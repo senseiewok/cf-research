@@ -1,6 +1,7 @@
-# Numbers in cf-ai-ideas.md that are sums of the scoring table (section 2), each with its arithmetic. The marks themselves are below 10 and are one author's judgement, labelled inferred in the text.
+# Numbers in cf-ai-ideas.md that are sums of the scoring table (section 2) or a design choice, each with its reason. The marks themselves are below 10 and are one author's judgement, labelled inferred in the text.
 # Check with: python tools/sources/check_numbers.py --evidence <the private evidence table for the 2026-10-06 refresh> --allow-file this-file cf-ai-ideas.md
-16  # 5 + 5 + 3 + 3 (claim check); also 4 + 3 + 5 + 4 (checklist), 3 + 5 + 4 + 4 (replication cards) and 2 + 4 + 5 + 5 (negative-results shelf)
-15  # 3 + 3 + 4 + 5 (question board); also 2 + 5 + 3 + 5 (a record behind every number)
+16  # 4 + 3 + 5 + 4 (checklist); also 3 + 5 + 4 + 4 (replication cards) and 2 + 4 + 5 + 5 (negative-results shelf)
+15  # 4 + 5 + 3 + 3 (source lookup); also 3 + 3 + 4 + 5 (question board) and 2 + 5 + 3 + 5 (a record behind every number)
 12  # 3 + 4 + 2 + 3 (EU records)
 11  # 3 + 4 + 2 + 2 (registry report years)
+30  # the size of the frozen sentence set in the stop rule of the source-lookup idea: a design choice made in this refresh, not a measurement
