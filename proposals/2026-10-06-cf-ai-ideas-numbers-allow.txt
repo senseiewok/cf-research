@@ -1,0 +1,6 @@
+# Numbers in cf-ai-ideas.md that are sums of the scoring table (section 2), each with its arithmetic. The marks themselves are below 10 and are one author's judgement, labelled inferred in the text.
+# Check with: python tools/sources/check_numbers.py --evidence <the private evidence table for the 2026-10-06 refresh> --allow-file this-file cf-ai-ideas.md
+16  # 5 + 5 + 3 + 3 (claim check); also 4 + 3 + 5 + 4 (checklist), 3 + 5 + 4 + 4 (replication cards) and 2 + 4 + 5 + 5 (negative-results shelf)
+15  # 3 + 3 + 4 + 5 (question board); also 2 + 5 + 3 + 5 (a record behind every number)
+12  # 3 + 4 + 2 + 3 (EU records)
+11  # 3 + 4 + 2 + 2 (registry report years)
