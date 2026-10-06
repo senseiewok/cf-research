@@ -57,6 +57,12 @@ The [Layout](#layout) table below lists every path with what it is and its statu
 - **Reproducible sources.** `sources/manifest.json` records the SHA-256 of the exact bytes an extraction ran against, so a stranger can download the same report from its publisher, confirm the hash and reproduce the result without us hosting a copy.
 - **A ledger, not a scoreboard.** Every caught mistake is recorded with what caught it. The website's [Evidence](https://senseiewok.ai/evidence/) page shows the catalog counts, one evidence record and three ledger entries exactly as recorded.
 
+## Working with the other lab repositories
+
+This repository is one of three that sit side by side; the control repository, [`cf-lab`](https://github.com/senseiewok/cf-lab), holds the shared agent rules. Start agent sessions from the `cf-lab` folder where you can, and add this one as a working directory: its section [Working across the sibling repos](https://github.com/senseiewok/cf-lab/blob/main/AGENTS.md#working-across-the-sibling-repos) says how, and what does and does not load.
+
+If you do start a session here, `.claude/settings.json` keeps the same secret-file deny rules as `cf-lab`, so the agent may not read `.env` files, keys or credential folders. A change that spans repositories is one pull request in each.
+
 ## To our CF community
 
 To people living with cystic fibrosis, families, caregivers and researchers: this is the notebook of a small, independent lab, and you are welcome to read over our shoulder. What is here is for examining evidence: notes that say how sure we are, a record of what each source permits, a model of a protein that shows only what four published files show, and a list of the mistakes we have made, so you can judge for yourself how carefully we work. None of it is medicine or medical advice; we do not interpret anyone's genotype or say what any person can expect, and clinical decisions belong with a care team. The sixty-five roses on the lab's [CF story](https://senseiewok.ai/cf/) page are our tribute, independent of the Cystic Fibrosis Foundation and not an emblem. You deserve care, dignity and room for ordinary life, and you owe no one an inspiring story. One concrete ask: the CFTR model is a draft, and we would like a person with CF, or someone who cares for one, to read its wording before it leaves draft. If a sentence there, or anywhere here, is unclear or lands wrong, open an issue in this repository and quote it; we will change it and say what changed.
@@ -109,6 +115,7 @@ verified yet, in that order. Read them the way you'd read a map, not a promise.
 | [`tools/sources/`](tools/sources/README.md) | Fetches what the catalog permits, prints browser instructions for the rest, writes a SHA-256 manifest for reproducibility | working, smoke-tested 2026-10-04 |
 | [`.claude/skills/ecfspr-report-reading/`](.claude/skills/ecfspr-report-reading/SKILL.md) | Agent skill: how to read an ECFSPR annual report (2020 to 2024) before extracting numbers. Every quotation and layout claim was checked against the report text; see its provenance note | draft, content review pending |
 | [`tools/evidence/`](tools/evidence/README.md) | Pointer: the evidence loop moved to the portable skill `cf-skills/.claude/skills/cf-evidence-loop`. Run it here with `EVIDENCE_CATALOG` set to `sources/catalog.yaml` | moved 2026-10-04 |
+| [`.claude/settings.json`](.claude/settings.json) | Claude Code deny rules for a session started here: no reading `.env` files, keys or credentials. The same list as `cf-lab` | v1, 2026-10-06 |
 | [`proposals/`](proposals/) | Proposed changes to sibling repos that an agent could not or should not apply directly, with evidence and a verification step for each | — |
 | [`ledger/`](ledger/) | Logs of real errors from working sessions: what happened, what caught it, and a cheap guard. A single entry is an observation, not a lesson | first ledger, 2026-10-04 |
 
