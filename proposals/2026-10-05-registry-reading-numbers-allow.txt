@@ -1,0 +1,8 @@
+# Numbers in cffpr-report-reading and cf-genetics-reading that are not in the evidence file, each with its reason.
+# Check with: python tools/sources/check_numbers.py --evidence <the evidence file of verified quotations and the CFTR-France summaries> --allow-file this-file <skill>
+152  # Canada 2024 report, PDF page 38: the sentence on the July 2024 expansion, read on the page; it was trimmed from the first evidence file
+127  # 89 + 38: the 2026 CFTR-France counts for non disease-causing and likely benign
+564  # 127 + 437: the same two classes plus the 437 unclassified
+503  # 422 + 42 + 39: the 2026 CFTR-France CF-causing, CFTR-RD-causing and varying-consequence subclass counts (592 minus 503 gives 89)
+60   # file page 60 of the CFF 2024 report, where the printed page number is 58 (the PDF runs two pages ahead)
+58   # the printed page number on that file page 60

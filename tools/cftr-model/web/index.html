@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CFTR protein in 3D (draft), from four published structures | Sensei Ewok Research Lab</title>
+  <meta name="description" content="An interactive 3D drawing of the human CFTR protein from four published structures (6MSM, 5UAK, 8EIQ, 8EJ1), one point per amino acid, showing where amino acid 508 sits and where it is absent. Draft, in review. Research, not medical advice.">
+  <meta name="theme-color" content="#050505">
+  <link rel="stylesheet" href="cftr-tokens.css">
+  <link rel="stylesheet" href="cftr-model.css">
+  <script type="module" src="cftr-viewer.js"></script>
+  <script type="module" src="cftr-research.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<main id="main">
+  <section class="page-head wrap">
+    <p class="eyebrow">Sensei Ewok Research / CFTR structures</p>
+    <h1>The CFTR protein in 3D, from four published structures</h1>
+    <p><span class="stamp stamp-planned">Draft, in review</span> <span class="stamp">Research, not medical advice</span></p>
+    <p class="lede">CFTR is a human protein, and variants of it are linked to cystic fibrosis. Here are four published structures of it, each drawn as a smooth tube through the position of one atom in every amino acid it places. Turn them, switch between them, and see where amino acid 508 sits, and where it is absent in the two structures of CFTR with F508del (8EIQ and 8EJ1).</p>
+    <p class="meta">The positions of the points come from published structure files, not from a drawing; the tube that joins them is ours. What a structure cannot show is listed below.</p>
+  </section>
+
+  <section class="wrap" id="view" aria-labelledby="view-title">
+    <h2 id="view-title">Turn it yourself</h2>
+    <div id="cftr-fallback" class="quiet">
+      <p>The 3D view needs JavaScript and WebGL2. <span data-why>It has not started.</span> The facts it shows are also written out as text and in the table further down this page.</p>
+    </div>
+    <div id="cftr-viewer" class="cftr-viewer" data-hash="url" hidden>
+      <div class="cftr-stage">
+        <canvas id="cftr-canvas" tabindex="0" role="img" aria-label="A three-dimensional drawing of the CFTR protein chain as a smooth shaded tube, coloured by part, with flat bands where UniProt annotates a helix or a strand. Drag it, use the arrow keys, or use the sliders beside it to turn it. The same facts are written out as text on this page."></canvas>
+      </div>
+      <div class="cftr-panel">
+        <div role="group" aria-labelledby="pick-label">
+          <p class="cftr-label" id="pick-label">Structure</p>
+          <div id="cftr-picks" class="cftr-row"></div>
+          <p id="cftr-note" class="meta cftr-note" aria-live="polite"></p>
+          <button id="cftr-overlay" class="cftr-btn" type="button" aria-pressed="false">Show 6MSM behind it</button>
+        </div>
+        <div id="cftr-readout" class="cftr-readout" aria-live="polite"></div>
+        <p class="meta">The title is the entry's own wording. Only the protein chain is drawn: the other molecules in an entry are not shown, and nothing here shows how any medicine acts.</p>
+        <div>
+          <p class="cftr-label" id="legend-label">Colours</p>
+          <ul id="cftr-legend" class="cftr-legend" aria-labelledby="legend-label"></ul>
+          <p class="meta">Grey: stretches outside the four marked parts. Dashed grey: a stretch this model does not place; the dashes are a straight connector, not its shape. Rose ring and dot: residue 508. White dot: the residue you have chosen.</p>
+          <p class="meta cftr-shape-note">How it is drawn: the tube is a smooth curve through the measured position of one atom per amino acid. It passes through every measured point; where it runs between two points is a drawing choice, not data. The flat bands mark the stretches UniProt annotates as a helix (wider) or a strand (narrower) for this protein; that annotation comes from UniProt's record, not from a computation on these coordinates. The shading is light on a shape and says nothing about the protein.</p>
+        </div>
+        <div>
+          <label class="cftr-label" for="cftr-walk">Walk along the chain: residue</label>
+          <div class="cftr-ruler">
+            <svg id="cftr-ruler-svg" class="cftr-ruler-svg" viewBox="0 0 1480 28" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
+            <input id="cftr-walk" class="cftr-range cftr-ruler-input" type="range" min="1" max="1480" step="1" value="508">
+          </div>
+          <div id="cftr-seq" class="cftr-seq" aria-hidden="true"></div>
+          <p class="meta cftr-seq-label">UniProt reference sequence around the marked residue (default 508). Lit where this structure places it; an empty box where the file says it was deleted.</p>
+          <p class="meta">The strip is the whole chain, 1 to 1480: coloured where the structure places residues, a thin grey line where it does not, and a rose mark at 508 (an empty outline where the structure lacks it).</p>
+          <p id="cftr-walk-out" class="cftr-walkout" aria-live="off"></p>
+          <div class="cftr-row">
+            <button id="cftr-walk-508" class="cftr-btn" type="button">Go to 508</button>
+            <button id="cftr-walk-clear" class="cftr-btn" type="button">Clear the marker</button>
+          </div>
+        </div>
+        <div>
+          <label class="cftr-label" for="cftr-turn">Turn</label>
+          <input id="cftr-turn" class="cftr-range" type="range" min="0" max="359" step="1" value="34">
+          <label class="cftr-label" for="cftr-tilt">Tilt</label>
+          <input id="cftr-tilt" class="cftr-range" type="range" min="0.2" max="2.94" step="0.01" value="1.35">
+          <div class="cftr-row">
+            <button id="cftr-play" class="cftr-btn" type="button" aria-pressed="false">Turn slowly</button>
+            <button id="cftr-zoom-out" class="cftr-btn" type="button" aria-label="Zoom out">&minus;</button>
+            <button id="cftr-zoom-in" class="cftr-btn" type="button" aria-label="Zoom in">+</button>
+            <button id="cftr-reset" class="cftr-btn" type="button">Reset view</button>
+          </div>
+          <p class="meta">With the picture focused: arrow keys turn and tilt, + and &minus; zoom, R resets, 1 to 4 switch structure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="tools" aria-labelledby="tools-title" data-needs-gl hidden>
+    <h2 id="tools-title">Look closer</h2>
+    <p>Tools for reading the four structures. They run in your browser on the files described further down this page; nothing is sent anywhere.</p>
+    <div class="cftr-tools">
+      <form id="cftr-lookup" class="cftr-tool" novalidate>
+        <h3>Look up a residue</h3>
+        <p class="meta">What UniProt annotates at a position, and what each of the four structures does with it.</p>
+        <label class="cftr-label" for="cftr-lookup-n">Residue number, 1 to 1480</label>
+        <div class="cftr-row"><input id="cftr-lookup-n" class="cftr-field" type="number" min="1" max="1480" step="1" inputmode="numeric" value="508"><button class="cftr-btn" type="submit">Look up</button></div>
+        <div id="cftr-dossier" class="cftr-dossier" aria-live="polite"></div>
+      </form>
+      <form id="cftr-measure" class="cftr-tool" novalidate>
+        <h3>Measure a distance</h3>
+        <p class="meta">Alpha carbon to alpha carbon, in the structure now shown. Both residues must be placed in it.</p>
+        <div class="cftr-row">
+          <label class="cftr-label" for="cftr-measure-a">From</label><input id="cftr-measure-a" class="cftr-field" type="number" min="1" max="1480" step="1" inputmode="numeric" value="507">
+          <label class="cftr-label" for="cftr-measure-b">To</label><input id="cftr-measure-b" class="cftr-field" type="number" min="1" max="1480" step="1" inputmode="numeric" value="509">
+          <button class="cftr-btn" type="submit">Measure</button>
+        </div>
+        <p id="cftr-measure-out" class="cftr-dossier" aria-live="polite"></p>
+      </form>
+      <fieldset class="cftr-tool">
+        <legend>Layers from UniProt</legend>
+        <label class="cftr-check"><input id="cftr-layer-topology" type="checkbox"> Colour the chain by UniProt&rsquo;s topology</label>
+        <p class="meta">Sides and helices come from UniProt&rsquo;s annotation of the protein sequence (13 topological domains and 12 transmembrane segments), not from these coordinates. This is not a membrane drawn from the data.</p>
+        <ul id="cftr-topology-legend" class="cftr-legend" hidden>
+          <li><span class="cftr-swatch sw-tm" aria-hidden="true"></span>Transmembrane segment</li>
+          <li><span class="cftr-swatch sw-cyt" aria-hidden="true"></span>Cytoplasmic side</li>
+          <li><span class="cftr-swatch sw-ext" aria-hidden="true"></span>Extracellular side</li>
+          <li><span class="cftr-swatch sw-none" aria-hidden="true"></span>No topology entry</li>
+        </ul>
+        <label class="cftr-check"><input id="cftr-layer-variants" type="checkbox"> Mark UniProt&rsquo;s annotated variant positions</label>
+        <p class="meta">Positions of the natural variants that UniProt P13569 lists, 209 entries (data: UniProt, CC BY 4.0). Entries that change one residue are drawn as beads; the few that span several residues are counted and shown in the residue look-up. This is annotation, not a clinical, frequency or severity statement, and it says nothing about any person. UniProt&rsquo;s own sentence: &ldquo;Any medical or genetic information is provided for research, educational and informational purposes only. It is not in any way intended to be used as a substitute for professional medical advice, diagnosis, treatment or care.&rdquo;</p>
+        <p id="cftr-variant-summary" class="meta" aria-live="polite"></p>
+      </fieldset>
+      <div class="cftr-tool">
+        <h3>Share and save</h3>
+        <div class="cftr-row">
+          <button id="cftr-copy-link" class="cftr-btn" type="button">Copy link to this view</button>
+          <button id="cftr-export-png" class="cftr-btn" type="button">Save picture (PNG)</button>
+          <button id="cftr-export-csv" class="cftr-btn" type="button">Save residues (CSV)</button>
+          <button id="cftr-export-json" class="cftr-btn" type="button">Save view (JSON)</button>
+        </div>
+        <p class="meta">The link holds the structure, the marked residue, the camera and the layers. The picture carries its label. The CSV has the alpha-carbon positions in angstrom in this page&rsquo;s frame (fitted onto 6MSM, centred on its placed residues, rounded to 0.1 &Aring;), with UniProt&rsquo;s part and topology for each residue.</p>
+        <p id="cftr-export-status" class="meta" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="steps" aria-labelledby="steps-title">
+    <h2 id="steps-title">A guided look</h2>
+    <p>Each step sets the picture above. The words stay here whether or not the picture runs.</p>
+    <ol class="cftr-steps">
+      <li data-step data-structure="6MSM">
+        <h3>A shape built from published data</h3>
+        <p>This is human CFTR, drawn as one point for each amino acid the model places, joined in order. The positions come from a model that scientists fitted to electron-microscope data (structure 6MSM, published in 2018). Drag to turn it, or use the sliders.</p>
+        <button class="cftr-btn" type="button" hidden>Show this</button>
+      </li>
+      <li data-step data-structure="6MSM">
+        <h3>Four marked parts of one chain</h3>
+        <p>CFTR is a single chain of 1,480 amino acids. UniProt marks two membrane-spanning parts (residues 81 to 365 and 859 to 1155) and two nucleotide-binding parts (423 to 646 and 1210 to 1443). It marks the long stretch from 654 to 831 as disordered, and none of that stretch is placed in the chain this page draws, in any of the four files. Three of the files (6MSM, 5UAK and 8EIQ) also hold a short separate fragment of 16 to 19 residues of unknown identity, whose place in the sequence is not assigned; 5UAK's file calls it the R domain. It is not drawn. Wherever a model leaves out a stretch, a dashed line shows only that it is not drawn.</p>
+        <button class="cftr-btn" type="button" hidden>Show this</button>
+      </li>
+      <li data-step data-structure="6MSM" data-walk="508">
+        <h3>Position 508</h3>
+        <p>Residue 508 sits inside the first nucleotide-binding part. In structure 6MSM it is phenylalanine, one of the amino acids that make up proteins. The rose ring and dot show it.</p>
+        <button class="cftr-btn" type="button" hidden>Show this</button>
+      </li>
+      <li data-step data-structure="8EIQ" data-walk="508">
+        <h3>The same protein with 508 absent</h3>
+        <p>Structure 8EIQ is human CFTR carrying F508del, the loss of the amino acid at position 508. Its model runs from residue 507 straight to 509, and the empty ring marks the place midway between them. Its file also records an engineered change at position 1371 (glutamate replaced by glutamine), as do the files for 6MSM and 8EJ1; 5UAK does not have it. This structure was solved with the three medicines of Trikafta (the title in its file lists them) and with ATP and magnesium present. This page does not show where they sit or how they act.</p>
+        <button class="cftr-btn" type="button" hidden>Show this</button>
+      </li>
+      <li data-step data-structure="8EIQ" data-overlay="1">
+        <h3>Laying the shapes over each other</h3>
+        <p>Here the membrane-spanning parts of each model are lined up on 6MSM, a computation made for this page. After that fit, the membrane-spanning parts of 8EIQ are 0.84 &Aring; from those of 6MSM, as a root-mean-square distance over 566 residues (1 &Aring; is a ten-billionth of a metre). The two dephosphorylated models, 5UAK and 8EJ1, are about 5 &Aring; away (5.01 &Aring; over 557 residues, and 4.87 &Aring; over 547). 8EJ1 was solved at lower resolution (6.9 &Aring;), so less detail is available for it. These numbers describe differences in shape between models. They do not say why, they do not say that any structure is open or closed, and they do not show what the medicines do.</p>
+        <button class="cftr-btn" type="button" hidden>Show this</button>
+      </li>
+    </ol>
+  </section>
+
+  <section class="wrap" id="limits" aria-labelledby="limits-title">
+    <h2 id="limits-title">What this page does not show</h2>
+    <div class="quiet">
+      <ul>
+        <li>What happens inside a living cell. A structure is a still picture of one arrangement of the protein. It cannot show what happens to the protein inside a cell, and it gives no count of how many channels reach the cell surface in anyone.</li>
+        <li>Where the pore and the gate are, how chloride passes through, or how any medicine acts. The sources we have checked so far do not settle these for this page, so we leave them out.</li>
+        <li>Anything about what a person with cystic fibrosis can expect, or about treatment. A care team is the place for that.</li>
+        <li>Everything in the chain. Each model places between 1,127 and 1,181 of the 1,480 positions in the UniProt sequence; the rest are not drawn.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap" id="facts" aria-labelledby="text-title">
+    <h2 id="text-title">The same facts as a table</h2>
+    <p>Read straight from the structure files. The last column lists the stretches a model does not place.</p>
+    <!--generated:cftr-table-->
+  <div class="cftr-tablewrap" tabindex="0" role="region" aria-label="Table of the four structures, scrolls sideways on narrow screens">
+    <table class="cftr-table">
+    <caption>Four human CFTR structures from the Protein Data Bank (CC0). Residue numbers follow UniProt P13569.</caption>
+    <thead>
+      <tr><th scope="col">Structure</th><th scope="col">What the file calls it</th><th scope="col">Method</th><th scope="col">Residues placed</th><th scope="col">Residue 508</th><th scope="col">Paper</th><th scope="col">Residues not placed</th><th scope="col">Differs from UniProt's sequence</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row"><a href="https://www.rcsb.org/structure/6MSM" rel="noopener noreferrer">6MSM</a></th><td>Phosphorylated, ATP-bound human cystic fibrosis transmembrane conductance regulator (CFTR)</td><td>Electron microscopy, 3.2 &Aring;; deposited 2018-10-16</td><td>1181 of 1480</td><td>present (phenylalanine)</td><td>Proc. Natl. Acad. Sci. U.S.A. 2018, <a href="https://pubmed.ncbi.nlm.nih.gov/30459277/" rel="noopener noreferrer">PubMed 30459277</a></td><td>410 to 434, 638 to 844, 890 to 899, 1174 to 1201, 1452 to 1480</td><td>1371: glutamine in the file, glutamate in UniProt (the file says: engineered mutation); 9 expression-tag residues beyond the protein, not drawn</td></tr>
+      <tr><th scope="row"><a href="https://www.rcsb.org/structure/5UAK" rel="noopener noreferrer">5UAK</a></th><td>Dephosphorylated, ATP-free human cystic fibrosis transmembrane conductance regulator (CFTR)</td><td>Electron microscopy, 3.87 &Aring;; deposited 2016-12-19</td><td>1139 of 1480</td><td>present (phenylalanine)</td><td>Cell 2017, <a href="https://pubmed.ncbi.nlm.nih.gov/28340353/" rel="noopener noreferrer">PubMed 28340353</a></td><td>1 to 4, 403 to 438, 646 to 843, 884 to 908, 1173 to 1206, 1437 to 1480</td><td>9 expression-tag residues beyond the protein, not drawn</td></tr>
+      <tr><th scope="row"><a href="https://www.rcsb.org/structure/8EIQ" rel="noopener noreferrer">8EIQ</a></th><td>The complex of phosphorylated human delta F508 cystic fibrosis transmembrane conductance regulator (CFTR) with Trikafta [elexacaftor (VX-445), tezacaftor (VX-661), ivacaftor (VX-770)] and ATP/Mg</td><td>Electron microscopy, 3 &Aring;; deposited 2022-09-15</td><td>1162 of 1480</td><td>absent: the chain runs from 507 to 509</td><td>Science 2022, <a href="https://pubmed.ncbi.nlm.nih.gov/36264792/" rel="noopener noreferrer">PubMed 36264792</a></td><td>403 to 436, 508, 637 to 845, 886 to 901, 1174 to 1202, 1452 to 1480</td><td>508: phenylalanine is not in the file (the file says: deletion); 1371: glutamine in the file, glutamate in UniProt (the file says: engineered mutation)</td></tr>
+      <tr><th scope="row"><a href="https://www.rcsb.org/structure/8EJ1" rel="noopener noreferrer">8EJ1</a></th><td>Dephosphorylated human delta F508 cystic fibrosis transmembrane conductance regulator (CFTR)</td><td>Electron microscopy, 6.9 &Aring;; deposited 2022-09-16</td><td>1127 of 1480</td><td>absent: the chain runs from 507 to 509</td><td>Science 2022, <a href="https://pubmed.ncbi.nlm.nih.gov/36264792/" rel="noopener noreferrer">PubMed 36264792</a></td><td>1 to 2, 109 to 117, 403 to 436, 508, 637 to 840, 887 to 909, 1122 to 1124, 1174 to 1206, 1437 to 1480</td><td>508: phenylalanine is not in the file (the file says: variant); 1371: glutamine in the file, glutamate in UniProt (the file says: engineered mutation)</td></tr>
+    </tbody>
+    </table>
+  </div>
+  <!--/generated:cftr-table-->
+  </section>
+
+  <section class="wrap" id="provenance" aria-labelledby="prov-title">
+    <h2 id="prov-title">Where each number comes from</h2>
+    <p>Every number on this page is read from a file or computed from one. The table says which, and how to check it.</p>
+    <!--generated:cftr-provenance-->
+    <div class="cftr-tablewrap" tabindex="0" role="region" aria-label="Table of where each number comes from, scrolls sideways on narrow screens">
+      <table class="cftr-table cftr-prov">
+      <caption>Each number on this page, its source and a way to check it.</caption>
+      <thead>
+      <tr><th scope="col">What</th><th scope="col">Value on this page</th><th scope="col">Where it comes from</th><th scope="col">How to check it</th></tr>
+      </thead>
+      <tbody>
+      <tr><th scope="row">Residues placed</th><td>6MSM 1181; 5UAK 1139; 8EIQ 1162; 8EJ1 1127</td><td>The four .cif.gz files from the RCSB Protein Data Bank, chain A, model 1.</td><td>Count the ATOM lines whose atom name is CA in chain A, model 1.</td></tr>
+      <tr><th scope="row">Method, resolution, date</th><td>6MSM 3.2 Å, deposited 2018-10-16; 5UAK 3.87 Å, deposited 2016-12-19; 8EIQ 3 Å, deposited 2022-09-15; 8EJ1 6.9 Å, deposited 2022-09-16</td><td>Fields _exptl.method, _em_3d_reconstruction.resolution and _pdbx_database_status.recvd_initial_deposition_date in each file.</td><td>Open the file header and read those fields.</td></tr>
+      <tr><th scope="row">Paper</th><td>6MSM Proc. Natl. Acad. Sci. U.S.A. 2018, PubMed 30459277; 5UAK Cell 2017, PubMed 28340353; 8EIQ Science 2022, PubMed 36264792; 8EJ1 Science 2022, PubMed 36264792</td><td>Fields _citation.journal_abbrev, _citation.year and _citation.pdbx_database_id_PubMed.</td><td>Open the PubMed record.</td></tr>
+      <tr><th scope="row">Stretches not placed</th><td>listed in the table above</td><td>Computed from the residue numbers placed.</td><td>List the residue numbers that have a CA atom and take the gaps between 1 and 1480.</td></tr>
+      <tr><th scope="row">How each file differs from UniProt’s sequence</th><td>6MSM 1371; 5UAK none; 8EIQ 508, 1371; 8EJ1 508, 1371</td><td>The file’s own _struct_ref_seq_dif list; expression-tag residues beyond the protein are counted, not drawn.</td><td>Read that list in the file.</td></tr>
+      <tr><th scope="row">Length and part boundaries</th><td>1,480 residues; parts 81 to 365, 423 to 646, 859 to 1155, 1210 to 1443; a region UniProt marks as disordered (the regulatory, or R, region) 654 to 831</td><td>UniProt P13569, entry version 286, annotation updated 2026-09-02: the sequence, and the features of type Domain and Region.</td><td>Open the entry on uniprot.org.</td></tr>
+      <tr><th scope="row">Residue numbering</th><td>4,609 placed residues checked; 3 differ from UniProt, all declared by their files</td><td>Every placed residue is compared with the amino acid UniProt has at that number; the build stops if one disagrees without its file saying so.</td><td>Run tools/cftr-model/build_traces.py (in the cf-research repository) with the downloaded files; tools/cftr-model/tests/test_data.py also checks it.</td></tr>
+      <tr><th scope="row">Distance after fitting</th><td>6MSM the reference; 5UAK 5.01 Å over 557 residues; 8EIQ 0.84 Å over 566 residues; 8EJ1 4.87 Å over 547 residues</td><td>Computed for this page. Take the alpha carbons that 6MSM and the structure both place, with the same amino acid, inside UniProt residues 81 to 365 and 859 to 1155; fit one onto the other by a rigid rotation and shift (Horn’s method); the number is the root-mean-square distance left.</td><td>Run tools/cftr-model/build_traces.py (in the cf-research repository); tools/cftr-model/tests/test_data.py shows the fit recovers a known rotation.</td></tr>
+      <tr><th scope="row">Positions in the view</th><td>angstrom, rounded to 0.1</td><td>The alpha-carbon coordinates after that fit, centred on the placed residues of 6MSM.</td><td>Save the CSV from the tools above.</td></tr>
+      <tr><th scope="row">Topology and helices</th><td>12 transmembrane segments; 13 topological domains</td><td>UniProt P13569 features of type Transmembrane and Topological domain.</td><td>Open the entry on uniprot.org.</td></tr>
+      <tr><th scope="row">Variant positions</th><td>209 entries: 196 at a single residue (165 different positions) and 13 spanning several residues</td><td>UniProt P13569 features of type Natural variant (position, residues and wording as UniProt gives them). Only single-residue entries are drawn as beads; the others are listed in the residue look-up.</td><td>Open the entry on uniprot.org.</td></tr>
+      </tbody>
+      </table>
+    </div>
+    <!--/generated:cftr-provenance-->
+    <h3 id="leaves-out">What the model leaves out</h3>
+    <ul class="cftr-leaves">
+      <li>Only the alpha-carbon atom of each amino acid is drawn: no side chains, no other backbone atoms, no hydrogens.</li>
+      <li>Only chain A of model 1 of each entry is used.</li>
+      <li>A stretch a model does not place is not drawn. The dotted grey lines across it are straight connectors, not the shape.</li>
+      <li>The other molecules in an entry (ATP, magnesium, lipids, cholesterol, and in 8EIQ the three medicines) are not drawn. Their names appear only in the entry&rsquo;s own title and ligand list.</li>
+      <li>The four entries were solved from different samples and under different conditions, at different resolutions. Differences between them are not a comparison of one experiment.</li>
+      <li>Residue numbers are the PDB entries&rsquo; author numbers, which equal UniProt&rsquo;s numbers (checked residue by residue). Where a file declares a change from UniProt&rsquo;s sequence it is shown in the table above.</li>
+      <li>There is no motion, no function and no mechanism in the picture.</li>
+    </ul>
+    <h3 id="cite">Cite this</h3>
+    <!--generated:cftr-cite-->
+    <pre class="cftr-cite" tabindex="0">Structures (RCSB Protein Data Bank, archive files under CC0 1.0; please cite the entry and its paper):
+6MSM: Molecular structure of the ATP-bound, phosphorylated human CFTR. Proc. Natl. Acad. Sci. U.S.A. 2018. PubMed 30459277. Entry deposited 2018-10-16.
+5UAK: Molecular Structure of the Human CFTR Ion Channel. Cell 2017. PubMed 28340353. Entry deposited 2016-12-19.
+8EIQ: Molecular structures reveal synergistic rescue of Delta 508 CFTR by Trikafta modulators. Science 2022. PubMed 36264792. Entry deposited 2022-09-15.
+8EJ1: Molecular structures reveal synergistic rescue of Delta 508 CFTR by Trikafta modulators. Science 2022. PubMed 36264792. Entry deposited 2022-09-16.
+Annotations: UniProt P13569, entry version 286, annotation last updated 2026-09-02 (CC BY 4.0; how to cite UniProt: https://www.uniprot.org/help/publications).
+Fit and numbers on this page: computed from those files with tools/cftr-model/build_traces.py in the cf-research repository (alpha-carbon atoms of chain A, model 1).</pre>
+    <!--/generated:cftr-cite-->
+  </section>
+
+  <section class="wrap" id="sources" aria-labelledby="source-title">
+    <h2 id="source-title">Where this comes from</h2>
+    <div class="quiet">
+      <ul>
+        <li>Coordinates: the <a href="https://www.rcsb.org/pages/policies" rel="noopener noreferrer">RCSB Protein Data Bank</a>. Its policy page says the archive's data files are available under the CC0 1.0 public domain dedication (read 2026-10-05) and encourages crediting the original authors, so please cite the entries and their authors as listed in the table.</li>
+        <li>Part boundaries and the length of 1,480 amino acids: <a href="https://www.uniprot.org/uniprotkb/P13569" rel="noopener noreferrer">UniProt P13569</a>, read on 2026-10-05.</li>
+        <li>Lining up: for each model, the alpha-carbon atoms in the membrane-spanning parts (residues 81 to 365 and 859 to 1155) that 6MSM and that model both place, at the same residue number and with the same amino acid, are fitted onto 6MSM by a least-squares rigid fit (Horn's method), written and tested for this page. Each point drawn is the alpha-carbon atom of one placed amino acid.</li>
+        <li>This page is a draft. A person with CF or a carer should read the wording before it is published, and the science has not yet had an outside expert's check.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+<footer class="page-foot wrap">
+  <p>Part of <a href="https://github.com/senseiewok/cf-research" rel="noopener noreferrer">senseiewok/cf-research</a>, an independent, open-source lab. Research, not medical advice; not affiliated with the Cystic Fibrosis Foundation.</p>
+  <p>Code: MIT. Notes: CC BY 4.0. Structure data: RCSB Protein Data Bank, CC0 1.0. Annotations: UniProt P13569, CC BY 4.0. See the README of this folder.</p>
+</footer>
+</body>
+</html>

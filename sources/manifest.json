@@ -1,0 +1,268 @@
+{
+  "generated": "2026-10-05T22:27:12Z",
+  "catalog_updated": "2026-10-05",
+  "downloads_dir": "sources/downloads",
+  "files": [
+    {
+      "id": "ecfspr-adr-2024",
+      "filename": "ECFSPR_Annual_Report_2024_v1.0.pdf",
+      "access": "fetch",
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
+      "present": true,
+      "sha256": "ed8e68f78f33ef014d32975eebca7c161494d68f21fbc82d8979781e1abcf0d6",
+      "size_bytes": 7064052
+    },
+    {
+      "id": "ecfspr-adr-2023",
+      "filename": "ECFSPR_Annual_Report_2023_v1.1.pdf",
+      "access": "fetch",
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/08/Annual-Report_2023_vs1.1_ECFSPR_20250715.pdf",
+      "present": true,
+      "sha256": "4d161be5b49cdbe83f82ee991e234b706f73161d190a096745009845cf243cf3",
+      "size_bytes": 5448476
+    },
+    {
+      "id": "ecfspr-adr-2022",
+      "filename": "ECFSPR_Annual_Report_2022_v1.0.pdf",
+      "access": "fetch",
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/06/Annual-Report_2022_vs1.0_ECFSPR_20250130.pdf",
+      "present": true,
+      "sha256": "22868219bcaeb5e4b2090643b0d5b1e8be91fddb1cf37ba74bf1bfaeec11506e",
+      "size_bytes": 10024367
+    },
+    {
+      "id": "ecfspr-adr-2021",
+      "filename": "ECFSPR_Annual_Report_2021.pdf",
+      "access": "fetch",
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/06/Annual-Report_2021_09Jun2023_ECFSPR_final.pdf",
+      "present": true,
+      "sha256": "34c8b625cbae85403131d3a2e453358439068ebdc9fdf41131f9333a1a87af5a",
+      "size_bytes": 7672352
+    },
+    {
+      "id": "ecfspr-adr-2020",
+      "filename": "ECFSPR_Annual_Report_2020_v1.0.pdf",
+      "access": "fetch",
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/06/ECFSPR_Report_2020_v1.0-07Jun2022_website.pdf",
+      "present": true,
+      "sha256": "6f0430d66af114c2770e3cffb28273163c22d35c7d45cf15dbab297df06624c8",
+      "size_bytes": 4593445
+    },
+    {
+      "id": "ecfspr-highlights-2024",
+      "filename": "ECFSPR_Highlights_2024_v1.0.pdf",
+      "access": "fetch",
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/12/ECFS-Patient-Registry-2024-Highlights-Report-v1.0-ECFSPR-20251218.pdf",
+      "present": true,
+      "sha256": "4f40030534dea57c6a85a0585c2d2499113892def61d6426bdc3f0236e2efeb7",
+      "size_bytes": 1626124
+    },
+    {
+      "id": "cffpr-adr-2022",
+      "filename": "CFFPR_Annual_Data_Report_2022.pdf",
+      "access": "manual",
+      "url": "https://www.cff.org/media/31216/download",
+      "present": true,
+      "sha256": "6475740f5e122fae8239e369faa07d61fc28db55bad9453bc7bbb2776742f544",
+      "size_bytes": 3902289
+    },
+    {
+      "id": "cffpr-technical-supplement",
+      "filename": "CFFPR_Technical_Supplement.pdf",
+      "access": "manual",
+      "url": "https://www.cff.org/media/24916/download",
+      "present": true,
+      "sha256": "52579b2d846eeb38a793fc48bf6f9b5f1a482095eeb14148d82ae914d34a4e94",
+      "size_bytes": 749438
+    },
+    {
+      "id": "cffpr-adr-2021",
+      "filename": "CFFPR_Annual_Data_Report_2021.pdf",
+      "access": "manual",
+      "url": "https://www.cff.org/sites/default/files/2021-11/Patient-Registry-Annual-Data-Report.pdf",
+      "present": true,
+      "sha256": "22e42e6ff6cd28b3afcc3177c727cdadad4831ddcda417cbf047a03cfef70101",
+      "size_bytes": 2885076
+    },
+    {
+      "id": "cffpr-adr-2020",
+      "filename": "CFFPR_Annual_Data_Report_2020.pdf",
+      "access": "manual",
+      "url": "https://www.cff.org/sites/default/files/2021-10/2019-Patient-Registry-Annual-Data-Report.pdf",
+      "present": true,
+      "sha256": "1d8ec4d5ac94dbcba6bd66713eba63c558b1038f6912c3a340e17675e85fc868",
+      "size_bytes": 2931488
+    },
+    {
+      "id": "cffpr-adr-2023",
+      "filename": "CFFPR_Annual_Data_Report_2023.pdf",
+      "access": "manual",
+      "url": null,
+      "present": true,
+      "sha256": "db640455a336bfcdc17159126528a0cfe65264ef4d8d0fbeec7615e103e99f4e",
+      "size_bytes": 3625363
+    },
+    {
+      "id": "cffpr-adr-2024",
+      "filename": "CFFPR_Annual_Data_Report_2024.pdf",
+      "access": "manual",
+      "url": null,
+      "present": true,
+      "sha256": "e24bdb2d874854101e1658dda2e509bb15dabf80c45c32adc1762debac18e74e",
+      "size_bytes": 3357836
+    },
+    {
+      "id": "cffpr-covid-2020",
+      "filename": "CFFPR_CF_Care_COVID_2020.pdf",
+      "access": "manual",
+      "url": null,
+      "present": true,
+      "sha256": "cf5fb6e7a9c3af92ee0dbb2dc2f092ebf81f441492fe2c5b2aa07540db578acd",
+      "size_bytes": 621212
+    },
+    {
+      "id": "cffpr-highlights-2021",
+      "filename": "CFFPR_Highlights_2021.pdf",
+      "access": "manual",
+      "url": null,
+      "present": true,
+      "sha256": "8c8342ec282de3342e8fedfafcdd9e06f2d9a307eb78976f1ce6f75d791b0a9a",
+      "size_bytes": 516762
+    },
+    {
+      "id": "cffpr-highlights-2022",
+      "filename": "CFFPR_Highlights_2022.pdf",
+      "access": "manual",
+      "url": null,
+      "present": true,
+      "sha256": "c4aa1321558a2a2614eda946ac181fc5b9af266e4beb6bfa4ed1c7656c08fee2",
+      "size_bytes": 419959
+    },
+    {
+      "id": "cffpr-highlights-2023",
+      "filename": "CFFPR_Highlights_2023.pdf",
+      "access": "manual",
+      "url": null,
+      "present": true,
+      "sha256": "8170ff897282c56a4d68e516ead75280baf3b710689755c1e3b5f1a3f69e256d",
+      "size_bytes": 778946
+    },
+    {
+      "id": "cffpr-highlights-2024",
+      "filename": "CFFPR_Highlights_2024.pdf",
+      "access": "manual",
+      "url": null,
+      "present": true,
+      "sha256": "f38f7ec6503788b323d39953347cea71ac3040563d8cde17c6b18d76d8552c94",
+      "size_bytes": 458549
+    },
+    {
+      "id": "cffpr-highlights-2025",
+      "filename": "CFFPR_Highlights_2025.pdf",
+      "access": "manual",
+      "url": null,
+      "present": true,
+      "sha256": "249c652114ed436c8d61b1b4f4198bf9266fcde3a5331411b7195ff134ce058c",
+      "size_bytes": 3086639
+    },
+    {
+      "id": "ukcfr-adr-2024",
+      "filename": "UKCFR_Annual_Data_Report_2024_v2.pdf",
+      "access": "fetch",
+      "url": "https://www.cysticfibrosis.org.uk/sites/default/files/2025-12/2024%20Registry%20Report%20v2.pdf",
+      "present": true,
+      "sha256": "088392bf49b3ce9951e6040997e9482ab3183b1c8de6a5ab87e00222558dabc9",
+      "size_bytes": 2998676
+    },
+    {
+      "id": "acfdr-adr-2025",
+      "filename": "ACFDR_Annual_Report_2025.pdf",
+      "access": "fetch",
+      "url": "https://www.cysticfibrosis.org.au/wp-content/uploads/2026/08/ACFDR-2025-Annual-Report.pdf",
+      "present": true,
+      "sha256": "7e9994646d31baa1c08a2be364ed08aee2d1e5f3e72a8b256977ccb0054b31a3",
+      "size_bytes": 24341829
+    },
+    {
+      "id": "cfri-adr-2024",
+      "filename": "CFRI_Annual_Report_2024.pdf",
+      "access": "fetch",
+      "url": "https://cfri.ie/wp-content/uploads/2025/12/CFRI-2024-Annual-Report-eISSN.pdf",
+      "present": true,
+      "sha256": "5210450c5a182a770f6e62e9fef853c5ea34e937708a0aad76696fe0e1897762",
+      "size_bytes": 1870483
+    },
+    {
+      "id": "ccfr-adr-2024",
+      "filename": "CCFR_Annual_Data_Report_2024.pdf",
+      "access": "manual",
+      "url": "https://cystic-fibrosis.cdn.prismic.io/cystic-fibrosis/aUWIlHNYClf9oh1P_2024-Annual-Data-Report-EN.pdf",
+      "present": true,
+      "sha256": "11d5c4c8c76ca5a7ca3b25f5874b5dc2c22fb6a5020672707c249c5fb14ecdb5",
+      "size_bytes": 2592265
+    },
+    {
+      "id": "cftr-france",
+      "filename": "AllVarCFTR-FranceToDownload_14092026.xlsx",
+      "access": "manual",
+      "url": "https://cftr.chu-montpellier.fr/CFTR/data/img/AllVarCFTR-FranceToDownload_14092026.xlsx",
+      "present": true,
+      "sha256": "87fddfb89da3568de7fbe66b35256542704cf06992b176110bbccca0c8f7f6b0",
+      "size_bytes": 120038
+    },
+    {
+      "id": "ema-medicines-json",
+      "filename": "EMA_medicines_json_report_en.json",
+      "access": "fetch",
+      "url": "https://www.ema.europa.eu/en/documents/report/medicines-output-medicines_json-report_en.json",
+      "present": true,
+      "sha256": "123acff1c7c1f1077aa1803a166e8e096145db818b3cb07b0eb6ed8bc605bd31",
+      "size_bytes": 6777246
+    },
+    {
+      "id": "rcsb-pdb-6msm",
+      "filename": "6MSM.cif.gz",
+      "access": "fetch",
+      "url": "https://files.rcsb.org/download/6MSM.cif.gz",
+      "present": true,
+      "sha256": "82933988abc3ed24a343819d410b39dc0d86913eaba4426dd945e3273e34fa59",
+      "size_bytes": 267478
+    },
+    {
+      "id": "rcsb-pdb-5uak",
+      "filename": "5UAK.cif.gz",
+      "access": "fetch",
+      "url": "https://files.rcsb.org/download/5UAK.cif.gz",
+      "present": true,
+      "sha256": "8bf00f2612dd961d3b1ccd2f2193781a534ad44f32666a6de8da948afb8d84cf",
+      "size_bytes": 249754
+    },
+    {
+      "id": "rcsb-pdb-8eiq",
+      "filename": "8EIQ.cif.gz",
+      "access": "fetch",
+      "url": "https://files.rcsb.org/download/8EIQ.cif.gz",
+      "present": true,
+      "sha256": "d13cbfc8ba6575ab6228f351578c6f9cc5b9dafe13e5913d9b27b3cacebc18d6",
+      "size_bytes": 266705
+    },
+    {
+      "id": "rcsb-pdb-8ej1",
+      "filename": "8EJ1.cif.gz",
+      "access": "fetch",
+      "url": "https://files.rcsb.org/download/8EJ1.cif.gz",
+      "present": true,
+      "sha256": "9582203b74c0add00a7917bed765cbc8a943fcc3a88ffbac8ae8dde7de2bc159",
+      "size_bytes": 181933
+    },
+    {
+      "id": "uniprot-p13569",
+      "filename": "p13569.json",
+      "access": "fetch",
+      "url": "https://rest.uniprot.org/uniprotkb/P13569.json",
+      "present": true,
+      "sha256": "c8feabfabe8690ef4a06af7de5b5f8dc3c8da554246c5ab3d403edf265d4a893",
+      "size_bytes": 357468
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+/* CFTR model: the viewer, the guided steps, the tables and the research tools.
+   Uses these custom properties (the site defines them; cftr-tokens.css defines them for the standalone page):
+   --bg-glass --border-glass --ink-primary --ink-secondary --muted --neon-cyan --lime --rose-pink --glow-cyan --font-mono. */
+/* ============================================
+   CFTR STRUCTURE VIEWER (cf/cftr/): a canvas with real controls beside it, guided steps, and a table of the same facts
+   ============================================ */
+.cftr-viewer[hidden], #cftr-fallback[hidden], .cftr-btn[hidden] { display: none; }
+.cftr-viewer { display: grid; gap: 1rem; margin: 1rem 0 2rem; }
+@media (min-width: 62rem) { .cftr-viewer { grid-template-columns: minmax(0, 1.5fr) minmax(19rem, 1fr); align-items: start; } }
+.cftr-stage { border: 1px solid var(--border-glass); border-radius: 12px; background: #050508; overflow: hidden; }
+.cftr-stage canvas { display: block; width: 100%; height: min(70vh, 40rem); min-height: 20rem; touch-action: pan-y; cursor: grab; }
+.cftr-stage canvas:active { cursor: grabbing; }
+@media (min-width: 62rem) { .cftr-stage { position: sticky; top: var(--cftr-sticky-top, 1rem); } }   /* a page with a sticky header sets --cftr-sticky-top below it */
+.cftr-panel { display: grid; gap: 1.1rem; padding: 1rem; border: 1px solid var(--border-glass); border-radius: 12px; background: var(--bg-glass); }
+.cftr-label { display: block; margin: 0 0 0.35rem; font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-secondary); }
+.cftr-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.4rem 0; }
+.cftr-btn {
+    min-height: 2.75rem; min-width: 2.75rem; padding: 0.4rem 0.9rem;
+    font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-primary);
+    background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-glass); border-radius: 6px; cursor: pointer;
+}
+.cftr-btn:hover:not(:disabled) { border-color: var(--neon-cyan); }
+.cftr-btn[aria-pressed="true"] { color: #050505; background: var(--neon-cyan); border-color: var(--neon-cyan); }
+.cftr-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.cftr-range { display: block; width: 100%; min-height: 2.75rem; margin: 0 0 0.5rem; accent-color: var(--neon-cyan); }
+.cftr-readout p { margin: 0 0 0.35rem; font-size: 0.92rem; }
+.cftr-readout strong { color: var(--neon-cyan); }
+.cftr-walkout { min-height: 3.2em; margin: 0.3rem 0; font-size: 0.92rem; }
+.cftr-legend { display: grid; gap: 0.3rem; margin: 0 0 0.5rem; padding: 0; list-style: none; font-size: 0.9rem; }
+.cftr-legend li { display: flex; align-items: center; gap: 0.6rem; }
+.cftr-swatch { flex: none; width: 1.1rem; height: 0.5rem; border-radius: 2px; }
+.cftr-steps { display: grid; gap: 1rem; margin: 1rem 0; padding: 0; list-style: none; counter-reset: step; }
+.cftr-steps li { counter-increment: step; padding: 1rem 1.25rem; border: 1px solid var(--border-glass); border-left: 3px solid rgba(255, 120, 150, 0.6); border-radius: 8px; background: var(--bg-glass); }
+.cftr-steps li[aria-current="step"] { border-left-color: var(--neon-cyan); box-shadow: 0 0 14px var(--glow-cyan); }
+.cftr-steps h3 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+.cftr-steps h3::before { content: counter(step) ". "; color: var(--rose-pink); font-family: var(--font-mono); }
+.cftr-steps p { margin: 0 0 0.75rem; }
+.cftr-tablewrap { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--border-glass); border-radius: 8px; }
+.cftr-table { width: 100%; min-width: 60rem; border-collapse: collapse; font-size: 0.88rem; }
+.cftr-table th, .cftr-table td { padding: 0.6rem 0.75rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border-glass); }
+.cftr-table thead th { color: var(--ink-secondary); font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; }
+.cftr-table caption { padding: 0.6rem 0.75rem; text-align: left; color: var(--ink-secondary); font-size: 0.85rem; }
+.cftr-table a { color: var(--neon-cyan); text-decoration: underline; text-underline-offset: 3px; }
+/* the chain ruler: an SVG strip drawn from the data, with the real range input laid over it so the keyboard and screen readers get a normal slider */
+.cftr-ruler { position: relative; height: 2.75rem; margin: 0 0 0.5rem; }
+.cftr-ruler-svg { position: absolute; inset: 0; width: 100%; height: 100%; border: 1px solid var(--border-glass); border-radius: 4px; background: rgba(0, 0, 0, 0.35); }
+.cftr-ruler-input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; background: transparent; appearance: none; -webkit-appearance: none; cursor: ew-resize; }
+.cftr-ruler-input::-webkit-slider-runnable-track { height: 100%; background: transparent; }
+.cftr-ruler-input::-moz-range-track { height: 100%; background: transparent; }
+.cftr-ruler-input::-webkit-slider-thumb { -webkit-appearance: none; width: 0.75rem; height: 2.75rem; border: 2px solid var(--lime); border-radius: 3px; background: rgba(255, 255, 255, 0.25); }
+.cftr-ruler-input::-moz-range-thumb { width: 0.5rem; height: 2.5rem; border: 2px solid var(--lime); border-radius: 3px; background: rgba(255, 255, 255, 0.25); }
+.cftr-note:empty { display: none; }
+/* the sequence strip and the stage legend; a slimmer thumb so the 508 mark stays visible */
+.cftr-seq { display: flex; flex-wrap: nowrap; gap: 2px; margin: 0.35rem 0 0; overflow: hidden; font-family: var(--font-mono); font-size: 0.82rem; }
+.cftr-seq-cell { flex: 1 1 0; min-width: 0; text-align: center; padding: 0.15rem 0; border-radius: 3px; color: var(--ink-secondary); background: rgba(255, 255, 255, 0.04); }
+.cftr-seq-cell.is-placed { color: #050505; background: var(--neon-cyan); }
+.cftr-seq-cell.is-unplaced { color: var(--muted); }
+.cftr-seq-cell.is-absent { background: transparent; border: 1px dashed var(--rose-pink); }
+.cftr-seq-cell.is-centre { outline: 2px solid var(--lime); outline-offset: 1px; }
+.cftr-seq-label { margin: 0.25rem 0 0; font-size: 0.72rem; }
+.cftr-swatch.is-dotted { height: 0; border-radius: 0; }
+.cftr-swatch.is-band { height: 0.7rem; border-radius: 999px; }
+.cftr-shape-note { margin: 0.5rem 0 0; font-size: 0.78rem; line-height: 1.4; }
+.cftr-shape-note[hidden] { display: none; }
+.cftr-ruler-input::-webkit-slider-thumb { width: 0.3rem; border: 1px solid rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.55); }
+.cftr-ruler-input::-moz-range-thumb { width: 0.3rem; border: 1px solid rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.55); }
+.cftr-ruler-input:focus-visible::-webkit-slider-thumb { border: 2px solid var(--lime); }
+.cftr-ruler-input:focus-visible::-moz-range-thumb { border: 2px solid var(--lime); }
+
+/* The research tools on cf/cftr/: forms, dossier, provenance, cite block. Uses the tokens in styles.css. */
+.cftr-tools { display: grid; gap: 1.25rem; margin: 1rem 0; }
+@media (min-width: 62rem) { .cftr-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
+.cftr-tool { margin: 0; padding: 1rem 1.25rem; border: 1px solid var(--border-glass); border-radius: 8px; background: var(--bg-glass); min-width: 0; }
+.cftr-tool h3, .cftr-tool legend { margin: 0 0 0.4rem; font-size: 1.05rem; color: var(--ink-primary); padding: 0 0.25rem; }
+.cftr-field { min-height: 2.75rem; width: 7rem; padding: 0.3rem 0.6rem; font-family: var(--font-mono); font-size: 0.95rem; color: var(--ink-primary); background: rgba(0, 0, 0, 0.45); border: 1px solid var(--border-glass); border-radius: 6px; }
+.cftr-check { display: flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; margin-top: 0.5rem; font-size: 0.95rem; cursor: pointer; }
+.cftr-check input { width: 1.25rem; height: 1.25rem; accent-color: var(--neon-cyan); }
+.cftr-dossier { margin-top: 0.75rem; font-size: 0.92rem; line-height: 1.5; }
+.cftr-dossier h4 { margin: 0 0 0.4rem; font-size: 1.05rem; color: var(--neon-cyan); }
+.cftr-dossier ul { margin: 0.25rem 0 0.75rem; padding-left: 1.2rem; }
+.cftr-dossier-group { margin: 0.6rem 0 0.2rem; font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-secondary); }
+.cftr-dossier details { margin: 0.25rem 0; }
+.cftr-dossier summary { cursor: pointer; color: var(--neon-cyan); min-height: 2rem; }
+.cftr-prov { min-width: 70rem; }
+.cftr-leaves { margin: 0.5rem 0 1rem; padding-left: 1.2rem; }
+.cftr-leaves li { margin-bottom: 0.35rem; }
+.cftr-cite { margin: 0.5rem 0 0; padding: 0.9rem 1rem; overflow-x: auto; white-space: pre-wrap; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.55; color: var(--ink-primary); background: rgba(0, 0, 0, 0.45); border: 1px solid var(--border-glass); border-radius: 8px; }
+[data-needs-gl][hidden] { display: none; }
+.sw-tm { background: #738cff; }
+.sw-cyt { background: #40e68c; }
+.sw-ext { background: #f2f2ff; }
+.sw-none { background: #8c99a8; }
+/* the colour key written into a page before the script runs (make_page_blocks.py legend_block); the script writes the same rows with these colours */
+.sw-part-1 { background: rgb(0, 242, 255); }
+.sw-part-2 { background: rgb(209, 92, 255); }
+.sw-part-3 { background: rgb(77, 140, 255); }
+.sw-part-4 { background: rgb(255, 173, 26); }
+.sw-grey { background: #8c99a8; }
+.sw-grey.is-dotted { background: transparent; border-top: 2px dotted #8c99a8; }
+.sw-band { background: #c9d1dc; }
+.cftr-legend[hidden] { display: none; }

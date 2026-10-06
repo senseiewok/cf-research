@@ -1,0 +1,49 @@
+/* The custom properties cftr-model.css uses, with the same names and values as the lab's website, so the model looks the same on its own page.
+   The website defines them in its own stylesheet and does not load this file. */
+:root {
+    color-scheme: dark;
+    /* Modern glassmorphism color palette (from the original page) */
+    --bg-dark: #050505;
+    --bg-panel: #0a0a0a;
+    --bg-glass: rgba(10, 10, 10, 0.7);
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --ink-primary: #f0f0f0;
+    --ink-secondary: #a0a0a0;
+    --muted: #9a9a9a;          /* was #606060: 3.2:1 on the dark background and 2:1 over a rose; now 4.5:1 even over the brightest rose */
+    --line: #1a1a1a;
+    --lime: #edbd45;
+    --coral: #f07843;
+    --neon-cyan: #00f3ff;
+    --neon-purple: #bc13fe;    /* borders, glows, fills */
+    --purple-text: #cf5cff;    /* purple used as small text: 6.4:1 on the dark background */
+    --neon-green: #0aff0a;
+    --neon-orange: #ff9d00;
+    --rose-pink: #ff7896;
+    --glow-lime: rgba(237, 189, 69, 0.4);
+    --glow-cyan: rgba(0, 243, 255, 0.3);
+    --glow-purple: rgba(188, 19, 254, 0.3);
+    --white: #ffffff;
+    --font-display: "Space Grotesk", "Aptos", "Segoe UI", sans-serif;
+    --font-body: "Space Grotesk", "Aptos", "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", "Cascadia Code", Consolas, monospace;
+    --cf-banner-h: 4.25rem;
+    --wide: 84rem;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg-dark); color: var(--ink-primary); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 1rem; line-height: 1.6; }
+.wrap { width: min(100% - 2rem, 84rem); margin-inline: auto; padding-block: 0.5rem; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; }
+a { color: var(--neon-cyan); }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--neon-cyan); outline-offset: 2px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip-link { position: absolute; left: -999px; } .skip-link:focus { left: 1rem; top: 1rem; z-index: 10; background: #000; padding: 0.5rem 1rem; }
+.eyebrow { margin: 0; font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--neon-cyan); }
+.lede { font-size: 1.15rem; max-width: 52rem; }
+.meta { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.55; color: var(--ink-secondary); }
+.stamp { display: inline-block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid currentColor; padding: 0.2rem 0.6rem; border-radius: 2px; color: var(--lime); margin: 0 0.4rem 0.4rem 0; }
+.stamp-planned { color: var(--rose-pink); }
+.quiet { padding: 1rem 1.25rem; border: 1px solid var(--border-glass); border-radius: 8px; background: var(--bg-glass); }
+.quiet a, .meta a { color: var(--neon-cyan); }
+.page-foot { border-top: 1px solid var(--border-glass); margin-top: 2rem; padding: 1.5rem 0 2.5rem; font-size: 0.9rem; color: var(--ink-secondary); }

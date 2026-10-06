@@ -1,0 +1,28 @@
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.ppk
+id_rsa*
+id_ed25519*
+credentials.json
+auth.json
+*service-account*.json
+.npmrc
+.loop-logs/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.claude/settings.local.json
+CLAUDE.local.md
+# Third-party source documents: linked and checksummed, never committed
+sources/downloads/
+*.part
+
+# tool caches and scratch ledgers
+__pycache__/
+.pytest_cache/
+evidence/*-smoke.jsonl

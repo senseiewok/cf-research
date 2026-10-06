@@ -1,0 +1,12 @@
+# Numbers in landscape/cftr-structures.md that are counts or sums derived from the data, each with its reason.
+# Check with: python tools/sources/check_numbers.py --evidence <slim JSON of tools/cftr-model/web/cftr-data.js without coordinates> --allow-file this-file landscape/cftr-structures.md
+4609  # 1181 + 1139 + 1162 + 1127: the residues the four models place
+341   # 1480 - 1139: residues 5UAK does not place
+318   # 1480 - 1162: residues 8EIQ does not place
+209   # two meanings: the number of UniProt natural-variant entries (196 single-residue + 13 spanning), and the longest gap in 8EIQ (residues 637 to 845 inclusive)
+76    # the count of Helix features in the UniProt record (76 helix + 31 strand + 11 turn = 118)
+165   # distinct start positions of the 196 single-residue variant entries
+404   # an HTTP status code: files.rcsb.org answers 404 for robots.txt, meaning no robots file
+17    # counted from the files: CA atoms of the unknown-identity fragment in 6MSM (chain B)
+19    # counted from the files: CA atoms of the unknown-identity fragment in 5UAK (chain R)
+16    # counted from the files: CA atoms of the unknown-identity fragment in 8EIQ (chain B)
