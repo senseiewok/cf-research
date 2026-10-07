@@ -156,7 +156,8 @@ page = REPO / "sources" / "manual-downloads.md"
 if real.exists() and page.exists():
     rc = yaml.safe_load(real.read_text(encoding="utf-8"))
     rendered = mod.render(rc)
-    check("the committed page is current (run make_manual_downloads.py)", page.read_bytes() == rendered.encode("utf-8"))
+    # Git on Windows (core.autocrlf) checks the page out with CRLF; the committed bytes are LF.
+    check("the committed page is current (run make_manual_downloads.py)", page.read_bytes().replace(b"\r\n", b"\n") == rendered.encode("utf-8"))
     for s in rc["sources"]:
         listed = s.get("title", s["id"]) in rendered or s["id"] in rendered
         if s["access"] in ("manual", "request", "forbidden"):
