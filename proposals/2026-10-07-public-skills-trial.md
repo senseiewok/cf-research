@@ -17,17 +17,17 @@ The checker was tested before it judged anything: `test_check_page_basics.py` ho
 
 ## `frontend-design`
 
-| Arm | Mean checks passed (of 7) | Pages passing all 7 | Prompt tokens | Mean output tokens | Mean seconds |
+| Arm | Mean checks passed (of 7) | Pages passing all 7 | Prompt tokens | Mean output tokens | Mean seconds per page (the runner's clock) |
 | --- | --- | --- | --- | --- | --- |
-| Without | 5.6 | 1 of 5 | 242 | 2,928 | 20.8 |
-| With | 6.4 | 3 of 5 | 2,178 | 2,554 | 18.8 |
+| Without | 5.6 | 1 of 5 | 242 | 2,928 | 21.1 |
+| With | 6.4 | 3 of 5 | 2,178 | 2,554 | 19.1 |
 
 What failed, per page:
 
 - Without: seed 12 changed one of the three verified sentences and had an animation that runs forever; seed 13 had no `main` landmark and low contrast (3.22); seed 14 had 9 text elements over a gradient or image that could not be measured; seed 15 had contrast 4.34 and two endless animations.
 - With: seed 11 had 2 text elements over a gradient or image that could not be measured (the lowest measured ratio, 5.16, passes); seed 13 had no `main` landmark and low contrast (3.13).
 
-Read this as a direction, not a result. Five pages per arm, one task, one model, and a checker written for this trial. The checks measure mechanical quality (accessibility, no outside loads, copy untouched), not what the skill is for, a distinctive look. The "with" arm was no slower and wrote fewer tokens, but it carries 1,936 more prompt tokens on every call. A reviewer has not yet looked at the ten pages for taste; only the checks and the controlling agent's own screenshots were used.
+Two of the failing pages failed contrast only because text over a gradient or image could not be measured, and the checker counts that as a failure (without seed 14, lowest measured ratio 9.15; with seed 11, lowest measured ratio 5.16). Counting those two as passes gives 2 of 5 against 4 of 5 pages passing all seven, and means of 5.8 against 6.6 (computed from the table); the gap in checks passed is 0.8 either way. Seed 13 failed the same two checks in both arms. Seconds are the runner's own clock per page (the usage log's model-call clock gives 20.8 and 18.8, the same order). Read this as a direction, not a result. Five pages per arm, one task, one model, and a checker written for this trial. The checks measure mechanical quality (accessibility, no outside loads, copy untouched), not what the skill is for, a distinctive look. The "with" arm was no slower and wrote fewer tokens, but it carries 1,936 more prompt tokens on every call. A reviewer has not yet looked at the ten pages for taste; only the checks and the controlling agent's own screenshots were used.
 
 What in the skill looks worth keeping, from reading it: spend boldness in one place, cut decoration that serves nothing, use motion sparingly and only for a reason, do not number or label content that is not a sequence, a quality floor (mobile, focus, reduced motion, contrast) built in without announcing it, and a two-pass plan-then-critique process. What does not fit the lab: it pushes toward an opinionated, risk-taking visual identity, which the calm, sober audience brief for this lab works against. The lab voice and verified-copy rules win where they differ.
 
@@ -38,7 +38,7 @@ What in the skill looks worth keeping, from reading it: spend boldness in one pl
 | Without | 1 of 5 | 139 |
 | With | 4 of 5 | 5,473 |
 
-Without the skill, seeds 13, 14 and 15 had art with no description after the block (the accessibility rule), and seed 12 had no fenced block that the checker could find. With the skill, seed 13 returned unfenced Braille dot art with a description after it, so the checker found no block. The skill earns its cost on this task, mostly by teaching the fenced block and the description-after-the-block convention, but five runs on one task only show that the check can tell the arms apart.
+Without the skill, seeds 13, 14 and 15 had art with no description after the block (the accessibility rule), and seed 12 had no fenced block that the checker could find. With the skill, seed 13 returned unfenced Braille dot art with a description after it (read from the saved reply), so the checker found no block. On this one task the skill-guided arm passed more often. The likely reason is the fenced-block and description-after-the-block conventions the skill states, but that was not isolated, and five runs on one task only show that the check can tell the arms apart.
 
 ## Cost in context
 
@@ -50,7 +50,7 @@ Measured with the local worker's tokenizer (Qwen), so other models count differe
 | `skill-creator` | 65 | 7,466 |
 | `ascii-art` (lab) | 162 | 5,312 |
 
-Across the 23 skills measured (lab and third party), descriptions range from 41 to 162 tokens per turn. Anthropic's own plugin bundle `example-skills` loads twelve skills at once and cannot be installed selectively (see the decision memo), which is why the trial used hand-copied, git-ignored folders.
+Across the 23 skills measured (lab and third party; the cost script's output was saved with the trial), descriptions range from 41 to 162 tokens per turn. Anthropic's own plugin bundle `example-skills` loads twelve skills at once and cannot be installed selectively (see the decision memo), which is why the trial used hand-copied, git-ignored folders.
 
 ## `skill-creator`
 
@@ -58,8 +58,12 @@ Read: its SKILL.md (a method for writing and testing skills) and its scripts. Fi
 
 - Its with-and-without evaluation is the idea the `ascii-art` trial above reproduces in the lab's own terms: same task, with and without the skill, judged by a check that runs and counted only where the check confirms. The trial adds the vacuous-pass guard (a check must find something to check) and a test that the check can fail.
 - Its scripts call `claude -p` on the user's own login, write a temporary command file into the project and serve a review page on 127.0.0.1. Not run, and not needed.
-- `quick_validate.py` was run on lab skills. On Windows it failed with an encoding error until `PYTHONUTF8=1` was set, because it reads the file without naming an encoding. From reading the code, its frontmatter pattern also requires `\n` line endings, so a CRLF file would not match; this was not run. Reported as an observation, not fixed upstream.
-- Three of its rules are not in the public skills repo's own check (`../cf-skills/scripts/check_repo.py`, which already checks the name pattern, the 64-character name limit and the 1024-character description limit): no frontmatter keys outside `name`, `description`, `license`, `allowed-tools`, `metadata` and `compatibility`; no angle brackets in the description; `compatibility` at most 500 characters.
+- `quick_validate.py` was run on lab skills. On Windows it failed with an encoding error until `PYTHONUTF8=1` was set, because it reads the file without naming an encoding (reproduce with: run it on `ascii-art`, `ai-provider-compatible-skills` or `cf-research-context` without that setting, which gives `UnicodeDecodeError: 'charmap' codec can't decode`; with it, all three are valid). From reading the code, its frontmatter pattern also requires `\n` line endings, so a CRLF file would not match; this was not run. Reported as an observation, not fixed upstream.
+- Three of its rules were not in the public skills repo's own check when the trial ran (`../cf-skills/scripts/check_repo.py` checked the name pattern, the 64-character name limit and the 1024-character description limit; the three were added afterwards in cf-skills pull request 3): no frontmatter keys outside `name`, `description`, `license`, `allowed-tools`, `metadata` and `compatibility`; no angle brackets in the description; `compatibility` at most 500 characters.
+
+## Review of this note
+
+A blind review by Opus, Fable and the local Qwen3.8 27B read the note and the saved results on 2026-10-07 and found no number that disagrees with the saved results except the seconds column (fixed above: it now names the clock it comes from). They asked for four things, now done: say how the unmeasurable-contrast pages are counted (above), mark the Braille detail as read from the saved reply, soften the sentence that said the skill earned its cost, and explain the garbled page titles in the runner's saved failure lines. Those titles read like `What this lab is â€” ...`; the pages and the checker's own output are correct UTF-8, and the garbling came from the runner reading the checker's output with the Windows default encoding, which `run_arms.py` now declares as UTF-8. Several statements in the note rest on the author's own reading or running of the tools, not on the saved results the reviewers saw (the checker's fixtures and its url-in-data-URI fix, the 360 px mobile width, the discovery check's setup, the script behaviour of `skill-creator`, the commit and licence); each is stated as read or run where it appears, and no reviewer checked them.
 
 ## Discovery
 

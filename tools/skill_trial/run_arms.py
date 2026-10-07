@@ -71,7 +71,7 @@ def main(argv=None):
                 body = page.read_text(encoding="utf-8") if page.exists() else None
                 row = {"arm": arm, "seed": seed, "seconds": secs, "model_exit": old.get("model_exit"), "has_block": body is not None}
                 if body is not None:
-                    c = subprocess.run([sys.executable, a.checker, str(page), *[x for x in a.checker_arg]], capture_output=True, text=True, timeout=300)
+                    c = subprocess.run([sys.executable, a.checker, str(page), *[x for x in a.checker_arg]], capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=300)
                     lines = c.stdout.strip().splitlines()
                     row["checks"] = {ln.split(":")[0].split(" ")[1]: ln.startswith("PASS") for ln in lines if ln.startswith(("PASS ", "FAIL "))}
                     row["details"] = [ln for ln in lines if ln.startswith("FAIL ")]
@@ -93,7 +93,7 @@ def main(argv=None):
             row = {"arm": arm, "seed": seed, "seconds": secs, "model_exit": p.returncode, "has_block": body is not None}
             if body is not None:
                 page.write_text(body + "\n", encoding="utf-8")
-                c = subprocess.run([sys.executable, a.checker, str(page), *[x for x in a.checker_arg]], capture_output=True, text=True, timeout=300)
+                c = subprocess.run([sys.executable, a.checker, str(page), *[x for x in a.checker_arg]], capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=300)
                 lines = c.stdout.strip().splitlines()
                 row["checks"] = {ln.split(":")[0].split(" ")[1]: ln.startswith("PASS") for ln in lines if ln.startswith(("PASS ", "FAIL "))}
                 row["details"] = [ln for ln in lines if ln.startswith("FAIL ")]
