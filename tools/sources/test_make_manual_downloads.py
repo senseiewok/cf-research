@@ -148,6 +148,15 @@ with tempfile.TemporaryDirectory() as tmp:
     check("--check on a changed file exits 1 and writes nothing", p.returncode == 1 and out.exists() and out.read_bytes().endswith(b"x"), f"{p.returncode}")
     p = run()
     check("running again repairs the file", p.returncode == 0 and out.exists() and out.read_bytes() == md.encode("utf-8"))
+    # Git on Windows (core.autocrlf) checks the page out with CRLF while the committed bytes are LF: --check must accept that, and still reject a stale page
+    out.write_bytes(md.encode("utf-8").replace(b"\n", b"\r\n"))
+    p = run("--check")
+    check("--check accepts the same page checked out with CRLF line endings", p.returncode == 0 and "up to date" in p.stdout, f"{p.returncode} {p.stdout!r}")
+    out.write_bytes(md.encode("utf-8").replace(b"\n", b"\r\n") + b"stale line\r\n")
+    p = run("--check")
+    check("--check still rejects a stale page that has CRLF line endings", p.returncode == 1 and "out of date" in p.stdout, f"{p.returncode} {p.stdout!r}")
+    p = run()
+    check("after the CRLF checks, running again rewrites the LF page", p.returncode == 0 and out.read_bytes() == md.encode("utf-8"))
 
 # the real catalog and the page committed with it
 REPO = Path(__file__).resolve().parents[2]
