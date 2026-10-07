@@ -214,7 +214,8 @@ def main(argv=None) -> int:
 
     if args.check:
         if out_path.exists():
-            existing = out_path.read_bytes()
+            # Git on Windows (core.autocrlf) checks the page out with CRLF; the committed bytes are LF.
+            existing = out_path.read_bytes().replace(b"\r\n", b"\n")
             if existing == rendered_bytes:
                 print("manual-downloads.md is up to date")
                 return 0
