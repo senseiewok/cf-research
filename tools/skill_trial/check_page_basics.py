@@ -104,13 +104,13 @@ def source_refs(text):
     refs = list(p.refs)
     # a url( inside an inline data: URI (for example an SVG filter reference such as url(%23n)) is part of that inline image, not a load
     text = re.sub(r"""url\(\s*(['"])\s*data:.*?\1\s*\)|url\(\s*data:[^)]*\)""", "url(data:)", text, flags=re.I | re.S)
-    for block in re.findall(r"<style[^>]*>(.*?)</style>", text, re.I | re.S):
+    for block in re.findall(r"<style[^>]*>(.*?)</style[^>]*>", text, re.I | re.S):
         for m in re.finditer(r"url\(\s*['\"]?\s*([^'\")\s]+)", block, re.I):
             if not m.group(1).lower().startswith("data:"):
                 refs.append(f"css url({m.group(1)[:60]})")
         for m in re.finditer(r"@import\s+(?:url\()?\s*['\"]?([^'\")\s;]+)", block, re.I):
             refs.append(f"@import {m.group(1)[:60]}")
-    for block in re.findall(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", text, re.I | re.S):
+    for block in re.findall(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script[^>]*>", text, re.I | re.S):
         if re.search(r"\bfetch\s*\(|XMLHttpRequest|\bWebSocket\b|\bimport\s*\(\s*['\"]https?:|\bsendBeacon\b", block):
             refs.append("script makes a request")
     return refs, " ".join(html.unescape(" ".join(p.text)).split())
