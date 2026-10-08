@@ -59,12 +59,6 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gnomad | gnomAD (Genome Aggregation Database) browser and downloads | [page](https://gnomad.broadinstitute.org/) | link only | Terms page read in full 2026-10-04 (/terms redirects to /policies). |
 
-### Google DeepMind
-
-| ID | What | Open | Save as | Notes |
-| --- | --- | --- | --- | --- |
-| alphamissense-predictions | AlphaMissense predictions (Zenodo record) | [page](https://zenodo.org/records/10813168) | link only | Fetched directly 2026-10-07 with the lab user agent: zenodo.org robots.txt (allows /records/ and /api/records/*/files, Crawl-delay 10), the v1 record 8208688 p… |
-
 ### GTEx Portal (publisher not read; robots.txt blocked every page)
 
 | ID | What | Open | Save as | Notes |
@@ -100,6 +94,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | unpaywall-api | Unpaywall REST API | [page](https://unpaywall.org/products/api) | link only | Fetched directly 2026-10-07 with the lab user agent. |
+
+### Zenodo (host of the record; creators at Google DeepMind, copyright DeepMind Technologies Limited)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| alphamissense-predictions | AlphaMissense predictions (Zenodo record) | [page](https://zenodo.org/records/10813168) | link only | Fetched directly 2026-10-07 with the lab user agent: zenodo.org robots.txt (allows /records/ and /api/records/*/files, Crawl-delay 10), the v1 record 8208688 p… |
 
 ## Ask first (access by request)
 

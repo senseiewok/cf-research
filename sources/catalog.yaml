@@ -1172,7 +1172,9 @@ sources:
       unknown). The web services page documents a versioned GET-only REST API (v2, XML or JSON) and ZIP/PDF
       label download URLs. NLM's download terms say "a signed license agreement is not needed"; users must
       acknowledge NLM as the source clearly and conspicuously, must not imply NLM endorsement, and anyone
-      redistributing must keep data current or say clearly that it may not be current. NLM's copyright page
+      redistributing must keep data current or say clearly that it may not be current. The same page says users
+      "agree to hold NLM and the U.S. Government harmless from any liability resulting from errors in the data" and that
+      works of the U.S. Government "may be protected by non-US copyright law" (re-read 2026-10-08). NLM's copyright page
       says U.S. government works may be reused freely with acknowledgement, while non-government content may
       be copyrighted; label text is submitted by companies, so its copyright status is not established here.
       The About page says DailyMed labeling is the latest submitted to FDA, may differ from FDA-approved
@@ -1196,7 +1198,7 @@ sources:
     claim_label: unverified
     notes: >-
       Fetched directly 2026-10-07 with the lab user agent; the API was not called. robots.txt on
-      rest.ensembl.org returns 404 (no file); www.ensembl.org disallows only /genome-browser/, /tools/ and
+      rest.ensembl.org returns 404 (no file; re-checked 2026-10-08: 404 again, though one reviewer saw a 500 the same day, so treat a 5xx as "unreadable, do not fetch"); www.ensembl.org disallows only /genome-browser/, /tools/ and
       /genome-selector/search; github.com's AI-agent group does not disallow wiki pages. The REST landing page
       lists the endpoints, including GET and POST vep/:species/hgvs, /id and /region, and links its User Guide
       to the GitHub wiki; it states no key, licence or terms. Could not read: the Ensembl disclaimer and legal
@@ -1208,7 +1210,7 @@ sources:
 
   - id: alphamissense-predictions
     title: AlphaMissense predictions (Zenodo record)
-    publisher: Google DeepMind
+    publisher: Zenodo (host of the record; creators at Google DeepMind, copyright DeepMind Technologies Limited)
     kind: dataset
     access: manual
     robots: allow
@@ -1228,6 +1230,8 @@ sources:
       advice. A public, non-commercial repo may use v3 with attribution; check which version a file came from
       before reusing it, because v1 files carry the NonCommercial-ShareAlike terms. The v1 files total 6.1 GB
       (largest 2.5 GB), so a human decides whether any file is needed; nothing is fetched by a tool.
+      The v3 record page, re-read 2026-10-08, also carries the disclaimer that the resource "has not been validated for, and is not
+      approved for, any clinical use" and lists its Publisher as Zenodo.
       Could not read: Zenodo's own terms of use (about.zenodo.org/terms, not fetched) and any hosting outside
       Zenodo (for example a Google Cloud bucket); this entry records only the Zenodo record. AlphaMissense
       scores are model predictions, not clinical classifications; never present one as a variant's
@@ -1254,7 +1258,7 @@ sources:
       lab user agent; the API was not called and no key was requested. robots.txt on
       api.semanticscholar.org returns 404 (no file); www.semanticscholar.org disallows /api, /search and some
       paper and author paths but not /product/. A key is optional for most endpoints and is requested
-      through a form on the overview page; it arrives by email and must not be shared. The licence permits
+      through the "Request an API Key" link on the overview page; it arrives by email and must not be shared. The licence permits
       API use and binds the user's organisation on first use, with indemnity and Washington State law, so a
       human accepts it before admission. Attribution: name "Semantic Scholar" on any site or publication using
       its data, and cite The Semantic Scholar Open Data Platform paper in scientific publications. S2 Data
