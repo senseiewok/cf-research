@@ -1,0 +1,188 @@
+<ClinVarResult-Set>
+  <VariationArchive VariationID="35867" VariationName="NM_000492.4(CFTR):c.3454G&gt;C (p.Asp1152His)" VariationType="single nucleotide variant" Accession="VCV000035867" Version="107" RecordType="classified" NumberOfSubmissions="46" NumberOfSubmitters="41" DateLastUpdated="2026-10-04" DateCreated="2015-06-28" MostRecentSubmission="2026-10-03">
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000052174" SubmitterName="Women's Health and Genetics/Laboratory Corporation of America, LabCorp" />
+      <Classification DateLastEvaluated="2015-07-16"><ReviewStatus>no assertion criteria provided</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001432688" SubmitterName="MAGI's Lab - Research, MAGI Group" />
+      <Classification><ReviewStatus>no assertion criteria provided</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV002502719" SubmitterName="AiLife Diagnostics, AiLife Diagnostics" />
+      <Classification DateLastEvaluated="2021-08-04"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000886266" SubmitterName="Mendelics" />
+      <Classification DateLastEvaluated="2018-11-05"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV002019233" SubmitterName="Revvity Omics, Revvity" />
+      <Classification DateLastEvaluated="2024-11-05"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000584083" SubmitterName="HudsonAlpha Institute for Biotechnology, HudsonAlpha Institute for Biotechnology" />
+      <Classification DateLastEvaluated="2017-07-05"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000916188" SubmitterName="Illumina Laboratory Services, Illumina" />
+      <Classification DateLastEvaluated="2018-08-22"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001193906" SubmitterName="Myriad Genetics, Inc." />
+      <Classification DateLastEvaluated="2019-11-11"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001953101" SubmitterName="Joint Genome Diagnostic Labs from Nijmegen and Maastricht, Radboudumc and MUMC+" />
+      <Classification><ReviewStatus>no assertion criteria provided</ReviewStatus><GermlineClassification>Likely pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV002507338" SubmitterName="Genome Diagnostics Laboratory, The Hospital for Sick Children" />
+      <Classification DateLastEvaluated="2021-08-23"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV002507422" SubmitterName="Genome Diagnostics Laboratory, The Hospital for Sick Children" />
+      <Classification DateLastEvaluated="2021-08-23"><ReviewStatus>no assertion criteria provided</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000601100" SubmitterName="Quest Diagnostics Nichols Institute San Juan Capistrano" />
+      <Classification DateLastEvaluated="2024-09-07"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000227775" SubmitterName="Eurofins Ntd Llc (ga)" />
+      <Classification DateLastEvaluated="2017-05-22"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001169218" SubmitterName="CFTR-France" />
+      <Classification DateLastEvaluated="2018-01-29"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV006083417" SubmitterName="Institute of Human Genetics, University of Leipzig Medical Center" />
+      <Classification DateLastEvaluated="2025-12-23"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>likely pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV007329967" SubmitterName="Imagene.me medical diagnostic laboratory, IMAGENE.ME SA" />
+      <Classification><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000603066" SubmitterName="ARUP Laboratories, Molecular Genetics and Genomics, ARUP Laboratories" />
+      <Classification DateLastEvaluated="2025-07-31"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV007540974" SubmitterName="Department of Human Genetics, Hannover Medical School" />
+      <Classification DateLastEvaluated="2022-04-13"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV007702754" SubmitterName="Blueprint Genetics" />
+      <Classification DateLastEvaluated="2024-10-09"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000511351" SubmitterName="Center for Pediatric Genomic Medicine, Children's Mercy Hospital and Clinics" />
+      <Classification DateLastEvaluated="2016-10-28"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000536841" SubmitterName="Division of Human Genetics, Children's Hospital of Philadelphia" />
+      <Classification DateLastEvaluated="2015-11-13"><ReviewStatus>no assertion criteria provided</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000329250" SubmitterName="GeneDx" />
+      <Classification DateLastEvaluated="2018-07-12"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000996035" SubmitterName="Johns Hopkins Genomics, Johns Hopkins University" />
+      <Classification DateLastEvaluated="2019-07-09"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001163543" SubmitterName="Baylor Genetics" />
+      <Classification><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001449991" SubmitterName="Clinical Genetics and Genomics, Karolinska University Hospital" />
+      <Classification DateLastEvaluated="2017-10-02"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001527341" SubmitterName="Baylor Genetics" />
+      <Classification DateLastEvaluated="2018-02-13"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001808839" SubmitterName="Genome Diagnostics Laboratory, Amsterdam University Medical Center" />
+      <Classification><ReviewStatus>no assertion criteria provided</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001963164" SubmitterName="Diagnostic Laboratory, Department of Genetics, University Medical Center Groningen" />
+      <Classification><ReviewStatus>no assertion criteria provided</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001973888" SubmitterName="Clinical Genetics DNA and cytogenetics Diagnostics Lab, Erasmus MC, Erasmus Medical Center" />
+      <Classification><ReviewStatus>no assertion criteria provided</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV002030178" SubmitterName="Baylor Genetics" />
+      <Classification DateLastEvaluated="2021-10-26"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000783093" SubmitterName="ClinPGx" />
+      <Classification DateLastEvaluated="2021-03-24"><ReviewStatus>reviewed by expert panel</ReviewStatus><GermlineClassification>drug response</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001860330" SubmitterName="Institute of Reproductive Genetics, University of Münster" />
+      <Classification DateLastEvaluated="2022-03-16"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV004183529" SubmitterName="Baylor Genetics" />
+      <Classification DateLastEvaluated="2023-10-01"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV004211630" SubmitterName="Baylor Genetics" />
+      <Classification DateLastEvaluated="2024-03-30"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV005197467" SubmitterName="Clinical Genetics Laboratory, Skane University Hospital Lund" />
+      <Classification DateLastEvaluated="2023-03-08"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Likely pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV005666415" SubmitterName="Fulgent Genetics, Fulgent Genetics" />
+      <Classification DateLastEvaluated="2024-04-12"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001810328" SubmitterName="Genome-Nilou Lab" />
+      <Classification DateLastEvaluated="2021-07-22"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001181807" SubmitterName="Ambry Genetics" />
+      <Classification DateLastEvaluated="2025-01-28"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV006325071" SubmitterName="Genetic Services Laboratory, University of Chicago" />
+      <Classification DateLastEvaluated="2024-03-20"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV007097386" SubmitterName="Department of Genomics, ADN Uruguay" />
+      <Classification DateLastEvaluated="2024-06-27"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000074908" SubmitterName="Labcorp Genetics (formerly Invitae), Labcorp" />
+      <Classification DateLastEvaluated="2026-01-28"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV002075827" SubmitterName="Natera, Inc." />
+      <Classification DateLastEvaluated="2025-09-08"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV007598152" SubmitterName="Dasa" />
+      <Classification DateLastEvaluated="2026-04-16"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV006581656" SubmitterName="3billion" />
+      <Classification DateLastEvaluated="2025-12-29"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV002586192" SubmitterName="CeGaT Center for Human Genetics Tuebingen" />
+      <Classification DateLastEvaluated="2024-02-01"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV004111459" SubmitterName="PreventionGenetics, part of Exact Sciences" />
+      <Classification DateLastEvaluated="2026-05-27"><ReviewStatus>criteria provided, single submitter</ReviewStatus><GermlineClassification>Likely pathogenic</GermlineClassification></Classification>
+    </ClinicalAssertion>
+  </VariationArchive>
+</ClinVarResult-Set>
