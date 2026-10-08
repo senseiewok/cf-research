@@ -1,0 +1,95 @@
+<ClinVarResult-Set>
+  <VariationArchive VariationID="54087" VariationName="NM_000492.4(CFTR):c.92G&gt;T (p.Arg31Leu)" VariationType="single nucleotide variant" Accession="VCV000054087" Version="29" RecordType="classified" NumberOfSubmissions="13" NumberOfSubmitters="13" DateLastUpdated="2026-08-04" DateCreated="2018-01-25" MostRecentSubmission="2026-06-14">
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000692318" SubmitterName="Clinical Molecular Genetics Laboratory, Johns Hopkins All Children's Hospital" />
+      <Classification DateLastEvaluated="2015-06-17">
+        <ReviewStatus>no assertion criteria provided</ReviewStatus>
+        <GermlineClassification>Uncertain significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV002686699" SubmitterName="Ambry Genetics" />
+      <Classification DateLastEvaluated="2024-07-29">
+        <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+        <GermlineClassification>Uncertain significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV005878596" SubmitterName="ARUP Laboratories, Molecular Genetics and Genomics, ARUP Laboratories" />
+      <Classification DateLastEvaluated="2024-01-04">
+        <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+        <GermlineClassification>Uncertain Significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000795721" SubmitterName="Counsyl" />
+      <Classification DateLastEvaluated="2017-11-13">
+        <ReviewStatus>no assertion criteria provided</ReviewStatus>
+        <GermlineClassification>Uncertain significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000679484" SubmitterName="ClinVar Staff, National Center for Biotechnology Information (NCBI)" />
+      <Classification>
+        <ReviewStatus>no classification provided</ReviewStatus>
+        <GermlineClassification>not provided</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001425298" SubmitterName="Johns Hopkins Genomics, Johns Hopkins University" />
+      <Classification DateLastEvaluated="2019-03-01">
+        <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+        <GermlineClassification>Uncertain significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001714822" SubmitterName="Mayo Clinic Laboratories, Mayo Clinic" />
+      <Classification DateLastEvaluated="2021-03-19">
+        <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+        <GermlineClassification>Uncertain significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV001981583" SubmitterName="CFTR2" />
+      <Classification DateLastEvaluated="2017-03-03">
+        <ReviewStatus>reviewed by expert panel</ReviewStatus>
+        <GermlineClassification>Uncertain significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV002529742" SubmitterName="Sema4, Sema4" />
+      <Classification DateLastEvaluated="2021-04-30">
+        <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+        <GermlineClassification>Uncertain significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV002779633" SubmitterName="Fulgent Genetics, Fulgent Genetics" />
+      <Classification DateLastEvaluated="2022-05-09">
+        <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+        <GermlineClassification>Uncertain significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV000861719" SubmitterName="Eurofins Ntd Llc (ga)" />
+      <Classification DateLastEvaluated="2018-06-07">
+        <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+        <GermlineClassification>Uncertain significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV003517738" SubmitterName="Labcorp Genetics (formerly Invitae), Labcorp" />
+      <Classification DateLastEvaluated="2026-01-04">
+        <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+        <GermlineClassification>Uncertain significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+    <ClinicalAssertion>
+      <ClinVarAccession Accession="SCV002570630" SubmitterName="Women's Health and Genetics/Laboratory Corporation of America, LabCorp" />
+      <Classification DateLastEvaluated="2026-05-01">
+        <ReviewStatus>criteria provided, single submitter</ReviewStatus>
+        <GermlineClassification>Uncertain significance</GermlineClassification>
+      </Classification>
+    </ClinicalAssertion>
+  </VariationArchive>
+</ClinVarResult-Set>
