@@ -47,7 +47,7 @@ The model needs a browser with WebGL2; without it the page still reads, because 
 
 ## What's inside
 
-The [Layout](#layout) table below lists every path with what it is and its status. In short: the notes at the top level and under `landscape/`; the catalog and its rules under `sources/`; the tools under `tools/` (`cftr-model`, `sources`, `skill_trial`, and a pointer for the evidence loop, which moved to the skills repository); the three reading guides under `.claude/skills/`; `proposals/`; `ledger/`.
+The [Layout](#layout) table below lists every path with what it is and its status. In short: the notes at the top level and under `landscape/`; the catalog and its rules under `sources/`; the tools under `tools/` (`cftr-model`, `sources`, `claims`, `variant_profile`, `skill_trial`, and a pointer for the evidence loop, which moved to the skills repository); the three reading guides under `.claude/skills/`; `proposals/`; `ledger/`.
 
 ## How we check it
 
@@ -115,6 +115,7 @@ verified yet, in that order. Read them the way you'd read a map, not a promise.
 | [`tools/cftr-model/`](tools/cftr-model/README.md) | An interactive 3D model of CFTR from those structures (WebGL2, no libraries), research tools (look up a residue, measure a distance, layers from UniProt, export), the build that ties every number to its file, and its tests. Draft, in review | draft, in review |
 | [`tools/sources/`](tools/sources/README.md) | Fetches what the catalog permits, prints browser instructions for the rest, writes a SHA-256 manifest for reproducibility | working, smoke-tested 2026-10-04 |
 | [`tools/claims/`](tools/claims/README.md) | Checks a file of claims against the evidence each cites: an exact quote, every number in the quote or worked out from it, a written scope for widening words and absence claims, and a stated basis for inferences. It does not prove that a quote supports its sentence | draft, in review |
+| [`tools/variant_profile/`](tools/variant_profile/README.md) | Prints what ClinVar states about one protein variant in one gene, each value beside the API field it came from, through the NCBI E-utilities API. It takes a variant, never a person, and interprets nothing | tests run offline against recorded API answers (retrieved 2026-10-07 and 2026-10-08) |
 | [`tools/skill_trial/`](tools/skill_trial/) | With-and-without trials of agent guidance on the local worker, and the checkers that judge them (page basics, ASCII art, skill discovery). Used by [`proposals/2026-10-07-public-skills-trial.md`](proposals/2026-10-07-public-skills-trial.md) | working, 2026-10-07 |
 | [`.claude/skills/ecfspr-report-reading/`](.claude/skills/ecfspr-report-reading/SKILL.md) | Agent skill: how to read an ECFSPR annual report (2020 to 2024) before extracting numbers. Every quotation and layout claim was checked against the report text; see its provenance note | draft, content review pending |
 | [`.claude/skills/cffpr-report-reading/`](.claude/skills/cffpr-report-reading/SKILL.md) | Agent skill: how to read a CFFPR Annual Data Report (2020 to 2024) before extracting numbers: who is counted, how a value is made, what changed between years and what the reports warn about | draft, content review pending |
@@ -133,6 +134,8 @@ Every factual claim that could be checked by a stranger is labelled with one of:
 - **`[hypothesis]`** — our own idea or inference, not a claim about the external world.
 
 If you add or edit a claim, update its label and, for `[verified]`, keep the source link and the date you checked it.
+
+These labels predate the answer tiers T0 to T3 in [`proposals/2026-10-08-antihallucination-strategy.md`](proposals/2026-10-08-antihallucination-strategy.md), which the lab's `cf-research-context` skill (in the cf-lab repository) carries as rules once its update is merged; no other note here uses them yet. In that proposal, text from a summary, a search snippet or memory is T0 and for orientation only, a note needs T1 (a quote from a primary source with its id and date), and a public claim needs T2 (T1 plus a script check and a different model's check). So before relying on a claim here, find its exact passage in the source; [`tools/claims/README.md`](tools/claims/README.md) describes a checker for a file of such claims, and what it cannot prove.
 
 ## Contributing conventions
 

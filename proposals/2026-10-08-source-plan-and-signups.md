@@ -7,7 +7,7 @@ Status: proposed, written 2026-10-08. The maintainer decides what to pursue and 
 | # | Source | What it adds | Access | Status |
 | --- | --- | --- | --- | --- |
 | 1 | The sources already approved, wired together: ClinicalTrials.gov, openFDA, ClinVar, PubMed, Europe PMC, Crossref with Retraction Watch, OpenAlex, NIH RePORTER | One question gives one cross-checked record (trial, label, variant, paper, retraction status) | No key, except OpenAlex (key required) and optional keys for NCBI and openFDA | Catalogued |
-| 2 | Variant layer: ClinVar (`tools/variant_profile`, open PR), MyVariant, AlphaMissense v3, CFTR2 | Evidence profiles for rare variants, plus an independent prediction score | Open; CFTR2 is a manual download | ClinVar and MyVariant catalogued; AlphaMissense in the draft catalog PR |
+| 2 | Variant layer: ClinVar (`tools/variant_profile`, merged), MyVariant, AlphaMissense v3, CFTR2 | Evidence profiles for rare variants, plus an independent prediction score | Open; CFTR2 is a manual download | ClinVar and MyVariant catalogued; AlphaMissense in the draft catalog PR |
 | 3 | Registry reports: ECFSPR, UK, Australia, CFRI; the CFF Patient Registry | Population numbers and trends | Four open; the CFF registry needs a permission request (board T-0006) | Catalogued |
 | 4 | Drug labels: openFDA, DailyMed, EMA | Approval and label facts without model guesses | No key | openFDA and EMA catalogued; DailyMed in the draft catalog PR |
 | 5 | Claude connectors for ChEMBL, ClinicalTrials.gov, PubMed and bioRxiv | Ready-made tools in the agent | Sign-in with the maintainer's Claude account | Listed in the session, not signed in. Their results do not pass through the lab's own audit trail |
