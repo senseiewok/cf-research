@@ -3,8 +3,9 @@
 
 Reads sources/catalog.yaml. Downloads entries whose access policy is 'fetch'.
 Prints browser instructions for 'manual' entries. Refuses 'forbidden' ones.
-Writes sources/manifest.json recording the SHA-256 of every file on disk, so an
-extraction can be reproduced without redistributing the documents themselves.
+Writes sources/manifest.json recording the SHA-256 of every file on disk (and keeping
+the hash an earlier run recorded for a file not on this machine), so an extraction
+can be reproduced without redistributing the documents themselves.
 
 Usage:
     python fetch_sources.py                 fetch permitted sources, list the rest
@@ -271,7 +272,23 @@ def manual_instructions(entries: list[dict]) -> str:
     return "\n".join(out)
 
 
-def build_manifest(catalog: dict, dest: Path) -> dict:
+def previous_hashes() -> dict[str, dict]:
+    """The hashes the current manifest holds, by id: {id: {filename, sha256, size_bytes}}. Empty when there is no manifest yet.
+    Raises ValueError when the manifest exists but cannot be read, so it is never overwritten (and its hashes lost) by mistake."""
+    if not MANIFEST.exists():
+        return {}
+    try:
+        files = json.loads(MANIFEST.read_text(encoding="utf-8"))["files"]
+        return {r["id"]: r for r in files if r.get("sha256")}
+    except (ValueError, KeyError, TypeError) as exc:
+        raise ValueError(f"{MANIFEST.name} exists but could not be read ({type(exc).__name__}); fix or remove it, then run again") from exc
+
+
+def build_manifest(catalog: dict, dest: Path, previous: dict[str, dict] | None = None) -> dict:
+    """Hash every catalog file that is on disk. A file that is not on disk keeps the hash an earlier run recorded for the same id and
+    filename (marked present: false), so a run on a machine that holds only some of the files does not erase the others' hashes.
+    A hash is never made up: an entry that was never recorded has none."""
+    previous = previous or {}
     records = []
     for entry in catalog.get("sources", []):
         name = entry.get("filename")
@@ -285,9 +302,14 @@ def build_manifest(catalog: dict, dest: Path) -> dict:
             "url": entry.get("url"),
             "present": path.exists(),
         }
+        old = previous.get(entry["id"])
         if path.exists():
             rec["sha256"] = sha256(path)
             rec["size_bytes"] = path.stat().st_size
+        elif old and old.get("filename") == name:
+            rec["sha256"] = old["sha256"]
+            if "size_bytes" in old:
+                rec["size_bytes"] = old["size_bytes"]
         records.append(rec)
     return {
         "generated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -299,11 +321,17 @@ def build_manifest(catalog: dict, dest: Path) -> dict:
 
 
 def record(catalog: dict, dest: Path) -> int:
-    """Hash whatever is on disk into the manifest. Never touches the network."""
-    manifest = build_manifest(catalog, dest)
+    """Hash whatever is on disk into the manifest, keeping earlier hashes of files not on disk. Never touches the network."""
+    try:
+        manifest = build_manifest(catalog, dest, previous_hashes())
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     have =[f for f in manifest["files"] if f["present"]]
-    print(f"recorded {len(have)} of {len(manifest['files'])} files in {MANIFEST.name}")
+    kept = [f for f in manifest["files"] if not f["present"] and f.get("sha256")]
+    print(f"recorded {len(have)} of {len(manifest['files'])} files in {MANIFEST.name}"
+          + (f"; kept the earlier hash of {len(kept)} file(s) not on disk" if kept else ""))
     manual_missing = [f for f in manifest["files"] if f["access"] == "manual" and not f["present"]]
     for f in manual_missing:
         print(f"still needed (save by hand): {f['id']}  ->  {f['filename']}")
@@ -331,9 +359,8 @@ def verify(dest: Path, only_ids: list[str] | None = None) -> int:
             continue
         path = dest / rec["filename"]
         if not rec.get("sha256"):
-            if wanted is not None:
-                print(f"NO HASH  {rec['id']}  (no recorded hash yet; save the file, then run --record)")
-                nohash += 1
+            print(f"NO HASH  {rec['id']}  (no recorded hash yet; save the file, then run --record)")
+            nohash += 1
             continue
         if not path.exists():
             print(f"MISSING  {rec['id']}  {rec['filename']}")
@@ -344,8 +371,14 @@ def verify(dest: Path, only_ids: list[str] | None = None) -> int:
         else:
             ok += 1
 
-    print(f"\n{ok} match, {bad} changed, {missing} missing")
-    if nohash or bad or missing:
+    print(f"\n{ok} match, {bad} changed, {missing} missing" + (f", {nohash} with no hash" if nohash else ""))
+    if bad or missing:
+        return 1
+    if ok == 0:
+        print("nothing was verified: no file had a recorded hash to check. Save the files, run --record, then --verify.")
+        return 1
+    # A named entry with no hash fails (--only); in a full run, entries not yet recorded are listed but do not fail the others.
+    if nohash and wanted is not None:
         return 1
     return 0
 
@@ -407,7 +440,11 @@ def main() -> int:
             print(f"FAILED ({type(exc).__name__}{': ' + str(exc) if isinstance(exc, Refused) else ''})")
             failed.append(entry["id"])
 
-    manifest = build_manifest(catalog, args.dest)
+    try:
+        manifest = build_manifest(catalog, args.dest, previous_hashes())
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
 
     present = sum(1 for f in manifest["files"] if f["present"])

@@ -44,13 +44,15 @@ The evidence skill must be next to this repository (`../cf-skills`) or named by 
 
 ## Exit codes
 
-`0` success. `1` a download failed, or `--verify` found a changed or missing file, or `--verify --only` named an entry that has no recorded hash yet (it prints `NO HASH`; save the file and run `--record`). `2` unknown catalog id, including `--verify --only` with an id the manifest does not have.
+`0` success. `1` a download failed, or `--verify` found a changed or missing file, or `--verify --only` named an entry that has no recorded hash yet, or `--verify` could check no file at all (every entry `NO HASH`, or an empty manifest), or the existing manifest could not be read (it is then left as it was). A full `--verify` lists every entry with no recorded hash as `NO HASH` (save the file and run `--record`) but still exits `0` when the files it could check all match. `2` unknown catalog id, including `--verify --only` with an id the manifest does not have.
 
 ## Tests
 
 ```bash
-python -m unittest -v     # standard library only; no network, no real catalog
+python -m unittest -v     # every test in this folder; no network, no real catalog
 ```
+
+Run it from `tools/sources` with PyYAML installed (`pip install -r requirements.txt`); the tests are not standard library only. Each `test_*.py` also runs on its own, for example `python test_check_numbers.py`, and the four checker tests (`test_check_catalog_fields.py`, `test_check_numbers.py`, `test_check_source_overlap.py`, `test_make_manual_downloads.py`) then accept an optional path to a candidate script to test instead of the real one, and print `VERIFIED`.
 
 `check_catalog_fields.py` checks that every key used in `sources/catalog.yaml` is documented in the Fields table of `sources/README.md` (exit 1 and the key names when one is not; a documented key nothing uses is only a warning). `python test_check_catalog_fields.py` tests it on fixtures.
 
@@ -68,7 +70,7 @@ The lab's rule is to paraphrase and not to quote a source's sentences in a publi
 
 ## Saving a manual document
 
-A source marked `manual` is downloaded by a person in a browser. Save it into `sources/downloads/` under the filename `--manual` shows, run `--record` to checksum it, then `--verify`. The manifest never stores a machine path.
+A source marked `manual` is downloaded by a person in a browser. Save it into `sources/downloads/` under the filename `--manual` shows, run `--record` to checksum it, then `--verify`. The manifest never stores a machine path. A `--record` or download run keeps the hash an earlier run recorded for a file that is not on this machine (marked `present: false`), so recording on a computer that holds only some of the files does not erase the others' hashes; it never makes one up.
 
 ## The manual downloads page
 
