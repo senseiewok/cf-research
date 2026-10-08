@@ -12,18 +12,28 @@ python variant_profile.py CFTR Arg31Leu --json
 python variant_profile.py CFTR F508del --no-submitters   # esummary only, no per-submitter rows
 ```
 
-Exit 0: printed a profile. 1: no record has that protein change. 2: refused input. 3: the API failed or answered unexpectedly (never retried).
+Exit 0: printed one or more profiles; read `Match status` (`single` or `ambiguous (N records match)`). 1: no record matches. 2: refused input. 3: the API failed or answered unexpectedly (never retried).
 
 ## How it reads ClinVar
 
-Three requests to the documented NCBI E-utilities API, nothing else: `esearch` (`GENE[gene] AND CHANGE`), `esummary` for the ids found, then `efetch rettype=vcv is_variationid=true` for the per-submitter rows. esearch matches the change in any field, so the tool keeps only records whose esummary `protein_change` equals the query. Submitter classifications are counted ignoring letter case (one submitter writes "Uncertain Significance"); "not provided" is counted but is not a disagreement.
+Three or four requests to the documented NCBI E-utilities API, nothing else:
+
+1. `esearch` on the HGVS protein name in the variant-name field: `CFTR[gene] AND "p.Phe508del"[varname]` (stops are written `Ter`, so G542X is searched as `p.Gly542Ter`). Only when that finds nothing, one second `esearch` with the plain term `CFTR[gene] AND F508del`, which matches any field. `retmax` is 100; when esearch reports more records than it returned, the output says the list may be incomplete.
+2. `esummary` for the ids found. A record matches when its `genes` holds the gene and either `protein_change` holds the change (ClinVar writes stops as `*`, as in `W1282*`; the tool treats `*` and `X` as the same) or its `title` or a `variation_name` holds `(p.Phe508del)`. The title route is needed because the main F508del record (7105) has an empty `protein_change`. The output names the field each match was made on; `--json` also lists the esearch ids that did not match (`esearch_ids_not_matched`).
+3. One `efetch rettype=vcv is_variationid=true` for all matches together, for the per-submitter rows (skipped above 10 matches, and said so).
+
+When more than one record matches (two nucleotide changes with the same protein change, such as N1303K's c.3909C>G and c.3909C>A, or a haplotype record that contains the variant) every match is printed with its record type and the status says `ambiguous`. The tool never picks one.
+
+ClinVar's aggregate classification is printed as stated even when it is not one of the five pathogenicity terms (D1152H's aggregate is `drug response`); a `Classification scale` line labels it, and it is never mapped onto the five.
+
+Submitter classifications are counted ignoring letter case (one submitter writes "Uncertain Significance"); "not provided" is counted but is not a disagreement. Any other differing term, `drug response` included, sets the "submitters disagree" flag; that is deliberately conservative.
 
 ## Limits
 
 From catalog entries `ncbi-eutils` and `clinvar` in [`sources/catalog.yaml`](../../sources/catalog.yaml):
 
 - at most 1 request per second (`MAX_RPS`), below the catalog's 2.5 and NCBI's stated 3 without a key;
-- one request per call, no retry; a 30-second timeout and a 5 MB response cap;
+- one request per call, no retry; at most four requests per run (two esearch terms, esummary, efetch); a 30-second timeout and a 20 MB response cap;
 - a descriptive User-Agent and the `tool` parameter; no email address or other personal identifier is sent (the catalog note mentions NCBI's email parameter; this tool leaves it out on purpose);
 - only `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/`; it never crawls web pages (robots.txt there disallows crawlers).
 
@@ -43,4 +53,4 @@ ClinVar via NCBI E-utilities (catalog ids `clinvar`, `ncbi-eutils`). ClinVar ask
 python -m unittest discover -s tools/variant_profile -v   # from the repo root; no network
 ```
 
-Tested against the CFTR R31L fixture recorded 2026-10-07 (see [`fixtures/README.md`](fixtures/README.md)).
+Tested against the CFTR R31L fixture recorded 2026-10-07, and fixtures for F508del, R117H, N1303K, W1282X, Y1092X, D1152H and R104fs recorded 2026-10-08 (see [`fixtures/README.md`](fixtures/README.md)).

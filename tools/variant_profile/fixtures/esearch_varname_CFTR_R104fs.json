@@ -1,0 +1,1 @@
+{"header":{"type":"esearch","version":"0.3"},"esearchresult":{"count":"1","retmax":"1","retstart":"0","idlist":["53653"],"translationset":[],"translationstack":[{"term":"CFTR[gene]","field":"gene","count":"6527","explode":"N"},{"term":"\"p0x2eArg104fs\"[varname]","field":"varname","count":"18","explode":"N"},"AND"],"querytranslation":"CFTR[gene] AND \"p0x2eArg104fs\"[varname]"}}

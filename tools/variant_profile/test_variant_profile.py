@@ -309,5 +309,180 @@ class TestNoNetwork(unittest.TestCase):
                 vp._http_get(vp.BASE_URL + "esearch.fcgi?db=clinvar")
 
 
+# --- follow-up fixtures, recorded 2026-10-08: the six variants a 10-variant audit could not score
+
+ES_F508 = (FIX / "esearch_varname_CFTR_F508del.json").read_bytes()
+ES_SIX = (FIX / "esearch_varname_CFTR_six_variants.json").read_bytes()  # one OR query over six p. names; the tool's filter must split it
+ES_FS = (FIX / "esearch_varname_CFTR_R104fs.json").read_bytes()
+ESUM15 = (FIX / "esummary_15_ids_trimmed.json").read_bytes()
+VCV_D1152H = (FIX / "efetch_vcv_35867_trimmed.xml").read_bytes()
+ES_EMPTY = b'{"esearchresult":{"count":"0","retmax":"0","retstart":"0","idlist":[]}}'
+
+
+def es_with_count(body, count):
+    d = json.loads(body)
+    d["esearchresult"]["count"] = str(count)
+    return json.dumps(d).encode()
+
+
+class Audit(Base):
+    """Answers from the follow-up fixtures. self.es is a list of esearch answers, used in order."""
+
+    def setUp(self):
+        super().setUp()
+        self.es = [ES_SIX]
+        self.esum = ESUM15
+        self.vcv = VCV_D1152H
+
+    def fake_get(self, url):
+        self.urls.append(url)
+        if "esearch.fcgi" in url:
+            return self.es.pop(0)
+        if "esummary.fcgi" in url:
+            return self.esum
+        if "efetch.fcgi" in url:
+            return self.vcv
+        raise AssertionError("unexpected URL " + url)
+
+    def profile_ids(self, *argv):
+        code, out, _ = self.run_main(*argv, "--json")
+        doc = json.loads(out)
+        return code, doc, [p["variation_id"]["value"] for p in doc["profiles"]]
+
+
+class TestStopCodons(Audit):
+    def test_w1282x_matches_star_in_protein_change(self):
+        code, doc, ids = self.profile_ids("CFTR", "W1282X", "--no-submitters")
+        self.assertEqual((code, sorted(ids)), (0, ["1300168", "7129", "983867"]))
+
+    def test_y1092x_matches_star_in_protein_change(self):
+        code, doc, ids = self.profile_ids("CFTR", "Tyr1092Ter", "--no-submitters")
+        self.assertEqual((code, sorted(ids)), (0, ["375475", "38728", "7211"]))
+
+    def test_negative_control_star_and_x_still_need_the_same_change(self):
+        self.assertTrue(vp._same_change("W1282*", "W1282X"))
+        self.assertFalse(vp._same_change("W1282*", "W1283X"))
+        self.assertFalse(vp._same_change("W1282*", "W1282R"))
+
+    def test_three_letter_names(self):
+        self.assertEqual([vp.three_letter(c) for c in ("R31L", "G542X", "F508del", "R104fs")],
+                         ["p.Arg31Leu", "p.Gly542Ter", "p.Phe508del", "p.Arg104fs"])
+
+
+class TestSearchTerm(Audit):
+    def test_first_term_is_the_hgvs_protein_name(self):
+        self.run_main("CFTR", "W1282X", "--no-submitters")
+        self.assertIn(vp.urllib.parse.quote_plus('CFTR[gene] AND "p.Trp1282Ter"[varname]'), self.urls[0])
+        self.assertEqual(sum("esearch.fcgi" in u for u in self.urls), 1)
+
+    def test_fallback_term_only_when_the_first_finds_nothing(self):
+        self.es = [ES_EMPTY, ES_SIX]
+        code, doc, ids = self.profile_ids("CFTR", "N1303K", "--no-submitters")
+        searches = [u for u in self.urls if "esearch.fcgi" in u]
+        self.assertEqual(len(searches), 2)
+        self.assertIn(vp.urllib.parse.quote_plus("CFTR[gene] AND N1303K"), searches[1])
+        self.assertEqual(doc["query"]["searched"], "CFTR[gene] AND N1303K")
+
+    def test_negative_control_nothing_found_by_either_term_exits_1_after_two_searches(self):
+        self.es = [ES_EMPTY, ES_EMPTY]
+        code, out, _ = self.run_main("CFTR", "N1303K")
+        self.assertEqual(code, 1)
+        self.assertEqual(len(self.urls), 2)
+        self.assertTrue(has_footer(out))
+
+    def test_fs_variant_found_by_its_p_name(self):
+        self.es, self.esum = [ES_FS], ESUMMARY
+        code, doc, ids = self.profile_ids("CFTR", "R104fs", "--no-submitters")
+        self.assertEqual((code, ids, doc["query"]["match_status"]), (0, ["53653"], "single"))
+
+
+class TestAmbiguity(Audit):
+    def test_n1303k_two_records_both_printed_and_flagged(self):
+        code, out, _ = self.run_main("CFTR", "N1303K", "--no-submitters")
+        self.assertEqual(code, 0)
+        self.assertIn("Match status: ambiguous (2 records match)", out)
+        self.assertIn("the tool does not choose", out)
+        self.assertIn("4818550", out)
+        self.assertIn("7136", out)
+        self.assertIn("Match 2 of 2", out)
+
+    def test_r117h_haplotype_record_is_shown_not_dropped(self):
+        code, doc, ids = self.profile_ids("CFTR", "R117H", "--no-submitters")
+        self.assertEqual(sorted(ids), ["209047", "7109"])
+        types = {p["variation_id"]["value"]: p["record_type"]["value"] for p in doc["profiles"]}
+        self.assertEqual(types["209047"], "Haplotype")
+        self.assertIn("54087", doc["query"]["esearch_ids_not_matched"])  # returned by esearch, not R117H: listed, not profiled
+
+    def test_negative_control_single_match_is_not_flagged(self):
+        code, out, _ = self.run_main("CFTR", "R31L", "--no-submitters")
+        self.assertIn("Match status: single", out)
+        self.assertNotIn("does not choose", out)
+
+    def test_f508del_main_record_matched_by_title(self):
+        self.es = [ES_F508]
+        code, doc, ids = self.profile_ids("CFTR", "F508del", "--no-submitters")
+        # 7105 (the 101-submission record) has an empty protein_change; 634837 is a haplotype (F508del with I1027T) found by its component name
+        self.assertEqual(sorted(ids), ["4072070", "634837", "7105"])
+        on = {p["variation_id"]["value"]: p["matched_on"] for p in doc["profiles"]}
+        self.assertEqual(on, {"4072070": "esummary:protein_change", "7105": "esummary:title",
+                              "634837": "esummary:variation_set[0].variation_name"})
+        self.assertEqual(doc["query"]["match_status"], "ambiguous (3 records match)")
+        self.assertEqual(doc["query"]["esearch_ids_not_matched"], [])
+
+    def test_negative_control_title_route_needs_the_gene_and_the_exact_p_name(self):
+        s = json.loads(ESUM15)["result"]["7105"]
+        self.assertTrue(vp.matches(s, "CFTR", "F508del"))
+        self.assertFalse(vp.matches(s, "CFTR", "F508C"))
+        self.assertFalse(vp.matches(s, "SCNN1B", "F508del"))
+        s2 = dict(s, title=s["title"].replace("(p.Phe508del)", "p.Phe508del"), variation_set=[])
+        self.assertFalse(vp.matches(s2, "CFTR", "F508del"))
+
+    def test_truncated_search_is_said(self):
+        self.es = [es_with_count(ES_SIX, 131)]
+        code, out, _ = self.run_main("CFTR", "R117H", "--no-submitters")
+        self.assertIn("esearch found 131 records but returned 12", out)
+
+    def test_negative_control_complete_search_has_no_truncation_note(self):
+        code, out, _ = self.run_main("CFTR", "R117H", "--no-submitters")
+        self.assertNotIn("may be incomplete", out)
+
+    def test_one_efetch_for_all_matches(self):
+        self.run_main("CFTR", "N1303K")
+        efetch = [u for u in self.urls if "efetch.fcgi" in u]
+        self.assertEqual(len(efetch), 1)
+        self.assertIn("4818550%2C7136", efetch[0])
+
+    def test_too_many_matches_skip_efetch_and_say_so(self):
+        with mock.patch.object(vp, "MAX_SUBMITTER_FETCH", 1):
+            code, out, _ = self.run_main("CFTR", "N1303K")
+        self.assertEqual(sum("efetch.fcgi" in u for u in self.urls), 0)
+        self.assertIn("efetch-vcv not requested: more than 1 matches", out)
+
+    def test_record_missing_from_efetch_is_not_stated(self):
+        code, doc, _ = self.profile_ids("CFTR", "N1303K")  # this efetch answer holds only 35867
+        for p in doc["profiles"]:
+            self.assertEqual(p["number_of_submissions"]["value"], vp.NOT_STATED)
+            self.assertEqual(p["number_of_submissions"]["source"], "efetch-vcv answer held no record for this id")
+
+
+class TestOtherClassificationTerms(Audit):
+    def test_drug_response_is_stated_and_labelled(self):
+        code, doc, ids = self.profile_ids("CFTR", "D1152H")
+        p = doc["profiles"][0]
+        self.assertEqual((code, ids), (0, ["35867"]))
+        self.assertEqual(p["germline_classification"]["value"], "drug response")
+        self.assertTrue(p["classification_scale"]["value"].startswith("other ClinVar term"))
+        self.assertEqual(p["number_of_submissions"]["value"], "46")
+        self.assertEqual(p["classification_counts"]["value"], {"Pathogenic": 41, "Likely pathogenic": 4, "drug response": 1})
+        self.assertTrue(p["submitters_disagree"]["value"])
+
+    def test_negative_control_five_tier_terms_are_labelled_five_tier(self):
+        for t in ("Pathogenic", "Likely pathogenic", "Uncertain significance", "Likely benign", "benign"):
+            self.assertEqual(vp.scale(t)["value"], "five-tier pathogenicity term", t)
+        for t in ("drug response", "risk factor", "Conflicting classifications of pathogenicity", "Pathogenic, low penetrance"):
+            self.assertNotEqual(vp.scale(t)["value"], "five-tier pathogenicity term", t)
+        self.assertEqual(vp.scale("")["value"], vp.NOT_STATED)
+
+
 if __name__ == "__main__":
     unittest.main()
