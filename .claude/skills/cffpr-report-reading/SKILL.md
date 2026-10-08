@@ -11,6 +11,8 @@ Use this before pulling a number out of a CFFPR Annual Data Report (2020 to 2024
 
 How it was made: a script chose the pages, a model extracted facts with exact quotations, a script kept only the facts whose quotations are verbatim on the cited page, a second model from a different family checked that each claim says no more than its quotations, and the controlling agent kept the narrower claim where they disagreed. See `proposals/2026-10-05-registry-reading-provenance.md`. Anything marked "our inference" is not from the report.
 
+Before a claim taken from a report goes into a note, write it with its exact quote in a claims file and run `tools/claims/check_claims.py` (see `tools/claims/README.md`); the answer tiers T0 to T3 proposed in `proposals/2026-10-08-antihallucination-strategy.md` say what a claim must rest on before it is used.
+
 ## Who is counted
 
 - A report covers people with a CF diagnosis who consented to the Registry and were seen at a CF Care Center during the calendar year, including people born, diagnosed or who died that year (all five reports; the Supplement words it as seen at a center or born, diagnosed or died in the year).

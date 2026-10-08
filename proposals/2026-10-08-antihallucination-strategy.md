@@ -82,4 +82,4 @@ Not solved by any of this: whether a true quote supports a sentence in the reade
 
 - Adopt the tiers (section 4) as the lab's wording for what an answer rests on?
 - Adopt principle 3 (a scope record for widening words) as a rule in `cf-research-context`? It is human-maintained policy, so it is a proposal here, not an edit.
-- Build in the order of section 6? Items 1 and 2 are being built now as separate pull requests (they add tools only and change no rule); the rest wait for a decision.
+- Build in the order of section 6? Item 1 (`tools/claims`) is merged (pull request 16); item 2 (`cite-check` in cf-skills) is in a pull request; both add tools only and change no rule. The rest wait for a decision.

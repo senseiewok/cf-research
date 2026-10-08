@@ -42,6 +42,8 @@ It is plausible that the 403 is a datacentre-IP reputation rule rather than a de
 
 ## Email draft: permissions request
 
+Newer drafts: [`proposals/2026-10-08-registry-permission-letters.md`](../proposals/2026-10-08-registry-permission-letters.md) proposes one letter per registry (CFF, ECFSPR, the UK CF Trust and the Australian registry) to replace this single draft, which stays here until a reply is recorded. That file says no letter has been sent.
+
 Send to the CF Foundation registry/communications contact, and an equivalent to ECFSPR. Adjust before sending; this is a draft, not a sent message.
 
 > Subject: Permission question — reuse of published Patient Registry Annual Data Report figures

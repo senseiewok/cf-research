@@ -11,6 +11,8 @@ Use this before pulling a number out of an ECFSPR Annual Data Report (2020 to 20
 
 Licence note: the CC0 dedication in the header covers the wording of this note only. The short quotations are the registry's, attributed to it and kept brief; the reports themselves are not re-hosted. Before adding more text from a report, run `python tools/sources/check_source_overlap.py` on the draft (see `tools/sources/README.md`).
 
+Before a claim taken from a report goes into a note, write it with its exact quote in a claims file and run `tools/claims/check_claims.py` (see `tools/claims/README.md`); the answer tiers T0 to T3 proposed in `proposals/2026-10-08-antihallucination-strategy.md` say what a claim must rest on before it is used.
+
 ## Where things are
 
 Each report has a contents page, a "Data report" with numbered sections, then appendices. Numbers and titles move between years, so read the contents of the report you are using instead of assuming a section number.

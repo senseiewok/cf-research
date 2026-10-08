@@ -11,6 +11,8 @@ Use this before taking a genotype, variant, class or "eligible by genotype" numb
 
 Method: a script chose the pages, a model extracted facts with exact quotations, a script kept only the verbatim ones, and a model from a different family checked the final wording against the quotations. See `proposals/2026-10-05-registry-reading-provenance.md`. "Our inference" marks a step the sources do not state. Related: `cffpr-report-reading`, `ecfspr-report-reading`.
 
+Before a claim taken from a report goes into a note, write it with its exact quote in a claims file and run `tools/claims/check_claims.py` (see `tools/claims/README.md`); the answer tiers T0 to T3 proposed in `proposals/2026-10-08-antihallucination-strategy.md` say what a claim must rest on before it is used.
+
 This is a reading aid for lab tools. It does not interpret anyone's genotype, and a class or an eligibility figure here is never a statement about a person.
 
 ## First, the unit: variants, alleles, people
