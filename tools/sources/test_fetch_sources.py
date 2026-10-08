@@ -1,4 +1,4 @@
-"""Unit tests for fetch_sources.py. Standard library only; no network, no real catalog.
+"""Unit tests for fetch_sources.py. No network, no real catalog; needs PyYAML (see requirements.txt).
 
 Run from this folder:  python -m unittest -v
 """
@@ -227,8 +227,77 @@ class FetchSourcesTest(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn("NO HASH  manual-file", out)
         self.assertIn("0 match", out)
-        # a full verify keeps skipping entries that have no hash
-        self.assertEqual(self.run_main("--verify")[0], 0)
+        # a full verify that checked other files still passes, and names the entry that has no hash
+        code, out, _ = self.run_main("--verify")
+        self.assertEqual(code, 0)
+        self.assertIn("NO HASH  manual-file", out)
+        self.assertIn("2 match, 0 changed, 0 missing, 3 with no hash", out)
+
+    # --- a record run keeps the hashes of files that are not on this machine ----------
+    def _manifest_records(self) -> dict:
+        return {r["id"]: r for r in json.loads(self.manifest.read_text(encoding="utf-8"))["files"]}
+
+    def test_record_keeps_the_hash_of_a_file_no_longer_on_disk(self) -> None:
+        self.dl.mkdir(parents=True)
+        (self.dl / "a.pdf").write_bytes(b"first")
+        self.assertEqual(self.run_main("--record")[0], 0)
+        a_hash = self._manifest_records()["fetch-ok"]["sha256"]
+        (self.dl / "a.pdf").unlink()
+        (self.dl / "b.pdf").write_bytes(b"second")
+        code, out, _ = self.run_main("--record")
+        self.assertEqual(code, 0)
+        rec = self._manifest_records()
+        self.assertEqual(rec["fetch-ok"].get("sha256"), a_hash, "the hash of a.pdf was dropped because the file is not on disk")
+        self.assertEqual(rec["fetch-ok"].get("size_bytes"), len(b"first"))
+        self.assertFalse(rec["fetch-ok"]["present"])
+        self.assertEqual(rec["fetch-bad"]["sha256"], fs.sha256(self.dl / "b.pdf"))
+        self.assertNotIn("sha256", rec["manual-file"], "a hash must never be invented for a file never recorded")
+        # a later download run keeps it too, and verify then reports the file missing rather than forgetting it
+        self.run_main("--only", "fetch-bad")
+        self.assertEqual(self._manifest_records()["fetch-ok"].get("sha256"), a_hash)
+        code, out, _ = self.run_main("--verify")
+        self.assertEqual(code, 1)
+        self.assertIn("MISSING  fetch-ok", out)
+
+    def test_record_rehashes_a_file_that_is_back_on_disk(self) -> None:
+        self.dl.mkdir(parents=True)
+        (self.dl / "a.pdf").write_bytes(b"first")
+        self.run_main("--record")
+        (self.dl / "a.pdf").write_bytes(b"a newer copy")
+        self.run_main("--record")
+        self.assertEqual(self._manifest_records()["fetch-ok"]["sha256"], fs.sha256(self.dl / "a.pdf"))
+
+    def test_record_drops_a_kept_hash_when_the_catalog_filename_changes(self) -> None:
+        self.dl.mkdir(parents=True)
+        (self.dl / "a.pdf").write_bytes(b"first")
+        self.run_main("--record")
+        (self.dl / "a.pdf").unlink()
+        self.catalog.write_text(CATALOG.replace("filename: a.pdf", "filename: a-renamed.pdf"), encoding="utf-8")
+        self.run_main("--record")
+        self.assertNotIn("sha256", self._manifest_records()["fetch-ok"])
+
+    def test_record_refuses_to_overwrite_an_unreadable_manifest(self) -> None:
+        self.manifest.write_text("{not json", encoding="utf-8")
+        code, _, err = self.run_main("--record")
+        self.assertEqual(code, 1)
+        self.assertIn("manifest", err)
+        self.assertEqual(self.manifest.read_text(encoding="utf-8"), "{not json")
+
+    # --- a full verify that could check nothing is not a pass -------------------------
+    def test_full_verify_on_a_manifest_with_no_hashes_does_not_pass_silently(self) -> None:
+        self.assertEqual(self.run_main("--record")[0], 0)  # nothing on disk: no hashes recorded
+        self.assertFalse(any("sha256" in r for r in self._manifest_records().values()))
+        code, out, _ = self.run_main("--verify")
+        self.assertEqual(code, 1)
+        self.assertIn("NO HASH  fetch-ok", out)
+        self.assertIn("0 match, 0 changed, 0 missing, 5 with no hash", out)
+        self.assertIn("nothing was verified", out)
+
+    def test_full_verify_on_an_empty_manifest_does_not_pass(self) -> None:
+        self.manifest.write_text(json.dumps({"files": []}), encoding="utf-8")
+        code, out, _ = self.run_main("--verify")
+        self.assertEqual(code, 1)
+        self.assertIn("nothing was verified", out)
 
 
 if __name__ == "__main__":

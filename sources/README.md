@@ -35,12 +35,12 @@ If a source is not in the catalog, it has no permission. Add an entry first, wit
 | `url` | Direct file URL, or `null` when only the landing page is known |
 | `landing_page` | Where a human goes to find it |
 | `filename` | The local name the fetcher writes |
-| `redistribute` | May we commit or host the file itself? Set once under `defaults:` (`false`), not per entry |
+| `redistribute` | May we commit or host the file itself? Set once under `defaults:` (`false`); an entry may override it. Five do, with `true`: the four PDB structures and the UniProt entry behind the CFTR model |
 | `citation` | The publisher's own preferred citation string, where they state one |
 | `claim_label` | `verified` / `unverified` / `hypothesis`, same convention as the rest of the repo |
-| `warning` | A machine-readable gotcha, e.g. `filename_year_mismatch` |
+| `warning` | A machine-readable gotcha, e.g. `filename_year_mismatch`. No entry sets one at present; the fetcher's `--manual` list and the manual downloads page show it when one does |
 | `notes` | Anything a future reader needs, including what was *not* checked |
-| `pages` | Page count of the PDF, when someone has checked it. Recorded for one report so far |
+| `pages` | Page count of the PDF, when someone has checked it. Recorded for 17 registry reports, highlights and methods documents so far |
 | `text_layer` | `embedded` when the PDF has selectable text. No entry needs OCR yet |
 | `priority` | Optional hint for which documents to obtain first. Only `high` is used so far |
 | `reference_doi` | DOI of the paper that describes the source, where one exists |

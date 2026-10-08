@@ -29,7 +29,7 @@ Beside the notes are the things the notes rest on. The **source catalog**, [`sou
 
 The **CFTR model**, [`tools/cftr-model/`](tools/cftr-model/README.md), is an interactive 3D drawing of the human CFTR protein built from four published structures (6MSM, 5UAK, 8EIQ and 8EJ1, from the Protein Data Bank), numbered as in UniProt P13569. It draws one point per amino acid each structure places and says plainly what it leaves out: no pore, no gate, no medicine, no motion, and nothing about what any person with CF can expect. Residue 508 is marked where a structure has it and shown as a gap where the file says it is absent, as it is in two of the four. The model is a draft, in review; the website's [CFTR model](https://senseiewok.ai/cf/cftr/) page is the same model with the same tables. The picture at the top of this page echoes that gap, but it is an emblem of the work of understanding, not a diagram of a gene or a protein, and it shows no treatment.
 
-The **ledger**, [`ledger/`](ledger/), logs the real mistakes caught in our working sessions, what caught each one and a cheap guard against the next: 98 entries on 2026-10-05, by `ledger/tally.py`. A single entry is an observation, not a lesson. [`proposals/`](proposals/) holds changes to sibling repositories that an agent could not or should not apply directly, each with its evidence and a verification step.
+The **ledger**, [`ledger/`](ledger/), logs the real mistakes caught in our working sessions, what caught each one and a cheap guard against the next: 138 entries in two session logs on 2026-10-08, by `ledger/tally.py`. A single entry is an observation, not a lesson. [`proposals/`](proposals/) holds changes to sibling repositories that an agent could not or should not apply directly, each with its evidence and a verification step.
 
 What this is not: a medical device, clinical guidance, or a place for patient data. We do not interpret anyone's genotype, recommend or dose any medicine, or predict any person's outcome. Clinical decisions belong with licensed care teams.
 
@@ -40,14 +40,14 @@ The notes need nothing: open any `.md` file. The tools need Python; each has its
 ```sh
 python tools/cftr-model/serve.py                 # the CFTR model at http://127.0.0.1:8080/ , this computer only
 python tools/sources/fetch_sources.py --manual   # the sources a person must download by hand; prints a list, fetches nothing
-cd tools/sources && python -m unittest -v        # the source tools' tests: standard library only, no network
+cd tools/sources && python -m unittest -v        # the source tools' tests, no network; needs PyYAML (see tools/sources/requirements.txt)
 ```
 
 The model needs a browser with WebGL2; without it the page still reads, because every fact is also written out as text and tables. Rebuilding the model's data from the four structure files, and the browser tests that need Playwright, are in [`tools/cftr-model/README.md`](tools/cftr-model/README.md); the fetcher's options and what it will not do are in [`tools/sources/README.md`](tools/sources/README.md).
 
 ## What's inside
 
-The [Layout](#layout) table below lists every path with what it is and its status. In short: the notes at the top level and under `landscape/`; the catalog and its rules under `sources/`; the tools under `tools/` (`cftr-model`, `sources`, and a pointer for the evidence loop, which moved to the skills repository); the three reading guides under `.claude/skills/`; `proposals/`; `ledger/`.
+The [Layout](#layout) table below lists every path with what it is and its status. In short: the notes at the top level and under `landscape/`; the catalog and its rules under `sources/`; the tools under `tools/` (`cftr-model`, `sources`, `skill_trial`, and a pointer for the evidence loop, which moved to the skills repository); the three reading guides under `.claude/skills/`; `proposals/`; `ledger/`.
 
 ## How we check it
 
@@ -110,14 +110,18 @@ verified yet, in that order. Read them the way you'd read a map, not a promise.
 | [`landscape/registry-data-access.md`](landscape/registry-data-access.md) | What the CF registry publishers do and do not permit programmatically, where to download their reports, and a draft permissions email | tested 2026-10-04 |
 | [`sources/catalog.yaml`](sources/catalog.yaml) | Every external source we rely on, with its access permission (`fetch`, `api`, `manual`, `request`, `forbidden`), URL, and verification status. Agents read this instead of guessing | v1, 2026-10-04 |
 | [`sources/README.md`](sources/README.md) | The rules an agent must follow when reading the catalog, and why no source PDFs are committed | v1 |
+| [`landscape/antibiotic-stewardship-cf.md`](landscape/antibiotic-stewardship-cf.md) | A short argument for antibiotic stewardship in CF, its five claims each checked against the primary papers, with exact quotes, links and limits | research note, read 2026-10-07 |
 | [`landscape/cftr-structures.md`](landscape/cftr-structures.md) | The four published structures of human CFTR behind the model, how they were fitted onto one another, what each file declares, and what the model does not show | research note, checked 2026-10-05 |
 | [`tools/cftr-model/`](tools/cftr-model/README.md) | An interactive 3D model of CFTR from those structures (WebGL2, no libraries), research tools (look up a residue, measure a distance, layers from UniProt, export), the build that ties every number to its file, and its tests. Draft, in review | draft, in review |
 | [`tools/sources/`](tools/sources/README.md) | Fetches what the catalog permits, prints browser instructions for the rest, writes a SHA-256 manifest for reproducibility | working, smoke-tested 2026-10-04 |
+| [`tools/skill_trial/`](tools/skill_trial/) | With-and-without trials of agent guidance on the local worker, and the checkers that judge them (page basics, ASCII art, skill discovery). Used by [`proposals/2026-10-07-public-skills-trial.md`](proposals/2026-10-07-public-skills-trial.md) | working, 2026-10-07 |
 | [`.claude/skills/ecfspr-report-reading/`](.claude/skills/ecfspr-report-reading/SKILL.md) | Agent skill: how to read an ECFSPR annual report (2020 to 2024) before extracting numbers. Every quotation and layout claim was checked against the report text; see its provenance note | draft, content review pending |
+| [`.claude/skills/cffpr-report-reading/`](.claude/skills/cffpr-report-reading/SKILL.md) | Agent skill: how to read a CFFPR Annual Data Report (2020 to 2024) before extracting numbers: who is counted, how a value is made, what changed between years and what the reports warn about | draft, content review pending |
+| [`.claude/skills/cf-genetics-reading/`](.claude/skills/cf-genetics-reading/SKILL.md) | Agent skill: how to read genotype and CFTR-variant figures in six registries' reports and the CFTR-France variant lists before extracting or comparing a number | draft, content review pending |
 | [`tools/evidence/`](tools/evidence/README.md) | Pointer: the evidence loop moved to the portable skill `cf-skills/.claude/skills/cf-evidence-loop`. Run it here with `EVIDENCE_CATALOG` set to `sources/catalog.yaml` | moved 2026-10-04 |
 | [`.claude/settings.json`](.claude/settings.json) | Claude Code deny rules for a session started here: no reading `.env` files, keys or credentials. The same list as `cf-lab` | v1, 2026-10-06 |
 | [`proposals/`](proposals/) | Proposed changes to sibling repos that an agent could not or should not apply directly, with evidence and a verification step for each | — |
-| [`ledger/`](ledger/) | Logs of real errors from working sessions: what happened, what caught it, and a cheap guard. A single entry is an observation, not a lesson | first ledger, 2026-10-04 |
+| [`ledger/`](ledger/) | Logs of real errors from working sessions: what happened, what caught it, and a cheap guard. A single entry is an observation, not a lesson | two session logs, 2026-10-04 and 2026-10-07 |
 
 ## How to read claims
 
@@ -144,4 +148,4 @@ This repository contains research notes, ideas, and references. It is not a medi
 
 ## Licenses
 
-Notes and documentation are licensed under [CC BY 4.0](LICENSE). Code under `tools/` is MIT ([tools/LICENSE](tools/LICENSE)). The agent skill under `.claude/skills/` declares CC0-1.0 in its frontmatter. Source documents published by registries are not covered by these licenses and are not redistributed here; short quotations are attributed to their report and year.
+Notes and documentation are licensed under [CC BY 4.0](LICENSE). Code under `tools/` is MIT ([tools/LICENSE](tools/LICENSE)). The three agent skills under `.claude/skills/` each declare CC0-1.0 in their frontmatter. Source documents published by registries are not covered by these licenses and are not redistributed here; short quotations are attributed to their report and year.
