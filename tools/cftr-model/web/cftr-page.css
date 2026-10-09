@@ -15,6 +15,15 @@
 .cftr-panel a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--neon-cyan); text-decoration: underline; text-underline-offset: 3px; }
 .cftr-sheet-open, .cftr-sheet-close, .cftr-touch-hint { display: none; }
 @media (any-pointer: coarse) { .cftr-touch-hint { display: block; margin: 0; } }
+/* the walk by touch: step buttons, a strip to drag, a wider thumb with its number above it */
+.cftr-nudge { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 0.5rem; touch-action: manipulation; }
+.cftr-nudge, #cftr-seq { user-select: none; -webkit-user-select: none; }
+#cftr-seq { touch-action: none; cursor: ew-resize; }
+.cftr-bubble { position: absolute; bottom: 110%; translate: -50%; padding: 0 0.4rem; border: 1px solid var(--lime); background: var(--bg-panel); }
+@media (pointer: coarse) {
+  .cftr-ruler-input::-webkit-slider-thumb { width: 1.75rem; border: 2px solid var(--lime); }
+  .cftr-ruler-input::-moz-range-thumb { width: 1.75rem; border: 2px solid var(--lime); }
+}
 @media (min-width: 62rem) {
   /* one row, taller than the screen: the picture and the panel stay pinned while the page scrolls past them (a sticky item only moves within its row) */
   .cftr-viewer { grid-template-rows: minmax(calc(100vh + 14rem), auto); }
