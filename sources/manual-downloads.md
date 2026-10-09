@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-24 to download by hand, 1 to ask for, 3 not to download.
+26 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -11,6 +11,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 3. When you have saved the files, paste the prompt at the bottom into your agent.
 
 ## Download in a browser
+
+### Allen Institute for AI (Ai2)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| semantic-scholar-api | Semantic Scholar Academic Graph API | [page](https://www.semanticscholar.org/product/api) | link only | Overview and API License Agreement (last updated May 17, 2023) fetched directly 2026-10-07 with the lab user agent; the API was not called and no key was reque… |
 
 ### Cochrane
 
@@ -59,7 +65,7 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gnomad | gnomAD (Genome Aggregation Database) browser and downloads | [page](https://gnomad.broadinstitute.org/) | link only | Terms page read in full 2026-10-04 (/terms redirects to /policies). |
 
-### GTEx Portal (publisher not read; robots.txt blocked every page)
+### GTEx Portal (publisher not read; robots.txt disallows our agent on the whole host)
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
@@ -89,6 +95,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cordis | CORDIS (EU-funded research projects and results) | [page](https://cordis.europa.eu/) | link only | Legal notice read 2026-10-05: unless a notice says otherwise, the editorial content owned by the EU may be reused under CC BY 4.0, and the Commission's reuse p… |
 
+### U.S. National Library of Medicine
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| dailymed-web-services | DailyMed RESTful web services (drug labels, SPL) | [page](https://dailymed.nlm.nih.gov/dailymed/app-support-web-services.cfm) | link only | Pages fetched directly 2026-10-07 with the lab user agent (web services page, About DailyMed, NLM web policies, NLM Copyright Information and Downloading NLM D… |
+
 ### Unpaywall (publisher not read; pages need JavaScript)
 
 | ID | What | Open | Save as | Notes |
@@ -99,7 +111,7 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
-| alphamissense-predictions | AlphaMissense predictions (Zenodo record) | [page](https://zenodo.org/records/10813168) | link only | Fetched directly 2026-10-07 with the lab user agent: zenodo.org robots.txt (allows /records/ and /api/records/*/files, Crawl-delay 10), the v1 record 8208688 p… |
+| alphamissense-predictions | AlphaMissense predictions (Zenodo record) | [page](https://zenodo.org/records/10813168) | link only | Fetched directly 2026-10-07 with the lab user agent: zenodo.org robots.txt (does not disallow /records/ except /records/*/preview; allows /api/records/*/files;… |
 
 ## Ask first (access by request)
 
