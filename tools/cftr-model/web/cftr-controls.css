@@ -1,0 +1,10 @@
+/* Shared by the model page and the home page hero, on top of the model's stylesheet: the walk by touch that cftr-controls.js builds (step buttons, a strip
+   to drag, a wider thumb with its number above it). Uses the site's tokens. */
+.cftr-nudge { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 0.5rem; touch-action: manipulation; }
+.cftr-nudge, #cftr-seq { user-select: none; -webkit-user-select: none; }
+#cftr-seq { touch-action: none; cursor: ew-resize; }
+.cftr-bubble { position: absolute; bottom: 110%; translate: -50%; padding: 0 0.4rem; border: 1px solid var(--lime); background: var(--bg-panel); }
+@media (pointer: coarse) {
+  .cftr-ruler-input::-webkit-slider-thumb { width: 1.75rem; border: 2px solid var(--lime); }
+  .cftr-ruler-input::-moz-range-thumb { width: 1.75rem; border: 2px solid var(--lime); }
+}

@@ -1,10 +1,13 @@
-"""The page layer: web/cftr-page.js (controls panel, touch gestures, variant box), web/cftr-variant.js (a pure parser for protein-level variant names) and
-web/cftr-page.css. The lab's website uses them on its model page; the standalone index.html here does not load them yet, so the panel and touch behaviour
-are tested on the website, where the markup for them is.
+"""The page layer: web/cftr-page.js (the model page: controls panel, variant box), web/cftr-variant.js (a pure parser for protein-level variant names),
+web/cftr-controls.js (shared by both pages: the sheet, touch gestures, the walk by touch), web/cftr-home.js (the home page hero: a Controls button and
+sheet, pinch and double tap, no tilt by touch) and their stylesheets. The lab's website uses them; the standalone index.html here does not load them yet,
+so the sheets are tested on the website, where the markup for them is.
 
-Two parts:
-  StaticTests   standard library only: the files are here and listed, make no network call and use no storage, and the parser is exported.
-  ParserTests   the parser's accepted and refused forms, run in a real Chromium from the module itself (needs Playwright, like test_viewer).
+Three parts:
+  StaticTests          standard library only: the files are here and listed, make no network call and use no storage, and the parser is exported.
+  ParserTests          the parser's accepted and refused forms, run in a real Chromium from the module itself (needs Playwright, like test_viewer).
+  SharedControlsTests  the page scripts loaded on the standalone page, which has none of their panel or variant markup: no error, and the shared
+                       touch and walk code works there (needs Playwright).
 
 Run from this folder:   python -m unittest test_page_layer -v"""
 import re
@@ -13,7 +16,9 @@ import unittest
 from pathlib import Path
 
 PKG = Path(__file__).resolve().parents[1]
-FILES = ("web/cftr-page.js", "web/cftr-variant.js", "web/cftr-page.css")
+FILES = ("web/cftr-page.js", "web/cftr-variant.js", "web/cftr-page.css", "web/cftr-controls.js", "web/cftr-controls.css", "web/cftr-home.js", "web/cftr-home.css")
+SCRIPTS = tuple(f for f in FILES if f.endswith(".js"))
+STYLES = tuple(f for f in FILES if f.endswith(".css"))
 
 # Anything that could send or keep what a visitor types. A dynamic import() of any kind counts, since it can load from a URL.
 FORBIDDEN = {
@@ -48,7 +53,7 @@ def problems(src, rules):
 
 
 class StaticTests(unittest.TestCase):
-    def test_the_three_files_are_in_the_package(self):
+    def test_the_files_are_in_the_package(self):
         for rel in FILES:
             with self.subTest(rel=rel):
                 self.assertTrue((PKG / rel).is_file(), rel)
@@ -67,12 +72,14 @@ class StaticTests(unittest.TestCase):
         self.assertRegex(readme, r"CFTR2[^\n]*not included")
 
     def test_the_scripts_make_no_network_call_and_use_no_storage(self):
-        for rel in ("web/cftr-page.js", "web/cftr-variant.js"):
+        for rel in SCRIPTS:
             with self.subTest(rel=rel):
                 self.assertEqual(problems(code_only(text(rel)), FORBIDDEN), [])
 
-    def test_the_stylesheet_loads_nothing(self):
-        self.assertEqual(problems(code_only(text("web/cftr-page.css")), CSS_FORBIDDEN), [])
+    def test_the_stylesheets_load_nothing(self):
+        for rel in STYLES:
+            with self.subTest(rel=rel):
+                self.assertEqual(problems(code_only(text(rel)), CSS_FORBIDDEN), [])
 
     def test_the_detector_would_catch_each_kind_of_call(self):
         """A check that can never fail proves nothing: each rule must fire on a line that does what it names."""
@@ -92,20 +99,40 @@ class StaticTests(unittest.TestCase):
         self.assertNotRegex(src, r"\bimport\b", "the parser imports nothing")
         self.assertNotRegex(src, r"\b(?:document|window|navigator|globalThis)\b", "the parser touches no page")
 
-    def test_the_page_script_imports_only_its_neighbours(self):
-        imports = re.findall(r"(?m)^import .* from '([^']+)';$", text("web/cftr-page.js"))
-        self.assertEqual(imports, ["./cftr-viewer.js", "./cftr-variant.js"])
-        for rel in imports:
-            self.assertTrue((PKG / "web" / rel).is_file(), rel)
+    def test_the_page_scripts_import_only_their_neighbours(self):
+        expected = {"web/cftr-page.js": ["./cftr-viewer.js", "./cftr-variant.js", "./cftr-controls.js"], "web/cftr-home.js": ["./cftr-viewer.js", "./cftr-controls.js"],
+                    "web/cftr-controls.js": [], "web/cftr-variant.js": []}
+        for rel, want in expected.items():
+            with self.subTest(rel=rel):
+                imports = re.findall(r"(?m)^import .* from '([^']+)';$", text(rel))
+                self.assertEqual(imports, want)
+                self.assertEqual(len(re.findall(r"(?m)^\s*import\b", text(rel))), len(want), "every import is on one line of its own")
+                for dep in imports:
+                    self.assertTrue((PKG / "web" / dep).is_file(), dep)
+
+    def test_the_shared_controls_stop_quietly_without_their_elements(self):
+        """A page that lacks the panel, the sheet buttons or the walk slider gets nothing built for them and no error; the browser test below loads them."""
+        src = code_only(text("web/cftr-controls.js"))
+        self.assertIn("if (!root || !panel || !open) return null;", src)
+        self.assertIn("if (!walk) return null;", src)
+        self.assertIn("close?.addEventListener", src)
+        self.assertIn("title?.focus", src)
+        self.assertIn("$('cftr-reset')?.click()", src)
+        home = code_only(text("web/cftr-home.js"))
+        self.assertIn("if (api && root && panel) {", home)
+        self.assertIn("touch(api, { tilt: false })", home, "on the home page one finger only turns; a vertical swipe scrolls the page")
+        page = code_only(text("web/cftr-page.js"))
+        self.assertIn("form?.addEventListener('submit'", page)
+        self.assertNotRegex(page, r"\$\('cftr-(?:panel|sheet-open|sheet-close|panel-title)'\)\.", "the model page script never dereferences the panel's elements itself")
 
     def test_the_walk_by_touch_is_built_by_the_script(self):
         """The step buttons, the bubble and the strip gestures are made here, with createElement and textContent, only when the walk slider exists;
-        the website's Playwright tests (CftrPanelTests) check how they behave on a phone."""
-        src = code_only(text("web/cftr-page.js"))
-        start = "const walk = $('cftr-walk')"
-        self.assertIn(start, src, "the walk block is in the page script")
-        block = src.split(start, 1)[1].split("// ---- the variant box", 1)[0]
-        self.assertIn("if (walk) {", block, "nothing runs without the slider")
+        the website's Playwright tests (CftrPanelTests, HomeTouchTests) check how they behave on a phone."""
+        src = code_only(text("web/cftr-controls.js"))
+        start = "export function walkControls("
+        self.assertIn(start, src, "the walk block is in the shared script")
+        block = src.split(start, 1)[1]
+        self.assertIn("if (!walk) return null;", block, "nothing runs without the slider")
         self.assertIn("for (const d of [-10, -1, 1, 10])", block)
         self.assertIn("mk('button', 'cftr-btn')", block)
         self.assertIn("type: 'button'", block)
@@ -120,7 +147,7 @@ class StaticTests(unittest.TestCase):
         self.assertIn("e.isPrimary", block)
 
     def test_the_stylesheet_makes_room_for_a_finger(self):
-        css = code_only(text("web/cftr-page.css"))
+        css = code_only(text("web/cftr-controls.css"))
         self.assertIn("@media (pointer: coarse) {", css)
         coarse = css.split("@media (pointer: coarse) {", 1)[1].split("\n}", 1)[0]
         for thumb in ("::-webkit-slider-thumb", "::-moz-range-thumb"):
@@ -230,6 +257,86 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(r[0], {"ok": False, "why": "range"})
         self.assertTrue(r[1]["ok"])
 
+
+def served(name):
+    """Where a page-layer script is served from: web/ here, scripts/ on the website (CFTR_WEB_ROOT)."""
+    for rel in (name, "scripts/" + name):
+        if (V.WEB / rel).is_file():
+            return "/" + rel
+    return None
+
+
+@unittest.skipIf(sync_playwright is None, "Playwright is not installed in this Python")
+class SharedControlsTests(unittest.TestCase):
+    """The page scripts on the standalone page, which has the viewer, the walk slider and the strip but none of the panel, sheet or variant markup.
+    Before cftr-controls.js, cftr-page.js stopped with an error on such a page. Now each script builds what its elements allow and nothing else."""
+
+    @classmethod
+    def setUpClass(cls):
+        chrome = V.find_chrome()
+        if not chrome:
+            raise unittest.SkipTest("no Chromium found")
+        cls.page_js, cls.home_js = served("cftr-page.js"), served("cftr-home.js")
+        if not (cls.page_js and cls.home_js) or V.PAGE:
+            raise unittest.SkipTest("these tests load the standalone page of this package")
+        cls.httpd = V.model_server.make_server(V.WEB, 0)
+        threading.Thread(target=cls.httpd.serve_forever, daemon=True).start()
+        cls.base = f"http://127.0.0.1:{cls.httpd.server_address[1]}/"
+        cls.pw = sync_playwright().start()
+        cls.browser = cls.pw.chromium.launch(executable_path=chrome, headless=True, args=V.ARGS)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.browser.close()
+        cls.pw.stop()
+        cls.httpd.shutdown()
+        cls.httpd.server_close()
+
+    def load(self, **ctx):
+        p = V.Page(self.browser, self.base, reduced_motion="reduce", **ctx)
+        self.addCleanup(p.close)
+        p.wait_drawn()
+        self.assertEqual(p.page.locator("#cftr-panel, #cftr-sheet-open, #cftr-sheet-close, #cftr-panel-title, #cftr-variant").count(), 0, "the standalone page has none of them")
+        p.page.evaluate("async (ms) => { for (const m of ms) await import(m); }", [self.page_js, self.home_js])
+        p.page.wait_for_timeout(200)
+        return p
+
+    def view(self, p):
+        return p.page.evaluate("async () => (await import('/cftr-viewer.js')).ready.then(a => a.state())")
+
+    def test_both_page_scripts_load_without_their_markup_and_build_only_what_fits(self):
+        p = self.load()
+        self.assertEqual([m for m in p.problems if "status of 404" not in m], [], "no error from either script")
+        self.assertEqual(p.page.locator(".cftr-nudge").count(), 1, "the model page script builds the step buttons once, under the ruler")
+        self.assertEqual(p.page.locator(".cftr-nudge button").count(), 4)
+        self.assertEqual(p.page.locator(".cftr-home-walkout").count(), 0, "the home page script builds nothing without its sheet")
+        p.page.get_by_role("button", name="Forward 10 residues", exact=True).click()
+        p.page.get_by_role("button", name="Back 1 residue", exact=True).click()
+        self.assertEqual(self.view(p)["walk"], 507, "with no marker the first step marks 508; one back is 507")
+
+    def test_the_shared_touch_code_pinches_and_resets_on_a_phone(self):
+        p = self.load(viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True, device_scale_factor=2)
+        page = p.page
+        page.evaluate("() => document.getElementById('cftr-canvas').scrollIntoView({ block: 'center', behavior: 'instant' })")
+        page.wait_for_timeout(200)
+        b = page.locator("#cftr-canvas").bounding_box()
+        x, y = b["x"] + b["width"] / 2, b["y"] + b["height"] / 2
+        cdp = p.ctx.new_cdp_session(page)
+        send = lambda kind, pts=(): cdp.send("Input.dispatchTouchEvent", {"type": kind, "touchPoints": [{"x": a, "y": c, "id": i} for i, (a, c) in enumerate(pts)]})
+        z0 = self.view(p)["zoom"]
+        send("touchStart", [(x - 30, y), (x + 30, y)])
+        for k in range(1, 9):
+            send("touchMove", [(x - 30 - 8 * k, y), (x + 30 + 8 * k, y)])
+        send("touchEnd")
+        self.assertGreater(self.view(p)["zoom"], z0 * 1.5, "spreading two fingers zooms in")
+        page.wait_for_timeout(400)
+        for _ in range(2):
+            send("touchStart", [(x, y)])
+            send("touchEnd")
+        v = self.view(p)
+        self.assertEqual((round(v["theta"], 5), round(v["phi"], 5), v["zoom"]), (0.6, 1.35, 1), "a double tap is the Reset view button")
+        self.assertFalse(v["viewTouched"])
+        self.assertEqual([m for m in p.problems if "status of 404" not in m], [])
 
 if __name__ == "__main__":
     unittest.main()
