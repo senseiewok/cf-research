@@ -1,0 +1,37 @@
+/* cf/cftr/ only, on top of styles-cftr.css (the model package's copy, kept byte for byte): one controls panel, a column beside the picture on a wide
+   screen and a bottom sheet on a phone; the touch hint; the variant box. Uses the site's tokens. */
+#cftr-canvas { touch-action: none; }   /* the picture takes its own gestures; the page around it still scrolls */
+.cftr-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.cftr-panel-head h3 { margin: 0; font-size: 1.05rem; }
+.cftr-panel > #tools:not([hidden]) { display: grid; gap: 1.1rem; }
+#tools > p { margin: 0; }
+.cftr-group { border-top: 1px solid var(--border-glass); }
+.cftr-panel-head + .cftr-group { border-top: 0; }
+.cftr-group > summary { display: flex; align-items: center; min-height: 2.75rem; cursor: pointer; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--neon-cyan); }
+.cftr-group > :not(summary) { margin: 0 0 1.1rem; }
+.cftr-panel .cftr-tool { padding: 0.75rem 0.9rem; }
+.cftr-field-wide { flex: 1 1 9rem; width: auto; min-width: 0; }
+.cftr-limit { margin: 0.6rem 0; padding: 0.4rem 0 0.4rem 0.7rem; border-left: 3px solid var(--rose-pink); font-size: 0.92rem; }
+.cftr-panel a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--neon-cyan); text-decoration: underline; text-underline-offset: 3px; }
+.cftr-sheet-open, .cftr-sheet-close, .cftr-touch-hint { display: none; }
+@media (any-pointer: coarse) { .cftr-touch-hint { display: block; margin: 0; } }
+@media (min-width: 62rem) {
+  /* one row, taller than the screen: the picture and the panel stay pinned while the page scrolls past them (a sticky item only moves within its row) */
+  .cftr-viewer { grid-template-rows: minmax(calc(100vh + 14rem), auto); }
+  .cftr-sheetbar { display: none; }
+  .cftr-panel { position: sticky; top: var(--cftr-sticky-top, 1rem); max-height: calc(100vh - var(--cftr-sticky-top, 1rem) - 1rem); overflow-y: auto; }
+}
+@media (max-width: 61.99rem) {
+  .cftr-stage canvas { height: min(52vh, 30rem); min-height: 19.5rem; }   /* room below the picture for the sheet, and for a thumb to scroll the page */
+  .cftr-sheetbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .cftr-sheet-open, .cftr-sheet-close { display: inline-block; }
+  /* closed: below the bottom edge and inert (the script sets it), so it is out of the tab order and the accessibility tree until opened */
+  .cftr-panel { position: fixed; inset: auto 0 0; z-index: 150; max-height: 45vh; max-height: 45dvh; overflow-y: auto; overscroll-behavior: contain;
+                padding: 0 1rem 1rem; border-radius: 12px 12px 0 0; background: var(--bg-panel); transform: translateY(100%); }
+  .cftr-viewer.is-open .cftr-panel { transform: none; box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.6); }
+  .cftr-panel-head { position: sticky; top: 0; z-index: 1; padding: 0.5rem 0; background: var(--bg-panel); border-bottom: 1px solid var(--border-glass); }
+  .cftr-dossier summary { min-height: 2.75rem; }
+}
+@media (max-width: 61.99rem) and (prefers-reduced-motion: no-preference) {
+  .cftr-panel { transition: transform 0.2s ease-out; }
+}

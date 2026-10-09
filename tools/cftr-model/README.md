@@ -13,6 +13,20 @@ An interactive 3D view of four published structures of the human CFTR protein, w
 - Research tools: look up a residue (what UniProt annotates, what each file does with it); measure an alpha-carbon distance; colour by UniProt's topology; mark UniProt's natural-variant positions (annotation only, with UniProt's own caveat); copy a link that restores the exact view; export a labelled PNG, the placed residues as CSV, or the view as JSON.
 - A provenance table (where each number comes from and how to check it), a list of what the model leaves out, and a cite-this block, all generated from the data.
 
+## The page layer: controls panel, touch and variant box
+
+Three files sit on top of the viewer for a page that wants them. The lab's website uses them on its model page; the standalone `index.html` here does not load them yet, because they need markup it does not have (the ids are in `cftr-page.js`).
+
+- **Controls panel.** On a wide screen the controls sit in a column beside the picture, and both stay in view while the page scrolls. On a phone they are a sheet below the picture, opened by a Controls button and closed by its close button or Escape; a closed sheet is out of the tab order. With reduced motion asked for, the sheet does not slide.
+- **Touch.** One finger turns and tilts the picture, two fingers pinch to zoom, and a double tap is the Reset view button. Dragging on the picture does not scroll the page; the rest of the page scrolls as usual. Mouse, wheel and keys stay with the viewer.
+- **Variant box.** Type one protein-level name, such as F508del, G551D, p.Trp1282Ter or I507_F508del, or a residue number from 1 to 1480. The page checks the reference letters against UniProt's sequence, marks the residue, turns the picture towards it and says which part it falls in and whether the structure shown places it. It refuses DNA-level and intron names, frameshifts and more than one name at a time, and says why. The name typed never goes into the address, into storage or over the network; the address keeps only the residue number, as it does for any marked residue.
+
+This shows where the position sits on one structure. It does not say what the change does or what it means for anyone.
+
+CFTR2 data is not included: the page only links to CFTR2, whose terms bar republishing any of it without written permission (see the `cftr2` entry in [`sources/catalog.yaml`](../../sources/catalog.yaml)).
+
+`cftr-variant.js` is pure (no page, no data, no network), so its cases can be tested on their own. `tests/test_page_layer.py` checks the three files are here and listed, that they make no network call and use no storage, and runs the parser's accepted and refused cases in Chromium. The panel and touch tests need the website's markup and run there.
+
 ## Run it
 
 ```bash
@@ -40,11 +54,13 @@ What the builder does: keeps chain A, model 1, one alpha-carbon atom per residue
 ```bash
 cd tools/cftr-model/tests
 python -m unittest test_data test_page_blocks          # standard library only; test_data needs the fetched files
+python -m unittest test_page_layer                     # the static checks need nothing; the parser cases need Playwright and are skipped without it
 python -m unittest test_viewer test_research           # needs Playwright for Python and a Chromium (see below)
 ```
 
 - `test_data`: the fit recovers a known rotation and never returns a mirror image; the numbering matches UniProt residue by residue; the data module is exactly what the builder makes from the fetched files.
 - `test_page_blocks`: the generated parts of the page match the data, and the check fails when one is wrong.
+- `test_page_layer`: the page layer's files are here and listed, make no network call and use no storage (and the detector fires on each kind of call), and the variant parser accepts and refuses the same names as on the website.
 - `test_viewer`, `test_research`: a real Chromium with a software GL, over HTTP with a strict Content-Security-Policy. They check the picture is drawn and coloured, residue 508 is marked and its absence shown, every control works with a real key or pointer, reduced motion draws one still frame and stops, a lost WebGL context is rebuilt, a phone needs no sideways scroll, the page reads without JavaScript, and every answer a research tool gives equals a value recomputed from the data (look-up against UniProt's lists, distances against the raw coordinates, CSV rows against the placed residues, variant counts against UniProt's).
 
 Playwright is not a dependency of anything else in this repo. Install it in its own virtual environment outside the repo; the tests use a Chromium already on disk (`CHROME_PATH`, or a Playwright browser folder) and block every host except `127.0.0.1`.
@@ -66,6 +82,9 @@ Tests that can never fail prove nothing, so the guards are also checked by break
 | `web/cftr-research.js` | The research tools |
 | `web/cftr-data.js` | Generated data: alpha-carbon traces, UniProt annotations, each file's declared differences |
 | `web/cftr-model.css`, `web/cftr-tokens.css` | Styles; the second defines the colour tokens for the standalone page |
+| `web/cftr-page.js` | The page layer the website uses: the controls panel, touch gestures on the picture, and the variant box; uses the viewer's API only |
+| `web/cftr-variant.js` | A pure parser for one protein-level variant name; exports `parseVariant` |
+| `web/cftr-page.css` | Styles for the page layer: the panel as a column or a bottom sheet, the touch hint, the variant box |
 | `build_traces.py` | Builds the data module from the fetched files |
 | `make_page_blocks.py` | Writes the generated tables, the provenance and cite blocks, and a still vector picture |
 | `serve.py` | A loopback preview server with a strict Content-Security-Policy |
