@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-20 to download by hand, 1 to ask for, 3 not to download.
+26 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -11,6 +11,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 3. When you have saved the files, paste the prompt at the bottom into your agent.
 
 ## Download in a browser
+
+### Allen Institute for AI (Ai2)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| semantic-scholar-api | Semantic Scholar Academic Graph API | [page](https://www.semanticscholar.org/product/api) | link only | Overview and API License Agreement (last updated May 17, 2023) fetched directly 2026-10-07 with the lab user agent; the API was not called and no key was reque… |
 
 ### Cochrane
 
@@ -41,6 +47,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | cffpr-highlights-2024 | CFF Patient Registry Highlights 2024 | [page](https://www.cff.org/medical-professionals/patient-registry) | `CFFPR_Highlights_2024.pdf` | Opened 2026-10-05 from the maintainer's browser download. |
 | cffpr-highlights-2025 | CFF Patient Registry Highlights 2025 | [page](https://www.cff.org/medical-professionals/2025-patient-registry-highlights) | `CFFPR_Highlights_2025.pdf` | Opened 2026-10-05 from the maintainer's browser download. |
 
+### Ensembl (its privacy link is on www.ebi.ac.uk; publisher not otherwise stated on the pages read)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ensembl-rest | Ensembl REST API (including Variant Effect Predictor endpoints) | [page](https://rest.ensembl.org/) | link only | Fetched directly 2026-10-07 with the lab user agent; the API was not called. |
+
 ### European Medicines Agency
 
 | ID | What | Open | Save as | Notes |
@@ -52,6 +64,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | gnomad | gnomAD (Genome Aggregation Database) browser and downloads | [page](https://gnomad.broadinstitute.org/) | link only | Terms page read in full 2026-10-04 (/terms redirects to /policies). |
+
+### GTEx Portal (publisher not read; robots.txt disallows our agent on the whole host)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gtex-portal-api | GTEx Portal API (gene expression by tissue) | [page](https://gtexportal.org/) | link only | robots.txt on gtexportal.org was fetched directly 2026-10-07 with the lab user agent: it allows only Googlebot and Bingbot (Crawl-delay 30) and has "User-agent… |
 
 ### INSERM (Orphanet)
 
@@ -76,6 +94,24 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cordis | CORDIS (EU-funded research projects and results) | [page](https://cordis.europa.eu/) | link only | Legal notice read 2026-10-05: unless a notice says otherwise, the editorial content owned by the EU may be reused under CC BY 4.0, and the Commission's reuse p… |
+
+### U.S. National Library of Medicine
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| dailymed-web-services | DailyMed RESTful web services (drug labels, SPL) | [page](https://dailymed.nlm.nih.gov/dailymed/app-support-web-services.cfm) | link only | Pages fetched directly 2026-10-07 with the lab user agent (web services page, About DailyMed, NLM web policies, NLM Copyright Information and Downloading NLM D… |
+
+### Unpaywall (publisher not read; pages need JavaScript)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| unpaywall-api | Unpaywall REST API | [page](https://unpaywall.org/products/api) | link only | Fetched directly 2026-10-07 with the lab user agent. |
+
+### Zenodo (host of the record; creators at Google DeepMind, copyright DeepMind Technologies Limited)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| alphamissense-predictions | AlphaMissense predictions (Zenodo record) | [page](https://zenodo.org/records/10813168) | link only | Fetched directly 2026-10-07 with the lab user agent: zenodo.org robots.txt (does not disallow /records/ except /records/*/preview; allows /api/records/*/files;… |
 
 ## Ask first (access by request)
 
