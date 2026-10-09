@@ -98,6 +98,42 @@ class StaticTests(unittest.TestCase):
         for rel in imports:
             self.assertTrue((PKG / "web" / rel).is_file(), rel)
 
+    def test_the_walk_by_touch_is_built_by_the_script(self):
+        """The step buttons, the bubble and the strip gestures are made here, with createElement and textContent, only when the walk slider exists;
+        the website's Playwright tests (CftrPanelTests) check how they behave on a phone."""
+        src = code_only(text("web/cftr-page.js"))
+        start = "const walk = $('cftr-walk')"
+        self.assertIn(start, src, "the walk block is in the page script")
+        block = src.split(start, 1)[1].split("// ---- the variant box", 1)[0]
+        self.assertIn("if (walk) {", block, "nothing runs without the slider")
+        self.assertIn("for (const d of [-10, -1, 1, 10])", block)
+        self.assertIn("mk('button', 'cftr-btn')", block)
+        self.assertIn("type: 'button'", block)
+        self.assertIn("ariaLabel: (d < 0 ? 'Back ' : 'Forward ')", block)
+        self.assertIn("document.createElement(t)", src)
+        self.assertNotRegex(src, r"\.(?:innerHTML|outerHTML)\b|insertAdjacentHTML", "no markup from strings")
+        for event in ("pointerdown", "pointerup", "pointercancel", "pointerleave", "blur", "visibilitychange"):
+            self.assertIn(event, block, f"the hold stops on {event}")
+        self.assertIn("Math.max(1, Math.min(length, n))", block, "clamped to the chain")
+        self.assertIn("new Event('input', { bubbles: true })", block, "the viewer hears the change as it hears the slider")
+        self.assertIn("strip.setPointerCapture(e.pointerId)", block)
+        self.assertIn("e.isPrimary", block)
+
+    def test_the_stylesheet_makes_room_for_a_finger(self):
+        css = code_only(text("web/cftr-page.css"))
+        self.assertIn("@media (pointer: coarse) {", css)
+        coarse = css.split("@media (pointer: coarse) {", 1)[1].split("\n}", 1)[0]
+        for thumb in ("::-webkit-slider-thumb", "::-moz-range-thumb"):
+            with self.subTest(thumb=thumb):
+                m = re.search(re.escape(".cftr-ruler-input" + thumb) + r"\s*\{([^}]*)\}", coarse)
+                self.assertTrue(m, thumb)
+                width = re.search(r"width:\s*([\d.]+)rem", m.group(1))
+                self.assertGreaterEqual(float(width.group(1)) * 16, 28, "at least 28 px wide on a touch screen")
+                self.assertRegex(m.group(1), r"border:\s*2px solid")
+        self.assertRegex(css, r"#cftr-seq\s*\{[^}]*touch-action:\s*none", "the strip takes its own drag")
+        self.assertRegex(css, r"\.cftr-nudge\s*\{[^}]*grid-template-columns:\s*repeat\(4, 1fr\)")
+        self.assertNotIn(".cftr-steps", css, "the guided look already uses .cftr-steps; a second rule for it here broke the phone layout once")
+
     def test_every_reason_the_parser_gives_has_a_message(self):
         reasons = set(re.findall(r"no\('(\w+)'\)", text("web/cftr-variant.js")))
         self.assertEqual(reasons, {"empty", "range", "dna", "many", "fs", "unread"})

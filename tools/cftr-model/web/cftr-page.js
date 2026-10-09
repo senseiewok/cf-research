@@ -1,5 +1,5 @@
 // The website's layer over the CFTR model on cf/cftr/: the controls panel (a column beside the picture on a wide screen, a bottom sheet on a phone),
-// touch gestures on the picture, and the variant box. It uses the viewer's API only; nothing is stored and nothing is sent anywhere.
+// touch gestures on the picture, the walk by touch, and the variant box. It uses the viewer's API only; nothing is stored and nothing is sent anywhere.
 import { ready } from './cftr-viewer.js';
 import { parseVariant } from './cftr-variant.js';
 
@@ -84,6 +84,33 @@ if (api && root) {
   };
   stage.addEventListener('pointerup', end, true);
   stage.addEventListener('pointercancel', end, true);
+
+  // ---- the walk by touch: step buttons that repeat while held, a strip to drag or tap, the number above the thumb under a finger
+  const walk = $('cftr-walk'), strip = $('cftr-seq'), on = (t, v, f) => v.split(' ').map(x => t.addEventListener(x, f)), mk = (t, c) => Object.assign(document.createElement(t), { className: c });
+  if (walk) {
+    const row = mk('div', 'cftr-nudge'), tip = mk('span', 'cftr-bubble'), at = () => api.state().walk, stop = () => clearTimeout(t);
+    const go = (n) => { walk.value = Math.max(1, Math.min(length, n)); walk.dispatchEvent(new Event('input', { bubbles: true })); };
+    let t, held, drag;
+    for (const d of [-10, -1, 1, 10]) {
+      const a = Math.abs(d), step = () => go((at() ?? 508 - d) + d), rep = (ms) => t = setTimeout(() => { held = 1; step(); rep(80); }, ms);   // no marker: 508
+      const b = Object.assign(mk('button', 'cftr-btn'), { type: 'button', textContent: (d < 0 ? '−' : '+') + a, ariaLabel: (d < 0 ? 'Back ' : 'Forward ') + a + ' residue' + (a > 1 ? 's' : '') });
+      on(b, 'click', (e) => { if (!e.detail || !held) step(); held = 0; });   // a tap or a key: one step; the click that ends a hold: none
+      on(b, 'pointerdown', (e) => { held = 0; stop(); if (e.isPrimary && !e.button) rep(400); });
+      on(b, 'pointerup pointercancel pointerleave blur', stop);
+      row.append(b);
+    }
+    on(document, 'visibilitychange', stop);
+    walk.parentElement.after(row);
+    walk.after(tip);
+    tip.hidden = true;
+    on(walk, 'pointerdown input', (e) => { if (e.pointerType == 'touch') tip.hidden = false; tip.textContent = walk.value; tip.style.left = 14 + (walk.value - 1) / (length - 1) * (walk.clientWidth - 28) + 'px'; });
+    on(walk, 'pointerup pointercancel change blur', () => { tip.hidden = true; });
+    if (strip) {
+      on(strip, 'pointerdown', (e) => { if (e.isPrimary && !e.button) { drag = { x: e.clientX, n: at() ?? 508, w: (strip.clientWidth + 2) / strip.children.length, c: e.target.closest('span') }; strip.setPointerCapture(e.pointerId); } });
+      on(strip, 'pointermove', (e) => { const k = drag && Math.round((drag.x - e.clientX) / drag.w); if (k || drag && !drag.c) { drag.c = null; go(drag.n + k); } });   // the letters follow the finger
+      on(strip, 'pointerup pointercancel', (e) => { if (e.type == 'pointerup' && drag?.c) go(parseInt(drag.c.title)); drag = null; });   // a tap marks the letter tapped
+    }
+  }
 
   // ---- the variant box: parse, check the reference letters, mark the residue and turn the picture towards it. Nothing typed reaches the address or storage.
   const form = $('cftr-variant'), input = $('cftr-variant-in'), out = $('cftr-variant-out');

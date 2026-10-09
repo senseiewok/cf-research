@@ -82,9 +82,9 @@ Tests that can never fail prove nothing, so the guards are also checked by break
 | `web/cftr-research.js` | The research tools |
 | `web/cftr-data.js` | Generated data: alpha-carbon traces, UniProt annotations, each file's declared differences |
 | `web/cftr-model.css`, `web/cftr-tokens.css` | Styles; the second defines the colour tokens for the standalone page |
-| `web/cftr-page.js` | The page layer the website uses: the controls panel, touch gestures on the picture, and the variant box; uses the viewer's API only |
+| `web/cftr-page.js` | The page layer the website uses: the controls panel, touch gestures on the picture, step buttons and a draggable sequence strip for the walk along the chain, and the variant box; uses the viewer's API only |
 | `web/cftr-variant.js` | A pure parser for one protein-level variant name; exports `parseVariant` |
-| `web/cftr-page.css` | Styles for the page layer: the panel as a column or a bottom sheet, the touch hint, the variant box |
+| `web/cftr-page.css` | Styles for the page layer: the panel as a column or a bottom sheet, the touch hint, the walk's step buttons and wider touch thumb, the variant box |
 | `build_traces.py` | Builds the data module from the fetched files |
 | `make_page_blocks.py` | Writes the generated tables, the provenance and cite blocks, and a still vector picture |
 | `serve.py` | A loopback preview server with a strict Content-Security-Policy |
