@@ -1,7 +1,8 @@
 // The website's layer over the CFTR model on cf/cftr/: the controls panel (a column beside the picture on a wide screen, a bottom sheet on a phone),
-// touch gestures on the picture, the walk by touch, and the variant box. It uses the viewer's API only; nothing is stored and nothing is sent anywhere.
+// touch gestures on the picture and the walk by touch (both from cftr-controls.js), and the variant box. It uses the viewer's API only; nothing is stored and nothing is sent anywhere.
 import { ready } from './cftr-viewer.js';
 import { parseVariant } from './cftr-variant.js';
+import { sheet, touch, walkControls } from './cftr-controls.js';
 
 const NAMES = { A: 'alanine', R: 'arginine', N: 'asparagine', D: 'aspartate', C: 'cysteine', Q: 'glutamine', E: 'glutamate', G: 'glycine', H: 'histidine', I: 'isoleucine',
                 L: 'leucine', K: 'lysine', M: 'methionine', F: 'phenylalanine', P: 'proline', S: 'serine', T: 'threonine', W: 'tryptophan', Y: 'tyrosine', V: 'valine' };
@@ -16,101 +17,18 @@ export const MESSAGES = {
 };
 const $ = (id) => document.getElementById(id);
 const aa = (l) => l + ' (' + NAMES[l] + ')';
-const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const api = await ready;
 const root = $('cftr-viewer');
 if (api && root) {
-  const { data, canvas, length } = api, seq = data.uniprot.sequence;
+  const { data, length } = api, seq = data.uniprot.sequence;
   const placed = data.structures.map(st => { const m = new Map(); for (const g of st.segments) for (let i = 0; i < g.xyz.length / 3; i++) m.set(g.start + i, g.xyz.slice(3 * i, 3 * i + 3)); return m; });
   const view = (v) => api.setView({ ...v, phi: v.phi === undefined ? undefined : Math.max(0.2, Math.min(Math.PI - 0.2, v.phi)) });
 
-  // ---- the panel: a bottom sheet below 62rem, opened by the Controls button; focus goes in on open and back on close; no trap
-  const panel = $('cftr-panel'), openBtn = $('cftr-sheet-open'), closeBtn = $('cftr-sheet-close'), title = $('cftr-panel-title');
-  const isOpen = () => root.classList.contains('is-open'), narrow = matchMedia('(max-width: 61.99rem)');
-  const inert = () => { panel.inert = narrow.matches && !isOpen(); };
-  function setSheet(open) {
-    root.classList.toggle('is-open', open);
-    inert();
-    openBtn.setAttribute('aria-expanded', String(open));
-    if (open) {
-      window.scrollTo({ top: scrollY + root.getBoundingClientRect().top, behavior: reduced() ? 'instant' : 'smooth' });   // the picture at the top, the sheet below it
-      title.focus({ preventScroll: true });
-    } else if (panel.contains(document.activeElement)) openBtn.focus({ preventScroll: true });
-  }
-  inert();
-  narrow.addEventListener('change', inert);
-  openBtn.addEventListener('click', () => setSheet(!isOpen()));
-  closeBtn.addEventListener('click', () => setSheet(false));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen() && !e.defaultPrevented && !e.target.closest('[role=dialog]')) setSheet(false); });
-
-  // ---- touch: one finger turns and tilts, two fingers pinch to zoom, a double tap resets. Mouse, wheel and keys stay with the viewer.
-  const pts = new Map();
-  let base = null, lastTap = null, tap = null;
-  const rebase = () => {
-    const p = [...pts.values()], s = api.state();
-    base = p.length >= 2 ? { d: Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1, zoom: s.zoom } : null;
-  };
-  const stage = canvas.parentElement;
-  stage.addEventListener('pointerdown', (e) => {
-    if (e.pointerType !== 'touch') return;
-    e.stopPropagation();
-    pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    try { canvas.setPointerCapture(e.pointerId); } catch (x) { /* not capturable */ }
-    tap = pts.size === 1 ? { x: e.clientX, y: e.clientY, t: e.timeStamp } : null;
-    rebase();
-  }, true);
-  stage.addEventListener('pointermove', (e) => {
-    const p = pts.get(e.pointerId);
-    if (e.pointerType !== 'touch' || !p) return;
-    e.stopPropagation();
-    const dx = e.clientX - p.x, dy = e.clientY - p.y;
-    p.x = e.clientX; p.y = e.clientY;
-    if (tap && Math.hypot(e.clientX - tap.x, e.clientY - tap.y) > 10) tap = null;
-    const s = api.state();
-    if (pts.size === 1) view({ theta: s.theta + dx * 0.01, phi: s.phi + dy * 0.01 });
-    else if (base) { const q = [...pts.values()]; view({ zoom: Math.max(0.5, Math.min(4, base.zoom * Math.hypot(q[0].x - q[1].x, q[0].y - q[1].y) / base.d)) }); }
-  }, true);
-  const end = (e) => {
-    if (e.pointerType !== 'touch' || !pts.has(e.pointerId)) return;
-    e.stopPropagation();
-    pts.delete(e.pointerId);
-    try { canvas.releasePointerCapture(e.pointerId); } catch (x) { /* already released */ }
-    if (e.type === 'pointerup' && tap && e.timeStamp - tap.t < 300) {
-      if (lastTap && tap.t - lastTap.t < 350 && Math.hypot(tap.x - lastTap.x, tap.y - lastTap.y) < 30) { $('cftr-reset').click(); lastTap = null; } else lastTap = tap;
-    } else lastTap = null;
-    tap = null;
-    rebase();
-  };
-  stage.addEventListener('pointerup', end, true);
-  stage.addEventListener('pointercancel', end, true);
-
-  // ---- the walk by touch: step buttons that repeat while held, a strip to drag or tap, the number above the thumb under a finger
-  const walk = $('cftr-walk'), strip = $('cftr-seq'), on = (t, v, f) => v.split(' ').map(x => t.addEventListener(x, f)), mk = (t, c) => Object.assign(document.createElement(t), { className: c });
-  if (walk) {
-    const row = mk('div', 'cftr-nudge'), tip = mk('span', 'cftr-bubble'), at = () => api.state().walk, stop = () => clearTimeout(t);
-    const go = (n) => { walk.value = Math.max(1, Math.min(length, n)); walk.dispatchEvent(new Event('input', { bubbles: true })); };
-    let t, held, drag;
-    for (const d of [-10, -1, 1, 10]) {
-      const a = Math.abs(d), step = () => go((at() ?? 508 - d) + d), rep = (ms) => t = setTimeout(() => { held = 1; step(); rep(80); }, ms);   // no marker: 508
-      const b = Object.assign(mk('button', 'cftr-btn'), { type: 'button', textContent: (d < 0 ? '−' : '+') + a, ariaLabel: (d < 0 ? 'Back ' : 'Forward ') + a + ' residue' + (a > 1 ? 's' : '') });
-      on(b, 'click', (e) => { if (!e.detail || !held) step(); held = 0; });   // a tap or a key: one step; the click that ends a hold: none
-      on(b, 'pointerdown', (e) => { held = 0; stop(); if (e.isPrimary && !e.button) rep(400); });
-      on(b, 'pointerup pointercancel pointerleave blur', stop);
-      row.append(b);
-    }
-    on(document, 'visibilitychange', stop);
-    walk.parentElement.after(row);
-    walk.after(tip);
-    tip.hidden = true;
-    on(walk, 'pointerdown input', (e) => { if (e.pointerType == 'touch') tip.hidden = false; tip.textContent = walk.value; tip.style.left = 14 + (walk.value - 1) / (length - 1) * (walk.clientWidth - 28) + 'px'; });
-    on(walk, 'pointerup pointercancel change blur', () => { tip.hidden = true; });
-    if (strip) {
-      on(strip, 'pointerdown', (e) => { if (e.isPrimary && !e.button) { drag = { x: e.clientX, n: at() ?? 508, w: (strip.clientWidth + 2) / strip.children.length, c: e.target.closest('span') }; strip.setPointerCapture(e.pointerId); } });
-      on(strip, 'pointermove', (e) => { const k = drag && Math.round((drag.x - e.clientX) / drag.w); if (k || drag && !drag.c) { drag.c = null; go(drag.n + k); } });   // the letters follow the finger
-      on(strip, 'pointerup pointercancel', (e) => { if (e.type == 'pointerup' && drag?.c) go(parseInt(drag.c.title)); drag = null; });   // a tap marks the letter tapped
-    }
-  }
+  // ---- the panel (a bottom sheet below 62rem, opened by the Controls button), touch gestures on the picture and the walk by touch: cftr-controls.js
+  sheet({ root, panel: $('cftr-panel'), open: $('cftr-sheet-open'), close: $('cftr-sheet-close'), title: $('cftr-panel-title'), narrow: matchMedia('(max-width: 61.99rem)') });
+  touch(api);
+  walkControls(api);
 
   // ---- the variant box: parse, check the reference letters, mark the residue and turn the picture towards it. Nothing typed reaches the address or storage.
   const form = $('cftr-variant'), input = $('cftr-variant-in'), out = $('cftr-variant-out');
@@ -147,7 +65,7 @@ if (api && root) {
     }
     shown = r;
     api.setWalk(r.start);
-    if (api.state().playing) $('cftr-play').click();
+    if (api.state().playing) $('cftr-play')?.click();
     const idx = data.structures.findIndex(s => s.id === api.state().structure);
     let p = null;
     for (let k = 0; !p && k < 60; k++) p = placed[idx].get(r.start - k) || placed[idx].get(r.start + k);
@@ -155,7 +73,7 @@ if (api && root) {
     render();
     return r;
   }
-  form.addEventListener('submit', (e) => { e.preventDefault(); place(input.value); });
+  form?.addEventListener('submit', (e) => { e.preventDefault(); place(input.value); });
   for (const b of document.querySelectorAll('[data-variant]')) b.addEventListener('click', () => { input.value = b.dataset.variant; place(input.value); });
   api.onChange((s) => { if (shown && s.structure !== shownIn) render(); });
 }

@@ -15,10 +15,12 @@ An interactive 3D view of four published structures of the human CFTR protein, w
 
 ## The page layer: controls panel, touch and variant box
 
-Three files sit on top of the viewer for a page that wants them. The lab's website uses them on its model page; the standalone `index.html` here does not load them yet, because they need markup it does not have (the ids are in `cftr-page.js`).
+A few files sit on top of the viewer for a page that wants them. The lab's website uses them on its model page and on its home page; the standalone `index.html` here does not load them yet, because they need markup it does not have (the ids are in `cftr-page.js`, `cftr-home.js` and `cftr-controls.js`). Each script builds only what the page's markup allows and does nothing for an element that is missing, so loading them on a page without their markup is not an error (`tests/test_page_layer.py` checks this on the standalone page).
 
-- **Controls panel.** On a wide screen the controls sit in a column beside the picture, and both stay in view while the page scrolls. On a phone they are a sheet below the picture, opened by a Controls button and closed by its close button or Escape; a closed sheet is out of the tab order. With reduced motion asked for, the sheet does not slide.
-- **Touch.** One finger turns and tilts the picture, two fingers pinch to zoom, and a double tap is the Reset view button. Dragging on the picture does not scroll the page; the rest of the page scrolls as usual. Mouse, wheel and keys stay with the viewer.
+- **Shared controls** (`cftr-controls.js`, `cftr-controls.css`): the bottom sheet, touch gestures on the picture and the walk by touch, used by both pages below.
+- **Controls panel** (model page, `cftr-page.js`). On a wide screen the controls sit in a column beside the picture, and both stay in view while the page scrolls. On a phone they are a sheet below the picture, opened by a Controls button and closed by its close button or Escape; a closed sheet is out of the tab order. With reduced motion asked for, the sheet does not slide.
+- **Touch** (model page). One finger turns and tilts the picture, two fingers pinch to zoom, and a double tap is the Reset view button. Dragging on the picture does not scroll the page; the rest of the page scrolls as usual. Mouse, wheel and keys stay with the viewer.
+- **Home page hero** (`cftr-home.js`, `cftr-home.css`). A Controls button on the picture opens a bottom sheet with the step buttons, the turn and tilt sliders, zoom, reset, the slow turn and a link to the full page; it closes with its Close button or Escape, and is out of the tab order while closed. Two fingers pinch to zoom and a double tap resets. One finger only turns: the picture fills much of a phone's first screen, so a vertical swipe on it scrolls the page (`touch-action: pan-y`), and tilting is on the slider. On a wide screen the sheet opens over the text column, not the picture. The variant box stays on the model page.
 - **Variant box.** Type one protein-level name, such as F508del, G551D, p.Trp1282Ter or I507_F508del, or a residue number from 1 to 1480. The page checks the reference letters against UniProt's sequence, marks the residue, turns the picture towards it and says which part it falls in and whether the structure shown places it. It refuses DNA-level and intron names, frameshifts and more than one name at a time, and says why. The name typed never goes into the address, into storage or over the network; the address keeps only the residue number, as it does for any marked residue.
 
 This shows where the position sits on one structure. It does not say what the change does or what it means for anyone.
@@ -54,13 +56,13 @@ What the builder does: keeps chain A, model 1, one alpha-carbon atom per residue
 ```bash
 cd tools/cftr-model/tests
 python -m unittest test_data test_page_blocks          # standard library only; test_data needs the fetched files
-python -m unittest test_page_layer                     # the static checks need nothing; the parser cases need Playwright and are skipped without it
+python -m unittest test_page_layer                     # the static checks need nothing; the browser cases need Playwright and are skipped without it
 python -m unittest test_viewer test_research           # needs Playwright for Python and a Chromium (see below)
 ```
 
 - `test_data`: the fit recovers a known rotation and never returns a mirror image; the numbering matches UniProt residue by residue; the data module is exactly what the builder makes from the fetched files.
 - `test_page_blocks`: the generated parts of the page match the data, and the check fails when one is wrong.
-- `test_page_layer`: the page layer's files are here and listed, make no network call and use no storage (and the detector fires on each kind of call), and the variant parser accepts and refuses the same names as on the website.
+- `test_page_layer`: the page layer's files are here and listed, make no network call and use no storage (and the detector fires on each kind of call), the variant parser accepts and refuses the same names as on the website, and the page scripts load on the standalone page (which lacks their panel and variant markup) without an error, with the shared step buttons, pinch and double tap working there.
 - `test_viewer`, `test_research`: a real Chromium with a software GL, over HTTP with a strict Content-Security-Policy. They check the picture is drawn and coloured, residue 508 is marked and its absence shown, every control works with a real key or pointer, reduced motion draws one still frame and stops, a lost WebGL context is rebuilt, a phone needs no sideways scroll, the page reads without JavaScript, and every answer a research tool gives equals a value recomputed from the data (look-up against UniProt's lists, distances against the raw coordinates, CSV rows against the placed residues, variant counts against UniProt's).
 
 Playwright is not a dependency of anything else in this repo. Install it in its own virtual environment outside the repo; the tests use a Chromium already on disk (`CHROME_PATH`, or a Playwright browser folder) and block every host except `127.0.0.1`.
@@ -82,9 +84,13 @@ Tests that can never fail prove nothing, so the guards are also checked by break
 | `web/cftr-research.js` | The research tools |
 | `web/cftr-data.js` | Generated data: alpha-carbon traces, UniProt annotations, each file's declared differences |
 | `web/cftr-model.css`, `web/cftr-tokens.css` | Styles; the second defines the colour tokens for the standalone page |
-| `web/cftr-page.js` | The page layer the website uses: the controls panel, touch gestures on the picture, step buttons and a draggable sequence strip for the walk along the chain, and the variant box; uses the viewer's API only |
+| `web/cftr-page.js` | The model page's layer: the controls panel and the variant box, with the sheet, touch and walk from `cftr-controls.js`; uses the viewer's API only |
 | `web/cftr-variant.js` | A pure parser for one protein-level variant name; exports `parseVariant` |
-| `web/cftr-page.css` | Styles for the page layer: the panel as a column or a bottom sheet, the touch hint, the walk's step buttons and wider touch thumb, the variant box |
+| `web/cftr-page.css` | Styles for the model page's layer: the panel as a column or a bottom sheet, the touch hint, the variant box |
+| `web/cftr-controls.js` | Shared by both pages: the bottom sheet, touch gestures on the picture (pinch, double tap, tilt optional), and step buttons and a draggable sequence strip for the walk along the chain; exports `sheet`, `touch` and `walkControls` |
+| `web/cftr-controls.css` | Styles for the walk by touch: the step buttons, the strip, the wider touch thumb and its number |
+| `web/cftr-home.js` | The home page hero's layer: the Controls button and its sheet, pinch and double tap, one-finger turn without tilt |
+| `web/cftr-home.css` | Styles for the home page hero's Controls button and sheet |
 | `build_traces.py` | Builds the data module from the fetched files |
 | `make_page_blocks.py` | Writes the generated tables, the provenance and cite blocks, and a still vector picture |
 | `serve.py` | A loopback preview server with a strict Content-Security-Policy |

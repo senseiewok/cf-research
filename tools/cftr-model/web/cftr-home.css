@@ -1,0 +1,16 @@
+/* The home page hero only, on top of the site's styles, the model's stylesheet and cftr-controls.css: a Controls button on the picture, and the controls
+   as a bottom sheet that is closed and inert until it is opened (cftr-home.js). The picture keeps touch-action: pan-y, so a vertical swipe on it scrolls. */
+.cftr-home-open { grid-area: 1 / 1; align-self: start; justify-self: start; z-index: 2; margin: 0.25rem; }
+.cftr-home-panel { position: fixed; inset: auto 0 0; z-index: 150; display: grid; gap: 0.6rem; max-height: 45vh; max-height: 45dvh; overflow-y: auto; overscroll-behavior: contain;
+                   padding: 0 1rem 1rem; border-radius: 12px 12px 0 0; background: var(--bg-panel); transform: translateY(100%); }
+.cftr-hero-viewer.is-open .cftr-home-panel { transform: none; box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.6); }
+.cftr-hero:has(.is-open) > .hero-fullpage-content { z-index: 150; }   /* open: above the sections and footer further down, which share the hero's level */
+.cftr-home-panel .cftr-panel-head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+                                    padding: 0.5rem 0; background: var(--bg-panel); border-bottom: 1px solid var(--border-glass); }
+.cftr-home-panel h2 { margin: 0; font-size: 1.05rem; }
+.cftr-home-panel :is(p, .cftr-row, .cftr-nudge, .cftr-range) { margin: 0; }
+.cftr-home-walkout { min-height: 1.5em; font-size: 0.9rem; }
+.cftr-home-full { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--neon-cyan); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 900px) { .cftr-home-open { grid-area: 2 / 1; justify-self: end; margin: 0.5rem; } }
+@media (min-width: 901px) { .cftr-home-panel { right: auto; left: 1.5rem; width: min(26rem, calc(100vw - 3rem)); } }   /* over the text column, not the picture */
+@media (prefers-reduced-motion: no-preference) { .cftr-home-panel { transition: transform 0.2s ease-out; } }
