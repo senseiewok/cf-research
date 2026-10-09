@@ -1,0 +1,7 @@
+# Numbers in 2026-10-09-research-leader-brief-and-pilot.md that are design choices or counts in the text itself, each with its reason.
+# Check with: python tools/sources/check_numbers.py --evidence <a private evidence file of the test outputs and the one run, kept out of the repo> --allow-file this-file proposals/2026-10-09-research-leader-brief-and-pilot.md
+20  # the pilot's proposed number of variants: a design choice, to agree with the partner
+350  # the word ceiling for the leave-behind, set in the task that asked for this brief
+1  # one run, one source, "1 in 20" proposed threshold: counts in the text and a proposal, not measurements
+0  # proposed threshold (claim error rate 0 after the checker) and "Claims checked: 0", observed in the run
+5  # "the first five profiles": a stop rule, a design choice
