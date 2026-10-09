@@ -1,5 +1,5 @@
-/* The home page hero only, on top of the site's styles, the model's stylesheet and cftr-controls.css: a Controls button on the picture, and the controls
-   as a bottom sheet that is closed and inert until it is opened (cftr-home.js). The picture keeps touch-action: pan-y, so a vertical swipe on it scrolls. */
+/* The home page hero only, over the site's, the model's and cftr-controls.css styles: a Controls button on the picture, and a bottom sheet of controls,
+   closed and inert until opened (cftr-home.js). The picture keeps touch-action: pan-y, so a vertical swipe on it scrolls. */
 .cftr-home-open { grid-area: 1 / 1; align-self: start; justify-self: start; z-index: 2; margin: 0.25rem; }
 .cftr-home-panel { position: fixed; inset: auto 0 0; z-index: 150; display: grid; gap: 0.6rem; max-height: 45vh; max-height: 45dvh; overflow-y: auto; overscroll-behavior: contain;
                    padding: 0 1rem 1rem; border-radius: 12px 12px 0 0; background: var(--bg-panel); transform: translateY(100%); }

@@ -1,23 +1,28 @@
-// Controls shared by the model page (cftr-page.js) and the home page hero (cftr-home.js): a bottom sheet of controls, touch gestures on the picture,
-// and the walk along the chain by touch. Each takes the viewer's API and the elements it needs, and does nothing for an element a page does not have.
-// It uses the viewer's API only; nothing is stored and nothing is sent anywhere.
+// Shared by the model page (cftr-page.js) and the home page hero (cftr-home.js): a bottom sheet, touch gestures on the picture and the walk by touch.
+// Each does nothing for an element a page lacks. It uses the viewer's API only; nothing is stored or sent.
 const $ = (id) => document.getElementById(id);
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const on = (t, v, f) => v.split(' ').map(x => t.addEventListener(x, f)), mk = (t, c) => Object.assign(document.createElement(t), { className: c });
 const view = (api, v) => api.setView({ ...v, phi: v.phi === undefined ? undefined : Math.max(0.2, Math.min(Math.PI - 0.2, v.phi)) });
 
-// ---- the sheet: `root` carries is-open; while `narrow` matches (always, without it) a closed panel is inert, so it is out of the tab order.
-// Opening puts `top` at the top of the screen (while `scroll` matches; always, without it) and focus on the title; closing returns focus to the button
-// if it was inside. No trap.
+// ---- the sheet: `root` carries is-open; a closed panel is inert (out of the tab order) while `narrow` matches, or always. Opening puts `top` at the
+// top of the screen while `scroll` matches, or always, the sheet at its own top and focus on the title; closing returns focus to the button if it was
+// inside. No trap. A finger sets Turn or Tilt where it lands and scrolls nothing (on an iPhone it scrolled the sheet).
 export function sheet({ root, panel, open, close, title, top = root, narrow = null, scroll = null }) {
   if (!root || !panel || !open) return null;
   const isOpen = () => root.classList.contains('is-open');
   const inert = () => { panel.inert = (!narrow || narrow.matches) && !isOpen(); };
+  for (const r of panel.querySelectorAll('#cftr-turn,#cftr-tilt')) {
+    on(r, 'touchstart', (e) => e.preventDefault());
+    on(r, 'pointerdown pointermove', (e) => { const b = r.getBoundingClientRect();   // a touch stays on its first element
+      if (e.pointerType == 'touch') { r.value = +r.min + (r.max - r.min) * (e.clientX - b.left - 12) / (b.width - 24); r.dispatchEvent(new Event('input', { bubbles: true })); } });
+  }
   function set(o) {
     root.classList.toggle('is-open', o);
     inert();
     open.setAttribute('aria-expanded', String(o));
     if (o) {
+      panel.scrollTop = 0;
       if (!scroll || scroll.matches) window.scrollTo({ top: scrollY + top.getBoundingClientRect().top, behavior: reduced() ? 'instant' : 'smooth' });   // the picture at the top, the sheet below it
       title?.focus({ preventScroll: true });
     } else if (panel.contains(document.activeElement)) open.focus({ preventScroll: true });
@@ -32,6 +37,7 @@ export function sheet({ root, panel, open, close, title, top = root, narrow = nu
 
 // ---- touch: one finger turns (and tilts, unless `tilt` is false), two fingers pinch to zoom, a double tap is the Reset view button.
 // Mouse, wheel and keys stay with the viewer. With tilt off, the page's own touch-action (pan-y) keeps a vertical swipe for scrolling the page.
+// A touch that starts on a control or the sheet is left to it.
 export function touch(api, { tilt = true } = {}) {
   const canvas = api.canvas, stage = canvas.parentElement, pts = new Map();
   let base = null, lastTap = null, tap = null;
@@ -40,7 +46,7 @@ export function touch(api, { tilt = true } = {}) {
     base = p.length >= 2 ? { d: Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1, zoom: s.zoom } : null;
   };
   stage.addEventListener('pointerdown', (e) => {
-    if (e.pointerType !== 'touch') return;
+    if (e.pointerType !== 'touch' || e.target.closest('#cftr-panel,[role=dialog],button,input,a,select,textarea,summary')) return;
     e.stopPropagation();
     pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
     try { canvas.setPointerCapture(e.pointerId); } catch (x) { /* not capturable */ }

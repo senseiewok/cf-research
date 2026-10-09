@@ -338,5 +338,150 @@ class SharedControlsTests(unittest.TestCase):
         self.assertFalse(v["viewTouched"])
         self.assertEqual([m for m in p.problems if "status of 404" not in m], [])
 
+    # ---------------------------------------------------------------- the home page's layout: the sheet inside the picture's parent
+    # Found on an iPhone: the home page's sheet sits inside #cftr-viewer, the picture's parent, where touch() listened in the capture phase, so every touch in
+    # the sheet was stopped there and captured to the picture: it turned the picture, a double tap on a button reset the view, a step button never saw its
+    # own pointerdown, and the sheet reopened where it had been scrolled to. These tests build that layout here from the standalone page's own controls.
+    HOME = """async ([css, home]) => {
+      const el = (t, props) => Object.assign(document.createElement(t), props), loaded = [];
+      for (const href of css) { const l = el('link', { rel: 'stylesheet', href }); loaded.push(new Promise(r => { l.onload = r; })); document.head.append(l); }
+      const viewer = document.getElementById('cftr-viewer'), stage = document.getElementById('cftr-canvas').parentElement, turn = document.getElementById('cftr-turn');
+      viewer.classList.add('cftr-hero-viewer');
+      const panel = el('div', { id: 'cftr-panel', className: 'cftr-home-panel' }), head = el('div', { className: 'cftr-panel-head' });
+      head.append(el('h2', { id: 'cftr-panel-title', tabIndex: -1, textContent: 'Controls' }), el('button', { id: 'cftr-sheet-close', className: 'cftr-btn', type: 'button', textContent: 'Close' }));
+      panel.append(head, ...turn.parentElement.children);          // Turn, Tilt, their labels, the button row and the hint, moved with the viewer's listeners
+      stage.append(el('button', { id: 'cftr-sheet-open', className: 'cftr-btn cftr-home-open', type: 'button', textContent: 'Controls' }), panel);
+      await Promise.all(loaded);
+      await import(home);
+    }"""
+    SHEET = "() => { const s = document.getElementById('cftr-panel'); return { top: s.scrollTop, y: scrollY }; }"
+
+    def home_layout(self):
+        if not all((V.WEB / f).is_file() for f in ("cftr-home.css", "cftr-controls.css")):
+            self.skipTest("the package's stylesheets are not in the folder being served")
+        p = V.Page(self.browser, self.base, reduced_motion="reduce", viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True, device_scale_factor=2)
+        self.addCleanup(p.close)
+        p.wait_drawn()
+        p.page.evaluate(self.HOME, [["/cftr-controls.css", "/cftr-home.css"], self.home_js])
+        p.page.wait_for_timeout(300)
+        cdp = p.ctx.new_cdp_session(p.page)
+        send = lambda kind, pts=(): cdp.send("Input.dispatchTouchEvent", {"type": kind, "touchPoints": [{"x": a, "y": c, "id": i} for i, (a, c) in enumerate(pts)]})
+        p.page.locator("#cftr-sheet-open").tap()
+        p.page.wait_for_timeout(300)
+        self.assertTrue(p.page.evaluate("document.getElementById('cftr-viewer').classList.contains('is-open')"), "the sheet is open")
+        self.assertTrue(p.page.evaluate("document.getElementById('cftr-panel').parentElement === document.getElementById('cftr-canvas').parentElement"), "inside the picture's parent")
+        return p, send
+
+    def paced(self, page, send, start, moves):
+        send("touchStart", [start])
+        for pt in moves:
+            send("touchMove", [pt])
+            page.wait_for_timeout(16)
+        send("touchEnd")
+        page.wait_for_timeout(150)
+
+    def centre(self, page, sel):
+        return page.evaluate("(s) => { const r = document.querySelector(s).getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }", sel)
+
+    def test_on_the_home_layout_a_finger_drags_and_taps_the_sheet_sliders(self):
+        p, send = self.home_layout()
+        page = p.page
+        for sel, key, to_view in (("#cftr-turn", "theta", lambda v: v * 3.141592653589793 / 180), ("#cftr-tilt", "phi", float)):
+            with self.subTest(slider=sel):
+                page.evaluate("(s) => document.querySelector(s).scrollIntoView({ block: 'nearest', behavior: 'instant' })", sel)
+                page.wait_for_timeout(100)
+                v0, sheet0, value0 = self.view(p), page.evaluate(self.SHEET), float(page.input_value(sel))
+                b = page.locator(sel).bounding_box()
+                f = (value0 - float(page.get_attribute(sel, "min"))) / (float(page.get_attribute(sel, "max")) - float(page.get_attribute(sel, "min")))
+                x, y = b["x"] + 12 + f * (b["width"] - 24), b["y"] + b["height"] / 2
+                self.paced(page, send, (x, y), [(x + 150 * k / 8, y) for k in range(1, 9)])
+                value1, v1 = float(page.input_value(sel)), self.view(p)
+                self.assertGreater(value1, value0, f"a sideways drag moves {sel}")
+                self.assertAlmostEqual(v1[key], to_view(value1), places=4, msg="and the model follows it")
+                others = [k for k in ("theta", "phi", "zoom") if k != key]
+                self.assertEqual([round(v1[k], 6) for k in others], [round(v0[k], 6) for k in others], "the drag does not also turn or zoom the picture")
+                self.assertEqual(page.evaluate(self.SHEET), sheet0, "nor scroll the sheet or the page")
+                x += 150
+                self.paced(page, send, (x, y), [(x - 150 * k / 8, y + 12 * k / 8) for k in range(1, 9)])
+                value2 = float(page.input_value(sel))
+                self.assertLess(value2, value1, "a slightly diagonal drag still moves it")
+                self.assertEqual(page.evaluate(self.SHEET), sheet0, "and scrolls neither the sheet nor the page")
+                send("touchStart", [(b["x"] + 0.85 * b["width"], y)])
+                send("touchEnd")
+                page.wait_for_timeout(150)
+                lo, hi = (float(page.get_attribute(sel, a)) for a in ("min", "max"))
+                self.assertAlmostEqual((float(page.input_value(sel)) - lo) / (hi - lo), 0.85, delta=0.05, msg="a tap on the track puts the thumb there")
+                self.assertAlmostEqual(self.view(p)[key], to_view(float(page.input_value(sel))), places=4)
+                page.wait_for_timeout(400)
+        self.assertEqual([m for m in p.problems if "status of 404" not in m], [])
+
+    def test_on_the_home_layout_a_touch_on_the_sheet_never_moves_the_picture(self):
+        p, send = self.home_layout()
+        page = p.page
+        page.get_by_role("button", name="Forward 1 residue", exact=True).tap()
+        page.locator("#cftr-turn").focus()
+        page.keyboard.press("ArrowRight")
+        page.wait_for_timeout(400)
+        v0 = self.view(p)
+        bx, by = self.centre(page, "#cftr-panel .cftr-nudge button:nth-child(3)")
+        self.assertEqual(page.evaluate("document.querySelector('#cftr-panel .cftr-nudge button:nth-child(3)').getAttribute('aria-label')"), "Forward 1 residue")
+        for _ in range(2):
+            send("touchStart", [(bx, by)])
+            send("touchEnd")
+        v1 = self.view(p)
+        self.assertEqual(v1["walk"], v0["walk"] + 2, "each tap is a step")
+        self.assertTrue(v1["viewTouched"], "two quick taps on a button are not the picture's double tap (Reset view)")
+        self.assertEqual([round(v1[k], 6) for k in ("theta", "phi", "zoom")], [round(v0[k], 6) for k in ("theta", "phi", "zoom")])
+        page.wait_for_timeout(400)
+        send("touchStart", [(bx, by)])
+        page.wait_for_timeout(1000)
+        send("touchEnd")
+        self.assertGreater(self.view(p)["walk"], v1["walk"] + 3, "a held step button repeats: it sees its own pointerdown")
+        page.wait_for_timeout(400)
+        c = page.locator("#cftr-canvas").bounding_box()
+        cx, cy = c["x"] + c["width"] / 2, max(c["y"], 0) + 60
+        self.assertEqual(page.evaluate("([x, y]) => document.elementFromPoint(x, y).id", [cx, cy]), "cftr-canvas")
+        t0 = self.view(p)["theta"]
+        self.paced(page, send, (cx - 60, cy), [(cx - 60 + 12 * k, cy) for k in range(1, 11)])
+        self.assertGreater(self.view(p)["theta"], t0 + 0.5, "a sideways drag on the picture still turns it")
+        z0 = self.view(p)["zoom"]
+        send("touchStart", [(cx - 30, cy), (cx + 30, cy)])
+        for k in range(1, 9):
+            send("touchMove", [(cx - 30 - 8 * k, cy), (cx + 30 + 8 * k, cy)])
+        send("touchEnd")
+        self.assertGreater(self.view(p)["zoom"], z0 * 1.5, "a pinch on the picture still zooms")
+        page.wait_for_timeout(400)
+        for _ in range(2):
+            send("touchStart", [(cx, cy)])
+            send("touchEnd")
+        self.assertFalse(self.view(p)["viewTouched"], "a double tap on the picture still resets")
+        for sel in ("#cftr-turn", "#cftr-tilt", "#cftr-panel-title", "#cftr-panel .cftr-home-walkout"):   # last: the page itself may zoom
+            with self.subTest(start=sel):
+                before = self.view(p)["zoom"]
+                x, y = self.centre(page, sel)
+                send("touchStart", [(x - 30, y), (x + 30, y)])
+                for k in range(1, 9):
+                    send("touchMove", [(x - 30 - 8 * k, y), (x + 30 + 8 * k, y)])
+                send("touchEnd")
+                page.wait_for_timeout(400)
+                self.assertEqual(self.view(p)["zoom"], before, f"two fingers from {sel} do not zoom the picture")
+        self.assertEqual([m for m in p.problems if "status of 404" not in m], [])
+
+    def test_on_the_home_layout_the_sheet_scrolls_and_reopens_at_its_top(self):
+        p, send = self.home_layout()
+        page = p.page
+        self.assertEqual(page.evaluate(self.SHEET)["top"], 0, "the sheet opens at its top")
+        self.assertGreater(page.evaluate("(() => { const s = document.getElementById('cftr-panel'); return s.scrollHeight - s.clientHeight; })()"), 50, "it has more than a screen")
+        x, y = self.centre(page, "#cftr-panel .cftr-home-walkout")
+        self.paced(page, send, (x, y), [(x, y - 12 * k) for k in range(1, 16)])
+        page.wait_for_timeout(300)
+        self.assertGreater(page.evaluate(self.SHEET)["top"], 30, "a vertical swipe on the sheet scrolls it")
+        page.locator("#cftr-sheet-close").tap()
+        page.wait_for_timeout(100)
+        page.locator("#cftr-sheet-open").tap()
+        page.wait_for_timeout(300)
+        self.assertEqual(page.evaluate(self.SHEET)["top"], 0, "opened again, it starts at its top")
+        self.assertEqual([m for m in p.problems if "status of 404" not in m], [])
+
 if __name__ == "__main__":
     unittest.main()

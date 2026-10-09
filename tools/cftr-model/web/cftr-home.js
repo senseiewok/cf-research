@@ -1,6 +1,6 @@
-// The home page hero's layer over the CFTR model: a Controls button on the picture opens a bottom sheet with the walk's step buttons and the view controls,
-// two fingers pinch to zoom and a double tap resets. One finger only turns: a vertical swipe on the picture still scrolls the page (touch-action: pan-y),
-// so tilting is on the slider in the sheet. It uses the viewer's API only; nothing is stored and nothing is sent anywhere.
+// The home page hero's layer over the CFTR model: a Controls button on the picture opens a bottom sheet with the walk's step buttons and the view
+// controls; two fingers pinch to zoom, a double tap resets, and one finger only turns, so a vertical swipe on the picture scrolls the page (touch-action:
+// pan-y) and tilting is on the slider. It uses the viewer's API only; nothing is stored or sent.
 import { ready } from './cftr-viewer.js';
 import { sheet, touch, walkControls } from './cftr-controls.js';
 
