@@ -1331,3 +1331,26 @@ sources:
       A second host of the Foundation, for the care center locator and the clinical trial finder. Its robots.txt and terms were
       not read; with no evidence the lab treats it like the main host, as manual. Rows are made by a person in a browser. No
       tool requests it. A person reading the terms of this host and of www.cff.org settles both.
+
+  - id: amfq-resource-pages
+    title: Asociación Mexicana de Fibrosis Quística, A.C. (AMFQ) website (www.fq.org.mx)
+    publisher: Asociación Mexicana de Fibrosis Quística, A.C.
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-09
+    landing_page: https://www.fq.org.mx/
+    url: null
+    claim_label: unverified
+    notes: >-
+      The address came from the reference list of an AI-written report the maintainer pasted on 2026-10-09 and from a web
+      search limited to this host. Read on 2026-10-09 with the lab's project user agent: robots.txt (HTTP 200, 487 bytes: one
+      group for all agents that allows everything, no group naming an AI agent, no content-signal line; a crawl delay only for two
+      SEO crawlers) and the home page, one request each. The read used a short script that copies the lab downloader's conduct
+      (robots first, one request per page, no retry, same-host redirects only) because the downloader's requests library is
+      not installed on this machine. Observed on the home page: a menu of four pages (what CF is, about the association,
+      programmes, contact); a link to a free online community that is hosted on a third-party community platform (circle.so),
+      not on this host, and that asks visitors to register; a link to a privacy notice; no terms-of-use page. Not read: the
+      privacy notice, any other page, and any terms. Access stays manual, not fetch, until a person has decided what the
+      lab may do here; no tool is set up to read this host. The pages are in Spanish: rows for them are confirmed by a person
+      who reads Spanish (the maintainer does), and the lab writes no Spanish text of its own.

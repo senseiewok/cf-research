@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-28 to download by hand, 1 to ask for, 3 not to download.
+29 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -17,6 +17,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | semantic-scholar-api | Semantic Scholar Academic Graph API | [page](https://www.semanticscholar.org/product/api) | link only | Overview and API License Agreement (last updated May 17, 2023) fetched directly 2026-10-07 with the lab user agent; the API was not called and no key was reque… |
+
+### Asociación Mexicana de Fibrosis Quística, A.C.
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| amfq-resource-pages | Asociación Mexicana de Fibrosis Quística, A.C. (AMFQ) website (www.fq.org.mx) | [page](https://www.fq.org.mx/) | link only | The address came from the reference list of an AI-written report the maintainer pasted on 2026-10-09 and from a web search limited to this host. |
 
 ### Cochrane
 
