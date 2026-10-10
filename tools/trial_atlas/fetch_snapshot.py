@@ -21,13 +21,13 @@ NOT VERIFIED against the real registry (nothing here has been run against it). E
 marked "to verify on the first real run" in DEFAULTS below: the largest pageSize, the request parameter that carries the page token,
 the query parameters, the `fields` piece names, and whether totalCount comes back on the first page only.
 
-Usage:
-    python fetch_snapshot.py --contact ADDRESS [--route both|condition|term] [--out DIR] [--page-size N] [--max-pages N]
-    python fetch_snapshot.py --contact ADDRESS --dry-run       print the planned requests; no socket is opened
-The contact may come from the environment variable EVIDENCE_CONTACT instead of --contact. Without one the tool does not run.
+Usage (the contact comes ONLY from the environment variable EVIDENCE_CONTACT, so it never sits on a command line or in shell
+history; there is no --contact option, and without the variable the tool does not run):
+    python fetch_snapshot.py [--route both|condition|term] [--out DIR] [--page-size N] [--max-pages N]
+    python fetch_snapshot.py --dry-run       print the planned requests; no socket is opened
 A real run is a network call: it needs a person's approval first (design, build step 2).
-Exit 0 written and checked; 1 the run stopped (reason printed, INCOMPLETE.txt left); 2 refused before any request (no contact,
-evidence skill absent, catalog gate).
+Exit 0 written and checked; 1 the run stopped (reason printed, INCOMPLETE.txt left; also on any unexpected error from the client);
+2 refused before any request (no contact, a contact the client refuses, evidence skill absent, catalog gate).
 """
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ from urllib.parse import urlencode
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from snapshot import NCT_ID, VERSION, sha256_file, snapshot_digest  # noqa: E402
+from snapshot import VERSION, manifest_digest, sha256_file, valid_nct  # noqa: E402
 
 REPO_ROOT = HERE.parents[1]
 CATALOG = REPO_ROOT / "sources" / "catalog.yaml"
@@ -125,10 +125,14 @@ def load_evidence_http():
                   "EVIDENCE_SKILL_DIR. This tool makes no request without its rules.")
 
 
-def resolve_contact(cli_value: str | None) -> str:
-    contact = cli_value or os.environ.get("EVIDENCE_CONTACT") or ""
+CONTACT_REFUSED = "the contact was refused by the evidence client: not a plain email address"
+
+
+def resolve_contact() -> str:
+    """The contact, from EVIDENCE_CONTACT only (never a command-line argument)."""
+    contact = os.environ.get("EVIDENCE_CONTACT") or ""
     if not contact.strip():
-        raise Refused("no contact: give --contact or set EVIDENCE_CONTACT. The registry client sends it in the User-Agent; "
+        raise Refused("no contact: set the environment variable EVIDENCE_CONTACT. The registry client sends it in the User-Agent; "
                       "this tool does not run without one")
     return contact.strip()
 
@@ -139,8 +143,9 @@ def make_client(contact: str, evidence=None, *, dry_run: bool = False):
         os.environ["EVIDENCE_DRY_RUN"] = "1"
     try:
         client = ev.Client(contact=contact)
-    except ValueError as exc:
-        raise Refused(f"the contact was refused by the evidence client: {exc}") from exc
+    except ValueError:
+        # A fixed message: the client's own message quotes the value, and the value is never echoed.
+        raise Refused(CONTACT_REFUSED) from None
     return client, ev
 
 
@@ -206,7 +211,7 @@ def fetch_route(client, name: str, base_params: dict, cfg: dict, out_dir: Path) 
             raise SnapshotStopped(f"{name} page {n}: the answer has no '{cfg['studies_field']}' list; the API may have changed")
         for s in studies:
             nct = ((s or {}).get("protocolSection") or {}).get("identificationModule", {}).get("nctId") if isinstance(s, dict) else None
-            if not isinstance(nct, str) or not NCT_ID.match(nct):
+            if not valid_nct(nct):
                 raise SnapshotStopped(f"{name} page {n}: a study has no valid protocolSection.identificationModule.nctId")
             if nct in seen_ids:
                 raise SnapshotStopped(f"{name} page {n}: {nct} was already received on an earlier page; paging is not stable")
@@ -248,11 +253,11 @@ def fetch_route(client, name: str, base_params: dict, cfg: dict, out_dir: Path) 
 def build_manifest(out_dir: Path, version: dict, routes: list[dict], cfg: dict, attempts: int, project_ua: str,
                    catalog_entry: dict | None) -> dict:
     files = {}
-    for p in sorted(out_dir.rglob("*.json")):
+    for p in sorted(out_dir.rglob("*")):
         rel = p.relative_to(out_dir).as_posix()
-        if rel != "manifest.json":
+        if p.is_file() and rel != "manifest.json":
             files[rel] = sha256_file(p)
-    return {
+    manifest = {
         "tool": TOOL,
         "source_id": SOURCE_ID,
         "base_url": (catalog_entry or {}).get("base_url"),
@@ -270,8 +275,9 @@ def build_manifest(out_dir: Path, version: dict, routes: list[dict], cfg: dict, 
         "modifications": "none at fetch: each page is the parsed JSON answer written back as UTF-8 JSON (the evidence client returns "
                          "parsed data, not bytes), so key order and values are kept and whitespace is not",
         "files": files,
-        "snapshot_sha256": snapshot_digest(files),
     }
+    manifest["snapshot_sha256"] = manifest_digest(manifest)     # covers the whole manifest, not only the file list
+    return manifest
 
 
 def run(client, out_dir: Path, *, routes: list[str], cfg: dict | None = None, project_ua: str = "", contact: str = "",
@@ -304,17 +310,18 @@ def run(client, out_dir: Path, *, routes: list[str], cfg: dict | None = None, pr
             raise SnapshotStopped("something shaped like an email address would have been written into the manifest; refused")
         (out_dir / "manifest.json").write_text(text, encoding="utf-8")
         return manifest
-    except (SnapshotStopped, Refused) as exc:
+    except Exception as exc:  # noqa: BLE001 - every failure leaves INCOMPLETE.txt, then propagates unchanged
         if out_dir.exists():
             attempts = getattr(getattr(client, "accounting", None), "attempts", "?")
-            (out_dir / "INCOMPLETE.txt").write_text(f"stopped: {exc}\nrequests made: {attempts}\nno manifest was written\n",
+            # Our own errors carry a reason we wrote; anything else is named by its type only, so no text from elsewhere is copied.
+            why = str(exc) if isinstance(exc, (SnapshotStopped, Refused)) else f"unexpected error from the client: {type(exc).__name__}"
+            (out_dir / "INCOMPLETE.txt").write_text(f"stopped: {why}\nrequests made: {attempts}\nno manifest was written\n",
                                                     encoding="utf-8")
         raise
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--contact", help="contact address for the User-Agent (or set EVIDENCE_CONTACT); never stored")
     ap.add_argument("--route", choices=("both", "condition", "term"), default="both")
     ap.add_argument("--out", type=Path, help="a new folder for the snapshot (default: under sources/downloads/trial_atlas/)")
     ap.add_argument("--page-size", type=int, default=DEFAULTS["page_size"])
@@ -328,7 +335,7 @@ def main(argv=None) -> int:
         print("error: --page-size and --max-pages must be positive", file=sys.stderr)
         return 2
     try:
-        contact = resolve_contact(a.contact)
+        contact = resolve_contact()
         client, ev = make_client(contact, dry_run=a.dry_run)
     except Refused as exc:
         print(f"REFUSED: {exc}", file=sys.stderr)
@@ -350,6 +357,9 @@ def main(argv=None) -> int:
     except SnapshotStopped as exc:
         print(f"STOPPED: {exc}", file=sys.stderr)
         print(client.accounting.summary(), file=sys.stderr)
+        return 1
+    except Exception as exc:  # noqa: BLE001 - INCOMPLETE.txt is already written; name the error by type only
+        print(f"STOPPED: unexpected error from the client: {type(exc).__name__}", file=sys.stderr)
         return 1
     print(client.accounting.summary())
     if manifest is None:

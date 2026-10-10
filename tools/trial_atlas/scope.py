@@ -129,7 +129,7 @@ def route_difference(snapshot: snap.Snapshot, manual=None, explained=None) -> di
 
 def read_id_reasons(path) -> dict[str, str]:
     data = json.loads(Path(path).read_text(encoding="utf-8-sig"))
-    if not isinstance(data, dict) or not all(isinstance(k, str) and snap.NCT_ID.match(k) and isinstance(v, str) and v.strip()
+    if not isinstance(data, dict) or not all(snap.valid_nct(k) and isinstance(v, str) and v.strip()
                                              for k, v in data.items()):
         raise ValueError(f"{path} must be a JSON object of NCT id -> a non-empty reason")
     return data
@@ -152,7 +152,7 @@ def main(argv=None) -> int:
         manual = read_id_reasons(a.exclude) if a.exclude else {}
         explained = read_id_reasons(a.explained) if a.explained else {}
     except (snap.SnapshotError, OSError, ValueError) as exc:
-        print(f"ERROR: {exc}")
+        print(f"ERROR: {snap.clean(exc, 300)}")
         return 1
     rep = report(s, manual, explained)
     if a.json:
@@ -165,7 +165,7 @@ def main(argv=None) -> int:
     print(f"  CF only: {c['cf_only']}   CF among others: {c['cf_among_others']}")
     print(f"  start actual: {c['start_actual']}   planned: {c['start_planned']}   unknown: {c['start_unknown']}")
     for e in rep["excluded"]:
-        print(f"  {e['nct_id']}  {e['rule']}  {e['reason']}")
+        print(f"  {e['nct_id']}  {e['rule']}  {snap.clean(e['reason'])}")
     rd = rep["routes"]
     if rd is None:
         print(f"no '{RECALL_ROUTE}' route in this snapshot: the recall check was not run")

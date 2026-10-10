@@ -13,13 +13,18 @@ What it does, in order:
      number of checked rows and a Wilson 95% interval ("too few to estimate" under 10 positives), micro and macro F1, the shares of
      entries tagged by rule, by model, as other, as not stated and left unclassified, and the model quote-rejection rate.
   4. Negative controls (--negative-controls): canary model tags with false quotes must all be rejected; planted non-CF ids must all be
-     excluded by scope; the tagger over a non-CF snapshot must give near zero CF-specific classes. By default they run on the
-     synthetic fixtures; --canary, --planted and --control-snapshot point them at other inputs.
-  5. Publication stop rules (skipped with --drift-only). Publication is blocked (exit 3) when: a class shown has precision below 0.85
-     or recall below 0.80 on the frozen set (where estimable); "other" plus unclassified exceed 15% of entries; the two retrieval
-     routes differ by more than 10% unexplained; a negative control fails; a rerun does not reproduce counts and hash; or an input a
-     rule needs is missing (no frozen set, no recall route, controls not run). The thresholds are the reviewer's judgement, not a
-     standard; they may be changed before the frozen set is labelled and not after.
+     excluded by scope; the tagger over a non-CF snapshot must give near zero CF-specific classes and near zero of the classes the
+     lexicon marks negative_control (exacerbations). By default they run on the synthetic fixtures; --canary, --planted and
+     --control-snapshot point them at other inputs. Synthetic controls never satisfy the publication gate.
+  5. Publication stop rules (skipped with --drift-only). Publication is blocked (exit 3) when:
+       S1 the frozen set is missing, has fewer than MIN_FROZEN_ROWS (50) labelled rows, has any unlabelled row, leaves a shown class
+          with no labelled positive, or a shown class has precision below 0.85 or recall below 0.80 where estimable (10 or more);
+       S2 "other" plus unclassified exceed 15% of entries (stricter than the design's "other" alone);
+       S3 the two retrieval routes differ by more than 10% unexplained, or there is no recall route;
+       S4 the controls were not run, or ran on synthetic fixtures instead of --canary, --planted and --control-snapshot.
+     A failed control or a rerun that does not reproduce counts and hashes is an integrity failure (exit 1). The thresholds are the
+     reviewer's judgement, not a standard; they may be changed before the frozen set is labelled and not after.
+Text that came from a model, a file or the registry is printed with control characters removed.
 
 No model is called. No network. Every number printed comes from the files given.
 
@@ -54,10 +59,32 @@ THRESHOLDS = {"precision": 0.85, "recall": 0.80, "other_share": 0.15, "route_une
 Z95 = 1.959963984540054
 MIN_QUOTE_CHARS = 3
 MODEL_FORBIDDEN_CLASSES = {"not_stated"}
+MIN_FROZEN_ROWS = 50          # the design's number of person-labelled outcome entries (decision 5)
+TAG_STATUSES = {"rule", "not_stated", "unclassified"}
 
 
 class UsageError(Exception):
     pass
+
+
+def validate_tags(tags, lex) -> dict:
+    """The tags file's shape, checked before anything reads it, so a wrong file is a usage error and not a traceback."""
+    def bad(why):
+        raise UsageError(f"the tags file is not a tags file written by lexicon.py ({why})")
+    if not isinstance(tags, dict) or not isinstance(tags.get("entries"), list):
+        bad("it must be an object with an 'entries' list")
+    for i, e in enumerate(tags["entries"]):
+        if not isinstance(e, dict):
+            bad(f"entry {i} is not an object")
+        if not isinstance(e.get("entry_id"), str) or not isinstance(e.get("nct_id"), str):
+            bad(f"entry {i} has no string entry_id and nct_id")
+        if e.get("status") not in TAG_STATUSES or not isinstance(e.get("tags"), list) or not isinstance(e.get("flags"), dict):
+            bad(f"entry {i} has no valid status, tags list or flags")
+        if not all(isinstance(t, dict) and t.get("class") in lex.domain_of for t in e["tags"]):
+            bad(f"entry {i} has a tag with an unknown class")
+        if not isinstance(e.get("timeframe_bucket"), str) or not isinstance(e.get("safety_subtypes"), list):
+            bad(f"entry {i} has no time-frame bucket or safety subtypes")
+    return tags
 
 
 # ------------------------------------------------------------------ small helpers
@@ -169,7 +196,7 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
         buckets[e["timeframe_bucket"]] += 1
         for s in e.get("safety_subtypes", []):
             subtypes[s] += 1
-    by_year, by_phase, cf_only, sponsors = {}, {}, {}, {}
+    by_year, by_phase, cf_only, sponsors, no_sponsor = {}, {}, {}, {}, {}
     studies_by_year: dict[str, int] = {}
     for nct, r in studies.items():
         y = str(r["start_year"]) if r["start_year"] else "unknown"
@@ -180,7 +207,11 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
             by_phase.setdefault(c, {})[p] = by_phase.setdefault(c, {}).get(p, 0) + 1
             if r["cf_flag"] == "CF only":
                 cf_only[c] = cf_only.get(c, 0) + 1
-            sponsors.setdefault(c, set()).add(r.get("sponsor") or "(no sponsor named)")
+            name = (r.get("sponsor") or "").strip() if isinstance(r.get("sponsor"), str) else ""
+            if name:
+                sponsors.setdefault(c, set()).add(name)
+            else:                                            # a missing sponsor is counted apart, never as one more sponsor
+                no_sponsor[c] = no_sponsor.get(c, 0) + 1
     n = len(tags["entries"])
 
     def share(k):
@@ -203,6 +234,7 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
         "studies_by_class": {c: sum(1 for s in study_classes.values() if c in s) for c in order},
         "studies_by_class_cf_only": {c: cf_only.get(c, 0) for c in order},
         "lead_sponsors_by_class": {c: len(sponsors.get(c, ())) for c in order},
+        "studies_without_lead_sponsor_by_class": {c: no_sponsor.get(c, 0) for c in order},
         "studies_by_start_year": dict(sorted(studies_by_year.items())),
         "studies_by_class_and_start_year": {c: dict(sorted(by_year.get(c, {}).items())) for c in order},
         "studies_by_class_and_phase": {c: dict(sorted(by_phase.get(c, {}).items())) for c in order},
@@ -318,7 +350,7 @@ def run_negative_controls(lex, *, snapshot=None, canary=None, planted=None, cont
         if canary:
             acc, rej = verify_model_tags(canary, entries, rule_tags, lex)
             results.append(("canary model tags with false quotes are all rejected", not acc,
-                            f"{len(rej)} of {len(canary)} rejected" + (f"; ACCEPTED: {[a['entry_id'] + ' ' + repr(a['text']) for a in acc]}" if acc else "")))
+                            f"{len(rej)} of {len(canary)} rejected" + (f"; ACCEPTED: {[snap.clean(a['entry_id'], 40) + ' ' + snap.clean(repr(a['text']), 60) for a in acc]}" if acc else "")))
         else:
             results.append(("canary model tags with false quotes are all rejected", False, "no canary tags were given"))
         if planted:
@@ -336,12 +368,14 @@ def run_negative_controls(lex, *, snapshot=None, canary=None, planted=None, cont
         else:
             results.append(("planted non-CF ids are all excluded by scope", False, "no planted ids were given"))
         control = lex_mod.tag_all_entries(control_snapshot, lex)
-        hits = [e for e in control if any(t["class"] in lex.cf_specific for t in e["tags"])]
+        watched = lex.control_classes                       # the CF-specific classes plus classes marked negative_control
+        hits = [e for e in control if any(t["class"] in watched for t in e["tags"])]
         share = len(hits) / len(control) if control else None
         ok = bool(control) and share <= near_zero
-        results.append((f"non-CF control: CF-specific classes at most {near_zero:.0%} of entries", ok,
+        results.append((f"non-CF control: CF-specific and watched classes ({', '.join(sorted(watched - lex.cf_specific))}) "
+                        f"at most {near_zero:.0%} of entries", ok,
                         f"{len(hits)} of {len(control)} entries" + (f" ({share:.1%})" if control else "; the control has no entries")
-                        + (f"; tagged: {[e['entry_id'] for e in hits]}" if hits else "")))
+                        + (f"; tagged: {[snap.clean(e['entry_id'], 40) for e in hits]}" if hits else "")))
     return results
 
 
@@ -373,7 +407,7 @@ def main(argv=None) -> int:
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(errors="backslashreplace")
     lex = lex_mod.load()
-    failures, blocked = [], []
+    failures, blocked, summary = [], [], None
     try:
         manual = scope_mod.read_id_reasons(a.exclude) if a.exclude else {}
         explained = scope_mod.read_id_reasons(a.explained) if a.explained else {}
@@ -389,27 +423,25 @@ def main(argv=None) -> int:
         if not a.tags:
             raise UsageError("--tags is required with --snapshot")
         s = snap.load(a.snapshot)
-        tags = read_json(a.tags, "tags file")
-    except UsageError as exc:
-        print(f"ERROR: {exc}")
-        return 2
-    except ValueError as exc:
-        print(f"ERROR: {exc}")
+        tags = validate_tags(read_json(a.tags, "tags file"), lex)
+        mt = a.model_tags or a.verify_model_tags
+        proposed = read_json(mt, "proposed model tags") if mt else []
+    except (UsageError, ValueError) as exc:
+        print(f"ERROR: {snap.clean(exc, 300)}")
         return 2
     except snap.SnapshotError as exc:
-        print(f"FAIL integrity: {exc}")
+        print(f"FAIL integrity: {snap.clean(exc, 300)}")
         return 1
 
     entries = entry_texts(s, manual)
     rule_tags = {e["entry_id"]: e for e in tags.get("entries", [])}
-    proposed = read_json(a.model_tags or a.verify_model_tags, "proposed model tags") if (a.model_tags or a.verify_model_tags) else []
     accepted, rejected = verify_model_tags(proposed, entries, rule_tags, lex)
     if a.verify_model_tags:
         for t in accepted:
-            print(f"ACCEPT {t['entry_id']} {t['class']}: found in {t['field']} at {t['start']}")
+            print(f"ACCEPT {snap.clean(t['entry_id'], 40)} {snap.clean(t['class'], 40)}: found in {t['field']} at {t['start']}")
         for r in rejected:
             t = r["tag"] if isinstance(r["tag"], dict) else {}
-            print(f"REJECT {t.get('entry_id', '?')} {t.get('class', '?')}: {r['reason']}")
+            print(f"REJECT {snap.clean(t.get('entry_id', '?'), 40)} {snap.clean(t.get('class', '?'), 40)}: {snap.clean(r['reason'], 200)}")
         print(f"{len(accepted)} accepted, {len(rejected)} rejected")
         return 0
 
@@ -453,7 +485,7 @@ def main(argv=None) -> int:
         print(f"model tags: {len(proposed)} proposed, {len(accepted)} accepted, {len(rejected)} rejected (quote-rejection rate {rate:.1%})")
         for r in rejected[:20]:
             t = r["tag"] if isinstance(r["tag"], dict) else {}
-            print(f"  rejected {t.get('entry_id', '?')} {t.get('class', '?')}: {r['reason']}")
+            print(f"  rejected {snap.clean(t.get('entry_id', '?'), 40)} {snap.clean(t.get('class', '?'), 40)}: {snap.clean(r['reason'], 200)}")
     else:
         print("model tags: none proposed (quote-rejection rate not measured)")
     print("challenger disagreement rate: not measured (no challenger review in this step)")
@@ -467,7 +499,7 @@ def main(argv=None) -> int:
         try:
             gold, summary = load_frozen(a.frozen_sheet, a.frozen_key, lex)
         except UsageError as exc:
-            print(f"ERROR: {exc}")
+            print(f"ERROR: {snap.clean(exc, 300)}")
             return 2
         model_by = {}
         for t in accepted:
@@ -500,7 +532,7 @@ def main(argv=None) -> int:
             planted = read_json(a.planted, "planted ids") if a.planted else None
             control = snap.load(a.control_snapshot) if a.control_snapshot else None
         except (UsageError, snap.SnapshotError) as exc:
-            print(f"ERROR: {exc}")
+            print(f"ERROR: {snap.clean(exc, 300)}")
             return 2
         on_real = canary is not None or planted is not None
         controls = run_negative_controls(lex, snapshot=s if on_real else None, canary=canary, planted=planted,
@@ -522,6 +554,13 @@ def main(argv=None) -> int:
     if m is None:
         blocked.append("S1 not evaluated: no frozen set was given (publication needs the person-labelled set)")
     else:
+        if summary["labelled"] < MIN_FROZEN_ROWS:
+            blocked.append(f"S1 only {summary['labelled']} labelled rows; the design needs at least {MIN_FROZEN_ROWS}")
+        if summary["unlabelled"]:
+            blocked.append(f"S1 {summary['unlabelled']} row(s) of the frozen sheet are unlabelled; every drawn row must be labelled")
+        unlabelled_classes = [c for c in shown if m["per_class"][c]["positives"] == 0]
+        if unlabelled_classes:
+            blocked.append(f"S1 shown class(es) with no labelled positive: {', '.join(unlabelled_classes)} (nothing checks their recall)")
         for c in shown:
             v = m["per_class"][c]
             if not (v["precision_estimable"] and v["recall_estimable"]):
@@ -542,6 +581,9 @@ def main(argv=None) -> int:
                        f"({len(rd['unexplained'])} studies), over {THRESHOLDS['route_unexplained']:.0%}")
     if controls is None:
         blocked.append("S4 not evaluated: the negative controls were not run (--negative-controls)")
+    elif not (a.canary and a.planted and a.control_snapshot):
+        blocked.append("S4 controls ran on synthetic fixtures only; the gate needs --canary, --planted and --control-snapshot "
+                       "(canary tags and planted ids for this snapshot, and a fetched non-CF control snapshot)")
     for b in blocked:
         print(f"STOP {b}")
     if blocked:

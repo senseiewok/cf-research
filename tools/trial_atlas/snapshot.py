@@ -1,8 +1,16 @@
 """Read a trial-atlas snapshot written by fetch_snapshot.py, check it against its manifest, and turn its studies into plain records.
 
 A snapshot is a folder:  manifest.json, version.json and one folder per retrieval route (condition/, term/) of page-NNNN.json files.
-The manifest holds the sha256 of every other file and the sha256 of the whole snapshot (see snapshot_digest). Loading checks every hash
-first and refuses a snapshot that does not match: a count is only ever computed from the bytes the manifest names.
+The manifest holds the sha256 of every other file, and snapshot_sha256: the sha256 of a canonical form of the whole manifest without
+that one key (manifest_digest), so the routes, the query strings, the totals, dataTimestamp and the file list are all covered.
+Loading refuses a snapshot unless:
+  - snapshot_sha256 matches the manifest as it is on disk;
+  - every file under the folder (of any kind) is listed in the manifest, and every listed file matches its hash;
+  - every page a route names, and version.json, is a listed file, given as a relative path inside the folder (no absolute path,
+    no '..', nothing that resolves outside the folder);
+  - every study has an NCT id of the form NCT followed by 8 digits.
+So a count is only ever computed from bytes the manifest names. The hash is a consistency check, not a signature: someone who can
+rewrite the whole folder can rewrite the manifest too.
 
 Standard library only. No network.
 """
@@ -12,16 +20,31 @@ import hashlib
 import json
 import re
 from dataclasses import dataclass, field
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 MANIFEST = "manifest.json"
 VERSION = "version.json"
-NCT_ID = re.compile(r"^NCT\d{8}$")
+NCT_ID = re.compile(r"NCT\d{8}")        # use fullmatch: a trailing newline or anything else is not an id
 CHUNK = 1 << 16
 
 
 class SnapshotError(RuntimeError):
     """The snapshot is missing, incomplete or does not match its manifest. Nothing is computed from it."""
+
+
+_ESCAPES = re.compile(r"\x1b\][^\x07\x1b]*(?:\x07|\x1b\\)|\x1b\[[0-?]*[ -/]*[@-~]|\x1b[P^_X][^\x1b]*\x1b\\|\x1b[@-Z\\-_]")
+_CONTROLS = re.compile(r"[\x00-\x1f\x7f-\x9f]")
+
+
+def clean(value, limit: int = 120) -> str:
+    """Text that came from registry pages, a model or a file, made safe to print: terminal escape sequences removed whole, every other
+    control character (newline and tab included) turned into a space, and long text cut at `limit` characters."""
+    text = _CONTROLS.sub(" ", _ESCAPES.sub("", str(value)))
+    return text if len(text) <= limit else text[:limit] + "..."
+
+
+def valid_nct(value) -> bool:
+    return isinstance(value, str) and NCT_ID.fullmatch(value) is not None
 
 
 def sha256_file(path: Path) -> str:
@@ -32,10 +55,10 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
-def snapshot_digest(file_hashes: dict[str, str]) -> str:
-    """One hash for the whole snapshot: sha256 of the lines 'relative/path<TAB>sha256' sorted by path, each ending in a newline."""
-    lines = "".join(f"{p}\t{file_hashes[p]}\n" for p in sorted(file_hashes))
-    return hashlib.sha256(lines.encode("utf-8")).hexdigest()
+def manifest_digest(manifest: dict) -> str:
+    """sha256 of the manifest without snapshot_sha256, as JSON with sorted keys, no spaces and UTF-8 text."""
+    body = {k: v for k, v in manifest.items() if k != "snapshot_sha256"}
+    return hashlib.sha256(json.dumps(body, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode("utf-8")).hexdigest()
 
 
 def _g(d, *path, default=None):
@@ -54,15 +77,19 @@ def _text(v) -> str:
 
 def study_record(study: dict) -> dict:
     """The fields the atlas reads from one API v2 study, under plain names. A missing field becomes None or an empty list, never a guess.
-    Primary outcomes keep every entry, in registry order, with measure, description and time frame exactly as written."""
-    ps = study.get("protocolSection") or {}
+    Primary outcomes keep every entry, in registry order, with measure, description and time frame exactly as written.
+    Raises SnapshotError when the NCT id is not of the form NCT followed by 8 digits."""
+    ps = (study or {}).get("protocolSection") or {}
+    nct = _g(ps, "identificationModule", "nctId")
+    if not valid_nct(nct):
+        raise SnapshotError(f"a study has no valid NCT id ({str(nct)[:20]!r})")
     outcomes = []
     for i, o in enumerate(_g(ps, "outcomesModule", "primaryOutcomes", default=[]) or [], 1):
         o = o if isinstance(o, dict) else {}
         outcomes.append({"index": i, "measure": _text(o.get("measure")), "description": _text(o.get("description")),
                          "time_frame": _text(o.get("timeFrame"))})
     return {
-        "nct_id": _g(ps, "identificationModule", "nctId"),
+        "nct_id": nct,
         "title": _g(ps, "identificationModule", "briefTitle"),
         "overall_status": _g(ps, "statusModule", "overallStatus"),
         "start_date": _g(ps, "statusModule", "startDateStruct", "date"),
@@ -113,9 +140,21 @@ class Snapshot:
         return [study_record(s) for s in self.studies(route)]
 
 
+def _inside(root: Path, rel) -> Path:
+    """The file a manifest path names, or SnapshotError when it is not a plain relative path inside the folder."""
+    if not isinstance(rel, str) or not rel or "\\" in rel or ":" in rel:
+        raise SnapshotError(f"manifest path {str(rel)[:60]!r} is not a plain relative path")
+    pp = PurePosixPath(rel)
+    if pp.is_absolute() or ".." in pp.parts or rel.startswith("/"):
+        raise SnapshotError(f"manifest path {rel[:60]!r} points outside the snapshot")
+    target = (root / pp).resolve()
+    if not target.is_relative_to(root.resolve()):
+        raise SnapshotError(f"manifest path {rel[:60]!r} resolves outside the snapshot")
+    return target
+
+
 def load(path: Path | str, *, verify: bool = True) -> Snapshot:
-    """Load a snapshot folder. With verify (the default) every file is re-hashed and must match the manifest, the snapshot hash must
-    match, and no page file may exist that the manifest does not name. Raises SnapshotError otherwise."""
+    """Load a snapshot folder. With verify (the default) every rule in the module docstring is checked first; SnapshotError otherwise."""
     root = Path(path)
     mpath = root / MANIFEST
     if not mpath.is_file():
@@ -126,10 +165,19 @@ def load(path: Path | str, *, verify: bool = True) -> Snapshot:
         routes = manifest["routes"]
         if not isinstance(files, dict) or not isinstance(routes, list):
             raise TypeError("files must be an object and routes a list")
+        page_paths = [p["file"] for r in routes for p in r["pages"]]
+        route_names = [r["name"] for r in routes]
     except (ValueError, KeyError, TypeError) as exc:
         raise SnapshotError(f"{MANIFEST} could not be read ({type(exc).__name__}: {exc})") from exc
     if verify:
-        on_disk = {p.relative_to(root).as_posix() for p in root.rglob("*.json") if p.name != MANIFEST}
+        if manifest_digest(manifest) != manifest.get("snapshot_sha256"):
+            raise SnapshotError("the snapshot sha256 does not match the manifest (an edited manifest, or a different snapshot)")
+        for rel in [VERSION] + page_paths:
+            if rel not in files:
+                raise SnapshotError(f"{str(rel)[:60]!r} is read but not listed in the manifest's files")
+        for rel in files:
+            _inside(root, rel)
+        on_disk = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file() and p.name != MANIFEST}
         extra = sorted(on_disk - set(files))
         if extra:
             raise SnapshotError(f"file(s) not named in the manifest: {', '.join(extra[:5])}")
@@ -139,13 +187,20 @@ def load(path: Path | str, *, verify: bool = True) -> Snapshot:
                 raise SnapshotError(f"{rel} is named in the manifest but missing")
             if sha256_file(fp) != want:
                 raise SnapshotError(f"{rel} does not match its sha256 in the manifest")
-        if snapshot_digest(files) != manifest.get("snapshot_sha256"):
-            raise SnapshotError("the snapshot sha256 does not match the file hashes in the manifest")
     try:
-        version = json.loads((root / VERSION).read_text(encoding="utf-8"))
+        version = json.loads(_inside(root, VERSION).read_text(encoding="utf-8"))
         pages = {}
-        for r in routes:
-            pages[r["name"]] = [json.loads((root / p["file"]).read_text(encoding="utf-8")) for p in r["pages"]]
+        for name, r in zip(route_names, routes):
+            pages[name] = [json.loads(_inside(root, p["file"]).read_text(encoding="utf-8")) for p in r["pages"]]
     except (OSError, ValueError, KeyError, TypeError) as exc:
         raise SnapshotError(f"a snapshot file could not be read ({type(exc).__name__}: {exc})") from exc
+    for name, plist in pages.items():
+        for page in plist:
+            studies = page.get("studies") if isinstance(page, dict) else None
+            if not isinstance(studies, list):
+                raise SnapshotError(f"route {name}: a page has no studies list")
+            for s in studies:
+                nct = _g(s, "protocolSection", "identificationModule", "nctId")
+                if not valid_nct(nct):
+                    raise SnapshotError(f"route {name}: a study has no valid NCT id ({str(nct)[:20]!r})")
     return Snapshot(path=root, manifest=manifest, version=version, pages=pages)

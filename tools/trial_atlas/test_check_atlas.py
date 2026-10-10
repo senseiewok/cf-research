@@ -51,6 +51,17 @@ class Fixture(unittest.TestCase):
         cls.explained = cls.root / "explained.json"
         cls.explained.write_text(json.dumps({"NCT00000014": "SYNTHETIC: hand check found it", "NCT00000015": "SYNTHETIC: same",
                                              "NCT00000017": "SYNTHETIC: condition spelled differently"}), encoding="utf-8")
+        cls.canary_path = cls.root / "canary.json"
+        cls.canary_path.write_text(json.dumps(sf.canary_model_tags()), encoding="utf-8")
+        cls.planted_path = cls.root / "planted.json"
+        cls.planted_path.write_text(json.dumps(sf.PLANTED_NON_CF_IDS), encoding="utf-8")
+        cls.control_dir = cls.root / "control"
+        sf.build_noncf_snapshot(cls.control_dir)
+
+    def controls(self):
+        """Controls on named inputs (here the synthetic ones, named explicitly), as the publication gate requires."""
+        return ["--negative-controls", "--canary", self.canary_path, "--planted", self.planted_path,
+                "--control-snapshot", self.control_dir]
 
     @classmethod
     def tearDownClass(cls):
@@ -238,7 +249,8 @@ class PublicationTest(Fixture):
         self.assertIn("STOP S3 the retrieval routes differ by 0.250 unexplained (3 studies)", out)
 
     def test_everything_in_place_passes_and_few_checked_is_said(self):
-        code, out = run(self.base() + self.frozen() + ["--negative-controls", "--explained", self.explained])
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19):
+            code, out = run(self.base() + self.frozen() + self.controls() + ["--explained", self.explained])
         self.assertEqual(code, 0, out)
         self.assertIn("too few to estimate", out)
         self.assertIn("few checked", out)
@@ -258,6 +270,80 @@ class PublicationTest(Fixture):
             code, out = run(self.base() + self.frozen() + ["--negative-controls", "--explained", self.explained])
         self.assertEqual(code, 3, out)
         self.assertIn("STOP S2 other plus unclassified are 5.0% of entries", out)
+
+    # ---- fix round after e7ea5ed: findings 5, 6, 12, 13 and 14. Each case failed before its fix.
+
+    def test_synthetic_controls_do_not_meet_the_gate(self):
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19):
+            code, out = run(self.base() + self.frozen() + ["--negative-controls", "--explained", self.explained])
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S4 controls ran on synthetic fixtures only", out)
+
+    def test_fewer_than_the_design_number_of_labelled_rows_blocks(self):
+        self.assertEqual(ca.MIN_FROZEN_ROWS, 50)
+        code, out = run(self.base() + self.frozen() + self.controls() + ["--explained", self.explained])
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S1 only 19 labelled rows; the design needs at least 50", out)
+
+    def test_an_unlabelled_row_blocks(self):
+        first = []
+
+        def skip_one(eid, cls):
+            if not first:
+                first.append(eid)
+                return []
+            return cls
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", 18):
+            code, out = run(self.base() + self.frozen(skip_one) + self.controls() + ["--explained", self.explained])
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S1 1 row(s) of the frozen sheet are unlabelled", out)
+
+    def test_a_shown_class_with_no_labelled_positive_blocks(self):
+        def no_pk(eid, cls):
+            return ["other"] if "pharmacokinetics" in cls else cls
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19):
+            code, out = run(self.base() + self.frozen(no_pk) + self.controls() + ["--explained", self.explained])
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S1 shown class(es) with no labelled positive: pharmacokinetics", out)
+
+    def test_a_bad_model_tags_file_exits_2(self):
+        p = self.work / "bad.json"
+        p.write_text("{not json", encoding="utf-8")
+        code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", self.counts_path, "--model-tags", p])
+        self.assertEqual(code, 2, out)
+        self.assertIn("ERROR: cannot read the proposed model tags", out)
+
+    def test_a_bad_tags_file_exits_2(self):
+        for content in ("[]", json.dumps({"entries": [{"entry_id": 1}]}), "{not json"):
+            p = self.work / "tags-bad.json"
+            p.write_text(content, encoding="utf-8")
+            with self.subTest(content=content):
+                code, out = run(["--snapshot", self.snap_dir, "--tags", p, "--counts", self.counts_path])
+                self.assertEqual(code, 2, out)
+                self.assertIn("ERROR:", out)
+
+    def test_model_output_is_sanitised_when_printed(self):
+        p = self.work / "evil.json"
+        p.write_text(json.dumps([{"entry_id": "NCT\x1b[31mX", "class": "\x1b]0;title\x07other", "quote": "q\x1b[2Jq"}]),
+                     encoding="utf-8")
+        for args in (self.base()[:-2] + ["--model-tags", p, "--drift-only"],
+                     ["--snapshot", self.snap_dir, "--tags", self.tags_path, "--verify-model-tags", p]):
+            with self.subTest(args=args[-2:]):
+                _, out = run(args)
+                self.assertNotIn("\x1b", out)
+                self.assertNotIn("\x07", out)
+
+    def test_a_missing_sponsor_is_not_counted_as_a_sponsor(self):
+        studies = sf.cf_condition_studies()
+        for st in studies:
+            if st["protocolSection"]["identificationModule"]["nctId"] == "NCT00000015":
+                del st["protocolSection"]["sponsorCollaboratorsModule"]
+        client = sf.FakeClient({fs.ROUTES["condition"]["query.cond"]: sf.pages(studies, 8, "condition")})
+        fs.run(client, self.work / "nosponsor", routes=["condition"], cfg={"page_size": 8}, contact=sf.DUMMY_CONTACT)
+        s = snap.load(self.work / "nosponsor")
+        counts = ca.compute_counts(s, lexicon.tag_snapshot(s, LEX), [], LEX)
+        self.assertEqual(counts["lead_sponsors_by_class"]["not_stated"], 1)          # NCT00000008's sponsor only
+        self.assertEqual(counts["studies_without_lead_sponsor_by_class"]["not_stated"], 1)
 
     def test_an_edited_frozen_sheet_is_refused(self):
         args = self.frozen()
@@ -310,6 +396,17 @@ class NegativeControlTest(unittest.TestCase):
         self.assertEqual(code, 1, out)
         self.assertIn("FAIL control: non-CF control", out)
         self.assertIn("NCT00000199:P1", out)
+
+    def test_the_control_covers_exacerbations(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            studies = sf.noncf_studies() + [sf.study("NCT00000198", "control with pulmonary exacerbation wording", conditions=("COPD",),
+                                                     outcomes=[("Rate of pulmonary exacerbations", "", "52 weeks")])]
+            client = sf.FakeClient({sf.NONCF_ROUTE["condition"]["query.cond"]: sf.pages(studies, 8, "condition")})
+            fs.run(client, Path(tmp) / "n", routes=["condition"], cfg={"page_size": 8}, contact=sf.DUMMY_CONTACT,
+                   route_params=sf.NONCF_ROUTE)
+            code, out = run(["--negative-controls", "--control-snapshot", Path(tmp) / "n"])
+        self.assertEqual(code, 1, out)
+        self.assertIn("NCT00000198:P1", out)
 
     def test_a_planted_id_missing_from_the_snapshot_is_not_a_pass(self):
         lex = LEX

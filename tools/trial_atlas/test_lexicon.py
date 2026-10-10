@@ -199,6 +199,126 @@ class TimeFrameTest(unittest.TestCase):
         self.assertEqual(LEX.timeframe("Week 4 and week 24")["timeframe_days"], 168.0)
 
 
+class FixRoundLexiconTest(unittest.TestCase):
+    """Review findings 2, 3, 8, 9 and 10 (fix round after e7ea5ed). Each case failed before its fix."""
+
+    def test_multi_word_rules_tolerate_any_whitespace(self):
+        multi = {}
+        for r in LEX.rules + LEX.composite:
+            for t in r["examples"]["match"]:
+                if " " in t:
+                    multi.setdefault(r.get("class", "composite"), []).append((r, t))
+        classes_with_multiword_rules = {r.get("class", "composite") for r in LEX.rules + LEX.composite
+                                        if " " in r["pattern"].replace("[- ]", "").replace("[\\s-]", "")}
+        self.assertTrue(classes_with_multiword_rules <= set(multi), "every class with a multi-word rule needs a multi-word example")
+        for cls, items in multi.items():
+            for r, t in items:
+                for variant in (t.replace(" ", "  ", 1), t.replace(" ", "\n", 1)):
+                    with self.subTest(cls=cls, rule=r["id"], text=variant):
+                        m = r["re"].search(variant)
+                        self.assertIsNotNone(m, f"{r['id']} should match {variant!r}")
+                        self.assertEqual(variant[m.start():m.end()], m.group(0))
+
+    def test_widen_spaces_shapes(self):
+        w = lexicon.widen_spaces
+        self.assertEqual(w("a b"), r"a\s+b")
+        self.assertEqual(w("(?<!non )x"), r"(?<!non\s)x")              # a lookbehind keeps a fixed width
+        self.assertEqual(w("a ?b"), r"a\s?b")
+        self.assertEqual(w("a[- ]b"), r"a[-\s]+b")
+        self.assertEqual(w("a[- ]?b"), r"a(?:[-\s]+)?b")
+        self.assertEqual(w(r"a\ b"), r"a\ b")                           # an escaped space stays as written
+
+    def test_whitespace_variants_tag_with_exact_spans(self):
+        t = tag("Change in sweat\nchloride")
+        self.assertEqual(t["tags"][0]["class"], "sweat_chloride")
+        self.assertEqual("Change in sweat\nchloride"[t["tags"][0]["start"]:t["tags"][0]["end"]], t["tags"][0]["text"])
+        self.assertIn("fev1", classes("forced  expiratory volume in one second"))
+
+    def test_non_serious_adverse_events_are_never_serious(self):
+        for text in ("Number of non-serious adverse events", "Nonserious adverse events", "non serious adverse events",
+                     "Incidence of non-SAEs"):
+            with self.subTest(text=text):
+                self.assertEqual(tag(text)["safety_subtypes"], ["adverse_events"])
+
+    def test_time_frame_continuations(self):
+        cases = {"Weeks 4-24": 168, "Week 4, 8, 12, 16": 112, "Months 1-6": 182.625, "Months 1, 3, 6": 182.625,
+                 "Weeks 0, 4, 8, 12": 84, "Years 1 to 5": 1826.25, "Days 1-28": 28, "Days 1 through 29": 29,
+                 "Weeks 2 and 6": 42, "30 minutes": 30 / 1440, "1 d": 1, "Minute 45": 45 / 1440}
+        for text, days in cases.items():
+            with self.subTest(text=text):
+                self.assertAlmostEqual(LEX.timeframe(text)["timeframe_days"], round(days, 3), places=3)
+        self.assertEqual(LEX.timeframe("Day 28")["timeframe_bucket"], "over 1 day to 4 weeks")
+        self.assertEqual(LEX.timeframe("Day 29")["timeframe_bucket"], "over 4 weeks to 6 months")   # the written number decides
+        self.assertEqual(LEX.timeframe("30 minutes")["timeframe_bucket"], "up to 1 day")
+
+    def test_false_positives_removed(self):
+        none_of = {
+            "nutrition_growth": ["Dose by weight", "Weight-based dosing", "Molecular weight of the compound", "Body weight-based dosing",
+                                 "Height of the nebulizer stand"],
+            "microbiology_sputum": ["Sputum neutrophil elastase", "Sputum volume", "Daily sputum production",
+                                    "Ivacaftor concentration in sputum"],
+            "safety_tolerability": ["Exercise tolerance", "Heat tolerance", "Cold tolerance"],
+            "feasibility_adherence": ["Peak oxygen uptake"],
+            "survival_transplant": ["FEV1 in lung transplant recipients"],
+            "liver": ["Liver function tests", "Liver enzymes"],
+            "exacerbations": ["Rate of moderate or severe COPD exacerbations", "Asthma exacerbations", "ABPA exacerbations",
+                              "Exacerbations of asthma"],
+            "imaging": ["Bone mineral density by DXA", "Fat-free mass by DEXA"],
+        }
+        for cls, texts in none_of.items():
+            for text in texts:
+                with self.subTest(cls=cls, text=text):
+                    self.assertNotIn(cls, classes(text))
+        self.assertFalse(tag("Composite score of symptoms")["flags"]["composite"])
+        self.assertFalse(tag("Brody composite score on chest CT")["flags"]["composite"])
+        self.assertTrue(tag("Composite endpoint of death or transplant")["flags"]["composite"])
+        self.assertEqual(tag("Liver function tests")["safety_subtypes"], ["laboratory"])
+        self.assertIn("nutrition_growth", classes("Fat-free mass by DEXA"))
+        self.assertIn("survival_transplant", classes("Time to lung transplantation"))
+        self.assertIn("exacerbations", classes("Rate of pulmonary exacerbations"))
+        self.assertIn("exacerbations", classes("Number of protocol-defined PEx"))
+
+    def test_description_fallback_keeps_the_earliest_class_and_no_generic_safety(self):
+        t = tag("Primary endpoint", "Change in sweat chloride; adverse events and FEV1 are also recorded.")
+        self.assertEqual([x["class"] for x in t["tags"]], ["sweat_chloride"])
+        self.assertTrue(t["tags"][0]["from_description"])
+        self.assertEqual(tag("Primary endpoint", "Safety will be monitored throughout.")["status"], "unclassified")
+        self.assertEqual(tag("Primary endpoint", "Adverse events will be recorded.")["status"], "unclassified")
+        self.assertFalse(tag("Change in FEV1")["tags"][0].get("from_description"))
+
+    def test_under_matches_added(self):
+        has = {
+            "pharmacokinetics": ["Plasma ivacaftor concentration", "Serum tobramycin concentrations", "Concentration of tobramycin in plasma",
+                                 "Trough levels"],
+            "healthcare_use": ["Days on IV antibiotics", "Antibiotic use", "Days of intravenous antibiotics"],
+            "gi_pancreatic": ["Fecal fat excretion"],
+            "microbiology_sputum": ["Positive culture for Pseudomonas", "Time to first positive culture"],
+            "fev1": ["Change in pFEV1", "forced expiratory volume in 1s", "forced expiratory volume in 1 seconds",
+                     "forced expiratory volume in the first second"],
+            "spirometry_other": ["FEV (forced expiratory volume)"],
+            "cftr_biomarker_other": ["CFTR gene expression"],
+            "inflammation_markers": ["IL-10 concentration", "IL-1beta"],
+            "exercise_capacity": ["Six-minute walk distance", "Peak oxygen uptake (VO2 peak)", "Exercise capacity", "Exercise tolerance"],
+        }
+        for cls, texts in has.items():
+            for text in texts:
+                with self.subTest(cls=cls, text=text):
+                    self.assertIn(cls, classes(text))
+        self.assertNotIn("pharmacokinetics", classes("Serum concentration of vitamin D"))
+        self.assertNotIn("fev1", classes("FEV (forced expiratory volume)"))
+        for text in ("Change in ALT", "AST elevations", "Total bilirubin", "Liver enzymes"):
+            with self.subTest(text=text):
+                self.assertEqual(tag(text)["safety_subtypes"], ["laboratory"])
+
+    def test_the_negative_control_watches_exacerbations(self):
+        self.assertIn("exacerbations", LEX.control_classes)
+        self.assertTrue(LEX.cf_specific <= LEX.control_classes)
+
+    def test_exercise_capacity_is_marked_as_a_taxonomy_addition(self):
+        cls = next(c for d in LEX.data["domains"] for c in d["classes"] if c["id"] == "exercise_capacity")
+        self.assertIn("maintainer", cls.get("added", ""))
+
+
 class SnapshotTaggingTest(unittest.TestCase):
     def setUp(self):
         sf.block_network(self)

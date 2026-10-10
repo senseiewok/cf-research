@@ -170,7 +170,7 @@ class ContactAndSkillTest(Base):
     def test_no_contact_means_no_run(self):
         with mock.patch.dict(os.environ, {"EVIDENCE_CONTACT": ""}):
             with self.assertRaises(fs.Refused) as cm:
-                fs.resolve_contact(None)
+                fs.resolve_contact()
             self.assertIn("no contact", str(cm.exception))
             with mock.patch.object(fs, "load_evidence_http", side_effect=AssertionError("must not load the client")):
                 err = io.StringIO()
@@ -181,7 +181,38 @@ class ContactAndSkillTest(Base):
 
     def test_the_contact_can_come_from_the_environment(self):
         with mock.patch.dict(os.environ, {"EVIDENCE_CONTACT": sf.DUMMY_CONTACT}):
-            self.assertEqual(fs.resolve_contact(None), sf.DUMMY_CONTACT)
+            self.assertEqual(fs.resolve_contact(), sf.DUMMY_CONTACT)
+
+    def test_the_contact_is_not_a_command_line_option(self):
+        with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as cm:
+            fs.main(["--contact", "someone", "--out", str(self.out)])
+        self.assertEqual(cm.exception.code, 2)
+        self.assertFalse(self.out.exists())
+
+    def test_a_rejected_contact_is_never_echoed(self):
+        class Ev:
+            PROJECT_UA = "x"
+
+            class Client:
+                def __init__(self, contact):
+                    raise ValueError(f"invalid contact {contact!r}: use a plain email address")
+        with self.assertRaises(fs.Refused) as cm:
+            fs.make_client("SECRET-LOOKING-VALUE", evidence=Ev)
+        self.assertEqual(str(cm.exception), "the contact was refused by the evidence client: not a plain email address")
+
+    def test_an_unexpected_client_error_leaves_incomplete(self):
+        c = client_with()
+        orig = c.get
+
+        def get(source_id, path, params=None):
+            if path == "studies":
+                raise TypeError("SYNTHETIC unexpected failure")
+            return orig(source_id, path, params)
+        c.get = get
+        with self.assertRaises(TypeError):
+            self.run_cf(c)
+        self.assertFalse((self.out / "manifest.json").exists())
+        self.assertIn("TypeError", (self.out / "INCOMPLETE.txt").read_text(encoding="utf-8"))
 
     def test_a_missing_evidence_skill_is_a_clear_refusal(self):
         with mock.patch.object(fs, "_evidence_dirs", return_value=[Path(self._tmp.name) / "nowhere"]):
