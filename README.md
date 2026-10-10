@@ -137,7 +137,9 @@ If you add or edit a claim, update its label and, for `[verified]`, keep the sou
 
 These labels predate the answer tiers T0 to T3 in [`proposals/2026-10-08-antihallucination-strategy.md`](proposals/2026-10-08-antihallucination-strategy.md), which the lab's `cf-research-context` skill (in the cf-lab repository) carries as rules once its update is merged; no other note here uses them yet. In that proposal, text from a summary, a search snippet or memory is T0 and for orientation only, a note needs T1 (a quote from a primary source with its id and date), and a public claim needs T2 (T1 plus a script check and a different model's check). So before relying on a claim here, find its exact passage in the source; [`tools/claims/README.md`](tools/claims/README.md) describes a checker for a file of such claims, and what it cannot prove.
 
-## Contributing conventions
+## Working conventions
+
+This repository does not take outside contributions (see [CONTRIBUTING.md](CONTRIBUTING.md)). These are the lab's own working conventions, for the maintainer and the AI agents that work here.
 
 - Markdown, sentence-case headings, short paragraphs, tables over prose where they aid scanning.
 - Prefer editing an existing file over creating a new one; add a new file only when there's no existing home.
