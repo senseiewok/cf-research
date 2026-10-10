@@ -1,6 +1,7 @@
 """Tests for lexicon.py and lexicon.json: every rule's own examples, then each class with SYNTHETIC outcome wording (positives and
 negatives), the vague-wording rule, the composite flag, safety subtypes, time-frame buckets and exact spans. No network.
 Usage: python -m unittest -v (inside tools/trial_atlas)."""
+import json
 import sys
 import tempfile
 import unittest
@@ -213,20 +214,48 @@ class FixRoundLexiconTest(unittest.TestCase):
         self.assertTrue(classes_with_multiword_rules <= set(multi), "every class with a multi-word rule needs a multi-word example")
         for cls, items in multi.items():
             for r, t in items:
-                for variant in (t.replace(" ", "  ", 1), t.replace(" ", "\n", 1)):
+                for variant in (t.replace(" ", "  "), t.replace(" ", "\n"), t.replace(" ", " \t\n ")):
                     with self.subTest(cls=cls, rule=r["id"], text=variant):
-                        m = r["re"].search(variant)
-                        self.assertIsNotNone(m, f"{r['id']} should match {variant!r}")
-                        self.assertEqual(variant[m.start():m.end()], m.group(0))
+                        hit = LEX.find(r["re"], variant)
+                        self.assertIsNotNone(hit, f"{r['id']} should match {variant!r}")
+                        start, end, text = hit
+                        self.assertEqual(variant[start:end], text)             # an exact piece of the ORIGINAL text
 
-    def test_widen_spaces_shapes(self):
-        w = lexicon.widen_spaces
-        self.assertEqual(w("a b"), r"a\s+b")
-        self.assertEqual(w("(?<!non )x"), r"(?<!non\s)x")              # a lookbehind keeps a fixed width
-        self.assertEqual(w("a ?b"), r"a\s?b")
-        self.assertEqual(w("a[- ]b"), r"a[-\s]+b")
-        self.assertEqual(w("a[- ]?b"), r"a(?:[-\s]+)?b")
-        self.assertEqual(w(r"a\ b"), r"a\ b")                           # an escaped space stays as written
+    def test_whitespace_is_normalised_with_an_offset_map(self):
+        norm, spans = lexicon.normalise_whitespace("a  b\n\tc ")
+        self.assertEqual(norm, "a b c ")
+        self.assertEqual(spans[1], (1, 3))                                      # the collapsed run maps back to both spaces
+        self.assertEqual(spans[2], (3, 4))
+
+    def test_a_double_space_does_not_defeat_a_negative(self):
+        # second fix round: the reviewer's lex2.py cases
+        self.assertEqual(tag("Number of participants with non  serious adverse events")["safety_subtypes"], ["adverse_events"])
+        self.assertEqual(tag("Number of participants with non\nserious adverse events")["safety_subtypes"], ["adverse_events"])
+        self.assertEqual(tag("Number of participants with serious  adverse events")["safety_subtypes"], ["serious_adverse_events"])
+        self.assertEqual(classes("Exercise  tolerance"), ["exercise_capacity"])
+        self.assertNotIn("nutrition_growth", classes("Dose adjusted by  body weight"))
+        self.assertNotIn("nutrition_growth", classes("Dose adjusted by\tbody weight"))
+        self.assertNotIn("safety_tolerability", classes("Oral glucose  tolerance test"))
+
+    def test_long_digit_runs_in_a_time_frame_are_fast(self):
+        import time
+        start = time.perf_counter()
+        LEX._tf_after.search("1" * 20000)
+        self.assertLess(time.perf_counter() - start, 1.0)
+        start = time.perf_counter()
+        self.assertEqual(LEX.timeframe("1" * 20000)["timeframe_bucket"], "unparseable")    # over the length cap
+        self.assertLess(time.perf_counter() - start, 1.0)
+
+    def test_risky_patterns_are_refused_at_load(self):
+        for bad in (r"(a[bc]*)*", r"(?:x+)+", r"(\w+ )+y", r"(?x) a b", r"(?ix)a", r"lung\ function"):
+            data = json.loads(json.dumps(LEX.data))
+            data["rules"][0]["pattern"] = bad
+            with self.subTest(pattern=bad), self.assertRaises(ValueError):
+                lexicon.Lexicon(data)
+        data = json.loads(json.dumps(LEX.data))
+        data["composite_rules"][0]["pattern"] = r"(a+)+"
+        with self.assertRaises(ValueError):
+            lexicon.Lexicon(data)
 
     def test_whitespace_variants_tag_with_exact_spans(self):
         t = tag("Change in sweat\nchloride")

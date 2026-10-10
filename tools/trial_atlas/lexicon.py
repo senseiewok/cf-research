@@ -33,62 +33,97 @@ import snapshot as snap  # noqa: E402
 LEXICON_PATH = HERE / "lexicon.json"
 
 
-def widen_spaces(pattern: str) -> str:
-    """Make a pattern tolerate any whitespace where it has a literal space: ' ' becomes \\s+, or \\s inside a character class, inside a
-    lookbehind (which must keep a fixed width) and before a quantifier (so ' ?' stays 'one optional whitespace'). Escapes are kept."""
-    out, i, n, in_class, groups = [], 0, len(pattern), False, []
-    class_start, class_has_space = 0, False
-    while i < n:
-        c = pattern[i]
+_WS_RUN = re.compile(r"\s+")
+MAX_TIMEFRAME_CHARS = 2000    # a longer time frame is reported "unparseable" instead of being parsed
+
+
+def normalise_whitespace(text: str) -> tuple[str, list[tuple[int, int]]]:
+    """(text with every run of whitespace, newlines included, collapsed to one space; for each character of it, the (start, end) it
+    covers in the original). Rules match the collapsed text, and spans are mapped back, so a reported span is always an exact piece
+    of the ORIGINAL text, double spaces and line breaks included."""
+    norm, spans, pos = [], [], 0
+    for m in _WS_RUN.finditer(text):
+        for i in range(pos, m.start()):
+            norm.append(text[i])
+            spans.append((i, i + 1))
+        norm.append(" ")
+        spans.append((m.start(), m.end()))
+        pos = m.end()
+    for i in range(pos, len(text)):
+        norm.append(text[i])
+        spans.append((i, i + 1))
+    return "".join(norm), spans
+
+
+def _mapped(m, spans, text):
+    """A match on the collapsed text as (start, end, exact original text), or None for an empty match."""
+    if m is None or m.end() <= m.start():
+        return None
+    start, end = spans[m.start()][0], spans[m.end() - 1][1]
+    return start, end, text[start:end]
+
+
+_VERBOSE_FLAG = re.compile(r"\(\?[a-zA-Z]*x[a-zA-Z]*[):]")
+
+
+def _has_quantifier(inner: str) -> bool:
+    i, in_class = 0, False
+    while i < len(inner):
+        c = inner[i]
         if c == "\\":
-            out.append(pattern[i:i + 2])
             i += 2
             continue
         if in_class:
-            if c == " ":
-                out.append(r"\s")
-                class_has_space = True
-            elif c == "]":
-                out.append(c)
-                in_class = False
-                nxt = pattern[i + 1] if i + 1 < n else ""
-                if class_has_space and not any(groups) and nxt not in "+{":
-                    # a class such as [- ] takes a run of whitespace: [-\s]+ ; an optional one becomes (?:[-\s]+)?
-                    if nxt in "?*":
-                        out[class_start:] = ["(?:", *out[class_start:], "+)"]
-                    else:
-                        out.append("+")
-            else:
-                out.append(c)
-            i += 1
-            continue
-        if c == "[":
-            class_start, class_has_space = len(out), False
-            out.append(c)
-            i += 1
-            if i < n and pattern[i] == "^":
-                out.append("^")
-                i += 1
-            if i < n and pattern[i] == "]":
-                out.append("]")
-                i += 1
+            in_class = c != "]"
+        elif c == "[":
             in_class = True
-            continue
-        if c == "(":
-            groups.append(pattern.startswith("(?<=", i) or pattern.startswith("(?<!", i))
-        elif c == ")" and groups:
-            groups.pop()
-        if c == " ":
-            nxt = pattern[i + 1] if i + 1 < n else ""
-            out.append(r"\s" if any(groups) or nxt in "?*+{" else r"\s+")
-        else:
-            out.append(c)
+            if inner[i + 1:i + 2] == "^":
+                i += 1
+            if inner[i + 1:i + 2] == "]":
+                i += 1
+        elif c in "*+{":
+            return True
         i += 1
-    return "".join(out)
+    return False
 
 
-def _compile(pattern: str, case_sensitive: bool = False):
-    return re.compile(widen_spaces(pattern), 0 if case_sensitive else re.I)
+def risky_pattern(pattern: str) -> str | None:
+    """Why a pattern is refused at load, or None. Refused: an inline verbose flag such as (?x), which changes what a space means; an
+    escaped space; and a quantified group whose content is itself quantified, such as (a[bc]*)* or (x+)+, which can take time that
+    grows exponentially with the text (catastrophic backtracking)."""
+    if _VERBOSE_FLAG.search(pattern):
+        return "an inline verbose flag such as (?x)"
+    stack, i, n, in_class = [], 0, len(pattern), False
+    while i < n:
+        c = pattern[i]
+        if c == "\\":
+            if pattern[i + 1:i + 2] == " ":
+                return "an escaped space"
+            i += 2
+            continue
+        if in_class:
+            in_class = c != "]"
+        elif c == "[":
+            in_class = True
+            if pattern[i + 1:i + 2] == "^":
+                i += 1
+            if pattern[i + 1:i + 2] == "]":
+                i += 1
+        elif c == "(":
+            stack.append(i)
+        elif c == ")" and stack:
+            start = stack.pop()
+            if pattern[i + 1:i + 2] in ("*", "+", "{") and _has_quantifier(pattern[start + 1:i]):
+                return "a nested quantifier (a quantified group whose content is quantified)"
+        i += 1
+    return None
+
+
+def _compile(pattern: str, case_sensitive: bool = False, rule_id: str = "?"):
+    why = risky_pattern(pattern)
+    if why:
+        raise ValueError(f"rule {rule_id}: the pattern is refused: {why}")
+    return re.compile(pattern, 0 if case_sensitive else re.I)
 
 
 class Lexicon:
@@ -113,7 +148,7 @@ class Lexicon:
         for r in data["rules"]:
             if r["class"] not in self.domain_of:
                 raise ValueError(f"rule {r['id']}: unknown class {r['class']}")
-            self.rules.append({**r, "re": _compile(r["pattern"], r.get("case_sensitive", False))})
+            self.rules.append({**r, "re": _compile(r["pattern"], r.get("case_sensitive", False), r["id"])})
         ids = [r["id"] for r in self.rules]
         if len(ids) != len(set(ids)):
             raise ValueError("duplicate rule ids in the lexicon")
@@ -125,10 +160,10 @@ class Lexicon:
         bad = self.fallback_excluded - set(ids)
         if bad:
             raise ValueError(f"fallback_excluded_rules names unknown rule id(s) {sorted(bad)}")
-        self.composite = [{**r, "re": _compile(r["pattern"])} for r in data["composite_rules"]]
+        self.composite = [{**r, "re": _compile(r["pattern"], False, r["id"])} for r in data["composite_rules"]]
         ns = {r["id"]: r for r in data["not_stated_rules"]}
-        self.placeholder = _compile(ns["NS-01"]["pattern"])
-        self.vague_ns = _compile(ns["NS-V1"]["pattern"])
+        self.placeholder = _compile(ns["NS-01"]["pattern"], False, "NS-01")
+        self.vague_ns = _compile(ns["NS-V1"]["pattern"], False, "NS-V1")
         tf = data["timeframe"]
         self.tf = tf
         units = "|".join(sorted(map(re.escape, tf["unit_words"]), key=len, reverse=True))
@@ -137,7 +172,8 @@ class Lexicon:
         sep = "\\s*(?:-|\u2013|\u2014|to|through|thru|and|or|&|,)\\s*"
         self._num_re = re.compile(self._num, re.I)
         # "24 weeks", "24-week", "six months", "30 minutes", "1 d"
-        self._tf_after = re.compile(rf"({self._num})\s*(?:-\s*)?({units})\b", re.I)
+        # The lookbehind starts a number only where no digit or dot precedes it, so a long digit run is not retried at every position.
+        self._tf_after = re.compile(rf"(?<![\d.])({self._num})\s*(?:-\s*)?({units})\b", re.I)
         # "Week 24", "Weeks 4-24", "Week 4, 8, 12, 16", "Years 1 to 5", "Days 1 through 29": every number after the unit is read
         self._tf_before = re.compile(rf"\b({units})\b\.?\s*({self._num}(?:{sep}{self._num})*)", re.I)
 
@@ -148,18 +184,25 @@ class Lexicon:
 
     # ------------------------------------------------------------- matching
 
+    @staticmethod
+    def find(rx, text: str):
+        """(start, end, exact original text) of the first match of rx in text with its whitespace collapsed, or None."""
+        norm, spans = normalise_whitespace(text)
+        return _mapped(rx.search(norm), spans, text)
+
     def rule_matches(self, rule_id: str, text: str):
         rule = next(r for r in self.rules if r["id"] == rule_id)
-        return rule["re"].search(text)
+        return self.find(rule["re"], text)
 
     def _match_group(self, entry: dict, fields: list[str]) -> list[dict]:
         hits = []
         for f in fields:
             text = entry.get(f) or ""
+            norm, spans = normalise_whitespace(text)
             for r in self.rules:
-                m = r["re"].search(text)
-                if m and m.group(0).strip():
-                    hits.append({"rule": r, "field": f, "start": m.start(), "end": m.end(), "text": m.group(0)})
+                found = _mapped(r["re"].search(norm), spans, text)
+                if found and found[2].strip():
+                    hits.append({"rule": r, "field": f, "start": found[0], "end": found[1], "text": found[2]})
         matched_ids = {h["rule"]["id"] for h in hits}
         kept = []
         for h in hits:
@@ -217,9 +260,9 @@ class Lexicon:
             comp = None
             for f in self.match_fields + self.fallback_fields:
                 for r in self.composite:
-                    m = r["re"].search(entry.get(f) or "")
-                    if m and comp is None:
-                        comp = {"rule_id": r["id"], "field": f, "start": m.start(), "end": m.end(), "text": m.group(0)}
+                    found = self.find(r["re"], entry.get(f) or "")
+                    if found and comp is None:
+                        comp = {"rule_id": r["id"], "field": f, "start": found[0], "end": found[1], "text": found[2]}
             if comp:
                 out["flags"]["composite"] = True
                 out["composite_span"] = comp
@@ -234,12 +277,12 @@ class Lexicon:
                             "end": m.end(), "text": m.group(0), "from_description": False}]
             return out
         for f in self.match_fields + self.fallback_fields:
-            m = self.vague_ns.search(entry.get(f) or "")
-            if m:
+            found = self.find(self.vague_ns, entry.get(f) or "")
+            if found:
                 out["status"] = "not_stated"
                 out["flags"]["vague"] = True
-                out["tags"] = [{"class": "not_stated", "by": "rule", "rule_id": "NS-V1", "field": f, "start": m.start(), "end": m.end(),
-                                "text": m.group(0), "from_description": f != self.match_fields[0]}]
+                out["tags"] = [{"class": "not_stated", "by": "rule", "rule_id": "NS-V1", "field": f, "start": found[0], "end": found[1],
+                                "text": found[2], "from_description": f != self.match_fields[0]}]
                 return out
         return out
 
@@ -248,6 +291,8 @@ class Lexicon:
     def timeframe(self, text: str) -> dict:
         if not text.strip():
             return {"timeframe_bucket": self.tf["empty_bucket"], "timeframe_days": None}
+        if len(text) > MAX_TIMEFRAME_CHARS:
+            return {"timeframe_bucket": self.tf["unparseable_bucket"], "timeframe_days": None}
         days = []
         for m in self._tf_after.finditer(text):
             days.append(self._days(m.group(1), m.group(2)))

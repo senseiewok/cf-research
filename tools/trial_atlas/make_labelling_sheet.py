@@ -34,6 +34,7 @@ import csv
 import hashlib
 import io
 import json
+import os
 import random
 import sys
 from pathlib import Path
@@ -56,6 +57,13 @@ def safe_cell(text: str) -> str:
 
 def phase_label(phases) -> str:
     return "/".join(phases) if phases else "none"
+
+
+def key_beside_sheet(key: Path, sheet: Path) -> bool:
+    """True when the key's folder is the sheet's folder or inside it (paths resolved; letter case ignored where the system ignores it)."""
+    key_dir = Path(os.path.normcase(str(Path(key).resolve().parent)))
+    sheet_dir = Path(os.path.normcase(str(Path(sheet).resolve().parent)))
+    return key_dir == sheet_dir or key_dir.is_relative_to(sheet_dir)
 
 
 def tags_digest(tags: dict) -> str:
@@ -192,9 +200,9 @@ def main(argv=None) -> int:
     if not 1 <= a.n <= MAX_ROWS or not 0 <= a.unclassified_share <= 1:
         print(f"error: --n must be 1 to {MAX_ROWS} and --unclassified-share 0 to 1", file=sys.stderr)
         return 2
-    if a.key.resolve().parent == a.sheet.resolve().parent:
-        print("error: the sealed key may not be written into the same folder as the sheet; give the labeller only the sheet's folder",
-              file=sys.stderr)
+    if key_beside_sheet(a.key, a.sheet):
+        print("error: the sealed key may not be written into the same folder as the sheet, or into a folder inside it; give the "
+              "labeller only the sheet's folder", file=sys.stderr)
         return 2
     for p in (a.sheet, a.key):
         if p.exists():

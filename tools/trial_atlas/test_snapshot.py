@@ -95,6 +95,56 @@ class SnapshotLoadTest(unittest.TestCase):
         with self.assertRaises(snap.SnapshotError):
             snap.study_record({"protocolSection": {"identificationModule": {"nctId": "not-an-id"}}})
 
+    # ---- second fix round (after 0401af9): the reviewer's snap_probe.py cases that loaded. Each failed before its fix.
+
+    def _alias(self, make):
+        def mutate(m):
+            r = m["routes"][0]
+            p = json.loads(json.dumps(r["pages"][0]))
+            p["file"] = make(p["file"])
+            r["pages"].append(p)
+            m["files"][p["file"]] = m["files"][r["pages"][0]["file"]]
+        rewrite_manifest(self.root, mutate)
+        with self.assertRaises(snap.SnapshotError):
+            snap.load(self.root)
+
+    def test_a_dot_slash_alias_is_refused(self):
+        self._alias(lambda f: "condition/./" + f.split("/")[1])
+
+    def test_a_case_alias_is_refused(self):
+        self._alias(lambda f: f.upper().replace(".JSON", ".json"))
+
+    def test_a_trailing_dot_alias_is_refused(self):
+        self._alias(lambda f: f + ".")
+
+    def test_a_page_listed_twice_is_refused(self):
+        rewrite_manifest(self.root, lambda m: m["routes"][0]["pages"].append(dict(m["routes"][0]["pages"][0])))
+        with self.assertRaises(snap.SnapshotError):
+            snap.load(self.root)
+
+    def test_a_duplicated_route_name_is_refused(self):
+        rewrite_manifest(self.root, lambda m: m["routes"].append(json.loads(json.dumps(m["routes"][1])) | {"name": "condition"}))
+        with self.assertRaises(snap.SnapshotError):
+            snap.load(self.root)
+
+    def test_a_study_twice_in_a_route_is_refused(self):
+        page = self.root / "condition" / "page-0001.json"
+        data = json.loads(page.read_text(encoding="utf-8"))
+        data["studies"].append(json.loads(json.dumps(data["studies"][0])))
+        page.write_text(json.dumps(data), encoding="utf-8")
+        rewrite_manifest(self.root, lambda m: m["files"].update({"condition/page-0001.json": snap.sha256_file(page)}))
+        with self.assertRaises(snap.SnapshotError):
+            snap.load(self.root)
+
+    def test_route_counts_must_agree_with_the_pages(self):
+        for field, value in (("total_count", 999), ("studies_received", 999)):
+            with self.subTest(field=field):
+                root = self.work / f"c-{field}"
+                shutil.copytree(self.base, root)
+                rewrite_manifest(root, lambda m: m["routes"][0].update({field: value}))
+                with self.assertRaises(snap.SnapshotError):
+                    snap.load(root)
+
 
 if __name__ == "__main__":
     unittest.main()

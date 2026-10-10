@@ -155,6 +155,18 @@ class SheetTest(unittest.TestCase):
         self.assertIn("same folder", err.getvalue())
         self.assertFalse(sheet.exists())
 
+    def test_the_key_may_not_sit_below_the_sheets_folder(self):
+        # second fix round: the reviewer's sheet_probe.py cases. Each failed before its fix.
+        sheet, _, args = self.cli_args()
+        for key in (sheet.parent / "sub" / "k.json", sheet.parent / "x" / ".." / "k3.json"):
+            with self.subTest(key=str(key)):
+                a = list(args)
+                a[a.index("--key") + 1] = str(key)
+                with contextlib.redirect_stderr(io.StringIO()) as err:
+                    self.assertEqual(mls.main(a), 2)
+                self.assertIn("same folder", err.getvalue())
+                self.assertFalse(Path(key).exists())
+
     def test_no_aggregate_counts_without_report(self):
         _, _, args = self.cli_args()
         with contextlib.redirect_stdout(io.StringIO()) as out:

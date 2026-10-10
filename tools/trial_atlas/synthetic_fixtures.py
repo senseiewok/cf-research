@@ -125,14 +125,20 @@ def pages(studies, page_size, route):
 
 
 def canary_model_tags():
-    """Model tags whose quotes are NOT exact substrings of their record's outcome text. Every one must be rejected."""
+    """Model tags on an in-scope, unclassified entry whose quotes are NOT exact substrings of its outcome text. Every one must be
+    rejected for its quote."""
     return [
         {"entry_id": "NCT00000014:P3", "class": "other", "quote": "Time to return to work"},
         {"entry_id": "NCT00000014:P3", "class": "other", "quote": "time to return to school"},
         {"entry_id": "NCT00000014:P3", "class": "other", "quote": "Time to  return to school"},
         {"entry_id": "NCT00000014:P3", "class": "healthcare_use", "quote": "Change in HbA1c"},
-        {"entry_id": "NCT00000099:P1", "class": "other", "quote": "Time to return to school"},
     ]
+
+
+def stray_model_tags():
+    """A proposed tag whose entry is not in the snapshot: rejected by the verifier, and an ERROR when used as a canary (a canary must
+    test the quote check on an entry that exists, is in scope and is unclassified)."""
+    return [{"entry_id": "NCT00000099:P1", "class": "other", "quote": "Time to return to school"}]
 
 
 def good_model_tags():

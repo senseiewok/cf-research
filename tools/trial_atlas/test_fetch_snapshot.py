@@ -189,6 +189,56 @@ class ContactAndSkillTest(Base):
         self.assertEqual(cm.exception.code, 2)
         self.assertFalse(self.out.exists())
 
+    # ---- second fix round (after 0401af9): the reviewer's contact_probe.py cases. Each failed before its fix.
+
+    FAKE = "probe.user" + "@" + "example.invalid"
+
+    def _scenario(self, client_cls):
+        ev = SimpleNamespace(PROJECT_UA="SYNTHETIC-UA")
+
+        def fake_make_client(contact, evidence=None, *, dry_run=False):
+            c = client_cls(sf.cf_client(8).routes, contact=contact)
+            c.accounting.summary = lambda: f"requests: {c.accounting.attempts}"
+            return c, ev
+        out, err = io.StringIO(), io.StringIO()
+        with mock.patch.dict(os.environ, {"EVIDENCE_CONTACT": self.FAKE}), mock.patch.object(fs, "make_client", fake_make_client), \
+                contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            code = fs.main(["--out", str(self.out)])
+        written = "".join(p.read_text(encoding="utf-8") for p in self.out.rglob("*") if p.is_file()) if self.out.exists() else ""
+        return code, out.getvalue(), err.getvalue(), written
+
+    def test_a_gate_error_quoting_the_user_agent_never_shows_the_contact(self):
+        class BoomPerm(sf.FakeClient):
+            def get(self, *a, **k):
+                raise PermissionError("denied for " + self.user_agent)
+        code, out, err, written = self._scenario(BoomPerm)
+        self.assertEqual(code, 2)
+        for text in (out, err, written):
+            self.assertNotIn(self.FAKE, text)
+            self.assertNotIn("@", text)
+        self.assertIn("[contact]", err)
+        self.assertIn("[contact]", written)
+
+    def test_a_budget_error_quoting_the_user_agent_never_shows_the_contact(self):
+        class BoomBudget(sf.FakeClient):
+            def get(self, *a, **k):
+                raise type("BudgetExhausted", (RuntimeError,), {})("budget " + self.user_agent)
+        code, out, err, written = self._scenario(BoomBudget)
+        self.assertEqual(code, 1)
+        for text in (out, err, written):
+            self.assertNotIn(self.FAKE, text)
+        self.assertIn("[contact]", err)
+
+    def test_a_usage_error_never_echoes_an_address(self):
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err), self.assertRaises(SystemExit):
+            fs.main(["--contact", self.FAKE])
+        self.assertNotIn(self.FAKE, err.getvalue())
+
+    def test_scrub_replaces_the_contact_and_any_address(self):
+        with mock.patch.dict(os.environ, {"EVIDENCE_CONTACT": "not-an-address-shape"}):
+            self.assertEqual(fs.scrub("ua not-an-address-shape and " + self.FAKE), "ua [contact] and [contact]")
+
     def test_a_rejected_contact_is_never_echoed(self):
         class Ev:
             PROJECT_UA = "x"

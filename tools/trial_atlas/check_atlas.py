@@ -15,13 +15,18 @@ What it does, in order:
   4. Negative controls (--negative-controls): canary model tags with false quotes must all be rejected; planted non-CF ids must all be
      excluded by scope; the tagger over a non-CF snapshot must give near zero CF-specific classes and near zero of the classes the
      lexicon marks negative_control (exacerbations). By default they run on the synthetic fixtures; --canary, --planted and
-     --control-snapshot point them at other inputs. Synthetic controls never satisfy the publication gate.
+     --control-snapshot point them at other inputs. Synthetic controls never satisfy the publication gate. A canary counts only when
+     its entry is in scope, unclassified, and the tag is rejected for its quote; any other rejection makes the canary an error.
   5. Publication stop rules (skipped with --drift-only). Publication is blocked (exit 3) when:
-       S1 the frozen set is missing, has fewer than MIN_FROZEN_ROWS (50) labelled rows, has any unlabelled row, leaves a shown class
-          with no labelled positive, or a shown class has precision below 0.85 or recall below 0.80 where estimable (10 or more);
+       S0 the snapshot or the control snapshot carries the synthetic marker (`_synthetic` on a page or in version.json, or an
+          apiVersion naming SYNTHETIC); only main(allow_synthetic_for_tests=True), which no option sets, skips this rule;
+       S1 the frozen set is missing or not bound to this snapshot and lexicon (key hashes, and each row's wording against this
+          snapshot's text), has fewer than MIN_FROZEN_ROWS (50) labelled rows, has any unlabelled row, leaves a shown class with
+          no labelled positive, or a shown class has precision below 0.85 or recall below 0.80 where estimable (10 or more);
        S2 "other" plus unclassified exceed 15% of entries (stricter than the design's "other" alone);
        S3 the two retrieval routes differ by more than 10% unexplained, or there is no recall route;
-       S4 the controls were not run, or ran on synthetic fixtures instead of --canary, --planted and --control-snapshot.
+       S4 the controls were not run, ran on synthetic fixtures instead of --canary, --planted and --control-snapshot, or the control
+          snapshot holds fewer than MIN_CONTROL_ENTRIES (50) outcome entries.
      A failed control or a rerun that does not reproduce counts and hashes is an integrity failure (exit 1). The thresholds are the
      reviewer's judgement, not a standard; they may be changed before the frozen set is labelled and not after.
 Text that came from a model, a file or the registry is printed with control characters removed.
@@ -33,9 +38,9 @@ Usage:
                         [--frozen-sheet SHEET.csv --frozen-key KEY.json] [--negative-controls] [--drift-only]
   python check_atlas.py --snapshot DIR --tags tags.json --write-counts counts.json [...]   write the counts file (no check)
   python check_atlas.py --verify-model-tags FILE --snapshot DIR --tags tags.json          only the quote check, one line per tag
-  python check_atlas.py --negative-controls                                              only the controls, on the synthetic fixtures
+  python check_atlas.py --negative-controls [--controls-only]                            only the controls, on the synthetic fixtures
 Exit 0 all checks passed (and publication allowed unless --drift-only); 1 integrity failure or a failed control; 2 usage error;
-3 integrity passed but publication is blocked.
+3 integrity passed but publication is blocked; 4 the controls-only run passed but is not the gate (0 with --controls-only).
 """
 from __future__ import annotations
 
@@ -60,6 +65,7 @@ Z95 = 1.959963984540054
 MIN_QUOTE_CHARS = 3
 MODEL_FORBIDDEN_CLASSES = {"not_stated"}
 MIN_FROZEN_ROWS = 50          # the design's number of person-labelled outcome entries (decision 5)
+MIN_CONTROL_ENTRIES = 50      # the fewest outcome entries a non-CF control snapshot may hold for the gate (a reviewer's number)
 TAG_STATUSES = {"rule", "not_stated", "unclassified"}
 
 
@@ -115,36 +121,38 @@ def entry_texts(snapshot: snap.Snapshot, manual=None) -> dict[str, dict]:
 # ------------------------------------------------------------------ model tags: the exact-quote verifier
 
 def verify_model_tags(proposed, entries: dict[str, dict], rule_tags: dict[str, dict], lex) -> tuple[list[dict], list[dict]]:
-    """(accepted, rejected). Each rejected item is {"tag": the proposed tag, "reason": why}. An accepted tag records the field and
-    span where the quote was found. A quote is accepted only as an exact substring: no case folding, no whitespace normalising."""
+    """(accepted, rejected). Each rejected item is {"tag": the proposed tag, "reason": why, "code": shape|entry|class|decided|short|
+    quote}; "quote" means the tag reached the quote check and its quote was not found. An accepted tag records the field and span
+    where the quote was found. A quote is accepted only as an exact substring: no case folding, no whitespace normalising."""
     accepted, rejected = [], []
     if not isinstance(proposed, list):
-        return [], [{"tag": proposed, "reason": "the proposed-tags file must hold a JSON list"}]
+        return [], [{"tag": proposed, "reason": "the proposed-tags file must hold a JSON list", "code": "shape"}]
     for t in proposed:
-        def no(why, t=t):
-            rejected.append({"tag": t, "reason": why})
+        def no(why, code, t=t):
+            rejected.append({"tag": t, "reason": why, "code": code})
         if not isinstance(t, dict) or not all(isinstance(t.get(k), str) for k in ("entry_id", "class", "quote")):
-            no("a proposed tag needs string fields entry_id, class and quote")
+            no("a proposed tag needs string fields entry_id, class and quote", "shape")
             continue
         eid, cls, quote = t["entry_id"], t["class"], t["quote"]
         if eid not in entries:
-            no(f"{eid} is not an in-scope outcome entry of this snapshot")
+            no(f"{eid} is not an in-scope outcome entry of this snapshot", "entry")
             continue
         if cls not in lex.domain_of or cls in MODEL_FORBIDDEN_CLASSES:
-            no(f"'{cls}' is not a class a model may propose")
+            no(f"'{cls}' is not a class a model may propose", "class")
             continue
         if rule_tags.get(eid, {}).get("status") != "unclassified":
-            no(f"{eid} was already decided by the rules ({rule_tags.get(eid, {}).get('status', 'no tag')}); a model proposes only for the remainder")
+            no(f"{eid} was already decided by the rules ({rule_tags.get(eid, {}).get('status', 'no tag')}); a model proposes only for "
+               "the remainder", "decided")
             continue
         if len(quote.strip()) < MIN_QUOTE_CHARS:
-            no(f"the quote is shorter than {MIN_QUOTE_CHARS} characters")
+            no(f"the quote is shorter than {MIN_QUOTE_CHARS} characters", "short")
             continue
         e = entries[eid]
         where = next(((f, e[f].find(quote)) for f in ("measure", "description", "time_frame") if quote in (e.get(f) or "")), None)
         if where is None:
             low = any(quote.lower() in (e.get(f) or "").lower() for f in ("measure", "description", "time_frame"))
             no("the quote matches this entry only if case is ignored" if low else
-               "the quote is not an exact substring of this entry's measure, description or time frame")
+               "the quote is not an exact substring of this entry's measure, description or time frame", "quote")
             continue
         f, start = where
         accepted.append({"entry_id": eid, "class": cls, "by": "model", "rule_id": None, "field": f, "start": start,
@@ -285,6 +293,32 @@ def read_sheet(path) -> list[dict]:
     return rows
 
 
+def frozen_binding_problems(sheet_path, key_path, snapshot, lex, entries: dict[str, dict]) -> list[str]:
+    """Why the frozen set does not belong to this snapshot and lexicon (empty when it does): the key must name this snapshot's hash
+    and this lexicon's hash, every key row's entry must be in scope here, and every sheet row's wording must equal this snapshot's text
+    for that entry (as the sheet tool writes it). No allowance flag exists."""
+    import make_labelling_sheet as mls  # noqa: PLC0415  (imported here: it imports this module)
+    rows = read_sheet(sheet_path)
+    key = read_json(key_path, "frozen-set key")
+    problems = []
+    if key.get("snapshot_sha256") != snapshot.digest:
+        problems.append("the key was drawn from a different snapshot")
+    if key.get("lexicon_sha256") != lex.sha256:
+        problems.append("the key was drawn with a different lexicon")
+    by_sample = {r.get("sample_id"): r.get("entry_id") for r in key.get("rows", []) if isinstance(r, dict)}
+    differ = []
+    for r in rows:
+        e = entries.get(by_sample.get(r["sample_id"]))
+        if e is None:
+            differ.append(r["sample_id"])
+            continue
+        if any(r[f] != mls.safe_cell(e[f]) for f in ("measure", "description", "time_frame")):
+            differ.append(r["sample_id"])
+    if differ:
+        problems.append(f"{len(differ)} sheet row(s) do not match this snapshot's wording for their entry: {', '.join(snap.clean(d, 10) for d in differ[:5])}")
+    return problems
+
+
 def load_frozen(sheet_path, key_path, lex) -> tuple[dict[str, set], dict]:
     """{entry_id: set of gold classes} for every labelled row, and a summary. Fails (UsageError) when the sheet's wording does not
     match the key's hash, a sample id is unknown, or a label is not a lexicon class."""
@@ -348,9 +382,19 @@ def run_negative_controls(lex, *, snapshot=None, canary=None, planted=None, cont
         entries = entry_texts(snapshot, manual)
         rule_tags = {e["entry_id"]: e for e in lex_mod.tag_snapshot(snapshot, lex, manual)["entries"]}
         if canary:
+            # A canary tests the quote check: it passes only when its entry exists in scope, is unclassified, and the tag is rejected
+            # for its quote. A canary rejected for any other reason (entry missing, entry already decided, bad class) is an error.
             acc, rej = verify_model_tags(canary, entries, rule_tags, lex)
-            results.append(("canary model tags with false quotes are all rejected", not acc,
-                            f"{len(rej)} of {len(canary)} rejected" + (f"; ACCEPTED: {[snap.clean(a['entry_id'], 40) + ' ' + snap.clean(repr(a['text']), 60) for a in acc]}" if acc else "")))
+            by_quote = [r for r in rej if r.get("code") == "quote"]
+            wrong = [r for r in rej if r.get("code") != "quote"]
+            detail = f"{len(by_quote)} of {len(canary)} rejected for their quote"
+            if acc:
+                detail += f"; ACCEPTED: {[snap.clean(a['entry_id'], 40) + ' ' + snap.clean(repr(a['text']), 60) for a in acc]}"
+            if wrong:
+                detail += ("; ERROR, not a valid canary (rejected before the quote check): "
+                           + "; ".join(f"{snap.clean((r['tag'] or {}).get('entry_id', '?') if isinstance(r['tag'], dict) else '?', 40)} "
+                                       f"({r.get('code')})" for r in wrong))
+            results.append(("canary model tags with false quotes are all rejected", not acc and not wrong, detail))
         else:
             results.append(("canary model tags with false quotes are all rejected", False, "no canary tags were given"))
         if planted:
@@ -385,7 +429,20 @@ def fmt(x, digits=3):
     return "n/a" if x is None else f"{x:.{digits}f}"
 
 
-def main(argv=None) -> int:
+def synthetic_marks(snapshot) -> list[str]:
+    """Where a snapshot says it is synthetic: a page or version.json carrying `_synthetic`, or an apiVersion naming SYNTHETIC."""
+    marks = []
+    if isinstance(snapshot.version, dict) and ("_synthetic" in snapshot.version or "SYNTHETIC" in str(snapshot.version.get("apiVersion", "")).upper()):
+        marks.append("version.json")
+    for route, plist in snapshot.pages.items():
+        if any(isinstance(p, dict) and "_synthetic" in p for p in plist):
+            marks.append(f"{route} pages")
+    return marks
+
+
+def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
+    """allow_synthetic_for_tests exists only for the unit tests: no command-line option sets it, so synthetic data can never pass
+    the gate from a command line."""
     ap = argparse.ArgumentParser(description="Check the trial atlas: drift, model quotes, metrics, negative controls, publication gate.")
     ap.add_argument("--snapshot", type=Path)
     ap.add_argument("--tags", type=Path)
@@ -402,6 +459,8 @@ def main(argv=None) -> int:
     ap.add_argument("--planted", type=Path, help="a JSON list of planted non-CF NCT ids (default: the synthetic ones)")
     ap.add_argument("--control-snapshot", type=Path, help="a non-CF snapshot for the tagger control (default: the synthetic one)")
     ap.add_argument("--drift-only", action="store_true", help="check integrity only; do not apply the publication stop rules")
+    ap.add_argument("--controls-only", action="store_true",
+                    help="with --negative-controls and no --snapshot: exit 0 when the controls pass (otherwise that run exits 4: it is not the gate)")
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
@@ -419,7 +478,10 @@ def main(argv=None) -> int:
             results = run_negative_controls(lex, control_snapshot=snap.load(a.control_snapshot) if a.control_snapshot else None)
             for name, ok, detail in results:
                 print(f"{'PASS' if ok else 'FAIL'} control: {name}: {detail}")
-            return 0 if all(ok for _, ok, _ in results) else 1
+            print("NOT THE GATE: controls only")
+            if not all(ok for _, ok, _ in results):
+                return 1
+            return 0 if a.controls_only else 4
         if not a.tags:
             raise UsageError("--tags is required with --snapshot")
         s = snap.load(a.snapshot)
@@ -494,13 +556,17 @@ def main(argv=None) -> int:
           f"not stated {fmt(sh['not_stated'])}, unclassified {fmt(sh['unclassified'])}; vague wording {counts['flags']['vague']} entr(ies)")
 
     # 3. metrics
-    m = None
+    m, frozen_problems = None, []
     if a.frozen_sheet:
         try:
             gold, summary = load_frozen(a.frozen_sheet, a.frozen_key, lex)
+            frozen_problems = frozen_binding_problems(a.frozen_sheet, a.frozen_key, s, lex, entries)
         except UsageError as exc:
             print(f"ERROR: {snap.clean(exc, 300)}")
             return 2
+        for p in frozen_problems:
+            print(f"frozen set: {p}")
+    if a.frozen_sheet and not frozen_problems:
         model_by = {}
         for t in accepted:
             model_by.setdefault(t["entry_id"], []).append(t)
@@ -525,7 +591,7 @@ def main(argv=None) -> int:
               f"rows checked {m['rows_checked']}")
 
     # 4. negative controls
-    controls = None
+    controls, control = None, None
     if a.negative_controls:
         try:
             canary = read_json(a.canary, "canary tags") if a.canary else None
@@ -550,8 +616,16 @@ def main(argv=None) -> int:
         return 0
 
     # 5. publication stop rules
+    if not allow_synthetic_for_tests:
+        for label, snp in (("the snapshot", s), ("the control snapshot", control)):
+            marks = synthetic_marks(snp) if snp is not None else []
+            if marks:
+                blocked.append(f"S0 synthetic data: {label} carries the synthetic marker ({', '.join(marks)}); synthetic data can "
+                               "never be published")
     shown = [c for c, n in counts["studies_by_class"].items() if n > 0]
-    if m is None:
+    if frozen_problems:
+        blocked.append("S1 the frozen set does not belong to this snapshot and lexicon: " + "; ".join(frozen_problems))
+    elif m is None:
         blocked.append("S1 not evaluated: no frozen set was given (publication needs the person-labelled set)")
     else:
         if summary["labelled"] < MIN_FROZEN_ROWS:
@@ -584,6 +658,10 @@ def main(argv=None) -> int:
     elif not (a.canary and a.planted and a.control_snapshot):
         blocked.append("S4 controls ran on synthetic fixtures only; the gate needs --canary, --planted and --control-snapshot "
                        "(canary tags and planted ids for this snapshot, and a fetched non-CF control snapshot)")
+    else:
+        n_control = len(lex_mod.tag_all_entries(control, lex))
+        if n_control < MIN_CONTROL_ENTRIES:
+            blocked.append(f"S4 the control snapshot has {n_control} outcome entries; at least {MIN_CONTROL_ENTRIES} are needed")
     for b in blocked:
         print(f"STOP {b}")
     if blocked:

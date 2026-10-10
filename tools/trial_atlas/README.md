@@ -2,17 +2,17 @@
 
 Build step 1 of the design in `proposals/2026-10-10-trial-endpoint-atlas.md` (board row T-0130): what interventional cystic fibrosis trials register as their primary outcome, counted from one dated, hashed snapshot of ClinicalTrials.gov.
 
-**Nothing here has been run against the real registry.** Every test runs on synthetic fixtures with no network. The lexicon is a second draft (0.2.0-draft) for review. No model is called anywhere in this folder.
+**Nothing here has been run against the real registry.** Every test runs on synthetic fixtures with no network. The lexicon is a second draft (0.2.1-draft) for review. No model is called anywhere in this folder.
 
 ## Files
 
 | File | What it does |
 | --- | --- |
-| `fetch_snapshot.py` | Fetches the snapshot through the evidence skill's `Client` (catalog gate, 1 request per second, 200-request ceiling, no redirects, honest user agent). It records `dataTimestamp`, the query strings verbatim and the request count, keeps every page, and writes `manifest.json` with the sha256 of each file and of the whole manifest. It stops (no manifest, `INCOMPLETE.txt` left) on any unexpected answer, including a received count that differs from `totalCount`, and on any unexpected error from the client. It takes the contact only from the environment variable `EVIDENCE_CONTACT` and does not run without one |
-| `snapshot.py` | Loads a snapshot and refuses it unless the manifest hash matches, every file under the folder is listed and matches its hash, every page a route names is a listed file inside the folder, and every NCT id is valid. Turns studies into plain records and outcome entries (`NCT…:P1`, …; `:P0` for a study with no primary outcome) |
+| `fetch_snapshot.py` | Fetches the snapshot through the evidence skill's `Client` (catalog gate, 1 request per second, 200-request ceiling, no redirects, honest user agent). It records `dataTimestamp`, the query strings verbatim and the request count, keeps every page, and writes `manifest.json` with the sha256 of each file and of the whole manifest. It stops (no manifest, `INCOMPLETE.txt` left) on any unexpected answer, including a received count that differs from `totalCount`, and on any unexpected error from the client. It takes the contact only from the environment variable `EVIDENCE_CONTACT` and does not run without one. Anything it prints or writes about an error has the contact and any address-shaped text replaced by `[contact]` |
+| `snapshot.py` | Loads a snapshot and refuses it unless: the manifest hash matches; the manifest's file list equals the files on disk exactly, as spelled; every file matches its hash; every page a route names is listed once and lies inside the folder; route names are unique; no study appears twice in a route; and each route's page counts equal its `studies_received` and `total_count`. Every NCT id must be valid. Turns studies into plain records and outcome entries (`NCT…:P1`, …; `:P0` for a study with no primary outcome) |
 | `scope.py` | Inclusion rules and flags: interventional only; condition list names CF; exclusions X1 to X6, each with a printed count and reason; "CF only" or "CF among others"; planned or actual start; the difference between the two retrieval routes |
 | `lexicon.json` | The versioned rule lexicon: two-level taxonomy, one regular expression per rule with its own examples, safety subtypes, the composite rule, the not-stated rules, time-frame buckets |
-| `lexicon.py` | Applies the lexicon. Each tag records the rule id and the exact matched span. A space in a pattern matches any run of whitespace. `python lexicon.py try "text"` shows what matches |
+| `lexicon.py` | Applies the lexicon. Each tag records the rule id and the exact matched span. Before matching, every run of whitespace in the text is collapsed to one space; spans are mapped back to the original text. A pattern with an inline `(?x)`, an escaped space or a nested quantifier is refused at load. A time frame longer than 2,000 characters is "unparseable". `python lexicon.py try "text"` shows what matches |
 | `check_atlas.py` | Recomputes every count and fails on drift; rejects model tags whose quote is not an exact substring; prints the metrics on the frozen set; runs the negative controls; applies the publication stop rules |
 | `make_labelling_sheet.py` | Draws the frozen set (stratified, seeded) and writes a blind sheet (wording only) and a sealed key |
 | `synthetic_fixtures.py` | Synthetic studies, pages and a fake client for the tests and the default negative controls. Not registry data |
@@ -31,15 +31,20 @@ Standard library only. Three cases in `test_fetch_snapshot.py` use the evidence 
 
 1. Set `EVIDENCE_CONTACT` in the environment (there is no `--contact` option, so the address never sits on a command line), then `fetch_snapshot.py --dry-run`, then the real run. **A real run is a network call and needs a person's approval and a contact address (design, build step 2; T-0117).** The default output folder is under `sources/downloads/`, which git ignores.
 2. `scope.py SNAPSHOT` and `lexicon.py tag SNAPSHOT --out tags.json`.
-3. `make_labelling_sheet.py --snapshot SNAPSHOT --tags tags.json --sheet SHEETDIR/sheet.csv --key KEYDIR/key.json --seed N`. The seed is required and should be chosen and written down when the draw is made. The key may not go into the sheet's folder. **The person who labels must not run this command and must not see the key:** the tool reads rule results to draw the sample, and `--report` prints counts that come from them. The sheet is UTF-8 with a signature; label it in a spreadsheet and save it as "CSV UTF-8".
+3. `make_labelling_sheet.py --snapshot SNAPSHOT --tags tags.json --sheet SHEETDIR/sheet.csv --key KEYDIR/key.json --seed N`. The seed is required and should be chosen and written down when the draw is made. The key may not go into the sheet's folder or any folder inside it. **The person who labels must not run this command and must not see the key:** the tool reads rule results to draw the sample, and `--report` prints counts that come from them. The sheet is UTF-8 with a signature; label it in a spreadsheet and save it as "CSV UTF-8".
 4. Later: model tags for the unclassified remainder, then `check_atlas.py --write-counts counts.json` and the full check with `--frozen-sheet`, `--frozen-key`, `--negative-controls`, `--canary`, `--planted`, `--control-snapshot` and `--explained`.
 
-`check_atlas.py` exits 0 when everything passes, 1 on drift or a failed control, 2 on a usage error (including a malformed tags or model-tags file) and 3 when integrity passed but a publication stop rule tripped. Publication is blocked when:
+`check_atlas.py` exits 0 when everything passes, 1 on drift or a failed control, 2 on a usage error (including a malformed tags or model-tags file) and 3 when integrity passed but a publication stop rule tripped. `check_atlas.py --negative-controls` with no snapshot runs only the controls on the synthetic fixtures: its last line says "NOT THE GATE: controls only" and it exits 4 unless `--controls-only` is given, so it can never be mistaken for a passing gate.
 
-- S1: there is no frozen set, fewer than 50 labelled rows (the design's number), any unlabelled row, a shown class with no labelled positive, or a shown class below precision 0.85 or recall 0.80 where 10 or more rows estimate it
+A canary counts only when its entry is in the snapshot's scope, was left unclassified by the rules, and the tag is rejected for its quote. A canary whose entry is missing or already decided is an error, and the control fails.
+
+Publication is blocked when:
+
+- S0: the snapshot or the control snapshot carries the synthetic marker (a `_synthetic` key on a page or in `version.json`, or an `apiVersion` naming SYNTHETIC). Synthetic data can never pass the gate from a command line; the unit tests reach a passing gate only through a function argument no option sets
+- S1: there is no frozen set; the frozen set does not belong to this snapshot and lexicon (the key's snapshot and lexicon hashes, and every sheet row's wording against this snapshot's text for that entry); fewer than 50 labelled rows (the design's number); any unlabelled row; a shown class with no labelled positive; or a shown class below precision 0.85 or recall 0.80 where 10 or more rows estimate it
 - S2: "other" plus unclassified exceed 15% of entries. This is stricter than the design, which names "other" alone; unclassified entries are counted too until a model or a person has placed them
 - S3: there is no recall route, or the routes differ by more than 10% unexplained
-- S4: the controls were not run, or ran only on the synthetic fixtures (the gate needs `--canary`, `--planted` and `--control-snapshot`)
+- S4: the controls were not run, or ran only on the synthetic fixtures (the gate needs `--canary`, `--planted` and `--control-snapshot`), or the control snapshot holds fewer than 50 outcome entries (a reviewer's number, not the design's)
 
 The thresholds are the reviewer's judgement from the design, not a standard. They can change before the frozen set is labelled, not after.
 

@@ -1,11 +1,11 @@
 {
-  "lexicon_version": "0.2.0-draft",
+  "lexicon_version": "0.2.1-draft",
   "status": "Second draft for review (2026-10-10), revised after two blind reviews of 0.1.0. Written from the taxonomy in proposals/2026-10-10-trial-endpoint-atlas.md plus one added class (exercise_capacity, not yet confirmed by the maintainer). Not yet checked against any real registry wording or against the frozen set. Every rule carries examples that test_lexicon.py runs; they are made-up English, not registry text.",
   "matching": {
     "match_fields": ["measure"],
     "fallback_fields": ["description"],
     "fallback_excluded_rules": ["SAFE-UNSPEC", "SAFE-AE", "SAFE-AE2"],
-    "note": "Rules run on the outcome's measure first. Only when no class rule (or only a vague one) matches there are they run on its description; from the description only the earliest match is kept, it is marked from_description, and generic safety wording (fallback_excluded_rules) never decides a class from there. The time frame is used for bucketing only. Patterns are Python regular expressions, case-insensitive unless case_sensitive is true. When a pattern is compiled, each literal space becomes \\s+ (\\s inside a character class or a lookbehind, or before a quantifier), so a double space or a line break in the registry text still matches; spans are always exact pieces of the original text."
+    "note": "Rules run on the outcome's measure first. Only when no class rule (or only a vague one) matches there are they run on its description; from the description only the earliest match is kept, it is marked from_description, and generic safety wording (fallback_excluded_rules) never decides a class from there. The time frame is used for bucketing only. Patterns are Python regular expressions, case-insensitive unless case_sensitive is true. Before matching, every run of whitespace in the registry text (line breaks included) is collapsed to one space, so a pattern's single space matches a double space or a line break, and a negative such as 'non serious' cannot be dodged by spacing; each span is mapped back and is always an exact piece of the original text. A pattern is refused at load if it holds an inline (?x) flag, an escaped space, or a quantified group whose content is itself quantified."
   },
   "domains": [
     {"id": "pulmonary", "label": "Pulmonary function", "classes": [

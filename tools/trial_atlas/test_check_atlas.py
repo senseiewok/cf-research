@@ -25,10 +25,10 @@ import synthetic_fixtures as sf  # noqa: E402
 LEX = lexicon.load()
 
 
-def run(argv):
+def run(argv, **kw):
     out = io.StringIO()
     with contextlib.redirect_stdout(out):
-        code = ca.main([str(a) for a in argv])
+        code = ca.main([str(a) for a in argv], **kw)
     return code, out.getvalue()
 
 
@@ -198,10 +198,10 @@ class ModelTagTest(Fixture):
 
     def test_verify_cli_prints_one_line_per_tag(self):
         p = self.work / "canary.json"
-        p.write_text(json.dumps(sf.canary_model_tags() + sf.good_model_tags()), encoding="utf-8")
+        p.write_text(json.dumps(sf.canary_model_tags() + sf.stray_model_tags() + sf.good_model_tags()), encoding="utf-8")
         code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--verify-model-tags", p])
         self.assertEqual(code, 0)
-        self.assertIn("1 accepted, 5 rejected", out)
+        self.assertIn("1 accepted, 5 rejected", out)        # the 4 canaries and the one whose entry is not in the snapshot
 
     def test_rejection_rate_is_printed(self):
         p = self.work / "mixed.json"
@@ -249,8 +249,10 @@ class PublicationTest(Fixture):
         self.assertIn("STOP S3 the retrieval routes differ by 0.250 unexplained (3 studies)", out)
 
     def test_everything_in_place_passes_and_few_checked_is_said(self):
-        with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19):
-            code, out = run(self.base() + self.frozen() + self.controls() + ["--explained", self.explained])
+        # The synthetic inputs can pass only through the test-only function argument, which no command line can set.
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19), mock.patch.object(ca, "MIN_CONTROL_ENTRIES", 8):
+            code, out = run(self.base() + self.frozen() + self.controls() + ["--explained", self.explained],
+                            allow_synthetic_for_tests=True)
         self.assertEqual(code, 0, out)
         self.assertIn("too few to estimate", out)
         self.assertIn("few checked", out)
@@ -353,6 +355,96 @@ class PublicationTest(Fixture):
         self.assertEqual(code, 2, out)
         self.assertIn("does not match the sealed key", out)
 
+    # ---- second fix round (after 0401af9). Each case failed before its fix.
+
+    def test_synthetic_inputs_never_pass_the_gate(self):
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19), mock.patch.object(ca, "MIN_CONTROL_ENTRIES", 8):
+            code, out = run(self.base() + self.frozen() + self.controls() + ["--explained", self.explained])
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S0 synthetic data", out)
+
+    def test_the_reviewers_gate_probe_construction_blocks(self):
+        """gate_probe.py: 90 synthetic studies, a 50-row frozen set labelled with the rule tags, named controls. It printed PASS."""
+        base = self.work
+        words = [("Absolute change in ppFEV1", "Week 24"), ("Change in sweat chloride", "Week 4"),
+                 ("Number of participants with adverse events", "Up to 28 days")]
+        studies = [sf.study(f"NCT0000{2000 + i:04d}", f"s{i}", outcomes=[(words[i % 3][0], "", words[i % 3][1])],
+                            start=f"{2001 + i % 20}-01", phases=("PHASE2", "PHASE3")[i % 2:i % 2 + 1]) for i in range(90)]
+        studies += [sf.study("NCT00009001", "planted", conditions=("Asthma",), outcomes=[("Change in FEV1", "", "12 weeks")]),
+                    sf.study("NCT00009002", "planted2", conditions=("COPD",), outcomes=[("Change in FEV1", "", "12 weeks")])]
+        r = fs.ROUTES
+        client = sf.FakeClient({r["condition"]["query.cond"]: sf.pages(studies, 50, "condition"),
+                                r["term"]["query.term"]: sf.pages(studies, 50, "term")})
+        fs.run(client, base / "cf", routes=["condition", "term"], cfg={"page_size": 50}, project_ua="SYNTHETIC", contact=sf.DUMMY_CONTACT)
+        s = snap.load(base / "cf")
+        tags = lexicon.tag_snapshot(s, LEX)
+        (base / "tags.json").write_text(json.dumps(tags), encoding="utf-8")
+        (base / "planted.json").write_text(json.dumps(["NCT00009001", "NCT00009002"]), encoding="utf-8")
+        sheet, key, _ = mls.build(s, tags, LEX, n=50, seed=1)
+        (base / "keydir").mkdir()
+        (base / "keydir" / "key.json").write_text(json.dumps(key), encoding="utf-8")
+        byid = {e["entry_id"]: e for e in tags["entries"]}
+        samp = {row["sample_id"]: row["entry_id"] for row in key["rows"]}
+        rows = list(csv.DictReader(io.StringIO(sheet)))
+        for row in rows:
+            row["label_classes"] = ";".join(t["class"] for t in byid[samp[row["sample_id"]]]["tags"])
+        with (base / "sheet.csv").open("w", encoding="utf-8-sig", newline="") as fh:
+            w = csv.DictWriter(fh, fieldnames=mls.COLUMNS, lineterminator="\n")
+            w.writeheader()
+            w.writerows(rows)
+        args = ["--snapshot", base / "cf", "--tags", base / "tags.json"]
+        self.assertEqual(run(args + ["--write-counts", base / "counts.json"])[0], 0)
+        code, out = run(args + ["--counts", base / "counts.json", "--frozen-sheet", base / "sheet.csv", "--frozen-key",
+                                base / "keydir" / "key.json", "--negative-controls", "--canary", self.canary_path, "--planted",
+                                base / "planted.json", "--control-snapshot", self.control_dir])
+        # It no longer passes: its canaries name entries that are not in its snapshot, which is now an error (exit 1). With valid
+        # canaries it would still stop at S0, because every page carries the synthetic marker (test_synthetic_inputs_never_pass_the_gate).
+        self.assertEqual(code, 1, out)
+        self.assertIn("ERROR, not a valid canary", out)
+        self.assertNotIn("RESULT: PASS", out)
+        with mock.patch.object(ca, "run_negative_controls", lambda *a, **k: [("stub control", True, "stubbed")]):
+            code, out = run(args + ["--counts", base / "counts.json", "--frozen-sheet", base / "sheet.csv", "--frozen-key",
+                                    base / "keydir" / "key.json", "--negative-controls", "--canary", self.canary_path, "--planted",
+                                    base / "planted.json", "--control-snapshot", self.control_dir])
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S0 synthetic data: the snapshot carries the synthetic marker", out)
+        self.assertNotIn("RESULT: PASS", out)
+
+    def test_a_small_control_snapshot_blocks(self):
+        self.assertEqual(ca.MIN_CONTROL_ENTRIES, 50)
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19):
+            code, out = run(self.base() + self.frozen() + self.controls() + ["--explained", self.explained],
+                            allow_synthetic_for_tests=True)
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S4 the control snapshot has 8 outcome entries; at least 50 are needed", out)
+
+    def test_a_frozen_set_from_another_snapshot_blocks(self):
+        frozen = self.frozen()                                   # drawn from snapshot A (the class fixture)
+        studies = sf.cf_condition_studies()
+        studies[0]["protocolSection"]["outcomesModule"]["primaryOutcomes"][1]["measure"] = "Change from baseline in sweat chloride (mmol/L)"
+        client = sf.FakeClient({fs.ROUTES["condition"]["query.cond"]: sf.pages(studies, 8, "condition"),
+                                fs.ROUTES["term"]["query.term"]: sf.pages(sf.cf_term_studies(), 8, "term")})
+        fs.run(client, self.work / "B", routes=["condition", "term"], cfg={"page_size": 8}, contact=sf.DUMMY_CONTACT)
+        sb = snap.load(self.work / "B")
+        (self.work / "tagsB.json").write_text(json.dumps(lexicon.tag_snapshot(sb, LEX)), encoding="utf-8")
+        args = ["--snapshot", self.work / "B", "--tags", self.work / "tagsB.json", "--model-tags", self.model_path]
+        self.assertEqual(run(args + ["--write-counts", self.work / "countsB.json"])[0], 0)
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19), mock.patch.object(ca, "MIN_CONTROL_ENTRIES", 8):
+            code, out = run(args + ["--counts", self.work / "countsB.json"] + frozen + self.controls() + ["--explained", self.explained],
+                            allow_synthetic_for_tests=True)
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S1 the frozen set does not belong to this snapshot and lexicon", out)
+
+    def test_a_frozen_key_from_another_lexicon_blocks(self):
+        frozen = self.frozen()
+        key = json.loads(Path(frozen[3]).read_text(encoding="utf-8"))
+        key["lexicon_sha256"] = "0" * 64
+        Path(frozen[3]).write_text(json.dumps(key), encoding="utf-8")
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19), mock.patch.object(ca, "MIN_CONTROL_ENTRIES", 8):
+            code, out = run(self.base() + frozen + self.controls() + ["--explained", self.explained], allow_synthetic_for_tests=True)
+        self.assertEqual(code, 3, out)
+        self.assertIn("the key was drawn with a different lexicon", out)
+
     def test_an_unknown_label_is_refused(self):
         code, out = run(self.base() + self.frozen(lambda e, c: ["not_a_class"]))
         self.assertEqual(code, 2, out)
@@ -364,10 +456,10 @@ class NegativeControlTest(unittest.TestCase):
         sf.block_network(self)
 
     def test_controls_pass_on_the_synthetic_fixtures(self):
-        code, out = run(["--negative-controls"])
+        code, out = run(["--negative-controls", "--controls-only"])
         self.assertEqual(code, 0, out)
         self.assertEqual(out.count("PASS control"), 3)
-        self.assertIn("5 of 5 rejected", out)
+        self.assertIn("4 of 4 rejected for their quote", out)
         self.assertIn("2 of 2 planted ids excluded", out)
         self.assertIn("0 of 8 entries", out)
 
@@ -407,6 +499,30 @@ class NegativeControlTest(unittest.TestCase):
             code, out = run(["--negative-controls", "--control-snapshot", Path(tmp) / "n"])
         self.assertEqual(code, 1, out)
         self.assertIn("NCT00000198:P1", out)
+
+    # ---- second fix round (after 0401af9). Each case failed before its fix.
+
+    def test_controls_only_is_not_the_gate(self):
+        code, out = run(["--negative-controls"])
+        self.assertEqual(code, 4, out)
+        self.assertEqual(out.strip().splitlines()[-1], "NOT THE GATE: controls only")
+
+    def test_a_canary_whose_entry_is_not_in_the_snapshot_is_an_error(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            sf.build_cf_snapshot(Path(tmp) / "s")
+            results = ca.run_negative_controls(LEX, snapshot=snap.load(Path(tmp) / "s"),
+                                               canary=sf.canary_model_tags() + sf.stray_model_tags(), planted=sf.PLANTED_NON_CF_IDS)
+        canary = next(r for r in results if r[0].startswith("canary"))
+        self.assertFalse(canary[1])
+        self.assertIn("NCT00000099:P1", canary[2])
+
+    def test_a_canary_on_an_entry_the_rules_decided_is_an_error(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            sf.build_cf_snapshot(Path(tmp) / "s")
+            results = ca.run_negative_controls(LEX, snapshot=snap.load(Path(tmp) / "s"),
+                                               canary=[{"entry_id": "NCT00000001:P1", "class": "other", "quote": "SYNTHETIC false quote"}],
+                                               planted=sf.PLANTED_NON_CF_IDS)
+        self.assertFalse(next(r for r in results if r[0].startswith("canary"))[1])
 
     def test_a_planted_id_missing_from_the_snapshot_is_not_a_pass(self):
         lex = LEX

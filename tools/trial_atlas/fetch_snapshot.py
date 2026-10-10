@@ -92,6 +92,25 @@ TERMS = {
 _EMAIL_LIKE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+")
 
 
+def scrub(text, contact: str = "") -> str:
+    """Text about to be printed or written, with the contact removed: the exact value of EVIDENCE_CONTACT (and of `contact`, when
+    given) and anything shaped like an email address become "[contact]". Client messages can quote the User-Agent, which holds it."""
+    text = str(text)
+    for value in (os.environ.get("EVIDENCE_CONTACT") or "", contact or ""):
+        for v in (value, value.strip()):
+            if v:
+                text = text.replace(v, "[contact]")
+    return _EMAIL_LIKE.sub("[contact]", text)
+
+
+class _Parser(argparse.ArgumentParser):
+    """argparse echoes unknown arguments in its error message; an address typed there is scrubbed before it is shown."""
+
+    def error(self, message):
+        self.print_usage(sys.stderr)
+        self.exit(2, f"{self.prog}: error: {scrub(message)}\n")
+
+
 class Refused(RuntimeError):
     """A run this tool will not start, with the reason. Nothing was requested."""
 
@@ -177,7 +196,7 @@ def _write_json(path: Path, data) -> None:
 def fetch_version(client, cfg: dict) -> dict:
     f = _request(client, cfg["version_path"], None)
     if getattr(f, "dry_run", False):
-        print(f"planned  {f.url}")
+        print(scrub(f"planned  {f.url}"))
         return {}
     if _status(f) != "found" or not isinstance(f.data, dict):
         raise SnapshotStopped(f"the version endpoint did not answer as expected (status {_status(f)}, http {getattr(f, 'http_status', None)})")
@@ -201,7 +220,7 @@ def fetch_route(client, name: str, base_params: dict, cfg: dict, out_dir: Path) 
             params[cfg["page_token_param"]] = token
         f = _request(client, cfg["studies_path"], params)
         if getattr(f, "dry_run", False):
-            print(f"planned  {f.url}")
+            print(scrub(f"planned  {f.url}"))
             return route
         if _status(f) != "found":
             raise SnapshotStopped(f"{name} page {n}: status {_status(f)} (http {getattr(f, 'http_status', None)}); not retried")
@@ -315,13 +334,13 @@ def run(client, out_dir: Path, *, routes: list[str], cfg: dict | None = None, pr
             attempts = getattr(getattr(client, "accounting", None), "attempts", "?")
             # Our own errors carry a reason we wrote; anything else is named by its type only, so no text from elsewhere is copied.
             why = str(exc) if isinstance(exc, (SnapshotStopped, Refused)) else f"unexpected error from the client: {type(exc).__name__}"
-            (out_dir / "INCOMPLETE.txt").write_text(f"stopped: {why}\nrequests made: {attempts}\nno manifest was written\n",
+            (out_dir / "INCOMPLETE.txt").write_text(f"stopped: {scrub(why, contact)}\nrequests made: {attempts}\nno manifest was written\n",
                                                     encoding="utf-8")
         raise
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = _Parser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--route", choices=("both", "condition", "term"), default="both")
     ap.add_argument("--out", type=Path, help="a new folder for the snapshot (default: under sources/downloads/trial_atlas/)")
     ap.add_argument("--page-size", type=int, default=DEFAULTS["page_size"])
@@ -338,7 +357,7 @@ def main(argv=None) -> int:
         contact = resolve_contact()
         client, ev = make_client(contact, dry_run=a.dry_run)
     except Refused as exc:
-        print(f"REFUSED: {exc}", file=sys.stderr)
+        print(f"REFUSED: {scrub(exc)}", file=sys.stderr)
         return 2
     try:
         from evidence import catalog as ev_catalog  # noqa: PLC0415  (loaded with the client above)
@@ -352,16 +371,16 @@ def main(argv=None) -> int:
         manifest = run(client, out, routes=routes, cfg={"page_size": a.page_size, "max_pages": a.max_pages},
                        project_ua=ev.PROJECT_UA, contact=contact, catalog_entry=entry)
     except Refused as exc:
-        print(f"REFUSED: {exc}", file=sys.stderr)
+        print(f"REFUSED: {scrub(exc, contact)}", file=sys.stderr)
         return 2
     except SnapshotStopped as exc:
-        print(f"STOPPED: {exc}", file=sys.stderr)
-        print(client.accounting.summary(), file=sys.stderr)
+        print(f"STOPPED: {scrub(exc, contact)}", file=sys.stderr)
+        print(scrub(client.accounting.summary(), contact), file=sys.stderr)
         return 1
     except Exception as exc:  # noqa: BLE001 - INCOMPLETE.txt is already written; name the error by type only
         print(f"STOPPED: unexpected error from the client: {type(exc).__name__}", file=sys.stderr)
         return 1
-    print(client.accounting.summary())
+    print(scrub(client.accounting.summary(), contact))
     if manifest is None:
         print("dry run: nothing was requested or written")
         return 0
