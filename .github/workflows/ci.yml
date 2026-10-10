@@ -1,0 +1,77 @@
+# Runs this repository's own tests and checks on every pull request to main and every push to main.
+# Read-only token, actions pinned by full commit SHA, no secrets, no caches, no artifacts.
+# Nothing from a pull request (title, branch name, body) is used in a run step.
+#
+# Not run here, and why:
+# - tools/cftr-model/tests test_viewer and test_research, and the browser cases of test_geometry and
+#   test_page_layer: need Playwright and a Chromium (those cases skip themselves without it, so they
+#   are listed below but run nothing that needs a browser).
+# - tools/cftr-model/tests test_data: its cases on the fetched structure files skip themselves,
+#   because sources/downloads/ is not in the repository (fetching would be a network call).
+# - tools/skill_trial/test_check_page_basics.py: needs a Chromium or Edge.
+# - tools/sources/sync_skill_catalog.py --check: compares with the sibling cf-skills repository,
+#   which is not checked out here. Its own self-check (check_sync_skill_catalog.py) does run.
+# - tools/sources/fetch_sources.py: reaches the network.
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+
+jobs:
+  tests:
+    name: tools tests and checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      # PyYAML is the one third-party package the tests need (tools/sources and tools/resources).
+      # tools/sources/requirements.txt lists ranges without hashes, so --require-hashes is not
+      # possible; it is pinned to an exact version and installed with --no-deps (it has no dependencies).
+      - name: install PyYAML (pinned)
+        run: 'python -m pip install --no-deps --only-binary=:all: PyYAML==6.0.3'
+      - name: source tools tests
+        working-directory: tools/sources
+        run: python -m unittest -v
+      - name: sync_skill_catalog.py self-check
+        working-directory: tools/sources
+        run: python check_sync_skill_catalog.py
+      - name: catalog fields documented
+        run: python tools/sources/check_catalog_fields.py
+      - name: manual-downloads list up to date
+        run: python tools/sources/make_manual_downloads.py --check
+      - name: resources check
+        run: python tools/resources/check_resources.py
+      - name: resources tests
+        working-directory: tools/resources
+        run: python -m unittest -v
+      - name: claims checker tests
+        working-directory: tools/claims
+        run: python -m unittest -v
+      - name: variant_profile tests
+        run: python -m unittest discover -s tools/variant_profile -v
+      - name: CFTR model tests (standard library; browser cases skip)
+        working-directory: tools/cftr-model/tests
+        run: python -m unittest -v test_data test_geometry test_page_blocks test_page_layer
