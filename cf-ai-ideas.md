@@ -118,4 +118,4 @@ Built from what exists: evidence records, the structure data, the ASCII and SVG 
 
 ## 6. How to propose an idea
 
-Open an issue or a pull request. A proposal names who it could help, marked as a hypothesis until public feedback from people in that role says otherwise, with nobody asked about their own health; the smallest artifact; the check that could fail it; what it must never do; a stop rule. Every number comes from a file or a command's output, with the source beside it.
+Tell the lab on the Contact page of [senseiewok.ai](https://senseiewok.ai/contact/); this repository does not take outside pull requests or issues. A proposal names who it could help, marked as a hypothesis until public feedback from people in that role says otherwise, with nobody asked about their own health; the smallest artifact; the check that could fail it; what it must never do; a stop rule. Every number comes from a file or a command's output, with the source beside it.
