@@ -9,7 +9,7 @@
 # Access policy evidence (what was tested, when): landscape/registry-data-access.md
 
 schema_version: 1
-updated: 2026-10-08
+updated: 2026-10-09
 
 # access  : fetch     - automated download is permitted; tools may retrieve it
 #           api       - queryable API, permitted; not a file download
@@ -1295,3 +1295,39 @@ sources:
       limit, licence and any email or registration requirement (the pages need JavaScript; we do not run a
       browser to get around that). No API root is recorded because none was read. A human reads the
       Unpaywall API and data-format pages in a browser before this is reconsidered.
+
+  # ---------------------------------------------------------------- resource pages (proposals/2026-10-09-resources-tab.md)
+  # Entries of kind resource_pages record what we may do with an organisation's public help pages, which the Resources tab links to.
+  # They are not report files: no url, no filename, and no tool downloads from them. A row in resources/resources.yaml points here.
+
+  - id: cff-resource-pages
+    title: Cystic Fibrosis Foundation public help pages (www.cff.org)
+    publisher: Cystic Fibrosis Foundation
+    kind: resource_pages
+    access: manual
+    robots: unreadable
+    robots_checked: 2026-10-05
+    landing_page: https://www.cff.org/support
+    url: null
+    claim_label: unverified
+    notes: >-
+      Same host and same evidence as the twelve Foundation registry entries above: robots.txt was unreadable on
+      2026-10-05 and the notes there say the site refuses automated clients, so no tool or agent requests this host and no
+      headless browser is used on it. Rows for these pages are made by a person opening them in a browser (the maintainer did
+      this on 2026-10-09 for nine pages). Not read: the site's terms of use; whether it permits links, short factual
+      descriptions or an automated reader. Until a person reads them, the lab links and describes in its own words and
+      copies no text, logo or image. Letter to the Foundation: not sent.
+
+  - id: cff-apps-resource-pages
+    title: Cystic Fibrosis Foundation tools host (apps.cff.org)
+    publisher: Cystic Fibrosis Foundation
+    kind: resource_pages
+    access: manual
+    robots: unknown
+    landing_page: https://apps.cff.org/ccd
+    url: null
+    claim_label: unverified
+    notes: >-
+      A second host of the Foundation, for the care center locator and the clinical trial finder. Its robots.txt and terms were
+      not read; with no evidence the lab treats it like the main host, as manual. Rows are made by a person in a browser. No
+      tool requests it. A person reading the terms of this host and of www.cff.org settles both.

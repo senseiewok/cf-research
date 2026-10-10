@@ -1,0 +1,193 @@
+# Resources the site's Resources tab may list. One row per resource, links only.
+# Rules and the field list: proposals/2026-10-09-resources-tab.md. Checker: tools/resources/check_resources.py.
+#
+# Every row below was made by a person: the maintainer opened each page in a browser on 2026-10-09 and confirmed the row
+# ("1 to 9 right"). The summaries are the lab's own words, written from page titles, not copied from any page.
+# who_for is not_checked on every row: nobody has yet recorded who each page says it is for, so the page shows the
+# standard line "Check the organisation's page for who can use this" and nothing more.
+# A row that is only a lead (a name seen on a slide or in an overview) has basis lead_only and is never confirmed.
+# Not here: phone numbers, emails, logos, copied text, individual studies, campaigns, people's names.
+
+schema_version: 1
+
+resources:
+
+  - id: foundation-support
+    name: Support
+    organisation: Cystic Fibrosis Foundation
+    countries: [US]
+    url: https://www.cff.org/support
+    audience: [adult_with_cf, parent_carer_of_child, partner_family_carer_of_adult]
+    category: [money_insurance, daily_life]
+    summary: "The Foundation's starting page for help with care, money and daily life."
+    who_for: not_checked
+    lang: en
+    source_id: cff-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-09
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-09
+    content_hash: cfa5151743895cb314a1e57223639edc0ec4aacbcb4215144728035f39e79a71
+    last_checked: 2026-10-09
+    status: active
+
+  - id: foundation-compass
+    name: CF Foundation Compass
+    organisation: Cystic Fibrosis Foundation
+    countries: [US]
+    url: https://www.cff.org/support/get-help-cf-foundation-compass
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [money_insurance, daily_life]
+    summary: "Free one-to-one help with insurance, costs and practical questions."
+    who_for: not_checked
+    lang: en
+    source_id: cff-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-09
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-09
+    content_hash: 6086df7282d6a7b121e1d146bea5cd53d3c4b7e5c54ccfd071d511c43cd8a575
+    last_checked: 2026-10-09
+    status: active
+
+  - id: foundation-managing-finances
+    name: Managing Finances
+    organisation: Cystic Fibrosis Foundation
+    countries: [US]
+    url: https://www.cff.org/support/managing-finances
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [money_insurance]
+    summary: "A page about the costs of living with CF."
+    who_for: not_checked
+    lang: en
+    source_id: cff-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-09
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-09
+    content_hash: 750bc29f3f66df7ae0a7320dd569acb522268342f0f90beb045a41f9be59c028
+    last_checked: 2026-10-09
+    status: active
+
+  - id: foundation-adult-with-cf
+    name: Adult With CF
+    organisation: Cystic Fibrosis Foundation
+    countries: [US]
+    url: https://www.cff.org/just-diagnosed-adult
+    audience: [adult_with_cf]
+    category: [newly_diagnosed_basics]
+    summary: "Starting information for an adult who has just been diagnosed."
+    who_for: not_checked
+    lang: en
+    source_id: cff-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-09
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-09
+    content_hash: b8d1d0aaeb131921f8c2f3d3a111687cf441173d6cbd65bc4e1fa7d49ed13390
+    last_checked: 2026-10-09
+    status: active
+
+  - id: foundation-parent-guardian-guidance
+    name: Parent and Guardian Guidance
+    organisation: Cystic Fibrosis Foundation
+    countries: [US]
+    url: https://www.cff.org/managing-cf/parent-and-guardian-guidance
+    audience: [parent_carer_of_child]
+    category: [daily_life]
+    summary: "Guidance for the parents and guardians of a child with CF."
+    who_for: not_checked
+    lang: en
+    source_id: cff-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-09
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-09
+    content_hash: fd9291af4abca26fbd46242eae5584cf5afcc035a5ba8cf71dfa1be055e5cf07
+    last_checked: 2026-10-09
+    status: active
+
+  - id: foundation-peer-connect
+    name: CF Peer Connect
+    organisation: Cystic Fibrosis Foundation
+    countries: [US]
+    url: https://www.cff.org/get-involved/cf-peer-connect
+    audience: [adult_with_cf, partner_family_carer_of_adult]
+    category: [community_peer]
+    summary: "A program that connects a person with a peer for one-to-one conversation."
+    who_for: not_checked
+    lang: en
+    source_id: cff-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-09
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-09
+    content_hash: 341100e451cefe0c01371900731b58691e136224c5f238cf4b1ef7f3bb9553df
+    last_checked: 2026-10-09
+    status: active
+
+  - id: foundation-care-center-locator
+    name: Find a CF Care Center
+    organisation: Cystic Fibrosis Foundation
+    countries: [US]
+    url: https://apps.cff.org/ccd
+    audience: [everyone]
+    category: [find_care_team]
+    summary: "A search for accredited CF care centres."
+    who_for: not_checked
+    lang: en
+    source_id: cff-apps-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-09
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-09
+    content_hash: 5ee7b6528df9b9485d56a82796ca2c8da019b3225dacc1cc949d4eba52daa60b
+    last_checked: 2026-10-09
+    status: active
+
+  - id: foundation-clinical-trial-finder
+    name: Clinical Trial Finder
+    organisation: Cystic Fibrosis Foundation
+    countries: [US]
+    url: https://apps.cff.org/trials/finder
+    audience: [adult_with_cf, care_team]
+    category: [trials_research_registries]
+    summary: "A search for studies that are enrolling."
+    who_for: not_checked
+    lang: en
+    source_id: cff-apps-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-09
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-09
+    content_hash: 660e56d34c8b76d7ade72e49bbd65d52cf2505f6f65054be2db8d4a5faad769f
+    last_checked: 2026-10-09
+    status: active
+
+  - id: foundation-international-efforts
+    name: Our International Efforts
+    organisation: Cystic Fibrosis Foundation
+    countries: [US]
+    url: https://www.cff.org/about-us/our-international-efforts
+    audience: [everyone]
+    category: [advocacy_involved]
+    summary: "The Foundation's page on its work outside the United States."
+    who_for: not_checked
+    lang: en
+    source_id: cff-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-09
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-09
+    content_hash: bec65a63414614c79683a747a7c98b247fdfc141f08ddfd49fd8a3c646184781
+    last_checked: 2026-10-09
+    status: active
