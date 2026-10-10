@@ -9,7 +9,7 @@ A tab on the site that gathers, in one place, the help people can use, by countr
 
 ## What the lab knows today (observed in the catalog, 2026-10-09)
 
-- `www.cff.org` is `access: manual` in all twelve Foundation entries (five annual reports, the technical supplement, a COVID handout, five highlights); robots.txt was unreadable on 2026-10-05 and the notes say the site "refuses automated clients". An agent never fetches it, and the read-and-discard design (proposed, not built) excludes manual hosts. A person reads those pages in a browser.
+- `www.cff.org` is `access: manual` in all twelve Foundation entries (five annual reports, six highlights files and the technical supplement); robots.txt was unreadable on 2026-10-05 and the notes of six of the entries say the site "refuses automated clients". An agent never fetches it, and the read-and-discard design (proposed, not built) excludes manual hosts. A person reads those pages in a browser.
 - Other catalogued bodies: UK (Cystic Fibrosis Trust, `fetch`), Australia (Cystic Fibrosis Australia, registry run by Monash University, `fetch`), Ireland (the Cystic Fibrosis Registry of Ireland at University College Dublin, `fetch`; this is a registry, not a support organisation), Canada (Cystic Fibrosis Canada, `manual`), Europe-wide (ECFS Patient Registry on `pr.ecfs.eu`, `fetch`; the society's main site is not in the catalog). France's entry is a variant list, not a registry report.
 - Each of those entries covers one document (a report or a list). The terms on record are for those documents. No organisation's resource pages have a catalog entry, a robots check or a terms reading yet.
 - Not known: whether any Foundation program serves people outside the United States. The lab will not state that from memory; each row records what its own page says.
@@ -38,7 +38,7 @@ A new folder `resources/` in cf-research holds `resources.yaml` (starting with `
 | `confirmed_by`, `confirmed_on`, `content_hash` | A person's confirmation of the row as it stands. The hash covers name, url, summary and who_for; a change after `confirmed_on` makes the row unconfirmed. A later script refresh cannot overwrite it |
 | `last_checked`, `status` | When a person last opened the page; `active` or `retired` (with a date) |
 
-The file holds no logos, no organisation text beyond the resource's name, no phone numbers or emails (links only; numbers go out of date and the lab writes none from memory), no personal stories, and no outbound-click logging.
+The file holds no logos, no organisation text beyond the resource's name, no phone numbers or emails (links only; numbers go out of date and the lab writes none from memory), and no personal stories.
 
 The checker (`tools/resources/check_resources.py`, standard library only, with a `--today` flag so tests are deterministic, run in check-all and in CI) enforces what a script can see: schema and enumerations, https, the `source_id` rule, the word cap, no phone or email, valid ISO codes, hashes. It prints a "due for a person to re-check" list.
 
