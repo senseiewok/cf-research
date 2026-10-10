@@ -1,8 +1,8 @@
 # Resources the site's Resources tab may list. One row per resource, links only.
 # Rules and the field list: proposals/2026-10-09-resources-tab.md. Checker: tools/resources/check_resources.py.
 #
-# Every row that is not a lead was made by a person: the maintainer opened each page in a browser on 2026-10-09 and confirmed
-# the row ("1 to 9 right"). The summaries are the lab's own words, written from page titles, not copied from any page.
+# Every row that is not a lead was made by a person: the maintainer opened each page in a browser and confirmed the row
+# (the Foundation rows on 2026-10-09, "1 to 9 right"; the two Mexican rows on 2026-10-10, in their own words). The summaries are the lab's own words, written from page titles, not copied from any page.
 # who_for is not_checked on every row: nobody has yet recorded who each page says it is for, so the page shows the
 # standard line "Check the organisation's page for who can use this" and nothing more.
 # A row that is only a lead (a name seen on a slide or in an overview) has basis lead_only and is never confirmed.
@@ -192,10 +192,9 @@ resources:
     last_checked: 2026-10-09
     status: active
 
-  # Mexico: two leads. A person who reads Spanish has not yet confirmed them against the pages, so they are basis lead_only,
-  # carry no confirmation and are never published. Both summaries are the lab's own words; summary_es is Mexican Spanish.
-  # The addresses are exactly as the site prints them. Not drafted: Comunidad FQ (third-party platform, registration),
-  # Programa Emprende FQ (no page of its own on the site's home page) and the association's about page.
+  # Mexico: the maintainer, who reads Spanish, opened both pages on 2026-10-10 and confirmed the rows. Both summaries are the
+  # lab's own words; summary_es is Mexican Spanish. The addresses are exactly as the site prints them. Not drafted: Comunidad FQ
+  # (third-party platform, registration), Programa Emprende FQ (no page of its own on the site's home page) and the about page.
 
   - id: amfq-que-es-fq
     name: "¿Qué es FQ?"
@@ -209,7 +208,12 @@ resources:
     who_for: not_checked
     lang: es-MX
     source_id: amfq-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-10
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-10
+    content_hash: f2baa3d5fb04545fa379e78a10d8438dd1320e2faf1342a0db7798d285620bfd
     last_checked: 2026-10-10
     status: active
 
@@ -225,6 +229,11 @@ resources:
     who_for: not_checked
     lang: es-MX
     source_id: amfq-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-10
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-10
+    content_hash: f2647cb7eb135f5377166c68cf0b3425f0e33ab8f51a61b13acdfd3c2b706052
     last_checked: 2026-10-10
     status: active
