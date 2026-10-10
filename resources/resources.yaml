@@ -1,8 +1,8 @@
 # Resources the site's Resources tab may list. One row per resource, links only.
 # Rules and the field list: proposals/2026-10-09-resources-tab.md. Checker: tools/resources/check_resources.py.
 #
-# Every row below was made by a person: the maintainer opened each page in a browser on 2026-10-09 and confirmed the row
-# ("1 to 9 right"). The summaries are the lab's own words, written from page titles, not copied from any page.
+# Every row that is not a lead was made by a person: the maintainer opened each page in a browser and confirmed the row
+# (the Foundation rows on 2026-10-09, "1 to 9 right"; the two Mexican rows on 2026-10-10, in their own words). The summaries are the lab's own words, written from page titles, not copied from any page.
 # who_for is not_checked on every row: nobody has yet recorded who each page says it is for, so the page shows the
 # standard line "Check the organisation's page for who can use this" and nothing more.
 # A row that is only a lead (a name seen on a slide or in an overview) has basis lead_only and is never confirmed.
@@ -190,4 +190,430 @@ resources:
     confirmed_on: 2026-10-09
     content_hash: bec65a63414614c79683a747a7c98b247fdfc141f08ddfd49fd8a3c646184781
     last_checked: 2026-10-09
+    status: active
+
+  # Mexico: the maintainer, who reads Spanish, opened both pages on 2026-10-10 and confirmed the rows. Both summaries are the
+  # lab's own words; summary_es is Mexican Spanish. The addresses are exactly as the site prints them. Not drafted: Comunidad FQ
+  # (third-party platform, registration), Programa Emprende FQ (no page of its own on the site's home page) and the about page.
+
+  - id: amfq-que-es-fq
+    name: "¿Qué es FQ?"
+    organisation: Asociación Mexicana de Fibrosis Quística
+    countries: [MX]
+    url: https://www.fq.org.mx/qué-es-fq
+    audience: [everyone]
+    category: [newly_diagnosed_basics]
+    summary: "Explanation of cystic fibrosis in Spanish from a Mexican association, with its warning signs."
+    summary_es: "Una asociación mexicana explica qué es la fibrosis quística y cuáles son sus signos de alerta."
+    who_for: not_checked
+    lang: es-MX
+    source_id: amfq-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-10
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-10
+    content_hash: f2baa3d5fb04545fa379e78a10d8438dd1320e2faf1342a0db7798d285620bfd
+    last_checked: 2026-10-10
+    status: active
+
+  - id: amfq-nuestros-programas
+    name: Nuestros programas
+    organisation: Asociación Mexicana de Fibrosis Quística
+    countries: [MX]
+    url: https://www.fq.org.mx/nuestros-programas
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [medicines_access]
+    summary: "A Mexican association's programmes for timely diagnosis, specialised care, access to equipment and medicines, and training for health professionals."
+    summary_es: "Una asociación mexicana presenta sus programas de diagnóstico oportuno, atención especializada, acceso a equipos y medicamentos, y capacitación para profesionales de la salud."
+    who_for: not_checked
+    lang: es-MX
+    source_id: amfq-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-10
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-10
+    content_hash: f2647cb7eb135f5377166c68cf0b3425f0e33ab8f51a61b13acdfd3c2b706052
+    last_checked: 2026-10-10
+    status: active
+
+  # Four countries, 2026-10-10: leads checked against a screenshot of each page, loaded under its catalog entry's conduct
+  # (honest user agent, same host only, robots.txt allowing). basis lead_only: a person has not yet confirmed these rows, so
+  # none is published. Summaries are the lab's own words. Addresses are as the sites print them. Not listed: the Trust's forum
+  # (login), CF Together (its home page loaded empty), Canada's trial finder (its robots.txt was not readable).
+
+  - id: cftrust-support-available
+    name: "How we can support you"
+    organisation: Cystic Fibrosis Trust
+    countries: [GB]
+    url: https://www.cysticfibrosis.org.uk/life-with-cystic-fibrosis/support-available
+    audience: [adult_with_cf, parent_carer_of_child, partner_family_carer_of_adult]
+    category: [daily_life, money_insurance]
+    summary: "The Trust's starting page for its helpline, financial help, work and education support, travel, disability and life after transplant."
+    who_for: not_checked
+    lang: en
+    source_id: cftrust-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cftrust-helpline
+    name: "Helpline"
+    organisation: Cystic Fibrosis Trust
+    countries: [GB]
+    url: https://www.cysticfibrosis.org.uk/life-with-cystic-fibrosis/support-available/helpline
+    audience: [adult_with_cf, parent_carer_of_child, partner_family_carer_of_adult]
+    category: [daily_life]
+    summary: "Confidential support and a listening ear for people with CF and those supporting them, by phone, email or social media messages."
+    who_for: not_checked
+    lang: en
+    source_id: cftrust-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cftrust-newborn-diagnosis
+    name: "Newborn diagnosis"
+    organisation: Cystic Fibrosis Trust
+    countries: [GB]
+    url: https://www.cysticfibrosis.org.uk/life-with-cystic-fibrosis/parents-and-children/new-diagnosis
+    audience: [parent_carer_of_child]
+    category: [newly_diagnosed_basics]
+    summary: "A guide for parents whose baby has just been diagnosed, from first questions to looking after the baby and themselves."
+    who_for: not_checked
+    lang: en
+    source_id: cftrust-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cftrust-what-is-cf
+    name: "What is cystic fibrosis?"
+    organisation: Cystic Fibrosis Trust
+    countries: [GB]
+    url: https://www.cysticfibrosis.org.uk/what-is-cystic-fibrosis
+    audience: [everyone]
+    category: [newly_diagnosed_basics]
+    summary: "Explanations of what CF is, how it is diagnosed and treated and how it affects the body, with FAQs and an Easy Read section."
+    who_for: not_checked
+    lang: en
+    source_id: cftrust-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cftrust-find-a-clinical-trial
+    name: "Find a clinical trial"
+    organisation: Cystic Fibrosis Trust
+    countries: [GB]
+    url: https://www.cysticfibrosis.org.uk/research/clinical-trials/clinical-trials-information-for-the-cf-community/find-a-clinical-trial
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [trials_research_registries]
+    summary: "Guidance on searching for CF trials, checking who can join, what happens when a trial ends and what to do if none are nearby."
+    who_for: not_checked
+    lang: en
+    source_id: cftrust-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cftrust-young-people
+    name: "Young people"
+    organisation: Cystic Fibrosis Trust
+    countries: [GB]
+    url: https://www.cysticfibrosis.org.uk/life-with-cystic-fibrosis/young-people
+    audience: [teen_young_adult]
+    category: [growing_up_transition, community_peer]
+    summary: "Information for young people with CF on life after school, the youth programme and the Youth Advisory Group."
+    who_for: not_checked
+    lang: en
+    source_id: cftrust-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cftrust-health-and-wellbeing
+    name: "Health and wellbeing with cystic fibrosis"
+    organisation: Cystic Fibrosis Trust
+    countries: [GB]
+    url: https://www.cysticfibrosis.org.uk/life-with-cystic-fibrosis/health-and-wellbeing
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [daily_life]
+    summary: "Practical topics for looking after your health with CF, including cross-infection, family planning, vaping, weather and neurodiversity."
+    who_for: not_checked
+    lang: en
+    source_id: cftrust-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cftrust-specialist-care
+    name: "Specialist cystic fibrosis care"
+    organisation: Cystic Fibrosis Trust
+    countries: [GB]
+    url: https://www.cysticfibrosis.org.uk/what-is-cystic-fibrosis/cystic-fibrosis-care/specialist-cystic-fibrosis-care
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team]
+    summary: "Care consensus documents and pages on adult and children's CF centres."
+    who_for: not_checked
+    lang: en
+    source_id: cftrust-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfcanada-resources-for-you
+    name: "Cystic fibrosis resources for you and your family"
+    organisation: Cystic Fibrosis Canada
+    countries: [CA]
+    url: https://cysticfibrosis.ca/cystic-fibrosis-resources-for-you-and-your-family
+    audience: [adult_with_cf, parent_carer_of_child, partner_family_carer_of_adult]
+    category: [daily_life]
+    summary: "A starting page of tools and support on living with CF, treatment options in Canada, connecting with others and finding a clinical trial."
+    who_for: not_checked
+    lang: en
+    source_id: cfcanada-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfcanada-parents-and-caregivers
+    name: "Parents & Caregivers"
+    organisation: Cystic Fibrosis Canada
+    countries: [CA]
+    url: https://cysticfibrosis.ca/parents-and-caregivers
+    audience: [parent_carer_of_child, partner_family_carer_of_adult]
+    category: [daily_life]
+    summary: "Information for parents and caregivers on what to expect, further resources, community support and the helpline."
+    who_for: not_checked
+    lang: en
+    source_id: cfcanada-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfcanada-adults-with-cf
+    name: "Adults with CF"
+    organisation: Cystic Fibrosis Canada
+    countries: [CA]
+    url: https://cysticfibrosis.ca/adults-with-cystic-fibrosis
+    audience: [adult_with_cf]
+    category: [daily_life, relationships_family_planning]
+    summary: "Information for adults with CF on reproductive health, parenting, nutrition and exercise, and ageing with CF."
+    who_for: not_checked
+    lang: en
+    source_id: cfcanada-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfcanada-resources-hub
+    name: "Cystic Fibrosis Resources Hub"
+    organisation: Cystic Fibrosis Canada
+    countries: [CA]
+    url: https://cysticfibrosis.ca/resources-hub
+    audience: [everyone]
+    category: [daily_life]
+    summary: "A searchable hub of resources on living with CF, with a link to a separate mental health hub and the helpline."
+    who_for: not_checked
+    lang: en
+    source_id: cfcanada-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfcanada-find-a-clinic
+    name: "Find a Canadian CF clinic"
+    organisation: Cystic Fibrosis Canada
+    countries: [CA]
+    url: https://cysticfibrosis.ca/find-a-canadian-cf-clinic
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [find_care_team]
+    summary: "Lists of CF clinics by province, to help people find their local clinic."
+    who_for: not_checked
+    lang: en
+    source_id: cfcanada-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfcanada-peer-connect-pilot
+    name: "Peer Connect Pilot"
+    organisation: Cystic Fibrosis Canada
+    countries: [CA]
+    url: https://cysticfibrosis.ca/resource/peer-connect-pilot
+    audience: [adult_with_cf, parent_carer_of_child, partner_family_carer_of_adult]
+    category: [community_peer]
+    summary: "A pilot of small virtual peer groups for the CF community, with upcoming groups listed and registration."
+    who_for: not_checked
+    lang: en
+    source_id: cfcanada-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfa-find-support
+    name: "Find support"
+    organisation: Cystic Fibrosis Australia
+    countries: [AU]
+    url: https://www.cysticfibrosis.org.au/support/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team]
+    summary: "Where to find your state or territory CF office and the adult, children's and mixed CF clinics near you."
+    who_for: not_checked
+    lang: en
+    source_id: cfaustralia-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfa-living-with-cf
+    name: "Living with CF"
+    organisation: Cystic Fibrosis Australia
+    countries: [AU]
+    url: https://www.cysticfibrosis.org.au/living-with-cf/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [daily_life]
+    summary: "An overview of daily life with CF and the routines of care."
+    who_for: not_checked
+    lang: en
+    source_id: cfaustralia-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfa-family
+    name: "Family"
+    organisation: Cystic Fibrosis Australia
+    countries: [AU]
+    url: https://www.cysticfibrosis.org.au/family/
+    audience: [parent_carer_of_child, partner_family_carer_of_adult]
+    category: [newly_diagnosed_basics]
+    summary: "Information for families after a CF diagnosis, pointing to state and territory offices, CF clinics and collected resources."
+    who_for: not_checked
+    lang: en
+    source_id: cfaustralia-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfa-clinical-trial-finder
+    name: "Clinical Trial Finder"
+    organisation: Cystic Fibrosis Australia
+    countries: [AU]
+    url: https://www.cysticfibrosis.org.au/clinical-trial-finder/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [trials_research_registries]
+    summary: "A CF-specific list of clinical trials by type, with a way to ask about trials that are recruiting."
+    who_for: not_checked
+    lang: en
+    source_id: cfaustralia-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfi-cf-and-me
+    name: "CF and Me"
+    organisation: Cystic Fibrosis Ireland
+    countries: [IE]
+    url: https://www.cfireland.ie/cf-and-me/
+    audience: [adult_with_cf, teen_young_adult, parent_carer_of_child]
+    category: [daily_life]
+    summary: "A hub of guidance and personal stories for adults, young people and parents, with a way to contact member services."
+    who_for: not_checked
+    lang: en
+    source_id: cfireland-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfi-how-we-support-you
+    name: "How we support you"
+    organisation: Cystic Fibrosis Ireland
+    countries: [IE]
+    url: https://www.cfireland.ie/cf-and-me/adults-with-cf/cfi-grants-and-supports
+    audience: [adult_with_cf]
+    category: [money_insurance, daily_life]
+    summary: "How member services help people with CF, including financial supports and information on exercise."
+    who_for: not_checked
+    lang: en
+    source_id: cfireland-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfi-state-supports-and-grants
+    name: "State Supports and Grants"
+    organisation: Cystic Fibrosis Ireland
+    countries: [IE]
+    url: https://www.cfireland.ie/cf-and-me/adults-with-cf/state-supports-and-grants
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [money_insurance]
+    summary: "Information on state benefits, allowances, tax reliefs and schemes such as warmer homes support for people with CF and their families."
+    who_for: not_checked
+    lang: en
+    source_id: cfireland-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfi-information-for-new-parents
+    name: "Information for new parents"
+    organisation: Cystic Fibrosis Ireland
+    countries: [IE]
+    url: https://www.cfireland.ie/cf-and-me/parents-of-children-with-cf/information-for-new-parents
+    audience: [parent_carer_of_child]
+    category: [newly_diagnosed_basics]
+    summary: "A welcome and information for parents of a newly diagnosed baby, with an offer of support when they are ready."
+    who_for: not_checked
+    lang: en
+    source_id: cfireland-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfi-parent-supports
+    name: "Parent Supports"
+    organisation: Cystic Fibrosis Ireland
+    countries: [IE]
+    url: https://www.cfireland.ie/cf-and-me/parents-of-children-with-cf/parent-supports
+    audience: [parent_carer_of_child]
+    category: [community_peer]
+    summary: "Supports for parents of children with CF, including volunteer parents who offer a listening ear and a newborn care pack."
+    who_for: not_checked
+    lang: en
+    source_id: cfireland-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfi-young-people-with-cf
+    name: "Young People with CF"
+    organisation: Cystic Fibrosis Ireland
+    countries: [IE]
+    url: https://www.cfireland.ie/cf-and-me/young-people-with-cf
+    audience: [teen_young_adult]
+    category: [growing_up_transition]
+    summary: "A space for young people with CF to learn about CF, staying healthy, hospital stays and moving to adult care."
+    who_for: not_checked
+    lang: en
+    source_id: cfireland-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
+    status: active
+
+  - id: cfi-wellbeing-supports
+    name: "Wellbeing Supports"
+    organisation: Cystic Fibrosis Ireland
+    countries: [IE]
+    url: https://www.cfireland.ie/cf-and-me/adults-with-cf/wellbeing-supports
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [mental_health]
+    summary: "Information on mental health and wellbeing, including financial help towards counselling for individuals and families."
+    who_for: not_checked
+    lang: en
+    source_id: cfireland-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-10
     status: active

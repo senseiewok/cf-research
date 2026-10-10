@@ -2,7 +2,7 @@
 
 Every row must name a resource_pages entry of the source catalog whose landing page shares the row's host, carry the
 fields the README describes, say how its summary was read (basis), and, unless it is only a lead, record who confirmed it
-and a content_hash of name, url, summary and who_for. No row may hold an email address or a phone number. Rows that are
+and a content_hash of name, url, summary, who_for and, when the row has one, summary_es. No row may hold an email address or a phone number. Rows that are
 due or expired for a re-check are warnings and are listed for a person at the end.
 
 Output: one line per finding (`ERROR <id>: ...` or `WARN <id>: ...`), then a `due for a person to re-check:` block when
@@ -76,7 +76,7 @@ REQUIRED = (
     "lang", "source_id", "basis", "last_checked", "status",
 )
 OPTIONAL = (
-    "format", "summary_attested_by", "summary_attested_on", "confirmed_by", "confirmed_on",
+    "format", "summary_es", "summary_attested_by", "summary_attested_on", "confirmed_by", "confirmed_on",
     "content_hash", "retired_on",
 )
 KNOWN_FIELDS = frozenset(REQUIRED + OPTIONAL)
@@ -94,6 +94,7 @@ ISO_DATE_RUN_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 YEAR_ONLY_RE = re.compile(r"^(?:19|20)\d\d$")
 YEAR_RE = re.compile(r"(?<![0-9A-Za-z])(?:19|20)\d\d(?![0-9A-Za-z])")
 URLISH_RE = re.compile(r"http|www\.|\.org|\.com|\.net", re.IGNORECASE)
+SPANISH_LANG_RE = re.compile(r"^es(-|$)", re.IGNORECASE)
 SENTENCE_BREAK_RE = re.compile(r"[.!?][\"')\]]*\s+\S")
 QUOTES = ('"', "“", "”")
 
@@ -159,10 +160,16 @@ def load_catalog(path):
 
 
 def compute_hash(row):
-    """Lowercase hex SHA-256 of name + newline + url + newline + summary + newline + who_for, values used exactly."""
+    """Lowercase hex SHA-256 of name + newline + url + newline + summary + newline + who_for, values used exactly.
+
+    A row with a summary_es adds a newline and that text at the end, so rows without one keep the hash they had.
+    """
     parts = []
     for key in ("name", "url", "summary", "who_for"):
         value = row.get(key, "")
+        parts.append(value if isinstance(value, str) else str(value))
+    if "summary_es" in row:
+        value = row["summary_es"]
         parts.append(value if isinstance(value, str) else str(value))
     return hashlib.sha256("\n".join(parts).encode("utf-8")).hexdigest()
 
@@ -239,24 +246,24 @@ def check_url(url):
     return None
 
 
-def check_summary(summary):
-    """Return a list of problem messages."""
+def check_summary(summary, field="summary"):
+    """Return a list of problem messages; field names the key in the messages (summary or summary_es)."""
     if not isinstance(summary, str) or not summary.strip():
-        return ["summary must be a non-empty string"]
+        return [f"{field} must be a non-empty string"]
     out = []
     words = summary.split()
     if len(words) > 25:
-        out.append(f"summary has {len(words)} words; at most 25")
+        out.append(f"{field} has {len(words)} words; at most 25")
     if "\n" in summary.strip() or SENTENCE_BREAK_RE.search(summary.strip()):
-        out.append("summary must be one sentence")
+        out.append(f"{field} must be one sentence")
     if any(q in summary for q in QUOTES):
-        out.append("summary must not contain a double quote mark")
+        out.append(f"{field} must not contain a double quote mark")
     if any(c.isdigit() for c in YEAR_RE.sub("", summary)):
-        out.append("summary must not contain digits other than a four-digit year")
+        out.append(f"{field} must not contain digits other than a four-digit year")
     if URLISH_RE.search(summary):
-        out.append("summary must not contain URL-like text")
+        out.append(f"{field} must not contain URL-like text")
     if "@" in summary:
-        out.append("summary must not contain @")
+        out.append(f"{field} must not contain @")
     return out
 
 
@@ -334,6 +341,8 @@ def check_row(row, catalog, today):
 
     if "summary" in row:
         errors.extend(check_summary(row["summary"]))
+    if "summary_es" in row:
+        errors.extend(check_summary(row["summary_es"], "summary_es"))
 
     if "who_for" in row and not is_one_of(row["who_for"], WHO_FOR):
         errors.append(f"who_for has unknown value {row['who_for']!r}")
@@ -341,6 +350,8 @@ def check_row(row, catalog, today):
         errors.append(f"format has unknown value {row['format']!r}")
     if "lang" in row and (not isinstance(row["lang"], str) or not LANG_RE.match(row["lang"])):
         errors.append(f"lang {row['lang']!r} is not a simple BCP 47 tag")
+    if isinstance(row.get("lang"), str) and SPANISH_LANG_RE.match(row["lang"]) and "summary_es" not in row:
+        errors.append("a Spanish-language row needs summary_es (Mexican Spanish, the lab's own words)")
 
     entry = None
     if "source_id" in row:

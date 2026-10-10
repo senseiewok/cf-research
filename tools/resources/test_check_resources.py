@@ -363,6 +363,57 @@ class Summary(Base):
         self.assertError(doc(row(summary="Ask us @ the clinic.")), "summary must not contain @")
 
 
+class SummaryEs(Base):
+    ES = "Una línea de ayuda para familias, abierta entre semana."
+
+    def test_optional_on_an_english_row(self):
+        self.assertPasses(doc(row(summary_es=self.ES)))
+
+    def test_spanish_row_needs_it(self):
+        for lang in ("es-MX", "es", "ES-mx"):
+            with self.subTest(lang=lang):
+                self.assertError(doc(row(lang=lang)), "needs summary_es")
+
+    def test_spanish_row_with_it_passes(self):
+        self.assertPasses(doc(row(lang="es-MX", countries=["MX"], summary_es=self.ES)))
+
+    def test_three_letter_language_starting_with_es_is_not_spanish(self):
+        self.assertPasses(doc(row(lang="est")))
+
+    def test_same_rules_as_summary(self):
+        cases = {
+            " ".join(["palabra"] * 26) + ".": "summary_es has 26 words",
+            "Una línea. Abierta entre semana.": "summary_es must be one sentence",
+            "Abierta 5 días a la semana.": "summary_es must not contain digits",
+            'Una "línea" de ayuda.': "summary_es must not contain a double quote mark",
+            "Visite www.example para más.": "summary_es must not contain URL-like text",
+            "": "summary_es must be a non-empty string",
+        }
+        for text, message in cases.items():
+            with self.subTest(text=text):
+                self.assertError(doc(row(summary_es=text)), message)
+
+    def test_email_in_it_is_found(self):
+        self.assertError(doc(row(summary_es="Escriba a ayuda@example.org para dudas.")), "phone number or email")
+
+    def test_list_or_mapping_is_an_error_not_a_crash(self):
+        for bad in (["x"], {"a": 1}, 5):
+            with self.subTest(bad=bad):
+                self.assertError(doc(row(summary_es=bad)), "summary_es must be a non-empty string")
+
+    def test_hash_covers_it(self):
+        r = row(summary_es=self.ES)
+        r["summary_es"] = "Otra frase distinta para familias."
+        self.assertError(doc(r), "hash mismatch")
+
+    def test_rows_without_it_keep_their_old_hash(self):
+        r = row()
+        old = check_resources.hashlib.sha256(
+            chr(10).join([r["name"], r["url"], r["summary"], r["who_for"]]).encode("utf-8")).hexdigest()
+        self.assertEqual(r["content_hash"], old)
+        self.assertNotEqual(row(summary_es=self.ES)["content_hash"], old)
+
+
 class ContactDetails(Base):
     def test_email_in_summary(self):
         self.assertError(doc(row(summary="Write to help@example.org for advice.")), "phone number or email in a data row")
@@ -537,7 +588,7 @@ class RealFiles(unittest.TestCase):
     def test_real_repo_files_pass(self):
         buf = io.StringIO()
         with contextlib.redirect_stdout(buf):
-            code = check_resources.main(["--today", TODAY])
+            code = check_resources.main(["--today", datetime.date.today().isoformat()])  # the real file is dated by real days, not by the fixture TODAY
         self.assertEqual(code, 0, buf.getvalue())
 
 
