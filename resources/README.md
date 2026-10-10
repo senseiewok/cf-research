@@ -11,13 +11,15 @@ The list behind the site's Resources tab: help that organisations offer to peopl
 
 A name, one link, who it is for, what it helps with, a one-sentence summary in the lab's own words, and the dates a person last looked. It holds no phone number, email address, logo, copied text, price, count, staff name, individual study or campaign.
 
+A row whose page is in Spanish (`lang` starting with `es`) also carries `summary_es`: a second one-sentence summary in Mexican Spanish, in the lab's own words, with the same limits. It is covered by the content hash (a row without one keeps its old hash). Spanish text in this list is always Mexican Spanish, never machine-translated, and a person who reads Spanish confirms it. The link stays exactly as the organisation's site prints it, accents included.
+
 ## How a row is made
 
 1. The organisation's host has an entry of kind `resource_pages` in [`../sources/catalog.yaml`](../sources/catalog.yaml) that says what the lab may do with it. For a `manual` host (the Foundation's) no tool or agent requests the page: a **person opens it in a browser**.
 2. The person sends the name, the link, who the page says it is for (or "not stated"), the date, and a note. An agent may structure what the person sent. The summary is the lab's own words; the person attests it matches the page.
 3. `python tools/resources/check_resources.py --print-hashes` prints each row's hash; the person's confirmation (`confirmed_by`, `confirmed_on`, `content_hash`) goes on the row. Changing the name, link, summary or `who_for` afterwards makes the hash wrong, so the row counts as unconfirmed until a person confirms it again.
-4. A name seen on a slide or in an overview, and not yet opened by a person, is a `lead_only` row at most: it is never confirmed or published.
+4. A name seen on a slide or in an overview, and not yet opened by a person, is a `lead_only` row at most: it is never confirmed or published. A draft written from someone else's description of a page (an AI-written report, a search summary) is also a `lead_only` row until a person has opened the page and confirmed it; another model's answer about a page is not that person's confirmation.
 
 ## What the checker does and does not do
 
-It checks what a script can see: fields, allowed values, https, the catalog link, the word cap, no phone or email, valid dates, hashes, and which rows are due for a person to re-check (180 days; 90 for money and medicines). It **cannot** check that a summary is not copied or that a page says what the row says: that is the person's attestation. It never requests any link.
+It checks what a script can see: fields, allowed values, https, the catalog link, the word cap (also for `summary_es`, which a Spanish-language row must have), no phone or email, valid dates, hashes, and which rows are due for a person to re-check (180 days; 90 for money and medicines). It **cannot** check that a summary is not copied or that a page says what the row says: that is the person's attestation. It never requests any link.
