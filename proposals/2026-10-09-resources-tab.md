@@ -26,14 +26,14 @@ A new folder `resources/` in cf-research holds `resources.yaml` (starting with `
 | `id`, `name`, `organisation` | Stable slug (also the page anchor); the resource's name as the organisation writes it; who runs it (spelled from one allowed list) |
 | `countries` | A list of ISO 3166-1 alpha-2 codes (`GB`, not `UK`), or the region values `europe` and `global` |
 | `url` | One https link to the organisation's own page |
-| `audience` | One or more of `adult_with_cf`, `teen_young_adult`, `parent_carer_of_child`, `partner_family_carer_of_adult`, `care_team`, `everyone` |
+| `audience` | One or more of `adult_with_cf`, `teen_young_adult`, `parent_carer_of_child`, `partner_family_carer_of_adult`, `care_team`, `researcher`, `everyone` |
 | `category` | One or more of the headings below |
 | `summary` | One sentence in the lab's own words, at most 25 words, no quote marks, no digits other than a year, no URL |
 | `who_for` | A fixed value: `stated_anyone`, `stated_countries`, `stated_region`, `not_stated`. Never the organisation's wording. The page shows a fixed line, not the row's text |
 | `format` | `online`, `in_person` or `both` |
 | `lang` | BCP 47 language of the linked page |
 | `source_id` | A catalog entry of the new kind `resource_pages` whose landing-page host equals the host of `url`. An entry for a registry report or a highlights file fails this rule |
-| `basis` | `person_read_in_browser`, or `script_fetch` (only for a host whose entry has `access: fetch`, a robots check within six months and the terms read) |
+| `basis` | `person_read_in_browser`, or `script_fetch` (only for a host whose entry has `access: fetch`, a robots check within six months and the terms read), or `lead_only` (a name seen on a presentation slide or in an overview: never publishable; the checker refuses a `confirmed_on` on it until a person has opened the page and the basis is changed) |
 | `summary_attested_by`, `summary_attested_on` | A person states the summary is their own words and matches the page. No script can check this: the page text is never kept, and manual hosts are never fetched. It is an attestation, not a test |
 | `confirmed_by`, `confirmed_on`, `content_hash` | A person's confirmation of the row as it stands. The hash covers name, url, summary and who_for; a change after `confirmed_on` makes the row unconfirmed. A later script refresh cannot overwrite it |
 | `last_checked`, `status` | When a person last opened the page; `active` or `retired` (with a date) |
@@ -46,7 +46,7 @@ Freshness. A row is due for a re-check at 180 days (90 for the categories Money,
 
 ### 2. Who it is for, and what it helps with
 
-Audiences: adults with CF; teens and young adults with CF; parents and carers of children with CF; partners, family and carers of adults with CF; care teams; everyone.
+Audiences: adults with CF; teens and young adults with CF; parents and carers of children with CF; partners, family and carers of adults with CF; care teams; researchers (the first leads include resources the Foundation pitches at researchers, such as its biorepository and its Community Voice program); everyone.
 
 Categories, in this order (the page shows only those with confirmed rows):
 
@@ -101,6 +101,18 @@ Only after the list ships. Boundary data from a public-domain source whose licen
 
 No ratings, rankings or "best of". No medical advice, eligibility advice or advice about money. No copying of an organisation's text or logo. No private groups. No claim about how well any resource works. No row from memory; a model may structure what a person sent, but a person writes or approves every summary. No fetch of any manual, request or forbidden host by any tool.
 
+## Intake: what the first leads showed (2026-10-09)
+
+A person sent the names shown on a set of public Foundation presentation slides, and a pasted AI-written overview of the global CF resource landscape. Nothing from either is in this repo; the leads sit in a private folder, unconfirmed. Rules the leads suggest:
+
+- A presentation slide or an overview is a lead (`basis: lead_only`), never evidence. The overview's eleven numbered references are generic and repeat after every paragraph; none supports a specific figure, so its names, amounts, thresholds and prices are not used.
+- Record only a resource's name and link. Never record a staff or researcher name, an email address, a text-message code, or a count, price or percentage from a slide.
+- List the stable service, not the campaign: a finder, a navigator, a program or a guide. Leave out an individual recruiting study (studies close and eligibility changes; list the finder instead) and a dated advocacy campaign.
+- Some Foundation resources are pitched at care teams or researchers, not at families. The `audience` field says so; the page must not present a clinician course as help for a parent.
+- Legal and immigration resources (the Foundation shared some with care teams) are high-stakes if wrong. None is in the first slice; they need a council and a person's read first, and a "not legal advice" line.
+- Sourcing medicines abroad, generic importation and drug prices are outside what the lab lists or advises on.
+- A QR code is not a link the lab can verify. Only an address printed on a slide is a lead, and a person opens it before it is a row.
+
 ## Order of work (the smallest slice first)
 
 1. Prerequisites: the web-tool block for catalog hosts marked manual, request or forbidden (board T-0108), so no agent request can reach cff.org.
@@ -119,3 +131,5 @@ No ratings, rankings or "best of". No medical advice, eligibility advice or advi
 5. The freshness numbers (180 and 365 days; 90 and 180 for money and medicines): keep or change? Who re-checks each country?
 6. The urgent-help line: keep the "local emergency number" wording until the emergency-number rule (board T-0104) is decided?
 7. A self-hosted public-domain world map, later: acceptable as a third-party download?
+8. Legal and immigration resources: leave out for now (recommended), or add a category after a council and your read?
+9. Researchers as an audience: keep (added after the first leads), or keep the tab to families and care teams?
