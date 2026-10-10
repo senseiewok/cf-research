@@ -588,7 +588,7 @@ class RealFiles(unittest.TestCase):
     def test_real_repo_files_pass(self):
         buf = io.StringIO()
         with contextlib.redirect_stdout(buf):
-            code = check_resources.main(["--today", TODAY])
+            code = check_resources.main(["--today", datetime.date.today().isoformat()])  # the real file is dated by real days, not by the fixture TODAY
         self.assertEqual(code, 0, buf.getvalue())
 
 
