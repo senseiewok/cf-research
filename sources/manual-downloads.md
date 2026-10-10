@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-26 to download by hand, 1 to ask for, 3 not to download.
+29 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -17,6 +17,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | semantic-scholar-api | Semantic Scholar Academic Graph API | [page](https://www.semanticscholar.org/product/api) | link only | Overview and API License Agreement (last updated May 17, 2023) fetched directly 2026-10-07 with the lab user agent; the API was not called and no key was reque… |
+
+### Asociación Mexicana de Fibrosis Quística, A.C.
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| amfq-resource-pages | Asociación Mexicana de Fibrosis Quística, A.C. (AMFQ) website (www.fq.org.mx) | [page](https://www.fq.org.mx/) | link only | The address came from the reference list of an AI-written report the maintainer pasted on 2026-10-09 and from a web search limited to this host. |
 
 ### Cochrane
 
@@ -46,6 +52,8 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | cffpr-highlights-2023 | CFF Patient Registry Highlights 2023 | [page](https://www.cff.org/medical-professionals/patient-registry) | `CFFPR_Highlights_2023.pdf` | Opened 2026-10-05 from the maintainer's browser download. |
 | cffpr-highlights-2024 | CFF Patient Registry Highlights 2024 | [page](https://www.cff.org/medical-professionals/patient-registry) | `CFFPR_Highlights_2024.pdf` | Opened 2026-10-05 from the maintainer's browser download. |
 | cffpr-highlights-2025 | CFF Patient Registry Highlights 2025 | [page](https://www.cff.org/medical-professionals/2025-patient-registry-highlights) | `CFFPR_Highlights_2025.pdf` | Opened 2026-10-05 from the maintainer's browser download. |
+| cff-resource-pages | Cystic Fibrosis Foundation public help pages (www.cff.org) | [page](https://www.cff.org/support) | link only | Same host and same evidence as the twelve Foundation registry entries above: robots.txt was unreadable on 2026-10-05 and the notes there say the site refuses a… |
+| cff-apps-resource-pages | Cystic Fibrosis Foundation tools host (apps.cff.org) | [page](https://apps.cff.org/ccd) | link only | A second host of the Foundation, for the care center locator and the clinical trial finder. |
 
 ### Ensembl (its privacy link is on www.ebi.ac.uk; publisher not otherwise stated on the pages read)
 
