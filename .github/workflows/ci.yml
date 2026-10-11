@@ -70,6 +70,8 @@ jobs:
       - name: claims checker tests
         working-directory: tools/claims
         run: python -m unittest -v
+      - name: research leads tests, check and render check
+        run: python -m unittest discover -s tools/leads -v && python tools/leads/check_leads.py && python tools/leads/render_leads.py --check
       - name: variant_profile tests
         run: python -m unittest discover -s tools/variant_profile -v
       - name: trial atlas tests (synthetic fixtures; the real-client cases skip without cf-skills)

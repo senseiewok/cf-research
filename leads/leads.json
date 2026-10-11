@@ -1,0 +1,466 @@
+{
+  "schema_version": 1,
+  "note": "The lab's public register of research leads. Edit this file, then run tools/leads/render_leads.py and tools/leads/check_leads.py. Fields and rules: leads/README.md. Nothing private goes here.",
+  "leads": [
+    {
+      "id": "L-0001",
+      "title": "Unsorted remainder of the trial atlas, sorted by a local model with exact-quote checks",
+      "question": "Can a local model propose a class for the primary outcomes the atlas lexicon leaves unsorted, with every proposal backed by an exact quote from the registry record?",
+      "why_it_matters": "Without it, a large unsorted remainder would hide part of what CF trials register as their main outcome.",
+      "status": "done",
+      "sources": [
+        {"type": "run", "ref": "trial atlas route, first real runs (board T-0130)", "tier": "T0", "read_on": null, "note": "Done in the atlas route; the tools are in pull request cf-research#39. A verified quote proves only that the words exist in the record."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov"], "access": "api", "already_have": true, "fields_missing": []},
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["computed", "registry-statement-verbatim"], "note": "Counts are computed from the snapshot; any registry text shown is quoted verbatim and checked against the record."},
+      "must_not_claim": [
+        "That a model's class for an outcome is correct because its quote was found in the record.",
+        "That the atlas classes measure trial quality."
+      ],
+      "needs_person": ["maintainer-approval"],
+      "links": {"board": ["T-0130"], "proposals": ["proposals/2026-10-10-trial-endpoint-atlas.md"], "prs": ["cf-research#39"]},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0002",
+      "title": "Results posted, and registry records linked to publications by exact trial-id match",
+      "question": "For CF trials in the registry, how many have results posted, and how many have a publication that cites their trial id exactly?",
+      "why_it_matters": "Researchers and clinicians weigh evidence differently when they know how much of the registered trial record reached results or a paper.",
+      "status": "idea",
+      "sources": [
+        {"type": "literature", "ref": "a published study of registry-to-publication links found in the 2026-10-10 literature search; citation to be recorded", "tier": "T0", "read_on": null, "note": "Agent-read abstract, not re-read here: about 23.2 percent of trials had a direct registry-to-PubMed link and about 44 percent of the apparently unlinked had a paper when searched by hand. Both figures are T0."},
+        {"type": "council", "ref": "three blind council reviews of the atlas, 2026-10-10", "tier": "T0", "read_on": null, "note": "Suggested as a follow-on view."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov", "europe-pmc", "ncbi-eutils"], "access": "api", "already_have": false, "fields_missing": ["publication links by trial id (Europe PMC or PubMed search)"]},
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["computed", "lab-position"], "note": "An exact trial-id match gives a lower bound only, and every count says so in the same sentence."},
+      "must_not_claim": [
+        "That a trial without a matched paper is unpublished.",
+        "That a match rate measures a sponsor's conduct."
+      ],
+      "needs_person": ["maintainer-approval"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0003",
+      "title": "How differently trials define pulmonary exacerbation, FEV1 and sweat chloride outcomes",
+      "question": "How many distinct definitions do CF trials register for pulmonary exacerbation, FEV1 and sweat chloride outcomes, counted by rule facets such as time frame and threshold?",
+      "why_it_matters": "Outcomes defined in different ways are hard to compare across trials, and a count of the definitions shows where comparison needs care.",
+      "status": "data-available",
+      "sources": [
+        {"type": "literature", "ref": "a systematic review of outcomes in 144 CF studies, found in the 2026-10-10 literature search; citation to be recorded", "tier": "T0", "read_on": null, "note": "Agent-read abstract: it reported \"a wide range of outcomes and corresponding endpoints\"."},
+        {"type": "council", "ref": "three blind council reviews of the atlas, 2026-10-10", "tier": "T0", "read_on": null, "note": ""}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov"], "access": "api", "already_have": true, "fields_missing": []},
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["computed", "registry-statement-verbatim"], "note": "Counts of definitions by facet are computed; a definition shown is the registry text, quoted verbatim."},
+      "must_not_claim": [
+        "That one definition is better or worse than another.",
+        "That heterogeneity means a trial was badly designed."
+      ],
+      "needs_person": ["clinician-reader"],
+      "links": {"board": ["T-0130"], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0004",
+      "title": "Registered outcomes before and after CFTR modulator approvals",
+      "question": "Did the mix of registered primary outcomes in CF trials shift between the eras around each modulator approval?",
+      "why_it_matters": "Trial designers and clinicians may want to see how registered endpoints changed as modulators changed care.",
+      "status": "idea",
+      "sources": [
+        {"type": "council", "ref": "three blind council reviews of the atlas, 2026-10-10", "tier": "T0", "read_on": null, "note": "Start dates with no date type are shown as a band, not placed in an era."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov", "openfda-drugsfda"], "access": "api", "already_have": false, "fields_missing": ["US approval dates from openFDA Drugs@FDA"]},
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["computed", "lab-position"], "note": "Era counts are computed; approval dates come from openFDA records; the framing is labelled a lab position."},
+      "must_not_claim": [
+        "That an approval caused any change in what trials register (no causal words).",
+        "That a start date with no date type belongs to a particular era."
+      ],
+      "needs_person": ["clinician-reader"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0005",
+      "title": "Embeddings and seeded clustering as an internal aid for finding lexicon terms",
+      "question": "Can embeddings with clusters seeded by the existing lexicon classes surface outcome wording the lexicon misses?",
+      "why_it_matters": "A better lexicon sorts more outcomes by rule, so fewer depend on a model's proposal.",
+      "status": "idea",
+      "sources": [
+        {"type": "council", "ref": "three blind council reviews of the atlas, 2026-10-10", "tier": "T0", "read_on": null, "note": "A local embedding model is not yet onboarded; it would go through the model-onboarding checklist first."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov"], "access": "api", "already_have": true, "fields_missing": []},
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["lab-position"], "note": "Internal only: a cluster suggests terms for a person to add as rules; clusters never publish."},
+      "must_not_claim": [
+        "That a cluster is a category of outcome.",
+        "Any count or figure from clusters."
+      ],
+      "needs_person": ["maintainer-approval"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0006",
+      "title": "Map atlas classes to a published outcome taxonomy",
+      "question": "Can each atlas class be placed under a domain of the Dodd et al. 2018 outcome taxonomy, and which classes fit none?",
+      "why_it_matters": "A shared taxonomy lets others compare the atlas with outcome work in other conditions.",
+      "status": "idea",
+      "sources": [
+        {"type": "literature", "ref": "Dodd et al. 2018, a taxonomy of outcome domains, https://pmc.ncbi.nlm.nih.gov/articles/PMC5854263/", "tier": "T1", "read_on": "2026-10-10", "note": "The controlling agent read the abstract page text: 38 outcome domains in five core areas; it says registry outcomes \"can be entered as free text only\"."},
+        {"type": "literature", "ref": "a report that mapping outcome concepts to UMLS covered only part of them, found in the 2026-10-10 literature search; citation to be recorded", "tier": "T0", "read_on": null, "note": "Agent-read: about 44 percent of outcome concepts covered. T0 here."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov", "europe-pmc"], "access": "api", "already_have": false, "fields_missing": ["the taxonomy's domain list, read from the open-access article"]},
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["open-access-quote", "lab-position"], "note": "Domain names come from the open-access article under its licence; each mapping is a lab position until a person reviews it."},
+      "must_not_claim": [
+        "That the mapping is endorsed by the taxonomy's authors.",
+        "That a class that fits no domain is a gap in CF research."
+      ],
+      "needs_person": ["clinician-reader"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0007",
+      "title": "Trials per class, deduplicated by lead sponsor",
+      "question": "How many distinct lead sponsors register trials in each atlas class, once spelling variants of one sponsor are merged by an alias table?",
+      "why_it_matters": "A sponsor count shows whether a class rests on many groups or a few, without ranking anyone.",
+      "status": "data-available",
+      "sources": [
+        {"type": "council", "ref": "three blind council reviews of the atlas, 2026-10-10", "tier": "T0", "read_on": null, "note": "The reviews advised against a network graph, which reads as a ranking."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov"], "access": "api", "already_have": true, "fields_missing": ["an alias table for sponsor names (lab-made)"]},
+      "effort": {"size": "S", "estimate": true},
+      "guard": {"ladder": ["computed", "registry-statement-verbatim"], "note": "Counts are computed; sponsor names are as the registry records them, and every alias merge is listed."},
+      "must_not_claim": [
+        "A ranking of sponsors or any judgement of a sponsor.",
+        "That a sponsor's count reflects its contribution to CF care."
+      ],
+      "needs_person": ["maintainer-approval"],
+      "links": {"board": ["T-0130"], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0008",
+      "title": "Registered outcome time frame compared with registered start and completion dates",
+      "question": "How often does a primary outcome's registered time frame fit inside the span between the registered start and completion dates?",
+      "why_it_matters": "A mismatch flags records a reader should check before relying on the time frame.",
+      "status": "idea",
+      "sources": [
+        {"type": "council", "ref": "three blind council reviews of the atlas, 2026-10-10", "tier": "T0", "read_on": null, "note": "Completion dates are not in the first snapshot."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov"], "access": "api", "already_have": false, "fields_missing": ["completion date and its type"]},
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["computed", "registry-statement-verbatim"], "note": "Comparisons are computed from registry fields; time frames shown are quoted verbatim."},
+      "must_not_claim": [
+        "That a mismatch is an error by the sponsor.",
+        "That a record is wrong; it may be planned or estimated."
+      ],
+      "needs_person": ["maintainer-approval"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public",
+      "notes": "Needs a re-fetch with more fields; the maintainer approves any new fetch."
+    },
+    {
+      "id": "L-0009",
+      "title": "Stopped trials and the reasons sponsors wrote",
+      "question": "For CF trials recorded as stopped, what reasons did the sponsors write, grouped without rewording?",
+      "why_it_matters": "Reasons for stopping help trial designers plan recruitment and feasibility.",
+      "status": "idea",
+      "sources": [
+        {"type": "council", "ref": "three blind council reviews of the atlas, 2026-10-10", "tier": "T0", "read_on": null, "note": "The why-stopped field is not in the first snapshot."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov"], "access": "api", "already_have": false, "fields_missing": ["why-stopped text"]},
+      "effort": {"size": "S", "estimate": true},
+      "guard": {"ladder": ["registry-statement-verbatim", "computed"], "note": "Reasons are shown as the sponsor wrote them; group counts are computed."},
+      "must_not_claim": [
+        "That a trial stopped for safety or efficacy unless its record says so.",
+        "Any reason the sponsor did not write."
+      ],
+      "needs_person": ["maintainer-approval"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public",
+      "notes": "Needs a re-fetch with more fields; the maintainer approves any new fetch."
+    },
+    {
+      "id": "L-0010",
+      "title": "Age bands trials admit, beside the age mix registries report",
+      "question": "Which age bands do CF trials admit, and how does that compare with the age groups registry reports describe?",
+      "why_it_matters": "Clinicians and families may want to see which age groups are less often admitted to trials.",
+      "status": "idea",
+      "sources": [
+        {"type": "council", "ref": "three blind council reviews of the atlas, 2026-10-10", "tier": "T0", "read_on": null, "note": "Minimum and maximum age are not in the first snapshot."}
+      ],
+      "data_needed": {
+        "catalog_ids": ["clinicaltrials-gov", "ecfspr-adr-2024", "ukcfr-adr-2024", "acfdr-adr-2025", "cfri-adr-2024"],
+        "access": {"clinicaltrials-gov": "api", "ecfspr-adr-2024": "fetch", "ukcfr-adr-2024": "fetch", "acfdr-adr-2025": "fetch", "cfri-adr-2024": "fetch"},
+        "already_have": false,
+        "fields_missing": ["minimum age", "maximum age"]
+      },
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["computed", "registry-statement-verbatim"], "note": "Trial counts are computed; registry age figures are quoted verbatim with the report and page, read with the registry reading guides."},
+      "must_not_claim": [
+        "Counts of patients from trial records; the trial side counts trials only.",
+        "Any comparison of one registry's figures with another's.",
+        "That a person of a given age can or cannot join a trial."
+      ],
+      "needs_person": ["registry-scientist", "maintainer-approval"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0011",
+      "title": "Crosswalk between registry measures and trial outcomes",
+      "question": "Which outcomes that trials register correspond to measures that patient registries report?",
+      "why_it_matters": "A crosswalk would show where trial outcomes and routine registry data speak the same language.",
+      "status": "idea",
+      "sources": [
+        {"type": "council", "ref": "three blind council reviews of the atlas, 2026-10-10", "tier": "T0", "read_on": null, "note": ""}
+      ],
+      "data_needed": {
+        "catalog_ids": ["clinicaltrials-gov", "ecfspr-adr-2024"],
+        "access": {"clinicaltrials-gov": "api", "ecfspr-adr-2024": "fetch"},
+        "already_have": false,
+        "fields_missing": ["registry measure definitions, read from the reports"]
+      },
+      "effort": {"size": "L", "estimate": true},
+      "guard": {"ladder": ["registry-statement-verbatim", "lab-position"], "note": "Each match is a lab position that a person labels; definitions on both sides are quoted verbatim."},
+      "must_not_claim": [
+        "That a trial outcome and a registry measure are the same thing because their names match.",
+        "Any match a person has not labelled."
+      ],
+      "needs_person": ["registry-scientist", "clinician-reader"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0012",
+      "title": "Atlas classes beside the CF core outcome set effort and frequent primary outcomes",
+      "question": "How do the atlas classes line up with the CF core outcome set work listed in the COMET database, and with methods that find frequent primary outcomes by text mining?",
+      "why_it_matters": "A core outcome set is what trialists may be asked to measure, so alignment with it makes the atlas useful to them.",
+      "status": "idea",
+      "sources": [
+        {"type": "literature", "ref": "COMET database, study 882 (a CF core outcome set effort)", "tier": "T0", "read_on": null, "note": "Agent-read: status ongoing at the time read; check the current status before any use."},
+        {"type": "literature", "ref": "a 2021 MEDINFO paper on frequent primary outcomes by text mining, found in the 2026-10-10 literature search; citation to be recorded", "tier": "T0", "read_on": null, "note": "Agent-read: it covered 5,090 trials. T0."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov"], "access": "api", "already_have": true, "fields_missing": ["the core outcome set's outcome list, when published"], "not_in_catalog": ["COMET database"]},
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["open-access-quote", "lab-position"], "note": "Outcome names from a core outcome set are quoted from its open-access publication; any alignment is a lab position."},
+      "must_not_claim": [
+        "A CF core outcome set that has not been published.",
+        "That the atlas proposes or endorses a core outcome set.",
+        "That frequency of use makes an outcome a good one."
+      ],
+      "needs_person": ["clinician-reader"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0013",
+      "title": "How often primary outcomes change over a record's history",
+      "question": "How often is a CF trial's registered primary outcome changed after the trial starts?",
+      "why_it_matters": "Outcome changes after a trial starts are something readers of results want to know about.",
+      "status": "idea",
+      "sources": [
+        {"type": "council", "ref": "three blind council reviews of the atlas, 2026-10-10", "tier": "T0", "read_on": null, "note": "An idea only; record history is not in the catalog."}
+      ],
+      "data_needed": {"catalog_ids": [], "access": "not in catalog", "already_have": false, "fields_missing": ["record version history"], "not_in_catalog": ["ClinicalTrials.gov record history (versions of a record)"]},
+      "effort": {"size": "L", "estimate": true},
+      "guard": {"ladder": ["computed", "registry-statement-verbatim"], "note": "Change counts would be computed from versions; any changed text is quoted verbatim."},
+      "must_not_claim": [
+        "That a change was improper; many changes are corrections or planned updates.",
+        "Anything about a named trial or sponsor."
+      ],
+      "needs_person": ["maintainer-approval"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public",
+      "notes": "Needs a catalog entry, with its terms read, before any data is touched."
+    },
+    {
+      "id": "L-0014",
+      "title": "AACT for comparing CF trials with all registered trials",
+      "question": "Could AACT, a relational copy of ClinicalTrials.gov, give the denominators to compare CF trials with all trials?",
+      "why_it_matters": "A comparison with all trials tells whether a CF pattern is particular to CF or common to trials generally.",
+      "status": "idea",
+      "sources": [
+        {"type": "council", "ref": "three blind council reviews of the atlas, 2026-10-10", "tier": "T0", "read_on": null, "note": "Its terms need checking before any use."}
+      ],
+      "data_needed": {"catalog_ids": [], "access": "not in catalog", "already_have": false, "fields_missing": ["all-trial denominators"], "not_in_catalog": ["AACT"]},
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["computed"], "note": "Only computed counts with the snapshot date; nothing until the catalog records what AACT permits."},
+      "must_not_claim": [
+        "That CF trials are better or worse than other trials.",
+        "Any figure from AACT before its terms are recorded in the catalog."
+      ],
+      "needs_person": ["maintainer-approval"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0015",
+      "title": "Start dates with no recorded date type in older records",
+      "question": "What else do older registry records lack, beyond the start date type observed missing on the first run?",
+      "why_it_matters": "Readers of any trend over time need to know which years rest on less complete records.",
+      "status": "data-available",
+      "sources": [
+        {"type": "run", "ref": "trial atlas, first real run, 2026-10-10", "tier": "T0", "read_on": null, "note": "Observed: a start date with no type in a large share of in-scope records, all with start years before 2018. Not re-counted here."},
+        {"type": "registry", "ref": "NLM Technical Bulletin item on older ClinicalTrials.gov records; link to be recorded", "tier": "T1", "read_on": "2026-10-10", "note": "It says older records \"may be missing information\". Our inference about the cause is T0."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov"], "access": "api", "already_have": true, "fields_missing": []},
+      "effort": {"size": "S", "estimate": true},
+      "guard": {"ladder": ["computed", "registry-statement-verbatim"], "note": "The share is computed from the snapshot; the bulletin is quoted verbatim; the cause stays an inference."},
+      "must_not_claim": [
+        "Why older records lack the date type, beyond what the registry states.",
+        "That records without a date type are wrong."
+      ],
+      "needs_person": ["none"],
+      "links": {"board": ["T-0130"], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public",
+      "notes": "A data-quality note for the atlas, and a question about the other fields."
+    },
+    {
+      "id": "L-0016",
+      "title": "A measured, quote-verified classifier for registry primary outcomes",
+      "question": "How well does the atlas's quote-verified classifier agree with a frozen, person-labelled set of primary outcomes?",
+      "why_it_matters": "A published agreement measure would let other groups judge whether such a classifier is fit for their own use.",
+      "status": "idea",
+      "sources": [
+        {"type": "literature", "ref": "a quick literature search, 2026-10-10", "tier": "T0", "read_on": null, "note": "No published evaluation of a registry primary-outcome classifier with agreement numbers was found; an empty search is not proof of absence."},
+        {"type": "run", "ref": "trial atlas, first real run, blind challenger, 2026-10-10", "tier": "T0", "read_on": null, "note": "The challenger agreed on 84 percent of 150 sampled entries (95 percent interval 77 to 89); agreement is not correctness."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov"], "access": "api", "already_have": true, "fields_missing": ["a frozen labelled set"]},
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["computed", "lab-position"], "note": "A methods note only after the frozen set is measured; all agreement figures are computed with their intervals."},
+      "must_not_claim": [
+        "That the classifier is accurate on the strength of model-to-model agreement.",
+        "That no such classifier has been published."
+      ],
+      "needs_person": ["clinician-reader", "maintainer-approval"],
+      "links": {"board": ["T-0130"], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0017",
+      "title": "Spanish (es-MX) outcome terms grounded in Spanish open-access sources",
+      "question": "Which Spanish-language open-access sources could ground Mexican Spanish names for the atlas classes?",
+      "why_it_matters": "Spanish-speaking families and clinicians deserve terms that come from Spanish sources, not from a model's translation.",
+      "status": "idea",
+      "sources": [
+        {"type": "run", "ref": "Europe PMC search during the atlas work, 2026-10-10", "tier": "T0", "read_on": null, "note": "Europe PMC returned thin Spanish full text."}
+      ],
+      "data_needed": {"catalog_ids": ["europe-pmc"], "access": "api", "already_have": false, "fields_missing": ["Spanish open-access definitions"], "not_in_catalog": ["other Spanish-language open-access sources"]},
+      "effort": {"size": "M", "estimate": true},
+      "guard": {"ladder": ["open-access-quote", "lab-position"], "note": "A term is used only with a Spanish open-access source whose licence allows it; otherwise it is a lab position the maintainer reviews."},
+      "must_not_claim": [
+        "That a Spanish term is standard or official without a source that says so.",
+        "A machine translation presented as a sourced term."
+      ],
+      "needs_person": ["clinician-reader", "maintainer-approval"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0018",
+      "title": "Single-use outcome instruments as a long tail",
+      "question": "How many outcome instruments in CF trials appear in only one trial, shown as an 'other or single-use instrument' view?",
+      "why_it_matters": "A long tail of single-use instruments makes results hard to pool, and a count shows its size.",
+      "status": "data-available",
+      "sources": [
+        {"type": "literature", "ref": "a preprint review of gastrointestinal outcomes in CF, found in the 2026-10-10 literature search; citation to be recorded", "tier": "T0", "read_on": null, "note": "Agent-read preprint abstract: 172 of 246 instruments were used in only one study. T0."}
+      ],
+      "data_needed": {"catalog_ids": ["clinicaltrials-gov"], "access": "api", "already_have": true, "fields_missing": []},
+      "effort": {"size": "S", "estimate": true},
+      "guard": {"ladder": ["computed", "registry-statement-verbatim"], "note": "Counts are computed; instrument names are shown as registered."},
+      "must_not_claim": [
+        "That a single-use instrument is invalid or poor.",
+        "The preprint's figures as established; they are T0 here."
+      ],
+      "needs_person": ["clinician-reader"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public"
+    },
+    {
+      "id": "L-0019",
+      "title": "Topics raised at a conference, worth checking in the literature",
+      "question": "Which topics raised at a conference have published, open-access evidence we can read and cite?",
+      "why_it_matters": "Conference topics can point to questions researchers are working on now.",
+      "status": "idea",
+      "sources": [
+        {"type": "conference-private", "ref": "private", "tier": "T0", "read_on": null, "note": ""}
+      ],
+      "data_needed": {"catalog_ids": ["europe-pmc"], "access": "api", "already_have": false, "fields_missing": ["published sources for each topic"]},
+      "effort": {"size": "S", "estimate": true},
+      "guard": {"ladder": ["open-access-quote", "lab-position"], "note": "Only published, open-access sources are cited; nothing from the conference itself is repeated."},
+      "must_not_claim": [
+        "Anything a presenter said or showed, or who presented it.",
+        "That a topic is established before a published source is read."
+      ],
+      "needs_person": ["maintainer-approval"],
+      "links": {"board": [], "proposals": [], "prs": []},
+      "created": "2026-10-10",
+      "updated": "2026-10-10",
+      "created_by": {"kind": "model", "model_id": "claude-opus-5-5"},
+      "visibility": "public",
+      "notes": "Details are kept in the maintainer's private folder, not here."
+    }
+  ]
+}
