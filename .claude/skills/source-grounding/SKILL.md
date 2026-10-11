@@ -47,11 +47,12 @@ A verified quote proves only that the words exist. A different model or a person
 
 ## The grounding tool (in progress)
 
-A tool for rung 3 is being built for the atlas (T-0130); its README will be the single source for how to run it. The method: searches for each term go to an open-access literature index with an open-licence filter; a model proposes a short definition quote; a script keeps only a quote that is an exact substring of the article and holds the term; the licence of every hit is checked again. Its search fields are recorded as "to verify on the first real run" (see `references/lessons.md`).
+The tool for rung 3 is `tools/trial_atlas/ground_definitions.py` (it arrives with the grounding change of T-0130); its README is the single source for how to run it. The method: searches for each term go to an open-access literature index with an open-licence filter; a model proposes a short definition quote; a script keeps only a quote that is an exact substring of the article and holds the term; the licence of every hit is checked again. Its search fields are recorded as "to verify on the first real run" (see `references/lessons.md`).
 
 ## Licence rule for quotes
 
 - Quote only from openly licensed text whose licence the tool or a person has confirmed.
+- A quote from an article under a non-commercial licence (for example CC BY-NC) is private evidence only: public text paraphrases it and cites the article, and never republishes the sentence. (The maintainer agreed to this rule on 2026-10-10.)
 - Article text and model outputs stay in private folders, never in a repository.
 - Public text carries short quotes only, within the lab's quotation limit, with the source linked.
 
