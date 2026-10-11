@@ -43,7 +43,7 @@ CASES = [
     ("gi_pancreatic", ["Coefficient of fat absorption", "Faecal elastase"], ["Pancreatitis"]),
     ("glucose_cfrd", ["Change in HbA1c", "Incidence of CF-related diabetes"], ["Glucagon-like peptide levels"]),
     ("liver", ["Change in liver stiffness"], ["Hepatic impairment cohort exposure"]),
-    ("sinus_upper_airway", ["Sinus opacification", "Chronic rhinosinusitis"], ["Sinus rhythm on ECG", "SNOT-22 score"]),
+    ("sinus_upper_airway", ["Sinus opacification", "Chronic rhinosinusitis", "SNOT-22 score"], ["Sinus rhythm on ECG", "Snot on a tissue"]),
     ("cfqr", ["CFQ-R respiratory domain score"], ["Quality of life questionnaire"]),
     ("pro_named_other", ["EQ-5D-5L index"], ["Quality of life"]),
     ("pro_unnamed", ["Quality of life"], ["CFQ-R respiratory domain", "EQ-5D-5L quality of life"]),
@@ -366,7 +366,8 @@ class Lexicon030Test(unittest.TestCase):
     classes added, and the versioning notes. All wording is SYNTHETIC."""
 
     def test_version(self):
-        self.assertEqual(LEX.version, "0.3.0-draft")
+        # 0.3.1-draft and 0.3.2-draft build on 0.3.0-draft; their own pins are in Lexicon031Test and Lexicon032Test
+        self.assertEqual(LEX.version, "0.3.2-draft")
         self.assertIn("versioning", LEX.data)
 
     def test_insulin_like_growth_factor_is_not_insulin(self):
@@ -401,15 +402,18 @@ class Lexicon030Test(unittest.TestCase):
             with self.subTest(text=text):
                 self.assertIn("microbiology_sputum", classes(text))
 
-    def test_faecal_calprotectin_is_one_class(self):
-        self.assertEqual(classes("Fecal calprotectin"), ["inflammation_markers"])
-        self.assertEqual(classes("Faecal calprotectin concentration"), ["inflammation_markers"])
+    def test_faecal_calprotectin_is_gastrointestinal_and_inflammation(self):
+        # 0.3.0-draft tagged faecal calprotectin as inflammation only; 0.3.2-draft tags both (GI-04, Lexicon032Test, proposal)
+        self.assertEqual(classes("Fecal calprotectin"), ["gi_pancreatic", "inflammation_markers"])
+        self.assertEqual(classes("Faecal calprotectin concentration"), ["gi_pancreatic", "inflammation_markers"])
+        self.assertEqual(classes("Sputum calprotectin"), ["inflammation_markers"])
         self.assertIn("gi_pancreatic", classes("Faecal elastase"))
 
-    def test_snot22_is_one_class(self):
+    def test_snot22_is_named_and_sinus(self):
+        # 0.3.0-draft tagged SNOT-22 as a named instrument only; 0.3.1-draft tags it as both (Lexicon031Test, proposal)
         for text in ("SNOT-22 score", "Sino-Nasal Outcome Test 22", "Change in SNOT 22"):
             with self.subTest(text=text):
-                self.assertEqual(classes(text), ["pro_named_other"])
+                self.assertEqual(classes(text), ["sinus_upper_airway", "pro_named_other"])
         self.assertEqual(classes("Sinus symptoms"), ["sinus_upper_airway"])
 
     def test_the_fev1_fvc_ratio_is_other_spirometry(self):
@@ -511,11 +515,12 @@ class Lexicon030Test(unittest.TestCase):
         self.assertEqual(classes("Symptom severity"), ["pro_unnamed"])
 
     def test_changed_rules_carry_a_version_note(self):
+        # the newest note comes first (0.3.1-draft), the 0.3.0-draft note is kept after it
         for r in LEX.data["rules"]:
             if "changed" in r:
                 with self.subTest(rule=r["id"]):
-                    self.assertTrue(r["changed"].startswith("0.3.0-draft:"))
-        changed = {r["id"] for r in LEX.data["rules"] if "changed" in r}
+                    self.assertTrue(r["changed"].startswith(("0.3.2-draft:", "0.3.1-draft:", "0.3.0-draft:")))
+        changed = {r["id"] for r in LEX.data["rules"] if "0.3.0-draft:" in r.get("changed", "")}
         self.assertEqual(changed, {"FEV1-01", "FEV1-02", "SPIRO-02", "LUNGFN-V1", "EXAC-01", "GI-01", "GLU-01", "LIVER-01", "SINUS-01",
                                    "MICRO-01", "MICRO-03", "SURV-01", "SAFE-UNSPEC", "PK-01", "FEAS-01"})
 
@@ -651,7 +656,8 @@ class Lexicon030Round2Test(unittest.TestCase):
         n = 20000
         texts = ["a" * n, "abc " * (n // 4), "clearance of " * (n // 13), "FEV1/" * (n // 5), "1" * n, "sputum " * (n // 7),
                  "incidence of a " * (n // 15), "mycin" * (n // 5), "PA-" * (n // 3), "R5-" * (n // 3), "a-" * (n // 2),
-                 "oxygen uptake " * (n // 14), "a " * (n // 2), "-" * n]
+                 "oxygen uptake " * (n // 14), "a " * (n // 2), "-" * n,
+                 "Abc-" * (n // 4), "Abc Def " * (n // 8)]   # hyphenated and spaced runs of capitalised words (PRO-06 was quadratic on them)
         rules = [(r["id"], r["re"]) for r in LEX.rules + LEX.composite] + [("NS-01", LEX.placeholder), ("NS-V1", LEX.vague_ns)]
         rules += [(f["id"], f["re"]) for f in LEX.fallback_restrictions]
         rules += [(r["id"], r["sup_re"]) for r in LEX.rules if r.get("sup_re")]
@@ -745,6 +751,330 @@ class Lexicon030Round2Test(unittest.TestCase):
     def test_suppressed_by_pattern_is_checked_in_the_same_field(self):
         self.assertEqual(classes("Mucociliary clearance rate", "Tc-sulfur colloid clearance; DTPA absorption was also measured."),
                          ["mucociliary_clearance"])
+
+
+class Lexicon031Test(unittest.TestCase):
+    """0.3.1-draft: rule-level fixes from a labelled development set (proposals/2026-10-11-lexicon-0.3.1-proposal.md). One test per
+    changed or added rule, each with a positive and a negative. All wording is SYNTHETIC (made-up instrument and drug-free phrases)."""
+
+    CHANGED = {"SPIRO-01", "SPIRO-02", "ICM-01", "CFTRBIO-02", "GI-01", "LIVER-01", "SINUS-01", "PRO-02", "MICRO-01", "MICRO-03",
+               "SPUT-01", "INFL-01", "INFL-02", "OXS-01", "HCU-01", "SURV-01", "SURV-04", "PK-01", "PK-02", "PK-03", "FEAS-01", "FEAS-02"}
+    ADDED = {"SINUS-02", "PRO-06"}
+
+    def test_version_and_change_notes(self):
+        self.assertTrue(LEX.version.startswith("0.3."))           # 0.3.2-draft notes come first; the 0.3.1 notes are kept after them
+        noted = {r["id"] for r in LEX.data["rules"] if "0.3.1-draft:" in r.get("changed", "")}
+        self.assertEqual(noted, self.CHANGED)
+        for rid in self.ADDED:
+            r = next(x for x in LEX.data["rules"] if x["id"] == rid)
+            with self.subTest(rule=rid):
+                self.assertIn("Added in 0.3.1-draft", r["note"])
+        # no class added, removed or renamed
+        self.assertEqual(len(LEX.class_order), 37)
+
+    def test_pro06_named_instrument(self):
+        for text in ("Example Coping Questionnaire (ECQ-II)", "Change in the Family Routine Inventory", "Partners in Example Scale score"):
+            with self.subTest(text=text):
+                self.assertEqual(classes(text), ["pro_named_other"])
+        for text in ("Pain on a Visual Analogue Scale", "Numeric Rating Scale for breathlessness", "Change in CF Questionnaire score"):
+            with self.subTest(negative=text):
+                self.assertNotIn("pro_named_other", classes(text))
+        # the CFQ-R's own domains are called scales; a named activity questionnaire is physical activity
+        self.assertEqual(classes("CFQ-R Respiratory Symptoms Scale"), ["cfqr"])
+        self.assertEqual(classes("Physical activity by the Example Activity Estimation Scale"), ["physical_activity"])
+
+    def test_pro02_gives_way_to_a_named_instrument_and_reads_self_report(self):
+        self.assertEqual(classes("Coping measured by the Example Coping Questionnaire"), ["pro_named_other"])
+        self.assertEqual(classes("Coping style", "Measured by the Example Flexibility Questionnaire."), ["pro_named_other"])
+        self.assertEqual(classes("Self-reported sleep quality"), ["pro_unnamed"])
+        self.assertEqual(classes("Quality of life questionnaire"), ["pro_unnamed"])
+        self.assertNotIn("pro_unnamed", classes("Self-reporting bias in diaries"))
+
+    def test_sinus01_sinus02_snot_is_named_and_sinus(self):
+        self.assertEqual(classes("Sino-Nasal Outcome Test 22 score"), ["sinus_upper_airway", "pro_named_other"])
+        self.assertEqual(classes("SNOT-20 total"), ["sinus_upper_airway", "pro_named_other"])
+        self.assertNotIn("sinus_upper_airway", classes("Snotty nose reported by parents"))
+        self.assertNotIn("sinus_upper_airway", classes("Sinus rhythm on ECG"))
+
+    def test_spiro01_named_flows_drop_the_vague_tag(self):
+        for text in ("FEF75 in percent predicted", "Pulmonary function: MEF50", "Slow vital capacity as a measure of lung function"):
+            with self.subTest(text=text):
+                self.assertEqual(classes(text), ["spirometry_other"])
+        self.assertEqual(classes("Lung function"), ["lung_function_unspecified"])
+        self.assertNotIn("spirometry_other", classes("Vital status at one year"))
+
+    def test_spiro02_forced_expiratory_manoeuvres(self):
+        self.assertEqual(classes("Lung function", "Forced expiratory manoeuvres at each visit."), ["spirometry_other"])
+        self.assertNotIn("spirometry_other", classes("Expiratory muscle training manoeuvres"))
+
+    def test_icm01_needs_rectal_or_intestinal_context(self):
+        self.assertEqual(classes("Short-circuit current in rectal biopsies"), ["icm"])
+        self.assertEqual(classes("Intestinal current measurement"), ["icm"])
+        self.assertNotIn("icm", classes("Short-circuit current across cultured airway cells"))
+
+    def test_cftrbio02_takes_the_bare_chamber_measurement(self):
+        self.assertEqual(classes("Short-circuit current across cultured airway cells"), ["cftr_biomarker_other"])
+        self.assertEqual(classes("Channel function", "Assessed in an Ussing chamber."), ["cftr_biomarker_other"])
+        self.assertNotIn("cftr_biomarker_other", classes("Short-circuit current in rectal biopsies"))
+
+    def test_gi01_pancreatic_insufficiency_only_as_an_outcome(self):
+        self.assertIn("gi_pancreatic", classes("Coefficient of nitrogen absorption"))
+        self.assertIn("gi_pancreatic", classes("Incidence of exocrine pancreatic insufficiency"))
+        self.assertEqual(classes("Safety of a new enzyme in participants with exocrine pancreatic insufficiency"), ["safety_tolerability"])
+
+    def test_liver01_positive_forms(self):
+        for text in ("Elastography of the liver", "Liver fat fraction", "Liver disease score"):
+            with self.subTest(text=text):
+                self.assertEqual(classes(text), ["liver"] if "Elastography" not in text else ["liver", "imaging"])
+        self.assertNotIn("liver", classes("Choline kinetics", "Bile acid output by the liver."))
+        self.assertNotIn("liver", classes("Cod liver oil intake"))
+
+    def test_micro03_sputum_as_a_sample_gives_way(self):
+        self.assertEqual(classes("Sputum samples"), ["microbiology_sputum"])
+        for text, cls in (("Sputum TNFα", "inflammation_markers"), ("Sputum IL-1ß", "inflammation_markers"),
+                          ("Peak sputum concentration", "pharmacokinetics"), ("Sputum glutathione concentration", "oxidative_stress"),
+                          ("Sputum expectorated per session", "sputum_properties")):
+            with self.subTest(text=text):
+                self.assertEqual(classes(text), [cls])
+
+    def test_micro01_colonisation_and_colony_counts(self):
+        self.assertEqual(classes("Nasal bacterial colonisation"), ["microbiology_sputum"])
+        self.assertEqual(classes("Sputum colony count after treatment"), ["microbiology_sputum"])
+        self.assertNotIn("microbiology_sputum", classes("Colony stimulating factor levels"))
+
+    def test_sput01_sputum_expectorated(self):
+        self.assertEqual(classes("Sputum expectorated during the session"), ["sputum_properties"])
+        self.assertNotIn("sputum_properties", classes("Sputum expectorated for culture"))
+
+    def test_infl01_cell_counts_and_proteases(self):
+        for text in ("Blood neutrophils", "Quantification of blood neutrophils", "PMN counts in nasal lavage", "Proteinase 3 activity",
+                     "Cathepsin G in sputum", "Leukotriene B4 levels"):
+            with self.subTest(text=text):
+                self.assertIn("inflammation_markers", classes(text))
+        for text in ("Phagocytosis by blood neutrophils", "Gene expression in blood neutrophils", "Leukotriene receptor antagonist use"):
+            with self.subTest(negative=text):
+                self.assertNotIn("inflammation_markers", classes(text))
+
+    def test_infl02_tnf_alpha(self):
+        self.assertEqual(classes("Serum TNF-alpha"), ["inflammation_markers"])
+        self.assertNotIn("inflammation_markers", classes("TNFR2 shedding"))
+
+    def test_oxs01_nitrotyrosine_spelling_and_nrf2(self):
+        self.assertEqual(classes("Plasma 3-nitrotyrosin"), ["oxidative_stress"])
+        self.assertEqual(classes("Nrf2 activity in blood cells"), ["oxidative_stress"])
+        self.assertNotIn("oxidative_stress", classes("Nrf2 activator dose escalation"))
+
+    def test_hcu01_counts_not_anchors(self):
+        for text in ("Number of antibiotic courses", "Time to first IV antibiotic course", "Number of clinic visits", "Length of hospitalization"):
+            with self.subTest(text=text):
+                self.assertIn("healthcare_use", classes(text))
+        for text in ("FEV1 when the antibiotic course ends", "Change in lung function during hospitalization",
+                     "Score at the first clinic visit", "Number of pulmonary exacerbations requiring hospitalization"):
+            with self.subTest(negative=text):
+                self.assertNotIn("healthcare_use", classes(text))
+        # the composite with hospitalisation as its own component keeps both classes
+        self.assertEqual(classes("Composite of time to first pulmonary exacerbation or hospitalization"), ["exacerbations", "healthcare_use"])
+
+    def test_surv01_cell_survival_is_not_survival(self):
+        self.assertEqual(classes("Survival"), ["survival_transplant"])
+        for text in ("Neutrophil survival/apoptosis ratio", "Bacterial survival in sputum", "Cell survival in culture"):
+            with self.subTest(text=text):
+                self.assertNotIn("survival_transplant", classes(text))
+
+    def test_surv04_bare_graft_is_not_a_transplant_outcome(self):
+        self.assertEqual(classes("Lung transplant"), ["survival_transplant"])
+        self.assertIn("survival_transplant", classes("Graft survival at one year"))
+        self.assertNotIn("survival_transplant", classes("Graft colonisation by bacteria"))
+        self.assertNotIn("survival_transplant", classes("Primary graft function score"))
+
+    def test_pk01_pk02_peak_concentration_and_glucose_curves(self):
+        for text in ("Peak sputum concentration", "Concentration of tobramycin in the sputum", "Area under the concentration-time curve"):
+            with self.subTest(text=text):
+                self.assertIn("pharmacokinetics", classes(text))
+        for text in ("Plasma glucose area under the curve", "Area under the curve for plasma glucose", "Glucose AUC during the test",
+                     "Serum concentration of inflammatory markers"):
+            with self.subTest(negative=text):
+                self.assertNotIn("pharmacokinetics", classes(text))
+
+    def test_pk03_antibiotic_concentrations(self):
+        self.assertIn("pharmacokinetics", classes("Sputum antibiotic levels after nebulisation"))
+        self.assertNotIn("pharmacokinetics", classes("Antibiotic courses per year"))
+
+    def test_feas01_misspelling(self):
+        self.assertEqual(classes("Feasability evaluation"), ["feasibility_adherence"])
+        self.assertNotIn("feasibility_adherence", classes("Feasting days"))
+
+    def test_feas02_study_discontinuation_not_use_errors(self):
+        self.assertEqual(classes("Children who discontinued the trial early"), ["feasibility_adherence"])
+        self.assertNotIn("feasibility_adherence", classes("Critical use errors with the inhaler"))
+        self.assertNotIn("feasibility_adherence", classes("Participants who discontinued the study drug"))
+
+    # ---- DU-01: a generic patient-reported measure whose description names the instrument
+
+    def test_du01_description_names_the_instrument(self):
+        cases = (("Quality of life", "Measured with the CFQ-R at each visit.", ["cfqr"]),
+                 ("Satisfaction scores", "Rated on the Example Therapy Rating Questionnaire.", ["pro_named_other"]),
+                 ("Health-related quality of life", "Scored with the EQ-5D-5L.", ["pro_named_other"]),
+                 ("Symptom burden", "The SNOT-22 total score.", ["sinus_upper_airway", "pro_named_other"]))
+        for measure, desc, expected in cases:
+            with self.subTest(measure=measure):
+                t = tag(measure, desc)
+                self.assertEqual([x["class"] for x in t["tags"]], expected)
+                for x in t["tags"]:
+                    self.assertTrue(x["from_description"])
+                    self.assertEqual(desc[x["start"]:x["end"]], x["text"])          # the span is exact, in the description
+                    self.assertEqual(x["field"], "description")
+
+    def test_du01_negative_no_instrument_in_the_description(self):
+        for desc in ("", "Self-rated on a scale from 0 to 10.", "A short questionnaire about daily life.", "Sinus symptoms are also asked about.",
+                     "Pain on a Visual Analogue Scale.", "FEV1 is also recorded."):
+            with self.subTest(desc=desc):
+                t = tag("Quality of life", desc)
+                self.assertEqual([x["class"] for x in t["tags"]], ["pro_unnamed"])
+                self.assertFalse(t["tags"][0]["from_description"])
+
+    def test_du01_never_touches_a_measure_that_named_another_class(self):
+        # the measure names a non-PRO class: the description is not read, even if it names an instrument
+        self.assertEqual(classes("Change in FEV1", "Quality of life by the CFQ-R is also measured."), ["fev1"])
+        self.assertEqual(classes("FEV1 and quality of life", "Quality of life by the CFQ-R."), ["fev1", "pro_unnamed"])
+        self.assertEqual(classes("Daily step count and satisfaction", "Satisfaction on the EQ-5D-5L."), ["pro_unnamed", "physical_activity"])
+        # a measure that already names an instrument keeps its own classes
+        self.assertEqual(classes("EQ-5D-5L index", "The CFQ-R is also given."), ["pro_named_other"])
+        # a measure with no class still uses the ordinary earliest-match fallback
+        self.assertEqual(classes("Primary endpoint", "Change in sweat chloride; the CFQ-R is also given."), ["sweat_chloride"])
+
+    def test_du01_is_declared_and_checked_at_load(self):
+        u = next(x for x in LEX.data["matching"]["description_upgrades"] if x["id"] == "DU-01")
+        self.assertEqual(u["measure_classes"], ["pro_unnamed"])
+        self.assertEqual(u["replaces"], ["pro_unnamed"])
+        self.assertEqual({LEX.data["rules"][[r["id"] for r in LEX.data["rules"]].index(rid)]["class"] for rid in u["description_rules"]},
+                         {"cfqr", "pro_named_other", "sinus_upper_airway"})
+        for key, bad in (("description_rules", ["NOPE-01"]), ("description_rules", []), ("measure_classes", ["nope"]),
+                         ("replaces", ["fev1"])):
+            data = json.loads(json.dumps(LEX.data))
+            data["matching"]["description_upgrades"][0][key] = bad
+            with self.subTest(key=key, bad=bad), self.assertRaises(ValueError):
+                lexicon.Lexicon(data)
+
+
+class Lexicon032Test(unittest.TestCase):
+    """0.3.2-draft: a second round from a larger development set (proposals/2026-10-11-lexicon-0.3.2-proposal.md). One test per changed
+    or added rule or mechanism, each with a positive and a negative. All wording is SYNTHETIC."""
+
+    CHANGED = {"PK-01", "PK-02", "GI-03", "PRO-01", "PRO-04", "PRO-06", "INFL-01", "SPUT-01", "FEAS-01", "FEAS-02", "MICRO-03"}
+    ADDED = {"PK-04", "PK-05", "MCC-02", "GI-04", "GI-05"}
+
+    def test_version_and_change_notes(self):
+        self.assertEqual(LEX.version, "0.3.2-draft")
+        noted = {r["id"] for r in LEX.data["rules"] if r.get("changed", "").startswith("0.3.2-draft:")}
+        self.assertEqual(noted, self.CHANGED)
+        for rid in self.ADDED:
+            r = next(x for x in LEX.data["rules"] if x["id"] == rid)
+            with self.subTest(rule=rid):
+                self.assertIn("Added in 0.3.2-draft", r["note"])
+        self.assertEqual(len(LEX.class_order), 37)
+
+    def test_word_repetitions_in_changed_and_added_rules_are_bounded(self):
+        import re
+        for r in LEX.data["rules"]:
+            if r["id"] in self.CHANGED | self.ADDED:
+                with self.subTest(rule=r["id"]):
+                    self.assertIsNone(re.search(r"\[[^\]]*\][+*]", r["pattern"]), "a character class repeated without a bound")
+
+    def test_pk01_pk04_pk05_area_under_the_curve_is_weak(self):
+        for text in ("Area under the plasma concentration-time curve", "Area under the curve from time zero to 24 hours", "AUC0-24",
+                     "Plasma area under the curve of the study drug"):
+            with self.subTest(text=text):
+                self.assertEqual(classes(text), ["pharmacokinetics"])
+        for text, cls in (("Area under the curve of MCC over 90 minutes", "mucociliary_clearance"), ("FEV1 area under the curve 0-4 hours", "fev1"),
+                          ("Small bowel water content AUC", "gi_pancreatic"), ("Glucose AUC during the tolerance test", "glucose_cfrd")):
+            with self.subTest(negative=text):
+                self.assertEqual(classes(text), [cls])
+
+    def test_micro03_gives_way_to_a_weak_drug_curve(self):
+        self.assertEqual(classes("Sputum AUC of the inhaled drug"), ["pharmacokinetics"])
+        self.assertEqual(classes("Sputum samples"), ["microbiology_sputum"])
+
+    def test_pk02_keeps_its_other_acronyms(self):
+        self.assertEqual(classes("Cmax and Tmax"), ["pharmacokinetics"])
+        self.assertNotIn("pharmacokinetics", classes("cmax"))
+
+    def test_mcc02_abbreviation(self):
+        self.assertEqual(classes("Whole-lung MCC at 60 minutes"), ["mucociliary_clearance"])
+        self.assertNotIn("mucociliary_clearance", classes("mcc of the device"))
+
+    def test_gi03_gut_water_content(self):
+        self.assertEqual(classes("Colonic water content by MRI"), ["gi_pancreatic", "imaging"])
+        self.assertNotIn("gi_pancreatic", classes("Water content of the nebuliser chamber"))
+
+    def test_gi04_gi05_intestinal_inflammation_and_symptom_instruments(self):
+        self.assertEqual(classes("Change in gut inflammation"), ["gi_pancreatic", "inflammation_markers"])
+        self.assertEqual(classes("IBS Severity Scoring System total"), ["gi_pancreatic", "pro_named_other"])
+        self.assertEqual(classes("Number of children with IBS"), ["gi_pancreatic"])
+        self.assertEqual(classes("Reflux symptoms in infants"), ["gi_pancreatic"])
+        for text in ("Airway inflammation", "Pulmonary calprotectin", "Reflux of the solution into the cup", "ibs"):
+            with self.subTest(negative=text):
+                self.assertNotIn("gi_pancreatic", classes(text))
+
+    def test_pro01_pro04_spellings(self):
+        self.assertEqual(classes("Peds QL generic score"), ["pro_named_other"])
+        self.assertEqual(classes("Rome IV diagnostic questionnaire"), ["gi_pancreatic", "pro_named_other"])
+        self.assertNotIn("pro_named_other", classes("Rome visit schedule"))
+
+    def test_pro06_one_word_name_with_its_abbreviation(self):
+        self.assertEqual(classes("Self-Example Questionnaire for Children (SEQ-C)"), ["pro_named_other"])
+        self.assertEqual(classes("Coping Inventory (CI-2) total"), ["pro_named_other"])
+        self.assertNotIn("pro_named_other", classes("Body Mass Index (BMI)"))
+        self.assertNotIn("pro_named_other", classes("Likert Scale (LS) of comfort"))
+
+    def test_infl01_sputum_elastase_and_cell_count(self):
+        self.assertEqual(classes("Change in sputum elastase activity"), ["inflammation_markers"])
+        self.assertEqual(classes("Neutrophil cell count in lavage"), ["inflammation_markers"])
+        self.assertNotIn("inflammation_markers", classes("Faecal elastase"))
+
+    def test_sput01_wet_and_dry_weight(self):
+        self.assertEqual(classes("Sputum wet and dry weight"), ["sputum_properties"])
+        self.assertNotIn("sputum_properties", classes("Sputum culture and weight of the child"))
+
+    def test_feas01_feas02_usability_and_reasons_for_leaving(self):
+        for text in ("Usability of the inhaler app", "Ease of use of the device", "Participants who discontinued the study due to adverse events"):
+            with self.subTest(negative=text):
+                self.assertNotIn("feasibility_adherence", classes(text))
+        self.assertEqual(classes("Example App Usability Scale"), ["pro_named_other"])
+        self.assertEqual(classes("Children who discontinued the trial early"), ["feasibility_adherence"])
+        self.assertEqual(classes("Acceptability of the intervention"), ["feasibility_adherence"])
+
+    def test_du02_safety_measure_with_lung_tests_named_in_the_description(self):
+        t = tag("Tolerability measured by pulmonary function tests", "Spirometry: FEV1 and FVC before and after the dose.")
+        self.assertEqual([x["class"] for x in t["tags"]], ["fev1", "spirometry_other", "safety_tolerability"])
+        self.assertFalse(t["flags"]["vague"])
+        self.assertTrue(all(x["from_description"] for x in t["tags"] if x["class"] != "safety_tolerability"))
+        # no named lung measure in the description: the vague tag stays
+        self.assertEqual(classes("Tolerability measured by pulmonary function tests", "Done at each visit."),
+                         ["lung_function_unspecified", "safety_tolerability"])
+        # a safety-only measure never gets a lung class this way
+        self.assertEqual(classes("Number of participants with adverse events", "FEV1 is also measured."), ["safety_tolerability"])
+        # a vague measure alone still uses the ordinary fallback
+        self.assertEqual(classes("Lung function", "FEV1 percent predicted."), ["fev1"])
+
+    def test_fc01_two_marker_families_in_one_description(self):
+        t = tag("Breath sample analysis", "Levels of nitrotyrosine and neutrophil elastase in the sample.")
+        self.assertEqual([x["class"] for x in t["tags"]], ["inflammation_markers", "oxidative_stress"])
+        self.assertTrue(all(x["from_description"] for x in t["tags"]))
+        # a class outside the group is not added
+        self.assertEqual(classes("Breath sample analysis", "Nitrotyrosine levels; FEV1 is also recorded."), ["oxidative_stress"])
+
+    def test_fc02_gi_measure_and_its_questionnaire_in_one_description(self):
+        self.assertEqual(classes("Mean score", "Gastroesophageal reflux disease symptoms scored with the Example Reflux Symptom Questionnaire."),
+                         ["gi_pancreatic", "pro_named_other"])
+        self.assertEqual(classes("Mean score", "Reflux symptoms; the CFQ-R is also given."), ["gi_pancreatic"])
+
+    def test_new_mechanisms_are_checked_at_load(self):
+        for bad in (["nope", "fev1"], ["fev1"]):
+            data = json.loads(json.dumps(LEX.data))
+            data["matching"]["fallback_companions"][0]["classes"] = bad
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                lexicon.Lexicon(data)
 
 
 class SnapshotTaggingTest(unittest.TestCase):

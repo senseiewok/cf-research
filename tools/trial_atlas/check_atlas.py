@@ -11,7 +11,13 @@ What it does, in order:
      (case and whitespace included) of that entry's measure, description or time frame. Only accepted tags are counted.
   3. Metrics on the frozen set (a labelling sheet a person filled in, and its sealed key): per-class precision and recall with the
      number of checked rows and a Wilson 95% interval ("too few to estimate" under 10 positives), micro and macro F1, the shares of
-     entries tagged by rule, by model, as other, as not stated and left unclassified, and the model quote-rejection rate.
+     entries tagged by rule, by model, as other, as not stated and left unclassified, and the model quote-rejection rate. A key
+     with design "census-v1" (proposals/2026-10-11-frozen-census-design.md) is checked against the frame it claims (strata,
+     populations, weights, the model-tags hash, each row's re-derived stratum) and scored with weighted precision and recall and
+     a seeded stratified bootstrap interval; `other` is not scored there. A census key whose sample_exclusion is a record needs
+     --frozen-exclude (the development ids its sample strata left out; the hash must match) and its sample strata are re-derived
+     without them; a key whose sample_exclusion is null refuses the file. --model-tags-plain prints the plain model route beside
+     the consensus-filtered --model-tags (counts only; it changes no decision).
   4. Negative controls (--negative-controls): canary model tags with false quotes must all be rejected; planted non-CF ids must all be
      excluded by scope; the tagger over a non-CF snapshot must give near zero CF-specific classes and near zero of the classes the
      lexicon marks negative_control (exacerbations). By default they run on the synthetic fixtures; --canary, --planted and
@@ -27,6 +33,11 @@ What it does, in order:
        S3 the two retrieval routes differ by more than 10% unexplained, or there is no recall route;
        S4 the controls were not run, ran on synthetic fixtures instead of --canary, --planted and --control-snapshot, or the control
           snapshot holds fewer than MIN_CONTROL_ENTRIES (50) outcome entries.
+     --withhold-failing (census-v1 keys only): a shown class that fails S1's per-class tests (no labelled positive, or precision
+     or recall below its threshold where estimable) is WITHHELD instead of blocking, computed from the metrics and THRESHOLDS only;
+     every other stop rule still blocks. It prints one WITHHELD line per class, the entries and studies that carry only withheld
+     classes, and "RESULT: PUBLICATION ALLOWED WITH K WITHHELD CLASS(ES)" (exit 0) when nothing else blocks. --record FILE writes
+     a canonical run record (class ids and counts only, never overwritten); --check-record FILE verifies one on its own.
      A failed control or a rerun that does not reproduce counts and hashes is an integrity failure (exit 1). The thresholds are the
      reviewer's judgement, not a standard; they may be changed before the frozen set is labelled and not after.
 Text that came from a model, a file or the registry is printed with control characters removed.
@@ -34,8 +45,11 @@ Text that came from a model, a file or the registry is printed with control char
 No model is called. No network. Every number printed comes from the files given.
 
 Usage:
-  python check_atlas.py --snapshot DIR --tags tags.json --counts counts.json [--model-tags FILE] [--exclude FILE] [--explained FILE]
-                        [--frozen-sheet SHEET.csv --frozen-key KEY.json] [--negative-controls] [--drift-only]
+  python check_atlas.py --snapshot DIR --tags tags.json --counts counts.json [--model-tags FILE [--model-tags-plain FILE]] [--exclude FILE]
+                        [--explained FILE]
+                        [--frozen-sheet SHEET.csv --frozen-key KEY.json [--frozen-exclude IDS.json]] [--negative-controls]
+                        [--drift-only] [--withhold-failing [--record RECORD.json]]
+  python check_atlas.py --check-record RECORD.json                                         verify a run record (no snapshot)
   python check_atlas.py --snapshot DIR --tags tags.json --write-counts counts.json [...]   write the counts file (no check)
   python check_atlas.py --verify-model-tags FILE --snapshot DIR --tags tags.json          only the quote check, one line per tag
   python check_atlas.py --negative-controls [--controls-only]                            only the controls, on the synthetic fixtures
@@ -52,6 +66,8 @@ import csv
 import hashlib
 import json
 import math
+import random
+import re
 import sys
 import tempfile
 from datetime import datetime, timezone
@@ -600,6 +616,469 @@ def metrics(gold: dict[str, set], predicted: dict[str, set], classes: list[str],
             "macro_f1": (sum(f1s) / len(f1s)) if f1s else None, "macro_over_classes": len(f1s)}
 
 
+# ------------------------------------------------------------------ the census design (key design "census-v1")
+# proposals/2026-10-11-frozen-census-design.md. A key with no "design" field is the old stratified draw and keeps its meaning.
+
+CENSUS_DESIGN = "census-v1"
+CENSUS_STRATA = ("census:small", "census:unclassified", "census:not_stated")
+SAMPLE_PREFIX = "sample:"
+CENSUS_ONLY_KEY_FIELDS = ("strata", "small_max", "large_per_class", "model_tags_sha256",
+                          "sample_exclusion")          # a key with any of these is a census key
+UNSCORED_CLASSES = ("other",)          # the tools never predict it as a measure class; a residual, not scored
+BOOTSTRAP_RESAMPLES = 2000
+WEIGHT_TOLERANCE = 1e-9
+
+
+def model_tags_digest(path) -> str | None:
+    """sha256 of the model-tags file's bytes (the key's model_tags_sha256); None when no file is given."""
+    if path is None:
+        return None
+    try:
+        return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    except OSError as exc:
+        raise UsageError(f"cannot read the model-tags file {path}: {exc}") from None
+
+
+def sample_exclusion_ids(data) -> list[str]:
+    """The ids of a sample-exclusion file's parsed JSON (the development entries the sampled strata must not draw from).
+    ValueError unless it is a JSON list of strings."""
+    if not isinstance(data, list) or not all(isinstance(x, str) for x in data):
+        raise ValueError("the sample-exclusion file must hold a JSON list of entry ids (strings)")
+    return data
+
+
+def sample_exclusion_digest(ids) -> str:
+    """sha256 of the distinct ids sorted, joined by newlines, utf-8: the hash the key's sample_exclusion records. Every id in the
+    file counts, those outside the frame included, so the hash names the file's content whatever its order or duplicates."""
+    return hashlib.sha256("\n".join(sorted(set(ids))).encode("utf-8")).hexdigest()
+
+
+def read_sample_exclusion(path) -> list[str]:
+    """The ids of a --frozen-exclude file. UsageError when it cannot be read or is not a JSON list of strings."""
+    try:
+        return sample_exclusion_ids(read_json(path, "sample-exclusion file"))
+    except ValueError as exc:
+        raise UsageError(f"{path}: {exc}") from None
+
+
+def census_frame(tag_entries: list[dict], accepted_model: list[dict]) -> dict[str, dict]:
+    """The frame: every in-scope entry with primary-outcome wording, as {entry_id: {"status", "classes"}}, where the classes are the
+    final classes (rule tags, or the accepted model tags of an entry the rules left unclassified) and the status is the rules'
+    status ("unclassified" only when no model tag was accepted either)."""
+    model_by: dict[str, list[dict]] = {}
+    for t in accepted_model:
+        model_by.setdefault(t["entry_id"], []).append(t)
+    frame = {}
+    for e in tag_entries:
+        if e["flags"].get("no_primary_outcome"):
+            continue
+        frame[e["entry_id"]] = {"status": e["status"], "classes": final_classes(e, model_by)}
+    return frame
+
+
+def frame_class_counts(frame: dict[str, dict], lex) -> dict[str, int]:
+    """{class: number of frame entries that carry it}, in the lexicon's class order."""
+    counts = {c: 0 for c in lex.class_order}
+    for f in frame.values():
+        for c in set(f["classes"]):
+            counts[c] = counts.get(c, 0) + 1
+    return counts
+
+
+def census_strata(frame: dict[str, dict], lex, small_max: int) -> dict[str, str]:
+    """{entry_id: stratum}, assigned in the design's order: census:small (carries a class with small_max or fewer frame entries),
+    census:unclassified (no accepted class), census:not_stated (status not_stated), else sample:<the entry's rarest class, ties by
+    the lexicon's class order>. The class not_stated is never small or large: its entries are the census:not_stated stratum (the
+    proposal gives not_stated its own census stratum; make_labelling_sheet.py draws the same way)."""
+    counts = frame_class_counts(frame, lex)
+    order = {c: i for i, c in enumerate(lex.class_order)}
+    out = {}
+    for eid, f in frame.items():
+        classes = [c for c in dict.fromkeys(f["classes"]) if c != "not_stated"]
+        if any(counts[c] <= small_max for c in classes):
+            out[eid] = "census:small"
+        elif f["status"] == "not_stated":            # tested before "no class": a not_stated entry's only class was set aside above
+            out[eid] = "census:not_stated"
+        elif not classes:
+            out[eid] = "census:unclassified"
+        else:
+            out[eid] = SAMPLE_PREFIX + min(classes, key=lambda c: (counts[c], order.get(c, len(order))))
+    return out
+
+
+def _is_int(x) -> bool:
+    return isinstance(x, int) and not isinstance(x, bool)
+
+
+def sample_exclusion_problems(key: dict, frame: dict[str, dict], exclude_ids: list[str] | None) -> tuple[list[str], set[str]]:
+    """(problems, the excluded ids to apply). A key whose sample_exclusion is null (or absent) takes no exclusion file; a key whose
+    sample_exclusion is a record needs the file, with the recorded hash and the recorded count of ids that sit in the frame. When
+    the record and the file disagree, no exclusion is applied (the binding has already failed)."""
+    recorded = key.get("sample_exclusion")
+    if recorded is None:
+        if exclude_ids is not None:
+            return ["the key was drawn with no sample exclusion, but --frozen-exclude was given"], set()
+        return [], set()
+    if not (isinstance(recorded, dict) and _is_int(recorded.get("count")) and isinstance(recorded.get("sha256"), str)):
+        return ["the key's sample_exclusion is neither null nor a record with a whole-number count and a sha256"], set()
+    if exclude_ids is None:
+        return ["the key's sampled strata exclude development entries, but no --frozen-exclude file was given"], set()
+    if sample_exclusion_digest(exclude_ids) != recorded["sha256"]:
+        return ["the --frozen-exclude file's hash differs from the key's sample_exclusion sha256"], set()
+    excluded = set(exclude_ids) & set(frame)
+    if len(excluded) != recorded["count"]:
+        return [f"the key's sample_exclusion count {recorded['count']} differs from the {len(excluded)} excluded id(s) in this "
+                "frame"], set()
+    return [], excluded
+
+
+def census_binding_problems(key: dict, tag_entries: list[dict], accepted_model: list[dict], lex, model_tags_path,
+                            exclude_ids: list[str] | None = None) -> list[str]:
+    """Why a census-v1 key does not describe this frame (empty when it does): its strata, populations, drawn counts (a census
+    stratum in full, a sample stratum min(population, large_per_class)) and weights, the model-tags hash, and each drawn row's
+    stratum re-derived from the tags, the accepted model tags and the key's small_max. exclude_ids are the ids of the
+    --frozen-exclude file (None when none was given): a key with a sample_exclusion record needs them, its sample strata's
+    populations leave them out, and no row of a sample stratum may be one of them."""
+    frame = census_frame(tag_entries, accepted_model)
+    problems, excluded = sample_exclusion_problems(key, frame, exclude_ids)
+    for field in ("small_max", "large_per_class", "seed"):
+        if not _is_int(key.get(field)):
+            problems.append(f"the census key has no whole-number {field}")
+    strata = key.get("strata")
+    if not isinstance(strata, dict) or not strata:
+        problems.append("the census key has no strata")
+        return problems
+    bad_shape = [n for n, s in strata.items() if not (isinstance(s, dict) and s.get("kind") in ("census", "sample")
+                                                       and _is_int(s.get("population")) and _is_int(s.get("drawn"))
+                                                       and isinstance(s.get("weight"), (int, float)) and not isinstance(s.get("weight"), bool))]
+    if bad_shape:
+        problems.append(f"{len(bad_shape)} stratum record(s) lack a kind, a whole-number population and drawn, or a weight: "
+                        f"{', '.join(snap.clean(n, 40) for n in bad_shape[:5])}")
+        return problems
+    unnamed = [n for n in strata if not (n in CENSUS_STRATA or (n.startswith(SAMPLE_PREFIX) and n[len(SAMPLE_PREFIX):] in lex.domain_of))]
+    if unnamed:
+        problems.append(f"{len(unnamed)} stratum name(s) are not census:small, census:unclassified, census:not_stated or "
+                        f"sample:<class>: {', '.join(snap.clean(n, 40) for n in unnamed[:5])}")
+    wrong_kind = [n for n, s in strata.items() if s["kind"] != ("census" if n in CENSUS_STRATA else "sample")]
+    if wrong_kind:
+        problems.append(f"{len(wrong_kind)} stratum(s) have the wrong kind: {', '.join(snap.clean(n, 40) for n in wrong_kind[:5])}")
+
+    derived: dict[str, str] = census_strata(frame, lex, key["small_max"]) if _is_int(key.get("small_max")) else {}
+    # An excluded (development) entry stays in the frame and in any census stratum, but is not part of a sample stratum's
+    # population. Which excluded entries sit in sample strata needs the derived strata; without small_max none are counted.
+    out_of_samples = {e for e in excluded if derived.get(e, "").startswith(SAMPLE_PREFIX)}
+    total = sum(s["population"] for s in strata.values())
+    if total != len(frame) - len(out_of_samples):
+        problems.append(f"the key's strata hold {total} entries in all; this snapshot's frame has {len(frame)} in-scope entries with "
+                        "primary-outcome wording" + (f", {len(out_of_samples)} of them excluded from the sample strata"
+                                                     if out_of_samples else ""))
+    if derived:
+        sizes: dict[str, int] = {}
+        for eid, st in derived.items():
+            if eid not in out_of_samples:
+                sizes[st] = sizes.get(st, 0) + 1
+        off = [f"{snap.clean(n, 40)} (key {strata[n]['population'] if n in strata else 'absent'}, frame {sizes.get(n, 0)})"
+               for n in sorted(set(strata) | set(sizes)) if (strata[n]["population"] if n in strata else 0) != sizes.get(n, 0)]
+        if off:
+            problems.append(f"{len(off)} stratum population(s) differ from this frame: {', '.join(off[:5])}")
+
+    rows = [r for r in key.get("rows", []) if isinstance(r, dict)]
+    drawn_by: dict[str, int] = {}
+    unknown_rows = []
+    for r in rows:
+        if r.get("stratum") in strata:
+            drawn_by[r["stratum"]] = drawn_by.get(r["stratum"], 0) + 1
+        else:
+            unknown_rows.append(r.get("sample_id"))
+    if unknown_rows:
+        problems.append(f"{len(unknown_rows)} row(s) name a stratum the key does not hold: "
+                        f"{', '.join(snap.clean(x, 10) for x in unknown_rows[:5])}")
+    in_dev = [r.get("sample_id") for r in rows if r.get("entry_id") in excluded and str(r.get("stratum", "")).startswith(SAMPLE_PREFIX)]
+    if in_dev:
+        problems.append(f"{len(in_dev)} row(s) of a sample stratum are excluded (development) entries: "
+                        f"{', '.join(snap.clean(x, 10) for x in in_dev[:5])}")
+    drawn_off = [f"{snap.clean(n, 40)} (drawn {s['drawn']}, rows {drawn_by.get(n, 0)})" for n, s in strata.items()
+                 if s["drawn"] != drawn_by.get(n, 0)]
+    if drawn_off:
+        problems.append(f"{len(drawn_off)} stratum(s) record a drawn count that differs from their rows: {', '.join(drawn_off[:5])}")
+    census_off = [snap.clean(n, 40) for n, s in strata.items() if s["kind"] == "census" and s["drawn"] != s["population"]]
+    if census_off:
+        problems.append(f"{len(census_off)} census stratum(s) were not drawn in full: {', '.join(census_off[:5])}")
+    # A sample stratum holds min(population, large_per_class) rows, as the design says. Only the size is checked: the seeded draw
+    # itself is NOT replayed, so a hand-chosen set of rows of the right size is not caught here. make_labelling_sheet.py imports
+    # this module when it loads, so this module cannot import it at load time (only inside a function, as
+    # frozen_binding_problems does for safe_cell); and a replay would either call the sheet's own draw code, so a defect there
+    # would pass here too, or keep a second copy of it to hold in step. The sheet/gate pair is kept from depending on each other's
+    # draw code instead.
+    if _is_int(key.get("large_per_class")):
+        size_off = [f"{snap.clean(n, 40)} (drawn {s['drawn']} of {s['population']}, the design gives "
+                    f"{min(s['population'], key['large_per_class'])})" for n, s in strata.items()
+                    if s["kind"] == "sample" and s["drawn"] != min(s["population"], key["large_per_class"])]
+        if size_off:
+            problems.append(f"{len(size_off)} sample stratum(s) do not hold min(population, large_per_class "
+                            f"{key['large_per_class']}) rows: {', '.join(size_off[:5])}")
+    weight_off = []
+    for n, s in strata.items():
+        if s["drawn"] <= 0 or s["drawn"] > s["population"]:
+            weight_off.append(f"{snap.clean(n, 40)} (drawn {s['drawn']} of {s['population']})")
+        elif abs(s["weight"] - s["population"] / s["drawn"]) > WEIGHT_TOLERANCE * max(1.0, s["population"] / s["drawn"]):
+            weight_off.append(f"{snap.clean(n, 40)} (weight {s['weight']}, population/drawn {s['population'] / s['drawn']:.6g})")
+    if weight_off:
+        problems.append(f"{len(weight_off)} stratum weight(s) are not population/drawn: {', '.join(weight_off[:5])}")
+    if derived:
+        moved = [f"{snap.clean(r.get('sample_id'), 10)} (key {snap.clean(r.get('stratum'), 40)}, frame "
+                 f"{snap.clean(derived.get(r.get('entry_id'), 'not in the frame'), 40)})"
+                 for r in rows if derived.get(r.get("entry_id")) != r.get("stratum")]
+        if moved:
+            problems.append(f"{len(moved)} drawn row(s) sit in a different stratum from the one this frame gives: {', '.join(moved[:5])}")
+
+    recorded, given = key.get("model_tags_sha256"), model_tags_digest(model_tags_path)
+    if recorded is None and given is not None:
+        problems.append("the key was drawn without model tags, but --model-tags was given")
+    elif recorded is not None and recorded != given:
+        problems.append("the key's model_tags_sha256 does not match the model-tags file given" if given else
+                        "the key was drawn with model tags, but no --model-tags was given")
+    return problems
+
+
+def _percentile(sorted_vals: list[float], q: float):
+    if not sorted_vals:
+        return None
+    pos = q * (len(sorted_vals) - 1)
+    lo = math.floor(pos)
+    hi = min(lo + 1, len(sorted_vals) - 1)
+    return sorted_vals[lo] + (sorted_vals[hi] - sorted_vals[lo]) * (pos - lo)
+
+
+def metrics_weighted(gold: dict[str, set], predicted: dict[str, set], classes: list[str], weights_by_entry: dict[str, float],
+                     strata_by_entry: dict[str, str], populations: dict[str, int], min_pos: int, seed: int,
+                     resamples: int = BOOTSTRAP_RESAMPLES) -> dict:
+    """Weighted metrics for a census-v1 frozen set. Each labelled row counts with its stratum's weight (population/drawn). Fields per
+    class as in metrics(); tp, fp, fn, positives and predicted are weighted sums. `populations` is {class: entries in the FRAME that
+    carry it}: precision is estimable when it is min_pos or more AND min_pos or more labelled rows are predicted to carry the class
+    (labelled_predicted_rows, unweighted); recall when the weighted positives are min_pos or more AND min_pos or more labelled rows
+    carry the class in their gold labels (labelled_positive_rows, unweighted). Intervals
+    are 95% percentile intervals of a stratified bootstrap (rows resampled with replacement inside each stratum, random.Random(seed)).
+    A stratum whose weight is 1 was drawn in full (a census), so it has no sampling error and is held fixed, which keeps the census
+    classes exact. `other` is never scored."""
+    classes = [c for c in classes if c not in UNSCORED_CLASSES]
+    scored = set(classes)
+
+    def contributions(e):
+        g, p = gold[e], predicted.get(e, set())
+        return [(c, "tp" if c in g and c in p else ("fp" if c in p else "fn")) for c in sorted((g | p) & scored)]
+
+    rows = sorted(gold)
+    contrib = {e: contributions(e) for e in rows}
+
+    def totals_of(row_ids, base=None):
+        t = {c: {"tp": 0.0, "fp": 0.0, "fn": 0.0} for c in classes} if base is None else {c: dict(v) for c, v in base.items()}
+        for e in row_ids:
+            w = weights_by_entry[e]
+            for c, k in contrib[e]:
+                t[c][k] += w
+        return t
+
+    point = totals_of(rows)
+    fixed_rows, sampled = [], {}
+    for e in rows:
+        if abs(weights_by_entry[e] - 1.0) <= WEIGHT_TOLERANCE:
+            fixed_rows.append(e)
+        else:
+            sampled.setdefault(strata_by_entry[e], []).append(e)
+    boot_p = {c: [] for c in classes}
+    boot_r = {c: [] for c in classes}
+    if sampled:
+        rng = random.Random(seed)
+        fixed = totals_of(fixed_rows)
+        for _ in range(resamples):
+            draw = []
+            for st in sorted(sampled):
+                members = sampled[st]
+                draw.extend(members[rng.randrange(len(members))] for _ in members)
+            t = totals_of(draw, fixed)
+            for c in classes:
+                v = t[c]
+                if v["tp"] + v["fp"] > 0:
+                    boot_p[c].append(v["tp"] / (v["tp"] + v["fp"]))
+                if v["tp"] + v["fn"] > 0:
+                    boot_r[c].append(v["tp"] / (v["tp"] + v["fn"]))
+
+    def interval(est, vals):
+        if est is None:
+            return None
+        if not sampled:
+            return est, est
+        vals = sorted(vals)
+        return (_percentile(vals, 0.025), _percentile(vals, 0.975)) if vals else None
+
+    per, tp_all, fp_all, fn_all, f1s = {}, 0.0, 0.0, 0.0, []
+    for c in classes:
+        tp, fp, fn = point[c]["tp"], point[c]["fp"], point[c]["fn"]
+        tp_all, fp_all, fn_all = tp_all + tp, fp_all + fp, fn_all + fn
+        prec = tp / (tp + fp) if tp + fp else None
+        rec = tp / (tp + fn) if tp + fn else None
+        f1 = (2 * prec * rec / (prec + rec)) if prec and rec else (0.0 if (tp + fp or tp + fn) else None)
+        if f1 is not None:
+            f1s.append(f1)
+        # Unweighted row counts behind the weighted sums: a weight can make a few checked rows look like many, so each estimate
+        # also needs min_pos labelled rows of its own (rows predicted to carry the class; rows labelled with it).
+        pred_rows = sum(1 for e in rows if c in predicted.get(e, set()))
+        pos_rows = sum(1 for e in rows if c in gold[e])
+        per[c] = {"tp": tp, "fp": fp, "fn": fn, "positives": tp + fn, "predicted": tp + fp, "precision": prec, "recall": rec,
+                  "precision_ci": interval(prec, boot_p[c]), "recall_ci": interval(rec, boot_r[c]), "f1": f1,
+                  "precision_estimable": populations.get(c, 0) >= min_pos and pred_rows >= min_pos,
+                  "recall_estimable": tp + fn >= min_pos and pos_rows >= min_pos,
+                  "frame_tagged": populations.get(c, 0), "labelled_predicted_rows": pred_rows, "labelled_positive_rows": pos_rows}
+    mp = tp_all / (tp_all + fp_all) if tp_all + fp_all else 0.0
+    mr = tp_all / (tp_all + fn_all) if tp_all + fn_all else 0.0
+    return {"per_class": per, "rows_checked": len(gold), "micro_f1": (2 * mp * mr / (mp + mr)) if mp + mr else 0.0,
+            "macro_f1": (sum(f1s) / len(f1s)) if f1s else None, "macro_over_classes": len(f1s), "seed": seed,
+            "resamples": resamples if sampled else 0}
+
+
+def wnum(x) -> str:
+    """A weighted count: a whole number as such, otherwise two decimals."""
+    return str(int(round(x))) if abs(x - round(x)) < 1e-9 else f"{x:.2f}"
+
+
+# ------------------------------------------------------------------ withheld classes and the run record (census-v1 only)
+# --withhold-failing: a shown class that fails S1's per-class tests is withheld (not shown) instead of blocking. Which classes are
+# withheld is computed from the metrics and the thresholds only; no option names a class. --record writes a canonical, id-free JSON
+# record of the run that a person approves by committing it in a pull request; --check-record verifies one.
+
+RECORD_FORMAT = 1
+REFERENCE_LABELS = ("labels made by a council of models; approved by the maintainer as the reference on 2026-10-11; not read row by "
+                    "row by a person; no clinician has read the class definitions")
+RECORD_VERDICTS = ("allowed", "allowed_with_withheld", "blocked")
+RECORD_FIELDS = ("record_format", "design", "snapshot_sha256", "lexicon_version", "lexicon_sha256", "tags_sha256", "model_tags_sha256",
+                 "consensus", "key_sha256", "sheet_wording_sha256", "sample_exclusion", "thresholds", "bootstrap", "per_class",
+                 "withheld", "withheld_sha256", "not_shown", "s2", "blocking_rules", "verdict", "reference_labels", "approval",
+                 "record_sha256")
+STUDY_ID = re.compile(r"NCT\d{8}")
+
+
+def canonical_json(obj) -> str:
+    """The one text form of a record: sorted keys, indent 1, no ASCII escaping, a trailing newline (written as utf-8)."""
+    return json.dumps(obj, sort_keys=True, indent=1, ensure_ascii=False) + "\n"
+
+
+def record_digest(record: dict) -> str:
+    """sha256 of the canonical JSON of the record without its record_sha256 field."""
+    return hashlib.sha256(canonical_json({k: v for k, v in record.items() if k != "record_sha256"}).encode("utf-8")).hexdigest()
+
+
+def withheld_digest(names) -> str:
+    """sha256 of the withheld class names joined by newlines (utf-8); the names as given, so an unsorted list hashes differently."""
+    return hashlib.sha256("\n".join(names).encode("utf-8")).hexdigest()
+
+
+def class_record(cls: str, v: dict) -> dict:
+    """One per-class entry of the run record, from metrics_weighted()'s values for the class. Class id and numbers only."""
+    def ci(x):
+        return None if x is None else [x[0], x[1]]
+    return {"class": cls, "precision": v["precision"], "recall": v["recall"], "precision_ci": ci(v["precision_ci"]),
+            "recall_ci": ci(v["recall_ci"]), "frame_tagged": v["frame_tagged"], "labelled_predicted_rows": v["labelled_predicted_rows"],
+            "labelled_positive_rows": v["labelled_positive_rows"], "weighted_positives": v["positives"]}
+
+
+def class_status(entry: dict, thresholds: dict) -> tuple[str, str | None]:
+    """(status, reason) of a shown class from its record entry and the thresholds: "withheld" when it fails S1's per-class tests (no
+    labelled positive; precision below the threshold where estimable; recall below the threshold where estimable), else
+    "few_checked" when precision or recall is not estimable, else "shown". The estimability rules are metrics_weighted()'s, recomputed
+    from the recorded counts so that a record can be checked without the data."""
+    mp = thresholds["min_positives"]
+    p_est = entry["frame_tagged"] >= mp and entry["labelled_predicted_rows"] >= mp
+    r_est = entry["weighted_positives"] >= mp and entry["labelled_positive_rows"] >= mp
+    reasons = []
+    if entry["labelled_positive_rows"] == 0:
+        reasons.append("no labelled positive")
+    if p_est and entry["precision"] is not None and entry["precision"] < thresholds["precision"]:
+        reasons.append(f"precision {fmt(entry['precision'])} below {thresholds['precision']:.2f}")
+    if r_est and entry["recall"] is not None and entry["recall"] < thresholds["recall"]:
+        reasons.append(f"recall {fmt(entry['recall'])} below {thresholds['recall']:.2f}")
+    if reasons:
+        return "withheld", "; ".join(reasons)
+    return ("shown" if p_est and r_est else "few_checked"), None
+
+
+def not_shown_counts(tag_entries: list[dict], accepted_model: list[dict], withheld) -> dict:
+    """Entries and studies that carry only withheld classes. An entry's classes are its final classes (rule tags, or the accepted
+    model tags of an entry the rules left unclassified, as census_frame takes them); a study's are the union over its entries. 'Only
+    withheld' means at least one class and every class withheld. The share is over all tag entries (the denominator S2 uses)."""
+    withheld = set(withheld)
+    model_by: dict[str, list[dict]] = {}
+    for t in accepted_model:
+        model_by.setdefault(t["entry_id"], []).append(t)
+    only, by_study = 0, {}
+    for e in tag_entries:
+        classes = set(final_classes(e, model_by))
+        if classes and classes <= withheld:
+            only += 1
+        by_study.setdefault(e["nct_id"], set()).update(classes)
+    n = len(tag_entries)
+    return {"entries": only, "entries_share": round(only / n, 4) if n else None,
+            "studies": sum(1 for s in by_study.values() if s and s <= withheld)}
+
+
+def record_verdict(blocking_rules, withheld) -> str:
+    return "blocked" if blocking_rules else ("allowed_with_withheld" if withheld else "allowed")
+
+
+def check_record(path) -> int:
+    """--check-record: verify a run record on its own (no snapshot). One PASS or FAIL line per check; exit 0 only when all pass."""
+    try:
+        text = Path(path).read_text(encoding="utf-8")
+        rec = json.loads(text)
+    except (OSError, ValueError) as exc:
+        print(f"ERROR: cannot read the run record {snap.clean(path, 200)}: {snap.clean(exc, 200)}")
+        return 2
+    lines: list[tuple[bool, str]] = []
+    missing = [f for f in RECORD_FIELDS if not isinstance(rec, dict) or f not in rec]
+    lines.append((not missing and rec.get("record_format") == RECORD_FORMAT,
+                  f"format: record_format {RECORD_FORMAT} with every field" + (f" (missing: {', '.join(missing)})" if missing else "")))
+    if missing:
+        print(f"FAIL {lines[0][1]}")
+        print("RESULT: FAIL (the record is incomplete)")
+        return 1
+    lines.append((record_digest(rec) == rec["record_sha256"], "record_sha256 matches the record"))
+    withheld = rec["withheld"]
+    names_ok = isinstance(withheld, list) and all(isinstance(x, str) for x in withheld)
+    lines.append((names_ok and withheld_digest(withheld) == rec["withheld_sha256"], "withheld_sha256 matches the withheld list"))
+    per = rec["per_class"] if isinstance(rec["per_class"], list) else []
+    try:
+        classes = [p["class"] for p in per]
+        marked = sorted(p["class"] for p in per if p["status"] == "withheld")
+        sorted_ok = isinstance(rec["per_class"], list) and all(isinstance(c, str) for c in classes) and classes == sorted(set(classes))
+    except (KeyError, TypeError, AttributeError):
+        marked, sorted_ok = None, False
+    lines.append((sorted_ok, "per_class is a list sorted by class, one entry per class"))
+    lines.append((names_ok and marked is not None and withheld == sorted(withheld) and withheld == marked,
+                  "withheld is sorted and equals the classes whose status is withheld"))
+    thr = rec["thresholds"]
+    for p in per:
+        try:
+            status, reason = class_status(p, thr)
+            ok = p["status"] == status and p.get("reason") == reason
+            detail = f"{snap.clean(p['class'], 60)}: recorded {snap.clean(p['status'], 20)}, the numbers and thresholds give {status}"
+            lines.append((ok, f"class {detail}" + (f" ({reason})" if reason else "")))
+        except (KeyError, TypeError, AttributeError) as exc:
+            lines.append((False, f"class entry cannot be checked: {type(exc).__name__} {snap.clean(exc, 60)}"))
+    lines.append((thr == THRESHOLDS, "the record's thresholds equal this gate's"))
+    rules = rec["blocking_rules"]
+    rules_ok = isinstance(rules, list) and all(isinstance(x, str) for x in rules)
+    lines.append((rules_ok and names_ok and rec["verdict"] in RECORD_VERDICTS and rec["verdict"] == record_verdict(rules, withheld),
+                  f"verdict {snap.clean(rec['verdict'], 40)} agrees with the blocking rules and the withheld list"))
+    lines.append((rec["reference_labels"] == REFERENCE_LABELS and rec["approval"] is None,
+                  "reference_labels is the fixed text and approval is null (approval is the commit, not a field)"))
+    lines.append((not STUDY_ID.search(text), "the record holds no registry study id"))
+    for ok, detail in lines:
+        print(f"{'PASS' if ok else 'FAIL'} {detail}")
+    failed = sum(1 for ok, _ in lines if not ok)
+    print(f"RESULT: {'PASS' if not failed else 'FAIL'} ({len(lines) - failed} of {len(lines)} checks pass)")
+    return 1 if failed else 0
+
+
 # ------------------------------------------------------------------ negative controls
 
 def run_negative_controls(lex, *, snapshot=None, canary=None, planted=None, control_snapshot=None, manual=None,
@@ -729,11 +1208,15 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
     ap.add_argument("--counts", type=Path, help="the committed counts file to check against")
     ap.add_argument("--write-counts", type=Path, help="write the recomputed counts here and stop (no check)")
     ap.add_argument("--model-tags", type=Path, help="proposed model tags: a JSON list of {entry_id, class, quote}")
+    ap.add_argument("--model-tags-plain", type=Path,
+                    help="with --model-tags (the consensus-filtered tags): the unfiltered model tags, counted beside them only")
     ap.add_argument("--verify-model-tags", type=Path, help="only verify these proposed tags and print one line each")
     ap.add_argument("--exclude", type=Path)
     ap.add_argument("--explained", type=Path)
     ap.add_argument("--frozen-sheet", type=Path)
     ap.add_argument("--frozen-key", type=Path)
+    ap.add_argument("--frozen-exclude", type=Path, help="census-v1 keys with a sample_exclusion: the JSON list of entry ids "
+                    "(development entries) the sampled strata were drawn without; its hash must match the key's")
     ap.add_argument("--negative-controls", action="store_true")
     ap.add_argument("--canary", type=Path, help="canary model tags for the controls (default: the synthetic ones)")
     ap.add_argument("--planted", type=Path, help="a JSON list of planted non-CF NCT ids (default: the synthetic ones)")
@@ -746,6 +1229,13 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
                          "config_verified in its manifest (the snapshot hash changes, so tag, draw and count again afterwards)")
     ap.add_argument("--self-consistency", type=Path, metavar="COUNTS.json",
                     help="check that a counts file the tools wrote satisfies its own relationships; prints OK or FAIL per relationship")
+    ap.add_argument("--withhold-failing", action="store_true",
+                    help="census-v1 keys only, with --frozen-sheet: a shown class that fails S1's per-class tests is withheld instead "
+                         "of blocking; computed from the metrics and thresholds only (no option names a class)")
+    ap.add_argument("--record", type=Path, metavar="FILE",
+                    help="with --withhold-failing: write the run record (canonical JSON, class ids and counts only); never overwrites")
+    ap.add_argument("--check-record", type=Path, metavar="FILE",
+                    help="on its own: verify a run record's hashes, withheld list, per-class statuses and verdict")
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
@@ -753,6 +1243,10 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
     lex = lex_mod.load()
     failures, blocked, summary = [], [], None
     try:
+        if a.check_record:
+            if any(v for k, v in vars(a).items() if k != "check_record"):
+                raise UsageError("--check-record stands alone")
+            return check_record(a.check_record)
         if a.self_consistency:
             return self_consistency(a.self_consistency)
         if a.confirm_real_run:
@@ -761,6 +1255,19 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
         explained = scope_mod.read_id_reasons(a.explained) if a.explained else {}
         if bool(a.frozen_sheet) != bool(a.frozen_key):
             raise UsageError("--frozen-sheet and --frozen-key go together")
+        if a.frozen_exclude and not a.frozen_key:
+            raise UsageError("--frozen-exclude goes with --frozen-sheet and --frozen-key")
+        if a.withhold_failing and not a.frozen_sheet:
+            raise UsageError("--withhold-failing needs --frozen-sheet and --frozen-key (a census-v1 key)")
+        if a.withhold_failing and (a.drift_only or a.write_counts or a.verify_model_tags):
+            raise UsageError("--withhold-failing applies the publication stop rules; it does not go with --drift-only, "
+                             "--write-counts or --verify-model-tags")
+        if a.record and not a.withhold_failing:
+            raise UsageError("--record goes with --withhold-failing")
+        if a.record and a.record.exists():
+            raise UsageError(f"the run record {a.record} exists already; a record is never overwritten")
+        if a.record and not a.record.parent.is_dir():
+            raise UsageError(f"the folder for the run record {a.record} does not exist")
         if not a.snapshot:
             if not a.negative_controls or any((a.tags, a.counts, a.write_counts, a.model_tags, a.verify_model_tags, a.frozen_sheet)):
                 raise UsageError("give --snapshot and --tags (or only --negative-controls)")
@@ -778,6 +1285,9 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
         tags = validate_tags(read_json(a.tags, "tags file"), lex)
         mt = a.model_tags or a.verify_model_tags
         proposed = read_json(mt, "proposed model tags") if mt else []
+        if a.model_tags_plain and not a.model_tags:
+            raise UsageError("--model-tags-plain goes with --model-tags (the consensus-filtered model tags)")
+        plain = read_json(a.model_tags_plain, "plain model tags") if a.model_tags_plain else None
     except (UsageError, ValueError, OSError) as exc:
         print(f"ERROR: {snap.clean(exc, 300)}")
         return 2
@@ -849,23 +1359,94 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             print(f"  rejected {snap.clean(t.get('entry_id', '?'), 40)} {snap.clean(t.get('class', '?'), 40)}: {snap.clean(r['reason'], 200)}")
     else:
         print("model tags: none proposed (quote-rejection rate not measured)")
+    if plain is not None:
+        # Counts only: the plain route beside the consensus rule (proposal 2026-10-11). It never changes a decision.
+        plain_accepted, _ = verify_model_tags(plain, entries, rule_tags, lex)
+        kept = {(t["entry_id"], t["class"]) for t in accepted}
+        plain_pairs = {(t["entry_id"], t["class"]) for t in plain_accepted}
+        print(f"model route: plain {len(plain_pairs)} accepted, with the consensus rule {len(kept)} accepted, "
+              f"{len(plain_pairs - kept)} dropped")
     print("challenger disagreement rate: not measured (no challenger review in this step)")
     sh = counts["shares"]
     print(f"shares of entries: by rule {fmt(sh['by_rule'])}, by model {fmt(sh['by_model'])}, other {fmt(sh['other'])}, "
           f"not stated {fmt(sh['not_stated'])}, unclassified {fmt(sh['unclassified'])}; vague wording {counts['flags']['vague']} entr(ies)")
 
     # 3. metrics
-    m, frozen_problems = None, []
+    m, frozen_problems, census_key = None, [], None
     if a.frozen_sheet:
         try:
             gold, summary = load_frozen(a.frozen_sheet, a.frozen_key, lex)
             frozen_problems = frozen_binding_problems(a.frozen_sheet, a.frozen_key, s, lex, entries)
+            key_obj = read_json(a.frozen_key, "frozen-set key")
+            design = key_obj.get("design") if isinstance(key_obj, dict) else None
+            if a.withhold_failing and design != CENSUS_DESIGN:
+                raise UsageError(f"--withhold-failing goes with a {CENSUS_DESIGN} key only; this key's design is "
+                                 f"{snap.clean(design, 40) if design is not None else 'not named (a legacy key)'}")
+            exclude_ids = read_sample_exclusion(a.frozen_exclude) if a.frozen_exclude else None
+            if design != CENSUS_DESIGN and exclude_ids is not None:
+                frozen_problems.append("--frozen-exclude was given, but the key is not a census-v1 key")
+            if design == CENSUS_DESIGN:
+                census_key = key_obj
+                frozen_problems += census_binding_problems(key_obj, retag["entries"], accepted, lex, a.model_tags, exclude_ids)
+            elif design is not None:
+                frozen_problems.append(f"the key's design '{snap.clean(design, 40)}' is not one this gate knows")
+            elif isinstance(key_obj, dict) and any(f in key_obj for f in CENSUS_ONLY_KEY_FIELDS):
+                # never scored as a legacy (unweighted) key: that would count sampled rows as if they were whole classes
+                frozen_problems.append("the key looks like a census key but names no design (it holds "
+                                       f"{', '.join(f for f in CENSUS_ONLY_KEY_FIELDS if f in key_obj)})")
         except UsageError as exc:
             print(f"ERROR: {snap.clean(exc, 300)}")
             return 2
+        if census_key is not None:
+            print(f"frozen set design: {CENSUS_DESIGN} (exact over the census strata, weighted estimate over the sampled ones)")
+            se = census_key.get("sample_exclusion")
+            if a.frozen_exclude and isinstance(se, dict) and not sample_exclusion_problems(
+                    census_key, census_frame(retag["entries"], accepted), exclude_ids)[0]:
+                print(f"frozen set: sample strata exclude {se['count']} development entries (hash checked)")
+            cr = census_key.get("consensus")
+            if isinstance(cr, dict):
+                print(f"consensus rule: declared {snap.clean(cr.get('rule_declared'), 20)}, proposed {snap.clean(cr.get('proposed'), 12)}, "
+                      f"kept {snap.clean(cr.get('kept'), 12)}, dropped {snap.clean(cr.get('dropped'), 12)}")
         for p in frozen_problems:
             print(f"frozen set: {p}")
-    if a.frozen_sheet and not frozen_problems:
+    if a.frozen_sheet and not frozen_problems and census_key is not None:
+        model_by = {}
+        for t in accepted:
+            model_by.setdefault(t["entry_id"], []).append(t)
+        predicted = {e["entry_id"]: set(final_classes(e, model_by)) for e in retag["entries"]}
+        missing = [e for e in gold if e not in predicted]
+        if missing:
+            failures.append(f"{len(missing)} frozen-set entr(ies) are not in this snapshot's scope: {missing[:5]}")
+        strata = census_key["strata"]
+        strata_by = {r["entry_id"]: r["stratum"] for r in census_key["rows"]}
+        weights_by = {e: float(strata[st]["weight"]) for e, st in strata_by.items()}
+        frame_counts = frame_class_counts(census_frame(retag["entries"], accepted), lex)
+        m = metrics_weighted({e: g for e, g in gold.items() if e in predicted}, predicted, lex.class_order, weights_by, strata_by,
+                             frame_counts, THRESHOLDS["min_positives"], census_key["seed"])
+        print(f"frozen set: {summary['rows']} rows, {summary['labelled']} labelled, {summary['unlabelled']} unlabelled")
+        print("frozen set strata: " + ", ".join(
+            f"{snap.clean(n, 40)} {st['drawn']} of {st['population']} (weight {wnum(st['weight'])})" for n, st in sorted(strata.items())))
+        print(f"intervals: stratified bootstrap, {m['resamples']} resamples, seed {m['seed']}, 95% percentile"
+              + ("" if m["resamples"] else " (every stratum drawn in full, so every value is exact)"))
+        for c, v in m["per_class"].items():
+            if v["positives"] == 0 and v["predicted"] == 0 and v["frame_tagged"] == 0:
+                continue
+            parts = []
+            for name, n, est, ci, why in (
+                    ("precision", v["predicted"], v["precision_estimable"], v["precision_ci"],
+                     f"{v['frame_tagged']} tagged in the frame, {v['labelled_predicted_rows']} labelled row(s) predicted"),
+                    ("recall", v["positives"], v["recall_estimable"], v["recall_ci"],
+                     f"weighted positives {wnum(v['positives'])} from {v['labelled_positive_rows']} labelled row(s)")):
+                if not est:
+                    parts.append(f"{name} too few to estimate ({why})")
+                elif n == 0 or ci is None:
+                    parts.append(f"{name} n/a (weighted {wnum(v['tp'])}/{wnum(n)})")
+                else:
+                    parts.append(f"{name} {fmt(v['tp'] / n)} (weighted {wnum(v['tp'])}/{wnum(n)}, 95% CI {fmt(ci[0])}-{fmt(ci[1])})")
+            print(f"  {c:28} " + "   ".join(parts) + f"   tagged in the frame {v['frame_tagged']}")
+        print(f"  micro F1 {fmt(m['micro_f1'])}   macro F1 {fmt(m['macro_f1'])} over {m['macro_over_classes']} class(es)   "
+              f"rows checked {m['rows_checked']}   ('other' is not scored)")
+    elif a.frozen_sheet and not frozen_problems:
         model_by = {}
         for t in accepted:
             model_by.setdefault(t["entry_id"], []).append(t)
@@ -926,6 +1507,7 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
                 blocked.append(f"S0 synthetic data: {label} carries the synthetic marker ({', '.join(marks)}); synthetic data can "
                                "never be published")
     shown = [c for c, n in counts["studies_by_class"].items() if n > 0]
+    withheld, class_records = {}, []
     if frozen_problems:
         blocked.append("S1 the frozen set does not belong to this snapshot and lexicon: " + "; ".join(frozen_problems))
     elif m is None:
@@ -935,14 +1517,38 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             blocked.append(f"S1 only {summary['labelled']} labelled rows; the design needs at least {MIN_FROZEN_ROWS}")
         if summary["unlabelled"]:
             blocked.append(f"S1 {summary['unlabelled']} row(s) of the frozen sheet are unlabelled; every drawn row must be labelled")
-        unlabelled_classes = [c for c in shown if m["per_class"][c]["positives"] == 0]
+        # In the census design `other` is not scored, so it has no per-class entry and is left to S2. Any other shown class the
+        # metrics do not hold is not skipped: it blocks, so a counts/lexicon mismatch never exempts a class from the thresholds.
+        scored_shown = [c for c in shown if c not in UNSCORED_CLASSES] if census_key is not None else shown
+        unscored = [c for c in scored_shown if c not in m["per_class"]]
+        if unscored:
+            blocked.append(f"S1 shown class(es) the frozen-set metrics do not hold: {', '.join(snap.clean(c, 40) for c in unscored[:5])} "
+                           "(the counts and the lexicon disagree)")
+            scored_shown = [c for c in scored_shown if c in m["per_class"]]
+        if a.withhold_failing:
+            # Withheld classes come from the metrics and THRESHOLDS only (class_status); they are taken out of the per-class
+            # blocks below, and every other S1 rule above and every other stop rule still blocks.
+            for c in scored_shown:
+                entry = class_record(c, m["per_class"][c])
+                entry["status"], entry["reason"] = class_status(entry, THRESHOLDS)
+                class_records.append(entry)
+                if entry["status"] == "withheld":
+                    withheld[c] = entry["reason"]
+        unlabelled_classes = [c for c in scored_shown if m["per_class"][c]["positives"] == 0 and c not in withheld]
         if unlabelled_classes:
             blocked.append(f"S1 shown class(es) with no labelled positive: {', '.join(unlabelled_classes)} (nothing checks their recall)")
-        for c in shown:
+        for c in scored_shown:
+            if c in withheld:
+                continue
             v = m["per_class"][c]
             if not (v["precision_estimable"] and v["recall_estimable"]):
-                print(f"  note: {c} is shown but few checked ({v['predicted']} tagged, {v['positives']} labelled in the frozen set); "
-                      "the page must say 'few checked'")
+                if census_key is not None:
+                    print(f"  note: {c} is shown but few checked ({v['frame_tagged']} tagged in the frame, {wnum(v['positives'])} "
+                          f"weighted labelled positives in the frozen set; labelled rows: {v['labelled_predicted_rows']} predicted, "
+                          f"{v['labelled_positive_rows']} positive); the page must say 'few checked'")
+                else:
+                    print(f"  note: {c} is shown but few checked ({v['predicted']} tagged, {v['positives']} labelled in the frozen set); "
+                          "the page must say 'few checked'")
             if v["precision_estimable"] and v["precision"] is not None and v["precision"] < THRESHOLDS["precision"]:
                 blocked.append(f"S1 {c}: precision {fmt(v['precision'])} is below {THRESHOLDS['precision']}")
             if v["recall_estimable"] and v["recall"] is not None and v["recall"] < THRESHOLDS["recall"]:
@@ -965,11 +1571,45 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
         n_control = len(lex_mod.tag_all_entries(control, lex))
         if n_control < MIN_CONTROL_ENTRIES:
             blocked.append(f"S4 the control snapshot has {n_control} outcome entries; at least {MIN_CONTROL_ENTRIES} are needed")
+    if a.withhold_failing:
+        for c in sorted(withheld):
+            print(f"WITHHELD {c}: {withheld[c]}")
+        # No cap on the not-shown share is applied: a cap is a person's decision, made before a run, not the gate's.
+        hidden = not_shown_counts(retag["entries"], accepted, withheld)
+        share = "n/a" if hidden["entries_share"] is None else f"{hidden['entries_share']:.1%}"
+        print(f"not shown: {hidden['entries']} entries ({share}) carry only withheld classes; {hidden['studies']} studies fall only "
+              "in withheld classes")
     for b in blocked:
         print(f"STOP {b}")
+    if a.record:
+        names = sorted(withheld)
+        rules = sorted({b.split(" ", 1)[0] for b in blocked})
+        record = {
+            "record_format": RECORD_FORMAT, "design": census_key.get("design"), "snapshot_sha256": s.digest,
+            "lexicon_version": lex.version, "lexicon_sha256": lex.sha256, "tags_sha256": census_key.get("tags_sha256"),
+            "model_tags_sha256": census_key.get("model_tags_sha256"), "consensus": census_key.get("consensus"),
+            "key_sha256": hashlib.sha256(Path(a.frozen_key).read_bytes()).hexdigest(),
+            "sheet_wording_sha256": census_key.get("sheet_wording_sha256"), "sample_exclusion": census_key.get("sample_exclusion"),
+            "thresholds": dict(THRESHOLDS),
+            "bootstrap": None if m is None else {"seed": m["seed"], "resamples": m["resamples"]},
+            "per_class": sorted(class_records, key=lambda r: r["class"]), "withheld": names, "withheld_sha256": withheld_digest(names),
+            "not_shown": hidden, "s2": {"share": round(other_share, 4)}, "blocking_rules": rules,
+            "verdict": record_verdict(rules, names), "reference_labels": REFERENCE_LABELS, "approval": None}
+        record["record_sha256"] = record_digest(record)
+        try:
+            with a.record.open("x", encoding="utf-8", newline="\n") as fh:
+                fh.write(canonical_json(record))
+        except OSError as exc:
+            print(f"ERROR: the run record was not written: {snap.clean(exc, 200)}")
+            return 2
+        print(f"run record written: {a.record.name} (record_sha256 {record['record_sha256']}; approval is a person's commit, not a "
+              "field)")
     if blocked:
         print(f"RESULT: PUBLICATION BLOCKED ({len(blocked)} stop rule(s)); integrity passed")
         return 3
+    if withheld:
+        print(f"RESULT: PUBLICATION ALLOWED WITH {len(withheld)} WITHHELD CLASS(ES)")
+        return 0
     print("RESULT: PASS (integrity, controls and every publication stop rule)")
     return 0
 
