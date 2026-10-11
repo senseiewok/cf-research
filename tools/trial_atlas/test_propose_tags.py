@@ -216,7 +216,7 @@ class RunTest(Base):
 
     def test_interrupt_leaves_valid_jsonl_and_resume_skips_verified(self):
         calls = {"n": 0}
-        good = oracle({"Time to return to school": "healthcare_use", "Change in hand grip strength": "exercise_capacity"})
+        good = oracle({"Time to return to school": "healthcare_use", "Change in hand dexterity score": "exercise_capacity"})
 
         def breaks(req):
             calls["n"] += 1
