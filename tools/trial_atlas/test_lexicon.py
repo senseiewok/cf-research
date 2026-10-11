@@ -58,7 +58,7 @@ CASES = [
     ("feasibility_adherence", ["Adherence to nebulised therapy", "Feasibility of recruitment"], ["Adherent mucus plugs"]),
     # classes added in 0.3.0-draft
     ("lung_mechanics", ["Change in airway resistance by oscillometry", "Residual volume"], ["Change in FVC", "Antibiotic resistance"]),
-    ("oxygenation", ["Nocturnal oxygen saturation by pulse oximetry", "Daytime PaCO2"], ["Peak oxygen uptake", "Safety assessed by pulse oximetry"]),
+    ("oxygenation", ["Nocturnal oxygen saturation by pulse oximetry", "Daytime PaCO2"], ["Peak oxygen uptake", "Tissue oxygen saturation"]),
     ("bone_density", ["Lumbar spine bone mineral density by DXA", "Change in BMD"], ["Body composition by DXA", "Bone age"]),
     ("mucociliary_clearance", ["Change in mucociliary clearance"], ["Lung clearance index", "Airway clearance technique"]),
     ("sputum_properties", ["24-hour sputum weight", "Sputum viscoelasticity"], ["Sputum culture", "Sputum neutrophil elastase"]),
@@ -387,7 +387,7 @@ class Lexicon030Test(unittest.TestCase):
                      "Lung compliance", "Static compliance", "Dynamic compliance"):
             with self.subTest(text=text):
                 self.assertNotIn("feasibility_adherence", classes(text))
-        for text in ("Uptake of the intervention", "Retention at 12 months", "Compliance with treatment", "Participant retention"):
+        for text in ("Uptake of the intervention", "Participant retention at 12 months", "Compliance with treatment", "Participant retention"):
             with self.subTest(text=text):
                 self.assertIn("feasibility_adherence", classes(text))
         self.assertIn("lung_mechanics", classes("Static compliance"))
@@ -442,9 +442,9 @@ class Lexicon030Test(unittest.TestCase):
         self.assertEqual(classes("Sputum culture"), ["microbiology_sputum"])
         self.assertEqual(classes("Burkholderia spp. density in expectorated sputum"), ["microbiology_sputum"])
 
-    def test_oximetry_inside_safety_stays_safety(self):
-        self.assertEqual(classes("Safety measured by pulse oximetry"), ["safety_tolerability"])
-        self.assertEqual(classes("Vital signs and pulse oximetry"), ["safety_tolerability"])
+    def test_oximetry_named_explicitly_is_oxygenation(self):
+        # second round: explicit oximetry inside a safety outcome gets both tags (Lexicon030Round2Test); a measure alone gets one
+        self.assertEqual(classes("Safety measured by pulse oximetry"), ["oxygenation", "safety_tolerability"])
         self.assertEqual(classes("Change in oxygen saturation"), ["oxygenation"])
         self.assertNotIn("oxygenation", classes("Gas exchange variables"))
         self.assertNotIn("oxygenation", classes("Tissue oxygen saturation"))
@@ -516,8 +516,235 @@ class Lexicon030Test(unittest.TestCase):
                 with self.subTest(rule=r["id"]):
                     self.assertTrue(r["changed"].startswith("0.3.0-draft:"))
         changed = {r["id"] for r in LEX.data["rules"] if "changed" in r}
-        self.assertEqual(changed, {"FEV1-01", "SPIRO-02", "LUNGFN-V1", "GI-01", "GLU-01", "LIVER-01", "SINUS-01", "MICRO-01", "MICRO-03",
-                                   "SURV-01", "SAFE-UNSPEC", "FEAS-01"})
+        self.assertEqual(changed, {"FEV1-01", "FEV1-02", "SPIRO-02", "LUNGFN-V1", "EXAC-01", "GI-01", "GLU-01", "LIVER-01", "SINUS-01",
+                                   "MICRO-01", "MICRO-03", "SURV-01", "SAFE-UNSPEC", "PK-01", "FEAS-01"})
+
+
+class Lexicon030Round2Test(unittest.TestCase):
+    """0.3.0-draft, second round: fixes from a blind adversarial review and a clinician-role review. All wording is SYNTHETIC."""
+
+    def assert_has(self, cases):
+        for cls, texts in cases.items():
+            for text in texts:
+                with self.subTest(cls=cls, text=text):
+                    self.assertIn(cls, classes(text))
+
+    def assert_not(self, cases):
+        for cls, texts in cases.items():
+            for text in texts:
+                with self.subTest(cls=cls, text=text):
+                    self.assertNotIn(cls, classes(text))
+
+    def test_diabetes_outcomes_with_modifiers(self):
+        self.assert_has({"glucose_cfrd": ["Incidence of type 2 diabetes", "Time to diabetes", "Number of participants who develop diabetes",
+                                          "Diabetes-free survival", "Risk of developing diabetes", "Incidence of cystic fibrosis-related diabetes",
+                                          "Onset of new-onset diabetes", "Prevalence of type 1 diabetes"]})
+        self.assert_not({"glucose_cfrd": ["FEV1 in participants with a diagnosis of diabetes", "FEV1 in adults with type 2 diabetes",
+                                          "Glucose-6-phosphate dehydrogenase activity", "Diabetes insipidus"]})
+
+    def test_drug_clearance_is_positive_only(self):
+        self.assert_has({"pharmacokinetics": ["Colistin clearance", "Tobramycin clearance", "Plasma clearance", "Apparent clearance",
+                                              "Total clearance", "Renal clearance of the study drug", "Clearance of the study drug",
+                                              "Clearance of tobramycin in plasma", "Clearance of the compound following a single oral dose",
+                                              "Ceftazidime clearance"]})
+        self.assert_not({"pharmacokinetics": ["Clearance of Haemophilus influenzae", "Clearance of nontuberculous mycobacteria",
+                                              "Clearance of Stenotrophomonas maltophilia", "Clearance of the infection", "Clearance of symptoms",
+                                              "Clearance of a radiolabelled molecule"]})
+
+    def test_absorptive_clearance_is_left_to_other(self):
+        for measure, desc in (("Absorptive clearance rate", "Clearance of a radiolabelled small molecule through absorption."),
+                              ("DTPA absorption rate", "Total DTPA clearance minus mucociliary clearance rate.")):
+            with self.subTest(measure=measure):
+                t = tag(measure, desc)
+                self.assertNotIn("pharmacokinetics", [x["class"] for x in t["tags"]])
+                self.assertNotIn("mucociliary_clearance", [x["class"] for x in t["tags"]])
+        self.assertEqual(classes("Mucociliary clearance rate"), ["mucociliary_clearance"])
+
+    def test_glutathione_as_treatment_is_not_a_marker(self):
+        self.assert_not({"oxidative_stress": ["Inhaled reduced glutathione", "Glutathione (GSH) inhalation", "Glutathione nebulization",
+                                              "Intravenous glutathione", "Nebulised glutathione and FEV1"]})
+        self.assert_has({"oxidative_stress": ["Sputum glutathione concentration", "Plasma glutathione levels", "GSH/GSSG ratio",
+                                              "Glutathione redox status", "Plasma F2-isoprostanes"]})
+
+    def test_sweat_secretion_needs_a_stimulation_or_cftr_context(self):
+        self.assert_not({"cftr_biomarker_other": ["Sweat rate during exercise in the heat", "Transepidermal water loss by evaporimetry",
+                                                  "Sweat secretion", "Skin water loss"]})
+        self.assert_has({"cftr_biomarker_other": ["Beta adrenergic sweat secretion", "Cholinergic-stimulated sweat rate",
+                                                  "Methacholine-stimulated sweat secretion", "CFTR-dependent sweat rate"],
+                         "molecular_expression": ["CFTR-dependent gene expression in nasal cells"]})
+
+    def test_lung_mechanics_needs_lung_context(self):
+        self.assert_not({"lung_mechanics": ["Residual volume in the nebulizer cup", "Gastric residual volume during tube feeding",
+                                            "Tidal volume set on the ventilator", "Tidal volume", "Inductive reactance of the device coil",
+                                            "Grade X10 magnification images", "Change in specific image-based airway resistance (siRaw)"]})
+        self.assert_has({"lung_mechanics": ["Specific airway resistance", "Respiratory system reactance at 5 Hz", "RV/TLC ratio",
+                                            "Change in R5-R20", "Lung compliance", "Thoracic compliance", "Compliance of the lung",
+                                            "Residual volume", "R5Hz by oscillometry"]})
+        self.assertEqual(LEX.labels["lung_mechanics"], "Airway resistance, compliance and lung volumes")
+
+    def test_feasibility_positive_forms(self):
+        self.assert_not({"feasibility_adherence": ["Compliance of the lung", "Thoracic compliance", "CO2 retention", "CO₂ retention",
+                                                   "Drug retention in the lung", "Uptake of 18F-FDG in the lungs", "Radiolabel uptake in the lung",
+                                                   "Leukocyte recruitment", "Recruitment of neutrophils to the airway", "Alveolar recruitment manoeuvre",
+                                                   "Oxygen uptake efficiency slope"]})
+        self.assert_has({"feasibility_adherence": ["Compliance with the airway clearance regimen", "Medication compliance",
+                                                   "Retention of participants at 12 months", "Participant retention", "Uptake of the intervention",
+                                                   "Treatment uptake", "Participant recruitment", "Recruitment rate", "Study enrolment",
+                                                   "Number of participants enrolled per month", "Dropout rate", "Adherence to therapy"]})
+
+    def test_new_safety_rules_never_decide_from_the_description(self):
+        for rid in ("SAFE-PE", "SAFE-VITAL2", "SAFE-LAB3", "SAFE-KIDNEY", "SAFE-KIDNEY2", "SAFE-HEARING"):
+            with self.subTest(rule=rid):
+                self.assertIn(rid, LEX.fallback_excluded)
+        self.assertEqual(tag("Primary endpoint", "A physical examination is done at every visit.")["status"], "unclassified")
+
+    def test_fev1_ratio_forms_are_not_fev1(self):
+        for text in ("Change in FEV1-to-FVC ratio", "FEV1%FVC", "FEV1 over FVC", "FEV1/FEV6 ratio", "FEV1 / FVC (%)", "FEV1:FVC",
+                     "Ratio of FEV1 to forced vital capacity",
+                     "Forced expiratory volume in one second to forced vital capacity ratio",
+                     "Forced expiratory volume in 1 second/forced vital capacity"):
+            with self.subTest(text=text):
+                self.assertNotIn("fev1", classes(text))
+                self.assertIn("spirometry_other", classes(text))
+        for text in ("FEV1 at week 24 and FEV1/FVC", "FEV1 to Week 24", "Forced expiratory volume in 1 second (FEV1)"):
+            with self.subTest(text=text):
+                self.assertIn("fev1", classes(text))
+        self.assertNotIn("spirometry_other", classes("FEV 6 weeks after start"))
+        self.assertIn("spirometry_other", classes("FEV0,5 z-score"))
+        self.assertNotIn("fev1", classes("Lung function"))                     # vague wording is still never FEV1
+
+    def test_smaller_false_positives(self):
+        self.assert_not({"sputum_properties": ["Blood viscoelastic testing", "Blood rheology", "Sufficient sputum quantity for a pellet"],
+                         "npd": ["TEPD of cultured cells", "TEPD in primary cell lines"],
+                         "muscle_strength": ["Motor evoked potential (MEP) amplitude", "MEP latency", "MIP 1 alpha"],
+                         "gi_pancreatic": ["Number of bowel movement-related symptoms", "Bowel movement symptom score"],
+                         "safety_tolerability": ["FEV1 in participants with decreased renal function",
+                                                 "Pharmacokinetics in participants with mild renal function impairment",
+                                                 "Change in temperature of the reconstituted solution"]})
+        self.assert_has({"sputum_properties": ["Grams of sputum expectorated", "Sputum percent solids", "Mucus solids percentage",
+                                               "Expectorated sputum (g)", "Sputum wet weight in grams"],
+                         "muscle_strength": ["Maximal expiratory pressure", "MIP and MEP", "Sniff nasal inspiratory pressure"],
+                         "gi_pancreatic": ["Frequency of bowel movements", "Number of spontaneous bowel movements per week"],
+                         "safety_tolerability": ["Creatinine clearance", "Decline in renal function", "Renal function tests"],
+                         "npd": ["Nasal TEPD"]})
+
+    def test_unicode_is_folded_and_spans_stay_exact(self):
+        for text, cls in (("SpO₂ during sleep", "oxygenation"), ("PaCO₂", "oxygenation"), ("FEV₁/FVC", "spirometry_other"),
+                          ("Change in ppFEV₁", "fev1"), ("Change in R5–R20", "lung_mechanics")):
+            with self.subTest(text=text):
+                t = tag(text)
+                self.assertIn(cls, [x["class"] for x in t["tags"]])
+                for x in t["tags"]:
+                    self.assertEqual(text[x["start"]:x["end"]], x["text"])
+        self.assertNotIn("glucose_cfrd", classes("Insulin–like growth factor 1"))          # en dash
+        self.assertNotIn("glucose_cfrd", classes("Insulin‑like growth factor 1"))     # non-breaking hyphen
+        self.assertNotIn("fev1", classes("FEV₁/FVC"))
+        t = tag("SpO₂  during\nsleep")
+        self.assertEqual("SpO₂  during\nsleep"[t["tags"][0]["start"]:t["tags"][0]["end"]], t["tags"][0]["text"])
+        norm, spans = lexicon.normalise_whitespace("a₂–b")
+        self.assertEqual(norm, "a2-b")
+        self.assertEqual(spans, [(0, 1), (1, 2), (2, 3), (3, 4)])
+        self.assert_has({"bone_density": ["Change in aBMD", "Tibial vBMD"]})
+
+    def test_every_pattern_is_fast_on_adversarial_text(self):
+        import time
+        n = 20000
+        texts = ["a" * n, "abc " * (n // 4), "clearance of " * (n // 13), "FEV1/" * (n // 5), "1" * n, "sputum " * (n // 7),
+                 "incidence of a " * (n // 15), "mycin" * (n // 5), "PA-" * (n // 3), "R5-" * (n // 3), "a-" * (n // 2),
+                 "oxygen uptake " * (n // 14), "a " * (n // 2), "-" * n]
+        rules = [(r["id"], r["re"]) for r in LEX.rules + LEX.composite] + [("NS-01", LEX.placeholder), ("NS-V1", LEX.vague_ns)]
+        rules += [(f["id"], f["re"]) for f in LEX.fallback_restrictions]
+        rules += [(r["id"], r["sup_re"]) for r in LEX.rules if r.get("sup_re")]
+        for rid, rx in rules:
+            for text in texts:
+                norm, _ = lexicon.normalise_whitespace(text)
+                start = time.perf_counter()
+                rx.search(norm)
+                elapsed = time.perf_counter() - start
+                with self.subTest(rule=rid, text=text[:12]):
+                    self.assertLess(elapsed, 0.1)
+
+    def test_pk01_is_bounded_and_keeps_its_matches(self):
+        for text in ("Plasma ivacaftor concentration", "Serum tobramycin concentrations", "Concentration of tobramycin in plasma",
+                     "Ivacaftor concentration in sputum"):
+            with self.subTest(text=text):
+                self.assertIn("pharmacokinetics", classes(text))
+        self.assertIn("{1,40}", next(r["pattern"] for r in LEX.data["rules"] if r["id"] == "PK-01"))
+
+    def test_single_entry_alternatives_are_gone(self):
+        pk3 = next(r["pattern"] for r in LEX.data["rules"] if r["id"] == "PK-03")
+        for stem in ("derocol", "olozane", "zidime", "DTPA", "indium", "In-"):
+            with self.subTest(stem=stem):
+                self.assertNotIn(stem, pk3)
+        pro4 = next(r["pattern"] for r in LEX.data["rules"] if r["id"] == "PRO-04")
+        for name in ("GSAS", "PEI"):
+            with self.subTest(name=name):
+                self.assertNotIn(name, pro4)
+        self.assertNotIn("Raw", next(r["pattern"] for r in LEX.data["rules"] if r["id"] == "LMECH-02").replace("sRaw", ""))
+        self.assertNotIn("expectorated sputum \\(", next(r["pattern"] for r in LEX.data["rules"] if r["id"] == "SPUT-01"))
+
+    def test_a_bare_exacerbation_measure_is_not_decided_by_other_outcomes_in_the_description(self):
+        t = tag("Exacerbation rate", "Secondary measures: quality of life, Pseudomonas status and lung function.")
+        self.assertEqual(t["status"], "unclassified")
+        self.assertEqual(classes("Exacerbations frequency", "Number of respiratory exacerbations per year."), ["exacerbations"])
+        self.assertEqual(classes("Number of participants with cystic fibrosis (CF) exacerbation"), ["exacerbations"])
+        self.assertEqual(classes("Quality of life", "Exacerbation rate is also recorded."), ["pro_unnamed"])
+
+    def test_timed_up_and_go_is_not_exercise_capacity(self):
+        self.assertNotIn("exercise_capacity", classes("Timed up and go test"))
+        self.assertIn("exercise_capacity", classes("30-second chair stand test"))
+        self.assertIn("exercise_capacity", classes("One-minute sit-to-stand test"))
+
+    def test_explicit_oximetry_in_a_safety_outcome_gets_both_tags(self):
+        self.assertEqual(classes("Safety measured by pulse oximetry"), ["oxygenation", "safety_tolerability"])
+        self.assertEqual(classes("Vital signs and pulse oximetry"), ["oxygenation", "safety_tolerability"])
+        self.assertEqual(classes("Safety: oxygen saturation"), ["oxygenation", "safety_tolerability"])
+        self.assertEqual(classes("Number of participants with desaturation adverse events"), ["safety_tolerability"])
+        self.assertEqual(classes("Bronchospasm defined as oxygen desaturation after inhalation"), ["safety_tolerability"])
+        self.assertEqual(classes("Nocturnal desaturation"), ["oxygenation"])
+
+    def test_clinical_labels_and_glosses(self):
+        self.assertEqual(LEX.labels["oxygenation"], "Oxygen and carbon dioxide levels")
+        self.assertEqual(LEX.labels["muscle_strength"], "Muscle strength and endurance")
+        self.assertEqual(LEX.labels["microbiology_sputum"], "Microbiology")
+        dom = {d["id"]: d for d in LEX.data["domains"]}
+        self.assertEqual(dom["microbiology_sputum"]["label"], "Microbiology")
+        self.assertEqual(dom["pulmonary"]["label"], "Lung function and gas exchange")
+        self.assertEqual(LEX.domain_of["oxidative_stress"], "molecular")
+        self.assertEqual(LEX.domain_of["exercise_capacity"], "exercise_capacity")
+        self.assertEqual(LEX.data["safety_subtype_labels"]["hearing"], "Hearing and balance")
+        self.assertEqual(set(LEX.data["safety_subtype_labels"]), set(LEX.data["safety_subtypes"]))
+        gloss = {c["id"]: c["gloss"] for d in LEX.data["domains"] for c in d["classes"]}
+        self.assertIn("type-2", gloss["inflammation_markers"])
+        self.assertIn("over time", gloss["mucociliary_clearance"])
+        self.assertNotIn("how fast", gloss["mucociliary_clearance"].lower())
+        self.assertIn("questionnaire", gloss["physical_activity"])
+        self.assertIn("tissue", gloss["molecular_expression"])
+        self.assertIn("z-score", gloss["bone_density"])
+        self.assertNotIn("osteopenia", gloss["bone_density"])
+        self.assertIn("percent solids", gloss["sputum_properties"])
+        self.assertIn("exhaled", gloss["oxygenation"])
+        for cid, g in gloss.items():
+            with self.subTest(cls=cid):
+                self.assertLessEqual(len(g), 160)
+
+    def test_new_mechanisms_are_checked_at_load(self):
+        for key, bad in (("suppressed_by_pattern", r"(a+)+"), ("measure_pattern", r"(?x) a b")):
+            data = json.loads(json.dumps(LEX.data))
+            if key == "suppressed_by_pattern":
+                data["rules"][0]["suppressed_by_pattern"] = bad
+            else:
+                data["matching"]["fallback_restrictions"][0]["measure_pattern"] = bad
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                lexicon.Lexicon(data)
+        data = json.loads(json.dumps(LEX.data))
+        data["matching"]["fallback_restrictions"][0]["classes"] = ["nope"]
+        with self.assertRaises(ValueError):
+            lexicon.Lexicon(data)
+
+    def test_suppressed_by_pattern_is_checked_in_the_same_field(self):
+        self.assertEqual(classes("Mucociliary clearance rate", "Tc-sulfur colloid clearance; DTPA absorption was also measured."),
+                         ["mucociliary_clearance"])
 
 
 class SnapshotTaggingTest(unittest.TestCase):
@@ -552,7 +779,7 @@ class SnapshotTaggingTest(unittest.TestCase):
             self.assertEqual(out.read_text(encoding="utf-8"), "KEEP")
 
     def test_the_not_stated_class_is_labelled_no_measure_named(self):
-        # only this class label changes; its domain label and every other label wait for a clinician reader
+        # this class label and its unchanged domain label; every label waits for a clinician reader
         self.assertEqual(LEX.labels["not_stated"], "No measure named")
         domain = next(d for d in LEX.data["domains"] if d["id"] == "not_stated")
         self.assertEqual(domain["label"], "Not stated")
