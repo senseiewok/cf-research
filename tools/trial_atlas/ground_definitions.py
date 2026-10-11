@@ -7,16 +7,21 @@ definition is right, complete or current. A person, or a model of a different fa
 from it. For a Spanish target, a verified quote proves usage in that article, not that Mexican clinicians use the term.
 
 What it does, per target in the targets file (grounding_targets.json holds search words only):
-  1. Search Europe PMC REST (`search`, resultType core, a small page) with each of the target's search strings, joined with the
-     configured open-access filter and licence filter, until the top N (default 8) hits with a PMCID, isOpenAccess Y and an open
-     licence are found. A hit without an open licence (a Creative Commons licence or CC0, which all permit quoting with attribution)
+  1. Search Europe PMC REST (`search`, resultType core, 25 hits a page). First the target's definition search (definitional
+     cue words plus a publication-type filter such as review or guideline; when that filter answers 0 hits, the same words once more
+     without it, and the report says so), then each of its other search strings. Every query also carries the open-access filter and
+     the licence filter. Searching stops once the top N (default 15) hits with a PMCID, isOpenAccess Y and an open licence are found. A hit without an open licence (a Creative Commons licence or CC0, which all permit quoting with attribution)
      is recorded as skipped, reason `licence`, and never read.
   2. Fetch each kept article's full text once (`{PMCID}/fullTextXML`) into a private cache, by PMCID, with its sha256; a cached
      article is never fetched again. Convert it to plain text deterministically (standard-library XML parsing; reference list kept
      after a marker so a quote from it can be refused; figure and table captions dropped unless --keep-captions; paragraph
      boundaries kept; whitespace collapsed); record the text's sha256.
   3. Pick the paragraphs that hold one of the target's terms (up to --passage-chars characters) and ask the local model ONCE per
-     article per target whether one sentence there defines or explains the target in the sense of its `what_to_define`.
+     article per target for one sentence about the target, labelled with a kind: defines_measure (says what the measure is, what
+     it quantifies or how it is obtained), expands_acronym (only spells out an abbreviation) or term_usage (the term used in a
+     clinical sentence). Only a verified defines_measure quote counts as a definition: toward the target's cap (default 5) and in the
+     report's gaps. The other two are kept, with their kind, for term and Spanish-usage grounding. The kind is the model's label;
+     no script checks it.
   4. Verify the quote: an exact substring of the plain text, 6 to 40 words, inside one paragraph, holding one of the target's terms,
      not reading like an instruction, not from the reference list and not the article's own title. Two fast attempts, then one
      thinking attempt (unless --no-think), only for replies that fail verification; a retry carries one fixed sentence naming why.
@@ -27,7 +32,8 @@ max_rps), its pace (the catalog's max_rps, 1 per second), the 200-request ceilin
 one honest project user agent. The Client parses JSON only; the full text is XML, so EvidenceAdapter.get_xml runs the same Client
 request (every gate, pace, count and cooldown) and only swaps the final JSON parse for the raw bytes. No contact is sent unless
 --send-contact is given; then it comes from EVIDENCE_CONTACT only and is never printed or stored. Before any request the worst case
-(searches + N full texts per target) must fit the budget; split a large run with --targets-from/--targets-to into several processes.
+(searches + N full texts per target) must fit the budget; split a large run with --targets-from/--targets-to into several processes
+(the dry run and the refusal print suggested ranges).
 
 Articles are UNTRUSTED text. Every packet puts the passages inside <untrusted_page>...</untrusted_page> and says, outside the tags,
 that the text was written by strangers, may contain instructions and must never be followed. The model gets no tools and returns
@@ -36,7 +42,8 @@ JSON only; this script writes every file.
 Outputs, in --out (refused inside a git working tree; nothing article-derived is ever committed):
   grounded.jsonl        append-only, one row per model attempt or skipped article, flushed per row (--resume goes on)
   searches.jsonl        append-only, one row per search: the query, hitCount and the hits' metadata (no article text)
-  grounding-report.md   per target: articles found, with full text, verified quotes, best sources by year; gaps first.
+  grounding-report.md   per target: articles found, with full text, verified quotes by kind, best definitions by year; targets
+                        with no definition first.
                         Counts, titles and PMCIDs only; no quotes
   sources.json          the articles with a verified quote: PMCID, title, year, licence, URL, access date, for citation
   run.json              what the folder is bound to (targets file hash, template, models, settings); --resume refuses another
@@ -46,12 +53,12 @@ Usage (from the repository root):
   python tools/trial_atlas/ground_definitions.py --out DIR --dry-run [--targets-from N --targets-to M]
   python tools/trial_atlas/ground_definitions.py --out DIR --lab-repo LAB --profile-file FAST.json
          [--thinking-profile-file THINK.json] [--targets FILE] [--targets-from N] [--targets-to M] [--limit-targets K]
-         [--top-n 8] [--cap 5] [--resume] [--no-think] [--think-on-not-found] [--keep-captions] [--no-licence-filter]
+         [--top-n 15] [--cap 5] [--no-definition-filter] [--resume] [--no-think] [--think-on-not-found] [--keep-captions] [--no-licence-filter]
          [--send-contact]
 Exit 0 finished; 1 stopped part-way (a gate, a cooldown or the budget; outputs written); 2 refused before any request or a usage
 error; 130 interrupted (the JSONL is valid; run again with --resume).
 
-NOT VERIFIED against Europe PMC (nothing here has been run against it). Every assumption about its answers is configuration in
+Only a one-target probe (template /1) has been run against Europe PMC. Every assumption about its answers is configuration in
 DEFAULTS or the targets file, marked "to verify on the first real run". Tests use a fake client and a fake model.
 """
 from __future__ import annotations
@@ -74,7 +81,7 @@ import propose_tags as pt  # noqa: E402
 import snapshot as snap  # noqa: E402
 
 TOOL = "trial_atlas/ground_definitions 0.1.0"
-TEMPLATE_VERSION = "trial-atlas-ground/1"
+TEMPLATE_VERSION = "trial-atlas-ground/2"
 SOURCE_ID = "europe-pmc"
 INVOKE_TAG = "trial-atlas-ground"
 DEFAULT_TARGETS = HERE / "grounding_targets.json"
@@ -91,7 +98,7 @@ DEFAULTS = {
     "search_path": "search",                      # the evidence skill's provider uses it (tested by the lab 2026-10-04)
     "fulltext_path": "{pmcid}/fullTextXML",       # to verify on the first real run
     "result_type": "core",                        # to verify on the first real run: core carries `license`; lite may not
-    "page_size": 10,                              # our own small page
+    "page_size": 25,                              # our own page: enough hits to find 15 eligible ones
     "hit_count_field": "hitCount",                # the evidence skill's provider reads it
     "license_field": "license",                   # to verify on the first real run: the key and its spellings ("cc by", ...)
     "open_access_field": "isOpenAccess",          # the evidence skill's provider reads it ("Y")
@@ -120,7 +127,13 @@ REPAIR = {
     "reference_list": "Your previous quote came from the reference list. Quote a sentence from the passages.",
     "term_missing": "Your previous quote did not contain any of the required words. The quote must contain one of them.",
     "malformed_json": "Your previous reply was not valid JSON matching the schema.",
+    "bad_kind": "With found true, kind must be defines_measure, expands_acronym or term_usage.",
 }
+# What a verified quote is. Only defines_measure counts toward a target's definition and its cap; the other two are kept, with their
+# kind, for term and Spanish-usage grounding, and reported apart.
+KINDS = ("defines_measure", "expands_acronym", "term_usage")
+KIND_LABELS = {"defines_measure": "definitions (defines_measure)", "expands_acronym": "acronym expansions",
+               "term_usage": "term usage"}
 _TAG = re.compile(r"untrusted_page", re.I)
 
 
@@ -166,7 +179,9 @@ def load_targets(path: Path) -> dict:
         for k in ("english_term", "what_to_define"):
             if not isinstance(t.get(k), str) or not t[k].strip():
                 raise Refused(f"{tid}: {k} is missing")
-    for k in ("search_filter", "licence_filter"):
+        if "definition_search" in t and (not isinstance(t["definition_search"], str) or not t["definition_search"].strip()):
+            raise Refused(f"{tid}: definition_search must be a non-empty string")
+    for k in ("search_filter", "licence_filter", "definition_filter"):
         if not isinstance(data.get(k, ""), str):
             raise Refused(f"{k} must be a string")
     if "OPEN_ACCESS:y" not in data.get("search_filter", ""):
@@ -189,16 +204,61 @@ def select_targets(targets: list[dict], start: int | None, end: int | None, limi
     return chosen
 
 
-def compose_query(search: str, cfg: dict) -> str:
-    parts = [f"({search})", cfg["search_filter"]]
+def compose_query(search: str, cfg: dict, type_filter: str = "") -> str:
+    parts = [f"({search})", type_filter, cfg["search_filter"]]
     if cfg.get("licence_filter"):
         parts.append(cfg["licence_filter"])
     return " AND ".join(p for p in parts if p)
 
 
+def planned_searches(target: dict, cfg: dict) -> list[tuple[str, str, str | None]]:
+    """(role, query, fallback query) in the order they run. The definition search carries the definition filter (a publication
+    type) when one is configured; if that query answers with 0 hits, its fallback (the same words without the filter) runs next."""
+    out = []
+    ds = target.get("definition_search")
+    if ds:
+        if cfg.get("definition_filter"):
+            out.append(("definition", compose_query(ds, cfg, cfg["definition_filter"]), compose_query(ds, cfg)))
+        else:
+            out.append(("definition", compose_query(ds, cfg), None))
+    out += [("search", compose_query(s, cfg), None) for s in target["searches"]]
+    return out
+
+
+def target_worst_case(t: dict, top_n: int) -> int:
+    """One target's most requests: every search string, the definition search and its unfiltered fallback, and N full texts.
+    Cached articles and early stops (enough hits, or the cap of definitions) make the real number smaller."""
+    return len(t["searches"]) + (2 if t.get("definition_search") else 0) + top_n
+
+
 def worst_case_requests(targets: list[dict], top_n: int) -> int:
-    """Every search string plus N full texts per target. Cached articles and early stops make the real number smaller."""
-    return sum(len(t["searches"]) + top_n for t in targets)
+    return sum(target_worst_case(t, top_n) for t in targets)
+
+
+def suggest_batches(targets: list[dict], top_n: int, budget: int) -> list[tuple[int, int, int]]:
+    """Consecutive (from, to, worst case) ranges, 1-based, each within `budget`, in file order (greedy)."""
+    out, start, need = [], 1, 0
+    for i, t in enumerate(targets, 1):
+        w = target_worst_case(t, top_n)
+        if w > budget:
+            raise Refused(f"target {t['id']} alone needs up to {w} requests, over the {budget} a process may make; lower --top-n")
+        if need + w > budget:
+            out.append((start, i - 1, need))
+            start, need = i, 0
+        need += w
+    out.append((start, len(targets), need))
+    return out
+
+
+def batches_text(targets: list[dict], top_n: int, budget: int) -> str:
+    lines = [f"suggested batches (each a separate process, run one after another; worst case of the {budget}-request budget):"]
+    try:
+        batches = suggest_batches(targets, top_n, budget)
+    except Refused as exc:
+        return f"no batches can be suggested: {exc}"
+    for a, b, need in batches:
+        lines.append(f"  --targets-from {a} --targets-to {b}   worst case {need}")
+    return "\n".join(lines)
 
 
 def term_pattern(terms: list[str]) -> re.Pattern:
@@ -551,9 +611,19 @@ SYSTEM_TEXT = ("You read passages from one scientific article and look for one s
 
 def reply_schema() -> dict:
     return {"type": "object",
-            "properties": {"found": {"type": "boolean"}, "quote": {"type": "string", "maxLength": 600},
+            "properties": {"found": {"type": "boolean"}, "kind": {"type": "string", "enum": list(KINDS) + ["none"]},
+                           "quote": {"type": "string", "maxLength": 600},
                            "section_hint": {"type": "string", "maxLength": 120}},
-            "required": ["found", "quote", "section_hint"], "additionalProperties": False}
+            "required": ["found", "kind", "quote", "section_hint"], "additionalProperties": False}
+
+
+# Invented sentences about a made-up measure, not from any article and not about any target, so the examples cannot be copied
+# into an answer.
+KIND_EXAMPLES = (
+    ("defines_measure", "The grip test measures the greatest force, in kilograms, that one hand can apply to a dynamometer."),
+    ("expands_acronym", "Participants completed the timed up and go (TUG) test at every visit."),
+    ("term_usage", "TUG time fell by two seconds after twelve weeks of training."),
+)
 
 
 def _inside(text: str) -> str:
@@ -578,9 +648,17 @@ def build_packet(target: dict, passages: list[Para], repair: str | None = None) 
               f"- quote: {MIN_WORDS} to {MAX_WORDS} words copied character for character from ONE passage (same letters, case, "
               "spacing and punctuation). Do not join pieces, shorten words, translate or fix spelling. Do not copy the passage "
               "labels.",
-              "- found: true only when a sentence in the box defines or explains the term in that sense. A sentence that only "
-              "mentions the term, or reports a result or a number without saying what the term is, is not enough: then found is "
-              "false and quote is an empty string.",
+              "- kind: what your quote does. Prefer a defines_measure sentence; give one of the other two kinds only when the box "
+              "holds no defines_measure sentence.",
+              "  - defines_measure: the sentence says what the measure is, what it quantifies or how it is obtained. Example (an "
+              f"invented sentence): \"{KIND_EXAMPLES[0][1]}\"",
+              "  - expands_acronym: the sentence only spells out an acronym or abbreviation. Example (invented): "
+              f"\"{KIND_EXAMPLES[1][1]}\"",
+              "  - term_usage: the sentence uses the term in a clinical sentence, for example a result. Example (invented): "
+              f"\"{KIND_EXAMPLES[2][1]}\"",
+              "  An acronym expansion alone is NOT a definition. A result or a number is NOT a definition.",
+              "- found: true when you give a quote of one of these kinds. When the box holds none of them, found is false, kind is "
+              "none and quote is an empty string.",
               "- section_hint: the section name shown above the passage you quoted, or an empty string.",
               "", "<untrusted_page>"]
     for n, p in enumerate(passages, 1):
@@ -592,7 +670,8 @@ def build_packet(target: dict, passages: list[Para], repair: str | None = None) 
         lines += ["", f"Note on your previous attempt: {repair}"]
     lines += ["", "Answer only from the material above. Where it is silent, set found to false. Do not add numbers, dates, names, "
               "causes or years that are not in it. Quote only what you copy exactly. Reply with JSON only: "
-              '{"found": true or false, "quote": "...", "section_hint": "..."}']
+              '{"found": true or false, "kind": "defines_measure|expands_acronym|term_usage|none", "quote": "...", '
+              '"section_hint": "..."}']
     return "\n".join(lines) + "\n"
 
 
@@ -602,7 +681,7 @@ def parse_reply(stdout: str) -> dict | None:
     except ValueError:
         return None
     if not isinstance(obj, dict) or not isinstance(obj.get("found"), bool) or not isinstance(obj.get("quote"), str) \
-            or not isinstance(obj.get("section_hint"), str):
+            or not isinstance(obj.get("section_hint"), str) or not isinstance(obj.get("kind"), str):
         return None
     return obj
 
@@ -698,11 +777,13 @@ class State:
         self.searches = {(r["target_id"], r["query"]): r for r in load_jsonl(out / SEARCHES)[0]
                          if r.get("status") in ("found", "not_found")}
         self.articles: dict[tuple[str, str], dict] = {}
-        self.verified: dict[str, int] = {}
+        self.definitions: dict[str, int] = {}     # verified defines_measure quotes per target: what the cap counts
         for r in load_jsonl(out / GROUNDED)[0]:
             self.note(r)
 
     def note(self, r: dict) -> None:
+        if r.get("row") == "attempt" and "kind" not in r:
+            return       # a row written before the kind field (template /1): unclassified, so the article is asked again
         key = (r["target_id"], r.get("hit_key") or r.get("pmcid"))
         s = self.articles.setdefault(key, {"attempts": 0, "verified": False, "final": False, "last_reason": None})
         if r.get("row") == "skip":
@@ -711,8 +792,8 @@ class State:
             return
         s["attempts"] = max(s["attempts"], int(r.get("attempt") or 0))
         if r.get("verified"):
-            if not s["verified"]:
-                self.verified[r["target_id"]] = self.verified.get(r["target_id"], 0) + 1
+            if not s["verified"] and r.get("kind") == "defines_measure":
+                self.definitions[r["target_id"]] = self.definitions.get(r["target_id"], 0) + 1
             s["verified"] = True
         elif r.get("reason") == "model_not_found" and r.get("final"):
             s["final"] = True
@@ -732,24 +813,28 @@ def ground_target(target: dict, client, invoker, out: Path, cache: Path, cfg: di
                   gfh, sfh, progress=print) -> None:
     pattern = term_pattern(target["terms"])
     tid = target["id"]
-    if state.verified.get(tid, 0) >= st.cap:
-        progress(f"{tid}: already has {state.verified[tid]} verified quote(s); skipped")
+    if state.definitions.get(tid, 0) >= st.cap:
+        progress(f"{tid}: already has {state.definitions[tid]} verified definition(s); skipped")
         return
-    # 1. searches, until N eligible hits
+    # 1. searches, until N eligible hits: the definition search first (with its type filter, and unfiltered when the filter
+    #    returns 0 hits), then the target's other searches
     hits: dict[str, dict] = {}
     order: list[str] = []
     eligible: list[str] = []
-    for s in target["searches"]:
+    queue = planned_searches(target, cfg)
+    while queue:
+        role, q, fallback = queue.pop(0)
         if len(eligible) >= st.top_n:
             break
-        q = compose_query(s, cfg)
         row = state.searches.get((tid, q))
         if row is None:
-            row = {"target_id": tid, **search(client, q, cfg)}
+            row = {"target_id": tid, "role": role, **search(client, q, cfg)}
             pt.append_row(sfh, row)
             if row["status"] in ("found", "not_found"):
                 state.searches[(tid, q)] = row
-            progress(f"{tid}: search {row['status']}, hitCount {row['hit_count']}, {len(row['hits'])} hit(s) read")
+            progress(f"{tid}: {role} search {row['status']}, hitCount {row['hit_count']}, {len(row['hits'])} hit(s) read")
+        if fallback and row["status"] == "found" and row["hit_count"] == 0:
+            queue.insert(0, ("definition_fallback", fallback, None))
         for h in row["hits"]:
             key = h["pmcid"] or f"no-pmcid:{h.get('pmid') or h.get('doi') or len(order)}"
             if key in hits:
@@ -770,7 +855,7 @@ def ground_target(target: dict, client, invoker, out: Path, cache: Path, cfg: di
     plan = attempt_plan(st.think)
     schema = reply_schema()
     for key in eligible:
-        if state.verified.get(tid, 0) >= st.cap:
+        if state.definitions.get(tid, 0) >= st.cap:
             break
         h = hits[key]
         s = state.articles.get((tid, key), {"attempts": 0, "verified": False, "final": False, "last_reason": None})
@@ -814,7 +899,7 @@ def ground_target(target: dict, client, invoker, out: Path, cache: Path, cfg: di
                                    profile=profile, tag=INVOKE_TAG)
             row = {**_base_row(target, h, "attempt", key), "attempt": attempt, "mode": mode, "think": think, "model": model,
                    "profile": Path(profile).name if profile else None, "repair_from": s["last_reason"] if repair else None,
-                   "found": None, "quote": None, "section": None, "section_hint": None, "verified": False, "reason": None,
+                   "found": None, "kind": None, "quote": None, "section": None, "section_hint": None, "verified": False, "reason": None,
                    "detail": None, "final": False, "text_sha256": doc.sha256, "access_date": access_date,
                    "countries": doc.countries, "passages": len(passages), "invoker_exit": None, "invoker_stderr": None,
                    "seconds": None}
@@ -846,15 +931,19 @@ def ground_target(target: dict, client, invoker, out: Path, cache: Path, cfg: di
                         next_idx = later_think[0]          # a fast "not found" in a long text is no information
                     else:
                         row["final"] = True
+                elif obj["kind"] not in KINDS:
+                    row["reason"], row["quote"] = "bad_kind", snap.clean(obj["quote"], 300)
+                    row["detail"] = f"kind {snap.clean(obj['kind'], 30)!r} with found true"
                 else:
                     ok, reason, detail, section = verify_quote(obj["quote"], doc, pattern)
+                    row["kind"] = obj["kind"]
                     row["quote"] = obj["quote"] if ok else snap.clean(obj["quote"], 300)
                     row["verified"], row["reason"], row["detail"], row["section"] = ok, reason, detail, section
             pt.append_row(gfh, row)
             state.note(row)
             s = state.articles[(tid, key)]
             if row["verified"]:
-                outcome = f"verified (attempt {attempt}, {mode})"
+                outcome = f"verified {row['kind']} (attempt {attempt}, {mode})"
                 break
             if row["final"]:
                 outcome = "the model found no defining sentence"
@@ -887,45 +976,65 @@ def summarise(targets: list[dict], out: Path) -> list[dict]:
                 skips[r["reason"]] = skips.get(r["reason"], 0) + 1
         with_text = {r["pmcid"] for r in rows if r.get("text_sha256")}
         asked = {r["pmcid"] for r in rows if r.get("row") == "attempt"}
-        verified_rows: dict[str, dict] = {}
+        by_kind: dict[str, dict[str, dict]] = {k: {} for k in (*KINDS, "unclassified")}
         for r in rows:
-            if r.get("verified") and r["pmcid"] not in verified_rows:
-                verified_rows[r["pmcid"]] = r
+            if r.get("verified"):
+                k = r.get("kind") if r.get("kind") in KINDS else "unclassified"   # rows from before the kind field
+                by_kind[k].setdefault(r["pmcid"], r)
+        others = [r for k in (*KINDS[1:], "unclassified") for r in by_kind[k].values()]
         res.append({"id": tid, "english_term": t["english_term"], "language": t["language"], "searches": len(srch),
                     "search_errors": sum(1 for r in srch if r.get("status") not in ("found", "not_found")),
+                    "filter_fell_back": any(r.get("role") == "definition_fallback" for r in srch),
                     "articles_found": len(found), "with_full_text": len(with_text), "model_asked": len(asked),
-                    "verified": len(verified_rows), "skipped_by_reason": dict(sorted(skips.items())),
-                    "best": sorted(verified_rows.values(), key=_year_key)[:5], "run": bool(srch or rows)})
+                    "definitions": len(by_kind["defines_measure"]),
+                    "by_kind": {k: len(v) for k, v in by_kind.items()},
+                    "skipped_by_reason": dict(sorted(skips.items())),
+                    "best": sorted(by_kind["defines_measure"].values(), key=_year_key)[:5],
+                    "others": sorted(others, key=_year_key)[:5], "run": bool(srch or rows)})
     return res
 
 
 def render_report(summ: list[dict], binding: dict) -> str:
-    gaps = [s for s in summ if s["run"] and s["verified"] == 0]
-    done = [s for s in summ if s["run"] and s["verified"] > 0]
+    gaps = [s for s in summ if s["run"] and s["definitions"] == 0]
+    done = [s for s in summ if s["run"] and s["definitions"] > 0]
     notrun = [s for s in summ if not s["run"]]
     L = ["# Grounding report (private; computed from grounded.jsonl and searches.jsonl)", "",
          f"Template {binding['template']}; targets file sha256 {binding['targets_sha256'][:12]}; model {binding['model']}.",
          "A verified quote proves only that its words exist in an open-access article. It does not prove the definition is right "
          "or complete; a person or a model of a different family reads each quote in grounded.jsonl before a gloss is written.",
-         "", f"Targets: {len(summ)}; run: {len(summ) - len(notrun)}; with zero verified quotes: {len(gaps)}; not run yet: "
+         "Only defines_measure quotes count as a definition; acronym expansions and term usage are kept for term and usage "
+         "grounding and counted apart. The kind is the model's label, not checked by a script.",
+         "", f"Targets: {len(summ)}; run: {len(summ) - len(notrun)}; with no definition: {len(gaps)}; not run yet: "
          f"{len(notrun)}.", ""]
+
+    def line(r):
+        return (f"{snap.clean(r.get('year'), 10)} {r['pmcid']} {snap.clean(r.get('title'), 140)} "
+                f"(licence {snap.clean(r.get('licence'), 30)})")
 
     def block(s):
         L.append(f"### {s['id']} ({s['language']}): {snap.clean(s['english_term'], 100)}")
+        k = s["by_kind"]
+        counts = "; ".join(f"{KIND_LABELS[x]}: {k[x]}" for x in KINDS)
+        if k["unclassified"]:
+            counts += f"; unclassified (rows without a kind): {k['unclassified']}"
         L.append(f"- searches: {s['searches']} (errors {s['search_errors']}); articles found: {s['articles_found']}; with full "
-                 f"text: {s['with_full_text']}; model asked: {s['model_asked']}; verified quotes: {s['verified']}")
+                 f"text: {s['with_full_text']}; model asked: {s['model_asked']}")
+        L.append(f"- verified quotes: {counts}")
+        if s["filter_fell_back"]:
+            L.append("- the definition filter returned 0 hits; fell back to the unfiltered definition search")
         if s["skipped_by_reason"]:
             L.append("- skipped: " + ", ".join(f"{k} {v}" for k, v in s["skipped_by_reason"].items()))
         for r in s["best"]:
-            L.append(f"- {snap.clean(r.get('year'), 10)} {r['pmcid']} {snap.clean(r.get('title'), 140)} "
-                     f"(licence {snap.clean(r.get('licence'), 30)})")
+            L.append(f"- definition: {line(r)}")
+        for r in s["others"]:
+            L.append(f"- {r.get('kind') or 'unclassified'}: {line(r)}")
         L.append("")
-    L += ["## Gaps: targets with zero verified quotes", ""]
+    L += ["## Gaps: targets with no definition (defines_measure)", ""]
     for s in gaps:
         block(s)
     if not gaps:
         L += ["(none)", ""]
-    L += ["## Targets with verified quotes (best sources by year)", ""]
+    L += ["## Targets with a definition (best sources by year)", ""]
     for s in done:
         block(s)
     if not done:
@@ -944,9 +1053,14 @@ def sources(out: Path) -> list[dict]:
         s = by.setdefault(r["pmcid"], {"pmcid": r["pmcid"], "title": r.get("title"), "year": r.get("year"),
                                        "journal": r.get("journal"), "doi": r.get("doi"), "licence": r.get("licence"),
                                        "url": f"https://europepmc.org/article/PMC/{r['pmcid'][3:]}",
-                                       "access_date": r.get("access_date"), "targets": []})
+                                       "access_date": r.get("access_date"), "targets": [], "kinds": []})
         if r["target_id"] not in s["targets"]:
             s["targets"].append(r["target_id"])
+        k = r.get("kind") if r.get("kind") in KINDS else "unclassified"
+        if k not in s["kinds"]:
+            s["kinds"].append(k)
+    for s in by.values():
+        s["kinds"].sort(key=lambda k: (*KINDS, "unclassified").index(k))
     return [by[k] for k in sorted(by)]
 
 
@@ -978,8 +1092,10 @@ def main(argv=None, *, client=None, invoker=None) -> int:
     ap.add_argument("--targets-from", type=int, help="first target, 1-based, in file order")
     ap.add_argument("--targets-to", type=int, help="last target, inclusive")
     ap.add_argument("--limit-targets", type=int, help="run only the first K targets of the range")
-    ap.add_argument("--top-n", type=int, default=8, help="open-access, openly licensed hits read per target")
-    ap.add_argument("--cap", type=int, default=5, help="stop a target after this many verified quotes")
+    ap.add_argument("--top-n", type=int, default=15, help="open-access, openly licensed hits read per target")
+    ap.add_argument("--cap", type=int, default=5, help="stop a target after this many verified definitions (defines_measure)")
+    ap.add_argument("--no-definition-filter", action="store_true", help="send the definition search without its publication-type "
+                                                                        "filter")
     ap.add_argument("--page-size", type=int, default=DEFAULTS["page_size"])
     ap.add_argument("--passage-chars", type=int, default=12000, help="the most article characters in one packet")
     ap.add_argument("--keep-captions", action="store_true", help="keep figure and table captions in the plain text")
@@ -1010,25 +1126,32 @@ def main(argv=None, *, client=None, invoker=None) -> int:
         targets = data["targets"]
         chosen = select_targets(targets, a.targets_from, a.targets_to, a.limit_targets)
         cfg = {**DEFAULTS, "page_size": a.page_size, "search_filter": data.get("search_filter", ""),
-               "licence_filter": "" if a.no_licence_filter else data.get("licence_filter", "")}
+               "licence_filter": "" if a.no_licence_filter else data.get("licence_filter", ""),
+               "definition_filter": "" if a.no_definition_filter else data.get("definition_filter", "")}
         need = worst_case_requests(chosen, a.top_n)
         for p, name in ((out, "--out"), (cache, "--cache")):
             if pt.inside_git_tree(p):
                 raise Refused(f"{name} lies inside a git working tree; article text stays outside every repository")
         if client is None:
             client, _ua = make_client(send_contact=a.send_contact, dry_run=a.dry_run)
-        budget = getattr(client, "max_requests", REQUEST_BUDGET) - getattr(client.accounting, "attempts", 0)
-        plan = (f"targets {len(chosen)} of {len(targets)}; worst case {need} requests (searches + {a.top_n} full texts per target) "
-                f"of the {budget} this process may make")
+        ceiling = getattr(client, "max_requests", REQUEST_BUDGET)
+        budget = ceiling - getattr(client.accounting, "attempts", 0)
+        plan = (f"targets {len(chosen)} of {len(targets)}; worst case {need} requests (searches, the definition search and its "
+                f"fallback, and {a.top_n} full texts per target) of the {budget} this process may make")
         if need > budget:
-            raise Refused(f"{plan}; split the run with --targets-from/--targets-to so each process fits")
+            raise Refused(f"{plan}; split the run with --targets-from/--targets-to so each process fits.\n"
+                          f"{batches_text(targets, a.top_n, ceiling)}")
         if a.dry_run:
             print(plan)
+            print(batches_text(targets, a.top_n, ceiling))
             for t in chosen:
-                print(f"target {t['id']} ({t['language']}): {snap.clean(t['english_term'], 80)}")
-                for s in t["searches"]:
-                    row = search(client, compose_query(s, cfg), cfg)
-                    print(f"  planned GET {snap.clean(row.get('url') or row['query'], 2000)}")
+                print(f"target {t['id']} ({t['language']}): {snap.clean(t['english_term'], 80)}; worst case "
+                      f"{target_worst_case(t, a.top_n)}")
+                for role, q, fallback in planned_searches(t, cfg):
+                    row = search(client, q, cfg)
+                    print(f"  planned GET ({role}) {snap.clean(row.get('url') or row['query'], 2000)}")
+                    if fallback:
+                        print("  and, only if that answers with 0 hits, the same search without the definition filter")
                 print(f"  then up to {a.top_n} full-text GETs of {cfg['fulltext_path']} (URLs depend on the search answers; "
                       "cached articles are not fetched)")
             print(fs.scrub(client.accounting.summary()) if hasattr(client.accounting, "summary") else "")
@@ -1044,10 +1167,12 @@ def main(argv=None, *, client=None, invoker=None) -> int:
                    "think_profile": Path(think_profile).name if think_profile else None, "seed": a.seed,
                    "temperature": a.temperature, "top_n": a.top_n, "cap": a.cap, "page_size": a.page_size,
                    "passage_chars": a.passage_chars, "keep_captions": a.keep_captions, "think": not a.no_think,
-                   "search_filter": cfg["search_filter"], "licence_filter": cfg["licence_filter"]}
+                   "search_filter": cfg["search_filter"], "licence_filter": cfg["licence_filter"],
+                   "definition_filter": cfg["definition_filter"]}
         prepare_out(out, cache, a.resume, binding)
     except (Refused, fs.Refused, pt.UsageError) as exc:
-        print(f"REFUSED: {fs.scrub(snap.clean(exc, 400))}", file=sys.stderr)
+        text = "\n".join(snap.clean(part, 400) for part in str(exc).splitlines()[:40])
+        print(f"REFUSED: {fs.scrub(text)}", file=sys.stderr)
         return 2
     st = Settings(model=model, profile=profile, think_model=think_model, think_profile=think_profile, think=not a.no_think,
                   think_on_not_found=a.think_on_not_found, temperature=a.temperature, seed=a.seed, timeout_sec=a.timeout,
@@ -1074,8 +1199,8 @@ def main(argv=None, *, client=None, invoker=None) -> int:
     if hasattr(client.accounting, "summary"):
         print(fs.scrub(client.accounting.summary()))
     ran = [s for s in summ if s["run"]]
-    print(f"targets run: {len(ran)}; with a verified quote: {sum(1 for s in ran if s['verified'])}; gaps: "
-          f"{sum(1 for s in ran if not s['verified'])}; see {REPORT}")
+    print(f"targets run: {len(ran)}; with a definition (defines_measure): {sum(1 for s in ran if s['definitions'])}; gaps: "
+          f"{sum(1 for s in ran if not s['definitions'])}; see {REPORT}")
     print(f"output folder: {Path(out).resolve()}")
     return code
 

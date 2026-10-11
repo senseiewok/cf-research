@@ -140,6 +140,8 @@ class FakeModel:
         self.requests.append(req)
         box = req.prompt.split("<untrusted_page>", 1)[1].split("</untrusted_page>", 1)[0]
         r = self.rule(req, box)
+        if isinstance(r, dict) and "kind" not in r:      # replies written before the kind field: a definition, unless stated
+            r = {**r, "kind": "defines_measure" if r.get("found") else "none"}
         if isinstance(r, BaseException):
             raise r
         return pt.InvokeResult(0, r if isinstance(r, str) else json.dumps(r), "")
@@ -223,8 +225,8 @@ class PipelineTest(Base):
         report = (self.out / gd.REPORT).read_text(encoding="utf-8")
         gaps = report.index("## Gaps")
         self.assertLess(gaps, report.index("### es_test"))
-        self.assertLess(report.index("### es_test"), report.index("## Targets with verified quotes"))
-        self.assertLess(report.index("## Targets with verified quotes"), report.index("### fev1_test"))
+        self.assertLess(report.index("### es_test"), report.index("## Targets with a definition"))
+        self.assertLess(report.index("## Targets with a definition"), report.index("### fev1_test"))
 
     def test_the_cap_stops_a_target(self):
         code, _ = self.run_main(FakeEPMC(), FakeModel(honest), "--cap", "1")
@@ -261,14 +263,14 @@ class GateAndBudgetTest(Base):
 
     def test_a_plan_over_the_budget_is_refused_before_any_request(self):
         client, model = FakeEPMC(max_requests=10), FakeModel(honest)
-        code, text = self.run_main(client, model)           # worst case 1 + 8 + 1 + 8 = 18 > 10
+        code, text = self.run_main(client, model)           # worst case 1 + 15 + 1 + 15 = 32 > 10
         self.assertEqual(code, 2)
-        self.assertIn("worst case 18 requests", text)
+        self.assertIn("worst case 32 requests", text)
         self.assertEqual(client.calls, [])
         self.assertFalse(self.out.exists())
 
     def test_a_budget_exhausted_part_way_stops_with_valid_outputs(self):
-        client = FakeEPMC(max_requests=18)
+        client = FakeEPMC(max_requests=32)
         client.accounting.attempts = 0
         orig = client._gate
 
@@ -285,8 +287,8 @@ class GateAndBudgetTest(Base):
 
     def test_worst_case_for_the_shipped_targets(self):
         data = gd.load_targets(gd.DEFAULT_TARGETS)
-        n = gd.worst_case_requests(data["targets"], 8)
-        self.assertEqual(n, sum(len(t["searches"]) + 8 for t in data["targets"]))
+        n = gd.worst_case_requests(data["targets"], 15)
+        self.assertEqual(n, sum(len(t["searches"]) + (2 if t.get("definition_search") else 0) + 15 for t in data["targets"]))
 
 
 class VerifierTest(unittest.TestCase):
@@ -517,7 +519,8 @@ class PrivacyTest(Base):
 
     def test_the_targets_file_holds_search_words_only(self):
         data = gd.load_targets(gd.DEFAULT_TARGETS)
-        allowed = {"id", "english_term", "spanish_term", "language", "atlas_classes", "searches", "terms", "what_to_define"}
+        allowed = {"id", "english_term", "spanish_term", "language", "atlas_classes", "searches", "definition_search", "terms",
+                   "what_to_define"}
         for t in data["targets"]:
             self.assertLessEqual(set(t), allowed, t["id"])
             self.assertLessEqual(len(t["searches"]), 3)
@@ -536,12 +539,172 @@ class DryRunTest(Base):
         code, text = quiet(gd.main, ["--targets", str(self.targets), "--out", str(self.out), "--dry-run"], client=client,
                            invoker=model)
         self.assertEqual(code, 0, text)
-        self.assertIn("worst case 18 requests", text)
+        self.assertIn("worst case 32 requests", text)
         self.assertIn("planned GET", text)
         self.assertIn("target fev1_test", text)
         self.assertEqual([c for c in client.calls if c[0] == "xml"], [])
         self.assertEqual(model.requests, [])
         self.assertFalse(self.out.exists())
+
+
+def kinds_by(rule_kind):
+    """A fake model that quotes like `honest` but labels each reply with rule_kind(box)."""
+    def rule(req, box):
+        r = honest(req, box)
+        if r["found"]:
+            r = {**r, "kind": rule_kind(box)}
+        return r
+    return rule
+
+
+class KindTest(Base):
+    def test_an_expansion_does_not_count_as_a_definition(self):
+        model = FakeModel(kinds_by(lambda box: "expands_acronym" if DEF_EN in box else "defines_measure"))
+        code, _ = self.run_main(FakeEPMC(), model, "--cap", "1")
+        self.assertEqual(code, 0)
+        rows = [r for r in self.rows() if r["target_id"] == "fev1_test" and r["row"] == "attempt"]
+        self.assertEqual([(r["pmcid"], r["kind"], r["verified"]) for r in rows],
+                         [("PMC1000001", "expands_acronym", True), ("PMC1000002", "defines_measure", True)])
+        # the cap of one definition was reached at PMC1000002: PMC1000003 is not asked
+        self.assertFalse(any("measured with a SYNTHETIC device" in r.prompt for r in model.requests))
+        report = (self.out / gd.REPORT).read_text(encoding="utf-8")
+        block = report[report.index("### fev1_test"):]
+        self.assertIn("definitions (defines_measure): 1", block)
+        self.assertIn("acronym expansions: 1", block)
+
+    def test_a_target_with_only_expansions_and_usage_is_a_gap(self):
+        model = FakeModel(kinds_by(lambda box: "term_usage" if DEF_INJ in box else "expands_acronym"))
+        code, _ = self.run_main(FakeEPMC(), model)
+        self.assertEqual(code, 0)
+        report = (self.out / gd.REPORT).read_text(encoding="utf-8")
+        gaps = report[report.index("## Gaps"):report.index("## Targets with a definition")]
+        self.assertIn("### fev1_test", gaps)
+        self.assertIn("### es_test", gaps)
+        self.assertIn("term usage: 1", gaps)
+        src = json.loads((self.out / gd.SOURCES).read_text(encoding="utf-8"))["sources"]
+        self.assertEqual({s["pmcid"]: s["kinds"] for s in src}["PMC1000002"], ["term_usage"])
+
+    def test_found_with_no_kind_is_rejected_and_retried(self):
+        def rule(req, box):
+            r = honest(req, box)
+            if r["found"] and req.attempt == 1:
+                return {**r, "kind": "none"}
+            return {**r, "kind": "defines_measure"} if r["found"] else r
+        code, _ = self.run_main(FakeEPMC(), FakeModel(rule))
+        self.assertEqual(code, 0)
+        rows = [r for r in self.rows() if r["pmcid"] == "PMC1000001"]
+        self.assertEqual([(r["attempt"], r["reason"], r["verified"]) for r in rows], [(1, "bad_kind", False), (2, None, True)])
+
+    def test_the_packet_explains_the_three_kinds_outside_the_box(self):
+        model = FakeModel(honest)
+        self.run_main(FakeEPMC(), model)
+        self.assertTrue(model.requests)
+        for req in model.requests:
+            head = req.prompt.partition("<untrusted_page>")[0]
+            for k in ("defines_measure", "expands_acronym", "term_usage"):
+                self.assertIn(k, head)
+            self.assertIn("An acronym expansion alone is NOT a definition", head)
+            self.assertEqual(req.schema["properties"]["kind"]["enum"], list(gd.KINDS) + ["none"])
+
+    def test_resume_reasks_old_rows_without_kind(self):
+        self.run_main(FakeEPMC(), FakeModel(honest))
+        path = self.out / gd.GROUNDED
+        old = []
+        for line in path.read_text(encoding="utf-8").splitlines():
+            r = json.loads(line)
+            if r["row"] == "attempt":
+                r.pop("kind")                                     # a row from the first probe, before the kind field
+            old.append(json.dumps(r))
+        path.write_text("\n".join(old) + "\n", encoding="utf-8")
+        state = gd.State(self.out)
+        self.assertEqual(state.definitions, {})
+        model = FakeModel(honest)
+        code, _ = self.run_main(FakeEPMC(), model, "--resume")
+        self.assertEqual(code, 0)
+        self.assertTrue(any(DEF_EN in r.prompt for r in model.requests))   # asked again
+        defs = {(r["target_id"], r["pmcid"]) for r in self.rows() if r.get("verified") and r.get("kind") == "defines_measure"}
+        self.assertEqual(len(defs), 4)
+
+
+DEF_TARGETS = {**TARGETS, "definition_filter": "PUB_TYPE:SYNTHETICREVIEW",
+               "targets": [{**TARGETS["targets"][0], "definition_search": "SYNTHETIC fev1 defined-as search"}]}
+
+
+class DefinitionSearchTest(Base):
+    def setUp(self):
+        super().setUp()
+        self.targets.write_text(json.dumps(DEF_TARGETS), encoding="utf-8")
+
+    def test_the_definition_search_runs_first_with_its_filter(self):
+        searches = {**SEARCHES, "SYNTHETIC fev1 defined-as search": [hit("PMC1000003")]}
+        client = FakeEPMC(searches=searches)
+        code, text = self.run_main(client, FakeModel(honest))
+        self.assertEqual(code, 0, text)
+        first = client.calls[0][2]["query"]
+        self.assertIn("SYNTHETIC fev1 defined-as search", first)
+        self.assertIn("PUB_TYPE:SYNTHETICREVIEW", first)
+        self.assertIn("OPEN_ACCESS:y", first)
+        self.assertEqual(self.rows(gd.SEARCHES)[0]["role"], "definition")
+
+    def test_a_filter_with_zero_hits_falls_back_to_the_unfiltered_search(self):
+        class ZeroFiltered(FakeEPMC):
+            def get(self, source_id, path, params=None):
+                if "SYNTHETICREVIEW" in params["query"]:
+                    self._gate(source_id)
+                    self.calls.append(("search", path, dict(params)))
+                    return SimpleNamespace(status="found", http_status=200, url="u", dry_run=False,
+                                           data={"hitCount": 0, "resultList": {"result": []}})
+                return super().get(source_id, path, params)
+        searches = {**SEARCHES, "SYNTHETIC fev1 defined-as search": [hit("PMC1000003")]}
+        client = ZeroFiltered(searches=searches)
+        code, _ = self.run_main(client, FakeModel(honest))
+        self.assertEqual(code, 0)
+        q = [c[2]["query"] for c in client.calls if c[0] == "search"]
+        self.assertIn("SYNTHETICREVIEW", q[0])
+        self.assertIn("SYNTHETIC fev1 defined-as search", q[1])
+        self.assertNotIn("SYNTHETICREVIEW", q[1])
+        roles = [r["role"] for r in self.rows(gd.SEARCHES)]
+        self.assertEqual(roles[:2], ["definition", "definition_fallback"])
+        report = (self.out / gd.REPORT).read_text(encoding="utf-8")
+        self.assertIn("the definition filter returned 0 hits; fell back to the unfiltered definition search", report)
+
+    def test_the_worst_case_counts_the_definition_search_and_its_fallback(self):
+        self.assertEqual(gd.target_worst_case(DEF_TARGETS["targets"][0], 15), 1 + 2 + 15)
+        self.assertEqual(gd.target_worst_case(TARGETS["targets"][0], 15), 1 + 15)
+
+
+class BatchTest(Base):
+    def test_suggested_batches_cover_every_target_under_the_ceiling(self):
+        data = gd.load_targets(gd.DEFAULT_TARGETS)
+        batches = gd.suggest_batches(data["targets"], 15, 200)
+        self.assertEqual(batches[0][0], 1)
+        self.assertEqual(batches[-1][1], len(data["targets"]))
+        for (a, b, need), nxt in zip(batches, batches[1:] + [None]):
+            self.assertLessEqual(need, 200)
+            self.assertEqual(need, sum(gd.target_worst_case(t, 15) for t in data["targets"][a - 1:b]))
+            if nxt:
+                self.assertEqual(nxt[0], b + 1)
+
+    def test_the_dry_run_prints_the_batches(self):
+        client = FakeEPMC(dry_run=True)
+        code, text = quiet(gd.main, ["--out", str(self.out), "--dry-run", "--targets-from", "1", "--targets-to", "2"], client=client,
+                           invoker=None)
+        self.assertEqual(code, 0, text)
+        self.assertIn("suggested batches", text)
+        self.assertIn("--targets-from 1 --targets-to", text)
+
+    def test_a_plan_over_the_budget_prints_the_suggested_ranges(self):
+        code, text = quiet(gd.main, ["--out", str(self.out), "--model", "m:1"], client=FakeEPMC(), invoker=FakeModel(honest))
+        self.assertEqual(code, 2)
+        self.assertIn("suggested batches", text)
+        self.assertFalse(self.out.exists())
+
+    def test_every_english_target_has_a_definition_search(self):
+        data = gd.load_targets(gd.DEFAULT_TARGETS)
+        self.assertTrue(data.get("definition_filter"))
+        for t in data["targets"]:
+            if t["language"] == "en":
+                self.assertTrue(t.get("definition_search"), t["id"])
 
 
 def _real_evidence():
