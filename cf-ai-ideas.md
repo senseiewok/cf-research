@@ -51,7 +51,7 @@ One plain-language page from our guardrails: the denominator, the year on the ti
 
 - **Who (hypothesis):** families, students, new researchers.
 - **Artifact and check:** each item tied to its rule and ledger line; a different model flags unsupported items, each confirmed on the source by a person. No infrastructure.
-- **Out of scope; stop rule:** what a paper means for anyone's care; ranking journals or treatments. If a reader with CF or a carer says it reads as instruction about their care, rewrite or withdraw; until such a reader is found, it stays draft.
+- **Out of scope; stop rule:** what a paper means for anyone's care; ranking journals or treatments. If a reader with CF or a caregiver says it reads as instruction about their care, rewrite or withdraw; until such a reader is found, it stays draft.
 
 ### 1= Replication cards
 
