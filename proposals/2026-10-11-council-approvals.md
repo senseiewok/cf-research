@@ -60,4 +60,4 @@ The disagreements are mostly one pattern: the council's `other` against a specif
 
 ## What a person must still do
 
-Check a sample of the council's labels (the review pack in the private lab-files folder; every row where the models disagreed, plus a random sample of the rest). Have a clinician read the class definitions before any plain-language note is published. Decide the lab's name and the header subtitle. Merge.
+**Labels: approved by the maintainer on 2026-10-11, as the reference for the gate.** The approval relies on the council runs (Opus, Sonnet and Gemma labelling, Fable and a model adjudicator on the splits) and on the fourth-family audit above. It is an approval of the method and its record, not a row-by-row check: no person has read the individual rows, so the numbers built on these labels are still labelled as measured against model-council labels. A spot-check from the private review pack stays open for anyone who wants one. Have a clinician read the class definitions before any plain-language note is published. Decide the lab's name and the header subtitle. Merge.
