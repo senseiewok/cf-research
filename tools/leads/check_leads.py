@@ -77,7 +77,8 @@ QUOTE_RES = (
     re.compile(r"‘([^’]+)’(?![A-Za-z])"),
     re.compile(r"(?:^|(?<=[\s(\[]))'(.+?)'(?=[\s.,;:!?)\]]|$)"),
 )
-CATALOG_ID_RE = re.compile(r"^  - id:\s*([A-Za-z0-9._-]+)\s*$")
+NC_LICENCE_RE = re.compile(r"(?i)\bCC[ -]?BY[ -]NC\b")
+CATALOG_ID_RE =re.compile(r"^  - id:\s*([A-Za-z0-9._-]+)\s*$")
 CATALOG_ACCESS_RE = re.compile(r"^    access:\s*([A-Za-z_-]+)\s*(?:#.*)?$")
 
 
@@ -227,6 +228,9 @@ def check_sources(sources, today, out):
                 out.append(f"{where}: a source read through a page-summarising tool is at most T1")
         elif TOOL_NOTE in note:
             out.append(f"{where}: a note that says {TOOL_NOTE!r} needs read_via page-summarising-tool")
+        # A quote from an article under a non-commercial licence is private evidence only: the public file paraphrases.
+        if NC_LICENCE_RE.search(f"{s.get('ref') or ''} {note}") and any(rx.search(note) for rx in QUOTE_RES):
+            out.append(f"{where}: a source under a non-commercial licence is paraphrased, never quoted, in this file")
         if via in ("search-snippet", "memory") and tier in TIERS and tier != "T0":
             out.append(f"{where}: a source from a {via} is T0")
         if stype == "conference-private":

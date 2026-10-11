@@ -10,7 +10,7 @@ someone writes that row; only a person sets a row `ready`. How to add, update or
 Tiers: T0 a summary or memory, unverified; T1 a quote from a primary source with its id and date; T2 T1 plus a script
 check and a different model's check; T3 T2 plus a person's review. Effort is an estimate.
 
-34 leads: 20 idea, 1 scoping, 12 data-available, 1 done.
+38 leads: 23 idea, 1 scoping, 13 data-available, 1 done.
 
 | Id | Title | Status | Best tier | Effort | Needs a person |
 | --- | --- | --- | --- | --- | --- |
@@ -34,6 +34,9 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 | L-0024 | Link-channel disagreement audit: how much an exact-id search misses | idea | T1 | M (estimate) | maintainer-approval |
 | L-0025 | Retractions and corrections across registry references and linked papers | idea | T1 | S (estimate) | maintainer-approval |
 | L-0026 | Catalog review: two entries that may be stale | idea | T1 | S (estimate) | maintainer-approval |
+| L-0036 | Title against eligibility text: does a genotype flag from the title agree? | idea | T1 | S (estimate) | clinician-reader, maintainer-approval |
+| L-0037 | Background modulator use stated in trials that are not testing a modulator | idea | T1 | M (estimate) | clinician-reader |
+| L-0038 | Endpoints by population and modulator era in the open literature | idea | T1 | M (estimate) | clinician-reader |
 | L-0017 | Plain-language class glosses and Spanish (es-MX) terms grounded in authoritative public pages | scoping | T1 | M (estimate) | clinician-reader, maintainer-approval |
 | L-0003 | How differently trials define pulmonary exacerbation, FEV1 and sweat chloride outcomes | data-available | T0 | M (estimate) | clinician-reader |
 | L-0007 | Trials per class, deduplicated by lead sponsor | data-available | T0 | S (estimate) | maintainer-approval |
@@ -47,6 +50,7 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 | L-0032 | Planned start dates already in the past | data-available | T1 | S (estimate) | maintainer-approval |
 | L-0033 | How many ways FEV1 is written as a primary outcome (exploratory) | data-available | T1 | S (estimate) | clinician-reader |
 | L-0034 | Three data-quality notes for the lexicon and the registry | data-available | T1 | S (estimate) | none |
+| L-0035 | Genotype terms in registry text | data-available | T1 | S (estimate) | clinician-reader |
 | L-0001 | Unsorted remainder of the trial atlas, sorted by a local model with exact-quote checks | done | T0 | M (estimate) | maintainer-approval |
 
 ## Idea
@@ -429,6 +433,73 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 - **Links:** none
 - **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
 
+### L-0036 Title against eligibility text: does a genotype flag from the title agree?
+
+- **Question:** For the roughly 150 records with a genotype or CFTR word, how often does a genotype flag from the title agree with a genotype term in the eligibility criteria?
+- **Why it matters:** A measured error rate for the title flag is needed before any genotype view is shown to readers.
+- **Sources:**
+  - T0, run, not read by us. genotype and modulator grounding memo, 2026-10-11: Proposed: a confusion table, with a person hand-checking 20 records.
+  - T1, registry, read 2026-10-11 (page-summarising-tool). ClinicalTrials.gov API v2, studies/metadata: Confirms the field names a re-fetch would need: official title, eligibility criteria (free text), minimum and maximum age, standard age groups, intervention names and other names, arm intervention names; read through a page-summarising tool; quote not checked against the raw page.
+- **Data:** clinicaltrials-gov (api); already have: no; fields missing: officialTitle, eligibilityCriteria
+- **Effort:** S (estimate)
+- **Guard:** computed, lab-position. Agreement counts are computed; the 20-record hand check is a person's record and is labelled as such.
+- **Must not claim:**
+  - Who was eligible for a trial, or that a person is or was eligible.
+  - That a trial's population was F508del-only, or covered all variants.
+  - That a genotype not mentioned means all variants; it means not stated.
+  - A person's chance of benefit or of enrolment, or any recommendation of a trial or medicine.
+  - That a genotype share in a registry equals the share in a trial.
+  - That agreement on about 150 records holds for all records.
+- **Needs a person:** clinician-reader, maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Needs a re-fetch of two fields for about 150 records; the maintainer approves any new fetch. Related to L-0035.
+
+### L-0037 Background modulator use stated in trials that are not testing a modulator
+
+- **Question:** By start year, how often does the eligibility text of a trial not testing a modulator mention modulator use as inclusion, exclusion or stratification?
+- **Why it matters:** Modulator background is a design variable for other CF trials, and a reader needs to know whether a record states it.
+- **Sources:**
+  - T1, literature, read 2026-10-11. PMC7516261, a 2020 review on designing anti-inflammatory trials in CF, CC BY: Argues that future trials stratify by whether participants take CFTR modulators; it does not say how often trials do.
+  - T0, run, not read by us. genotype and modulator grounding memo, 2026-10-11: An untested idea; the term list needs a person's review.
+- **Data:** clinicaltrials-gov (api); already have: no; fields missing: eligibilityCriteria, interventions.name
+- **Effort:** M (estimate)
+- **Guard:** computed, registry-statement-verbatim. Counts of records whose eligibility text mentions modulator use, by start year; any text shown is quoted exactly.
+- **Must not claim:**
+  - What trials did; this says what registry records state.
+  - That a record silent on modulators enrolled no one taking one.
+  - Any cause: no causal words.
+  - Any recommendation about modulator use.
+- **Needs a person:** clinician-reader
+- **Links:** none
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Needs the eligibility field (re-fetch, with the maintainer's approval).
+
+### L-0038 Endpoints by population and modulator era in the open literature
+
+- **Question:** What do open-access sources say about the endpoints used for younger or milder populations, and about endpoint choice across modulator eras?
+- **Why it matters:** It sets the atlas's registry counts beside what researchers have written about endpoint choice, without claiming either explains the other.
+- **Sources:**
+  - T1, literature, read 2026-10-11. PMC7946844, 2021, CC BY: a review of LCI and exercise testing as endpoints: Reviewers report that LCI can be abnormal when FEV1 is normal in early lung disease, citing other studies.
+  - T1, literature, read 2026-10-11. PMC7516261, 2020, CC BY: designing anti-inflammatory trials: Treats modulator background as a design variable to stratify on.
+  - T1, literature, read 2026-10-11. PMC9746869, 2022, CC BY-NC-ND: a randomized trial in children aged 6 to 11: Paraphrased, not quoted, under its licence: its primary endpoint was the change in LCI2.5 through week 24.
+  - T1, literature, read 2026-10-11. PMC12126198, 2025, CC BY: a modulator trial in children aged 6 to 11: Safety and tolerability were the primary endpoint; LCI2.5 was reported with 14.1 percent missing data.
+  - T1, literature, read 2026-10-11. PMC9853074, 2022, CC BY: a cohort protocol in infants and preschool children: An observational cohort, not a trial: LCI2.5 and an MRI score are its primary endpoints.
+  - T0, literature, not read by us. three Europe PMC searches for a review comparing endpoint choice across modulator eras, 2026-10-11: Not found; empty is not proof of absence.
+- **Data:** europe-pmc (api); already have: no; fields missing: a scoped literature search with its search record
+- **Effort:** M (estimate)
+- **Guard:** open-access-quote, lab-position. Quotes only from articles whose licence allows it (CC BY); the CC BY-NC-ND article is paraphrased and cited; any link to the atlas counts is a lab position.
+- **Must not claim:**
+  - That any one trial's endpoint is typical.
+  - That the modulator era caused a change in endpoint choice.
+  - That no review compares endpoint choice across eras.
+  - That a cohort's endpoints are trial endpoints.
+  - Anything about approval or about any person's care.
+- **Needs a person:** clinician-reader
+- **Links:** none
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Kept apart from L-0004 (registry dates beside approvals, no inference) and L-0012 (core outcome set): this lead reads the literature, not the registry. Article text stays in private folders.
+
 ## Scoping
 
 ### L-0017 Plain-language class glosses and Spanish (es-MX) terms grounded in authoritative public pages
@@ -689,6 +760,29 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 - **Links:** board T-0130
 - **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
 - **Notes:** For the lexicon team; the registry-side items need a person's look before any public mention.
+
+### L-0035 Genotype terms in registry text
+
+- **Question:** What can the registry's title, condition and keyword text say about a trial's genotype population, and what can it not say?
+- **Why it matters:** Readers sort CF trials by genotype, and they need to know that the registry text only mentions terms, it does not code a population.
+- **Sources:**
+  - T1, run, read 2026-10-11 (lab-run). local script over the first snapshot, 2,026 unique studies (both query routes; not only the in-scope set): F508del spellings in 58 studies (51 in the title, 4 in the conditions); gating or G551D in 31, and gating alone is noisy; homozygous or heterozygous in 46; wording such as all genotypes in none. Recomputed independently: no.
+  - T1, registry, read 2026-10-11 (page-summarising-tool). ClinicalTrials.gov API v2, studies/metadata: Confirms the field names a re-fetch would need: official title, eligibility criteria (free text), minimum and maximum age, standard age groups, intervention names and other names, arm intervention names; read through a page-summarising tool; quote not checked against the raw page.
+  - T1, registry, read 2026-10-11 (direct). sources/catalog.yaml entry cftr2: The catalog records CFTR2 as manual, link-only and not redistributable (T1 to the catalog's notes; the terms were not re-read), so no automated CFTR2 lookup.
+- **Data:** clinicaltrials-gov (api); already have: yes; fields missing: officialTitle, eligibilityCriteria, minimumAge, maximumAge, stdAges, interventions.name, interventions.otherNames, armGroups.interventionNames
+- **Effort:** S (estimate)
+- **Guard:** computed, registry-statement-verbatim. A rule-based flag says only that the registry text mentions term X; absence is shown as not stated; any text shown is quoted exactly.
+- **Must not claim:**
+  - Who was eligible for a trial, or that a person is or was eligible.
+  - That a trial's population was F508del-only, or covered all variants.
+  - That a genotype not mentioned means all variants; it means not stated.
+  - A person's chance of benefit or of enrolment, or any recommendation of a trial or medicine.
+  - That a genotype share in a registry equals the share in a trial.
+  - Anything about eligibility from the title alone.
+- **Needs a person:** clinician-reader
+- **Links:** none
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** The first snapshot holds title, conditions and keywords only; eligibility text needs a re-fetch, and even then a flag is text matching, not a coded population.
 
 ## Done
 

@@ -2307,6 +2307,324 @@
       },
       "visibility": "public",
       "notes": "For the lexicon team; the registry-side items need a person's look before any public mention."
+    },
+    {
+      "id": "L-0035",
+      "title": "Genotype terms in registry text",
+      "question": "What can the registry's title, condition and keyword text say about a trial's genotype population, and what can it not say?",
+      "why_it_matters": "Readers sort CF trials by genotype, and they need to know that the registry text only mentions terms, it does not code a population.",
+      "status": "data-available",
+      "sources": [
+        {
+          "type": "run",
+          "ref": "local script over the first snapshot, 2,026 unique studies (both query routes; not only the in-scope set)",
+          "tier": "T1",
+          "read_on": "2026-10-11",
+          "read_via": "lab-run",
+          "note": "F508del spellings in 58 studies (51 in the title, 4 in the conditions); gating or G551D in 31, and gating alone is noisy; homozygous or heterozygous in 46; wording such as all genotypes in none. Recomputed independently: no."
+        },
+        {
+          "type": "registry",
+          "ref": "ClinicalTrials.gov API v2, studies/metadata",
+          "tier": "T1",
+          "read_on": "2026-10-11",
+          "read_via": "page-summarising-tool",
+          "note": "Confirms the field names a re-fetch would need: official title, eligibility criteria (free text), minimum and maximum age, standard age groups, intervention names and other names, arm intervention names; read through a page-summarising tool; quote not checked against the raw page."
+        },
+        {
+          "type": "registry",
+          "ref": "sources/catalog.yaml entry cftr2",
+          "tier": "T1",
+          "read_on": "2026-10-11",
+          "read_via": "direct",
+          "note": "The catalog records CFTR2 as manual, link-only and not redistributable (T1 to the catalog's notes; the terms were not re-read), so no automated CFTR2 lookup."
+        }
+      ],
+      "data_needed": {
+        "catalog_ids": [
+          "clinicaltrials-gov"
+        ],
+        "access": "api",
+        "already_have": true,
+        "fields_missing": [
+          "officialTitle",
+          "eligibilityCriteria",
+          "minimumAge",
+          "maximumAge",
+          "stdAges",
+          "interventions.name",
+          "interventions.otherNames",
+          "armGroups.interventionNames"
+        ]
+      },
+      "effort": {
+        "size": "S",
+        "estimate": true
+      },
+      "guard": {
+        "ladder": [
+          "computed",
+          "registry-statement-verbatim"
+        ],
+        "note": "A rule-based flag says only that the registry text mentions term X; absence is shown as not stated; any text shown is quoted exactly."
+      },
+      "must_not_claim": [
+        "Who was eligible for a trial, or that a person is or was eligible.",
+        "That a trial's population was F508del-only, or covered all variants.",
+        "That a genotype not mentioned means all variants; it means not stated.",
+        "A person's chance of benefit or of enrolment, or any recommendation of a trial or medicine.",
+        "That a genotype share in a registry equals the share in a trial.",
+        "Anything about eligibility from the title alone."
+      ],
+      "needs_person": [
+        "clinician-reader"
+      ],
+      "links": {
+        "board": [],
+        "proposals": [],
+        "prs": []
+      },
+      "created": "2026-10-11",
+      "updated": "2026-10-11",
+      "created_by": {
+        "kind": "model",
+        "model_id": "claude-opus-5-5"
+      },
+      "visibility": "public",
+      "notes": "The first snapshot holds title, conditions and keywords only; eligibility text needs a re-fetch, and even then a flag is text matching, not a coded population."
+    },
+    {
+      "id": "L-0036",
+      "title": "Title against eligibility text: does a genotype flag from the title agree?",
+      "question": "For the roughly 150 records with a genotype or CFTR word, how often does a genotype flag from the title agree with a genotype term in the eligibility criteria?",
+      "why_it_matters": "A measured error rate for the title flag is needed before any genotype view is shown to readers.",
+      "status": "idea",
+      "sources": [
+        {
+          "type": "run",
+          "ref": "genotype and modulator grounding memo, 2026-10-11",
+          "tier": "T0",
+          "read_on": null,
+          "note": "Proposed: a confusion table, with a person hand-checking 20 records."
+        },
+        {
+          "type": "registry",
+          "ref": "ClinicalTrials.gov API v2, studies/metadata",
+          "tier": "T1",
+          "read_on": "2026-10-11",
+          "read_via": "page-summarising-tool",
+          "note": "Confirms the field names a re-fetch would need: official title, eligibility criteria (free text), minimum and maximum age, standard age groups, intervention names and other names, arm intervention names; read through a page-summarising tool; quote not checked against the raw page."
+        }
+      ],
+      "data_needed": {
+        "catalog_ids": [
+          "clinicaltrials-gov"
+        ],
+        "access": "api",
+        "already_have": false,
+        "fields_missing": [
+          "officialTitle",
+          "eligibilityCriteria"
+        ]
+      },
+      "effort": {
+        "size": "S",
+        "estimate": true
+      },
+      "guard": {
+        "ladder": [
+          "computed",
+          "lab-position"
+        ],
+        "note": "Agreement counts are computed; the 20-record hand check is a person's record and is labelled as such."
+      },
+      "must_not_claim": [
+        "Who was eligible for a trial, or that a person is or was eligible.",
+        "That a trial's population was F508del-only, or covered all variants.",
+        "That a genotype not mentioned means all variants; it means not stated.",
+        "A person's chance of benefit or of enrolment, or any recommendation of a trial or medicine.",
+        "That a genotype share in a registry equals the share in a trial.",
+        "That agreement on about 150 records holds for all records."
+      ],
+      "needs_person": [
+        "clinician-reader",
+        "maintainer-approval"
+      ],
+      "links": {
+        "board": [],
+        "proposals": [],
+        "prs": []
+      },
+      "created": "2026-10-11",
+      "updated": "2026-10-11",
+      "created_by": {
+        "kind": "model",
+        "model_id": "claude-opus-5-5"
+      },
+      "visibility": "public",
+      "notes": "Needs a re-fetch of two fields for about 150 records; the maintainer approves any new fetch. Related to L-0035."
+    },
+    {
+      "id": "L-0037",
+      "title": "Background modulator use stated in trials that are not testing a modulator",
+      "question": "By start year, how often does the eligibility text of a trial not testing a modulator mention modulator use as inclusion, exclusion or stratification?",
+      "why_it_matters": "Modulator background is a design variable for other CF trials, and a reader needs to know whether a record states it.",
+      "status": "idea",
+      "sources": [
+        {
+          "type": "literature",
+          "ref": "PMC7516261, a 2020 review on designing anti-inflammatory trials in CF, CC BY",
+          "tier": "T1",
+          "read_on": "2026-10-11",
+          "note": "Argues that future trials stratify by whether participants take CFTR modulators; it does not say how often trials do."
+        },
+        {
+          "type": "run",
+          "ref": "genotype and modulator grounding memo, 2026-10-11",
+          "tier": "T0",
+          "read_on": null,
+          "note": "An untested idea; the term list needs a person's review."
+        }
+      ],
+      "data_needed": {
+        "catalog_ids": [
+          "clinicaltrials-gov"
+        ],
+        "access": "api",
+        "already_have": false,
+        "fields_missing": [
+          "eligibilityCriteria",
+          "interventions.name"
+        ]
+      },
+      "effort": {
+        "size": "M",
+        "estimate": true
+      },
+      "guard": {
+        "ladder": [
+          "computed",
+          "registry-statement-verbatim"
+        ],
+        "note": "Counts of records whose eligibility text mentions modulator use, by start year; any text shown is quoted exactly."
+      },
+      "must_not_claim": [
+        "What trials did; this says what registry records state.",
+        "That a record silent on modulators enrolled no one taking one.",
+        "Any cause: no causal words.",
+        "Any recommendation about modulator use."
+      ],
+      "needs_person": [
+        "clinician-reader"
+      ],
+      "links": {
+        "board": [],
+        "proposals": [],
+        "prs": []
+      },
+      "created": "2026-10-11",
+      "updated": "2026-10-11",
+      "created_by": {
+        "kind": "model",
+        "model_id": "claude-opus-5-5"
+      },
+      "visibility": "public",
+      "notes": "Needs the eligibility field (re-fetch, with the maintainer's approval)."
+    },
+    {
+      "id": "L-0038",
+      "title": "Endpoints by population and modulator era in the open literature",
+      "question": "What do open-access sources say about the endpoints used for younger or milder populations, and about endpoint choice across modulator eras?",
+      "why_it_matters": "It sets the atlas's registry counts beside what researchers have written about endpoint choice, without claiming either explains the other.",
+      "status": "idea",
+      "sources": [
+        {
+          "type": "literature",
+          "ref": "PMC7946844, 2021, CC BY: a review of LCI and exercise testing as endpoints",
+          "tier": "T1",
+          "read_on": "2026-10-11",
+          "note": "Reviewers report that LCI can be abnormal when FEV1 is normal in early lung disease, citing other studies."
+        },
+        {
+          "type": "literature",
+          "ref": "PMC7516261, 2020, CC BY: designing anti-inflammatory trials",
+          "tier": "T1",
+          "read_on": "2026-10-11",
+          "note": "Treats modulator background as a design variable to stratify on."
+        },
+        {
+          "type": "literature",
+          "ref": "PMC9746869, 2022, CC BY-NC-ND: a randomized trial in children aged 6 to 11",
+          "tier": "T1",
+          "read_on": "2026-10-11",
+          "note": "Paraphrased, not quoted, under its licence: its primary endpoint was the change in LCI2.5 through week 24."
+        },
+        {
+          "type": "literature",
+          "ref": "PMC12126198, 2025, CC BY: a modulator trial in children aged 6 to 11",
+          "tier": "T1",
+          "read_on": "2026-10-11",
+          "note": "Safety and tolerability were the primary endpoint; LCI2.5 was reported with 14.1 percent missing data."
+        },
+        {
+          "type": "literature",
+          "ref": "PMC9853074, 2022, CC BY: a cohort protocol in infants and preschool children",
+          "tier": "T1",
+          "read_on": "2026-10-11",
+          "note": "An observational cohort, not a trial: LCI2.5 and an MRI score are its primary endpoints."
+        },
+        {
+          "type": "literature",
+          "ref": "three Europe PMC searches for a review comparing endpoint choice across modulator eras, 2026-10-11",
+          "tier": "T0",
+          "read_on": null,
+          "note": "Not found; empty is not proof of absence."
+        }
+      ],
+      "data_needed": {
+        "catalog_ids": [
+          "europe-pmc"
+        ],
+        "access": "api",
+        "already_have": false,
+        "fields_missing": [
+          "a scoped literature search with its search record"
+        ]
+      },
+      "effort": {
+        "size": "M",
+        "estimate": true
+      },
+      "guard": {
+        "ladder": [
+          "open-access-quote",
+          "lab-position"
+        ],
+        "note": "Quotes only from articles whose licence allows it (CC BY); the CC BY-NC-ND article is paraphrased and cited; any link to the atlas counts is a lab position."
+      },
+      "must_not_claim": [
+        "That any one trial's endpoint is typical.",
+        "That the modulator era caused a change in endpoint choice.",
+        "That no review compares endpoint choice across eras.",
+        "That a cohort's endpoints are trial endpoints.",
+        "Anything about approval or about any person's care."
+      ],
+      "needs_person": [
+        "clinician-reader"
+      ],
+      "links": {
+        "board": [],
+        "proposals": [],
+        "prs": []
+      },
+      "created": "2026-10-11",
+      "updated": "2026-10-11",
+      "created_by": {
+        "kind": "model",
+        "model_id": "claude-opus-5-5"
+      },
+      "visibility": "public",
+      "notes": "Kept apart from L-0004 (registry dates beside approvals, no inference) and L-0012 (core outcome set): this lead reads the literature, not the registry. Article text stays in private folders."
     }
   ]
 }

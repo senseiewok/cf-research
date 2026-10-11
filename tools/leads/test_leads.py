@@ -256,6 +256,15 @@ class FailingRules(Fixture):
             src = dict(src, tier="T0", read_on=None)
             self.assertEqual(self.errors(good_lead(sources=[src])), [])
 
+    def test_non_commercial_licence_source_carries_no_quote(self):
+        base = {"type": "literature", "ref": "PMC0000001, 2022, CC BY-NC-ND", "tier": "T1", "read_on": "2026-10-10"}
+        self.assertFails(good_lead(sources=[dict(base, note="It says \"the primary endpoint was X\".")]),
+                         "non-commercial licence")
+        self.assertFails(good_lead(sources=[dict(base, ref="PMC0000001", note="CC BY-NC 4.0; “a quote”")]),
+                         "non-commercial licence")
+        self.assertEqual(self.errors(good_lead(sources=[dict(base, note="Paraphrased: one trial used LCI as primary.")])), [])
+        self.assertEqual(self.errors(good_lead(sources=[dict(base, ref="PMC0000002, CC BY", note="It says \"a quote\".")])), [])
+
     def test_direct_read_passes(self):
         for via in ("direct", "local-text-extract", "lab-run"):
             src = {"type": "data", "ref": "x", "tier": "T1", "read_on": "2026-10-10", "note": "", "read_via": via}

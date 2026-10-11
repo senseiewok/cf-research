@@ -78,6 +78,18 @@ tier; every other source keeps its own.
 A source whose note carries that sentence must have `read_via: page-summarising-tool`. Before a tool-read quote goes
 into public text, someone reads it on the raw page.
 
+A source under a non-commercial licence (CC BY-NC and its variants, named in `ref` or `note`) is paraphrased and
+cited, never quoted, in this file: such a quote is private evidence only. The checker refuses quotation marks in the
+note of such a source.
+
+### Sources no tool may use automatically
+
+Some sources a lead might want are closed to automation by the catalog. **CFTR2** is the example that comes up most
+for genotype leads: `sources/catalog.yaml` records it as `manual`, link-only and not redistributable (T1 to the
+catalog's notes, read on 2026-10-05; its terms were not re-read for this register). So no lead plans an automated
+CFTR2 lookup; a lead may link to it for a person to read. The same holds for any source whose catalog `access` is
+`manual`, `request` or `forbidden`.
+
 ## Public register, private folder
 
 This file is public. A lead that **cannot** be public does not go here at all:
