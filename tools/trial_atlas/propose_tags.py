@@ -189,6 +189,7 @@ class InvokeRequest:
     attempt: int
     mode: str
     profile: str = ""        # a model profile file (ollama-profile*.json) passed as -ProfileFile; "" means none
+    tag: str = "trial-atlas-route"   # the label in the invoker's usage log, so each tool's calls can be told apart
 
 
 @dataclass
@@ -225,7 +226,7 @@ def invoker_args(req: InvokeRequest, paths: dict) -> dict:
     return {"PromptFile": str(paths["prompt"]), "SystemFile": str(paths["system"]), "SchemaFile": str(paths["schema"]),
             "ProfileFile": req.profile or "", "Model": req.model, "ThinkMode": "on" if req.think else "off",
             "Temperature": req.temperature, "Seed": req.seed, "TimeoutSec": req.timeout_sec, "MaxOutputTokens": req.max_output_tokens,
-            "Samples": 1, "Attempt": req.attempt, "Mode": req.mode, "Tag": "trial-atlas-route"}
+            "Samples": 1, "Attempt": req.attempt, "Mode": req.mode, "Tag": req.tag}
 
 
 class PwshInvoker:
