@@ -13,7 +13,9 @@ composite wording), vague (a vague rule decided the tag; vague wording is never 
 Usage:
     python lexicon.py try "Change in ppFEV1 from baseline"      show which rules match a piece of text
     python lexicon.py tag SNAPSHOT_DIR --out tags.json [--exclude FILE.json]
-                                                             tag every outcome entry of the studies in scope (main route)
+                                                             tag every outcome entry of the studies in scope (main retrieval
+                                                             route); the output file must not exist yet (exit 2 otherwise)
+    python lexicon.py classes                                every class id, its domain and a one-line gloss for the labeller
 Standard library only. No network. No model.
 """
 from __future__ import annotations
@@ -344,6 +346,7 @@ def main(argv=None) -> int:
     g.add_argument("snapshot", type=Path)
     g.add_argument("--out", type=Path, required=True)
     g.add_argument("--exclude", type=Path)
+    sub.add_parser("classes", help="list every class id with its domain and a one-line gloss (for the person labelling)")
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
@@ -353,6 +356,14 @@ def main(argv=None) -> int:
         res = lex.tag_entry({"entry_id": "TRY:P1", "nct_id": "TRY", "measure": a.text, "description": "", "time_frame": a.time_frame})
         print(json.dumps(res, indent=2, ensure_ascii=False))
         return 0
+    if a.cmd == "classes":
+        for d in lex.data["domains"]:
+            for c in d["classes"]:
+                print(f"{c['id']:28} {d['id']:24} {c.get('gloss', '')}")
+        return 0
+    if a.out.exists():
+        print(f"ERROR: {a.out.name} exists; a tags file is never overwritten (choose a new name)", file=sys.stderr)
+        return 2
     try:
         s = snap.load(a.snapshot)
         manual = scope_mod.read_id_reasons(a.exclude) if a.exclude else {}

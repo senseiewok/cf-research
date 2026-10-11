@@ -39,6 +39,9 @@ Usage:
   python check_atlas.py --snapshot DIR --tags tags.json --write-counts counts.json [...]   write the counts file (no check)
   python check_atlas.py --verify-model-tags FILE --snapshot DIR --tags tags.json          only the quote check, one line per tag
   python check_atlas.py --negative-controls [--controls-only]                            only the controls, on the synthetic fixtures
+  python check_atlas.py --snapshot DIR --confirm-real-run      a person confirms a REAL snapshot's fetch configuration (config_verified)
+counts.json carries a registry_terms block (source, processing and fetch dates, terms pointer, modifications, licence line, retention
+note); the check prints it first and the drift check covers it.
 Exit 0 all checks passed (and publication allowed unless --drift-only); 1 integrity failure or a failed control; 2 usage error;
 3 integrity passed but publication is blocked; 4 the controls-only run passed but is not the gate (0 with --controls-only).
 """
@@ -51,6 +54,7 @@ import json
 import math
 import sys
 import tempfile
+from datetime import datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -67,6 +71,49 @@ MODEL_FORBIDDEN_CLASSES = {"not_stated"}
 MIN_FROZEN_ROWS = 50          # the design's number of person-labelled outcome entries (decision 5)
 MIN_CONTROL_ENTRIES = 50      # the fewest outcome entries a non-CF control snapshot may hold for the gate (a reviewer's number)
 TAG_STATUSES = {"rule", "not_stated", "unclassified"}
+
+# The registry's terms travel with every count (counts.json, the printed header, the TERMS file beside a labelling sheet).
+REGISTRY_SOURCE = "ClinicalTrials.gov"
+# The Terms and Conditions page as given in the third review round; it was not opened during this offline build.
+TERMS_URL = "https://clinicaltrials.gov/about-site/terms-conditions"
+LICENCE_LINE = ("The lab's licence covers its own tags, code and counts only; registry text and fields remain ClinicalTrials.gov data "
+                "under its terms.")
+RETENTION_NOTE = "The registry's terms apply for as long as the data are kept, in any copy, file or page made from them."
+
+
+def registry_terms(snapshot, lex, scope_counts: dict) -> dict:
+    """The block that must accompany any count or file made from the snapshot: source, the registry's processing date, the fetch
+    date, the terms pointer, every modification the lab made, the licence line and the retention note."""
+    excluded = ", ".join(f"{rid} {n}" for rid, n in scope_counts.get("excluded_by_rule", {}).items())
+    terms = snapshot.manifest.get("terms") if isinstance(snapshot.manifest.get("terms"), dict) else {}
+    return {
+        "source": REGISTRY_SOURCE,
+        "data_processed_by_registry": snapshot.manifest.get("data_timestamp"),
+        "snapshot_fetched_at": snapshot.manifest.get("fetched_at"),
+        "terms_url": TERMS_URL,
+        "terms_last_updated": terms.get("terms_last_updated"),
+        "modifications": [
+            f"Primary-outcome wording was classified into classes by the versioned rule lexicon {lex.version} (sha256 {lex.sha256[:12]}); "
+            "a model-proposed class is counted only when its quote is an exact piece of the registry text.",
+            f"Studies were left out by stated scope rules, with these counts: {excluded} (X1 to X6 are explained in "
+            "tools/trial_atlas/scope.py; X6 is a person's exclusion list).",
+            "No registry wording was clipped by these tools; any clipping on a published page must be added to this list.",
+            "Registry pages were re-saved as UTF-8 JSON after parsing; values and key order are kept, whitespace is not.",
+        ],
+        "licence": LICENCE_LINE,
+        "retention": RETENTION_NOTE,
+    }
+
+
+def terms_text(block: dict) -> str:
+    """The terms block as plain lines (for the printed header and the TERMS file beside a CSV)."""
+    lines = [f"source: {block['source']}", f"data processed by the registry: {block['data_processed_by_registry']}",
+             f"snapshot fetched at: {block['snapshot_fetched_at']}",
+             f"terms: {block['terms_url']} (last updated {block['terms_last_updated'] or 'not recorded in the manifest'})",
+             "modifications made by the lab:"]
+    lines += [f"  - {m}" for m in block["modifications"]]
+    lines += [f"licence: {block['licence']}", f"retention: {block['retention']}"]
+    return "\n".join(lines) + "\n"
 
 
 class UsageError(Exception):
@@ -205,12 +252,17 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
         for s in e.get("safety_subtypes", []):
             subtypes[s] += 1
     by_year, by_phase, cf_only, sponsors, no_sponsor = {}, {}, {}, {}, {}
+    by_kind, by_posted = {"actual": {}, "planned": {}}, {}
     studies_by_year: dict[str, int] = {}
     for nct, r in studies.items():
         y = str(r["start_year"]) if r["start_year"] else "unknown"
+        fp = str(r["first_posted_year"]) if r.get("first_posted_year") else "unknown"
         studies_by_year[y] = studies_by_year.get(y, 0) + 1
         for c in study_classes[nct]:
             by_year.setdefault(c, {})[y] = by_year.setdefault(c, {}).get(y, 0) + 1
+            if r["start_kind"] in by_kind:
+                by_kind[r["start_kind"]].setdefault(c, {})[y] = by_kind[r["start_kind"]].setdefault(c, {}).get(y, 0) + 1
+            by_posted.setdefault(c, {})[fp] = by_posted.setdefault(c, {}).get(fp, 0) + 1
             p = phase_label(r["phases"])
             by_phase.setdefault(c, {})[p] = by_phase.setdefault(c, {}).get(p, 0) + 1
             if r["cf_flag"] == "CF only":
@@ -245,7 +297,13 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
         "studies_without_lead_sponsor_by_class": {c: no_sponsor.get(c, 0) for c in order},
         "studies_by_start_year": dict(sorted(studies_by_year.items())),
         "studies_by_class_and_start_year": {c: dict(sorted(by_year.get(c, {}).items())) for c in order},
+        # Split by the registry's start type: ACTUAL and ESTIMATED (planned). A start with no date or no type is in neither.
+        "studies_by_class_and_actual_start_year": {c: dict(sorted(by_kind["actual"].get(c, {}).items())) for c in order},
+        "studies_by_class_and_planned_start_year": {c: dict(sorted(by_kind["planned"].get(c, {}).items())) for c in order},
+        # The first-posted year, for banding registration eras (design, decision 2).
+        "studies_by_class_and_first_posted_year": {c: dict(sorted(by_posted.get(c, {}).items())) for c in order},
         "studies_by_class_and_phase": {c: dict(sorted(by_phase.get(c, {}).items())) for c in order},
+        "registry_terms": registry_terms(snapshot, lex, result["counts"]),
         "flags": flags,
         "timeframe_buckets": buckets,
         "safety_subtypes": subtypes,
@@ -398,7 +456,12 @@ def run_negative_controls(lex, *, snapshot=None, canary=None, planted=None, cont
         else:
             results.append(("canary model tags with false quotes are all rejected", False, "no canary tags were given"))
         if planted:
-            records = {r["nct_id"]: r for r in snapshot.records(scope_mod.MAIN_ROUTE)}
+            # A planted id is looked for in the main retrieval route and then in the recall route: an id only the term search
+            # returned is still tested against the scope rules.
+            records = {}
+            for route in [scope_mod.MAIN_ROUTE] + [r for r in snapshot.routes() if r != scope_mod.MAIN_ROUTE]:
+                for r in snapshot.records(route):
+                    records.setdefault(r["nct_id"], r)
             missing = [i for i in planted if i not in records]
             included = {r["nct_id"] for r in scope_mod.apply_scope(list(records.values()), manual)["included"]}
             leaked = [i for i in planted if i in included]
@@ -440,6 +503,44 @@ def synthetic_marks(snapshot) -> list[str]:
     return marks
 
 
+def load_input_snapshot(path, what: str):
+    """A snapshot given as an input other than the one under check: a missing or broken one is a usage error (exit 2)."""
+    try:
+        return snap.load(path)
+    except snap.SnapshotError as exc:
+        raise UsageError(f"cannot read the {what} {path}: {exc}") from None
+
+
+def confirm_real_run(path) -> int:
+    """Set config_verified in a real snapshot's manifest after a person has checked its fetch configuration against the registry
+    (page size, token keys, query parameters, field names). Refuses a synthetic or an already confirmed snapshot. The manifest hash
+    is recomputed, so every tags file, sheet and counts file made before must be made again."""
+    if not path:
+        print("ERROR: --confirm-real-run needs --snapshot")
+        return 2
+    try:
+        s = snap.load(path)
+    except snap.SnapshotError as exc:
+        print(f"ERROR: {snap.clean(exc, 300)}")
+        return 2
+    marks = synthetic_marks(s)
+    if marks:
+        print(f"ERROR: this snapshot carries the synthetic marker ({', '.join(marks)}); only a real snapshot can be confirmed")
+        return 2
+    if s.manifest.get("config_verified") is True:
+        print("ERROR: this snapshot's configuration is already confirmed")
+        return 2
+    m = dict(s.manifest)
+    m["config_verified"] = True
+    m["config_verified_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    m["snapshot_sha256"] = snap.manifest_digest(m)
+    (Path(path) / snap.MANIFEST).write_text(json.dumps(m, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    snap.load(path)
+    print(f"config_verified set; the snapshot sha256 is now {m['snapshot_sha256']}")
+    print("re-run lexicon.py tag, make_labelling_sheet.py and check_atlas.py --write-counts: anything made before refers to the old hash")
+    return 0
+
+
 def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
     """allow_synthetic_for_tests exists only for the unit tests: no command-line option sets it, so synthetic data can never pass
     the gate from a command line."""
@@ -461,6 +562,9 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
     ap.add_argument("--drift-only", action="store_true", help="check integrity only; do not apply the publication stop rules")
     ap.add_argument("--controls-only", action="store_true",
                     help="with --negative-controls and no --snapshot: exit 0 when the controls pass (otherwise that run exits 4: it is not the gate)")
+    ap.add_argument("--confirm-real-run", action="store_true",
+                    help="with --snapshot only: a person confirms that this real snapshot's fetch configuration was checked; sets "
+                         "config_verified in its manifest (the snapshot hash changes, so tag, draw and count again afterwards)")
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
@@ -468,6 +572,8 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
     lex = lex_mod.load()
     failures, blocked, summary = [], [], None
     try:
+        if a.confirm_real_run:
+            return confirm_real_run(a.snapshot)
         manual = scope_mod.read_id_reasons(a.exclude) if a.exclude else {}
         explained = scope_mod.read_id_reasons(a.explained) if a.explained else {}
         if bool(a.frozen_sheet) != bool(a.frozen_key):
@@ -475,7 +581,8 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
         if not a.snapshot:
             if not a.negative_controls or any((a.tags, a.counts, a.write_counts, a.model_tags, a.verify_model_tags, a.frozen_sheet)):
                 raise UsageError("give --snapshot and --tags (or only --negative-controls)")
-            results = run_negative_controls(lex, control_snapshot=snap.load(a.control_snapshot) if a.control_snapshot else None)
+            results = run_negative_controls(lex, control_snapshot=load_input_snapshot(a.control_snapshot, "control snapshot")
+                                            if a.control_snapshot else None)
             for name, ok, detail in results:
                 print(f"{'PASS' if ok else 'FAIL'} control: {name}: {detail}")
             print("NOT THE GATE: controls only")
@@ -488,7 +595,7 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
         tags = validate_tags(read_json(a.tags, "tags file"), lex)
         mt = a.model_tags or a.verify_model_tags
         proposed = read_json(mt, "proposed model tags") if mt else []
-    except (UsageError, ValueError) as exc:
+    except (UsageError, ValueError, OSError) as exc:
         print(f"ERROR: {snap.clean(exc, 300)}")
         return 2
     except snap.SnapshotError as exc:
@@ -535,6 +642,7 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             for d in drift[:40]:
                 print(f"  drift {d}")
     print(f"snapshot {s.digest[:12]}  dataTimestamp {s.manifest.get('data_timestamp')}  lexicon {lex.version}")
+    print(terms_text(counts["registry_terms"]), end="")
     print(f"studies in scope: {counts['studies']}   outcome entries: {counts['entries']}")
     for f in failures:
         print(f"FAIL integrity: {f}")
@@ -596,6 +704,10 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
         try:
             canary = read_json(a.canary, "canary tags") if a.canary else None
             planted = read_json(a.planted, "planted ids") if a.planted else None
+            if canary is not None and not (isinstance(canary, list) and canary and all(isinstance(t, dict) for t in canary)):
+                raise UsageError("the canary file must be a non-empty JSON list of {entry_id, class, quote} objects")
+            if planted is not None and not (isinstance(planted, list) and planted and all(snap.valid_nct(i) for i in planted)):
+                raise UsageError("the planted-ids file must be a non-empty JSON list of NCT ids (NCT followed by 8 digits)")
             control = snap.load(a.control_snapshot) if a.control_snapshot else None
         except (UsageError, snap.SnapshotError) as exc:
             print(f"ERROR: {snap.clean(exc, 300)}")

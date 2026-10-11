@@ -23,8 +23,11 @@ the query parameters, the `fields` piece names, and whether totalCount comes bac
 
 Usage (the contact comes ONLY from the environment variable EVIDENCE_CONTACT, so it never sits on a command line or in shell
 history; there is no --contact option, and without the variable the tool does not run):
-    python fetch_snapshot.py [--route both|condition|term] [--out DIR] [--page-size N] [--max-pages N]
-    python fetch_snapshot.py --dry-run       print the planned requests; no socket is opened
+    python fetch_snapshot.py [--route both|condition|term] [--out DIR] [--page-size N] [--max-pages N] [--fields A,B,...]
+    python fetch_snapshot.py --route-query NAME=KEY=VALUE [...]   define the retrieval route(s) instead (a non-CF control snapshot)
+    python fetch_snapshot.py --dry-run       print the planned requests, the output folder and the page ceiling; no socket is opened
+The page ceiling (1 + retrieval routes x --max-pages) must fit the evidence client's 200-request budget, or the run is refused before
+any request. At the end the absolute output folder is printed; a stopped run names the incomplete folder it left.
 A real run is a network call: it needs a person's approval first (design, build step 2).
 Exit 0 written and checked; 1 the run stopped (reason printed, INCOMPLETE.txt left; also on any unexpected error from the client);
 2 refused before any request (no contact, a contact the client refuses, evidence skill absent, catalog gate).
@@ -66,7 +69,7 @@ DEFAULTS = {
     # StudyType, StartDate, LeadSponsorName, Condition, PrimaryOutcomeMeasure and HasResults; the others are assumed by analogy.
     "fields": ("NCTId,BriefTitle,OverallStatus,StartDate,StartDateType,StudyFirstPostDate,StudyType,Phase,Condition,Keyword,"
                "PrimaryOutcomeMeasure,PrimaryOutcomeDescription,PrimaryOutcomeTimeFrame,LeadSponsorName,HasResults"),
-    "max_pages": 150,                        # our own cap per run, under the evidence client's 200-request ceiling
+    "max_pages": 99,                         # our own cap per retrieval route: 1 + 2 x 99 = 199 requests, under the client's 200
 }
 
 # The two retrieval routes (design, decision 3). The parameter names and the term syntax are to verify on the first real run.
@@ -339,12 +342,39 @@ def run(client, out_dir: Path, *, routes: list[str], cfg: dict | None = None, pr
         raise
 
 
+REQUEST_BUDGET = 200          # the evidence client's ceiling per process (MAX_REQUESTS_PER_PROCESS in its http.py)
+_ROUTE_NAME = re.compile(r"[a-z][a-z0-9_]{0,31}")
+_ROUTE_KEY = re.compile(r"(?:query|filter)\.[A-Za-z][A-Za-z0-9_.]{0,63}")
+
+
+def parse_route_queries(items: list[str]) -> dict[str, dict]:
+    """--route-query NAME=KEY=VALUE (repeatable) into {NAME: {KEY: VALUE}}. NAME is a lower-case retrieval route name; KEY must be a
+    query.* or filter.* parameter, so paging, page size and fields stay under this tool's control. Raises Refused on a bad item."""
+    routes: dict[str, dict] = {}
+    for item in items:
+        name, sep1, rest = item.partition("=")
+        key, sep2, value = rest.partition("=")
+        if not (sep1 and sep2 and value.strip()):
+            raise Refused(f"--route-query needs NAME=KEY=VALUE, got {scrub(item)[:80]!r}")
+        if not _ROUTE_NAME.fullmatch(name):
+            raise Refused(f"--route-query: route name {scrub(name)[:40]!r} must be lower-case letters, digits or _ (starting with a letter)")
+        if not _ROUTE_KEY.fullmatch(key):
+            raise Refused(f"--route-query: parameter {scrub(key)[:40]!r} must be a query.* or filter.* parameter")
+        routes.setdefault(name, {})[key] = value
+    return routes
+
+
 def main(argv=None) -> int:
     ap = _Parser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--route", choices=("both", "condition", "term"), default="both")
+    ap.add_argument("--route", choices=("both", "condition", "term"), default="both",
+                    help="which built-in retrieval route(s) to fetch (ignored when --route-query is given)")
+    ap.add_argument("--route-query", action="append", default=[], metavar="NAME=KEY=VALUE",
+                    help="define a retrieval route instead of the built-in ones, for example a matched non-CF control "
+                         "(condition=query.cond=asthma); repeat to add parameters or routes")
+    ap.add_argument("--fields", help="comma list of API field piece names, replacing the default (to verify on the first real run)")
     ap.add_argument("--out", type=Path, help="a new folder for the snapshot (default: under sources/downloads/trial_atlas/)")
     ap.add_argument("--page-size", type=int, default=DEFAULTS["page_size"])
-    ap.add_argument("--max-pages", type=int, default=DEFAULTS["max_pages"])
+    ap.add_argument("--max-pages", type=int, default=DEFAULTS["max_pages"], help="the most pages fetched per retrieval route")
     ap.add_argument("--dry-run", action="store_true", help="print the planned requests; open no socket")
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
@@ -353,6 +383,23 @@ def main(argv=None) -> int:
     if a.page_size < 1 or a.max_pages < 1:
         print("error: --page-size and --max-pages must be positive", file=sys.stderr)
         return 2
+    try:
+        route_params = parse_route_queries(a.route_query) if a.route_query else None
+        if a.fields is not None and not re.fullmatch(r"[A-Za-z][A-Za-z0-9]*(?:,[A-Za-z][A-Za-z0-9]*)*", a.fields):
+            raise Refused("--fields must be a comma list of field piece names (letters and digits, no spaces)")
+    except Refused as exc:
+        print(f"REFUSED: {scrub(exc)}", file=sys.stderr)
+        return 2
+    routes = list(route_params) if route_params else (["condition", "term"] if a.route == "both" else [a.route])
+    ceiling = 1 + len(routes) * a.max_pages
+    plural = "route" if len(routes) == 1 else "routes"
+    plan = (f"planned page ceiling: {a.max_pages} per retrieval route x {len(routes)} {plural} + 1 version request = {ceiling} "
+            f"of the {REQUEST_BUDGET}-request budget")
+    if ceiling > REQUEST_BUDGET:
+        print(f"REFUSED: {plan}; lower --max-pages so the run cannot hit the {REQUEST_BUDGET}-request budget part-way", file=sys.stderr)
+        return 2
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    out = a.out or DEFAULT_OUT_PARENT / f"snapshot-{stamp}"
     try:
         contact = resolve_contact()
         client, ev = make_client(contact, dry_run=a.dry_run)
@@ -364,21 +411,29 @@ def main(argv=None) -> int:
         entry = ev_catalog.entry(SOURCE_ID)
     except Exception:  # noqa: BLE001 - the gate inside the client still decides; this is only for the manifest
         entry = None
-    routes = ["condition", "term"] if a.route == "both" else [a.route]
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    out = a.out or DEFAULT_OUT_PARENT / f"snapshot-{stamp}"
+    print(plan)
+    if a.dry_run:
+        print(f"output folder (not created in a dry run): {Path(out).resolve()}")
+    cfg = {"page_size": a.page_size, "max_pages": a.max_pages}
+    if a.fields is not None:
+        cfg["fields"] = a.fields
     try:
-        manifest = run(client, out, routes=routes, cfg={"page_size": a.page_size, "max_pages": a.max_pages},
-                       project_ua=ev.PROJECT_UA, contact=contact, catalog_entry=entry)
+        manifest = run(client, out, routes=routes, cfg=cfg, project_ua=ev.PROJECT_UA, contact=contact, catalog_entry=entry,
+                       route_params=route_params)
     except Refused as exc:
         print(f"REFUSED: {scrub(exc, contact)}", file=sys.stderr)
+        if Path(out).exists():
+            print(f"incomplete folder left at: {Path(out).resolve()} (read INCOMPLETE.txt there)", file=sys.stderr)
         return 2
     except SnapshotStopped as exc:
         print(f"STOPPED: {scrub(exc, contact)}", file=sys.stderr)
         print(scrub(client.accounting.summary(), contact), file=sys.stderr)
+        print(f"incomplete folder left at: {Path(out).resolve()} (read INCOMPLETE.txt there)", file=sys.stderr)
         return 1
     except Exception as exc:  # noqa: BLE001 - INCOMPLETE.txt is already written; name the error by type only
         print(f"STOPPED: unexpected error from the client: {type(exc).__name__}", file=sys.stderr)
+        if Path(out).exists():
+            print(f"incomplete folder left at: {Path(out).resolve()} (read INCOMPLETE.txt there)", file=sys.stderr)
         return 1
     print(scrub(client.accounting.summary(), contact))
     if manifest is None:
@@ -387,7 +442,8 @@ def main(argv=None) -> int:
     print(f"snapshot: {out.name}  sha256 {manifest['snapshot_sha256']}")
     print(f"dataTimestamp: {manifest['data_timestamp']}  requests: {manifest['requests']}")
     for r in manifest["routes"]:
-        print(f"route {r['name']}: {r['studies_received']} studies received, total {r['total_count']}, {len(r['pages'])} page(s)")
+        print(f"retrieval route {r['name']}: {r['studies_received']} studies received, total {r['total_count']}, {len(r['pages'])} page(s)")
+    print(f"output folder: {Path(out).resolve()}")
     return 0
 
 

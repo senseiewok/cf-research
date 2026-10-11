@@ -167,6 +167,29 @@ class SheetTest(unittest.TestCase):
                 self.assertIn("same folder", err.getvalue())
                 self.assertFalse(Path(key).exists())
 
+    # ---- third round (after adff5aa). Each case failed before its fix.
+
+    def test_a_short_draw_is_warned_about(self):
+        _, _, args = self.cli_args()
+        args[args.index("--n") + 1] = "50"
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()) as err:
+            self.assertEqual(mls.main(args), 0)
+        self.assertIn("WARNING: drew 19 of the 50 rows asked for", err.getvalue())
+        self.assertIn("only 19 entries could be drawn", err.getvalue())
+
+    def test_the_registry_terms_are_written_beside_the_sheet(self):
+        sheet, _, args = self.cli_args()
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(mls.main(args), 0)
+        terms = sheet.with_name(sheet.stem + ".TERMS.txt")
+        text = terms.read_text(encoding="utf-8")
+        self.assertIn("ClinicalTrials.gov", text)
+        self.assertIn(ca.LICENCE_LINE, text)
+        self.assertIn("for as long as the data are kept", text)
+        self.assertIn(self.s.manifest["data_timestamp"], text)
+        for word in ("unclassified", "fev1", "stratum", "NCT0"):
+            self.assertNotIn(word, text)                                    # terms only: nothing from the rules or the key
+
     def test_no_aggregate_counts_without_report(self):
         _, _, args = self.cli_args()
         with contextlib.redirect_stdout(io.StringIO()) as out:

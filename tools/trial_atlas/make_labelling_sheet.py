@@ -204,9 +204,10 @@ def main(argv=None) -> int:
         print("error: the sealed key may not be written into the same folder as the sheet, or into a folder inside it; give the "
               "labeller only the sheet's folder", file=sys.stderr)
         return 2
-    for p in (a.sheet, a.key):
+    terms_path = a.sheet.with_name(a.sheet.stem + ".TERMS.txt")
+    for p in (a.sheet, a.key, terms_path):
         if p.exists():
-            print(f"error: {p.name} exists; a sheet or key is never overwritten", file=sys.stderr)
+            print(f"error: {p.name} exists; a sheet, key or terms file is never overwritten", file=sys.stderr)
             return 2
     try:
         s = snap.load(a.snapshot)
@@ -215,18 +216,27 @@ def main(argv=None) -> int:
         manual = scope_mod.read_id_reasons(a.exclude) if a.exclude else {}
         if already and len(already.get("rows", [])) + a.n > MAX_ROWS:
             raise ValueError(f"the earlier key holds {len(already['rows'])} rows; {a.n} more would pass {MAX_ROWS}")
-        sheet, key, summary = build(s, tags, lex_mod.load(), n=a.n, seed=a.seed, unclassified_share=a.unclassified_share,
+        lex = lex_mod.load()
+        sheet, key, summary = build(s, tags, lex, n=a.n, seed=a.seed, unclassified_share=a.unclassified_share,
                                     rare_max=a.rare_max, already=already, manual=manual)
     except (snap.SnapshotError, OSError, ValueError) as exc:
         print(f"ERROR: {snap.clean(exc, 300)}")
         return 1
     a.sheet.write_text(sheet, encoding="utf-8-sig", newline="")
     a.key.write_text(json.dumps(key, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    # The sheet holds registry text, so the registry's terms go beside it (a CSV has no room for a header comment).
+    block = check_atlas.registry_terms(s, lex, scope_mod.apply_scope(s.records(scope_mod.MAIN_ROUTE), manual)["counts"])
+    terms_path.write_text(f"Terms for {a.sheet.name}: it holds registry text from {check_atlas.REGISTRY_SOURCE}.\n"
+                          + check_atlas.terms_text(block), encoding="utf-8")
     print(f"drew {summary['drawn']} rows (seed {a.seed})")
+    if summary["drawn"] < a.n:
+        print(f"WARNING: drew {summary['drawn']} of the {a.n} rows asked for: only {summary['pool']} entries could be drawn "
+              "(in-scope entries with a primary outcome, less the rows of any earlier key)", file=sys.stderr)
     if a.report:
         print(f"of {summary['pool']} eligible entries: {summary['unclassified']} unclassified oversample, {summary['rare_class']} from "
               f"{summary['rare_classes']} rare class(es), {summary['stratified']} across {summary['strata']} strata")
-    print(f"sheet: {a.sheet.name} (blind: wording only)   key: {a.key.name} (sealed; keep it away from the labeller)")
+    print(f"sheet: {a.sheet.name} (blind: wording only)   terms: {terms_path.name}   key: {a.key.name} (sealed; keep it away from "
+          "the labeller)")
     return 0
 
 

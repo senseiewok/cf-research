@@ -1,5 +1,5 @@
 {
-  "lexicon_version": "0.2.1-draft",
+  "lexicon_version": "0.2.2-draft",
   "status": "Second draft for review (2026-10-10), revised after two blind reviews of 0.1.0. Written from the taxonomy in proposals/2026-10-10-trial-endpoint-atlas.md plus one added class (exercise_capacity, not yet confirmed by the maintainer). Not yet checked against any real registry wording or against the frozen set. Every rule carries examples that test_lexicon.py runs; they are made-up English, not registry text.",
   "matching": {
     "match_fields": ["measure"],
@@ -9,55 +9,55 @@
   },
   "domains": [
     {"id": "pulmonary", "label": "Pulmonary function", "classes": [
-      {"id": "fev1", "label": "FEV1"},
-      {"id": "spirometry_other", "label": "Other spirometry"},
-      {"id": "lci", "label": "Lung clearance index"},
-      {"id": "lung_function_unspecified", "label": "Lung function, not specified"}]},
+      {"id": "fev1", "label": "FEV1", "gloss": "Forced expiratory volume in one second, named explicitly (FEV1, ppFEV1)."},
+      {"id": "spirometry_other", "label": "Other spirometry", "gloss": "Other spirometry, such as FVC, FEF25-75 or peak flow, or spirometry with no FEV1 named."},
+      {"id": "lci", "label": "Lung clearance index", "gloss": "Lung clearance index or multiple-breath washout."},
+      {"id": "lung_function_unspecified", "label": "Lung function, not specified", "gloss": "Lung or pulmonary function named without saying which measure."}]},
     {"id": "cftr_function", "label": "CFTR function", "classes": [
-      {"id": "sweat_chloride", "label": "Sweat chloride", "cf_specific": true},
-      {"id": "npd", "label": "Nasal potential difference", "cf_specific": true},
-      {"id": "icm", "label": "Intestinal current measurement", "cf_specific": true},
-      {"id": "cftr_biomarker_other", "label": "Other CFTR biomarker", "cf_specific": true}]},
+      {"id": "sweat_chloride", "label": "Sweat chloride", "gloss": "Chloride concentration in sweat (the sweat test).", "cf_specific": true},
+      {"id": "npd", "label": "Nasal potential difference", "gloss": "Nasal potential difference.", "cf_specific": true},
+      {"id": "icm", "label": "Intestinal current measurement", "gloss": "Intestinal current measurement, usually on rectal biopsies.", "cf_specific": true},
+      {"id": "cftr_biomarker_other", "label": "Other CFTR biomarker", "gloss": "Another direct measure of CFTR function or expression, such as organoid swelling.", "cf_specific": true}]},
     {"id": "exacerbations", "label": "Exacerbations", "classes": [
-      {"id": "exacerbations", "label": "Pulmonary exacerbations", "negative_control": true,
+      {"id": "exacerbations", "label": "Pulmonary exacerbations", "gloss": "Pulmonary exacerbations in CF, counted or timed by the study.", "negative_control": true,
        "note": "Only with a CF or pulmonary context (pulmonary, respiratory, protocol-defined, CF exacerbation, or PEx). A bare 'exacerbations' and asthma, COPD or ABPA exacerbations are left unclassified. Watched by the non-CF negative control."}]},
     {"id": "nutrition_growth", "label": "Nutrition and growth", "classes": [
-      {"id": "nutrition_growth", "label": "Nutrition and growth"}]},
+      {"id": "nutrition_growth", "label": "Nutrition and growth", "gloss": "Weight, height, BMI, body composition or another nutrition or growth measure."}]},
     {"id": "gi_pancreatic", "label": "Gastrointestinal and pancreatic", "classes": [
-      {"id": "gi_pancreatic", "label": "Gastrointestinal and pancreatic"}]},
+      {"id": "gi_pancreatic", "label": "Gastrointestinal and pancreatic", "gloss": "Digestive or pancreatic measures, such as fat absorption, faecal elastase or abdominal symptoms."}]},
     {"id": "glucose_cfrd", "label": "Glucose and CF-related diabetes", "classes": [
-      {"id": "glucose_cfrd", "label": "Glucose and CF-related diabetes"}]},
+      {"id": "glucose_cfrd", "label": "Glucose and CF-related diabetes", "gloss": "Blood glucose, HbA1c, insulin or CF-related diabetes."}]},
     {"id": "liver", "label": "Liver", "classes": [
-      {"id": "liver", "label": "Liver", "note": "Liver disease measures. Liver blood tests (liver function tests, liver enzymes, ALT, AST, bilirubin) are safety (laboratory) only, unless liver-disease wording is also present."}]},
+      {"id": "liver", "label": "Liver", "gloss": "Liver disease measures, such as liver stiffness or steatosis (liver blood tests are safety).", "note": "Liver disease measures. Liver blood tests (liver function tests, liver enzymes, ALT, AST, bilirubin) are safety (laboratory) only, unless liver-disease wording is also present."}]},
     {"id": "sinus_upper_airway", "label": "Sinus and upper airway", "classes": [
-      {"id": "sinus_upper_airway", "label": "Sinus and upper airway"}]},
+      {"id": "sinus_upper_airway", "label": "Sinus and upper airway", "gloss": "Sinus, nasal polyp or other upper-airway measures."}]},
     {"id": "patient_reported", "label": "Patient-reported", "classes": [
-      {"id": "cfqr", "label": "CFQ-R", "cf_specific": true},
-      {"id": "pro_named_other", "label": "Other named instrument"},
-      {"id": "pro_unnamed", "label": "Patient-reported, instrument not named"}]},
+      {"id": "cfqr", "label": "CFQ-R", "gloss": "The CFQ-R questionnaire or one of its domains.", "cf_specific": true},
+      {"id": "pro_named_other", "label": "Other named instrument", "gloss": "Another named questionnaire or diary completed by the participant."},
+      {"id": "pro_unnamed", "label": "Patient-reported, instrument not named", "gloss": "Quality of life or symptoms reported by the participant, with no instrument named."}]},
     {"id": "imaging", "label": "Imaging", "classes": [
-      {"id": "imaging", "label": "Imaging", "note": "DXA and DEXA are not tagged imaging: they measure body composition (nutrition_growth, through its own words) or bone density (no class; left unclassified)."}]},
+      {"id": "imaging", "label": "Imaging", "gloss": "Imaging, such as chest CT, MRI, X-ray or ultrasound.", "note": "DXA and DEXA are not tagged imaging: they measure body composition (nutrition_growth, through its own words) or bone density (no class; left unclassified)."}]},
     {"id": "microbiology_sputum", "label": "Microbiology and sputum", "classes": [
-      {"id": "microbiology_sputum", "label": "Microbiology and sputum"}]},
+      {"id": "microbiology_sputum", "label": "Microbiology and sputum", "gloss": "Bacteria, fungi or other organisms in sputum or cultures, including eradication."}]},
     {"id": "inflammation_markers", "label": "Inflammation markers", "classes": [
-      {"id": "inflammation_markers", "label": "Inflammation markers"}]},
+      {"id": "inflammation_markers", "label": "Inflammation markers", "gloss": "Markers of inflammation, such as neutrophil elastase, interleukins or CRP."}]},
     {"id": "healthcare_use", "label": "Healthcare use", "classes": [
-      {"id": "healthcare_use", "label": "Healthcare use"}]},
+      {"id": "healthcare_use", "label": "Healthcare use", "gloss": "Hospital stays, antibiotic courses, clinic visits or costs."}]},
     {"id": "survival_transplant", "label": "Survival and transplant", "classes": [
-      {"id": "survival_transplant", "label": "Survival and transplant"}]},
+      {"id": "survival_transplant", "label": "Survival and transplant", "gloss": "Survival, death or lung transplantation as an outcome."}]},
     {"id": "safety", "label": "Safety and tolerability", "classes": [
-      {"id": "safety_tolerability", "label": "Safety and tolerability"}]},
+      {"id": "safety_tolerability", "label": "Safety and tolerability", "gloss": "Adverse events, laboratory safety tests, vital signs or how well a treatment is tolerated."}]},
     {"id": "pharmacokinetics", "label": "Pharmacokinetics", "classes": [
-      {"id": "pharmacokinetics", "label": "Pharmacokinetics"}]},
+      {"id": "pharmacokinetics", "label": "Pharmacokinetics", "gloss": "Drug levels in the body over time, such as Cmax, AUC or half-life."}]},
     {"id": "feasibility_adherence", "label": "Feasibility and adherence", "classes": [
-      {"id": "feasibility_adherence", "label": "Feasibility and adherence"}]},
+      {"id": "feasibility_adherence", "label": "Feasibility and adherence", "gloss": "Whether a study or treatment can be carried out: adherence, recruitment, retention."}]},
     {"id": "exercise_capacity", "label": "Exercise capacity", "classes": [
-      {"id": "exercise_capacity", "label": "Exercise capacity",
+      {"id": "exercise_capacity", "label": "Exercise capacity", "gloss": "Exercise capacity, such as the six-minute walk or peak oxygen uptake.",
        "added": "Added 2026-10-10 after review; not in the design's taxonomy. The maintainer must confirm it before the frozen set is labelled."}]},
     {"id": "other", "label": "Other", "classes": [
-      {"id": "other", "label": "Other", "assigned_by": "a model tag with an exact quote, or a person; no rule assigns it"}]},
+      {"id": "other", "label": "Other", "gloss": "A measure that fits none of the classes above.", "assigned_by": "a model tag with an exact quote, or a person; no rule assigns it"}]},
     {"id": "not_stated", "label": "Not stated", "classes": [
-      {"id": "not_stated", "label": "Not stated", "assigned_by": "rules NS-00, NS-01 and NS-V1 only"}]}
+      {"id": "not_stated", "label": "Not stated", "gloss": "No measure is named: no primary outcome, a placeholder, or only words such as efficacy.", "assigned_by": "rules NS-00, NS-01 and NS-V1 only"}]}
   ],
   "safety_subtypes": ["adverse_events", "serious_adverse_events", "laboratory", "vital_signs_ecg", "dose_limiting", "tolerability", "unspecified"],
   "rules": [

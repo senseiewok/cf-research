@@ -366,6 +366,32 @@ class SnapshotTaggingTest(unittest.TestCase):
         status = [e["status"] for e in tags["entries"]]
         self.assertEqual((status.count("rule"), status.count("not_stated"), status.count("unclassified")), (17, 2, 1))
 
+    # ---- third round (after adff5aa). Each case failed before its fix.
+
+    def test_tag_never_overwrites_its_output(self):
+        import contextlib
+        import io
+        with tempfile.TemporaryDirectory() as tmp:
+            sf.build_cf_snapshot(Path(tmp) / "s")
+            out = Path(tmp) / "tags.json"
+            out.write_text("KEEP", encoding="utf-8")
+            with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                self.assertEqual(lexicon.main(["tag", str(Path(tmp) / "s"), "--out", str(out)]), 2)
+            self.assertEqual(out.read_text(encoding="utf-8"), "KEEP")
+
+    def test_classes_lists_every_class_with_its_domain_and_gloss(self):
+        import contextlib
+        import io
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(lexicon.main(["classes"]), 0)
+        lines = out.getvalue().strip().splitlines()
+        for d in LEX.data["domains"]:
+            for c in d["classes"]:
+                with self.subTest(cls=c["id"]):
+                    self.assertTrue(c.get("gloss", "").strip(), "every class needs a gloss")
+                    self.assertLessEqual(len(c["gloss"]), 160)
+                    self.assertTrue(any(line.split()[:2] == [c["id"], d["id"]] and c["gloss"] in line for line in lines))
+
     def test_non_cf_control_has_no_cf_specific_class(self):
         with tempfile.TemporaryDirectory() as tmp:
             sf.build_noncf_snapshot(Path(tmp) / "n")

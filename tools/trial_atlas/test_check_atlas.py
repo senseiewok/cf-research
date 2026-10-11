@@ -166,6 +166,84 @@ class IntegrityTest(Fixture):
         self.assertEqual(c["scope"]["excluded_by_rule"]["X5"], 1)
         self.assertEqual(c["shares"]["other"], 0.05)
 
+    # ---- third round (after adff5aa). Each case failed before its fix.
+
+    def test_the_registry_terms_travel_with_the_counts(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        t = c["registry_terms"]
+        self.assertEqual(t["source"], "ClinicalTrials.gov")
+        self.assertEqual(t["data_processed_by_registry"], self.s.manifest["data_timestamp"])
+        self.assertEqual(t["snapshot_fetched_at"], self.s.manifest["fetched_at"])
+        self.assertEqual(t["terms_url"], "https://clinicaltrials.gov/about-site/terms-conditions")
+        self.assertEqual(t["terms_last_updated"], "2023-01-31")
+        mods = " ".join(t["modifications"])
+        self.assertIn(LEX.version, mods)
+        self.assertIn("X5 1", mods)                                       # each exclusion rule with its count
+        self.assertIn("re-saved", mods)
+        self.assertIn("clipped", mods)
+        self.assertEqual(t["licence"], ca.LICENCE_LINE)
+        self.assertIn("for as long as the data are kept", t["retention"])
+        code, out = run(self.base() + ["--drift-only"])
+        self.assertIn("source: ClinicalTrials.gov", out)
+        self.assertIn(ca.LICENCE_LINE, out)
+
+    def test_the_drift_check_covers_the_terms_block(self):
+        counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        counts["registry_terms"]["licence"] = "anything goes"
+        p = self.work / "counts.json"
+        p.write_text(json.dumps(counts), encoding="utf-8")
+        code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", p, "--model-tags", self.model_path,
+                         "--drift-only"])
+        self.assertEqual(code, 1, out)
+        self.assertIn("drift /registry_terms/licence", out)
+
+    def test_split_counts_by_actual_and_planned_start_and_first_posted_year(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        self.assertEqual(c["studies_by_class_and_actual_start_year"]["exacerbations"], {"2005": 1})
+        self.assertEqual(c["studies_by_class_and_planned_start_year"]["exacerbations"], {"2027": 1})
+        self.assertEqual(c["studies_by_class_and_first_posted_year"]["exacerbations"], {"2019": 1, "2026": 1})
+
+    def test_missing_input_files_are_a_clean_usage_error(self):
+        nowhere = self.work / "nowhere.json"
+        for flag in ("--exclude", "--explained", "--canary", "--planted", "--control-snapshot"):
+            with self.subTest(flag=flag):
+                extra = [flag, nowhere] + (["--negative-controls"] if flag in ("--canary", "--planted", "--control-snapshot") else [])
+                with contextlib.redirect_stderr(io.StringIO()) as err:
+                    code, out = run(self.base() + extra)
+                self.assertEqual(code, 2, out)
+                self.assertIn("ERROR", out)
+                self.assertNotIn("Traceback", out + err.getvalue())
+        code, out = run(["--negative-controls", "--control-snapshot", nowhere])
+        self.assertEqual(code, 2, out)
+        self.assertIn("ERROR", out)
+
+    def test_confirm_real_run_refuses_a_synthetic_snapshot(self):
+        copy = self.work / "snap"
+        shutil.copytree(self.snap_dir, copy)
+        code, out = run(["--snapshot", copy, "--confirm-real-run"])
+        self.assertEqual(code, 2, out)
+        self.assertIn("synthetic", out)
+        self.assertFalse(json.loads((copy / "manifest.json").read_text(encoding="utf-8"))["config_verified"])
+
+    def test_confirm_real_run_flips_config_verified(self):
+        studies = sf.cf_condition_studies()
+        pages = sf.pages(studies, 8, "condition")
+        for p in pages:
+            p.pop("_synthetic")
+        version = {"apiVersion": "2.0.0-test", "dataTimestamp": "2026-10-09T09:00:00"}
+        client = sf.FakeClient({fs.ROUTES["condition"]["query.cond"]: pages}, version=version)
+        fs.run(client, self.work / "real", routes=["condition"], cfg={"page_size": 8}, contact=sf.DUMMY_CONTACT)
+        before = snap.load(self.work / "real").digest
+        code, out = run(["--snapshot", self.work / "real", "--confirm-real-run"])
+        self.assertEqual(code, 0, out)
+        s = snap.load(self.work / "real")
+        self.assertTrue(s.manifest["config_verified"])
+        self.assertTrue(s.manifest["config_verified_at"])
+        self.assertNotEqual(s.digest, before)
+        self.assertIn("re-run", out)
+        code, out = run(["--snapshot", self.work / "real", "--confirm-real-run"])
+        self.assertEqual(code, 2, out)                                    # already confirmed
+
 
 class ModelTagTest(Fixture):
     def entries_and_rules(self):
@@ -523,6 +601,26 @@ class NegativeControlTest(unittest.TestCase):
                                                canary=[{"entry_id": "NCT00000001:P1", "class": "other", "quote": "SYNTHETIC false quote"}],
                                                planted=sf.PLANTED_NON_CF_IDS)
         self.assertFalse(next(r for r in results if r[0].startswith("canary"))[1])
+
+    def test_planted_ids_found_only_by_the_recall_route_are_checked(self):
+        # third round: a planted id that only the term search returned is still tested against the scope rules
+        cond = [st for st in sf.cf_condition_studies()
+                if st["protocolSection"]["identificationModule"]["nctId"] not in ("NCT00000011", "NCT00000016")]
+        term = sf.cf_term_studies() + [st for st in sf.cf_condition_studies()
+                                       if st["protocolSection"]["identificationModule"]["nctId"] == "NCT00000011"]
+        with tempfile.TemporaryDirectory() as tmp:
+            client = sf.FakeClient({fs.ROUTES["condition"]["query.cond"]: sf.pages(cond, 8, "condition"),
+                                    fs.ROUTES["term"]["query.term"]: sf.pages(term, 8, "term")})
+            fs.run(client, Path(tmp) / "s", routes=["condition", "term"], cfg={"page_size": 8}, contact=sf.DUMMY_CONTACT)
+            s = snap.load(Path(tmp) / "s")
+            ok_case = ca.run_negative_controls(LEX, snapshot=s, canary=sf.canary_model_tags(), planted=["NCT00000011"])
+            leak_case = ca.run_negative_controls(LEX, snapshot=s, canary=sf.canary_model_tags(), planted=["NCT00000017"])
+        planted = next(r for r in ok_case if r[0].startswith("planted"))
+        self.assertTrue(planted[1], planted[2])
+        self.assertIn("1 of 1 planted ids excluded", planted[2])
+        leaked = next(r for r in leak_case if r[0].startswith("planted"))
+        self.assertFalse(leaked[1])
+        self.assertIn("INCLUDED", leaked[2])
 
     def test_a_planted_id_missing_from_the_snapshot_is_not_a_pass(self):
         lex = LEX

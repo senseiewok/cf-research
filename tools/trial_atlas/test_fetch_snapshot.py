@@ -235,6 +235,70 @@ class ContactAndSkillTest(Base):
             fs.main(["--contact", self.FAKE])
         self.assertNotIn(self.FAKE, err.getvalue())
 
+    # ---- third round (after adff5aa). Each case failed before its fix.
+
+    def _main(self, args, client_factory=None, dry=False):
+        ev = SimpleNamespace(PROJECT_UA="SYNTHETIC-UA")
+        made = []
+
+        def fake_make_client(contact, evidence=None, *, dry_run=False):
+            c = (client_factory or (lambda: sf.cf_client(8)))()
+            if dry:
+                c.dry_run = True
+                orig = c.get
+                c.get = lambda s, p, params=None: SimpleNamespace(**{**vars(orig(s, p, params)), "dry_run": True, "status": "out_of_scope"})
+            c.accounting.summary = lambda: f"requests: {c.accounting.attempts}"
+            made.append(c)
+            return c, ev
+        out, err = io.StringIO(), io.StringIO()
+        with mock.patch.dict(os.environ, {"EVIDENCE_CONTACT": sf.DUMMY_CONTACT}), mock.patch.object(fs, "make_client", fake_make_client), \
+                contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            try:
+                code = fs.main(args)
+            except SystemExit as e:
+                code = e.code
+        return code, out.getvalue(), err.getvalue(), made
+
+    def test_the_absolute_output_path_is_printed(self):
+        code, out, _, _ = self._main(["--out", str(self.out), "--page-size", "8"])
+        self.assertEqual(code, 0, out)
+        self.assertIn(f"output folder: {self.out.resolve()}", out)
+
+    def test_a_dry_run_prints_the_folder_and_the_page_ceiling(self):
+        code, out, _, _ = self._main(["--out", str(self.out), "--max-pages", "40", "--dry-run"], dry=True)
+        self.assertEqual(code, 0, out)
+        self.assertIn(f"output folder (not created in a dry run): {self.out.resolve()}", out)
+        self.assertIn("planned page ceiling: 40 per retrieval route x 2 routes + 1 version request = 81 of the 200-request budget", out)
+
+    def test_a_ceiling_over_the_budget_is_refused(self):
+        code, _, err, made = self._main(["--out", str(self.out), "--max-pages", "150"])
+        self.assertEqual(code, 2)
+        self.assertIn("200-request budget", err)
+        self.assertEqual(made, [])
+
+    def test_the_fields_can_be_overridden(self):
+        code, out, _, made = self._main(["--out", str(self.out), "--page-size", "8", "--fields", "NCTId,BriefTitle"])
+        self.assertEqual(code, 0, out)
+        self.assertTrue(all(p.get("fields") == "NCTId,BriefTitle" for path, p in made[0].calls if path == "studies"))
+        self.assertEqual(snap.load(self.out).manifest["config"]["fields"], "NCTId,BriefTitle")
+
+    def test_a_route_query_fetches_a_control_snapshot(self):
+        code, out, err, _ = self._main(["--out", str(self.out), "--page-size", "8", "--route-query",
+                                        "condition=query.cond=SYNTHETIC asthma OR COPD control"], client_factory=sf.noncf_client)
+        self.assertEqual(code, 0, out + err)
+        s = snap.load(self.out)
+        self.assertEqual(s.routes(), ["condition"])
+        self.assertEqual(len(s.studies("condition")), 8)
+        self.assertEqual(s.manifest["routes"][0]["params"]["query.cond"], "SYNTHETIC asthma OR COPD control")
+
+    def test_a_bad_route_query_is_a_usage_error(self):
+        for bad in ("condition", "condition=query.cond", "Bad Name=query.cond=x", "condition=pageSize=1000"):
+            with self.subTest(bad=bad):
+                code, _, err, made = self._main(["--out", str(self.out), "--route-query", bad])
+                self.assertEqual(code, 2)
+                self.assertEqual(made, [])
+                self.assertFalse(self.out.exists())
+
     def test_scrub_replaces_the_contact_and_any_address(self):
         with mock.patch.dict(os.environ, {"EVIDENCE_CONTACT": "not-an-address-shape"}):
             self.assertEqual(fs.scrub("ua not-an-address-shape and " + self.FAKE), "ua [contact] and [contact]")
