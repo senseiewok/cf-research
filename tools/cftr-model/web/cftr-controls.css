@@ -3,8 +3,10 @@
 .cftr-nudge { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 0.5rem; touch-action: manipulation; }
 .cftr-nudge, #cftr-seq { user-select: none; -webkit-user-select: none; }
 #cftr-seq { touch-action: none; cursor: ew-resize; }
-.cftr-bubble { position: absolute; bottom: 110%; translate: -50%; padding: 0 0.4rem; border: 1px solid var(--lime); background: var(--bg-panel); }
+/* the number above the thumb: over its neighbours, never under the finger; a 2rem lane above the ruler on touch screens */
+.cftr-bubble { position: absolute; bottom: 110%; translate: -50%; z-index: 20; padding: 0 0.4rem; border: 1px solid var(--lime); background: var(--bg-panel); pointer-events: none; white-space: nowrap; font-variant-numeric: tabular-nums; }
 @media (pointer: coarse) {
+  .cftr-ruler { margin-top: 2rem; }
   .cftr-ruler-input::-webkit-slider-thumb { width: 1.75rem; border: 2px solid var(--lime); }
   .cftr-ruler-input::-moz-range-thumb { width: 1.75rem; border: 2px solid var(--lime); }
 }
