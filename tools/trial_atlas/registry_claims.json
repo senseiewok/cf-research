@@ -129,5 +129,13 @@
               "retains any of the data obtained from ClinicalTrials.gov"],
     "kind": "observed",
     "scope": "The whole Use of ClinicalTrials.gov data section of the saved Terms and Conditions page text was read."
+  },
+  {
+    "id": "nlm-developed",
+    "claim": "ClinicalTrials.gov was developed by the U.S. National Institutes of Health through its National Library of Medicine",
+    "source": "ctgov-terms",
+    "quote": ["The U.S. National Institutes of Health, Department of Health and Human Services",
+              "through its National Library of Medicine, has developed ClinicalTrials.gov"],
+    "kind": "observed"
   }
 ]

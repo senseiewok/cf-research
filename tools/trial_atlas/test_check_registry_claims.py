@@ -65,6 +65,26 @@ class CoverageTest(unittest.TestCase):
                 self.assertEqual(code, 1, out)
 
 
+class RequiredClaimTest(unittest.TestCase):
+    """A statement another tool (the page generator) relies on, which these tools do not emit, must still have its claim."""
+
+    def test_the_nlm_attribution_claim_is_present_and_exact(self):
+        claims = crc.load_claims(crc.CLAIMS_PATH)
+        nlm = [c for c in claims if c["id"] == "nlm-developed"]
+        self.assertEqual(len(nlm), 1)
+        self.assertEqual(nlm[0]["claim"], "ClinicalTrials.gov was developed by the U.S. National Institutes of Health through its "
+                                          "National Library of Medicine")
+        self.assertEqual(nlm[0]["source"], "ctgov-terms")
+        self.assertEqual(crc.coverage_problems(claims), [])
+
+    def test_a_missing_or_changed_required_claim_fails(self):
+        claims = crc.load_claims(crc.CLAIMS_PATH)
+        without = [c for c in claims if c["id"] != "nlm-developed"]
+        self.assertTrue(any("nlm-developed" in p for p in crc.coverage_problems(without)))
+        changed = [({**c, "claim": c["claim"].replace("developed", "funded")} if c["id"] == "nlm-developed" else c) for c in claims]
+        self.assertTrue(any("nlm-developed" in p for p in crc.coverage_problems(changed)))
+
+
 class EvidenceTest(unittest.TestCase):
     """Part (b) on SYNTHETIC evidence: each source's text is just the claims' own quotes, under the address header the real saved
     files carry. Not registry page text."""
@@ -86,7 +106,7 @@ class EvidenceTest(unittest.TestCase):
             p = self.write_evidence(tmp)
             code, out = run(["--terms", p["ctgov-terms"], "--disclaimer", p["ctgov-disclaimer"]])
         self.assertEqual(code, 0, out)
-        self.assertIn("part (b): 15 claims, 0 failures", out)
+        self.assertIn("part (b): 16 claims, 0 failures", out)
 
     def test_part_b_fails_when_a_quote_is_altered(self):
         with tempfile.TemporaryDirectory() as tmp:

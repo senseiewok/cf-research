@@ -254,7 +254,9 @@ Every sentence the tools attribute to the registry is guarded against drift. The
 
 CI cannot run part (b), because third-party page text is never committed; the tests run it only on synthetic evidence files they write themselves.
 
-On 2026-10-10, part (b) was run against the page texts the controlling agent saved that day: `15 claims, 0 failures`.
+Part (b) was run against the page texts the controlling agent saved on 2026-10-10. With 15 claims it gave `15 claims, 0 failures`. After the attribution claim below was added, it gave `16 claims, 0 failures`.
+
+**A claim the tools rely on without emitting it.** The page generator's attribution line names ClinicalTrials.gov as a database of the U.S. National Library of Medicine. These tools do not emit that line, so there is no constant to cover. Instead, part (a) requires the claim `nlm-developed` to exist with exactly this text: "ClinicalTrials.gov was developed by the U.S. National Institutes of Health through its National Library of Medicine". The claim is kept to what its Terms-page quote supports. That sentence of the page does not say "database"; the word rests on other statements (the Disclaimer's "website and online database", claim `disclaimer-url-site`).
 
 What this does not prove: that a quote entails its sentence. A claim can pass every rule and still be wrong, so a person or a different model still reads each quote against its claim.
 
@@ -263,6 +265,23 @@ The only CSV the tools write is the labelling sheet. A CSV has no room for a hea
 ## What counts.json holds
 
 Every count is recomputed from the snapshot and the tags, and the drift check compares all of it with the committed file. Types count as well as values: `true` is not `1`, `0` is not `false` and `1` is not `1.0`.
+
+**Self-consistency.** A counts file must also satisfy its own relationships:
+- every class's studies are at most the studies in scope
+- the sum of `entries_by_class` is at least the entries that have a class (an entry can name several classes)
+- `unsorted_entries` equals `entries_by_status.unclassified`
+- the four start kinds add up to the studies in scope
+- in `class_year_phase`, the phase totals equal the year counts of each start kind
+- each `co_occurrence` pair is between 1 and the smaller of its two class totals
+- distinct lead sponsors per class are at most that class's studies.
+
+`--write-counts` checks these before writing and writes nothing if one fails. To check a file the tools wrote earlier:
+
+```
+python tools/trial_atlas/check_atlas.py --self-consistency counts.json
+```
+
+It prints `OK` or `FAIL` for each relationship (aggregates only) and exits 1 on any failure. The rules are written once, in `CONSISTENCY_RULES` in `check_atlas.py`; a page generator should apply the same rules. On 2026-10-10 the counts file from the first real run (kept privately, not committed) gave `7 of 7 relationships hold`.
 
 The top-level keys, listed from the output of `compute_counts` (in the order it writes them):
 

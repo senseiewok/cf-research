@@ -398,6 +398,94 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
     }
 
 
+# ------------------------------------------------------------------ self-consistency of a counts file
+
+def _rule_class_studies(c):
+    over = [k for k, v in c["studies_by_class"].items() if v > c["studies"]]
+    return not over, f"{len(over)} class(es) above {c['studies']} studies in scope" + (f": {', '.join(over[:5])}" if over else "")
+
+
+def _rule_class_entries(c):
+    classified = c["entries"] - c["entries_by_status"]["unclassified"]
+    total = sum(c["entries_by_class"].values())
+    return total >= classified, f"sum over classes {total}, entries with a class {classified}"
+
+
+def _rule_unsorted(c):
+    a, b = c["unsorted_entries"], c["entries_by_status"]["unclassified"]
+    return type(a) is type(b) and a == b, f"unsorted_entries {a}, entries_by_status.unclassified {b}"
+
+
+def _rule_start_kinds(c):
+    s = c["scope"]
+    total = s["start_actual"] + s["start_planned"] + s["start_untyped"] + s["start_no_date"]
+    return total == c["studies"] == s["included"], f"kinds add up to {total}; studies in scope {c['studies']} (scope.included {s['included']})"
+
+
+def _rule_class_year_phase(c):
+    bad = []
+    for cls, kinds in c["class_year_phase"].items():
+        for kind, years in kinds.items():
+            totals = {y: sum(phases.values()) for y, phases in years.items()}
+            if totals != c[f"studies_by_class_and_{kind}_start_year"].get(cls, {}):
+                bad.append(f"{snap.clean(cls, 40)}/{snap.clean(kind, 20)}")
+    return not bad, f"{len(bad)} class and kind cell(s) differ from the year counts" + (f": {', '.join(bad[:5])}" if bad else "")
+
+
+def _rule_co_occurrence(c):
+    per = c["co_occurrence"]["studies_by_class"]
+    bad = [f"{snap.clean(p['a'], 30)}+{snap.clean(p['b'], 30)}" for p in c["co_occurrence"]["pairs"]
+           if not 0 < p["studies"] <= min(per[p["a"]], per[p["b"]])]
+    return not bad, f"{len(bad)} pair(s) outside 1..smaller class total" + (f": {', '.join(bad[:5])}" if bad else "")
+
+
+def _rule_sponsors(c):
+    bad = [k for k, v in c["lead_sponsors_by_class"].items() if v > c["studies_by_class"].get(k, 0)]
+    return not bad, f"{len(bad)} class(es) with more distinct sponsors than studies" + (f": {', '.join(bad[:5])}" if bad else "")
+
+
+# The relationships every counts file must satisfy. A page generator should apply the same rules; this is where they are written.
+CONSISTENCY_RULES = {
+    "class studies within studies in scope": _rule_class_studies,
+    "class entries cover classified entries": _rule_class_entries,
+    "unsorted entries equal unclassified": _rule_unsorted,
+    "start kinds add up to studies in scope": _rule_start_kinds,
+    "class_year_phase totals equal year counts": _rule_class_year_phase,
+    "co-occurrence pairs within the smaller class": _rule_co_occurrence,
+    "distinct sponsors within studies": _rule_sponsors,
+}
+
+
+def consistency_results(counts) -> list[tuple[str, bool, str]]:
+    """[(relationship, ok, detail)] for every rule. A missing key or a wrong type fails that rule; it never raises."""
+    out = []
+    for name, rule in CONSISTENCY_RULES.items():
+        try:
+            ok, detail = rule(counts)
+        except (KeyError, TypeError, AttributeError) as exc:
+            ok, detail = False, f"cannot be checked: {type(exc).__name__} {snap.clean(exc, 60)}"
+        out.append((name, ok, detail))
+    return out
+
+
+def self_consistency(path) -> int:
+    """--self-consistency: read a counts file the tools wrote and check its relationships. Prints aggregates only."""
+    try:
+        counts = read_json(path, "counts file")
+    except UsageError as exc:
+        print(f"ERROR: {snap.clean(exc, 300)}")
+        return 2
+    if not isinstance(counts, dict):
+        print("ERROR: the counts file must hold a JSON object")
+        return 2
+    results = consistency_results(counts)
+    for name, ok, detail in results:
+        print(f"{'OK' if ok else 'FAIL'} {name}: {detail}")
+    failed = sum(1 for _, ok, _ in results if not ok)
+    print(f"{len(results) - failed} of {len(results)} relationships hold")
+    return 1 if failed else 0
+
+
 def diff_paths(a, b, path="") -> list[str]:
     """Every path where two JSON values differ. Types count: True is not 1, 0 is not False and 1 is not 1.0. Keys (which can hold
     registry text, such as phase labels) are cleaned before they are printed."""
@@ -656,6 +744,8 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
     ap.add_argument("--confirm-real-run", action="store_true",
                     help="with --snapshot only: a person confirms that this real snapshot's fetch configuration was checked; sets "
                          "config_verified in its manifest (the snapshot hash changes, so tag, draw and count again afterwards)")
+    ap.add_argument("--self-consistency", type=Path, metavar="COUNTS.json",
+                    help="check that a counts file the tools wrote satisfies its own relationships; prints OK or FAIL per relationship")
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
@@ -663,6 +753,8 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
     lex = lex_mod.load()
     failures, blocked, summary = [], [], None
     try:
+        if a.self_consistency:
+            return self_consistency(a.self_consistency)
         if a.confirm_real_run:
             return confirm_real_run(a.snapshot)
         manual = scope_mod.read_id_reasons(a.exclude) if a.exclude else {}
@@ -720,6 +812,14 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             for f in failures:
                 print(f"FAIL integrity: {f}")
             return 1
+        results = consistency_results(counts)
+        if not all(ok for _, ok, _ in results):
+            for name, ok, detail in results:
+                if not ok:
+                    print(f"FAIL {name}: {detail}")
+            print("NOT WRITTEN: the counts do not satisfy their own relationships")
+            return 1
+        print(f"self-consistency: OK ({len(results)} relationships)")
         a.write_counts.write_text(json.dumps(counts, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
         print(f"wrote {a.write_counts.name}: {counts['studies']} studies, {counts['entries']} entries")
         return 0

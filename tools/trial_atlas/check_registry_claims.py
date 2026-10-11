@@ -53,6 +53,12 @@ LAB_FRAGMENTS = {
     "SPONSOR_RESPONSIBILITY": ["and that", "See the registry's Disclaimer."],
     "KEEP_CURRENT": ["This copy is dated and may be out of date; the live record is the current one."],
 }
+# Claims for statements another tool relies on but these tools do not emit (so there is no constant to cover): the page generator's
+# attribution line rests on this one. Each must exist with exactly this text and source.
+REQUIRED_CLAIMS = {
+    "nlm-developed": ("ctgov-terms",
+                      "ClinicalTrials.gov was developed by the U.S. National Institutes of Health through its National Library of Medicine"),
+}
 
 
 def statements() -> list[tuple[str, str, str, str]]:
@@ -123,6 +129,13 @@ def coverage_problems(claims) -> list[str]:
     problems = shape_problems(claims)
     if problems:
         return problems
+    by_id = {c["id"]: c for c in claims}
+    for cid, (source, text) in REQUIRED_CLAIMS.items():
+        c = by_id.get(cid)
+        if c is None:
+            problems.append(f"required claim {cid} is missing")
+        elif c["source"] != source or c["claim"] != text:
+            problems.append(f"required claim {cid} no longer has its exact text and source ({source}); check it again before changing")
     for name, kind, value, source in statements():
         texts = sorted((c["claim"] for c in claims if c["source"] == source), key=len, reverse=True)
         if not isinstance(value, str) or not value:

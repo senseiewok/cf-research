@@ -711,6 +711,70 @@ class PublicationTest(Fixture):
         self.assertIn("unknown class", out)
 
 
+class SelfConsistencyTest(Fixture):
+    """--self-consistency: the relationships a counts file must satisfy, the same rules a page generator applies."""
+
+    def check(self, mutate=None):
+        counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        if mutate:
+            mutate(counts)
+        p = self.work / "counts-consistency.json"
+        p.write_text(json.dumps(counts), encoding="utf-8")
+        return run(["--self-consistency", p])
+
+    def test_counts_written_by_the_tools_are_consistent(self):
+        code, out = self.check()
+        self.assertEqual(code, 0, out)
+        self.assertEqual(out.count("\nOK ") + out.startswith("OK "), len(ca.CONSISTENCY_RULES))
+        self.assertNotIn("FAIL", out)
+
+    def test_each_relationship_fails_on_a_perturbed_file(self):
+        def bump_class_studies(c):
+            c["studies_by_class"]["fev1"] = c["studies"] + 1
+
+        def zero_class_entries(c):
+            c["entries_by_class"] = {k: 0 for k in c["entries_by_class"]}
+
+        def phase_total(c):
+            c["class_year_phase"]["exacerbations"]["planned"]["2027"]["PHASE3"] = 2
+
+        cases = (
+            ("class studies within studies in scope", bump_class_studies),
+            ("class entries cover classified entries", zero_class_entries),
+            ("unsorted entries equal unclassified", lambda c: c.update({"unsorted_entries": 3})),
+            ("start kinds add up to studies in scope", lambda c: c["scope"].update({"start_untyped": c["scope"]["start_untyped"] + 1})),
+            ("class_year_phase totals equal year counts", phase_total),
+            ("co-occurrence pairs within the smaller class", lambda c: c["co_occurrence"]["pairs"][0].update({"studies": 99})),
+            ("distinct sponsors within studies", lambda c: c["lead_sponsors_by_class"].update({"exacerbations": 99})),
+        )
+        self.assertEqual(sorted(n for n, _ in cases), sorted(ca.CONSISTENCY_RULES))
+        for name, mutate in cases:
+            with self.subTest(name=name):
+                code, out = self.check(mutate)
+                self.assertEqual(code, 1, out)
+                self.assertIn(f"FAIL {name}", out)
+                self.assertEqual(out.count("FAIL "), 1, out)              # only the relationship that was broken
+
+    def test_a_missing_key_fails_and_an_unreadable_file_is_a_usage_error(self):
+        code, out = self.check(lambda c: c.pop("unsorted_entries"))
+        self.assertEqual(code, 1, out)
+        self.assertIn("FAIL unsorted entries equal unclassified", out)
+        code, out = run(["--self-consistency", self.work / "nowhere.json"])
+        self.assertEqual(code, 2, out)
+
+    def test_write_counts_checks_before_writing(self):
+        target = self.work / "counts-new.json"
+        code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--model-tags", self.model_path, "--write-counts", target])
+        self.assertEqual(code, 0, out)
+        self.assertIn("self-consistency: OK", out)
+        with mock.patch.object(ca, "consistency_results", lambda c: [("unsorted entries equal unclassified", False, "forced")]):
+            target2 = self.work / "counts-refused.json"
+            code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--model-tags", self.model_path,
+                             "--write-counts", target2])
+        self.assertEqual(code, 1, out)
+        self.assertFalse(target2.exists())
+
+
 class NegativeControlTest(unittest.TestCase):
     def setUp(self):
         sf.block_network(self)
