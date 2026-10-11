@@ -206,7 +206,7 @@ The terms also ask that the data be kept current. A frozen snapshot cannot be, s
 - the Terms and Conditions page (`https://clinicaltrials.gov/about-site/terms-conditions`) and the last-updated date the manifest records
 - the Disclaimer page (`disclaimer_url`: `https://clinicaltrials.gov/about-site/disclaimer`, `disclaimer_last_updated`: 2023-08-03; the page said "Last updated on August 03, 2023")
 - every modification the lab made: the classification by the versioned lexicon, the scope exclusions with their counts, no clipping, pages re-saved after parsing
-- `no_warranty`: "ClinicalTrials.gov states that the U.S. Government makes no warranties about its data and assumes no liability for their use."
+- `no_warranty`: "ClinicalTrials.gov states that the U.S. Government makes no warranties, expressed or implied, about its data and assumes no liability for any party's use of them."
 - `sponsor_responsibility`: "Study sponsors and investigators write and are responsible for their own records. The registry's Disclaimer says the U.S. government "does not review or approve the safety and science of all studies listed on this website" and that NLM staff only review study information for apparent errors, deficiencies or inconsistencies. See the registry's Disclaimer." The inner quotation is verbatim from the Disclaimer page.
 - `third_party_copyright`: "Some registry data may be subject to third-party copyright, and the data carry an international copyright outside the United States and its Territories or Possessions."
 - `keep_current`: "The registry says it is updated daily and that data in any publication or distribution should be kept current at all times. This copy is dated and may be out of date; the live record is the current one." The last clause is the lab's own statement.
@@ -214,6 +214,25 @@ The terms also ask that the data be kept current. A frozen snapshot cannot be, s
 - the note that the terms apply for as long as the data are kept.
 
 The wording of `no_warranty`, `sponsor_responsibility`, `third_party_copyright` and `keep_current`, and both last-updated dates, are quoted or closely paraphrased from the registry's Terms and Disclaimer pages. Those pages were read on 2026-10-10 by the controlling agent in a person's session; the tools themselves open no URL. Every value in the printed block is cleaned first: escape sequences and control characters are removed and the length is limited, so a manifest value cannot change a terminal or start a line of its own.
+
+### Grounding the registry statements
+
+Every sentence the tools attribute to the registry is guarded against drift. These are the terms items above, both last-updated dates and both page addresses. `registry_claims.json` holds one claim per statement, in the format of the lab's claims checker (`tools/claims/check_claims.py`), each with an exact quote from the registry's own page. Its sources are `ctgov-terms` (Terms and Conditions) and `ctgov-disclaimer` (Disclaimer). `check_registry_claims.py` runs in two parts:
+
+- **Part (a), coverage.** It runs everywhere, CI included. Every statement constant in `check_atlas.py`, and the Terms date in `fetch_snapshot.py`, must be covered by claims of its source. A sentence must be fully accounted for by claim texts plus a short list of the lab's own connecting words. An address must appear whole. A date must appear as the registry writes it. A changed word in any statement fails until its claim is updated and checked again.
+- **Part (b), the quotes.** A person renders the registry's Terms and Disclaimer pages and saves their text outside the repository. Then they run:
+
+  ```
+  python tools/trial_atlas/check_registry_claims.py --terms <saved Terms page text> --disclaimer <saved Disclaimer page text>
+  ```
+
+  This runs the claims checker with those two files as evidence: every quote must be an exact piece of its page, with the checker's rules on numbers and widening words. A saved file that begins with a `URL:` line must name the address the tools emit.
+
+CI cannot run part (b), because third-party page text is never committed; the tests run it only on synthetic evidence files they write themselves.
+
+On 2026-10-10, part (b) was run against the page texts the controlling agent saved that day: `15 claims, 0 failures`.
+
+What this does not prove: that a quote entails its sentence. A claim can pass every rule and still be wrong, so a person or a different model still reads each quote against its claim.
 
 The only CSV the tools write is the labelling sheet. A CSV has no room for a header comment, so the same block is written beside it as `<sheet name>.TERMS.txt`.
 

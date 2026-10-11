@@ -207,8 +207,8 @@ class IntegrityTest(Fixture):
 
     def test_the_terms_block_carries_the_disclaimer_items(self):
         t = json.loads(self.counts_path.read_text(encoding="utf-8"))["registry_terms"]
-        self.assertEqual(t["no_warranty"], "ClinicalTrials.gov states that the U.S. Government makes no warranties about its data and "
-                                           "assumes no liability for their use.")
+        self.assertEqual(t["no_warranty"], "ClinicalTrials.gov states that the U.S. Government makes no warranties, expressed or "
+                                           "implied, about its data and assumes no liability for any party's use of them.")
         self.assertEqual(t["sponsor_responsibility"],
                          "Study sponsors and investigators write and are responsible for their own records. The registry's Disclaimer "
                          "says the U.S. government \"does not review or approve the safety and science of all studies listed on this "

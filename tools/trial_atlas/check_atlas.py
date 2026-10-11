@@ -83,8 +83,8 @@ LICENCE_LINE = ("The lab's licence covers its own tags, code and counts only; re
 RETENTION_NOTE = "The registry's terms apply for as long as the data are kept, in any copy, file or page made from them."
 # Wording quoted or closely paraphrased from the registry's pages as read on 2026-10-10 by the controlling agent (not by
 # these tools, which open no URL). The Disclaimer page said "Last updated on August 03, 2023".
-NO_WARRANTY = ("ClinicalTrials.gov states that the U.S. Government makes no warranties about its data and assumes no liability for "
-               "their use.")
+NO_WARRANTY = ("ClinicalTrials.gov states that the U.S. Government makes no warranties, expressed or implied, about its data and assumes "
+               "no liability for any party's use of them.")
 SPONSOR_RESPONSIBILITY = ("Study sponsors and investigators write and are responsible for their own records. The registry's Disclaimer "
                           "says the U.S. government \"does not review or approve the safety and science of all studies listed on this "
                           "website\" and that NLM staff only review study information for apparent errors, deficiencies or "
