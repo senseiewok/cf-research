@@ -36,13 +36,17 @@ LEXICON_PATH = HERE / "lexicon.json"
 
 
 _WS_RUN = re.compile(r"\s+")
+# One character to one character, so spans still map back exactly: subscript digits to ASCII digits, and the hyphen-like dashes
+# (hyphen, non-breaking hyphen, figure dash, en dash, em dash, minus sign) to '-'.
+_FOLD = str.maketrans({**{chr(0x2080 + i): str(i) for i in range(10)},
+                       **{c: "-" for c in "\u2010\u2011\u2012\u2013\u2014\u2212"}})
 MAX_TIMEFRAME_CHARS = 2000    # a longer time frame is reported "unparseable" instead of being parsed
 
 
 def normalise_whitespace(text: str) -> tuple[str, list[tuple[int, int]]]:
-    """(text with every run of whitespace, newlines included, collapsed to one space; for each character of it, the (start, end) it
-    covers in the original). Rules match the collapsed text, and spans are mapped back, so a reported span is always an exact piece
-    of the ORIGINAL text, double spaces and line breaks included."""
+    """(text with every run of whitespace, newlines included, collapsed to one space, and subscript digits and dashes folded one to one
+    (_FOLD); for each character of it, the (start, end) it covers in the original). Rules match the normalised text, and spans are
+    mapped back, so a reported span is always an exact piece of the ORIGINAL text, double spaces, line breaks and subscripts included."""
     norm, spans, pos = [], [], 0
     for m in _WS_RUN.finditer(text):
         for i in range(pos, m.start()):
@@ -54,7 +58,7 @@ def normalise_whitespace(text: str) -> tuple[str, list[tuple[int, int]]]:
     for i in range(pos, len(text)):
         norm.append(text[i])
         spans.append((i, i + 1))
-    return "".join(norm), spans
+    return "".join(norm).translate(_FOLD), spans
 
 
 def _mapped(m, spans, text):
@@ -150,7 +154,10 @@ class Lexicon:
         for r in data["rules"]:
             if r["class"] not in self.domain_of:
                 raise ValueError(f"rule {r['id']}: unknown class {r['class']}")
-            self.rules.append({**r, "re": _compile(r["pattern"], r.get("case_sensitive", False), r["id"])})
+            rule = {**r, "re": _compile(r["pattern"], r.get("case_sensitive", False), r["id"])}
+            if r.get("suppressed_by_pattern"):
+                rule["sup_re"] = _compile(r["suppressed_by_pattern"], False, r["id"])
+            self.rules.append(rule)
         ids = [r["id"] for r in self.rules]
         if len(ids) != len(set(ids)):
             raise ValueError("duplicate rule ids in the lexicon")
@@ -162,6 +169,12 @@ class Lexicon:
         bad = self.fallback_excluded - set(ids)
         if bad:
             raise ValueError(f"fallback_excluded_rules names unknown rule id(s) {sorted(bad)}")
+        self.fallback_restrictions = []
+        for f in data["matching"].get("fallback_restrictions", []):
+            bad = set(f["classes"]) - set(self.domain_of)
+            if bad:
+                raise ValueError(f"fallback restriction {f['id']}: unknown class(es) {sorted(bad)}")
+            self.fallback_restrictions.append({**f, "re": _compile(f["measure_pattern"], False, f["id"])})
         self.composite = [{**r, "re": _compile(r["pattern"], False, r["id"])} for r in data["composite_rules"]]
         ns = {r["id"]: r for r in data["not_stated_rules"]}
         self.placeholder = _compile(ns["NS-01"]["pattern"], False, "NS-01")
@@ -203,6 +216,8 @@ class Lexicon:
             norm, spans = normalise_whitespace(text)
             for r in self.rules:
                 found = _mapped(r["re"].search(norm), spans, text)
+                if found and r.get("sup_re") and r["sup_re"].search(norm):
+                    continue                                  # suppressed_by_pattern: the same field names a measure this rule must not claim
                 if found and found[2].strip():
                     hits.append({"rule": r, "field": f, "start": found[0], "end": found[1], "text": found[2]})
         matched_ids = {h["rule"]["id"] for h in hits}
@@ -219,8 +234,13 @@ class Lexicon:
         return kept
 
     def _fallback(self, entry: dict) -> list[dict]:
-        """From the description: generic safety wording is ignored, and only the earliest remaining match is kept."""
+        """From the description: generic safety wording is ignored, a fallback restriction whose measure pattern matches limits the
+        classes the description may give, and only the earliest remaining match is kept."""
         hits = [h for h in self._match_group(entry, self.fallback_fields) if h["rule"]["id"] not in self.fallback_excluded]
+        measure, _ = normalise_whitespace(entry.get(self.match_fields[0]) or "")
+        for f in self.fallback_restrictions:
+            if f["re"].search(measure):                       # the measure names an outcome; the description may only confirm its class
+                hits = [h for h in hits if h["rule"]["class"] in f["classes"]]
         if not hits:
             return []
         pool = [h for h in hits if not h["rule"].get("vague")] or hits
