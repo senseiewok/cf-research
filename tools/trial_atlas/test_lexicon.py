@@ -43,7 +43,7 @@ CASES = [
     ("gi_pancreatic", ["Coefficient of fat absorption", "Faecal elastase"], ["Pancreatitis"]),
     ("glucose_cfrd", ["Change in HbA1c", "Incidence of CF-related diabetes"], ["Glucagon-like peptide levels"]),
     ("liver", ["Change in liver stiffness"], ["Hepatic impairment cohort exposure"]),
-    ("sinus_upper_airway", ["Sinus opacification", "SNOT-22 score"], ["Sinus rhythm on ECG"]),
+    ("sinus_upper_airway", ["Sinus opacification", "Chronic rhinosinusitis"], ["Sinus rhythm on ECG", "SNOT-22 score"]),
     ("cfqr", ["CFQ-R respiratory domain score"], ["Quality of life questionnaire"]),
     ("pro_named_other", ["EQ-5D-5L index"], ["Quality of life"]),
     ("pro_unnamed", ["Quality of life"], ["CFQ-R respiratory domain", "EQ-5D-5L quality of life"]),
@@ -56,7 +56,20 @@ CASES = [
     ("safety_tolerability", ["Number of participants with adverse events", "Safety", "Tolerability"], ["Safely completed visits"]),
     ("pharmacokinetics", ["Maximum plasma concentration (Cmax)", "Half-life (t1/2)"], ["Lung clearance index", "Airway clearance"]),
     ("feasibility_adherence", ["Adherence to nebulised therapy", "Feasibility of recruitment"], ["Adherent mucus plugs"]),
+    # classes added in 0.3.0-draft
+    ("lung_mechanics", ["Change in airway resistance by oscillometry", "Residual volume"], ["Change in FVC", "Antibiotic resistance"]),
+    ("oxygenation", ["Nocturnal oxygen saturation by pulse oximetry", "Daytime PaCO2"], ["Peak oxygen uptake", "Safety assessed by pulse oximetry"]),
+    ("bone_density", ["Lumbar spine bone mineral density by DXA", "Change in BMD"], ["Body composition by DXA", "Bone age"]),
+    ("mucociliary_clearance", ["Change in mucociliary clearance"], ["Lung clearance index", "Airway clearance technique"]),
+    ("sputum_properties", ["24-hour sputum weight", "Sputum viscoelasticity"], ["Sputum culture", "Sputum neutrophil elastase"]),
+    ("molecular_expression", ["Gene expression in blood leukocytes", "DNA methylation"], ["CFTR gene expression", "Genotype"]),
+    ("oxidative_stress", ["Urinary isoprostane levels", "Oxidative stress markers"], ["Inhaled glutathione and FEV1"]),
+    ("physical_activity", ["Daily step count", "Physical activity by accelerometry"], ["Exercise capacity", "Enzyme activity"]),
+    ("muscle_strength", ["Handgrip strength", "Maximal inspiratory pressure"], ["Muscle mass", "MIP-1alpha levels"]),
 ]
+
+ADDED_IN_0_3 = {"lung_mechanics", "oxygenation", "bone_density", "mucociliary_clearance", "sputum_properties", "molecular_expression",
+                "oxidative_stress", "physical_activity", "muscle_strength"}
 
 
 class RuleExamplesTest(unittest.TestCase):
@@ -346,6 +359,165 @@ class FixRoundLexiconTest(unittest.TestCase):
     def test_exercise_capacity_is_marked_as_a_taxonomy_addition(self):
         cls = next(c for d in LEX.data["domains"] for c in d["classes"] if c["id"] == "exercise_capacity")
         self.assertIn("maintainer", cls.get("added", ""))
+
+
+class Lexicon030Test(unittest.TestCase):
+    """0.3.0-draft: the over-match fixes (the old false positive is gone, the true positive stays), the double tags resolved, the
+    classes added, and the versioning notes. All wording is SYNTHETIC."""
+
+    def test_version(self):
+        self.assertEqual(LEX.version, "0.3.0-draft")
+        self.assertIn("versioning", LEX.data)
+
+    def test_insulin_like_growth_factor_is_not_insulin(self):
+        self.assertNotIn("glucose_cfrd", classes("Serum insulin-like growth factor 1"))
+        self.assertNotIn("glucose_cfrd", classes("Insulin like growth factor binding protein"))
+        self.assertIn("glucose_cfrd", classes("Insulin secretion after a meal"))
+
+    def test_diabetes_only_as_an_outcome(self):
+        for text in ("Change in FEV1 in adults with diabetes", "Diabetes insipidus", "Lung function in people living with diabetes"):
+            with self.subTest(text=text):
+                self.assertNotIn("glucose_cfrd", classes(text))
+        for text in ("Incidence of CF-related diabetes", "Time to diagnosis of diabetes", "Diabetes onset", "Conversion to cystic fibrosis related diabetes"):
+            with self.subTest(text=text):
+                self.assertIn("glucose_cfrd", classes(text))
+
+    def test_uptake_retention_compliance_outside_feasibility(self):
+        for text in ("FDG uptake in the lungs", "Glucose uptake by muscle", "Uptake of FDG on PET", "CO2 retention", "Carbon dioxide retention",
+                     "Lung compliance", "Static compliance", "Dynamic compliance"):
+            with self.subTest(text=text):
+                self.assertNotIn("feasibility_adherence", classes(text))
+        for text in ("Uptake of the intervention", "Retention at 12 months", "Compliance with treatment", "Participant retention"):
+            with self.subTest(text=text):
+                self.assertIn("feasibility_adherence", classes(text))
+        self.assertIn("lung_mechanics", classes("Static compliance"))
+        self.assertIn("oxygenation", classes("Carbon dioxide retention"))
+
+    def test_an_organism_naming_the_population_is_not_microbiology(self):
+        self.assertEqual(classes("Change in FEV1 in patients with chronic Pseudomonas infection"), ["fev1"])
+        self.assertEqual(classes("Quality of life in people with P. aeruginosa"), ["pro_unnamed"])
+        for text in ("Sputum Pseudomonas aeruginosa density", "Time to Pseudomonas recurrence", "Eradication of S. aureus", "Pseudomonas acquisition",
+                     "Time to first Pseudomonas infection"):
+            with self.subTest(text=text):
+                self.assertIn("microbiology_sputum", classes(text))
+
+    def test_faecal_calprotectin_is_one_class(self):
+        self.assertEqual(classes("Fecal calprotectin"), ["inflammation_markers"])
+        self.assertEqual(classes("Faecal calprotectin concentration"), ["inflammation_markers"])
+        self.assertIn("gi_pancreatic", classes("Faecal elastase"))
+
+    def test_snot22_is_one_class(self):
+        for text in ("SNOT-22 score", "Sino-Nasal Outcome Test 22", "Change in SNOT 22"):
+            with self.subTest(text=text):
+                self.assertEqual(classes(text), ["pro_named_other"])
+        self.assertEqual(classes("Sinus symptoms"), ["sinus_upper_airway"])
+
+    def test_the_fev1_fvc_ratio_is_other_spirometry(self):
+        for text in ("FEV1/FVC ratio", "Change in FEV1 / FVC", "Tiffeneau index FEV1/VC", "FEV1 to FVC ratio"):
+            with self.subTest(text=text):
+                self.assertEqual(classes(text), ["spirometry_other"])
+        self.assertEqual(classes("Change in FEV1 and FEV1/FVC"), ["fev1", "spirometry_other"])
+        self.assertEqual(classes("FEV1/FVC and ppFEV1"), ["fev1", "spirometry_other"])
+        self.assertEqual(classes("Absolute change in ppFEV1"), ["fev1"])
+
+    def test_event_free_survival_is_not_survival(self):
+        for text in ("Exacerbation-free survival", "Event-free survival", "Infection free survival"):
+            with self.subTest(text=text):
+                self.assertNotIn("survival_transplant", classes(text))
+        self.assertIn("exacerbations", classes("Pulmonary exacerbation-free survival"))
+        self.assertIn("survival_transplant", classes("Overall survival"))
+        self.assertIn("survival_transplant", classes("Transplant-free survival"))
+
+    def test_liver_function_is_safety(self):
+        for text in ("Liver function", "Change in liver function"):
+            with self.subTest(text=text):
+                self.assertEqual(classes(text), ["safety_tolerability"])
+                self.assertEqual(tag(text)["safety_subtypes"], ["laboratory"])
+        self.assertEqual(classes("Liver stiffness"), ["liver"])
+
+    def test_sputum_amount_is_not_microbiology(self):
+        for text in ("Wet sputum weight", "Volume of expectorated sputum", "Sputum dry weight", "Sputum rheology"):
+            with self.subTest(text=text):
+                self.assertEqual(classes(text), ["sputum_properties"])
+        self.assertEqual(classes("Sputum culture"), ["microbiology_sputum"])
+        self.assertEqual(classes("Burkholderia spp. density in expectorated sputum"), ["microbiology_sputum"])
+
+    def test_oximetry_inside_safety_stays_safety(self):
+        self.assertEqual(classes("Safety measured by pulse oximetry"), ["safety_tolerability"])
+        self.assertEqual(classes("Vital signs and pulse oximetry"), ["safety_tolerability"])
+        self.assertEqual(classes("Change in oxygen saturation"), ["oxygenation"])
+        self.assertNotIn("oxygenation", classes("Gas exchange variables"))
+        self.assertNotIn("oxygenation", classes("Tissue oxygen saturation"))
+
+    def test_named_instruments_and_unnamed_ratings(self):
+        self.assertEqual(classes("Anxiety", "Measured by the Beck Anxiety Inventory."), ["pro_named_other"])
+        self.assertEqual(classes("Dyspnoea score", "Modified Borg scale, 0 to 10."), ["pro_named_other"])
+        self.assertEqual(classes("Pain score"), ["pro_unnamed"])
+        self.assertEqual(classes("Change of maximum VAS"), ["pro_unnamed"])
+        self.assertEqual(tag("Anxiety")["status"], "unclassified")      # a bare word names no instrument and no class
+
+    def test_new_measures_in_existing_classes(self):
+        has = {
+            "exercise_capacity": ["One-minute sit-to-stand test repetitions", "1-minute STS", "Ventilatory threshold", "Incremental shuttle test"],
+            "pharmacokinetics": ["Terminal elimination rate constant", "Fraction unbound", "Imipenem clearance", "Clearance of the study drug"],
+            "nutrition_growth": ["Fat mass", "Daily energy intake", "Resting energy expenditure"],
+            "inflammation_markers": ["Fractional exhaled nitric oxide (FeNO)"],
+            "npd": ["Nasal transepithelial potential difference", "Nasal TEPD"],
+            "cftr_biomarker_other": ["Beta-adrenergic sweat rate"],
+            "imaging": ["Ventilation defect percentage", "Xenon MRI"],
+            "feasibility_adherence": ["Recruitment rate", "Patient attrition", "Intervention fidelity"],
+            "gi_pancreatic": ["Total intestinal transit time", "Gastric emptying"],
+            "glucose_cfrd": ["CGM time in range", "Stimulated C-peptide"],
+            "liver": ["Hepatic elasticity"],
+            "lci": ["Nitrogen washout"],
+            "spirometry_other": ["Change in FEV0.5"],
+        }
+        for cls, texts in has.items():
+            for text in texts:
+                with self.subTest(cls=cls, text=text):
+                    self.assertIn(cls, classes(text))
+        # 'chloride transport' alone names no test: the description decides
+        self.assertEqual(tag("Chloride transport response")["status"], "unclassified")
+        self.assertEqual(classes("Chloride transport response", "Measured by nasal TEPD."), ["npd"])
+        self.assertNotIn("pharmacokinetics", classes("Clearance of Pseudomonas"))
+        self.assertNotIn("pharmacokinetics", classes("Clearance of radiolabelled particles"))
+        self.assertEqual(classes("CFTR gene expression"), ["cftr_biomarker_other"])
+
+    def test_safety_additions(self):
+        cases = {"Change in serum creatinine": ["laboratory"], "Acute kidney injury": ["laboratory"], "Audiometry": ["hearing"],
+                 "Hearing loss": ["hearing"], "Body temperature": ["vital_signs_ecg"], "Respiratory rate": ["vital_signs_ecg"],
+                 "QRS interval": ["vital_signs_ecg"], "Physical examination": ["physical_examination"], "Serum chemistry": ["laboratory"]}
+        for text, subtypes in cases.items():
+            with self.subTest(text=text):
+                t = tag(text)
+                self.assertEqual([x["class"] for x in t["tags"]], ["safety_tolerability"])
+                self.assertEqual(t["safety_subtypes"], subtypes)
+        self.assertNotIn("safety_tolerability", classes("AUC in participants with impaired renal function"))
+        self.assertEqual(tag("Safety: physical examination")["safety_subtypes"], ["physical_examination"])
+
+    def test_added_classes_are_marked_for_a_clinician_reader(self):
+        added = {c["id"]: c for d in LEX.data["domains"] for c in d["classes"] if "0.3.0-draft" in c.get("added", "")}
+        self.assertEqual(set(added), ADDED_IN_0_3)
+        for cid, c in added.items():
+            with self.subTest(cls=cid):
+                self.assertIn("clinician", c["added"])
+                self.assertLessEqual(len(c["gloss"]), 160)
+
+    def test_unlike_cftr_gi_and_symptom_concepts_stay_apart(self):
+        # the guardrail: pancreatic measures, symptoms and direct CFTR function are never one class
+        self.assertNotEqual(LEX.domain_of["gi_pancreatic"], LEX.domain_of["cftr_biomarker_other"])
+        self.assertEqual(classes("Faecal elastase"), ["gi_pancreatic"])
+        self.assertEqual(classes("Sweat chloride"), ["sweat_chloride"])
+        self.assertEqual(classes("Symptom severity"), ["pro_unnamed"])
+
+    def test_changed_rules_carry_a_version_note(self):
+        for r in LEX.data["rules"]:
+            if "changed" in r:
+                with self.subTest(rule=r["id"]):
+                    self.assertTrue(r["changed"].startswith("0.3.0-draft:"))
+        changed = {r["id"] for r in LEX.data["rules"] if "changed" in r}
+        self.assertEqual(changed, {"FEV1-01", "SPIRO-02", "LUNGFN-V1", "GI-01", "GLU-01", "LIVER-01", "SINUS-01", "MICRO-01", "MICRO-03",
+                                   "SURV-01", "SAFE-UNSPEC", "FEAS-01"})
 
 
 class SnapshotTaggingTest(unittest.TestCase):

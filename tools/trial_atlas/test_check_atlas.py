@@ -355,7 +355,7 @@ class IntegrityTest(Fixture):
         self.assertEqual(pairs[("fev1", "sweat_chloride")], 1)
         self.assertEqual(pairs[("exacerbations", "healthcare_use")], 1)
         self.assertEqual(pairs[("exacerbations", "cfqr")], 1)
-        self.assertEqual(pairs[("npd", "sinus_upper_airway")], 1)
+        self.assertEqual(pairs[("npd", "pro_named_other")], 1)              # SNOT-22 is a named instrument only (lexicon 0.3.0-draft)
         self.assertFalse([p for p in pairs if {"other", "not_stated"} & set(p)])
         self.assertEqual(co["excluded_classes"], ["other", "not_stated"])
         self.assertEqual(co["studies_by_class"]["exacerbations"], 2)
