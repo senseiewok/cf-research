@@ -75,23 +75,27 @@ CO_OCCURRENCE_EXCLUDED = ("other", "not_stated")
 
 # The registry's terms travel with every count (counts.json, the printed header, the TERMS file beside a labelling sheet).
 REGISTRY_SOURCE = "ClinicalTrials.gov"
-# The Terms and Conditions page as given in the third review round; it was not opened during this offline build.
+# The Terms and Conditions page address. The page was read on 2026-10-10 by the controlling agent in a person's session; these tools
+# never open it.
 TERMS_URL = "https://clinicaltrials.gov/about-site/terms-conditions"
 LICENCE_LINE = ("The lab's licence covers its own tags, code and counts only; registry text and fields remain ClinicalTrials.gov data "
                 "under its terms.")
 RETENTION_NOTE = "The registry's terms apply for as long as the data are kept, in any copy, file or page made from them."
-# Round 4: wording quoted or closely paraphrased from the registry's pages as read on 2026-10-10 by the controlling agent (not by
+# Wording quoted or closely paraphrased from the registry's pages as read on 2026-10-10 by the controlling agent (not by
 # these tools, which open no URL). The Disclaimer page said "Last updated on August 03, 2023".
 NO_WARRANTY = ("ClinicalTrials.gov states that the U.S. Government makes no warranties about its data and assumes no liability for "
                "their use.")
-SPONSOR_RESPONSIBILITY = ("Study sponsors and investigators write and are responsible for their own records; the U.S. Government does "
-                          "not review or approve the safety and science of all studies listed. See the registry's Disclaimer.")
+SPONSOR_RESPONSIBILITY = ("Study sponsors and investigators write and are responsible for their own records. The registry's Disclaimer "
+                          "says the U.S. government \"does not review or approve the safety and science of all studies listed on this "
+                          "website\" and that NLM staff only review study information for apparent errors, deficiencies or "
+                          "inconsistencies. See the registry's Disclaimer.")
 DISCLAIMER_URL = "https://clinicaltrials.gov/about-site/disclaimer"
 DISCLAIMER_LAST_UPDATED = "2023-08-03"
 THIRD_PARTY_COPYRIGHT = ("Some registry data may be subject to third-party copyright, and the data carry an international copyright "
-                         "outside the United States.")
-KEEP_CURRENT = ("The registry asks that data in any publication or distribution be kept current at all times; this copy is dated and "
-                "the live record is current.")
+                         "outside the United States and its Territories or Possessions.")
+# The first sentence reports what the registry says; the last clause is the lab's own statement.
+KEEP_CURRENT = ("The registry says it is updated daily and that data in any publication or distribution should be kept current at all "
+                "times. This copy is dated and may be out of date; the live record is the current one.")
 
 
 def registry_terms(snapshot, lex, scope_counts: dict) -> dict:
@@ -124,19 +128,37 @@ def registry_terms(snapshot, lex, scope_counts: dict) -> dict:
     }
 
 
+def _fetch_time(value) -> str:
+    """The fetch time with '(UTC)' only when the value says UTC (a string ending in Z); otherwise as given, marked as not stated
+    as UTC; 'not recorded' when missing."""
+    if value is None or value == "":
+        return "not recorded"
+    text = snap.clean(value, 60)
+    return f"{text} (UTC)" if isinstance(value, str) and value.endswith("Z") else f"{text} (time zone not stated as UTC)"
+
+
+def _registry_time(value) -> str:
+    if value is None or value == "":
+        return "not recorded"
+    return f"{snap.clean(value, 60)} (as given by the registry)"
+
+
 def terms_text(block: dict) -> str:
-    """The terms block as plain lines (for the printed header and the TERMS file beside a CSV). The fetch time is UTC (the manifest
-    writes it with a trailing Z); the registry's processing time is printed exactly as the registry gave it."""
-    lines = [f"source: {block['source']}",
-             f"data processed by the registry: {block['data_processed_by_registry']} (as given by the registry)",
-             f"snapshot fetched at: {block['snapshot_fetched_at']} (UTC)",
-             f"terms: {block['terms_url']} (last updated {block['terms_last_updated'] or 'not recorded in the manifest'})",
-             f"disclaimer: {block['disclaimer_url']} (last updated {block['disclaimer_last_updated']})",
+    """The terms block as plain lines (for the printed header and the TERMS file beside a CSV). Every value is cleaned first: escape
+    sequences and control characters removed, length limited, so text from a manifest or the registry cannot change a terminal or
+    start a line of its own."""
+    c = snap.clean
+    updated = c(block["terms_last_updated"], 40) if block.get("terms_last_updated") else "not recorded in the manifest"
+    lines = [f"source: {c(block['source'])}",
+             f"data processed by the registry: {_registry_time(block.get('data_processed_by_registry'))}",
+             f"snapshot fetched at: {_fetch_time(block.get('snapshot_fetched_at'))}",
+             f"terms: {c(block['terms_url'])} (last updated {updated})",
+             f"disclaimer: {c(block['disclaimer_url'])} (last updated {c(block['disclaimer_last_updated'], 40)})",
              "modifications made by the lab:"]
-    lines += [f"  - {m}" for m in block["modifications"]]
-    lines += [f"no warranty: {block['no_warranty']}", f"sponsor responsibility: {block['sponsor_responsibility']}",
-              f"copyright: {block['third_party_copyright']}", f"keep current: {block['keep_current']}",
-              f"licence: {block['licence']}", f"retention: {block['retention']}"]
+    lines += [f"  - {c(m, 400)}" for m in block["modifications"]]
+    lines += [f"no warranty: {c(block['no_warranty'], 400)}", f"sponsor responsibility: {c(block['sponsor_responsibility'], 400)}",
+              f"copyright: {c(block['third_party_copyright'], 400)}", f"keep current: {c(block['keep_current'], 400)}",
+              f"licence: {c(block['licence'], 400)}", f"retention: {c(block['retention'], 400)}"]
     return "\n".join(lines) + "\n"
 
 
@@ -328,9 +350,12 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
     return {
         "kind": "trial-atlas counts",
         "units": "studies are counted once per class; entries are primary-outcome entries; a study can name several classes",
-        # true when the snapshot carries the synthetic marker; a consumer can refuse synthetic data without guessing
+        # true when the snapshot carries the synthetic marker; false means only that no synthetic marker was found, not proof of
+        # origin (the hashes are not a signature, so a marker can be removed). Real-data publication still needs the person-run
+        # steps and the gate.
         "synthetic": bool(synthetic_marks(snapshot)),
-        # entries left with no class by a rule or by an accepted model tag (shown as "left unsorted"); not the class "other",
+        # entries left with no class by a rule or by an accepted model tag (to be shown as "left unsorted"); equal to
+        # entries_by_status["unclassified"]; not the class "other",
         # which a model or a person assigns to a measure that fits none of the classes
         "unsorted_entries": status["unclassified"],
         # studies per class x start year x phase label, with ACTUAL and planned (ESTIMATED) start types kept apart
@@ -370,16 +395,22 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
 
 
 def diff_paths(a, b, path="") -> list[str]:
-    """Every path where two JSON values differ."""
+    """Every path where two JSON values differ. Types count: True is not 1, 0 is not False and 1 is not 1.0. Keys (which can hold
+    registry text, such as phase labels) are cleaned before they are printed."""
     if isinstance(a, dict) and isinstance(b, dict):
         out = []
         for k in sorted(set(a) | set(b), key=str):
+            here = f"{path}/{snap.clean(k, 80)}"
             if k not in a or k not in b:
-                out.append(f"{path}/{k}: {'missing in committed' if k not in b else 'not recomputed'}")
+                out.append(f"{here}: {'missing in committed' if k not in b else 'not recomputed'}")
             else:
-                out.extend(diff_paths(a[k], b[k], f"{path}/{k}"))
+                out.extend(diff_paths(a[k], b[k], here))
         return out
-    if a != b:
+    if isinstance(a, list) and isinstance(b, list):
+        if len(a) != len(b):
+            return [f"{path}: recomputed {len(a)} item(s), committed {len(b)}"]
+        return [d for i, (x, y) in enumerate(zip(a, b)) for d in diff_paths(x, y, f"{path}[{i}]")]
+    if type(a) is not type(b) or a != b:
         return [f"{path}: recomputed {json.dumps(a)[:80]}, committed {json.dumps(b)[:80]}"]
     return []
 
@@ -697,7 +728,7 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             failures.append(f"{len(drift)} count(s) differ from the committed counts file")
             for d in drift[:40]:
                 print(f"  drift {d}")
-    print(f"snapshot {s.digest[:12]}  dataTimestamp {s.manifest.get('data_timestamp')}  lexicon {lex.version}")
+    print(f"snapshot {s.digest[:12]}  dataTimestamp {_registry_time(s.manifest.get('data_timestamp'))}  lexicon {lex.version}")
     print(terms_text(counts["registry_terms"]), end="")
     print(f"studies in scope: {counts['studies']}   outcome entries: {counts['entries']}")
     for f in failures:

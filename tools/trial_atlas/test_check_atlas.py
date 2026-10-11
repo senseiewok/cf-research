@@ -166,7 +166,7 @@ class IntegrityTest(Fixture):
         self.assertEqual(c["scope"]["excluded_by_rule"]["X5"], 1)
         self.assertEqual(c["shares"]["other"], 0.05)
 
-    # ---- third round (after adff5aa). Each case failed before its fix.
+    # ---- the terms block, split counts, input errors, confirming a real run
 
     def test_the_registry_terms_travel_with_the_counts(self):
         c = json.loads(self.counts_path.read_text(encoding="utf-8"))
@@ -203,19 +203,25 @@ class IntegrityTest(Fixture):
         self.assertEqual(c["studies_by_class_and_planned_start_year"]["exacerbations"], {"2027": 1})
         self.assertEqual(c["studies_by_class_and_first_posted_year"]["exacerbations"], {"2019": 1, "2026": 1})
 
-    # ---- round 4 (after 47adc05). Each case failed before its fix.
+    # ---- the disclaimer items, time zones, the synthetic key and the page counts
 
     def test_the_terms_block_carries_the_disclaimer_items(self):
         t = json.loads(self.counts_path.read_text(encoding="utf-8"))["registry_terms"]
         self.assertEqual(t["no_warranty"], "ClinicalTrials.gov states that the U.S. Government makes no warranties about its data and "
                                            "assumes no liability for their use.")
-        self.assertIn("Study sponsors and investigators write and are responsible for their own records", t["sponsor_responsibility"])
-        self.assertIn("See the registry's Disclaimer.", t["sponsor_responsibility"])
+        self.assertEqual(t["sponsor_responsibility"],
+                         "Study sponsors and investigators write and are responsible for their own records. The registry's Disclaimer "
+                         "says the U.S. government \"does not review or approve the safety and science of all studies listed on this "
+                         "website\" and that NLM staff only review study information for apparent errors, deficiencies or "
+                         "inconsistencies. See the registry's Disclaimer.")
         self.assertEqual(t["disclaimer_url"], "https://clinicaltrials.gov/about-site/disclaimer")
         self.assertEqual(t["disclaimer_last_updated"], "2023-08-03")
-        self.assertIn("third-party copyright", t["third_party_copyright"])
-        self.assertIn("international copyright outside the United States", t["third_party_copyright"])
-        self.assertIn("kept current at all times", t["keep_current"])
+        self.assertEqual(t["third_party_copyright"],
+                         "Some registry data may be subject to third-party copyright, and the data carry an international copyright "
+                         "outside the United States and its Territories or Possessions.")
+        self.assertEqual(t["keep_current"],
+                         "The registry says it is updated daily and that data in any publication or distribution should be kept current "
+                         "at all times. This copy is dated and may be out of date; the live record is the current one.")
         text = ca.terms_text(t)
         for key in ("no_warranty", "sponsor_responsibility", "third_party_copyright", "keep_current"):
             self.assertIn(t[key], text)
@@ -228,6 +234,71 @@ class IntegrityTest(Fixture):
         self.assertIn(f"snapshot fetched at: {c['registry_terms']['snapshot_fetched_at']} (UTC)", text)
         self.assertIn(f"data processed by the registry: {c['registry_terms']['data_processed_by_registry']} (as given by the registry)",
                       text)
+
+    def test_utc_is_said_only_when_the_value_says_so(self):
+        base = json.loads(self.counts_path.read_text(encoding="utf-8"))["registry_terms"]
+        cases = {"2026-10-10T01:02:03Z": "snapshot fetched at: 2026-10-10T01:02:03Z (UTC)",
+                 "2026-10-10T01:02:03+02:00": "snapshot fetched at: 2026-10-10T01:02:03+02:00 (time zone not stated as UTC)",
+                 "2026-10-10T01:02:03": "snapshot fetched at: 2026-10-10T01:02:03 (time zone not stated as UTC)",
+                 None: "snapshot fetched at: not recorded\n"}
+        for value, line in cases.items():
+            with self.subTest(value=value):
+                self.assertIn(line, ca.terms_text({**base, "snapshot_fetched_at": value}))
+        text = ca.terms_text({**base, "data_processed_by_registry": None})
+        self.assertIn("data processed by the registry: not recorded\n", text)
+        self.assertNotIn("not recorded (as given by the registry)", text)
+
+    def test_registry_text_is_cleaned_before_printing(self):
+        base = json.loads(self.counts_path.read_text(encoding="utf-8"))["registry_terms"]
+        text = ca.terms_text({**base, "data_processed_by_registry": "2026\x1b[2J\nINJECTED", "terms_last_updated": "x\x1b]0;t\x07y"})
+        self.assertNotIn("\x1b", text)
+        self.assertNotIn("\x07", text)
+        self.assertFalse([ln for ln in text.splitlines() if ln.startswith("INJECTED")], "a newline in a value must not start a line")
+        counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        counts["class_year_phase"]["exacerbations"]["actual"]["2005"]["PHASE3\x1b[31m\nEVIL"] = 1
+        p = self.work / "counts-escape.json"
+        p.write_text(json.dumps(counts), encoding="utf-8")
+        code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", p, "--model-tags", self.model_path,
+                         "--drift-only"])
+        self.assertEqual(code, 1, out)
+        self.assertNotIn("\x1b", out)
+        self.assertFalse([ln for ln in out.splitlines() if ln.startswith("EVIL")])
+
+    def test_drift_compares_types_not_only_values(self):
+        for name, mutate in (("synthetic", lambda c: c.update({"synthetic": 1})),
+                             ("unsorted_entries", lambda c: c.update({"unsorted_entries": False})),
+                             ("studies", lambda c: c.update({"studies": float(c["studies"])}))):
+            with self.subTest(name=name):
+                counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
+                mutate(counts)
+                p = self.work / f"counts-type-{name}.json"
+                p.write_text(json.dumps(counts), encoding="utf-8")
+                code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", p, "--model-tags", self.model_path,
+                                 "--drift-only"])
+                self.assertEqual(code, 1, out)
+                self.assertIn(f"drift /{name}", out)
+
+    def test_the_readme_does_not_claim_the_synthetic_key_proves_origin(self):
+        readme = (HERE / "README.md").read_text(encoding="utf-8")
+        source = (HERE / "check_atlas.py").read_text(encoding="utf-8")
+        for text in (readme, source):
+            self.assertNotIn("without guessing", text)
+        self.assertIn("not proof of origin", readme)
+        self.assertIn("no synthetic marker found", readme)
+
+    def test_co_occurrence_counts_studies_once_per_pair(self):
+        studies = [
+            sf.study("NCT00000301", "two entries in the same pair", start="2015-01", outcomes=[
+                ("Change in FEV1", "", "Week 4"), ("Change in sweat chloride", "", "Week 4"),
+                ("Change in FEV1 and sweat chloride", "", "Week 8")]),
+            sf.study("NCT00000302", "three classes", start="2016-01", outcomes=[
+                ("Change in FEV1", "", "Week 4"), ("Change in sweat chloride", "", "Week 4"), ("Change in HbA1c", "", "Week 4")]),
+        ]
+        client = sf.FakeClient({fs.ROUTES["condition"]["query.cond"]: sf.pages(studies, 8, "condition")})
+        fs.run(client, self.work / "pairs", routes=["condition"], cfg={"page_size": 8}, contact=sf.DUMMY_CONTACT)
+        s = snap.load(self.work / "pairs")
+        pairs = {(p["a"], p["b"]): p["studies"] for p in ca.compute_counts(s, lexicon.tag_snapshot(s, LEX), [], LEX)["co_occurrence"]["pairs"]}
+        self.assertEqual(pairs, {("fev1", "sweat_chloride"): 2, ("fev1", "glucose_cfrd"): 1, ("sweat_chloride", "glucose_cfrd"): 1})
 
     def test_counts_say_whether_the_data_are_synthetic(self):
         c = json.loads(self.counts_path.read_text(encoding="utf-8"))
@@ -432,7 +503,7 @@ class PublicationTest(Fixture):
         self.assertEqual(code, 3, out)
         self.assertIn("STOP S2 other plus unclassified are 5.0% of entries", out)
 
-    # ---- fix round after e7ea5ed: findings 5, 6, 12, 13 and 14. Each case failed before its fix.
+    # ---- controls on named inputs, the frozen-set size, sanitised printing, input errors, sponsors
 
     def test_synthetic_controls_do_not_meet_the_gate(self):
         with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19):
@@ -514,7 +585,7 @@ class PublicationTest(Fixture):
         self.assertEqual(code, 2, out)
         self.assertIn("does not match the sealed key", out)
 
-    # ---- second fix round (after 0401af9). Each case failed before its fix.
+    # ---- the gate refuses synthetic data and unbound frozen sets
 
     def test_synthetic_inputs_never_pass_the_gate(self):
         with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19), mock.patch.object(ca, "MIN_CONTROL_ENTRIES", 8):
@@ -659,7 +730,7 @@ class NegativeControlTest(unittest.TestCase):
         self.assertEqual(code, 1, out)
         self.assertIn("NCT00000198:P1", out)
 
-    # ---- second fix round (after 0401af9). Each case failed before its fix.
+    # ---- the gate refuses synthetic data and unbound frozen sets
 
     def test_controls_only_is_not_the_gate(self):
         code, out = run(["--negative-controls"])
@@ -684,7 +755,7 @@ class NegativeControlTest(unittest.TestCase):
         self.assertFalse(next(r for r in results if r[0].startswith("canary"))[1])
 
     def test_planted_ids_found_only_by_the_recall_route_are_checked(self):
-        # third round: a planted id that only the term search returned is still tested against the scope rules
+        # a planted id that only the term search returned is still tested against the scope rules
         cond = [st for st in sf.cf_condition_studies()
                 if st["protocolSection"]["identificationModule"]["nctId"] not in ("NCT00000011", "NCT00000016")]
         term = sf.cf_term_studies() + [st for st in sf.cf_condition_studies()

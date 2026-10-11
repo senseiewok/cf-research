@@ -190,7 +190,7 @@ Pages are stored as the parsed JSON written back out (the client returns parsed 
 
 Scope, from the design: interventional studies whose condition list names cystic fibrosis, all statuses and dates; expanded access and observational studies out; one registry, one query, one date.
 
-The registry's Terms and Conditions (last updated 2023-01-31, as summarised in the design) ask anyone who publishes or distributes the data to:
+The registry's Terms and Disclaimer pages were read on 2026-10-10 by the controlling agent of this build, in a person's session, not by these tools, which open no URL. The Terms and Conditions (last updated 2023-01-31) ask anyone who publishes or distributes the data to:
 
 - name the source as ClinicalTrials.gov
 - show the date the registry processed the data (`dataTimestamp`)
@@ -201,26 +201,33 @@ The terms also ask that the data be kept current. A frozen snapshot cannot be, s
 
 **The terms travel with the data.** `counts.json` carries a `registry_terms` block, and `check_atlas.py` prints the same block at the top of every check. The drift check covers it like any other count. The block holds:
 - the source
-- the registry's processing date (`data_processed_by_registry`), printed exactly as the registry gave it, with the note "as given by the registry"
-- the snapshot's fetch time (`snapshot_fetched_at`). It is UTC: the manifest writes it with a trailing `Z`, and the printed line says "(UTC)"
-- the terms page (`https://clinicaltrials.gov/about-site/terms-conditions`, the address given at review) and the last-updated date the manifest records
+- the registry's processing date (`data_processed_by_registry`), printed as the registry gave it with the note "(as given by the registry)", or "not recorded" when the manifest has none
+- the snapshot's fetch time (`snapshot_fetched_at`). The fetch tool writes it in UTC with a trailing `Z`. The printed line adds "(UTC)" only when the value ends in `Z`. Any other value is printed as given with "(time zone not stated as UTC)", and a missing one as "not recorded"
+- the Terms and Conditions page (`https://clinicaltrials.gov/about-site/terms-conditions`) and the last-updated date the manifest records
 - the Disclaimer page (`disclaimer_url`: `https://clinicaltrials.gov/about-site/disclaimer`, `disclaimer_last_updated`: 2023-08-03; the page said "Last updated on August 03, 2023")
 - every modification the lab made: the classification by the versioned lexicon, the scope exclusions with their counts, no clipping, pages re-saved after parsing
 - `no_warranty`: "ClinicalTrials.gov states that the U.S. Government makes no warranties about its data and assumes no liability for their use."
-- `sponsor_responsibility`: "Study sponsors and investigators write and are responsible for their own records; the U.S. Government does not review or approve the safety and science of all studies listed. See the registry's Disclaimer."
-- `third_party_copyright`: "Some registry data may be subject to third-party copyright, and the data carry an international copyright outside the United States."
-- `keep_current`: "The registry asks that data in any publication or distribution be kept current at all times; this copy is dated and the live record is current."
+- `sponsor_responsibility`: "Study sponsors and investigators write and are responsible for their own records. The registry's Disclaimer says the U.S. government "does not review or approve the safety and science of all studies listed on this website" and that NLM staff only review study information for apparent errors, deficiencies or inconsistencies. See the registry's Disclaimer." The inner quotation is verbatim from the Disclaimer page.
+- `third_party_copyright`: "Some registry data may be subject to third-party copyright, and the data carry an international copyright outside the United States and its Territories or Possessions."
+- `keep_current`: "The registry says it is updated daily and that data in any publication or distribution should be kept current at all times. This copy is dated and may be out of date; the live record is the current one." The last clause is the lab's own statement.
 - the licence line: "The lab's licence covers its own tags, code and counts only; registry text and fields remain ClinicalTrials.gov data under its terms."
 - the note that the terms apply for as long as the data are kept.
 
-The wording of `no_warranty`, `sponsor_responsibility`, `third_party_copyright` and `keep_current`, and the Disclaimer's last-updated date, are quoted or closely paraphrased from the registry's pages as read on 2026-10-10 by the controlling agent of this build. The tools open no URL. The terms page address was given at review and was not opened during this offline build.
+The wording of `no_warranty`, `sponsor_responsibility`, `third_party_copyright` and `keep_current`, and both last-updated dates, are quoted or closely paraphrased from the registry's Terms and Disclaimer pages. Those pages were read on 2026-10-10 by the controlling agent in a person's session; the tools themselves open no URL. Every value in the printed block is cleaned first: escape sequences and control characters are removed and the length is limited, so a manifest value cannot change a terminal or start a line of its own.
 
 The only CSV the tools write is the labelling sheet. A CSV has no room for a header comment, so the same block is written beside it as `<sheet name>.TERMS.txt`.
 
 ## What counts.json holds
 
-Every count is recomputed from the snapshot and the tags, and the drift check compares all of it with the committed file. Besides the terms block:
+Every count is recomputed from the snapshot and the tags, and the drift check compares all of it with the committed file. Types count as well as values: `true` is not `1`, `0` is not `false` and `1` is not `1.0`.
 
+The top-level keys, listed from the output of `compute_counts` (in the order it writes them):
+
+`kind`, `units`, `synthetic`, `unsorted_entries`, `class_year_phase`, `co_occurrence`, `snapshot_sha256`, `data_timestamp`, `lexicon_version`, `lexicon_sha256`, `scope`, `routes`, `studies`, `entries`, `entries_by_status`, `entries_by_class`, `studies_by_class`, `studies_by_class_cf_only`, `lead_sponsors_by_class`, `studies_without_lead_sponsor_by_class`, `studies_by_start_year`, `studies_by_class_and_start_year`, `studies_by_class_and_actual_start_year`, `studies_by_class_and_planned_start_year`, `studies_by_class_and_first_posted_year`, `studies_by_class_and_phase`, `registry_terms`, `flags`, `timeframe_buckets`, `safety_subtypes`, `shares`, `other_entries`.
+
+What they hold:
+
+- **Identity.** `kind` ("trial-atlas counts"), `units` (what a study and an entry count as), `snapshot_sha256`, `data_timestamp` (as the registry gave it), `lexicon_version`, `lexicon_sha256`.
 - **Scope and size.** `scope` (the counts behind each exclusion), `routes` (the difference between the retrieval routes), `studies`, `entries`, `entries_by_status`.
 - **Counts by class.** `entries_by_class`, `studies_by_class`, `studies_by_class_cf_only`, `lead_sponsors_by_class` (distinct lead sponsors), `studies_without_lead_sponsor_by_class`.
 - **Counts by time and phase.**
@@ -234,8 +241,9 @@ Every count is recomputed from the snapshot and the tags, and the drift check co
   - `other` and `not_stated` are left out of pairs.
   - `studies_by_class` gives the per-class totals a share is computed from.
 - **Flags and buckets.** `flags`, `timeframe_buckets`, `safety_subtypes`, `shares`, `other_entries`.
-- **`unsorted_entries`.** The number of entries that no rule classified and no accepted model tag placed, shown on a page as "left unsorted". It is not the class `other`: `other` is a class that a model or a person assigns to a measure that fits none of the classes, while an unsorted entry has no class at all yet. S2 counts the two together.
-- **`synthetic`.** `true` when the snapshot carries the synthetic marker, so a consumer can refuse synthetic data without guessing. The gate's own refusal (S0) stays.
+- **`registry_terms`.** The terms block described above.
+- **`unsorted_entries`.** The number of entries that no rule classified and no accepted model tag placed, to be shown on a page as "left unsorted". It equals `entries_by_status.unclassified` (the code sets it from that count). It is not the class `other`: `other` is a class that a model or a person assigns to a measure that fits none of the classes, while an unsorted entry has no class at all yet. S2 counts the two together.
+- **`synthetic`.** `true` when the snapshot carries the synthetic marker. `false` means only: no synthetic marker found. It is not proof of origin. The hashes are not a signature, so someone who edits a snapshot can remove the marker and recompute every hash. Publishing real data still needs the person-run steps (the fetch approval, `--confirm-real-run`, the blind labelling) and the gate, whose own refusal (S0) stays.
 
 ## Lexicon decisions to review
 
@@ -267,5 +275,9 @@ Every count is recomputed from the snapshot and the tags, and the drift check co
 - The hand check of 20 studies from the difference between the two retrieval routes (the design's decision 3). The tools print the difference; nobody has checked it by hand.
 - The flag for open-label extensions (the design's guard against clustering).
 - The count deduplicated by lead sponsor. The counts give the number of distinct lead sponsors per class, which is a different number.
-- Per-class links to a registry search.
-- The site.
+- Per-class links to a registry search. This item came from a council review, not from the proposal.
+- The site. These items from the proposal's decision 7 belong to the page generator, not these tools:
+  - the independence sentence
+  - a how-to-cite line
+  - the standing line that the live record is current and the page is not
+  - a stated cadence after which the page counts as stale.

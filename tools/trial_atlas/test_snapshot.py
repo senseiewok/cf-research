@@ -95,7 +95,7 @@ class SnapshotLoadTest(unittest.TestCase):
         with self.assertRaises(snap.SnapshotError):
             snap.study_record({"protocolSection": {"identificationModule": {"nctId": "not-an-id"}}})
 
-    # ---- second fix round (after 0401af9): the reviewer's snap_probe.py cases that loaded. Each failed before its fix.
+    # ---- aliases, duplicates and counts that must not load
 
     def _alias(self, make):
         def mutate(m):

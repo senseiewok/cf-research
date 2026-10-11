@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch one dated, hashed snapshot of ClinicalTrials.gov API v2 studies for the trial endpoint atlas (board row T-0130).
+"""Fetch one dated, hashed snapshot of ClinicalTrials.gov API v2 studies for the trial endpoint atlas.
 
 Every request goes through the evidence skill's Client (cf-skills, cf-evidence-loop), imported from the sibling checkout exactly as
 tools/sources/fetch_sources.py imports it, so its rules apply unchanged: the catalog gate (`clinicaltrials-gov` must be `access: api`
@@ -45,7 +45,7 @@ from urllib.parse import urlencode
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from snapshot import VERSION, manifest_digest, sha256_file, valid_nct  # noqa: E402
+from snapshot import VERSION, clean, manifest_digest, sha256_file, valid_nct  # noqa: E402
 
 REPO_ROOT = HERE.parents[1]
 CATALOG = REPO_ROOT / "sources" / "catalog.yaml"
@@ -89,7 +89,8 @@ TERMS = {
         "keep the data current, or state the snapshot date prominently (a frozen snapshot cannot be current at all times)",
         "some content may be subject to third-party copyright; quote only what each count needs",
     ],
-    "read_from": "the registry's Terms and Conditions page, as summarised in proposals/2026-10-10-trial-endpoint-atlas.md",
+    "read_from": "the registry's Terms and Conditions page, read on 2026-10-10 by the controlling agent in a person's session "
+                 "(this tool opens no page but the API)",
 }
 
 _EMAIL_LIKE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+")
@@ -440,7 +441,7 @@ def main(argv=None) -> int:
         print("dry run: nothing was requested or written")
         return 0
     print(f"snapshot: {out.name}  sha256 {manifest['snapshot_sha256']}")
-    print(f"dataTimestamp: {manifest['data_timestamp']}  requests: {manifest['requests']}")
+    print(f"dataTimestamp: {clean(manifest['data_timestamp'], 60)} (as given by the registry)  requests: {manifest['requests']}")
     for r in manifest["routes"]:
         print(f"retrieval route {r['name']}: {r['studies_received']} studies received, total {r['total_count']}, {len(r['pages'])} page(s)")
     print(f"output folder: {Path(out).resolve()}")
