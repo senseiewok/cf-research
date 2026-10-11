@@ -1225,6 +1225,238 @@ class CensusGateTest(Fixture):
         self.assertIn("--model-tags-plain goes with --model-tags", out)
 
 
+def no_pk(eid, cls):
+    """A labeller who never gives pharmacokinetics (the synthetic frame's two pk entries are NCT00000005:P1 and P2)."""
+    return ["other"] if "pharmacokinetics" in cls else cls
+
+
+class WithholdTest(Fixture):
+    """--withhold-failing, --record and --check-record on the synthetic census frame."""
+    census = CensusGateTest.census
+
+    def gate(self, frozen, min_rows, extra=(), withhold=True):
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", min_rows), mock.patch.object(ca, "MIN_CONTROL_ENTRIES", 8):
+            return run(self.base() + frozen + self.controls() + ["--explained", self.explained]
+                       + (["--withhold-failing"] if withhold else []) + list(extra), allow_synthetic_for_tests=True)
+
+    def test_a_failing_class_is_withheld_where_it_would_otherwise_block(self):
+        frozen, rows = self.census(label=no_pk)
+        code, out = self.gate(frozen, rows, withhold=False)
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S1 shown class(es) with no labelled positive: pharmacokinetics", out)
+        code, out = self.gate(frozen, rows)
+        self.assertEqual(code, 0, out)
+        self.assertIn("WITHHELD pharmacokinetics: no labelled positive\n", out)
+        self.assertNotIn("STOP", out)
+        self.assertNotIn("note: pharmacokinetics", out)                      # withheld, so not a 'few checked' class on the page
+        self.assertIn("note: fev1 is shown but few checked", out)             # few checked stays shown
+        # by hand: NCT00000005:P1 and P2 carry only pharmacokinetics, 2 of 20 entries; study NCT00000005 has no other class
+        self.assertIn("not shown: 2 entries (10.0%) carry only withheld classes; 1 studies fall only in withheld classes\n", out)
+        self.assertIn("RESULT: PUBLICATION ALLOWED WITH 1 WITHHELD CLASS(ES)\n", out)
+
+    def test_precision_and_recall_reasons_are_computed(self):
+        def label(eid, cls):
+            return ["sweat_chloride", "fev1"] if eid == "NCT00000001:P2" else no_pk(eid, cls)
+        frozen, rows = self.census(label=label)
+        with mock.patch.dict(ca.THRESHOLDS, {"min_positives": 1}):
+            code, out = self.gate(frozen, rows)
+        self.assertEqual(code, 0, out)
+        withheld = [ln for ln in out.splitlines() if ln.startswith("WITHHELD")]
+        self.assertEqual(withheld, ["WITHHELD fev1: recall 0.500 below 0.80",
+                                    "WITHHELD pharmacokinetics: no labelled positive; precision 0.000 below 0.85"])
+        # NCT00000001:P1 (fev1 only) and the two pk entries; NCT00000001 keeps sweat_chloride, so one study only
+        self.assertIn("not shown: 3 entries (15.0%) carry only withheld classes; 1 studies fall only in withheld classes", out)
+        self.assertIn("RESULT: PUBLICATION ALLOWED WITH 2 WITHHELD CLASS(ES)", out)
+
+    def test_every_other_stop_still_blocks(self):
+        first = []
+
+        def skip_one(eid, cls):                                  # one row left blank, besides the failing pk class
+            if not first and "pharmacokinetics" not in cls:
+                first.append(eid)
+                return []
+            return no_pk(eid, cls)
+        frozen, rows = self.census(label=skip_one)
+        code, out = self.gate(frozen, rows - 1)
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S1 1 row(s) of the frozen sheet are unlabelled", out)
+        frozen, rows = self.census(label=no_pk)
+        with mock.patch.object(ca, "MIN_CONTROL_ENTRIES", 8):            # MIN_FROZEN_ROWS stays 50
+            code, out = run(self.base() + frozen + self.controls() + ["--explained", self.explained, "--withhold-failing"],
+                            allow_synthetic_for_tests=True)
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S1 only 19 labelled rows; the design needs at least 50", out)
+        frozen, rows = self.census(label=no_pk, mutate=lambda k: k["strata"]["census:small"].__setitem__("weight", 2))
+        code, out = self.gate(frozen, rows)
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S1 the frozen set does not belong to this snapshot and lexicon", out)
+        self.assertNotIn("WITHHELD", out)                        # nothing is scored on a key that does not bind
+        frozen, rows = self.census(label=no_pk)
+        with mock.patch.dict(ca.THRESHOLDS, {"other_share": 0.01}):
+            code, out = self.gate(frozen, rows)
+        self.assertEqual(code, 3, out)
+        self.assertIn("WITHHELD pharmacokinetics: no labelled positive", out)
+        self.assertIn("STOP S2 other plus unclassified are 5.0% of entries", out)
+        self.assertIn("RESULT: PUBLICATION BLOCKED (1 stop rule(s)); integrity passed", out)
+        code, out = run(self.base() + frozen + ["--negative-controls", "--withhold-failing"], allow_synthetic_for_tests=True)
+        self.assertEqual(code, 3, out)                           # S3 and S4 too
+        self.assertIn("STOP S3", out)
+        self.assertIn("STOP S4", out)
+
+    def test_few_checked_classes_are_not_withheld(self):
+        frozen, rows = self.census()
+        code, out = self.gate(frozen, rows)
+        self.assertEqual(code, 0, out)
+        self.assertNotIn("WITHHELD", out)
+        self.assertEqual(out.count("is shown but few checked"), 17)
+        self.assertIn("not shown: 0 entries (0.0%) carry only withheld classes; 0 studies fall only in withheld classes", out)
+        self.assertIn("RESULT: PASS (integrity, controls and every publication stop rule)", out)
+
+    def test_no_class_is_withheld_because_someone_typed_it(self):
+        frozen, rows = self.census(mutate=lambda k: k.update({"withheld": ["fev1"], "withhold": ["lci"]}))
+        code, out = self.gate(frozen, rows)
+        self.assertEqual(code, 0, out)
+        self.assertNotIn("WITHHELD", out)                        # a key field naming classes is ignored
+        for opt in (["--withhold-class", "fev1"], ["--withheld", "fev1"], ["--withhold-failing", "fev1"]):
+            with self.subTest(opt=opt), contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as cm:
+                self.gate(frozen, rows, extra=opt)
+            self.assertEqual(cm.exception.code, 2)
+
+    def test_usage_errors(self):
+        frozen, rows = self.census(label=no_pk)
+        code, out = self.gate(self.frozen(), 19)                 # a legacy key
+        self.assertEqual(code, 2, out)
+        self.assertIn("--withhold-failing goes with a census-v1 key only; this key's design is not named (a legacy key)", out)
+        code, out = run(self.base() + ["--withhold-failing"])
+        self.assertEqual(code, 2, out)
+        self.assertIn("--withhold-failing needs --frozen-sheet", out)
+        code, out = run(self.base() + frozen + ["--withhold-failing", "--drift-only"])
+        self.assertEqual(code, 2, out)
+        rec = self.work / "rec.json"
+        code, out = self.gate(frozen, rows, extra=["--record", rec], withhold=False)
+        self.assertEqual(code, 2, out)
+        self.assertIn("--record goes with --withhold-failing", out)
+        self.assertFalse(rec.exists())
+        code, out = self.gate(frozen, rows, extra=["--record", self.work / "no-such-folder" / "rec.json"])
+        self.assertEqual(code, 2, out)
+        code, out = run(["--check-record", rec, "--snapshot", self.snap_dir])
+        self.assertEqual(code, 2, out)
+        self.assertIn("--check-record stands alone", out)
+        code, out = run(["--check-record", self.work / "absent.json"])
+        self.assertEqual(code, 2, out)
+
+    def test_not_shown_counts_by_hand(self):
+        entries = [tag_entry("A:1", ["fev1"]), tag_entry("A:2", ["lci"]),               # study A: fev1 and lci entries
+                   tag_entry("B:1", ["fev1", "lci"]),                                   # both withheld: only withheld
+                   tag_entry("C:1", ["fev1", "sweat_chloride"]),                        # a shown class too: not counted
+                   tag_entry("D:1", []), tag_entry("D:2", ["fev1"]),                    # D: an unclassified entry has no class
+                   tag_entry("E:1", []),                                                # model tag below gives it lci
+                   tag_entry("F:1", [])]                                                # no class at all: never 'only withheld'
+        accepted = [{"entry_id": "E:1", "class": "lci"}]
+        got = ca.not_shown_counts(entries, accepted, {"fev1", "lci"})
+        # entries A:1, A:2, B:1, D:2, E:1 -> 5 of 8; studies A, B, D, E (C has sweat_chloride, F has no class) -> 4
+        self.assertEqual(got, {"entries": 5, "entries_share": 0.625, "studies": 4})
+        self.assertEqual(ca.not_shown_counts(entries, accepted, {"fev1"}), {"entries": 2, "entries_share": 0.25, "studies": 1})
+        self.assertEqual(ca.not_shown_counts(entries, accepted, set()), {"entries": 0, "entries_share": 0.0, "studies": 0})
+
+    # ---- the run record
+
+    def record(self, name="rec.json", label=no_pk):
+        frozen, rows = self.census(label=label)
+        path = self.work / name
+        code, out = self.gate(frozen, rows, extra=["--record", path])
+        self.assertEqual(code, 0, out)
+        self.assertIn(f"run record written: {name}", out)
+        return path
+
+    def test_the_record_is_deterministic_id_free_and_never_overwritten(self):
+        a, b = self.record("a.json"), self.record("b.json")
+        self.assertEqual(a.read_bytes(), b.read_bytes())
+        text = a.read_text(encoding="utf-8")
+        self.assertTrue(text.endswith("}\n"))
+        self.assertEqual(text, ca.canonical_json(json.loads(text)))
+        self.assertNotRegex(text, r"NCT\d")                     # no entry or study id
+        self.assertNotIn("S001", text)                           # no sample id
+        for e in ca.entry_texts(self.s).values():                # no registry wording
+            for f in ("measure", "description"):
+                if len(e.get(f) or "") > 8:
+                    self.assertNotIn(e[f], text)
+        rec = json.loads(text)
+        self.assertEqual(set(rec), set(ca.RECORD_FIELDS))
+        self.assertEqual(rec["withheld"], ["pharmacokinetics"])
+        self.assertEqual(rec["withheld_sha256"], __import__("hashlib").sha256(b"pharmacokinetics").hexdigest())
+        self.assertEqual(rec["record_sha256"], ca.record_digest(rec))
+        self.assertEqual(rec["verdict"], "allowed_with_withheld")
+        self.assertEqual((rec["approval"], rec["reference_labels"]), (None, ca.REFERENCE_LABELS))
+        self.assertEqual(rec["not_shown"], {"entries": 2, "entries_share": 0.1, "studies": 1})
+        self.assertEqual(rec["key_sha256"], __import__("hashlib").sha256((self.work / "census-key.json").read_bytes()).hexdigest())
+        pk = next(p for p in rec["per_class"] if p["class"] == "pharmacokinetics")
+        self.assertEqual((pk["status"], pk["reason"], pk["labelled_positive_rows"]), ("withheld", "no labelled positive", 0))
+        self.assertEqual({p["status"] for p in rec["per_class"] if p["class"] != "pharmacokinetics"}, {"few_checked"})
+        before = a.read_bytes()
+        frozen, rows = self.census(label=no_pk)
+        code, out = self.gate(frozen, rows, extra=["--record", a])
+        self.assertEqual(code, 2, out)
+        self.assertIn("exists already; a record is never overwritten", out)
+        self.assertEqual(a.read_bytes(), before)
+
+    def check(self, path):
+        return run(["--check-record", path])
+
+    def edited(self, path, change, rehash=True):
+        rec = json.loads(path.read_text(encoding="utf-8"))
+        change(rec)
+        if rehash:                                               # a careful forger recomputes the record hash
+            rec["record_sha256"] = ca.record_digest(rec)
+        out = self.work / "edited.json"
+        out.write_text(ca.canonical_json(rec), encoding="utf-8")
+        return out
+
+    def test_check_record_passes_a_good_record(self):
+        code, out = self.check(self.record())
+        self.assertEqual(code, 0, out)
+        self.assertNotIn("FAIL", out)
+        self.assertIn("PASS class pharmacokinetics: recorded withheld, the numbers and thresholds give withheld (no labelled "
+                      "positive)", out)
+
+    def test_check_record_fails_each_edit(self):
+        path = self.record()
+
+        def drop_withheld(r):
+            r["withheld"] = []
+            r["withheld_sha256"] = ca.withheld_digest([])
+
+        def unfail(r):                                           # pk gains labelled positives, so it no longer fails
+            pk = next(p for p in r["per_class"] if p["class"] == "pharmacokinetics")
+            pk["labelled_positive_rows"], pk["weighted_positives"] = 2, 2.0
+
+        def verdict(r):
+            r["verdict"] = "allowed"
+
+        def add_withheld(r):                                     # a class typed into the list by hand
+            r["withheld"] = ["fev1", "pharmacokinetics"]
+            r["withheld_sha256"] = ca.withheld_digest(r["withheld"])
+        cases = ((drop_withheld, True, "FAIL withheld is sorted and equals the classes whose status is withheld"),
+                 (lambda r: r.update(withheld=["pharmacokinetics", "fev1"]), True, "FAIL withheld_sha256 matches"),
+                 (add_withheld, True, "FAIL withheld is sorted and equals"),
+                 (unfail, True, "FAIL class pharmacokinetics: recorded withheld, the numbers and thresholds give few_checked"),
+                 (verdict, True, "FAIL verdict allowed agrees with"),
+                 (lambda r: r.update(blocking_rules=["S2"]), True, "FAIL verdict allowed_with_withheld agrees with"),
+                 (lambda r: r.update(approval="someone"), True, "FAIL reference_labels is the fixed text and approval is null"),
+                 (lambda r: r.update(record_sha256="0" * 64), False, "FAIL record_sha256 matches the record"),
+                 (lambda r: r["thresholds"].update(recall=0.5), True, "FAIL the record's thresholds equal this gate's"),
+                 (lambda r: r.pop("verdict"), True, "FAIL format"))
+        for change, rehash, text in cases:
+            with self.subTest(text=text):
+                code, out = self.check(self.edited(path, change, rehash))
+                self.assertEqual(code, 1, out)
+                self.assertIn(text, out)
+        # an edit without a rehash is caught by the record hash
+        code, out = self.check(self.edited(path, verdict, rehash=False))
+        self.assertEqual(code, 1, out)
+        self.assertIn("FAIL record_sha256 matches the record", out)
+
+
 class SelfConsistencyTest(Fixture):
     """--self-consistency: the relationships a counts file must satisfy, the same rules a page generator applies."""
 

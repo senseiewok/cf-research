@@ -190,6 +190,14 @@ class Lexicon:
             if not set(u["replaces"]) <= set(u["measure_classes"]):
                 raise ValueError(f"description upgrade {u['id']}: replaces must be among measure_classes")
             self.description_upgrades.append(u)
+        # fallback_companions: groups of classes that one description may give together (two distinct marker families named side by
+        # side). When the earliest description match is in a group, the earliest match of each other class of that group is kept too.
+        self.fallback_companions = []
+        for g in data["matching"].get("fallback_companions", []):
+            bad = set(g["classes"]) - set(self.domain_of)
+            if bad or len(set(g["classes"])) < 2:
+                raise ValueError(f"fallback companion group {g['id']}: needs two or more known classes (unknown: {sorted(bad)})")
+            self.fallback_companions.append(g)
         self.composite = [{**r, "re": _compile(r["pattern"], False, r["id"])} for r in data["composite_rules"]]
         ns = {r["id"]: r for r in data["not_stated_rules"]}
         self.placeholder = _compile(ns["NS-01"]["pattern"], False, "NS-01")
@@ -250,7 +258,8 @@ class Lexicon:
 
     def _fallback(self, entry: dict) -> list[dict]:
         """From the description: generic safety wording is ignored, a fallback restriction whose measure pattern matches limits the
-        classes the description may give, and only the earliest remaining match is kept."""
+        classes the description may give, and only the earliest remaining match is kept, together with the earliest match of each
+        other class in its fallback companion group (matching.fallback_companions), if any."""
         hits = [h for h in self._match_group(entry, self.fallback_fields) if h["rule"]["id"] not in self.fallback_excluded]
         measure, _ = normalise_whitespace(entry.get(self.match_fields[0]) or "")
         for f in self.fallback_restrictions:
@@ -259,16 +268,27 @@ class Lexicon:
         if not hits:
             return []
         pool = [h for h in hits if not h["rule"].get("vague")] or hits
-        first = min(pool, key=lambda h: (self.fallback_fields.index(h["field"]), h["start"], self.class_order.index(h["rule"]["class"])))
-        return [{**first, "from_description": True}]
+        order = lambda h: (self.fallback_fields.index(h["field"]), h["start"], self.class_order.index(h["rule"]["class"]))  # noqa: E731
+        first = min(pool, key=order)
+        kept = [first]
+        for g in self.fallback_companions:                    # matching.fallback_companions: named side by side, both classes stay
+            if first["rule"]["class"] in g["classes"]:
+                for c in g["classes"]:
+                    same = [h for h in pool if h["rule"]["class"] == c and c != first["rule"]["class"]]
+                    if same and all(k["rule"]["class"] != c for k in kept):
+                        kept.append(min(same, key=order))
+        return [{**h, "from_description": True} for h in kept]
 
     def _description_upgrade(self, entry: dict, hits: list[dict]) -> list[dict]:
         """matching.description_upgrades: if every class the measure gave is in an upgrade's measure_classes, its description_rules
         are read on the description (with the usual suppression there); their matches are added as from_description tags and the
-        classes in 'replaces' are dropped. Any other class in the measure, or no match in the description, leaves the hits as they are."""
+        classes in 'replaces' are dropped. It applies only when the measure gave at least one class in 'replaces'. Any other class
+        in the measure, or no match in the description, leaves the hits as they are."""
         measure_classes = {h["rule"]["class"] for h in hits}
         for u in self.description_upgrades:
             if not measure_classes or not measure_classes <= set(u["measure_classes"]):
+                continue
+            if not measure_classes & set(u["replaces"]):          # the upgrade only ever replaces a class the measure actually gave
                 continue
             allowed = set(u["description_rules"])
             found = [h for h in self._match_group(entry, self.fallback_fields) if h["rule"]["id"] in allowed]

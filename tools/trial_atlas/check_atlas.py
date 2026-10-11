@@ -33,6 +33,11 @@ What it does, in order:
        S3 the two retrieval routes differ by more than 10% unexplained, or there is no recall route;
        S4 the controls were not run, ran on synthetic fixtures instead of --canary, --planted and --control-snapshot, or the control
           snapshot holds fewer than MIN_CONTROL_ENTRIES (50) outcome entries.
+     --withhold-failing (census-v1 keys only): a shown class that fails S1's per-class tests (no labelled positive, or precision
+     or recall below its threshold where estimable) is WITHHELD instead of blocking, computed from the metrics and THRESHOLDS only;
+     every other stop rule still blocks. It prints one WITHHELD line per class, the entries and studies that carry only withheld
+     classes, and "RESULT: PUBLICATION ALLOWED WITH K WITHHELD CLASS(ES)" (exit 0) when nothing else blocks. --record FILE writes
+     a canonical run record (class ids and counts only, never overwritten); --check-record FILE verifies one on its own.
      A failed control or a rerun that does not reproduce counts and hashes is an integrity failure (exit 1). The thresholds are the
      reviewer's judgement, not a standard; they may be changed before the frozen set is labelled and not after.
 Text that came from a model, a file or the registry is printed with control characters removed.
@@ -43,7 +48,8 @@ Usage:
   python check_atlas.py --snapshot DIR --tags tags.json --counts counts.json [--model-tags FILE [--model-tags-plain FILE]] [--exclude FILE]
                         [--explained FILE]
                         [--frozen-sheet SHEET.csv --frozen-key KEY.json [--frozen-exclude IDS.json]] [--negative-controls]
-                        [--drift-only]
+                        [--drift-only] [--withhold-failing [--record RECORD.json]]
+  python check_atlas.py --check-record RECORD.json                                         verify a run record (no snapshot)
   python check_atlas.py --snapshot DIR --tags tags.json --write-counts counts.json [...]   write the counts file (no check)
   python check_atlas.py --verify-model-tags FILE --snapshot DIR --tags tags.json          only the quote check, one line per tag
   python check_atlas.py --negative-controls [--controls-only]                            only the controls, on the synthetic fixtures
@@ -61,6 +67,7 @@ import hashlib
 import json
 import math
 import random
+import re
 import sys
 import tempfile
 from datetime import datetime, timezone
@@ -935,6 +942,143 @@ def wnum(x) -> str:
     return str(int(round(x))) if abs(x - round(x)) < 1e-9 else f"{x:.2f}"
 
 
+# ------------------------------------------------------------------ withheld classes and the run record (census-v1 only)
+# --withhold-failing: a shown class that fails S1's per-class tests is withheld (not shown) instead of blocking. Which classes are
+# withheld is computed from the metrics and the thresholds only; no option names a class. --record writes a canonical, id-free JSON
+# record of the run that a person approves by committing it in a pull request; --check-record verifies one.
+
+RECORD_FORMAT = 1
+REFERENCE_LABELS = ("labels made by a council of models; approved by the maintainer as the reference on 2026-10-11; not read row by "
+                    "row by a person; no clinician has read the class definitions")
+RECORD_VERDICTS = ("allowed", "allowed_with_withheld", "blocked")
+RECORD_FIELDS = ("record_format", "design", "snapshot_sha256", "lexicon_version", "lexicon_sha256", "tags_sha256", "model_tags_sha256",
+                 "consensus", "key_sha256", "sheet_wording_sha256", "sample_exclusion", "thresholds", "bootstrap", "per_class",
+                 "withheld", "withheld_sha256", "not_shown", "s2", "blocking_rules", "verdict", "reference_labels", "approval",
+                 "record_sha256")
+STUDY_ID = re.compile(r"NCT\d{8}")
+
+
+def canonical_json(obj) -> str:
+    """The one text form of a record: sorted keys, indent 1, no ASCII escaping, a trailing newline (written as utf-8)."""
+    return json.dumps(obj, sort_keys=True, indent=1, ensure_ascii=False) + "\n"
+
+
+def record_digest(record: dict) -> str:
+    """sha256 of the canonical JSON of the record without its record_sha256 field."""
+    return hashlib.sha256(canonical_json({k: v for k, v in record.items() if k != "record_sha256"}).encode("utf-8")).hexdigest()
+
+
+def withheld_digest(names) -> str:
+    """sha256 of the withheld class names joined by newlines (utf-8); the names as given, so an unsorted list hashes differently."""
+    return hashlib.sha256("\n".join(names).encode("utf-8")).hexdigest()
+
+
+def class_record(cls: str, v: dict) -> dict:
+    """One per-class entry of the run record, from metrics_weighted()'s values for the class. Class id and numbers only."""
+    def ci(x):
+        return None if x is None else [x[0], x[1]]
+    return {"class": cls, "precision": v["precision"], "recall": v["recall"], "precision_ci": ci(v["precision_ci"]),
+            "recall_ci": ci(v["recall_ci"]), "frame_tagged": v["frame_tagged"], "labelled_predicted_rows": v["labelled_predicted_rows"],
+            "labelled_positive_rows": v["labelled_positive_rows"], "weighted_positives": v["positives"]}
+
+
+def class_status(entry: dict, thresholds: dict) -> tuple[str, str | None]:
+    """(status, reason) of a shown class from its record entry and the thresholds: "withheld" when it fails S1's per-class tests (no
+    labelled positive; precision below the threshold where estimable; recall below the threshold where estimable), else
+    "few_checked" when precision or recall is not estimable, else "shown". The estimability rules are metrics_weighted()'s, recomputed
+    from the recorded counts so that a record can be checked without the data."""
+    mp = thresholds["min_positives"]
+    p_est = entry["frame_tagged"] >= mp and entry["labelled_predicted_rows"] >= mp
+    r_est = entry["weighted_positives"] >= mp and entry["labelled_positive_rows"] >= mp
+    reasons = []
+    if entry["labelled_positive_rows"] == 0:
+        reasons.append("no labelled positive")
+    if p_est and entry["precision"] is not None and entry["precision"] < thresholds["precision"]:
+        reasons.append(f"precision {fmt(entry['precision'])} below {thresholds['precision']:.2f}")
+    if r_est and entry["recall"] is not None and entry["recall"] < thresholds["recall"]:
+        reasons.append(f"recall {fmt(entry['recall'])} below {thresholds['recall']:.2f}")
+    if reasons:
+        return "withheld", "; ".join(reasons)
+    return ("shown" if p_est and r_est else "few_checked"), None
+
+
+def not_shown_counts(tag_entries: list[dict], accepted_model: list[dict], withheld) -> dict:
+    """Entries and studies that carry only withheld classes. An entry's classes are its final classes (rule tags, or the accepted
+    model tags of an entry the rules left unclassified, as census_frame takes them); a study's are the union over its entries. 'Only
+    withheld' means at least one class and every class withheld. The share is over all tag entries (the denominator S2 uses)."""
+    withheld = set(withheld)
+    model_by: dict[str, list[dict]] = {}
+    for t in accepted_model:
+        model_by.setdefault(t["entry_id"], []).append(t)
+    only, by_study = 0, {}
+    for e in tag_entries:
+        classes = set(final_classes(e, model_by))
+        if classes and classes <= withheld:
+            only += 1
+        by_study.setdefault(e["nct_id"], set()).update(classes)
+    n = len(tag_entries)
+    return {"entries": only, "entries_share": round(only / n, 4) if n else None,
+            "studies": sum(1 for s in by_study.values() if s and s <= withheld)}
+
+
+def record_verdict(blocking_rules, withheld) -> str:
+    return "blocked" if blocking_rules else ("allowed_with_withheld" if withheld else "allowed")
+
+
+def check_record(path) -> int:
+    """--check-record: verify a run record on its own (no snapshot). One PASS or FAIL line per check; exit 0 only when all pass."""
+    try:
+        text = Path(path).read_text(encoding="utf-8")
+        rec = json.loads(text)
+    except (OSError, ValueError) as exc:
+        print(f"ERROR: cannot read the run record {snap.clean(path, 200)}: {snap.clean(exc, 200)}")
+        return 2
+    lines: list[tuple[bool, str]] = []
+    missing = [f for f in RECORD_FIELDS if not isinstance(rec, dict) or f not in rec]
+    lines.append((not missing and rec.get("record_format") == RECORD_FORMAT,
+                  f"format: record_format {RECORD_FORMAT} with every field" + (f" (missing: {', '.join(missing)})" if missing else "")))
+    if missing:
+        print(f"FAIL {lines[0][1]}")
+        print("RESULT: FAIL (the record is incomplete)")
+        return 1
+    lines.append((record_digest(rec) == rec["record_sha256"], "record_sha256 matches the record"))
+    withheld = rec["withheld"]
+    names_ok = isinstance(withheld, list) and all(isinstance(x, str) for x in withheld)
+    lines.append((names_ok and withheld_digest(withheld) == rec["withheld_sha256"], "withheld_sha256 matches the withheld list"))
+    per = rec["per_class"] if isinstance(rec["per_class"], list) else []
+    try:
+        classes = [p["class"] for p in per]
+        marked = sorted(p["class"] for p in per if p["status"] == "withheld")
+        sorted_ok = isinstance(rec["per_class"], list) and all(isinstance(c, str) for c in classes) and classes == sorted(set(classes))
+    except (KeyError, TypeError, AttributeError):
+        marked, sorted_ok = None, False
+    lines.append((sorted_ok, "per_class is a list sorted by class, one entry per class"))
+    lines.append((names_ok and marked is not None and withheld == sorted(withheld) and withheld == marked,
+                  "withheld is sorted and equals the classes whose status is withheld"))
+    thr = rec["thresholds"]
+    for p in per:
+        try:
+            status, reason = class_status(p, thr)
+            ok = p["status"] == status and p.get("reason") == reason
+            detail = f"{snap.clean(p['class'], 60)}: recorded {snap.clean(p['status'], 20)}, the numbers and thresholds give {status}"
+            lines.append((ok, f"class {detail}" + (f" ({reason})" if reason else "")))
+        except (KeyError, TypeError, AttributeError) as exc:
+            lines.append((False, f"class entry cannot be checked: {type(exc).__name__} {snap.clean(exc, 60)}"))
+    lines.append((thr == THRESHOLDS, "the record's thresholds equal this gate's"))
+    rules = rec["blocking_rules"]
+    rules_ok = isinstance(rules, list) and all(isinstance(x, str) for x in rules)
+    lines.append((rules_ok and names_ok and rec["verdict"] in RECORD_VERDICTS and rec["verdict"] == record_verdict(rules, withheld),
+                  f"verdict {snap.clean(rec['verdict'], 40)} agrees with the blocking rules and the withheld list"))
+    lines.append((rec["reference_labels"] == REFERENCE_LABELS and rec["approval"] is None,
+                  "reference_labels is the fixed text and approval is null (approval is the commit, not a field)"))
+    lines.append((not STUDY_ID.search(text), "the record holds no registry study id"))
+    for ok, detail in lines:
+        print(f"{'PASS' if ok else 'FAIL'} {detail}")
+    failed = sum(1 for ok, _ in lines if not ok)
+    print(f"RESULT: {'PASS' if not failed else 'FAIL'} ({len(lines) - failed} of {len(lines)} checks pass)")
+    return 1 if failed else 0
+
+
 # ------------------------------------------------------------------ negative controls
 
 def run_negative_controls(lex, *, snapshot=None, canary=None, planted=None, control_snapshot=None, manual=None,
@@ -1085,6 +1229,13 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
                          "config_verified in its manifest (the snapshot hash changes, so tag, draw and count again afterwards)")
     ap.add_argument("--self-consistency", type=Path, metavar="COUNTS.json",
                     help="check that a counts file the tools wrote satisfies its own relationships; prints OK or FAIL per relationship")
+    ap.add_argument("--withhold-failing", action="store_true",
+                    help="census-v1 keys only, with --frozen-sheet: a shown class that fails S1's per-class tests is withheld instead "
+                         "of blocking; computed from the metrics and thresholds only (no option names a class)")
+    ap.add_argument("--record", type=Path, metavar="FILE",
+                    help="with --withhold-failing: write the run record (canonical JSON, class ids and counts only); never overwrites")
+    ap.add_argument("--check-record", type=Path, metavar="FILE",
+                    help="on its own: verify a run record's hashes, withheld list, per-class statuses and verdict")
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
@@ -1092,6 +1243,10 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
     lex = lex_mod.load()
     failures, blocked, summary = [], [], None
     try:
+        if a.check_record:
+            if any(v for k, v in vars(a).items() if k != "check_record"):
+                raise UsageError("--check-record stands alone")
+            return check_record(a.check_record)
         if a.self_consistency:
             return self_consistency(a.self_consistency)
         if a.confirm_real_run:
@@ -1102,6 +1257,17 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             raise UsageError("--frozen-sheet and --frozen-key go together")
         if a.frozen_exclude and not a.frozen_key:
             raise UsageError("--frozen-exclude goes with --frozen-sheet and --frozen-key")
+        if a.withhold_failing and not a.frozen_sheet:
+            raise UsageError("--withhold-failing needs --frozen-sheet and --frozen-key (a census-v1 key)")
+        if a.withhold_failing and (a.drift_only or a.write_counts or a.verify_model_tags):
+            raise UsageError("--withhold-failing applies the publication stop rules; it does not go with --drift-only, "
+                             "--write-counts or --verify-model-tags")
+        if a.record and not a.withhold_failing:
+            raise UsageError("--record goes with --withhold-failing")
+        if a.record and a.record.exists():
+            raise UsageError(f"the run record {a.record} exists already; a record is never overwritten")
+        if a.record and not a.record.parent.is_dir():
+            raise UsageError(f"the folder for the run record {a.record} does not exist")
         if not a.snapshot:
             if not a.negative_controls or any((a.tags, a.counts, a.write_counts, a.model_tags, a.verify_model_tags, a.frozen_sheet)):
                 raise UsageError("give --snapshot and --tags (or only --negative-controls)")
@@ -1213,6 +1379,9 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             frozen_problems = frozen_binding_problems(a.frozen_sheet, a.frozen_key, s, lex, entries)
             key_obj = read_json(a.frozen_key, "frozen-set key")
             design = key_obj.get("design") if isinstance(key_obj, dict) else None
+            if a.withhold_failing and design != CENSUS_DESIGN:
+                raise UsageError(f"--withhold-failing goes with a {CENSUS_DESIGN} key only; this key's design is "
+                                 f"{snap.clean(design, 40) if design is not None else 'not named (a legacy key)'}")
             exclude_ids = read_sample_exclusion(a.frozen_exclude) if a.frozen_exclude else None
             if design != CENSUS_DESIGN and exclude_ids is not None:
                 frozen_problems.append("--frozen-exclude was given, but the key is not a census-v1 key")
@@ -1338,6 +1507,7 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
                 blocked.append(f"S0 synthetic data: {label} carries the synthetic marker ({', '.join(marks)}); synthetic data can "
                                "never be published")
     shown = [c for c, n in counts["studies_by_class"].items() if n > 0]
+    withheld, class_records = {}, []
     if frozen_problems:
         blocked.append("S1 the frozen set does not belong to this snapshot and lexicon: " + "; ".join(frozen_problems))
     elif m is None:
@@ -1355,10 +1525,21 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             blocked.append(f"S1 shown class(es) the frozen-set metrics do not hold: {', '.join(snap.clean(c, 40) for c in unscored[:5])} "
                            "(the counts and the lexicon disagree)")
             scored_shown = [c for c in scored_shown if c in m["per_class"]]
-        unlabelled_classes = [c for c in scored_shown if m["per_class"][c]["positives"] == 0]
+        if a.withhold_failing:
+            # Withheld classes come from the metrics and THRESHOLDS only (class_status); they are taken out of the per-class
+            # blocks below, and every other S1 rule above and every other stop rule still blocks.
+            for c in scored_shown:
+                entry = class_record(c, m["per_class"][c])
+                entry["status"], entry["reason"] = class_status(entry, THRESHOLDS)
+                class_records.append(entry)
+                if entry["status"] == "withheld":
+                    withheld[c] = entry["reason"]
+        unlabelled_classes = [c for c in scored_shown if m["per_class"][c]["positives"] == 0 and c not in withheld]
         if unlabelled_classes:
             blocked.append(f"S1 shown class(es) with no labelled positive: {', '.join(unlabelled_classes)} (nothing checks their recall)")
         for c in scored_shown:
+            if c in withheld:
+                continue
             v = m["per_class"][c]
             if not (v["precision_estimable"] and v["recall_estimable"]):
                 if census_key is not None:
@@ -1390,11 +1571,45 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
         n_control = len(lex_mod.tag_all_entries(control, lex))
         if n_control < MIN_CONTROL_ENTRIES:
             blocked.append(f"S4 the control snapshot has {n_control} outcome entries; at least {MIN_CONTROL_ENTRIES} are needed")
+    if a.withhold_failing:
+        for c in sorted(withheld):
+            print(f"WITHHELD {c}: {withheld[c]}")
+        # No cap on the not-shown share is applied: a cap is a person's decision, made before a run, not the gate's.
+        hidden = not_shown_counts(retag["entries"], accepted, withheld)
+        share = "n/a" if hidden["entries_share"] is None else f"{hidden['entries_share']:.1%}"
+        print(f"not shown: {hidden['entries']} entries ({share}) carry only withheld classes; {hidden['studies']} studies fall only "
+              "in withheld classes")
     for b in blocked:
         print(f"STOP {b}")
+    if a.record:
+        names = sorted(withheld)
+        rules = sorted({b.split(" ", 1)[0] for b in blocked})
+        record = {
+            "record_format": RECORD_FORMAT, "design": census_key.get("design"), "snapshot_sha256": s.digest,
+            "lexicon_version": lex.version, "lexicon_sha256": lex.sha256, "tags_sha256": census_key.get("tags_sha256"),
+            "model_tags_sha256": census_key.get("model_tags_sha256"), "consensus": census_key.get("consensus"),
+            "key_sha256": hashlib.sha256(Path(a.frozen_key).read_bytes()).hexdigest(),
+            "sheet_wording_sha256": census_key.get("sheet_wording_sha256"), "sample_exclusion": census_key.get("sample_exclusion"),
+            "thresholds": dict(THRESHOLDS),
+            "bootstrap": None if m is None else {"seed": m["seed"], "resamples": m["resamples"]},
+            "per_class": sorted(class_records, key=lambda r: r["class"]), "withheld": names, "withheld_sha256": withheld_digest(names),
+            "not_shown": hidden, "s2": {"share": round(other_share, 4)}, "blocking_rules": rules,
+            "verdict": record_verdict(rules, names), "reference_labels": REFERENCE_LABELS, "approval": None}
+        record["record_sha256"] = record_digest(record)
+        try:
+            with a.record.open("x", encoding="utf-8", newline="\n") as fh:
+                fh.write(canonical_json(record))
+        except OSError as exc:
+            print(f"ERROR: the run record was not written: {snap.clean(exc, 200)}")
+            return 2
+        print(f"run record written: {a.record.name} (record_sha256 {record['record_sha256']}; approval is a person's commit, not a "
+              "field)")
     if blocked:
         print(f"RESULT: PUBLICATION BLOCKED ({len(blocked)} stop rule(s)); integrity passed")
         return 3
+    if withheld:
+        print(f"RESULT: PUBLICATION ALLOWED WITH {len(withheld)} WITHHELD CLASS(ES)")
+        return 0
     print("RESULT: PASS (integrity, controls and every publication stop rule)")
     return 0
 
