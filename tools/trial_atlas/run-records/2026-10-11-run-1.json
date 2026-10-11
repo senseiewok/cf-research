@@ -1,0 +1,727 @@
+{
+ "approval": null,
+ "blocking_rules": [],
+ "bootstrap": {
+  "resamples": 2000,
+  "seed": 20261015
+ },
+ "consensus": {
+  "dropped": 18,
+  "kept": 70,
+  "proposed": 88,
+  "report_sha256": "151eb2b3d8180e627c8e8fce138fbaae2eec37a88729de4b02be02c7292dc746",
+  "rule_declared": "2026-10-11"
+ },
+ "design": "census-v1",
+ "key_sha256": "2bb7359a25b69da6ab485d5f25c2088acd88ade4e20e5cda2dc833c5dbe57f0e",
+ "lexicon_sha256": "f4bd1af4c664ab377a9484e800dd9fa5a7873f8aabd8ab6cc2c4f955ced84492",
+ "lexicon_version": "0.3.2-draft",
+ "model_tags_sha256": "364fda7f674e480de5a0f508b4b80571829b9173a499429e550b35a5fad09f02",
+ "not_shown": {
+  "entries": 388,
+  "entries_share": 0.1891,
+  "studies": 188
+ },
+ "per_class": [
+  {
+   "class": "bone_density",
+   "frame_tagged": 9,
+   "labelled_positive_rows": 11,
+   "labelled_predicted_rows": 9,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 0.8181818181818182,
+   "recall_ci": [
+    0.8181818181818182,
+    0.8181818181818182
+   ],
+   "status": "few_checked",
+   "weighted_positives": 11.0
+  },
+  {
+   "class": "cfqr",
+   "frame_tagged": 28,
+   "labelled_positive_rows": 29,
+   "labelled_predicted_rows": 28,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 0.9655172413793104,
+   "recall_ci": [
+    0.9655172413793104,
+    0.9655172413793104
+   ],
+   "status": "shown",
+   "weighted_positives": 29.0
+  },
+  {
+   "class": "cftr_biomarker_other",
+   "frame_tagged": 20,
+   "labelled_positive_rows": 21,
+   "labelled_predicted_rows": 20,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 0.9523809523809523,
+   "recall_ci": [
+    0.9523809523809523,
+    0.9523809523809523
+   ],
+   "status": "shown",
+   "weighted_positives": 21.0
+  },
+  {
+   "class": "exacerbations",
+   "frame_tagged": 40,
+   "labelled_positive_rows": 19,
+   "labelled_predicted_rows": 17,
+   "precision": 0.9411764705882353,
+   "precision_ci": [
+    0.9411764705882353,
+    0.9411764705882353
+   ],
+   "reason": null,
+   "recall": 0.8421052631578947,
+   "recall_ci": [
+    0.8421052631578947,
+    0.8421052631578947
+   ],
+   "status": "shown",
+   "weighted_positives": 19.0
+  },
+  {
+   "class": "exercise_capacity",
+   "frame_tagged": 74,
+   "labelled_positive_rows": 41,
+   "labelled_predicted_rows": 41,
+   "precision": 0.9511111111111111,
+   "precision_ci": [
+    0.8777777777777779,
+    1.0
+   ],
+   "reason": null,
+   "recall": 0.9553571428571429,
+   "recall_ci": [
+    0.9518072289156627,
+    0.9574468085106383
+   ],
+   "status": "shown",
+   "weighted_positives": 44.80000000000003
+  },
+  {
+   "class": "feasibility_adherence",
+   "frame_tagged": 87,
+   "labelled_positive_rows": 39,
+   "labelled_predicted_rows": 43,
+   "precision": 0.8125,
+   "precision_ci": [
+    0.6953125,
+    0.90625
+   ],
+   "reason": "precision 0.812 below 0.85",
+   "recall": 0.9069767441860465,
+   "recall_ci": [
+    0.8929765886287625,
+    0.9157894736842105
+   ],
+   "status": "withheld",
+   "weighted_positives": 43.0
+  },
+  {
+   "class": "fev1",
+   "frame_tagged": 176,
+   "labelled_positive_rows": 45,
+   "labelled_predicted_rows": 43,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 0.984375,
+   "recall_ci": [
+    0.984375,
+    0.984375
+   ],
+   "status": "shown",
+   "weighted_positives": 128.00000000000009
+  },
+  {
+   "class": "gi_pancreatic",
+   "frame_tagged": 80,
+   "labelled_positive_rows": 34,
+   "labelled_predicted_rows": 37,
+   "precision": 0.8108108108108109,
+   "precision_ci": [
+    0.8108108108108109,
+    0.8108108108108109
+   ],
+   "reason": "precision 0.811 below 0.85",
+   "recall": 0.8708272859216255,
+   "recall_ci": [
+    0.7868852459016393,
+    0.9375
+   ],
+   "status": "withheld",
+   "weighted_positives": 34.45
+  },
+  {
+   "class": "glucose_cfrd",
+   "frame_tagged": 62,
+   "labelled_positive_rows": 29,
+   "labelled_predicted_rows": 30,
+   "precision": 0.9333333333333333,
+   "precision_ci": [
+    0.9333333333333333,
+    0.9333333333333333
+   ],
+   "reason": null,
+   "recall": 0.9655172413793104,
+   "recall_ci": [
+    0.9655172413793104,
+    0.9655172413793104
+   ],
+   "status": "shown",
+   "weighted_positives": 29.0
+  },
+  {
+   "class": "healthcare_use",
+   "frame_tagged": 7,
+   "labelled_positive_rows": 10,
+   "labelled_predicted_rows": 7,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": "recall 0.691 below 0.80",
+   "recall": 0.691358024691358,
+   "recall_ci": [
+    0.5656565656565656,
+    0.7777777777777778
+   ],
+   "status": "withheld",
+   "weighted_positives": 10.125
+  },
+  {
+   "class": "imaging",
+   "frame_tagged": 47,
+   "labelled_positive_rows": 33,
+   "labelled_predicted_rows": 31,
+   "precision": 0.9032258064516129,
+   "precision_ci": [
+    0.9032258064516129,
+    0.9032258064516129
+   ],
+   "reason": null,
+   "recall": 0.8484848484848485,
+   "recall_ci": [
+    0.8484848484848485,
+    0.8484848484848485
+   ],
+   "status": "shown",
+   "weighted_positives": 33.0
+  },
+  {
+   "class": "inflammation_markers",
+   "frame_tagged": 64,
+   "labelled_positive_rows": 32,
+   "labelled_predicted_rows": 30,
+   "precision": 0.9666666666666667,
+   "precision_ci": [
+    0.9666666666666667,
+    0.9666666666666667
+   ],
+   "reason": null,
+   "recall": 0.8936825885978428,
+   "recall_ci": [
+    0.7827260458839407,
+    1.0
+   ],
+   "status": "shown",
+   "weighted_positives": 32.45
+  },
+  {
+   "class": "lci",
+   "frame_tagged": 26,
+   "labelled_positive_rows": 27,
+   "labelled_predicted_rows": 26,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 0.9629629629629629,
+   "recall_ci": [
+    0.9629629629629629,
+    0.9629629629629629
+   ],
+   "status": "shown",
+   "weighted_positives": 27.0
+  },
+  {
+   "class": "liver",
+   "frame_tagged": 11,
+   "labelled_positive_rows": 10,
+   "labelled_predicted_rows": 11,
+   "precision": 0.8181818181818182,
+   "precision_ci": [
+    0.8181818181818182,
+    0.8181818181818182
+   ],
+   "reason": "precision 0.818 below 0.85",
+   "recall": 0.9,
+   "recall_ci": [
+    0.9,
+    0.9
+   ],
+   "status": "withheld",
+   "weighted_positives": 10.0
+  },
+  {
+   "class": "lung_function_unspecified",
+   "frame_tagged": 21,
+   "labelled_positive_rows": 18,
+   "labelled_predicted_rows": 21,
+   "precision": 0.8095238095238095,
+   "precision_ci": [
+    0.8095238095238095,
+    0.8095238095238095
+   ],
+   "reason": "precision 0.810 below 0.85",
+   "recall": 0.9444444444444444,
+   "recall_ci": [
+    0.9444444444444444,
+    0.9444444444444444
+   ],
+   "status": "withheld",
+   "weighted_positives": 18.0
+  },
+  {
+   "class": "lung_mechanics",
+   "frame_tagged": 18,
+   "labelled_positive_rows": 18,
+   "labelled_predicted_rows": 18,
+   "precision": 0.9444444444444444,
+   "precision_ci": [
+    0.9444444444444444,
+    0.9444444444444444
+   ],
+   "reason": null,
+   "recall": 0.9444444444444444,
+   "recall_ci": [
+    0.9444444444444444,
+    0.9444444444444444
+   ],
+   "status": "shown",
+   "weighted_positives": 18.0
+  },
+  {
+   "class": "microbiology_sputum",
+   "frame_tagged": 73,
+   "labelled_positive_rows": 35,
+   "labelled_predicted_rows": 41,
+   "precision": 0.779787234042553,
+   "precision_ci": [
+    0.6574468085106382,
+    0.9021276595744679
+   ],
+   "reason": "precision 0.780 below 0.85",
+   "recall": 0.9243379571248423,
+   "recall_ci": [
+    0.911504424778761,
+    0.9339207048458149
+   ],
+   "status": "withheld",
+   "weighted_positives": 39.64999999999998
+  },
+  {
+   "class": "molecular_expression",
+   "frame_tagged": 12,
+   "labelled_positive_rows": 12,
+   "labelled_predicted_rows": 12,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 1.0,
+   "recall_ci": [
+    1.0,
+    1.0
+   ],
+   "status": "shown",
+   "weighted_positives": 12.0
+  },
+  {
+   "class": "mucociliary_clearance",
+   "frame_tagged": 20,
+   "labelled_positive_rows": 17,
+   "labelled_predicted_rows": 20,
+   "precision": 0.85,
+   "precision_ci": [
+    0.85,
+    0.85
+   ],
+   "reason": null,
+   "recall": 1.0,
+   "recall_ci": [
+    1.0,
+    1.0
+   ],
+   "status": "shown",
+   "weighted_positives": 17.0
+  },
+  {
+   "class": "muscle_strength",
+   "frame_tagged": 17,
+   "labelled_positive_rows": 19,
+   "labelled_predicted_rows": 17,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 0.8854166666666667,
+   "recall_ci": [
+    0.7555555555555555,
+    1.0
+   ],
+   "status": "shown",
+   "weighted_positives": 19.2
+  },
+  {
+   "class": "not_stated",
+   "frame_tagged": 4,
+   "labelled_positive_rows": 7,
+   "labelled_predicted_rows": 4,
+   "precision": 0.0,
+   "precision_ci": [
+    0.0,
+    0.0
+   ],
+   "reason": null,
+   "recall": 0.0,
+   "recall_ci": [
+    0.0,
+    0.0
+   ],
+   "status": "few_checked",
+   "weighted_positives": 7.0
+  },
+  {
+   "class": "npd",
+   "frame_tagged": 19,
+   "labelled_positive_rows": 19,
+   "labelled_predicted_rows": 19,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 1.0,
+   "recall_ci": [
+    1.0,
+    1.0
+   ],
+   "status": "shown",
+   "weighted_positives": 19.0
+  },
+  {
+   "class": "nutrition_growth",
+   "frame_tagged": 67,
+   "labelled_positive_rows": 42,
+   "labelled_predicted_rows": 34,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 0.8095238095238095,
+   "recall_ci": [
+    0.8095238095238095,
+    0.8095238095238095
+   ],
+   "status": "shown",
+   "weighted_positives": 42.0
+  },
+  {
+   "class": "oxidative_stress",
+   "frame_tagged": 17,
+   "labelled_positive_rows": 17,
+   "labelled_predicted_rows": 17,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 1.0,
+   "recall_ci": [
+    1.0,
+    1.0
+   ],
+   "status": "shown",
+   "weighted_positives": 17.0
+  },
+  {
+   "class": "oxygenation",
+   "frame_tagged": 26,
+   "labelled_positive_rows": 26,
+   "labelled_predicted_rows": 26,
+   "precision": 0.9230769230769231,
+   "precision_ci": [
+    0.9230769230769231,
+    0.9230769230769231
+   ],
+   "reason": null,
+   "recall": 0.9230769230769231,
+   "recall_ci": [
+    0.9230769230769231,
+    0.9230769230769231
+   ],
+   "status": "shown",
+   "weighted_positives": 26.0
+  },
+  {
+   "class": "pharmacokinetics",
+   "frame_tagged": 267,
+   "labelled_positive_rows": 42,
+   "labelled_predicted_rows": 40,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 0.9908178518043989,
+   "recall_ci": [
+    0.9811799534785367,
+    0.9957081545064378
+   ],
+   "status": "shown",
+   "weighted_positives": 234.15000000000015
+  },
+  {
+   "class": "physical_activity",
+   "frame_tagged": 12,
+   "labelled_positive_rows": 13,
+   "labelled_predicted_rows": 12,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": "recall 0.585 below 0.80",
+   "recall": 0.584652862362972,
+   "recall_ci": [
+    0.3193612774451098,
+    1.0
+   ],
+   "status": "withheld",
+   "weighted_positives": 20.525
+  },
+  {
+   "class": "pro_named_other",
+   "frame_tagged": 106,
+   "labelled_positive_rows": 66,
+   "labelled_predicted_rows": 51,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": "recall 0.797 below 0.80",
+   "recall": 0.7970297029702972,
+   "recall_ci": [
+    0.7524752475247526,
+    0.8341968911917099
+   ],
+   "status": "withheld",
+   "weighted_positives": 75.75000000000004
+  },
+  {
+   "class": "pro_unnamed",
+   "frame_tagged": 44,
+   "labelled_positive_rows": 14,
+   "labelled_predicted_rows": 25,
+   "precision": 0.36,
+   "precision_ci": [
+    0.36,
+    0.36
+   ],
+   "reason": "precision 0.360 below 0.85; recall 0.637 below 0.80",
+   "recall": 0.6371681415929203,
+   "recall_ci": [
+    0.549618320610687,
+    0.6923076923076923
+   ],
+   "status": "withheld",
+   "weighted_positives": 14.125
+  },
+  {
+   "class": "safety_tolerability",
+   "frame_tagged": 427,
+   "labelled_positive_rows": 68,
+   "labelled_predicted_rows": 62,
+   "precision": 0.9268158347676421,
+   "precision_ci": [
+    0.8334248455730954,
+    0.9972461273666093
+   ],
+   "reason": null,
+   "recall": 0.9686285796517485,
+   "recall_ci": [
+    0.953575439910146,
+    0.982127659574468
+   ],
+   "status": "shown",
+   "weighted_positives": 347.44999999999993
+  },
+  {
+   "class": "sinus_upper_airway",
+   "frame_tagged": 11,
+   "labelled_positive_rows": 12,
+   "labelled_predicted_rows": 11,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 0.9166666666666666,
+   "recall_ci": [
+    0.9166666666666666,
+    0.9166666666666666
+   ],
+   "status": "shown",
+   "weighted_positives": 12.0
+  },
+  {
+   "class": "spirometry_other",
+   "frame_tagged": 69,
+   "labelled_positive_rows": 31,
+   "labelled_predicted_rows": 29,
+   "precision": 0.9310344827586207,
+   "precision_ci": [
+    0.9310344827586207,
+    0.9310344827586207
+   ],
+   "reason": null,
+   "recall": 0.8163265306122448,
+   "recall_ci": [
+    0.6883365200764818,
+    0.9
+   ],
+   "status": "shown",
+   "weighted_positives": 33.075
+  },
+  {
+   "class": "sputum_properties",
+   "frame_tagged": 23,
+   "labelled_positive_rows": 26,
+   "labelled_predicted_rows": 23,
+   "precision": 1.0,
+   "precision_ci": [
+    1.0,
+    1.0
+   ],
+   "reason": null,
+   "recall": 0.8795411089866157,
+   "recall_ci": [
+    0.8084358523725835,
+    0.92
+   ],
+   "status": "shown",
+   "weighted_positives": 26.15
+  },
+  {
+   "class": "survival_transplant",
+   "frame_tagged": 10,
+   "labelled_positive_rows": 8,
+   "labelled_predicted_rows": 10,
+   "precision": 0.8,
+   "precision_ci": [
+    0.8,
+    0.8
+   ],
+   "reason": "precision 0.800 below 0.85",
+   "recall": 1.0,
+   "recall_ci": [
+    1.0,
+    1.0
+   ],
+   "status": "withheld",
+   "weighted_positives": 8.0
+  },
+  {
+   "class": "sweat_chloride",
+   "frame_tagged": 21,
+   "labelled_positive_rows": 19,
+   "labelled_predicted_rows": 21,
+   "precision": 0.9047619047619048,
+   "precision_ci": [
+    0.9047619047619048,
+    0.9047619047619048
+   ],
+   "reason": null,
+   "recall": 1.0,
+   "recall_ci": [
+    1.0,
+    1.0
+   ],
+   "status": "shown",
+   "weighted_positives": 19.0
+  }
+ ],
+ "record_format": 1,
+ "record_sha256": "8c6de118f359fd4a35eae2b1ac85aad604136567ed38470b4821636df0bb27a7",
+ "reference_labels": "labels made by a council of models; approved by the maintainer as the reference on 2026-10-11; not read row by row by a person; no clinician has read the class definitions",
+ "s2": {
+  "share": 0.0541
+ },
+ "sample_exclusion": {
+  "count": 926,
+  "sha256": "5aa2d1347f4cb88822608726e4d7646707f2e27eef97f1c51d6c17ab78652b35"
+ },
+ "sheet_wording_sha256": "5a8adc657199b3d975fea9f23ba874f02aa671fc37731c8b6c1f80b68b26cbc5",
+ "snapshot_sha256": "d164700bb17d3da0b8ca907b9c773ac8d167d365c4c8961afe72a569d1077f7d",
+ "tags_sha256": "6cfbb1a6da95a96bb008f407dc7cd203c137845347320f90c656e2f6893d9d56",
+ "thresholds": {
+  "min_positives": 10,
+  "near_zero_cf_specific": 0.01,
+  "other_share": 0.15,
+  "precision": 0.85,
+  "recall": 0.8,
+  "route_unexplained": 0.1
+ },
+ "verdict": "allowed_with_withheld",
+ "withheld": [
+  "feasibility_adherence",
+  "gi_pancreatic",
+  "healthcare_use",
+  "liver",
+  "lung_function_unspecified",
+  "microbiology_sputum",
+  "physical_activity",
+  "pro_named_other",
+  "pro_unnamed",
+  "survival_transplant"
+ ],
+ "withheld_sha256": "a642377b1f0648db53df4240fa3bf6870000c12de68df98dceb8fa1a6ac5b7fb"
+}

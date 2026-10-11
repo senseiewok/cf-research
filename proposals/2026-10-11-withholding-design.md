@@ -31,3 +31,15 @@ Risks all four named: the shown page over-represents easy-to-tag classes (patien
 ## What this does not do
 
 It does not make the shown classes correct. A pass means agreement with a council of models. It does not read any rows, and it does not replace a clinician reading the class definitions. It does not decide the cap on the not-shown share, the page layout, or whether the page is published at all.
+
+## First real run (2026-10-11)
+
+Run on the redrawn census frozen set: lexicon 0.3.2-draft, the consensus-filtered model tags (88 proposed, 70 kept), 938 rows (797 labels reused, 141 new; the sampled strata exclude the 926 development entries, hash checked), the COPD control, 4 planted non-CF ids and 3 canaries. The record is `tools/trial_atlas/run-records/2026-10-11-run-1.json`; `check_atlas.py --check-record` passes 44 of 44 checks on it.
+
+- **Verdict: allowed with 10 withheld classes.** 23 classes shown, 2 few checked (`bone_density`, `not_stated`), 10 withheld.
+- **Withheld:** `feasibility_adherence` (precision 0.812), `gi_pancreatic` (0.811), `healthcare_use` (recall 0.691), `liver` (precision 0.818), `lung_function_unspecified` (0.810), `microbiology_sputum` (0.780), `physical_activity` (recall 0.585), `pro_named_other` (recall 0.797, 0.003 below the line), `pro_unnamed` (precision 0.360, recall 0.637), `survival_transplant` (precision 0.800).
+- **Not shown:** 388 of 2,052 entries (18.9 percent) carry only withheld classes; 188 studies fall only in withheld classes. No cap is set on this share; that is a person's decision made before a run.
+- **S2 (other plus unclassified)** is 5.4 percent against the 15 percent limit.
+- **Two things to look at before anyone relies on this list:** `pro_named_other` is withheld by 0.003, and `physical_activity` (12 tagged entries) moved from passing to withheld when the development entries left the sampled strata, so its recall rests on few rows. A different seed could move such borderline classes. The record names the lexicon hash, so any rule change makes it stale.
+
+The reference labels are a council of models' (approved as the reference by the maintainer on 2026-10-11, not read row by row); no clinician has read the class definitions. Nothing is published.
