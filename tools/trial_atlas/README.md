@@ -2,7 +2,7 @@
 
 Build step 1 of the design in `proposals/2026-10-10-trial-endpoint-atlas.md` (board row T-0130): what interventional cystic fibrosis trials register as their primary outcome, counted from one dated, hashed snapshot of ClinicalTrials.gov.
 
-**Nothing here has been run against the real registry.** Every test runs on synthetic fixtures with no network. The lexicon is a draft (0.2.3-draft) for review. Only `propose_tags.py` and `challenge_tags.py` call a model, a local one through the lab's invoker, and no test does: the tests use a fake model.
+**These tools have been run against the real registry once** (a person-approved fetch on 2026-10-10; see "What the first real run showed" below), and every test runs on synthetic fixtures with no network. The lexicon is a draft (0.3.0-draft) for review; it was developed on development entries from that run, not on the frozen set (see "Lexicon 0.3.0-draft" below), and no clinician has reviewed it. Only `propose_tags.py` and `challenge_tags.py` call a model, a local one through the lab's invoker, and no test does: the tests use a fake model.
 
 Words used here: a **retrieval route** is one of the searches a snapshot is fetched with (the condition search, which is the main retrieval route, and the term search, which is the recall retrieval route). The **route name** is that search's name as the manifest records it (`condition`, `term`).
 
@@ -14,7 +14,7 @@ Words used here: a **retrieval route** is one of the searches a snapshot is fetc
 | `snapshot.py` | Loads a snapshot and refuses it unless: the manifest hash matches; the manifest's file list equals the files on disk exactly, as spelled; every file matches its hash; every page a retrieval route names is listed once and lies inside the folder; route names are unique; no study appears twice in a retrieval route; and each retrieval route's page counts equal its `studies_received` and `total_count`. Every NCT id must be valid. Turns studies into plain records and outcome entries (`NCT…:P1`, …; `:P0` for a study with no primary outcome) |
 | `scope.py` | Inclusion rules and flags: interventional only; condition list names CF; exclusions X1 to X6, each with a printed count and reason; "CF only" or "CF among others"; planned or actual start; the difference between the two retrieval routes |
 | `lexicon.json` | The versioned rule lexicon: two-level taxonomy (each class with a one-line gloss for the person labelling), one regular expression per rule with its own examples, safety subtypes, the composite rule, the not-stated rules, time-frame buckets |
-| `lexicon.py` | Applies the lexicon. Each tag records the rule id and the exact matched span. Before matching, every run of whitespace in the text is collapsed to one space; spans are mapped back to the original text. A pattern with an inline `(?x)`, an escaped space or a nested quantifier is refused at load. A time frame longer than 2,000 characters is "unparseable". `lexicon.py try "text"` shows what matches; `lexicon.py classes` lists every class with its domain and gloss; `lexicon.py tag` never overwrites its output |
+| `lexicon.py` | Applies the lexicon. Each tag records the rule id and the exact matched span. Before matching, every run of whitespace in the text is collapsed to one space, and subscript digits and dashes are folded one to one to ASCII digits and '-'; spans are mapped back to the original text. A pattern with an inline `(?x)`, an escaped space or a nested quantifier is refused at load. A time frame longer than 2,000 characters is "unparseable". `lexicon.py try "text"` shows what matches; `lexicon.py classes` lists every class with its domain and gloss; `lexicon.py tag` never overwrites its output |
 | `check_atlas.py` | Recomputes every count and fails on drift; rejects model tags whose quote is not an exact substring; prints the metrics on the frozen set; runs the negative controls; applies the publication stop rules; `--confirm-real-run` records that a person checked a real snapshot's configuration |
 | `make_labelling_sheet.py` | Draws the frozen set (stratified, seeded) and writes a blind sheet (wording only), the registry's terms beside it, and a sealed key |
 | `propose_tags.py` | The model-assisted route: a local model proposes one class, with an exact quote, for each entry the rules left unclassified; a script keeps only the proposals it can verify. `--self-check` runs the planted controls with a fake model |
@@ -419,7 +419,7 @@ The "to verify on the first real run" comments in `DEFAULTS` stay as they are un
 - **Tagging.** Lexicon 0.2.3-draft left 442 of 2,052 entries unclassified (21.5 percent), so stop rule S2 (15%) would trip.
 - **Measures the lexicon does not cover yet:** mucociliary clearance, gas exchange, DNA methylation and gene expression, respiratory muscle strength, the one-minute sit-to-stand test, anxiety and depression scales, dose-escalation parts, and many generic "change from baseline" titles that need the description.
 
-The lexicon is not changed in this round, and `config_verified` is not set.
+The lexicon was not changed in that round, and `config_verified` is not set. Lexicon 0.3.0-draft, the next round, covers most of these families; see below.
 
 **What the registry says.** A National Library of Medicine technical bulletin says that "older ClinicalTrials.gov records may be missing information". The source is https://www.nlm.nih.gov/pubs/techbull/mj24/mj24_Clinical_Trials_Study_Record_Modernization.html, read on 2026-10-10 by the controlling agent. The bulletin says nothing specific about start date types.
 
@@ -543,15 +543,83 @@ What they hold:
 - **From the description** (read only when the measure gives no class), only the earliest match is kept and marked `from_description`. Generic safety wording never decides a class from there.
 - **The time frame's largest written number decides the bucket, with no day-1 adjustment.** "Day 28" is up to 4 weeks; "Day 29" (often a four-week visit when day 1 is the first dose) falls in "over 4 weeks to 6 months".
 - **The glosses** (`lexicon.py classes`) are short, neutral aids for the person labelling, not text for the public site.
-- **The class `not_stated` is labelled "No measure named"** (lexicon 0.2.3-draft). Its id, its domain label ("Not stated") and every other class and domain label are unchanged. They wait for a clinician reader (T-0105).
+- **Nine classes were added in 0.3.0-draft** (lung mechanics, oxygenation, bone density, mucociliary clearance, sputum properties, gene expression and methylation, oxidative stress, physical activity, muscle strength). Each needs a clinician reader before publication. The reasons and counts are in `proposals/2026-10-11-lexicon-0.3-proposal.md`.
+- **Explicit oximetry inside a safety outcome gets both tags** (0.3.0-draft, second round); only a bare "desaturation" gives way to safety.
+- **A named questionnaire is tagged by its instrument only** (0.3.0-draft): SNOT-22 is `pro_named_other`, not also sinus, as the CFQ-R is never also pulmonary.
+- **The FEV1/FVC ratio is other spirometry, not FEV1** (0.3.0-draft). An entry that also names FEV1 on its own gets both.
+- **Faecal calprotectin is an inflammation marker only; "liver function" without "tests" is safety (laboratory)** (0.3.0-draft).
+- **An organism's name alone is weak** (0.3.0-draft, MICRO-04): it is dropped when the entry names any other class, because it then describes who was enrolled.
+- **The class `not_stated` is labelled "No measure named"** (lexicon 0.2.3-draft). Its id and its domain label ("Not stated") are unchanged.
+- **Labels changed in 0.3.0-draft, after a clinician-role review** (a model in that role, not a clinician):
+  - The pulmonary domain is "Lung function and gas exchange".
+  - The microbiology domain and class are "Microbiology"; the id `microbiology_sputum` is unchanged.
+  - The new classes' labels are as in the class table.
+  - All labels still wait for a clinician reader (T-0105).
+
+## Lexicon 0.3.0-draft
+
+**Versioning.** `lexicon.json` carries the rule as `versioning`:
+- A rule id names one rule and is never reused for another meaning.
+- A rule whose pattern or suppression changes keeps its id, with a `changed` note naming the version and what changed.
+- A rule that would move to another class is retired, and a new id is added.
+- New rules get new ids.
+
+Tags record the lexicon version and hash, so a rule id is always read together with them. In 0.3.0-draft these rules changed: FEV1-01, FEV1-02, SPIRO-02, LUNGFN-V1, EXAC-01, GI-01, GLU-01, LIVER-01, SINUS-01, MICRO-01, MICRO-03, SURV-01, SAFE-UNSPEC, PK-01 and FEAS-01. Every other existing rule is unchanged. `test_lexicon.py` pins that list.
+
+**Measured on development entries only** (2,002 in-scope entries from the first run, the 50 frozen rows left out; counts from a throwaway script that uses `lexicon.py`'s own functions):
+- Unclassified fell from 426 (21.3%) with 0.2.3-draft to 189 (9.4%) after the second review round (176, 8.8%, after the first).
+- 60 entries that had a class changed class. The proposal lists them by pair, with a reading of each.
+
+**Two blind reviews** (an adversarial rules review and a clinician-role review, the second round of 2026-10-11) led to positive rule forms in place of exclusion lists, the removal of alternatives fitted to one entry, new labels and glosses, and two matching mechanisms:
+- `suppressed_by_pattern`: a rule is dropped when a pattern matches the same field.
+- `matching.fallback_restrictions`: a measure that names a bare exacerbation lets its description confirm only the exacerbations class.
+
+A test times every pattern on adversarial 20,000-character text (under 100 ms each).
+- None of this is a measure on the frozen set.
+
+**Before the gate is run with 0.3.0-draft.** The frozen set was labelled with the 0.2.3 class list, so its `other` rows need a blind review against the new classes. Otherwise a new class must stay out of what is shown (stop rule S1). See the proposal.
+
+### Classes
+
+37 classes in 24 domains. A rule can assign 35 of them; `other` and `not_stated` are assigned only as their glosses say. `python lexicon.py classes` prints each with its gloss. Classes marked * were added in 0.3.0-draft and need a clinician reader.
+
+| Domain | Classes |
+| --- | --- |
+| Lung function and gas exchange | `fev1`, `spirometry_other`, `lci`, `lung_function_unspecified`, `lung_mechanics`*, `oxygenation`* |
+| CFTR function | `sweat_chloride`, `npd`, `icm`, `cftr_biomarker_other` |
+| Exacerbations | `exacerbations` |
+| Nutrition and growth | `nutrition_growth` |
+| Bone health | `bone_density`* |
+| Gastrointestinal and pancreatic | `gi_pancreatic` |
+| Glucose and CF-related diabetes | `glucose_cfrd` |
+| Liver | `liver` |
+| Sinus and upper airway | `sinus_upper_airway` |
+| Patient-reported | `cfqr`, `pro_named_other`, `pro_unnamed` |
+| Imaging | `imaging` |
+| Microbiology | `microbiology_sputum` |
+| Mucus and mucociliary clearance | `mucociliary_clearance`*, `sputum_properties`* |
+| Inflammation markers | `inflammation_markers` |
+| Molecular and oxidative markers | `molecular_expression`*, `oxidative_stress`* |
+| Healthcare use | `healthcare_use` |
+| Survival and transplant | `survival_transplant` |
+| Safety and tolerability | `safety_tolerability` (subtypes: adverse events, serious adverse events, laboratory, vital signs and ECG, dose-limiting, tolerability, hearing and balance, physical examination, unspecified; labels in `safety_subtype_labels`) |
+| Pharmacokinetics | `pharmacokinetics` |
+| Feasibility and adherence | `feasibility_adherence` |
+| Exercise capacity | `exercise_capacity` |
+| Physical activity and muscle function | `physical_activity`*, `muscle_strength`* |
+| Other | `other` |
+| Not stated | `not_stated` |
 
 ## What the lexicon does not cover yet
 
 - Negation and hedging: "FEV1 was not measured" is still tagged FEV1.
 - Wording in any language but English.
-- Measures with no class in the taxonomy, such as FeNO, cough counts, sleep, bone density, hearing and kidney safety tests. They stay unclassified for a model or a person.
+- Measures with no class in the taxonomy, such as cough counts, vascular function, balance, airway pH and absorptive (DTPA) clearance. They stay unclassified for a model or a person. Sleep is tagged only through a named instrument.
 - Ambiguous acronyms left out on purpose: CAT, FIS, NE.
-- `multi_class` does not tell one instrument that spans two classes (SNOT-22: sinus and a named instrument) from two measures in one entry.
+- `multi_class` does not tell one measure that spans two classes from two measures in one entry. The one known case, SNOT-22, was resolved in 0.3.0-draft.
+- Single-study named scales not on the PRO-01 or PRO-04 lists stay unclassified; a generic "... Scale" matcher would also catch unnamed and clinician-rated scales.
+- "Chloride transport" with no test named is not tagged; the description decides.
+- "Area under the curve" is read as pharmacokinetics even for a glucose or C-peptide curve.
 - Patient survival and graft survival are not told apart.
 - Drug levels are told from nutrient and biomarker levels by a fixed list of exclusions (vitamins, glucose, proteins, cytokines and the like); a level not on the list may be read as pharmacokinetics.
 
