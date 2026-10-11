@@ -23,8 +23,17 @@ id and stratum, and holds the seed, the hashes of the snapshot, the lexicon and 
 check_atlas.py can tell a filled-in sheet from an edited one. Tags made from another snapshot or another lexicon are refused. Rows
 drawn here stay out of rule development. --already KEY.json skips the rows of an earlier key, to extend the set (up to 150 in all).
 
+--design census-v1 (proposals/2026-10-11-frozen-census-design.md) draws a census instead: every entry that carries a class with
+--small-max (default 30) or fewer entries, every unclassified entry and every not-stated entry, plus a seeded random sample of
+--large-per-class (default 40) entries for each larger class (an entry is sampled for its rarest large class). The size follows from the
+design, so --n, --unclassified-share, --rare-max and --already are refused with it, and MAX_ROWS does not apply. The classes an entry
+carries are its rule tags plus, for an entry the rules left unclassified, its accepted model tag (--model-tags FILE, the proposed-tags
+file check_atlas.py reads; each tag is checked by check_atlas.verify_model_tags). The key then records the design, both sizes, the
+model-tags hash and, per stratum, its population, the number drawn and the weight (population / drawn). The sheet is as blind as before.
+
 Usage: python make_labelling_sheet.py --snapshot DIR --tags tags.json --sheet SHEET.csv --key KEY.json --seed N [--n 50]
        [--unclassified-share 0.2] [--rare-max N] [--already KEY.json] [--exclude FILE.json] [--report]
+       python make_labelling_sheet.py ... --seed N --design census-v1 [--model-tags FILE.json] [--small-max 30] [--large-per-class 40]
 Exit 0 written; 1 the inputs could not be read or do not match; 2 usage error.
 """
 from __future__ import annotations
@@ -47,7 +56,10 @@ import scope as scope_mod  # noqa: E402
 import snapshot as snap  # noqa: E402
 
 COLUMNS = ["sample_id", "measure", "description", "time_frame", "label_classes", "label_composite", "label_notes"]
-MAX_ROWS = 150
+MAX_ROWS = 150                                           # the legacy design only; census-v1's size follows from its strata
+DESIGNS = ("legacy", "census-v1")
+SMALL_MAX_DEFAULT, LARGE_PER_CLASS_DEFAULT = 30, 40
+NOT_STATED = "not_stated"                                # treated through its own census stratum, never as a small or large class
 FORMULA_START = ("=", "+", "-", "@", "\t", "\r")
 
 
@@ -137,9 +149,73 @@ def draw(entries: list[dict], tags_by_id: dict[str, dict], study: dict[str, dict
     return chosen, summary
 
 
-def build(snapshot: snap.Snapshot, tags: dict, lex, *, n: int, seed: int, unclassified_share: float = 0.2, rare_max: int | None = None,
-          already: dict | None = None, manual=None) -> tuple[str, dict, dict]:
-    """(sheet CSV text, key, summary). Raises ValueError when the tags were not made from this snapshot with this lexicon."""
+def model_tags_digest(raw: bytes) -> str:
+    """sha256 of the model-tags file's bytes. check_atlas.py has no hash helper for a model-tags file (it only reads and verifies the
+    tags), so the plain file hash is used; any change to the file, a line-ending change included, gives a new hash."""
+    return hashlib.sha256(raw).hexdigest()
+
+
+def draw_census(pool: list[dict], tags_by_id: dict[str, dict], lex, model_by_entry: dict[str, list[dict]], *, seed: int,
+                small_max: int, large_per_class: int) -> tuple[list[dict], dict]:
+    """([{entry_id, stratum}] in canonical order, {stratum name: {kind, population, drawn, weight}}) for the census-v1 design.
+    Strata are assigned in the order census:small, census:unclassified, census:not_stated, sample:<class>. An empty stratum is left
+    out (its weight would be undefined). The class `not_stated` is never small or large: its entries are the census:not_stated stratum."""
+    final = {e["entry_id"]: [c for c in check_atlas.final_classes(tags_by_id[e["entry_id"]], model_by_entry) if c != NOT_STATED]
+             for e in pool}
+    count = {c: 0 for c in lex.class_order}
+    for classes in final.values():
+        for c in classes:
+            count[c] += 1
+    small = {c for c in lex.class_order if 0 < count[c] <= small_max}
+    members: dict[str, list[dict]] = {}
+    for e in pool:                                       # the pool is sorted by entry id, so every stratum is too
+        classes = final[e["entry_id"]]
+        if any(c in small for c in classes):
+            name = "census:small"
+        elif tags_by_id[e["entry_id"]]["status"] == "not_stated":
+            name = "census:not_stated"
+        elif not classes:
+            name = "census:unclassified"
+        else:
+            name = "sample:" + min(classes, key=lambda c: (count[c], lex.class_order.index(c)))
+        members.setdefault(name, []).append(e)
+    rng = random.Random(seed)
+    order = ["census:small", "census:unclassified", "census:not_stated"] + [f"sample:{c}" for c in lex.class_order]
+    chosen, strata = [], {}
+    for name in order:
+        pop = members.get(name, [])
+        if not pop:
+            continue
+        kind = name.split(":")[0]
+        if kind == "sample" and len(pop) > large_per_class:
+            picked = sorted(rng.sample(pop, large_per_class), key=lambda e: e["entry_id"])
+        else:
+            picked = pop
+        chosen += [{"entry_id": e["entry_id"], "stratum": name} for e in picked]
+        strata[name] = {"kind": kind, "population": len(pop), "drawn": len(picked), "weight": len(pop) / len(picked)}
+    return chosen, strata
+
+
+def build(snapshot: snap.Snapshot, tags: dict, lex, *, n: int | None = None, seed: int, unclassified_share: float = 0.2,
+          rare_max: int | None = None, already: dict | None = None, manual=None, design: str = "legacy",
+          small_max: int = SMALL_MAX_DEFAULT, large_per_class: int = LARGE_PER_CLASS_DEFAULT, model_tags: list | None = None,
+          model_tags_sha256: str | None = None) -> tuple[str, dict, dict]:
+    """(sheet CSV text, key, summary). Raises ValueError when the tags were not made from this snapshot with this lexicon.
+    design "legacy" needs n; design "census-v1" takes no n and no earlier key, and may take the model tags (the proposed-tags list as
+    check_atlas reads it) together with the sha256 of their file."""
+    if design not in DESIGNS:
+        raise ValueError(f"unknown design {design!r}")
+    census = design == "census-v1"
+    if census and (n is not None or already):
+        raise ValueError("census-v1 sizes itself: it takes neither n nor an earlier key")
+    if not census and n is None:
+        raise ValueError("the legacy design needs n")
+    if not census and model_tags is not None:
+        raise ValueError("model tags are used by the census-v1 design only")
+    if census and (small_max < 1 or large_per_class < 1):
+        raise ValueError("small_max and large_per_class must each be at least 1")
+    if (model_tags is None) != (model_tags_sha256 is None):
+        raise ValueError("give the model tags and their file hash together")
     if not isinstance(tags, dict) or not isinstance(tags.get("entries"), list):
         raise ValueError("the tags file is not a tags file (an object with an 'entries' list)")
     if tags.get("snapshot_sha256") != snapshot.digest:
@@ -153,13 +229,28 @@ def build(snapshot: snap.Snapshot, tags: dict, lex, *, n: int, seed: int, unclas
     study = {r["nct_id"]: r for r in result["included"]}
     skip = {r["entry_id"] for r in (already or {}).get("rows", [])}
     start_no = len((already or {}).get("rows", [])) + 1
-    if rare_max is None:
-        rare_max = max(2, round(0.02 * len(entries)))
-    chosen, summary = draw(entries, tags_by_id, study, lex, n=n, seed=seed, unclassified_share=unclassified_share,
-                           rare_max=rare_max, skip=skip)
+    by_id = {e["entry_id"]: e for e in entries}
+    if census:
+        pool = sorted((e for e in entries if not e.get("no_primary_outcome")), key=lambda e: e["entry_id"])
+        accepted, rejected = check_atlas.verify_model_tags(model_tags, by_id, tags_by_id, lex) if model_tags is not None else ([], [])
+        model_by_entry: dict[str, list[dict]] = {}
+        for t in accepted:
+            model_by_entry.setdefault(t["entry_id"], []).append(t)
+        chosen, strata = draw_census(pool, tags_by_id, lex, model_by_entry, seed=seed, small_max=small_max,
+                                     large_per_class=large_per_class)
+        if sum(v["population"] for v in strata.values()) != len(pool):
+            raise ValueError("internal error: the strata do not partition the drawable entries")
+        if not all(c["stratum"] in strata for c in chosen) or len(chosen) != sum(v["drawn"] for v in strata.values()):
+            raise ValueError("internal error: a drawn row is outside the strata")
+        summary = {"drawn": len(chosen), "pool": len(pool), "strata": strata, "model_tags_accepted": len(accepted),
+                   "model_tags_rejected": len(rejected)}
+    else:
+        if rare_max is None:
+            rare_max = max(2, round(0.02 * len(entries)))
+        chosen, summary = draw(entries, tags_by_id, study, lex, n=n, seed=seed, unclassified_share=unclassified_share,
+                               rare_max=rare_max, skip=skip)
     rng = random.Random(seed + 1)
     rng.shuffle(chosen)                                   # the sheet's order says nothing about why a row was drawn
-    by_id = {e["entry_id"]: e for e in entries}
     rows = []
     for i, c in enumerate(chosen, start_no):
         e = by_id[c["entry_id"]]
@@ -172,14 +263,26 @@ def build(snapshot: snap.Snapshot, tags: dict, lex, *, n: int, seed: int, unclas
     key = {
         "kind": "trial-atlas frozen-set key",
         "sealed": "Keep closed until labelling is finished. These rows stay out of rule development.",
-        "seed": seed, "n": n, "unclassified_share": unclassified_share, "rare_max": rare_max,
-        "snapshot_sha256": snapshot.digest, "lexicon_sha256": lex.sha256, "tags_sha256": tags_digest(tags),
+        "seed": seed,
+    }
+    if census:
+        key["design"] = "census-v1"
+        key.update({"small_max": small_max, "large_per_class": large_per_class})
+    else:
+        key.update({"n": n, "unclassified_share": unclassified_share, "rare_max": rare_max})
+    key.update({"snapshot_sha256": snapshot.digest, "lexicon_sha256": lex.sha256, "tags_sha256": tags_digest(tags)})
+    if census:
+        key["model_tags_sha256"] = model_tags_sha256
+    key.update({
         "lexicon_version_used_for_the_draw": lex.version,
         "extends": (already or {}).get("sheet_wording_sha256"),
         "sheet_wording_sha256": check_atlas.sheet_wording_sha(rows),
         "notes": "A cell starting with = + - @ or a tab was given a leading apostrophe; nothing else in the wording was changed.",
-        "rows": [{"sample_id": r["sample_id"], "entry_id": c["entry_id"], "stratum": c["stratum"]} for r, c in zip(rows, chosen)],
-    }
+    })
+    if census:
+        key["consensus"] = None
+        key["strata"] = summary["strata"]
+    key["rows"] = [{"sample_id": r["sample_id"], "entry_id": c["entry_id"], "stratum": c["stratum"]} for r, c in zip(rows, chosen)]
     return buf.getvalue(), key, summary
 
 
@@ -190,16 +293,38 @@ def main(argv=None) -> int:
     ap.add_argument("--sheet", type=Path, required=True)
     ap.add_argument("--key", type=Path, required=True)
     ap.add_argument("--seed", type=int, required=True, help="required: choose it when the draw is made, and write it down")
-    ap.add_argument("--n", type=int, default=50)
-    ap.add_argument("--unclassified-share", type=float, default=0.2)
-    ap.add_argument("--rare-max", type=int)
+    ap.add_argument("--design", choices=DESIGNS, default="legacy", help="legacy: stratified sample of --n rows; census-v1: a census of "
+                    "the small classes, the unclassified and not-stated entries, plus a sample per large class (size follows from the data)")
+    ap.add_argument("--n", type=int, help=f"legacy design only (default 50, at most {MAX_ROWS})")
+    ap.add_argument("--unclassified-share", type=float, help="legacy design only (default 0.2)")
+    ap.add_argument("--rare-max", type=int, help="legacy design only")
+    ap.add_argument("--model-tags", type=Path, help="census-v1 only: the proposed model-tags file check_atlas.py reads with --model-tags")
+    ap.add_argument("--small-max", type=int, help=f"census-v1 only: a class with this many entries or fewer is censused (default {SMALL_MAX_DEFAULT})")
+    ap.add_argument("--large-per-class", type=int, help=f"census-v1 only: rows sampled per larger class (default {LARGE_PER_CLASS_DEFAULT})")
     ap.add_argument("--already", type=Path)
     ap.add_argument("--exclude", type=Path)
     ap.add_argument("--report", action="store_true", help="print how many rows each oversample took (a rule result; not for the labeller)")
     a = ap.parse_args(argv)
-    if not 1 <= a.n <= MAX_ROWS or not 0 <= a.unclassified_share <= 1:
-        print(f"error: --n must be 1 to {MAX_ROWS} and --unclassified-share 0 to 1", file=sys.stderr)
+    census = a.design == "census-v1"
+    wrong = ([f for f, v in (("--n", a.n), ("--unclassified-share", a.unclassified_share), ("--rare-max", a.rare_max),
+                             ("--already", a.already)) if v is not None] if census else
+             [f for f, v in (("--model-tags", a.model_tags), ("--small-max", a.small_max), ("--large-per-class", a.large_per_class))
+              if v is not None])
+    if wrong:
+        print(f"error: {', '.join(wrong)} cannot be used with --design {a.design}", file=sys.stderr)
         return 2
+    if census:
+        a.small_max = SMALL_MAX_DEFAULT if a.small_max is None else a.small_max
+        a.large_per_class = LARGE_PER_CLASS_DEFAULT if a.large_per_class is None else a.large_per_class
+        if a.small_max < 1 or a.large_per_class < 1:
+            print("error: --small-max and --large-per-class must each be at least 1", file=sys.stderr)
+            return 2
+    else:
+        a.n = 50 if a.n is None else a.n
+        a.unclassified_share = 0.2 if a.unclassified_share is None else a.unclassified_share
+        if not 1 <= a.n <= MAX_ROWS or not 0 <= a.unclassified_share <= 1:
+            print(f"error: --n must be 1 to {MAX_ROWS} and --unclassified-share 0 to 1", file=sys.stderr)
+            return 2
     if key_beside_sheet(a.key, a.sheet):
         print("error: the sealed key may not be written into the same folder as the sheet, or into a folder inside it; give the "
               "labeller only the sheet's folder", file=sys.stderr)
@@ -217,8 +342,15 @@ def main(argv=None) -> int:
         if already and len(already.get("rows", [])) + a.n > MAX_ROWS:
             raise ValueError(f"the earlier key holds {len(already['rows'])} rows; {a.n} more would pass {MAX_ROWS}")
         lex = lex_mod.load()
-        sheet, key, summary = build(s, tags, lex, n=a.n, seed=a.seed, unclassified_share=a.unclassified_share,
-                                    rare_max=a.rare_max, already=already, manual=manual)
+        if census:
+            raw = a.model_tags.read_bytes() if a.model_tags else None
+            proposed = json.loads(raw.decode("utf-8-sig")) if raw is not None else None
+            sheet, key, summary = build(s, tags, lex, seed=a.seed, design="census-v1", small_max=a.small_max,
+                                        large_per_class=a.large_per_class, model_tags=proposed, manual=manual,
+                                        model_tags_sha256=model_tags_digest(raw) if raw is not None else None)
+        else:
+            sheet, key, summary = build(s, tags, lex, n=a.n, seed=a.seed, unclassified_share=a.unclassified_share,
+                                        rare_max=a.rare_max, already=already, manual=manual)
     except (snap.SnapshotError, OSError, ValueError) as exc:
         print(f"ERROR: {snap.clean(exc, 300)}")
         return 1
@@ -229,10 +361,15 @@ def main(argv=None) -> int:
     terms_path.write_text(f"Terms for {a.sheet.name}: it holds registry text from {check_atlas.REGISTRY_SOURCE}.\n"
                           + check_atlas.terms_text(block), encoding="utf-8")
     print(f"drew {summary['drawn']} rows (seed {a.seed})")
-    if summary["drawn"] < a.n:
+    if not census and summary["drawn"] < a.n:
         print(f"WARNING: drew {summary['drawn']} of the {a.n} rows asked for: only {summary['pool']} entries could be drawn "
               "(in-scope entries with a primary outcome, less the rows of any earlier key)", file=sys.stderr)
-    if a.report:
+    if a.report and census:                               # counts only: never an entry's text
+        print(f"of {summary['pool']} eligible entries in {len(summary['strata'])} strata (model tags: {summary['model_tags_accepted']} "
+              f"accepted, {summary['model_tags_rejected']} rejected)")
+        for name, v in summary["strata"].items():
+            print(f"  {name}: population {v['population']}, drawn {v['drawn']}, weight {v['weight']:.4g}")
+    elif a.report:
         print(f"of {summary['pool']} eligible entries: {summary['unclassified']} unclassified oversample, {summary['rare_class']} from "
               f"{summary['rare_classes']} rare class(es), {summary['stratified']} across {summary['strata']} strata")
     print(f"sheet: {a.sheet.name} (blind: wording only)   terms: {terms_path.name}   key: {a.key.name} (sealed; keep it away from "

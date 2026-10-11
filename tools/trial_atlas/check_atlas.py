@@ -11,7 +11,11 @@ What it does, in order:
      (case and whitespace included) of that entry's measure, description or time frame. Only accepted tags are counted.
   3. Metrics on the frozen set (a labelling sheet a person filled in, and its sealed key): per-class precision and recall with the
      number of checked rows and a Wilson 95% interval ("too few to estimate" under 10 positives), micro and macro F1, the shares of
-     entries tagged by rule, by model, as other, as not stated and left unclassified, and the model quote-rejection rate.
+     entries tagged by rule, by model, as other, as not stated and left unclassified, and the model quote-rejection rate. A key
+     with design "census-v1" (proposals/2026-10-11-frozen-census-design.md) is checked against the frame it claims (strata,
+     populations, weights, the model-tags hash, each row's re-derived stratum) and scored with weighted precision and recall and
+     a seeded stratified bootstrap interval; `other` is not scored there. --model-tags-plain prints the plain model route beside
+     the consensus-filtered --model-tags (counts only; it changes no decision).
   4. Negative controls (--negative-controls): canary model tags with false quotes must all be rejected; planted non-CF ids must all be
      excluded by scope; the tagger over a non-CF snapshot must give near zero CF-specific classes and near zero of the classes the
      lexicon marks negative_control (exacerbations). By default they run on the synthetic fixtures; --canary, --planted and
@@ -34,7 +38,8 @@ Text that came from a model, a file or the registry is printed with control char
 No model is called. No network. Every number printed comes from the files given.
 
 Usage:
-  python check_atlas.py --snapshot DIR --tags tags.json --counts counts.json [--model-tags FILE] [--exclude FILE] [--explained FILE]
+  python check_atlas.py --snapshot DIR --tags tags.json --counts counts.json [--model-tags FILE [--model-tags-plain FILE]] [--exclude FILE]
+                        [--explained FILE]
                         [--frozen-sheet SHEET.csv --frozen-key KEY.json] [--negative-controls] [--drift-only]
   python check_atlas.py --snapshot DIR --tags tags.json --write-counts counts.json [...]   write the counts file (no check)
   python check_atlas.py --verify-model-tags FILE --snapshot DIR --tags tags.json          only the quote check, one line per tag
@@ -52,6 +57,7 @@ import csv
 import hashlib
 import json
 import math
+import random
 import sys
 import tempfile
 from datetime import datetime, timezone
@@ -600,6 +606,254 @@ def metrics(gold: dict[str, set], predicted: dict[str, set], classes: list[str],
             "macro_f1": (sum(f1s) / len(f1s)) if f1s else None, "macro_over_classes": len(f1s)}
 
 
+# ------------------------------------------------------------------ the census design (key design "census-v1")
+# proposals/2026-10-11-frozen-census-design.md. A key with no "design" field is the old stratified draw and keeps its meaning.
+
+CENSUS_DESIGN = "census-v1"
+CENSUS_STRATA = ("census:small", "census:unclassified", "census:not_stated")
+SAMPLE_PREFIX = "sample:"
+UNSCORED_CLASSES = ("other",)          # the tools never predict it as a measure class; a residual, not scored
+BOOTSTRAP_RESAMPLES = 2000
+WEIGHT_TOLERANCE = 1e-9
+
+
+def model_tags_digest(path) -> str | None:
+    """sha256 of the model-tags file's bytes (the key's model_tags_sha256); None when no file is given."""
+    if path is None:
+        return None
+    try:
+        return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    except OSError as exc:
+        raise UsageError(f"cannot read the model-tags file {path}: {exc}") from None
+
+
+def census_frame(tag_entries: list[dict], accepted_model: list[dict]) -> dict[str, dict]:
+    """The frame: every in-scope entry with primary-outcome wording, as {entry_id: {"status", "classes"}}, where the classes are the
+    final classes (rule tags, or the accepted model tags of an entry the rules left unclassified) and the status is the rules'
+    status ("unclassified" only when no model tag was accepted either)."""
+    model_by: dict[str, list[dict]] = {}
+    for t in accepted_model:
+        model_by.setdefault(t["entry_id"], []).append(t)
+    frame = {}
+    for e in tag_entries:
+        if e["flags"].get("no_primary_outcome"):
+            continue
+        frame[e["entry_id"]] = {"status": e["status"], "classes": final_classes(e, model_by)}
+    return frame
+
+
+def frame_class_counts(frame: dict[str, dict], lex) -> dict[str, int]:
+    """{class: number of frame entries that carry it}, in the lexicon's class order."""
+    counts = {c: 0 for c in lex.class_order}
+    for f in frame.values():
+        for c in set(f["classes"]):
+            counts[c] = counts.get(c, 0) + 1
+    return counts
+
+
+def census_strata(frame: dict[str, dict], lex, small_max: int) -> dict[str, str]:
+    """{entry_id: stratum}, assigned in the design's order: census:small (carries a class with small_max or fewer frame entries),
+    census:unclassified (no accepted class), census:not_stated (status not_stated), else sample:<the entry's rarest class, ties by
+    the lexicon's class order>. The class not_stated is never small or large: its entries are the census:not_stated stratum (the
+    proposal gives not_stated its own census stratum; make_labelling_sheet.py draws the same way)."""
+    counts = frame_class_counts(frame, lex)
+    order = {c: i for i, c in enumerate(lex.class_order)}
+    out = {}
+    for eid, f in frame.items():
+        classes = [c for c in dict.fromkeys(f["classes"]) if c != "not_stated"]
+        if any(counts[c] <= small_max for c in classes):
+            out[eid] = "census:small"
+        elif f["status"] == "not_stated":            # tested before "no class": a not_stated entry's only class was set aside above
+            out[eid] = "census:not_stated"
+        elif not classes:
+            out[eid] = "census:unclassified"
+        else:
+            out[eid] = SAMPLE_PREFIX + min(classes, key=lambda c: (counts[c], order.get(c, len(order))))
+    return out
+
+
+def _is_int(x) -> bool:
+    return isinstance(x, int) and not isinstance(x, bool)
+
+
+def census_binding_problems(key: dict, tag_entries: list[dict], accepted_model: list[dict], lex, model_tags_path) -> list[str]:
+    """Why a census-v1 key does not describe this frame (empty when it does): its strata, populations, drawn counts and weights, the
+    model-tags hash, and each drawn row's stratum re-derived from the tags, the accepted model tags and the key's small_max."""
+    problems = []
+    for field in ("small_max", "large_per_class", "seed"):
+        if not _is_int(key.get(field)):
+            problems.append(f"the census key has no whole-number {field}")
+    strata = key.get("strata")
+    if not isinstance(strata, dict) or not strata:
+        problems.append("the census key has no strata")
+        return problems
+    bad_shape = [n for n, s in strata.items() if not (isinstance(s, dict) and s.get("kind") in ("census", "sample")
+                                                       and _is_int(s.get("population")) and _is_int(s.get("drawn"))
+                                                       and isinstance(s.get("weight"), (int, float)) and not isinstance(s.get("weight"), bool))]
+    if bad_shape:
+        problems.append(f"{len(bad_shape)} stratum record(s) lack a kind, a whole-number population and drawn, or a weight: "
+                        f"{', '.join(snap.clean(n, 40) for n in bad_shape[:5])}")
+        return problems
+    unnamed = [n for n in strata if not (n in CENSUS_STRATA or (n.startswith(SAMPLE_PREFIX) and n[len(SAMPLE_PREFIX):] in lex.domain_of))]
+    if unnamed:
+        problems.append(f"{len(unnamed)} stratum name(s) are not census:small, census:unclassified, census:not_stated or "
+                        f"sample:<class>: {', '.join(snap.clean(n, 40) for n in unnamed[:5])}")
+    wrong_kind = [n for n, s in strata.items() if s["kind"] != ("census" if n in CENSUS_STRATA else "sample")]
+    if wrong_kind:
+        problems.append(f"{len(wrong_kind)} stratum(s) have the wrong kind: {', '.join(snap.clean(n, 40) for n in wrong_kind[:5])}")
+
+    frame = census_frame(tag_entries, accepted_model)
+    total = sum(s["population"] for s in strata.values())
+    if total != len(frame):
+        problems.append(f"the key's strata hold {total} entries in all; this snapshot's frame has {len(frame)} in-scope entries with "
+                        "primary-outcome wording")
+    derived: dict[str, str] = {}
+    if _is_int(key.get("small_max")):
+        derived = census_strata(frame, lex, key["small_max"])
+        sizes: dict[str, int] = {}
+        for st in derived.values():
+            sizes[st] = sizes.get(st, 0) + 1
+        off = [f"{snap.clean(n, 40)} (key {strata[n]['population'] if n in strata else 'absent'}, frame {sizes.get(n, 0)})"
+               for n in sorted(set(strata) | set(sizes)) if (strata[n]["population"] if n in strata else 0) != sizes.get(n, 0)]
+        if off:
+            problems.append(f"{len(off)} stratum population(s) differ from this frame: {', '.join(off[:5])}")
+
+    rows = [r for r in key.get("rows", []) if isinstance(r, dict)]
+    drawn_by: dict[str, int] = {}
+    unknown_rows = []
+    for r in rows:
+        if r.get("stratum") in strata:
+            drawn_by[r["stratum"]] = drawn_by.get(r["stratum"], 0) + 1
+        else:
+            unknown_rows.append(r.get("sample_id"))
+    if unknown_rows:
+        problems.append(f"{len(unknown_rows)} row(s) name a stratum the key does not hold: "
+                        f"{', '.join(snap.clean(x, 10) for x in unknown_rows[:5])}")
+    drawn_off = [f"{snap.clean(n, 40)} (drawn {s['drawn']}, rows {drawn_by.get(n, 0)})" for n, s in strata.items()
+                 if s["drawn"] != drawn_by.get(n, 0)]
+    if drawn_off:
+        problems.append(f"{len(drawn_off)} stratum(s) record a drawn count that differs from their rows: {', '.join(drawn_off[:5])}")
+    census_off = [snap.clean(n, 40) for n, s in strata.items() if s["kind"] == "census" and s["drawn"] != s["population"]]
+    if census_off:
+        problems.append(f"{len(census_off)} census stratum(s) were not drawn in full: {', '.join(census_off[:5])}")
+    weight_off = []
+    for n, s in strata.items():
+        if s["drawn"] <= 0 or s["drawn"] > s["population"]:
+            weight_off.append(f"{snap.clean(n, 40)} (drawn {s['drawn']} of {s['population']})")
+        elif abs(s["weight"] - s["population"] / s["drawn"]) > WEIGHT_TOLERANCE * max(1.0, s["population"] / s["drawn"]):
+            weight_off.append(f"{snap.clean(n, 40)} (weight {s['weight']}, population/drawn {s['population'] / s['drawn']:.6g})")
+    if weight_off:
+        problems.append(f"{len(weight_off)} stratum weight(s) are not population/drawn: {', '.join(weight_off[:5])}")
+    if derived:
+        moved = [f"{snap.clean(r.get('sample_id'), 10)} (key {snap.clean(r.get('stratum'), 40)}, frame "
+                 f"{snap.clean(derived.get(r.get('entry_id'), 'not in the frame'), 40)})"
+                 for r in rows if derived.get(r.get("entry_id")) != r.get("stratum")]
+        if moved:
+            problems.append(f"{len(moved)} drawn row(s) sit in a different stratum from the one this frame gives: {', '.join(moved[:5])}")
+
+    recorded, given = key.get("model_tags_sha256"), model_tags_digest(model_tags_path)
+    if recorded is None and given is not None:
+        problems.append("the key was drawn without model tags, but --model-tags was given")
+    elif recorded is not None and recorded != given:
+        problems.append("the key's model_tags_sha256 does not match the model-tags file given" if given else
+                        "the key was drawn with model tags, but no --model-tags was given")
+    return problems
+
+
+def _percentile(sorted_vals: list[float], q: float):
+    if not sorted_vals:
+        return None
+    pos = q * (len(sorted_vals) - 1)
+    lo = math.floor(pos)
+    hi = min(lo + 1, len(sorted_vals) - 1)
+    return sorted_vals[lo] + (sorted_vals[hi] - sorted_vals[lo]) * (pos - lo)
+
+
+def metrics_weighted(gold: dict[str, set], predicted: dict[str, set], classes: list[str], weights_by_entry: dict[str, float],
+                     strata_by_entry: dict[str, str], populations: dict[str, int], min_pos: int, seed: int,
+                     resamples: int = BOOTSTRAP_RESAMPLES) -> dict:
+    """Weighted metrics for a census-v1 frozen set. Each labelled row counts with its stratum's weight (population/drawn). Fields per
+    class as in metrics(); tp, fp, fn, positives and predicted are weighted sums. `populations` is {class: entries in the FRAME that
+    carry it}: precision is estimable when it is min_pos or more; recall when the weighted positives are min_pos or more. Intervals
+    are 95% percentile intervals of a stratified bootstrap (rows resampled with replacement inside each stratum, random.Random(seed)).
+    A stratum whose weight is 1 was drawn in full (a census), so it has no sampling error and is held fixed, which keeps the census
+    classes exact. `other` is never scored."""
+    classes = [c for c in classes if c not in UNSCORED_CLASSES]
+    scored = set(classes)
+
+    def contributions(e):
+        g, p = gold[e], predicted.get(e, set())
+        return [(c, "tp" if c in g and c in p else ("fp" if c in p else "fn")) for c in sorted((g | p) & scored)]
+
+    rows = sorted(gold)
+    contrib = {e: contributions(e) for e in rows}
+
+    def totals_of(row_ids, base=None):
+        t = {c: {"tp": 0.0, "fp": 0.0, "fn": 0.0} for c in classes} if base is None else {c: dict(v) for c, v in base.items()}
+        for e in row_ids:
+            w = weights_by_entry[e]
+            for c, k in contrib[e]:
+                t[c][k] += w
+        return t
+
+    point = totals_of(rows)
+    fixed_rows, sampled = [], {}
+    for e in rows:
+        if abs(weights_by_entry[e] - 1.0) <= WEIGHT_TOLERANCE:
+            fixed_rows.append(e)
+        else:
+            sampled.setdefault(strata_by_entry[e], []).append(e)
+    boot_p = {c: [] for c in classes}
+    boot_r = {c: [] for c in classes}
+    if sampled:
+        rng = random.Random(seed)
+        fixed = totals_of(fixed_rows)
+        for _ in range(resamples):
+            draw = []
+            for st in sorted(sampled):
+                members = sampled[st]
+                draw.extend(members[rng.randrange(len(members))] for _ in members)
+            t = totals_of(draw, fixed)
+            for c in classes:
+                v = t[c]
+                if v["tp"] + v["fp"] > 0:
+                    boot_p[c].append(v["tp"] / (v["tp"] + v["fp"]))
+                if v["tp"] + v["fn"] > 0:
+                    boot_r[c].append(v["tp"] / (v["tp"] + v["fn"]))
+
+    def interval(est, vals):
+        if est is None:
+            return None
+        if not sampled:
+            return est, est
+        vals = sorted(vals)
+        return (_percentile(vals, 0.025), _percentile(vals, 0.975)) if vals else None
+
+    per, tp_all, fp_all, fn_all, f1s = {}, 0.0, 0.0, 0.0, []
+    for c in classes:
+        tp, fp, fn = point[c]["tp"], point[c]["fp"], point[c]["fn"]
+        tp_all, fp_all, fn_all = tp_all + tp, fp_all + fp, fn_all + fn
+        prec = tp / (tp + fp) if tp + fp else None
+        rec = tp / (tp + fn) if tp + fn else None
+        f1 = (2 * prec * rec / (prec + rec)) if prec and rec else (0.0 if (tp + fp or tp + fn) else None)
+        if f1 is not None:
+            f1s.append(f1)
+        per[c] = {"tp": tp, "fp": fp, "fn": fn, "positives": tp + fn, "predicted": tp + fp, "precision": prec, "recall": rec,
+                  "precision_ci": interval(prec, boot_p[c]), "recall_ci": interval(rec, boot_r[c]), "f1": f1,
+                  "precision_estimable": populations.get(c, 0) >= min_pos, "recall_estimable": tp + fn >= min_pos,
+                  "frame_tagged": populations.get(c, 0)}
+    mp = tp_all / (tp_all + fp_all) if tp_all + fp_all else 0.0
+    mr = tp_all / (tp_all + fn_all) if tp_all + fn_all else 0.0
+    return {"per_class": per, "rows_checked": len(gold), "micro_f1": (2 * mp * mr / (mp + mr)) if mp + mr else 0.0,
+            "macro_f1": (sum(f1s) / len(f1s)) if f1s else None, "macro_over_classes": len(f1s), "seed": seed,
+            "resamples": resamples if sampled else 0}
+
+
+def wnum(x) -> str:
+    """A weighted count: a whole number as such, otherwise two decimals."""
+    return str(int(round(x))) if abs(x - round(x)) < 1e-9 else f"{x:.2f}"
+
+
 # ------------------------------------------------------------------ negative controls
 
 def run_negative_controls(lex, *, snapshot=None, canary=None, planted=None, control_snapshot=None, manual=None,
@@ -729,6 +983,8 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
     ap.add_argument("--counts", type=Path, help="the committed counts file to check against")
     ap.add_argument("--write-counts", type=Path, help="write the recomputed counts here and stop (no check)")
     ap.add_argument("--model-tags", type=Path, help="proposed model tags: a JSON list of {entry_id, class, quote}")
+    ap.add_argument("--model-tags-plain", type=Path,
+                    help="with --model-tags (the consensus-filtered tags): the unfiltered model tags, counted beside them only")
     ap.add_argument("--verify-model-tags", type=Path, help="only verify these proposed tags and print one line each")
     ap.add_argument("--exclude", type=Path)
     ap.add_argument("--explained", type=Path)
@@ -778,6 +1034,9 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
         tags = validate_tags(read_json(a.tags, "tags file"), lex)
         mt = a.model_tags or a.verify_model_tags
         proposed = read_json(mt, "proposed model tags") if mt else []
+        if a.model_tags_plain and not a.model_tags:
+            raise UsageError("--model-tags-plain goes with --model-tags (the consensus-filtered model tags)")
+        plain = read_json(a.model_tags_plain, "plain model tags") if a.model_tags_plain else None
     except (UsageError, ValueError, OSError) as exc:
         print(f"ERROR: {snap.clean(exc, 300)}")
         return 2
@@ -849,23 +1108,74 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             print(f"  rejected {snap.clean(t.get('entry_id', '?'), 40)} {snap.clean(t.get('class', '?'), 40)}: {snap.clean(r['reason'], 200)}")
     else:
         print("model tags: none proposed (quote-rejection rate not measured)")
+    if plain is not None:
+        # Counts only: the plain route beside the consensus rule (proposal 2026-10-11). It never changes a decision.
+        plain_accepted, _ = verify_model_tags(plain, entries, rule_tags, lex)
+        kept = {(t["entry_id"], t["class"]) for t in accepted}
+        plain_pairs = {(t["entry_id"], t["class"]) for t in plain_accepted}
+        print(f"model route: plain {len(plain_pairs)} accepted, with the consensus rule {len(kept)} accepted, "
+              f"{len(plain_pairs - kept)} dropped")
     print("challenger disagreement rate: not measured (no challenger review in this step)")
     sh = counts["shares"]
     print(f"shares of entries: by rule {fmt(sh['by_rule'])}, by model {fmt(sh['by_model'])}, other {fmt(sh['other'])}, "
           f"not stated {fmt(sh['not_stated'])}, unclassified {fmt(sh['unclassified'])}; vague wording {counts['flags']['vague']} entr(ies)")
 
     # 3. metrics
-    m, frozen_problems = None, []
+    m, frozen_problems, census_key = None, [], None
     if a.frozen_sheet:
         try:
             gold, summary = load_frozen(a.frozen_sheet, a.frozen_key, lex)
             frozen_problems = frozen_binding_problems(a.frozen_sheet, a.frozen_key, s, lex, entries)
+            key_obj = read_json(a.frozen_key, "frozen-set key")
+            design = key_obj.get("design") if isinstance(key_obj, dict) else None
+            if design == CENSUS_DESIGN:
+                census_key = key_obj
+                frozen_problems += census_binding_problems(key_obj, retag["entries"], accepted, lex, a.model_tags)
+            elif design is not None:
+                frozen_problems.append(f"the key's design '{snap.clean(design, 40)}' is not one this gate knows")
         except UsageError as exc:
             print(f"ERROR: {snap.clean(exc, 300)}")
             return 2
+        if census_key is not None:
+            print(f"frozen set design: {CENSUS_DESIGN} (exact over the census strata, weighted estimate over the sampled ones)")
         for p in frozen_problems:
             print(f"frozen set: {p}")
-    if a.frozen_sheet and not frozen_problems:
+    if a.frozen_sheet and not frozen_problems and census_key is not None:
+        model_by = {}
+        for t in accepted:
+            model_by.setdefault(t["entry_id"], []).append(t)
+        predicted = {e["entry_id"]: set(final_classes(e, model_by)) for e in retag["entries"]}
+        missing = [e for e in gold if e not in predicted]
+        if missing:
+            failures.append(f"{len(missing)} frozen-set entr(ies) are not in this snapshot's scope: {missing[:5]}")
+        strata = census_key["strata"]
+        strata_by = {r["entry_id"]: r["stratum"] for r in census_key["rows"]}
+        weights_by = {e: float(strata[st]["weight"]) for e, st in strata_by.items()}
+        frame_counts = frame_class_counts(census_frame(retag["entries"], accepted), lex)
+        m = metrics_weighted({e: g for e, g in gold.items() if e in predicted}, predicted, lex.class_order, weights_by, strata_by,
+                             frame_counts, THRESHOLDS["min_positives"], census_key["seed"])
+        print(f"frozen set: {summary['rows']} rows, {summary['labelled']} labelled, {summary['unlabelled']} unlabelled")
+        print("frozen set strata: " + ", ".join(
+            f"{snap.clean(n, 40)} {st['drawn']} of {st['population']} (weight {wnum(st['weight'])})" for n, st in sorted(strata.items())))
+        print(f"intervals: stratified bootstrap, {m['resamples']} resamples, seed {m['seed']}, 95% percentile"
+              + ("" if m["resamples"] else " (every stratum drawn in full, so every value is exact)"))
+        for c, v in m["per_class"].items():
+            if v["positives"] == 0 and v["predicted"] == 0 and v["frame_tagged"] == 0:
+                continue
+            parts = []
+            for name, n, est, ci, why in (
+                    ("precision", v["predicted"], v["precision_estimable"], v["precision_ci"], f"{v['frame_tagged']} tagged in the frame"),
+                    ("recall", v["positives"], v["recall_estimable"], v["recall_ci"], f"weighted positives {wnum(v['positives'])}")):
+                if not est:
+                    parts.append(f"{name} too few to estimate ({why})")
+                elif n == 0 or ci is None:
+                    parts.append(f"{name} n/a (weighted {wnum(v['tp'])}/{wnum(n)})")
+                else:
+                    parts.append(f"{name} {fmt(v['tp'] / n)} (weighted {wnum(v['tp'])}/{wnum(n)}, 95% CI {fmt(ci[0])}-{fmt(ci[1])})")
+            print(f"  {c:28} " + "   ".join(parts) + f"   tagged in the frame {v['frame_tagged']}")
+        print(f"  micro F1 {fmt(m['micro_f1'])}   macro F1 {fmt(m['macro_f1'])} over {m['macro_over_classes']} class(es)   "
+              f"rows checked {m['rows_checked']}   ('other' is not scored)")
+    elif a.frozen_sheet and not frozen_problems:
         model_by = {}
         for t in accepted:
             model_by.setdefault(t["entry_id"], []).append(t)
@@ -935,14 +1245,20 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             blocked.append(f"S1 only {summary['labelled']} labelled rows; the design needs at least {MIN_FROZEN_ROWS}")
         if summary["unlabelled"]:
             blocked.append(f"S1 {summary['unlabelled']} row(s) of the frozen sheet are unlabelled; every drawn row must be labelled")
-        unlabelled_classes = [c for c in shown if m["per_class"][c]["positives"] == 0]
+        # In the census design `other` is not scored, so it has no per-class entry and is left to S2.
+        scored_shown = [c for c in shown if c in m["per_class"]]
+        unlabelled_classes = [c for c in scored_shown if m["per_class"][c]["positives"] == 0]
         if unlabelled_classes:
             blocked.append(f"S1 shown class(es) with no labelled positive: {', '.join(unlabelled_classes)} (nothing checks their recall)")
-        for c in shown:
+        for c in scored_shown:
             v = m["per_class"][c]
             if not (v["precision_estimable"] and v["recall_estimable"]):
-                print(f"  note: {c} is shown but few checked ({v['predicted']} tagged, {v['positives']} labelled in the frozen set); "
-                      "the page must say 'few checked'")
+                if census_key is not None:
+                    print(f"  note: {c} is shown but few checked ({v['frame_tagged']} tagged in the frame, {wnum(v['positives'])} "
+                          "weighted labelled positives in the frozen set); the page must say 'few checked'")
+                else:
+                    print(f"  note: {c} is shown but few checked ({v['predicted']} tagged, {v['positives']} labelled in the frozen set); "
+                          "the page must say 'few checked'")
             if v["precision_estimable"] and v["precision"] is not None and v["precision"] < THRESHOLDS["precision"]:
                 blocked.append(f"S1 {c}: precision {fmt(v['precision'])} is below {THRESHOLDS['precision']}")
             if v["recall_estimable"] and v["recall"] is not None and v["recall"] < THRESHOLDS["recall"]:

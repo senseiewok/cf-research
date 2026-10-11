@@ -711,6 +711,323 @@ class PublicationTest(Fixture):
         self.assertIn("unknown class", out)
 
 
+def tag_entry(eid, classes, status=None, no_primary=False):
+    """A hand-made tags-file entry (only the fields the census code reads)."""
+    status = status or ("not_stated" if classes == ["not_stated"] else ("rule" if classes else "unclassified"))
+    return {"entry_id": eid, "nct_id": eid.split(":")[0], "status": status, "tags": [{"class": c} for c in classes],
+            "flags": {"no_primary_outcome": no_primary}}
+
+
+class CensusUnitTest(unittest.TestCase):
+    """The census-v1 design on small hand-made frames and keys (proposals/2026-10-11-frozen-census-design.md)."""
+
+    # ---- weighted metrics
+
+    def frame(self, sampled_weight=2.0):
+        gold = {"c1": {"fev1"}, "c2": {"fev1"}, "c3": {"lci"}, "s1": {"fev1"}, "s2": {"other"}}
+        pred = {"c1": {"fev1"}, "c2": set(), "c3": {"fev1", "lci"}, "s1": {"fev1"}, "s2": {"fev1", "other"}}
+        strata = {"c1": "census:small", "c2": "census:small", "c3": "census:small", "s1": "sample:fev1", "s2": "sample:fev1"}
+        weights = {e: (sampled_weight if st.startswith("sample:") else 1.0) for e, st in strata.items()}
+        return gold, pred, weights, strata
+
+    def test_weighted_precision_and_recall_by_hand(self):
+        gold, pred, w, st = self.frame()
+        m = ca.metrics_weighted(gold, pred, ["fev1", "lci", "other"], w, st, {"fev1": 12, "lci": 3, "other": 40}, 10, seed=5)
+        f = m["per_class"]["fev1"]
+        # census: c1 TP, c2 FN, c3 FP (weight 1); sampled at weight 2: s1 TP, s2 FP
+        self.assertEqual((f["tp"], f["fp"], f["fn"]), (3.0, 3.0, 1.0))
+        self.assertAlmostEqual(f["precision"], 3 / 6)
+        self.assertAlmostEqual(f["recall"], 3 / 4)
+        self.assertEqual((f["positives"], f["predicted"]), (4.0, 6.0))
+        self.assertTrue(f["precision_estimable"])                 # 12 entries in the FRAME carry fev1, though only 6 weighted are drawn
+        self.assertFalse(f["recall_estimable"])                   # 4 weighted positives: under 10
+        self.assertEqual(f["frame_tagged"], 12)
+        self.assertEqual(m["resamples"], 2000)
+        self.assertEqual(m["seed"], 5)
+        lo, hi = f["precision_ci"]
+        self.assertTrue(0.0 <= lo <= hi <= 1.0)
+
+    def test_census_only_classes_are_exact(self):
+        gold, pred, w, st = self.frame()
+        m = ca.metrics_weighted(gold, pred, ["fev1", "lci"], w, st, {"fev1": 12, "lci": 3}, 10, seed=5)
+        lci = m["per_class"]["lci"]
+        self.assertEqual((lci["tp"], lci["fp"], lci["fn"]), (1.0, 0.0, 0.0))
+        self.assertEqual((lci["precision"], lci["recall"]), (1.0, 1.0))
+        self.assertEqual(lci["precision_ci"], (1.0, 1.0))         # every lci row is in a census stratum: no sampling error
+        self.assertEqual(lci["recall_ci"], (1.0, 1.0))
+        self.assertFalse(lci["precision_estimable"])              # 3 in the frame
+        # a set drawn wholly from census strata has no bootstrap at all and every interval is the point value
+        only = {e: g for e, g in gold.items() if e.startswith("c")}
+        m2 = ca.metrics_weighted(only, pred, ["fev1"], w, st, {"fev1": 12}, 10, seed=5)
+        f = m2["per_class"]["fev1"]
+        self.assertEqual(m2["resamples"], 0)
+        self.assertEqual((f["precision"], f["recall"]), (0.5, 0.5))
+        self.assertEqual((f["precision_ci"], f["recall_ci"]), ((0.5, 0.5), (0.5, 0.5)))
+
+    def test_a_sampled_row_of_weight_2_counts_double(self):
+        gold, pred, w, st = self.frame(sampled_weight=1.0)
+        one = ca.metrics_weighted(gold, pred, ["fev1"], w, st, {}, 10, seed=1)["per_class"]["fev1"]
+        gold, pred, w, st = self.frame(sampled_weight=2.0)
+        two = ca.metrics_weighted(gold, pred, ["fev1"], w, st, {}, 10, seed=1)["per_class"]["fev1"]
+        self.assertEqual((one["tp"], one["fp"]), (2.0, 2.0))
+        self.assertEqual((two["tp"], two["fp"]), (3.0, 3.0))      # the census rows once, s1 and s2 twice each
+        self.assertEqual(two["fn"], one["fn"])
+
+    def test_other_is_not_scored(self):
+        gold, pred, w, st = self.frame()
+        m = ca.metrics_weighted(gold, pred, ["fev1", "lci", "other"], w, st, {"other": 99}, 1, seed=1)
+        self.assertNotIn("other", m["per_class"])
+        self.assertEqual(m["macro_over_classes"], 2)
+
+    def test_the_bootstrap_is_deterministic_for_a_seed_and_moves_with_it(self):
+        gold, pred, w, st = {}, {}, {}, {}
+        for i in range(12):
+            e = f"s{i}"
+            gold[e] = {"fev1"} if i % 3 else {"lci"}
+            pred[e] = {"fev1"} if i % 4 else {"lci"}
+            st[e], w[e] = ("sample:fev1", 2.5) if i < 8 else ("sample:lci", 1.5)
+        gold["c0"], pred["c0"], st["c0"], w["c0"] = {"fev1"}, {"fev1"}, "census:small", 1.0
+
+        def cis(seed):
+            m = ca.metrics_weighted(gold, pred, ["fev1", "lci"], w, st, {}, 1, seed=seed, resamples=50)
+            return tuple((v["precision_ci"], v["recall_ci"]) for v in m["per_class"].values())
+        self.assertEqual(cis(11), cis(11))
+        self.assertGreater(len({cis(s) for s in range(1, 6)}), 1)
+        full = ca.metrics_weighted(gold, pred, ["fev1"], w, st, {}, 1, seed=11)
+        self.assertEqual(full, ca.metrics_weighted(gold, pred, ["fev1"], w, st, {}, 1, seed=11))
+
+    # ---- strata and the binding checks
+
+    LEX_ENTRIES = staticmethod(lambda: [
+        tag_entry("N1:f1", ["fev1"]), tag_entry("N1:f2", ["fev1"]), tag_entry("N1:f3", ["fev1"]),
+        tag_entry("N2:fs", ["fev1", "sweat_chloride"]), tag_entry("N2:s1", ["sweat_chloride"]), tag_entry("N2:s2", ["sweat_chloride"]),
+        tag_entry("N3:l1", ["lci"]), tag_entry("N3:fl", ["fev1", "lci"]),
+        tag_entry("N4:u1", []), tag_entry("N4:u2", []),
+        tag_entry("N5:n1", ["not_stated"]), tag_entry("N5:n2", ["not_stated"]), tag_entry("N5:n3", ["not_stated"]),
+        tag_entry("N6:x0", ["not_stated"], no_primary=True)])
+    ACCEPTED = [{"entry_id": "N4:u2", "class": "other"}]
+    EXPECTED = {"N1:f1": "sample:fev1", "N1:f2": "sample:fev1", "N1:f3": "sample:fev1",
+                "N2:fs": "sample:sweat_chloride", "N2:s1": "sample:sweat_chloride", "N2:s2": "sample:sweat_chloride",
+                "N3:l1": "census:small", "N3:fl": "census:small", "N4:u2": "census:small",
+                "N4:u1": "census:unclassified", "N5:n1": "census:not_stated", "N5:n2": "census:not_stated", "N5:n3": "census:not_stated"}
+
+    def test_strata_follow_the_design_order(self):
+        frame = ca.census_frame(self.LEX_ENTRIES(), self.ACCEPTED)
+        self.assertNotIn("N6:x0", frame)                          # no primary-outcome wording: never in the frame
+        self.assertEqual(ca.census_strata(frame, LEX, 2), self.EXPECTED)
+        # ties between equally rare large classes go by the lexicon's class order (fev1 before lci)
+        tie = ca.census_frame([tag_entry("A:1", ["lci", "fev1"]), tag_entry("A:2", ["fev1", "lci"])], [])
+        self.assertEqual(ca.census_strata(tie, LEX, 0), {"A:1": "sample:fev1", "A:2": "sample:fev1"})
+        # not_stated is never a small class: a lone not_stated entry is still census:not_stated
+        self.assertEqual(ca.census_strata(ca.census_frame([tag_entry("B:1", ["not_stated"])], []), LEX, 30),
+                         {"B:1": "census:not_stated"})
+
+    def key(self):
+        strata = {"sample:fev1": {"kind": "sample", "population": 3, "drawn": 2, "weight": 1.5},
+                  "sample:sweat_chloride": {"kind": "sample", "population": 3, "drawn": 3, "weight": 1.0},
+                  "census:small": {"kind": "census", "population": 3, "drawn": 3, "weight": 1},
+                  "census:unclassified": {"kind": "census", "population": 1, "drawn": 1, "weight": 1},
+                  "census:not_stated": {"kind": "census", "population": 3, "drawn": 3, "weight": 1}}
+        rows = [{"sample_id": f"S{i:03d}", "entry_id": e, "stratum": st}
+                for i, (e, st) in enumerate(sorted((e, st) for e, st in self.EXPECTED.items() if e != "N1:f3"), 1)]
+        return {"design": "census-v1", "small_max": 2, "large_per_class": 2, "seed": 4, "model_tags_sha256": None,
+                "consensus": None, "strata": strata, "rows": rows}
+
+    def problems(self, key, model_path=None):
+        return ca.census_binding_problems(key, self.LEX_ENTRIES(), self.ACCEPTED, LEX, model_path)
+
+    def test_a_key_that_describes_the_frame_binds(self):
+        self.assertEqual(self.problems(self.key()), [])
+
+    def test_populations_that_do_not_sum_are_a_problem(self):
+        k = self.key()
+        k["strata"]["census:unclassified"]["population"] = 2
+        k["strata"]["census:unclassified"]["drawn"] = 2
+        out = " | ".join(self.problems(k))
+        self.assertIn("the key's strata hold 14 entries in all; this snapshot's frame has 13", out)
+
+    def test_a_wrong_weight_is_a_problem(self):
+        k = self.key()
+        k["strata"]["sample:fev1"]["weight"] = 2
+        self.assertEqual(self.problems(k), ["1 stratum weight(s) are not population/drawn: sample:fev1 (weight 2, population/drawn 1.5)"])
+        k["strata"]["sample:fev1"]["weight"] = 1.5 + 1e-12          # within the tolerance
+        self.assertEqual(self.problems(k), [])
+
+    def test_a_row_in_another_stratum_than_the_frame_gives_is_a_problem(self):
+        k = self.key()
+        for r in k["rows"]:                                      # swap two rows: drawn counts and populations still add up
+            if r["entry_id"] == "N1:f1":
+                r["stratum"] = "sample:sweat_chloride"
+            elif r["entry_id"] == "N2:s1":
+                r["stratum"] = "sample:fev1"
+        out = self.problems(k)
+        self.assertEqual(len(out), 1, out)
+        self.assertIn("2 drawn row(s) sit in a different stratum from the one this frame gives", out[0])
+        self.assertIn("frame sample:fev1", out[0])
+
+    def test_a_different_small_max_moves_the_frame(self):
+        k = self.key()
+        k["small_max"] = 3                                       # fev1 still large; sweat_chloride (3) becomes small
+        self.assertTrue(any("different stratum" in p for p in self.problems(k)))
+
+    def test_drawn_counts_census_and_names_are_checked(self):
+        k = self.key()
+        k["strata"]["census:not_stated"]["drawn"] = 2
+        k["strata"]["census:not_stated"]["weight"] = 1.5
+        out = " | ".join(self.problems(k))
+        self.assertIn("record a drawn count that differs from their rows: census:not_stated (drawn 2, rows 3)", out)
+        self.assertIn("census stratum(s) were not drawn in full: census:not_stated", out)
+        k = self.key()
+        k["rows"][0]["stratum"] = "sample:nowhere"
+        self.assertTrue(any("name a stratum the key does not hold" in p for p in self.problems(k)))
+        k = self.key()
+        del k["strata"]
+        self.assertEqual(self.problems(k), ["the census key has no strata"])
+
+    def test_the_model_tags_hash_must_match(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "mt.json"
+            p.write_bytes(b'[{"entry_id": "N4:u2", "class": "other", "quote": "x"}]\n')
+            self.assertIsNone(ca.model_tags_digest(None))
+            digest = ca.model_tags_digest(p)
+            self.assertEqual(digest, __import__("hashlib").sha256(p.read_bytes()).hexdigest())
+            k = self.key()
+            self.assertEqual(self.problems(k, p), ["the key was drawn without model tags, but --model-tags was given"])
+            k["model_tags_sha256"] = digest
+            self.assertEqual(self.problems(k, p), [])
+            self.assertEqual(self.problems(k, None), ["the key was drawn with model tags, but no --model-tags was given"])
+            k["model_tags_sha256"] = "0" * 64
+            self.assertEqual(self.problems(k, p), ["the key's model_tags_sha256 does not match the model-tags file given"])
+
+
+class CensusGateTest(Fixture):
+    """check_atlas.main with a hand-built census-v1 key on the synthetic snapshot."""
+
+    def census(self, small_max=30, large_per_class=40, label=None, mutate=None, seed=3):
+        tags = json.loads(self.tags_path.read_text(encoding="utf-8"))
+        entries = ca.entry_texts(self.s)
+        rules = {e["entry_id"]: e for e in tags["entries"]}
+        accepted, _ = ca.verify_model_tags(sf.good_model_tags(), entries, rules, LEX)
+        frame = ca.census_frame(tags["entries"], accepted)
+        strata_of = ca.census_strata(frame, LEX, small_max)
+        members: dict[str, list[str]] = {}
+        for e, st in sorted(strata_of.items()):
+            members.setdefault(st, []).append(e)
+        rng = __import__("random").Random(seed)
+        strata, chosen = {}, []
+        for st, ids in sorted(members.items()):
+            take = ids if st.startswith("census:") else rng.sample(ids, min(large_per_class, len(ids)))
+            strata[st] = {"kind": "census" if st.startswith("census:") else "sample", "population": len(ids), "drawn": len(take),
+                          "weight": len(ids) / len(take)}
+            chosen += [(e, st) for e in take]
+        rng.shuffle(chosen)
+        final = {e: frame[e]["classes"] for e in frame}
+        rows, key_rows = [], []
+        for i, (e, st) in enumerate(chosen, 1):
+            sid = f"S{i:03d}"
+            rows.append({"sample_id": sid, "measure": mls.safe_cell(entries[e]["measure"]),
+                         "description": mls.safe_cell(entries[e]["description"]), "time_frame": mls.safe_cell(entries[e]["time_frame"]),
+                         "label_composite": "", "label_notes": "",
+                         "label_classes": ";".join(label(e, final[e]) if label else final[e])})
+            key_rows.append({"sample_id": sid, "entry_id": e, "stratum": st})
+        key = {"kind": "trial-atlas frozen-set key", "design": "census-v1", "seed": seed, "small_max": small_max,
+               "large_per_class": large_per_class, "snapshot_sha256": self.s.digest, "lexicon_sha256": LEX.sha256,
+               "tags_sha256": mls.tags_digest(tags), "model_tags_sha256": ca.model_tags_digest(self.model_path), "consensus": None,
+               "sheet_wording_sha256": ca.sheet_wording_sha(rows), "strata": strata, "rows": key_rows}
+        if mutate:
+            mutate(key)
+        sp, kp = self.work / "census-sheet.csv", self.work / "census-key.json"
+        with sp.open("w", encoding="utf-8", newline="") as fh:
+            w = csv.DictWriter(fh, fieldnames=mls.COLUMNS)
+            w.writeheader()
+            w.writerows(rows)
+        kp.write_text(json.dumps(key), encoding="utf-8")
+        return ["--frozen-sheet", sp, "--frozen-key", kp], len(rows)
+
+    def gate(self, frozen, rows):
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", rows), mock.patch.object(ca, "MIN_CONTROL_ENTRIES", 8):
+            return run(self.base() + frozen + self.controls() + ["--explained", self.explained], allow_synthetic_for_tests=True)
+
+    def test_an_all_census_set_passes_with_exact_values(self):
+        frozen, rows = self.census()
+        self.assertEqual(rows, 19)                               # the frame: 20 entries less the one with no primary outcome
+        code, out = self.gate(frozen, rows)
+        self.assertEqual(code, 0, out)
+        self.assertEqual(out.count("frozen set design: census-v1 (exact over the census strata, weighted estimate over the sampled "
+                                   "ones)"), 1)
+        self.assertIn("frozen set strata: census:not_stated 1 of 1 (weight 1), census:small 18 of 18 (weight 1)", out)
+        self.assertIn("every stratum drawn in full, so every value is exact", out)
+        self.assertIn("tagged in the frame 2", out)              # e.g. pharmacokinetics
+        self.assertIn("few checked (2 tagged in the frame, 2 weighted labelled positives in the frozen set)", out)
+        self.assertNotRegex(out, r"\n  other ")                  # other is not scored
+        self.assertIn("RESULT: PASS", out)
+
+    def test_a_sampled_stratum_is_weighted_through_the_gate(self):
+        frozen, rows = self.census(small_max=1, large_per_class=1)
+        self.assertEqual(rows, 17)                               # safety and pharmacokinetics: 1 of 2 each
+        code, out = self.gate(frozen, rows)
+        self.assertEqual(code, 0, out)
+        self.assertIn("sample:pharmacokinetics 1 of 2 (weight 2)", out)
+        self.assertIn("sample:safety_tolerability 1 of 2 (weight 2)", out)
+        self.assertIn("intervals: stratified bootstrap, 2000 resamples, seed 3, 95% percentile", out)
+        self.assertIn("weighted positives 2", out)               # the one drawn pharmacokinetics row counts twice
+
+    def test_no_labelled_positive_still_blocks_in_census_mode(self):
+        frozen, rows = self.census(label=lambda e, cls: ["other"] if "pharmacokinetics" in cls else cls)
+        code, out = self.gate(frozen, rows)
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S1 shown class(es) with no labelled positive: pharmacokinetics", out)
+
+    def test_fewer_than_50_labelled_rows_still_blocks_in_census_mode(self):
+        frozen, rows = self.census()
+        with mock.patch.object(ca, "MIN_CONTROL_ENTRIES", 8):
+            code, out = run(self.base() + frozen + self.controls() + ["--explained", self.explained], allow_synthetic_for_tests=True)
+        self.assertEqual(code, 3, out)
+        self.assertIn("STOP S1 only 19 labelled rows; the design needs at least 50", out)
+
+    def test_a_key_that_does_not_describe_the_frame_blocks(self):
+        def other_hash(k):
+            k["model_tags_sha256"] = "0" * 64
+
+        def bad_weight(k):
+            k["strata"]["census:small"]["weight"] = 2
+        for mutate, text in ((other_hash, "the key's model_tags_sha256 does not match the model-tags file given"),
+                             (bad_weight, "stratum weight(s) are not population/drawn: census:small")):
+            with self.subTest(text=text):
+                frozen, rows = self.census(mutate=mutate)
+                code, out = self.gate(frozen, rows)
+                self.assertEqual(code, 3, out)
+                self.assertIn("STOP S1 the frozen set does not belong to this snapshot and lexicon", out)
+                self.assertIn(text, out)
+
+    def test_a_legacy_key_is_unchanged_and_an_unknown_design_is_refused(self):
+        with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19), mock.patch.object(ca, "MIN_CONTROL_ENTRIES", 8):
+            code, out = run(self.base() + self.frozen() + self.controls() + ["--explained", self.explained],
+                            allow_synthetic_for_tests=True)
+        self.assertEqual(code, 0, out)
+        self.assertNotIn("frozen set design", out)
+        self.assertIn("too few to estimate (", out)
+        frozen = self.frozen()
+        key = json.loads(Path(frozen[3]).read_text(encoding="utf-8"))
+        key["design"] = "census-v9"
+        Path(frozen[3]).write_text(json.dumps(key), encoding="utf-8")
+        code, out = self.gate(frozen, 19)
+        self.assertEqual(code, 3, out)
+        self.assertIn("the key's design 'census-v9' is not one this gate knows", out)
+
+    def test_the_plain_route_is_counted_beside_the_consensus_rule(self):
+        plain = self.work / "plain.json"
+        plain.write_text(json.dumps(sf.good_model_tags() + [{"entry_id": "NCT00000014:P3", "class": "pro_unnamed",
+                                                            "quote": "return to school"}]), encoding="utf-8")
+        code, out = run(self.base() + ["--model-tags-plain", plain, "--drift-only"])
+        self.assertEqual(code, 0, out)                           # counts only: nothing changes
+        self.assertIn("model route: plain 2 accepted, with the consensus rule 1 accepted, 1 dropped", out)
+        code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", self.counts_path,
+                         "--model-tags-plain", plain])
+        self.assertEqual(code, 2, out)
+        self.assertIn("--model-tags-plain goes with --model-tags", out)
+
+
 class SelfConsistencyTest(Fixture):
     """--self-consistency: the relationships a counts file must satisfy, the same rules a page generator applies."""
 

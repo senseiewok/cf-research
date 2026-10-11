@@ -16,7 +16,8 @@ Words used here: a **retrieval route** is one of the searches a snapshot is fetc
 | `lexicon.json` | The versioned rule lexicon: two-level taxonomy (each class with a one-line gloss for the person labelling), one regular expression per rule with its own examples, safety subtypes, the composite rule, the not-stated rules, time-frame buckets |
 | `lexicon.py` | Applies the lexicon. Each tag records the rule id and the exact matched span. Before matching, every run of whitespace in the text is collapsed to one space, and subscript digits and dashes are folded one to one to ASCII digits and '-'; spans are mapped back to the original text. A pattern with an inline `(?x)`, an escaped space or a nested quantifier is refused at load. A time frame longer than 2,000 characters is "unparseable". `lexicon.py try "text"` shows what matches; `lexicon.py classes` lists every class with its domain and gloss; `lexicon.py tag` never overwrites its output |
 | `check_atlas.py` | Recomputes every count and fails on drift; rejects model tags whose quote is not an exact substring; prints the metrics on the frozen set; runs the negative controls; applies the publication stop rules; `--confirm-real-run` records that a person checked a real snapshot's configuration |
-| `make_labelling_sheet.py` | Draws the frozen set (stratified, seeded) and writes a blind sheet (wording only), the registry's terms beside it, and a sealed key |
+| `make_labelling_sheet.py` | Draws the frozen set and writes a blind sheet (wording only), the registry's terms beside it, and a sealed key. `--design legacy` (default): a seeded stratified draw of up to 150 rows. `--design census-v1`: every entry of the small classes and every unclassified entry, plus a weighted random sample of the large classes; see "The census frozen set" below |
+| `apply_consensus.py` | Applies the consensus rule to the model route's proposals: a proposal is kept only if a blind model of another family also gave that class. Writes the kept tags, a counts-only report and the dropped list, outside every repository |
 | `propose_tags.py` | The model-assisted route: a local model proposes one class, with an exact quote, for each entry the rules left unclassified; a script keeps only the proposals it can verify. `--self-check` runs the planted controls with a fake model |
 | `challenge_tags.py` | A blind second opinion from a model of a different family on a seeded sample of model-accepted and rule-tagged entries, with the agreement rate and a disagreement list |
 | `ground_definitions.py` | Source grounding for the glosses: searches Europe PMC for open-access, openly licensed articles, asks a local model for one sentence that defines each target term, and keeps only quotes a script verifies. See "Grounding the glosses" below |
@@ -367,6 +368,27 @@ The one-target run comes first. Read its `searches.jsonl`: if the `definition` s
 - that `EVIDENCE_CONTACT` is never printed or stored.
 
 No test calls a model or opens the network.
+
+## The census frozen set
+
+Why: the gate needs a labelled positive for every shown class, but 20 of the 36 classes hold 28 or fewer entries, so a random set of 150 rows cannot give them one. The design, the council that chose it and its risks are in `proposals/2026-10-11-frozen-census-design.md`; the council's approvals are in `proposals/2026-10-11-council-approvals.md`.
+
+`make_labelling_sheet.py --design census-v1 --snapshot SNAP --tags TAGS --model-tags MODEL_TAGS --sheet VIEW/sheet.csv --key SEALED/key.json --seed N [--small-max 30] [--large-per-class 40] [--report]`:
+
+| Stratum | Entries | Drawn | Weight |
+| --- | --- | --- | --- |
+| `census:small` | carries a class that has `small-max` or fewer entries | all | 1 |
+| `census:unclassified` | no accepted class | all | 1 |
+| `census:not_stated` | status `not_stated` | all | 1 |
+| `sample:<class>` | only classes with more entries than `small-max`; the entry's rarest such class | `large-per-class` by seeded random draw | population / drawn |
+
+The sheet is blind as before. The key (`design: census-v1`) holds each stratum's population, rows drawn and weight, and the hash of the model-tags file, so the frame is bound to the tags that defined it. `check_atlas.py` re-derives every row's stratum and refuses a key that disagrees. For a census key it prints weighted precision and recall; the intervals are a seeded stratified bootstrap over the sampled strata only (a census stratum is exact). A class is estimable for precision when 10 or more entries in the frame carry it and for recall when its weighted positives reach 10; `other` is not scored. The legacy design and its 150-row cap are unchanged.
+
+`--model-tags-plain FILE` (with `--model-tags`) prints how many proposals the consensus rule kept and dropped, beside the plain route. It changes no decision.
+
+**The consensus rule** (`apply_consensus.py --model-tags FILE --blind-labels FILE --proposer-family NAME --out DIR`): a proposal for an unclassified entry is kept only when a blind model of a different family, labelling the entry on its own, gave the same class; an invalid or missing blind reply drops it. The blind labels are one JSON file: `{"labeller_family", "labeller_model", "entries": {entry_id: {"classes": [...]} or {"invalid": true}}}`. It refuses a labeller of the proposer's family and an `--out` inside a git repository (the kept tags carry registry quotes). The rule was chosen on 2026-10-11 after the plain route's precision was seen, so its figures on the development entries are development figures.
+
+What it does not do: it makes no label, and a model council's labels are not a person's. The numbers it produces are tier T2 until a person has checked a sample.
 
 ## When a fetch stops
 
