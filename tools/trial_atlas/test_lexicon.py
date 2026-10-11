@@ -379,6 +379,13 @@ class SnapshotTaggingTest(unittest.TestCase):
                 self.assertEqual(lexicon.main(["tag", str(Path(tmp) / "s"), "--out", str(out)]), 2)
             self.assertEqual(out.read_text(encoding="utf-8"), "KEEP")
 
+    def test_the_not_stated_class_is_labelled_no_measure_named(self):
+        # round 4: only this class label changes; its domain label and every other label wait for a clinician reader (T-0105)
+        self.assertEqual(LEX.labels["not_stated"], "No measure named")
+        self.assertEqual(LEX.version, "0.2.3-draft")
+        domain = next(d for d in LEX.data["domains"] if d["id"] == "not_stated")
+        self.assertEqual(domain["label"], "Not stated")
+
     def test_classes_lists_every_class_with_its_domain_and_gloss(self):
         import contextlib
         import io

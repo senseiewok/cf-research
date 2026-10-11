@@ -71,6 +71,7 @@ MODEL_FORBIDDEN_CLASSES = {"not_stated"}
 MIN_FROZEN_ROWS = 50          # the design's number of person-labelled outcome entries (decision 5)
 MIN_CONTROL_ENTRIES = 50      # the fewest outcome entries a non-CF control snapshot may hold for the gate (a reviewer's number)
 TAG_STATUSES = {"rule", "not_stated", "unclassified"}
+CO_OCCURRENCE_EXCLUDED = ("other", "not_stated")
 
 # The registry's terms travel with every count (counts.json, the printed header, the TERMS file beside a labelling sheet).
 REGISTRY_SOURCE = "ClinicalTrials.gov"
@@ -79,6 +80,18 @@ TERMS_URL = "https://clinicaltrials.gov/about-site/terms-conditions"
 LICENCE_LINE = ("The lab's licence covers its own tags, code and counts only; registry text and fields remain ClinicalTrials.gov data "
                 "under its terms.")
 RETENTION_NOTE = "The registry's terms apply for as long as the data are kept, in any copy, file or page made from them."
+# Round 4: wording quoted or closely paraphrased from the registry's pages as read on 2026-10-10 by the controlling agent (not by
+# these tools, which open no URL). The Disclaimer page said "Last updated on August 03, 2023".
+NO_WARRANTY = ("ClinicalTrials.gov states that the U.S. Government makes no warranties about its data and assumes no liability for "
+               "their use.")
+SPONSOR_RESPONSIBILITY = ("Study sponsors and investigators write and are responsible for their own records; the U.S. Government does "
+                          "not review or approve the safety and science of all studies listed. See the registry's Disclaimer.")
+DISCLAIMER_URL = "https://clinicaltrials.gov/about-site/disclaimer"
+DISCLAIMER_LAST_UPDATED = "2023-08-03"
+THIRD_PARTY_COPYRIGHT = ("Some registry data may be subject to third-party copyright, and the data carry an international copyright "
+                         "outside the United States.")
+KEEP_CURRENT = ("The registry asks that data in any publication or distribution be kept current at all times; this copy is dated and "
+                "the live record is current.")
 
 
 def registry_terms(snapshot, lex, scope_counts: dict) -> dict:
@@ -102,17 +115,28 @@ def registry_terms(snapshot, lex, scope_counts: dict) -> dict:
         ],
         "licence": LICENCE_LINE,
         "retention": RETENTION_NOTE,
+        "no_warranty": NO_WARRANTY,
+        "sponsor_responsibility": SPONSOR_RESPONSIBILITY,
+        "disclaimer_url": DISCLAIMER_URL,
+        "disclaimer_last_updated": DISCLAIMER_LAST_UPDATED,
+        "third_party_copyright": THIRD_PARTY_COPYRIGHT,
+        "keep_current": KEEP_CURRENT,
     }
 
 
 def terms_text(block: dict) -> str:
-    """The terms block as plain lines (for the printed header and the TERMS file beside a CSV)."""
-    lines = [f"source: {block['source']}", f"data processed by the registry: {block['data_processed_by_registry']}",
-             f"snapshot fetched at: {block['snapshot_fetched_at']}",
+    """The terms block as plain lines (for the printed header and the TERMS file beside a CSV). The fetch time is UTC (the manifest
+    writes it with a trailing Z); the registry's processing time is printed exactly as the registry gave it."""
+    lines = [f"source: {block['source']}",
+             f"data processed by the registry: {block['data_processed_by_registry']} (as given by the registry)",
+             f"snapshot fetched at: {block['snapshot_fetched_at']} (UTC)",
              f"terms: {block['terms_url']} (last updated {block['terms_last_updated'] or 'not recorded in the manifest'})",
+             f"disclaimer: {block['disclaimer_url']} (last updated {block['disclaimer_last_updated']})",
              "modifications made by the lab:"]
     lines += [f"  - {m}" for m in block["modifications"]]
-    lines += [f"licence: {block['licence']}", f"retention: {block['retention']}"]
+    lines += [f"no warranty: {block['no_warranty']}", f"sponsor responsibility: {block['sponsor_responsibility']}",
+              f"copyright: {block['third_party_copyright']}", f"keep current: {block['keep_current']}",
+              f"licence: {block['licence']}", f"retention: {block['retention']}"]
     return "\n".join(lines) + "\n"
 
 
@@ -252,7 +276,7 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
         for s in e.get("safety_subtypes", []):
             subtypes[s] += 1
     by_year, by_phase, cf_only, sponsors, no_sponsor = {}, {}, {}, {}, {}
-    by_kind, by_posted = {"actual": {}, "planned": {}}, {}
+    by_kind, by_posted, cyp = {"actual": {}, "planned": {}}, {}, {}
     studies_by_year: dict[str, int] = {}
     for nct, r in studies.items():
         y = str(r["start_year"]) if r["start_year"] else "unknown"
@@ -265,6 +289,9 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
             by_posted.setdefault(c, {})[fp] = by_posted.setdefault(c, {}).get(fp, 0) + 1
             p = phase_label(r["phases"])
             by_phase.setdefault(c, {})[p] = by_phase.setdefault(c, {}).get(p, 0) + 1
+            if r["start_kind"] in ("actual", "planned"):
+                cell = cyp.setdefault(c, {"actual": {}, "planned": {}})[r["start_kind"]].setdefault(y, {})
+                cell[p] = cell.get(p, 0) + 1
             if r["cf_flag"] == "CF only":
                 cf_only[c] = cf_only.get(c, 0) + 1
             name = (r.get("sponsor") or "").strip() if isinstance(r.get("sponsor"), str) else ""
@@ -277,10 +304,39 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
     def share(k):
         return round(k / n, 4) if n else None
 
+    # Studies (not entries) that name both classes of a pair; "other" and "not_stated" are left out of pairs. Pairs are listed in the
+    # lexicon's class order, only when at least one study names both; the per-class totals are the denominators for a share.
+    paired = [c for c in order if c not in CO_OCCURRENCE_EXCLUDED]
+    pair_counts: dict[tuple[str, str], int] = {}
+    for classes in study_classes.values():
+        present = [c for c in paired if c in classes]
+        for i, a in enumerate(present):
+            for b in present[i + 1:]:
+                pair_counts[(a, b)] = pair_counts.get((a, b), 0) + 1
+    co_occurrence = {
+        "unit": "studies",
+        "excluded_classes": list(CO_OCCURRENCE_EXCLUDED),
+        "pairs": [{"a": a, "b": b, "studies": pair_counts[(a, b)]}
+                  for a, b in sorted(pair_counts, key=lambda p: (order.index(p[0]), order.index(p[1])))],
+        "studies_by_class": {c: sum(1 for s in study_classes.values() if c in s) for c in paired},
+    }
+
+    def nested_sorted(d):
+        return {k: nested_sorted(v) if isinstance(v, dict) else v for k, v in sorted(d.items())}
+
     rd = scope_mod.route_difference(snapshot, manual)      # raw differences; explanations are applied only by stop rule S3
     return {
         "kind": "trial-atlas counts",
         "units": "studies are counted once per class; entries are primary-outcome entries; a study can name several classes",
+        # true when the snapshot carries the synthetic marker; a consumer can refuse synthetic data without guessing
+        "synthetic": bool(synthetic_marks(snapshot)),
+        # entries left with no class by a rule or by an accepted model tag (shown as "left unsorted"); not the class "other",
+        # which a model or a person assigns to a measure that fits none of the classes
+        "unsorted_entries": status["unclassified"],
+        # studies per class x start year x phase label, with ACTUAL and planned (ESTIMATED) start types kept apart
+        "class_year_phase": {c: {"actual": nested_sorted(cyp.get(c, {}).get("actual", {})),
+                                 "planned": nested_sorted(cyp.get(c, {}).get("planned", {}))} for c in order},
+        "co_occurrence": co_occurrence,
         "snapshot_sha256": snapshot.digest,
         "data_timestamp": snapshot.manifest.get("data_timestamp"),
         "lexicon_version": lex.version,

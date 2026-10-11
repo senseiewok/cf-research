@@ -2,7 +2,7 @@
 
 Build step 1 of the design in `proposals/2026-10-10-trial-endpoint-atlas.md` (board row T-0130): what interventional cystic fibrosis trials register as their primary outcome, counted from one dated, hashed snapshot of ClinicalTrials.gov.
 
-**Nothing here has been run against the real registry.** Every test runs on synthetic fixtures with no network. The lexicon is a draft (0.2.2-draft) for review. No model is called anywhere in this folder.
+**Nothing here has been run against the real registry.** Every test runs on synthetic fixtures with no network. The lexicon is a draft (0.2.3-draft) for review. No model is called anywhere in this folder.
 
 Words used here: a **retrieval route** is one of the searches a snapshot is fetched with (the condition search, which is the main retrieval route, and the term search, which is the recall retrieval route). The **route name** is that search's name as the manifest records it (`condition`, `term`).
 
@@ -200,14 +200,42 @@ The registry's Terms and Conditions (last updated 2023-01-31, as summarised in t
 The terms also ask that the data be kept current. A frozen snapshot cannot be, so the page must show its date prominently. Some text may belong to third parties, so quote only what each count needs.
 
 **The terms travel with the data.** `counts.json` carries a `registry_terms` block, and `check_atlas.py` prints the same block at the top of every check. The drift check covers it like any other count. The block holds:
-- the source and the registry's processing date
-- the snapshot's fetch date
-- the terms page (`https://clinicaltrials.gov/about-site/terms-conditions`, the address given at review; it was not opened during this offline build) and the last-updated date the manifest records
+- the source
+- the registry's processing date (`data_processed_by_registry`), printed exactly as the registry gave it, with the note "as given by the registry"
+- the snapshot's fetch time (`snapshot_fetched_at`). It is UTC: the manifest writes it with a trailing `Z`, and the printed line says "(UTC)"
+- the terms page (`https://clinicaltrials.gov/about-site/terms-conditions`, the address given at review) and the last-updated date the manifest records
+- the Disclaimer page (`disclaimer_url`: `https://clinicaltrials.gov/about-site/disclaimer`, `disclaimer_last_updated`: 2023-08-03; the page said "Last updated on August 03, 2023")
 - every modification the lab made: the classification by the versioned lexicon, the scope exclusions with their counts, no clipping, pages re-saved after parsing
+- `no_warranty`: "ClinicalTrials.gov states that the U.S. Government makes no warranties about its data and assumes no liability for their use."
+- `sponsor_responsibility`: "Study sponsors and investigators write and are responsible for their own records; the U.S. Government does not review or approve the safety and science of all studies listed. See the registry's Disclaimer."
+- `third_party_copyright`: "Some registry data may be subject to third-party copyright, and the data carry an international copyright outside the United States."
+- `keep_current`: "The registry asks that data in any publication or distribution be kept current at all times; this copy is dated and the live record is current."
 - the licence line: "The lab's licence covers its own tags, code and counts only; registry text and fields remain ClinicalTrials.gov data under its terms."
 - the note that the terms apply for as long as the data are kept.
 
+The wording of `no_warranty`, `sponsor_responsibility`, `third_party_copyright` and `keep_current`, and the Disclaimer's last-updated date, are quoted or closely paraphrased from the registry's pages as read on 2026-10-10 by the controlling agent of this build. The tools open no URL. The terms page address was given at review and was not opened during this offline build.
+
 The only CSV the tools write is the labelling sheet. A CSV has no room for a header comment, so the same block is written beside it as `<sheet name>.TERMS.txt`.
+
+## What counts.json holds
+
+Every count is recomputed from the snapshot and the tags, and the drift check compares all of it with the committed file. Besides the terms block:
+
+- **Scope and size.** `scope` (the counts behind each exclusion), `routes` (the difference between the retrieval routes), `studies`, `entries`, `entries_by_status`.
+- **Counts by class.** `entries_by_class`, `studies_by_class`, `studies_by_class_cf_only`, `lead_sponsors_by_class` (distinct lead sponsors), `studies_without_lead_sponsor_by_class`.
+- **Counts by time and phase.**
+  - `studies_by_start_year` and `studies_by_class_and_start_year`.
+  - `studies_by_class_and_actual_start_year` and `studies_by_class_and_planned_start_year`. A start with no date or no type is in neither.
+  - `studies_by_class_and_first_posted_year`, for banding registration eras.
+  - `studies_by_class_and_phase`. The phase label is the registry's phase values joined with `/`, or `none`.
+  - `class_year_phase`: studies per class, start year and phase label, with ACTUAL and planned (ESTIMATED) start types kept apart.
+- **`co_occurrence`.** For each unordered pair of different classes, the number of studies (not entries) with at least one entry in each.
+  - Only pairs with a count of 1 or more are listed, in the lexicon's class order.
+  - `other` and `not_stated` are left out of pairs.
+  - `studies_by_class` gives the per-class totals a share is computed from.
+- **Flags and buckets.** `flags`, `timeframe_buckets`, `safety_subtypes`, `shares`, `other_entries`.
+- **`unsorted_entries`.** The number of entries that no rule classified and no accepted model tag placed, shown on a page as "left unsorted". It is not the class `other`: `other` is a class that a model or a person assigns to a measure that fits none of the classes, while an unsorted entry has no class at all yet. S2 counts the two together.
+- **`synthetic`.** `true` when the snapshot carries the synthetic marker, so a consumer can refuse synthetic data without guessing. The gate's own refusal (S0) stays.
 
 ## Lexicon decisions to review
 
@@ -219,6 +247,7 @@ The only CSV the tools write is the labelling sheet. A CSV has no room for a hea
 - **From the description** (read only when the measure gives no class), only the earliest match is kept and marked `from_description`. Generic safety wording never decides a class from there.
 - **The time frame's largest written number decides the bucket, with no day-1 adjustment.** "Day 28" is up to 4 weeks; "Day 29" (often a four-week visit when day 1 is the first dose) falls in "over 4 weeks to 6 months".
 - **The glosses** (`lexicon.py classes`) are short, neutral aids for the person labelling, not text for the public site.
+- **The class `not_stated` is labelled "No measure named"** (lexicon 0.2.3-draft). Its id, its domain label ("Not stated") and every other class and domain label are unchanged. They wait for a clinician reader (T-0105).
 
 ## What the lexicon does not cover yet
 
@@ -238,4 +267,5 @@ The only CSV the tools write is the labelling sheet. A CSV has no room for a hea
 - The hand check of 20 studies from the difference between the two retrieval routes (the design's decision 3). The tools print the difference; nobody has checked it by hand.
 - The flag for open-label extensions (the design's guard against clustering).
 - The count deduplicated by lead sponsor. The counts give the number of distinct lead sponsors per class, which is a different number.
+- Per-class links to a registry search.
 - The site.

@@ -203,6 +203,87 @@ class IntegrityTest(Fixture):
         self.assertEqual(c["studies_by_class_and_planned_start_year"]["exacerbations"], {"2027": 1})
         self.assertEqual(c["studies_by_class_and_first_posted_year"]["exacerbations"], {"2019": 1, "2026": 1})
 
+    # ---- round 4 (after 47adc05). Each case failed before its fix.
+
+    def test_the_terms_block_carries_the_disclaimer_items(self):
+        t = json.loads(self.counts_path.read_text(encoding="utf-8"))["registry_terms"]
+        self.assertEqual(t["no_warranty"], "ClinicalTrials.gov states that the U.S. Government makes no warranties about its data and "
+                                           "assumes no liability for their use.")
+        self.assertIn("Study sponsors and investigators write and are responsible for their own records", t["sponsor_responsibility"])
+        self.assertIn("See the registry's Disclaimer.", t["sponsor_responsibility"])
+        self.assertEqual(t["disclaimer_url"], "https://clinicaltrials.gov/about-site/disclaimer")
+        self.assertEqual(t["disclaimer_last_updated"], "2023-08-03")
+        self.assertIn("third-party copyright", t["third_party_copyright"])
+        self.assertIn("international copyright outside the United States", t["third_party_copyright"])
+        self.assertIn("kept current at all times", t["keep_current"])
+        text = ca.terms_text(t)
+        for key in ("no_warranty", "sponsor_responsibility", "third_party_copyright", "keep_current"):
+            self.assertIn(t[key], text)
+        self.assertIn("https://clinicaltrials.gov/about-site/disclaimer (last updated 2023-08-03)", text)
+
+    def test_time_zones_are_stated(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        self.assertTrue(c["registry_terms"]["snapshot_fetched_at"].endswith("Z"))
+        text = ca.terms_text(c["registry_terms"])
+        self.assertIn(f"snapshot fetched at: {c['registry_terms']['snapshot_fetched_at']} (UTC)", text)
+        self.assertIn(f"data processed by the registry: {c['registry_terms']['data_processed_by_registry']} (as given by the registry)",
+                      text)
+
+    def test_counts_say_whether_the_data_are_synthetic(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        self.assertIs(c["synthetic"], True)
+        clean = self.work / "clean"
+        pages = sf.pages(sf.cf_condition_studies(), 8, "condition")
+        for p in pages:
+            p.pop("_synthetic")
+        client = sf.FakeClient({fs.ROUTES["condition"]["query.cond"]: pages},
+                               version={"apiVersion": "2.0.0-test", "dataTimestamp": "2026-10-09T09:00:00"})
+        fs.run(client, clean, routes=["condition"], cfg={"page_size": 8}, contact=sf.DUMMY_CONTACT)
+        s = snap.load(clean)
+        self.assertIs(ca.compute_counts(s, lexicon.tag_snapshot(s, LEX), [], LEX)["synthetic"], False)
+
+    def test_class_year_phase(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))["class_year_phase"]
+        self.assertEqual(c["exacerbations"], {"actual": {"2005": {"PHASE3": 1}}, "planned": {"2027": {"PHASE3": 1}}})
+        self.assertEqual(c["pharmacokinetics"], {"actual": {"2016": {"PHASE1": 1}}, "planned": {}})
+        self.assertEqual(c["feasibility_adherence"]["actual"], {"2018": {"NA": 1}})
+
+    def test_co_occurrence(self):
+        co = json.loads(self.counts_path.read_text(encoding="utf-8"))["co_occurrence"]
+        pairs = {(p["a"], p["b"]): p["studies"] for p in co["pairs"]}
+        self.assertEqual(pairs[("fev1", "sweat_chloride")], 1)
+        self.assertEqual(pairs[("exacerbations", "healthcare_use")], 1)
+        self.assertEqual(pairs[("exacerbations", "cfqr")], 1)
+        self.assertEqual(pairs[("npd", "sinus_upper_airway")], 1)
+        self.assertFalse([p for p in pairs if {"other", "not_stated"} & set(p)])
+        self.assertEqual(co["excluded_classes"], ["other", "not_stated"])
+        self.assertEqual(co["studies_by_class"]["exacerbations"], 2)
+        order = [(LEX.class_order.index(a), LEX.class_order.index(b)) for a, b in pairs]
+        self.assertEqual(order, sorted(order))
+        self.assertTrue(all(i < j for i, j in order))
+
+    def test_unsorted_entries(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        self.assertEqual(c["unsorted_entries"], 0)                       # the one unclassified entry has an accepted model tag
+        s = snap.load(self.snap_dir)
+        self.assertEqual(ca.compute_counts(s, lexicon.tag_snapshot(s, LEX), [], LEX)["unsorted_entries"], 1)
+
+    def test_each_new_count_is_drift_checked(self):
+        for path, mutate in (("class_year_phase", lambda c: c["class_year_phase"]["exacerbations"]["actual"].update({"2005": {"PHASE3": 2}})),
+                             ("co_occurrence", lambda c: c["co_occurrence"]["pairs"][0].update({"studies": 9})),
+                             ("unsorted_entries", lambda c: c.update({"unsorted_entries": 5})),
+                             ("synthetic", lambda c: c.update({"synthetic": False})),
+                             ("registry_terms/no_warranty", lambda c: c["registry_terms"].update({"no_warranty": "x"}))):
+            with self.subTest(path=path):
+                counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
+                mutate(counts)
+                p = self.work / f"counts-{path.replace('/', '-')}.json"
+                p.write_text(json.dumps(counts), encoding="utf-8")
+                code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", p, "--model-tags", self.model_path,
+                                 "--drift-only"])
+                self.assertEqual(code, 1, out)
+                self.assertIn(f"drift /{path}", out)
+
     def test_missing_input_files_are_a_clean_usage_error(self):
         nowhere = self.work / "nowhere.json"
         for flag in ("--exclude", "--explained", "--canary", "--planted", "--control-snapshot"):
