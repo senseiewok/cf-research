@@ -230,6 +230,37 @@ class FailingRules(Fixture):
         self.assertFails(lead, "has ref 'private'")
         self.assertFails(lead, "carries no note")
 
+    def test_read_via_values(self):
+        lead = good_lead()
+        lead["sources"][0]["read_via"] = "telepathy"
+        self.assertFails(lead, "read_via 'telepathy'")
+
+    def test_tool_read_needs_note_and_t1(self):
+        src = {"type": "literature", "ref": "a page", "tier": "T1", "read_on": "2026-10-10", "note": "a short note",
+               "read_via": "page-summarising-tool"}
+        self.assertFails(good_lead(sources=[src]), "needs the note")
+        src = dict(src, note=check_leads.TOOL_NOTE, tier="T2")
+        self.assertFails(good_lead(sources=[src]), "at most T1")
+        src = dict(src, tier="T1")
+        self.assertEqual(self.errors(good_lead(sources=[src])), [])
+
+    def test_tool_note_needs_read_via(self):
+        src = {"type": "literature", "ref": "a page", "tier": "T1", "read_on": "2026-10-10",
+               "note": "Read 2026-10-10; " + check_leads.TOOL_NOTE + "."}
+        self.assertFails(good_lead(sources=[src]), "read_via page-summarising-tool")
+
+    def test_snippet_or_memory_is_t0(self):
+        for via in ("search-snippet", "memory"):
+            src = {"type": "literature", "ref": "x", "tier": "T1", "read_on": "2026-10-10", "note": "", "read_via": via}
+            self.assertFails(good_lead(sources=[src]), "is T0")
+            src = dict(src, tier="T0", read_on=None)
+            self.assertEqual(self.errors(good_lead(sources=[src])), [])
+
+    def test_direct_read_passes(self):
+        for via in ("direct", "local-text-extract", "lab-run"):
+            src = {"type": "data", "ref": "x", "tier": "T1", "read_on": "2026-10-10", "note": "", "read_via": via}
+            self.assertEqual(self.errors(good_lead(sources=[src])), [])
+
     def test_email(self):
         address = "someone" + "@" + "example.org"  # built from pieces so this file holds no address
         self.assertFails(good_lead(title=f"write to {address}"), "email-like text")
@@ -272,6 +303,11 @@ class Rendering(Fixture):
         b = good_lead("L-0001")
         c = good_lead("L-0003", title="Pipe | in title")
         return [a, b, c]
+
+    def test_read_via_shown(self):
+        lead = good_lead()
+        lead["sources"][0].update(tier="T1", read_on="2026-10-10", read_via="page-summarising-tool")
+        self.assertIn("read 2026-10-10 (page-summarising-tool)", render_leads.render([lead]))
 
     def test_deterministic_and_order_independent(self):
         first = render_leads.render(self.leads())

@@ -10,64 +10,91 @@ someone writes that row; only a person sets a row `ready`. How to add, update or
 Tiers: T0 a summary or memory, unverified; T1 a quote from a primary source with its id and date; T2 T1 plus a script
 check and a different model's check; T3 T2 plus a person's review. Effort is an estimate.
 
-19 leads: 14 idea, 4 data-available, 1 done.
+34 leads: 20 idea, 1 scoping, 12 data-available, 1 done.
 
 | Id | Title | Status | Best tier | Effort | Needs a person |
 | --- | --- | --- | --- | --- | --- |
-| L-0002 | Results posted, and registry records linked to publications by exact trial-id match | idea | T0 | M (estimate) | maintainer-approval |
-| L-0004 | Registered outcomes before and after CFTR modulator approvals | idea | T0 | M (estimate) | clinician-reader |
+| L-0002 | Registry records linked to publications by exact trial-id match, and results-posting baselines | idea | T1 | M (estimate) | maintainer-approval |
+| L-0004 | Registered outcomes and trial record dates beside modulator approval dates | idea | T1 | M (estimate) | clinician-reader |
 | L-0005 | Embeddings and seeded clustering as an internal aid for finding lexicon terms | idea | T0 | M (estimate) | maintainer-approval |
 | L-0006 | Map atlas classes to a published outcome taxonomy | idea | T1 | M (estimate) | clinician-reader |
-| L-0008 | Registered outcome time frame compared with registered start and completion dates | idea | T0 | M (estimate) | maintainer-approval |
-| L-0009 | Stopped trials and the reasons sponsors wrote | idea | T0 | S (estimate) | maintainer-approval |
-| L-0010 | Age bands trials admit, beside the age mix registries report | idea | T0 | M (estimate) | registry-scientist, maintainer-approval |
-| L-0011 | Crosswalk between registry measures and trial outcomes | idea | T0 | L (estimate) | registry-scientist, clinician-reader |
+| L-0008 | Registered outcome time frame compared with registered start and completion dates | idea | T1 | M (estimate) | maintainer-approval |
+| L-0009 | Stopped trials and the reasons sponsors wrote | idea | T1 | S (estimate) | maintainer-approval |
+| L-0010 | Age bands trials admit, beside the age mix registries report | idea | T1 | M (estimate) | registry-scientist, maintainer-approval |
+| L-0011 | Coverage map between trial outcome classes and registry report measures (direct, proxy or none) | idea | T1 | L (estimate) | registry-scientist, clinician-reader |
 | L-0012 | Atlas classes beside the CF core outcome set effort and frequent primary outcomes | idea | T0 | M (estimate) | clinician-reader |
 | L-0013 | How often primary outcomes change over a record's history | idea | T0 | L (estimate) | maintainer-approval |
 | L-0014 | AACT for comparing CF trials with all registered trials | idea | T0 | M (estimate) | maintainer-approval |
 | L-0016 | A measured, quote-verified classifier for registry primary outcomes | idea | T0 | M (estimate) | clinician-reader, maintainer-approval |
-| L-0017 | Spanish (es-MX) outcome terms grounded in Spanish open-access sources | idea | T0 | M (estimate) | clinician-reader, maintainer-approval |
 | L-0019 | Topics raised at a conference, worth checking in the literature | idea | T0 | S (estimate) | maintainer-approval |
+| L-0020 | An equation-era flag on every FEV1 figure | idea | T1 | M (estimate) | registry-scientist |
+| L-0021 | Funder footprint: grant ids in registry records (NIH only) | idea | T1 | M (estimate) | maintainer-approval |
+| L-0022 | A person-run WHO ICTRP export for cystic fibrosis | idea | T1 | S (estimate) | maintainer-approval |
+| L-0023 | CF records that cite an ISRCTN or EudraCT id | idea | T1 | S (estimate) | maintainer-approval |
+| L-0024 | Link-channel disagreement audit: how much an exact-id search misses | idea | T1 | M (estimate) | maintainer-approval |
+| L-0025 | Retractions and corrections across registry references and linked papers | idea | T1 | S (estimate) | maintainer-approval |
+| L-0026 | Catalog review: two entries that may be stale | idea | T1 | S (estimate) | maintainer-approval |
+| L-0017 | Plain-language class glosses and Spanish (es-MX) terms grounded in authoritative public pages | scoping | T1 | M (estimate) | clinician-reader, maintainer-approval |
 | L-0003 | How differently trials define pulmonary exacerbation, FEV1 and sweat chloride outcomes | data-available | T0 | M (estimate) | clinician-reader |
 | L-0007 | Trials per class, deduplicated by lead sponsor | data-available | T0 | S (estimate) | maintainer-approval |
 | L-0015 | Start dates with no recorded date type in older records | data-available | T1 | S (estimate) | none |
 | L-0018 | Single-use outcome instruments as a long tail | data-available | T0 | S (estimate) | clinician-reader |
+| L-0027 | Registered endpoint mix: the largest lead-sponsor name against single-study sponsors | data-available | T1 | S (estimate) | maintainer-approval |
+| L-0028 | Registered follow-up windows by class, and how the FEV1 short-window share depends on its cutoff | data-available | T1 | S (estimate) | clinician-reader |
+| L-0029 | Multiple primary outcomes per record, by first-posted period | data-available | T1 | S (estimate) | clinician-reader |
+| L-0030 | Phase 3 records that register only safety or pharmacokinetic primaries | data-available | T1 | S (estimate) | clinician-reader |
+| L-0031 | UNKNOWN status and results-posted shares by phase group and era | data-available | T1 | S (estimate) | maintainer-approval |
+| L-0032 | Planned start dates already in the past | data-available | T1 | S (estimate) | maintainer-approval |
+| L-0033 | How many ways FEV1 is written as a primary outcome (exploratory) | data-available | T1 | S (estimate) | clinician-reader |
+| L-0034 | Three data-quality notes for the lexicon and the registry | data-available | T1 | S (estimate) | none |
 | L-0001 | Unsorted remainder of the trial atlas, sorted by a local model with exact-quote checks | done | T0 | M (estimate) | maintainer-approval |
 
 ## Idea
 
-### L-0002 Results posted, and registry records linked to publications by exact trial-id match
+### L-0002 Registry records linked to publications by exact trial-id match, and results-posting baselines
 
 - **Question:** For CF trials in the registry, how many have results posted, and how many have a publication that cites their trial id exactly?
 - **Why it matters:** Researchers and clinicians weigh evidence differently when they know how much of the registered trial record reached results or a paper.
 - **Sources:**
-  - T0, literature, not read by us. a published study of registry-to-publication links found in the 2026-10-10 literature search; citation to be recorded: Agent-read abstract, not re-read here: about 23.2 percent of trials had a direct registry-to-PubMed link and about 44 percent of the apparently unlinked had a paper when searched by hand. Both figures are T0.
+  - T1, literature, read 2026-10-10 (page-summarising-tool). Huser and Cimino, PLoS One 2013, doi 10.1371/journal.pone.0068409 (journals.plos.org): 23.2 percent is 2,068 of 8,907 completed phase 2 and later trials (data of 7 January 2013) with a link present in PubMed abstracts, not in the registry's reference field. The roughly 44 percent figure comes from the authors' earlier validation study. Both are 2013 snapshots; read through a page-summarising tool; quote not checked against the raw page.
+  - T1, literature, read 2026-10-10 (page-summarising-tool). Anderson et al., NEJM 2015, PMID 25760355 (Europe PMC record): General, not CF-specific: among 13,327 trials completed 2008 to 2012, 13.4 percent posted summary results within 12 months and 38.3 percent by 27 September 2013; read through a page-summarising tool; quote not checked against the raw page.
+  - T1, literature, read 2026-10-10 (page-summarising-tool). Chen et al., BMJ 2016, PMID 26888209 (Europe PMC record): General, not CF-specific, academic medical centres only: 35.9 percent disseminated within 24 months and 66 percent overall; read through a page-summarising tool; quote not checked against the raw page.
+  - T1, registry, read 2026-10-10 (page-summarising-tool). ClinicalTrials.gov API v2, studies/metadata, references module: Records can carry references with a PMID and a submitter's type label (background, result, derived); read through a page-summarising tool; quote not checked against the raw page.
+  - T0, literature, not read by us. one Europe PMC query for a CF-specific publication-rate study, 2026-10-10: None found among 10 hits; a narrow search, so empty is not proof of absence.
   - T0, council, not read by us. three blind council reviews of the atlas, 2026-10-10: Suggested as a follow-on view.
-- **Data:** clinicaltrials-gov, europe-pmc, ncbi-eutils (api); already have: no; fields missing: publication links by trial id (Europe PMC or PubMed search)
+- **Data:** clinicaltrials-gov, europe-pmc, ncbi-eutils (api); already have: no; fields missing: registry references with PMIDs (not in the first snapshot), publication links by trial id (PubMed secondary source id, Europe PMC)
 - **Effort:** M (estimate)
-- **Guard:** computed, lab-position. An exact trial-id match gives a lower bound only, and every count says so in the same sentence.
+- **Guard:** computed, lab-position. An exact trial-id match gives a lower bound only, and every count says so in the same sentence; registry results posted and a paper published are counted apart.
 - **Must not claim:**
   - That a trial without a matched paper is unpublished.
   - That a match rate measures a sponsor's conduct.
+  - The 2013 figures, or the general baselines, as current rates or as CF rates.
+  - That results posted on the registry and a published paper are the same event.
 - **Needs a person:** maintainer-approval
 - **Links:** none
-- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-10
+- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** The registry's own results-posted flag, by phase and era, is L-0031; measuring the method's recall is L-0024.
 
-### L-0004 Registered outcomes before and after CFTR modulator approvals
+### L-0004 Registered outcomes and trial record dates beside modulator approval dates
 
-- **Question:** Did the mix of registered primary outcomes in CF trials shift between the eras around each modulator approval?
+- **Question:** Shown as parallel timelines with no inference, how do US and EU approval dates for CFTR modulators sit beside the dates and registered primary outcomes of CF trial records?
 - **Why it matters:** Trial designers and clinicians may want to see how registered endpoints changed as modulators changed care.
 - **Sources:**
   - T0, council, not read by us. three blind council reviews of the atlas, 2026-10-10: Start dates with no date type are shown as a band, not placed in an era.
-- **Data:** clinicaltrials-gov, openfda-drugsfda (api); already have: no; fields missing: US approval dates from openFDA Drugs@FDA
+  - T1, registry, read 2026-10-10 (page-summarising-tool). openFDA Drugs@FDA endpoint page, open.fda.gov: Approval history by application with nested submissions; updated on weekdays; read through a page-summarising tool; quote not checked against the raw page.
+  - T0, registry, not read by us. openFDA Drugs@FDA field reference (submission dates and types): Not read; the exact submission field names must be read there first.
+  - T1, registry, read 2026-10-10 (page-summarising-tool). EMA medicines data (JSON report files): Keys include a Commission decision date and an opinion date; current indication only, not its history; read through a page-summarising tool; quote not checked against the raw page.
+- **Data:** clinicaltrials-gov api, ema-medicines-json fetch, openfda-drugsfda api; already have: no; fields missing: US approval and supplement dates, EU decision dates, CompletionDate and PrimaryCompletionDate (re-fetch)
 - **Effort:** M (estimate)
-- **Guard:** computed, lab-position. Era counts are computed; approval dates come from openFDA records; the framing is labelled a lab position.
+- **Guard:** computed, lab-position. Era counts are computed; approval dates are copied from openFDA and EMA records with their dates; the timelines are shown side by side with no inference.
 - **Must not claim:**
   - That an approval caused any change in what trials register (no causal words).
   - That a start date with no date type belongs to a particular era.
+  - Who may take a medicine now, or who is treated; a label or decision says neither.
 - **Needs a person:** clinician-reader
 - **Links:** none
-- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-10
+- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Merged in round 2: the approval-event timeline from the regulatory memo is this lead.
 
 ### L-0005 Embeddings and seeded clustering as an internal aid for finding lexicon terms
 
@@ -108,7 +135,8 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 - **Why it matters:** A mismatch flags records a reader should check before relying on the time frame.
 - **Sources:**
   - T0, council, not read by us. three blind council reviews of the atlas, 2026-10-10: Completion dates are not in the first snapshot.
-- **Data:** clinicaltrials-gov (api); already have: no; fields missing: completion date and its type
+  - T1, registry, read 2026-10-10 (page-summarising-tool). ClinicalTrials.gov API v2, studies/metadata (field piece names): Lists the field piece names named below; read through a page-summarising tool; quote not checked against the raw page.
+- **Data:** clinicaltrials-gov (api); already have: no; fields missing: CompletionDate, PrimaryCompletionDate
 - **Effort:** M (estimate)
 - **Guard:** computed, registry-statement-verbatim. Comparisons are computed from registry fields; time frames shown are quoted verbatim.
 - **Must not claim:**
@@ -116,7 +144,7 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
   - That a record is wrong; it may be planned or estimated.
 - **Needs a person:** maintainer-approval
 - **Links:** none
-- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-10
+- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-11
 - **Notes:** Needs a re-fetch with more fields; the maintainer approves any new fetch.
 
 ### L-0009 Stopped trials and the reasons sponsors wrote
@@ -125,7 +153,8 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 - **Why it matters:** Reasons for stopping help trial designers plan recruitment and feasibility.
 - **Sources:**
   - T0, council, not read by us. three blind council reviews of the atlas, 2026-10-10: The why-stopped field is not in the first snapshot.
-- **Data:** clinicaltrials-gov (api); already have: no; fields missing: why-stopped text
+  - T1, registry, read 2026-10-10 (page-summarising-tool). ClinicalTrials.gov API v2, studies/metadata (field piece names): Lists the field piece names named below; read through a page-summarising tool; quote not checked against the raw page.
+- **Data:** clinicaltrials-gov (api); already have: no; fields missing: WhyStopped, CompletionDate
 - **Effort:** S (estimate)
 - **Guard:** registry-statement-verbatim, computed. Reasons are shown as the sponsor wrote them; group counts are computed.
 - **Must not claim:**
@@ -133,7 +162,7 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
   - Any reason the sponsor did not write.
 - **Needs a person:** maintainer-approval
 - **Links:** none
-- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-10
+- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-11
 - **Notes:** Needs a re-fetch with more fields; the maintainer approves any new fetch.
 
 ### L-0010 Age bands trials admit, beside the age mix registries report
@@ -142,7 +171,8 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 - **Why it matters:** Clinicians and families may want to see which age groups are less often admitted to trials.
 - **Sources:**
   - T0, council, not read by us. three blind council reviews of the atlas, 2026-10-10: Minimum and maximum age are not in the first snapshot.
-- **Data:** acfdr-adr-2025 fetch, cfri-adr-2024 fetch, clinicaltrials-gov api, ecfspr-adr-2024 fetch, ukcfr-adr-2024 fetch; already have: no; fields missing: minimum age, maximum age
+  - T1, registry, read 2026-10-10 (page-summarising-tool). ClinicalTrials.gov API v2, studies/metadata (field piece names): Lists the field piece names named below; read through a page-summarising tool; quote not checked against the raw page.
+- **Data:** acfdr-adr-2025 fetch, cfri-adr-2024 fetch, clinicaltrials-gov api, ecfspr-adr-2024 fetch, ukcfr-adr-2024 fetch; already have: no; fields missing: MinimumAge, MaximumAge, StdAge
 - **Effort:** M (estimate)
 - **Guard:** computed, registry-statement-verbatim. Trial counts are computed; registry age figures are quoted verbatim with the report and page, read with the registry reading guides.
 - **Must not claim:**
@@ -151,23 +181,33 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
   - That a person of a given age can or cannot join a trial.
 - **Needs a person:** registry-scientist, maintainer-approval
 - **Links:** none
-- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-10
+- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-11
 
-### L-0011 Crosswalk between registry measures and trial outcomes
+### L-0011 Coverage map between trial outcome classes and registry report measures (direct, proxy or none)
 
-- **Question:** Which outcomes that trials register correspond to measures that patient registries report?
-- **Why it matters:** A crosswalk would show where trial outcomes and routine registry data speak the same language.
+- **Question:** For each trial outcome class, does each national registry report a direct counterpart, a proxy, or none, with the report footnote or dictionary item as evidence?
+- **Why it matters:** It shows where trial outcomes and routine registry data speak the same language, and where they only look alike.
 - **Sources:**
+  - T1, registry, read 2026-10-10 (local-text-extract). ECFSPR Annual Data Report 2024: Best FEV1 percent predicted over the year; exacerbation counted only when treated with IV antibiotics.
+  - T1, registry, read 2026-10-10 (local-text-extract). CFF Patient Registry Annual Data Report 2024 (the lab's saved copy): Exacerbation footnote defines a period of IV antibiotic treatment; sweat chloride is not a routine on-treatment value.
+  - T1, registry, read 2026-10-10 (direct). ACFDR data dictionary v1.1 (July 2025), cysticfibrosis.org.au: Mental-health items record whether a screen was done, not scores; no LCI item found.
+  - T1, registry, read 2026-10-10 (local-text-extract). searches of five report texts and the ACFDR dictionary, 2026-10-10: No patient-reported scale, LCI result or imaging score found; empty is not proof of absence.
   - T0, council, not read by us. three blind council reviews of the atlas, 2026-10-10
-- **Data:** clinicaltrials-gov api, ecfspr-adr-2024 fetch; already have: no; fields missing: registry measure definitions, read from the reports
+- **Data:** acfdr-adr-2025 fetch, cffpr-adr-2024 manual, clinicaltrials-gov api, ecfspr-adr-2024 fetch, ukcfr-adr-2024 fetch; already have: no; fields missing: one definition row per registry-year: population, denominator, equation, aggregation
+- **Not in the catalog:** ACFDR data dictionary v1.1
 - **Effort:** L (estimate)
-- **Guard:** registry-statement-verbatim, lab-position. Each match is a lab position that a person labels; definitions on both sides are quoted verbatim.
+- **Guard:** registry-statement-verbatim, lab-position. Each direct, proxy or none label is a lab position a person checks; registry definitions are quoted verbatim from the footnote or dictionary item; no arithmetic across registries.
 - **Must not claim:**
-  - That a trial outcome and a registry measure are the same thing because their names match.
+  - That a registry value equals a trial endpoint because their names match.
+  - That IV-treated events are all the exacerbations.
+  - That a screen done yes or no is a prevalence of depression or anxiety.
+  - That a measure absent from a report is not collected.
+  - Any comparison or ranking across registries.
   - Any match a person has not labelled.
 - **Needs a person:** registry-scientist, clinician-reader
 - **Links:** none
-- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-10
+- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Merged in round 2: the outcome-class coverage map from the registries memo is this lead. Reproducing tables needs each registry's permission (UK, ACFDR); cite and link CFF.
 
 ### L-0012 Atlas classes beside the CF core outcome set effort and frequent primary outcomes
 
@@ -240,23 +280,6 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 - **Links:** board T-0130
 - **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-10
 
-### L-0017 Spanish (es-MX) outcome terms grounded in Spanish open-access sources
-
-- **Question:** Which Spanish-language open-access sources could ground Mexican Spanish names for the atlas classes?
-- **Why it matters:** Spanish-speaking families and clinicians deserve terms that come from Spanish sources, not from a model's translation.
-- **Sources:**
-  - T0, run, not read by us. Europe PMC search during the atlas work, 2026-10-10: Europe PMC returned thin Spanish full text.
-- **Data:** europe-pmc (api); already have: no; fields missing: Spanish open-access definitions
-- **Not in the catalog:** other Spanish-language open-access sources
-- **Effort:** M (estimate)
-- **Guard:** open-access-quote, lab-position. A term is used only with a Spanish open-access source whose licence allows it; otherwise it is a lab position the maintainer reviews.
-- **Must not claim:**
-  - That a Spanish term is standard or official without a source that says so.
-  - A machine translation presented as a sourced term.
-- **Needs a person:** clinician-reader, maintainer-approval
-- **Links:** none
-- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-10
-
 ### L-0019 Topics raised at a conference, worth checking in the literature
 
 - **Question:** Which topics raised at a conference have published, open-access evidence we can read and cite?
@@ -273,6 +296,161 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 - **Links:** none
 - **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-10
 - **Notes:** Details are kept in the maintainer's private folder, not here.
+
+### L-0020 An equation-era flag on every FEV1 figure
+
+- **Question:** Which reference equation (GLI 2012, GLI 2022 or other) lies behind each FEV1 figure, trial or registry, and can a display refuse to set side by side two figures on different equations?
+- **Why it matters:** Percent-predicted FEV1 computed with different reference equations differs by several points, so an unflagged comparison misleads.
+- **Sources:**
+  - T1, registry, read 2026-10-10 (local-text-extract). ECFSPR Annual Data Report 2024, Appendix 1 (pr.ecfs.eu): Main figures use GLI 2012 race-specific equations; the appendix gives both and a median difference of 5.0 points for white adults.
+  - T1, registry, read 2026-10-10 (local-text-extract). CFF Patient Registry Annual Data Report 2024, summary table footnote D (the lab's saved copy): GLI 2022 race-neutral equations; CFF recalculated all years with them from its 2023 report (per the lab's cffpr-report-reading skill).
+  - T1, registry, read 2026-10-10 (local-text-extract). ACFDR and UK reports, passages read 2026-10-10: State GLI without the edition in the passages read.
+  - T0, data, not read by us. the equation each trial used: Not known; needs a per-trial check.
+- **Data:** cffpr-adr-2023 manual, cffpr-adr-2024 manual, clinicaltrials-gov api, ecfspr-adr-2024 fetch; already have: no; fields missing: equation per trial, equation edition for ACFDR and UK
+- **Effort:** M (estimate)
+- **Guard:** registry-statement-verbatim, lab-position. Each equation tag rests on a verbatim registry footnote or a trial document; untagged figures are shown as unknown.
+- **Must not claim:**
+  - That FEV1 figures on different equations are comparable.
+  - Which equation is better.
+  - A trial's equation without a source for it.
+- **Needs a person:** registry-scientist
+- **Links:** none
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+
+### L-0021 Funder footprint: grant ids in registry records (NIH only)
+
+- **Question:** How many CF trial records carry an NIH or other-grant secondary id, and how many of those join to an NIH RePORTER core project number?
+- **Why it matters:** It describes how publicly funded trials can be traced in the registry, and how thin that trace is.
+- **Sources:**
+  - T1, registry, read 2026-10-10 (page-summarising-tool). ClinicalTrials.gov API v2, studies/enums (SecondaryIdType values): Secondary id types include NIH and OTHER_GRANT; sponsor classes include NIH and INDUSTRY; read through a page-summarising tool; quote not checked against the raw page.
+  - T1, registry, read 2026-10-10 (local-text-extract). NIH RePORTER API Data Elements PDF (version 2.3): The key is the core project number; no trial-registry id field was found in the document.
+  - T0, run, not read by us. regulatory and funding memo, 2026-10-10: The join rate is an inference: grant ids are free text typed by sponsors.
+- **Data:** clinicaltrials-gov, nih-reporter (api); already have: no; fields missing: SecondaryId, SecondaryIdType, SecondaryIdDomain, LeadSponsorClass
+- **Effort:** M (estimate)
+- **Guard:** computed, registry-statement-verbatim. Counts of records with a grant id are computed; ids are shown as typed; every count says NIH only.
+- **Must not claim:**
+  - That an unlinked trial is unfunded.
+  - That a grant paid for a trial because its number appears in the record.
+  - Any funding total for a trial; RePORTER amounts are per fiscal year, per project.
+  - Anything about non-NIH or industry funding.
+- **Needs a person:** maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Needs a re-fetch with more fields; the maintainer approves any new fetch.
+
+### L-0022 A person-run WHO ICTRP export for cystic fibrosis
+
+- **Question:** Would one dated, person-run export of WHO ICTRP records for cystic fibrosis put a number on the CF records held by registries other than ClinicalTrials.gov?
+- **Why it matters:** The atlas says other registries are absent; a dated count would replace that sentence with a measured one.
+- **Sources:**
+  - T1, registry, read 2026-10-10 (page-summarising-tool). WHO page on downloading records from the ICTRP database (who.int): Records are offered for download from the Search Portal at no charge, as CSV or XML, updated weekly; no commercial use; read through a page-summarising tool; quote not checked against the raw page.
+  - T1, registry, read 2026-10-10 (direct). sources/catalog.yaml entry who-ictrp: The catalog entry (access request) covers the paid web service only, a different route from the portal download.
+- **Data:** not in catalog; already have: no; fields missing: records by source registry, cross-registry ids
+- **Not in the catalog:** WHO ICTRP Search Portal download (a person runs the form)
+- **Effort:** S (estimate)
+- **Guard:** computed. Counts of records by source registry, with the export's processing date; never a count of trials.
+- **Must not claim:**
+  - A count of all CF trials worldwide, or completeness.
+  - That zero hits in a registry means no trial there.
+  - That a record count equals a trial count; one trial can have several records.
+  - That primary outcomes are comparable across registries.
+- **Needs a person:** maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** A person runs the portal form and reads its terms first; the file stays local; the catalog needs an entry for this route.
+
+### L-0023 CF records that cite an ISRCTN or EudraCT id
+
+- **Question:** How many in-scope CF records on ClinicalTrials.gov list an ISRCTN or EudraCT number among their secondary ids?
+- **Why it matters:** It sizes the overlap with other registries before any new registry is touched.
+- **Sources:**
+  - T1, registry, read 2026-10-10 (page-summarising-tool). ClinicalTrials.gov API v2, studies/metadata (field piece names): Lists the field piece names named below; read through a page-summarising tool; quote not checked against the raw page.
+  - T0, run, not read by us. other-registries memo, 2026-10-10: Proposed as a zero-fetch probe; the first snapshot did not request the secondary-id field, so it needs a re-fetch.
+- **Data:** clinicaltrials-gov (api); already have: no; fields missing: SecondaryId, SecondaryIdType, SecondaryIdDomain
+- **Effort:** S (estimate)
+- **Guard:** computed. Counts of records with each id form, matched exactly; a lower bound.
+- **Must not claim:**
+  - That a record without such an id is not registered elsewhere.
+  - That two records without a shared id are different trials.
+- **Needs a person:** maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Needs a re-fetch with more fields; the maintainer approves any new fetch.
+
+### L-0024 Link-channel disagreement audit: how much an exact-id search misses
+
+- **Question:** For 20 CF trials completed three or more years ago, how many papers does each linking channel find, and how many does a person find by hand?
+- **Why it matters:** A measured, dated recall estimate for the lab's own method would replace the 2013 figure.
+- **Sources:**
+  - T0, run, not read by us. publications memo, 2026-10-10: Channels: registry references, PubMed secondary source id, Europe PMC full text (after its terms are read).
+  - T1, literature, read 2026-10-10 (page-summarising-tool). PubMed help, data links (pubmed.ncbi.nlm.nih.gov/help): Data links connect to records in other NLM databases, including ClinicalTrials.gov; read through a page-summarising tool; quote not checked against the raw page.
+- **Data:** clinicaltrials-gov, ncbi-eutils, europe-pmc (api); already have: no; fields missing: registry references, a hand-search result per trial
+- **Effort:** M (estimate)
+- **Guard:** computed, lab-position. Counts per channel are computed; the hand search is a person's record; the result is a recall estimate for 20 trials, labelled as such.
+- **Must not claim:**
+  - A publication rate for CF trials from 20 trials.
+  - That a paper reports a trial's primary result because it cites the trial id.
+- **Needs a person:** maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Related to L-0002.
+
+### L-0025 Retractions and corrections across registry references and linked papers
+
+- **Question:** Does any registry result reference, or any paper linked to a CF trial, appear in the registry's retraction list or in Crossref or PubMed correction data?
+- **Why it matters:** A retracted or corrected paper linked to a trial changes how that trial's evidence should be read.
+- **Sources:**
+  - T1, registry, read 2026-10-10 (page-summarising-tool). ClinicalTrials.gov API v2, studies/metadata, references module: The references module carries a retractions list; read through a page-summarising tool; quote not checked against the raw page.
+  - T0, run, not read by us. publications memo, 2026-10-10
+- **Data:** clinicaltrials-gov, crossref, ncbi-eutils, retraction-watch-crossref (api); already have: no; fields missing: registry references and retractions
+- **Effort:** S (estimate)
+- **Guard:** computed, registry-statement-verbatim. A short flagged list, each item confirmed on the source by a person; an empty list says none found, not none.
+- **Must not claim:**
+  - That a trial's results are wrong because a linked paper was corrected.
+  - That no linked paper was retracted, from an empty search.
+- **Needs a person:** maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+
+### L-0026 Catalog review: two entries that may be stale
+
+- **Question:** Do the catalog entries for OpenAlex (key required) and the ECFSPR 2024 report (redistribute false) still match what each publisher states?
+- **Why it matters:** The catalog decides what the lab's tools may do, so a stale entry either blocks a permitted use or permits a wrong one.
+- **Sources:**
+  - T1, registry, read 2026-10-10 (page-summarising-tool). OpenAlex authentication help page (help.openalex.org), updated 19 August 2026: Says a free key raises the daily budget; the catalog says a key is required; read through a page-summarising tool; quote not checked against the raw page.
+  - T1, registry, read 2026-10-10 (page-summarising-tool). ECFSPR annual reports page (pr.ecfs.eu/annual-reports): States a Creative Commons Attribution Share Alike 4.0 licence for the 2024 report; the catalog says redistribute false; read through a page-summarising tool; quote not checked against the raw page.
+- **Data:** ecfspr-adr-2024 fetch, openalex api; already have: yes; fields missing: none
+- **Effort:** S (estimate)
+- **Guard:** registry-statement-verbatim. The maintainer reads each publisher page and decides; the catalog changes only then.
+- **Must not claim:**
+  - Which statement is right, the catalog's or the page's.
+  - That the ECFSPR report may be redistributed, before the maintainer decides.
+- **Needs a person:** maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+
+## Scoping
+
+### L-0017 Plain-language class glosses and Spanish (es-MX) terms grounded in authoritative public pages
+
+- **Question:** Can every plain-language class gloss and Spanish term be grounded in an authoritative public health page (MedlinePlus, NCI vocabulary, NHLBI, MeSH scope notes) or an open-access article?
+- **Why it matters:** Families and clinicians, in English and in Spanish, deserve definitions that come from an authoritative source, not from a model's wording or translation.
+- **Sources:**
+  - T0, run, not read by us. open-access grounding pass of 40 gloss targets, 2026-10-10: Reported to this register, not recounted here: an accurate cross-model-reviewed definition for 18, partial for 13, none for 9 (FVC, BMI and growth, survival and transplant, primary outcome, adverse event, and four Spanish terms).
+  - T1, literature, read 2026-10-10 (page-summarising-tool). MeSH record for forced expiratory volume: No scope note; an annotation says "do not confuse with FORCED EXPIRATORY FLOW RATES"; read through a page-summarising tool; quote not checked against the raw page.
+  - T0, run, not read by us. Europe PMC search during the atlas work, 2026-10-10: Europe PMC returned thin Spanish full text.
+- **Data:** europe-pmc, ncbi-eutils (api); already have: no; fields missing: a definition for each of the 22 targets without an accurate one
+- **Not in the catalog:** MedlinePlus, NCI vocabulary definitions, NHLBI health pages, MeSH browser pages, other Spanish-language open-access sources
+- **Effort:** M (estimate)
+- **Guard:** open-access-quote, lab-position. A gloss rests on an authoritative page or an open-access article whose terms allow use; each source needs a catalog entry first; otherwise the gloss is a lab position a person reviews.
+- **Must not claim:**
+  - That a Spanish term is standard or official without a source that says so.
+  - A machine translation presented as a sourced term.
+  - A gloss as clinical advice or as a description of any person's condition.
+- **Needs a person:** clinician-reader, maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Merged in round 2: the glosses lead is this lead. The maintainer reviews es-MX wording. The pages named in the question need catalog entries, with their terms read, before use.
 
 ## Data-available
 
@@ -342,6 +520,175 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 - **Needs a person:** clinician-reader
 - **Links:** none
 - **Recorded:** created 2026-10-10 by model (claude-opus-5-5); updated 2026-10-10
+
+### L-0027 Registered endpoint mix: the largest lead-sponsor name against single-study sponsors
+
+- **Question:** How does the mix of registered primary-outcome classes under the largest lead-sponsor name differ from the long tail of sponsor names with one study?
+- **Why it matters:** It shows that the registry's endpoint wording comes from two very different kinds of study, which a reader of any total should know.
+- **Sources:**
+  - T1, run, read 2026-10-10 (lab-run). trial atlas insights, a script over one ClinicalTrials.gov query (registry data timestamp 2026-10-09), 1,072 in-scope interventional studies; private analysis memo and its independent review: The largest lead-sponsor name holds 110 of 1,072 studies (10.3 percent); 219 names have one study each. Its studies name a safety primary in 49.1 percent against 17.7 percent for other sponsors, and it has no phase-NA study, so phase mix explains much of the difference. Sponsor names as written, not deduplicated. Recomputed independently: yes for the concentration figure (the controlling agent); no for the class mix.
+- **Data:** clinicaltrials-gov (api); already have: yes; fields missing: none
+- **Effort:** S (estimate)
+- **Guard:** computed. Counts and shares with their denominators; the sponsor is described as the largest lead-sponsor name, descriptive of registered wording.
+- **Must not claim:**
+  - Any cause: no causal words (led to, drove, because of).
+  - A ranking of sponsors, measures or classes.
+  - That the snapshot is complete or covers all CF trials; it is one registry and one query.
+  - That a frequent outcome is a good one; frequency is not quality.
+  - Any judgement of a sponsor; the description is of registered wording only.
+  - That a difference in endpoint mix is not largely phase mix.
+- **Needs a person:** maintainer-approval
+- **Links:** board T-0130
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** The lab's public-voice rules apply to naming any company; this register names none.
+
+### L-0028 Registered follow-up windows by class, and how the FEV1 short-window share depends on its cutoff
+
+- **Question:** How long are registered primary-outcome time frames per class, and how much does the share of short phase-2 FEV1 windows move with the cutoff?
+- **Why it matters:** Protocol writers look for the windows others register, and a cutoff-sensitive share must not be quoted as a fixed fact.
+- **Sources:**
+  - T1, run, read 2026-10-10 (lab-run). trial atlas insights, a script over one ClinicalTrials.gov query (registry data timestamp 2026-10-09), 1,072 in-scope interventional studies; private analysis memo and its independent review: Median registered windows: pharmacokinetics 3.0 days, safety 44, FEV1 56, exacerbations 182.6. Phase-2 FEV1 windows of 29 days or less: 33 of 57 (58 percent); 28 days or less 23 of 57 (40 percent); one month or less 34 of 57 (60 percent); longest window per study 29 of 52 (56 percent). Denominator 1,865 entries with a parseable time frame; 74 empty and 85 unparseable excluded. Recomputed independently: yes (the review), including the cutoff variants.
+- **Data:** clinicaltrials-gov (api); already have: yes; fields missing: none
+- **Effort:** S (estimate)
+- **Guard:** computed. Medians and shares with denominators and the cutoff stated; the era trend is exploratory and is not published as a trend.
+- **Must not claim:**
+  - Any cause: no causal words (led to, drove, because of).
+  - A ranking of sponsors, measures or classes.
+  - That the snapshot is complete or covers all CF trials; it is one registry and one query.
+  - That a frequent outcome is a good one; frequency is not quality.
+  - That phase-2 FEV1 windows shrank over time; era cells hold 4 to 25 entries and one sponsor name holds 10 of 25 in 2016 to 2020.
+  - That a registered time frame is the trial's length or its safety follow-up.
+  - Whether a short window is appropriate.
+- **Needs a person:** clinician-reader
+- **Links:** board T-0130
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Exploratory for the era trend: the review ranked it the most fragile finding. The class medians are robust.
+
+### L-0029 Multiple primary outcomes per record, by first-posted period
+
+- **Question:** How has the share of CF records that register two or more primary outcomes changed by the period in which the record was first posted?
+- **Why it matters:** Trial designers and methodologists read a registered primary outcome differently when one record lists several.
+- **Sources:**
+  - T1, run, read 2026-10-10 (lab-run). trial atlas insights, a script over one ClinicalTrials.gov query (registry data timestamp 2026-10-09), 1,072 in-scope interventional studies; private analysis memo and its independent review: Share with two or more primary outcomes: 40 of 223 (17.9 percent) first posted 2006 to 2010; 109 of 215 (50.7 percent) first posted 2021 to 2026. Denominator 1,072 studies; 28 with no primary outcome count as zero. Recomputed independently: yes for the growth in the share (the controlling agent); no for the phase-group split.
+- **Data:** clinicaltrials-gov (api); already have: yes; fields missing: none
+- **Effort:** S (estimate)
+- **Guard:** computed. Per-period table and the counting rule published together.
+- **Must not claim:**
+  - Any cause: no causal words (led to, drove, because of).
+  - A ranking of sponsors, measures or classes.
+  - That the snapshot is complete or covers all CF trials; it is one registry and one query.
+  - That a frequent outcome is a good one; frequency is not quality.
+  - That more registered lines means more hypotheses; the registry asks for one entry per measure and time point.
+  - Anything about multiplicity control or what was analysed.
+- **Needs a person:** clinician-reader
+- **Links:** board T-0130
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+
+### L-0030 Phase 3 records that register only safety or pharmacokinetic primaries
+
+- **Question:** What share of fully classified phase 3 CF records register no efficacy-type primary outcome?
+- **Why it matters:** A clinician reading phase 3 as an efficacy trial should know that about a quarter of these records register no efficacy-type primary.
+- **Sources:**
+  - T1, run, read 2026-10-10 (lab-run). trial atlas insights, a script over one ClinicalTrials.gov query (registry data timestamp 2026-10-09), 1,072 in-scope interventional studies; private analysis memo and its independent review: 44 of 158 fully classified phase 3 (including 2/3) records, 27.8 percent; 28.9 percent with rule classes only; 29.9 percent with phase 3 alone. 159 studies with an unclassified or not-stated entry are excluded. 36 of the 44 carry the largest lead-sponsor name. Recomputed independently: yes (the review).
+- **Data:** clinicaltrials-gov (api); already have: yes; fields missing: none
+- **Effort:** S (estimate)
+- **Guard:** computed. Share with its exclusion rule stated; naming any record needs a person's check of its design.
+- **Must not claim:**
+  - Any cause: no causal words (led to, drove, because of).
+  - A ranking of sponsors, measures or classes.
+  - That the snapshot is complete or covers all CF trials; it is one registry and one query.
+  - That a frequent outcome is a good one; frequency is not quality.
+  - That these records have no efficacy measure; efficacy may be a secondary outcome.
+  - That a safety-only phase 3 record is a gap or a flaw; many are extension studies.
+- **Needs a person:** clinician-reader
+- **Links:** board T-0130
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Robust: third in the review's ranking.
+
+### L-0031 UNKNOWN status and results-posted shares by phase group and era
+
+- **Question:** How do the registry's UNKNOWN status and its results-posted flag vary by phase group and start era among CF records?
+- **Why it matters:** Anyone using registry status or results for a view of CF trials needs to know where both are thin.
+- **Sources:**
+  - T1, run, read 2026-10-10 (lab-run). trial atlas insights, a script over one ClinicalTrials.gov query (registry data timestamp 2026-10-09), 1,072 in-scope interventional studies; private analysis memo and its independent review: UNKNOWN by phase NA, 1, 2, 3, 4: 12.5, 0.7, 4.2, 3.5, 6.8 percent; by start era 2006 to 2026: 4.0, 7.9, 8.3, 9.0 percent; 54 of 77 UNKNOWN records (70 percent) are phase NA. Among completed studies started 2008 or later, results posted for 16.9 percent of phase NA against 52.3 percent of drug phases. Denominators 1,072 studies and 750 completed. Recomputed independently: yes (the review; all 25 era-by-phase results cells reproduce).
+- **Data:** clinicaltrials-gov (api); already have: yes; fields missing: none
+- **Effort:** S (estimate)
+- **Guard:** computed, registry-statement-verbatim. Shares from registry fields with denominators; the registry's definition of UNKNOWN is quoted verbatim before use.
+- **Must not claim:**
+  - Any cause: no causal words (led to, drove, because of).
+  - A ranking of sponsors, measures or classes.
+  - That the snapshot is complete or covers all CF trials; it is one registry and one query.
+  - That a frequent outcome is a good one; frequency is not quality.
+  - That an UNKNOWN record is a failed study; the registry assigns it to an unverified record.
+  - That a low results share is a violation; many phase-NA studies are outside the reporting duty.
+  - Anything about sponsors' motives or which sponsors are academic.
+- **Needs a person:** maintainer-approval
+- **Links:** board T-0130
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Robust: first and second in the review's ranking. Linking records to papers is L-0002.
+
+### L-0032 Planned start dates already in the past
+
+- **Question:** How many CF records with an estimated start date carry one already behind the registry's data timestamp, and in which statuses?
+- **Why it matters:** Any view of trials a person could join should treat a not-yet-recruiting record with a past planned start as possibly stale.
+- **Sources:**
+  - T1, run, read 2026-10-10 (lab-run). trial atlas insights, a script over one ClinicalTrials.gov query (registry data timestamp 2026-10-09), 1,072 in-scope interventional studies; private analysis memo and its independent review: 41 of 44 estimated start dates (93.2 percent) fall before October 2026; 7 of 17 not-yet-recruiting records are more than six months past; 10 UNKNOWN records carry an estimated start 3 to 9 years old. Recomputed independently: yes (the controlling agent).
+- **Data:** clinicaltrials-gov (api); already have: yes; fields missing: none
+- **Effort:** S (estimate)
+- **Guard:** computed. Counts from status and start fields; a person re-checks each record's current status before any is named.
+- **Must not claim:**
+  - Any cause: no causal words (led to, drove, because of).
+  - A ranking of sponsors, measures or classes.
+  - That the snapshot is complete or covers all CF trials; it is one registry and one query.
+  - That a frequent outcome is a good one; frequency is not quality.
+  - Whether any of these studies began; the file cannot say.
+  - That a stale date is a sponsor's error; this is record maintenance, not trial behaviour.
+- **Needs a person:** maintainer-approval
+- **Links:** board T-0130
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+
+### L-0033 How many ways FEV1 is written as a primary outcome (exploratory)
+
+- **Question:** How many distinct measure texts do CF records use for an FEV1 primary outcome, and which forms repeat?
+- **Why it matters:** Trial designers and core-outcome-set groups care how one measure is worded across records.
+- **Sources:**
+  - T1, run, read 2026-10-10 (lab-run). trial atlas insights, a script over one ClinicalTrials.gov query (registry data timestamp 2026-10-09), 1,072 in-scope interventional studies; private analysis memo and its independent review: 151 distinct measure texts among 176 FEV1 entries (150 ignoring punctuation); about half say percent predicted (52.3 percent, 52.8 percent in the review); the most repeated exact text occurs 10 times. Measure field only; the description is ignored. Recomputed independently: yes for the distinct-text count and percent predicted (the review); the absolute and relative change sub-shares differ under the phrase rule (50 and 9, not 53 and 12).
+- **Data:** clinicaltrials-gov (api); already have: yes; fields missing: none
+- **Effort:** S (estimate)
+- **Guard:** computed, registry-statement-verbatim. Counts with the word rules stated; any repeated text shown is quoted exactly.
+- **Must not claim:**
+  - Any cause: no causal words (led to, drove, because of).
+  - A ranking of sponsors, measures or classes.
+  - That the snapshot is complete or covers all CF trials; it is one registry and one query.
+  - That a frequent outcome is a good one; frequency is not quality.
+  - That relative change has faded; unverified under the phrase rule.
+  - That wording has converged; the most repeated form is 10 of 176.
+  - Which wording is better, or how any trial was analysed.
+- **Needs a person:** clinician-reader
+- **Links:** board T-0130
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** Exploratory: the review ranked the sub-shares the second most fragile finding. Related to L-0003.
+
+### L-0034 Three data-quality notes for the lexicon and the registry
+
+- **Question:** Can the lexicon read ordinal time frames, and how should it treat repeated measure text and measure text in the time-frame field?
+- **Why it matters:** Small fixes in reading the records change counts that others may cite.
+- **Sources:**
+  - T1, run, read 2026-10-10 (lab-run). trial atlas insights, a script over one ClinicalTrials.gov query (registry data timestamp 2026-10-09), 1,072 in-scope interventional studies; private analysis memo and its independent review: The time-frame parser misses ordinals (2nd week, 4th week): 11 of 85 unparseable entries. Some studies repeat identical measure text across primary-outcome entries, which inflates entry-level shares (the count had no script line behind it). Some records hold measure or procedure text in the time-frame field. Recomputed independently: no.
+- **Data:** clinicaltrials-gov (api); already have: yes; fields missing: none
+- **Effort:** S (estimate)
+- **Guard:** computed, registry-statement-verbatim. Counts from the lexicon's parser; any registry text shown is quoted exactly and a person looks at it before calling it an error.
+- **Must not claim:**
+  - Any cause: no causal words (led to, drove, because of).
+  - A ranking of sponsors, measures or classes.
+  - That the snapshot is complete or covers all CF trials; it is one registry and one query.
+  - That a frequent outcome is a good one; frequency is not quality.
+  - That a record holds an error before a person has read it.
+  - That unparseable means unclear to a reader; it is this parser's limit.
+- **Needs a person:** none
+- **Links:** board T-0130
+- **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
+- **Notes:** For the lexicon team; the registry-side items need a person's look before any public mention.
 
 ## Done
 

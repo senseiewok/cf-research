@@ -41,7 +41,7 @@ anyone has started.
 | `question` | One sentence |
 | `why_it_matters` | One sentence, for a CF researcher or clinician |
 | `status` | `idea`, `scoping`, `data-available`, `in-progress`, `done`, `dropped` |
-| `sources` | A list of `{type, ref, tier, read_on, note}`. `type` is `registry`, `literature`, `data`, `council`, `conference-private` or `run`. `tier` is T0 to T3; T1 or higher needs `read_on`. `note` is short: never a long quote (at most 25 words in quotation marks) |
+| `sources` | A list of `{type, ref, tier, read_on, note}`. `type` is `registry`, `literature`, `data`, `council`, `conference-private` or `run`. `tier` is T0 to T3; T1 or higher needs `read_on`. `note` is short: never a long quote (at most 25 words in quotation marks). Optional `read_via` says how the source was read (see below) |
 | `data_needed` | `{catalog_ids, access, already_have, fields_missing}`, and optionally `not_in_catalog` (plain names of sources the catalog does not list). Every id must be in `sources/catalog.yaml`, and `access` must be the catalog's value (`api`, `fetch`, `manual`, `request`, `forbidden`); when the ids differ, `access` is a mapping of id to value. With no catalog ids, `access` is `not in catalog` |
 | `effort` | `{size: S, M or L, estimate: true}`. Always an estimate |
 | `guard` | `{ladder, note}`: how every public number or sentence from the lead would be grounded. `ladder` uses `computed`, `registry-statement-verbatim`, `open-access-quote`, `lab-position` |
@@ -62,6 +62,21 @@ and then the source gains `read_on` and its new tier; never upgrade a tier on th
 model read in an abstract is T0 here, and the `note` says so. A verified quote proves only that the words exist; a
 person or a different model still reads it against the sentence it supports. `LEADS.md` shows each lead's best source
 tier; every other source keeps its own.
+
+### How a source was read
+
+`read_via` records it, and the checker holds the tier to it:
+
+| `read_via` | Meaning | Tier rule |
+| --- | --- | --- |
+| `direct` | The page read as it is | Any |
+| `local-text-extract` | A PDF or file turned into text on this machine and read | Any |
+| `lab-run` | Output of the lab's own script over a dated copy of the data; the note says whether it was recomputed independently | Any |
+| `page-summarising-tool` | A page read through a fetch tool that summarises pages, so the quote is as the tool returned it | At most T1, and the note must contain: `read through a page-summarising tool; quote not checked against the raw page` |
+| `search-snippet`, `memory` | A search result snippet or something remembered | T0 |
+
+A source whose note carries that sentence must have `read_via: page-summarising-tool`. Before a tool-read quote goes
+into public text, someone reads it on the raw page.
 
 ## Public register, private folder
 

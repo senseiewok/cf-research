@@ -44,6 +44,13 @@ FIELDS = (
 )
 OPTIONAL_FIELDS = ("notes",)
 SOURCE_FIELDS = ("type", "ref", "tier", "read_on", "note")
+SOURCE_OPTIONAL = ("read_via",)
+# How a source was read. A page read through a fetch tool that summarises pages returns the quote as the tool gave it,
+# not as the raw page has it: such a source is at most T1 and carries TOOL_NOTE in its note. A search snippet or a memory
+# is T0. direct = the page read as it is; local-text-extract = a PDF or file turned into text on this machine;
+# lab-run = output of the lab's own script.
+READ_VIA = frozenset({"direct", "local-text-extract", "page-summarising-tool", "search-snippet", "memory", "lab-run"})
+TOOL_NOTE = "read through a page-summarising tool; quote not checked against the raw page"
 DATA_FIELDS = ("catalog_ids", "access", "already_have", "fields_missing")
 DATA_OPTIONAL = ("not_in_catalog",)
 EFFORT_FIELDS = ("size", "estimate")
@@ -192,7 +199,7 @@ def check_sources(sources, today, out):
         if not isinstance(s, dict):
             out.append(f"{where} must be an object")
             continue
-        unknown_keys(s, SOURCE_FIELDS, where, out)
+        unknown_keys(s, SOURCE_FIELDS + SOURCE_OPTIONAL, where, out)
         for key in SOURCE_FIELDS:
             if key not in s:
                 out.append(f"{where}: missing {key!r}")
@@ -210,6 +217,18 @@ def check_sources(sources, today, out):
             check_date(read_on, f"{where}.read_on", today, out)
         elif tier in TIERS and tier != "T0":
             out.append(f"{where}: a {tier} source needs read_on")
+        via, note = s.get("read_via"), s.get("note") if isinstance(s.get("note"), str) else ""
+        if "read_via" in s and via not in READ_VIA:
+            out.append(f"{where}: read_via {via!r} is not one of {sorted(READ_VIA)}")
+        if via == "page-summarising-tool":
+            if TOOL_NOTE not in note:
+                out.append(f"{where}: a source read through a page-summarising tool needs the note {TOOL_NOTE!r}")
+            if tier in TIERS and TIERS.index(tier) > 1:
+                out.append(f"{where}: a source read through a page-summarising tool is at most T1")
+        elif TOOL_NOTE in note:
+            out.append(f"{where}: a note that says {TOOL_NOTE!r} needs read_via page-summarising-tool")
+        if via in ("search-snippet", "memory") and tier in TIERS and tier != "T0":
+            out.append(f"{where}: a source from a {via} is T0")
         if stype == "conference-private":
             if s.get("ref") != "private":
                 out.append(f"{where}: a conference-private source has ref 'private' and nothing else")

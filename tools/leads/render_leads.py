@@ -113,6 +113,8 @@ def render_lead(lead):
         if not isinstance(s, dict):
             continue
         read = f"read {s.get('read_on')}" if s.get("read_on") else "not read by us"
+        if s.get("read_via"):
+            read += f" ({s.get('read_via')})"
         note = f": {s.get('note')}" if s.get("note") else ""
         lines.append(f"  - {s.get('tier')}, {s.get('type')}, {read}. {s.get('ref')}{note}")
     have = "yes" if data.get("already_have") is True else "no"
