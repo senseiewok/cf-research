@@ -167,6 +167,26 @@ class RefusalTest(Base):
                 self.assertIn("REFUSED", text)
                 self.assert_nothing_written(self.out)
 
+    def test_two_names_of_one_family_stem_are_refused(self):
+        self.assertEqual([ac._stem(n) for n in ("qwen3.8", "qwen3-coder-next:latest", "gemma4", "claude-opus-5-5", "Qwen-Coder")],
+                         ["qwen", "qwen", "gemma", "claude", "qwen"])
+        for labeller_family, labeller_model in (("qwen-coder", "qwen3-coder-next:latest"),   # the review's case
+                                                ("alibaba", "qwen3-coder-next:latest"),      # the model name alone gives it away
+                                                ("qwen-coder", "other-model:1")):            # the family alone gives it away
+            with self.subTest(labeller_family=labeller_family, labeller_model=labeller_model):
+                with self.assertRaises(ac.Refused) as cm:
+                    ac.refuse_same_family("qwen", ["qwen3.8:27b"], labeller_family, labeller_model)
+                self.assertIn("family stem 'qwen'", str(cm.exception))
+        # the stem of a proposer model id counts even when the declared proposer family names something else
+        with self.assertRaises(ac.Refused):
+            ac.refuse_same_family("alibaba", ["qwen3.8:27b"], "qwen-coder", "coder-next:latest")
+        # gemma against qwen is still accepted
+        self.assertIsNone(ac.refuse_same_family("qwen", ["qwen3.8:27b"], "gemma", "gemma4:31b-it-q4_K_M"))
+        code, text = self.run_main(self.labels(labels_file(AGREEMENT, family="fake-labeller", model="fakelab:1")))
+        self.assertEqual(code, 1, text)                         # through main: fake-proposer:1 and fake-labeller share "fake"
+        self.assertIn("family stem 'fake'", text)
+        self.assert_nothing_written(self.out)
+
     def test_proposer_family_is_required(self):
         with self.assertRaises(SystemExit) as cm, contextlib.redirect_stderr(io.StringIO()):
             ac.main(["--model-tags", str(self.model_tags_path), "--blind-labels", str(self.labels(labels_file(AGREEMENT))),

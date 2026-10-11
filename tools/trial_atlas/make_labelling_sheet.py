@@ -30,10 +30,18 @@ design, so --n, --unclassified-share, --rare-max and --already are refused with 
 carries are its rule tags plus, for an entry the rules left unclassified, its accepted model tag (--model-tags FILE, the proposed-tags
 file check_atlas.py reads; each tag is checked by check_atlas.verify_model_tags). The key then records the design, both sizes, the
 model-tags hash and, per stratum, its population, the number drawn and the weight (population / drawn). The sheet is as blind as before.
+With --consensus-report FILE (the consensus-report.json apply_consensus.py wrote for the --model-tags file) the key's `consensus`
+holds the rule's date, the proposed, kept and dropped counts and the report's sha256; otherwise it is null.
+--sample-exclude FILE (census-v1 only; a JSON list of entry ids, e.g. the development entries the lexicon was tuned on): those entries
+still count for class sizes, stratum assignment and the census strata (an excluded entry in a census stratum is still drawn), but
+are never drawn into a sample:<class> stratum and are not part of its population, so its weight is (population without them) /
+drawn. The key's `sample_exclusion` is null, or {count: ids of the file in the frame, sha256: check_atlas.sample_exclusion_digest};
+check_atlas.py then needs the same file (--frozen-exclude). Ids not in the frame are ignored and counted in --report.
 
 Usage: python make_labelling_sheet.py --snapshot DIR --tags tags.json --sheet SHEET.csv --key KEY.json --seed N [--n 50]
        [--unclassified-share 0.2] [--rare-max N] [--already KEY.json] [--exclude FILE.json] [--report]
-       python make_labelling_sheet.py ... --seed N --design census-v1 [--model-tags FILE.json] [--small-max 30] [--large-per-class 40]
+       python make_labelling_sheet.py ... --seed N --design census-v1 [--model-tags FILE.json [--consensus-report FILE.json]] [--small-max 30] [--large-per-class 40]
+       [--sample-exclude IDS.json]
 Exit 0 written; 1 the inputs could not be read or do not match; 2 usage error.
 """
 from __future__ import annotations
@@ -155,18 +163,44 @@ def model_tags_digest(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+CONSENSUS_FIELDS = ("rule_declared", "proposed", "kept", "dropped")
+
+
+def consensus_record(raw: bytes) -> dict:
+    """The key's `consensus` record from the bytes of the consensus-report.json that apply_consensus.py writes: only rule_declared,
+    proposed, kept and dropped, copied, plus report_sha256 (sha256 of the file's bytes). ValueError when a field is missing or of
+    the wrong type."""
+    try:
+        report = json.loads(raw.decode("utf-8-sig"))
+    except (UnicodeDecodeError, ValueError) as exc:
+        raise ValueError(f"the consensus report is not JSON: {exc}") from None
+    if not isinstance(report, dict):
+        raise ValueError("the consensus report must hold a JSON object")
+    bad = [f for f in CONSENSUS_FIELDS if not (isinstance(report.get(f), str) and report[f].strip() if f == "rule_declared" else
+                                               isinstance(report.get(f), int) and not isinstance(report.get(f), bool) and report[f] >= 0)]
+    if bad:
+        raise ValueError(f"the consensus report lacks a valid {', '.join(bad)} (is it the consensus-report.json apply_consensus.py writes?)")
+    return {**{f: report[f] for f in CONSENSUS_FIELDS}, "report_sha256": hashlib.sha256(raw).hexdigest()}
+
+
 def draw_census(pool: list[dict], tags_by_id: dict[str, dict], lex, model_by_entry: dict[str, list[dict]], *, seed: int,
-                small_max: int, large_per_class: int) -> tuple[list[dict], dict]:
+                small_max: int, large_per_class: int, sample_exclude=frozenset()) -> tuple[list[dict], dict]:
     """([{entry_id, stratum}] in canonical order, {stratum name: {kind, population, drawn, weight}}) for the census-v1 design.
     Strata are assigned in the order census:small, census:unclassified, census:not_stated, sample:<class>. An empty stratum is left
-    out (its weight would be undefined). The class `not_stated` is never small or large: its entries are the census:not_stated stratum."""
+    out (its weight would be undefined). The class `not_stated` is never small or large: its entries are the census:not_stated stratum.
+    sample_exclude (entry ids, e.g. the development entries the rules were tuned on) still counts for the class sizes and the stratum
+    assignment, and an excluded entry in a census stratum is drawn as before; it is only taken out of the sample strata, from both
+    their draw and their population. With no exclusion the draw is the same as before the option existed."""
     final = {e["entry_id"]: [c for c in check_atlas.final_classes(tags_by_id[e["entry_id"]], model_by_entry) if c != NOT_STATED]
              for e in pool}
+    # Counted as check_atlas.frame_class_counts counts them: once per entry (a class an entry carries twice counts once), and a class
+    # outside the lexicon's class order counted with .get, so the sheet and the gate agree on every class's size.
     count = {c: 0 for c in lex.class_order}
     for classes in final.values():
-        for c in classes:
-            count[c] += 1
-    small = {c for c in lex.class_order if 0 < count[c] <= small_max}
+        for c in set(classes):
+            count[c] = count.get(c, 0) + 1
+    order = {c: i for i, c in enumerate(lex.class_order)}
+    small = {c for c, k in count.items() if 0 < k <= small_max}
     members: dict[str, list[dict]] = {}
     for e in pool:                                       # the pool is sorted by entry id, so every stratum is too
         classes = final[e["entry_id"]]
@@ -177,16 +211,21 @@ def draw_census(pool: list[dict], tags_by_id: dict[str, dict], lex, model_by_ent
         elif not classes:
             name = "census:unclassified"
         else:
-            name = "sample:" + min(classes, key=lambda c: (count[c], lex.class_order.index(c)))
+            name = "sample:" + min(classes, key=lambda c: (count[c], order.get(c, len(order))))
         members.setdefault(name, []).append(e)
     rng = random.Random(seed)
     order = ["census:small", "census:unclassified", "census:not_stated"] + [f"sample:{c}" for c in lex.class_order]
+    order += sorted(n for n in members if n not in order)   # a class outside the class order still keeps its entries
     chosen, strata = [], {}
     for name in order:
         pop = members.get(name, [])
         if not pop:
             continue
         kind = name.split(":")[0]
+        if kind == "sample" and sample_exclude:
+            pop = [e for e in pop if e["entry_id"] not in sample_exclude]
+            if not pop:
+                continue
         if kind == "sample" and len(pop) > large_per_class:
             picked = sorted(rng.sample(pop, large_per_class), key=lambda e: e["entry_id"])
         else:
@@ -199,19 +238,28 @@ def draw_census(pool: list[dict], tags_by_id: dict[str, dict], lex, model_by_ent
 def build(snapshot: snap.Snapshot, tags: dict, lex, *, n: int | None = None, seed: int, unclassified_share: float = 0.2,
           rare_max: int | None = None, already: dict | None = None, manual=None, design: str = "legacy",
           small_max: int = SMALL_MAX_DEFAULT, large_per_class: int = LARGE_PER_CLASS_DEFAULT, model_tags: list | None = None,
-          model_tags_sha256: str | None = None) -> tuple[str, dict, dict]:
+          model_tags_sha256: str | None = None, consensus: dict | None = None,
+          sample_exclude: list | None = None) -> tuple[str, dict, dict]:
     """(sheet CSV text, key, summary). Raises ValueError when the tags were not made from this snapshot with this lexicon.
     design "legacy" needs n; design "census-v1" takes no n and no earlier key, and may take the model tags (the proposed-tags list as
-    check_atlas reads it) together with the sha256 of their file."""
+    check_atlas reads it) together with the sha256 of their file, and then the consensus record (consensus_record()) of the rule that
+    filtered them. sample_exclude (census-v1 only) is a list of entry ids the sample strata may not draw from (see draw_census); the
+    key's sample_exclusion records how many of them sit in the frame and the hash of the list (check_atlas.sample_exclusion_digest)."""
     if design not in DESIGNS:
         raise ValueError(f"unknown design {design!r}")
     census = design == "census-v1"
+    if consensus is not None and (not census or model_tags is None):
+        raise ValueError("a consensus record goes with census-v1 and its model tags only")
     if census and (n is not None or already):
         raise ValueError("census-v1 sizes itself: it takes neither n nor an earlier key")
     if not census and n is None:
         raise ValueError("the legacy design needs n")
     if not census and model_tags is not None:
         raise ValueError("model tags are used by the census-v1 design only")
+    if sample_exclude is not None:
+        if not census:
+            raise ValueError("a sample exclusion is used by the census-v1 design only")
+        check_atlas.sample_exclusion_ids(sample_exclude)
     if census and (small_max < 1 or large_per_class < 1):
         raise ValueError("small_max and large_per_class must each be at least 1")
     if (model_tags is None) != (model_tags_sha256 is None):
@@ -236,14 +284,25 @@ def build(snapshot: snap.Snapshot, tags: dict, lex, *, n: int | None = None, see
         model_by_entry: dict[str, list[dict]] = {}
         for t in accepted:
             model_by_entry.setdefault(t["entry_id"], []).append(t)
+        pool_ids = {e["entry_id"] for e in pool}
+        excluded = set(sample_exclude or ()) & pool_ids
         chosen, strata = draw_census(pool, tags_by_id, lex, model_by_entry, seed=seed, small_max=small_max,
-                                     large_per_class=large_per_class)
-        if sum(v["population"] for v in strata.values()) != len(pool):
+                                     large_per_class=large_per_class, sample_exclude=frozenset(excluded))
+        if any(c["entry_id"] in excluded and c["stratum"].startswith("sample:") for c in chosen):
+            raise ValueError("internal error: an excluded entry was drawn into a sample stratum")
+        # census strata are drawn in full, so the excluded entries not among their rows are the ones the sample strata left out
+        in_census = sum(1 for c in chosen if c["entry_id"] in excluded and c["stratum"].startswith("census:"))
+        if sum(v["population"] for v in strata.values()) != len(pool) - (len(excluded) - in_census):
             raise ValueError("internal error: the strata do not partition the drawable entries")
         if not all(c["stratum"] in strata for c in chosen) or len(chosen) != sum(v["drawn"] for v in strata.values()):
             raise ValueError("internal error: a drawn row is outside the strata")
         summary = {"drawn": len(chosen), "pool": len(pool), "strata": strata, "model_tags_accepted": len(accepted),
                    "model_tags_rejected": len(rejected)}
+        sample_exclusion = None
+        if sample_exclude is not None:
+            sample_exclusion = {"count": len(excluded), "sha256": check_atlas.sample_exclusion_digest(sample_exclude)}
+            summary.update({"excluded_in_frame": len(excluded), "excluded_not_in_frame": len(set(sample_exclude) - pool_ids),
+                            "excluded_in_census": in_census})
     else:
         if rare_max is None:
             rare_max = max(2, round(0.02 * len(entries)))
@@ -280,7 +339,8 @@ def build(snapshot: snap.Snapshot, tags: dict, lex, *, n: int | None = None, see
         "notes": "A cell starting with = + - @ or a tab was given a leading apostrophe; nothing else in the wording was changed.",
     })
     if census:
-        key["consensus"] = None
+        key["consensus"] = dict(consensus) if consensus is not None else None
+        key["sample_exclusion"] = sample_exclusion
         key["strata"] = summary["strata"]
     key["rows"] = [{"sample_id": r["sample_id"], "entry_id": c["entry_id"], "stratum": c["stratum"]} for r, c in zip(rows, chosen)]
     return buf.getvalue(), key, summary
@@ -299,8 +359,12 @@ def main(argv=None) -> int:
     ap.add_argument("--unclassified-share", type=float, help="legacy design only (default 0.2)")
     ap.add_argument("--rare-max", type=int, help="legacy design only")
     ap.add_argument("--model-tags", type=Path, help="census-v1 only: the proposed model-tags file check_atlas.py reads with --model-tags")
+    ap.add_argument("--consensus-report", type=Path, help="census-v1 with --model-tags only: the consensus-report.json apply_consensus.py "
+                    "wrote for those tags; the key records its rule date and counts")
     ap.add_argument("--small-max", type=int, help=f"census-v1 only: a class with this many entries or fewer is censused (default {SMALL_MAX_DEFAULT})")
     ap.add_argument("--large-per-class", type=int, help=f"census-v1 only: rows sampled per larger class (default {LARGE_PER_CLASS_DEFAULT})")
+    ap.add_argument("--sample-exclude", type=Path, help="census-v1 only: a JSON list of entry ids (the development entries) the "
+                    "sample strata may not draw from; they still count for class sizes and census strata")
     ap.add_argument("--already", type=Path)
     ap.add_argument("--exclude", type=Path)
     ap.add_argument("--report", action="store_true", help="print how many rows each oversample took (a rule result; not for the labeller)")
@@ -308,10 +372,13 @@ def main(argv=None) -> int:
     census = a.design == "census-v1"
     wrong = ([f for f, v in (("--n", a.n), ("--unclassified-share", a.unclassified_share), ("--rare-max", a.rare_max),
                              ("--already", a.already)) if v is not None] if census else
-             [f for f, v in (("--model-tags", a.model_tags), ("--small-max", a.small_max), ("--large-per-class", a.large_per_class))
-              if v is not None])
+             [f for f, v in (("--model-tags", a.model_tags), ("--consensus-report", a.consensus_report), ("--small-max", a.small_max),
+                             ("--large-per-class", a.large_per_class), ("--sample-exclude", a.sample_exclude)) if v is not None])
     if wrong:
         print(f"error: {', '.join(wrong)} cannot be used with --design {a.design}", file=sys.stderr)
+        return 2
+    if a.consensus_report and not a.model_tags:
+        print("error: --consensus-report goes with --model-tags (the tags the consensus rule kept)", file=sys.stderr)
         return 2
     if census:
         a.small_max = SMALL_MAX_DEFAULT if a.small_max is None else a.small_max
@@ -345,9 +412,13 @@ def main(argv=None) -> int:
         if census:
             raw = a.model_tags.read_bytes() if a.model_tags else None
             proposed = json.loads(raw.decode("utf-8-sig")) if raw is not None else None
+            consensus = consensus_record(a.consensus_report.read_bytes()) if a.consensus_report else None
+            sample_exclude = (check_atlas.sample_exclusion_ids(json.loads(a.sample_exclude.read_text(encoding="utf-8-sig")))
+                              if a.sample_exclude else None)
             sheet, key, summary = build(s, tags, lex, seed=a.seed, design="census-v1", small_max=a.small_max,
                                         large_per_class=a.large_per_class, model_tags=proposed, manual=manual,
-                                        model_tags_sha256=model_tags_digest(raw) if raw is not None else None)
+                                        model_tags_sha256=model_tags_digest(raw) if raw is not None else None, consensus=consensus,
+                                        sample_exclude=sample_exclude)
         else:
             sheet, key, summary = build(s, tags, lex, n=a.n, seed=a.seed, unclassified_share=a.unclassified_share,
                                         rare_max=a.rare_max, already=already, manual=manual)
@@ -367,6 +438,9 @@ def main(argv=None) -> int:
     if a.report and census:                               # counts only: never an entry's text
         print(f"of {summary['pool']} eligible entries in {len(summary['strata'])} strata (model tags: {summary['model_tags_accepted']} "
               f"accepted, {summary['model_tags_rejected']} rejected)")
+        if "excluded_in_frame" in summary:
+            print(f"sample exclusion: {summary['excluded_in_frame']} ids in the frame ({summary['excluded_in_census']} of them in census "
+                  f"strata, still drawn), {summary['excluded_not_in_frame']} ids not in the frame (ignored)")
         for name, v in summary["strata"].items():
             print(f"  {name}: population {v['population']}, drawn {v['drawn']}, weight {v['weight']:.4g}")
     elif a.report:

@@ -2,7 +2,7 @@
 
 Build step 1 of the design in `proposals/2026-10-10-trial-endpoint-atlas.md` (board row T-0130): what interventional cystic fibrosis trials register as their primary outcome, counted from one dated, hashed snapshot of ClinicalTrials.gov.
 
-**These tools have been run against the real registry once** (a person-approved fetch on 2026-10-10; see "What the first real run showed" below), and every test runs on synthetic fixtures with no network. The lexicon is a draft (0.3.0-draft) for review; it was developed on development entries from that run, not on the frozen set (see "Lexicon 0.3.0-draft" below), and no clinician has reviewed it. Only `propose_tags.py` and `challenge_tags.py` call a model, a local one through the lab's invoker, and no test does: the tests use a fake model.
+**These tools have been run against the real registry once** (a person-approved fetch on 2026-10-10; see "What the first real run showed" below), and every test runs on synthetic fixtures with no network. The lexicon is a draft (0.3.1-draft) for review; it was developed on development entries from that run, not on the frozen set (see "Lexicon 0.3.0-draft" below), and no clinician has reviewed it. Only `propose_tags.py` and `challenge_tags.py` call a model, a local one through the lab's invoker, and no test does: the tests use a fake model.
 
 Words used here: a **retrieval route** is one of the searches a snapshot is fetched with (the condition search, which is the main retrieval route, and the term search, which is the recall retrieval route). The **route name** is that search's name as the manifest records it (`condition`, `term`).
 
@@ -382,11 +382,15 @@ Why: the gate needs a labelled positive for every shown class, but 20 of the 36 
 | `census:not_stated` | status `not_stated` | all | 1 |
 | `sample:<class>` | only classes with more entries than `small-max`; the entry's rarest such class | `large-per-class` by seeded random draw | population / drawn |
 
-The sheet is blind as before. The key (`design: census-v1`) holds each stratum's population, rows drawn and weight, and the hash of the model-tags file, so the frame is bound to the tags that defined it. `check_atlas.py` re-derives every row's stratum and refuses a key that disagrees. For a census key it prints weighted precision and recall; the intervals are a seeded stratified bootstrap over the sampled strata only (a census stratum is exact). A class is estimable for precision when 10 or more entries in the frame carry it and for recall when its weighted positives reach 10; `other` is not scored. The legacy design and its 150-row cap are unchanged.
+The sheet is blind as before. The key (`design: census-v1`) holds each stratum's population, rows drawn and weight, and the hash of the model-tags file, so the frame is bound to the tags that defined it. `check_atlas.py` re-derives every row's stratum and refuses a key that disagrees, including a sample stratum that does not hold min(population, `large_per_class`) rows (the seeded draw itself is not replayed), and a key that holds census fields but no `design`. For a census key it prints weighted precision and recall; the intervals are a seeded stratified bootstrap over the sampled strata only (a census stratum is exact). A class is estimable for precision when 10 or more entries in the frame carry it and 10 or more labelled rows are predicted to carry it, and for recall when its weighted positives reach 10 from 10 or more labelled rows; `other` is not scored, and any other shown class the metrics lack blocks. The legacy design and its 150-row cap are unchanged.
+
+`--consensus-report FILE` (census-v1, with `--model-tags`): the `consensus-report.json` that `apply_consensus.py` wrote; the key's `consensus` then records the rule's date, the proposed, kept and dropped counts and the report's sha256 (otherwise null), and `check_atlas.py` prints them in one line.
+
+`--sample-exclude FILE` (census-v1 only; a JSON list of entry ids, such as the development entries the lexicon was tuned on): those entries are never drawn into a `sample:<class>` stratum and are not part of its population, so its weight is (population without them) / drawn. They still count for class sizes and stratum assignment, and one that falls in a census stratum is still drawn: census strata are exact over their whole population. The key's `sample_exclusion` records how many of the ids sit in the frame and the sha256 of the ids sorted and joined by newlines (null without the option). `check_atlas.py --frozen-exclude FILE` must then be given the same file; it re-derives the sample strata without those ids, refuses any of them drawn into a sample stratum, refuses a missing or different file, refuses the file with a key whose `sample_exclusion` is null, and prints `frozen set: sample strata exclude N development entries (hash checked)`.
 
 `--model-tags-plain FILE` (with `--model-tags`) prints how many proposals the consensus rule kept and dropped, beside the plain route. It changes no decision.
 
-**The consensus rule** (`apply_consensus.py --model-tags FILE --blind-labels FILE --proposer-family NAME --out DIR`): a proposal for an unclassified entry is kept only when a blind model of a different family, labelling the entry on its own, gave the same class; an invalid or missing blind reply drops it. The blind labels are one JSON file: `{"labeller_family", "labeller_model", "entries": {entry_id: {"classes": [...]} or {"invalid": true}}}`. It refuses a labeller of the proposer's family and an `--out` inside a git repository (the kept tags carry registry quotes). The rule was chosen on 2026-10-11 after the plain route's precision was seen, so its figures on the development entries are development figures.
+**The consensus rule** (`apply_consensus.py --model-tags FILE --blind-labels FILE --proposer-family NAME --out DIR`): a proposal for an unclassified entry is kept only when a blind model of a different family, labelling the entry on its own, gave the same class; an invalid or missing blind reply drops it. The blind labels are one JSON file: `{"labeller_family", "labeller_model", "entries": {entry_id: {"classes": [...]} or {"invalid": true}}}`. It refuses a labeller of the proposer's family, also when only the family stem (the leading letters, so `qwen3.8` and `qwen3-coder-next` are both `qwen`) matches, and an `--out` inside a git repository (the kept tags carry registry quotes). The rule was chosen on 2026-10-11 after the plain route's precision was seen, so its figures on the development entries are development figures.
 
 What it does not do: it makes no label, and a model council's labels are not a person's. The numbers it produces are tier T2 until a person has checked a sample.
 
@@ -562,12 +566,12 @@ What they hold:
 - **Liver blood tests are safety (laboratory) only:** liver function tests, liver enzymes, ALT, AST and bilirubin. The liver class is for liver-disease wording such as stiffness, steatosis, cirrhosis or CFLD.
 - **DXA and DEXA are not imaging.** Body composition is tagged nutrition and growth through its own words; bone density has no class.
 - **"FEV" or "forced expiratory volume" without the one-second timing** is other spirometry, never FEV1.
-- **From the description** (read only when the measure gives no class), only the earliest match is kept and marked `from_description`. Generic safety wording never decides a class from there.
+- **From the description** (read only when the measure gives no class), only the earliest match is kept and marked `from_description`. Generic safety wording never decides a class from there. One exception since 0.3.1-draft (`DU-01`): when the measure alone gave only `pro_unnamed`, the named-instrument questionnaire rules are also read on the description, and a match replaces `pro_unnamed`.
 - **The time frame's largest written number decides the bucket, with no day-1 adjustment.** "Day 28" is up to 4 weeks; "Day 29" (often a four-week visit when day 1 is the first dose) falls in "over 4 weeks to 6 months".
 - **The glosses** (`lexicon.py classes`) are short, neutral aids for the person labelling, not text for the public site.
 - **Nine classes were added in 0.3.0-draft** (lung mechanics, oxygenation, bone density, mucociliary clearance, sputum properties, gene expression and methylation, oxidative stress, physical activity, muscle strength). Each needs a clinician reader before publication. The reasons and counts are in `proposals/2026-10-11-lexicon-0.3-proposal.md`.
 - **Explicit oximetry inside a safety outcome gets both tags** (0.3.0-draft, second round); only a bare "desaturation" gives way to safety.
-- **A named questionnaire is tagged by its instrument only** (0.3.0-draft): SNOT-22 is `pro_named_other`, not also sinus, as the CFQ-R is never also pulmonary.
+- **A named questionnaire is tagged by its instrument only** (0.3.0-draft), with one reversal in 0.3.1-draft: SNOT-22 is now `pro_named_other` and `sinus_upper_airway`, because the council gave both classes on every labelled entry and the sinus gloss admits it. The CFQ-R is never also pulmonary.
 - **The FEV1/FVC ratio is other spirometry, not FEV1** (0.3.0-draft). An entry that also names FEV1 on its own gets both.
 - **Faecal calprotectin is an inflammation marker only; "liver function" without "tests" is safety (laboratory)** (0.3.0-draft).
 - **An organism's name alone is weak** (0.3.0-draft, MICRO-04): it is dropped when the entry names any other class, because it then describes who was enrolled.
@@ -632,13 +636,21 @@ A test times every pattern on adversarial 20,000-character text (under 100 ms ea
 | Other | `other` |
 | Not stated | `not_stated` |
 
+## Lexicon 0.3.1-draft
+
+The first real per-class gate run on the census frozen set (see "The census frozen set") showed that most failing classes failed because of a few rules, not because of the design: `PRO-02` tagged `pro_unnamed` where the council saw a named questionnaire (which also cost `pro_named_other`, `cfqr` and `sinus_upper_airway` recall), and `MICRO-03`, `GI-01`, `FEAS-01`, `FEAS-02`, `LUNGFN-V1`, `ICM-01` and a few others over-matched on single words. `proposals/2026-10-11-lexicon-0.3.1-proposal.md` lists every changed rule with counts (labelled in-sample). Two new rules (`PRO-06`, a capitalised name ending in Questionnaire, Inventory or Scale; `SINUS-02`, the SNOT abbreviation) and one declarative mechanism (`DU-01`, above) were added. Class ids are unchanged.
+
+**How it was measured.** The rules were tuned only on a development half of the council-labelled census rows: every census-stratum row plus the sampled rows whose entry id hashes to an even number. The other half of the sampled rows (283) was never shown to the rule writer, and the next frozen set is drawn with `--sample-exclude` so its sampled strata never contain a development entry. On the held-out half, pooled over classes and unweighted, precision rose from 0.837 to 0.883 and recall from 0.848 to 0.892 (0.3.0 to 0.3.1). That is a measurement against model-council labels, not a person's.
+
+**What it does not do.** Census strata are exact over their whole population, so rule fixes that move a census entry are real corrections, not an estimate. A class measured only through sampled strata is estimated on entries the rules were not tuned on. Neither is a claim that the classes are right in a clinician's eyes.
+
 ## What the lexicon does not cover yet
 
 - Negation and hedging: "FEV1 was not measured" is still tagged FEV1.
 - Wording in any language but English.
 - Measures with no class in the taxonomy, such as cough counts, vascular function, balance, airway pH and absorptive (DTPA) clearance. They stay unclassified for a model or a person. Sleep is tagged only through a named instrument.
 - Ambiguous acronyms left out on purpose: CAT, FIS, NE.
-- `multi_class` does not tell one measure that spans two classes from two measures in one entry. The one known case, SNOT-22, was resolved in 0.3.0-draft.
+- `multi_class` does not tell one measure that spans two classes from two measures in one entry. The one known case, SNOT-22, was resolved in 0.3.0-draft and changed in 0.3.1-draft (both classes).
 - Single-study named scales not on the PRO-01 or PRO-04 lists stay unclassified; a generic "... Scale" matcher would also catch unnamed and clinician-rated scales.
 - "Chloride transport" with no test named is not tagged; the description decides.
 - "Area under the curve" is read as pharmacokinetics even for a glucose or C-peptide curve.

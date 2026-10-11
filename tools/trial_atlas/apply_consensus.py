@@ -30,7 +30,8 @@ Outputs in --out
   dropped.json           the dropped proposals: entry id, class, reason (disagree | invalid_reply | missing). No entry text.
 
 Refusals (exit 1, nothing written): the labeller's family or model is the proposer's (compared after lower-casing, and by the part
-before ':' of each model id, as challenge_tags.py does); an unreadable or malformed input; --out inside a git working tree or
+before ':' of each model id, as challenge_tags.py does, and by family stem: the leading lower-case letters of a family or model
+base name, so qwen3.8:27b and qwen3-coder-next are one family); an unreadable or malformed input; --out inside a git working tree or
 already holding an output file. Exit 2 is a usage error (a missing argument).
 
 Deterministic: no clock, no randomness; the same inputs give byte-identical outputs. Standard library only. No network, no model.
@@ -41,6 +42,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -69,6 +71,13 @@ def _family(text) -> str:
 
 def _base(model) -> str:
     return _family(model).split(":", 1)[0].strip()
+
+
+def _stem(name) -> str:
+    """The family stem: the leading run of lower-case letters of the casefolded family or model base name (qwen3.8 -> qwen,
+    qwen3-coder-next -> qwen, gemma4 -> gemma, claude-opus-5-5 -> claude). Empty when the name starts with anything else."""
+    m = re.match(r"[a-z]+", _base(name))
+    return m.group(0) if m else ""
 
 
 def load_proposals(path: Path) -> list[dict]:
@@ -126,6 +135,12 @@ def refuse_same_family(proposer_family: str, proposer_models: list[str], labelle
             raise Refused("the blind labeller's model matches a model that made the proposals; the rule needs a different family")
     if _base(labeller_model) == pf:
         raise Refused("the blind labeller's model name carries the proposer's family; the rule needs a different family")
+    # Two names of one family can differ in full (qwen3.8:27b and qwen3-coder-next): compare their stems too.
+    labeller_stems = {s for s in (_stem(labeller_family), _stem(labeller_model)) if s}
+    proposer_stems = {s for s in [_stem(proposer_family)] + [_stem(m) for m in proposer_models] if s}
+    shared = labeller_stems & proposer_stems
+    if shared:
+        raise Refused(f"the blind labeller and the proposer share the family stem {sorted(shared)[0]!r}; the rule needs a different family")
 
 
 def apply_rule(proposals: list[dict], labels: dict[str, set | None]) -> tuple[list[dict], list[dict]]:

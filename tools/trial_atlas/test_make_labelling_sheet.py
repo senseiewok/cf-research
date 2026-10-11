@@ -394,6 +394,21 @@ class CensusTest(unittest.TestCase):
         _, strata = mls.draw_census(pool, tags, lex, {}, seed=1, small_max=30, large_per_class=40)
         self.assertEqual(sorted(strata), ["sample:a", "sample:b"])
 
+    def test_a_class_carried_twice_by_one_entry_counts_once_as_in_the_gate(self):
+        lex = SimpleNamespace(class_order=["a", "b", "not_stated"])
+        pool = [{"entry_id": f"E{i:03d}"} for i in range(40)]
+        tags = {e["entry_id"]: {"entry_id": e["entry_id"], "status": "rule", "tags": [{"class": "a" if i < 3 else "b"}]}
+                for i, e in enumerate(pool)}
+        tags["E000"]["tags"] = [{"class": "a"}, {"class": "a"}]  # two rule tags with one class: a is carried by 3 entries, not 4
+        tags["E039"]["tags"] = [{"class": "b"}, {"class": "zz_not_in_the_order"}]   # a class outside the class order: no KeyError
+        chosen, strata = mls.draw_census(pool, tags, lex, {}, seed=1, small_max=3, large_per_class=40)
+        self.assertEqual(strata["census:small"]["population"], 4)     # a (3 entries) and the lone unknown class are both small
+        # the gate derives the same strata from the same frame
+        frame = {e["entry_id"]: {"status": "rule", "classes": [t["class"] for t in tags[e["entry_id"]]["tags"]]} for e in pool}
+        derived = ca.census_strata(frame, lex, 3)
+        self.assertEqual({c["entry_id"]: c["stratum"] for c in chosen}, derived)
+        self.assertEqual(derived["E000"], "census:small")
+
     # ---- model tags
 
     def test_model_tags_change_the_frame(self):
@@ -578,6 +593,152 @@ class CensusTest(unittest.TestCase):
         code, out, _ = self.run_cli(args)
         self.assertEqual(code, 1)
         self.assertIn("ERROR", out)
+
+    def test_cli_consensus_report_fills_the_keys_consensus_record(self):
+        mt = self.root / "kept-model-tags.json"
+        mt.write_bytes(self.good_bytes)
+        report = {"kind": "trial-atlas consensus report (counts only)", "rule_declared": "2026-10-11", "rule": "text",
+                  "proposed": 7, "kept": 1, "dropped": 6, "dropped_disagree": 6, "labeller_family": "gemma"}
+        rp = self.root / "consensus-report.json"
+        rp.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
+        _, keyf, args = self.cli_args("--model-tags", str(mt), "--consensus-report", str(rp))
+        code, out, err = self.run_cli(args)
+        self.assertEqual(code, 0, out + err)
+        key = json.loads(keyf.read_text(encoding="utf-8"))
+        self.assertEqual(key["consensus"], {"rule_declared": "2026-10-11", "proposed": 7, "kept": 1, "dropped": 6,
+                                            "report_sha256": __import__("hashlib").sha256(rp.read_bytes()).hexdigest()})
+        # without the option the record stays null
+        _, keyf, args = self.cli_args("--model-tags", str(mt))
+        self.assertEqual(self.run_cli(args)[0], 0)
+        self.assertIsNone(json.loads(keyf.read_text(encoding="utf-8"))["consensus"])
+        # a report lacking a field (or with a wrong type) is an input error, nothing written
+        for broken in ({k: v for k, v in report.items() if k != "kept"}, {**report, "dropped": "6"}, [report]):
+            with self.subTest(broken=str(broken)[:40]):
+                bad = Path(tempfile.mkdtemp(dir=self.root)) / "consensus-report.json"
+                bad.write_text(json.dumps(broken), encoding="utf-8")
+                sheet, keyf, args = self.cli_args("--model-tags", str(mt), "--consensus-report", str(bad))
+                code, out, _ = self.run_cli(args)
+                self.assertEqual(code, 1, out)
+                self.assertIn("ERROR", out)
+                self.assertFalse(sheet.exists() or keyf.exists())
+        # it needs --model-tags, and the legacy design refuses it
+        _, _, args = self.cli_args("--consensus-report", str(rp))
+        code, _, err = self.run_cli(args)
+        self.assertEqual(code, 2)
+        self.assertIn("--consensus-report goes with --model-tags", err)
+        _, _, args = self.cli_args()
+        code, _, err = self.run_cli(self.legacy_args(args, "--n", "10", "--consensus-report", str(rp)))
+        self.assertEqual(code, 2)
+        self.assertIn("cannot be used with --design legacy", err)
+        with self.assertRaises(ValueError):
+            self.census(consensus={"rule_declared": "2026-10-11", "proposed": 1, "kept": 1, "dropped": 0, "report_sha256": "0" * 64})
+
+    # ---- --sample-exclude: development entries kept out of the sample strata only
+
+    def sample_ids(self, key, name):
+        return sorted(r["entry_id"] for r in key["rows"] if r["stratum"] == name)
+
+    def test_without_exclusion_the_draw_is_unchanged(self):
+        # sha256 of draw_census's output on this hand-made frame, recorded before --sample-exclude existed (2026-10-11)
+        lex = SimpleNamespace(class_order=["a", "b", "c", "not_stated"])
+        pool = [{"entry_id": f"E{i:03d}"} for i in range(300)]
+        tags = {e["entry_id"]: {"entry_id": e["entry_id"], "status": "rule",
+                                "tags": [{"class": "a" if i < 20 else ("b" if i < 150 else "c")}]} for i, e in enumerate(pool)}
+        digest = lambda out: __import__("hashlib").sha256(json.dumps(list(out), sort_keys=True).encode()).hexdigest()  # noqa: E731
+        before = "4763a8654d2ec569aa737faef680de135a29fbd9a781482289a765b115ad4ff2"
+        self.assertEqual(digest(mls.draw_census(pool, tags, lex, {}, seed=9, small_max=30, large_per_class=40)), before)
+        self.assertEqual(digest(mls.draw_census(pool, tags, lex, {}, seed=9, small_max=30, large_per_class=40,
+                                                sample_exclude=frozenset())), before)
+        # through build: no exclusion gives the same sheet, rows and strata, and a null sample_exclusion
+        a, b = self.census(seed=5, small_max=1, large_per_class=1), self.census(seed=5, small_max=1, large_per_class=1, sample_exclude=None)
+        self.assertEqual((a[0], a[1]), (b[0], b[1]))
+        self.assertIsNone(a[1]["sample_exclusion"])
+
+    def test_excluded_entries_leave_only_the_sample_strata_and_reduce_their_weight(self):
+        lex = SimpleNamespace(class_order=["a", "b", "not_stated"])
+        pool = [{"entry_id": f"E{i:03d}"} for i in range(260)]
+        tags = {e["entry_id"]: {"entry_id": e["entry_id"], "status": "rule", "tags": [{"class": "a" if i < 30 else "b"}]}
+                for i, e in enumerate(pool)}
+        dev = frozenset([f"E{i:03d}" for i in range(0, 5)] + [f"E{i:03d}" for i in range(30, 60)])   # 5 census, 30 sampled
+        chosen, strata = mls.draw_census(pool, tags, lex, {}, seed=1, small_max=30, large_per_class=40, sample_exclude=dev)
+        self.assertEqual(strata["census:small"], {"kind": "census", "population": 30, "drawn": 30, "weight": 1.0})
+        self.assertEqual(strata["sample:b"], {"kind": "sample", "population": 200, "drawn": 40, "weight": 200 / 40})
+        drawn = {c["entry_id"]: c["stratum"] for c in chosen}
+        self.assertTrue(all(drawn[f"E{i:03d}"] == "census:small" for i in range(5)))      # still drawn in the census stratum
+        self.assertFalse(dev & {e for e, st in drawn.items() if st == "sample:b"})
+        # the class sizes still count the excluded entries: with them a stays small (30); the frame is not shrunk
+        self.assertNotIn("sample:a", strata)
+        # a sample stratum whose whole population is excluded is left out (its weight would be undefined)
+        all_b = frozenset(f"E{i:03d}" for i in range(30, 260))
+        _, strata = mls.draw_census(pool, tags, lex, {}, seed=1, small_max=30, large_per_class=40, sample_exclude=all_b)
+        self.assertEqual(sorted(strata), ["census:small"])
+
+    def test_build_with_exclusion_records_it_and_the_gate_binds_it(self):
+        _, base, _ = self.census(small_max=1, large_per_class=1)
+        safety = sorted(e for e in self.drawable if "safety_tolerability" in self.classes[e])
+        census_small = self.sample_ids(base, "census:small")
+        dev = [safety[0], census_small[0], "NCT09999999:P1"]                    # one sampled, one censused, one not in the frame
+        _, key, summary = self.census(small_max=1, large_per_class=1, sample_exclude=dev)
+        self.assertEqual(key["sample_exclusion"], {"count": 2, "sha256": ca.sample_exclusion_digest(dev)})
+        self.assertEqual(key["sample_exclusion"]["sha256"],
+                         __import__("hashlib").sha256("\n".join(sorted(dev)).encode("utf-8")).hexdigest())
+        self.assertEqual((summary["excluded_in_frame"], summary["excluded_not_in_frame"], summary["excluded_in_census"]), (2, 1, 1))
+        self.assertEqual(key["strata"]["sample:safety_tolerability"], {"kind": "sample", "population": 1, "drawn": 1, "weight": 1.0})
+        self.assertEqual(self.sample_ids(key, "sample:safety_tolerability"), [safety[1]])
+        self.assertEqual(key["strata"]["census:small"], base["strata"]["census:small"])
+        self.assertIn(census_small[0], self.sample_ids(key, "census:small"))
+        self.assertEqual(sum(v["population"] for v in key["strata"].values()), len(self.drawable) - 1)
+        # the gate re-derives the same frame with the same file, and refuses it without the file or with another one
+        self.assertEqual(ca.census_binding_problems(key, self.tags["entries"], [], LEX, None, dev), [])
+        self.assertIn("no --frozen-exclude file was given", " ".join(ca.census_binding_problems(key, self.tags["entries"], [], LEX, None)))
+        self.assertIn("hash differs", " ".join(ca.census_binding_problems(key, self.tags["entries"], [], LEX, None, dev[:2])))
+        # a key drawn without exclusion refuses an exclusion file
+        self.assertIn("drawn with no sample exclusion", " ".join(ca.census_binding_problems(base, self.tags["entries"], [], LEX, None, dev)))
+        # an excluded entry drawn into its sample stratum (the honest row swapped for it) is refused
+        for r in key["rows"]:
+            if r["entry_id"] == safety[1]:
+                r["entry_id"] = safety[0]
+        self.assertIn("row(s) of a sample stratum are excluded (development) entries",
+                      " ".join(ca.census_binding_problems(key, self.tags["entries"], [], LEX, None, dev)))
+
+    def test_the_same_seed_and_exclusion_give_byte_identical_output(self):
+        dev = sorted(e for e in self.drawable if "pharmacokinetics" in self.classes[e])[:1]
+        a = self.census(seed=42, small_max=1, large_per_class=1, sample_exclude=dev)
+        b = self.census(seed=42, small_max=1, large_per_class=1, sample_exclude=list(reversed(dev + dev)))
+        self.assertEqual(a[0], b[0])
+        self.assertEqual(json.dumps(a[1], indent=1), json.dumps(b[1], indent=1))   # order and duplicates do not change the hash
+        devf = self.root / "dev-ids.json"
+        devf.write_text(json.dumps(dev), encoding="utf-8")
+        first, second = (self.cli_args("--small-max", "1", "--large-per-class", "1", "--sample-exclude", str(devf)) for _ in range(2))
+        for _, _, args in (first, second):
+            self.assertEqual(self.run_cli(args)[0], 0)
+        self.assertEqual(first[0].read_bytes(), second[0].read_bytes())
+        self.assertEqual(first[1].read_bytes(), second[1].read_bytes())
+        self.assertEqual(json.loads(first[1].read_text(encoding="utf-8"))["sample_exclusion"]["count"], 1)
+
+    def test_cli_sample_exclude_inputs(self):
+        devf = self.root / "dev-report.json"
+        devf.write_text(json.dumps([self.drawable[0], "NCT09999999:P1", "NCT09999998:P1"]), encoding="utf-8")
+        _, _, args = self.cli_args("--sample-exclude", str(devf), "--report")
+        code, out, _ = self.run_cli(args)
+        self.assertEqual(code, 0, out)
+        self.assertIn("sample exclusion: 1 ids in the frame (1 of them in census strata, still drawn), 2 ids not in the frame (ignored)",
+                      out)
+        for broken in ({"ids": []}, [1, 2], "x"):
+            with self.subTest(broken=broken):
+                bad = Path(tempfile.mkdtemp(dir=self.root)) / "dev.json"
+                bad.write_text(json.dumps(broken), encoding="utf-8")
+                sheet, keyf, args = self.cli_args("--sample-exclude", str(bad))
+                code, out, _ = self.run_cli(args)
+                self.assertEqual(code, 1, out)
+                self.assertIn("must hold a JSON list of entry ids", out)
+                self.assertFalse(sheet.exists() or keyf.exists())
+        _, _, args = self.cli_args()
+        code, _, err = self.run_cli(self.legacy_args(args, "--n", "10", "--sample-exclude", str(devf)))
+        self.assertEqual(code, 2)
+        self.assertIn("cannot be used with --design legacy", err)
+        with self.assertRaises(ValueError):
+            mls.build(self.s, self.tags, LEX, n=10, seed=3, sample_exclude=[])
 
     def test_report_prints_counts_only(self):
         _, _, args = self.cli_args("--small-max", "1", "--large-per-class", "1", "--report")

@@ -2,7 +2,9 @@
 """The versioned rule lexicon for the trial atlas (lexicon.json) and the deterministic tagger that applies it.
 
 A tag records the class, the rule id and the exact matched span (field, start, end, text): entry[field][start:end] == text, always.
-Rules run on the measure first and on the description only when the measure gave no class (matching settings in lexicon.json).
+Rules run on the measure first and on the description only when the measure gave no class (matching settings in lexicon.json),
+with one declared exception (matching.description_upgrades): a measure that gave only an unnamed patient-reported class may have the
+instrument named in its description, and only the named-instrument rules listed there are read on the description for it.
 A rule with suppressed_by is dropped when any listed class or rule id also matched in the same field group. The entry's status:
   rule          at least one class rule matched
   not_stated    no primary outcome (NS-00), a placeholder measure (NS-01), or only wording that names no measure (NS-V1, flag vague)
@@ -175,6 +177,19 @@ class Lexicon:
             if bad:
                 raise ValueError(f"fallback restriction {f['id']}: unknown class(es) {sorted(bad)}")
             self.fallback_restrictions.append({**f, "re": _compile(f["measure_pattern"], False, f["id"])})
+        # description_upgrades: when the measure gave ONLY the listed classes, the listed rules are also read on the description; a
+        # match there adds its class (from_description) and removes the classes in "replaces". Nothing else reads the description then.
+        self.description_upgrades = []
+        for u in data["matching"].get("description_upgrades", []):
+            bad = (set(u["measure_classes"]) | set(u["replaces"])) - set(self.domain_of)
+            if bad:
+                raise ValueError(f"description upgrade {u['id']}: unknown class(es) {sorted(bad)}")
+            bad = set(u["description_rules"]) - set(ids)
+            if bad or not u["description_rules"]:
+                raise ValueError(f"description upgrade {u['id']}: unknown or missing rule id(s) {sorted(bad)}")
+            if not set(u["replaces"]) <= set(u["measure_classes"]):
+                raise ValueError(f"description upgrade {u['id']}: replaces must be among measure_classes")
+            self.description_upgrades.append(u)
         self.composite = [{**r, "re": _compile(r["pattern"], False, r["id"])} for r in data["composite_rules"]]
         ns = {r["id"]: r for r in data["not_stated_rules"]}
         self.placeholder = _compile(ns["NS-01"]["pattern"], False, "NS-01")
@@ -247,6 +262,21 @@ class Lexicon:
         first = min(pool, key=lambda h: (self.fallback_fields.index(h["field"]), h["start"], self.class_order.index(h["rule"]["class"])))
         return [{**first, "from_description": True}]
 
+    def _description_upgrade(self, entry: dict, hits: list[dict]) -> list[dict]:
+        """matching.description_upgrades: if every class the measure gave is in an upgrade's measure_classes, its description_rules
+        are read on the description (with the usual suppression there); their matches are added as from_description tags and the
+        classes in 'replaces' are dropped. Any other class in the measure, or no match in the description, leaves the hits as they are."""
+        measure_classes = {h["rule"]["class"] for h in hits}
+        for u in self.description_upgrades:
+            if not measure_classes or not measure_classes <= set(u["measure_classes"]):
+                continue
+            allowed = set(u["description_rules"])
+            found = [h for h in self._match_group(entry, self.fallback_fields) if h["rule"]["id"] in allowed]
+            if found:
+                kept = [h for h in hits if h["rule"]["class"] not in set(u["replaces"])]
+                return kept + [{**h, "from_description": True} for h in found]
+        return hits
+
     @staticmethod
     def _tag(h: dict) -> dict:
         return {"class": h["rule"]["class"], "by": "rule", "rule_id": h["rule"]["id"], "field": h["field"], "start": h["start"],
@@ -269,6 +299,8 @@ class Lexicon:
             fallback = self._fallback(entry)
             if any(not h["rule"].get("vague") for h in fallback) or not hits:
                 hits = fallback or hits
+        else:
+            hits = self._description_upgrade(entry, hits)
         if hits:
             out["status"] = "rule"
             seen = {}
