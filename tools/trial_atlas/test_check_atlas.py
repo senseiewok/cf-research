@@ -166,7 +166,7 @@ class IntegrityTest(Fixture):
         self.assertEqual(c["scope"]["excluded_by_rule"]["X5"], 1)
         self.assertEqual(c["shares"]["other"], 0.05)
 
-    # ---- third round (after adff5aa). Each case failed before its fix.
+    # ---- the terms block, split counts, input errors, confirming a real run
 
     def test_the_registry_terms_travel_with_the_counts(self):
         c = json.loads(self.counts_path.read_text(encoding="utf-8"))
@@ -199,9 +199,191 @@ class IntegrityTest(Fixture):
 
     def test_split_counts_by_actual_and_planned_start_and_first_posted_year(self):
         c = json.loads(self.counts_path.read_text(encoding="utf-8"))
-        self.assertEqual(c["studies_by_class_and_actual_start_year"]["exacerbations"], {"2005": 1})
+        self.assertEqual(c["studies_by_class_and_actual_start_year"]["exacerbations"], {})
         self.assertEqual(c["studies_by_class_and_planned_start_year"]["exacerbations"], {"2027": 1})
+        self.assertEqual(c["studies_by_class_and_untyped_start_year"]["exacerbations"], {"2005": 1})   # NCT00000012: no date type
         self.assertEqual(c["studies_by_class_and_first_posted_year"]["exacerbations"], {"2019": 1, "2026": 1})
+
+    def test_untyped_starts_are_counted_and_the_kinds_add_up(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        kinds = {k: c["scope"][k] for k in ("start_actual", "start_planned", "start_untyped", "start_no_date")}
+        self.assertEqual(kinds, {"start_actual": 7, "start_planned": 1, "start_untyped": 3, "start_no_date": 1})
+        self.assertEqual(sum(kinds.values()), c["studies"])
+        self.assertNotIn("start_unknown", c["scope"])
+        # every study with a start year is in exactly one of the three year-split counts; a study with no date is in none
+        dated = sum(c["studies_by_start_year"].get(y, 0) for y in c["studies_by_start_year"] if y != "unknown")
+        self.assertEqual(dated, kinds["start_actual"] + kinds["start_planned"] + kinds["start_untyped"])
+        self.assertEqual(c["studies_by_start_year"].get("unknown"), kinds["start_no_date"])
+        mods = " ".join(c["registry_terms"]["modifications"])
+        self.assertIn("Start dates without a recorded date type are counted as their own kind; no type is assumed.", mods)
+
+    def test_the_new_start_kind_keys_are_drift_checked(self):
+        for path, mutate in (("scope/start_untyped", lambda c: c["scope"].update({"start_untyped": 4})),
+                             ("scope/start_no_date", lambda c: c["scope"].update({"start_no_date": 0})),
+                             ("studies_by_class_and_untyped_start_year", lambda c: c["studies_by_class_and_untyped_start_year"].update(
+                                 {"exacerbations": {"2005": 2}})),
+                             ("class_year_phase", lambda c: c["class_year_phase"]["exacerbations"]["untyped"].update({"2005": {"PHASE3": 2}}))):
+            with self.subTest(path=path):
+                counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
+                mutate(counts)
+                p = self.work / f"counts-kind-{path.replace('/', '-')}.json"
+                p.write_text(json.dumps(counts), encoding="utf-8")
+                code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", p, "--model-tags", self.model_path,
+                                 "--drift-only"])
+                self.assertEqual(code, 1, out)
+                self.assertIn(f"drift /{path}", out)
+
+    # ---- the disclaimer items, time zones, the synthetic key and the page counts
+
+    def test_the_terms_block_carries_the_disclaimer_items(self):
+        t = json.loads(self.counts_path.read_text(encoding="utf-8"))["registry_terms"]
+        self.assertEqual(t["no_warranty"], "ClinicalTrials.gov states that the U.S. Government makes no warranties, expressed or "
+                                           "implied, about its data and assumes no liability for any party's use of them.")
+        self.assertEqual(t["sponsor_responsibility"],
+                         "Study sponsors and investigators write and are responsible for their own records. The registry's Disclaimer "
+                         "says the U.S. government \"does not review or approve the safety and science of all studies listed on this "
+                         "website\" and that NLM staff only review study information for apparent errors, deficiencies or "
+                         "inconsistencies. See the registry's Disclaimer.")
+        self.assertEqual(t["disclaimer_url"], "https://clinicaltrials.gov/about-site/disclaimer")
+        self.assertEqual(t["disclaimer_last_updated"], "2023-08-03")
+        self.assertEqual(t["third_party_copyright"],
+                         "Some registry data may be subject to third-party copyright, and the data carry an international copyright "
+                         "outside the United States and its Territories or Possessions.")
+        self.assertEqual(t["keep_current"],
+                         "The registry says it is updated daily and that data in any publication or distribution should be kept current "
+                         "at all times. This copy is dated and may be out of date; the live record is the current one.")
+        text = ca.terms_text(t)
+        for key in ("no_warranty", "sponsor_responsibility", "third_party_copyright", "keep_current"):
+            self.assertIn(t[key], text)
+        self.assertIn("https://clinicaltrials.gov/about-site/disclaimer (last updated 2023-08-03)", text)
+
+    def test_time_zones_are_stated(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        self.assertTrue(c["registry_terms"]["snapshot_fetched_at"].endswith("Z"))
+        text = ca.terms_text(c["registry_terms"])
+        self.assertIn(f"snapshot fetched at: {c['registry_terms']['snapshot_fetched_at']} (UTC)", text)
+        self.assertIn(f"data processed by the registry: {c['registry_terms']['data_processed_by_registry']} (as given by the registry)",
+                      text)
+
+    def test_utc_is_said_only_when_the_value_says_so(self):
+        base = json.loads(self.counts_path.read_text(encoding="utf-8"))["registry_terms"]
+        cases = {"2026-10-10T01:02:03Z": "snapshot fetched at: 2026-10-10T01:02:03Z (UTC)",
+                 "2026-10-10T01:02:03+02:00": "snapshot fetched at: 2026-10-10T01:02:03+02:00 (time zone not stated as UTC)",
+                 "2026-10-10T01:02:03": "snapshot fetched at: 2026-10-10T01:02:03 (time zone not stated as UTC)",
+                 None: "snapshot fetched at: not recorded\n"}
+        for value, line in cases.items():
+            with self.subTest(value=value):
+                self.assertIn(line, ca.terms_text({**base, "snapshot_fetched_at": value}))
+        text = ca.terms_text({**base, "data_processed_by_registry": None})
+        self.assertIn("data processed by the registry: not recorded\n", text)
+        self.assertNotIn("not recorded (as given by the registry)", text)
+
+    def test_registry_text_is_cleaned_before_printing(self):
+        base = json.loads(self.counts_path.read_text(encoding="utf-8"))["registry_terms"]
+        text = ca.terms_text({**base, "data_processed_by_registry": "2026\x1b[2J\nINJECTED", "terms_last_updated": "x\x1b]0;t\x07y"})
+        self.assertNotIn("\x1b", text)
+        self.assertNotIn("\x07", text)
+        self.assertFalse([ln for ln in text.splitlines() if ln.startswith("INJECTED")], "a newline in a value must not start a line")
+        counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        counts["class_year_phase"]["exacerbations"]["untyped"]["2005"]["PHASE3\x1b[31m\nEVIL"] = 1
+        p = self.work / "counts-escape.json"
+        p.write_text(json.dumps(counts), encoding="utf-8")
+        code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", p, "--model-tags", self.model_path,
+                         "--drift-only"])
+        self.assertEqual(code, 1, out)
+        self.assertNotIn("\x1b", out)
+        self.assertFalse([ln for ln in out.splitlines() if ln.startswith("EVIL")])
+
+    def test_drift_compares_types_not_only_values(self):
+        for name, mutate in (("synthetic", lambda c: c.update({"synthetic": 1})),
+                             ("unsorted_entries", lambda c: c.update({"unsorted_entries": False})),
+                             ("studies", lambda c: c.update({"studies": float(c["studies"])}))):
+            with self.subTest(name=name):
+                counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
+                mutate(counts)
+                p = self.work / f"counts-type-{name}.json"
+                p.write_text(json.dumps(counts), encoding="utf-8")
+                code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", p, "--model-tags", self.model_path,
+                                 "--drift-only"])
+                self.assertEqual(code, 1, out)
+                self.assertIn(f"drift /{name}", out)
+
+    def test_the_readme_does_not_claim_the_synthetic_key_proves_origin(self):
+        readme = (HERE / "README.md").read_text(encoding="utf-8")
+        source = (HERE / "check_atlas.py").read_text(encoding="utf-8")
+        for text in (readme, source):
+            self.assertNotIn("without guessing", text)
+        self.assertIn("not proof of origin", readme)
+        self.assertIn("no synthetic marker found", readme)
+
+    def test_co_occurrence_counts_studies_once_per_pair(self):
+        studies = [
+            sf.study("NCT00000301", "two entries in the same pair", start="2015-01", outcomes=[
+                ("Change in FEV1", "", "Week 4"), ("Change in sweat chloride", "", "Week 4"),
+                ("Change in FEV1 and sweat chloride", "", "Week 8")]),
+            sf.study("NCT00000302", "three classes", start="2016-01", outcomes=[
+                ("Change in FEV1", "", "Week 4"), ("Change in sweat chloride", "", "Week 4"), ("Change in HbA1c", "", "Week 4")]),
+        ]
+        client = sf.FakeClient({fs.ROUTES["condition"]["query.cond"]: sf.pages(studies, 8, "condition")})
+        fs.run(client, self.work / "pairs", routes=["condition"], cfg={"page_size": 8}, contact=sf.DUMMY_CONTACT)
+        s = snap.load(self.work / "pairs")
+        pairs = {(p["a"], p["b"]): p["studies"] for p in ca.compute_counts(s, lexicon.tag_snapshot(s, LEX), [], LEX)["co_occurrence"]["pairs"]}
+        self.assertEqual(pairs, {("fev1", "sweat_chloride"): 2, ("fev1", "glucose_cfrd"): 1, ("sweat_chloride", "glucose_cfrd"): 1})
+
+    def test_counts_say_whether_the_data_are_synthetic(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        self.assertIs(c["synthetic"], True)
+        clean = self.work / "clean"
+        pages = sf.pages(sf.cf_condition_studies(), 8, "condition")
+        for p in pages:
+            p.pop("_synthetic")
+        client = sf.FakeClient({fs.ROUTES["condition"]["query.cond"]: pages},
+                               version={"apiVersion": "2.0.0-test", "dataTimestamp": "2026-10-09T09:00:00"})
+        fs.run(client, clean, routes=["condition"], cfg={"page_size": 8}, contact=sf.DUMMY_CONTACT)
+        s = snap.load(clean)
+        self.assertIs(ca.compute_counts(s, lexicon.tag_snapshot(s, LEX), [], LEX)["synthetic"], False)
+
+    def test_class_year_phase(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))["class_year_phase"]
+        self.assertEqual(c["exacerbations"], {"actual": {}, "planned": {"2027": {"PHASE3": 1}}, "untyped": {"2005": {"PHASE3": 1}}})
+        self.assertEqual(c["pharmacokinetics"], {"actual": {"2016": {"PHASE1": 1}}, "planned": {}, "untyped": {}})
+        self.assertEqual(c["feasibility_adherence"]["actual"], {"2018": {"NA": 1}})
+
+    def test_co_occurrence(self):
+        co = json.loads(self.counts_path.read_text(encoding="utf-8"))["co_occurrence"]
+        pairs = {(p["a"], p["b"]): p["studies"] for p in co["pairs"]}
+        self.assertEqual(pairs[("fev1", "sweat_chloride")], 1)
+        self.assertEqual(pairs[("exacerbations", "healthcare_use")], 1)
+        self.assertEqual(pairs[("exacerbations", "cfqr")], 1)
+        self.assertEqual(pairs[("npd", "sinus_upper_airway")], 1)
+        self.assertFalse([p for p in pairs if {"other", "not_stated"} & set(p)])
+        self.assertEqual(co["excluded_classes"], ["other", "not_stated"])
+        self.assertEqual(co["studies_by_class"]["exacerbations"], 2)
+        order = [(LEX.class_order.index(a), LEX.class_order.index(b)) for a, b in pairs]
+        self.assertEqual(order, sorted(order))
+        self.assertTrue(all(i < j for i, j in order))
+
+    def test_unsorted_entries(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        self.assertEqual(c["unsorted_entries"], 0)                       # the one unclassified entry has an accepted model tag
+        s = snap.load(self.snap_dir)
+        self.assertEqual(ca.compute_counts(s, lexicon.tag_snapshot(s, LEX), [], LEX)["unsorted_entries"], 1)
+
+    def test_each_new_count_is_drift_checked(self):
+        for path, mutate in (("class_year_phase", lambda c: c["class_year_phase"]["exacerbations"]["planned"].update({"2027": {"PHASE3": 2}})),
+                             ("co_occurrence", lambda c: c["co_occurrence"]["pairs"][0].update({"studies": 9})),
+                             ("unsorted_entries", lambda c: c.update({"unsorted_entries": 5})),
+                             ("synthetic", lambda c: c.update({"synthetic": False})),
+                             ("registry_terms/no_warranty", lambda c: c["registry_terms"].update({"no_warranty": "x"}))):
+            with self.subTest(path=path):
+                counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
+                mutate(counts)
+                p = self.work / f"counts-{path.replace('/', '-')}.json"
+                p.write_text(json.dumps(counts), encoding="utf-8")
+                code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", p, "--model-tags", self.model_path,
+                                 "--drift-only"])
+                self.assertEqual(code, 1, out)
+                self.assertIn(f"drift /{path}", out)
 
     def test_missing_input_files_are_a_clean_usage_error(self):
         nowhere = self.work / "nowhere.json"
@@ -351,7 +533,7 @@ class PublicationTest(Fixture):
         self.assertEqual(code, 3, out)
         self.assertIn("STOP S2 other plus unclassified are 5.0% of entries", out)
 
-    # ---- fix round after e7ea5ed: findings 5, 6, 12, 13 and 14. Each case failed before its fix.
+    # ---- controls on named inputs, the frozen-set size, sanitised printing, input errors, sponsors
 
     def test_synthetic_controls_do_not_meet_the_gate(self):
         with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19):
@@ -433,7 +615,7 @@ class PublicationTest(Fixture):
         self.assertEqual(code, 2, out)
         self.assertIn("does not match the sealed key", out)
 
-    # ---- second fix round (after 0401af9). Each case failed before its fix.
+    # ---- the gate refuses synthetic data and unbound frozen sets
 
     def test_synthetic_inputs_never_pass_the_gate(self):
         with mock.patch.object(ca, "MIN_FROZEN_ROWS", 19), mock.patch.object(ca, "MIN_CONTROL_ENTRIES", 8):
@@ -529,6 +711,70 @@ class PublicationTest(Fixture):
         self.assertIn("unknown class", out)
 
 
+class SelfConsistencyTest(Fixture):
+    """--self-consistency: the relationships a counts file must satisfy, the same rules a page generator applies."""
+
+    def check(self, mutate=None):
+        counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        if mutate:
+            mutate(counts)
+        p = self.work / "counts-consistency.json"
+        p.write_text(json.dumps(counts), encoding="utf-8")
+        return run(["--self-consistency", p])
+
+    def test_counts_written_by_the_tools_are_consistent(self):
+        code, out = self.check()
+        self.assertEqual(code, 0, out)
+        self.assertEqual(out.count("\nOK ") + out.startswith("OK "), len(ca.CONSISTENCY_RULES))
+        self.assertNotIn("FAIL", out)
+
+    def test_each_relationship_fails_on_a_perturbed_file(self):
+        def bump_class_studies(c):
+            c["studies_by_class"]["fev1"] = c["studies"] + 1
+
+        def zero_class_entries(c):
+            c["entries_by_class"] = {k: 0 for k in c["entries_by_class"]}
+
+        def phase_total(c):
+            c["class_year_phase"]["exacerbations"]["planned"]["2027"]["PHASE3"] = 2
+
+        cases = (
+            ("class studies within studies in scope", bump_class_studies),
+            ("class entries cover classified entries", zero_class_entries),
+            ("unsorted entries equal unclassified", lambda c: c.update({"unsorted_entries": 3})),
+            ("start kinds add up to studies in scope", lambda c: c["scope"].update({"start_untyped": c["scope"]["start_untyped"] + 1})),
+            ("class_year_phase totals equal year counts", phase_total),
+            ("co-occurrence pairs within the smaller class", lambda c: c["co_occurrence"]["pairs"][0].update({"studies": 99})),
+            ("distinct sponsors within studies", lambda c: c["lead_sponsors_by_class"].update({"exacerbations": 99})),
+        )
+        self.assertEqual(sorted(n for n, _ in cases), sorted(ca.CONSISTENCY_RULES))
+        for name, mutate in cases:
+            with self.subTest(name=name):
+                code, out = self.check(mutate)
+                self.assertEqual(code, 1, out)
+                self.assertIn(f"FAIL {name}", out)
+                self.assertEqual(out.count("FAIL "), 1, out)              # only the relationship that was broken
+
+    def test_a_missing_key_fails_and_an_unreadable_file_is_a_usage_error(self):
+        code, out = self.check(lambda c: c.pop("unsorted_entries"))
+        self.assertEqual(code, 1, out)
+        self.assertIn("FAIL unsorted entries equal unclassified", out)
+        code, out = run(["--self-consistency", self.work / "nowhere.json"])
+        self.assertEqual(code, 2, out)
+
+    def test_write_counts_checks_before_writing(self):
+        target = self.work / "counts-new.json"
+        code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--model-tags", self.model_path, "--write-counts", target])
+        self.assertEqual(code, 0, out)
+        self.assertIn("self-consistency: OK", out)
+        with mock.patch.object(ca, "consistency_results", lambda c: [("unsorted entries equal unclassified", False, "forced")]):
+            target2 = self.work / "counts-refused.json"
+            code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--model-tags", self.model_path,
+                             "--write-counts", target2])
+        self.assertEqual(code, 1, out)
+        self.assertFalse(target2.exists())
+
+
 class NegativeControlTest(unittest.TestCase):
     def setUp(self):
         sf.block_network(self)
@@ -578,7 +824,7 @@ class NegativeControlTest(unittest.TestCase):
         self.assertEqual(code, 1, out)
         self.assertIn("NCT00000198:P1", out)
 
-    # ---- second fix round (after 0401af9). Each case failed before its fix.
+    # ---- the gate refuses synthetic data and unbound frozen sets
 
     def test_controls_only_is_not_the_gate(self):
         code, out = run(["--negative-controls"])
@@ -603,7 +849,7 @@ class NegativeControlTest(unittest.TestCase):
         self.assertFalse(next(r for r in results if r[0].startswith("canary"))[1])
 
     def test_planted_ids_found_only_by_the_recall_route_are_checked(self):
-        # third round: a planted id that only the term search returned is still tested against the scope rules
+        # a planted id that only the term search returned is still tested against the scope rules
         cond = [st for st in sf.cf_condition_studies()
                 if st["protocolSection"]["identificationModule"]["nctId"] not in ("NCT00000011", "NCT00000016")]
         term = sf.cf_term_studies() + [st for st in sf.cf_condition_studies()

@@ -1,5 +1,5 @@
 {
-  "lexicon_version": "0.2.2-draft",
+  "lexicon_version": "0.2.3-draft",
   "status": "Second draft for review (2026-10-10), revised after two blind reviews of 0.1.0. Written from the taxonomy in proposals/2026-10-10-trial-endpoint-atlas.md plus one added class (exercise_capacity, not yet confirmed by the maintainer). Not yet checked against any real registry wording or against the frozen set. Every rule carries examples that test_lexicon.py runs; they are made-up English, not registry text.",
   "matching": {
     "match_fields": ["measure"],
@@ -57,7 +57,7 @@
     {"id": "other", "label": "Other", "classes": [
       {"id": "other", "label": "Other", "gloss": "A measure that fits none of the classes above.", "assigned_by": "a model tag with an exact quote, or a person; no rule assigns it"}]},
     {"id": "not_stated", "label": "Not stated", "classes": [
-      {"id": "not_stated", "label": "Not stated", "gloss": "No measure is named: no primary outcome, a placeholder, or only words such as efficacy.", "assigned_by": "rules NS-00, NS-01 and NS-V1 only"}]}
+      {"id": "not_stated", "label": "No measure named", "gloss": "No measure is named: no primary outcome, a placeholder, or only words such as efficacy.", "assigned_by": "rules NS-00, NS-01 and NS-V1 only"}]}
   ],
   "safety_subtypes": ["adverse_events", "serious_adverse_events", "laboratory", "vital_signs_ecg", "dose_limiting", "tolerability", "unspecified"],
   "rules": [

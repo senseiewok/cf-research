@@ -189,7 +189,7 @@ class ContactAndSkillTest(Base):
         self.assertEqual(cm.exception.code, 2)
         self.assertFalse(self.out.exists())
 
-    # ---- second fix round (after 0401af9): the reviewer's contact_probe.py cases. Each failed before its fix.
+    # ---- the contact never appears in any output
 
     FAKE = "probe.user" + "@" + "example.invalid"
 
@@ -235,7 +235,7 @@ class ContactAndSkillTest(Base):
             fs.main(["--contact", self.FAKE])
         self.assertNotIn(self.FAKE, err.getvalue())
 
-    # ---- third round (after adff5aa). Each case failed before its fix.
+    # ---- output path, dry-run plan, --fields and --route-query
 
     def _main(self, args, client_factory=None, dry=False):
         ev = SimpleNamespace(PROJECT_UA="SYNTHETIC-UA")

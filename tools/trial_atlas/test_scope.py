@@ -59,9 +59,28 @@ class ScopeTest(unittest.TestCase):
         info = {r["nct_id"]: r for r in self.result["included"]}
         self.assertEqual(info["NCT00000004"]["start_kind"], "planned")
         self.assertEqual(info["NCT00000001"]["start_kind"], "actual")
-        self.assertEqual(info["NCT00000014"]["start_kind"], "unknown")   # a date with no type is not called actual
         self.assertEqual(info["NCT00000014"]["start_year"], 2000)
         self.assertEqual(info["NCT00000012"]["start_decade"], "2000s")
+
+    def test_a_start_date_with_no_type_is_its_own_kind(self):
+        # A date with no recorded type is "untyped" (never called actual or planned); no date at all is "no_date".
+        info = {r["nct_id"]: r for r in self.result["included"]}
+        for nct in ("NCT00000003", "NCT00000012", "NCT00000014"):
+            with self.subTest(nct=nct):
+                self.assertEqual(info[nct]["start_kind"], "untyped")
+                self.assertIsNotNone(info[nct]["start_year"])
+        self.assertEqual(info["NCT00000015"]["start_kind"], "no_date")
+        self.assertIsNone(info["NCT00000015"]["start_year"])
+        self.assertEqual(scope.start_info({"start_date": "2001-05", "start_type": None})["start_kind"], "untyped")
+        self.assertEqual(scope.start_info({"start_date": "2001-05", "start_type": ""})["start_kind"], "untyped")
+        self.assertEqual(scope.start_info({"start_date": None, "start_type": "ACTUAL"})["start_kind"], "no_date")
+        self.assertEqual(scope.start_info({"start_date": "2030-01", "start_type": "ESTIMATED"})["start_kind"], "planned")
+
+    def test_the_start_kinds_add_up_to_the_studies_in_scope(self):
+        c = self.result["counts"]
+        self.assertEqual((c["start_actual"], c["start_planned"], c["start_untyped"], c["start_no_date"]), (7, 1, 3, 1))
+        self.assertEqual(c["start_actual"] + c["start_planned"] + c["start_untyped"] + c["start_no_date"], c["included"])
+        self.assertNotIn("start_unknown", c)
 
     def test_condition_matching(self):
         self.assertTrue(scope.condition_names_cf("Cystic Fibrosis"))

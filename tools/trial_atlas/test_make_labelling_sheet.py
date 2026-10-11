@@ -116,7 +116,7 @@ class SheetTest(unittest.TestCase):
         self.assertEqual(sheet.read_bytes(), first)
         self.assertNotIn(b"\r\n", first)
 
-    # ---- fix round after e7ea5ed: findings 4 and 11. Each case failed before its fix.
+    # ---- input binding, strata, encoding and the key's folder
 
     def test_tags_from_another_snapshot_or_lexicon_are_refused(self):
         for field in ("snapshot_sha256", "lexicon_sha256"):
@@ -156,7 +156,7 @@ class SheetTest(unittest.TestCase):
         self.assertFalse(sheet.exists())
 
     def test_the_key_may_not_sit_below_the_sheets_folder(self):
-        # second fix round: the reviewer's sheet_probe.py cases. Each failed before its fix.
+        # the key's folder may not be inside the sheet's folder
         sheet, _, args = self.cli_args()
         for key in (sheet.parent / "sub" / "k.json", sheet.parent / "x" / ".." / "k3.json"):
             with self.subTest(key=str(key)):
@@ -167,7 +167,7 @@ class SheetTest(unittest.TestCase):
                 self.assertIn("same folder", err.getvalue())
                 self.assertFalse(Path(key).exists())
 
-    # ---- third round (after adff5aa). Each case failed before its fix.
+    # ---- short draws and the terms file
 
     def test_a_short_draw_is_warned_about(self):
         _, _, args = self.cli_args()

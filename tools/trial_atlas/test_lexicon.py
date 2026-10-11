@@ -201,7 +201,7 @@ class TimeFrameTest(unittest.TestCase):
 
 
 class FixRoundLexiconTest(unittest.TestCase):
-    """Review findings 2, 3, 8, 9 and 10 (fix round after e7ea5ed). Each case failed before its fix."""
+    """Whitespace, non-serious events, time-frame continuations, false positives and under-matches."""
 
     def test_multi_word_rules_tolerate_any_whitespace(self):
         multi = {}
@@ -228,7 +228,7 @@ class FixRoundLexiconTest(unittest.TestCase):
         self.assertEqual(spans[2], (3, 4))
 
     def test_a_double_space_does_not_defeat_a_negative(self):
-        # second fix round: the reviewer's lex2.py cases
+        # spacing must not defeat a negative
         self.assertEqual(tag("Number of participants with non  serious adverse events")["safety_subtypes"], ["adverse_events"])
         self.assertEqual(tag("Number of participants with non\nserious adverse events")["safety_subtypes"], ["adverse_events"])
         self.assertEqual(tag("Number of participants with serious  adverse events")["safety_subtypes"], ["serious_adverse_events"])
@@ -366,7 +366,7 @@ class SnapshotTaggingTest(unittest.TestCase):
         status = [e["status"] for e in tags["entries"]]
         self.assertEqual((status.count("rule"), status.count("not_stated"), status.count("unclassified")), (17, 2, 1))
 
-    # ---- third round (after adff5aa). Each case failed before its fix.
+    # ---- tag output, the classes listing and the class labels
 
     def test_tag_never_overwrites_its_output(self):
         import contextlib
@@ -378,6 +378,12 @@ class SnapshotTaggingTest(unittest.TestCase):
             with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
                 self.assertEqual(lexicon.main(["tag", str(Path(tmp) / "s"), "--out", str(out)]), 2)
             self.assertEqual(out.read_text(encoding="utf-8"), "KEEP")
+
+    def test_the_not_stated_class_is_labelled_no_measure_named(self):
+        # only this class label changes; its domain label and every other label wait for a clinician reader
+        self.assertEqual(LEX.labels["not_stated"], "No measure named")
+        domain = next(d for d in LEX.data["domains"] if d["id"] == "not_stated")
+        self.assertEqual(domain["label"], "Not stated")
 
     def test_classes_lists_every_class_with_its_domain_and_gloss(self):
         import contextlib

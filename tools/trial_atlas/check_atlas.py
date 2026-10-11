@@ -71,14 +71,32 @@ MODEL_FORBIDDEN_CLASSES = {"not_stated"}
 MIN_FROZEN_ROWS = 50          # the design's number of person-labelled outcome entries (decision 5)
 MIN_CONTROL_ENTRIES = 50      # the fewest outcome entries a non-CF control snapshot may hold for the gate (a reviewer's number)
 TAG_STATUSES = {"rule", "not_stated", "unclassified"}
+CO_OCCURRENCE_EXCLUDED = ("other", "not_stated")
+DATED_START_KINDS = ("actual", "planned", "untyped")   # scope.start_info kinds that carry a start year ("no_date" has none)
 
 # The registry's terms travel with every count (counts.json, the printed header, the TERMS file beside a labelling sheet).
 REGISTRY_SOURCE = "ClinicalTrials.gov"
-# The Terms and Conditions page as given in the third review round; it was not opened during this offline build.
+# The Terms and Conditions page address. The page was read on 2026-10-10 by the controlling agent in a person's session; these tools
+# never open it.
 TERMS_URL = "https://clinicaltrials.gov/about-site/terms-conditions"
 LICENCE_LINE = ("The lab's licence covers its own tags, code and counts only; registry text and fields remain ClinicalTrials.gov data "
                 "under its terms.")
 RETENTION_NOTE = "The registry's terms apply for as long as the data are kept, in any copy, file or page made from them."
+# Wording quoted or closely paraphrased from the registry's pages as read on 2026-10-10 by the controlling agent (not by
+# these tools, which open no URL). The Disclaimer page said "Last updated on August 03, 2023".
+NO_WARRANTY = ("ClinicalTrials.gov states that the U.S. Government makes no warranties, expressed or implied, about its data and assumes "
+               "no liability for any party's use of them.")
+SPONSOR_RESPONSIBILITY = ("Study sponsors and investigators write and are responsible for their own records. The registry's Disclaimer "
+                          "says the U.S. government \"does not review or approve the safety and science of all studies listed on this "
+                          "website\" and that NLM staff only review study information for apparent errors, deficiencies or "
+                          "inconsistencies. See the registry's Disclaimer.")
+DISCLAIMER_URL = "https://clinicaltrials.gov/about-site/disclaimer"
+DISCLAIMER_LAST_UPDATED = "2023-08-03"
+THIRD_PARTY_COPYRIGHT = ("Some registry data may be subject to third-party copyright, and the data carry an international copyright "
+                         "outside the United States and its Territories or Possessions.")
+# The first sentence reports what the registry says; the last clause is the lab's own statement.
+KEEP_CURRENT = ("The registry says it is updated daily and that data in any publication or distribution should be kept current at all "
+                "times. This copy is dated and may be out of date; the live record is the current one.")
 
 
 def registry_terms(snapshot, lex, scope_counts: dict) -> dict:
@@ -97,22 +115,52 @@ def registry_terms(snapshot, lex, scope_counts: dict) -> dict:
             "a model-proposed class is counted only when its quote is an exact piece of the registry text.",
             f"Studies were left out by stated scope rules, with these counts: {excluded} (X1 to X6 are explained in "
             "tools/trial_atlas/scope.py; X6 is a person's exclusion list).",
+            "Start dates without a recorded date type are counted as their own kind; no type is assumed.",
             "No registry wording was clipped by these tools; any clipping on a published page must be added to this list.",
             "Registry pages were re-saved as UTF-8 JSON after parsing; values and key order are kept, whitespace is not.",
         ],
         "licence": LICENCE_LINE,
         "retention": RETENTION_NOTE,
+        "no_warranty": NO_WARRANTY,
+        "sponsor_responsibility": SPONSOR_RESPONSIBILITY,
+        "disclaimer_url": DISCLAIMER_URL,
+        "disclaimer_last_updated": DISCLAIMER_LAST_UPDATED,
+        "third_party_copyright": THIRD_PARTY_COPYRIGHT,
+        "keep_current": KEEP_CURRENT,
     }
 
 
+def _fetch_time(value) -> str:
+    """The fetch time with '(UTC)' only when the value says UTC (a string ending in Z); otherwise as given, marked as not stated
+    as UTC; 'not recorded' when missing."""
+    if value is None or value == "":
+        return "not recorded"
+    text = snap.clean(value, 60)
+    return f"{text} (UTC)" if isinstance(value, str) and value.endswith("Z") else f"{text} (time zone not stated as UTC)"
+
+
+def _registry_time(value) -> str:
+    if value is None or value == "":
+        return "not recorded"
+    return f"{snap.clean(value, 60)} (as given by the registry)"
+
+
 def terms_text(block: dict) -> str:
-    """The terms block as plain lines (for the printed header and the TERMS file beside a CSV)."""
-    lines = [f"source: {block['source']}", f"data processed by the registry: {block['data_processed_by_registry']}",
-             f"snapshot fetched at: {block['snapshot_fetched_at']}",
-             f"terms: {block['terms_url']} (last updated {block['terms_last_updated'] or 'not recorded in the manifest'})",
+    """The terms block as plain lines (for the printed header and the TERMS file beside a CSV). Every value is cleaned first: escape
+    sequences and control characters removed, length limited, so text from a manifest or the registry cannot change a terminal or
+    start a line of its own."""
+    c = snap.clean
+    updated = c(block["terms_last_updated"], 40) if block.get("terms_last_updated") else "not recorded in the manifest"
+    lines = [f"source: {c(block['source'])}",
+             f"data processed by the registry: {_registry_time(block.get('data_processed_by_registry'))}",
+             f"snapshot fetched at: {_fetch_time(block.get('snapshot_fetched_at'))}",
+             f"terms: {c(block['terms_url'])} (last updated {updated})",
+             f"disclaimer: {c(block['disclaimer_url'])} (last updated {c(block['disclaimer_last_updated'], 40)})",
              "modifications made by the lab:"]
-    lines += [f"  - {m}" for m in block["modifications"]]
-    lines += [f"licence: {block['licence']}", f"retention: {block['retention']}"]
+    lines += [f"  - {c(m, 400)}" for m in block["modifications"]]
+    lines += [f"no warranty: {c(block['no_warranty'], 400)}", f"sponsor responsibility: {c(block['sponsor_responsibility'], 400)}",
+              f"copyright: {c(block['third_party_copyright'], 400)}", f"keep current: {c(block['keep_current'], 400)}",
+              f"licence: {c(block['licence'], 400)}", f"retention: {c(block['retention'], 400)}"]
     return "\n".join(lines) + "\n"
 
 
@@ -252,7 +300,7 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
         for s in e.get("safety_subtypes", []):
             subtypes[s] += 1
     by_year, by_phase, cf_only, sponsors, no_sponsor = {}, {}, {}, {}, {}
-    by_kind, by_posted = {"actual": {}, "planned": {}}, {}
+    by_kind, by_posted, cyp = {k: {} for k in DATED_START_KINDS}, {}, {}
     studies_by_year: dict[str, int] = {}
     for nct, r in studies.items():
         y = str(r["start_year"]) if r["start_year"] else "unknown"
@@ -265,6 +313,9 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
             by_posted.setdefault(c, {})[fp] = by_posted.setdefault(c, {}).get(fp, 0) + 1
             p = phase_label(r["phases"])
             by_phase.setdefault(c, {})[p] = by_phase.setdefault(c, {}).get(p, 0) + 1
+            if r["start_kind"] in DATED_START_KINDS:
+                cell = cyp.setdefault(c, {k: {} for k in DATED_START_KINDS})[r["start_kind"]].setdefault(y, {})
+                cell[p] = cell.get(p, 0) + 1
             if r["cf_flag"] == "CF only":
                 cf_only[c] = cf_only.get(c, 0) + 1
             name = (r.get("sponsor") or "").strip() if isinstance(r.get("sponsor"), str) else ""
@@ -277,10 +328,42 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
     def share(k):
         return round(k / n, 4) if n else None
 
+    # Studies (not entries) that name both classes of a pair; "other" and "not_stated" are left out of pairs. Pairs are listed in the
+    # lexicon's class order, only when at least one study names both; the per-class totals are the denominators for a share.
+    paired = [c for c in order if c not in CO_OCCURRENCE_EXCLUDED]
+    pair_counts: dict[tuple[str, str], int] = {}
+    for classes in study_classes.values():
+        present = [c for c in paired if c in classes]
+        for i, a in enumerate(present):
+            for b in present[i + 1:]:
+                pair_counts[(a, b)] = pair_counts.get((a, b), 0) + 1
+    co_occurrence = {
+        "unit": "studies",
+        "excluded_classes": list(CO_OCCURRENCE_EXCLUDED),
+        "pairs": [{"a": a, "b": b, "studies": pair_counts[(a, b)]}
+                  for a, b in sorted(pair_counts, key=lambda p: (order.index(p[0]), order.index(p[1])))],
+        "studies_by_class": {c: sum(1 for s in study_classes.values() if c in s) for c in paired},
+    }
+
+    def nested_sorted(d):
+        return {k: nested_sorted(v) if isinstance(v, dict) else v for k, v in sorted(d.items())}
+
     rd = scope_mod.route_difference(snapshot, manual)      # raw differences; explanations are applied only by stop rule S3
     return {
         "kind": "trial-atlas counts",
         "units": "studies are counted once per class; entries are primary-outcome entries; a study can name several classes",
+        # true when the snapshot carries the synthetic marker; false means only that no synthetic marker was found, not proof of
+        # origin (the hashes are not a signature, so a marker can be removed). Real-data publication still needs the person-run
+        # steps and the gate.
+        "synthetic": bool(synthetic_marks(snapshot)),
+        # entries left with no class by a rule or by an accepted model tag (to be shown as "left unsorted"); equal to
+        # entries_by_status["unclassified"]; not the class "other",
+        # which a model or a person assigns to a measure that fits none of the classes
+        "unsorted_entries": status["unclassified"],
+        # studies per class x start year x phase label, with the three dated start kinds kept apart: ACTUAL, planned (ESTIMATED),
+        # and untyped (a start date with no recorded type); a study with no start date is in none of them
+        "class_year_phase": {c: {k: nested_sorted(cyp.get(c, {}).get(k, {})) for k in DATED_START_KINDS} for c in order},
+        "co_occurrence": co_occurrence,
         "snapshot_sha256": snapshot.digest,
         "data_timestamp": snapshot.manifest.get("data_timestamp"),
         "lexicon_version": lex.version,
@@ -297,9 +380,11 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
         "studies_without_lead_sponsor_by_class": {c: no_sponsor.get(c, 0) for c in order},
         "studies_by_start_year": dict(sorted(studies_by_year.items())),
         "studies_by_class_and_start_year": {c: dict(sorted(by_year.get(c, {}).items())) for c in order},
-        # Split by the registry's start type: ACTUAL and ESTIMATED (planned). A start with no date or no type is in neither.
+        # Split by the registry's start type: ACTUAL, ESTIMATED (planned), and untyped (a start date with no recorded type; no type
+        # is assumed). A study with no start date is in none of the three.
         "studies_by_class_and_actual_start_year": {c: dict(sorted(by_kind["actual"].get(c, {}).items())) for c in order},
         "studies_by_class_and_planned_start_year": {c: dict(sorted(by_kind["planned"].get(c, {}).items())) for c in order},
+        "studies_by_class_and_untyped_start_year": {c: dict(sorted(by_kind["untyped"].get(c, {}).items())) for c in order},
         # The first-posted year, for banding registration eras (design, decision 2).
         "studies_by_class_and_first_posted_year": {c: dict(sorted(by_posted.get(c, {}).items())) for c in order},
         "studies_by_class_and_phase": {c: dict(sorted(by_phase.get(c, {}).items())) for c in order},
@@ -313,17 +398,111 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
     }
 
 
+# ------------------------------------------------------------------ self-consistency of a counts file
+
+def _rule_class_studies(c):
+    over = [k for k, v in c["studies_by_class"].items() if v > c["studies"]]
+    return not over, f"{len(over)} class(es) above {c['studies']} studies in scope" + (f": {', '.join(over[:5])}" if over else "")
+
+
+def _rule_class_entries(c):
+    classified = c["entries"] - c["entries_by_status"]["unclassified"]
+    total = sum(c["entries_by_class"].values())
+    return total >= classified, f"sum over classes {total}, entries with a class {classified}"
+
+
+def _rule_unsorted(c):
+    a, b = c["unsorted_entries"], c["entries_by_status"]["unclassified"]
+    return type(a) is type(b) and a == b, f"unsorted_entries {a}, entries_by_status.unclassified {b}"
+
+
+def _rule_start_kinds(c):
+    s = c["scope"]
+    total = s["start_actual"] + s["start_planned"] + s["start_untyped"] + s["start_no_date"]
+    return total == c["studies"] == s["included"], f"kinds add up to {total}; studies in scope {c['studies']} (scope.included {s['included']})"
+
+
+def _rule_class_year_phase(c):
+    bad = []
+    for cls, kinds in c["class_year_phase"].items():
+        for kind, years in kinds.items():
+            totals = {y: sum(phases.values()) for y, phases in years.items()}
+            if totals != c[f"studies_by_class_and_{kind}_start_year"].get(cls, {}):
+                bad.append(f"{snap.clean(cls, 40)}/{snap.clean(kind, 20)}")
+    return not bad, f"{len(bad)} class and kind cell(s) differ from the year counts" + (f": {', '.join(bad[:5])}" if bad else "")
+
+
+def _rule_co_occurrence(c):
+    per = c["co_occurrence"]["studies_by_class"]
+    bad = [f"{snap.clean(p['a'], 30)}+{snap.clean(p['b'], 30)}" for p in c["co_occurrence"]["pairs"]
+           if not 0 < p["studies"] <= min(per[p["a"]], per[p["b"]])]
+    return not bad, f"{len(bad)} pair(s) outside 1..smaller class total" + (f": {', '.join(bad[:5])}" if bad else "")
+
+
+def _rule_sponsors(c):
+    bad = [k for k, v in c["lead_sponsors_by_class"].items() if v > c["studies_by_class"].get(k, 0)]
+    return not bad, f"{len(bad)} class(es) with more distinct sponsors than studies" + (f": {', '.join(bad[:5])}" if bad else "")
+
+
+# The relationships every counts file must satisfy. A page generator should apply the same rules; this is where they are written.
+CONSISTENCY_RULES = {
+    "class studies within studies in scope": _rule_class_studies,
+    "class entries cover classified entries": _rule_class_entries,
+    "unsorted entries equal unclassified": _rule_unsorted,
+    "start kinds add up to studies in scope": _rule_start_kinds,
+    "class_year_phase totals equal year counts": _rule_class_year_phase,
+    "co-occurrence pairs within the smaller class": _rule_co_occurrence,
+    "distinct sponsors within studies": _rule_sponsors,
+}
+
+
+def consistency_results(counts) -> list[tuple[str, bool, str]]:
+    """[(relationship, ok, detail)] for every rule. A missing key or a wrong type fails that rule; it never raises."""
+    out = []
+    for name, rule in CONSISTENCY_RULES.items():
+        try:
+            ok, detail = rule(counts)
+        except (KeyError, TypeError, AttributeError) as exc:
+            ok, detail = False, f"cannot be checked: {type(exc).__name__} {snap.clean(exc, 60)}"
+        out.append((name, ok, detail))
+    return out
+
+
+def self_consistency(path) -> int:
+    """--self-consistency: read a counts file the tools wrote and check its relationships. Prints aggregates only."""
+    try:
+        counts = read_json(path, "counts file")
+    except UsageError as exc:
+        print(f"ERROR: {snap.clean(exc, 300)}")
+        return 2
+    if not isinstance(counts, dict):
+        print("ERROR: the counts file must hold a JSON object")
+        return 2
+    results = consistency_results(counts)
+    for name, ok, detail in results:
+        print(f"{'OK' if ok else 'FAIL'} {name}: {detail}")
+    failed = sum(1 for _, ok, _ in results if not ok)
+    print(f"{len(results) - failed} of {len(results)} relationships hold")
+    return 1 if failed else 0
+
+
 def diff_paths(a, b, path="") -> list[str]:
-    """Every path where two JSON values differ."""
+    """Every path where two JSON values differ. Types count: True is not 1, 0 is not False and 1 is not 1.0. Keys (which can hold
+    registry text, such as phase labels) are cleaned before they are printed."""
     if isinstance(a, dict) and isinstance(b, dict):
         out = []
         for k in sorted(set(a) | set(b), key=str):
+            here = f"{path}/{snap.clean(k, 80)}"
             if k not in a or k not in b:
-                out.append(f"{path}/{k}: {'missing in committed' if k not in b else 'not recomputed'}")
+                out.append(f"{here}: {'missing in committed' if k not in b else 'not recomputed'}")
             else:
-                out.extend(diff_paths(a[k], b[k], f"{path}/{k}"))
+                out.extend(diff_paths(a[k], b[k], here))
         return out
-    if a != b:
+    if isinstance(a, list) and isinstance(b, list):
+        if len(a) != len(b):
+            return [f"{path}: recomputed {len(a)} item(s), committed {len(b)}"]
+        return [d for i, (x, y) in enumerate(zip(a, b)) for d in diff_paths(x, y, f"{path}[{i}]")]
+    if type(a) is not type(b) or a != b:
         return [f"{path}: recomputed {json.dumps(a)[:80]}, committed {json.dumps(b)[:80]}"]
     return []
 
@@ -565,6 +744,8 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
     ap.add_argument("--confirm-real-run", action="store_true",
                     help="with --snapshot only: a person confirms that this real snapshot's fetch configuration was checked; sets "
                          "config_verified in its manifest (the snapshot hash changes, so tag, draw and count again afterwards)")
+    ap.add_argument("--self-consistency", type=Path, metavar="COUNTS.json",
+                    help="check that a counts file the tools wrote satisfies its own relationships; prints OK or FAIL per relationship")
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
@@ -572,6 +753,8 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
     lex = lex_mod.load()
     failures, blocked, summary = [], [], None
     try:
+        if a.self_consistency:
+            return self_consistency(a.self_consistency)
         if a.confirm_real_run:
             return confirm_real_run(a.snapshot)
         manual = scope_mod.read_id_reasons(a.exclude) if a.exclude else {}
@@ -629,6 +812,14 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             for f in failures:
                 print(f"FAIL integrity: {f}")
             return 1
+        results = consistency_results(counts)
+        if not all(ok for _, ok, _ in results):
+            for name, ok, detail in results:
+                if not ok:
+                    print(f"FAIL {name}: {detail}")
+            print("NOT WRITTEN: the counts do not satisfy their own relationships")
+            return 1
+        print(f"self-consistency: OK ({len(results)} relationships)")
         a.write_counts.write_text(json.dumps(counts, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
         print(f"wrote {a.write_counts.name}: {counts['studies']} studies, {counts['entries']} entries")
         return 0
@@ -641,7 +832,7 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             failures.append(f"{len(drift)} count(s) differ from the committed counts file")
             for d in drift[:40]:
                 print(f"  drift {d}")
-    print(f"snapshot {s.digest[:12]}  dataTimestamp {s.manifest.get('data_timestamp')}  lexicon {lex.version}")
+    print(f"snapshot {s.digest[:12]}  dataTimestamp {_registry_time(s.manifest.get('data_timestamp'))}  lexicon {lex.version}")
     print(terms_text(counts["registry_terms"]), end="")
     print(f"studies in scope: {counts['studies']}   outcome entries: {counts['entries']}")
     for f in failures:

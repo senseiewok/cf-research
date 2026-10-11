@@ -9,8 +9,13 @@ any date. Each exclusion rule has an id, a reason and a printed count:
   X5  the condition list names CF only in a negation (for example "Non-Cystic Fibrosis Bronchiectasis")
   X6  listed by hand in an exclusions file (--exclude), with the reason written there
 
-Flags on each included study: "CF only" (every condition names CF) or "CF among others"; start "actual", "planned" (the registry's
-ESTIMATED start) or "unknown" (no date, or a date with no type); start year and decade; first-posted year.
+Flags on each included study: "CF only" (every condition names CF) or "CF among others"; the start kind; start year and decade;
+first-posted year. The start kinds:
+  actual    a start date whose registry type is ACTUAL
+  planned   a start date whose registry type is ESTIMATED
+  untyped   a start date with no recorded type (or a type other than ACTUAL or ESTIMATED); no type is assumed
+  no_date   no start date
+The four kinds add up to the studies in scope.
 
 Only the condition list decides; keywords and titles do not (a keyword is how the recall route finds studies, not proof of scope).
 The second retrieval route (a term search) is compared with the main route after the same rules, and the difference is printed.
@@ -62,7 +67,14 @@ def start_info(record: dict) -> dict:
     m = re.match(r"^(\d{4})", date)
     year = int(m.group(1)) if m else None
     stype = (record.get("start_type") or "").upper()
-    kind = "unknown" if year is None or not stype else ("actual" if stype == "ACTUAL" else "planned" if stype == "ESTIMATED" else "unknown")
+    if year is None:
+        kind = "no_date"
+    elif stype == "ACTUAL":
+        kind = "actual"
+    elif stype == "ESTIMATED":
+        kind = "planned"
+    else:
+        kind = "untyped"                                     # a date with no recorded type: counted as its own kind, never guessed
     fp = re.match(r"^(\d{4})", record.get("first_posted") or "")
     return {"start_year": year, "start_decade": f"{year // 10 * 10}s" if year else "unknown", "start_kind": kind,
             "first_posted_year": int(fp.group(1)) if fp else None}
@@ -108,7 +120,8 @@ def apply_scope(records: list[dict], manual: dict[str, str] | None = None) -> di
             "cf_among_others": sum(1 for r in included if r["cf_flag"] == "CF among others"),
             "start_actual": sum(1 for r in included if r["start_kind"] == "actual"),
             "start_planned": sum(1 for r in included if r["start_kind"] == "planned"),
-            "start_unknown": sum(1 for r in included if r["start_kind"] == "unknown"),
+            "start_untyped": sum(1 for r in included if r["start_kind"] == "untyped"),
+            "start_no_date": sum(1 for r in included if r["start_kind"] == "no_date"),
         },
     }
 
@@ -163,7 +176,8 @@ def main(argv=None) -> int:
     for rid, n in c["excluded_by_rule"].items():
         print(f"  excluded {rid}: {n}  {RULES[rid]}")
     print(f"  CF only: {c['cf_only']}   CF among others: {c['cf_among_others']}")
-    print(f"  start actual: {c['start_actual']}   planned: {c['start_planned']}   unknown: {c['start_unknown']}")
+    print(f"  start actual: {c['start_actual']}   planned: {c['start_planned']}   date with no type: {c['start_untyped']}   "
+          f"no date: {c['start_no_date']}")
     for e in rep["excluded"]:
         print(f"  {e['nct_id']}  {e['rule']}  {snap.clean(e['reason'])}")
     rd = rep["routes"]
