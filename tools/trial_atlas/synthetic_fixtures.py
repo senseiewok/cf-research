@@ -50,7 +50,8 @@ def cf_condition_studies():
         study("NCT00000002", "safety study", start="2012-06", sponsor="SYNTHETIC Sponsor B", outcomes=[
             ("Number of participants with adverse events", "Safety and tolerability.", "Up to 28 days"),
             ("Number of participants with serious adverse events", "", "Up to 28 days")]),
-        study("NCT00000003", "inhaled antibiotic study", start="2008-09", conditions=("Cystic Fibrosis", "Pseudomonas Aeruginosa Infection"),
+        study("NCT00000003", "inhaled antibiotic study", start="2008-09", start_type=None,
+              conditions=("Cystic Fibrosis", "Pseudomonas Aeruginosa Infection"),
               outcomes=[("Change in sputum Pseudomonas aeruginosa density", "Log10 colony forming units per gram of sputum.", "Day 28")]),
         study("NCT00000004", "planned exacerbation study", phases=("PHASE3",), start="2027-01", start_type="ESTIMATED",
               status="NOT_YET_RECRUITING", first_posted="2026-05-01", outcomes=[
@@ -68,7 +69,9 @@ def cf_condition_studies():
         study("NCT00000010", "expanded access programme", study_type="EXPANDED_ACCESS", phases=(), start=None),
         study("NCT00000011", "planted non-CF bronchiectasis study", phases=("PHASE3",), start="2017-04",
               conditions=("Non-Cystic Fibrosis Bronchiectasis",), outcomes=[("Rate of pulmonary exacerbations", "", "52 weeks")]),
-        study("NCT00000012", "lung clearance study", phases=("PHASE3",), start="2005-04", sponsor="SYNTHETIC Sponsor B", outcomes=[
+        # an older record with a start date but no date type, as many real older records have
+        study("NCT00000012", "lung clearance study", phases=("PHASE3",), start="2005-04", start_type=None, sponsor="SYNTHETIC Sponsor B",
+              outcomes=[
             ("Change in lung clearance index (LCI2.5)", "", "Week 4"),
             ("Composite of time to first pulmonary exacerbation or hospitalization", "", "Up to 1 year")]),
         study("NCT00000013", "related diabetes study", start="2023-08", conditions=("Cystic Fibrosis-related Diabetes",), outcomes=[
@@ -78,7 +81,7 @@ def cf_condition_studies():
                   ("Change in nasal potential difference", "", "Day 14"),
                   ("Change in Sino-Nasal Outcome Test (SNOT-22) score", "", "Week 12"),
                   ("Time to return to school", "SYNTHETIC wording for a measure the lexicon does not cover.", "Up to 6 weeks")]),
-        study("NCT00000015", "study with no primary outcome entered", start="2021-11"),
+        study("NCT00000015", "study with no primary outcome or start date entered", start=None),
         study("NCT00000016", "planted asthma study", start="2019-09", conditions=("Asthma",), outcomes=[("Change in FEV1", "", "12 weeks")]),
     ]
 

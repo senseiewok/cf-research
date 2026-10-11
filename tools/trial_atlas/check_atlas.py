@@ -72,6 +72,7 @@ MIN_FROZEN_ROWS = 50          # the design's number of person-labelled outcome e
 MIN_CONTROL_ENTRIES = 50      # the fewest outcome entries a non-CF control snapshot may hold for the gate (a reviewer's number)
 TAG_STATUSES = {"rule", "not_stated", "unclassified"}
 CO_OCCURRENCE_EXCLUDED = ("other", "not_stated")
+DATED_START_KINDS = ("actual", "planned", "untyped")   # scope.start_info kinds that carry a start year ("no_date" has none)
 
 # The registry's terms travel with every count (counts.json, the printed header, the TERMS file beside a labelling sheet).
 REGISTRY_SOURCE = "ClinicalTrials.gov"
@@ -114,6 +115,7 @@ def registry_terms(snapshot, lex, scope_counts: dict) -> dict:
             "a model-proposed class is counted only when its quote is an exact piece of the registry text.",
             f"Studies were left out by stated scope rules, with these counts: {excluded} (X1 to X6 are explained in "
             "tools/trial_atlas/scope.py; X6 is a person's exclusion list).",
+            "Start dates without a recorded date type are counted as their own kind; no type is assumed.",
             "No registry wording was clipped by these tools; any clipping on a published page must be added to this list.",
             "Registry pages were re-saved as UTF-8 JSON after parsing; values and key order are kept, whitespace is not.",
         ],
@@ -298,7 +300,7 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
         for s in e.get("safety_subtypes", []):
             subtypes[s] += 1
     by_year, by_phase, cf_only, sponsors, no_sponsor = {}, {}, {}, {}, {}
-    by_kind, by_posted, cyp = {"actual": {}, "planned": {}}, {}, {}
+    by_kind, by_posted, cyp = {k: {} for k in DATED_START_KINDS}, {}, {}
     studies_by_year: dict[str, int] = {}
     for nct, r in studies.items():
         y = str(r["start_year"]) if r["start_year"] else "unknown"
@@ -311,8 +313,8 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
             by_posted.setdefault(c, {})[fp] = by_posted.setdefault(c, {}).get(fp, 0) + 1
             p = phase_label(r["phases"])
             by_phase.setdefault(c, {})[p] = by_phase.setdefault(c, {}).get(p, 0) + 1
-            if r["start_kind"] in ("actual", "planned"):
-                cell = cyp.setdefault(c, {"actual": {}, "planned": {}})[r["start_kind"]].setdefault(y, {})
+            if r["start_kind"] in DATED_START_KINDS:
+                cell = cyp.setdefault(c, {k: {} for k in DATED_START_KINDS})[r["start_kind"]].setdefault(y, {})
                 cell[p] = cell.get(p, 0) + 1
             if r["cf_flag"] == "CF only":
                 cf_only[c] = cf_only.get(c, 0) + 1
@@ -358,9 +360,9 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
         # entries_by_status["unclassified"]; not the class "other",
         # which a model or a person assigns to a measure that fits none of the classes
         "unsorted_entries": status["unclassified"],
-        # studies per class x start year x phase label, with ACTUAL and planned (ESTIMATED) start types kept apart
-        "class_year_phase": {c: {"actual": nested_sorted(cyp.get(c, {}).get("actual", {})),
-                                 "planned": nested_sorted(cyp.get(c, {}).get("planned", {}))} for c in order},
+        # studies per class x start year x phase label, with the three dated start kinds kept apart: ACTUAL, planned (ESTIMATED),
+        # and untyped (a start date with no recorded type); a study with no start date is in none of them
+        "class_year_phase": {c: {k: nested_sorted(cyp.get(c, {}).get(k, {})) for k in DATED_START_KINDS} for c in order},
         "co_occurrence": co_occurrence,
         "snapshot_sha256": snapshot.digest,
         "data_timestamp": snapshot.manifest.get("data_timestamp"),
@@ -378,9 +380,11 @@ def compute_counts(snapshot: snap.Snapshot, tags: dict, accepted_model: list[dic
         "studies_without_lead_sponsor_by_class": {c: no_sponsor.get(c, 0) for c in order},
         "studies_by_start_year": dict(sorted(studies_by_year.items())),
         "studies_by_class_and_start_year": {c: dict(sorted(by_year.get(c, {}).items())) for c in order},
-        # Split by the registry's start type: ACTUAL and ESTIMATED (planned). A start with no date or no type is in neither.
+        # Split by the registry's start type: ACTUAL, ESTIMATED (planned), and untyped (a start date with no recorded type; no type
+        # is assumed). A study with no start date is in none of the three.
         "studies_by_class_and_actual_start_year": {c: dict(sorted(by_kind["actual"].get(c, {}).items())) for c in order},
         "studies_by_class_and_planned_start_year": {c: dict(sorted(by_kind["planned"].get(c, {}).items())) for c in order},
+        "studies_by_class_and_untyped_start_year": {c: dict(sorted(by_kind["untyped"].get(c, {}).items())) for c in order},
         # The first-posted year, for banding registration eras (design, decision 2).
         "studies_by_class_and_first_posted_year": {c: dict(sorted(by_posted.get(c, {}).items())) for c in order},
         "studies_by_class_and_phase": {c: dict(sorted(by_phase.get(c, {}).items())) for c in order},

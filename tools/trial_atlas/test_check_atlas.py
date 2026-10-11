@@ -199,9 +199,39 @@ class IntegrityTest(Fixture):
 
     def test_split_counts_by_actual_and_planned_start_and_first_posted_year(self):
         c = json.loads(self.counts_path.read_text(encoding="utf-8"))
-        self.assertEqual(c["studies_by_class_and_actual_start_year"]["exacerbations"], {"2005": 1})
+        self.assertEqual(c["studies_by_class_and_actual_start_year"]["exacerbations"], {})
         self.assertEqual(c["studies_by_class_and_planned_start_year"]["exacerbations"], {"2027": 1})
+        self.assertEqual(c["studies_by_class_and_untyped_start_year"]["exacerbations"], {"2005": 1})   # NCT00000012: no date type
         self.assertEqual(c["studies_by_class_and_first_posted_year"]["exacerbations"], {"2019": 1, "2026": 1})
+
+    def test_untyped_starts_are_counted_and_the_kinds_add_up(self):
+        c = json.loads(self.counts_path.read_text(encoding="utf-8"))
+        kinds = {k: c["scope"][k] for k in ("start_actual", "start_planned", "start_untyped", "start_no_date")}
+        self.assertEqual(kinds, {"start_actual": 7, "start_planned": 1, "start_untyped": 3, "start_no_date": 1})
+        self.assertEqual(sum(kinds.values()), c["studies"])
+        self.assertNotIn("start_unknown", c["scope"])
+        # every study with a start year is in exactly one of the three year-split counts; a study with no date is in none
+        dated = sum(c["studies_by_start_year"].get(y, 0) for y in c["studies_by_start_year"] if y != "unknown")
+        self.assertEqual(dated, kinds["start_actual"] + kinds["start_planned"] + kinds["start_untyped"])
+        self.assertEqual(c["studies_by_start_year"].get("unknown"), kinds["start_no_date"])
+        mods = " ".join(c["registry_terms"]["modifications"])
+        self.assertIn("Start dates without a recorded date type are counted as their own kind; no type is assumed.", mods)
+
+    def test_the_new_start_kind_keys_are_drift_checked(self):
+        for path, mutate in (("scope/start_untyped", lambda c: c["scope"].update({"start_untyped": 4})),
+                             ("scope/start_no_date", lambda c: c["scope"].update({"start_no_date": 0})),
+                             ("studies_by_class_and_untyped_start_year", lambda c: c["studies_by_class_and_untyped_start_year"].update(
+                                 {"exacerbations": {"2005": 2}})),
+                             ("class_year_phase", lambda c: c["class_year_phase"]["exacerbations"]["untyped"].update({"2005": {"PHASE3": 2}}))):
+            with self.subTest(path=path):
+                counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
+                mutate(counts)
+                p = self.work / f"counts-kind-{path.replace('/', '-')}.json"
+                p.write_text(json.dumps(counts), encoding="utf-8")
+                code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", p, "--model-tags", self.model_path,
+                                 "--drift-only"])
+                self.assertEqual(code, 1, out)
+                self.assertIn(f"drift /{path}", out)
 
     # ---- the disclaimer items, time zones, the synthetic key and the page counts
 
@@ -255,7 +285,7 @@ class IntegrityTest(Fixture):
         self.assertNotIn("\x07", text)
         self.assertFalse([ln for ln in text.splitlines() if ln.startswith("INJECTED")], "a newline in a value must not start a line")
         counts = json.loads(self.counts_path.read_text(encoding="utf-8"))
-        counts["class_year_phase"]["exacerbations"]["actual"]["2005"]["PHASE3\x1b[31m\nEVIL"] = 1
+        counts["class_year_phase"]["exacerbations"]["untyped"]["2005"]["PHASE3\x1b[31m\nEVIL"] = 1
         p = self.work / "counts-escape.json"
         p.write_text(json.dumps(counts), encoding="utf-8")
         code, out = run(["--snapshot", self.snap_dir, "--tags", self.tags_path, "--counts", p, "--model-tags", self.model_path,
@@ -315,8 +345,8 @@ class IntegrityTest(Fixture):
 
     def test_class_year_phase(self):
         c = json.loads(self.counts_path.read_text(encoding="utf-8"))["class_year_phase"]
-        self.assertEqual(c["exacerbations"], {"actual": {"2005": {"PHASE3": 1}}, "planned": {"2027": {"PHASE3": 1}}})
-        self.assertEqual(c["pharmacokinetics"], {"actual": {"2016": {"PHASE1": 1}}, "planned": {}})
+        self.assertEqual(c["exacerbations"], {"actual": {}, "planned": {"2027": {"PHASE3": 1}}, "untyped": {"2005": {"PHASE3": 1}}})
+        self.assertEqual(c["pharmacokinetics"], {"actual": {"2016": {"PHASE1": 1}}, "planned": {}, "untyped": {}})
         self.assertEqual(c["feasibility_adherence"]["actual"], {"2018": {"NA": 1}})
 
     def test_co_occurrence(self):
@@ -340,7 +370,7 @@ class IntegrityTest(Fixture):
         self.assertEqual(ca.compute_counts(s, lexicon.tag_snapshot(s, LEX), [], LEX)["unsorted_entries"], 1)
 
     def test_each_new_count_is_drift_checked(self):
-        for path, mutate in (("class_year_phase", lambda c: c["class_year_phase"]["exacerbations"]["actual"].update({"2005": {"PHASE3": 2}})),
+        for path, mutate in (("class_year_phase", lambda c: c["class_year_phase"]["exacerbations"]["planned"].update({"2027": {"PHASE3": 2}})),
                              ("co_occurrence", lambda c: c["co_occurrence"]["pairs"][0].update({"studies": 9})),
                              ("unsorted_entries", lambda c: c.update({"unsorted_entries": 5})),
                              ("synthetic", lambda c: c.update({"synthetic": False})),

@@ -180,6 +180,30 @@ Each of these is configuration in `fetch_snapshot.DEFAULTS` or `ROUTES`, marked 
 
 Pages are stored as the parsed JSON written back out (the client returns parsed data, not bytes), so the hashes cover what was parsed. Values and key order are kept; whitespace is not. The manifest hash is a consistency check, not a signature: anyone who can rewrite the folder can rewrite the manifest.
 
+The "to verify on the first real run" comments in `DEFAULTS` stay as they are until a person has confirmed the items above against a real run's pages. They are removed only after that, together with `--confirm-real-run`.
+
+### What the first real run showed (2026-10-10)
+
+**Observed.** These are aggregates only, from a first real run on 2026-10-10 of the snapshot with data timestamp 2026-10-09T09:00:05. They are not committed, because the snapshot is not committed, and no study text is reproduced here.
+
+- **The fetch.** The run made 40 requests. `pageSize` 100 was accepted, the next-page token chained from page to page, and `countTotal` was returned and matched the studies received on both retrieval routes: condition 1,772 studies in 18 pages, term 2,023 in 21 pages. There was no refusal.
+- **Scope.** 1,072 studies were in scope: 797 name cystic fibrosis only, 275 name it among other conditions. Exclusions: X1 554, X2 7, X3 0, X4 91, X5 48, X6 0.
+- **Start dates.** Of the 1,072:
+  - 531 have an ACTUAL start
+  - 44 have an ESTIMATED start
+  - 492 have a start date but no date type (start years 1993 to 2017)
+  - 5 have no start date.
+
+  Before the `untyped` kind existed, all 497 without a type or a date were counted as "unknown", and the start-year counts dropped almost half the studies, mostly the older ones.
+- **Tagging.** Lexicon 0.2.3-draft left 442 of 2,052 entries unclassified (21.5 percent), so stop rule S2 (15%) would trip.
+- **Measures the lexicon does not cover yet:** mucociliary clearance, gas exchange, DNA methylation and gene expression, respiratory muscle strength, the one-minute sit-to-stand test, anxiety and depression scales, dose-escalation parts, and many generic "change from baseline" titles that need the description.
+
+The lexicon is not changed in this round, and `config_verified` is not set.
+
+**What the registry says.** A National Library of Medicine technical bulletin says that "older ClinicalTrials.gov records may be missing information". The source is https://www.nlm.nih.gov/pubs/techbull/mj24/mj24_Clinical_Trials_Study_Record_Modernization.html, read on 2026-10-10 by the controlling agent. The bulletin says nothing specific about start date types.
+
+**Our inference, not a fact.** We infer that the untyped starts are older records whose date type was not collected when they were registered. This is labelled as an inference here and must not be stated as fact in any page text. The tools never assume a type: those studies are counted as `untyped`.
+
 ### Registry-side risks
 
 - **A 403 is possible.** The registry may refuse an agent that is not a browser. The evidence client treats a 403 as a refusal, puts the host in cooldown, and does not retry. The run then stops with `INCOMPLETE.txt`. Do not work around it with a browser user agent: the client has no way to set one, on purpose.
@@ -205,7 +229,7 @@ The terms also ask that the data be kept current. A frozen snapshot cannot be, s
 - the snapshot's fetch time (`snapshot_fetched_at`). The fetch tool writes it in UTC with a trailing `Z`. The printed line adds "(UTC)" only when the value ends in `Z`. Any other value is printed as given with "(time zone not stated as UTC)", and a missing one as "not recorded"
 - the Terms and Conditions page (`https://clinicaltrials.gov/about-site/terms-conditions`) and the last-updated date the manifest records
 - the Disclaimer page (`disclaimer_url`: `https://clinicaltrials.gov/about-site/disclaimer`, `disclaimer_last_updated`: 2023-08-03; the page said "Last updated on August 03, 2023")
-- every modification the lab made: the classification by the versioned lexicon, the scope exclusions with their counts, no clipping, pages re-saved after parsing
+- every modification the lab made: the classification by the versioned lexicon, the scope exclusions with their counts, "Start dates without a recorded date type are counted as their own kind; no type is assumed.", no clipping, pages re-saved after parsing
 - `no_warranty`: "ClinicalTrials.gov states that the U.S. Government makes no warranties, expressed or implied, about its data and assumes no liability for any party's use of them."
 - `sponsor_responsibility`: "Study sponsors and investigators write and are responsible for their own records. The registry's Disclaimer says the U.S. government "does not review or approve the safety and science of all studies listed on this website" and that NLM staff only review study information for apparent errors, deficiencies or inconsistencies. See the registry's Disclaimer." The inner quotation is verbatim from the Disclaimer page.
 - `third_party_copyright`: "Some registry data may be subject to third-party copyright, and the data carry an international copyright outside the United States and its Territories or Possessions."
@@ -242,19 +266,24 @@ Every count is recomputed from the snapshot and the tags, and the drift check co
 
 The top-level keys, listed from the output of `compute_counts` (in the order it writes them):
 
-`kind`, `units`, `synthetic`, `unsorted_entries`, `class_year_phase`, `co_occurrence`, `snapshot_sha256`, `data_timestamp`, `lexicon_version`, `lexicon_sha256`, `scope`, `routes`, `studies`, `entries`, `entries_by_status`, `entries_by_class`, `studies_by_class`, `studies_by_class_cf_only`, `lead_sponsors_by_class`, `studies_without_lead_sponsor_by_class`, `studies_by_start_year`, `studies_by_class_and_start_year`, `studies_by_class_and_actual_start_year`, `studies_by_class_and_planned_start_year`, `studies_by_class_and_first_posted_year`, `studies_by_class_and_phase`, `registry_terms`, `flags`, `timeframe_buckets`, `safety_subtypes`, `shares`, `other_entries`.
+`kind`, `units`, `synthetic`, `unsorted_entries`, `class_year_phase`, `co_occurrence`, `snapshot_sha256`, `data_timestamp`, `lexicon_version`, `lexicon_sha256`, `scope`, `routes`, `studies`, `entries`, `entries_by_status`, `entries_by_class`, `studies_by_class`, `studies_by_class_cf_only`, `lead_sponsors_by_class`, `studies_without_lead_sponsor_by_class`, `studies_by_start_year`, `studies_by_class_and_start_year`, `studies_by_class_and_actual_start_year`, `studies_by_class_and_planned_start_year`, `studies_by_class_and_untyped_start_year`, `studies_by_class_and_first_posted_year`, `studies_by_class_and_phase`, `registry_terms`, `flags`, `timeframe_buckets`, `safety_subtypes`, `shares`, `other_entries`.
 
 What they hold:
 
 - **Identity.** `kind` ("trial-atlas counts"), `units` (what a study and an entry count as), `snapshot_sha256`, `data_timestamp` (as the registry gave it), `lexicon_version`, `lexicon_sha256`.
-- **Scope and size.** `scope` (the counts behind each exclusion), `routes` (the difference between the retrieval routes), `studies`, `entries`, `entries_by_status`.
+- **Scope and size.** `scope` (the counts behind each exclusion, the CF-only split and the start kinds), `routes` (the difference between the retrieval routes), `studies`, `entries`, `entries_by_status`.
+- **Start kinds** (in `scope`). Every study in scope has exactly one start kind, so the four counts add up to `studies`. `start_unknown` is gone: its only consumer was the scope report's printed line.
+  - `start_actual`: a start date whose registry type is ACTUAL.
+  - `start_planned`: type ESTIMATED.
+  - `start_untyped`: a start date with no recorded type, or a type that is neither of those two. No type is assumed.
+  - `start_no_date`: no start date.
 - **Counts by class.** `entries_by_class`, `studies_by_class`, `studies_by_class_cf_only`, `lead_sponsors_by_class` (distinct lead sponsors), `studies_without_lead_sponsor_by_class`.
 - **Counts by time and phase.**
   - `studies_by_start_year` and `studies_by_class_and_start_year`.
-  - `studies_by_class_and_actual_start_year` and `studies_by_class_and_planned_start_year`. A start with no date or no type is in neither.
+  - `studies_by_class_and_actual_start_year`, `studies_by_class_and_planned_start_year` and `studies_by_class_and_untyped_start_year`. A study with a start date is in exactly one of the three; a study with no start date is in none.
   - `studies_by_class_and_first_posted_year`, for banding registration eras.
   - `studies_by_class_and_phase`. The phase label is the registry's phase values joined with `/`, or `none`.
-  - `class_year_phase`: studies per class, start year and phase label, with ACTUAL and planned (ESTIMATED) start types kept apart.
+  - `class_year_phase`: studies per class, start year and phase label, with the three dated kinds (`actual`, `planned`, `untyped`) kept apart.
 - **`co_occurrence`.** For each unordered pair of different classes, the number of studies (not entries) with at least one entry in each.
   - Only pairs with a count of 1 or more are listed, in the lexicon's class order.
   - `other` and `not_stated` are left out of pairs.
