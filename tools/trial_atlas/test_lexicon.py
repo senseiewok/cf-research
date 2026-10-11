@@ -654,7 +654,8 @@ class Lexicon030Round2Test(unittest.TestCase):
         n = 20000
         texts = ["a" * n, "abc " * (n // 4), "clearance of " * (n // 13), "FEV1/" * (n // 5), "1" * n, "sputum " * (n // 7),
                  "incidence of a " * (n // 15), "mycin" * (n // 5), "PA-" * (n // 3), "R5-" * (n // 3), "a-" * (n // 2),
-                 "oxygen uptake " * (n // 14), "a " * (n // 2), "-" * n]
+                 "oxygen uptake " * (n // 14), "a " * (n // 2), "-" * n,
+                 "Abc-" * (n // 4), "Abc Def " * (n // 8)]   # hyphenated and spaced runs of capitalised words (PRO-06 was quadratic on them)
         rules = [(r["id"], r["re"]) for r in LEX.rules + LEX.composite] + [("NS-01", LEX.placeholder), ("NS-V1", LEX.vague_ns)]
         rules += [(f["id"], f["re"]) for f in LEX.fallback_restrictions]
         rules += [(r["id"], r["sup_re"]) for r in LEX.rules if r.get("sup_re")]
