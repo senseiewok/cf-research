@@ -2,7 +2,7 @@
 
 Build step 1 of the design in `proposals/2026-10-10-trial-endpoint-atlas.md` (board row T-0130): what interventional cystic fibrosis trials register as their primary outcome, counted from one dated, hashed snapshot of ClinicalTrials.gov.
 
-**Nothing here has been run against the real registry.** Every test runs on synthetic fixtures with no network. The lexicon is a draft (0.2.3-draft) for review. No model is called anywhere in this folder.
+**Nothing here has been run against the real registry.** Every test runs on synthetic fixtures with no network. The lexicon is a draft (0.2.3-draft) for review. Only `propose_tags.py` and `challenge_tags.py` call a model, a local one through the lab's invoker, and no test does: the tests use a fake model.
 
 Words used here: a **retrieval route** is one of the searches a snapshot is fetched with (the condition search, which is the main retrieval route, and the term search, which is the recall retrieval route). The **route name** is that search's name as the manifest records it (`condition`, `term`).
 
@@ -17,6 +17,8 @@ Words used here: a **retrieval route** is one of the searches a snapshot is fetc
 | `lexicon.py` | Applies the lexicon. Each tag records the rule id and the exact matched span. Before matching, every run of whitespace in the text is collapsed to one space; spans are mapped back to the original text. A pattern with an inline `(?x)`, an escaped space or a nested quantifier is refused at load. A time frame longer than 2,000 characters is "unparseable". `lexicon.py try "text"` shows what matches; `lexicon.py classes` lists every class with its domain and gloss; `lexicon.py tag` never overwrites its output |
 | `check_atlas.py` | Recomputes every count and fails on drift; rejects model tags whose quote is not an exact substring; prints the metrics on the frozen set; runs the negative controls; applies the publication stop rules; `--confirm-real-run` records that a person checked a real snapshot's configuration |
 | `make_labelling_sheet.py` | Draws the frozen set (stratified, seeded) and writes a blind sheet (wording only), the registry's terms beside it, and a sealed key |
+| `propose_tags.py` | The model-assisted route: a local model proposes one class, with an exact quote, for each entry the rules left unclassified; a script keeps only the proposals it can verify. `--self-check` runs the planted controls with a fake model |
+| `challenge_tags.py` | A blind second opinion from a model of a different family on a seeded sample of model-accepted and rule-tagged entries, with the agreement rate and a disagreement list |
 | `synthetic_fixtures.py` | Synthetic studies, pages and a fake client for the tests and the default negative controls. Not registry data |
 | `test_*.py` | Unit tests, one file per tool |
 
@@ -89,7 +91,7 @@ Every command below is run from the repository root. `SNAP` stands for the snaps
 
 5. **Label** (the person). Open `sheet.csv` in a spreadsheet, fill `label_classes` with class ids separated by `;`, and save it as "CSV UTF-8". `python tools/trial_atlas/lexicon.py classes` lists the class ids with a one-line gloss each.
 
-6. **Model tags** for the unclassified remainder: not built yet. A model may propose a class only with an exact quote; the checker verifies every quote.
+6. **Model tags** for the unclassified remainder: `propose_tags.py`, then the blind challenger `challenge_tags.py` (see "The model-assisted route" below). A model may propose a class only with an exact quote; the checker verifies every quote again.
 
 7. **Counts:**
 
@@ -146,6 +148,101 @@ Publication is blocked when:
 - S2 counts "other" plus unclassified, where the design names "other" alone.
 
 The proposal is being updated to match. The thresholds are the reviewer's judgement from the design, not a standard. They can change before the frozen set is labelled, not after.
+
+## The model-assisted route
+
+**What it is.** The rule lexicon runs first. For each entry it leaves `unclassified`, `propose_tags.py` asks a local model to choose one class, or `none`, and to copy an exact quote from the entry that supports the choice. The model's answer is a lead, never a verdict. A script accepts it only when:
+- the class is one this route offers: the lexicon's classes without `not_stated` (no model may propose it) and without `other`. A measure that fits no class is answered `none`, with a 1 to 5 word `family` label.
+- the quote is 3 to 25 words, does not read like an instruction, and passes `check_atlas.verify_model_tags`, the gate's own code. That is an exact substring of the entry's measure, description or time frame. Case and spacing count: a quote with one space changed is rejected.
+
+**What a verified quote proves.** Only that the words exist in the entry. It does NOT prove that the class is right. The blind challenger and the frozen set, labelled by a person, measure that.
+
+**The lexicon is not changed by this route.** `families.json` groups the `none` answers by their family label, with counts and entry ids only. It is a lead for the next lexicon version. A council and a clinician review it before any class or rule changes. Family labels are never published.
+
+**The data boundary.** Registry text is written by strangers. Every packet puts the entry's three fields inside `<untrusted_page>`...`</untrusted_page>`. Outside the box, the packet says the text may contain instructions and must never be followed. Entry text cannot close the box early: the tag name is altered inside it. The model has no tools and returns JSON only (a schema with the class ids as an enum); the script writes every file. A packet carries only the entry text and the class list (id, label and the lexicon's gloss): no NCT id, no rule tag, no other model's answer.
+
+Two more guards against planted text:
+- a quote that reads like an instruction is rejected
+- entries whose text reads like an instruction are listed in `summary.txt` for a person to read.
+
+Both use a heuristic pattern, which catches the obvious forms only.
+
+**The loop** (the lab's loop):
+1. Two fast attempts, thinking off.
+2. With `--think-after-fast`, one thinking attempt for each entry still failing.
+
+A retry carries one fixed sentence naming why the last reply was rejected, never the reply itself. Temperature is 0 by default. Every row records:
+- the model and the profile file's name
+- the mode and the attempt number
+- the prompt template version (`trial-atlas-propose/1`) and the seed.
+
+The prompt is never recorded.
+
+**What is private.** Every output holds registry text or answers about it. Outputs stay outside every repository, in the lab's private files folder; the tools refuse an `--out` inside a git working tree. Nothing registry-derived is committed.
+
+| File in `--out` | Holds |
+| --- | --- |
+| `proposals.jsonl` | One row per attempt, appended and flushed per row: class, quote, family, verified, the rejection reason, the invoker's exit code and cleaned error text |
+| `model-tags.json` | The accepted classes, one per entry (the first verified attempt wins), in the format `check_atlas.py --model-tags` reads |
+| `families.json` | The verified `none` answers grouped by normalised family: counts and entry ids |
+| `summary.txt` | Counts from `proposals.jsonl`: entries, accepted, unresolved, rejected attempts by reason (bad class, quote not an exact substring, quote too short or long, instruction-like quote, missing family, malformed JSON, invoker error, timeout), accepted by class, and the quote-rejection rate |
+| `run.json` | The snapshot, lexicon and tags hashes, the models, profile names, template and seed this folder is bound to. `--resume` refuses a different one |
+
+**Robustness.** A failed, empty, malformed or late reply is recorded and retried by the loop; it never stops the run. Ctrl-C leaves complete JSON lines and exits 130. `--resume` skips entries that already have a verified row or every planned attempt. `--limit N` runs a seeded sample of N entries, for a first timing run.
+
+**Models.** There is no default model. Give exactly one of:
+- `--model NAME`, a model with no profile.
+- `--profile-file`, a profile from a model profile skill. The profile's own model is used. Add `--thinking-profile-file` for the thinking attempt.
+
+The tools pass these to the invoker explicitly, so `LOCAL_WORKER_MODEL` and `LOCAL_WORKER_PROFILE` cannot change them:
+- the model name
+- the profile, or none
+- think on or off
+- the temperature.
+
+The profile supplies the context size and the other sampling settings.
+
+**The challenger.** `challenge_tags.py` draws a seeded sample:
+- half from the entries the proposer accepted
+- half from the entries the rules tagged.
+
+A short pool is topped up from the other. The challenger gets the same packet as the proposer and never the proposer's or the rule's answer. Its quotes are verified the same way.
+
+It refuses a model equal to the proposer's, or one with the same name before `:`. `challenge.json` holds:
+- per entry: the reference classes, the challenger's class and whether they agree
+- the agreement rate, overall and per pool, with a Wilson 95% interval, or "too few to estimate" under 10
+- a disagreement list for a person or a council (entry ids and classes only).
+
+Agreement between two models is not correctness.
+
+**Running it overnight.** Run from the repository root, in PowerShell 7 (the invoker is a PowerShell script).
+
+`LAB` is the cf-lab folder. `PRIVATE` is the lab's private files folder. `SNAP` and `TAGS` are the snapshot and the tags file from steps 1 and 3.
+
+The model names are the ones chosen for the lab's machine: Qwen3.8 27B through its 64K profiles as the proposer, Gemma 4 31B as the challenger. Any local models of two different families work.
+
+```
+python tools/trial_atlas/propose_tags.py --self-check
+python tools/trial_atlas/propose_tags.py --snapshot SNAP --tags TAGS --out PRIVATE/route-1 --lab-repo LAB --profile-file LAB/.claude/skills/model-qwen3-8-27b/ollama-profile.64k.fast.json --thinking-profile-file LAB/.claude/skills/model-qwen3-8-27b/ollama-profile.64k.json --think-after-fast --seed 1
+python tools/trial_atlas/check_atlas.py --verify-model-tags PRIVATE/route-1/model-tags.json --snapshot SNAP --tags TAGS
+python tools/trial_atlas/check_atlas.py --snapshot SNAP --tags TAGS --model-tags PRIVATE/route-1/model-tags.json --write-counts PRIVATE/route-1/counts.json
+python tools/trial_atlas/challenge_tags.py --snapshot SNAP --tags TAGS --proposals PRIVATE/route-1 --out PRIVATE/route-1/challenge --lab-repo LAB --model gemma4:31b-it-q4_K_M --sample 100 --seed 2 --think-after-fast
+```
+
+- Add `--limit 20` to the first run to measure the time per entry. Then run the same command with `--resume` and without `--limit`.
+- After an interruption, run the same command again with `--resume`.
+- The time per entry is not known until it is measured.
+
+**What was tested, and how.** Every test uses a fake model: a scripted invoker, or a stub PowerShell script that prints a fixed reply. No test calls a model, and no test opens the network.
+
+`propose_tags.py --self-check` runs the whole pipeline on synthetic entries with these planted controls:
+- a canary whose reply quotes words not in the entry
+- an entry that tells the model to ignore its instructions, with replies that obey it (an unsupported quote, and then a quote of the planted sentence itself)
+- malformed replies
+- a timeout and an invoker error
+- an entry that tries to close the data boundary.
+
+It exits 1 if any control passes wrongly. The request the real invoker would send was checked once with its `-DumpRequest` option, which stops before any call, for both 64K profiles and for `--model`. That check is not a test in this folder.
 
 ## When a fetch stops
 
@@ -336,8 +433,8 @@ What they hold:
 
 ## Not built in this step
 
-- The model-assisted tagging step itself. Only its quote verifier is here.
-- The challenger review and its disagreement rate.
+- A run of the model-assisted route on real data. The route is built and tested with a fake model only.
+- The challenger's agreement rate inside the gate: `check_atlas.py` still prints "challenger disagreement rate: not measured"; the rate is in `challenge.json`.
 - The relabelling check: 20 rows labelled again two weeks after the first labels.
 - The hand check of 20 studies from the difference between the two retrieval routes (the design's decision 3). The tools print the difference; nobody has checked it by hand.
 - The flag for open-label extensions (the design's guard against clustering).
