@@ -125,6 +125,7 @@ verified yet, in that order. Read them the way you'd read a map, not a promise.
 | [`.claude/skills/source-grounding/`](.claude/skills/source-grounding/SKILL.md) | Agent skill: how a public sentence is grounded (computed, registry statement, open-access definition, lab position), what each checker proves and does not, and packets for a local worker | draft, in review |
 | [`tools/evidence/`](tools/evidence/README.md) | Pointer: the evidence loop moved to the portable skill `cf-skills/.claude/skills/cf-evidence-loop`. Run it here with `EVIDENCE_CATALOG` set to `sources/catalog.yaml` | moved 2026-10-04 |
 | [`.claude/settings.json`](.claude/settings.json) | Claude Code deny rules for a session started here: no reading `.env` files, keys or credentials. The same list as `cf-lab` | v1, 2026-10-06 |
+| [`leads/`](leads/README.md) | The public register of research leads: ideas, questions and sources worth following that are not yet tasks, each with its evidence tier, the data it needs and what the catalog permits, its guard and what it must not claim. `LEADS.md` is rendered; `tools/leads/` holds the renderer, the checker and their tests | seeded 2026-10-10 |
 | [`proposals/`](proposals/) | Proposed changes to sibling repos that an agent could not or should not apply directly, with evidence and a verification step for each | — |
 | [`ledger/`](ledger/) | Logs of real errors from working sessions: what happened, what caught it, and a cheap guard. A single entry is an observation, not a lesson | two session logs, 2026-10-04 and 2026-10-07 |
 
