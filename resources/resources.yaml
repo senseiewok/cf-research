@@ -122,16 +122,17 @@ resources:
     url: https://www.cff.org/get-involved/cf-peer-connect
     audience: [adult_with_cf, partner_family_carer_of_adult]
     category: [community_peer]
-    summary: "A programme that connects a person with a peer for one-to-one conversation."
+    # 2026-10-11: spelling only; re-attested on the maintainer's instruction after a three-model council review (the page was not reopened).
+    summary: "A program that connects a person with a peer for one-to-one conversation."
     who_for: not_checked
     lang: en
     source_id: cff-resource-pages
     basis: person_read_in_browser
     summary_attested_by: maintainer
-    summary_attested_on: 2026-10-10
+    summary_attested_on: 2026-10-11
     confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: c85d97c72b5836e45b37dc3f44e869bf79000e015c989becb7e3b9d0e26f6eab
+    confirmed_on: 2026-10-11
+    content_hash: 341100e451cefe0c01371900731b58691e136224c5f238cf4b1ef7f3bb9553df
     last_checked: 2026-10-09
     status: active
 
@@ -142,16 +143,17 @@ resources:
     url: https://apps.cff.org/ccd
     audience: [everyone]
     category: [find_care_team]
-    summary: "A search for accredited CF care centres."
+    # 2026-10-11: spelling only; re-attested on the maintainer's instruction after a three-model council review (the page was not reopened).
+    summary: "A search for accredited CF care centers."
     who_for: not_checked
     lang: en
     source_id: cff-apps-resource-pages
     basis: person_read_in_browser
     summary_attested_by: maintainer
-    summary_attested_on: 2026-10-09
+    summary_attested_on: 2026-10-11
     confirmed_by: maintainer
-    confirmed_on: 2026-10-09
-    content_hash: 5ee7b6528df9b9485d56a82796ca2c8da019b3225dacc1cc949d4eba52daa60b
+    confirmed_on: 2026-10-11
+    content_hash: 5367caeb0ae58abb824199ce2e7e72527bfa4329941952e52951dd5644808a1d
     last_checked: 2026-10-09
     status: active
 
@@ -227,17 +229,18 @@ resources:
     url: https://www.fq.org.mx/nuestros-programas
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [medicines_access]
-    summary: "A Mexican association's programmes for timely diagnosis, specialised care, access to equipment and medicines, and training for health professionals."
+    # 2026-10-11: spelling only; re-attested on the maintainer's instruction after a three-model council review (the page was not reopened).
+    summary: "A Mexican association's programs for timely diagnosis, specialized care, access to equipment and medicines, and training for health professionals."
     summary_es: "Una asociación mexicana presenta sus programas de diagnóstico oportuno, atención especializada, acceso a equipos y medicamentos, y capacitación para profesionales de la salud."
     who_for: not_checked
     lang: es-MX
     source_id: amfq-resource-pages
     basis: person_read_in_browser
     summary_attested_by: maintainer
-    summary_attested_on: 2026-10-10
+    summary_attested_on: 2026-10-11
     confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: f2647cb7eb135f5377166c68cf0b3425f0e33ab8f51a61b13acdfd3c2b706052
+    confirmed_on: 2026-10-11
+    content_hash: 5b030b5680787015c73672985a857d2897dcfdaaa7b3b709e4f03f466d3c72f6
     last_checked: 2026-10-10
     status: active
 
@@ -354,16 +357,17 @@ resources:
     url: https://www.cysticfibrosis.org.uk/life-with-cystic-fibrosis/young-people
     audience: [teen_young_adult]
     category: [growing_up_transition, community_peer]
-    summary: "Information for young people with CF on life after school, the youth programme and the Youth Advisory Group."
+    # 2026-10-11: spelling only; re-attested on the maintainer's instruction after a three-model council review (the page was not reopened).
+    summary: "Information for young people with CF on life after school, the youth program and the Youth Advisory Group."
     who_for: not_checked
     lang: en
     source_id: cftrust-resource-pages
     basis: script_fetch
     summary_attested_by: maintainer
-    summary_attested_on: 2026-10-10
+    summary_attested_on: 2026-10-11
     confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: a25330e323d3040673082c1ed132bbc498695975a4e26aaba445ef6a095fcad1
+    confirmed_on: 2026-10-11
+    content_hash: 575d5282b7e4b7e1deadcf1b3a33ffaa61deb8b2a63a6964f62fedab73ec739c
     last_checked: 2026-10-10
     status: active
 
@@ -394,16 +398,17 @@ resources:
     url: https://www.cysticfibrosis.org.uk/what-is-cystic-fibrosis/cystic-fibrosis-care/specialist-cystic-fibrosis-care
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [find_care_team]
-    summary: "Care consensus documents and pages on adult and children's CF centres."
+    # 2026-10-11: spelling only; re-attested on the maintainer's instruction after a three-model council review (the page was not reopened).
+    summary: "Care consensus documents and pages on adult and children's CF centers."
     who_for: not_checked
     lang: en
     source_id: cftrust-resource-pages
     basis: script_fetch
     summary_attested_by: maintainer
-    summary_attested_on: 2026-10-10
+    summary_attested_on: 2026-10-11
     confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 96cdf111c81440f0321c3d05efe30eae44868559b8d448f2cee19aeb42c3a67a
+    confirmed_on: 2026-10-11
+    content_hash: 20faf2e30729991d13397ee38669544f73398947989b11366b3e42e297a1a175
     last_checked: 2026-10-10
     status: active
 
@@ -454,16 +459,17 @@ resources:
     url: https://cysticfibrosis.ca/adults-with-cystic-fibrosis
     audience: [adult_with_cf]
     category: [daily_life, relationships_family_planning]
-    summary: "Information for adults with CF on reproductive health, parenting, nutrition and exercise, and ageing with CF."
+    # 2026-10-11: spelling only; re-attested on the maintainer's instruction after a three-model council review (the page was not reopened).
+    summary: "Information for adults with CF on reproductive health, parenting, nutrition and exercise, and aging with CF."
     who_for: not_checked
     lang: en
     source_id: cfcanada-resource-pages
     basis: script_fetch
     summary_attested_by: maintainer
-    summary_attested_on: 2026-10-10
+    summary_attested_on: 2026-10-11
     confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 6d9e9c7b91e97d0fdd8c91a7105b84233049f6f6fbf1e435570a3652c21c6ea1
+    confirmed_on: 2026-10-11
+    content_hash: b834c0fd5d9dc9076f467f3ebca797f5409c62c37ebaad020a28036812c5ded3
     last_checked: 2026-10-10
     status: active
 
@@ -734,15 +740,16 @@ resources:
     url: https://www.cfireland.ie/cf-and-me/adults-with-cf/wellbeing-supports
     audience: [adult_with_cf, parent_carer_of_child]
     category: [mental_health]
-    summary: "Information on mental health and wellbeing, including financial help towards counselling for individuals and families."
+    # 2026-10-11: spelling only; re-attested on the maintainer's instruction after a three-model council review (the page was not reopened).
+    summary: "Information on mental health and well-being, including financial help toward counseling for individuals and families."
     who_for: not_checked
     lang: en
     source_id: cfireland-resource-pages
     basis: script_fetch
     summary_attested_by: maintainer
-    summary_attested_on: 2026-10-10
+    summary_attested_on: 2026-10-11
     confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 9d1eb59de37c0595fb5a204beadaa6fc85d874474ae52c7e4611776432f365b8
+    confirmed_on: 2026-10-11
+    content_hash: e0e4faabb9ebfdf684c0a3cd2816fc25b7af9cf35a4b37f6375cf80faa595477
     last_checked: 2026-10-10
     status: active

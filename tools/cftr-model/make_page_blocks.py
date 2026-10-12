@@ -6,7 +6,7 @@ Blocks, each between <!--generated:NAME--> and <!--/generated:NAME--> markers in
   cftr-cite        the entries, papers and UniProt version to cite, as plain text
   cftr-poster      a still vector picture of the first structure in the viewer's starting view (shown without JavaScript or while the 3D view loads)
   cftr-caption     the caption the viewer's script reproduces word for word
-  cftr-legend      the colour key, word for word what the viewer's script writes into the same list
+  cftr-legend      the color key, word for word what the viewer's script writes into the same list
 Nothing is typed in: every number is computed from the data module.
 
 Usage: python tools/cftr-model/make_page_blocks.py [--page PATH] [--data PATH] [--blocks table,provenance,cite] [--check]
@@ -114,7 +114,7 @@ def caption_text(st, length):
 
 
 def poster_svg(data):
-    """A still picture of the first structure in the viewer's starting view: an orthographic projection of the C-alpha trace, coloured by part."""
+    """A still picture of the first structure in the viewer's starting view: an orthographic projection of the C-alpha trace, colored by part."""
     st = data["structures"][0]
     parts = [d for d in data["domains"] if d["type"] == "Domain"]
     st_phi, st_theta = HOME_PHI, HOME_THETA
@@ -149,7 +149,7 @@ def poster_svg(data):
             j = i
             while j + 1 < len(pts) and colour(pts[j + 1][0]) == c:
                 j += 1
-            seg_pts = pts[i:j + 2] if j + 1 < len(pts) else pts[i:j + 1]       # overlap one point so colour runs join
+            seg_pts = pts[i:j + 2] if j + 1 < len(pts) else pts[i:j + 1]       # overlap one point so color runs join
             if len(seg_pts) > 1:
                 d = "M" + " L".join(f"{sx(p[1])} {sy(p[2])}" for p in seg_pts)
                 paths.append(f'<path d="{d}" stroke="{rgb(c)}" />')
@@ -162,7 +162,7 @@ def poster_svg(data):
         p = st["res508"]["xyz"]
         cx, cy = sx(dot(p, xa)), sy(-dot(p, ya))
         ring = f'<circle cx="{cx}" cy="{cy}" r="11" fill="none" stroke="{rgb(ROSE_RGB)}" stroke-width="3" /><circle cx="{cx}" cy="{cy}" r="4.5" fill="{rgb(ROSE_RGB)}" />'
-    label = (f"A still picture of CFTR structure {st['id']}, drawn as a line through the amino acids the model places and coloured by part. "
+    label = (f"A still picture of CFTR structure {st['id']}, drawn as a line through the amino acids the model places and colored by part. "
              "Residue 508 is ringed in rose. The interactive 3D view replaces it when the page can run it.")
     return (f'<svg class="cftr-poster-svg" viewBox="0 0 {round(W)} {round(H)}" role="img" aria-label="{html.escape(label)}" xmlns="http://www.w3.org/2000/svg">'
             f'<g fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">{"".join(paths)}</g>'
@@ -170,15 +170,15 @@ def poster_svg(data):
 
 
 def legend_block(data):
-    """The colour key as list items, word for word what cftr-viewer.js writes into #cftr-legend (partsOf and legendRow there), so a page can show it before and
-    without the script and the script's rewrite changes nothing. Swatch colours are classes in cftr-model.css (sw-part-1 to 4 follow PART_RGB)."""
+    """The color key as list items, word for word what cftr-viewer.js writes into #cftr-legend (partsOf and legendRow there), so a page can show it before and
+    without the script and the script's rewrite changes nothing. Swatch colors are classes in cftr-model.css (sw-part-1 to 4 follow PART_RGB)."""
     kinds, rows = {"membrane": 0, "binding": 0}, []
     for i, d in enumerate(x for x in data["domains"] if x["type"] == "Domain"):
         kind = "membrane" if re.search("transmembrane", d["name"], re.I) else "binding"
         kinds[kind] += 1
         label = ("Membrane-spanning part " if kind == "membrane" else "Nucleotide-binding part ") + str(kinds[kind])
         rows.append((f"sw-part-{i % len(PART_RGB) + 1}", f"{label}, residues {d['start']} to {d['end']}"))
-    rows += [("sw-grey", "Grey: placed, outside the four marked parts"), ("sw-grey is-dotted", "Dotted grey: not placed in this structure"),
+    rows += [("sw-grey", "Gray: placed, outside the four marked parts"), ("sw-grey is-dotted", "Dotted gray: not placed in this structure"),
              ("sw-band is-band", "Flat band: helix or strand, as UniProt annotates")]
     return "".join(f'<li><span class="cftr-swatch {c}" aria-hidden="true"></span>{html.escape(t)}</li>' for c, t in rows)
 
@@ -211,7 +211,7 @@ def provenance_block(data):
         ("Distance after fitting", per(lambda s: f"{s['superposition_rmsd_A']:.2f} \u00c5 over {s['superposition_residues']} residues" if s["id"] != sts[0]["id"] else "the reference"),
          "Computed for this page. Take the alpha carbons that 6MSM and the structure both place, with the same amino acid, inside UniProt residues 81 to 365 and 859 to 1155; fit one onto the other by a rigid rotation and shift (Horn\u2019s method); the number is the root-mean-square distance left.",
          "Run tools/cftr-model/build_traces.py (in the cf-research repository); tools/cftr-model/tests/test_data.py shows the fit recovers a known rotation."),
-        ("Positions in the view", "angstrom, rounded to 0.1", "The alpha-carbon coordinates after that fit, centred on the placed residues of 6MSM.", "Save the CSV from the tools above."),
+        ("Positions in the view", "angstrom, rounded to 0.1", "The alpha-carbon coordinates after that fit, centered on the placed residues of 6MSM.", "Save the CSV from the tools above."),
         ("Topology and helices", f"{len(u['transmembrane'])} transmembrane segments; {len(u['topology'])} topological domains", "UniProt P13569 features of type Transmembrane and Topological domain.", "Open the entry on uniprot.org."),
         ("Variant positions", f"{len(u['variants'])} entries: {len(single)} at a single residue ({len(positions)} different positions) and {spanning} spanning several residues", "UniProt P13569 features of type Natural variant (position, residues and wording as UniProt gives them). Only single-residue entries are drawn as beads; the others are listed in the residue look-up.", "Open the entry on uniprot.org."),
     ]

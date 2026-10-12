@@ -104,7 +104,7 @@ class ViewerTests(unittest.TestCase):
             self.assertIn(needle, note, needle)
         legend = norm(p.page.inner_text("#cftr-legend"))
         self.assertIn("Flat band: helix or strand, as UniProt annotates", legend)
-        self.assertIn("Dotted grey: not placed in this structure", legend)
+        self.assertIn("Dotted gray: not placed in this structure", legend)
         self.assertEqual(len(DATA["uniprot"]["secondary"]), 118, "the bands come from the data file, which carries UniProt's ranges")
         self.assertTrue(all(s["type"] in ("helix", "strand", "turn") for s in DATA["uniprot"]["secondary"]))
 
@@ -174,7 +174,7 @@ class ViewerTests(unittest.TestCase):
             while b + 1 not in placed and b < DATA["length"]:
                 b += 1
             p.page.evaluate("n => { const r = document.getElementById('cftr-walk'); r.value = n; r.dispatchEvent(new Event('input', {bubbles: true})); }", n)
-            self.assertIn(f"the stretch {a} to {b} is not modelled", p.page.inner_text("#cftr-walk-out"), sid)
+            self.assertIn(f"the stretch {a} to {b} is not modeled", p.page.inner_text("#cftr-walk-out"), sid)
 
     def test_overlay_is_only_for_the_others_and_reports_the_computed_distance(self):
         p = self.open()

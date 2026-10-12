@@ -429,7 +429,7 @@ export async function start() {
     }
     if (n === 508 && st.covered[507] && st.covered[509]) return 'Residue 508 is absent from this structure: the model runs from residue 507 straight to 509.';
     const [a, b] = stretchAround(st, n);
-    return 'Residue ' + n + ': not placed in this model (the stretch ' + a + ' to ' + b + ' is not modelled), in ' + partName(n) + '.';
+    return 'Residue ' + n + ': not placed in this model (the stretch ' + a + ' to ' + b + ' is not modeled), in ' + partName(n) + '.';
   }
   function captionText(st) {
     const r508 = st.res508 ? 'Residue 508 is present in this structure.' : 'Residue 508 is absent from this structure.';
@@ -714,7 +714,7 @@ export async function start() {
       sw.className = 'cftr-swatch'; sw.style.background = 'rgb(' + p.colour.map(v => Math.round(v * 255)).join(',') + ')'; sw.setAttribute('aria-hidden', 'true');
       li.append(sw, p.label + ', residues ' + p.start + ' to ' + p.end);
       return li;
-    }).concat([legendRow('#8c99a8', 'Grey: placed, outside the four marked parts'), legendRow('#8c99a8', 'Dotted grey: not placed in this structure', 'dotted'),
+    }).concat([legendRow('#8c99a8', 'Gray: placed, outside the four marked parts'), legendRow('#8c99a8', 'Dotted gray: not placed in this structure', 'dotted'),
                legendRow('#c9d1dc', 'Flat band: helix or strand, as UniProt annotates', 'band')]));
   }
   if (el.walk) { el.walk.min = '1'; el.walk.max = String(length); el.walk.value = '508'; }

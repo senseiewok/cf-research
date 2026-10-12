@@ -29,7 +29,7 @@
     </div>
     <div id="cftr-viewer" class="cftr-viewer" data-hash="url" hidden>
       <div class="cftr-stage">
-        <canvas id="cftr-canvas" tabindex="0" role="img" aria-label="A three-dimensional drawing of the CFTR protein chain as a smooth shaded tube, coloured by part, with flat bands where UniProt annotates a helix or a strand. Drag it, use the arrow keys, or use the sliders beside it to turn it. The same facts are written out as text on this page."></canvas>
+        <canvas id="cftr-canvas" tabindex="0" role="img" aria-label="A three-dimensional drawing of the CFTR protein chain as a smooth shaded tube, colored by part, with flat bands where UniProt annotates a helix or a strand. Drag it, use the arrow keys, or use the sliders beside it to turn it. The same facts are written out as text on this page."></canvas>
       </div>
       <div class="cftr-panel">
         <div role="group" aria-labelledby="pick-label">
@@ -41,9 +41,9 @@
         <div id="cftr-readout" class="cftr-readout" aria-live="polite"></div>
         <p class="meta">The title is the entry's own wording. Only the protein chain is drawn: the other molecules in an entry are not shown, and nothing here shows how any medicine acts.</p>
         <div>
-          <p class="cftr-label" id="legend-label">Colours</p>
+          <p class="cftr-label" id="legend-label">Colors</p>
           <ul id="cftr-legend" class="cftr-legend" aria-labelledby="legend-label"></ul>
-          <p class="meta">Grey: stretches outside the four marked parts. Dashed grey: a stretch this model does not place; the dashes are a straight connector, not its shape. Rose ring and dot: residue 508. White dot: the residue you have chosen.</p>
+          <p class="meta">Gray: stretches outside the four marked parts. Dashed gray: a stretch this model does not place; the dashes are a straight connector, not its shape. Rose ring and dot: residue 508. White dot: the residue you have chosen.</p>
           <p class="meta cftr-shape-note">How it is drawn: the tube is a smooth curve through the measured position of one atom per amino acid. It passes through every measured point; where it runs between two points is a drawing choice, not data. The flat bands mark the stretches UniProt annotates as a helix (wider) or a strand (narrower) for this protein; that annotation comes from UniProt's record, not from a computation on these coordinates. The shading is light on a shape and says nothing about the protein.</p>
         </div>
         <div>
@@ -54,7 +54,7 @@
           </div>
           <div id="cftr-seq" class="cftr-seq" aria-hidden="true"></div>
           <p class="meta cftr-seq-label">UniProt reference sequence around the marked residue (default 508). Lit where this structure places it; an empty box where the file says it was deleted.</p>
-          <p class="meta">The strip is the whole chain, 1 to 1480: coloured where the structure places residues, a thin grey line where it does not, and a rose mark at 508 (an empty outline where the structure lacks it).</p>
+          <p class="meta">The strip is the whole chain, 1 to 1480: colored where the structure places residues, a thin gray line where it does not, and a rose mark at 508 (an empty outline where the structure lacks it).</p>
           <p id="cftr-walk-out" class="cftr-walkout" aria-live="off"></p>
           <div class="cftr-row">
             <button id="cftr-walk-508" class="cftr-btn" type="button">Go to 508</button>
@@ -101,7 +101,7 @@
       </form>
       <fieldset class="cftr-tool">
         <legend>Layers from UniProt</legend>
-        <label class="cftr-check"><input id="cftr-layer-topology" type="checkbox"> Colour the chain by UniProt&rsquo;s topology</label>
+        <label class="cftr-check"><input id="cftr-layer-topology" type="checkbox"> Color the chain by UniProt&rsquo;s topology</label>
         <p class="meta">Sides and helices come from UniProt&rsquo;s annotation of the protein sequence (13 topological domains and 12 transmembrane segments), not from these coordinates. This is not a membrane drawn from the data.</p>
         <ul id="cftr-topology-legend" class="cftr-legend" hidden>
           <li><span class="cftr-swatch sw-tm" aria-hidden="true"></span>Transmembrane segment</li>
@@ -121,7 +121,7 @@
           <button id="cftr-export-csv" class="cftr-btn" type="button">Save residues (CSV)</button>
           <button id="cftr-export-json" class="cftr-btn" type="button">Save view (JSON)</button>
         </div>
-        <p class="meta">The link holds the structure, the marked residue, the camera and the layers. The picture carries its label. The CSV has the alpha-carbon positions in angstrom in this page&rsquo;s frame (fitted onto 6MSM, centred on its placed residues, rounded to 0.1 &Aring;), with UniProt&rsquo;s part and topology for each residue.</p>
+        <p class="meta">The link holds the structure, the marked residue, the camera and the layers. The picture carries its label. The CSV has the alpha-carbon positions in angstrom in this page&rsquo;s frame (fitted onto 6MSM, centered on its placed residues, rounded to 0.1 &Aring;), with UniProt&rsquo;s part and topology for each residue.</p>
         <p id="cftr-export-status" class="meta" aria-live="polite"></p>
       </div>
     </div>
@@ -153,7 +153,7 @@
       </li>
       <li data-step data-structure="8EIQ" data-overlay="1">
         <h3>Laying the shapes over each other</h3>
-        <p>Here the membrane-spanning parts of each model are lined up on 6MSM, a computation made for this page. After that fit, the membrane-spanning parts of 8EIQ are 0.84 &Aring; from those of 6MSM, as a root-mean-square distance over 566 residues (1 &Aring; is a ten-billionth of a metre). The two dephosphorylated models, 5UAK and 8EJ1, are about 5 &Aring; away (5.01 &Aring; over 557 residues, and 4.87 &Aring; over 547). 8EJ1 was solved at lower resolution (6.9 &Aring;), so less detail is available for it. These numbers describe differences in shape between models. They do not say why, they do not say that any structure is open or closed, and they do not show what the medicines do.</p>
+        <p>Here the membrane-spanning parts of each model are lined up on 6MSM, a computation made for this page. After that fit, the membrane-spanning parts of 8EIQ are 0.84 &Aring; from those of 6MSM, as a root-mean-square distance over 566 residues (1 &Aring; is a ten-billionth of a meter). The two dephosphorylated models, 5UAK and 8EJ1, are about 5 &Aring; away (5.01 &Aring; over 557 residues, and 4.87 &Aring; over 547). 8EJ1 was solved at lower resolution (6.9 &Aring;), so less detail is available for it. These numbers describe differences in shape between models. They do not say why, they do not say that any structure is open or closed, and they do not show what the medicines do.</p>
         <button class="cftr-btn" type="button" hidden>Show this</button>
       </li>
     </ol>
@@ -211,7 +211,7 @@
       <tr><th scope="row">Length and part boundaries</th><td>1,480 residues; parts 81 to 365, 423 to 646, 859 to 1155, 1210 to 1443; a region UniProt marks as disordered (the regulatory, or R, region) 654 to 831</td><td>UniProt P13569, entry version 286, annotation updated 2026-09-02: the sequence, and the features of type Domain and Region.</td><td>Open the entry on uniprot.org.</td></tr>
       <tr><th scope="row">Residue numbering</th><td>4,609 placed residues checked; 3 differ from UniProt, all declared by their files</td><td>Every placed residue is compared with the amino acid UniProt has at that number; the build stops if one disagrees without its file saying so.</td><td>Run tools/cftr-model/build_traces.py (in the cf-research repository) with the downloaded files; tools/cftr-model/tests/test_data.py also checks it.</td></tr>
       <tr><th scope="row">Distance after fitting</th><td>6MSM the reference; 5UAK 5.01 Å over 557 residues; 8EIQ 0.84 Å over 566 residues; 8EJ1 4.87 Å over 547 residues</td><td>Computed for this page. Take the alpha carbons that 6MSM and the structure both place, with the same amino acid, inside UniProt residues 81 to 365 and 859 to 1155; fit one onto the other by a rigid rotation and shift (Horn’s method); the number is the root-mean-square distance left.</td><td>Run tools/cftr-model/build_traces.py (in the cf-research repository); tools/cftr-model/tests/test_data.py shows the fit recovers a known rotation.</td></tr>
-      <tr><th scope="row">Positions in the view</th><td>angstrom, rounded to 0.1</td><td>The alpha-carbon coordinates after that fit, centred on the placed residues of 6MSM.</td><td>Save the CSV from the tools above.</td></tr>
+      <tr><th scope="row">Positions in the view</th><td>angstrom, rounded to 0.1</td><td>The alpha-carbon coordinates after that fit, centered on the placed residues of 6MSM.</td><td>Save the CSV from the tools above.</td></tr>
       <tr><th scope="row">Topology and helices</th><td>12 transmembrane segments; 13 topological domains</td><td>UniProt P13569 features of type Transmembrane and Topological domain.</td><td>Open the entry on uniprot.org.</td></tr>
       <tr><th scope="row">Variant positions</th><td>209 entries: 196 at a single residue (165 different positions) and 13 spanning several residues</td><td>UniProt P13569 features of type Natural variant (position, residues and wording as UniProt gives them). Only single-residue entries are drawn as beads; the others are listed in the residue look-up.</td><td>Open the entry on uniprot.org.</td></tr>
       </tbody>
@@ -222,7 +222,7 @@
     <ul class="cftr-leaves">
       <li>Only the alpha-carbon atom of each amino acid is drawn: no side chains, no other backbone atoms, no hydrogens.</li>
       <li>Only chain A of model 1 of each entry is used.</li>
-      <li>A stretch a model does not place is not drawn. The dotted grey lines across it are straight connectors, not the shape.</li>
+      <li>A stretch a model does not place is not drawn. The dotted gray lines across it are straight connectors, not the shape.</li>
       <li>The other molecules in an entry (ATP, magnesium, lipids, cholesterol, and in 8EIQ the three medicines) are not drawn. Their names appear only in the entry&rsquo;s own title and ligand list.</li>
       <li>The four entries were solved from different samples and under different conditions, at different resolutions. Differences between them are not a comparison of one experiment.</li>
       <li>Residue numbers are the PDB entries&rsquo; author numbers, which equal UniProt&rsquo;s numbers (checked residue by residue). Where a file declares a change from UniProt&rsquo;s sequence it is shown in the table above.</li>

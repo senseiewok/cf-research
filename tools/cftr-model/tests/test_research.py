@@ -455,7 +455,7 @@ class ResearchTests(unittest.TestCase):
         p = self.open(java_script_enabled=False)
         items = [norm(li.inner_text()) for li in p.page.query_selector_all("ul.cftr-leaves li")]
         self.assertEqual(len(items), 7)
-        wanted = ["Only the alpha-carbon atom of each amino acid is drawn", "Only chain A of model 1 of each entry is used", "dotted grey lines across it are straight connectors",
+        wanted = ["Only the alpha-carbon atom of each amino acid is drawn", "Only chain A of model 1 of each entry is used", "dotted gray lines across it are straight connectors",
                   "the three medicines) are not drawn", "solved from different samples and under different conditions", "author numbers, which equal UniProt", "no motion, no function and no mechanism"]
         for w in wanted:
             self.assertTrue(any(w in i for i in items), w)
