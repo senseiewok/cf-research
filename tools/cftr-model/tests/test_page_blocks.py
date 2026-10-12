@@ -49,7 +49,7 @@ class PageBlockTests(unittest.TestCase):
         self.assertEqual(len(parts), 4)
         self.assertEqual(rows[0], ("sw-part-1", f"Membrane-spanning part 1, residues {parts[0]['start']} to {parts[0]['end']}"))
         self.assertEqual([c for c, _ in rows], ["sw-part-1", "sw-part-2", "sw-part-3", "sw-part-4", "sw-grey", "sw-grey is-dotted", "sw-band is-band"])
-        self.assertEqual([t for _, t in rows[4:]], ["Grey: placed, outside the four marked parts", "Dotted grey: not placed in this structure",
+        self.assertEqual([t for _, t in rows[4:]], ["Gray: placed, outside the four marked parts", "Dotted gray: not placed in this structure",
                                                     "Flat band: helix or strand, as UniProt annotates"])
         self.assertEqual(sorted(t.split(",")[0] for _, t in rows[:4]), ["Membrane-spanning part 1", "Membrane-spanning part 2", "Nucleotide-binding part 1", "Nucleotide-binding part 2"])
         css = (PKG / "web" / "cftr-model.css").read_text(encoding="utf-8")
