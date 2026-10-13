@@ -6,7 +6,7 @@
 
 ## 1. Executive Summary & The Universal Bypass Rationale
 
-For the approximately 10% of people with Cystic Fibrosis who produce zero CFTR protein (Class I nonsense mutations, large indels, splicing defects) or who discontinue small-molecule modulators due to hepatotoxicity or adverse psychiatric effects, restoring ion and fluid transport through alternative channels represents a **mutation-agnostic universal curative path**.
+For the approximately 10% of people with Cystic Fibrosis who produce zero CFTR protein (Class I nonsense mutations, large indels, splicing defects) or who discontinue small-molecule modulators due to hepatotoxicity or adverse psychiatric effects, restoring ion and fluid transport through alternative channels represents a **mutation-agnostic bypass strategy for airway rehydration** (investigational biophysical research, not clinical advice).
 
 In normal airway epithelium, CFTR conducts chloride ($Cl^-$) and bicarbonate ($HCO_3^-$) while tonically downregulating the Epithelial Sodium Channel (ENaC). In CF:
 1. Absence of apical $Cl^-$ secretion eliminates the primary osmotic driving force for fluid movement into the airway lumen.
