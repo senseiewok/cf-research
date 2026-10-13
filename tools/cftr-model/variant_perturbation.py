@@ -97,7 +97,7 @@ def analyze_residue(data, residue_num):
 
     # Active vs Apo F508del (8EJ1) displacement delta
     delta_active_apo_f508del = None
-    if coords.get("6MSM") and coords.get("8EIQ"):
+    if coords.get("6MSM") and coords.get("8EJ1"):
         delta_active_apo_f508del = dist3d(coords["6MSM"], coords["8EJ1"])
 
     # Distances to landmarks in 6MSM (active conformation)
