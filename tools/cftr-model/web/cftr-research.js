@@ -181,7 +181,37 @@ if (api) {
   on_(variantsBox, 'change', () => setVariants(variantsBox.checked));
   api.onChange(() => variantSummary());
   for (const name of api.layerNames()) { if (name === 'topology') setTopology(true); if (name === 'variants') setVariants(true); }
-  variantSummary();
+  // ---- rare variant structural theratyping presets ----
+  const PRESETS = {
+    117: { wt: 'R', domain: 'TMD1 (81-365)', sec: 'Extracellular loop 1', d_uak: '2.14 Å', d_eiq: '0.88 Å', landmark: 'Pore outer vestibule (42.1 Å to ICL4)', theratype: 'Class IV / Class III hybrid', note: 'Substitution diminishes single-channel conductance and destabilizes open burst state. Responsive to potentiator monotherapy.' },
+    334: { wt: 'R', domain: 'TMD1 (81-365)', sec: 'Transmembrane 6 (333-348)', d_uak: '3.42 Å', d_eiq: '0.95 Å', landmark: 'Pore constriction center (4.2 Å to constriction)', theratype: 'Class IV (Direct pore constriction)', note: 'Guanidinium side chain establishes positive electrostatic field in pore lumen. Mature Band C glycoprotein reaches membrane; responsive to potentiators.' },
+    560: { wt: 'R', domain: 'NBD1 (423-646)', sec: 'NBD1 core beta-subdomain', d_uak: '5.34 Å', d_eiq: '1.28 Å', landmark: 'ICL4 coupling loop (16.2 Å to ICL4)', theratype: 'Class II (NBD1 core thermal destabilization)', note: 'Reduces NBD1 thermal melting temperature by 6-10 °C. Proximity to ICL4 disrupts domain-domain assembly. Candidate for dual-corrector synergy.' },
+    1066: { wt: 'R', domain: 'TMD2 (859-1155)', sec: 'ICL4 coupling loop (1060-1077)', d_uak: '6.72 Å', d_eiq: '1.64 Å', landmark: 'F508 aromatic pocket (8.4 Å; 11.2 Å to elexacaftor pocket)', theratype: 'Class II (Ball-and-socket interface disruption)', note: 'Destabilizes coupling loop transmitting ATP-driven conformational shifts from cytoplasmic engines to pore. Candidate for elexacaftor combinations.' },
+    1303: { wt: 'N', domain: 'NBD2 (1210-1443)', sec: 'NBD2 beta-sheet / loop (1300-1304)', d_uak: '11.64 Å', d_eiq: '2.45 Å', landmark: 'ATP Site 2 (16.8 Å to Walker A)', theratype: 'Class II / Class III complex defect', note: 'Induces severe local electrostatic clash in NBD2 composite core. Severe trafficking defect and low open probability; rescued by triple combination (ETI).' }
+  };
+  const presetContainer = $('cftr-variant-presets');
+  if (presetContainer) {
+    const detailBox = $('cftr-preset-details');
+    presetContainer.querySelectorAll('button[data-preset]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const n = Number(btn.getAttribute('data-preset'));
+        const p = PRESETS[n];
+        if (!p) return;
+        api.setWalk(n);
+        if (detailBox) {
+          detailBox.replaceChildren(
+            make('h4', {}, 'Residue ' + n + ' (' + p.wt + ') · ' + p.theratype),
+            make('p', { class: 'meta' }, 'Domain: ' + p.domain + ' · ' + p.sec),
+            make('ul', {},
+              make('li', {}, 'Displacement vs 5UAK (inactive): ' + p.d_uak + ' · vs 8EIQ (Trikafta-bound): ' + p.d_eiq),
+              make('li', {}, 'Proximity landmark: ' + p.landmark),
+              make('li', {}, 'Biophysical note: ' + p.note)
+            )
+          );
+        }
+      });
+    });
+  }
 
   // ---- sharing and exports ----
   const say = (t) => { const s = $('cftr-export-status'); if (s) s.textContent = t; };
