@@ -1,9 +1,9 @@
 # Data Commons MCP server: admission review
 
-Status: steps 1 to 4 are done (2026-10-04). Recommendation for the human reviewer: admit the server **for general statistics only** (population and other denominators); it has no cystic fibrosis or sickle cell indicator. The decision is the human's (step 5). Owner repo: research (hq board task T-0048).
-Provenance: steps 1 to 4 performed by `claude-sonnet-5-5`; every fact below was read from the cited file, page or saved server response on 2026-10-04. Review tier: full (a third-party server with a key and a network connection).
+Status: admitted (2026-10-14). Maintainer decision (step 5): admit for general statistics only (population and other denominators); base_url declared in sources/catalog.yaml, board task T-0048 done. Owner repo: research.
+Provenance: steps 1 to 4 performed by `claude-sonnet-5-5`; step 5 decision by maintainer on 2026-10-14. Review tier: full (a third-party server with a key and a network connection).
 
-## Verdicts so far
+## Verdicts
 
 | Step | Result | Basis |
 | --- | --- | --- |
@@ -11,7 +11,7 @@ Provenance: steps 1 to 4 performed by `claude-sonnet-5-5`; every fact below was 
 | 2 Terms and rate limits | pass with a gap: **no Data Commons rate limit is published** | below |
 | 3 Key handling | pass; the key was supplied only through the git-ignored `.env` and the launcher | below |
 | 4 Runtime review (stdio, four queries) | **pass with two disclosed deviations** | below |
-| 5 Decision | pending: the human decides | below |
+| 5 Decision | **pass: admitted by maintainer 2026-10-14** | general statistics and population denominators only |
 
 ## 1 Provenance
 
@@ -75,7 +75,9 @@ Deviations, stated plainly:
 No 429, 403 or cooldown response occurred.
 
 ## 5 Decision and next step
-
-Step 4 passed. Recommendation: admit for general statistics (population and similar denominators) only, never as a source of CF or SCD figures, and keep the rate limit unpublished-so-be-conservative (1 request per second in the catalog). The decision is the human's. If admitted, the next task is a `datacommons` provider in `cf-evidence-loop` that follows its network rules and returns evidence records whose `limitations` name the underlying source and vintage. That provider is not written here, and nothing in the evidence skill changes until a human says so.
+ 
+- Step 4 passed.
+- Step 5 passed (2026-10-14): maintainer decision to admit for general statistics (population and similar denominators) only, never as a source of CF or SCD figures. `base_url: https://api.datacommons.org/v2/` declared in `sources/catalog.yaml` and synced to `cf-skills`. Board task T-0048 marked done.
+- Next step: build the `datacommons` provider in `cf-evidence-loop` for population denominators.
 
 Escalate and stop if: a later install runs a script that was not read; the key cannot be kept out of the repositories; a query returns anything that looks like individual-level data; or the terms restrict redistribution of the statistics in a way that affects the registry table.
