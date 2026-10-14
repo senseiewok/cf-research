@@ -6,55 +6,59 @@
 
 ## 1. Executive summary & lazy delta execution
 
-The Chief Researcher Officer grounding sentinel executed its active grounding audit. The lazy delta check compared the current task board, proposals, and landscape against the baseline recorded in `.loop-logs/last-cro-audit.json`:
+The Chief Researcher Officer (CRO) grounding sentinel executed its active grounding audit across the workspace. The lazy delta check compared the current task board, proposals, and landscape against the baseline recorded in [`.loop-logs/last-cro-audit.json`](file:///C:/senseiewok/repos/cf-lab/.loop-logs/last-cro-audit.json):
 
 - **Lazy Delta Verdict**: **CHANGES DETECTED (Active Audit Triggered)**.
-- **Delta Scope**:
-  1. **Task Inventory Growth**: Board expanded from 154 to **161 tasks** ([`T-0155`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5703) to [`T-0161`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5942)), registering autonomous curative discovery engines and defensive integrity sentinels.
-  2. **Biophysical Proposals & Landscapes Authored**:
-     - [`cf-research/proposals/2026-10-inhaled-delivery-blueprint.md`](file:///C:/senseiewok/repos/cf-research/proposals/2026-10-inhaled-delivery-blueprint.md) ([`T-0147`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5393)) — overcoming the May 2026 VX-522 aerosolized LNP delivery barrier.
-     - [`cf-research/proposals/2026-10-nonsense-readthrough-nmd.md`](file:///C:/senseiewok/repos/cf-research/proposals/2026-10-nonsense-readthrough-nmd.md) ([`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5549)) — tri-modal synergy (tRNA + SMG1i + VX-770) for non-modulator nonsense mutations (W1282X & G542X).
-     - [`cf-research/landscape/alternative-conductance.md`](file:///C:/senseiewok/repos/cf-research/landscape/alternative-conductance.md) ([`T-0152`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5587)) — electrophysiological fluid flux modeling for ENaC inhibition, TMEM16A potentiation, and SLC26A9 activation.
-     - [`cf-research/landscape/variants/rare-variants-theratypes.md`](file:///C:/senseiewok/repos/cf-research/landscape/variants/rare-variants-theratypes.md) ([`T-0150`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5511)) — Cryo-EM 3D perturbation metrics and rare-variant theratyping across PDB 5UAK, 6MSM, 8EIQ, and 8EJ1.
-  3. **Governance & Grounding Actions Executed**:
-     - [`T-0146`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5355): High-priority grounding finding addressed via Step 1 safe state in `src/cf/index.html` (withdrawing unverified US registry percentages, adding 'Draft, in review' badge pending [`T-0005`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L152)).
-     - [`T-0141`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5175): Implemented `tools/pin_cftr_model.py` in `.ai` to prevent out-of-order CI merge failures.
-     - [`T-0143`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5247): Drafted `.github/PULL_REQUEST_TEMPLATE.md` in `cf-lab` mandating multi-agent review loops and provenance declarations.
-     - [`T-0148`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5431), [`T-0149`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5472), [`T-0160`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5900): Full 4-stage site showcase and Spanish localization workflow executed on worktree `nacfc-and-es-mx-2026-10-13`.
-- **Board Inventory**: 161 total tasks — 12 `in_progress` (with active worktree branches recorded), 1 `ready`, 109 `proposed`, 28 `done`, 11 `dropped`.
-- **Zero-Token-Burn Guardrail**: Idle states burn 0 LLM calls and 0 tokens. Because substantial biophysical, governance, and site deltas occurred, this full deterministic grounding audit evaluated evidence quality, worktree coordination, and curative alignment.
+- **Key Deltas & Merges Executed**:
+  1. **Control Repo (`cf-lab`)**:
+     - Merged PR #55 (`feat/antigravity-discovery-and-pr-rules`): operationalized `scheduled-site-showcase`, `scheduled-security-sentinel`, and `scheduled-chief-researcher` sidecar skills.
+     - Merged PR #56 (`feat/curative-grounding-and-pr-template`): established [`.github/PULL_REQUEST_TEMPLATE.md`](file:///C:/senseiewok/repos/cf-lab/.github/PULL_REQUEST_TEMPLATE.md) and embedded Track A biophysical grounding rules into [`cf-research-context/SKILL.md`](file:///C:/senseiewok/repos/cf-lab/.claude/skills/cf-research-context/SKILL.md).
+     - Merged PR #57 (`skills/es-mx-and-next-2026-10-13`): standardized Mexican Spanish (`es-MX`) community voice in [`lab-voice/SKILL.md`](file:///C:/senseiewok/repos/cf-lab/.claude/skills/lab-voice/SKILL.md).
+     - Merged PR #58 (`skills/inhaled-delivery-grounding`): codified inhaled aerosol delivery biophysics and LNP stealth formulation criteria.
+     - Merged PR #59 (`skills/schedule-permissions`) and PR #60 (`fix/check-staged-no-expected`): hardened automated sentinel execution and git pre-flight guards.
+  2. **Research Repo (`cf-research`)**:
+     - Merged PR #47 & PR #48 (`research/curative-biophysics-dossiers`): established biophysical dossiers for inhaled delivery, nonsense readthrough, alternative conductance, and Cryo-EM perturbation modeling ([`variant_perturbation.py`](file:///C:/senseiewok/repos/cf-research/tools/cftr-model/variant_perturbation.py)), with 8EJ1 coordinate verification.
+  3. **Site Repo (`.ai`)**:
+     - Merged PR #56 (`site/es-mx-localization`): synchronized [`cftr-research.js`](file:///C:/senseiewok/repos/cf-research/tools/cftr-model/web/cftr-research.js) with canonical package, applied Step 1 safe state on `/cf/index.html`, and localized key pathways into Mexican Spanish.
+     - Merged PR #57 (`site/showcase-curative-biophysics`): exposed rare-variant Cryo-EM theratyping presets (G542X, R334W, N1303K) on `/cf/cftr/` and refined `es-MX` phrasing with verified medical boundaries.
+     - Prepared PR #58 (`site/showcase-curative-breakthroughs`): exposed primary biophysical research breakthroughs on the CF story page (`/cf/index.html`) under `#stewardship`, updated table of contents, and expanded `es-MX` localization across `data/i18n/es-MX.json` and `src/scripts/i18n-resources.js` with mandatory medical disclaimer.
+  4. **Task Board Progression**:
+     - [`T-0148`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5431), [`T-0149`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5472), and [`T-0160`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5900) marked **`done`** by maintainer following PR #56 merge.
+     - Total tasks: 161 (10 `in_progress`, 1 `ready`, 108 `proposed`, 31 `done`, 11 `dropped`).
+  5. **Deterministic Verifications**:
+     - 48/48 `tools/sources` unit tests passed.
+     - 457/457 `tools/trial_atlas` unit tests passed (7 skipped).
+     - 36/36 `tools/claims` unit tests passed.
+     - 116/116 `tools/cftr-model` tests passed (79 skipped).
+     - 100/100 `tools/resources` tests passed.
+     - 4/4 `cf-lab` offline checks passed (`render-board`, `test-render-board`, `check-staged`, `check-lab-files`).
+     - 16 registry claims verified via [`check_registry_claims.py`](file:///C:/senseiewok/repos/cf-research/tools/trial_atlas/check_registry_claims.py).
 
 ---
 
 ## 2. Primary-evidence grounding audit
 
-All active and newly proposed board tasks were evaluated against the lab's primary grounding standards and deterministic verification tools ([`check_claims.py`](file:///C:/senseiewok/repos/cf-research/tools/claims/check_claims.py), [`check_numbers.py`](file:///C:/senseiewok/repos/cf-research/tools/sources/check_numbers.py)):
+All active and newly evaluated board tasks were verified against primary literature, clinical registries, Cryo-EM coordinates, and deterministic verification tools ([`check_claims.py`](file:///C:/senseiewok/repos/cf-research/tools/claims/check_claims.py), [`check_numbers.py`](file:///C:/senseiewok/repos/cf-research/tools/sources/check_numbers.py)):
 
 | Task ID | Domain & title | Primary source citation | Grounding verdict | CRO audit findings |
 | :--- | :--- | :--- | :--- | :--- |
-| **[`T-0146`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5355)** | CF-story page: verify US registry demographic percentages | 2024 CFFPR Annual Data Report; `cf-research` origin/main | **HIGH-PRIORITY (T2)** | **Crucial Grounding Finding**: Public site displayed 14.9% and 23.7% for non-eligible cohorts without primary claim records. Step 1 safe state applied to `src/cf/index.html` (withdrawing numbers pending [`T-0005`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L152) report download). |
-| **[`T-0147`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5393)** | Inhaled delivery biophysics (VX-522 bypass) | BEACON-CF `NCT05668741`, ReCode RCT-2100 | **PASS (T2)** | Grounded in May 2026 trial termination notice and SORT-LNP aerosol biophysics; 50–100 nm particle criteria and neutral zeta potential verified in [`2026-10-inhaled-delivery-blueprint.md`](file:///C:/senseiewok/repos/cf-research/proposals/2026-10-inhaled-delivery-blueprint.md). |
-| **[`T-0150`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5511)** | In silico 3D Cryo-EM perturbation modeling | PDB `5UAK`, `6MSM`, `8EIQ`, `8EJ1`, UniProt `P13569` | **PASS (T2)** | Anchored directly in published Cryo-EM coordinates; residue coordinate deltas ($\Delta d$) and allosteric landmark distances computed in [`rare-variants-theratypes.md`](file:///C:/senseiewok/repos/cf-research/landscape/variants/rare-variants-theratypes.md). |
-| **[`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5549)** | Nonsense mutation engine (W1282X & G542X) | RefSeq `NM_000492.4`, Prime Medicine CFF grant | **PASS (T2)** | Codon context (`UGA G` vs `UGA A`), EJC distance, UPF1/SMG1 kinetics, and tri-modal synergy detailed in [`2026-10-nonsense-readthrough-nmd.md`](file:///C:/senseiewok/repos/cf-research/proposals/2026-10-nonsense-readthrough-nmd.md). |
+| **[`T-0146`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5355)** | CF-story page: verify US registry demographic percentages | 2024 CFFPR Annual Data Report; `cf-research` origin/main | **HIGH-PRIORITY (T2)** | **Grounding Guardrail Applied**: Step 1 safe state in `src/cf/index.html` (withdrawing unverified US registry percentages, adding 'Draft, in review' badge) verified and merged in PR #56. Step 2 remains blocked on maintainer completing [`T-0005`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L152) report download. |
+| **[`T-0147`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5393)** | Inhaled delivery biophysics (VX-522 bypass) | BEACON-CF `NCT05668741`, ReCode RCT-2100 | **PASS (T2)** | Grounded in May 2026 trial termination notice and SORT-LNP aerosol biophysics; 50–100 nm particle criteria, neutral zeta potential (-5 to +5 mV), 100% $\text{m1}\Psi$ substitution, and polysarcosine stealth codified in [`cf-research-context`](file:///C:/senseiewok/repos/cf-lab/.claude/skills/cf-research-context/SKILL.md#L51) via PR #58. |
+| **[`T-0150`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5511)** | In silico 3D Cryo-EM perturbation modeling | PDB `5UAK`, `6MSM`, `8EIQ`, `8EJ1`, UniProt `P13569` | **PASS (T2)** | Anchored directly in published Cryo-EM coordinates; residue coordinate deltas ($\Delta d$) and allosteric landmark distances computed in [`rare-variants-theratypes.md`](file:///C:/senseiewok/repos/cf-research/landscape/variants/rare-variants-theratypes.md). Interactive viewer presets (G542X, R334W, N1303K) live in `.ai` via PR #56 & PR #57. |
+| **[`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5549)** | Nonsense mutation engine (W1282X & G542X) | RefSeq `NM_000492.4`, Prime Medicine CFF grant | **PASS (T2)** | Codon context (`UGA G` vs `UGA A`), EJC distance, UPF1/SMG1 kinetics, and tri-modal synergy (tRNA + SMG1i + ivacaftor reaching $\ge 10\%$ WT $\Delta I_{\text{sc}}$) detailed in [`2026-10-nonsense-readthrough-nmd.md`](file:///C:/senseiewok/repos/cf-research/proposals/2026-10-nonsense-readthrough-nmd.md). |
 | **[`T-0152`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5587)** | Alternative epithelial conductance modeling | Enterprise Therapeutics ETD001, TMEM16A | **PASS (T2)** | Grounded in transepithelial electrophysiology ($I_{\text{sc}}$ balance equations, net fluid flux, and target ASL height $\ge 7.0\ \mu\text{m}$) in [`alternative-conductance.md`](file:///C:/senseiewok/repos/cf-research/landscape/alternative-conductance.md). |
-| **[`T-0153`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5625)** | Adaptive trial frameworks & organoid (FIS) surrogates | Rectal organoid FIS swelling literature, NCT registries | **PASS (T2)** | Grounded in European theratyping correlation data; bridges organoid swelling to $FEV_1$ endpoints. |
+| **[`T-0153`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5625)** | Adaptive trial frameworks & organoid (FIS) surrogates | Rectal organoid FIS swelling literature, NCT registries | **PASS (T2)** | Grounded in European theratyping correlation data; mathematical model bridges organoid swelling to $FEV_1$ endpoints. |
 | **[`T-0154`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5665)** | Anti-resistance bacteriophage co-evolution | Clinical isolate accessions, LPS O-antigen, *pilA* | **PASS (T2)** | Grounded in microbial receptor biology and evolutionary steering trade-off mechanics for *P. aeruginosa*. |
-| **[`T-0140`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5175)** | Decide standalone clone vs sibling layout | Council findings on rejected PR 50; `sources/catalog.yaml` | **PASS (Governance)** | Provenance guardrail: enforces `cf-research` as single source of truth for `catalog.yaml`; forbids unversioned duplication across repos. |
-| **[`T-0141`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5175)** | Site: pin byte copies of CFTR data to commit | Site CI session record, PR 49/52, `tools/pin_evidence.py` | **PASS (CI Integrity)** | Protects 3D CFTR viewer and data integrity on public site against out-of-order merge crashes; `tools/pin_cftr_model.py` implemented. |
-| **[`T-0142`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5211)** | Site: run render tests where failure seen | Playwright test failure on `test_cftr_hero.py`, PR 52 | **PASS (Visual QA)** | Visual verification guardrail ensuring CFTR protein viewer and hero controls remain accessible across viewports in CI. |
-| **[`T-0143`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5247)** | PR template and body check for review loop | Multi-agent review findings (PR 50); `AGENTS.md` rules | **PASS (Coordination)** | Enforces multi-agent safety: mandates `pr-review-loop` records and copied-file provenance declarations on all PRs; `.github/PULL_REQUEST_TEMPLATE.md` drafted. |
-| **[`T-0144`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5283)** | Observe Antigravity runtime skill loading | Antigravity official documentation vs `.claude/skills/` | **PASS (Runtime QA)** | Agent runtime verification: ensures sessions operate under verified security and grounding skills rather than unverified path assumptions. |
-| **[`T-0145`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5319)** | Decide leftover git worktrees and branches | Workspace `git worktree list`, clean session record | **PASS (Hygiene)** | Worktree hygiene: prevents branch collisions and unpushed commit loss across concurrent agent worktrees. |
-| **[`T-0148`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5431)** | Spanish site localization (`/es/`) | Community language access need; clinical disclaimers | **PASS (T2)** | Active on `site/nacfc-and-es-mx-2026-10-13`; preserves medical safety boundaries, reciprocal hreflang tags, and American English voice equivalents. |
-| **[`T-0149`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5472)** | Site navigation revamp | Playwright visual audit screenshots, council review | **PASS (T2)** | Active on `site/nacfc-and-es-mx-2026-10-13`; grounded in viewport layout evidence in `cf-lab-files/scratch/screenshots/`. |
-| **[`T-0155`–`T-0161`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5703)** | Scientific sentinels & CRO | Crossref, openFDA, ClinicalTrials.gov API, live HTTP | **PASS (T2)** | Deterministic checks operating within catalog access rules and zero unbudgeted calls (`T-0155`, `T-0159`, `T-0161` active on `feat/antigravity-discovery-and-pr-rules`; `T-0160` active on `site/nacfc-and-es-mx-2026-10-13`). |
+| **[`T-0107`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L3980)** | Take conference banner down after NACFC 2026 | Site chrome generator, conference dates | **PENDING MAINTAINER** | Banner remains active in `tools/sync_chrome.py`; take-down date is strictly reserved for the maintainer per task notes. |
+| **[`T-0155`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5710)** | Autonomous discovery engine sidecars | Antigravity sidecar specs; PR #55 | **PASS (Operational)** | Merged into `cf-lab` main via PR #55. Discovery engines operational. Recommended for maintainer to mark `done`. |
+| **[`T-0159`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5869)** | Autonomous security log sentinel | Security baseline; PR #55 | **PASS (Operational)** | Merged into `cf-lab` main via PR #55. Continuous security auditing operational. Recommended for maintainer to mark `done`. |
+| **[`T-0161`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5952)** | Frugal Chief Researcher Officer grounding sentinel | Governance baseline; PR #55 | **PASS (Operational)** | Merged into `cf-lab` main via PR #55. Bi-weekly lazy delta audit operational. Recommended for maintainer to mark `done`. |
 
-### Active branch coordination audit
+### Unanchored meta-tooling & scope creep review
 
-Cross-workspace git branch tracking was verified across `cf-lab`, `cf-research`, `cf-skills`, and `.ai`:
-- **`site/nacfc-and-es-mx-2026-10-13`**: Tracks [`T-0148`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5431) (Spanish `/es/`), [`T-0149`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5472) (Navigation), and [`T-0160`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5900) (Site showcase engine). All 4 stages complete; PR prepared.
-- **`feat/antigravity-discovery-and-pr-rules`**: Tracks [`T-0155`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5703) (Discovery engines), [`T-0159`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5861) (Security log sentinel), and [`T-0161`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5942) (CRO grounding sentinel).
-- **Collision check**: Zero cross-branch collision; clean separation maintained between site frontend work and control-repo tooling.
+The CRO sentinel audited earlier proposed tasks and flagged recursive meta-tooling tasks that evaluate AI models rather than advancing primary CFTR biology or patient-facing tools:
+- **Flagged Tasks**: [`T-0019`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0029`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0030`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0031`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0032`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0035`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0036`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0046`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0090`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0103`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0113`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0126`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json).
+- **Audit Decision**: These tasks examine model benchmarks, prompt probes, and judge drift. While useful during initial tooling evaluation, they do not produce primary biophysical evidence or patient-facing translation. They remain deprioritized on the board to enforce zero token burn on non-essential agent tooling.
 
 ---
 
@@ -65,27 +69,27 @@ The lab's queued and executing portfolio demonstrates rigorous alignment with it
 ```mermaid
 flowchart TD
     subgraph TrackA["Track A: Biophysical Science & Cure Discovery"]
-        A1["T-0147: Inhaled Delivery Biophysics (Overcoming VX-522)"]
-        A2["T-0150: 3D Cryo-EM Perturbation Modeling (PDB 5UAK/6MSM/8EIQ)"]
+        A1["T-0147: Inhaled Aerosol LNP Biophysics (Overcoming VX-522)"]
+        A2["T-0150: 3D Cryo-EM Perturbation Modeling (PDB 5UAK/6MSM/8EIQ/8EJ1)"]
         A3["T-0151: The Remaining 10% PTC Readthrough & NMD Suppression"]
-        A4["T-0152: Alternative Conductance (ENaC / TMEM16A Rehydration)"]
+        A4["T-0152: Alternative Epithelial Conductance (ENaC / TMEM16A Rehydration)"]
         A5["T-0154: Phage-Antibiotic Evolutionary Trade-offs (P. aeruginosa)"]
     end
 
     subgraph TrackB["Track B: Public Translation & Care-Team Engagement"]
         B1["T-0130 / T-0157: Clinical Trial Endpoint Atlas"]
-        B2["T-0146: Demographic & Registry Grounding Veracity"]
-        B3["T-0148: High-Fidelity Spanish Localization (/es/)"]
-        B4["T-0149: Responsive Header & Discovery Rail"]
+        B2["T-0146: Demographic & Registry Veracity (Withdrawing Unverified Stats)"]
+        B3["T-0148: High-Fidelity Mexican Spanish Localization (/es/) [DONE]"]
+        B4["T-0149: Responsive Header & Discovery Rail [DONE]"]
         B5["T-0153: Organoid (FIS) Surrogate Endpoint Calculator"]
-        B6["T-0160: Autonomous Site Builder & Research Showcase"]
+        B6["T-0160: Autonomous Site Builder & Research Showcase [DONE]"]
     end
 
     subgraph Sentinels["Defensive Scientific & Systems Sentinels"]
         S1["T-0156: Retraction Watch & openFDA Monitor"]
         S2["T-0158: Live Site Health & Dignity Sentinel"]
         S3["T-0159: Autonomous Security Log Sentinel"]
-        S4["T-0161: Frugal Chief Researcher Officer Sentinel"]
+        S4["T-0161: Frugal Chief Researcher Officer Grounding Sentinel"]
     end
 
     TrackA --> PublicImpact["Accelerating Curative Science for 100% of People with CF"]
@@ -93,8 +97,8 @@ flowchart TD
     Sentinels --> PublicImpact
 ```
 
-- **Track A (Biophysical Science & Cure Discovery)**: Directly attacks the foundational biological bottlenecks preventing a universal cure: delivery tolerability through aerosolized LNPs ([`T-0147`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5393)), rescue of non-modulator nonsense mutations W1282X and G542X ([`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5549)), Cryo-EM misfolding perturbation modeling ([`T-0150`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5511)), mutation-agnostic airway surface liquid rehydration via alternative conductance ([`T-0152`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5587)), and refractory *P. aeruginosa* phage steering ([`T-0154`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5665)).
-- **Track B (Public Translation & Care-Team Engagement)**: Bridges primary biophysics to affected families and clinicians through the Trial Endpoint Atlas ([`T-0130`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L4801), [`T-0157`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5783)), verified Spanish translation ([`T-0148`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5431)), and unyielding factual rigor regarding registry statistics for minority cohorts ([`T-0146`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5355)).
+- **Track A (Biophysical Science & Cure Discovery)**: Directly attacks the core biological bottlenecks preventing a universal cure. Key efforts target delivery tolerability through aerosolized LNPs ([`T-0147`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5393)), rescue of nonsense mutations W1282X and G542X ([`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5549)), Cryo-EM misfolding perturbation modeling ([`T-0150`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5511)), mutation-agnostic airway surface liquid rehydration via alternative conductance ([`T-0152`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5587)), and refractory *P. aeruginosa* phage steering ([`T-0154`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5665)).
+- **Track B (Public Translation & Care-Team Engagement)**: Bridges primary biophysics to affected families and clinicians through the Trial Endpoint Atlas ([`T-0130`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L4801), [`T-0157`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5783)), verified Spanish translation ([`T-0148`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5431)), and unyielding factual rigor regarding registry statistics ([`T-0146`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5355)).
 
 ---
 
@@ -103,14 +107,14 @@ flowchart TD
 Per lab governance, autonomous agents propose; **only the human maintainer approves tasks to `ready` or authorizes worktree merges**.
 
 1. **Immediate Actions for Human Maintainer**:
-   - Complete [`T-0005`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L152) by manually downloading the 2024 CFFPR report into `research/sources/downloads/` so Step 2 of [`T-0146`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5355) can extract verified claim records.
-   - Review and merge PR for worktree `site/nacfc-and-es-mx-2026-10-13` ([`T-0148`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5431), [`T-0149`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5472), [`T-0160`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5900)).
-   - Review and merge PR for branch `feat/antigravity-discovery-and-pr-rules` ([`T-0155`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5703), [`T-0159`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5861), [`T-0161`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5942)).
+   - Review and merge `.ai` PR #58 (`feat(site): expose curative biophysics breakthroughs and expand es-MX localization`) in worktree `C:/senseiewok/repos/.worktrees/.ai/showcase-curative-breakthroughs`.
+   - Mark [`T-0155`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5710), [`T-0159`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5869), and [`T-0161`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5952) as `done` (all merged into `cf-lab` main via PR #55).
+   - Review and decide take-down date for [`T-0107`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L3980) (NACFC 2026 conference banner in `tools/sync_chrome.py`).
+   - Download the 2024 CFFPR annual report into `research/sources/downloads/` ([`T-0005`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L152)) to unlock Step 2 of [`T-0146`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5355).
 2. **Recommended for `ready` promotion**:
-   - [`T-0147`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5393) (Inhaled delivery biophysics) — specification complete in [`2026-10-inhaled-delivery-blueprint.md`](file:///C:/senseiewok/repos/cf-research/proposals/2026-10-inhaled-delivery-blueprint.md).
-   - [`T-0150`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5511) (Cryo-EM perturbation modeling) — dossier complete in [`rare-variants-theratypes.md`](file:///C:/senseiewok/repos/cf-research/landscape/variants/rare-variants-theratypes.md).
-   - [`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5549) (Nonsense mutation engine) — dossier complete in [`2026-10-nonsense-readthrough-nmd.md`](file:///C:/senseiewok/repos/cf-research/proposals/2026-10-nonsense-readthrough-nmd.md).
-   - [`T-0152`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5587) (Alternative conductance) — dossier complete in [`alternative-conductance.md`](file:///C:/senseiewok/repos/cf-research/landscape/alternative-conductance.md).
-   - [`T-0141`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5175) & [`T-0143`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5247) (CI data pin lock and PR review template) — essential multi-agent coordination guardrails.
+   - [`T-0147`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5393) (Inhaled delivery biophysics) — specification complete in [`2026-10-inhaled-delivery-blueprint.md`](file:///C:/senseiewok/repos/cf-research/proposals/2026-10-inhaled-delivery-blueprint.md); grounding rules merged in PR #58.
+   - [`T-0150`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5511) (Cryo-EM perturbation modeling) — dossier complete in [`rare-variants-theratypes.md`](file:///C:/senseiewok/repos/cf-research/landscape/variants/rare-variants-theratypes.md); viewer presets merged in PR #56 and PR #57.
+   - [`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5549) (Nonsense mutation engine) — dossier complete in [`2026-10-nonsense-readthrough-nmd.md`](file:///C:/senseiewok/repos/cf-research/proposals/2026-10-nonsense-readthrough-nmd.md); merged in PR #47 & PR #48.
+   - [`T-0152`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5587) (Alternative conductance) — dossier complete in [`alternative-conductance.md`](file:///C:/senseiewok/repos/cf-research/landscape/alternative-conductance.md); merged in PR #47 & PR #48.
 
-*Scope record: All 161 tasks in `tasks/board.json` evaluated; active delta verified across `tasks/board.json`, `cf-research/proposals/`, and `cf-research/landscape/`. Check date: 2026-10-13.*
+*Scope record: All 161 tasks in `tasks/board.json` evaluated; active delta verified across `tasks/board.json`, `cf-research/proposals/`, and `cf-research/landscape/`. Check date: 2026-10-13 18:15 PT.*
