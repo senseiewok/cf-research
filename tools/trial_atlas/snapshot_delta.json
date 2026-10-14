@@ -1,0 +1,1453 @@
+{
+  "timestamp": "2026-10-14T05:34:06.296547+00:00",
+  "date": "2026-10-14",
+  "disclaimer": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.",
+  "sentinel_id": "scheduled-trial-surveillance",
+  "review_tier": "elevated",
+  "verdict": "UPDATES_DETECTED",
+  "summary": {
+    "total_studies_retrieved": 1052,
+    "previous_baseline_count": 0,
+    "new_trials_count": 1052,
+    "status_transitions_count": 0,
+    "terminated_trials_count": 115,
+    "suspended_trials_count": 4
+  },
+  "status_distribution": {
+    "COMPLETED": 836,
+    "TERMINATED": 115,
+    "RECRUITING": 73,
+    "ACTIVE_NOT_RECRUITING": 24,
+    "SUSPENDED": 4
+  },
+  "modalities_distribution": {
+    "Mucolytic / Anti-Infective": 124,
+    "CFTR Modulator": 129,
+    "AAV / Gene Therapy": 11,
+    "ENaC Inhibitor": 11,
+    "mRNA": 8,
+    "Bacteriophage": 10,
+    "TMEM16A Potentiator": 1
+  },
+  "terminated_trials": [
+    {
+      "nct_id": "NCT02858843",
+      "title": "The Effect of Combination Lumacaftor and Ivacaftor on Markers of Hyperglycemia",
+      "lead_sponsor": "Massachusetts General Hospital",
+      "why_stopped": "We were unable to enroll eligible subjects for the study.",
+      "phases": [
+        "NA"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT04743206",
+      "title": "Airway Clearance for Pediatric and Adult Cystic Fibrosis Patients Using a Portable Intra-Pulmonary Percussion Device",
+      "lead_sponsor": "University of Florida",
+      "why_stopped": "recruitment difficulty due to COVID recruitment difficulty due to covid",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00418470",
+      "title": "Prolonging the Duration of Peripheral Venous Catheters in Cystic Fibrosis People",
+      "lead_sponsor": "University of Florence",
+      "why_stopped": "impossibility to find volunteers",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00846781",
+      "title": "Study 08-114 Open-label Extension of Study 08-110 - A Multi-Center Study of Denufosol Tetrasodium Inhalation Solution in Patients With Cystic Fibrosis Lung Disease (P08642)",
+      "lead_sponsor": "Merck Sharp & Dohme LLC",
+      "why_stopped": null,
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00996424",
+      "title": "The Effect of Inhaled N-Acetylcysteine Compared to Normal Saline on Sputum Rheology and Lung Function",
+      "lead_sponsor": "University Hospital, Ghent",
+      "why_stopped": "Insufficient recruitment.",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01810536",
+      "title": "High Flow Nasal Oxygen for Children With Cystic Fibrosis Presenting With Respiratory Failure - a Randomized Controlled Study",
+      "lead_sponsor": "University of Sao Paulo",
+      "why_stopped": "It was impossible for us to include patients",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00839644",
+      "title": "Airway Secretion Clearance in Cystic Fibrosis",
+      "lead_sponsor": "University of Colorado, Denver",
+      "why_stopped": "High dropout, problems recruiting, and smaller than expected decline in FEV1.",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02015663",
+      "title": "Tobramycin Inhalation Powder (TIP) Administered Once Daily Continuously Versus TIP Administered BID in 28 Day on / 28 Day Off Cycles",
+      "lead_sponsor": "Novartis Pharmaceuticals",
+      "why_stopped": null,
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT03309358",
+      "title": "A Study of the Safety and Tolerability of Inhaled SNSP113 in Healthy Subjects and Subjects With Stable Cystic Fibrosis",
+      "lead_sponsor": "Synspira, Inc.",
+      "why_stopped": "Successful completion of Part A. Company decision to end early.",
+      "phases": [
+        "PHASE1"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01257464",
+      "title": "Sitagliptin in Cystic Fibrosis-Related Diabetes",
+      "lead_sponsor": "University of British Columbia",
+      "why_stopped": "Lack of recruitment",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02759562",
+      "title": "Effect of Andecaliximab on FEV1 in Adults With Cystic Fibrosis",
+      "lead_sponsor": "Gilead Sciences",
+      "why_stopped": "Discontinuation of development for this indication",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02730793",
+      "title": "Aztreonam Aerosol to Treat Cystic Fibrosis Nasal Disease",
+      "lead_sponsor": "Virginia Commonwealth University",
+      "why_stopped": "terminated due to an inability to recruit study subjects",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03066453",
+      "title": "Evaluation of Short Antibiotic Combination Courses Followed by Aerosols in Cystic Fibrosis",
+      "lead_sponsor": "University Hospital, Lille",
+      "why_stopped": "new treatment that changes the management of the disease",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT03206788",
+      "title": "Losartan and Inflammation in Cystic Fibrosis",
+      "lead_sponsor": "University of Miami",
+      "why_stopped": "due to slow enrollment and approval of the Trikafta for CF patients",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04458129",
+      "title": "Polyethylene Glycol and Intestinal Inflammation in Cystic Fibrosis",
+      "lead_sponsor": "University Hospital, Bordeaux",
+      "why_stopped": "Target number of inclusion not reached",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT05515250",
+      "title": "Neuromodulation for Children With Cystic Fibrosis Experiencing Chronic Abdominal Pain",
+      "lead_sponsor": "St. Louis University",
+      "why_stopped": "inadequate enrollment. Found only one participant over 1 year as opposed to anticipated over 15 patients. Inadequate research funding and staff support also added to this decision.",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02190604",
+      "title": "Safety, Tolerability, Pharmacokinetics, and Preliminary Pharmacodynamics of QBW251 in Healthy Subjects and Cystic Fibrosis Patients",
+      "lead_sponsor": "Novartis Pharmaceuticals",
+      "why_stopped": null,
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00425165",
+      "title": "Study of Denufosol Inhalation Solution in Patients With Mild to Moderate Cystic Fibrosis Lung Disease",
+      "lead_sponsor": "Merck Sharp & Dohme LLC",
+      "why_stopped": null,
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02823470",
+      "title": "A Pilot Study to Evaluate the Use of Smart Adherence Technology to Measure Lumacaftor/Ivacaftor Adherence in CF Subjects Homozygous for the F508del CFTR Mutation",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "why_stopped": "Study terminated early due to slow recruitment of patients.",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT01241942",
+      "title": "Phase 2 Study of Ex-vivo Perfusion and Ventilation of Lungs to Assess Transplant Suitability",
+      "lead_sponsor": "University of North Carolina, Chapel Hill",
+      "why_stopped": "Funding exhausted.",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02170025",
+      "title": "Early Signs of Efficacy Study With Riociguat in Adult Homozygous Delta F508 Cystic Fibrosis Patients",
+      "lead_sponsor": "Bayer",
+      "why_stopped": "Study was terminated after completion of Part 1, because Part 2 was no longer appropriate.",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00376428",
+      "title": "Interest of Gentamicin-induced Readthrough in Cystic Fibrosis Patients",
+      "lead_sponsor": "Assistance Publique - H\u00f4pitaux de Paris",
+      "why_stopped": null,
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00208078",
+      "title": "Effect of Non-Invasive Ventilation in Cystic Fibrosis Patient With Chronic Respiratory Failure.",
+      "lead_sponsor": "Cochin Hospital",
+      "why_stopped": "Not enough patient recruited",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00744250",
+      "title": "Intraduodenal Aspiration Study to Assess the Bioavailability of Oral Pancrecarb\u00ae Compared to Placebo Control",
+      "lead_sponsor": "Digestive Care, Inc.",
+      "why_stopped": "No longer required study by FDA for NDA approval.",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04059094",
+      "title": "A 4-week Study to Test Different Doses of BI 1265162 in Adolescents and Adults With Cystic Fibrosis Using the Respimat\u00ae Inhaler - BALANCE - CF\u21221",
+      "lead_sponsor": "Boehringer Ingelheim",
+      "why_stopped": "Not due to safety reasons",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": [
+        "ENaC Inhibitor"
+      ]
+    },
+    {
+      "nct_id": "NCT03304028",
+      "title": "MUCOviscidose EXacerbation Outils Connect\u00e9s Education Th\u00e9rapeutique",
+      "lead_sponsor": "Institut National de la Sant\u00e9 Et de la Recherche M\u00e9dicale, France",
+      "why_stopped": "recruitment and search completed",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03956589",
+      "title": "Functional Respiratory Imaging and Orkambi in CF",
+      "lead_sponsor": "University Hospital, Antwerp",
+      "why_stopped": "Patient inclusion has stopped after interim analysis.",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT03699982",
+      "title": "Resting Energy Expenditure in Patients With Cystic Fibrosis: A Pilot Study",
+      "lead_sponsor": "CAMC Health System",
+      "why_stopped": "PI left study institute.",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02888730",
+      "title": "Tobramycin Delivered by Nebulized Sonic Aerosol for Chronic Rhinosinusitis Treatment of Cystic Fibrosis Patients",
+      "lead_sponsor": "Virginie ESCABASSE",
+      "why_stopped": "No suffisant recruitment",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT02649751",
+      "title": "Evaluation of (R)-Roscovitine Safety and Effects in Subjects With Cystic Fibrosis, Homozygous for the F508del-CFTR Mutation",
+      "lead_sponsor": "University Hospital, Brest",
+      "why_stopped": "The centers have no longer patients. In September 2018, set up of a competitive international study.",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03357562",
+      "title": "MR Imaging of Lung in the Follow-up Assessment of Cystic Fibrosis",
+      "lead_sponsor": "University Hospital, Bordeaux",
+      "why_stopped": "Target number of inclusion not reached",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03633526",
+      "title": "Evaluation of VX-659/TEZ/IVA in Cystic Fibrosis Subjects 6 Through 11 Years of Age",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "why_stopped": "Study discontinued after Part A due to Sponsor's discretion.",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01349192",
+      "title": "Early Methicillin-resistant Staphylococcus Aureus (MRSA) Therapy in Cystic Fibrosis (CF)",
+      "lead_sponsor": "University of North Carolina, Chapel Hill",
+      "why_stopped": "Interim review showed a statistically significant treatment effect and the DMC recommended that the study be stopped with ongoing follow-up of enrolled subjects",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02498535",
+      "title": "Efficacy and Safety of Inhaled Nitric Oxide (NO) in Cystic Fibrosis (CF) Patients",
+      "lead_sponsor": "Novoteris, LLC",
+      "why_stopped": "Terminated for the safety of cystic fibrosis clinical trial subjects due to Covid-19.",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03870841",
+      "title": "The Effect of PC945 on Aspergillus Fumigatus Lung Infection in Patients With Cystic Fibrosis",
+      "lead_sponsor": "Pulmocide Ltd",
+      "why_stopped": "The study is being terminated early as a result of the coronavirus (COVID-19) outbreak.",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04060329",
+      "title": "Measuring and Improving Coproduction Using coopeRATE",
+      "lead_sponsor": "Dartmouth-Hitchcock Medical Center",
+      "why_stopped": "Reasons associated with COVID-19 pandemic led to cancellation of Phase 2",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00434278",
+      "title": "A Trial of Pulmozyme Withdrawal on Exercise Tolerance in Cystic Fibrosis Subjects With Severe Lung Disease (TOPIC)",
+      "lead_sponsor": "Genentech, Inc.",
+      "why_stopped": "This study was terminated for administrative reasons. There were no safety concerns.",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT02144246",
+      "title": "Contraceptive Hormones and Women With Cystic Fibrosis",
+      "lead_sponsor": "University of Pennsylvania",
+      "why_stopped": null,
+      "phases": [
+        "PHASE1"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01837355",
+      "title": "Modulation of Intestinal and Pulmonary Inflammation by Lactobacillus Diet Supplementation in Pediatric Cystic Fibrosis",
+      "lead_sponsor": "Cantonal Hospital of St. Gallen",
+      "why_stopped": null,
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02518672",
+      "title": "Pro-resolving Effect of MAG-DHA in Cystic Fibrosis (PREMDIC)",
+      "lead_sponsor": "SCF Pharma",
+      "why_stopped": null,
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT05100823",
+      "title": "Validation of Therapeutic Efficacy Targeting the Splicing Variants in Cystic Fibrosis and CFTR Pathologies",
+      "lead_sponsor": "University Hospital, Montpellier",
+      "why_stopped": "Enrolment period completed and sufficient number of enrolments to achieve study objectives",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02107859",
+      "title": "Study of Ataluren (PTC124) in Cystic Fibrosis",
+      "lead_sponsor": "PTC Therapeutics",
+      "why_stopped": "Based on the results of study PTC124-GD-021-CF (NCT02139306), clinical development of ataluren in cystic fibrosis was discontinued and this study was closed.",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04656275",
+      "title": "A Study in Patients With Non-cystic Fibrosis Bronchiectasis to Test How Well Different Doses of BI 1323495 Are Tolerated and How BI 1323495 Affects Biomarkers of Inflammation",
+      "lead_sponsor": "Boehringer Ingelheim",
+      "why_stopped": "Company decision",
+      "phases": [
+        "PHASE1"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04017312",
+      "title": "A Pilot Study to Evaluate the Use of the Vest\u00ae System for Treatment of Bronchiectasis Patients in the Home Setting",
+      "lead_sponsor": "Hill-Rom",
+      "why_stopped": "Data",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02742519",
+      "title": "A Study to Evaluate Efficacy and Safety of Ivacaftor in Subjects With Cystic Fibrosis Aged 3 Through 5 Years Who Have a Specified CFTR Gating Mutation",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "why_stopped": "Low enrollment.",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT03624101",
+      "title": "Novel Therapeutic Approaches for Treatment of CF Patients With W1282X Premature Termination Codon Mutations",
+      "lead_sponsor": "University of Alabama at Birmingham",
+      "why_stopped": "summary results revealed ineffective intervention and the trial was terminated prematurely. No formal statistical analysis was performed",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT05267418",
+      "title": "Effects of Automated Oxygen Titration Alone or With High Flow Nasal Therapy on Dyspnea and Exercise Tolerance",
+      "lead_sponsor": "Laval University",
+      "why_stopped": "COVID19 pandemia",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01885650",
+      "title": "The Addition of Non-Invasive Ventilation To Airway Clearance Techniques In Adults With Cystic Fibrosis",
+      "lead_sponsor": "Royal Brompton & Harefield NHS Foundation Trust",
+      "why_stopped": "Based upon results of interim data analysis",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00680316",
+      "title": "A Study of Pulmozyme\u00ae (Dornase Alpha) in 3- to 5-Year-Old Patients With Cystic Fibrosis",
+      "lead_sponsor": "Genentech, Inc.",
+      "why_stopped": "Most patients were unable to perform the test being used to measure lung function, thus it became clear the study would not yield clinically meaningful data",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT01329172",
+      "title": "Nasal Mucin Oral Supplementation Treatment Respiratory Inflammation Using PUFA in Cystic Fibrosis (CF) Patients",
+      "lead_sponsor": "University Hospital, Lille",
+      "why_stopped": null,
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01572194",
+      "title": "Predictive Value of PIIINP Urinary for the Development of Chronic Renal Failure in Patients With Cystic Fibrosis After Lung Transplantation (MUCO-IRC)",
+      "lead_sponsor": "Nantes University Hospital",
+      "why_stopped": "no more recruitment in the centers",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01694069",
+      "title": "Continuous Infusion Piperacillin-tazobactam for the Treatment of Cystic Fibrosis",
+      "lead_sponsor": "West Virginia University",
+      "why_stopped": "Recruitment was not sufficient to complete the study",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03925194",
+      "title": "A Study to Evaluate Safety and Efficacy of Subcutaneous Administration of Anakinra in Patients With CF",
+      "lead_sponsor": "Heidelberg University",
+      "why_stopped": "Funding issues",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00391703",
+      "title": "Assessment of Quadriceps Muscle Electrostimulation Used in Patients Suffering From Cystic Fibrosis",
+      "lead_sponsor": "University Hospital, Grenoble",
+      "why_stopped": "enrolment difficulties",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02456103",
+      "title": "Extension Study of Ataluren in Participants With Nonsense Mutation Cystic Fibrosis",
+      "lead_sponsor": "PTC Therapeutics",
+      "why_stopped": "Cystic Fibrosis (CF) data from the double-blind CF Study PTC124-GD-021-CF did not meet endpoints.",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01586728",
+      "title": "Oxygen Therapy in Cystic Fibrosis",
+      "lead_sponsor": "Assistance Publique - H\u00f4pitaux de Paris",
+      "why_stopped": "lack of inclusion in the study",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00967798",
+      "title": "Prevention of Cystic Fibrosis Diabetes",
+      "lead_sponsor": "Emory University",
+      "why_stopped": "Could not achieve target enrollment",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02950116",
+      "title": "Lung Clearance Index (LCI) in Pediatric Patients With Obstructive Lung Disease",
+      "lead_sponsor": "Universitair Ziekenhuis Brussel",
+      "why_stopped": "Availabe time for inclusion ended (master thesis)",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00639626",
+      "title": "Use of Levemir\u00ae Improves Metabolic and Clinical Status in Cystic Fibrosis-related Diabetes (CFRD)",
+      "lead_sponsor": "Nationwide Children's Hospital",
+      "why_stopped": "PI left the institution",
+      "phases": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04375514",
+      "title": "Study of ARO-ENaC in Healthy Volunteers and in Patients With Cystic Fibrosis",
+      "lead_sponsor": "Arrowhead Pharmaceuticals",
+      "why_stopped": "Business decision",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "modalities": [
+        "ENaC Inhibitor"
+      ]
+    },
+    {
+      "nct_id": "NCT02061852",
+      "title": "Evaluation of the Safety of the Medical Device Simeox\u00ae",
+      "lead_sponsor": "Physio-Assist",
+      "why_stopped": null,
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02096315",
+      "title": "Safety, Efficacy and PK/PD of POL7080 in Patients With Exacerbation of Non-cystic Fibrosis Bronchiectasis.",
+      "lead_sponsor": "Polyphor Ltd.",
+      "why_stopped": null,
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01793649",
+      "title": "A Phase 1 Study to Characterize the Effect of GS-5737 Enhancement of Mucociliary Clearance (MCC) in Healthy Subjects",
+      "lead_sponsor": "Gilead Sciences",
+      "why_stopped": null,
+      "phases": [
+        "PHASE1"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT05101915",
+      "title": "Study of a Nebulised Nitric Oxide Generating Solution in Patients With Mycobacterium Abscessus",
+      "lead_sponsor": "Papworth Hospital NHS Foundation Trust",
+      "why_stopped": "TSC recommended early termination due to lack of futility of the trial.",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02323100",
+      "title": "Glycerol Phenylbutyrate Corrector Therapy For CF (Cystic Fibrosis)",
+      "lead_sponsor": "National Jewish Health",
+      "why_stopped": "funding ended",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT00537602",
+      "title": "Miglustat / OGT 918 in the Treatment of Cystic Fibrosis",
+      "lead_sponsor": "Actelion",
+      "why_stopped": "Methodology applied did not meet all criteria required per guidelines",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01201434",
+      "title": "Effect of Probiotics on Sputum Inflammation and Pulmonary Infections in Patients With Cystic Fibrosis",
+      "lead_sponsor": "Sheba Medical Center",
+      "why_stopped": "Severe allergic reaction in one patient",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01923753",
+      "title": "A Short-term Comparative Study of Aerosure for Airway Clearance in Patients With Cystic Fibrosis",
+      "lead_sponsor": "Actegy Ltd.",
+      "why_stopped": "Unable to recruit sufficient patients within reasonable timeframe",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00953706",
+      "title": "Study of Ivacaftor in Cystic Fibrosis Subjects Aged 12 Years and Older Homozygous for the F508del-CFTR Mutation",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "why_stopped": "Following review of results obtained from a pre-specified 6-month analysis of Part B data the study was terminated on the basis of futility.",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT02598999",
+      "title": "Dose Escalation Study of ALX-009 in Healthy Men and Cystic Fibrosis (CF) and Non-CF Bronchiectasis Patients",
+      "lead_sponsor": "Alaxia SAS",
+      "why_stopped": "Financial issues",
+      "phases": [
+        "PHASE1"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03447262",
+      "title": "A Study Evaluating the Long Term Safety and Efficacy of VX-659 Combination Therapy",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "why_stopped": "At Sponsor's Discretion",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00125346",
+      "title": "Tobramycin Inhalation Powder (TIP) in Cystic Fibrosis Subjects",
+      "lead_sponsor": "Novartis",
+      "why_stopped": "per Data Monitoring Committee recommendation",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT05561764",
+      "title": "Imipenem/Cilastatin/Relebactam Pharmacokinetics, Safety, and Outcomes in Adults and Adolescents With Cystic Fibrosis",
+      "lead_sponsor": "Hartford Hospital",
+      "why_stopped": "Difficulty enrolling",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02248922",
+      "title": "Evaluation of Lung Clearance Index in Cystic Fibrosis (CF) Patients, Infected With P.Aeruginosa",
+      "lead_sponsor": "Novartis Pharmaceuticals",
+      "why_stopped": "Reason for termination was challenge with enrollment and recruitment. A significant decrease in the eligible patient population was main driver.",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT04853368",
+      "title": "Study to Evaluate Adverse Events and Change in Disease Activity With Oral Capsules of Galicaftor/Navocaftor/ABBV-119 or Galicaftor/Navocaftor/ABBV-576 Combination Therapies in Adult Participants With Cystic Fibrosis",
+      "lead_sponsor": "AbbVie",
+      "why_stopped": "Strategic considerations",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02324868",
+      "title": "Impact of Availability of Showerpatch for Patients With Intravenous Catheters",
+      "lead_sponsor": "Universitaire Ziekenhuizen KU Leuven",
+      "why_stopped": "logistic problems",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04381429",
+      "title": "Effect of Postprandial Insulin Administration of Faster-acting Insulin Analogue Versus Pre-prandial Administration of Acting-insulin Analogue in Cystic Fibrosis Related Diabetes",
+      "lead_sponsor": "University Hospital, Strasbourg, France",
+      "why_stopped": "Difficulties of inclusion in this rare pathology",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02496780",
+      "title": "The Impact of Insulin Therapy on Protein Turnover in Pre-Diabetic Cystic Fibrosis Patients",
+      "lead_sponsor": "University of Minnesota",
+      "why_stopped": null,
+      "phases": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00787917",
+      "title": "An Exploratory Study to Assess Multiple Doses of Omalizumab in Patients With Cystic Fibrosis Complicated by Acute Bronchopulmonary Aspergillosis (ABPA)",
+      "lead_sponsor": "Novartis Pharmaceuticals",
+      "why_stopped": null,
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00333385",
+      "title": "Continuous Versus Short Infusions of Ceftazidime in Cystic Fibrosis",
+      "lead_sponsor": "Association Nationale pour les Traitements A Domicile, les Innovations et la Recherche",
+      "why_stopped": null,
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00590538",
+      "title": "Phenylbutyrate/Genistein Duotherapy in Delta F508-Heterozygotes (for Cystic Fibrosis)",
+      "lead_sponsor": "Children's Hospital of Philadelphia",
+      "why_stopped": "12/15/2008 Voluntarily placed on inactive status-requested by the PI",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00073463",
+      "title": "Safety and Efficacy of Recombinant Adeno-Associated Virus Containing the CFTR Gene in the Treatment of Cystic Fibrosis",
+      "lead_sponsor": "Targeted Genetics Corporation",
+      "why_stopped": null,
+      "phases": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "modalities": [
+        "AAV / Gene Therapy"
+      ]
+    },
+    {
+      "nct_id": "NCT01158937",
+      "title": "Pharmacokinetic Study of Extended Infusion Meropenem in Adult Cystic Fibrosis Patients",
+      "lead_sponsor": "Unity Health Toronto",
+      "why_stopped": "Inadequate enrolment and lack of resources",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04922255",
+      "title": "Cystic Fibrosis and Urinary Incontinence",
+      "lead_sponsor": "Megan Bradley",
+      "why_stopped": "We exhausted all ability to recruit from our study sites",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT05006573",
+      "title": "Efficacy and Safety of Benralizumab in Patients With Non-cystic Fibrosis Bronchiectasis",
+      "lead_sponsor": "AstraZeneca",
+      "why_stopped": "Due to the decision to stop recruitment early, enrolment into the MAHALE trial was terminated in August 2022; 139 patients were screened and 100 randomised to IP.",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00803179",
+      "title": "Growth Hormone Therapy for Wasting in Cystic Fibrosis",
+      "lead_sponsor": "University of Massachusetts, Worcester",
+      "why_stopped": "Poor enrollment, patients were lost to follow up",
+      "phases": [
+        "PHASE1"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02955888",
+      "title": "Study of Safety, Tolerability & Efficacy in Cystic Fibrosis Patients With Abnormal Glucose Tolerance",
+      "lead_sponsor": "Liminal BioSciences Ltd.",
+      "why_stopped": "Unsatisfactory rate of recruitment",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00846573",
+      "title": "Hyperpolarized Noble Gas MR Imaging for Pulmonary Disorders",
+      "lead_sponsor": "University of Massachusetts, Worcester",
+      "why_stopped": "The study was halted prematurely as the PI was no longer an employee of UMass Medical School.",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03597347",
+      "title": "Trial of Inhaled Molgramostim in Cystic Fibrosis Subjects With Nontuberculous Mycobacterial Infection",
+      "lead_sponsor": "Savara Inc.",
+      "why_stopped": "Recruitment for trial stopped early due to limitations from COVID-19, additionally changes in the standard of care for CF patients during the study period resulted in confounding of the primary endpoint.",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03497117",
+      "title": "19F MRI of Ventilation in Subjects With Cystic Fibrosis Undergoing Treatment for Pulmonary Exacerbation",
+      "lead_sponsor": "University of North Carolina, Chapel Hill",
+      "why_stopped": "Enrollment barriers made study completion impossible",
+      "phases": [
+        "EARLY_PHASE1"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02748798",
+      "title": "Developing Optimal Parameters for Hyperpolarized Noble Gas and Inert Fluorinated Gas MRI of Lung Disorders",
+      "lead_sponsor": "Thunder Bay Regional Health Research Institute",
+      "why_stopped": "Funding is no longer available due to the failure to enroll the target number of participants within the required timeframe.",
+      "phases": [
+        "EARLY_PHASE1"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02971839",
+      "title": "Study to Evaluate the Safety and Efficacy of CTP-656 in Patients With Cystic Fibrosis With CFTR Gating Mutations",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "why_stopped": "Decision by Sponsor.",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03734744",
+      "title": "PK/PD of Vitamin D3 in Adults With CF",
+      "lead_sponsor": "University of Southern California",
+      "why_stopped": "Clinical research currently on hold",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02694393",
+      "title": "Inhaled Sodium Nitrite as an Antimicrobial for Cystic Fibrosis",
+      "lead_sponsor": "Schmidhofer, Mark, MD",
+      "why_stopped": "Protocol closed due to difficulty recruiting subjects and then expiration of investigational product and lack of a manufacturer.",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03237767",
+      "title": "A CFit Study - Acute Exercise",
+      "lead_sponsor": "University of Portsmouth",
+      "why_stopped": "Poor recruitment",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03939065",
+      "title": "Sensor Augmented Pump (SAP) Therapy for Inpatient CFRD Management",
+      "lead_sponsor": "University of Colorado, Denver",
+      "why_stopped": "Decreased admissions secondary to wider introduction of HEMTs along with pandemic impacted ability to enroll",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02010411",
+      "title": "Alpha1 Antitrypsin Aerosol Therapy in Cystic Fibrosis",
+      "lead_sponsor": "Universit\u00e9 de Sherbrooke",
+      "why_stopped": "Technical problems with measure of CFU's. Outcomes published: PMID:16986483",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01417481",
+      "title": "Effect of Glycine in Cystic Fibrosis",
+      "lead_sponsor": "Instituto Nacional de Enfermedades Respiratorias",
+      "why_stopped": "Some of the researchers finished their participation in the study.",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03822455",
+      "title": "A Phase 2b Randomised, Placebo Controlled Study of OligoG in Patients with Cystic Fibrosis",
+      "lead_sponsor": "AlgiPharma AS",
+      "why_stopped": "Futility",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT06909903",
+      "title": "Cell Content of Sputum Induced by Hypertonic Saline in Adolescents With Cystic Fibrosis",
+      "lead_sponsor": "Assistance Publique Hopitaux De Marseille",
+      "why_stopped": "difficulty including the last participants",
+      "phases": [
+        "NA"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT01753869",
+      "title": "Timing of Hypertonic Saline Inhalation Relative to Airways Clearance in Cystic Fibrosis",
+      "lead_sponsor": "Belfast Health and Social Care Trust",
+      "why_stopped": "Challenges with recruitment",
+      "phases": [
+        "NA"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT00060801",
+      "title": "Efficacy and Safety of 24 Weeks of Oral Treatment With BIIL 284 BS in Adult and Pediatric Patients",
+      "lead_sponsor": "Boehringer Ingelheim",
+      "why_stopped": null,
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT06515002",
+      "title": "A Study to Test How Well BI 3720931 is Tolerated and Whether it Improves Lung Function in People With Cystic Fibrosis (Lenticlair\u2122 1)",
+      "lead_sponsor": "Boehringer Ingelheim",
+      "why_stopped": "Sponsor decision",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "modalities": [
+        "AAV / Gene Therapy",
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT05392855",
+      "title": "Symptom Based Performance of Airway Clearance After Starting Highly Effective Modulators for Cystic Fibrosis (SPACE-CF)",
+      "lead_sponsor": "University of Missouri-Columbia",
+      "why_stopped": "Low recruitment, low interest from participant population",
+      "phases": [
+        "NA"
+      ],
+      "modalities": [
+        "CFTR Modulator",
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT03367494",
+      "title": "A New Optical Sweat Test Method Based on a Citric Acid-derived Multi-halide Sensor",
+      "lead_sponsor": "Milton S. Hershey Medical Center",
+      "why_stopped": "Investigator Decision",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02550041",
+      "title": "Analysis T Cells Response for Identification of Aspergillus Bronchitis With Cystic Fibrosis Patients",
+      "lead_sponsor": "University Hospital, Montpellier",
+      "why_stopped": "Difficulties for inclusions",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00566241",
+      "title": "IGF-1 Therapy in Patients With Cystic Fibrosis",
+      "lead_sponsor": "Stony Brook University",
+      "why_stopped": "Insufficient recruitment",
+      "phases": [
+        "PHASE1"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03460704",
+      "title": "Trial in Non-cystic Fibrosis Bronchiectasis Patients With Chronic Lung Infections Treated With Colistimethate Sodium.",
+      "lead_sponsor": "Zambon SpA",
+      "why_stopped": "The study was brought to an early close in March 2022 due to major ongoing recruitment issues primarily related to the COVID-19 pandemic and concerns regarding the continued randomization and exposure of subjects to placebo in the study.",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00332215",
+      "title": "A Phase I Study of Inhaled Sodium Pyruvate for the Treatment of Cystic Fibrosis.",
+      "lead_sponsor": "University of Minnesota",
+      "why_stopped": "Dr. Milla has left University of Minnesota. The study is no longer being conducted at this site.",
+      "phases": [
+        "PHASE1"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT02840136",
+      "title": "LC-MS/MS Based Method Development for the Monitoring of Antibiotic Concentrations in Sputum of Cystic Fibrosis Patients",
+      "lead_sponsor": "University Ghent",
+      "why_stopped": "Lack of staff",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04921332",
+      "title": "Bright Light Therapy for Depression Symptoms in Adults With Cystic Fibrosis (CF) and COPD",
+      "lead_sponsor": "Erica Osborn",
+      "why_stopped": "Study was stopped secondary to principal investigator needing to analyze data and present prior to graduating. Target enrollment not able to be reached prior to this.",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03219164",
+      "title": "Study of Aztreonam for Inhalation in Children With Cystic Fibrosis and New Infection of the Airways by Pseudomonas Aeruginosa Bacteria",
+      "lead_sponsor": "Gilead Sciences",
+      "why_stopped": "Study was terminated early by sponsor due to the challenges and risks introduced by Coronavirus disease 2019 (COVID-19) pandemic.",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03262142",
+      "title": "Targeted AntiBiotics for Chronic Pulmonary Diseases",
+      "lead_sponsor": "Chronic Obstructive Pulmonary Disease Trial Network, Denmark",
+      "why_stopped": "Slow recruitment",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT00975663",
+      "title": "Bayesian Dose Adjustment of Immunosuppressants After Lung Transplantation",
+      "lead_sponsor": "University Hospital, Limoges",
+      "why_stopped": null,
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01002534",
+      "title": "Does a Nasal Instillation of Vardenafil Normalize the Nasal Potential Difference in Cystic Fibrosis Patients?",
+      "lead_sponsor": "Cliniques universitaires Saint-Luc- Universit\u00e9 Catholique de Louvain",
+      "why_stopped": "not yet started",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    }
+  ],
+  "suspended_trials": [
+    {
+      "nct_id": "NCT03756922",
+      "title": "A DDI Study of FDL169 and FDL176 in Healthy Subjects",
+      "lead_sponsor": "Flatley Discovery Lab LLC",
+      "why_stopped": "Business reasons",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT00005110",
+      "title": "A Multi-Centered Study of the Long-Term Effect of Salmeterol and Albuterol in Cystic Fibrosis",
+      "lead_sponsor": "National Center for Research Resources (NCRR)",
+      "why_stopped": null,
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT07547436",
+      "title": "A Study to Access Activity and Safety With SAR445399 Compared With Placebo in Participants Aged 18 to 80 Years of Age With Non-Cystic Fibrosis Bronchiectasis",
+      "lead_sponsor": "Sanofi",
+      "why_stopped": "The pause is for strategic business reasons to facilitate internal portfolio review.\n\nThe pause is not due to any concerns with patient safety, with program benefit/risk, or with trial integrity.",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00008775",
+      "title": "Pressure Support Ventilation During CF Exacerbations",
+      "lead_sponsor": "National Center for Research Resources (NCRR)",
+      "why_stopped": null,
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    }
+  ],
+  "status_transitions": [],
+  "recent_trials_sample": [
+    {
+      "nct_id": "NCT01515007",
+      "title": "Phase 3 Study With Ciprofloxacin Dispersion for Inhalation in Non-CF Bronchiectasis (ORBIT-3)",
+      "status": "COMPLETED",
+      "lead_sponsor": "Aradigm Corporation",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT00909532",
+      "title": "Study of Ivacaftor in Cystic Fibrosis Subjects Aged 12 Years and Older With the G551D Mutation",
+      "status": "COMPLETED",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT02858843",
+      "title": "The Effect of Combination Lumacaftor and Ivacaftor on Markers of Hyperglycemia",
+      "status": "TERMINATED",
+      "lead_sponsor": "Massachusetts General Hospital",
+      "phases": [
+        "NA"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT02918409",
+      "title": "IV Colistin for Pulmonary Exacerbations: Improving Safety and Efficacy",
+      "status": "COMPLETED",
+      "lead_sponsor": "National Jewish Health",
+      "phases": [
+        "PHASE4"
+      ],
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ]
+    },
+    {
+      "nct_id": "NCT06132048",
+      "title": "A Usability Validation of the MuCopilot Mobile Application, a Digital Tool for the Unsupervised Objective Assessment of Cystic Fibrosis",
+      "status": "RECRUITING",
+      "lead_sponsor": "Ad scientiam",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT03029455",
+      "title": "A Study to Evaluate Safety and Pharmacokinetics of VX-659 in Healthy Subjects and in Adults With Cystic Fibrosis",
+      "status": "COMPLETED",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "phases": [
+        "PHASE1"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT05495243",
+      "title": "Phase 2a, 28-day Investigational Use Study of ARINA-1 in Non-Cystic Fibrosis Bronchiectasis (NCFBE) With Excess Mucus and Cough",
+      "status": "COMPLETED",
+      "lead_sponsor": "Renovion, Inc.",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01232478",
+      "title": "I Change Adherence & Raise Expectations",
+      "status": "COMPLETED",
+      "lead_sponsor": "Johns Hopkins University",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04743206",
+      "title": "Airway Clearance for Pediatric and Adult Cystic Fibrosis Patients Using a Portable Intra-Pulmonary Percussion Device",
+      "status": "TERMINATED",
+      "lead_sponsor": "University of Florida",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04043806",
+      "title": "A Study Evaluating the Long-term Safety of VX-445 Combination Therapy",
+      "status": "COMPLETED",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT04537793",
+      "title": "Evaluation of ELX/TEZ/IVA in Cystic Fibrosis (CF) Subjects 2 Through 5 Years",
+      "status": "COMPLETED",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT03069625",
+      "title": "Sit-to-stand Test in Cystic Fibrosis Children and Adolescents",
+      "status": "COMPLETED",
+      "lead_sponsor": "Groupe Hospitalier du Havre",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT01531673",
+      "title": "Study of VX-661 Alone and in Combination With Ivacaftor in Subjects Homozygous or Heterozygous to the F508del-Cystic Fibrosis Transmembrane Conductance Regulator(CFTR) Mutation",
+      "status": "COMPLETED",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "phases": [
+        "PHASE2"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    },
+    {
+      "nct_id": "NCT03873688",
+      "title": "Effects of Expiratory Muscle Training on Cough Efficacy in Children and Adolescents With Cystic Fibrosis",
+      "status": "COMPLETED",
+      "lead_sponsor": "Cigdem Emirza",
+      "phases": [
+        "NA"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT00909727",
+      "title": "Study of Ivacaftor in Cystic Fibrosis Subjects Aged 6 to 11 Years With the G551D Mutation",
+      "status": "COMPLETED",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "phases": [
+        "PHASE3"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    }
+  ]
+}
