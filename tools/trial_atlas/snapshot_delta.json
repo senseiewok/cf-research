@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-10-14T05:34:06.296547+00:00",
+  "timestamp": "2026-10-14T14:12:11.425555+00:00",
   "date": "2026-10-14",
   "disclaimer": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.",
   "sentinel_id": "scheduled-trial-surveillance",
   "review_tier": "elevated",
   "verdict": "UPDATES_DETECTED",
   "summary": {
-    "total_studies_retrieved": 1052,
-    "previous_baseline_count": 0,
-    "new_trials_count": 1052,
-    "status_transitions_count": 0,
+    "total_studies_retrieved": 1053,
+    "previous_baseline_count": 1052,
+    "new_trials_count": 1,
+    "status_transitions_count": 1,
     "terminated_trials_count": 115,
     "suspended_trials_count": 4
   },
@@ -17,12 +17,12 @@
     "COMPLETED": 836,
     "TERMINATED": 115,
     "RECRUITING": 73,
-    "ACTIVE_NOT_RECRUITING": 24,
+    "ACTIVE_NOT_RECRUITING": 25,
     "SUSPENDED": 4
   },
   "modalities_distribution": {
     "Mucolytic / Anti-Infective": 124,
-    "CFTR Modulator": 129,
+    "CFTR Modulator": 130,
     "AAV / Gene Therapy": 11,
     "ENaC Inhibitor": 11,
     "mRNA": 8,
@@ -252,7 +252,7 @@
     {
       "nct_id": "NCT00376428",
       "title": "Interest of Gentamicin-induced Readthrough in Cystic Fibrosis Patients",
-      "lead_sponsor": "Assistance Publique - H\u00f4pitaux de Paris",
+      "lead_sponsor": "Assistance Publique - Hôpitaux de Paris",
       "why_stopped": null,
       "phases": [
         "PHASE2"
@@ -271,7 +271,7 @@
     },
     {
       "nct_id": "NCT00744250",
-      "title": "Intraduodenal Aspiration Study to Assess the Bioavailability of Oral Pancrecarb\u00ae Compared to Placebo Control",
+      "title": "Intraduodenal Aspiration Study to Assess the Bioavailability of Oral Pancrecarb® Compared to Placebo Control",
       "lead_sponsor": "Digestive Care, Inc.",
       "why_stopped": "No longer required study by FDA for NDA approval.",
       "phases": [
@@ -281,7 +281,7 @@
     },
     {
       "nct_id": "NCT04059094",
-      "title": "A 4-week Study to Test Different Doses of BI 1265162 in Adolescents and Adults With Cystic Fibrosis Using the Respimat\u00ae Inhaler - BALANCE - CF\u21221",
+      "title": "A 4-week Study to Test Different Doses of BI 1265162 in Adolescents and Adults With Cystic Fibrosis Using the Respimat® Inhaler - BALANCE - CF™1",
       "lead_sponsor": "Boehringer Ingelheim",
       "why_stopped": "Not due to safety reasons",
       "phases": [
@@ -293,8 +293,8 @@
     },
     {
       "nct_id": "NCT03304028",
-      "title": "MUCOviscidose EXacerbation Outils Connect\u00e9s Education Th\u00e9rapeutique",
-      "lead_sponsor": "Institut National de la Sant\u00e9 Et de la Recherche M\u00e9dicale, France",
+      "title": "MUCOviscidose EXacerbation Outils Connectés Education Thérapeutique",
+      "lead_sponsor": "Institut National de la Santé Et de la Recherche Médicale, France",
       "why_stopped": "recruitment and search completed",
       "phases": [
         "NA"
@@ -479,7 +479,7 @@
     },
     {
       "nct_id": "NCT04017312",
-      "title": "A Pilot Study to Evaluate the Use of the Vest\u00ae System for Treatment of Bronchiectasis Patients in the Home Setting",
+      "title": "A Pilot Study to Evaluate the Use of the Vest® System for Treatment of Bronchiectasis Patients in the Home Setting",
       "lead_sponsor": "Hill-Rom",
       "why_stopped": "Data",
       "phases": [
@@ -533,7 +533,7 @@
     },
     {
       "nct_id": "NCT00680316",
-      "title": "A Study of Pulmozyme\u00ae (Dornase Alpha) in 3- to 5-Year-Old Patients With Cystic Fibrosis",
+      "title": "A Study of Pulmozyme® (Dornase Alpha) in 3- to 5-Year-Old Patients With Cystic Fibrosis",
       "lead_sponsor": "Genentech, Inc.",
       "why_stopped": "Most patients were unable to perform the test being used to measure lung function, thus it became clear the study would not yield clinically meaningful data",
       "phases": [
@@ -606,7 +606,7 @@
     {
       "nct_id": "NCT01586728",
       "title": "Oxygen Therapy in Cystic Fibrosis",
-      "lead_sponsor": "Assistance Publique - H\u00f4pitaux de Paris",
+      "lead_sponsor": "Assistance Publique - Hôpitaux de Paris",
       "why_stopped": "lack of inclusion in the study",
       "phases": [
         "NA"
@@ -635,7 +635,7 @@
     },
     {
       "nct_id": "NCT00639626",
-      "title": "Use of Levemir\u00ae Improves Metabolic and Clinical Status in Cystic Fibrosis-related Diabetes (CFRD)",
+      "title": "Use of Levemir® Improves Metabolic and Clinical Status in Cystic Fibrosis-related Diabetes (CFRD)",
       "lead_sponsor": "Nationwide Children's Hospital",
       "why_stopped": "PI left the institution",
       "phases": [
@@ -659,7 +659,7 @@
     },
     {
       "nct_id": "NCT02061852",
-      "title": "Evaluation of the Safety of the Medical Device Simeox\u00ae",
+      "title": "Evaluation of the Safety of the Medical Device Simeox®",
       "lead_sponsor": "Physio-Assist",
       "why_stopped": null,
       "phases": [
@@ -1035,7 +1035,7 @@
     {
       "nct_id": "NCT02010411",
       "title": "Alpha1 Antitrypsin Aerosol Therapy in Cystic Fibrosis",
-      "lead_sponsor": "Universit\u00e9 de Sherbrooke",
+      "lead_sponsor": "Université de Sherbrooke",
       "why_stopped": "Technical problems with measure of CFU's. Outcomes published: PMID:16986483",
       "phases": [
         "PHASE2"
@@ -1098,7 +1098,7 @@
     },
     {
       "nct_id": "NCT06515002",
-      "title": "A Study to Test How Well BI 3720931 is Tolerated and Whether it Improves Lung Function in People With Cystic Fibrosis (Lenticlair\u2122 1)",
+      "title": "A Study to Test How Well BI 3720931 is Tolerated and Whether it Improves Lung Function in People With Cystic Fibrosis (Lenticlair™ 1)",
       "lead_sponsor": "Boehringer Ingelheim",
       "why_stopped": "Sponsor decision",
       "phases": [
@@ -1228,7 +1228,7 @@
     {
       "nct_id": "NCT01002534",
       "title": "Does a Nasal Instillation of Vardenafil Normalize the Nasal Potential Difference in Cystic Fibrosis Patients?",
-      "lead_sponsor": "Cliniques universitaires Saint-Luc- Universit\u00e9 Catholique de Louvain",
+      "lead_sponsor": "Cliniques universitaires Saint-Luc- Université Catholique de Louvain",
       "why_stopped": "not yet started",
       "phases": [
         "PHASE2"
@@ -1281,7 +1281,19 @@
       "modalities": []
     }
   ],
-  "status_transitions": [],
+  "status_transitions": [
+    {
+      "nct_id": "NCT07709494",
+      "title": "A Phase 1a/1b Study to Investigate the Safety, Tolerability, Microbiological Response, and Pharmacokinetics of Inhaled Rev-56 in Adult Healthy Volunteers and Adult Non-cystic Fibrosis Bronchiectasis (NCFB) Patients With Chronic P. Aeruginosa",
+      "old_status": "RECRUITING",
+      "new_status": "ACTIVE_NOT_RECRUITING",
+      "transition": "RECRUITING -> ACTIVE_NOT_RECRUITING",
+      "lead_sponsor": "ReviR Therapeutics Inc.",
+      "phases": [
+        "PHASE1"
+      ]
+    }
+  ],
   "recent_trials_sample": [
     {
       "nct_id": "NCT01515007",
@@ -1444,6 +1456,20 @@
       "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
       "phases": [
         "PHASE3"
+      ],
+      "modalities": [
+        "CFTR Modulator"
+      ]
+    }
+  ],
+  "new_trials": [
+    {
+      "nct_id": "NCT07809867",
+      "title": "Pharmacokinetics of Elexacaftor/Tezacaftor/Ivacaftor in Cystic Fibrosis",
+      "status": "RECRUITING",
+      "lead_sponsor": "Istituto Giannina Gaslini",
+      "phases": [
+        "PHASE4"
       ],
       "modalities": [
         "CFTR Modulator"
