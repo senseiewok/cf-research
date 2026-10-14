@@ -22,12 +22,16 @@ The Chief Researcher Officer (CRO) grounding sentinel executed its active ground
      - Merged PR #65 (`skills/modern-web-standards-and-patterns`): codified [`modern-web-standards`](file:///C:/senseiewok/repos/cf-lab/.claude/skills/modern-web-standards/SKILL.md) and [`native-esmodules-design-patterns`](file:///C:/senseiewok/repos/cf-lab/.claude/skills/native-esmodules-design-patterns/SKILL.md).
      - Merged PR #66 (`skills/schedules-revamp-council`): revamped autonomous sentinels and aligned with Opus Frontier Council review.
      - Merged PR #68 (`feat/cro-mission-grounding-sync`): recorded late-night CRO mission grounding audit notes on [`T-0161`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5952).
-     - Active PR #67 (`skills/accelerated-schedules-sync`): document accelerated active sprint cadences across scheduled sentinels.
+     - Merged PR #69 (`feat/cro-cycle6-grounding-sync`): recorded post-cycle-6 CRO audit notes on T-0161.
+     - Merged PR #70 (`skills/schedules-pull-main`): every scheduled sentinel now pulls `origin/main` via `sync-main.py` on startup (T-0155).
+     - Active PR #67 (`skills/accelerated-schedules-sync`): document accelerated active sprint cadences across scheduled sentinels (still open; verified with `gh pr list`).
   2. **Research Repo (`cf-research`)**:
      - Merged PR #47 & PR #48 (`research/curative-biophysics-dossiers`): established biophysical dossiers for inhaled delivery, nonsense readthrough, alternative conductance, and Cryo-EM perturbation modeling ([`variant_perturbation.py`](file:///C:/senseiewok/repos/cf-research/tools/cftr-model/variant_perturbation.py)), with 8EJ1 coordinate verification.
      - Merged PR #49 (`research/cro-audit-2026-10-13`): recorded evening CRO mission grounding audit.
      - Merged PR #50 (`research/cro-grounding-sync`): recorded night CRO grounding audit and worktree coordination.
      - Merged PR #51 (`research/cro-mission-grounding-sync`): recorded late-night CRO mission grounding and multi-repo sync.
+     - Merged PR #52 (`research/cro-cycle6-grounding-sync`): recorded post-cycle-6 CRO audit.
+     - Merged PR #53 (`research/trial-surveillance-2026-10-13`): ClinicalTrials.gov API v2 snapshot (`tools/trial_atlas/snapshot.json`, `snapshot_delta.json`). Per the commit message: 1,052 interventional CF studies, 115 TERMINATED, including VX-522 `NCT05668741`. Not re-verified against the registry by this audit (T1); the trial surveillance sentinel owns that check.
   3. **Site Repo (`.ai`)**:
      - Merged PR #56 (`site/es-mx-localization`): synchronized [`cftr-research.js`](file:///C:/senseiewok/repos/cf-research/tools/cftr-model/web/cftr-research.js) with canonical package, applied Step 1 safe state on `/cf/index.html`, and localized key pathways into Mexican Spanish.
      - Merged PR #57 (`site/showcase-curative-biophysics`): exposed rare-variant Cryo-EM theratyping presets (G542X, R334W, N1303K) on `/cf/cftr/` and refined `es-MX` phrasing with verified medical boundaries.
@@ -35,10 +39,12 @@ The Chief Researcher Officer (CRO) grounding sentinel executed its active ground
      - Merged PR #59 (`site/showcase-curative-modalities`): exposed curative modalities and updated navigation rails.
      - Merged PR #60 (`site/showcase-curative-frontiers`): exposed Cryo-EM perturbation modeling and expanded `es-MX` biophysical localization.
      - Merged PR #61 (`site/widescreen-research-showcase`): implemented second-level subnav, widescreen split feature, and biophysical research showcase grid.
+     - Merged PR #63 (`site/showcase-biophysical-grounding`): localized biophysical card badges and CFTR viewer controls into Mexican Spanish (`data/i18n/es-MX.json`, `src/scripts/i18n-resources.js`, `src/scripts/i18n.js`). No new factual claims in the diff stat; wording review is outside this audit.
      - Merged PR #62 (`site/showcase-curative-theratypes`): Cycle 6 executed; exposed rare-variant theratyping presets (R347, R1070) on 3D CFTR viewer (`src/cf/cftr/index.html`) and expanded Mexican Spanish localization across `data/i18n/es-MX.json` and `src/scripts/i18n-resources.js` with mandatory medical boundary disclaimer.
   4. **Worktree & Task Coordination Audit**:
      - Cross-checked active git branches against `git worktree list` across all 4 repos (`cf-lab`, `cf-research`, `cf-skills`, `.ai`).
      - Flagged merged branches: [`T-0155`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5710), [`T-0159`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5869), and [`T-0161`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5952) (`feat/antigravity-discovery-and-pr-rules` merged in `cf-lab` PR #55, updated in PR #66, #68); [`T-0160`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5900) (all 6 cycles merged via `.ai` PR #56, #57, #58, #59, #60, #61, #62; marked `done`); [`T-0107`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L3980) (`site/nacfc-and-es-mx-2026-10-13` merged in `.ai` PR #56).
+     - **Branch drift (new)**: `T-0155` now records `skills/schedules-pull-main` (merged in PR #70), while `T-0159` and `T-0161` still record `feat/antigravity-discovery-and-pr-rules` (merged in PR #55). All three are merged branches on `in_progress` tasks; maintainer to set `done` or reassign.
      - Flagged missing branches: [`T-0039`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0048`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0052`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0067`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0077`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0119`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json) marked `in_progress` with empty `branch`.
   5. **Task Board Progression**:
      - [`T-0148`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5431), [`T-0149`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5472), and [`T-0160`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5900) marked **`done`** by maintainer following PR #56, #57, #58, #59, #60, #61, #62 merges.
@@ -133,4 +139,4 @@ Per lab governance, autonomous agents propose; **only the human maintainer appro
    - [`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5549) (Nonsense mutation engine) — dossier complete in [`2026-10-nonsense-readthrough-nmd.md`](file:///C:/senseiewok/repos/cf-research/proposals/2026-10-nonsense-readthrough-nmd.md); merged in PR #47 & PR #48.
    - [`T-0152`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5587) (Alternative conductance) — dossier complete in [`alternative-conductance.md`](file:///C:/senseiewok/repos/cf-research/landscape/alternative-conductance.md); merged in PR #47 & PR #48.
 
-*Scope record: All 161 tasks in `tasks/board.json` evaluated; active delta verified across `tasks/board.json`, `cf-research/proposals/`, and `cf-research/landscape/`. Check date: 2026-10-13 22:30 PT.*
+*Scope record: All 161 tasks in `tasks/board.json` evaluated; active delta verified across `tasks/board.json`, `cf-research/proposals/`, and `cf-research/landscape/`. Check date: 2026-10-13 22:45 PT. Delta this round: `tasks/board.json` tree hash changed (c313801 to a4d162a, T-0155 branch and notes only); `proposals/` and `landscape/` hashes unchanged at the last-audit baseline. No new `proposed` tasks.*
