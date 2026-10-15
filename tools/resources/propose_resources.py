@@ -144,13 +144,28 @@ def find_catalog_entry(catalog: list[dict], host: str | None = None, source_id: 
 
     if host:
         host_lower = host.lower()
+        matching = []
         for s in catalog:
             entry_host = urlsplit(s.get("landing_page") or s.get("url") or s.get("base_url") or "").hostname
             if entry_host and entry_host.lower() == host_lower:
-                if s.get("access") != "fetch":
-                    raise Refused(f"catalog entry '{s.get('id')}' for host '{host}' has access '{s.get('access')}'; fetch refused")
-                return s
-        raise Refused(f"no catalog entry with access: fetch found for host '{host}'")
+                matching.append(s)
+
+        if not matching:
+            raise Refused(f"no catalog entry found for host '{host}'")
+
+        # Prioritize entries with kind: resource_pages and access: fetch
+        resource_fetch = [s for s in matching if s.get("kind") == "resource_pages" and s.get("access") == "fetch"]
+        if resource_fetch:
+            return resource_fetch[0]
+
+        # Next check any entry with access: fetch
+        any_fetch = [s for s in matching if s.get("access") == "fetch"]
+        if any_fetch:
+            return any_fetch[0]
+
+        # None permitted fetch
+        access_list = ", ".join(f"{s.get('id')}:{s.get('access')}" for s in matching)
+        raise Refused(f"catalog access for host '{host}' does not permit fetch ({access_list}); automated fetch refused")
 
     raise Refused("either host or source_id must be provided")
 
@@ -368,6 +383,11 @@ class IntakeSession:
                     raise Refused(f"cross-host redirect from {current} to {loc} is refused")
                 if target_parts.scheme and target_parts.scheme != "https":
                     raise Refused(f"insecure redirect from {current} to {loc} is refused")
+                # Re-check robots.txt rules against redirect target path
+                target_path = target_parts.path or "/"
+                allowed, reason = check_all_robots_groups(robots, target_path)
+                if not allowed:
+                    raise Refused(f"redirect target {loc} disallowed by robots.txt: {reason}")
                 current = urljoin(current, loc)
                 continue
             break
@@ -607,66 +627,67 @@ def propose_resources(
 
     valid_rows = []
 
-    for url in urls:
-        # Load and parse page
-        fetch_res = intake_session.fetch_page(url)
-        slug = slugify(fetch_res.title or urlsplit(url).path)
+    try:
+        for url in urls:
+            # Load and parse page
+            fetch_res = intake_session.fetch_page(url)
+            slug = slugify(fetch_res.title or urlsplit(url).path)
 
-        # Save text and metadata to scratch outside repository
-        if not dry_run:
-            meta = {
-                "url": url,
-                "title": fetch_res.title,
-                "bytes": fetch_res.bytes_count,
-                "host": canonical_host,
-                "source_id": sid,
-                "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-            }
-            save_to_scratch(scratch, slug, fetch_res.text, meta)
+            # Save text and metadata to scratch outside repository
+            if not dry_run:
+                meta = {
+                    "url": url,
+                    "title": fetch_res.title,
+                    "bytes": fetch_res.bytes_count,
+                    "host": canonical_host,
+                    "source_id": sid,
+                    "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                }
+                save_to_scratch(scratch, slug, fetch_res.text, meta)
 
-        # Prompt worker
-        prompt = build_worker_prompt(url, fetch_res.title, fetch_res.text)
+            # Prompt worker
+            prompt = build_worker_prompt(url, fetch_res.title, fetch_res.text)
 
-        if dry_run:
-            draft = {
-                "name": f"Help Service for {fetch_res.title or 'CF'}",
-                "summary": "Information and support resources provided for individuals and families affected by cystic fibrosis.",
-                "audience": ["adult_with_cf", "parent_carer_of_child"],
-                "category": ["daily_life"],
-                "who_for": "stated_anyone",
-                "format": "online",
-                "countries": ["GB"],
-                "lang": "en",
-                "organisation": entry.get("publisher", "CF Organisation"),
-            }
-        elif worker_fn is not None:
-            raw_response = worker_fn(prompt)
-            if isinstance(raw_response, str):
-                # Clean possible markdown block
-                cleaned = re.sub(r"^```(?:json)?\s*", "", raw_response.strip())
-                cleaned = re.sub(r"\s*```$", "", cleaned)
-                try:
-                    draft = json.loads(cleaned)
-                except json.JSONDecodeError:
-                    print(f"WARN: Dropping draft for {url}: Worker output was not valid JSON", file=sys.stderr)
-                    continue
+            if dry_run:
+                draft = {
+                    "name": f"Help Service for {fetch_res.title or 'CF'}",
+                    "summary": "Information and support resources provided for individuals and families affected by cystic fibrosis.",
+                    "audience": ["adult_with_cf", "parent_carer_of_child"],
+                    "category": ["daily_life"],
+                    "who_for": "stated_anyone",
+                    "format": "online",
+                    "countries": ["GB"],
+                    "lang": "en",
+                    "organisation": entry.get("publisher", "CF Organisation"),
+                }
+            elif worker_fn is not None:
+                raw_response = worker_fn(prompt)
+                if isinstance(raw_response, str):
+                    # Clean possible markdown block
+                    cleaned = re.sub(r"^```(?:json)?\s*", "", raw_response.strip())
+                    cleaned = re.sub(r"\s*```$", "", cleaned)
+                    try:
+                        draft = json.loads(cleaned)
+                    except json.JSONDecodeError:
+                        print(f"WARN: Dropping draft for {url}: Worker output was not valid JSON", file=sys.stderr)
+                        continue
+                else:
+                    draft = raw_response
             else:
-                draft = raw_response
-        else:
-            raise Refused("Worker callable not configured and live model not specified")
+                raise Refused("Worker callable not configured and live model not specified")
 
-        # Validate draft against checker rules
-        is_valid, reason = validate_draft(draft, sid, entry)
-        if not is_valid:
-            print(f"WARN: Dropping draft for {url}: {reason}", file=sys.stderr)
-            continue
+            # Validate draft against checker rules
+            is_valid, reason = validate_draft(draft, sid, entry)
+            if not is_valid:
+                print(f"WARN: Dropping draft for {url}: {reason}", file=sys.stderr)
+                continue
 
-        # Form lead_only row
-        row = build_lead_only_row(draft, url, sid)
-        valid_rows.append(row)
-
-    if delete_scratch_after and not dry_run:
-        clean_scratch(scratch)
+            # Form lead_only row
+            row = build_lead_only_row(draft, url, sid)
+            valid_rows.append(row)
+    finally:
+        if delete_scratch_after and not dry_run:
+            clean_scratch(scratch)
 
     return valid_rows
 
@@ -675,7 +696,7 @@ def parse_args(argv=None):
     parser = argparse.ArgumentParser(
         description="A reusable intake tool so local agents can propose Resources rows from permitted sites."
     )
-    parser.add_argument("--urls", nargs="+", required=True, help="List of addresses to propose")
+    parser.add_argument("--urls", nargs="*", default=[], help="List of addresses to propose")
     parser.add_argument("--source-id", help="Source ID in catalog.yaml (must have access: fetch)")
     parser.add_argument("--host", help="Host name matching a catalog entry with access: fetch")
     parser.add_argument("--catalog", type=Path, default=CATALOG_PATH, help="Path to catalog.yaml")
@@ -690,6 +711,15 @@ def parse_args(argv=None):
 
 def main(argv=None) -> int:
     args = parse_args(argv)
+    if args.delete_scratch and not args.urls:
+        scratch = args.scratch_dir or get_default_scratch_dir()
+        count = clean_scratch(scratch)
+        print(f"Cleaned {count} files from scratch directory {scratch}")
+        return 0
+
+    if not args.urls:
+        print("ERROR: the following arguments are required: --urls (unless using --delete-scratch)", file=sys.stderr)
+        return 1
     try:
         rows = propose_resources(
             urls=args.urls,

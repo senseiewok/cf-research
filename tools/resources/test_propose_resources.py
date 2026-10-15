@@ -176,6 +176,17 @@ class ProposeResourcesConductTest(unittest.TestCase):
                 FakeResponse(200, b"<html><title>Support</title><body>Help page</body></html>")
             ],
         })
+
+        def mock_worker(prompt):
+            return json.dumps({
+                "name": "CF Trust Support",
+                "summary": "Support provided for families living with cystic fibrosis.",
+                "audience": ["adult_with_cf"],
+                "category": ["daily_life"],
+                "who_for": "stated_anyone",
+                "countries": ["GB"],
+            })
+
         rows = pr.propose_resources(
             urls=["https://www.cysticfibrosis.org.uk/support"],
             source_id="cftrust-resource-pages",
@@ -183,9 +194,12 @@ class ProposeResourcesConductTest(unittest.TestCase):
             scratch_dir=self.scratch_dir,
             pause_s=0.0,
             session=fake_sess,
-            dry_run=True,
+            worker_fn=mock_worker,
         )
         self.assertEqual(len(rows), 1)
+        self.assertEqual(len(fake_sess.calls), 2)
+        self.assertEqual(fake_sess.calls[0].url, "https://www.cysticfibrosis.org.uk/robots.txt")
+        self.assertEqual(fake_sess.calls[1].url, "https://www.cysticfibrosis.org.uk/support")
 
     def test_ai_agent_group_disallow_in_robots_stops_fetch(self):
         fake_sess = FakeSession({
@@ -216,6 +230,17 @@ class ProposeResourcesConductTest(unittest.TestCase):
                 FakeResponse(200, b"<html><title>Support</title><body>Content here</body></html>")
             ],
         })
+
+        def mock_worker(prompt):
+            return json.dumps({
+                "name": "CF Trust Support",
+                "summary": "Support provided for families living with cystic fibrosis.",
+                "audience": ["adult_with_cf"],
+                "category": ["daily_life"],
+                "who_for": "stated_anyone",
+                "countries": ["GB"],
+            })
+
         rows = pr.propose_resources(
             urls=["https://www.cysticfibrosis.org.uk/support"],
             source_id="cftrust-resource-pages",
@@ -223,9 +248,31 @@ class ProposeResourcesConductTest(unittest.TestCase):
             scratch_dir=self.scratch_dir,
             pause_s=0.0,
             session=fake_sess,
-            dry_run=True,
+            worker_fn=mock_worker,
         )
         self.assertEqual(len(rows), 1)
+        self.assertEqual(len(fake_sess.calls), 3)
+
+    def test_redirect_to_robots_disallowed_path_refused(self):
+        fake_sess = FakeSession({
+            "https://www.cysticfibrosis.org.uk/robots.txt": [
+                FakeResponse(200, b"User-agent: *\nDisallow: /private/\nAllow: /\n")
+            ],
+            "https://www.cysticfibrosis.org.uk/support": [
+                FakeResponse(301, headers={"Location": "https://www.cysticfibrosis.org.uk/private/intake"})
+            ],
+        })
+        with self.assertRaises(pr.Refused) as cm:
+            pr.propose_resources(
+                urls=["https://www.cysticfibrosis.org.uk/support"],
+                source_id="cftrust-resource-pages",
+                catalog_path=self.catalog_path,
+                scratch_dir=self.scratch_dir,
+                pause_s=0.0,
+                session=fake_sess,
+                worker_fn=lambda p: "",
+            )
+        self.assertIn("disallowed by robots.txt", str(cm.exception))
 
     def test_pacing_invoked_on_redirect_hops(self):
         fake_sess = FakeSession({
@@ -343,6 +390,32 @@ class ProposeResourcesConductTest(unittest.TestCase):
                 scratch_dir=self.scratch_dir,
             )
         self.assertIn("no catalog entry", str(cm.exception))
+
+    def test_multi_entry_host_prefers_resource_pages_fetch(self):
+        # Multi-entry catalog with manual report first, then fetch resource_pages
+        multi_cat_path = Path(self._tmp.name) / "multi_catalog.yaml"
+        multi_data = {
+            "sources": [
+                {
+                    "id": "ccfr-adr-2024",
+                    "kind": "registry_annual_report",
+                    "access": "manual",
+                    "landing_page": "https://cysticfibrosis.ca/report",
+                    "publisher": "CF Canada",
+                },
+                {
+                    "id": "cfcanada-resource-pages",
+                    "kind": "resource_pages",
+                    "access": "fetch",
+                    "landing_page": "https://cysticfibrosis.ca/",
+                    "publisher": "CF Canada",
+                },
+            ]
+        }
+        multi_cat_path.write_text(yaml.dump(multi_data), encoding="utf-8")
+        entry = pr.find_catalog_entry(multi_data["sources"], host="cysticfibrosis.ca")
+        self.assertEqual(entry["id"], "cfcanada-resource-pages")
+        self.assertEqual(entry["access"], "fetch")
 
     # --- 6. Data Boundary & Worker Prompting -----------------------------------------
     def test_data_boundary_structure_no_tools(self):
@@ -491,6 +564,19 @@ class ProposeResourcesConductTest(unittest.TestCase):
         self.assertEqual(count, 2)
         self.assertFalse(txt_path.exists())
         self.assertFalse(meta_path.exists())
+
+    def test_standalone_scratch_cleanup_cli(self):
+        txt_path, meta_path = pr.save_to_scratch(
+            self.scratch_dir,
+            "standalone-clean",
+            "Page text content",
+            {"url": "https://example.org"},
+        )
+        self.assertTrue(txt_path.exists())
+        # Call main with --delete-scratch and --scratch-dir without --urls
+        ret = pr.main(["--delete-scratch", "--scratch-dir", str(self.scratch_dir)])
+        self.assertEqual(ret, 0)
+        self.assertFalse(txt_path.exists())
 
     # --- 10. Dry Run on One Real Host ------------------------------------------------
     def test_dry_run_real_host_description(self):
