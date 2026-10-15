@@ -1,0 +1,5 @@
+# openFDA New Drug Application (NDA) numbers for approved CFTR modulators
+218730  # openFDA NDA 218730 (vanzacaftor/tezacaftor/deutivacaftor, ALYFTREK)
+203188  # openFDA NDA 203188 (ivacaftor, KALYDECO)
+206038  # openFDA NDA 206038 (lumacaftor/ivacaftor, ORKAMBI)
+210491  # openFDA NDA 210491 (tezacaftor/ivacaftor, SYMDEKO)

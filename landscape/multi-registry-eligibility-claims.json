@@ -1,0 +1,104 @@
+[
+  {
+    "id": "cffpr-genotype-eligibility",
+    "claim": "In 2024, 92.3 percent of the total CF population in the CFF Registry was eligible by CFTR genotype for at least one CFTR modulator.",
+    "source": "cffpr-txt",
+    "quote": ["Overall, 92.3 percent of the total CF population in the Registry was eligible by CFTR genotype",
+              "for at least one CFTR modulator as of 2024."],
+    "kind": "observed",
+    "scope": "The CFTR Modulator Therapies chapter of the CFFPR 2024 Annual Data Report was read in its entirety."
+  },
+  {
+    "id": "cffpr-prescribed-count",
+    "claim": "In 2024, 26,277 of the 29,314 people eligible for a CFTR modulator based on age and genotype were prescribed a CFTR modulator in the CFF Registry.",
+    "source": "cffpr-txt",
+    "quote": ["In 2024, 26,277 of the 29,314 (89.6 percent) people eligible for a CFTR modulator based on age and",
+              "was the most highly prescribed CFTR modulator."],
+    "kind": "observed"
+  },
+  {
+    "id": "cffpr-eligible-not-prescribed",
+    "claim": "The number of eligible individuals who were not prescribed a CFTR modulator in the CFF Registry fell from 3,065 in 2023 to 3,037 in 2024.",
+    "source": "cffpr-txt",
+    "quote": ["The number of eligible individuals who were not",
+              "prescribed a CFTR modulator fell from 3,065 (10.8 percent) in 2023 to 3,037 (10.4 percent) in 2024."],
+    "kind": "observed"
+  },
+  {
+    "id": "ccfr-ineligible-percentage",
+    "claim": "In the 2024 Canadian CF Registry, 7.6% of individuals were not considered currently eligible by age and genotype for any CFTR modulator therapies.",
+    "source": "ccfr-txt",
+    "quote": ["Table 7 describes the CFTR modulator usage in 2024,",
+              "Not shown in Table 7 are the 7.6% of individuals who were not considered currently eligible by age and genotype,",
+              "for any CFTR modulator therapies."],
+    "kind": "observed",
+    "scope": "Section 6 Table 7 and associated explanatory prose of CCFR 2024 were read."
+  },
+  {
+    "id": "ccfr-eti-usage-count",
+    "claim": "In 2024, 3,087 individuals in Canada were on elexacaftor/tezacaftor/ivacaftor, including 1,004 children and 2,083 adults.",
+    "source": "ccfr-txt",
+    "quote": ["Table 7 describes the CFTR modulator usage in 2024",
+              "Elexacaftor/tezacaftor/ivacaftor 1,004 2,083 3,087"],
+    "kind": "observed"
+  },
+  {
+    "id": "ukcfr-registry-count",
+    "claim": "In 2024, 11,381 people with CF were registered in the UK CF Registry, of whom 93% had an annual review.",
+    "source": "ukcfr-txt",
+    "quote": ["11,381 people with CF are registered within the UK CF Registry of whom 93% had",
+              "annual review in 2024"],
+    "kind": "observed"
+  },
+  {
+    "id": "ukcfr-annual-review-modulator-users",
+    "claim": "In the UK CF Registry, 8,830 people with a 2024 annual review had at least one record of using a CFTR modulator in 2024.",
+    "source": "ukcfr-txt",
+    "quote": ["8,830 people with CF with a 2024 annual review have at least one record of using a CFTR modulator in",
+              "have at least one record of using a CFTR modulator in 2024 (Section 1.35a)."],
+    "kind": "observed"
+  },
+  {
+    "id": "ukcfr-never-used-percentage",
+    "claim": "In the UK CF Registry, 12.4% of people with CF with a 2024 annual review had never used a CFTR modulator.",
+    "source": "ukcfr-txt",
+    "quote": ["12.4% of people with CF",
+              "with CF with a 2024 annual review have never used a CFTR modulator (Section 1.35a)."],
+    "kind": "observed",
+    "scope": "Section 1.35a and executive summary bullets of UKCFR 2024 report were read."
+  },
+  {
+    "id": "acfdr-adult-ineligible-range",
+    "claim": "In Australia, five to six percent of adults with CF were not eligible for a CFTR modulator.",
+    "source": "acfdr-txt",
+    "quote": ["Five to six percent of adults with CF are not eligible",
+              "for a CFTR modulator"],
+    "kind": "observed"
+  },
+  {
+    "id": "acfdr-paediatric-ineligible-count",
+    "claim": "In the Australian registry in 2025, 170 children and adolescents were not eligible for a modulator.",
+    "source": "acfdr-txt",
+    "quote": ["modulator was known/recorded for 99.7% (1,473 people) in 2025.",
+              "Of these, 170 children and adolescents (11.5%) were not eligible for a modulator; 75.0% (1,105 children and",
+              "adolescents) were eligible and prescribed a modulator"],
+    "kind": "observed"
+  },
+  {
+    "id": "acfdr-adult-prescribed-percentage",
+    "claim": "Among 2,326 adults in the Australian registry with known eligibility, 85.6% were eligible and prescribed a modulator.",
+    "source": "acfdr-txt",
+    "quote": ["Of the 2,326 adults in the registry in 2025 who had known eligibility for a modulator, 5.8% were not eligible for",
+              "85.6% were eligible and prescribed a modulator"],
+    "kind": "observed"
+  },
+  {
+    "id": "ecfspr-ema-criteria",
+    "claim": "The ECFSPR adopted the 2024 eligibility criteria of the European Medicines Agency for all countries except Israel, the Russian Federation and Switzerland.",
+    "source": "ecfspr-txt",
+    "quote": ["We adopted the 2024 eligibility criteria of the European Medicines Agency (EMA) for all countries in the ECFSPR except",
+              "Israel, the Russian Federation and Switzerland"],
+    "kind": "observed",
+    "scope": "Chapter 9 page 81 of the ECFSPR 2024 Annual Data Report was read."
+  }
+]
