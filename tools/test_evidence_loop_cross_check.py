@@ -114,8 +114,11 @@ class TestT0102Step1EvidenceLoop(unittest.TestCase):
             # Confirm silent fields print as "not stated"
             fields = s["fields"]
             silent_values = [v for v in fields.values() if v == "not stated"]
-            # At least some sources have explicit 'not stated' values where data is silent
             self.assertIsInstance(fields, dict)
+        self.assertTrue(
+            any(v == "not stated" for s in self.sources for v in s["fields"].values()),
+            "At least one silent field across sources must be explicitly rendered as 'not stated'",
+        )
 
     def test_concordant_cross_check_passes(self):
         appr = self.sources[0]["fields"]["original_approval"]

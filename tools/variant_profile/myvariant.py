@@ -88,7 +88,8 @@ def parse_myvariant_record(hit: dict[str, Any]) -> dict[str, Any]:
     cadd = hit.get("cadd", {}) if isinstance(hit.get("cadd"), dict) else {}
     clinvar = hit.get("clinvar", {}) if isinstance(hit.get("clinvar"), dict) else {}
     snpeff = hit.get("snpeff", {}) if isinstance(hit.get("snpeff"), dict) else {}
-    snpeff_ann = snpeff.get("ann", {}) if isinstance(snpeff.get("ann"), dict) else {}
+    raw_ann = snpeff.get("ann", {})
+    snpeff_ann = raw_ann[0] if isinstance(raw_ann, list) and raw_ann else (raw_ann if isinstance(raw_ann, dict) else {})
 
     polyphen = cadd.get("polyphen", {}) if isinstance(cadd.get("polyphen"), dict) else {}
     sift = cadd.get("sift", {}) if isinstance(cadd.get("sift"), dict) else {}
