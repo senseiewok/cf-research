@@ -102,9 +102,9 @@ Match status: single (ClinVar matches: 1, MyVariant hits: 1)
   CADD Phred score: 22.9    [myvariant:cadd.phred]
   CADD raw score: 3.36173    [myvariant:cadd.rawscore]
   CADD consequence: NON_SYNONYMOUS    [myvariant:cadd.consequence]
-  PolyPhen-2: benign (score: 0.131)    [myvariant:cadd.polyphen.cat]
-  SIFT: tolerated (score: 0.13)    [myvariant:cadd.sift.cat]
-  SnpEff effect: missense_variant (impact: MODERATE)    [myvariant:snpeff.ann.effect]
+  PolyPhen-2 prediction: benign [myvariant:cadd.polyphen.cat] (score: 0.131 [myvariant:cadd.polyphen.val])
+  SIFT prediction: tolerated [myvariant:cadd.sift.cat] (score: 0.13 [myvariant:cadd.sift.val])
+  SnpEff effect: missense_variant [myvariant:snpeff.ann.effect] (impact: MODERATE [myvariant:snpeff.ann.putative_impact])
   GRCh38 coordinates: chr7:117504291-117504291    [myvariant:clinvar.hg38.start]
 
 --- 3. Structural Prediction Layer (AlphaMissense) ---
