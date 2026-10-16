@@ -1,0 +1,115 @@
+{
+  "title": "CFTR Cryo-EM 3D Nonsense Truncation & Allosteric Architecture",
+  "reference_pdb": "6MSM (Phosphorylated, ATP-bound active human CFTR, 3.2 A)",
+  "superposed_comparators": [
+    "5UAK (inward-facing, 3.87 A)",
+    "8EIQ (Trikafta-bound, 3.0 A)"
+  ],
+  "variants": {
+    "G542X": {
+      "variant": "G542X",
+      "codon_residue": 542,
+      "domain": "NBD1 (ABC transporter 1, 423-646)",
+      "synthesized_length_aa": 541,
+      "deleted_length_aa": 939,
+      "fraction_synthesized_pct": 36.55,
+      "displacement_6msm_5uak_A": 8.52,
+      "displacement_6msm_8eiq_A": 1.93,
+      "calpha_coords_6msm": [
+        -10.6,
+        4.1,
+        -13.6
+      ],
+      "structural_fate": "Cotranslational Ribosome Quality Control (RQC) & Proteasomal Cleavage",
+      "missing_catalytic_elements": [
+        "NBD1 alpha-helical subdomain (542-646)",
+        "Regulatory R-domain (654-831)",
+        "TMD2 transmembrane helices TM7-TM12 (859-1155)",
+        "NBD2 catalytic core (1210-1443)",
+        "C-terminal PDZ-binding motif (-DTRL, 1477-1480)"
+      ],
+      "therapeutic_rescue_feasibility": "Readthrough mandatory; truncated fragment is non-viable as channel"
+    },
+    "W1282X": {
+      "variant": "W1282X",
+      "codon_residue": 1282,
+      "domain": "NBD2 (ABC transporter 2, 1210-1443)",
+      "synthesized_length_aa": 1281,
+      "deleted_length_aa": 199,
+      "fraction_synthesized_pct": 86.55,
+      "displacement_6msm_5uak_A": 6.94,
+      "displacement_6msm_8eiq_A": 1.46,
+      "calpha_coords_6msm": [
+        -11.7,
+        -24.6,
+        -22.1
+      ],
+      "structural_fate": "CFTR_1281 ERAD Chaperone Trap (Calnexin/BiP sink, Manfredi et al. 2025)",
+      "missing_catalytic_elements": [
+        "NBD2 catalytic core (residues 1282-1436)",
+        "Walker B motif catalytic Glu1371 (ATP hydrolysis)",
+        "ABC signature motif LSGGQ at 1347",
+        "ATP Site 1 & Site 2 composite interface pairing with NBD1",
+        "C-terminal PDZ-binding motif (-DTRL, 1477-1480)"
+      ],
+      "landmark_distances_A": {
+        "ICL4_coupling": 44.5,
+        "ICL1_coupling": 44.32,
+        "ATP_site_1": 39.5,
+        "ATP_site_2": 25.03,
+        "TMD1_pocket": 53.18,
+        "TMD2_pocket": 42.2,
+        "pore_constriction": 72.98
+      },
+      "exposed_hydrophobic_sasa_estimate_A2": 2460.0,
+      "allosteric_rescue_mechanism": {
+        "tmd1_tezacaftor_distance_A": 53.18,
+        "tmd2_elexacaftor_distance_A": 42.2,
+        "icl4_coupling_distance_A": 44.5,
+        "coupling_mode": "Long-range allosteric conformational rigidification (>40 A) accelerating Band C Golgi export (k_fold >> k_ERAD)"
+      }
+    }
+  },
+  "allosteric_pockets": {
+    "Tezacaftor_VX661": {
+      "pocket": "TMD1 / TM6 / ICL1",
+      "center_residues": [
+        370,
+        390
+      ],
+      "centroid_6msm": [
+        15.442857142857143,
+        20.209523809523812,
+        -12.957142857142859
+      ],
+      "distance_to_W1282_A": 53.18
+    },
+    "Elexacaftor_VX445": {
+      "pocket": "TMD2 / TM8 / TM10 / TM11",
+      "center_residues": [
+        1050,
+        1085
+      ],
+      "centroid_6msm": [
+        -0.5555555555555555,
+        13.730555555555556,
+        -8.405555555555557
+      ],
+      "distance_to_W1282_A": 42.2
+    },
+    "Ivacaftor_VX770": {
+      "pocket": "Pore constriction / TM4 / TM5 / TM8",
+      "center_residues": [
+        334,
+        348
+      ],
+      "centroid_6msm": [
+        7.286666666666666,
+        -2.5,
+        44.81333333333334
+      ],
+      "distance_to_W1282_A": 72.98
+    }
+  },
+  "timestamp_utc": "2026-10-15T18:00:00Z"
+}
