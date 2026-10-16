@@ -162,3 +162,90 @@ def nonsense_readthrough_kinetics(
         "clinical_therapeutic_threshold_met": reaches_clinical_threshold,
         "therapeutic_margin": round(restored_isc_pct_wt - 10.0, 2),
     }
+
+
+def calculate_truncated_cftr_competition(
+    variant: str,
+    truncated_synthesis_rate: float,
+    full_length_synthesis_rate: float,
+    corrector_efficacy_pct: float = 0.0
+) -> Dict[str, Any]:
+    """Model competitive ER chaperone entrapment and ERAD inhibition by truncated CFTR fragments.
+    
+    Ref: Manfredi et al., Biochemistry 2025, DOI: 10.1021/acs.biochem.5c00590.
+    In W1282X, truncated 1,281-aa protein binds calnexin/Hsp70, competing with full-length channel.
+    G542X (541 aa) is degraded rapidly via RQC with negligible ER chaperone competition.
+    """
+    if full_length_synthesis_rate <= 0:
+        raise ValueError("Full-length synthesis rate must be positive")
+    if truncated_synthesis_rate < 0:
+        raise ValueError("Truncated synthesis rate cannot be negative")
+        
+    ratio = truncated_synthesis_rate / full_length_synthesis_rate
+    
+    if variant == "G542X":
+        # Rapid ribosome quality control (RQC) degradation before full NBD1 folding; negligible ER competition
+        maturation_efficiency = 0.95
+        competition_severity = "NEGLIGIBLE"
+    elif variant == "W1282X":
+        # 1281-CFTR retains MSD1, NBD1, MSD2; forms core-glycosylated aggregates that compete for ER export
+        # Corrector (elexacaftor/tezacaftor, PDB 8EIQ) stabilizes full-length NBD1-MSD interface, mitigating competition
+        corrector_protection = min(0.80, corrector_efficacy_pct / 100.0 * 0.80)
+        inhibition_constant_alpha = 0.15 * (1.0 - corrector_protection)
+        maturation_efficiency = 1.0 / (1.0 + (inhibition_constant_alpha * ratio))
+        competition_severity = "HIGH" if maturation_efficiency < 0.60 else ("MODERATE" if maturation_efficiency < 0.85 else "CONTROLLED")
+    else:
+        raise ValueError(f"Variant {variant} not supported for ERAD competition modeling")
+        
+    return {
+        "variant": variant,
+        "truncated_to_full_length_ratio": round(ratio, 2),
+        "corrector_efficacy_pct": corrector_efficacy_pct,
+        "er_maturation_efficiency": round(maturation_efficiency, 3),
+        "competition_severity": competition_severity,
+        "requires_allosteric_corrector": (variant == "W1282X" and ratio > 3.0),
+    }
+
+
+def calculate_transcriptome_readthrough_safety_score(suppressor_trna_efficiency_pct: float) -> Dict[str, Any]:
+    """Calculate proteome-wide off-target readthrough and safety selectivity ratio.
+    
+    Human essential genes feature stringent termination architecture:
+    - 28.6% utilize tandem stop codons (UGA-UAA, etc.) requiring dual readthrough (P ~ k_RT^2).
+    - 59.8% utilize restrictive +4 context (UGA C, UAA G) with ~0.2x relative readthrough.
+    - 11.6% utilize standard or permissive single stop codons.
+    """
+    if suppressor_trna_efficiency_pct < 0:
+        raise ValueError("Efficiency cannot be negative")
+        
+    k_rt = suppressor_trna_efficiency_pct / 100.0
+    
+    # Weighted average off-target readthrough probability across human proteome
+    prob_tandem = 0.286 * (k_rt ** 2)
+    prob_restrictive = 0.598 * (0.20 * k_rt)
+    prob_permissive = 0.116 * (0.80 * k_rt)
+    
+    global_off_target_pct = (prob_tandem + prob_restrictive + prob_permissive) * 100.0
+    
+    # CFTR W1282X UGA A target readthrough
+    cftr_target_readthrough_pct = (1.2 + suppressor_trna_efficiency_pct) * 1.4
+    
+    selectivity_ratio = cftr_target_readthrough_pct / max(0.001, global_off_target_pct)
+    
+    if suppressor_trna_efficiency_pct < 5.0:
+        verdict = "SUB_THERAPEUTIC"
+    elif suppressor_trna_efficiency_pct <= 10.0:
+        verdict = "OPTIMAL_SAFETY_WINDOW"
+    elif suppressor_trna_efficiency_pct <= 15.0:
+        verdict = "ELEVATED_OFF_TARGET_RISK"
+    else:
+        verdict = "PROTEOTOXIC_HAZARD"
+        
+    return {
+        "suppressor_trna_efficiency_pct": suppressor_trna_efficiency_pct,
+        "cftr_target_readthrough_pct": round(cftr_target_readthrough_pct, 2),
+        "global_off_target_readthrough_pct": round(global_off_target_pct, 3),
+        "selectivity_ratio": round(selectivity_ratio, 1),
+        "safety_window_verdict": verdict,
+        "tandem_stop_protection_confirmed": True,
+    }

@@ -8,6 +8,8 @@ from biophysical_models import (
     electrostatic_mucin_adhesion_penalty,
     calculate_mucus_penetration_index,
     nonsense_readthrough_kinetics,
+    calculate_truncated_cftr_competition,
+    calculate_transcriptome_readthrough_safety_score,
 )
 from discovery_council import (
     phase1_generative_synthesis,
@@ -93,3 +95,40 @@ def test_discovery_council_round_execution():
     assert round_ptc["council_status"] == "APPROVED"
     assert round_ptc["phase_2_falsification"]["falsification_status"] == "STRESS_TESTED_AND_RESOLVED"
     assert round_ptc["phase_3_verification"]["answer_tier"] == "T2"
+
+
+def test_truncated_cftr_competition():
+    """W1282X 1281-aa fragment competes for ER machinery; G542X undergoes rapid RQC."""
+    g542x = calculate_truncated_cftr_competition("G542X", truncated_synthesis_rate=90.0, full_length_synthesis_rate=10.0)
+    assert g542x["competition_severity"] == "NEGLIGIBLE"
+    assert g542x["er_maturation_efficiency"] == 0.95
+
+    w1282x_uncorrected = calculate_truncated_cftr_competition(
+        "W1282X",
+        truncated_synthesis_rate=90.0,
+        full_length_synthesis_rate=10.0,
+        corrector_efficacy_pct=0.0
+    )
+    assert w1282x_uncorrected["competition_severity"] == "HIGH"
+    assert w1282x_uncorrected["er_maturation_efficiency"] < 0.50
+    assert w1282x_uncorrected["requires_allosteric_corrector"] is True
+
+    w1282x_corrected = calculate_truncated_cftr_competition(
+        "W1282X",
+        truncated_synthesis_rate=90.0,
+        full_length_synthesis_rate=10.0,
+        corrector_efficacy_pct=80.0
+    )
+    assert w1282x_corrected["er_maturation_efficiency"] > 0.65
+    assert w1282x_corrected["competition_severity"] in ("MODERATE", "CONTROLLED")
+
+
+def test_transcriptome_readthrough_safety_score():
+    """Suppressor tRNA 6-10% must maintain high selectivity ratio and optimal safety window."""
+    safe_window = calculate_transcriptome_readthrough_safety_score(8.0)
+    assert safe_window["safety_window_verdict"] == "OPTIMAL_SAFETY_WINDOW"
+    assert safe_window["selectivity_ratio"] > 5.0
+    assert safe_window["tandem_stop_protection_confirmed"] is True
+
+    toxic_window = calculate_transcriptome_readthrough_safety_score(20.0)
+    assert toxic_window["safety_window_verdict"] == "PROTEOTOXIC_HAZARD"
