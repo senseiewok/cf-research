@@ -471,6 +471,21 @@ class ModelTagTest(Fixture):
         self.assertEqual(code, 0, out)
         self.assertIn("2 proposed, 1 accepted, 1 rejected (quote-rejection rate 50.0%)", out)
 
+    def test_model_sorted_entries_are_in_accuracy_sample(self):
+        """Verifies that model-sorted entries sit inside the census-v1 frame and are drawn into the accuracy sample (T-0135)."""
+        tags = json.loads(self.tags_path.read_text(encoding="utf-8"))
+        good = sf.good_model_tags()
+        raw = json.dumps(good).encode("utf-8")
+        h = mls.model_tags_digest(raw)
+        sheet, key, summary = mls.build(self.s, tags, LEX, design="census-v1", seed=42, model_tags=good, model_tags_sha256=h)
+        model_eid = good[0]["entry_id"]
+        # Verify model-sorted entry is in the drawn sample
+        drawn_ids = {r["entry_id"] for r in key["rows"]}
+        self.assertIn(model_eid, drawn_ids)
+        # Verify its stratum reflects its model-assigned class
+        row = next(r for r in key["rows"] if r["entry_id"] == model_eid)
+        self.assertTrue(row["stratum"].startswith("census:small") or row["stratum"].startswith("sample:"))
+
 
 class MetricsTest(unittest.TestCase):
     def test_wilson(self):

@@ -656,6 +656,18 @@ The second round of rule fixes, after the census frozen set was redrawn with lex
 
 `proposals/2026-10-11-withholding-design.md` has the decision and the council. In short: `check_atlas.py --withhold-failing` withholds, class by class, those that fail precision or recall where estimable or have no labelled positive, and every other stop rule still blocks. `--record FILE` writes a counts-only run record (hashes, thresholds, every class's figures and status, the sorted withheld list and its hash, the not-shown share) and `--check-record FILE` verifies it. The page lists withheld classes by name with no per-class count. A cap on the not-shown share is a person's decision, set before a run.
 
+## Accuracy story: thresholds, intervals, and model-sorted inclusion
+
+Following council review (board task T-0135), the atlas makes its accuracy evidence and limits explicit on public pages:
+
+- **Accuracy thresholds (S1 to S4 values)**: Printed on the front page from the run record and gate code: precision >= 0.85 and recall >= 0.80 where 10 or more entries estimate it (stop rule S1), other plus unclassified under 15% (S2), route difference under 10% unexplained (S3), and negative controls passed with synthetic markers checked (S0, S4).
+- **Bootstrap confidence intervals**: Each shown class page displays a 95% confidence interval for its precision and recall, computed by stratified bootstrap from the frozen sample counts. This makes sampling uncertainty visible instead of presenting a point estimate as exact.
+- **Model-sorted entries in the accuracy sample**: Consensus model tags define the census-v1 sampling frame alongside rule tags. Model-sorted entries sit inside the accuracy evaluation frame and are drawn into accuracy sample strata (`census:small` or `sample:<class>`). Each class page states: *"Model-sorted entries are included in the accuracy sample."*
+- **Plain-language definitions**:
+  - *Weighted estimate*: accounts for different sampling rates across strata, giving rarer outcome classes higher weight per sampled row so estimates reflect the whole snapshot rather than just the sampled subset.
+  - *Few checked*: fewer than 10 labelled entries were available to reliably estimate precision or recall, so counts are shown without percentage shares or sorting accuracy metrics.
+  - *Synthetic marker*: a testing flag ensuring that artificial test fixtures can never be published as real registry data (stop rule S0).
+
 ## What the lexicon does not cover yet
 
 - Negation and hedging: "FEV1 was not measured" is still tagged FEV1.
