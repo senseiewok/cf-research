@@ -6,6 +6,7 @@ The list behind the site's Resources tab: help that organisations offer to peopl
 | --- | --- |
 | [`resources.yaml`](resources.yaml) | One row per resource. The only data file. |
 | `../tools/resources/check_resources.py` | Checks the rows against the schema and the source catalog (`python tools/resources/check_resources.py`). |
+| `../tools/resources/propose_resources.py` | Reusable intake tool for local agents to propose `lead_only` rows from permitted sites (`access: fetch`). |
 
 ## What a row is
 
@@ -24,3 +25,29 @@ A row whose page is in Spanish (`lang` starting with `es`) also carries `summary
 ## What the checker does and does not do
 
 It checks what a script can see: fields, allowed values, https, the catalog link, the word cap (also for `summary_es`, which a Spanish-language row must have), no phone or email, valid dates, hashes, and which rows are due for a person to re-check (180 days; 90 for money and medicines). It **cannot** check that a summary is not copied or that a page says what the row says: that is the person's attestation. It never requests any link.
+ 
+## Automated intake from permitted hosts (`propose_resources.py`)
+
+Local agents propose new rows using `python tools/resources/propose_resources.py`.
+
+Conduct invariants:
+- **Catalog gate**: The target host must have an entry in `sources/catalog.yaml` with `access: fetch`. All requested URLs must reside on that same host.
+- **Robots gate**: `robots.txt` is fetched first under the project user agent (`senseiewok-research-evidence/1.0.0`). Every declared agent group is verified; an unreadable file stops the run immediately.
+- **Pacing & size cap**: Requests are strictly paced 3.0 seconds apart, same-host only, with no cross-host redirects followed, and capped at 500 KB per page.
+- **Scratch isolation**: Screenshots and extracted text reside exclusively in a scratch directory outside all repositories (e.g. `cf-lab-files/scratch/resource_intake`) and can be deleted on request via `--delete-scratch`.
+- **Worker boundary**: The local worker model operates inside a strict data boundary with no tools or network access.
+- **Rule enforcement**: Any draft failing the checker's rules (word cap of 25, no digits except four-digit years, no quote marks, no URLs, no contact numbers or emails) is dropped.
+- **Human confirmation invariant**: The tool emits candidate rows with `basis: lead_only`. A person must confirm every row; the tool strictly never writes `confirmed_by`, `confirmed_on`, or `content_hash`.
+
+### Dry run on a real host
+
+A dry run simulates the intake pipeline without opening network sockets or calling local models:
+
+```bash
+python tools/resources/propose_resources.py \
+    --source-id cftrust-resource-pages \
+    --urls https://www.cysticfibrosis.org.uk/what-is-cystic-fibrosis/faqs \
+    --dry-run
+```
+
+This verifies the catalog permission (`cftrust-resource-pages`), validates same-host containment, confirms scratch isolation outside git, and outputs a proposed `lead_only` row for human review.
