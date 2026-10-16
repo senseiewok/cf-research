@@ -1,0 +1,16 @@
+{
+  "trikafta-spl-warnings": "Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA. Regular monitoring of liver transaminases is recommended prior to initiating TRIKAFTA, every 3 months during the first year of treatment, and annually thereafter.",
+  "trikafta-spl-nda": "NDA 212273 - TRIKAFTA (elexacaftor, tezacaftor, and ivacaftor tablets; ivacaftor oral granules). Initial U.S. Approval: 2019.",
+  "alyftrek-spl-active": "ALYFTREK contains vanzacaftor, tezacaftor, and deutivacaftor for oral administration in fixed-dose combination.",
+  "kalydeco-spl-boxed": "Boxed warning: none reported in current FDA approved prescribing information for KALYDECO (ivacaftor, NDA 203188).",
+  "ctgov-nct05668741": "NCT05668741: A Phase 1/2 Study to Evaluate the Safety and Tolerability of VX-522 in Adults With Cystic Fibrosis. Primary outcome: incidence of treatment-emergent adverse events through 28 days.",
+  "ctgov-nct05033080": "NCT05033080: A Phase 3, Randomized, Double-Blind, Controlled Study Evaluating Efficacy and Safety. A total of 510 patients were randomized across 115 clinical sites.",
+  "ctgov-nct05033080-enrollment": "The trial enrolled 240 female patients and 270 male patients across all active regional sites.",
+  "ctgov-nct05033080-eligibility": "Only patients with at least one F508del allele were eligible for the trial.",
+  "ctgov-sweat-chloride": "Sweat chloride concentration decreased by a mean of 42.8 mmol/L at week 24 in the active intervention group.",
+  "cryoem-cftr-structures": "Atomic models of human CFTR in dephosphorylated ATP-free (PDB 5UAK) and phosphorylated ATP-bound (PDB 6MSM) conformations resolve channel gating transitions.",
+  "cryoem-modulator-complexes": "Cryo-EM structures of CFTR bound to elexacaftor and tezacaftor (PDB 8EIQ and 8EJ1) reveal allosteric corrector binding pockets in transmembrane domains.",
+  "crossref-10-1038-ng2745": "Crossref metadata for DOI 10.1038/ng.2745 (Sosnay et al.): update-to notices: 0, retractions: 0, status: clean.",
+  "ecfspr-2024-summary": "The ECFSPR 2024 annual report records 54,208 registered individuals across 39 participating national registries.",
+  "ecfspr-2024-modulators": "In 2024, approximately 82.4 percent of eligible individuals aged 6 years and older were receiving CFTR modulator therapy in reporting centres."
+}

@@ -1,0 +1,710 @@
+[
+  {
+    "id": "BENCH-001",
+    "name": "Lookup TRIKAFTA FDA NDA Number",
+    "category": "evidence_lookup",
+    "source_id": "openfda-label",
+    "source_citation": "U.S. FDA Structured Product Label (SPL) for TRIKAFTA NDA 212273",
+    "source_line": "NDA 212273 - TRIKAFTA (elexacaftor, tezacaftor, and ivacaftor tablets; ivacaftor oral granules). Initial U.S. Approval: 2019.",
+    "input": {
+      "drug_name": "TRIKAFTA",
+      "requested_field": "nda_application_number"
+    },
+    "expected_output": {
+      "nda_number": "212273",
+      "approval_year": "2019"
+    },
+    "claim_object": {
+      "id": "claim-bench-001",
+      "claim": "NDA 212273 corresponds to TRIKAFTA tablets and oral granules with initial approval in 2019.",
+      "source": "trikafta-spl-nda",
+      "quote": "NDA 212273 - TRIKAFTA (elexacaftor, tezacaftor, and ivacaftor tablets; ivacaftor oral granules). Initial U.S. Approval: 2019.",
+      "kind": "observed"
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-002",
+    "name": "Lookup ALYFTREK Fixed-Dose Active Ingredients",
+    "category": "evidence_lookup",
+    "source_id": "openfda-label",
+    "source_citation": "U.S. FDA Structured Product Label (SPL) for ALYFTREK fixed combination",
+    "source_line": "ALYFTREK contains vanzacaftor, tezacaftor, and deutivacaftor for oral administration in fixed-dose combination.",
+    "input": {
+      "drug_name": "ALYFTREK",
+      "requested_field": "active_substances"
+    },
+    "expected_output": {
+      "substances": ["vanzacaftor", "tezacaftor", "deutivacaftor"]
+    },
+    "claim_object": {
+      "id": "claim-bench-002",
+      "claim": "ALYFTREK contains vanzacaftor, tezacaftor, and deutivacaftor for oral administration.",
+      "source": "alyftrek-spl-active",
+      "quote": "ALYFTREK contains vanzacaftor, tezacaftor, and deutivacaftor for oral administration in fixed-dose combination.",
+      "kind": "observed"
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-003",
+    "name": "Lookup BEACON-CF mRNA Trial Protocol Record",
+    "category": "evidence_lookup",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov protocol section for VX-522 (NCT05668741)",
+    "source_line": "NCT05668741: A Phase 1/2 Study to Evaluate the Safety and Tolerability of VX-522 in Adults With Cystic Fibrosis. Primary outcome: incidence of treatment-emergent adverse events through 28 days.",
+    "input": {
+      "trial_id": "NCT05668741",
+      "requested_field": "study_phase_and_designation"
+    },
+    "expected_output": {
+      "nct_id": "NCT05668741",
+      "phase": "Phase 1/2",
+      "primary_outcome_timeframe_days": "28"
+    },
+    "claim_object": {
+      "id": "claim-bench-003",
+      "claim": "NCT05668741 evaluated treatment-emergent adverse events through 28 days.",
+      "source": "ctgov-nct05668741",
+      "quote": "Primary outcome: incidence of treatment-emergent adverse events through 28 days.",
+      "kind": "observed"
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-004",
+    "name": "Lookup CFTR Inward and Outward Cryo-EM PDB Coordinates",
+    "category": "evidence_lookup",
+    "source_id": "cftr-structures",
+    "source_citation": "Science 2022 (DOI 10.1126/science.adg7492); RCSB Protein Data Bank",
+    "source_line": "Atomic models of human CFTR in dephosphorylated ATP-free (PDB 5UAK) and phosphorylated ATP-bound (PDB 6MSM) conformations resolve channel gating transitions.",
+    "input": {
+      "protein": "human CFTR",
+      "requested_field": "pdb_accession_codes"
+    },
+    "expected_output": {
+      "atp_free_inward": "5UAK",
+      "atp_bound_outward": "6MSM"
+    },
+    "claim_object": {
+      "id": "claim-bench-004",
+      "claim": "Atomic models in PDB 5UAK and PDB 6MSM resolve channel gating transitions.",
+      "source": "cryoem-cftr-structures",
+      "quote": "Atomic models of human CFTR in dephosphorylated ATP-free (PDB 5UAK) and phosphorylated ATP-bound (PDB 6MSM) conformations resolve channel gating transitions.",
+      "kind": "observed"
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-005",
+    "name": "Lookup Crossref Update-To Status for Benchmark DOI",
+    "category": "evidence_lookup",
+    "source_id": "crossref-api",
+    "source_citation": "Crossref API works endpoint filter=updates:10.1038/ng.2745",
+    "source_line": "Crossref metadata for DOI 10.1038/ng.2745 (Sosnay et al.): update-to notices: 0, retractions: 0, status: clean.",
+    "input": {
+      "doi": "10.1038/ng.2745",
+      "requested_field": "retraction_count"
+    },
+    "expected_output": {
+      "update_notices": 0,
+      "retractions": 0,
+      "clean": true
+    },
+    "claim_object": {
+      "id": "claim-bench-005",
+      "claim": "Crossref records 0 retractions for the monitored benchmark paper.",
+      "source": "crossref-10-1038-ng2745",
+      "quote": "update-to notices: 0, retractions: 0, status: clean.",
+      "kind": "observed"
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-006",
+    "name": "Verify Exact Quote of TRIKAFTA Transaminase Monitoring",
+    "category": "quote_exactness",
+    "source_id": "openfda-label",
+    "source_citation": "U.S. FDA Drug Label for TRIKAFTA (Warnings and Precautions Section 5.1)",
+    "source_line": "Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA.",
+    "input": {
+      "candidate_quote": "Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA."
+    },
+    "expected_output": {
+      "r2_verdict": "PASS",
+      "quote_word_count": 14
+    },
+    "claim_object": {
+      "id": "claim-bench-006",
+      "claim": "Elevations in liver transaminases have been reported in patients treated with TRIKAFTA.",
+      "source": "trikafta-spl-warnings",
+      "quote": "Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA.",
+      "kind": "observed"
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-007",
+    "name": "Catch Subtle Model Paraphrasing in Cited Quote",
+    "category": "quote_exactness",
+    "source_id": "openfda-label",
+    "source_citation": "U.S. FDA Drug Label for TRIKAFTA Section 5.1",
+    "source_line": "Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA.",
+    "input": {
+      "candidate_quote": "Elevations in hepatic transaminases were observed in patients taking TRIKAFTA."
+    },
+    "expected_output": {
+      "r2_verdict": "FAIL",
+      "failure_reason": "quote is not an exact piece of evidence"
+    },
+    "claim_object": {
+      "id": "claim-bench-007",
+      "claim": "Elevations in hepatic enzymes were observed in patients taking TRIKAFTA.",
+      "source": "trikafta-spl-warnings",
+      "quote": "Elevations in hepatic transaminases were observed in patients taking TRIKAFTA.",
+      "kind": "observed"
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R2"],
+    "intended_flaw": "Paraphrased quote where worker substituted synonyms ('hepatic transaminases were observed') rather than copying exact text",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-008",
+    "name": "Catch Under-Length Quote Below Four Words",
+    "category": "quote_exactness",
+    "source_id": "openfda-label",
+    "source_citation": "U.S. FDA Drug Label for TRIKAFTA Section 5.1",
+    "source_line": "Regular monitoring of liver transaminases is recommended prior to initiating TRIKAFTA",
+    "input": {
+      "candidate_quote": "Regular monitoring"
+    },
+    "expected_output": {
+      "r2_verdict": "FAIL",
+      "failure_reason": "quote has 2 word(s); at least 4 are needed"
+    },
+    "claim_object": {
+      "id": "claim-bench-008",
+      "claim": "Regular monitoring is recommended.",
+      "source": "trikafta-spl-warnings",
+      "quote": "Regular monitoring",
+      "kind": "observed"
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R2"],
+    "intended_flaw": "Quote has only 2 words, violating the 4-word minimum requirement",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-009",
+    "name": "Catch Case Mutation in Quoted Evidence",
+    "category": "quote_exactness",
+    "source_id": "openfda-label",
+    "source_citation": "U.S. FDA Drug Label for TRIKAFTA Section 5.1",
+    "source_line": "Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA.",
+    "input": {
+      "candidate_quote": "elevations in liver transaminases (alt and ast) have been reported in patients treated with trikafta."
+    },
+    "expected_output": {
+      "r2_verdict": "FAIL",
+      "failure_reason": "matches the evidence only if case is ignored"
+    },
+    "claim_object": {
+      "id": "claim-bench-009",
+      "claim": "Elevations in liver transaminases occurred in treated patients.",
+      "source": "trikafta-spl-warnings",
+      "quote": "elevations in liver transaminases (alt and ast) have been reported in patients treated with trikafta.",
+      "kind": "observed"
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R2"],
+    "intended_flaw": "Worker downcased acronyms and brand names (alt, ast, trikafta), violating exact character matching",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-010",
+    "name": "Catch Ellipsis Artifact in Quoted Text",
+    "category": "quote_exactness",
+    "source_id": "openfda-label",
+    "source_citation": "U.S. FDA Drug Label for TRIKAFTA Section 5.1",
+    "source_line": "Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA. Regular monitoring of liver transaminases is recommended prior to initiating TRIKAFTA",
+    "input": {
+      "candidate_quote": "Elevations in liver transaminases ... is recommended prior to initiating TRIKAFTA"
+    },
+    "expected_output": {
+      "r2_verdict": "FAIL",
+      "failure_reason": "contains an ellipsis and is not in the evidence"
+    },
+    "claim_object": {
+      "id": "claim-bench-010",
+      "claim": "Monitoring of liver transaminases is recommended prior to initiating TRIKAFTA.",
+      "source": "trikafta-spl-warnings",
+      "quote": "Elevations in liver transaminases ... is recommended prior to initiating TRIKAFTA",
+      "kind": "observed"
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R2"],
+    "intended_flaw": "Worker bridged discontinuous clauses with ellipsis rather than splitting into separate discrete quotes",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-011",
+    "name": "Verify Exact Extraction of Trial Numbers",
+    "category": "numerical_fidelity",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov ProtocolSection for NCT05033080",
+    "source_line": "A total of 510 patients were randomized across 115 clinical sites.",
+    "input": {
+      "candidate_claim": "A total of 510 patients were randomized across 115 clinical sites."
+    },
+    "expected_output": {
+      "r3_verdict": "PASS",
+      "verified_numbers": ["510", "115"]
+    },
+    "claim_object": {
+      "id": "claim-bench-011",
+      "claim": "A total of 510 patients were randomized across 115 clinical sites.",
+      "source": "ctgov-nct05033080",
+      "quote": "A total of 510 patients were randomized across 115 clinical sites.",
+      "kind": "observed"
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-012",
+    "name": "Catch Worker Hallucinated Numerical Approximation",
+    "category": "numerical_fidelity",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov ProtocolSection for NCT05033080",
+    "source_line": "A total of 510 patients were randomized across 115 clinical sites.",
+    "input": {
+      "candidate_claim": "A total of 500 patients were randomized across 120 clinical sites."
+    },
+    "expected_output": {
+      "r3_verdict": "FAIL",
+      "unsupported_numbers": ["500", "120"]
+    },
+    "claim_object": {
+      "id": "claim-bench-012",
+      "claim": "A total of 500 patients were randomized across 120 clinical sites.",
+      "source": "ctgov-nct05033080",
+      "quote": "A total of 510 patients were randomized across 115 clinical sites.",
+      "kind": "observed"
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R3"],
+    "intended_flaw": "Worker wrote approximate rounded numbers (500 and 120) from memory instead of exact figures (510 and 115)",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-013",
+    "name": "Verify Derived Arithmetic Computation from Quoted Strata",
+    "category": "numerical_fidelity",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov ProtocolSection for NCT05033080 gender breakdown",
+    "source_line": "The trial enrolled 240 female patients and 270 male patients across all active regional sites.",
+    "input": {
+      "expression": "240 + 270",
+      "result": 510
+    },
+    "expected_output": {
+      "r3_verdict": "PASS",
+      "computed_result": 510
+    },
+    "claim_object": {
+      "id": "claim-bench-013",
+      "claim": "In total 510 patients were enrolled across the gender strata.",
+      "source": "ctgov-nct05033080-enrollment",
+      "quote": "The trial enrolled 240 female patients and 270 male patients across all active regional sites.",
+      "kind": "computed",
+      "computed": [
+        {
+          "expr": "240 + 270",
+          "result": 510
+        }
+      ]
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-014",
+    "name": "Catch Computed Claim with Ungrounded Operands",
+    "category": "numerical_fidelity",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov ProtocolSection for NCT05033080",
+    "source_line": "A total of 510 patients were randomized across 115 clinical sites.",
+    "input": {
+      "expression": "255 + 255",
+      "result": 510
+    },
+    "expected_output": {
+      "r3_verdict": "FAIL",
+      "missing_operands": ["255"]
+    },
+    "claim_object": {
+      "id": "claim-bench-014",
+      "claim": "In total 510 patients participated across two equal cohorts.",
+      "source": "ctgov-nct05033080",
+      "quote": "A total of 510 patients were randomized across 115 clinical sites.",
+      "kind": "computed",
+      "computed": [
+        {
+          "expr": "255 + 255",
+          "result": 510
+        }
+      ]
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R3"],
+    "intended_flaw": "Computed arithmetic expression uses operand '255' which appears nowhere in the cited quote",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-015",
+    "name": "Verify Multi-Digit Registry Count from Primary Report",
+    "category": "numerical_fidelity",
+    "source_id": "ecfspr-adr-2024",
+    "source_citation": "ECFSPR Annual Data Report 2024 Executive Summary",
+    "source_line": "The ECFSPR 2024 annual report records 54,208 registered individuals across 39 participating national registries.",
+    "input": {
+      "candidate_claim": "The report records 54,208 registered individuals across 39 participating national registries."
+    },
+    "expected_output": {
+      "r3_verdict": "PASS",
+      "numbers": ["54208", "39"]
+    },
+    "claim_object": {
+      "id": "claim-bench-015",
+      "claim": "The report records 54,208 registered individuals across 39 participating national registries.",
+      "source": "ecfspr-2024-summary",
+      "quote": "The ECFSPR 2024 annual report records 54,208 registered individuals across 39 participating national registries.",
+      "kind": "observed"
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-016",
+    "name": "Verify Bounded Absence Claim with Compliant Scope Record",
+    "category": "widening_and_absence",
+    "source_id": "openfda-label",
+    "source_citation": "U.S. FDA Drug Label for KALYDECO NDA 203188",
+    "source_line": "Boxed warning: none reported in current FDA approved prescribing information for KALYDECO (ivacaftor, NDA 203188).",
+    "input": {
+      "candidate_claim": "A boxed warning is not stated in the KALYDECO prescribing information."
+    },
+    "expected_output": {
+      "r4_verdict": "PASS",
+      "scope_word_count": 12
+    },
+    "claim_object": {
+      "id": "claim-bench-016",
+      "claim": "A boxed warning is not stated in the KALYDECO prescribing information.",
+      "source": "kalydeco-spl-boxed",
+      "quote": "Boxed warning: none reported in current FDA approved prescribing information for KALYDECO (ivacaftor, NDA 203188).",
+      "kind": "observed",
+      "scope": "Searched FDA approved structured product labeling for KALYDECO NDA 203188 accessed 2026-10-15."
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-017",
+    "name": "Catch Absence Claim Lacking Mandatory Scope Record",
+    "category": "widening_and_absence",
+    "source_id": "openfda-label",
+    "source_citation": "U.S. FDA Drug Label for KALYDECO NDA 203188",
+    "source_line": "Boxed warning: none reported in current FDA approved prescribing information for KALYDECO (ivacaftor, NDA 203188).",
+    "input": {
+      "candidate_claim": "A boxed warning is not stated in the KALYDECO prescribing information."
+    },
+    "expected_output": {
+      "r4_verdict": "FAIL",
+      "failure_reason": "needs a 'scope' saying what was searched and where"
+    },
+    "claim_object": {
+      "id": "claim-bench-017",
+      "claim": "A boxed warning is not stated in the KALYDECO prescribing information.",
+      "source": "kalydeco-spl-boxed",
+      "quote": "Boxed warning: none reported in current FDA approved prescribing information for KALYDECO (ivacaftor, NDA 203188).",
+      "kind": "observed",
+      "scope": ""
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R4"],
+    "intended_flaw": "Absence phrase 'not stated' used without any scope record detailing the searched corpus",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-018",
+    "name": "Verify Observed Widening Claim Backed by Quote and Scope",
+    "category": "widening_and_absence",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov ProtocolSection for NCT05033080 Eligibility Criteria",
+    "source_line": "Only patients with at least one F508del allele were eligible for the trial.",
+    "input": {
+      "candidate_claim": "Only patients with at least one F508del allele were eligible for the trial."
+    },
+    "expected_output": {
+      "r4_verdict": "PASS",
+      "widening_word": "only",
+      "scope_word_count": 10
+    },
+    "claim_object": {
+      "id": "claim-bench-018",
+      "claim": "Only patients with at least one F508del allele were eligible for the trial.",
+      "source": "ctgov-nct05033080-eligibility",
+      "quote": "Only patients with at least one F508del allele were eligible for the trial.",
+      "kind": "observed",
+      "scope": "ClinicalTrials.gov protocol section eligibility criteria for NCT05033080 audited on 2026-10-15."
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-019",
+    "name": "Catch Unquoted Widening Word in Observed Statement",
+    "category": "widening_and_absence",
+    "source_id": "ecfspr-adr-2024",
+    "source_citation": "ECFSPR Annual Data Report 2024 Modulator Coverage Section",
+    "source_line": "In 2024, approximately 82.4 percent of eligible individuals aged 6 years and older were receiving CFTR modulator therapy in reporting centres.",
+    "input": {
+      "candidate_claim": "All registered individuals were receiving CFTR modulator therapy in reporting centres."
+    },
+    "expected_output": {
+      "r4_verdict": "FAIL",
+      "failure_reason": "an observed claim uses 'all' but its quote does not"
+    },
+    "claim_object": {
+      "id": "claim-bench-019",
+      "claim": "All registered individuals were receiving CFTR modulator therapy in reporting centres.",
+      "source": "ecfspr-2024-modulators",
+      "quote": "In 2024, approximately 82.4 percent of eligible individuals aged 6 years and older were receiving CFTR modulator therapy in reporting centres.",
+      "kind": "observed",
+      "scope": "ECFSPR 2024 Annual Data Report table 14 examined for modulator coverage."
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R4"],
+    "intended_flaw": "Observed claim introduces unanchored absolute word 'all' when evidence states 82.4 percent",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-020",
+    "name": "Catch Insufficient Scope Length for Widening Word",
+    "category": "widening_and_absence",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov ProtocolSection for NCT05033080",
+    "source_line": "Only patients with at least one F508del allele were eligible for the trial.",
+    "input": {
+      "scope": "Searched NCT05033080."
+    },
+    "expected_output": {
+      "r4_verdict": "FAIL",
+      "failure_reason": "needs a scope of at least 8 words; it has 2"
+    },
+    "claim_object": {
+      "id": "claim-bench-020",
+      "claim": "Only patients with at least one F508del allele were eligible for the trial.",
+      "source": "ctgov-nct05033080-eligibility",
+      "quote": "Only patients with at least one F508del allele were eligible for the trial.",
+      "kind": "observed",
+      "scope": "Searched NCT05033080."
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R4"],
+    "intended_flaw": "Scope record has only 2 words, failing the 8-word minimum threshold",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-021",
+    "name": "Verify Inferred Claim with Explicit Marker and Grounded Basis",
+    "category": "epistemic_kind_and_basis",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov ProtocolSection for NCT05033080 Endpoint Results",
+    "source_line": "Sweat chloride concentration decreased by a mean of 42.8 mmol/L at week 24 in the active intervention group.",
+    "input": {
+      "candidate_claim": "We infer that substantial channel opening occurred in response to intervention."
+    },
+    "expected_output": {
+      "r5_verdict": "PASS",
+      "basis_word_count": 15
+    },
+    "claim_object": {
+      "id": "claim-bench-021",
+      "claim": "We infer that substantial channel opening occurred in response to intervention.",
+      "source": "ctgov-sweat-chloride",
+      "quote": "Sweat chloride concentration decreased by a mean of 42.8 mmol/L at week 24 in the active intervention group.",
+      "kind": "inferred",
+      "basis": "Our inference follows because sweat chloride reductions exceeding 30 mmol/L indicate biologically significant CFTR channel function."
+    },
+    "expected_status": "PASS",
+    "expected_rule_failures": [],
+    "intended_flaw": null,
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-022",
+    "name": "Catch Inferred Claim Stated as Unhedged Objective Fact",
+    "category": "epistemic_kind_and_basis",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov ProtocolSection for NCT05033080",
+    "source_line": "Sweat chloride concentration decreased by a mean of 42.8 mmol/L at week 24 in the active intervention group.",
+    "input": {
+      "candidate_claim": "Substantial channel opening occurred in response to intervention."
+    },
+    "expected_output": {
+      "r5_verdict": "FAIL",
+      "failure_reason": "an inferred claim must say 'our inference' or 'we infer'"
+    },
+    "claim_object": {
+      "id": "claim-bench-022",
+      "claim": "Substantial channel opening occurred in response to intervention.",
+      "source": "ctgov-sweat-chloride",
+      "quote": "Sweat chloride concentration decreased by a mean of 42.8 mmol/L at week 24 in the active intervention group.",
+      "kind": "inferred",
+      "basis": "Our inference follows because sweat chloride reductions exceeding 30 mmol/L indicate biologically significant CFTR channel function."
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R5"],
+    "intended_flaw": "Worker marked claim as inferred but omitted required humble phrasing ('our inference' or 'we infer')",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-023",
+    "name": "Catch Inferred Claim with Empty Explanatory Basis",
+    "category": "epistemic_kind_and_basis",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov ProtocolSection for NCT05033080",
+    "source_line": "Sweat chloride concentration decreased by a mean of 42.8 mmol/L at week 24 in the active intervention group.",
+    "input": {
+      "candidate_claim": "We infer that substantial channel opening occurred in response to intervention."
+    },
+    "expected_output": {
+      "r5_verdict": "FAIL",
+      "failure_reason": "an inferred claim needs a 'basis' of at least 8 words"
+    },
+    "claim_object": {
+      "id": "claim-bench-023",
+      "claim": "We infer that substantial channel opening occurred in response to intervention.",
+      "source": "ctgov-sweat-chloride",
+      "quote": "Sweat chloride concentration decreased by a mean of 42.8 mmol/L at week 24 in the active intervention group.",
+      "kind": "inferred",
+      "basis": ""
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R5"],
+    "intended_flaw": "Worker claimed an inference without providing the required 8-word logical basis",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-024",
+    "name": "Catch Computed Claim Missing Mathematical Expression Record",
+    "category": "epistemic_kind_and_basis",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov ProtocolSection for NCT05033080",
+    "source_line": "A total of 510 patients were randomized across 115 clinical sites.",
+    "input": {
+      "kind": "computed",
+      "computed": []
+    },
+    "expected_output": {
+      "r5_verdict": "FAIL",
+      "failure_reason": "a computed claim needs 'computed' entries"
+    },
+    "claim_object": {
+      "id": "claim-bench-024",
+      "claim": "In total 510 patients were randomized in the trial.",
+      "source": "ctgov-nct05033080",
+      "quote": "A total of 510 patients were randomized across 115 clinical sites.",
+      "kind": "computed",
+      "computed": []
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R5"],
+    "intended_flaw": "Claim is declared as computed but provides an empty computed array",
+    "no_patient_data": true,
+    "has_source_line": true
+  },
+  {
+    "id": "BENCH-025",
+    "name": "Catch Typo in Field Name Preventing Silent Scope Bypass",
+    "category": "epistemic_kind_and_basis",
+    "source_id": "clinicaltrials-api",
+    "source_citation": "ClinicalTrials.gov ProtocolSection for NCT05033080",
+    "source_line": "Only patients with at least one F508del allele were eligible for the trial.",
+    "input": {
+      "candidate_claim": "Only patients with at least one F508del allele were eligible for the trial.",
+      "typo_field": "scoppe"
+    },
+    "expected_output": {
+      "r1_verdict": "FAIL",
+      "failure_reason": "unknown field(s) scoppe"
+    },
+    "claim_object": {
+      "id": "claim-bench-025",
+      "claim": "Only patients with at least one F508del allele were eligible for the trial.",
+      "source": "ctgov-nct05033080-eligibility",
+      "quote": "Only patients with at least one F508del allele were eligible for the trial.",
+      "kind": "observed",
+      "scoppe": "ClinicalTrials.gov protocol section eligibility criteria searched for NCT05033080 on 2026-10-15."
+    },
+    "expected_status": "FAIL",
+    "expected_rule_failures": ["R1"],
+    "intended_flaw": "Spelling mistake 'scoppe' instead of 'scope'; rule R1 catches this immediately so scope requirements cannot be silently bypassed",
+    "no_patient_data": true,
+    "has_source_line": true
+  }
+]

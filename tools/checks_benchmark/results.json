@@ -1,0 +1,1172 @@
+{
+  "benchmark_name": "Sensei Ewok CF Lab Checks Benchmark (T-0126)",
+  "total_tasks": 25,
+  "clean_tasks_count": 12,
+  "flawed_tasks_count": 13,
+  "manifest_verification": {
+    "verified": true,
+    "details": {
+      "tasks.json": {
+        "status": "MATCH",
+        "expected": "d3aaa28f2f05e35f2588b4c0af4c69d7dfc88b03b8e73b084b0871653d895544",
+        "actual": "d3aaa28f2f05e35f2588b4c0af4c69d7dfc88b03b8e73b084b0871653d895544"
+      },
+      "sources_fixture.json": {
+        "status": "MATCH",
+        "expected": "452e5d14ad81c0fde89bbb912b4145b752c33bd95654fd53291f8486ba5d02a1",
+        "actual": "452e5d14ad81c0fde89bbb912b4145b752c33bd95654fd53291f8486ba5d02a1"
+      },
+      "benchmark_runner.py": {
+        "status": "MATCH",
+        "expected": "e84fe278b4e5e7fb6e749bb3ad0d265a9f2aa4df19eef363450cfc812b76a3dc",
+        "actual": "e84fe278b4e5e7fb6e749bb3ad0d265a9f2aa4df19eef363450cfc812b76a3dc"
+      },
+      "evaluate_local_worker.py": {
+        "status": "MATCH",
+        "expected": "c34ff43db4e09e9d18bd116455a7b42be733ad2b73accbca2a861da10751e7cc",
+        "actual": "c34ff43db4e09e9d18bd116455a7b42be733ad2b73accbca2a861da10751e7cc"
+      }
+    }
+  },
+  "with_lab_checks": {
+    "total_evaluated": 25,
+    "passed": 12,
+    "failed": 13,
+    "expected_agreement_rate": "100.0%",
+    "flaw_detection_rate": "100.0%",
+    "false_positive_rate": "0.0%",
+    "rule_violation_counts": {
+      "R1": 1,
+      "R2": 4,
+      "R3": 2,
+      "R4": 3,
+      "R5": 3
+    }
+  },
+  "without_lab_checks": {
+    "total_evaluated": 25,
+    "passed": 25,
+    "failed": 0,
+    "silent_hallucination_count": 13,
+    "silent_hallucination_rate": "100.0%",
+    "flaw_detection_rate": "0.0%",
+    "false_positive_rate": "52.0%"
+  },
+  "detailed_results": {
+    "with_checks": [
+      {
+        "task_id": "BENCH-001",
+        "name": "Lookup TRIKAFTA FDA NDA Number",
+        "category": "evidence_lookup",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'trikafta-spl-nda'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-002",
+        "name": "Lookup ALYFTREK Fixed-Dose Active Ingredients",
+        "category": "evidence_lookup",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'alyftrek-spl-active'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-003",
+        "name": "Lookup BEACON-CF mRNA Trial Protocol Record",
+        "category": "evidence_lookup",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ctgov-nct05668741'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-004",
+        "name": "Lookup CFTR Inward and Outward Cryo-EM PDB Coordinates",
+        "category": "evidence_lookup",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'cryoem-cftr-structures'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-005",
+        "name": "Lookup Crossref Update-To Status for Benchmark DOI",
+        "category": "evidence_lookup",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'crossref-10-1038-ng2745'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-006",
+        "name": "Verify Exact Quote of TRIKAFTA Transaminase Monitoring",
+        "category": "quote_exactness",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'trikafta-spl-warnings'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-007",
+        "name": "Catch Subtle Model Paraphrasing in Cited Quote",
+        "category": "quote_exactness",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R2"
+        ],
+        "expected_rule_failures": [
+          "R2"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": false,
+            "detail": "quote is not an exact piece of evidence 'trikafta-spl-warnings'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Paraphrased quote where worker substituted synonyms ('hepatic transaminases were observed') rather than copying exact text"
+      },
+      {
+        "task_id": "BENCH-008",
+        "name": "Catch Under-Length Quote Below Four Words",
+        "category": "quote_exactness",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R2"
+        ],
+        "expected_rule_failures": [
+          "R2"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": false,
+            "detail": "quote has 2 word(s); at least 4 are needed"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Quote has only 2 words, violating the 4-word minimum requirement"
+      },
+      {
+        "task_id": "BENCH-009",
+        "name": "Catch Case Mutation in Quoted Evidence",
+        "category": "quote_exactness",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R2"
+        ],
+        "expected_rule_failures": [
+          "R2"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": false,
+            "detail": "quote matches the evidence only if case is ignored; copy it exactly"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Worker downcased acronyms and brand names (alt, ast, trikafta), violating exact character matching"
+      },
+      {
+        "task_id": "BENCH-010",
+        "name": "Catch Ellipsis Artifact in Quoted Text",
+        "category": "quote_exactness",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R2"
+        ],
+        "expected_rule_failures": [
+          "R2"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": false,
+            "detail": "quote contains an ellipsis and is not in the evidence; split it into separate quotes"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Worker bridged discontinuous clauses with ellipsis rather than splitting into separate discrete quotes"
+      },
+      {
+        "task_id": "BENCH-011",
+        "name": "Verify Exact Extraction of Trial Numbers",
+        "category": "numerical_fidelity",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ctgov-nct05033080'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-012",
+        "name": "Catch Worker Hallucinated Numerical Approximation",
+        "category": "numerical_fidelity",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R3"
+        ],
+        "expected_rule_failures": [
+          "R3"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ctgov-nct05033080'"
+          },
+          "R3": {
+            "passed": false,
+            "detail": "number 500 is not in the quote and is not a computed result; number 120 is not in the quote and is not a computed result"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Worker wrote approximate rounded numbers (500 and 120) from memory instead of exact figures (510 and 115)"
+      },
+      {
+        "task_id": "BENCH-013",
+        "name": "Verify Derived Arithmetic Computation from Quoted Strata",
+        "category": "numerical_fidelity",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ctgov-nct05033080-enrollment'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind computed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-014",
+        "name": "Catch Computed Claim with Ungrounded Operands",
+        "category": "numerical_fidelity",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R3"
+        ],
+        "expected_rule_failures": [
+          "R3"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ctgov-nct05033080'"
+          },
+          "R3": {
+            "passed": false,
+            "detail": "computed 1: operand(s) 255, 255 not in the quote; number two is not in the quote and is not a computed result"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind computed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Computed arithmetic expression uses operand '255' which appears nowhere in the cited quote"
+      },
+      {
+        "task_id": "BENCH-015",
+        "name": "Verify Multi-Digit Registry Count from Primary Report",
+        "category": "numerical_fidelity",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ecfspr-2024-summary'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-016",
+        "name": "Verify Bounded Absence Claim with Compliant Scope Record",
+        "category": "widening_and_absence",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'kalydeco-spl-boxed'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "'not stated' with a scope of 12 words"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-017",
+        "name": "Catch Absence Claim Lacking Mandatory Scope Record",
+        "category": "widening_and_absence",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R4"
+        ],
+        "expected_rule_failures": [
+          "R4"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'kalydeco-spl-boxed'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": false,
+            "detail": "'not stated' need(s) a 'scope' saying what was searched and where"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Absence phrase 'not stated' used without any scope record detailing the searched corpus"
+      },
+      {
+        "task_id": "BENCH-018",
+        "name": "Verify Observed Widening Claim Backed by Quote and Scope",
+        "category": "widening_and_absence",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ctgov-nct05033080-eligibility'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "'only' with a scope of 10 words"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-019",
+        "name": "Catch Unquoted Widening Word in Observed Statement",
+        "category": "widening_and_absence",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R4"
+        ],
+        "expected_rule_failures": [
+          "R4"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ecfspr-2024-modulators'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": false,
+            "detail": "an observed claim uses 'all' but its quote does not; narrow the sentence or mark it inferred"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Observed claim introduces unanchored absolute word 'all' when evidence states 82.4 percent"
+      },
+      {
+        "task_id": "BENCH-020",
+        "name": "Catch Insufficient Scope Length for Widening Word",
+        "category": "widening_and_absence",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R4"
+        ],
+        "expected_rule_failures": [
+          "R4"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ctgov-nct05033080-eligibility'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": false,
+            "detail": "'only' need(s) a scope of at least 8 words; it has 2"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind observed has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Scope record has only 2 words, failing the 8-word minimum threshold"
+      },
+      {
+        "task_id": "BENCH-021",
+        "name": "Verify Inferred Claim with Explicit Marker and Grounded Basis",
+        "category": "epistemic_kind_and_basis",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "failed_rules": [],
+        "expected_rule_failures": [],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ctgov-sweat-chloride'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": true,
+            "detail": "kind inferred has what it needs"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-022",
+        "name": "Catch Inferred Claim Stated as Unhedged Objective Fact",
+        "category": "epistemic_kind_and_basis",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R5"
+        ],
+        "expected_rule_failures": [
+          "R5"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ctgov-sweat-chloride'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": false,
+            "detail": "an inferred claim must say 'our inference' or 'we infer'"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Worker marked claim as inferred but omitted required humble phrasing ('our inference' or 'we infer')"
+      },
+      {
+        "task_id": "BENCH-023",
+        "name": "Catch Inferred Claim with Empty Explanatory Basis",
+        "category": "epistemic_kind_and_basis",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R5"
+        ],
+        "expected_rule_failures": [
+          "R5"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ctgov-sweat-chloride'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": false,
+            "detail": "an inferred claim needs a 'basis' of at least 8 words; it has 0"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Worker claimed an inference without providing the required 8-word logical basis"
+      },
+      {
+        "task_id": "BENCH-024",
+        "name": "Catch Computed Claim Missing Mathematical Expression Record",
+        "category": "epistemic_kind_and_basis",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R5"
+        ],
+        "expected_rule_failures": [
+          "R5"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": true,
+            "detail": "fields, id and evidence present"
+          },
+          "R2": {
+            "passed": true,
+            "detail": "1 quote(s) found exactly in 'ctgov-nct05033080'"
+          },
+          "R3": {
+            "passed": true,
+            "detail": "every number is in the quote or computed"
+          },
+          "R4": {
+            "passed": true,
+            "detail": "no widening word or absence phrase"
+          },
+          "R5": {
+            "passed": false,
+            "detail": "a computed claim needs 'computed' entries"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Claim is declared as computed but provides an empty computed array"
+      },
+      {
+        "task_id": "BENCH-025",
+        "name": "Catch Typo in Field Name Preventing Silent Scope Bypass",
+        "category": "epistemic_kind_and_basis",
+        "status": "FAIL",
+        "expected_status": "FAIL",
+        "failed_rules": [
+          "R1"
+        ],
+        "expected_rule_failures": [
+          "R1"
+        ],
+        "rule_details": {
+          "R1": {
+            "passed": false,
+            "detail": "unknown field(s) scoppe (a misspelt 'scope' or 'basis' would otherwise be ignored)"
+          }
+        },
+        "matches_expected": true,
+        "intended_flaw": "Spelling mistake 'scoppe' instead of 'scope'; rule R1 catches this immediately so scope requirements cannot be silently bypassed"
+      }
+    ],
+    "without_checks": [
+      {
+        "task_id": "BENCH-001",
+        "name": "Lookup TRIKAFTA FDA NDA Number",
+        "category": "evidence_lookup",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-002",
+        "name": "Lookup ALYFTREK Fixed-Dose Active Ingredients",
+        "category": "evidence_lookup",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-003",
+        "name": "Lookup BEACON-CF mRNA Trial Protocol Record",
+        "category": "evidence_lookup",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-004",
+        "name": "Lookup CFTR Inward and Outward Cryo-EM PDB Coordinates",
+        "category": "evidence_lookup",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-005",
+        "name": "Lookup Crossref Update-To Status for Benchmark DOI",
+        "category": "evidence_lookup",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-006",
+        "name": "Verify Exact Quote of TRIKAFTA Transaminase Monitoring",
+        "category": "quote_exactness",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-007",
+        "name": "Catch Subtle Model Paraphrasing in Cited Quote",
+        "category": "quote_exactness",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Paraphrased quote where worker substituted synonyms ('hepatic transaminases were observed') rather than copying exact text"
+      },
+      {
+        "task_id": "BENCH-008",
+        "name": "Catch Under-Length Quote Below Four Words",
+        "category": "quote_exactness",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Quote has only 2 words, violating the 4-word minimum requirement"
+      },
+      {
+        "task_id": "BENCH-009",
+        "name": "Catch Case Mutation in Quoted Evidence",
+        "category": "quote_exactness",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Worker downcased acronyms and brand names (alt, ast, trikafta), violating exact character matching"
+      },
+      {
+        "task_id": "BENCH-010",
+        "name": "Catch Ellipsis Artifact in Quoted Text",
+        "category": "quote_exactness",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Worker bridged discontinuous clauses with ellipsis rather than splitting into separate discrete quotes"
+      },
+      {
+        "task_id": "BENCH-011",
+        "name": "Verify Exact Extraction of Trial Numbers",
+        "category": "numerical_fidelity",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-012",
+        "name": "Catch Worker Hallucinated Numerical Approximation",
+        "category": "numerical_fidelity",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Worker wrote approximate rounded numbers (500 and 120) from memory instead of exact figures (510 and 115)"
+      },
+      {
+        "task_id": "BENCH-013",
+        "name": "Verify Derived Arithmetic Computation from Quoted Strata",
+        "category": "numerical_fidelity",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-014",
+        "name": "Catch Computed Claim with Ungrounded Operands",
+        "category": "numerical_fidelity",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Computed arithmetic expression uses operand '255' which appears nowhere in the cited quote"
+      },
+      {
+        "task_id": "BENCH-015",
+        "name": "Verify Multi-Digit Registry Count from Primary Report",
+        "category": "numerical_fidelity",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-016",
+        "name": "Verify Bounded Absence Claim with Compliant Scope Record",
+        "category": "widening_and_absence",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-017",
+        "name": "Catch Absence Claim Lacking Mandatory Scope Record",
+        "category": "widening_and_absence",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Absence phrase 'not stated' used without any scope record detailing the searched corpus"
+      },
+      {
+        "task_id": "BENCH-018",
+        "name": "Verify Observed Widening Claim Backed by Quote and Scope",
+        "category": "widening_and_absence",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-019",
+        "name": "Catch Unquoted Widening Word in Observed Statement",
+        "category": "widening_and_absence",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Observed claim introduces unanchored absolute word 'all' when evidence states 82.4 percent"
+      },
+      {
+        "task_id": "BENCH-020",
+        "name": "Catch Insufficient Scope Length for Widening Word",
+        "category": "widening_and_absence",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Scope record has only 2 words, failing the 8-word minimum threshold"
+      },
+      {
+        "task_id": "BENCH-021",
+        "name": "Verify Inferred Claim with Explicit Marker and Grounded Basis",
+        "category": "epistemic_kind_and_basis",
+        "status": "PASS",
+        "expected_status": "PASS",
+        "caught_flaw": true,
+        "silent_hallucination_passed": false,
+        "intended_flaw": null
+      },
+      {
+        "task_id": "BENCH-022",
+        "name": "Catch Inferred Claim Stated as Unhedged Objective Fact",
+        "category": "epistemic_kind_and_basis",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Worker marked claim as inferred but omitted required humble phrasing ('our inference' or 'we infer')"
+      },
+      {
+        "task_id": "BENCH-023",
+        "name": "Catch Inferred Claim with Empty Explanatory Basis",
+        "category": "epistemic_kind_and_basis",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Worker claimed an inference without providing the required 8-word logical basis"
+      },
+      {
+        "task_id": "BENCH-024",
+        "name": "Catch Computed Claim Missing Mathematical Expression Record",
+        "category": "epistemic_kind_and_basis",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Claim is declared as computed but provides an empty computed array"
+      },
+      {
+        "task_id": "BENCH-025",
+        "name": "Catch Typo in Field Name Preventing Silent Scope Bypass",
+        "category": "epistemic_kind_and_basis",
+        "status": "PASS",
+        "expected_status": "FAIL",
+        "caught_flaw": false,
+        "silent_hallucination_passed": true,
+        "intended_flaw": "Spelling mistake 'scoppe' instead of 'scope'; rule R1 catches this immediately so scope requirements cannot be silently bypassed"
+      }
+    ]
+  }
+}
