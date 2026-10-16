@@ -1,6 +1,6 @@
 # Decision Record: Governance, Cloud-Model Routing, Permission Letters & Skill Licensing (T-0072)
 
-**Status**: proposed (awaiting human maintainer decision)  
+**Status**: ratified (approved by maintainer 2026-10-15)  
 **Date**: 2026-10-15  
 **Author**: daily-research-sentinel (CRO Governance Round)  
 **Task ID**: `T-0072` (cloud-model use on reports with unread terms, permission requests to registries, and skill licensing)  
@@ -109,11 +109,14 @@ When a skill carries short third-party quotations, include the standard copyrigh
 
 ## Maintainer Action Sign-Off
 
-To ratify these decisions, tick the approved options above, sign below, and commit:
+Ratified by maintainer directive on 2026-10-15:
 
-- **Decision 1 (Cloud Routing)**: Approved Option [ ]
-- **Decision 2 (Permission Letters)**: Approved Option [ ]
-- **Decision 3 (Skill Licensing)**: Approved Option [ ]
+- **Decision 1 (Cloud Routing)**: Approved **Option 1A with Fallback to Option 1B**  
+  *Policy*: Local-first extraction via `qwen3.8:27b-64k` loopback. Bounded cloud fallback to Frontier models (Gemini & Claude team) under certified Zero Data Retention (ZDR) and non-training terms.
+- **Decision 2 (Permission Letters)**: Approved **Option 2B (Retaining Manual Tasks)**  
+  *Policy*: Operate under strict academic citation and <= 8-word quote limits without outbound letters today; retain permission letters in `tasks/HUMAN-TASKS.md` Section 2 as pending human actions for future dispatch.
+- **Decision 3 (Skill Licensing)**: Approved **Option 3A (Dual-Notice CC0 Dedication & Reservation)**  
+  *Policy*: Standardize dual-notice disclaimer across skills (`license: CC0-1.0` covers original lab code and text; third-party quotes remain under fair use with tight quotation hygiene).
 
-**Maintainer Signature**: _____________________________  
-**Date**: _____________________________
+**Maintainer Decision Status**: Ratified  
+**Date**: 2026-10-15  
