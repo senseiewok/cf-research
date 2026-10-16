@@ -1,6 +1,6 @@
 """Offline tests for propose_resources.py: conduct, robots, redirects, size cap, data boundary, and lead_only rows.
 
-Standard library + pytest; no real network sockets are opened during tests.
+Standard library only; no real network sockets are opened during tests.
 """
 
 from __future__ import annotations
@@ -13,7 +13,6 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
-import pytest
 import yaml
 
 HERE = Path(__file__).resolve().parent
