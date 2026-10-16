@@ -110,7 +110,7 @@ class Page:
     def shot(self):
         """The canvas alone, always from the same scroll position so the pinned picture sits at the same sub-pixel place (and clear of the header)."""
         self.page.evaluate("() => { const v = document.getElementById('cftr-viewer').getBoundingClientRect(); window.scrollTo({top: window.scrollY + v.top + 250, behavior: 'instant'}); }")
-        self.page.wait_for_timeout(150)
+        self.page.wait_for_timeout(30)
         return self.page.locator("#cftr-canvas").screenshot()
 
     def look(self):
@@ -120,15 +120,16 @@ class Page:
     def show(self):
         """Bring the picture onto the screen: the viewer draws nothing while the canvas is off the screen, and on a page with a long introduction it starts below the fold."""
         self.page.evaluate("() => document.getElementById('cftr-canvas').scrollIntoView({block: 'center', behavior: 'instant'})")
-        self.page.wait_for_timeout(300)
+        self.wait_until(lambda: not self.state().get("offscreen", True), "picture on screen")
 
     def hold(self):
         """Pause the slow turn and let the last frame reach the screen, so a picture can be compared."""
         if self.state()["playing"]:
             self.page.click("#cftr-play")
-        self.page.wait_for_timeout(300)
+            self.wait_until(lambda: not self.state()["playing"], "playback to pause")
+        self.settle(ms=30)
 
-    def settle(self, ms=120):
+    def settle(self, ms=30):
         """Wait until drawing has gone quiet: the frame counter stops changing for one interval."""
         last = -1
         for _ in range(80):

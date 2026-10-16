@@ -298,7 +298,7 @@ class SharedControlsTests(unittest.TestCase):
         p.wait_drawn()
         self.assertEqual(p.page.locator("#cftr-panel, #cftr-sheet-open, #cftr-sheet-close, #cftr-panel-title, #cftr-variant").count(), 0, "the standalone page has none of them")
         p.page.evaluate("async (ms) => { for (const m of ms) await import(m); }", [self.page_js, self.home_js])
-        p.page.wait_for_timeout(200)
+        p.page.wait_for_selector(".cftr-nudge")
         return p
 
     def view(self, p):
@@ -318,7 +318,7 @@ class SharedControlsTests(unittest.TestCase):
         p = self.load(viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True, device_scale_factor=2)
         page = p.page
         page.evaluate("() => document.getElementById('cftr-canvas').scrollIntoView({ block: 'center', behavior: 'instant' })")
-        page.wait_for_timeout(200)
+        p.wait_until(lambda: not p.state().get("offscreen", True), "canvas in view")
         b = page.locator("#cftr-canvas").bounding_box()
         x, y = b["x"] + b["width"] / 2, b["y"] + b["height"] / 2
         cdp = p.ctx.new_cdp_session(page)
@@ -329,7 +329,7 @@ class SharedControlsTests(unittest.TestCase):
             send("touchMove", [(x - 30 - 8 * k, y), (x + 30 + 8 * k, y)])
         send("touchEnd")
         self.assertGreater(self.view(p)["zoom"], z0 * 1.5, "spreading two fingers zooms in")
-        page.wait_for_timeout(400)
+        page.wait_for_timeout(100)
         for _ in range(2):
             send("touchStart", [(x, y)])
             send("touchEnd")
@@ -363,11 +363,11 @@ class SharedControlsTests(unittest.TestCase):
         self.addCleanup(p.close)
         p.wait_drawn()
         p.page.evaluate(self.HOME, [["/cftr-controls.css", "/cftr-home.css"], self.home_js])
-        p.page.wait_for_timeout(300)
+        p.page.locator("#cftr-sheet-open").wait_for(state="attached")
         cdp = p.ctx.new_cdp_session(p.page)
         send = lambda kind, pts=(): cdp.send("Input.dispatchTouchEvent", {"type": kind, "touchPoints": [{"x": a, "y": c, "id": i} for i, (a, c) in enumerate(pts)]})
         p.page.locator("#cftr-sheet-open").tap()
-        p.page.wait_for_timeout(300)
+        p.page.wait_for_selector("#cftr-viewer.is-open")
         self.assertTrue(p.page.evaluate("document.getElementById('cftr-viewer').classList.contains('is-open')"), "the sheet is open")
         self.assertTrue(p.page.evaluate("document.getElementById('cftr-panel').parentElement === document.getElementById('cftr-canvas').parentElement"), "inside the picture's parent")
         return p, send
