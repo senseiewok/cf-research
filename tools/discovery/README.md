@@ -1,0 +1,68 @@
+# tools/discovery
+
+The **Curative Discovery Council** engine provides a rigorous multi-agent and biophysical modeling architecture to transition the lab from passive surveillance and defensive checking into proactive, grounded therapeutic discovery (Track A: Biophysical Science & Cure Discovery).
+
+---
+
+## 1. The 3-Phase Discovery Architecture
+
+```mermaid
+flowchart TD
+    subgraph Phase1["Phase 1: Generative Synthesis (Ideation & Biophysical Modeling)"]
+        P1["Ingest primary structures (5UAK, 6MSM, 8EIQ)<br/>RefSeq NM_000492.4 transcript coordinates<br/>Execute biophysical_models.py transport & kinetic sweeps"]
+    end
+
+    subgraph Phase2["Phase 2: Orthogonal Falsification (Adversarial Red-Teaming)"]
+        P2["Stress-test against biophysical bottlenecks:<br/>• Vibrating mesh nebulizer shear rates (10^5 s^-1)<br/>• Alveolar macrophage scavenger receptor A uptake<br/>• Transcriptome-wide stop codon readthrough proteotoxicity<br/>• Systemic NMD knockout lethality"]
+    end
+
+    subgraph Phase3["Phase 3: Grounded AI Loop & Epistemic Verification"]
+        P3["Audit claims with check_claims (Rules R1–R5):<br/>• Exact primary DOIs, NCTs, PDB IDs<br/>• Humble inference markers ('our inference' / 'we infer')<br/>• Bound widening words with explicit search scopes<br/>• Certify Answer Tier T2 minimum"]
+    end
+
+    Phase1 -->|Candidate Parameters| Phase2
+    Phase2 -->|Refined & Resolved Hypotheses| Phase3
+    Phase3 -->|Verified Curative Dossier| Deliverable["Publication in landscape/"]
+```
+
+---
+
+## 2. Active Curative Discovery Modules
+
+### Module 1: Aerosol SORT-LNP Formulation Matrix (`aerosol_sort_lnp`)
+- **Clinical Problem**: Overcoming the dose-limiting airway inflammation and mucin entrapment that terminated the Phase 1/2 BEACON-CF mRNA trial (`NCT05668741`, VX-522).
+- **Biophysical Model**:
+  - Stokes-Einstein diffusion $D_0 = \frac{k_B T}{6 \pi \eta r}$ coupled with Ogston lattice steric obstruction ratio through $110\text{ nm}$ CF sputum pores.
+  - Surface charge transmission efficiency penalizing cationic mucin trapping ($> +5\text{ mV}$) and extreme anionic exclusion ($< -10\text{ mV}$).
+- **Council-Derived Specifications**:
+  - Hydrodynamic Diameter: **$65 \pm 10\text{ nm}$** (PDI $< 0.12$).
+  - Zeta Potential: **$-2.5\text{ to } +1.5\text{ mV}$** at airway surface liquid pH $6.5–7.0$.
+  - Stealth Shell: **$1.2\text{ mol}\%$ polysarcosine** replacing immunogenic PEG-2000.
+  - Alveolar Clearance: Ester-cleavable biodegradable aliphatic core ($t_{1/2} < 4\text{ hours}$ in alveolar macrophages).
+  - Aerosol MMAD: **$2.8–3.2\ \mu\text{m}$** targeting bronchial epithelium while minimizing deep alveolar deposition.
+
+### Module 2: Tri-Modal Nonsense Codon Kinetics (`nonsense_trimodal`)
+- **Clinical Problem**: The remaining ~10% of CF individuals with premature termination codon (PTC) alleles (G542X, W1282X) who produce zero functional CFTR protein and do not respond to modulators.
+- **Biophysical Model**:
+  - Exon-junction complex (EJC) distance and codon tetranucleotide context (`UGA G` vs `UGA A`).
+  - Salvaged mRNA abundance as a function of transient SMG1/UPF1 phosphorylation blockade.
+  - Synergistic short-circuit current ($\Delta I_{\text{sc}}$) restoration with potentiator amplification.
+- **Council-Derived Specifications**:
+  - **G542X (Exon 12, `UGA G`)**: $60.0\%$ transient NMD inhibition + $9.0\%$ engineered opal suppressor tRNA + $2.0\times$ potentiator restoration yields **$12.31\%$ wild-type $\Delta I_{\text{sc}}$** (surpassing the $10.0\%$ clinical therapeutic threshold).
+  - **W1282X (Exon 23, `UGA A`)**: Proximity to poly(A) tail confers partial baseline NMD escape ($38\%$ baseline mRNA); $40.0\%$ NMD inhibition + $6.0\%$ suppressor tRNA yields **$13.91\%$ wild-type $\Delta I_{\text{sc}}$**.
+  - **Transcriptome Safety Margin**: Native human termination codons utilize tandem stops or stringent eRF1 context, maintaining proteome integrity at suppressor tRNA efficiencies $< 12\%$.
+
+---
+
+## 3. Running the Discovery Council
+
+```bash
+# Run specific discovery deliberation with Tier T2 verification:
+python tools/discovery/discovery_council.py --topic aerosol_sort_lnp --verify
+
+# Run full discovery suite across all active curative frontiers:
+python tools/discovery/discovery_council.py --run-all
+
+# Execute unit test suite:
+pytest tools/discovery/test_discovery_council.py
+```
