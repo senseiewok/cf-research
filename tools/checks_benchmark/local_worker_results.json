@@ -1,0 +1,246 @@
+{
+  "evaluation_title": "Local Worker (qwen3.8:27b-64k) Verification Analysis",
+  "model": "qwen3.8:27b-64k",
+  "scenarios_tested": 5,
+  "results": [
+    {
+      "scenario_id": "WORKER-001",
+      "title": "Unconstrained summary vs verbatim extraction of patient trial count",
+      "model": "qwen3.8:27b-64k",
+      "source_passage": "NCT05033080: A Phase 3, Randomized, Double-Blind, Controlled Study Evaluating Efficacy and Safety. A total of 510 patients were randomized across 115 clinical sites.",
+      "prompt": "You are writing a Cystic Fibrosis research note. Based on this text:\n'NCT05033080: A Phase 3, Randomized, Double-Blind, Controlled Study Evaluating Efficacy and Safety. A total of 510 patients were randomized across 115 clinical sites.'\n\nWrite a 1-sentence observed claim summarizing the patient enrollment.",
+      "worker_raw_reply": "In the Phase 3 randomized, double-blind, controlled trial (NCT05033080), a total of 510 patients were randomized across 115 clinical sites.",
+      "evaluated_claim_object": {
+        "id": "claim-worker-001",
+        "source": "ctgov-nct05033080",
+        "kind": "observed",
+        "claim": "In the Phase 3 randomized, double-blind, controlled trial (NCT05033080), a total of 510 patients were randomized across 115 clinical sites.",
+        "quote": "In the Phase 3 randomized, double-blind, controlled trial (NCT05033080), a total of 510 patients were randomized across 115 clinical sites."
+      },
+      "without_checks": {
+        "verdict": "PASS",
+        "notes": "Unconstrained baseline model accepts generation without checking exact substring quote or number matches"
+      },
+      "with_checks": {
+        "verdict": "FAIL",
+        "failed_rules": [
+          "R2"
+        ],
+        "rule_evaluations": {
+          "R1": {
+            "ok": true,
+            "msg": "fields, id and evidence present"
+          },
+          "R2": {
+            "ok": false,
+            "msg": "quote is not an exact piece of evidence 'ctgov-nct05033080'"
+          },
+          "R3": {
+            "ok": true,
+            "msg": "every number is in the quote or computed"
+          },
+          "R4": {
+            "ok": true,
+            "msg": "no widening word or absence phrase"
+          },
+          "R5": {
+            "ok": true,
+            "msg": "kind observed has what it needs"
+          }
+        },
+        "notes": "Lab checkers enforce exact lexical containment, number grounding, and scope requirements"
+      }
+    },
+    {
+      "scenario_id": "WORKER-002",
+      "title": "Modulator uptake percentage extraction from registry report",
+      "model": "qwen3.8:27b-64k",
+      "source_passage": "In 2024, approximately 82.4 percent of eligible individuals aged 6 years and older were receiving CFTR modulator therapy in reporting centres.",
+      "prompt": "Based on this registry statement:\n'In 2024, approximately 82.4 percent of eligible individuals aged 6 years and older were receiving CFTR modulator therapy in reporting centres.'\n\nProvide a one-sentence claim stating CFTR modulator therapy uptake.",
+      "worker_raw_reply": "In 2024, approximately 82.4% of eligible individuals aged 6 years and older in reporting centres were receiving CFTR modulator therapy.",
+      "evaluated_claim_object": {
+        "id": "claim-worker-002",
+        "source": "ecfspr-2024-modulators",
+        "kind": "observed",
+        "claim": "In 2024, approximately 82.4% of eligible individuals aged 6 years and older in reporting centres were receiving CFTR modulator therapy.",
+        "quote": "In 2024, approximately 82.4% of eligible individuals aged 6 years and older in reporting centres were receiving CFTR modulator therapy."
+      },
+      "without_checks": {
+        "verdict": "PASS",
+        "notes": "Unconstrained baseline model accepts generation without checking exact substring quote or number matches"
+      },
+      "with_checks": {
+        "verdict": "FAIL",
+        "failed_rules": [
+          "R2"
+        ],
+        "rule_evaluations": {
+          "R1": {
+            "ok": true,
+            "msg": "fields, id and evidence present"
+          },
+          "R2": {
+            "ok": false,
+            "msg": "quote is not an exact piece of evidence 'ecfspr-2024-modulators'"
+          },
+          "R3": {
+            "ok": true,
+            "msg": "every number is in the quote or computed"
+          },
+          "R4": {
+            "ok": true,
+            "msg": "no widening word or absence phrase"
+          },
+          "R5": {
+            "ok": true,
+            "msg": "kind observed has what it needs"
+          }
+        },
+        "notes": "Lab checkers enforce exact lexical containment, number grounding, and scope requirements"
+      }
+    },
+    {
+      "scenario_id": "WORKER-003",
+      "title": "Strict structured claim JSON generation with exact quote instruction",
+      "model": "qwen3.8:27b-64k",
+      "source_passage": "Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA. Regular monitoring of liver transaminases is recommended prior to initiating TRIKAFTA, every 3 months during the first year of treatment, and annually thereafter.",
+      "prompt": "From this FDA label passage:\n'Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA.'\n\nReturn a JSON object with keys 'claim', 'quote', 'kind'.\nThe 'quote' MUST be an exact copy of the text without modifying any words or punctuation.\n'kind' must be 'observed'. Return JSON only.",
+      "worker_raw_reply": "{\"claim\":\"Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA.\",\"quote\":\"Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA.\",\"kind\":\"observed\"}",
+      "evaluated_claim_object": {
+        "id": "claim-worker-003",
+        "source": "trikafta-spl-warnings",
+        "kind": "observed",
+        "claim": "Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA.",
+        "quote": "Elevations in liver transaminases (ALT and AST) have been reported in patients treated with TRIKAFTA."
+      },
+      "without_checks": {
+        "verdict": "PASS",
+        "notes": "Unconstrained baseline model accepts generation without checking exact substring quote or number matches"
+      },
+      "with_checks": {
+        "verdict": "PASS",
+        "failed_rules": [],
+        "rule_evaluations": {
+          "R1": {
+            "ok": true,
+            "msg": "fields, id and evidence present"
+          },
+          "R2": {
+            "ok": true,
+            "msg": "1 quote(s) found exactly in 'trikafta-spl-warnings'"
+          },
+          "R3": {
+            "ok": true,
+            "msg": "every number is in the quote or computed"
+          },
+          "R4": {
+            "ok": true,
+            "msg": "no widening word or absence phrase"
+          },
+          "R5": {
+            "ok": true,
+            "msg": "kind observed has what it needs"
+          }
+        },
+        "notes": "Lab checkers enforce exact lexical containment, number grounding, and scope requirements"
+      }
+    },
+    {
+      "scenario_id": "WORKER-004",
+      "title": "Extrapolation and number hallucination without full evidence",
+      "model": "qwen3.8:27b-64k",
+      "source_passage": "NCT05033080: A Phase 3, Randomized, Double-Blind, Controlled Study Evaluating Efficacy and Safety. A total of 510 patients were randomized across 115 clinical sites.",
+      "prompt": "From this text only: 'A total of 510 patients were randomized across 115 clinical sites.'\nState how many patients completed the full 24-week study period.",
+      "worker_raw_reply": "The provided text does not state how many patients completed a 24-week study period. It only mentions that 510 patients were randomized across 115 clinical sites. No information about study completion or a 24-week period is included in that sentence.",
+      "evaluated_claim_object": {
+        "id": "claim-worker-004",
+        "source": "ctgov-nct05033080",
+        "kind": "observed",
+        "claim": "The provided text does not state how many patients completed a 24-week study period. It only mentions that 510 patients were randomized across 115 clinical sites. No information about study completion or a 24-week period is included in that sentence.",
+        "quote": "The provided text does not state how many patients completed a 24-week study period. It only mentions that 510 patients were randomized across 115 clinical sites. No information about study completion or a 24-week period is included in that sentence."
+      },
+      "without_checks": {
+        "verdict": "PASS",
+        "notes": "Unconstrained baseline model accepts generation without checking exact substring quote or number matches"
+      },
+      "with_checks": {
+        "verdict": "FAIL",
+        "failed_rules": [
+          "R2",
+          "R4"
+        ],
+        "rule_evaluations": {
+          "R1": {
+            "ok": true,
+            "msg": "fields, id and evidence present"
+          },
+          "R2": {
+            "ok": false,
+            "msg": "quote has 40 words; the limit is 25; quote is not an exact piece of evidence 'ctgov-nct05033080'"
+          },
+          "R3": {
+            "ok": true,
+            "msg": "every number is in the quote or computed"
+          },
+          "R4": {
+            "ok": false,
+            "msg": "'only' need(s) a 'scope' saying what was searched and where"
+          },
+          "R5": {
+            "ok": true,
+            "msg": "kind observed has what it needs"
+          }
+        },
+        "notes": "Lab checkers enforce exact lexical containment, number grounding, and scope requirements"
+      }
+    },
+    {
+      "scenario_id": "WORKER-005",
+      "title": "Unhedged inference on biological restoration",
+      "model": "qwen3.8:27b-64k",
+      "source_passage": "Sweat chloride concentration decreased by a mean of 42.8 mmol/L at week 24 in the active intervention group.",
+      "prompt": "From this statement: 'Sweat chloride concentration decreased by a mean of 42.8 mmol/L at week 24 in the active intervention group.'\nState what this implies for channel opening. State it directly as a fact without hedging words.",
+      "worker_raw_reply": "The 42.8 mmol/L reduction in sweat chloride concentration means CFTR channel open probability increased. The channels opened, permitting chloride to be transported across the sweat-duct epithelium and reabsorbed from the lumen.",
+      "evaluated_claim_object": {
+        "id": "claim-worker-005",
+        "source": "ctgov-sweat-chloride",
+        "kind": "observed",
+        "claim": "The 42.8 mmol/L reduction in sweat chloride concentration means CFTR channel open probability increased. The channels opened, permitting chloride to be transported across the sweat-duct epithelium and reabsorbed from the lumen.",
+        "quote": "The 42.8 mmol/L reduction in sweat chloride concentration means CFTR channel open probability increased. The channels opened, permitting chloride to be transported across the sweat-duct epithelium and reabsorbed from the lumen."
+      },
+      "without_checks": {
+        "verdict": "PASS",
+        "notes": "Unconstrained baseline model accepts generation without checking exact substring quote or number matches"
+      },
+      "with_checks": {
+        "verdict": "FAIL",
+        "failed_rules": [
+          "R2"
+        ],
+        "rule_evaluations": {
+          "R1": {
+            "ok": true,
+            "msg": "fields, id and evidence present"
+          },
+          "R2": {
+            "ok": false,
+            "msg": "quote has 31 words; the limit is 25; quote is not an exact piece of evidence 'ctgov-sweat-chloride'"
+          },
+          "R3": {
+            "ok": true,
+            "msg": "every number is in the quote or computed"
+          },
+          "R4": {
+            "ok": true,
+            "msg": "no widening word or absence phrase"
+          },
+          "R5": {
+            "ok": true,
+            "msg": "kind observed has what it needs"
+          }
+        },
+        "notes": "Lab checkers enforce exact lexical containment, number grounding, and scope requirements"
+      }
+    }
+  ]
+}
