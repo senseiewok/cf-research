@@ -132,3 +132,35 @@ def test_transcriptome_readthrough_safety_score():
 
     toxic_window = calculate_transcriptome_readthrough_safety_score(20.0)
     assert toxic_window["safety_window_verdict"] == "PROTEOTOXIC_HAZARD"
+
+
+def test_cryoem_nonsense_truncation_metrics():
+    """Verify Cryo-EM coordinate metrics, deleted machinery, and pocket distances."""
+    from cryoem_truncation_model import model_nonsense_truncation, generate_3d_truncation_trace
+
+    g542 = model_nonsense_truncation("G542X")
+    assert g542["synthesized_length_aa"] == 541
+    assert g542["deleted_length_aa"] == 939
+    assert g542["fraction_synthesized_pct"] == 36.55
+    assert len(g542["missing_catalytic_elements"]) >= 5
+
+    w1282 = model_nonsense_truncation("W1282X")
+    assert w1282["synthesized_length_aa"] == 1281
+    assert w1282["deleted_length_aa"] == 199
+    assert w1282["fraction_synthesized_pct"] == 86.55
+    assert 40.0 < w1282["landmark_distances_A"]["TMD2_pocket"] < 45.0
+    assert 50.0 < w1282["landmark_distances_A"]["TMD1_pocket"] < 56.0
+
+    trace = generate_3d_truncation_trace()
+    assert "G542X" in trace["variants"]
+    assert "W1282X" in trace["variants"]
+    assert "Elexacaftor_VX445" in trace["allosteric_pockets"]
+
+
+def test_discovery_council_cryoem_round():
+    """Verify Discovery Council Round execution for Cryo-EM truncation topic."""
+    round_cryo = execute_discovery_council_round("cryo_em_truncation_model")
+    assert round_cryo["council_status"] == "APPROVED"
+    assert round_cryo["phase_2_falsification"]["falsification_status"] == "STRESS_TESTED_AND_RESOLVED"
+    assert len(round_cryo["phase_2_falsification"]["challenges_raised"]) == 2
+    assert round_cryo["phase_3_verification"]["answer_tier"] == "T2"
