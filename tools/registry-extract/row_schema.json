@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://senseiewok.ai/schemas/cf-registry-extract-row.json",
+  "title": "CF Registry Extract Row",
+  "description": "Frozen standardized record schema for epidemiological indicators extracted from national and continental Cystic Fibrosis patient registry annual data reports.",
+  "type": "object",
+  "required": [
+    "row_id",
+    "registry_id",
+    "report_title",
+    "report_year",
+    "page_number",
+    "table_id",
+    "indicator_id",
+    "indicator_name",
+    "stratum_sex",
+    "unit",
+    "source_sha256",
+    "raw_text_quote",
+    "extraction_kind"
+  ],
+  "properties": {
+    "row_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_-]+$",
+      "description": "Unique deterministic identifier for this extraction row (e.g. ECFSPR-2022-P08-R01)."
+    },
+    "registry_id": {
+      "type": "string",
+      "enum": ["ecfspr", "cffpr", "ukcfr", "acfdr", "ccfr", "cfri"],
+      "description": "Canonical registry identifier matching sources/catalog.yaml."
+    },
+    "report_title": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Official title of the registry annual data report publication."
+    },
+    "report_year": {
+      "type": "integer",
+      "minimum": 1990,
+      "maximum": 2035,
+      "description": "Reporting data year of the registry cohort."
+    },
+    "page_number": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "1-indexed page number as printed in the official report PDF."
+    },
+    "table_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Table or section identifier in the report (e.g. Table 1.1 or Summary of data report)."
+    },
+    "indicator_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Normalized snake_case identifier for the clinical/demographic indicator."
+    },
+    "indicator_name": {
+      "type": "string",
+      "minLength": 2,
+      "description": "Human-readable indicator label as stated in the table row header."
+    },
+    "stratum_sex": {
+      "type": "string",
+      "enum": ["females", "males", "total", "not_applicable"],
+      "description": "Biological sex stratification of the indicator cohort."
+    },
+    "count_n": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Observed count of patients (n), if applicable."
+    },
+    "percentage": {
+      "type": ["number", "null"],
+      "minimum": 0.0,
+      "maximum": 100.0,
+      "description": "Observed percentage of the cohort (0.0 to 100.0), if applicable."
+    },
+    "denominator_n": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Cohort denominator for percentage calculations, if reported or footnoted."
+    },
+    "value_point": {
+      "type": ["number", "null"],
+      "description": "Point estimate (mean, rate, score) when neither count nor median applies."
+    },
+    "value_low": {
+      "type": ["number", "null"],
+      "description": "Lower bound of the observed interval (25th percentile, 95% CI lower, or minimum)."
+    },
+    "value_high": {
+      "type": ["number", "null"],
+      "description": "Upper bound of the observed interval (75th percentile, 95% CI upper, or maximum)."
+    },
+    "median_iqr": {
+      "type": ["object", "null"],
+      "description": "Non-parametric distribution parameters (median, 25th percentile, 75th percentile).",
+      "required": ["median", "q1", "q3"],
+      "properties": {
+        "median": {
+          "type": "number",
+          "description": "Median value of the distribution."
+        },
+        "q1": {
+          "type": "number",
+          "description": "First quartile (25th percentile)."
+        },
+        "q3": {
+          "type": "number",
+          "description": "Third quartile (75th percentile)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "count_and_percentage",
+        "count",
+        "percentage",
+        "years",
+        "months",
+        "mmol_l",
+        "score",
+        "ratio",
+        "other"
+      ],
+      "description": "Physical, statistical, or demographic unit of measurement."
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Cryptographic SHA-256 digest of the source PDF document in sources/downloads/."
+    },
+    "raw_text_quote": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Verbatim text extracted from the source table cell or row."
+    },
+    "extraction_kind": {
+      "type": "string",
+      "enum": ["observed", "computed", "inferred"],
+      "description": "Epistemic kind per cf-research-context: observed (verbatim), computed (formula), or inferred."
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "description": "Associated report footnotes, sample restrictions, or methodology clarifications."
+    }
+  },
+  "additionalProperties": false
+}
