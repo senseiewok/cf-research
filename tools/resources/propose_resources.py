@@ -301,9 +301,10 @@ class IntakeSession:
             self._robots_body = ""
             return ""
 
-        import requests
-
-        sess = self.session or requests.Session()
+        sess = self.session
+        if sess is None:
+            import requests
+            sess = requests.Session()
         current = robots_url
         for _ in range(MAX_REDIRECTS + 1):
             self._pace()
@@ -358,9 +359,10 @@ class IntakeSession:
         if self.dry_run:
             return FetchResult(url, 200, f"[Dry Run Content for {url}]", "Dry Run Page", 100)
 
-        import requests
-
-        sess = self.session or requests.Session()
+        sess = self.session
+        if sess is None:
+            import requests
+            sess = requests.Session()
         current = url
 
         for _ in range(MAX_REDIRECTS + 1):
