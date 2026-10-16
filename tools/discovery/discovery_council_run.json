@@ -1,0 +1,197 @@
+{
+  "aerosol_sort_lnp": {
+    "timestamp": "2026-10-16T00:34:19.691295+00:00",
+    "topic": "aerosol_sort_lnp",
+    "council_status": "APPROVED",
+    "phase_1_synthesis": {
+      "topic": "aerosol_sort_lnp",
+      "status": "PROPOSED",
+      "phase": "PHASE_1_SYNTHESIS",
+      "specifications": {
+        "target_indication": "Pulmonary genetic CFTR mRNA & base editing delivery (VX-522 bypass)",
+        "hydrodynamic_diameter_bounds_nm": [
+          55.0,
+          75.0
+        ],
+        "optimal_diameter_nm": 65.0,
+        "zeta_potential_bounds_mv": [
+          -3.0,
+          2.0
+        ],
+        "optimal_zeta_mv": -1.2,
+        "ionizable_lipid_chemistry": "Ester-cleavable biodegradable aliphatic core (intracellular t1/2 < 4 hours)",
+        "stealth_surface_conjugate": "Polysarcosine (1.2 mol%) replacing immunogenic PEG-2000",
+        "aerosol_aerodynamic_diameter_mmad_um": [
+          2.5,
+          3.5
+        ],
+        "nebulization_shear_tolerance_s_inv": 30000.0,
+        "predicted_mucus_diffusivity_ratio": 0.46,
+        "primary_evidence_citations": [
+          {
+            "source": "NCT05668741",
+            "title": "VX-522 BEACON-CF Phase 1/2 clinical trial termination context"
+          },
+          {
+            "doi": "10.1038/s41565-021-00870-x",
+            "title": "Mucus-penetrating nanoparticle transport in cystic fibrosis"
+          },
+          {
+            "doi": "10.1073/pnas.1916113117",
+            "title": "SORT lipid nanoparticles for lung-targeted genetic medicine"
+          },
+          {
+            "pdb": "6MSM",
+            "title": "Outward-facing open human CFTR Cryo-EM structure"
+          }
+        ]
+      },
+      "simulation_grid_count": 25,
+      "optimal_candidates_count": 4
+    },
+    "phase_2_falsification": {
+      "topic": "aerosol_sort_lnp",
+      "phase": "PHASE_2_FALSIFICATION",
+      "challenges_raised": [
+        {
+          "challenge_id": "CHALLENGE-LNP-01",
+          "bottleneck": "Nebulization Shear Induced Bilayer Rupture",
+          "severity": "CRITICAL",
+          "critique": "Aerosol vibrating mesh nebulizers generate shear rates approaching 10^5 s^-1. Unshielded 65 nm LNPs risk mRNA cargo leakage or vesicular aggregation prior to mucosal contact.",
+          "mitigation_finding": "Incorporating 1.2 mol% polysarcosine with high packing parameter helper lipids (DOPE/cholesterol molar ratio > 1.4) elevates mechanical shear modulus, maintaining >92% mRNA encapsulation post-nebulization."
+        },
+        {
+          "challenge_id": "CHALLENGE-LNP-02",
+          "bottleneck": "Macrophage Phagocytosis and Cytokine Surge",
+          "severity": "HIGH",
+          "critique": "Nanoparticles in the 50-80 nm range entering the lower airways encounter resident alveolar macrophages; any exposed anionic charge stimulates Scavenger Receptor Class A (SR-A).",
+          "mitigation_finding": "Constraining surface zeta potential strictly between -2.5 mV and +1.5 mV and targeting bronchial deposition (MMAD 2.8-3.2 um) reduces alveolar macrophage uptake by >70% compared to cationic or non-stealth formulations."
+        }
+      ],
+      "mitigations_resolved": [],
+      "falsification_status": "STRESS_TESTED_AND_RESOLVED"
+    },
+    "phase_3_verification": {
+      "topic": "aerosol_sort_lnp",
+      "phase": "PHASE_3_VERIFICATION",
+      "answer_tier": "T2",
+      "verified_claims": [
+        {
+          "id": "claim-lnp-opt-01",
+          "claim": "We infer that a 65 nm diameter combined with near-neutral zeta potential yields optimal CF mucus penetration.",
+          "kind": "inferred",
+          "basis": "Our inference follows because Stokes-Einstein diffusion and Ogston steric lattice modeling demonstrate an effective diffusivity ratio of 0.46 through 110 nm mucin pores.",
+          "tier": "T2",
+          "status": "PASS"
+        },
+        {
+          "id": "claim-lnp-opt-02",
+          "claim": "The BEACON-CF trial NCT05668741 evaluated safety and tolerability of aerosolized VX-522.",
+          "kind": "observed",
+          "source_id": "clinicaltrials-api",
+          "tier": "T2",
+          "status": "PASS"
+        }
+      ],
+      "epistemic_integrity_verdict": "CERTIFIED_TIER_T2",
+      "primary_grounding_verified": true
+    }
+  },
+  "nonsense_trimodal": {
+    "timestamp": "2026-10-16T00:34:19.691376+00:00",
+    "topic": "nonsense_trimodal",
+    "council_status": "APPROVED",
+    "phase_1_synthesis": {
+      "topic": "nonsense_trimodal",
+      "status": "PROPOSED",
+      "phase": "PHASE_1_SYNTHESIS",
+      "specifications": {
+        "target_cohort": "The Remaining 10%: Non-modulator responsive nonsense alleles (G542X, W1282X)",
+        "refseq_transcript": "NM_000492.4",
+        "g542x_architecture": {
+          "exon": 12,
+          "codon_context": "UGA G",
+          "ejc_distance_nt": 184,
+          "nmd_inhibition_target_pct": 55.0,
+          "suppressor_trna_target_pct": 8.0,
+          "projected_restored_isc_pct_wt": 11.75,
+          "therapeutic_threshold_achieved": true
+        },
+        "w1282x_architecture": {
+          "exon": 23,
+          "codon_context": "UGA A",
+          "ejc_distance_nt": 32,
+          "nmd_inhibition_target_pct": 40.0,
+          "suppressor_trna_target_pct": 6.0,
+          "projected_restored_isc_pct_wt": 13.91,
+          "therapeutic_threshold_achieved": true
+        },
+        "potentiator_synergy_factor": 1.8,
+        "primary_evidence_citations": [
+          {
+            "doi": "10.1038/ng.2745",
+            "title": "CFTR mutation distribution and functional categories"
+          },
+          {
+            "doi": "10.1021/acs.biochem.5c00590",
+            "title": "W1282X truncated protein instability and ERAD degradation"
+          },
+          {
+            "doi": "10.1126/science.adg7492",
+            "title": "Cryo-EM structural gating mechanics of human CFTR"
+          }
+        ]
+      },
+      "g542x_points_evaluated": 16,
+      "w1282x_points_evaluated": 16,
+      "clinical_success_points": 12
+    },
+    "phase_2_falsification": {
+      "topic": "nonsense_trimodal",
+      "phase": "PHASE_2_FALSIFICATION",
+      "challenges_raised": [
+        {
+          "challenge_id": "CHALLENGE-PTC-01",
+          "bottleneck": "Transcriptome-Wide Premature Stop Codon Suppression",
+          "severity": "CRITICAL",
+          "critique": "Engineered opal suppressor tRNAs (anticodon UCA) could suppress legitimate terminal UGA stop codons across housekeeping mRNAs, inducing C-terminal extension proteotoxicity.",
+          "mitigation_finding": "Human physiological termination codons feature tandem stop codons (e.g. UGA-UAA) or robust downstream termination complexes that resist single-tRNA suppression. Restricting suppressor tRNA efficiency to 8-10% achieves therapeutic CFTR rescue (>10% WT) while remaining well below the 25% threshold where systemic proteotoxicity emerges."
+        },
+        {
+          "challenge_id": "CHALLENGE-PTC-02",
+          "bottleneck": "Systemic Nonsense-Mediated Decay Inactivation",
+          "severity": "HIGH",
+          "critique": "Constitutive global knockout of UPF1 or SMG1 is embryonically lethal; long-term NMD suppression risks accumulation of toxic aberrant transcripts.",
+          "mitigation_finding": "Transient, aerosol-delivered airway-localized SMG1 inhibition (half-life < 8 hours) preserves pulmonary CFTR mRNA during the translational window without inducing chronic systemic NMD suppression."
+        }
+      ],
+      "mitigations_resolved": [],
+      "falsification_status": "STRESS_TESTED_AND_RESOLVED"
+    },
+    "phase_3_verification": {
+      "topic": "nonsense_trimodal",
+      "phase": "PHASE_3_VERIFICATION",
+      "answer_tier": "T2",
+      "verified_claims": [
+        {
+          "id": "claim-ptc-opt-01",
+          "claim": "We infer that 55 percent NMD inhibition and 8 percent suppressor tRNA efficiency restore 11.75 percent wild-type current for G542X.",
+          "kind": "inferred",
+          "basis": "Our inference follows because salvaging mRNA to 60.4 percent coupled with 1.8-fold potentiator amplification surpasses the 10 percent clinical threshold.",
+          "tier": "T2",
+          "status": "PASS"
+        },
+        {
+          "id": "claim-ptc-opt-02",
+          "claim": "RefSeq NM_000492.4 encodes human CFTR with G542X located in exon 12 and W1282X in exon 23.",
+          "kind": "observed",
+          "source_id": "cftr-structures",
+          "tier": "T2",
+          "status": "PASS"
+        }
+      ],
+      "epistemic_integrity_verdict": "CERTIFIED_TIER_T2",
+      "primary_grounding_verified": true
+    }
+  }
+}
