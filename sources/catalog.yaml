@@ -38,6 +38,10 @@ sources:
     url: https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf
     filename: ECFSPR_Annual_Report_2024_v1.0.pdf
     claim_label: verified
+    notes: >-
+      Official annual report openly published at pr.ecfs.eu. Outbound permission letter drafted 2026-10-16 in
+      landscape/permission-letters-dispatch.md (Letter 4) for maintainer dispatch from lab address (T-0106);
+      retrieval is fetch-based, redistribution of extracted tables pending written reply.
 
   - id: ecfspr-adr-2023
     title: ECFSPR Annual Data Report 2023
@@ -267,6 +271,8 @@ sources:
       reproduce its charts (redistribute stays false). 120 pages; the text layer extracts. www.cff.org refuses
       automated clients (robots.txt unreadable on 2026-10-05), so this is manual. Not yet checked: ligature
       artefacts and which figures change definition between years; read the Technical Supplement first.
+      Outbound permission letter drafted 2026-10-16 in landscape/permission-letters-dispatch.md (Letter 3)
+      for maintainer dispatch from lab address (T-0106); status remains manual and link-only pending written reply.
   - id: cffpr-covid-2020
     title: CFF Patient Registry 2020 handout, CF Care and COVID-19
     publisher: Cystic Fibrosis Foundation
@@ -430,6 +436,8 @@ sources:
       publication needs the Trust's written permission. The landing page also lists an at-a-glance
       summary, a Scottish report and older years, none of which are catalogued yet. England, Wales,
       Scotland and Northern Ireland are covered; comparability with other registries is not assessed.
+      Outbound permission letter drafted 2026-10-16 in landscape/permission-letters-dispatch.md (Letter 5)
+      for maintainer dispatch from lab address (T-0106); reuse in publications pending written reply.
 
   - id: acfdr-adr-2025
     title: Australian Cystic Fibrosis Data Registry Annual Report 2025
@@ -455,6 +463,8 @@ sources:
       re-host it (redistribute stays false), and asks the registry before reproducing tables. The registry
       page also offers an annual-report archive back to 2014 and a data dictionary; none of those are
       catalogued yet. Counts and definitions differ from other registries; comparability is not assessed.
+      Outbound permission letter drafted 2026-10-16 in landscape/permission-letters-dispatch.md (Letter 6)
+      for maintainer dispatch from lab address (T-0106); reuse and quotation pending written reply.
   - id: cfri-adr-2024
     title: Cystic Fibrosis Registry of Ireland Annual Report 2024
     publisher: Cystic Fibrosis Registry of Ireland (University College Dublin)
@@ -641,6 +651,8 @@ sources:
       Written permission would have to come from CFF and Johns Hopkins (info@cff.org is the contact named in
       the terms). Authoritative for variant-level clinical and functional annotation. The terms are the
       publisher's text, not legal advice; a human should read them.
+      Outbound permission letter drafted 2026-10-16 in landscape/permission-letters-dispatch.md (Letter 1)
+      for maintainer dispatch from lab address (T-0106); status remains manual and link-only pending written reply.
   - id: cftr-france
     title: CFTR-France (public variant list)
     publisher: INSERM / CHU Montpellier
