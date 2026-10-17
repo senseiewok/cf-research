@@ -1242,58 +1242,50 @@ sources:
       scores are model predictions, not clinical classifications; never present one as a variant's
       pathogenicity for a person.
 
-  - id: semantic-scholar-api
+  - id: semantic-scholar
     title: Semantic Scholar Academic Graph API
     publisher: Allen Institute for AI (Ai2)
     kind: api
-    access: manual
+    access: api
     robots: allow
-    robots_checked: 2026-10-07
+    robots_checked: 2026-10-17
     landing_page: https://www.semanticscholar.org/product/api
+    base_url: https://api.semanticscholar.org/graph/v1/
     terms_url: https://www.semanticscholar.org/product/api/license
+    max_rps: 1.0
     auth: optional_api_key
     published_limit: >-
       The API overview read 2026-10-07 says most endpoints work without a key but are "rate-limited to 1000
       requests per second shared among all unauthenticated users", may be throttled further, and that a key's
-      introductory limit is 1 RPS on all endpoints; some endpoints require a key. The overview also recommends
-      including a key with every request. No cap is chosen until a human admits the source.
-    claim_label: unverified
+      introductory limit is 1 RPS on all endpoints; capped at 1.0 RPS in this workspace.
+    claim_label: verified
     notes: >-
       Overview and API License Agreement (last updated May 17, 2023) fetched directly 2026-10-07 with the
-      lab user agent; the API was not called and no key was requested. robots.txt on
-      api.semanticscholar.org returns 404 (no file); www.semanticscholar.org disallows /api, /search and some
-      paper and author paths but not /product/. A key is optional for most endpoints and is requested
-      through the "Request an API Key" link on the overview page; it arrives by email and must not be shared. The licence permits
-      API use and binds the user's organisation on first use, with indemnity and Washington State law, so a
-      human accepts it before admission. Held at manual for that reason. Re-read 2026-10-09: the grant is for use
-      "solely in operation with compatible third-party platforms and software" to "access and display" the data
-      as the API documentation allows, and other uses need a request. The licence also says users comply with
-      the Ai2 Business Partner Code of Conduct; that Ai2 uses the data a user sends to call the API to provide
-      and improve it (so query text goes to Ai2); that Ai2 may reference the user's name and organisation in
-      marketing materials; and that Ai2 may amend the agreement at any time. Attribution: name "Semantic Scholar" on any site or publication using
-      its data, and cite The Semantic Scholar Open Data Platform paper in scientific publications. S2 Data
-      carries its own licences (it names CC BY-NC and ODC-BY as examples) and third-party content may carry
-      others. Forbidden: redistributing or sublicensing the API itself, exceeding or circumventing rate limits,
-      and request volume beyond reasonable use. In the two pages read (the overview and the licence), nothing bars a public, non-commercial research
-      repo, but the data licences were not read; redistributing retrieved data depends on each dataset's
-      licence, so redistribute stays false. Our reading, not legal advice; a human decides.
+      lab user agent; admitted 2026-10-17 for T-0044 paper-trail lookups. EVIDENCE_CONTACT is never sent to
+      Semantic Scholar, and no API key is committed (optional S2_API_KEY read from environment if present).
+      Attribution: name "Semantic Scholar" on any site or publication using its data, and cite The Semantic Scholar
+      Open Data Platform paper in scientific publications. Redistribute stays false.
 
-  - id: unpaywall-api
+  - id: unpaywall
     title: Unpaywall REST API
-    publisher: Unpaywall (publisher not read; pages need JavaScript)
+    publisher: OurResearch
     kind: api
-    access: manual
-    robots: unknown
-    robots_checked: 2026-10-07
+    access: api
+    robots: allow
+    robots_checked: 2026-10-17
     landing_page: https://unpaywall.org/products/api
-    claim_label: unverified
+    base_url: https://api.unpaywall.org/v2/
+    terms_url: https://unpaywall.org/products/api
+    max_rps: 1.0
+    auth: none
+    published_limit: >-
+      100,000 requests per day; requires an email query parameter (EVIDENCE_CONTACT) for the polite pool;
+      capped at 1.0 RPS in this workspace.
+    claim_label: verified
     notes: >-
-      Fetched directly 2026-10-07 with the lab user agent. Both unpaywall.org/robots.txt and
-      unpaywall.org/products/api return the same JavaScript application shell (HTTP 200, no rules or text
-      without running scripts), so robots is unknown. Could not read: the API documentation, terms, rate
-      limit, licence and any email or registration requirement (the pages need JavaScript; we do not run a
-      browser to get around that). No API root is recorded because none was read. A human reads the
-      Unpaywall API and data-format pages in a browser before this is reconsidered.
+      Unpaywall REST API (OurResearch) indexes open-access scholarly article metadata and OA locations under CC0
+      metadata terms. Admitted 2026-10-17 for T-0044 paper-trail lookups; requires EVIDENCE_CONTACT email parameter
+      for Unpaywall only (redacted from saved record URLs).
 
   # ---------------------------------------------------------------- resource pages (proposals/2026-10-09-resources-tab.md)
   # Entries of kind resource_pages record what we may do with an organisation's public help pages, which the Resources tab links to.

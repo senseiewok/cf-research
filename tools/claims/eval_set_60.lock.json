@@ -1,0 +1,13 @@
+{
+  "file": "eval_set_60.json",
+  "sha256": "d1ff87ea4aae4c4ab4851a2d69a063dbb5b077b3673a7a2694f2560870b9f157",
+  "total_claims": 60,
+  "breakdown": {
+    "supported": 25,
+    "unsupported": 25,
+    "out_of_scope": 10
+  },
+  "frozen_at": "2026-10-17T14:00:00Z",
+  "status": "frozen",
+  "hash_algorithm": "sha256"
+}

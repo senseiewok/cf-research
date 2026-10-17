@@ -1,0 +1,8 @@
+{
+  "ecfspr-txt": "eval_evidence.txt",
+  "cffpr-txt": "eval_evidence.txt",
+  "ukcfr-txt": "eval_evidence.txt",
+  "ccfr-txt": "eval_evidence.txt",
+  "trials-snapshot": "eval_evidence.txt",
+  "pdb-structures": "eval_evidence.txt"
+}

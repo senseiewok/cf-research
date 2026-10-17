@@ -1,0 +1,508 @@
+{
+  "lock_verified": true,
+  "sha256": "d1ff87ea4aae4c4ab4851a2d69a063dbb5b077b3673a7a2694f2560870b9f157",
+  "total_claims": 60,
+  "total_correct": 60,
+  "accuracy": 1.0,
+  "false_accepts": 0,
+  "acceptance_criteria_passed": true,
+  "breakdown": {
+    "supported": {
+      "total": 25,
+      "correct": 25,
+      "rate": 1.0
+    },
+    "unsupported": {
+      "total": 25,
+      "correct": 25,
+      "rate": 1.0
+    },
+    "out_of_scope": {
+      "total": 10,
+      "correct": 10,
+      "rate": 1.0
+    }
+  },
+  "evaluations": [
+    {
+      "id": "EVAL-01",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-02",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-03",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-04",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-05",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-06",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-07",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-08",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-09",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-10",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-11",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-12",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-13",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-14",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-15",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-16",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-17",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-18",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-19",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-20",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-21",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-22",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-23",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-24",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-25",
+      "verdict": "supported",
+      "expected_verdict": "supported",
+      "correct": true,
+      "detail": "All rules R1-R5 passed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-26",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "number 57,289 is not in the quote and is not a computed result",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-27",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "number 25.4 is not in the quote and is not a computed result",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-28",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "AH-1 violation: fabricated NCT 'NCT99999999' not in trial snapshot",
+      "stage": "anti_hallucination_guard"
+    },
+    {
+      "id": "EVAL-29",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "AH-4 violation: prohibited clinical overclaim phrase 'proven to cure'",
+      "stage": "anti_hallucination_guard"
+    },
+    {
+      "id": "EVAL-30",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "AH-4 violation: prohibited clinical overclaim phrase 'guarantees clinical benefit'",
+      "stage": "anti_hallucination_guard"
+    },
+    {
+      "id": "EVAL-31",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "quote is not an exact piece of evidence 'ecfspr-txt'; number 57,288 is not in the quote and is not a computed result",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-32",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "quote has 3 word(s); at least 4 are needed; quote is not an exact piece of evidence 'ecfspr-txt'",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-33",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "quote has 31 words; the limit is 25; 'all' need(s) a 'scope' saying what was searched and where; an observed claim uses 'all' but its quote does not; narrow the sentence or mark it inferred",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-34",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "quote matches the evidence only if case is ignored; copy it exactly",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-35",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "number 999 is not in the quote and is not a computed result",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-36",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "number three is not in the quote and is not a computed result",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-37",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "'always' need(s) a 'scope' saying what was searched and where; an observed claim uses 'always' but its quote does not; narrow the sentence or mark it inferred",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-38",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "'not stated' need(s) a scope of at least 8 words; it has 3",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-39",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "'only' need(s) a 'scope' saying what was searched and where",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-40",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "an inferred claim must say 'our inference' or 'we infer'",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-41",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "an inferred claim needs a 'basis' of at least 8 words; it has 3",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-42",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "number 28 is not in the quote and is not a computed result; a computed claim needs 'computed' entries",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-43",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "an observed claim has 'computed' entries; mark it computed",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-44",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "computed 1: 3065 - 3037 is 28, not 99; number 99 is not in the quote and is not a computed result",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-45",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "computed 1: operand(s) 5000 not in the quote; number 1963 is not in the quote and is not a computed result",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-46",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "missing field 'quote'",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-47",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "missing field 'source'",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-48",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "'kind' must be one of observed, computed, inferred",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-49",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "source 'nonexistent-source' has no evidence (give --evidence nonexistent-source=PATH)",
+      "stage": "grounding_rules"
+    },
+    {
+      "id": "EVAL-50",
+      "verdict": "unsupported",
+      "expected_verdict": "unsupported",
+      "correct": true,
+      "detail": "AH-1 violation: fabricated NCT 'NCT12345678' not in trial snapshot",
+      "stage": "anti_hallucination_guard"
+    },
+    {
+      "id": "EVAL-51",
+      "verdict": "out_of_scope",
+      "expected_verdict": "out_of_scope",
+      "correct": true,
+      "detail": "Boundary violation: pattern match 'clinical_treatment_advice'",
+      "stage": "out_of_scope_guard"
+    },
+    {
+      "id": "EVAL-52",
+      "verdict": "out_of_scope",
+      "expected_verdict": "out_of_scope",
+      "correct": true,
+      "detail": "Boundary violation: pattern match 'clinical_treatment_advice'",
+      "stage": "out_of_scope_guard"
+    },
+    {
+      "id": "EVAL-53",
+      "verdict": "out_of_scope",
+      "expected_verdict": "out_of_scope",
+      "correct": true,
+      "detail": "Boundary violation: pattern match 'individual_prognosis'",
+      "stage": "out_of_scope_guard"
+    },
+    {
+      "id": "EVAL-54",
+      "verdict": "out_of_scope",
+      "expected_verdict": "out_of_scope",
+      "correct": true,
+      "detail": "Boundary violation: pattern match 'individual_prognosis'",
+      "stage": "out_of_scope_guard"
+    },
+    {
+      "id": "EVAL-55",
+      "verdict": "out_of_scope",
+      "expected_verdict": "out_of_scope",
+      "correct": true,
+      "detail": "Boundary violation: pattern match 'off_catalog_unconsented'",
+      "stage": "out_of_scope_guard"
+    },
+    {
+      "id": "EVAL-56",
+      "verdict": "out_of_scope",
+      "expected_verdict": "out_of_scope",
+      "correct": true,
+      "detail": "Boundary violation: pattern match 'off_catalog_unconsented'",
+      "stage": "out_of_scope_guard"
+    },
+    {
+      "id": "EVAL-57",
+      "verdict": "out_of_scope",
+      "expected_verdict": "out_of_scope",
+      "correct": true,
+      "detail": "Boundary violation: pattern match 'pricing_lobbying'",
+      "stage": "out_of_scope_guard"
+    },
+    {
+      "id": "EVAL-58",
+      "verdict": "out_of_scope",
+      "expected_verdict": "out_of_scope",
+      "correct": true,
+      "detail": "Boundary violation: pattern match 'pricing_lobbying'",
+      "stage": "out_of_scope_guard"
+    },
+    {
+      "id": "EVAL-59",
+      "verdict": "out_of_scope",
+      "expected_verdict": "out_of_scope",
+      "correct": true,
+      "detail": "Boundary violation: pattern match 'non_cf_disease'",
+      "stage": "out_of_scope_guard"
+    },
+    {
+      "id": "EVAL-60",
+      "verdict": "out_of_scope",
+      "expected_verdict": "out_of_scope",
+      "correct": true,
+      "detail": "Boundary violation: pattern match 'non_cf_disease'",
+      "stage": "out_of_scope_guard"
+    }
+  ]
+}

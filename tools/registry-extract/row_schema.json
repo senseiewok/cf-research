@@ -46,6 +46,16 @@
       "minimum": 1,
       "description": "1-indexed page number as printed in the official report PDF."
     },
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Alias for page_number (1-indexed printed page number in the report PDF)."
+    },
+    "url": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Official download or landing URL matching sources/manifest.json."
+    },
     "table_id": {
       "type": "string",
       "minLength": 1,

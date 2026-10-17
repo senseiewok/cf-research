@@ -1,0 +1,47 @@
+[
+  {
+    "disagreement_id": "DISAGREE-001",
+    "report_year": 2022,
+    "page_number": 8,
+    "category": "font_ligature_encoding",
+    "issue": "ECFSPR 2022 report PDF maps 'ti' and 'tt' character ligatures incorrectly in some font subsets, resulting in glyph errors such as 'Cys-c Fibrosis', 'Introduc?on', 'idenLﬁed', and 'CroaLa' in section headers.",
+    "resolution": "Numerals and parentheses inside summary table cells on page 8 were unaffected. Extracted indicator headers and indicator_id use normalized canonical keys per row_schema.json, while raw_text_quote preserves the exact verbatim numeric cell string.",
+    "status": "resolved"
+  },
+  {
+    "disagreement_id": "DISAGREE-002",
+    "report_year": 2020,
+    "page_number": 11,
+    "category": "multi_line_cell_layout",
+    "issue": "In the 2020 Summary of data report (page 11), counts and percentages are rendered on consecutive lines ('n 24799 27447 52246' followed by '(%) (47.5%) (52.5%)'), whereas 2021-2023 reports render unified cells '25765 (47.7)'.",
+    "resolution": "Dual-pass extraction parser couples the consecutive count and percentage tokens per column, populating count_n, percentage, and raw_text_quote as '24799 (47.5%)', perfectly conforming to row_schema.json.",
+    "status": "resolved"
+  },
+  {
+    "disagreement_id": "DISAGREE-003",
+    "report_year": 2020,
+    "page_number": 11,
+    "category": "distribution_metric_reporting",
+    "issue": "In 2020, age at follow-up and age at death reported both mean and median without IQR bounds ('mean 21.5', 'median 18.8'), whereas 2021-2024 reports provide median with 25th-75th percentiles.",
+    "resolution": "For 2020, value_point stores the median value (18.8) to maintain longitudinal metric consistency with median_iqr distributions, value_low and value_high remain null, and the mean value is recorded in notes.",
+    "status": "resolved"
+  },
+  {
+    "disagreement_id": "DISAGREE-004",
+    "report_year": 2024,
+    "page_number": 9,
+    "category": "table_schema_shift",
+    "issue": "The 2024 Annual Data Report modified the opening summary table (page 9) from sex stratification (Females, Males, Total) to a multi-year trend table (2024, 2019, 2014) for the total cohort.",
+    "resolution": "Extracted the 9 total cohort indicators for 2024 from page 9 with stratum_sex='total', and extracted sex and age strata from Chapter 1 Appendix Table A1.2 on page 106.",
+    "status": "resolved"
+  },
+  {
+    "disagreement_id": "DISAGREE-005",
+    "report_year": "all",
+    "page_number": "variable",
+    "category": "uk_denominator_footnote_invariant",
+    "issue": "In all five ECFSPR reports (2020-2024), the deceased cohort footnote specifies that while most countries report only patients seen during the year, the United Kingdom includes all individuals with a confirmed CF diagnosis (N=10,837 to 11,381).",
+    "resolution": "Each deceased row embeds the exact footnoted cohort size in denominator_n and documents the UK inclusion criteria verbatim in notes.",
+    "status": "resolved"
+  }
+]

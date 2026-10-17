@@ -178,6 +178,85 @@ class RegistryExtractSchemaTest(unittest.TestCase):
         errors = validate_row(sample, self.schema)
         self.assertTrue(any("unexpected property 'unauthorized_extra_field'" in e for e in errors))
 
+    def test_ecfspr_v0_1_extracted_passes_schema_validation(self):
+        extracted_p = HERE / "ecfspr_v0_1_extracted.json"
+        self.assertTrue(extracted_p.exists(), f"Missing extracted dataset: {extracted_p}")
+        rows = json.loads(extracted_p.read_text(encoding="utf-8"))
+        self.assertGreaterEqual(len(rows), 100, f"Must have >= 100 extracted rows, got {len(rows)}")
+
+        errors = validate_file(extracted_p, SCHEMA_JSON)
+        self.assertEqual(errors, [], f"Extraction dataset validation errors: {errors}")
+
+    def test_ecfspr_v0_1_extracted_covers_5_years_and_15_indicators(self):
+        extracted_p = HERE / "ecfspr_v0_1_extracted.json"
+        rows = json.loads(extracted_p.read_text(encoding="utf-8"))
+        years = set(r["report_year"] for r in rows)
+        indicators = set(r["indicator_id"] for r in rows)
+
+        expected_years = {2020, 2021, 2022, 2023, 2024}
+        self.assertEqual(years, expected_years, f"Must cover all 5 ECFSPR years: {expected_years}")
+        self.assertGreaterEqual(len(indicators), 15, f"Must cover >= 15 indicators, got {len(indicators)}")
+
+    def test_ecfspr_v0_1_extracted_100_percent_url_and_page(self):
+        extracted_p = HERE / "ecfspr_v0_1_extracted.json"
+        rows = json.loads(extracted_p.read_text(encoding="utf-8"))
+        for r in rows:
+            rid = r.get("row_id")
+            url = r.get("url")
+            page = r.get("page")
+            page_num = r.get("page_number")
+            self.assertTrue(isinstance(url, str) and url.startswith("https://pr.ecfs.eu/"), f"Row {rid} missing valid url: {url}")
+            self.assertTrue(isinstance(page, int) and page >= 1, f"Row {rid} invalid page: {page}")
+            self.assertTrue(isinstance(page_num, int) and page_num >= 1, f"Row {rid} invalid page_number: {page_num}")
+            self.assertEqual(page, page_num, f"Row {rid} page mismatch: {page} != {page_num}")
+
+    def test_ecfspr_v0_1_audit_acceptance(self):
+        from audit_ecfspr import run_audit
+        report = run_audit(sample_size=100, seed=20261017)
+        self.assertEqual(report["status"], "PASS")
+        self.assertGreaterEqual(report["accuracy"], 0.99, f"Accuracy must be >= 0.99, got {report['accuracy']}")
+        self.assertEqual(report["url_page_coverage"], 1.0, "URL and page coverage must be 100%")
+        self.assertTrue(report["disagreements_log_committed"], "Disagreements log must be committed")
+
+        # Wilson 95% CI reported and within [0, 1]
+        ci_lower, ci_upper = report["wilson_95_ci"]
+        self.assertGreaterEqual(ci_lower, 0.90)
+        self.assertLessEqual(ci_upper, 1.0)
+
+    def test_positive_control_tampered_value_fails_audit(self):
+        from audit_ecfspr import verify_row_against_page
+        row = {
+            "row_id": "TEST-FAIL",
+            "report_year": 2022,
+            "page_number": 8,
+            "indicator_id": "pwcf_registered",
+            "count_n": 99999999,  # fabricated count
+            "raw_text_quote": "99999999",
+        }
+        page_text = "Summary of data report PwCF registered in the ECFSPR 25964 (47.6) 28582 (52.4) 54546 (100)"
+        verified, reason = verify_row_against_page(row, page_text)
+        self.assertFalse(verified)
+        self.assertIn("not found on page", reason)
+
+    def test_positive_control_missing_url_or_page_rejected(self):
+        extracted_p = HERE / "ecfspr_v0_1_extracted.json"
+        rows = json.loads(extracted_p.read_text(encoding="utf-8"))
+        bad_rows = copy.deepcopy(rows[:5])
+        bad_rows[0]["url"] = None
+
+        from audit_ecfspr import run_audit
+        temp_bad = HERE / "temp_bad_rows.json"
+        try:
+            temp_bad.write_text(json.dumps(bad_rows), encoding="utf-8")
+            report = run_audit(extracted_path=temp_bad, sample_size=5)
+            self.assertEqual(report["status"], "FAIL")
+            self.assertLess(report["url_page_coverage"], 1.0)
+            self.assertGreater(len(report["url_page_failures"]), 0)
+        finally:
+            if temp_bad.exists():
+                temp_bad.unlink()
+
 
 if __name__ == "__main__":
     unittest.main()
+
