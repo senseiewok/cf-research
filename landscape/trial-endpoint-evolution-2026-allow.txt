@@ -1,0 +1,37 @@
+# Allow file for landscape/trial-endpoint-evolution-2026.md
+# Format: number # explanation
+
+2008  # start year for longitudinal surveillance window 2008-2026
+2011  # Ramsey BW et al. NEJM publication year
+2012  # GLI-2012 reference equation year and Ivacaftor approval era milestone
+2013  # Davies JC et al. AJRCCM publication year
+2015  # Wainwright CE et al. NEJM publication year
+2017  # Farrell PM et al. J Pediatr publication year
+2019  # Middleton PG et al. NEJM publication year
+2020  # PRISMA 2020 statement year and post-Trikafta era boundary
+2021  # PRISMA 2020 BMJ statement publication year
+2026  # current surveillance snapshot year
+
+8  # 8 canonical outcome classes in PRISMA 2020 taxonomy
+4  # 4 clinical trial phases (Phases 1-4)
+50  # 50-study stratified census size
+4711  # deterministic sampling seed
+2.5  # LCI2.5 cutoff for lung clearance index
+
+0  # count of exclusions under rules X1, X2, X3, X6 and sweat chloride in Phase 3/4
+10.7  # 113 / 1053 * 100 = 10.7% exclusion percentage
+6.8  # 72 / 1053 * 100 = 6.8% X4 exclusion percentage
+3.9  # 41 / 1053 * 100 = 3.9% X5 exclusion percentage
+89.3  # 940 / 1053 * 100 = 89.3% inclusion percentage
+87  # 916 / 1053 * 100 = 87.0% studies with registered outcomes
+2.3  # 24 / 1053 * 100 = 2.3% studies without registered outcomes
+100  # 1053 / 1053 * 100 = 100.0% identification baseline percentage
+
+372  # BMJ volume 372 for Page MJ et al. 2021
+40  # Eur Respir J volume 40 for Quanjer PH et al. 2012
+331  # N Engl J Med volume 331 for Fuchs HJ et al. 1994
+128  # Chest volume 128 for Quittner AL et al. 2005
+365  # N Engl J Med volume 365 for Ramsey BW et al. 2011
+373  # N Engl J Med volume 373 for Wainwright CE et al. 2015
+381  # N Engl J Med volume 381 for Middleton PG et al. 2019
+187  # Am J Respir Crit Care Med volume 187 for Davies JC et al. 2013

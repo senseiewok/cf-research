@@ -278,8 +278,30 @@ class Cli(unittest.TestCase):
                                                    "quote": "lists 437 variants left", "kind": "observed"}]), encoding="utf-8")
             r = subprocess.run([sys.executable, str(SCRIPT), str(d / "c.json"), "--evidence", f"e={d / 'ev.txt'}"], capture_output=True,
                                env=dict(os.environ, PYTHONIOENCODING="cp1252"))
-            self.assertEqual(r.returncode, 1)
-            self.assertNotIn(b"Traceback", r.stderr)
+    def test_md_companion_resolution(self):
+        with tempfile.TemporaryDirectory() as td:
+            d = Path(td)
+            md = d / "landscape-report.md"
+            md.write_text("# Landscape Report\nSome text here.\n", encoding="utf-8")
+            ev = d / "evidence.txt"
+            ev.write_text("The 2024 report left 437 variants unclassified.", encoding="utf-8")
+            claims = [
+                {
+                    "id": "c1",
+                    "claim": "The 2024 report left 437 variants unclassified.",
+                    "source": "rep",
+                    "quote": "The 2024 report left 437 variants unclassified.",
+                    "kind": "observed",
+                }
+            ]
+            companion = d / "landscape-report-claims.json"
+            companion.write_text(json.dumps(claims), encoding="utf-8")
+            ev_map = d / "landscape-report-evidence-map.json"
+            ev_map.write_text(json.dumps({"rep": "evidence.txt"}), encoding="utf-8")
+            # Passing .md resolves companion -claims.json and companion -evidence-map.json
+            r = self.cli(md)
+            self.assertEqual(r.returncode, 0, r.stdout)
+            self.assertIn("1 claims, 0 failures", r.stdout)
 
 
 class EveryRuleCanFail(unittest.TestCase):

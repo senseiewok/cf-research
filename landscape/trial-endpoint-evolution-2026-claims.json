@@ -1,0 +1,172 @@
+[
+  {
+    "id": "prisma-identified",
+    "claim": "In the ClinicalTrials.gov API v2 CF snapshot, 1,053 studies were identified through the condition query.",
+    "source": "atlas-ev",
+    "quote": "In the ClinicalTrials.gov API v2 CF snapshot, 1,053 studies were identified through the condition query.",
+    "kind": "observed"
+  },
+  {
+    "id": "prisma-screened-excluded",
+    "claim": "Screening applied deterministic scope rules X1 through X6, resulting in 113 excluded studies.",
+    "source": "atlas-ev",
+    "quote": "Screening applied deterministic scope rules X1 through X6, resulting in 113 excluded studies.",
+    "kind": "observed"
+  },
+  {
+    "id": "prisma-rule-x4",
+    "claim": "Specifically, 72 studies were excluded under rule X4 because the condition list does not name cystic fibrosis.",
+    "source": "atlas-ev",
+    "quote": "Specifically, 72 studies were excluded under rule X4 because the condition list does not name cystic fibrosis.",
+    "kind": "observed",
+    "scope": "The trial screening ledger was audited across all exclusions under rule X4 in its entirety."
+  },
+  {
+    "id": "prisma-rule-x5",
+    "claim": "41 studies were excluded under rule X5 because the condition list names cystic fibrosis only in a negation.",
+    "source": "atlas-ev",
+    "quote": "41 studies were excluded under rule X5 because the condition list names cystic fibrosis only in a negation.",
+    "kind": "observed",
+    "scope": "The trial screening ledger was audited across all exclusions under rule X5 in its entirety."
+  },
+  {
+    "id": "prisma-included-scope",
+    "claim": "940 interventional studies were eligible and included in the trial endpoint atlas.",
+    "source": "atlas-ev",
+    "quote": "940 interventional studies were eligible and included in the trial endpoint atlas.",
+    "kind": "observed"
+  },
+  {
+    "id": "prisma-outcomes-registered",
+    "claim": "Among included studies, 916 studies registered primary outcomes and 24 studies had no registered primary outcome.",
+    "source": "atlas-ev",
+    "quote": "Among included studies, 916 studies registered primary outcomes and 24 studies had no registered primary outcome.",
+    "kind": "observed"
+  },
+  {
+    "id": "prisma-outcome-entries",
+    "claim": "In total, 1,821 primary outcome entries were evaluated across the 940 included studies.",
+    "source": "atlas-ev",
+    "quote": "In total, 1,821 primary outcome entries were evaluated across the 940 included studies.",
+    "kind": "observed"
+  },
+  {
+    "id": "endpoints-fev1",
+    "claim": "Across 1,821 evaluated primary outcome entries, 164 entries across 152 studies were classified as lung_function_fev1.",
+    "source": "atlas-ev",
+    "quote": "Across 1,821 evaluated primary outcome entries, 164 entries across 152 studies were classified as lung_function_fev1.",
+    "kind": "observed"
+  },
+  {
+    "id": "endpoints-sweat-chloride",
+    "claim": "16 entries across 12 studies were classified as sweat_chloride.",
+    "source": "atlas-ev",
+    "quote": "16 entries across 12 studies were classified as sweat_chloride.",
+    "kind": "observed"
+  },
+  {
+    "id": "endpoints-exacerbations",
+    "claim": "26 entries across 26 studies were classified as pulmonary_exacerbations.",
+    "source": "atlas-ev",
+    "quote": "26 entries across 26 studies were classified as pulmonary_exacerbations.",
+    "kind": "observed"
+  },
+  {
+    "id": "endpoints-qol",
+    "claim": "129 entries across 75 studies were classified as quality_of_life.",
+    "source": "atlas-ev",
+    "quote": "129 entries across 75 studies were classified as quality_of_life.",
+    "kind": "observed"
+  },
+  {
+    "id": "endpoints-microbiology",
+    "claim": "66 entries across 51 studies were classified as microbiology_cfu.",
+    "source": "atlas-ev",
+    "quote": "66 entries across 51 studies were classified as microbiology_cfu.",
+    "kind": "observed"
+  },
+  {
+    "id": "endpoints-bmi",
+    "claim": "55 entries across 37 studies were classified as nutritional_bmi.",
+    "source": "atlas-ev",
+    "quote": "55 entries across 37 studies were classified as nutritional_bmi.",
+    "kind": "observed"
+  },
+  {
+    "id": "endpoints-safety",
+    "claim": "404 entries across 201 studies were classified as safety_adverse_events.",
+    "source": "atlas-ev",
+    "quote": "404 entries across 201 studies were classified as safety_adverse_events.",
+    "kind": "observed"
+  },
+  {
+    "id": "endpoints-other",
+    "claim": "1,037 entries across 583 studies were classified as other_or_not_stated.",
+    "source": "atlas-ev",
+    "quote": "1,037 entries across 583 studies were classified as other_or_not_stated.",
+    "kind": "observed"
+  },
+  {
+    "id": "phase-transition-p1",
+    "claim": "In Phase 1 protocols, 180 entries evaluated safety_adverse_events, 18 evaluated lung_function_fev1, and 1 evaluated sweat_chloride.",
+    "source": "atlas-ev",
+    "quote": "In Phase 1 protocols, 180 entries evaluated safety_adverse_events, 18 evaluated lung_function_fev1, and 1 evaluated sweat_chloride.",
+    "kind": "observed"
+  },
+  {
+    "id": "phase-transition-p2",
+    "claim": "In Phase 2 protocols, 176 entries evaluated safety_adverse_events, 59 evaluated lung_function_fev1, and 11 evaluated sweat_chloride.",
+    "source": "atlas-ev",
+    "quote": "In Phase 2 protocols, 176 entries evaluated safety_adverse_events, 59 evaluated lung_function_fev1, and 11 evaluated sweat_chloride.",
+    "kind": "observed"
+  },
+  {
+    "id": "phase-transition-p3",
+    "claim": "In Phase 3 protocols, 89 entries evaluated safety_adverse_events, 47 evaluated lung_function_fev1, and 6 evaluated pulmonary_exacerbations.",
+    "source": "atlas-ev",
+    "quote": "In Phase 3 protocols, 89 entries evaluated safety_adverse_events, 47 evaluated lung_function_fev1, and 6 evaluated pulmonary_exacerbations.",
+    "kind": "observed"
+  },
+  {
+    "id": "phase-transition-p4",
+    "claim": "In Phase 4 protocols, 15 entries evaluated lung_function_fev1, 6 evaluated safety_adverse_events, and 4 evaluated pulmonary_exacerbations.",
+    "source": "atlas-ev",
+    "quote": "In Phase 4 protocols, 15 entries evaluated lung_function_fev1, 6 evaluated safety_adverse_events, and 4 evaluated pulmonary_exacerbations.",
+    "kind": "observed"
+  },
+  {
+    "id": "era-transition-pre2012",
+    "claim": "In the pre-2012 era prior to ivacaftor approval, 56 entries evaluated lung_function_fev1, 24 evaluated nutritional_bmi, and 2 evaluated sweat_chloride.",
+    "source": "atlas-ev",
+    "quote": "In the pre-2012 era prior to ivacaftor approval, 56 entries evaluated lung_function_fev1, 24 evaluated nutritional_bmi, and 2 evaluated sweat_chloride.",
+    "kind": "observed"
+  },
+  {
+    "id": "era-transition-2012-2019",
+    "claim": "In the 2012-2019 modulator expansion era, 82 entries evaluated lung_function_fev1, 47 evaluated quality_of_life, and 11 evaluated sweat_chloride.",
+    "source": "atlas-ev",
+    "quote": "In the 2012-2019 modulator expansion era, 82 entries evaluated lung_function_fev1, 47 evaluated quality_of_life, and 11 evaluated sweat_chloride.",
+    "kind": "observed"
+  },
+  {
+    "id": "era-transition-2020-2026",
+    "claim": "In the 2020-2026 post-Trikafta era, 131 entries evaluated safety_adverse_events, 62 evaluated quality_of_life, and 26 evaluated lung_function_fev1.",
+    "source": "atlas-ev",
+    "quote": "In the 2020-2026 post-Trikafta era, 131 entries evaluated safety_adverse_events, 62 evaluated quality_of_life, and 26 evaluated lung_function_fev1.",
+    "kind": "observed"
+  },
+  {
+    "id": "benchmark-farrell-sweat-chloride",
+    "claim": "Farrell PM et al. 2017 established sweat chloride concentration guidelines with a diagnostic threshold of 60 mmol/L.",
+    "source": "atlas-ev",
+    "quote": "Farrell PM et al. 2017 established sweat chloride concentration guidelines with a diagnostic threshold of 60 mmol/L.",
+    "kind": "observed"
+  },
+  {
+    "id": "benchmark-quittner-cfqr-mcid",
+    "claim": "Quittner AL et al. 2005 established that the minimal clinically important difference for the CFQ-R respiratory domain is 4.0 points.",
+    "source": "atlas-ev",
+    "quote": "Quittner AL et al. 2005 established that the minimal clinically important difference for the CFQ-R respiratory domain is 4.0 points.",
+    "kind": "observed"
+  }
+]
