@@ -279,7 +279,39 @@ class Cli(unittest.TestCase):
             r = subprocess.run([sys.executable, str(SCRIPT), str(d / "c.json"), "--evidence", f"e={d / 'ev.txt'}"], capture_output=True,
                                env=dict(os.environ, PYTHONIOENCODING="cp1252"))
             self.assertEqual(r.returncode, 1)
-            self.assertNotIn(b"Traceback", r.stderr)
+            out = r.stdout.decode("cp1252", errors="replace")
+            self.assertNotIn("Traceback", out)
+
+    def test_md_companion_resolution(self):
+        with tempfile.TemporaryDirectory() as td:
+            d = Path(td)
+            md = d / "landscape-report.md"
+            md.write_text("# Landscape Report\nThe 2024 report left 437 variants unclassified.\n", encoding="utf-8")
+            ev = d / "evidence.txt"
+            ev.write_text("The 2024 report left 437 variants unclassified.", encoding="utf-8")
+            claims = [
+                {
+                    "id": "c1",
+                    "claim": "The 2024 report left 437 variants unclassified.",
+                    "source": "rep",
+                    "quote": "The 2024 report left 437 variants unclassified.",
+                    "kind": "observed",
+                }
+            ]
+            companion = d / "landscape-report-claims.json"
+            companion.write_text(json.dumps(claims), encoding="utf-8")
+            ev_map = d / "landscape-report-evidence-map.json"
+            ev_map.write_text(json.dumps({"rep": "evidence.txt"}), encoding="utf-8")
+            # Passing .md resolves companion -claims.json and companion -evidence-map.json
+            r = self.cli(md)
+            self.assertEqual(r.returncode, 0, r.stdout)
+            self.assertIn("1 claims, 0 failures", r.stdout)
+
+            # Failure when markdown does not contain the claim text or numbers
+            md.write_text("# Landscape Report\nEntirely unrelated text without the claim.\n", encoding="utf-8")
+            r_fail = self.cli(md)
+            self.assertEqual(r_fail.returncode, 1, r_fail.stdout)
+            self.assertIn("FAIL c1 R2 companion_markdown", r_fail.stdout)
 
 
 class EveryRuleCanFail(unittest.TestCase):

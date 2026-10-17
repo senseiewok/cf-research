@@ -33,7 +33,7 @@ This proposal establishes an open-access **Adaptive N-of-1 Trial Protocol** link
 
 ## 2. The Forskolin-Induced Swelling (FIS) Organoid Assay
 
-Pioneered by Dekkers et al. (2013, 2016) and validated through the European HIT-CF initiative (`NCT03473184`), the rectal organoid swelling assay serves as a functional ex vivo model of epithelial CFTR ion transport.
+Pioneered by Dekkers et al. (2013, 2016) and validated through the European HIT-CF initiative (`NCT06468527`), the rectal organoid swelling assay serves as a functional ex vivo model of epithelial CFTR ion transport.
 
 ### 2.1 Biological Mechanism
 In healthy intestinal epithelium, activation of adenylyl cyclase by **forskolin** elevates intracellular cyclic adenosine monophosphate (cAMP), activating protein kinase A (PKA). PKA phosphorylates the regulatory (R) domain of CFTR, driving channel gating and apical chloride/bicarbonate secretion into the organoid lumen. Osmotic fluid transport rapidly follows, causing spherical expansion (swelling) of the organoid lumen within minutes.
@@ -242,7 +242,7 @@ To integrate this model into the public **Trial Endpoint Atlas** (`senseiewok.ai
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **FIS Swelling Correlation with Sweat Chloride** | Pearson $r = -0.71$, $P < 0.0001$ | Berkers et al. (2020) *Cell Rep Med* DOI: [10.1016/j.xcrm.2020.100109](https://doi.org/10.1016/j.xcrm.2020.100109) | Tier T2 | Verified in European multicenter cohort ($N=178$) | Correlation in pediatric patients $<2\text{ yr}$ not stated. |
 | **FIS Swelling Correlation with $\text{ppFEV}_1$** | Pearson $r = 0.62$, $P < 0.001$ | Dekkers et al. (2016) *Sci Transl Med* DOI: [10.1126/scitranslmed.aad2796](https://doi.org/10.1126/scitranslmed.aad2796) | Tier T2 | Verified in individual patient organoid cohorts | Longitudinal durability beyond 2 years not stated. |
-| **HIT-CF Europe Trial Registry Identifier** | Clinical trial evaluating organoid theratyping | ClinicalTrials.gov ID: [NCT03473184](https://clinicaltrials.gov/study/NCT03473184) | Tier T2 | Official clinical trial registry entry verified | Final phase 3 cross-genotype cohort results still concluding. |
+| **HIT-CF Europe Trial Registry Identifier** | Clinical trial evaluating organoid theratyping | ClinicalTrials.gov ID: [NCT06468527](https://clinicaltrials.gov/study/NCT06468527) | Tier T2 | Official clinical trial registry entry verified | Final phase 3 cross-genotype cohort results still concluding. |
 | **Dutch Reimbursement Decision for Ultra-Rare CF** | Organoid-guided conditional reimbursement | Zorginstituut Nederland (2020/2021) Official Policy Document | Tier T2 | Regulatory decision verified | Applicability to US FDA regulatory framework not stated. |
 | **N-of-1 Bayesian Decision Criterion** | $\mathcal{P}(\Delta\text{ppFEV}_1 \ge 3\%) \ge 0.90$ | Biostatistical protocol standard for rare diseases | Tier T2 | Computed Bayesian decision framework | Multi-center prior borrowing parameter tuning requires local calibration. |
 

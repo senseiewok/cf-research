@@ -1,0 +1,45 @@
+# Evidence Corpus for Trial Endpoint Evolution Dossier (2026)
+
+Section 1: PRISMA 2020 Flow and Identification
+In the ClinicalTrials.gov API v2 CF snapshot, 1,053 studies were identified through the condition query.
+Screening applied deterministic scope rules X1 through X6, resulting in 113 excluded studies.
+Specifically, 72 studies were excluded under rule X4 because the condition list does not name cystic fibrosis.
+41 studies were excluded under rule X5 because the condition list names cystic fibrosis only in a negation.
+940 interventional studies were eligible and included in the trial endpoint atlas.
+Among included studies, 916 studies registered primary outcomes and 24 studies had no registered primary outcome.
+In total, 1,821 primary outcome entries were evaluated across the 940 included studies.
+
+Section 2: Canonical 8 Endpoint Prevalence
+Across 1,821 evaluated primary outcome entries, 164 entries across 152 studies were classified as lung_function_fev1.
+16 entries across 12 studies were classified as sweat_chloride.
+26 entries across 26 studies were classified as pulmonary_exacerbations.
+129 entries across 75 studies were classified as quality_of_life.
+66 entries across 51 studies were classified as microbiology_cfu.
+55 entries across 37 studies were classified as nutritional_bmi.
+404 entries across 201 studies were classified as safety_adverse_events.
+1,037 entries across 583 studies were classified as other_or_not_stated.
+
+Section 3: Longitudinal Phase Transition Matrix
+In Phase 1 protocols, 180 entries evaluated safety_adverse_events, 18 evaluated lung_function_fev1, and 1 evaluated sweat_chloride. Additional Phase 1 entries included 10 for quality_of_life and 248 for other_or_not_stated.
+In Phase 2 protocols, 176 entries evaluated safety_adverse_events, 59 evaluated lung_function_fev1, and 11 evaluated sweat_chloride. Additional Phase 2 entries included 35 for microbiology_cfu and 246 for other_or_not_stated.
+In Phase 3 protocols, 89 entries evaluated safety_adverse_events, 47 evaluated lung_function_fev1, and 6 evaluated pulmonary_exacerbations. Additional Phase 3 entries included 96 for other_or_not_stated.
+In Phase 4 protocols, 15 entries evaluated lung_function_fev1, 6 evaluated safety_adverse_events, and 4 evaluated pulmonary_exacerbations. Additional Phase 4 entries included 87 for other_or_not_stated.
+
+Section 4: Era Transition Matrix
+In the pre-2012 era prior to ivacaftor approval, 56 entries evaluated lung_function_fev1, 24 evaluated nutritional_bmi, and 2 evaluated sweat_chloride.
+In the 2012-2019 modulator expansion era, 82 entries evaluated lung_function_fev1, 47 evaluated quality_of_life, and 11 evaluated sweat_chloride.
+In the 2020-2026 post-Trikafta era, 131 entries evaluated safety_adverse_events, 62 evaluated quality_of_life, and 26 evaluated lung_function_fev1.
+
+Section 5: Benchmark Trials and Biophysical Standards
+Ramsey BW et al. 2011 reported that ivacaftor in subjects with G551D showed significant improvements in percent predicted FEV1 in STRIVE (NCT00909532).
+Wainwright CE et al. 2015 reported lumacaftor/ivacaftor in F508del homozygous subjects in TRAFFIC (NCT01807923) and TRANSPORT.
+Davies JC et al. 2013 reported ivacaftor in pediatric subjects aged 6 to 11 years in ENVISION (NCT00909727).
+Middleton PG et al. 2019 demonstrated that elexacaftor/tezacaftor/ivacaftor in AURORA-44 (NCT03525444) significantly improved percent predicted FEV1 and CFQ-R respiratory scores.
+Farrell PM et al. 2017 established sweat chloride concentration guidelines with a diagnostic threshold of 60 mmol/L.
+Quittner AL et al. 2009 established that the minimal clinically important difference for the CFQ-R respiratory domain is 4.0 points.
+Fuchs HJ et al. 1994 established standardized criteria for protocol-defined pulmonary exacerbations.
+NCT05668741 BEACON-CF evaluated inhaled mRNA VX-522 with overall status: TERMINATED.
+NCT05033080 SKYLINE 102 evaluated vanzacaftor/tezacaftor/deutivacaftor in subjects heterozygous for F508del and a minimal function mutation.
+
+Section 6: Mandatory Disclaimer
+ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote United States Federal Government endorsement.

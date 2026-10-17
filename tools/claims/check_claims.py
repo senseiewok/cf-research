@@ -411,17 +411,39 @@ def main(argv=None):
     for stream in (sys.stdout, sys.stderr):  # a Windows console may not show every character; never crash a report over it
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(errors="backslashreplace")
+    target_path = Path(a.claims)
+    companion_map = None
+    claims: list | None = None
+    problem: str | None = None
+    original_md_path: Path | None = None
+    if target_path.suffix.lower() == ".md":
+        original_md_path = target_path
+        companion_claims = target_path.parent / f"{target_path.stem}-claims.json"
+        if companion_claims.exists():
+            target_path = companion_claims
+            cand_map = target_path.parent / f"{target_path.stem.removesuffix('-claims')}-evidence-map.json"
+            if cand_map.exists():
+                companion_map = cand_map
+        else:
+            problem = f"no companion claims file found for {a.claims}: expected {companion_claims}"
+    elif target_path.name.endswith("-claims.json"):
+        cand_map = target_path.parent / f"{target_path.stem.removesuffix('-claims')}-evidence-map.json"
+        if cand_map.exists():
+            companion_map = cand_map
+
     try:
         if a.max_quote_words < MIN_QUOTE_WORDS:
             raise UsageError(f"--max-quote-words must be at least {MIN_QUOTE_WORDS}")
-        paths = parse_evidence_args(a.evidence, a.evidence_map)
+        map_to_use = a.evidence_map or (str(companion_map) if companion_map and not a.evidence else None)
+        paths = parse_evidence_args(a.evidence, map_to_use)
         widening = read_terms(a.widening) if a.widening else DEFAULT_WIDENING
         absence = read_terms(a.absence) if a.absence else DEFAULT_ABSENCE
     except UsageError as e:
         print(f"ERROR: {e}")
         return 2
     evidence, evidence_errors = read_evidence(paths)
-    claims, problem = load_claims(a.claims)
+    if problem is None:
+        claims, problem = load_claims(target_path)
     results = []
     if not paths:
         results.append({"id": "-", "rule": "R1", "name": "fields", "ok": False, "detail": "no evidence was given (--evidence ID=PATH)"})
@@ -431,6 +453,36 @@ def main(argv=None):
         results.append({"id": "-", "rule": "R1", "name": "fields", "ok": False, "detail": problem})
     else:
         results.extend(check(claims, evidence, evidence_errors, a.max_quote_words, widening, absence))
+        if original_md_path and claims:
+            try:
+                md_text = original_md_path.read_text(encoding="utf-8")
+                md_norm = normalise_text(md_text)
+                for c in claims:
+                    cid = c.get("id", "?")
+                    c_text = c.get("claim", "")
+                    c_norm = normalise_text(c_text)
+                    if c_norm not in md_norm:
+                        c_nums = [n for _, n in claim_numbers(c_text)]
+                        if not (c_nums and all(n in md_norm for n in c_nums)):
+                            results.append(
+                                {
+                                    "id": cid,
+                                    "rule": "R2",
+                                    "name": "companion_markdown",
+                                    "ok": False,
+                                    "detail": f"claim sentence or numbers not found in companion markdown {original_md_path.name}",
+                                }
+                            )
+            except Exception as e:
+                results.append(
+                    {
+                        "id": "-",
+                        "rule": "R2",
+                        "name": "companion_markdown",
+                        "ok": False,
+                        "detail": f"could not read companion markdown {original_md_path}: {e}",
+                    }
+                )
     failures = sum(1 for r in results if not r["ok"])
     n_claims = len(claims) if claims else 0
     if a.json:

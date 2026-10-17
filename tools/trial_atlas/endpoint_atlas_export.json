@@ -1,0 +1,210 @@
+{
+  "metadata": {
+    "source": "ClinicalTrials.gov API v2",
+    "snapshot_data_timestamp": "2026-10-14T14:12:11.425555+00:00",
+    "generated_tool": "tools/trial_atlas/export_web_atlas.py",
+    "disclaimer": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote United States Federal Government endorsement."
+  },
+  "prisma_2020_flow": {
+    "identification": {
+      "route_condition": 1053,
+      "total_identified": 1053
+    },
+    "screening": {
+      "total_screened": 1053,
+      "excluded": 113,
+      "exclusions_by_rule": {
+        "X1_observational": 0,
+        "X2_expanded_access": 0,
+        "X3_non_interventional": 0,
+        "X4_condition_not_cf": 72,
+        "X5_cf_in_negation": 41,
+        "X6_manual": 0
+      }
+    },
+    "eligibility_and_inclusion": {
+      "eligible_studies": 940,
+      "included_studies": 940,
+      "studies_with_registered_primary_outcomes": 916,
+      "studies_without_registered_primary_outcomes": 24,
+      "total_outcome_entries": 1821
+    }
+  },
+  "canonical_8_endpoints": {
+    "lung_function_fev1": {
+      "entries": 164,
+      "studies": 152
+    },
+    "sweat_chloride": {
+      "entries": 16,
+      "studies": 12
+    },
+    "pulmonary_exacerbations": {
+      "entries": 26,
+      "studies": 26
+    },
+    "quality_of_life": {
+      "entries": 129,
+      "studies": 75
+    },
+    "microbiology_cfu": {
+      "entries": 66,
+      "studies": 51
+    },
+    "nutritional_bmi": {
+      "entries": 55,
+      "studies": 37
+    },
+    "safety_adverse_events": {
+      "entries": 404,
+      "studies": 201
+    },
+    "other_or_not_stated": {
+      "entries": 1037,
+      "studies": 583
+    }
+  },
+  "phase_transition_matrix": {
+    "PHASE1": {
+      "safety_adverse_events": 180,
+      "other_or_not_stated": 248,
+      "quality_of_life": 10,
+      "lung_function_fev1": 18,
+      "nutritional_bmi": 4,
+      "microbiology_cfu": 18,
+      "pulmonary_exacerbations": 2,
+      "sweat_chloride": 1
+    },
+    "PHASE2": {
+      "safety_adverse_events": 176,
+      "sweat_chloride": 11,
+      "microbiology_cfu": 35,
+      "other_or_not_stated": 246,
+      "nutritional_bmi": 8,
+      "lung_function_fev1": 59,
+      "pulmonary_exacerbations": 9,
+      "quality_of_life": 15
+    },
+    "PHASE3": {
+      "lung_function_fev1": 47,
+      "other_or_not_stated": 96,
+      "safety_adverse_events": 89,
+      "pulmonary_exacerbations": 6,
+      "nutritional_bmi": 6,
+      "quality_of_life": 10,
+      "microbiology_cfu": 7
+    },
+    "PHASE4": {
+      "lung_function_fev1": 15,
+      "pulmonary_exacerbations": 4,
+      "safety_adverse_events": 6,
+      "other_or_not_stated": 87,
+      "microbiology_cfu": 6,
+      "quality_of_life": 3,
+      "nutritional_bmi": 4
+    }
+  },
+  "era_transition_matrix": {
+    "pre-2012": {
+      "lung_function_fev1": 56,
+      "other_or_not_stated": 286,
+      "pulmonary_exacerbations": 17,
+      "microbiology_cfu": 23,
+      "nutritional_bmi": 24,
+      "safety_adverse_events": 91,
+      "quality_of_life": 20,
+      "sweat_chloride": 2
+    },
+    "2012-2019": {
+      "other_or_not_stated": 456,
+      "lung_function_fev1": 82,
+      "pulmonary_exacerbations": 7,
+      "safety_adverse_events": 182,
+      "sweat_chloride": 11,
+      "microbiology_cfu": 21,
+      "quality_of_life": 47,
+      "nutritional_bmi": 11
+    },
+    "2020-2026": {
+      "other_or_not_stated": 291,
+      "safety_adverse_events": 131,
+      "nutritional_bmi": 20,
+      "quality_of_life": 62,
+      "lung_function_fev1": 26,
+      "pulmonary_exacerbations": 2,
+      "microbiology_cfu": 22,
+      "sweat_chloride": 3
+    },
+    "unknown": {
+      "other_or_not_stated": 4
+    }
+  },
+  "benchmark_trials": [
+    {
+      "nct_id": "NCT00909532",
+      "name": "STRIVE",
+      "title": "Study of Ivacaftor in Cystic Fibrosis Subjects Aged 12 Years and Older With the G551D Mutation",
+      "phase": "PHASE3",
+      "status": "COMPLETED",
+      "modality": "ivacaftor (VX-770)",
+      "population": "G551D gating mutation",
+      "primary_endpoint": [
+        "Absolute Mean Change From Baseline in Percent Predicted Forced Expiratory Volume in 1 Second (FEV1) Through Week 24"
+      ],
+      "citation": "Ramsey BW et al., N Engl J Med 2011;365:1663-1672"
+    },
+    {
+      "nct_id": "NCT01807923",
+      "name": "TRAFFIC",
+      "title": "A Study of Lumacaftor in Combination With Ivacaftor in Cystic Fibrosis Subjects Aged 12 Years and Older Who Are Homozygous for the F508del-CFTR Mutation",
+      "phase": "PHASE3",
+      "status": "COMPLETED",
+      "modality": "lumacaftor / ivacaftor",
+      "population": "F508del homozygous",
+      "primary_endpoint": [
+        "Absolute Change From Baseline in Percent Predicted Forced Expiratory Volume in 1 Second (FEV1) at Week 24"
+      ],
+      "citation": "Wainwright CE et al., N Engl J Med 2015;373:220-231"
+    },
+    {
+      "nct_id": "NCT03525444",
+      "name": "AURORA-44",
+      "title": "A Phase 3 Study of VX-445 Combination Therapy in Subjects With Cystic Fibrosis Heterozygous for the F508del Mutation and a Minimal Function Mutation (F/MF)",
+      "phase": "PHASE3",
+      "status": "COMPLETED",
+      "modality": "elexacaftor / tezacaftor / ivacaftor",
+      "population": "F508del heterozygous with minimal function (F/MF)",
+      "primary_endpoint": [
+        "Absolute Change in Percent Predicted Forced Expiratory Volume in 1 Second (ppFEV1)"
+      ],
+      "citation": "Middleton PG et al., N Engl J Med 2019;381:1809-1819"
+    },
+    {
+      "nct_id": "NCT05033080",
+      "name": "SKYLINE 102",
+      "title": "A Phase 3 Study of VX-121 Combination Therapy in Participants With Cystic Fibrosis (CF) Heterozygous for F508del and a Minimal Function Mutation (F/MF)",
+      "phase": "PHASE3",
+      "status": "COMPLETED",
+      "modality": "vanzacaftor / tezacaftor / deutivacaftor",
+      "population": "F508del heterozygous with minimal function (F/MF)",
+      "primary_endpoint": [
+        "Absolute Change in Percent Predicted Forced Expiratory Volume in 1 Second (ppFEV1)"
+      ],
+      "citation": "ClinicalTrials.gov NCT05033080"
+    },
+    {
+      "nct_id": "NCT05668741",
+      "name": "BEACON-CF",
+      "title": "A Phase 1/2 Study of VX-522 in Participants With Cystic Fibrosis (CF)",
+      "phase": "PHASE2",
+      "status": "COMPLETED",
+      "modality": "VX-522 (inhaled CFTR mRNA)",
+      "population": "CF adults ineligible for CFTR modulators",
+      "primary_endpoint": [
+        "Safety and Tolerability as Assessed by Number of Participants With Adverse Events (AEs) and Serious Adverse Events (SAEs)"
+      ],
+      "citation": "ClinicalTrials.gov NCT05668741 (Terminated)"
+    }
+  ],
+  "export_sha256": "f507cee9c49db97409a4d53dc1d85b86ab5553f014c610231c7dd0d335512d95"
+}

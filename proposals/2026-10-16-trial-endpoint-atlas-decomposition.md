@@ -81,22 +81,22 @@ Endpoints registered across interventional CF trials are mapped to an 8-class ca
 
 1. **Percent Predicted FEV1 (`lung_function_fev1`)**:
    - *Biophysical Construct*: Forced expiratory volume in 1 second expressed as percent predicted using standardized Global Lung Function Initiative equations (*Quanjer PH et al., Eur Respir J 2012;40(6):1324-1343*, DOI: [`10.1183/09031936.00080312`](https://doi.org/10.1183/09031936.00080312)) or pediatric Wang/Hankinson reference equations.
-   - *Benchmark Registrational Trials*: STRIVE (`NCT00744159`, ivacaftor in G551D; *Ramsey BW et al., N Engl J Med 2011;365:1663-1672*); TRAFFIC & TRANSPORT (`NCT01807897`, `NCT01807910`, lumacaftor/ivacaftor in F508del; *Wainwright CE et al., N Engl J Med 2015;373:220-231*); AURORA-44 (`NCT03525444`, elexacaftor/tezacaftor/ivacaftor in F508del-minimal function; *Middleton PG et al., N Engl J Med 2019;381:1809-1819*).
+   - *Benchmark Registrational Trials*: STRIVE (`NCT00909532`, ivacaftor in G551D; *Ramsey BW et al., N Engl J Med 2011;365:1663-1672*); TRAFFIC & TRANSPORT (`NCT01807923`, `NCT01807949`, lumacaftor/ivacaftor in F508del; *Wainwright CE et al., N Engl J Med 2015;373:220-231*); AURORA-44 (`NCT03525444`, elexacaftor/tezacaftor/ivacaftor in F508del-minimal function; *Middleton PG et al., N Engl J Med 2019;381:1809-1819*).
 2. **Sweat Chloride Concentration (`sweat_chloride`)**:
    - *Biophysical Construct*: Quantitative pilocarpine iontophoresis measurement of chloride ion transport (mmol/L) directly reflecting in vivo CFTR channel open probability and pore conductance (*Farrell PM et al., J Pediatr 2017;181S:S4-S15.e1*, DOI: [`10.1016/j.jpeds.2016.09.064`](https://doi.org/10.1016/j.jpeds.2016.09.064)). Diagnostic thresholds: $\ge 60\ \text{mmol/L}$ (diagnostic of CF), $30\text{--}59\ \text{mmol/L}$ (intermediate), $< 30\ \text{mmol/L}$ (normal reference range).
-   - *Benchmark Registrational Trials*: ENVISION (`NCT00909532`, pediatric ivacaftor; *Davies JC et al., Am J Respir Crit Care Med 2013;187:1219-1225*); AURORA-F/MF (`NCT03525548`, ETI); SKYLINE 102 & 103 (`NCT05033080`, `NCT05076149`, vanzacaftor/tezacaftor/deutivacaftor).
+   - *Benchmark Registrational Trials*: ENVISION (`NCT00909727`, pediatric ivacaftor; *Davies JC et al., Am J Respir Crit Care Med 2013;187:1219-1225*); AURORA-F/MF (`NCT03525548`, ETI); SKYLINE 102 & 103 (`NCT05033080`, `NCT05076149`, vanzacaftor/tezacaftor/deutivacaftor).
 3. **Protocol-Defined Pulmonary Exacerbations (`pulmonary_exacerbations`)**:
    - *Biophysical Construct*: Acute worsening of lower respiratory tract symptoms requiring intravenous or new oral systemic antibiotic treatment per standardized Fuchs criteria (*Fuchs HJ et al., N Engl J Med 1994;331:637-642*, DOI: [`10.1056/NEJM199409083311003`](https://doi.org/10.1056/NEJM199409083311003)). Measured as annualized event rate ratios or time-to-first pulmonary exacerbation.
-   - *Benchmark Registrational Trials*: EVOLVE (`NCT02347657`, tezacaftor/ivacaftor; *Taylor-Cousar JL et al., N Engl J Med 2017;377:2013-2023*); TRAFFIC/TRANSPORT (`NCT01807897`).
+   - *Benchmark Registrational Trials*: EVOLVE (`NCT02347657`, tezacaftor/ivacaftor; *Taylor-Cousar JL et al., N Engl J Med 2017;377:2013-2023*); TRAFFIC/TRANSPORT (`NCT01807923`, `NCT01807949`).
 4. **Patient-Reported Quality of Life (`quality_of_life`)**:
    - *Biophysical Construct*: Cystic Fibrosis Questionnaire-Revised (CFQ-R) Respiratory Domain score (0–100 scale), measuring respiratory symptom burden and physical function (*Quittner AL et al., Chest 2005;128(4):2347-2354*, DOI: [`10.1378/chest.128.4.2347`](https://doi.org/10.1378/chest.128.4.2347)). Validated Minimal Clinically Important Difference (MCID) established at **$+4.0\ \text{points}$**.
-   - *Benchmark Registrational Trials*: STRIVE (`NCT00744159`); AURORA-44 (`NCT03525444`).
+   - *Benchmark Registrational Trials*: STRIVE (`NCT00909532`); AURORA-44 (`NCT03525444`).
 5. **Microbiology & Sputum Pathogen Density (`microbiology_cfu`)**:
    - *Biophysical Construct*: Quantitative log10 colony forming units (CFU) per gram of sputum for opportunistic CF airway pathogens, primarily mucoid and non-mucoid *Pseudomonas aeruginosa*, *Burkholderia cepacia* complex, and *Staphylococcus aureus* (*Ramsey BW et al., N Engl J Med 1999;340:23-30*, DOI: [`10.1056/NEJM199901073400104`](https://doi.org/10.1056/NEJM199901073400104)).
-   - *Benchmark Trials*: Inhaled Tobramycin Study Group (`NCT00000775`); ELX/TEZ/IVA microbiology cohort studies.
+   - *Benchmark Trials*: Tobramycin Inhalation Powder vs Solution Phase 3 Trial (`NCT00388505`, EAGER); ELX/TEZ/IVA microbiology cohort studies.
 6. **Nutritional & Anthropometric Status (`nutritional_bmi`)**:
    - *Biophysical Construct*: Body Mass Index (BMI in $\text{kg/m}^2$) for adults ($\ge 20\ \text{years}$) and BMI-for-age percentiles / z-scores for children and adolescents ($2\text{--}19\ \text{years}$) evaluated per CDC and WHO growth standards (*Stallings VA et al., J Am Diet Assoc 2008;108(5):832-839*, DOI: [`10.1016/j.jada.2008.06.438`](https://doi.org/10.1016/j.jada.2008.06.438)).
-   - *Benchmark Registrational Trials*: ENVISION (`NCT00909532`); AURORA-44 (`NCT03525444`).
+   - *Benchmark Registrational Trials*: ENVISION (`NCT00909727`); AURORA-44 (`NCT03525444`).
 7. **Safety, Tolerability & Toxicological Halts (`safety_adverse_events`)**:
    - *Biophysical Construct*: Treatment-emergent adverse events (TEAEs), serious adverse events (SAEs), and specific laboratory monitoring signals. Directly aligned with openFDA Structured Product Label (SPL) Boxed Warnings for Drug-Induced Liver Injury (DILI): elevations in alanine aminotransferase (ALT), aspartate aminotransferase (AST), and total bilirubin ($\ge 3\times\ \text{ULN}$ or $\ge 5\times\ \text{ULN}$).
    - *Benchmark Trials*: Monitored across all phase 1–3 protocols; crucial for terminated novel modalities such as BEACON-CF (`NCT05668741`, inhaled mRNA VX-522, terminated due to delivery/tolerability hurdles).
@@ -176,7 +176,7 @@ flowchart LR
 - **Recommended Route**: `cloud` (Orthogonal Frontier Review: Argon / Gemini 4 Pro + Ollama `qwen3.8:27b-64k`)
 - **Primary Source Evidence**:
   - Frozen census of 50 randomly sampled CF trials stratified across phase (1, 2, 3, 4) and outcome class generated by `tools/trial_atlas/make_labelling_sheet.py --seed 4711`.
-  - Benchmark NCT records: STRIVE (`NCT00744159`), TRAFFIC (`NCT01807897`), AURORA-44 (`NCT03525444`), SKYLINE 102 (`NCT05033080`), BEACON-CF (`NCT05668741`).
+  - Benchmark NCT records: STRIVE (`NCT00909532`), TRAFFIC (`NCT01807923`), AURORA-44 (`NCT03525444`), SKYLINE 102 (`NCT05033080`), BEACON-CF (`NCT05668741`).
 - **Measurable Acceptance Criteria**:
   1. Human/expert ground-truth labels for 50 studies locked in sealed key (`sealed/key.json`).
   2. Model-assisted proposals (`propose_tags.py`) subjected to blind challenger verification (`challenge_tags.py`) by an orthogonal model family.

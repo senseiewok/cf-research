@@ -1236,12 +1236,51 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
                     help="with --withhold-failing: write the run record (canonical JSON, class ids and counts only); never overwrites")
     ap.add_argument("--check-record", type=Path, metavar="FILE",
                     help="on its own: verify a run record's hashes, withheld list, per-class statuses and verdict")
+    ap.add_argument("--key", type=Path, help="ground-truth key for 50-study consensus audit")
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(errors="backslashreplace")
     lex = lex_mod.load()
     failures, blocked, summary = [], [], None
+
+    raw_args = sys.argv[1:] if argv is None else list(argv)
+    if not raw_args:
+        # Default self-check mode (for T-0172 acceptance: python tools/trial_atlas/check_atlas.py)
+        import consensus_audit
+        print("TRIAL ENDPOINT ATLAS: DEFAULT SELF-CHECK & RUN RECORD VERIFICATION")
+        rec_path = HERE / "run-records" / "2026-10-11-run-1.json"
+        if not rec_path.exists():
+            print(f"FAIL default self-check: missing run record {rec_path}")
+            return 1
+        code_rec = check_record(rec_path)
+        if code_rec != 0:
+            return code_rec
+        snap_dir = consensus_audit.DEFAULT_SNAPSHOT_DIR
+        tags_path = consensus_audit.DEFAULT_TAGS_PATH
+        key_path = consensus_audit.DEFAULT_KEY_PATH
+        if not snap_dir.exists() or not tags_path.exists() or not key_path.exists():
+            print("FAIL default self-check: consensus artifacts missing. Run consensus_audit.py --generate first.")
+            return 1
+        s = snap.load(snap_dir)
+        tags_data = read_json(tags_path, "tags file")
+        code_audit = consensus_audit.run_audit(s, tags_data, key_path)
+        if code_audit != 0:
+            return code_audit
+
+        # Anti-hallucination guardrail audit across proposals and landscape
+        claims_dir = HERE.parent / "claims"
+        if str(claims_dir) not in sys.path:
+            sys.path.insert(0, str(claims_dir))
+        import check_anti_hallucination as cah
+        code_ah = cah.main(["--root", str(HERE.parents[1])])
+        if code_ah != 0:
+            return code_ah
+
+        print("PASS default self-check: consensus audit, run records, and anti-hallucination guardrails verified.")
+        print("RESULT: PASS (default self-check)")
+        return 0
+
     try:
         if a.check_record:
             if any(v for k, v in vars(a).items() if k != "check_record"):
@@ -1253,6 +1292,23 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
             return confirm_real_run(a.snapshot)
         manual = scope_mod.read_id_reasons(a.exclude) if a.exclude else {}
         explained = scope_mod.read_id_reasons(a.explained) if a.explained else {}
+
+        # 50-study consensus audit mode
+        if a.key and not a.frozen_sheet:
+            import consensus_audit
+            if not a.snapshot or not a.tags:
+                raise UsageError("--key requires --snapshot and --tags")
+            s = snap.load(a.snapshot)
+            tags = validate_tags(read_json(a.tags, "tags file"), lex)
+            if tags.get("snapshot_sha256") != s.digest:
+                print("FAIL integrity: the tags file was made from a different snapshot")
+                return 1
+            retag = lex_mod.tag_snapshot(s, lex, manual)
+            if retag["entries"] != tags.get("entries"):
+                print("FAIL integrity: re-running the lexicon does not reproduce the tags file")
+                return 1
+            return consensus_audit.run_audit(s, tags, a.key)
+
         if bool(a.frozen_sheet) != bool(a.frozen_key):
             raise UsageError("--frozen-sheet and --frozen-key go together")
         if a.frozen_exclude and not a.frozen_key:
