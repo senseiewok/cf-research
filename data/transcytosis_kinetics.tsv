@@ -1,0 +1,25 @@
+receptor_id	receptor_name	pdb_id	concentration_nm	surface_binding_pct	internalized_pct	basolateral_exocytosis_pct	net_flux_pct_per_h	transcytosis_efficiency_pct	verdict
+fcrn	Neonatal Fc Receptor (FcRn)	4N0F	10.0	4.35	92.67	76.33	38.165	82.85	OPTIMAL_TRANSCYTOSIS
+fcrn	Neonatal Fc Receptor (FcRn)	4N0F	25.0	10.20	92.67	76.33	38.165	82.85	OPTIMAL_TRANSCYTOSIS
+fcrn	Neonatal Fc Receptor (FcRn)	4N0F	50.0	18.52	92.67	76.33	38.165	82.85	OPTIMAL_TRANSCYTOSIS
+fcrn	Neonatal Fc Receptor (FcRn)	4N0F	100.0	31.25	92.67	76.33	38.165	82.85	OPTIMAL_TRANSCYTOSIS
+fcrn	Neonatal Fc Receptor (FcRn)	4N0F	200.0	47.62	92.67	76.33	38.165	82.85	OPTIMAL_TRANSCYTOSIS
+fcrn	Neonatal Fc Receptor (FcRn)	4N0F	300.0	57.69	92.67	76.33	38.165	82.85	OPTIMAL_TRANSCYTOSIS
+fcrn	Neonatal Fc Receptor (FcRn)	4N0F	500.0	69.44	92.67	76.33	38.165	82.85	OPTIMAL_TRANSCYTOSIS
+fcrn	Neonatal Fc Receptor (FcRn)	4N0F	1000.0	81.97	92.67	76.33	38.165	82.85	OPTIMAL_TRANSCYTOSIS
+tfr	Transferrin Receptor 1 (TfR1)	1CX8	10.0	3.85	91.78	56.78	28.390	62.11	OPTIMAL_TRANSCYTOSIS
+tfr	Transferrin Receptor 1 (TfR1)	1CX8	25.0	9.09	91.78	56.78	28.390	62.11	OPTIMAL_TRANSCYTOSIS
+tfr	Transferrin Receptor 1 (TfR1)	1CX8	50.0	16.67	91.78	56.78	28.390	62.11	OPTIMAL_TRANSCYTOSIS
+tfr	Transferrin Receptor 1 (TfR1)	1CX8	100.0	28.57	91.78	56.78	28.390	62.11	OPTIMAL_TRANSCYTOSIS
+tfr	Transferrin Receptor 1 (TfR1)	1CX8	200.0	44.44	91.78	56.78	28.390	62.11	OPTIMAL_TRANSCYTOSIS
+tfr	Transferrin Receptor 1 (TfR1)	1CX8	300.0	54.55	91.78	56.78	28.390	62.11	OPTIMAL_TRANSCYTOSIS
+tfr	Transferrin Receptor 1 (TfR1)	1CX8	500.0	66.67	91.78	56.78	28.390	62.11	OPTIMAL_TRANSCYTOSIS
+tfr	Transferrin Receptor 1 (TfR1)	1CX8	1000.0	80.00	91.78	56.78	28.390	62.11	OPTIMAL_TRANSCYTOSIS
+pigr	Polymeric Immunoglobulin Receptor (pIgR)	5D4K	10.0	3.12	90.06	61.54	30.770	69.11	OPTIMAL_TRANSCYTOSIS
+pigr	Polymeric Immunoglobulin Receptor (pIgR)	5D4K	25.0	7.46	90.06	61.54	30.770	69.11	OPTIMAL_TRANSCYTOSIS
+pigr	Polymeric Immunoglobulin Receptor (pIgR)	5D4K	50.0	13.89	90.06	61.54	30.770	69.11	OPTIMAL_TRANSCYTOSIS
+pigr	Polymeric Immunoglobulin Receptor (pIgR)	5D4K	100.0	24.39	90.06	61.54	30.770	69.11	OPTIMAL_TRANSCYTOSIS
+pigr	Polymeric Immunoglobulin Receptor (pIgR)	5D4K	200.0	39.22	90.06	61.54	30.770	69.11	OPTIMAL_TRANSCYTOSIS
+pigr	Polymeric Immunoglobulin Receptor (pIgR)	5D4K	300.0	49.18	90.06	61.54	30.770	69.11	OPTIMAL_TRANSCYTOSIS
+pigr	Polymeric Immunoglobulin Receptor (pIgR)	5D4K	500.0	61.73	90.06	61.54	30.770	69.11	OPTIMAL_TRANSCYTOSIS
+pigr	Polymeric Immunoglobulin Receptor (pIgR)	5D4K	1000.0	76.34	90.06	61.54	30.770	69.11	OPTIMAL_TRANSCYTOSIS
