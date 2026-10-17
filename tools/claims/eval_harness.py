@@ -77,7 +77,7 @@ def verify_lock(claims_path: Path, lock_path: Path) -> dict[str, Any]:
     if not lock_path.exists():
         raise FileNotFoundError(f"Lock file not found: {lock_path}")
 
-    claims_bytes = claims_path.read_bytes()
+    claims_bytes = claims_path.read_bytes().replace(b"\r\n", b"\n")
     actual_sha256 = hashlib.sha256(claims_bytes).hexdigest()
 
     lock_data = json.loads(lock_path.read_text(encoding="utf-8"))

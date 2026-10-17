@@ -671,12 +671,12 @@ def main() -> None:
     assert counts["unsupported"] == 25, f"Expected 25 unsupported, got {counts['unsupported']}"
     assert counts["out_of_scope"] == 10, f"Expected 10 out_of_scope, got {counts['out_of_scope']}"
     
-    # Write eval_set_60.json with canonical formatting
+    # Write eval_set_60.json with canonical LF formatting
     raw_json = json.dumps(CLAIMS, indent=2, ensure_ascii=False) + "\n"
-    EVAL_SET_PATH.write_text(raw_json, encoding="utf-8")
+    EVAL_SET_PATH.write_text(raw_json, encoding="utf-8", newline="\n")
     
-    # Compute SHA-256
-    file_bytes = EVAL_SET_PATH.read_bytes()
+    # Compute LF-normalized SHA-256
+    file_bytes = EVAL_SET_PATH.read_bytes().replace(b"\r\n", b"\n")
     sha256 = hashlib.sha256(file_bytes).hexdigest()
     
     lock_data = {
@@ -689,7 +689,7 @@ def main() -> None:
         "hash_algorithm": "sha256"
     }
     
-    LOCK_PATH.write_text(json.dumps(lock_data, indent=2) + "\n", encoding="utf-8")
+    LOCK_PATH.write_text(json.dumps(lock_data, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"Successfully generated {EVAL_SET_PATH.name} ({len(CLAIMS)} claims)")
     print(f"Successfully generated {LOCK_PATH.name} (SHA-256: {sha256})")
 
