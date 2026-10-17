@@ -76,6 +76,10 @@
       "enum": ["females", "males", "total", "not_applicable"],
       "description": "Biological sex stratification of the indicator cohort."
     },
+    "stratum_country": {
+      "type": ["string", "null"],
+      "description": "Optional ISO-2 country code or canonical country name when stratified by participating national registry (e.g. UK, France, Germany, Italy, Spain); null or 'all_ecfspr' for pooled continental rows."
+    },
     "count_n": {
       "type": ["integer", "null"],
       "minimum": 0,
@@ -91,6 +95,22 @@
       "type": ["integer", "null"],
       "minimum": 0,
       "description": "Cohort denominator for percentage calculations, if reported or footnoted."
+    },
+    "denominator_scope": {
+      "type": ["string", "null"],
+      "enum": [
+        "all_registered",
+        "registered_cohort",
+        "seen_during_year",
+        "alive_on_31_dec",
+        "seen_never_transplanted",
+        "deceased_cohort",
+        "confirmed_diagnosis_seen",
+        "genotyped_seen",
+        "not_applicable",
+        null
+      ],
+      "description": "Explicit epidemiological denominator scope tier distinguishing registered vs seen vs alive on 31 Dec vs seen-never-transplanted vs confirmed diagnosis cohorts."
     },
     "value_point": {
       "type": ["number", "null"],

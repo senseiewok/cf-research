@@ -41,9 +41,11 @@ The formal JSON Schema is defined in [`row_schema.json`](file:///tools/registry-
 | `indicator_id` | `string` | **Yes** | Normalized snake_case indicator key (e.g. `pwcf_registered`, `age_at_followup`, `pwcf_adult_ge18`). Pattern: `^[a-z0-9_]+$`. |
 | `indicator_name` | `string` | **Yes** | Full verbatim title of the indicator from the table row header. |
 | `stratum_sex` | `string` | **Yes** | Biological sex stratum. Enum: `["females", "males", "total", "not_applicable"]`. |
+| `stratum_country` | `string` \| `null` | No | Country-level sub-stratum (e.g., `"UK"`, `"France"`, `"Germany"`) when extracted from Table 1.1 national participation breakdowns; `null` for pooled continental summaries. |
 | `count_n` | `integer` \| `null` | No | Absolute patient count ($N$), or `null` if the indicator reports only continuous metrics. |
 | `percentage` | `number` \| `null` | No | Observed percentage ($0.0 \le \% \le 100.0$), or `null` if not applicable. |
 | `denominator_n` | `integer` \| `null` | No | Denominator cohort count for percentages, if reported or footnoted. |
+| `denominator_scope` | `string` \| `null` | No | Epidemiological denominator tier. Enum: `["registered_cohort", "seen_during_year", "alive_on_31_dec", "deceased_cohort", "confirmed_diagnosis_seen", "genotyped_seen", null]`. |
 | `value_point` | `number` \| `null` | No | Point estimate (mean, rate, median) when scalar analysis is needed. |
 | `value_low` | `number` \| `null` | No | Lower bound of the interval (e.g. 25th percentile, minimum, or 95% CI lower). |
 | `value_high` | `number` \| `null` | No | Upper bound of the interval (e.g. 75th percentile, maximum, or 95% CI upper). |
