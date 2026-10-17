@@ -46,6 +46,16 @@
       "minimum": 1,
       "description": "1-indexed page number as printed in the official report PDF."
     },
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Alias for page_number (1-indexed printed page number in the report PDF)."
+    },
+    "url": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Official download or landing URL matching sources/manifest.json."
+    },
     "table_id": {
       "type": "string",
       "minLength": 1,
@@ -65,6 +75,16 @@
       "type": "string",
       "enum": ["females", "males", "total", "not_applicable"],
       "description": "Biological sex stratification of the indicator cohort."
+    },
+    "stratum_country": {
+      "type": ["string", "null"],
+      "minLength": 2,
+      "description": "Geographic country or territory stratification (e.g. United Kingdom, Germany, France, or all_europe)."
+    },
+    "denominator_scope": {
+      "type": ["string", "null"],
+      "enum": ["all_registered", "seen_during_year", "alive_end_of_year", "mortality_cohort_uk_all", "seen_never_transplanted", "sex_stratum_cohort", null],
+      "description": "Explicit cohort denominator restriction per registry methodology."
     },
     "count_n": {
       "type": ["integer", "null"],
