@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-27 to download by hand, 1 to ask for, 3 not to download.
+25 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -11,12 +11,6 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 3. When you have saved the files, paste the prompt at the bottom into your agent.
 
 ## Download in a browser
-
-### Allen Institute for AI (Ai2)
-
-| ID | What | Open | Save as | Notes |
-| --- | --- | --- | --- | --- |
-| semantic-scholar-api | Semantic Scholar Academic Graph API | [page](https://www.semanticscholar.org/product/api) | link only | Overview and API License Agreement (last updated May 17, 2023) fetched directly 2026-10-07 with the lab user agent; the API was not called and no key was reque… |
 
 ### Asociación Mexicana de Fibrosis Quística, A.C.
 
@@ -96,12 +90,6 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cordis | CORDIS (EU-funded research projects and results) | [page](https://cordis.europa.eu/) | link only | Legal notice read 2026-10-05: unless a notice says otherwise, the editorial content owned by the EU may be reused under CC BY 4.0, and the Commission's reuse p… |
-
-### Unpaywall (publisher not read; pages need JavaScript)
-
-| ID | What | Open | Save as | Notes |
-| --- | --- | --- | --- | --- |
-| unpaywall-api | Unpaywall REST API | [page](https://unpaywall.org/products/api) | link only | Fetched directly 2026-10-07 with the lab user agent. |
 
 ### Zenodo (host of the record; creators at Google DeepMind, copyright DeepMind Technologies Limited)
 

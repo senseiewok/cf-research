@@ -1,7 +1,7 @@
 # CF Registry Extract Row Schema (`cf-registry-extract`)
 
 **Status**: Frozen  
-**Task Anchor**: `T-0008` ("Freeze the cf-registry-extract row schema (incl. value_low/value_high or median_iqr, source_sha256)")  
+**Task Anchor**: `T-0008` (Freeze the cf-registry-extract row schema including `value_low`/`value_high`, `median_iqr`, and `source_sha256`)  
 **Version**: 1.0.0  
 **Date**: 2026-10-16  
 **License**: CC0-1.0  
@@ -35,13 +35,17 @@ The formal JSON Schema is defined in [`row_schema.json`](file:///tools/registry-
 | `report_title` | `string` | **Yes** | Official report publication title. |
 | `report_year` | `integer` | **Yes** | Reporting calendar/cohort year (e.g., `2022`). Range: 1990–2035. |
 | `page_number` | `integer` | **Yes** | 1-indexed printed page number in the report PDF. |
+| `page` | `integer` | No | Alias for `page_number` (1-indexed page in PDF). |
+| `url` | `string` | No | Canonical download or landing URL matching `sources/manifest.json`. |
 | `table_id` | `string` | **Yes** | Identifier or title of the table (e.g. `Table 1.1`, `Summary of data report`). |
 | `indicator_id` | `string` | **Yes** | Normalized snake_case indicator key (e.g. `pwcf_registered`, `age_at_followup`, `pwcf_adult_ge18`). Pattern: `^[a-z0-9_]+$`. |
 | `indicator_name` | `string` | **Yes** | Full verbatim title of the indicator from the table row header. |
 | `stratum_sex` | `string` | **Yes** | Biological sex stratum. Enum: `["females", "males", "total", "not_applicable"]`. |
+| `stratum_country` | `string` \| `null` | No | Country-level sub-stratum (e.g., `"UK"`, `"France"`, `"Germany"`) when extracted from Table 1.1 national participation breakdowns; `null` for pooled continental summaries. |
 | `count_n` | `integer` \| `null` | No | Absolute patient count ($N$), or `null` if the indicator reports only continuous metrics. |
 | `percentage` | `number` \| `null` | No | Observed percentage ($0.0 \le \% \le 100.0$), or `null` if not applicable. |
 | `denominator_n` | `integer` \| `null` | No | Denominator cohort count for percentages, if reported or footnoted. |
+| `denominator_scope` | `string` \| `null` | No | Epidemiological denominator tier. Enum: `["registered_cohort", "seen_during_year", "alive_on_31_dec", "deceased_cohort", "confirmed_diagnosis_seen", "genotyped_seen", null]`. |
 | `value_point` | `number` \| `null` | No | Point estimate (mean, rate, median) when scalar analysis is needed. |
 | `value_low` | `number` \| `null` | No | Lower bound of the interval (e.g. 25th percentile, minimum, or 95% CI lower). |
 | `value_high` | `number` \| `null` | No | Upper bound of the interval (e.g. 75th percentile, maximum, or 95% CI upper). |

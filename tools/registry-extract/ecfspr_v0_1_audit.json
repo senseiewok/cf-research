@@ -1,0 +1,1019 @@
+{
+  "status": "PASS",
+  "sample_size": 100,
+  "seed": 20261017,
+  "total_dataset_rows": 160,
+  "correct_count": 100,
+  "accuracy": 1.0,
+  "accuracy_percent": 100.0,
+  "wilson_95_ci": [
+    0.963,
+    1.0
+  ],
+  "url_page_coverage": 1.0,
+  "url_page_failures": [],
+  "disagreements_log_committed": true,
+  "disagreements_log_path": "tools/registry-extract/ecfspr_v0_1_disagreements.json",
+  "audit_sample_results": [
+    {
+      "row_id": "ECFSPR-2022-P08-R16",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "females",
+      "raw_text_quote": "1285 (5.3)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R08",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "pwcf_adult_ge18",
+      "stratum_sex": "males",
+      "raw_text_quote": "14780 (54.2%)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P127-R01",
+      "report_year": 2023,
+      "page_number": 127,
+      "indicator_id": "fev1_pct_pred_adults",
+      "stratum_sex": "total",
+      "raw_text_quote": "Total 24610 1082 77.0 3.5 58.6 79.6 95.8 176.8",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R19",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_liver_transplant",
+      "stratum_sex": "females",
+      "raw_text_quote": "108 (0.4)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R04",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "age_at_followup",
+      "stratum_sex": "females",
+      "raw_text_quote": "19.2 (10.0-31.4)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P115-R01",
+      "report_year": 2024,
+      "page_number": 115,
+      "indicator_id": "pseudomonas_aeruginosa_chronic_children",
+      "stratum_sex": "total",
+      "raw_text_quote": "Total 149 0.6 19287 83 1717 7.4 2096 9.0",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-IT-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "Italy* 6206 6182 98%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-IT-SEEN",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "raw_text_quote": "Italy* 6206 6182 98%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-FR-SEEN",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "raw_text_quote": "France* 7515 7515 >90%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-PL-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "Poland 1726 1642 90%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-TR-SEEN",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "raw_text_quote": "Türkiye* 2765 2749 >60%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R01",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "females",
+      "raw_text_quote": "26714 (47.6)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R18",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "total",
+      "raw_text_quote": "2869 (5.6)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P106-R01",
+      "report_year": 2024,
+      "page_number": 106,
+      "indicator_id": "pwcf_children_lt18",
+      "stratum_sex": "total",
+      "raw_text_quote": "Total 24735 43.4 32277 56.6",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-DE-SEEN",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "raw_text_quote": "Germany* 7704 7372 >80%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R18",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "total",
+      "raw_text_quote": "2471 (4.7)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-TR-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "Türkiye* 2765 2749 >60%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R23",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "pwcf_deceased",
+      "stratum_sex": "males",
+      "raw_text_quote": "194 (0.7%)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-IE-SEEN",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "raw_text_quote": "Ireland* 1403 1378 94.6%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R20",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_liver_transplant",
+      "stratum_sex": "males",
+      "raw_text_quote": "230 (0.9)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R14",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_f508del_allele",
+      "stratum_sex": "males",
+      "raw_text_quote": "21334 (80.3)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R09",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "pwcf_adult_ge18",
+      "stratum_sex": "total",
+      "raw_text_quote": "29544 (54.5)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R25",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "age_at_death",
+      "stratum_sex": "females",
+      "raw_text_quote": "30.5 (21.0-42.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P09-R03",
+      "report_year": 2024,
+      "page_number": 9,
+      "indicator_id": "pwcf_adult_ge18",
+      "stratum_sex": "total",
+      "raw_text_quote": "32277 (56.6)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R07",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_adult_ge18",
+      "stratum_sex": "females",
+      "raw_text_quote": "13500 (52.8)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R02",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "males",
+      "raw_text_quote": "27447 (52.5%)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P65-R01",
+      "report_year": 2022,
+      "page_number": 65,
+      "indicator_id": "bmi_adults",
+      "stratum_sex": "total",
+      "raw_text_quote": "Total 23545 23.1 12.5 20.5 22.6 25.0 57.6",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-CH-SEEN",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "raw_text_quote": "Switzerland** 1118 1037 >99%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R04",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "age_at_followup",
+      "stratum_sex": "females",
+      "raw_text_quote": "median 18.8",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R22",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "pwcf_deceased",
+      "stratum_sex": "females",
+      "raw_text_quote": "165 (0.7%)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R09",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_adult_ge18",
+      "stratum_sex": "total",
+      "raw_text_quote": "31004 (55.5)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R27",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "age_at_death",
+      "stratum_sex": "total",
+      "raw_text_quote": "33.0 (23.0-45.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R14",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_f508del_allele",
+      "stratum_sex": "males",
+      "raw_text_quote": "22055 (80.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R10",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "age_at_diagnosis_months",
+      "stratum_sex": "females",
+      "raw_text_quote": "3.6 (1.2-31.3)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R16",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "females",
+      "raw_text_quote": "1463 (6.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R08",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "pwcf_adult_ge18",
+      "stratum_sex": "males",
+      "raw_text_quote": "15757 (55.4)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-RU-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "Russian Federation* 4294 3449 90%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R21",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_liver_transplant",
+      "stratum_sex": "total",
+      "raw_text_quote": "338 (0.7)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R15",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_f508del_allele",
+      "stratum_sex": "total",
+      "raw_text_quote": "42215 (80.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-DE-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "Germany* 7704 7372 >80%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R03",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "54043 (100)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R12",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "age_at_diagnosis_months",
+      "stratum_sex": "total",
+      "raw_text_quote": "3.6 (1.2-31.1)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-ES-SEEN",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "raw_text_quote": "Spain** 2780 2620 85%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-FR-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "France* 7515 7515 >90%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R24",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_deceased",
+      "stratum_sex": "total",
+      "raw_text_quote": "346 (0.7)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R19",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_liver_transplant",
+      "stratum_sex": "females",
+      "raw_text_quote": "106 (0.4)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P09-R05",
+      "report_year": 2024,
+      "page_number": 9,
+      "indicator_id": "pwcf_f508del_allele",
+      "stratum_sex": "total",
+      "raw_text_quote": "43330 (80.1)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R27",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "age_at_death",
+      "stratum_sex": "total",
+      "raw_text_quote": "33.0 (22.0-44.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R11",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "age_at_diagnosis_months",
+      "stratum_sex": "males",
+      "raw_text_quote": "3.6 (1.2-30.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-DK-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "Denmark* 574 565 99%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R10",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "age_at_diagnosis_months",
+      "stratum_sex": "females",
+      "raw_text_quote": "median (months) 3.6",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R18",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "total",
+      "raw_text_quote": "2799 (5.7%)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R16",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "females",
+      "raw_text_quote": "1245 (5.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-NL-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "Netherlands* 1608 1584 95%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R18",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "total",
+      "raw_text_quote": "2547 (5.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-AT-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "Austria 909 884 90%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R17",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "males",
+      "raw_text_quote": "1262 (4.8)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-UK-SEEN",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "raw_text_quote": "United Kingdom* 11381 10424 99%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P09-R04",
+      "report_year": 2024,
+      "page_number": 9,
+      "indicator_id": "age_at_diagnosis_months",
+      "stratum_sex": "total",
+      "raw_text_quote": "3.6 (1.2-32.4)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R26",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "age_at_death",
+      "stratum_sex": "males",
+      "raw_text_quote": "32.0 (21.0-43.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-IE-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "Ireland* 1403 1378 94.6%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R05",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "age_at_followup",
+      "stratum_sex": "males",
+      "raw_text_quote": "median 19.8",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R09",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_adult_ge18",
+      "stratum_sex": "total",
+      "raw_text_quote": "28986 (54.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-RU-SEEN",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "raw_text_quote": "Russian Federation* 4294 3449 90%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R10",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "age_at_diagnosis_months",
+      "stratum_sex": "females",
+      "raw_text_quote": "3.6 (1.2-31.9)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P09-R06",
+      "report_year": 2024,
+      "page_number": 9,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "total",
+      "raw_text_quote": "2380 (4.4)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R21",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "pwcf_liver_transplant",
+      "stratum_sex": "total",
+      "raw_text_quote": "311 (0.6%)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R11",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "age_at_diagnosis_months",
+      "stratum_sex": "males",
+      "raw_text_quote": "3.6 (1.2-31.9)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-DK-SEEN",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "raw_text_quote": "Denmark* 574 565 99%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R03",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "56144 (100)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R04",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "age_at_followup",
+      "stratum_sex": "females",
+      "raw_text_quote": "19.4 (10.2-31.8)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R11",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "age_at_diagnosis_months",
+      "stratum_sex": "males",
+      "raw_text_quote": "median (months) 3.6",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R20",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "pwcf_liver_transplant",
+      "stratum_sex": "males",
+      "raw_text_quote": "209 (0.8%)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R17",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "males",
+      "raw_text_quote": "1226 (4.5)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R01",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "females",
+      "raw_text_quote": "24799 (47.5%)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R12",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "age_at_diagnosis_months",
+      "stratum_sex": "total",
+      "raw_text_quote": "3.6 (1.2-32.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R07",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "pwcf_adult_ge18",
+      "stratum_sex": "females",
+      "raw_text_quote": "13787 (53.4)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-AT-SEEN",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "raw_text_quote": "Austria 909 884 90%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R23",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_deceased",
+      "stratum_sex": "males",
+      "raw_text_quote": "145 (0.5)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R17",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "males",
+      "raw_text_quote": "1373 (5.4%)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R12",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "age_at_diagnosis_months",
+      "stratum_sex": "total",
+      "raw_text_quote": "median (months) 3.6",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R16",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "females",
+      "raw_text_quote": "1426 (6.1%)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R22",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_deceased",
+      "stratum_sex": "females",
+      "raw_text_quote": "175 (0.7)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R21",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_liver_transplant",
+      "stratum_sex": "total",
+      "raw_text_quote": "336 (0.6)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P115-R02",
+      "report_year": 2024,
+      "page_number": 115,
+      "indicator_id": "pseudomonas_aeruginosa_chronic_adults",
+      "stratum_sex": "total",
+      "raw_text_quote": "587 2.10 17218 61.8 7296 26.2 2740 9.8",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R24",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "pwcf_deceased_2022",
+      "stratum_sex": "total",
+      "raw_text_quote": "309 (0.6)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-UK-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "United Kingdom* 11381 10424 99%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R04",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "age_at_followup",
+      "stratum_sex": "females",
+      "raw_text_quote": "19.8 (10.5-32.5)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-UA-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "Ukraine4 546 475 >50%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R26",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "age_at_death",
+      "stratum_sex": "males",
+      "raw_text_quote": "median 32.5",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P12-CZ-REG",
+      "report_year": 2024,
+      "page_number": 12,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "raw_text_quote": "Czech Republic* 755 740 99%",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R20",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_liver_transplant",
+      "stratum_sex": "males",
+      "raw_text_quote": "230 (0.8)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2020-P11-R07",
+      "report_year": 2020,
+      "page_number": 11,
+      "indicator_id": "pwcf_adult_ge18",
+      "stratum_sex": "females",
+      "raw_text_quote": "12788 (51.9%)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R24",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "pwcf_deceased",
+      "stratum_sex": "total",
+      "raw_text_quote": "283 (0.5)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2023-P08-R26",
+      "report_year": 2023,
+      "page_number": 8,
+      "indicator_id": "age_at_death",
+      "stratum_sex": "males",
+      "raw_text_quote": "35.0 (27.0-48.0)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2024-P125-R01",
+      "report_year": 2024,
+      "page_number": 125,
+      "indicator_id": "bmi_adults",
+      "stratum_sex": "total",
+      "raw_text_quote": "Total 26443 598 23.3 12.4 20.5 22.7 25.3 62.1",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R21",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "pwcf_liver_transplant",
+      "stratum_sex": "total",
+      "raw_text_quote": "327 (0.6)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R01",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "females",
+      "raw_text_quote": "25765 (47.7)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2021-P08-R17",
+      "report_year": 2021,
+      "page_number": 8,
+      "indicator_id": "pwcf_lung_transplant",
+      "stratum_sex": "males",
+      "raw_text_quote": "1406 (5.3)",
+      "verified": true,
+      "reason": "OK"
+    },
+    {
+      "row_id": "ECFSPR-2022-P08-R15",
+      "report_year": 2022,
+      "page_number": 8,
+      "indicator_id": "pwcf_f508del_allele",
+      "stratum_sex": "total",
+      "raw_text_quote": "40749 (80.3)",
+      "verified": true,
+      "reason": "OK"
+    }
+  ]
+}
