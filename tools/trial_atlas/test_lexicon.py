@@ -167,6 +167,17 @@ class ClassTest(unittest.TestCase):
         self.assertTrue(t["flags"]["multi_class"])
         self.assertFalse(t["flags"]["composite"])
 
+    def test_fev1_safety_check_co_tagging(self):
+        """Asserts that FEV1 monitored as a safety check emits both fev1 and safety_tolerability,
+        mapping to both lung_function_fev1 and safety_adverse_events, with FEV1 never suppressed."""
+        t = tag("Safety and tolerability: incidence of bronchospasm assessed by FEV1 decline post-dose")
+        tag_classes = [x["class"] for x in t["tags"]]
+        self.assertIn("fev1", tag_classes)
+        self.assertIn("safety_tolerability", tag_classes)
+        self.assertIn("lung_function_fev1", t["canonical_8_classes"])
+        self.assertIn("safety_adverse_events", t["canonical_8_classes"])
+        self.assertTrue(t["flags"]["multi_class"])
+
     def test_safety_subtypes(self):
         self.assertEqual(tag("Number of participants with serious adverse events")["safety_subtypes"], ["serious_adverse_events"])
         self.assertEqual(tag("Adverse events and serious adverse events")["safety_subtypes"], ["adverse_events", "serious_adverse_events"])

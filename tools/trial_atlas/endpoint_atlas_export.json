@@ -206,5 +206,235 @@
       "citation": "ClinicalTrials.gov NCT05668741 (Terminated)"
     }
   ],
-  "export_sha256": "f507cee9c49db97409a4d53dc1d85b86ab5553f014c610231c7dd0d335512d95"
+  "care_team_guide": {
+    "title": "Care Team Reader Guide",
+    "reader_path": "care_team",
+    "what_the_atlas_can_answer": [
+      "Prevalence and longitudinal shift of registered primary endpoint classes across 940 interventional CF trials (pre-2012, 2012-2019, 2020-2026).",
+      "Distribution of primary trial endpoints across clinical phases (Phase 1 through Phase 4).",
+      "Whether trial protocols evaluate specific physiological or patient-reported measures (e.g. FEV1, sweat chloride, CFQ-R, BMI, pulmonary exacerbations).",
+      "Co-tagging patterns where measures capture both efficacy parameters and safety surveillance (e.g. multi-class tagging)."
+    ],
+    "what_the_atlas_cannot_answer": [
+      "Individual patient treatment decisions, personalized medical recommendations, or clinical practice directives.",
+      "Regulatory efficacy or safety clearance (ClinicalTrials.gov registrations reflect sponsor filings, not agency approval determinations).",
+      "Unregistered exploratory or secondary endpoints omitted from primary protocol registrations.",
+      "Personal modulator eligibility, which depends strictly on individual CFTR genotyping and national regulatory labels."
+    ],
+    "fev1_definition_and_safety_use": "The lung_function_fev1 class captures all registered forced expiratory volume in one second measures, including those monitored as safety or bronchospasm checks post-dosing, which are co-tagged with safety_adverse_events under the multi_class flag rather than suppressed.",
+    "measures_list": [
+      {
+        "class_name": "lung_function_fev1",
+        "status": "shown (canonical 8)",
+        "entries": 164
+      },
+      {
+        "class_name": "sweat_chloride",
+        "status": "shown (canonical 8)",
+        "entries": 16
+      },
+      {
+        "class_name": "pulmonary_exacerbations",
+        "status": "shown (canonical 8)",
+        "entries": 26
+      },
+      {
+        "class_name": "quality_of_life",
+        "status": "shown (canonical 8)",
+        "entries": 129
+      },
+      {
+        "class_name": "microbiology_cfu",
+        "status": "shown (canonical 8)",
+        "entries": 66
+      },
+      {
+        "class_name": "nutritional_bmi",
+        "status": "shown (canonical 8)",
+        "entries": 55
+      },
+      {
+        "class_name": "safety_adverse_events",
+        "status": "shown (canonical 8)",
+        "entries": 404
+      },
+      {
+        "class_name": "other_or_not_stated",
+        "status": "shown (canonical 8)",
+        "entries": 1037
+      },
+      {
+        "class_name": "fev1",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 164
+      },
+      {
+        "class_name": "spirometry_other",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 61
+      },
+      {
+        "class_name": "lci",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 21
+      },
+      {
+        "class_name": "lung_function_unspecified",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 16
+      },
+      {
+        "class_name": "lung_mechanics",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 14
+      },
+      {
+        "class_name": "oxygenation",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 17
+      },
+      {
+        "class_name": "npd",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 19
+      },
+      {
+        "class_name": "icm",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 0
+      },
+      {
+        "class_name": "cftr_biomarker_other",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 9
+      },
+      {
+        "class_name": "exacerbations",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 26
+      },
+      {
+        "class_name": "nutrition_growth",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 55
+      },
+      {
+        "class_name": "bone_density",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 7
+      },
+      {
+        "class_name": "gi_pancreatic",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 74
+      },
+      {
+        "class_name": "glucose_cfrd",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 52
+      },
+      {
+        "class_name": "liver",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 5
+      },
+      {
+        "class_name": "sinus_upper_airway",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 10
+      },
+      {
+        "class_name": "cfqr",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 23
+      },
+      {
+        "class_name": "pro_named_other",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 73
+      },
+      {
+        "class_name": "pro_unnamed",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 34
+      },
+      {
+        "class_name": "imaging",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 38
+      },
+      {
+        "class_name": "microbiology_sputum",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 66
+      },
+      {
+        "class_name": "mucociliary_clearance",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 17
+      },
+      {
+        "class_name": "sputum_properties",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 22
+      },
+      {
+        "class_name": "inflammation_markers",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 55
+      },
+      {
+        "class_name": "molecular_expression",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 11
+      },
+      {
+        "class_name": "oxidative_stress",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 9
+      },
+      {
+        "class_name": "healthcare_use",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 6
+      },
+      {
+        "class_name": "survival_transplant",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 8
+      },
+      {
+        "class_name": "safety_tolerability",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 404
+      },
+      {
+        "class_name": "pharmacokinetics",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 247
+      },
+      {
+        "class_name": "feasibility_adherence",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 62
+      },
+      {
+        "class_name": "exercise_capacity",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 67
+      },
+      {
+        "class_name": "physical_activity",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 7
+      },
+      {
+        "class_name": "muscle_strength",
+        "status": "counted, not shown (below the agreement bar)",
+        "entries": 16
+      }
+    ],
+    "clinician_review_gate": "Plain-language class notes stay unpublished until a clinician has read them (a person, not a model)."
+  },
+  "export_sha256": "e72bb15d92ec89f2a53f11a8e9a5603dea8ba06b4216467bb67c49796dc81206"
 }

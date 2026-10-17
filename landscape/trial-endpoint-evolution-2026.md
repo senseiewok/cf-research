@@ -160,7 +160,39 @@ The canonical taxonomy maps directly to the benchmark trials that established re
 
 ---
 
-## 6. Mandatory Regulatory & Epistemic Disclaimers
+## 6. Care Team Reader Path & Clinical Endpoint Boundaries
+
+To assist clinical care teams interpreting trial endpoint prevalence data alongside patient inquiries, the atlas defines an explicit care-team reading path with scope boundaries, withheld class disclosures, and outcome definitions:
+
+### What the Atlas Can and Cannot Answer
+- **What the atlas can answer**:
+  - The historical shift and prevalence of registered primary endpoint classes across 940 PRISMA-screened interventional CF trials (spanning pre-2012, 2012-2019, and 2020-2026 eras).
+  - Transition rates of outcome classes across clinical development phases (Phase 1 through Phase 4).
+  - Whether specific trials evaluate primary physiological, microbiological, or patient-reported endpoints.
+  - Multi-class co-tagging occurrences where protocols monitor both efficacy endpoints and safety surveillance.
+- **What the atlas cannot answer**:
+  - Individual clinical treatment decisions, patient care regimens, or prescriptive therapy recommendations.
+  - Regulatory drug efficacy or safety determinations (trial registrations on ClinicalTrials.gov represent sponsor declarations, not agency marketing authorization).
+  - Unregistered secondary or exploratory endpoints omitted from primary outcome fields.
+  - Personal modulator eligibility for a specific patient, which is determined strictly by diagnostic genotyping and national regulatory labels.
+
+### Withheld Classes & The Consensus Agreement Bar
+The primary public atlas view visualizes the 8 canonical classes (`lung_function_fev1`, `sweat_chloride`, `pulmonary_exacerbations`, `quality_of_life`, `microbiology_cfu`, `nutritional_bmi`, `safety_adverse_events`, `other_or_not_stated`). Additional granular outcome categories remain below the inter-annotator agreement threshold for independent visualization; in the exported measures catalog, these classes are explicitly categorized:
+
+| Measure Class Category | Classification Status | Reporting Disposition |
+| :--- | :--- | :--- |
+| **Canonical 8 Classes** | Validated across three independent annotators | Shown (canonical 8) |
+| **Granular / Withheld Classes** (`pharmacokinetics`, `gi_pancreatic`, `exercise_capacity`, `feasibility_adherence`, `spirometry_other`, `inflammation_markers`, `glucose_cfrd`, `imaging`, `lci`, `npd`, `oxygenation`, etc.) | Granular classes below the inter-annotator agreement bar | `counted, not shown (below the agreement bar)` |
+
+### FEV1 Definition & Safety Co-Tagging
+The `lung_function_fev1` class captures all registered forced expiratory volume in one second measures, including those monitored as safety or bronchospasm checks post-dosing, which are co-tagged with `safety_adverse_events` under the `multi_class` flag rather than suppressed. This deterministic behavior is backed by lexicon tagging rules and verified by unit test `test_fev1_safety_check_co_tagging`.
+
+### Clinician Review Gate Notice
+Plain-language class notes stay unpublished until a clinician has read them (a person, not a model; T-0011 / T-0105 human gate).
+
+---
+
+## 7. Mandatory Regulatory & Epistemic Disclaimers
 
 ### ClinicalTrials.gov NLM Disclaimer
 > ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote United States Federal Government endorsement.
@@ -176,7 +208,7 @@ The canonical taxonomy maps directly to the benchmark trials that established re
 
 ---
 
-## 7. Deterministic Verification & Audit Trail
+## 8. Deterministic Verification & Audit Trail
 
 ```text
 Deterministic Verification Commands:

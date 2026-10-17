@@ -6,8 +6,7 @@
 # - tools/cftr-model/tests test_viewer and test_research, and the browser cases of test_geometry and
 #   test_page_layer: need Playwright and a Chromium (those cases skip themselves without it, so they
 #   are listed below but run nothing that needs a browser).
-# - tools/cftr-model/tests test_data: its cases on the fetched structure files skip themselves,
-#   because sources/downloads/ is not in the repository (fetching would be a network call).
+# - tools/cftr-model/tests test_data: runs offline from tracked tools/cftr-model/data/ with CC0/CC-BY attribution.
 # - tools/skill_trial/test_check_page_basics.py: needs a Chromium or Edge.
 # - tools/sources/sync_skill_catalog.py --check: compares with the sibling cf-skills repository,
 #   which is not checked out here. Its own self-check (check_sync_skill_catalog.py) does run.
