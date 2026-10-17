@@ -66,6 +66,27 @@ ECFSPR_REPORTS = {
 }
 
 
+DEFAULT_DENOMINATOR_SCOPE = {
+    "pwcf_registered": "all_registered",
+    "age_at_followup": "alive_end_of_year",
+    "age_at_followup_mean": "alive_end_of_year",
+    "pwcf_adult_ge18": "alive_end_of_year",
+    "pwcf_lung_transplant": "alive_end_of_year",
+    "pwcf_liver_transplant": "alive_end_of_year",
+    "pwcf_alive_end_of_year": "alive_end_of_year",
+    "age_at_diagnosis_months": "seen_during_year",
+    "age_at_diagnosis_years": "seen_during_year",
+    "pwcf_f508del_allele": "seen_during_year",
+    "pwcf_seen_during_year": "seen_during_year",
+    "pwcf_deceased": "mortality_cohort_uk_all",
+    "age_at_death": "mortality_cohort_uk_all",
+    "age_at_death_mean": "mortality_cohort_uk_all",
+    "pwcf_mortality_cohort": "mortality_cohort_uk_all",
+    "pwcf_uk_included": "mortality_cohort_uk_all",
+    "pwcf_seen_never_transplanted": "seen_never_transplanted",
+}
+
+
 def build_row(
     *,
     row_id: str,
@@ -75,6 +96,8 @@ def build_row(
     stratum_sex: str,
     unit: str,
     raw_text_quote: str,
+    stratum_country: Optional[str] = "all_europe",
+    denominator_scope: Optional[str] = None,
     count_n: Optional[int] = None,
     percentage: Optional[float] = None,
     denominator_n: Optional[int] = None,
@@ -90,6 +113,7 @@ def build_row(
     meta = ECFSPR_REPORTS[year]
     pg = page_number if page_number is not None else meta["page_number"]
     tbl = table_id if table_id is not None else meta["table_id"]
+    d_scope = denominator_scope if denominator_scope is not None else DEFAULT_DENOMINATOR_SCOPE.get(indicator_id)
 
     return {
         "row_id": row_id,
@@ -103,6 +127,8 @@ def build_row(
         "indicator_id": indicator_id,
         "indicator_name": indicator_name,
         "stratum_sex": stratum_sex,
+        "stratum_country": stratum_country,
+        "denominator_scope": d_scope,
         "count_n": count_n,
         "percentage": percentage,
         "denominator_n": denominator_n,
@@ -1128,14 +1154,92 @@ def extract_ecfspr_2024() -> List[Dict[str, Any]]:
     return rows
 
 
+def extract_ecfspr_2024_country_dimension() -> List[Dict[str, Any]]:
+    """Extract country-level stratification (Table 1.1, p.12) and clinical cohort denominator (p.13) from ECFSPR 2024."""
+    y = 2024
+    rows: List[Dict[str, Any]] = []
+
+    # Page 13: Clinical analysis cohort (seen during year and never had a transplant)
+    rows.append(build_row(
+        row_id="ECFSPR-2024-P13-R01",
+        year=y,
+        page_number=13,
+        table_id="1. Demographics (Table 1.1 methodology notes)",
+        indicator_id="pwcf_seen_never_transplanted",
+        indicator_name="People with CF seen during the year who have never had a transplant",
+        stratum_sex="total",
+        stratum_country="all_europe",
+        denominator_scope="seen_never_transplanted",
+        unit="count",
+        count_n=51294,
+        raw_text_quote="From chapter 4 onwards, only people with CF seen during the year and who have never had a transplant are considered for the analyses (total number 51,294).",
+        notes="Fifth ECFSPR 2024 denominator tier: clinical outcome cohort excluding transplanted patients.",
+    ))
+
+    # Page 12: Table 1.1 Number of people with CF in 2024, by country
+    country_table_specs = [
+        ("UK", "United Kingdom", 11381, 10424, "United Kingdom* 11381 10424 99%", "National CF registry; 99% estimated coverage."),
+        ("DE", "Germany", 7704, 7372, "Germany* 7704 7372 >80%", "National CF registry; >80% estimated coverage."),
+        ("FR", "France", 7515, 7515, "France* 7515 7515 >90%", "National CF registry; >90% estimated coverage."),
+        ("IT", "Italy", 6206, 6182, "Italy* 6206 6182 98%", "National CF registry; 98% estimated coverage."),
+        ("RU", "Russian Federation", 4294, 3449, "Russian Federation* 4294 3449 90%", "National CF registry; 90% estimated coverage."),
+        ("ES", "Spain", 2780, 2620, "Spain** 2780 2620 85%", "All centres participate in ECFSPR; 85% estimated coverage."),
+        ("TR", "Turkiye", 2765, 2749, "Türkiye* 2765 2749 >60%", "National CF registry; >60% estimated coverage."),
+        ("PL", "Poland", 1726, 1642, "Poland 1726 1642 90%", "90% estimated coverage."),
+        ("NL", "Netherlands", 1608, 1584, "Netherlands* 1608 1584 95%", "National CF registry; 95% estimated coverage."),
+        ("IE", "Ireland", 1403, 1378, "Ireland* 1403 1378 94.6%", "National CF registry; 94.6% estimated coverage."),
+        ("CH", "Switzerland", 1118, 1037, "Switzerland** 1118 1037 >99%", "All centres participate in ECFSPR; >99% estimated coverage."),
+        ("AT", "Austria", 909, 884, "Austria 909 884 90%", "90% estimated coverage."),
+        ("SE", "Sweden", 814, 795, "Sweden* 814 795 >99%", "National CF registry; >99% estimated coverage."),
+        ("CZ", "Czech Republic", 755, 740, "Czech Republic* 755 740 99%", "National CF registry; 99% estimated coverage."),
+        ("DK", "Denmark", 574, 565, "Denmark* 574 565 99%", "National CF registry; 99% estimated coverage."),
+        ("UA", "Ukraine", 546, 475, "Ukraine4 546 475 >50%", "Footnote 4: Unknown how many PwCF left the country after the start of the war; >50% estimated coverage."),
+    ]
+
+    for idx, (iso, country_name, reg_n, seen_n, quote, note) in enumerate(country_table_specs, start=1):
+        rows.append(build_row(
+            row_id=f"ECFSPR-2024-P12-{iso}-REG",
+            year=y,
+            page_number=12,
+            table_id="Table 1.1 Number of people with CF in 2024, by country",
+            indicator_id="pwcf_registered",
+            indicator_name="People with CF, registered, not lost to follow-up",
+            stratum_sex="total",
+            stratum_country=country_name,
+            denominator_scope="all_registered",
+            unit="count",
+            count_n=reg_n,
+            raw_text_quote=quote,
+            notes=note,
+        ))
+        rows.append(build_row(
+            row_id=f"ECFSPR-2024-P12-{iso}-SEEN",
+            year=y,
+            page_number=12,
+            table_id="Table 1.1 Number of people with CF in 2024, by country",
+            indicator_id="pwcf_seen_during_year",
+            indicator_name="People with CF seen during the year",
+            stratum_sex="total",
+            stratum_country=country_name,
+            denominator_scope="seen_during_year",
+            unit="count",
+            count_n=seen_n,
+            raw_text_quote=quote,
+            notes=note,
+        ))
+
+    return rows
+
+
 def extract_all_ecfspr() -> List[Dict[str, Any]]:
-    """Run full extraction pipeline across all 5 ECFSPR report years."""
+    """Run full extraction pipeline across all 5 ECFSPR report years and geographic dimensions."""
     all_rows: List[Dict[str, Any]] = []
     all_rows.extend(extract_ecfspr_2020())
     all_rows.extend(extract_ecfspr_2021())
     all_rows.extend(extract_ecfspr_2022())
     all_rows.extend(extract_ecfspr_2023())
     all_rows.extend(extract_ecfspr_2024())
+    all_rows.extend(extract_ecfspr_2024_country_dimension())
     return all_rows
 
 

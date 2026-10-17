@@ -41,6 +41,8 @@ The formal JSON Schema is defined in [`row_schema.json`](file:///tools/registry-
 | `indicator_id` | `string` | **Yes** | Normalized snake_case indicator key (e.g. `pwcf_registered`, `age_at_followup`, `pwcf_adult_ge18`). Pattern: `^[a-z0-9_]+$`. |
 | `indicator_name` | `string` | **Yes** | Full verbatim title of the indicator from the table row header. |
 | `stratum_sex` | `string` | **Yes** | Biological sex stratum. Enum: `["females", "males", "total", "not_applicable"]`. |
+| `stratum_country` | `string` \| `null` | No | Geographic country or territory stratification (e.g. `United Kingdom`, `Germany`, `France`, or `all_europe`). |
+| `denominator_scope` | `string` \| `null` | No | Explicit cohort denominator rule (`all_registered`, `seen_during_year`, `alive_end_of_year`, `mortality_cohort_uk_all`, `seen_never_transplanted`, `sex_stratum_cohort`). |
 | `count_n` | `integer` \| `null` | No | Absolute patient count ($N$), or `null` if the indicator reports only continuous metrics. |
 | `percentage` | `number` \| `null` | No | Observed percentage ($0.0 \le \% \le 100.0$), or `null` if not applicable. |
 | `denominator_n` | `integer` \| `null` | No | Denominator cohort count for percentages, if reported or footnoted. |

@@ -130,6 +130,40 @@ class ECFSPRExtractionPipelineTest(unittest.TestCase):
         self.assertIn("2020", log_content)
         self.assertIn("2024", log_content)
 
+    def test_country_stratification_dimension(self):
+        rows = json.loads(DATASET_JSON.read_text(encoding="utf-8"))
+        country_rows = [r for r in rows if r.get("stratum_country") not in (None, "all_europe")]
+        self.assertGreaterEqual(len(country_rows), 32, "Expected at least 32 country-stratified rows (16 countries x 2 metrics)")
+        countries = {r["stratum_country"] for r in country_rows}
+        self.assertIn("United Kingdom", countries)
+        self.assertIn("France", countries)
+        self.assertIn("Germany", countries)
+        self.assertIn("Italy", countries)
+        self.assertIn("Spain", countries)
+
+    def test_denominator_scope_cascade_dimension(self):
+        rows = json.loads(DATASET_JSON.read_text(encoding="utf-8"))
+        scopes_2024 = {
+            r.get("denominator_scope"): r.get("count_n")
+            for r in rows
+            if r["report_year"] == 2024
+            and r.get("stratum_country") == "all_europe"
+            and r.get("stratum_sex") == "total"
+            and r["indicator_id"] in {
+                "pwcf_registered",
+                "pwcf_mortality_cohort",
+                "pwcf_seen_during_year",
+                "pwcf_alive_end_of_year",
+                "pwcf_seen_never_transplanted",
+            }
+            and "historical comparative benchmark" not in r.get("notes", "")
+        }
+        self.assertEqual(scopes_2024.get("all_registered"), 57288)
+        self.assertEqual(scopes_2024.get("mortality_cohort_uk_all"), 55199)
+        self.assertEqual(scopes_2024.get("seen_during_year"), 54241)
+        self.assertEqual(scopes_2024.get("alive_end_of_year"), 53988)
+        self.assertEqual(scopes_2024.get("seen_never_transplanted"), 51294)
+
 
 if __name__ == "__main__":
     unittest.main()

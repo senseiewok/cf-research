@@ -8,7 +8,7 @@
 - **Matches**: 100 / 100
 - **Accuracy**: 100.0% (threshold $\ge 99.0\%$)
 - **Wilson 95% Score CI**: `[0.9630, 1.0000]` ($96.30\% - 100.00\%$)
-- **URL & Page Coverage**: 100.0% (152 / 152 rows carry valid canonical `url` and `page`)
+- **URL & Page Coverage**: 100.0% (185 / 185 rows carry valid canonical `url` and `page`)
 
 ---
 
@@ -69,6 +69,18 @@ During the implementation and verification of the 5-year extraction pipeline, se
 - **Resolution**:
   - The pipeline extracts both `pwcf_mortality_cohort` and `pwcf_uk_included` as explicit standardized indicators, ensuring complete epidemiological transparency.
 
+### Case 6: 5-Tier Denominator Cascade (`denominator_scope`) & Country Stratification (`stratum_country`)
+- **Observation**:
+  - Across a single ECFSPR report year (e.g., 2024), five distinct population denominators govern different analyses:
+    1. `all_registered`: `57,288` (Table 1 & Table 1.1 total registered PwCF)
+    2. `mortality_cohort_uk_all`: `55,199` (Table 1 footnote `***` — mortality denominator including all `11,381` UK confirmed diagnoses)
+    3. `seen_during_year`: `54,241` (Table 1 footnote `*` & Table 1.1 total seen during 2024)
+    4. `alive_end_of_year`: `53,988` (Table 1 footnote `**` — denominator for adult $\ge 18$ proportion `60%`)
+    5. `seen_never_transplanted`: `51,294` (Page 13 text — clinical outcome denominator from Chapter 4 onwards)
+  - Conflating these 5 tiers is a classic source of epidemiological claim misinterpretation.
+- **Resolution**:
+  - Added explicit `denominator_scope` and `stratum_country` schema dimensions (`row_schema.json`), extracting all 5 denominator tiers and 16 European country cohorts from Table 1.1 (page 12) with verbatim quotes.
+
 ---
 
 ## 3. Disagreement Status Summary
@@ -76,5 +88,5 @@ During the implementation and verification of the 5-year extraction pipeline, se
 | Audit Item | Expected Value | Extracted Value | Disagreement? | Disposition |
 | :--- | :--- | :--- | :---: | :--- |
 | Random 100-cell sample | Exact PDF values | Exact PDF values | **None (0/100)** | Verified 100.0% accurate |
-| URL & Page coverage | 100% rows | 152 / 152 rows | **None** | Full compliance |
+| URL & Page coverage | 100% rows | 185 / 185 rows | **None** | Full compliance |
 | Schema validation | 0 errors | 0 errors | **None** | Passes `row_schema.json` |

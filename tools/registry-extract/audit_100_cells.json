@@ -1,6 +1,6 @@
 {
-  "dataset_rows_total": 152,
-  "candidate_cells_total": 415,
+  "dataset_rows_total": 185,
+  "candidate_cells_total": 448,
   "sampled_cells": 100,
   "matched_cells": 100,
   "disagreements_count": 0,
@@ -15,9 +15,9 @@
     "confidence_level": 0.95
   },
   "url_page_coverage": {
-    "url_count": 152,
-    "page_count": 152,
-    "total_rows": 152,
+    "url_count": 185,
+    "page_count": 185,
+    "total_rows": 185,
     "url_coverage_percent": "100.0%",
     "page_coverage_percent": "100.0%",
     "meets_100_percent_requirement": true
@@ -180,15 +180,15 @@
     },
     {
       "audit_id": 12,
-      "row_id": "ECFSPR-2024-P09-R23",
+      "row_id": "ECFSPR-2024-P12-DK-REG",
       "report_year": 2024,
-      "indicator_id": "age_at_death",
+      "indicator_id": "pwcf_registered",
       "stratum_sex": "total",
-      "page": 9,
+      "page": 12,
       "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
-      "cell_key": "value_high",
-      "extracted_value": 37.0,
-      "ground_truth_quote": "28.0 (21.0-37.0)",
+      "cell_key": "count_n",
+      "extracted_value": 574,
+      "ground_truth_quote": "Denmark* 574 565 99%",
       "is_correct": true,
       "discrepancy": null
     },
@@ -432,15 +432,15 @@
     },
     {
       "audit_id": 30,
-      "row_id": "ECFSPR-2024-P09-R20",
+      "row_id": "ECFSPR-2024-P12-IE-SEEN",
       "report_year": 2024,
-      "indicator_id": "age_at_followup",
+      "indicator_id": "pwcf_seen_during_year",
       "stratum_sex": "total",
-      "page": 9,
+      "page": 12,
       "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
-      "cell_key": "median_iqr.median",
-      "extracted_value": 18.9,
-      "ground_truth_quote": "18.9 (9.6-29.3)",
+      "cell_key": "count_n",
+      "extracted_value": 1378,
+      "ground_truth_quote": "Ireland* 1403 1378 94.6%",
       "is_correct": true,
       "discrepancy": null
     },
@@ -530,6 +530,20 @@
     },
     {
       "audit_id": 37,
+      "row_id": "ECFSPR-2024-P09-R16",
+      "report_year": 2024,
+      "indicator_id": "pwcf_adult_ge18",
+      "stratum_sex": "total",
+      "page": 9,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
+      "cell_key": "count_n",
+      "extracted_value": 26429,
+      "ground_truth_quote": "26429 (52.4)",
+      "is_correct": true,
+      "discrepancy": null
+    },
+    {
+      "audit_id": 38,
       "row_id": "ECFSPR-2021-P08-R06",
       "report_year": 2021,
       "indicator_id": "age_at_followup",
@@ -543,7 +557,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 38,
+      "audit_id": 39,
       "row_id": "ECFSPR-2024-P09-R04",
       "report_year": 2024,
       "indicator_id": "age_at_diagnosis_months",
@@ -557,21 +571,21 @@
       "discrepancy": null
     },
     {
-      "audit_id": 39,
-      "row_id": "ECFSPR-2024-P09-R20",
+      "audit_id": 40,
+      "row_id": "ECFSPR-2024-P12-NL-REG",
       "report_year": 2024,
-      "indicator_id": "age_at_followup",
+      "indicator_id": "pwcf_registered",
       "stratum_sex": "total",
-      "page": 9,
+      "page": 12,
       "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
-      "cell_key": "value_point",
-      "extracted_value": 18.9,
-      "ground_truth_quote": "18.9 (9.6-29.3)",
+      "cell_key": "count_n",
+      "extracted_value": 1608,
+      "ground_truth_quote": "Netherlands* 1608 1584 95%",
       "is_correct": true,
       "discrepancy": null
     },
     {
-      "audit_id": 40,
+      "audit_id": 41,
       "row_id": "ECFSPR-2022-P08-R05",
       "report_year": 2022,
       "indicator_id": "age_at_followup",
@@ -585,21 +599,21 @@
       "discrepancy": null
     },
     {
-      "audit_id": 41,
-      "row_id": "ECFSPR-2024-P09-R13",
+      "audit_id": 42,
+      "row_id": "ECFSPR-2024-P09-R23",
       "report_year": 2024,
-      "indicator_id": "pwcf_uk_included",
+      "indicator_id": "age_at_death",
       "stratum_sex": "total",
       "page": 9,
       "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
-      "cell_key": "count_n",
-      "extracted_value": 11381,
-      "ground_truth_quote": "N=11, 381 for 2024",
+      "cell_key": "median_iqr.q1",
+      "extracted_value": 21.0,
+      "ground_truth_quote": "28.0 (21.0-37.0)",
       "is_correct": true,
       "discrepancy": null
     },
     {
-      "audit_id": 42,
+      "audit_id": 43,
       "row_id": "ECFSPR-2021-P08-R06",
       "report_year": 2021,
       "indicator_id": "age_at_followup",
@@ -613,7 +627,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 43,
+      "audit_id": 44,
       "row_id": "ECFSPR-2021-P08-R14",
       "report_year": 2021,
       "indicator_id": "pwcf_f508del_allele",
@@ -627,7 +641,21 @@
       "discrepancy": null
     },
     {
-      "audit_id": 44,
+      "audit_id": 45,
+      "row_id": "ECFSPR-2024-P09-R17",
+      "report_year": 2024,
+      "indicator_id": "pwcf_deceased",
+      "stratum_sex": "total",
+      "page": 9,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
+      "cell_key": "count_n",
+      "extracted_value": 424,
+      "ground_truth_quote": "424 (0.9)",
+      "is_correct": true,
+      "discrepancy": null
+    },
+    {
+      "audit_id": 46,
       "row_id": "ECFSPR-2022-P08-R05",
       "report_year": 2022,
       "indicator_id": "age_at_followup",
@@ -641,35 +669,35 @@
       "discrepancy": null
     },
     {
-      "audit_id": 45,
-      "row_id": "ECFSPR-2024-P09-R21",
+      "audit_id": 47,
+      "row_id": "ECFSPR-2024-P12-AT-REG",
       "report_year": 2024,
-      "indicator_id": "pwcf_adult_ge18",
+      "indicator_id": "pwcf_registered",
       "stratum_sex": "total",
-      "page": 9,
+      "page": 12,
       "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
       "cell_key": "count_n",
-      "extracted_value": 21073,
-      "ground_truth_quote": "21073 (52.4)",
+      "extracted_value": 909,
+      "ground_truth_quote": "Austria 909 884 90%",
       "is_correct": true,
       "discrepancy": null
     },
     {
-      "audit_id": 46,
-      "row_id": "ECFSPR-2024-P09-R18",
+      "audit_id": 48,
+      "row_id": "ECFSPR-2024-P12-TR-SEEN",
       "report_year": 2024,
-      "indicator_id": "age_at_death",
+      "indicator_id": "pwcf_seen_during_year",
       "stratum_sex": "total",
-      "page": 9,
+      "page": 12,
       "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
-      "cell_key": "median_iqr.q1",
-      "extracted_value": 22.0,
-      "ground_truth_quote": "30.0 (22.0-41.0)",
+      "cell_key": "count_n",
+      "extracted_value": 2749,
+      "ground_truth_quote": "T\u00fcrkiye* 2765 2749 >60%",
       "is_correct": true,
       "discrepancy": null
     },
     {
-      "audit_id": 47,
+      "audit_id": 49,
       "row_id": "ECFSPR-2022-P08-R11",
       "report_year": 2022,
       "indicator_id": "age_at_diagnosis_months",
@@ -683,7 +711,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 48,
+      "audit_id": 50,
       "row_id": "ECFSPR-2020-P07-R29",
       "report_year": 2020,
       "indicator_id": "age_at_death",
@@ -697,7 +725,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 49,
+      "audit_id": 51,
       "row_id": "ECFSPR-2022-P08-R08",
       "report_year": 2022,
       "indicator_id": "pwcf_adult_ge18",
@@ -711,7 +739,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 50,
+      "audit_id": 52,
       "row_id": "ECFSPR-2022-P08-R06",
       "report_year": 2022,
       "indicator_id": "age_at_followup",
@@ -725,7 +753,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 51,
+      "audit_id": 53,
       "row_id": "ECFSPR-2023-P08-R16",
       "report_year": 2023,
       "indicator_id": "pwcf_lung_transplant",
@@ -739,7 +767,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 52,
+      "audit_id": 54,
       "row_id": "ECFSPR-2021-P08-R25",
       "report_year": 2021,
       "indicator_id": "age_at_death",
@@ -753,7 +781,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 53,
+      "audit_id": 55,
       "row_id": "ECFSPR-2020-P07-R14",
       "report_year": 2020,
       "indicator_id": "age_at_diagnosis_months",
@@ -767,7 +795,21 @@
       "discrepancy": null
     },
     {
-      "audit_id": 54,
+      "audit_id": 56,
+      "row_id": "ECFSPR-2024-P09-R09",
+      "report_year": 2024,
+      "indicator_id": "age_at_death",
+      "stratum_sex": "total",
+      "page": 9,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
+      "cell_key": "value_high",
+      "extracted_value": 49.0,
+      "ground_truth_quote": "36.5 (24.0-49.0)",
+      "is_correct": true,
+      "discrepancy": null
+    },
+    {
+      "audit_id": 57,
       "row_id": "ECFSPR-2022-P08-R26",
       "report_year": 2022,
       "indicator_id": "age_at_death",
@@ -781,7 +823,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 55,
+      "audit_id": 58,
       "row_id": "ECFSPR-2023-P08-R06",
       "report_year": 2023,
       "indicator_id": "age_at_followup",
@@ -795,7 +837,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 56,
+      "audit_id": 59,
       "row_id": "ECFSPR-2021-P08-R03",
       "report_year": 2021,
       "indicator_id": "pwcf_registered",
@@ -809,7 +851,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 57,
+      "audit_id": 60,
       "row_id": "ECFSPR-2022-P08-R11",
       "report_year": 2022,
       "indicator_id": "age_at_diagnosis_months",
@@ -823,7 +865,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 58,
+      "audit_id": 61,
       "row_id": "ECFSPR-2020-P07-R24",
       "report_year": 2020,
       "indicator_id": "pwcf_liver_transplant",
@@ -837,7 +879,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 59,
+      "audit_id": 62,
       "row_id": "ECFSPR-2023-P08-R09",
       "report_year": 2023,
       "indicator_id": "pwcf_adult_ge18",
@@ -851,7 +893,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 60,
+      "audit_id": 63,
       "row_id": "ECFSPR-2021-P08-R28",
       "report_year": 2021,
       "indicator_id": "pwcf_seen_during_year",
@@ -865,7 +907,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 61,
+      "audit_id": 64,
       "row_id": "ECFSPR-2023-P08-R22",
       "report_year": 2023,
       "indicator_id": "pwcf_deceased",
@@ -879,7 +921,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 62,
+      "audit_id": 65,
       "row_id": "ECFSPR-2023-P08-R20",
       "report_year": 2023,
       "indicator_id": "pwcf_liver_transplant",
@@ -893,7 +935,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 63,
+      "audit_id": 66,
       "row_id": "ECFSPR-2022-P08-R09",
       "report_year": 2022,
       "indicator_id": "pwcf_adult_ge18",
@@ -907,7 +949,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 64,
+      "audit_id": 67,
       "row_id": "ECFSPR-2023-P08-R11",
       "report_year": 2023,
       "indicator_id": "age_at_diagnosis_months",
@@ -921,7 +963,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 65,
+      "audit_id": 68,
       "row_id": "ECFSPR-2021-P08-R11",
       "report_year": 2021,
       "indicator_id": "age_at_diagnosis_months",
@@ -935,7 +977,21 @@
       "discrepancy": null
     },
     {
-      "audit_id": 66,
+      "audit_id": 69,
+      "row_id": "ECFSPR-2024-P09-R04",
+      "report_year": 2024,
+      "indicator_id": "age_at_diagnosis_months",
+      "stratum_sex": "total",
+      "page": 9,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
+      "cell_key": "median_iqr.median",
+      "extracted_value": 3.6,
+      "ground_truth_quote": "3.6 (1.2-32.4)",
+      "is_correct": true,
+      "discrepancy": null
+    },
+    {
+      "audit_id": 70,
       "row_id": "ECFSPR-2020-P07-R22",
       "report_year": 2020,
       "indicator_id": "pwcf_lung_transplant",
@@ -949,7 +1005,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 67,
+      "audit_id": 71,
       "row_id": "ECFSPR-2020-P07-R15",
       "report_year": 2020,
       "indicator_id": "age_at_diagnosis_months",
@@ -963,7 +1019,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 68,
+      "audit_id": 72,
       "row_id": "ECFSPR-2023-P08-R27",
       "report_year": 2023,
       "indicator_id": "age_at_death",
@@ -977,7 +1033,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 69,
+      "audit_id": 73,
       "row_id": "ECFSPR-2021-P08-R17",
       "report_year": 2021,
       "indicator_id": "pwcf_lung_transplant",
@@ -991,7 +1047,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 70,
+      "audit_id": 74,
       "row_id": "ECFSPR-2021-P08-R27",
       "report_year": 2021,
       "indicator_id": "age_at_death",
@@ -1005,35 +1061,35 @@
       "discrepancy": null
     },
     {
-      "audit_id": 71,
-      "row_id": "ECFSPR-2024-P09-R21",
+      "audit_id": 75,
+      "row_id": "ECFSPR-2024-P09-R15",
       "report_year": 2024,
-      "indicator_id": "pwcf_adult_ge18",
+      "indicator_id": "age_at_followup",
       "stratum_sex": "total",
       "page": 9,
       "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
-      "cell_key": "percentage",
-      "extracted_value": 52.4,
-      "ground_truth_quote": "21073 (52.4)",
+      "cell_key": "median_iqr.q3",
+      "extracted_value": 30.9,
+      "ground_truth_quote": "19.0 (9.5-30.9)",
       "is_correct": true,
       "discrepancy": null
     },
     {
-      "audit_id": 72,
-      "row_id": "ECFSPR-2024-P09-R18",
+      "audit_id": 76,
+      "row_id": "ECFSPR-2024-P12-ES-SEEN",
       "report_year": 2024,
-      "indicator_id": "age_at_death",
+      "indicator_id": "pwcf_seen_during_year",
       "stratum_sex": "total",
-      "page": 9,
+      "page": 12,
       "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
-      "cell_key": "value_high",
-      "extracted_value": 41.0,
-      "ground_truth_quote": "30.0 (22.0-41.0)",
+      "cell_key": "count_n",
+      "extracted_value": 2620,
+      "ground_truth_quote": "Spain** 2780 2620 85%",
       "is_correct": true,
       "discrepancy": null
     },
     {
-      "audit_id": 73,
+      "audit_id": 77,
       "row_id": "ECFSPR-2020-P07-R31",
       "report_year": 2020,
       "indicator_id": "age_at_death",
@@ -1047,35 +1103,35 @@
       "discrepancy": null
     },
     {
-      "audit_id": 74,
-      "row_id": "ECFSPR-2024-P09-R07",
+      "audit_id": 78,
+      "row_id": "ECFSPR-2024-P09-R20",
       "report_year": 2024,
-      "indicator_id": "pwcf_liver_transplant",
+      "indicator_id": "age_at_followup",
+      "stratum_sex": "total",
+      "page": 9,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
+      "cell_key": "value_point",
+      "extracted_value": 18.9,
+      "ground_truth_quote": "18.9 (9.6-29.3)",
+      "is_correct": true,
+      "discrepancy": null
+    },
+    {
+      "audit_id": 79,
+      "row_id": "ECFSPR-2024-P09-R21",
+      "report_year": 2024,
+      "indicator_id": "pwcf_adult_ge18",
       "stratum_sex": "total",
       "page": 9,
       "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
       "cell_key": "percentage",
-      "extracted_value": 0.7,
-      "ground_truth_quote": "355 (0.7)",
+      "extracted_value": 52.4,
+      "ground_truth_quote": "21073 (52.4)",
       "is_correct": true,
       "discrepancy": null
     },
     {
-      "audit_id": 75,
-      "row_id": "ECFSPR-2024-P09-R09",
-      "report_year": 2024,
-      "indicator_id": "age_at_death",
-      "stratum_sex": "total",
-      "page": 9,
-      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
-      "cell_key": "median_iqr.median",
-      "extracted_value": 36.5,
-      "ground_truth_quote": "36.5 (24.0-49.0)",
-      "is_correct": true,
-      "discrepancy": null
-    },
-    {
-      "audit_id": 76,
+      "audit_id": 80,
       "row_id": "ECFSPR-2022-P08-R25",
       "report_year": 2022,
       "indicator_id": "age_at_death",
@@ -1089,7 +1145,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 77,
+      "audit_id": 81,
       "row_id": "ECFSPR-2023-P08-R24",
       "report_year": 2023,
       "indicator_id": "pwcf_deceased",
@@ -1103,7 +1159,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 78,
+      "audit_id": 82,
       "row_id": "ECFSPR-2022-P08-R09",
       "report_year": 2022,
       "indicator_id": "pwcf_adult_ge18",
@@ -1117,7 +1173,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 79,
+      "audit_id": 83,
       "row_id": "ECFSPR-2021-P08-R06",
       "report_year": 2021,
       "indicator_id": "age_at_followup",
@@ -1131,7 +1187,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 80,
+      "audit_id": 84,
       "row_id": "ECFSPR-2022-P08-R10",
       "report_year": 2022,
       "indicator_id": "age_at_diagnosis_months",
@@ -1145,7 +1201,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 81,
+      "audit_id": 85,
       "row_id": "ECFSPR-2022-P08-R07",
       "report_year": 2022,
       "indicator_id": "pwcf_adult_ge18",
@@ -1159,7 +1215,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 82,
+      "audit_id": 86,
       "row_id": "ECFSPR-2021-P08-R12",
       "report_year": 2021,
       "indicator_id": "age_at_diagnosis_months",
@@ -1173,7 +1229,21 @@
       "discrepancy": null
     },
     {
-      "audit_id": 83,
+      "audit_id": 87,
+      "row_id": "ECFSPR-2023-P08-R27",
+      "report_year": 2023,
+      "indicator_id": "age_at_death",
+      "stratum_sex": "total",
+      "page": 8,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/08/Annual-Report_2023_vs1.1_ECFSPR_20250715.pdf",
+      "cell_key": "median_iqr.q3",
+      "extracted_value": 47.0,
+      "ground_truth_quote": "34.0 (23.0-47.0)",
+      "is_correct": true,
+      "discrepancy": null
+    },
+    {
+      "audit_id": 88,
       "row_id": "ECFSPR-2021-P08-R25",
       "report_year": 2021,
       "indicator_id": "age_at_death",
@@ -1187,7 +1257,35 @@
       "discrepancy": null
     },
     {
-      "audit_id": 84,
+      "audit_id": 89,
+      "row_id": "ECFSPR-2024-P12-DE-SEEN",
+      "report_year": 2024,
+      "indicator_id": "pwcf_seen_during_year",
+      "stratum_sex": "total",
+      "page": 12,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
+      "cell_key": "count_n",
+      "extracted_value": 7372,
+      "ground_truth_quote": "Germany* 7704 7372 >80%",
+      "is_correct": true,
+      "discrepancy": null
+    },
+    {
+      "audit_id": 90,
+      "row_id": "ECFSPR-2024-P09-R02",
+      "report_year": 2024,
+      "indicator_id": "age_at_followup",
+      "stratum_sex": "total",
+      "page": 9,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
+      "cell_key": "value_point",
+      "extracted_value": 20.8,
+      "ground_truth_quote": "20.8 (11.1-33.8)",
+      "is_correct": true,
+      "discrepancy": null
+    },
+    {
+      "audit_id": 91,
       "row_id": "ECFSPR-2023-P08-R25",
       "report_year": 2023,
       "indicator_id": "age_at_death",
@@ -1201,7 +1299,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 85,
+      "audit_id": 92,
       "row_id": "ECFSPR-2020-P07-R22",
       "report_year": 2020,
       "indicator_id": "pwcf_lung_transplant",
@@ -1215,7 +1313,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 86,
+      "audit_id": 93,
       "row_id": "ECFSPR-2023-P08-R17",
       "report_year": 2023,
       "indicator_id": "pwcf_lung_transplant",
@@ -1229,21 +1327,21 @@
       "discrepancy": null
     },
     {
-      "audit_id": 87,
-      "row_id": "ECFSPR-2023-P08-R31",
-      "report_year": 2023,
-      "indicator_id": "pwcf_uk_included",
+      "audit_id": 94,
+      "row_id": "ECFSPR-2024-P09-R07",
+      "report_year": 2024,
+      "indicator_id": "pwcf_liver_transplant",
       "stratum_sex": "total",
-      "page": 8,
-      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/08/Annual-Report_2023_vs1.1_ECFSPR_20250715.pdf",
+      "page": 9,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
       "cell_key": "count_n",
-      "extracted_value": 11318,
-      "ground_truth_quote": "N=11,318",
+      "extracted_value": 355,
+      "ground_truth_quote": "355 (0.7)",
       "is_correct": true,
       "discrepancy": null
     },
     {
-      "audit_id": 88,
+      "audit_id": 95,
       "row_id": "ECFSPR-2021-P08-R08",
       "report_year": 2021,
       "indicator_id": "pwcf_adult_ge18",
@@ -1257,7 +1355,7 @@
       "discrepancy": null
     },
     {
-      "audit_id": 89,
+      "audit_id": 96,
       "row_id": "ECFSPR-2023-P08-R06",
       "report_year": 2023,
       "indicator_id": "age_at_followup",
@@ -1271,35 +1369,35 @@
       "discrepancy": null
     },
     {
-      "audit_id": 90,
-      "row_id": "ECFSPR-2024-P09-R23",
+      "audit_id": 97,
+      "row_id": "ECFSPR-2024-P12-CZ-REG",
       "report_year": 2024,
-      "indicator_id": "age_at_death",
+      "indicator_id": "pwcf_registered",
+      "stratum_sex": "total",
+      "page": 12,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
+      "cell_key": "count_n",
+      "extracted_value": 755,
+      "ground_truth_quote": "Czech Republic* 755 740 99%",
+      "is_correct": true,
+      "discrepancy": null
+    },
+    {
+      "audit_id": 98,
+      "row_id": "ECFSPR-2024-P09-R06",
+      "report_year": 2024,
+      "indicator_id": "pwcf_lung_transplant",
       "stratum_sex": "total",
       "page": 9,
       "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
-      "cell_key": "value_point",
-      "extracted_value": 28.0,
-      "ground_truth_quote": "28.0 (21.0-37.0)",
+      "cell_key": "count_n",
+      "extracted_value": 2380,
+      "ground_truth_quote": "2380 (4.4)",
       "is_correct": true,
       "discrepancy": null
     },
     {
-      "audit_id": 91,
-      "row_id": "ECFSPR-2023-P08-R26",
-      "report_year": 2023,
-      "indicator_id": "age_at_death",
-      "stratum_sex": "males",
-      "page": 8,
-      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/08/Annual-Report_2023_vs1.1_ECFSPR_20250715.pdf",
-      "cell_key": "median_iqr.q1",
-      "extracted_value": 27.0,
-      "ground_truth_quote": "35.0 (27.0-48.0)",
-      "is_correct": true,
-      "discrepancy": null
-    },
-    {
-      "audit_id": 92,
+      "audit_id": 99,
       "row_id": "ECFSPR-2022-P08-R26",
       "report_year": 2022,
       "indicator_id": "age_at_death",
@@ -1313,114 +1411,16 @@
       "discrepancy": null
     },
     {
-      "audit_id": 93,
-      "row_id": "ECFSPR-2023-P08-R27",
-      "report_year": 2023,
-      "indicator_id": "age_at_death",
-      "stratum_sex": "total",
-      "page": 8,
-      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/08/Annual-Report_2023_vs1.1_ECFSPR_20250715.pdf",
-      "cell_key": "median_iqr.median",
-      "extracted_value": 34.0,
-      "ground_truth_quote": "34.0 (23.0-47.0)",
-      "is_correct": true,
-      "discrepancy": null
-    },
-    {
-      "audit_id": 94,
-      "row_id": "ECFSPR-2021-P08-R26",
-      "report_year": 2021,
-      "indicator_id": "age_at_death",
-      "stratum_sex": "males",
-      "page": 8,
-      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/06/Annual-Report_2021_09Jun2023_ECFSPR_final.pdf",
-      "cell_key": "value_point",
-      "extracted_value": 32.0,
-      "ground_truth_quote": "32.0 (21.0-43.0)",
-      "is_correct": true,
-      "discrepancy": null
-    },
-    {
-      "audit_id": 95,
-      "row_id": "ECFSPR-2023-P08-R10",
-      "report_year": 2023,
-      "indicator_id": "age_at_diagnosis_months",
-      "stratum_sex": "females",
-      "page": 8,
-      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/08/Annual-Report_2023_vs1.1_ECFSPR_20250715.pdf",
-      "cell_key": "value_low",
-      "extracted_value": 1.2,
-      "ground_truth_quote": "3.6 (1.2-32.4)",
-      "is_correct": true,
-      "discrepancy": null
-    },
-    {
-      "audit_id": 96,
-      "row_id": "ECFSPR-2024-P09-R15",
-      "report_year": 2024,
-      "indicator_id": "age_at_followup",
-      "stratum_sex": "total",
-      "page": 9,
-      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
-      "cell_key": "value_low",
-      "extracted_value": 9.5,
-      "ground_truth_quote": "19.0 (9.5-30.9)",
-      "is_correct": true,
-      "discrepancy": null
-    },
-    {
-      "audit_id": 97,
-      "row_id": "ECFSPR-2022-P08-R04",
-      "report_year": 2022,
-      "indicator_id": "age_at_followup",
-      "stratum_sex": "females",
-      "page": 8,
-      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/06/Annual-Report_2022_vs1.0_ECFSPR_20250130.pdf",
-      "cell_key": "median_iqr.median",
-      "extracted_value": 19.4,
-      "ground_truth_quote": "19.4 (10.2-31.8)",
-      "is_correct": true,
-      "discrepancy": null
-    },
-    {
-      "audit_id": 98,
-      "row_id": "ECFSPR-2020-P07-R18",
-      "report_year": 2020,
-      "indicator_id": "pwcf_f508del_allele",
-      "stratum_sex": "males",
-      "page": 7,
-      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/06/ECFSPR_Report_2020_v1.0-07Jun2022_website.pdf",
-      "cell_key": "percentage",
-      "extracted_value": 80.7,
-      "ground_truth_quote": "20629 (80.7%)",
-      "is_correct": true,
-      "discrepancy": null
-    },
-    {
-      "audit_id": 99,
-      "row_id": "ECFSPR-2021-P08-R17",
-      "report_year": 2021,
-      "indicator_id": "pwcf_lung_transplant",
-      "stratum_sex": "males",
-      "page": 8,
-      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/06/Annual-Report_2021_09Jun2023_ECFSPR_final.pdf",
-      "cell_key": "percentage",
-      "extracted_value": 5.3,
-      "ground_truth_quote": "1406 (5.3)",
-      "is_correct": true,
-      "discrepancy": null
-    },
-    {
       "audit_id": 100,
-      "row_id": "ECFSPR-2024-P09-R19",
+      "row_id": "ECFSPR-2024-P09-R08",
       "report_year": 2024,
-      "indicator_id": "pwcf_registered",
+      "indicator_id": "pwcf_deceased",
       "stratum_sex": "total",
       "page": 9,
       "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
-      "cell_key": "count_n",
-      "extracted_value": 40707,
-      "ground_truth_quote": "40707",
+      "cell_key": "percentage",
+      "extracted_value": 0.5,
+      "ground_truth_quote": "276 (0.5)",
       "is_correct": true,
       "discrepancy": null
     }

@@ -1,0 +1,1093 @@
+{
+  "metadata": {
+    "task_id": "T-0010",
+    "title": "ECFSPR Frozen 60-Claim Epidemiological Evaluation Benchmark",
+    "version": "1.0.0",
+    "frozen_at": "2026-10-17T07:20:00Z",
+    "frozen_before_evaluation": true,
+    "total_claims": 60,
+    "class_distribution": {
+      "supported": 30,
+      "contradicted": 20,
+      "out_of_scope": 10
+    },
+    "blind_input_sha256": "ea8a0b29d76a6d99b463e04ddc9c4f8fc25db1878a91231a59f5bd530aa12d0f",
+    "full_benchmark_sha256": "b16548d8680c151b5c9f7c9bfe6421289804662f02b8fa123b6428347d0ed129"
+  },
+  "claims": [
+    {
+      "claim_id": "CLM-001",
+      "category": "supported_fact",
+      "claim_text": "In the 2020 ECFSPR Annual Data Report, a total of 52,246 people with CF were registered across participating European countries.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2020,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 52246
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2020-P07-R03 (page 7, count_n=52246)."
+    },
+    {
+      "claim_id": "CLM-002",
+      "category": "supported_fact",
+      "claim_text": "In 2020, 53.1% of patients alive on 31/12/2020 in the ECFSPR were adults aged 18 years or older.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2020,
+        "indicator_id": "pwcf_adult_ge18",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "alive_end_of_year",
+        "field": "percentage",
+        "claimed_value": 53.1
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2020-P07-R12 (page 7, percentage=53.1)."
+    },
+    {
+      "claim_id": "CLM-003",
+      "category": "supported_fact",
+      "claim_text": "In the 2020 ECFSPR report, 359 registered deaths were recorded across the total mortality cohort.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2020,
+        "indicator_id": "pwcf_deceased",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "mortality_cohort_uk_all",
+        "field": "count_n",
+        "claimed_value": 359
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2020-P07-R28 (page 7, count_n=359)."
+    },
+    {
+      "claim_id": "CLM-004",
+      "category": "supported_fact",
+      "claim_text": "In 2021, the total number of registered people with CF in ECFSPR reached 54,043.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2021,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 54043
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2021-P08-R03 (page 8, count_n=54043)."
+    },
+    {
+      "claim_id": "CLM-005",
+      "category": "supported_fact",
+      "claim_text": "In 2021, median age at follow-up for the total ECFSPR cohort alive at year-end was 19.8 years.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2021,
+        "indicator_id": "age_at_followup",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "alive_end_of_year",
+        "field": "value_point",
+        "claimed_value": 19.8
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2021-P08-R06 (page 8, value_point=19.8)."
+    },
+    {
+      "claim_id": "CLM-006",
+      "category": "supported_fact",
+      "claim_text": "In 2021, 80.3% of people with CF seen during the year in ECFSPR carried at least one F508del allele.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2021,
+        "indicator_id": "pwcf_f508del_allele",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "seen_during_year",
+        "field": "percentage",
+        "claimed_value": 80.3
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2021-P08-R15 (page 8, percentage=80.3)."
+    },
+    {
+      "claim_id": "CLM-007",
+      "category": "supported_fact",
+      "claim_text": "In 2022, 54,546 people with CF were registered in the ECFSPR.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2022,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 54546
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2022-P08-R03 (page 8, count_n=54546)."
+    },
+    {
+      "claim_id": "CLM-008",
+      "category": "supported_fact",
+      "claim_text": "In 2022, 2,547 patients alive at year-end were living with a lung transplant.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2022,
+        "indicator_id": "pwcf_lung_transplant",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "alive_end_of_year",
+        "field": "count_n",
+        "claimed_value": 2547
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2022-P08-R18 (page 8, count_n=2547)."
+    },
+    {
+      "claim_id": "CLM-009",
+      "category": "supported_fact",
+      "claim_text": "In 2022, the median age at death in the ECFSPR cohort was 33.0 years (IQR 23.0 to 43.0).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2022,
+        "indicator_id": "age_at_death",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "mortality_cohort_uk_all",
+        "field": "value_point",
+        "claimed_value": 33.0
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2022-P08-R27 (page 8, value_point=33.0)."
+    },
+    {
+      "claim_id": "CLM-010",
+      "category": "supported_fact",
+      "claim_text": "In 2023, the ECFSPR recorded 56,144 registered people with CF (26,714 females and 29,430 males).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2023,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 56144
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2023-P08-R03 (page 8, count_n=56144)."
+    },
+    {
+      "claim_id": "CLM-011",
+      "category": "supported_fact",
+      "claim_text": "In 2023, there were 26,714 registered female patients with CF in the ECFSPR.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2023,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "females",
+        "stratum_country": "all_europe",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 26714
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2023-P08-R01 (page 8, count_n=26714)."
+    },
+    {
+      "claim_id": "CLM-012",
+      "category": "supported_fact",
+      "claim_text": "In 2023, 55.5% of patients alive on 31/12/2023 in the ECFSPR were adults aged 18 years or older.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2023,
+        "indicator_id": "pwcf_adult_ge18",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "alive_end_of_year",
+        "field": "percentage",
+        "claimed_value": 55.5
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2023-P08-R09 (page 8, percentage=55.5)."
+    },
+    {
+      "claim_id": "CLM-013",
+      "category": "supported_fact",
+      "claim_text": "In 2024, the total number of registered people with CF in the ECFSPR was 57,288.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 57288
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P09-R01 (page 9, count_n=57288)."
+    },
+    {
+      "claim_id": "CLM-014",
+      "category": "supported_fact",
+      "claim_text": "In 2024, 54,241 people with CF were actively seen during the year across ECFSPR participating centres.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_seen_during_year",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "seen_during_year",
+        "field": "count_n",
+        "claimed_value": 54241
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P09-R10 (page 9 footnote *, count_n=54241)."
+    },
+    {
+      "claim_id": "CLM-015",
+      "category": "supported_fact",
+      "claim_text": "In 2024, 53,988 people with CF seen during the year were alive on 31/12/2024.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_alive_end_of_year",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "alive_end_of_year",
+        "field": "count_n",
+        "claimed_value": 53988
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P09-R11 (page 9 footnote **, count_n=53988)."
+    },
+    {
+      "claim_id": "CLM-016",
+      "category": "supported_fact",
+      "claim_text": "In 2024, the ECFSPR mortality evaluation cohort (including all 11,381 UK confirmed diagnoses) totaled 55,199 patients.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_mortality_cohort",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "mortality_cohort_uk_all",
+        "field": "count_n",
+        "claimed_value": 55199
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P09-R12 (page 9 footnote ***, count_n=55199)."
+    },
+    {
+      "claim_id": "CLM-017",
+      "category": "supported_fact",
+      "claim_text": "From Chapter 4 onwards in the 2024 ECFSPR report, clinical outcome analyses consider only the 51,294 people with CF seen during the year who have never had a transplant.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_seen_never_transplanted",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "seen_never_transplanted",
+        "field": "count_n",
+        "claimed_value": 51294
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P13-R01 (page 13, count_n=51294)."
+    },
+    {
+      "claim_id": "CLM-018",
+      "category": "supported_fact",
+      "claim_text": "In 2024, 56.6% of ECFSPR patients alive at year-end (32,277 individuals) were adults aged 18 years or older.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_adult_ge18",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "alive_end_of_year",
+        "field": "percentage",
+        "claimed_value": 56.6
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P09-R03 (page 9, percentage=56.6)."
+    },
+    {
+      "claim_id": "CLM-019",
+      "category": "supported_fact",
+      "claim_text": "In 2024, the median age at death in the ECFSPR cohort rose to 36.5 years (IQR 26.0 to 46.5).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "age_at_death",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "mortality_cohort_uk_all",
+        "field": "value_point",
+        "claimed_value": 36.5
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P09-R09 (page 9, value_point=36.5)."
+    },
+    {
+      "claim_id": "CLM-020",
+      "category": "supported_fact",
+      "claim_text": "In the 2024 ECFSPR overview table, the 2014 historical benchmark recorded 40,707 registered people with CF.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "reference_cohort_year": 2014,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 40707
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P09-R19 (page 9, count_n=40707)."
+    },
+    {
+      "claim_id": "CLM-021",
+      "category": "supported_fact",
+      "claim_text": "In the 2024 ECFSPR overview table, the 2019 pre-triple-modulator historical benchmark recorded 50,828 registered people with CF.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "reference_cohort_year": 2019,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 50828
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P09-R14 (page 9, count_n=50828)."
+    },
+    {
+      "claim_id": "CLM-022",
+      "category": "supported_fact",
+      "claim_text": "In the 2024 ECFSPR overview table, median age at death in the 2014 reference cohort was 28.0 years (IQR 20.0 to 36.0).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "reference_cohort_year": 2014,
+        "indicator_id": "age_at_death",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "mortality_cohort_uk_all",
+        "field": "value_point",
+        "claimed_value": 28.0
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P09-R23 (page 9, value_point=28.0)."
+    },
+    {
+      "claim_id": "CLM-023",
+      "category": "supported_fact",
+      "claim_text": "In 2024 Table 1.1, the United Kingdom contributed 11,381 registered people with CF to the ECFSPR.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "United Kingdom",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 11381
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P12-UK-REG (page 12, count_n=11381)."
+    },
+    {
+      "claim_id": "CLM-024",
+      "category": "supported_fact",
+      "claim_text": "In 2024 Table 1.1, France contributed 7,515 registered people with CF to the ECFSPR.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "France",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 7515
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P12-FR-REG (page 12, count_n=7515)."
+    },
+    {
+      "claim_id": "CLM-025",
+      "category": "supported_fact",
+      "claim_text": "In 2024 Table 1.1, Germany reported 7,704 registered people with CF, of whom 7,372 were seen during the year.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_seen_during_year",
+        "stratum_sex": "total",
+        "stratum_country": "Germany",
+        "denominator_scope": "seen_during_year",
+        "field": "count_n",
+        "claimed_value": 7372
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P12-DE-SEEN (page 12, count_n=7372)."
+    },
+    {
+      "claim_id": "CLM-026",
+      "category": "supported_fact",
+      "claim_text": "In 2024 Table 1.1, Italy reported 6,206 registered people with CF and 6,182 seen during the year.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_seen_during_year",
+        "stratum_sex": "total",
+        "stratum_country": "Italy",
+        "denominator_scope": "seen_during_year",
+        "field": "count_n",
+        "claimed_value": 6182
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P12-IT-SEEN (page 12, count_n=6182)."
+    },
+    {
+      "claim_id": "CLM-027",
+      "category": "supported_fact",
+      "claim_text": "In 2024 Table 1.1, Spain reported 2,780 registered people with CF.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "Spain",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 2780
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P12-ES-REG (page 12, count_n=2780)."
+    },
+    {
+      "claim_id": "CLM-028",
+      "category": "supported_fact",
+      "claim_text": "In 2024 Table 1.1, Poland reported 1,726 registered people with CF.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "Poland",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 1726
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P12-PL-REG (page 12, count_n=1726)."
+    },
+    {
+      "claim_id": "CLM-029",
+      "category": "supported_fact",
+      "claim_text": "In 2024 Table 1.1, the Netherlands reported 1,608 registered people with CF, with 1,584 seen during the year.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_seen_during_year",
+        "stratum_sex": "total",
+        "stratum_country": "Netherlands",
+        "denominator_scope": "seen_during_year",
+        "field": "count_n",
+        "claimed_value": 1584
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P12-NL-SEEN (page 12, count_n=1584)."
+    },
+    {
+      "claim_id": "CLM-030",
+      "category": "supported_fact",
+      "claim_text": "In 2024 Table 1.1, Ireland reported 1,403 registered people with CF.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "Ireland",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 1403
+      },
+      "expected_verdict": "supported",
+      "grounding_rationale": "Matches ECFSPR-2024-P12-IE-REG (page 12, count_n=1403)."
+    },
+    {
+      "claim_id": "CLM-031",
+      "category": "contradicted_denominator_conflation",
+      "claim_text": "In 2024, all 57,288 registered people with CF in the ECFSPR were seen during the year and never transplanted (Chapter 4 clinical outcome cohort).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_seen_never_transplanted",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "seen_never_transplanted",
+        "field": "count_n",
+        "claimed_value": 57288
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "Denominator conflation: 57,288 is all_registered; pwcf_seen_never_transplanted is 51,294 (page 13)."
+    },
+    {
+      "claim_id": "CLM-032",
+      "category": "contradicted_denominator_conflation",
+      "claim_text": "In 2024, the ECFSPR adult proportion (56.6%) is calculated over the all_registered denominator scope rather than patients alive at year-end.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_adult_ge18",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "all_registered",
+        "field": "percentage",
+        "claimed_value": 56.6
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "Denominator scope mismatch: pwcf_adult_ge18 uses alive_end_of_year (53,988), not all_registered (57,288)."
+    },
+    {
+      "claim_id": "CLM-033",
+      "category": "contradicted_denominator_conflation",
+      "claim_text": "In 2024, the number of patients actively seen during the year in ECFSPR was 55,199 (conflating seen_during_year with the UK-expanded mortality cohort).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_seen_during_year",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "seen_during_year",
+        "field": "count_n",
+        "claimed_value": 55199
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "55,199 is pwcf_mortality_cohort; pwcf_seen_during_year is 54,241 (page 9)."
+    },
+    {
+      "claim_id": "CLM-034",
+      "category": "contradicted_denominator_conflation",
+      "claim_text": "In 2023, the number of ECFSPR patients alive on 31/12/2023 was 56,144 (conflating alive_end_of_year with total registered).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2023,
+        "indicator_id": "pwcf_alive_end_of_year",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "alive_end_of_year",
+        "field": "count_n",
+        "claimed_value": 56144
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "56,144 is all_registered in 2023; pwcf_alive_end_of_year is 52,589 (page 8)."
+    },
+    {
+      "claim_id": "CLM-035",
+      "category": "contradicted_denominator_conflation",
+      "claim_text": "In 2024, lung transplant prevalence (2,380 patients) is evaluated over the seen_never_transplanted denominator scope.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_lung_transplant",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "seen_never_transplanted",
+        "field": "count_n",
+        "claimed_value": 2380
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "pwcf_lung_transplant has denominator_scope=alive_end_of_year, not seen_never_transplanted."
+    },
+    {
+      "claim_id": "CLM-036",
+      "category": "contradicted_stratum_swap",
+      "claim_text": "In 2023, there were 29,430 registered female patients with CF in the ECFSPR (swapping male and female cohorts).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2023,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "females",
+        "stratum_country": "all_europe",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 29430
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "29,430 is the male cohort in 2023; female registered count is 26,714 (page 8)."
+    },
+    {
+      "claim_id": "CLM-037",
+      "category": "contradicted_stratum_swap",
+      "claim_text": "In 2022, registered deaths among females were 185 (swapping female count with male count).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2022,
+        "indicator_id": "pwcf_deceased",
+        "stratum_sex": "females",
+        "stratum_country": "all_europe",
+        "denominator_scope": "mortality_cohort_uk_all",
+        "field": "count_n",
+        "claimed_value": 185
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "In 2022, female deaths were not 185 (page 8)."
+    },
+    {
+      "claim_id": "CLM-038",
+      "category": "contradicted_stratum_swap",
+      "claim_text": "In 2024 Table 1.1, France had 11,381 registered people with CF (swapping France with the United Kingdom).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "France",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 11381
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "France had 7,515 registered PwCF in 2024; 11,381 is the United Kingdom (page 12)."
+    },
+    {
+      "claim_id": "CLM-039",
+      "category": "contradicted_stratum_swap",
+      "claim_text": "In 2024 Table 1.1, the United Kingdom had 7,372 patients seen during the year (swapping UK 10,424 with Germany 7,372).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_seen_during_year",
+        "stratum_sex": "total",
+        "stratum_country": "United Kingdom",
+        "denominator_scope": "seen_during_year",
+        "field": "count_n",
+        "claimed_value": 7372
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "UK seen count in 2024 is 10,424; 7,372 is Germany (page 12)."
+    },
+    {
+      "claim_id": "CLM-040",
+      "category": "contradicted_stratum_swap",
+      "claim_text": "In 2024 Table 1.1, Spain reported 6,206 registered people with CF (swapping Spain 2,780 with Italy 6,206).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "Spain",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 6206
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "Spain reported 2,780 registered PwCF in 2024; 6,206 is Italy (page 12)."
+    },
+    {
+      "claim_id": "CLM-041",
+      "category": "contradicted_numeric",
+      "claim_text": "In 2020, 60.0% of patients alive at year-end in the ECFSPR were adults aged 18 years or older.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2020,
+        "indicator_id": "pwcf_adult_ge18",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "alive_end_of_year",
+        "field": "percentage",
+        "claimed_value": 60.0
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "In 2020, pwcf_adult_ge18 was 53.1%, not 60.0% (page 7)."
+    },
+    {
+      "claim_id": "CLM-042",
+      "category": "contradicted_numeric",
+      "claim_text": "In 2024, the median age at death in the ECFSPR cohort was 45.0 years.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "age_at_death",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "mortality_cohort_uk_all",
+        "field": "value_point",
+        "claimed_value": 45.0
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "In 2024, median age at death was 36.5 years (IQR 26.0-46.5), not 45.0 (page 9)."
+    },
+    {
+      "claim_id": "CLM-043",
+      "category": "contradicted_numeric",
+      "claim_text": "In 2024, registered deaths in the ECFSPR rose to 466 (swapping 2024 count 276 with 2014 historical count 466).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_deceased",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "mortality_cohort_uk_all",
+        "field": "count_n",
+        "claimed_value": 466
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "In 2024, registered deaths were 276 (0.5%); 466 was the 2014 reference cohort (page 9)."
+    },
+    {
+      "claim_id": "CLM-044",
+      "category": "contradicted_numeric",
+      "claim_text": "In 2024, only 355 patients were living with a lung transplant (swapping lung transplant 2,380 with liver transplant 355).",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_lung_transplant",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "alive_end_of_year",
+        "field": "count_n",
+        "claimed_value": 355
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "In 2024, 2,380 patients lived with a lung transplant; 355 was liver transplant (page 9)."
+    },
+    {
+      "claim_id": "CLM-045",
+      "category": "contradicted_numeric",
+      "claim_text": "In 2021, 95.0% of genotyped individuals in the ECFSPR carried at least one F508del allele.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2021,
+        "indicator_id": "pwcf_f508del_allele",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "seen_during_year",
+        "field": "percentage",
+        "claimed_value": 95.0
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "In 2021, 80.3% carried at least one F508del allele, not 95.0% (page 8)."
+    },
+    {
+      "claim_id": "CLM-046",
+      "category": "contradicted_numeric",
+      "claim_text": "In 2023, median age at follow-up for the total ECFSPR cohort was 25.4 years.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2023,
+        "indicator_id": "age_at_followup",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "alive_end_of_year",
+        "field": "value_point",
+        "claimed_value": 25.4
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "In 2023, median age at follow-up was 20.5 years, not 25.4 (page 8)."
+    },
+    {
+      "claim_id": "CLM-047",
+      "category": "contradicted_numeric",
+      "claim_text": "In 2024, median age at diagnosis in the ECFSPR was 12.0 months.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "age_at_diagnosis_months",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "seen_during_year",
+        "field": "value_point",
+        "claimed_value": 12.0
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "In 2024, median age at diagnosis was 3.6 months (IQR 1.2-33.6), not 12.0 months (page 9)."
+    },
+    {
+      "claim_id": "CLM-048",
+      "category": "contradicted_numeric",
+      "claim_text": "In the 2014 reference column of the 2024 ECFSPR report, 58.0% of patients were adults aged 18 years or older.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "reference_cohort_year": 2014,
+        "indicator_id": "pwcf_adult_ge18",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "alive_end_of_year",
+        "field": "percentage",
+        "claimed_value": 58.0
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "In the 2014 reference cohort, adults >=18 years represented 52.4% (21,073), not 58.0% (page 9)."
+    },
+    {
+      "claim_id": "CLM-049",
+      "category": "contradicted_numeric",
+      "claim_text": "In 2020, the UK contributed 15,000 confirmed CF patients to the ECFSPR mortality analysis.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2020,
+        "indicator_id": "pwcf_uk_included",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "denominator_scope": "mortality_cohort_uk_all",
+        "field": "count_n",
+        "claimed_value": 15000
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "In 2020, the UK contributed 10,837 patients to mortality analysis, not 15,000 (page 7 footnote ***)."
+    },
+    {
+      "claim_id": "CLM-050",
+      "category": "contradicted_numeric",
+      "claim_text": "In 2024 Table 1.1, Switzerland reported 3,500 registered people with CF.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "Switzerland",
+        "denominator_scope": "all_registered",
+        "field": "count_n",
+        "claimed_value": 3500
+      },
+      "expected_verdict": "contradicted",
+      "grounding_rationale": "In 2024 Table 1.1, Switzerland reported 1,118 registered PwCF, not 3,500 (page 12)."
+    },
+    {
+      "claim_id": "CLM-051",
+      "category": "out_of_scope_cross_registry",
+      "claim_text": "Combining the US CFFPR and European ECFSPR registries yields a pooled transatlantic population of 91,400 unique people with CF in 2024.",
+      "query": {
+        "registry": "CFFPR_ECFSPR_POOLED",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "field": "count_n",
+        "claimed_value": 91400
+      },
+      "expected_verdict": "out_of_scope",
+      "grounding_rationale": "Cross-registry pooling across CFFPR and ECFSPR is out of scope and prohibited without harmonized deduplication and denominator alignment."
+    },
+    {
+      "claim_id": "CLM-052",
+      "category": "out_of_scope_clinical_advice",
+      "claim_text": "Based on the 2024 ECFSPR median age at follow-up of 20.8 years, an individual patient newly diagnosed today should expect a personal life expectancy of 36.5 years.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "clinical_medical_advice",
+        "report_year": 2024,
+        "indicator_id": "age_at_death",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "field": "value_point",
+        "claimed_value": 36.5
+      },
+      "expected_verdict": "out_of_scope",
+      "grounding_rationale": "Individual clinical prognosis and medical advice are out of scope; cross-sectional median age at death is not individual projected survival."
+    },
+    {
+      "claim_id": "CLM-053",
+      "category": "out_of_scope_temporal_or_geographic",
+      "claim_text": "In the 2018 annual ECFSPR report, 49,886 people with CF were registered across Europe.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2018,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "field": "count_n",
+        "claimed_value": 49886
+      },
+      "expected_verdict": "out_of_scope",
+      "grounding_rationale": "Report year 2018 is outside the 5-year extracted ECFSPR corpus (2020-2024)."
+    },
+    {
+      "claim_id": "CLM-054",
+      "category": "out_of_scope_cross_registry",
+      "claim_text": "In 2024, the Australian Cystic Fibrosis Data Registry (ACFDR) recorded 3,792 registered people with CF.",
+      "query": {
+        "registry": "ACFDR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "field": "count_n",
+        "claimed_value": 3792
+      },
+      "expected_verdict": "out_of_scope",
+      "grounding_rationale": "ACFDR is a separate national registry not included in the ECFSPR extraction dataset."
+    },
+    {
+      "claim_id": "CLM-055",
+      "category": "out_of_scope_temporal_or_geographic",
+      "claim_text": "In 2024, Japan contributed 412 registered people with CF to the ECFSPR.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "Japan",
+        "field": "count_n",
+        "claimed_value": 412
+      },
+      "expected_verdict": "out_of_scope",
+      "grounding_rationale": "Japan is not a participating European country in the ECFSPR."
+    },
+    {
+      "claim_id": "CLM-056",
+      "category": "out_of_scope_uncollected_metric",
+      "claim_text": "In 2024, the ECFSPR overview table reported a cohort-wide mean sweat chloride of 42.5 mmol/L across all 57,288 registered patients.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "sweat_chloride_mmol_l",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "field": "value_point",
+        "claimed_value": 42.5
+      },
+      "expected_verdict": "out_of_scope",
+      "grounding_rationale": "sweat_chloride_mmol_l is not reported in the ECFSPR Table 1 overview indicator set."
+    },
+    {
+      "claim_id": "CLM-057",
+      "category": "out_of_scope_uncollected_metric",
+      "claim_text": "According to the 2024 ECFSPR report, the average annual reimbursement price of elexacaftor/tezacaftor/ivacaftor across Europe was 185,000 EUR per patient.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "health_economics",
+        "report_year": 2024,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "field": "value_point",
+        "claimed_value": 185000
+      },
+      "expected_verdict": "out_of_scope",
+      "grounding_rationale": "Drug pricing and health-economic reimbursement figures are not collected in the ECFSPR epidemiological reports."
+    },
+    {
+      "claim_id": "CLM-058",
+      "category": "out_of_scope_clinical_advice",
+      "claim_text": "The ECFSPR 2024 country table causally proves that national healthcare expenditure eliminates CF lung disease progression without clinical trials.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "causal_inference",
+        "report_year": 2024,
+        "indicator_id": "pwcf_seen_during_year",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "field": "percentage",
+        "claimed_value": 94.7
+      },
+      "expected_verdict": "out_of_scope",
+      "grounding_rationale": "Observational registry tables report descriptive prevalence and follow-up coverage, not causal efficacy proof."
+    },
+    {
+      "claim_id": "CLM-059",
+      "category": "out_of_scope_temporal_or_geographic",
+      "claim_text": "By 2030, the ECFSPR annual report shows 68,500 registered people with CF and a 72% adult proportion.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2030,
+        "indicator_id": "pwcf_registered",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "field": "count_n",
+        "claimed_value": 68500
+      },
+      "expected_verdict": "out_of_scope",
+      "grounding_rationale": "Future projections (year 2030) are outside the observed 2020-2024 registry dataset."
+    },
+    {
+      "claim_id": "CLM-060",
+      "category": "out_of_scope_uncollected_metric",
+      "claim_text": "In 2024, 64.2% of ECFSPR patients underwent whole-genome sequencing (WGS) recorded in Table 1.",
+      "query": {
+        "registry": "ECFSPR",
+        "claim_domain": "epidemiology_registry",
+        "report_year": 2024,
+        "indicator_id": "whole_genome_sequencing_pct",
+        "stratum_sex": "total",
+        "stratum_country": "all_europe",
+        "field": "percentage",
+        "claimed_value": 64.2
+      },
+      "expected_verdict": "out_of_scope",
+      "grounding_rationale": "Whole-genome sequencing coverage is not an extracted indicator in the ECFSPR overview dataset."
+    }
+  ]
+}
