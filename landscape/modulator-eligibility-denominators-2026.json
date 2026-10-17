@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "title": "Definitions ledger for CFTR modulator-eligibility denominators (2020-2026)",
+    "date": "2026-10-17",
+    "description": "Quote-checked registry and regulator eligibility definitions after the 03/2026 FDA label update and July 2026 EMA decisions. Zero cross-registry arithmetic.",
+    "task_id": "T-0134"
+  },
+  "regulator_labels": [
+    {
+      "regulator": "EMA",
+      "brand_name": "Kaftrio",
+      "nonproprietary_name": "elexacaftor / tezacaftor / ivacaftor",
+      "application_id": "EMEA/H/C/005269",
+      "initial_approval_date": "2020-08-21",
+      "decision_or_update_date": "2026-07-23",
+      "age_rule": "paediatric patients aged 2 to less than 6 years; patients aged 6 years and older",
+      "variant_rule": "at least one non-Class I mutation in the cystic fibrosis transmembrane conductance regulator (CFTR) gene",
+      "exact_eligibility_wording": "Kaftrio tablets are indicated in a combination regimen with ivacaftor for the treatment of cystic fibrosis (CF) in patients aged 6 years and older who have at least one non-Class I mutation in the cystic fibrosis transmembrane conductance regulator (CFTR) gene. Kaftrio granules are indicated in a combination regimen with ivacaftor for the treatment of cystic fibrosis (CF) in paediatric patients aged 2 to less than 6 years who have at least one non-Class I mutation in the cystic fibrosis transmembrane conductance regulator (CFTR) gene.",
+      "source_citation": "EMA Medicines Data JSON Report (EMEA/H/C/005269, updated 2026-08-19, European Commission decision 2026-07-23)"
+    },
+    {
+      "regulator": "EMA",
+      "brand_name": "Alyftrek",
+      "nonproprietary_name": "vanzacaftor / tezacaftor / deutivacaftor",
+      "application_id": "EMEA/H/C/006382",
+      "initial_approval_date": "2025-06-30",
+      "decision_or_update_date": "2026-07-23",
+      "age_rule": "people aged 6 years and older",
+      "variant_rule": "at least one non-Class I mutation in the cystic fibrosis transmembrane conductance regulator (CFTR) gene",
+      "exact_eligibility_wording": "Alyftrek tablets are indicated for the treatment of cystic fibrosis (CF) in people aged 6 years and older who have at least one non-Class I mutation in the cystic fibrosis transmembrane conductance regulator (CFTR) gene (see sections 4.2 and 5.1).",
+      "source_citation": "EMA Medicines Data JSON Report (EMEA/H/C/006382, updated 2026-08-19, European Commission decision 2026-07-23)"
+    },
+    {
+      "regulator": "FDA",
+      "brand_name": "Trikafta",
+      "nonproprietary_name": "elexacaftor / tezacaftor / ivacaftor",
+      "application_id": "NDA 212273 / NDA 217660",
+      "initial_approval_date": "2019-10-21",
+      "decision_or_update_date": "2026-06-22 (Indications and Usage major change 03/2026)",
+      "age_rule": "adult and pediatric patients aged 2 years and older",
+      "variant_rule": "at least one variant in the CFTR gene that is either responsive based on clinical and/or in vitro data (see Table 6) or results in production of CFTR protein",
+      "exact_eligibility_wording": "TRIKAFTA is indicated for the treatment of cystic fibrosis (CF) in adult and pediatric patients aged 2 years and older who have a clinical diagnosis of CF and who have at least one variant in the cystic fibrosis transmembrane conductance regulator ( CFTR ) gene that is either responsive based on clinical and/or in vitro data (see Table 6 ) or results in production of CFTR protein [see Clinical Pharmacology (12.1) ] .",
+      "source_citation": "openFDA Drug Label API (NDA212273 / NDA217660, SPL id b63ac090-8d8b-43a0-82d1-558127f2d598, effective_time 20260622, Indications and Usage 03/2026)"
+    },
+    {
+      "regulator": "FDA",
+      "brand_name": "Alyftrek",
+      "nonproprietary_name": "vanzacaftor / tezacaftor / deutivacaftor",
+      "application_id": "NDA 218730",
+      "initial_approval_date": "2024-12-20",
+      "decision_or_update_date": "2026-08-26 (Indications and Usage major change 03/2026)",
+      "age_rule": "adult and pediatric patients 6 years of age and older",
+      "variant_rule": "at least one variant in the CFTR gene that is either responsive based on clinical and/or in vitro data (see Table 5) or results in production of CFTR protein",
+      "exact_eligibility_wording": "ALYFTREK is indicated for the treatment of cystic fibrosis (CF) in adult and pediatric patients 6 years of age and older who have a clinical diagnosis of CF and who have at least one variant in the cystic fibrosis transmembrane conductance regulator ( CFTR ) gene that is either responsive based on clinical and/or in vitro data (see Table 5 ) or results in production of CFTR protein [see Clinical Pharmacology (12.1) ].",
+      "source_citation": "openFDA Drug Label API (NDA218730, SPL id fe5c4f96-377c-455b-896c-4886c10d5098, effective_time 20260826, Indications and Usage 03/2026)"
+    }
+  ],
+  "registry_reports": [
+    {
+      "registry_id": "ecfspr-adr-2020",
+      "report_year": 2022,
+      "data_year": 2020,
+      "base_population": "Eligible patients seen in 2020 in ECFSPR participating countries who had never had a transplant",
+      "age_rule": "12 years or older",
+      "variant_list_and_date": "F508del homozygous or F508del heterozygous (2020 EMA criteria)",
+      "page": 133,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/06/ECFSPR_Report_2020_v1.0-07Jun2022_website.pdf",
+      "short_quote": "The patient is 12 years or older and is F508del homozygous or F508del heterozygous."
+    },
+    {
+      "registry_id": "ecfspr-adr-2021",
+      "report_year": 2023,
+      "data_year": 2021,
+      "base_population": "Patients in ECFSPR participating countries with 2021 follow-up",
+      "age_rule": "12 years or older (no age limitation in Israel; up to 18 years in the Russian Federation)",
+      "variant_list_and_date": "F508del homozygous or F508del heterozygous (2021 EMA criteria)",
+      "page": 121,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/06/Annual-Report_2021_09Jun2023_ECFSPR_final.pdf",
+      "short_quote": "to 18 years in the Russian Federation) and is F508del homozygous or F508del heterozygous."
+    },
+    {
+      "registry_id": "ecfspr-adr-2022",
+      "report_year": 2025,
+      "data_year": 2022,
+      "base_population": "Patients in ECFSPR participating countries with 2022 follow-up",
+      "age_rule": "at least 6 years old",
+      "variant_list_and_date": "at least one F508del variant (2022 EMA criteria)",
+      "page": 103,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/06/Annual-Report_2022_vs1.0_ECFSPR_20250130.pdf",
+      "short_quote": "at least 6 years old and have at least one F508del variant."
+    },
+    {
+      "registry_id": "ecfspr-adr-2023",
+      "report_year": 2025,
+      "data_year": 2023,
+      "base_population": "Patients in ECFSPR participating countries with 2023 follow-up",
+      "age_rule": "at least 2 years old (6 years old in Switzerland and in Russia, 12 years old in Israel)",
+      "variant_list_and_date": "at least one F508del variant (2023 EMA criteria)",
+      "page": 100,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2025/08/Annual-Report_2023_vs1.1_ECFSPR_20250715.pdf",
+      "short_quote": "(6 years old in Switzerland and in Russia, 12 years old in Israel) and have at least one F508del variant"
+    },
+    {
+      "registry_id": "ecfspr-adr-2024",
+      "report_year": 2026,
+      "data_year": 2024,
+      "base_population": "Patients in ECFSPR participating countries with 2024 follow-up",
+      "age_rule": "at least 2 years old (6 years old in Israel and in the Russian Federation)",
+      "variant_list_and_date": "at least one F508del variant (2024 EMA criteria)",
+      "page": 81,
+      "url": "https://pr.ecfs.eu/wp-content/uploads/2026/05/Annual-Report_2024_vs1.0_ECFSPR_20260518.pdf",
+      "short_quote": "at least 2 years old (6 years old in Israel and in the Russian Federation) with at least one F508del variant"
+    },
+    {
+      "registry_id": "cffpr-adr-2024",
+      "report_year": 2025,
+      "data_year": 2024,
+      "base_population": "Patients with CF seen at CFF-accredited care centers in the United States in 2024",
+      "age_rule": "eligible for a CFTR modulator based on age and genotype",
+      "variant_list_and_date": "FDA-approved responsive variants as of 2024 (VTD sole-eligible categorized as modulator ineligible in 2024 charts)",
+      "page": 58,
+      "url": "https://www.cff.org/medical-professionals/patient-registry",
+      "short_quote": "people eligible for a CFTR modulator based on age and genotype had at least one prescription reported in the Registry."
+    }
+  ]
+}

@@ -14,7 +14,12 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
+HERE = Path(__file__).resolve().parent
+if str(HERE) not in sys.path:
+    sys.path.insert(0, str(HERE))
+
 import fetch_sources as fs
+
 
 CATALOG = """\
 schema_version: 1
@@ -299,6 +304,48 @@ class FetchSourcesTest(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn("nothing was verified", out)
 
+    # --- AI_AGENT_TOKENS robots.txt enforcement (T-0094 / T-0067) -----------------
+    def test_ai_agent_tokens_tuple_defined_with_expected_agents(self) -> None:
+        expected = {
+            "claude", "claudebot", "anthropic-ai", "gptbot",
+            "chatgpt-user", "ccbot", "google-extended", "perplexitybot",
+        }
+        self.assertTrue(hasattr(fs, "AI_AGENT_TOKENS"))
+        self.assertTrue(expected.issubset(set(fs.AI_AGENT_TOKENS)))
+
+    def test_disallowing_any_ai_agent_token_causes_robots_allows_to_return_false(self) -> None:
+        for token in fs.AI_AGENT_TOKENS:
+            body = f"""\
+User-agent: {token}
+Disallow: /
+
+User-agent: *
+Allow: /
+"""
+            self.assertFalse(
+                fs.robots_allows(body, "/test.pdf"),
+                f"robots_allows should return False when {token} is disallowed"
+            )
+
+    def test_allowing_all_tokens_returns_true(self) -> None:
+        body = """\
+User-agent: *
+Allow: /
+"""
+        self.assertTrue(fs.robots_allows(body, "/test.pdf"))
+
+    def test_disallowing_specific_path_for_ai_agent_token_only_blocks_that_path(self) -> None:
+        body = """\
+User-agent: ClaudeBot
+Disallow: /restricted/
+
+User-agent: *
+Allow: /
+"""
+        self.assertFalse(fs.robots_allows(body, "/restricted/report.pdf"))
+        self.assertTrue(fs.robots_allows(body, "/open/report.pdf"))
+
 
 if __name__ == "__main__":
     unittest.main()
+

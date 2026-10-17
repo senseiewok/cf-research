@@ -1,0 +1,131 @@
+[
+  {
+    "id": "ecfspr-2020-rule",
+    "claim": "In the 2020 ECFSPR report, the patient is 12 years or older and is F508del homozygous or F508del heterozygous.",
+    "source": "denom-ev",
+    "quote": "The eligibility criteria for Elexacaftor/Tezacaftor/Ivacaftor in 2020 are: The patient is 12 years or older and is F508del homozygous or F508del heterozygous.",
+    "kind": "observed"
+  },
+  {
+    "id": "ecfspr-2021-rule",
+    "claim": "In the 2021 ECFSPR report, the individual must be 12 years or older (no age limitation in Israel; up to 18 years in the Russian Federation) and is F508del homozygous or F508del heterozygous.",
+    "source": "denom-ev",
+    "quote": [
+      "The eligibility criteria for the CFTR modulators in 2021 in Europe are:",
+      "12 years or older (no age limitation in Israel; up to 18 years in the Russian Federation) and is F508del homozygous or F508del heterozygous."
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "ecfspr-2022-rule",
+    "claim": "In the 2022 ECFSPR report, elexacaftor/tezacaftor/ivacaftor eligibility required patients to be at least 6 years old and have at least one F508del variant.",
+    "source": "denom-ev",
+    "quote": "The eligibility criteria for the CFTR modulators in 2022 were: elexacaftor/tezacaftor/ivacaftor: at least 6 years old and have at least one F508del variant.",
+    "kind": "observed"
+  },
+  {
+    "id": "ecfspr-2023-rule",
+    "claim": "In the 2023 ECFSPR report, eligibility criteria specified patients at least 2 years old (6 years old in Switzerland and in Russia, 12 years old in Israel) and have at least one F508del variant.",
+    "source": "denom-ev",
+    "quote": [
+      "We adopted the 2023 eligibility criteria of the European Medicines Agency (EMA)",
+      "at least 2 years old (6 years old in Switzerland and in Russia, 12 years old in Israel) and have at least one F508del variant"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "ecfspr-2024-rule",
+    "claim": "In the 2024 ECFSPR report, eligibility criteria specified patients at least 2 years old (6 years old in Israel and in the Russian Federation) with at least one F508del variant.",
+    "source": "denom-ev",
+    "quote": [
+      "We adopted the 2024 eligibility criteria of the European Medicines Agency (EMA)",
+      "at least 2 years old (6 years old in Israel and in the Russian Federation) with at least one F508del variant"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "cffpr-genotype-eligibility",
+    "claim": "Overall, 92.3 percent of the total CF population in the Registry was eligible by CFTR genotype for at least one CFTR modulator as of 2024.",
+    "source": "denom-ev",
+    "quote": "Overall, 92.3 percent of the total CF population in the Registry was eligible by CFTR genotype for at least one CFTR modulator as of 2024.",
+    "kind": "observed"
+  },
+  {
+    "id": "cffpr-age-genotype-prescribed",
+    "claim": "In 2024, 26,277 of the 29,314 (89.6 percent) people eligible for a CFTR modulator based on age and genotype had at least one prescription reported in the Registry.",
+    "source": "denom-ev",
+    "quote": [
+      "In 2024, 26,277 of the 29,314 (89.6 percent) people eligible for a CFTR modulator",
+      "based on age and genotype had at least one prescription reported in the Registry."
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "cffpr-unprescribed-drop",
+    "claim": "The number of eligible individuals who were not prescribed a CFTR modulator fell from 3,065 (10.8 percent) in 2023 to 3,037 (10.4 percent) in 2024.",
+    "source": "denom-ev",
+    "quote": "The number of eligible individuals who were not prescribed a CFTR modulator fell from 3,065 (10.8 percent) in 2023 to 3,037 (10.4 percent) in 2024.",
+    "kind": "observed"
+  },
+  {
+    "id": "cffpr-rare-approval",
+    "claim": "On December 20, 2024, FDA approval of VTD for patients aged 6 years and older included 31 additional rare mutations, and 135 individuals became eligible for the first time.",
+    "source": "denom-ev",
+    "quote": [
+      "On December 20, 2024, the U.S. Food and Drug Administration (FDA)",
+      "aged 6 years and older with at least one F508del mutation or another responsive CFTR mutation, including 31 additional rare mutations",
+      "With this approval, 135 individuals in the Registry became eligible for a CFTR modulator for the first time."
+    ],
+    "kind": "observed",
+    "scope": "Page 58 of the CFFPR 2024 Annual Data Report was reviewed across newly eligible cohorts in its entirety."
+  },
+  {
+    "id": "cffpr-vtd-categorization",
+    "claim": "In the 2024 CFFPR report, individuals solely eligible for VTD are categorized as modulator ineligible in 2024.",
+    "source": "denom-ev",
+    "quote": [
+      "In the 2024 Annual Data Report, eligibility for the newly approved CFTR modulator, VTD, is not included",
+      "individuals who are solely eligible for VTD (and not other modulators) are categorized as modulator ineligible in 2024"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "ema-kaftrio-indication",
+    "claim": "EMA Kaftrio indications cover patients aged 6 years and older and paediatric patients aged 2 to less than 6 years who have at least one non-Class I mutation in the CFTR gene.",
+    "source": "denom-ev",
+    "quote": [
+      "patients aged 6 years and older who have at least one non-Class I mutation in the cystic fibrosis transmembrane conductance regulator (CFTR) gene.",
+      "paediatric patients aged 2 to less than 6 years who have at least one non-Class I mutation"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "ema-alyftrek-indication",
+    "claim": "EMA Alyftrek indications cover people aged 6 years and older who have at least one non-Class I mutation in the cystic fibrosis transmembrane conductance regulator (CFTR) gene.",
+    "source": "denom-ev",
+    "quote": "people aged 6 years and older who have at least one non-Class I mutation in the cystic fibrosis transmembrane conductance regulator (CFTR) gene",
+    "kind": "observed"
+  },
+  {
+    "id": "fda-trikafta-2026-indication",
+    "claim": "Following the 03/2026 label update, TRIKAFTA is indicated in patients aged 2 years and older who have at least one variant that is responsive or results in production of CFTR protein.",
+    "source": "denom-ev",
+    "quote": [
+      "recent_major_changes: Indications and Usage ( 1 ) 03/2026",
+      "patients aged 2 years and older who have a clinical diagnosis of CF",
+      "either responsive based on clinical and/or in vitro data (see Table 6 ) or results in production of CFTR protein"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "fda-alyftrek-2026-indication",
+    "claim": "Following the 03/2026 label update, ALYFTREK is indicated in patients 6 years of age and older who have at least one variant that is responsive or results in production of CFTR protein.",
+    "source": "denom-ev",
+    "quote": [
+      "recent_major_changes: Indications and Usage ( 1 ) 03/2026",
+      "patients 6 years of age and older who have a clinical diagnosis of CF",
+      "either responsive based on clinical and/or in vitro data (see Table 5 ) or results in production of CFTR protein"
+    ],
+    "kind": "observed"
+  }
+]

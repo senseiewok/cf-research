@@ -14,7 +14,10 @@ spec = importlib.util.spec_from_file_location("build_traces", ROOT / "build_trac
 bt = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(bt)
 DOWNLOADS = REPO / "sources" / "downloads"
+TRACKED_DATA = ROOT / "data"
+DATA_DIR = TRACKED_DATA if (TRACKED_DATA / "p13569.json").exists() else DOWNLOADS
 DATA_JS = ROOT / "web" / "cftr-data.js"
+
 
 
 def matmul(A, B):
@@ -90,12 +93,47 @@ class SecondaryStructureTests(unittest.TestCase):
         self.assertEqual(bt.secondary_structure([]), [])
 
 
-@unittest.skipUnless((DOWNLOADS / "p13569.json").exists(), "fetch the structure files first: python tools/sources/fetch_sources.py --only rcsb-pdb-6msm rcsb-pdb-5uak rcsb-pdb-8eiq rcsb-pdb-8ej1 uniprot-p13569 (see README.md)")
 class DataTests(unittest.TestCase):
+    EXPECTED_FILES = ("6MSM.cif.gz", "5UAK.cif.gz", "8EIQ.cif.gz", "8EJ1.cif.gz", "p13569.json")
+
     @classmethod
     def setUpClass(cls):
-        cls.data = bt.build(DOWNLOADS)
+        import hashlib
+        manifest_path = REPO / "sources" / "manifest.json"
+        if not manifest_path.is_file():
+            raise FileNotFoundError(f"Missing required manifest: {manifest_path}")
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        hashes = {f["filename"]: f["sha256"] for f in manifest.get("files", []) if f.get("filename") and f.get("sha256")}
+        verified = []
+        for fname in cls.EXPECTED_FILES:
+            if fname not in hashes:
+                raise KeyError(f"{fname} missing from sources/manifest.json")
+            fpath = DATA_DIR / fname
+            if not fpath.is_file():
+                raise FileNotFoundError(f"Missing required structure/sequence file: {fpath}")
+            digest = hashlib.sha256(fpath.read_bytes()).hexdigest()
+            if digest != hashes[fname]:
+                raise ValueError(f"Corrupt data file {fname}: {digest} != {hashes[fname]}")
+            verified.append(fname)
+        if len(verified) != 5:
+            raise AssertionError(f"Expected 5 verified files, got {len(verified)}")
+        cls.manifest_hashes = {k: hashes[k] for k in cls.EXPECTED_FILES}
+        cls.data = bt.build(DATA_DIR)
         cls.by_id = {s["id"]: s for s in cls.data["structures"]}
+
+    def test_attribution_matches_cif_citations_and_manifest_hashes(self):
+        attr_path = TRACKED_DATA / "ATTRIBUTION.md"
+        self.assertTrue(attr_path.is_file(), f"Missing {attr_path}")
+        attr_text = attr_path.read_text(encoding="utf-8")
+        for fname, digest in self.manifest_hashes.items():
+            self.assertIn(fname, attr_text)
+            self.assertIn(digest, attr_text)
+        for sid, st in self.by_id.items():
+            self.assertIn(st["title"], attr_text, f"{sid} title mismatch in ATTRIBUTION.md")
+            self.assertIn(st["deposited"], attr_text, f"{sid} deposited date mismatch in ATTRIBUTION.md")
+            self.assertIn(st["paper"], attr_text, f"{sid} paper title mismatch in ATTRIBUTION.md")
+            self.assertIn(st["journal"], attr_text, f"{sid} journal mismatch in ATTRIBUTION.md")
+            self.assertIn(st["pubmed"], attr_text, f"{sid} pubmed mismatch in ATTRIBUTION.md")
 
     def placed(self, sid):
         return {n for seg in self.by_id[sid]["segments"] for n in range(seg["start"], seg["start"] + len(seg["xyz"]) // 3)}
@@ -174,7 +212,7 @@ class DataTests(unittest.TestCase):
 
     def test_the_secondary_structure_is_uniprots_annotation_copied_whole(self):
         sec = self.data["uniprot"]["secondary"]
-        raw = json.loads((DOWNLOADS / "p13569.json").read_text(encoding="utf-8"))["features"]
+        raw = json.loads((DATA_DIR / "p13569.json").read_text(encoding="utf-8"))["features"]
         wanted = sorted(((bt.SECONDARY_TYPES[f["type"]], f["location"]["start"]["value"], f["location"]["end"]["value"]) for f in raw if f["type"] in bt.SECONDARY_TYPES),
                         key=lambda s: (s[1], s[2]))
         self.assertEqual([(s["type"], s["start"], s["end"]) for s in sec], wanted, "every UniProt helix, strand and turn, and nothing else")
@@ -188,7 +226,7 @@ class DataTests(unittest.TestCase):
         self.assertFalse(any(s["start"] <= 508 <= s["end"] for s in sec), "UniProt annotates no helix, strand or turn at 508 itself")
 
     def test_the_building_is_deterministic(self):
-        again = bt.build(DOWNLOADS)
+        again = bt.build(DATA_DIR)
         self.assertEqual(json.dumps(again, separators=(",", ":")), json.dumps(self.data, separators=(",", ":")))
 
     def test_the_data_on_the_page_is_what_the_builder_makes(self):
@@ -198,7 +236,7 @@ class DataTests(unittest.TestCase):
     def test_the_output_file_has_the_header_and_ends_cleanly(self):
         with tempfile.TemporaryDirectory() as td:
             out = Path(td) / "o.js"
-            bt.main(["--inputs", str(DOWNLOADS), "--out", str(out)])
+            bt.main(["--inputs", str(DATA_DIR), "--out", str(out)])
             raw = out.read_bytes().decode("utf-8")
             self.assertTrue(raw.startswith(bt.HEADER + "export default {"))
             self.assertTrue(raw.endswith("};\r\n"))

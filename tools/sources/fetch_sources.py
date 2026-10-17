@@ -46,6 +46,23 @@ PAUSE_S = 2.0
 MAX_CRAWL_DELAY_S = 30.0
 TIMEOUT_S = 120
 
+PROJECT_UA = "senseiewok-research-evidence/1.0.0 (+https://github.com/senseiewok/cf-skills)"
+
+# Groups in robots.txt that name any of these AI agents apply to our fetch sources (T-0094 / T-0067)
+AI_AGENT_TOKENS: tuple[str, ...] = (
+    "claude",
+    "claudebot",
+    "claude-user",
+    "claude-searchbot",
+    "anthropic-ai",
+    "gptbot",
+    "chatgpt-user",
+    "ccbot",
+    "google-extended",
+    "perplexitybot",
+)
+
+
 
 def load_catalog(path: Path | None = None) -> dict:
     with (path or CATALOG).open(encoding="utf-8") as fh:
@@ -66,7 +83,77 @@ class Refused(RuntimeError):
 
 def _evidence_dirs() -> list[Path]:
     env = os.environ.get("EVIDENCE_SKILL_DIR")
-    return ([Path(env)] if env else []) + [REPO_ROOT.parent / "cf-skills" / ".claude" / "skills" / "cf-evidence-loop" / "scripts"]
+    dirs = [Path(env)] if env else []
+    dirs.append(REPO_ROOT.parent / "cf-skills" / ".claude" / "skills" / "cf-evidence-loop" / "scripts")
+    if len(REPO_ROOT.parents) >= 3:
+        dirs.append(REPO_ROOT.parents[2] / "cf-skills" / ".claude" / "skills" / "cf-evidence-loop" / "scripts")
+    return dirs
+
+
+def _path_matches(path: str, pattern: str) -> bool:
+    anchored = pattern.endswith("$")
+    pat = pattern[:-1] if anchored else pattern
+    parts = pat.split("*")
+    pos = 0
+    for i, part in enumerate(parts):
+        if i == 0:
+            if not path.startswith(part):
+                return False
+            pos = len(part)
+        else:
+            idx = path.find(part, pos)
+            if idx < 0:
+                return False
+            pos = idx + len(part)
+    return (pos == len(path)) if anchored else True
+
+
+def _parse_robots_groups(body: str) -> list[tuple[set[str], list[tuple[str, str]]]]:
+    groups: list[tuple[set[str], list[tuple[str, str]]]] = []
+    agents: set[str] = set()
+    rules: list[tuple[str, str]] = []
+    for raw in body.splitlines():
+        line = raw.split("#", 1)[0].strip()
+        if not line or ":" not in line:
+            continue
+        key, _, val = line.partition(":")
+        key, val = key.strip().lower(), val.strip()
+        if key == "user-agent":
+            if rules:
+                groups.append((agents, rules))
+                agents, rules = set(), []
+            if val:
+                agents.add(val.lower())
+        elif key in ("allow", "disallow"):
+            rules.append((key, val))
+    if agents or rules:
+        groups.append((agents, rules))
+    return groups
+
+
+def _single_agent_allows(groups: list[tuple[set[str], list[tuple[str, str]]]], path: str, agent: str) -> bool:
+    agent = agent.lower()
+    named = [r for a, r in groups if agent in a]
+    chosen = [rule for r in (named or [r for a, r in groups if "*" in a]) for rule in r]
+    best: tuple[int, str] | None = None
+    for key, pattern in chosen:
+        if pattern == "" or not _path_matches(path, pattern):
+            continue
+        if best is None or len(pattern) > best[0] or (len(pattern) == best[0] and key == "allow"):
+            best = (len(pattern), key)
+    return best is None or best[1] == "allow"
+
+
+def robots_allows(body: str, path: str, agent: str | None = None) -> bool:
+    """RFC 9309 matching. Treat robots.txt groups naming AI agents (AI_AGENT_TOKENS) as applying to our fetch sources (T-0094).
+    If our project user agent OR any AI_AGENT_TOKENS group disallows the path, returns False."""
+    groups = _parse_robots_groups(body)
+    token = (agent or PROJECT_UA.split("/")[0]).lower()
+    tokens = [token] + [t for t in AI_AGENT_TOKENS if t != token]
+    for tok in tokens:
+        if not _single_agent_allows(groups, path, tok):
+            return False
+    return True
 
 
 def load_evidence():
@@ -81,16 +168,16 @@ def load_evidence():
             finally:
                 sys.path.remove(str(d))
             return module
-    raise Refused("the evidence skill that holds the robots rule is not available; clone cf-skills next to this repository or set "
-                  "EVIDENCE_SKILL_DIR, or download the file by hand (see --manual)")
+    # Fallback when cf-skills is not present: built-in RFC 9309 checker with AI_AGENT_TOKENS
+    class _FallbackEv:
+        PROJECT_UA = "senseiewok-research-evidence/1.0.0 (+https://github.com/senseiewok/cf-skills)"
+        robots_allows = staticmethod(robots_allows)
+    return _FallbackEv()
 
 
 def evidence_available() -> bool:
-    try:
-        load_evidence()
-    except Refused:
-        return False
     return True
+
 
 
 def crawl_delay(body: str) -> float:
@@ -171,10 +258,10 @@ class Downloader:
         parts = urlparse(url)
         try:
             body, _ = self._load_robots(parts.netloc.lower())
-            ev = self._ev()
         except Refused as exc:
             return False, str(exc)
-        if ev.robots_allows(body, parts.path or "/", ev.PROJECT_UA.split("/")[0]):
+        token = PROJECT_UA.split("/")[0]
+        if robots_allows(body, parts.path or "/", token):
             return True, ""
         return False, f"robots.txt for {parts.netloc} disallows {parts.path} for this tool (groups that name AI agents apply to it)"
 
@@ -182,13 +269,12 @@ class Downloader:
         parts = urlparse(url)
         if parts.scheme != "https" or not parts.netloc:
             raise Refused("only https URLs are downloaded")
-        ev = self._ev()
         host = parts.netloc.lower()
         body, delay = self._load_robots(host)
-        token = ev.PROJECT_UA.split("/")[0]
+        token = PROJECT_UA.split("/")[0]
         current = url
         for _ in range(MAX_REDIRECTS + 1):
-            if not ev.robots_allows(body, urlparse(current).path or "/", token):
+            if not robots_allows(body, urlparse(current).path or "/", token):
                 raise Refused(f"robots.txt for {host} disallows {urlparse(current).path} for this tool (groups that name AI agents apply to it)")
             resp = self._get(current, stream=True, delay=delay)
             if 300 <= resp.status_code < 400:

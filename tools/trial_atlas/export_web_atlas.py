@@ -52,6 +52,7 @@ def compute_atlas_export(snapshot_path: Path = SNAPSHOT_JSON_PATH) -> dict:
     total_outcome_entries = 0
     studies_with_outcomes = 0
     class_entry_counts = Counter()
+    granular_entry_counts = Counter()
     class_study_counts = defaultdict(set)
 
     phase_transition_matrix = defaultdict(Counter)
@@ -76,6 +77,8 @@ def compute_atlas_export(snapshot_path: Path = SNAPSHOT_JSON_PATH) -> dict:
 
         for e in entries:
             tagged = lex.tag_entry(e)
+            for t in tagged.get("tags", []):
+                granular_entry_counts[t["class"]] += 1
             c8_list = tagged.get("canonical_8_classes", [])
             for c8 in c8_list:
                 class_entry_counts[c8] += 1
@@ -192,6 +195,36 @@ def compute_atlas_export(snapshot_path: Path = SNAPSHOT_JSON_PATH) -> dict:
                 },
             ]
         ],
+        "care_team_guide": {
+            "title": "Care Team Reader Guide",
+            "reader_path": "care_team",
+            "what_the_atlas_can_answer": [
+                "Prevalence and longitudinal shift of registered primary endpoint classes across 940 interventional CF trials (pre-2012, 2012-2019, 2020-2026).",
+                "Distribution of primary trial endpoints across clinical phases (Phase 1 through Phase 4).",
+                "Whether trial protocols evaluate specific physiological or patient-reported measures (e.g. FEV1, sweat chloride, CFQ-R, BMI, pulmonary exacerbations).",
+                "Co-tagging patterns where measures capture both efficacy parameters and safety surveillance (e.g. multi-class tagging)."
+            ],
+            "what_the_atlas_cannot_answer": [
+                "Individual patient treatment decisions, personalized medical recommendations, or clinical practice directives.",
+                "Regulatory efficacy or safety clearance (ClinicalTrials.gov registrations reflect sponsor filings, not agency approval determinations).",
+                "Unregistered exploratory or secondary endpoints omitted from primary protocol registrations.",
+                "Personal modulator eligibility, which depends strictly on individual CFTR genotyping and national regulatory labels."
+            ],
+            "fev1_definition_and_safety_use": (
+                "The lung_function_fev1 class captures all registered forced expiratory volume in one second measures, "
+                "including those monitored as safety or bronchospasm checks post-dosing, which are co-tagged with "
+                "safety_adverse_events under the multi_class flag rather than suppressed."
+            ),
+            "measures_list": [
+                {
+                    "class_name": c,
+                    "status": "shown (canonical 8)" if c in lex_mod.CANONICAL_8_CLASSES else "counted, not shown (below the agreement bar)",
+                    "entries": class_entry_counts[c] if c in lex_mod.CANONICAL_8_CLASSES else granular_entry_counts[c],
+                }
+                for c in (list(lex_mod.CANONICAL_8_CLASSES) + [cls for cls in lex.class_order if cls not in lex_mod.CANONICAL_8_CLASSES and cls not in ("other", "not_stated")])
+            ],
+            "clinician_review_gate": "Plain-language class notes stay unpublished until a clinician has read them (a person, not a model)."
+        },
     }
 
     # Canonical sha256 checksum
