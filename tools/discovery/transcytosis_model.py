@@ -175,6 +175,58 @@ def simulate_transcytosis_kinetics(
     }
 
 
+
+class TranscytosisModel:
+    """Apical-to-basolateral receptor transcytosis flux model."""
+
+    DEFAULT_CONCENTRATIONS_NM: List[float] = [10.0, 25.0, 50.0, 100.0, 200.0, 300.0, 500.0, 1000.0]
+
+    def __init__(self, receptors: List[str] | None = None):
+        self.receptors = [r.lower() for r in (receptors or ["fcrn", "tfr", "pigr"])]
+        for r in self.receptors:
+            if r not in RECEPTOR_PROFILES:
+                raise ValueError(f"Unknown receptor '{r}'. Must be one of: {list(RECEPTOR_PROFILES.keys())}")
+
+    def simulate_flux(
+        self,
+        concentrations_nm: List[float] | None = None,
+        time_minutes: float = 120.0,
+    ) -> List[Dict[str, Any]]:
+        """Simulate transcytosis flux across tested receptors and concentration range."""
+        concs = concentrations_nm or self.DEFAULT_CONCENTRATIONS_NM
+        results = []
+        for rec_id in self.receptors:
+            prof = RECEPTOR_PROFILES[rec_id]
+            kd = prof["kd_apical_nm"]
+            for conc in concs:
+                occupancy = calculate_fractional_occupancy(conc, kd)
+                surface_binding_pct = round(occupancy * 100.0, 2)
+                sim = simulate_transcytosis_kinetics(
+                    receptor_id=rec_id,
+                    ligand_conc_nm=conc,
+                    time_minutes=time_minutes,
+                )
+                internalized_pct = round(100.0 - sim["apical_retention_pct"], 2)
+                basolateral_exocytosis_pct = sim["basolateral_delivery_yield_pct"]
+                hours = max(0.1, time_minutes / 60.0)
+                net_flux_pct_per_h = round(basolateral_exocytosis_pct / hours, 3)
+
+                results.append({
+                    "receptor_id": rec_id,
+                    "receptor_name": prof["name"],
+                    "pdb_id": prof["pdb_id"],
+                    "concentration_nm": float(conc),
+                    "surface_binding_pct": surface_binding_pct,
+                    "internalized_pct": internalized_pct,
+                    "basolateral_exocytosis_pct": basolateral_exocytosis_pct,
+                    "net_flux_pct_per_h": net_flux_pct_per_h,
+                    "transcytosis_efficiency_pct": sim["transcytosis_efficiency_pct"],
+                    "lysosomal_escape_pct": sim["lysosomal_escape_pct"],
+                    "verdict": sim["verdict"],
+                })
+        return results
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Apical-to-Basolateral Receptor Transcytosis Model")
     parser.add_argument("--receptor", default="fcrn", choices=list(RECEPTOR_PROFILES.keys()), help="Target receptor")
@@ -205,3 +257,4 @@ def main(argv=None) -> int:
 if __name__ == "__main__":
     import sys
     sys.exit(main())
+

@@ -1,0 +1,2098 @@
+{
+  "metadata": {
+    "generated_at": "2026-10-17T02:59:50Z",
+    "tier": "Tier T2 Certified",
+    "schema_version": "1.0.0",
+    "source_code_hash": "9be47bb94216567f02b1befa232d309a5d064eb3c4a33c8b2a829d081f24c0b6",
+    "doi_citations": [
+      "10.1126/scitranslmed.3002230",
+      "10.1084/jem.20020400",
+      "10.1016/j.addr.2006.07.019",
+      "10.1038/nature12777",
+      "10.1038/nature14548",
+      "10.1016/j.stem.2009.04.002",
+      "10.1016/j.stem.2016.11.001",
+      "10.1016/j.ccr.2009.11.002",
+      "10.1073/pnas.1813020116",
+      "10.1039/c9bm01314d",
+      "10.1016/S2213-2600(15)00245-3"
+    ],
+    "terms_of_use": "Research hypothesis / in silico model only. Not medical advice."
+  },
+  "json_ld": {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "Cross-Domain Stem Cell Delivery Breakthrough Models for Cystic Fibrosis",
+    "description": "Deterministic in silico biophysical and kinetic models establishing feasibility for apical-to-basolateral receptor transcytosis (FcRn, TfR1, pIgR), airway secretory-to-basal dedifferentiation plasticity, and cross-domain delivery innovation rankings.",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "citation": [
+      "https://doi.org/10.1126/scitranslmed.3002230",
+      "https://doi.org/10.1084/jem.20020400",
+      "https://doi.org/10.1016/j.addr.2006.07.019",
+      "https://doi.org/10.1038/nature12777",
+      "https://doi.org/10.1038/nature14548",
+      "https://doi.org/10.1016/j.stem.2009.04.002",
+      "https://doi.org/10.1016/j.stem.2016.11.001",
+      "https://doi.org/10.1016/j.ccr.2009.11.002",
+      "https://doi.org/10.1073/pnas.1813020116",
+      "https://doi.org/10.1039/c9bm01314d",
+      "https://doi.org/10.1016/S2213-2600(15)00245-3"
+    ]
+  },
+  "datasets": {
+    "bfi_rankings": [
+      {
+        "id": "CDI-004",
+        "title": "Airway Secretory-to-Basal Dedifferentiation via Transient Notch Reprogramming",
+        "donor_field": "epithelial_plasticity",
+        "primary_doi": "10.1038/nature12777",
+        "pmid": "24196715",
+        "pdb_id": null,
+        "lead_author": "Tata et al. (Nature 2013)",
+        "mechanism": "Facultative lineage plasticity: committed luminal secretory cells (SCGB1A1+) dedifferentiate into multipotent basal stem cells (KRT5+/TP63+) upon transient Notch inhibition.",
+        "particle_diameter_nm": 50.0,
+        "zeta_potential_mv": 0.0,
+        "endosomal_escape_score": 0.92,
+        "macrophage_stealth_score": 0.9,
+        "cf_application": "Eliminates the requirement for crossing tight junctions: edit accessible apical club cells and pulse with a transient Notch inhibitor to repopulate the basal niche.",
+        "bfi": 0.945,
+        "feasibility_tier": "HIGH_FEASIBILITY",
+        "transfer_domain": "epithelial_plasticity",
+        "bfi_score": 0.945,
+        "physical_barriers": "Basal niche inaccessibility; tight junction penetration requirement"
+      },
+      {
+        "id": "CDI-002",
+        "title": "Low-Affinity Transferrin Receptor (TfR1) Monovalent Transcytosis",
+        "donor_field": "blood_brain_barrier",
+        "primary_doi": "10.1126/scitranslmed.3002230",
+        "pmid": "21613623",
+        "pdb_id": "1CX8",
+        "lead_author": "Yu et al. (Sci Transl Med 2011)",
+        "mechanism": "Tuning ligand binding affinity (Kd = 200-400 nM) avoids lysosomal sorting, redirecting internalized vesicles to Rab11a exocytosis pathways across tight junctions.",
+        "particle_diameter_nm": 55.0,
+        "zeta_potential_mv": -1.0,
+        "endosomal_escape_score": 0.9,
+        "macrophage_stealth_score": 0.85,
+        "cf_application": "Enables aerosolized nanoparticles to cross intact airway tight junctions via Rab11a-mediated basolateral exocytosis directly into the basal stem cell niche.",
+        "bfi": 0.9125,
+        "feasibility_tier": "HIGH_FEASIBILITY",
+        "transfer_domain": "blood_brain_barrier",
+        "bfi_score": 0.9125,
+        "physical_barriers": "Epithelial tight junctions; endosomal/lysosomal degradation pathway"
+      },
+      {
+        "id": "CDI-003",
+        "title": "Polysarcosine (pSar) Biodegradable Stealth & Ester-Cleavable Ionizable Lipids",
+        "donor_field": "mucosal_immunology",
+        "primary_doi": "10.1039/c9bm01314d",
+        "pmid": "31960002",
+        "pdb_id": null,
+        "lead_author": "Siewert et al. (Biomaterials Sci 2020)",
+        "mechanism": "Replaces immunogenic PEG conjugates with non-immunogenic polysarcosine (pSar); incorporates enzymatic ester cleavable aliphatic tails (macrophage t1/2 < 4h).",
+        "particle_diameter_nm": 75.0,
+        "zeta_potential_mv": 0.5,
+        "endosomal_escape_score": 0.88,
+        "macrophage_stealth_score": 0.98,
+        "cf_application": "Abolishes the acute alveolar macrophage TLR7/8 cytokine storm (IL-8/TNF-alpha) and anti-PEG neutralizing antibody clearance that terminated VX-522.",
+        "bfi": 0.9085,
+        "feasibility_tier": "HIGH_FEASIBILITY",
+        "transfer_domain": "mucosal_immunology",
+        "bfi_score": 0.9085,
+        "physical_barriers": "Polyanionic mucin adhesion; alveolar macrophage TLR7/8 activation and PEG clearance"
+      },
+      {
+        "id": "CDI-001",
+        "title": "CendR / NRP-1 Proteolytic Internalization & Mucinase Liquefaction",
+        "donor_field": "solid_tumor_desmoplasia",
+        "primary_doi": "10.1016/j.ccr.2009.11.002",
+        "pmid": "19962669",
+        "pdb_id": "2QQM",
+        "lead_author": "Sugahara et al. (Cancer Cell 2009)",
+        "mechanism": "iRGD / C-end Rule peptide activation of Neuropilin-1 (NRP-1) macropinocytosis coupled with StcE mucin-cleaving protease (Malaker et al. PNAS 2019, DOI: 10.1073/pnas.1813020116).",
+        "particle_diameter_nm": 65.0,
+        "zeta_potential_mv": -2.5,
+        "endosomal_escape_score": 0.85,
+        "macrophage_stealth_score": 0.8,
+        "cf_application": "Enzymatically liquefies thick CF sputum meshwork while actively triggering trans-epithelial penetration across apical ciliated and secretory cells.",
+        "bfi": 0.86,
+        "feasibility_tier": "HIGH_FEASIBILITY",
+        "transfer_domain": "solid_tumor_desmoplasia",
+        "bfi_score": 0.86,
+        "physical_barriers": "Sputum mucin meshwork steric entrapment; apical endocytic barrier"
+      },
+      {
+        "id": "CDI-005",
+        "title": "Sendai Virus F/HN Pseudotyped Enveloped Delivery Vehicles (EDVs)",
+        "donor_field": "synthetic_virology",
+        "primary_doi": "10.1016/S2213-2600(15)00245-3",
+        "pmid": "26149839",
+        "pdb_id": "1Z4Z",
+        "lead_author": "Alton et al. (Lancet Respir Med 2015)",
+        "mechanism": "Hemagglutinin-neuraminidase (HN) binds apical sialic acid; fusion (F) protein mediates direct pH-independent membrane fusion at the apical plasma membrane.",
+        "particle_diameter_nm": 95.0,
+        "zeta_potential_mv": -4.0,
+        "endosomal_escape_score": 0.99,
+        "macrophage_stealth_score": 0.82,
+        "cf_application": "Bypasses endosomal TLR pattern recognition entirely by directly injecting Cas9/prime-editor RNPs across the luminal membrane at neutral pH.",
+        "bfi": 0.8353,
+        "feasibility_tier": "MODERATE_FEASIBILITY",
+        "transfer_domain": "synthetic_virology",
+        "bfi_score": 0.8353,
+        "physical_barriers": "Mucosal endosomal entrapment; lysosomal TLR pattern recognition"
+      }
+    ],
+    "transcytosis_kinetics": [
+      {
+        "receptor_id": "fcrn",
+        "receptor_name": "Neonatal Fc Receptor (FcRn)",
+        "pdb_id": "4N0F",
+        "concentration_nm": 10.0,
+        "surface_binding_pct": 4.35,
+        "internalized_pct": 92.67,
+        "basolateral_exocytosis_pct": 76.33,
+        "net_flux_pct_per_h": 38.165,
+        "transcytosis_efficiency_pct": 82.85,
+        "lysosomal_escape_pct": 84.36,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "fcrn",
+        "receptor_name": "Neonatal Fc Receptor (FcRn)",
+        "pdb_id": "4N0F",
+        "concentration_nm": 25.0,
+        "surface_binding_pct": 10.2,
+        "internalized_pct": 92.67,
+        "basolateral_exocytosis_pct": 76.33,
+        "net_flux_pct_per_h": 38.165,
+        "transcytosis_efficiency_pct": 82.85,
+        "lysosomal_escape_pct": 84.36,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "fcrn",
+        "receptor_name": "Neonatal Fc Receptor (FcRn)",
+        "pdb_id": "4N0F",
+        "concentration_nm": 50.0,
+        "surface_binding_pct": 18.52,
+        "internalized_pct": 92.67,
+        "basolateral_exocytosis_pct": 76.33,
+        "net_flux_pct_per_h": 38.165,
+        "transcytosis_efficiency_pct": 82.85,
+        "lysosomal_escape_pct": 84.36,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "fcrn",
+        "receptor_name": "Neonatal Fc Receptor (FcRn)",
+        "pdb_id": "4N0F",
+        "concentration_nm": 100.0,
+        "surface_binding_pct": 31.25,
+        "internalized_pct": 92.67,
+        "basolateral_exocytosis_pct": 76.33,
+        "net_flux_pct_per_h": 38.165,
+        "transcytosis_efficiency_pct": 82.85,
+        "lysosomal_escape_pct": 84.36,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "fcrn",
+        "receptor_name": "Neonatal Fc Receptor (FcRn)",
+        "pdb_id": "4N0F",
+        "concentration_nm": 200.0,
+        "surface_binding_pct": 47.62,
+        "internalized_pct": 92.67,
+        "basolateral_exocytosis_pct": 76.33,
+        "net_flux_pct_per_h": 38.165,
+        "transcytosis_efficiency_pct": 82.85,
+        "lysosomal_escape_pct": 84.36,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "fcrn",
+        "receptor_name": "Neonatal Fc Receptor (FcRn)",
+        "pdb_id": "4N0F",
+        "concentration_nm": 300.0,
+        "surface_binding_pct": 57.69,
+        "internalized_pct": 92.67,
+        "basolateral_exocytosis_pct": 76.33,
+        "net_flux_pct_per_h": 38.165,
+        "transcytosis_efficiency_pct": 82.85,
+        "lysosomal_escape_pct": 84.36,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "fcrn",
+        "receptor_name": "Neonatal Fc Receptor (FcRn)",
+        "pdb_id": "4N0F",
+        "concentration_nm": 500.0,
+        "surface_binding_pct": 69.44,
+        "internalized_pct": 92.67,
+        "basolateral_exocytosis_pct": 76.33,
+        "net_flux_pct_per_h": 38.165,
+        "transcytosis_efficiency_pct": 82.85,
+        "lysosomal_escape_pct": 84.36,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "fcrn",
+        "receptor_name": "Neonatal Fc Receptor (FcRn)",
+        "pdb_id": "4N0F",
+        "concentration_nm": 1000.0,
+        "surface_binding_pct": 81.97,
+        "internalized_pct": 92.67,
+        "basolateral_exocytosis_pct": 76.33,
+        "net_flux_pct_per_h": 38.165,
+        "transcytosis_efficiency_pct": 82.85,
+        "lysosomal_escape_pct": 84.36,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "tfr",
+        "receptor_name": "Transferrin Receptor 1 (TfR1)",
+        "pdb_id": "1CX8",
+        "concentration_nm": 10.0,
+        "surface_binding_pct": 3.85,
+        "internalized_pct": 91.78,
+        "basolateral_exocytosis_pct": 56.78,
+        "net_flux_pct_per_h": 28.39,
+        "transcytosis_efficiency_pct": 62.11,
+        "lysosomal_escape_pct": 63.52,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "tfr",
+        "receptor_name": "Transferrin Receptor 1 (TfR1)",
+        "pdb_id": "1CX8",
+        "concentration_nm": 25.0,
+        "surface_binding_pct": 9.09,
+        "internalized_pct": 91.78,
+        "basolateral_exocytosis_pct": 56.78,
+        "net_flux_pct_per_h": 28.39,
+        "transcytosis_efficiency_pct": 62.11,
+        "lysosomal_escape_pct": 63.52,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "tfr",
+        "receptor_name": "Transferrin Receptor 1 (TfR1)",
+        "pdb_id": "1CX8",
+        "concentration_nm": 50.0,
+        "surface_binding_pct": 16.67,
+        "internalized_pct": 91.78,
+        "basolateral_exocytosis_pct": 56.78,
+        "net_flux_pct_per_h": 28.39,
+        "transcytosis_efficiency_pct": 62.11,
+        "lysosomal_escape_pct": 63.52,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "tfr",
+        "receptor_name": "Transferrin Receptor 1 (TfR1)",
+        "pdb_id": "1CX8",
+        "concentration_nm": 100.0,
+        "surface_binding_pct": 28.57,
+        "internalized_pct": 91.78,
+        "basolateral_exocytosis_pct": 56.78,
+        "net_flux_pct_per_h": 28.39,
+        "transcytosis_efficiency_pct": 62.11,
+        "lysosomal_escape_pct": 63.52,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "tfr",
+        "receptor_name": "Transferrin Receptor 1 (TfR1)",
+        "pdb_id": "1CX8",
+        "concentration_nm": 200.0,
+        "surface_binding_pct": 44.44,
+        "internalized_pct": 91.78,
+        "basolateral_exocytosis_pct": 56.78,
+        "net_flux_pct_per_h": 28.39,
+        "transcytosis_efficiency_pct": 62.11,
+        "lysosomal_escape_pct": 63.52,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "tfr",
+        "receptor_name": "Transferrin Receptor 1 (TfR1)",
+        "pdb_id": "1CX8",
+        "concentration_nm": 300.0,
+        "surface_binding_pct": 54.55,
+        "internalized_pct": 91.78,
+        "basolateral_exocytosis_pct": 56.78,
+        "net_flux_pct_per_h": 28.39,
+        "transcytosis_efficiency_pct": 62.11,
+        "lysosomal_escape_pct": 63.52,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "tfr",
+        "receptor_name": "Transferrin Receptor 1 (TfR1)",
+        "pdb_id": "1CX8",
+        "concentration_nm": 500.0,
+        "surface_binding_pct": 66.67,
+        "internalized_pct": 91.78,
+        "basolateral_exocytosis_pct": 56.78,
+        "net_flux_pct_per_h": 28.39,
+        "transcytosis_efficiency_pct": 62.11,
+        "lysosomal_escape_pct": 63.52,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "tfr",
+        "receptor_name": "Transferrin Receptor 1 (TfR1)",
+        "pdb_id": "1CX8",
+        "concentration_nm": 1000.0,
+        "surface_binding_pct": 80.0,
+        "internalized_pct": 91.78,
+        "basolateral_exocytosis_pct": 56.78,
+        "net_flux_pct_per_h": 28.39,
+        "transcytosis_efficiency_pct": 62.11,
+        "lysosomal_escape_pct": 63.52,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "pigr",
+        "receptor_name": "Polymeric Immunoglobulin Receptor (pIgR)",
+        "pdb_id": "5D4K",
+        "concentration_nm": 10.0,
+        "surface_binding_pct": 3.12,
+        "internalized_pct": 90.06,
+        "basolateral_exocytosis_pct": 61.54,
+        "net_flux_pct_per_h": 30.77,
+        "transcytosis_efficiency_pct": 69.11,
+        "lysosomal_escape_pct": 72.04,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "pigr",
+        "receptor_name": "Polymeric Immunoglobulin Receptor (pIgR)",
+        "pdb_id": "5D4K",
+        "concentration_nm": 25.0,
+        "surface_binding_pct": 7.46,
+        "internalized_pct": 90.06,
+        "basolateral_exocytosis_pct": 61.54,
+        "net_flux_pct_per_h": 30.77,
+        "transcytosis_efficiency_pct": 69.11,
+        "lysosomal_escape_pct": 72.04,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "pigr",
+        "receptor_name": "Polymeric Immunoglobulin Receptor (pIgR)",
+        "pdb_id": "5D4K",
+        "concentration_nm": 50.0,
+        "surface_binding_pct": 13.89,
+        "internalized_pct": 90.06,
+        "basolateral_exocytosis_pct": 61.54,
+        "net_flux_pct_per_h": 30.77,
+        "transcytosis_efficiency_pct": 69.11,
+        "lysosomal_escape_pct": 72.04,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "pigr",
+        "receptor_name": "Polymeric Immunoglobulin Receptor (pIgR)",
+        "pdb_id": "5D4K",
+        "concentration_nm": 100.0,
+        "surface_binding_pct": 24.39,
+        "internalized_pct": 90.06,
+        "basolateral_exocytosis_pct": 61.54,
+        "net_flux_pct_per_h": 30.77,
+        "transcytosis_efficiency_pct": 69.11,
+        "lysosomal_escape_pct": 72.04,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "pigr",
+        "receptor_name": "Polymeric Immunoglobulin Receptor (pIgR)",
+        "pdb_id": "5D4K",
+        "concentration_nm": 200.0,
+        "surface_binding_pct": 39.22,
+        "internalized_pct": 90.06,
+        "basolateral_exocytosis_pct": 61.54,
+        "net_flux_pct_per_h": 30.77,
+        "transcytosis_efficiency_pct": 69.11,
+        "lysosomal_escape_pct": 72.04,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "pigr",
+        "receptor_name": "Polymeric Immunoglobulin Receptor (pIgR)",
+        "pdb_id": "5D4K",
+        "concentration_nm": 300.0,
+        "surface_binding_pct": 49.18,
+        "internalized_pct": 90.06,
+        "basolateral_exocytosis_pct": 61.54,
+        "net_flux_pct_per_h": 30.77,
+        "transcytosis_efficiency_pct": 69.11,
+        "lysosomal_escape_pct": 72.04,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "pigr",
+        "receptor_name": "Polymeric Immunoglobulin Receptor (pIgR)",
+        "pdb_id": "5D4K",
+        "concentration_nm": 500.0,
+        "surface_binding_pct": 61.73,
+        "internalized_pct": 90.06,
+        "basolateral_exocytosis_pct": 61.54,
+        "net_flux_pct_per_h": 30.77,
+        "transcytosis_efficiency_pct": 69.11,
+        "lysosomal_escape_pct": 72.04,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      },
+      {
+        "receptor_id": "pigr",
+        "receptor_name": "Polymeric Immunoglobulin Receptor (pIgR)",
+        "pdb_id": "5D4K",
+        "concentration_nm": 1000.0,
+        "surface_binding_pct": 76.34,
+        "internalized_pct": 90.06,
+        "basolateral_exocytosis_pct": 61.54,
+        "net_flux_pct_per_h": 30.77,
+        "transcytosis_efficiency_pct": 69.11,
+        "lysosomal_escape_pct": 72.04,
+        "verdict": "OPTIMAL_TRANSCYTOSIS"
+      }
+    ],
+    "epithelial_trajectory": [
+      {
+        "day": 0,
+        "uncorrected_secretory": 15.0,
+        "corrected_secretory": 10.0,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 0.0,
+        "ciliated": 40.0,
+        "cftr_plus_stem_cell_pct": 0.0
+      },
+      {
+        "day": 1,
+        "uncorrected_secretory": 11.695,
+        "corrected_secretory": 7.532,
+        "transient_intermediate": 3.812,
+        "corrected_basal_stem_cells": 0.777,
+        "ciliated": 40.075,
+        "cftr_plus_stem_cell_pct": 2.59
+      },
+      {
+        "day": 2,
+        "uncorrected_secretory": 9.194,
+        "corrected_secretory": 5.69,
+        "transient_intermediate": 5.08,
+        "corrected_basal_stem_cells": 1.882,
+        "ciliated": 40.148,
+        "cftr_plus_stem_cell_pct": 6.27
+      },
+      {
+        "day": 3,
+        "uncorrected_secretory": 7.297,
+        "corrected_secretory": 4.318,
+        "transient_intermediate": 5.135,
+        "corrected_basal_stem_cells": 2.915,
+        "ciliated": 40.221,
+        "cftr_plus_stem_cell_pct": 9.72
+      },
+      {
+        "day": 4,
+        "uncorrected_secretory": 5.857,
+        "corrected_secretory": 3.299,
+        "transient_intermediate": 4.671,
+        "corrected_basal_stem_cells": 3.759,
+        "ciliated": 40.293,
+        "cftr_plus_stem_cell_pct": 12.53
+      },
+      {
+        "day": 5,
+        "uncorrected_secretory": 4.764,
+        "corrected_secretory": 2.541,
+        "transient_intermediate": 4.037,
+        "corrected_basal_stem_cells": 4.409,
+        "ciliated": 40.364,
+        "cftr_plus_stem_cell_pct": 14.7
+      },
+      {
+        "day": 6,
+        "uncorrected_secretory": 4.47,
+        "corrected_secretory": 2.256,
+        "transient_intermediate": 2.784,
+        "corrected_basal_stem_cells": 4.862,
+        "ciliated": 40.435,
+        "cftr_plus_stem_cell_pct": 16.21
+      },
+      {
+        "day": 7,
+        "uncorrected_secretory": 4.762,
+        "corrected_secretory": 2.292,
+        "transient_intermediate": 1.566,
+        "corrected_basal_stem_cells": 5.105,
+        "ciliated": 40.504,
+        "cftr_plus_stem_cell_pct": 17.02
+      },
+      {
+        "day": 8,
+        "uncorrected_secretory": 5.047,
+        "corrected_secretory": 2.329,
+        "transient_intermediate": 0.881,
+        "corrected_basal_stem_cells": 5.238,
+        "ciliated": 40.573,
+        "cftr_plus_stem_cell_pct": 17.46
+      },
+      {
+        "day": 9,
+        "uncorrected_secretory": 5.326,
+        "corrected_secretory": 2.368,
+        "transient_intermediate": 0.496,
+        "corrected_basal_stem_cells": 5.312,
+        "ciliated": 40.641,
+        "cftr_plus_stem_cell_pct": 17.71
+      },
+      {
+        "day": 10,
+        "uncorrected_secretory": 5.599,
+        "corrected_secretory": 2.406,
+        "transient_intermediate": 0.279,
+        "corrected_basal_stem_cells": 5.353,
+        "ciliated": 40.708,
+        "cftr_plus_stem_cell_pct": 17.84
+      },
+      {
+        "day": 11,
+        "uncorrected_secretory": 5.867,
+        "corrected_secretory": 2.444,
+        "transient_intermediate": 0.157,
+        "corrected_basal_stem_cells": 5.376,
+        "ciliated": 40.775,
+        "cftr_plus_stem_cell_pct": 17.92
+      },
+      {
+        "day": 12,
+        "uncorrected_secretory": 6.13,
+        "corrected_secretory": 2.481,
+        "transient_intermediate": 0.088,
+        "corrected_basal_stem_cells": 5.389,
+        "ciliated": 40.84,
+        "cftr_plus_stem_cell_pct": 17.96
+      },
+      {
+        "day": 13,
+        "uncorrected_secretory": 6.389,
+        "corrected_secretory": 2.518,
+        "transient_intermediate": 0.05,
+        "corrected_basal_stem_cells": 5.396,
+        "ciliated": 40.905,
+        "cftr_plus_stem_cell_pct": 17.99
+      },
+      {
+        "day": 14,
+        "uncorrected_secretory": 6.643,
+        "corrected_secretory": 2.555,
+        "transient_intermediate": 0.028,
+        "corrected_basal_stem_cells": 5.4,
+        "ciliated": 40.969,
+        "cftr_plus_stem_cell_pct": 18.0
+      },
+      {
+        "day": 15,
+        "uncorrected_secretory": 6.893,
+        "corrected_secretory": 2.591,
+        "transient_intermediate": 0.016,
+        "corrected_basal_stem_cells": 5.402,
+        "ciliated": 41.033,
+        "cftr_plus_stem_cell_pct": 18.01
+      },
+      {
+        "day": 16,
+        "uncorrected_secretory": 7.138,
+        "corrected_secretory": 2.626,
+        "transient_intermediate": 0.009,
+        "corrected_basal_stem_cells": 5.403,
+        "ciliated": 41.095,
+        "cftr_plus_stem_cell_pct": 18.01
+      },
+      {
+        "day": 17,
+        "uncorrected_secretory": 7.379,
+        "corrected_secretory": 2.661,
+        "transient_intermediate": 0.005,
+        "corrected_basal_stem_cells": 5.404,
+        "ciliated": 41.157,
+        "cftr_plus_stem_cell_pct": 18.01
+      },
+      {
+        "day": 18,
+        "uncorrected_secretory": 7.616,
+        "corrected_secretory": 2.695,
+        "transient_intermediate": 0.003,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.219,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 19,
+        "uncorrected_secretory": 7.848,
+        "corrected_secretory": 2.728,
+        "transient_intermediate": 0.002,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.279,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 20,
+        "uncorrected_secretory": 8.077,
+        "corrected_secretory": 2.761,
+        "transient_intermediate": 0.001,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.339,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 21,
+        "uncorrected_secretory": 8.302,
+        "corrected_secretory": 2.794,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.398,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 22,
+        "uncorrected_secretory": 8.523,
+        "corrected_secretory": 2.826,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.456,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 23,
+        "uncorrected_secretory": 8.74,
+        "corrected_secretory": 2.857,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.514,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 24,
+        "uncorrected_secretory": 8.953,
+        "corrected_secretory": 2.888,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.571,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 25,
+        "uncorrected_secretory": 9.163,
+        "corrected_secretory": 2.918,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.628,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 26,
+        "uncorrected_secretory": 9.369,
+        "corrected_secretory": 2.948,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.684,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 27,
+        "uncorrected_secretory": 9.571,
+        "corrected_secretory": 2.977,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.739,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 28,
+        "uncorrected_secretory": 9.77,
+        "corrected_secretory": 3.005,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.793,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 29,
+        "uncorrected_secretory": 9.966,
+        "corrected_secretory": 3.034,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.847,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 30,
+        "uncorrected_secretory": 10.158,
+        "corrected_secretory": 3.061,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.901,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 31,
+        "uncorrected_secretory": 10.347,
+        "corrected_secretory": 3.088,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 41.953,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 32,
+        "uncorrected_secretory": 10.533,
+        "corrected_secretory": 3.115,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.005,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 33,
+        "uncorrected_secretory": 10.715,
+        "corrected_secretory": 3.141,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.057,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 34,
+        "uncorrected_secretory": 10.894,
+        "corrected_secretory": 3.167,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.108,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 35,
+        "uncorrected_secretory": 11.071,
+        "corrected_secretory": 3.193,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.158,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 36,
+        "uncorrected_secretory": 11.244,
+        "corrected_secretory": 3.218,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.208,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 37,
+        "uncorrected_secretory": 11.414,
+        "corrected_secretory": 3.242,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.257,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 38,
+        "uncorrected_secretory": 11.581,
+        "corrected_secretory": 3.266,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.305,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 39,
+        "uncorrected_secretory": 11.745,
+        "corrected_secretory": 3.29,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.353,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 40,
+        "uncorrected_secretory": 11.907,
+        "corrected_secretory": 3.313,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.401,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 41,
+        "uncorrected_secretory": 12.066,
+        "corrected_secretory": 3.336,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.448,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 42,
+        "uncorrected_secretory": 12.222,
+        "corrected_secretory": 3.358,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.494,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 43,
+        "uncorrected_secretory": 12.375,
+        "corrected_secretory": 3.381,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.54,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 44,
+        "uncorrected_secretory": 12.525,
+        "corrected_secretory": 3.402,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.585,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 45,
+        "uncorrected_secretory": 12.674,
+        "corrected_secretory": 3.424,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.63,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 46,
+        "uncorrected_secretory": 12.819,
+        "corrected_secretory": 3.445,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.674,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 47,
+        "uncorrected_secretory": 12.962,
+        "corrected_secretory": 3.465,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.718,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 48,
+        "uncorrected_secretory": 13.102,
+        "corrected_secretory": 3.485,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.761,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 49,
+        "uncorrected_secretory": 13.241,
+        "corrected_secretory": 3.505,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.804,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 50,
+        "uncorrected_secretory": 13.376,
+        "corrected_secretory": 3.525,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.846,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 51,
+        "uncorrected_secretory": 13.51,
+        "corrected_secretory": 3.544,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.888,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 52,
+        "uncorrected_secretory": 13.641,
+        "corrected_secretory": 3.563,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.929,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 53,
+        "uncorrected_secretory": 13.769,
+        "corrected_secretory": 3.581,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 42.97,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 54,
+        "uncorrected_secretory": 13.896,
+        "corrected_secretory": 3.6,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.011,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 55,
+        "uncorrected_secretory": 14.02,
+        "corrected_secretory": 3.618,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.051,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 56,
+        "uncorrected_secretory": 14.143,
+        "corrected_secretory": 3.635,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.09,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 57,
+        "uncorrected_secretory": 14.263,
+        "corrected_secretory": 3.652,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.129,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 58,
+        "uncorrected_secretory": 14.381,
+        "corrected_secretory": 3.669,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.167,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 59,
+        "uncorrected_secretory": 14.497,
+        "corrected_secretory": 3.686,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.206,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 60,
+        "uncorrected_secretory": 14.611,
+        "corrected_secretory": 3.703,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.243,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 61,
+        "uncorrected_secretory": 14.723,
+        "corrected_secretory": 3.719,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.28,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 62,
+        "uncorrected_secretory": 14.833,
+        "corrected_secretory": 3.735,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.317,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 63,
+        "uncorrected_secretory": 14.941,
+        "corrected_secretory": 3.75,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.354,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 64,
+        "uncorrected_secretory": 15.048,
+        "corrected_secretory": 3.766,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.389,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 65,
+        "uncorrected_secretory": 15.152,
+        "corrected_secretory": 3.781,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.425,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 66,
+        "uncorrected_secretory": 15.255,
+        "corrected_secretory": 3.795,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.46,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 67,
+        "uncorrected_secretory": 15.356,
+        "corrected_secretory": 3.81,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.495,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 68,
+        "uncorrected_secretory": 15.455,
+        "corrected_secretory": 3.824,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.529,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 69,
+        "uncorrected_secretory": 15.552,
+        "corrected_secretory": 3.838,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.563,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 70,
+        "uncorrected_secretory": 15.648,
+        "corrected_secretory": 3.852,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.597,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 71,
+        "uncorrected_secretory": 15.742,
+        "corrected_secretory": 3.866,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.63,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 72,
+        "uncorrected_secretory": 15.835,
+        "corrected_secretory": 3.879,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.662,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 73,
+        "uncorrected_secretory": 15.926,
+        "corrected_secretory": 3.892,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.695,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 74,
+        "uncorrected_secretory": 16.015,
+        "corrected_secretory": 3.905,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.727,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 75,
+        "uncorrected_secretory": 16.103,
+        "corrected_secretory": 3.918,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.758,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 76,
+        "uncorrected_secretory": 16.189,
+        "corrected_secretory": 3.93,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.79,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 77,
+        "uncorrected_secretory": 16.274,
+        "corrected_secretory": 3.942,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.821,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 78,
+        "uncorrected_secretory": 16.358,
+        "corrected_secretory": 3.954,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.851,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 79,
+        "uncorrected_secretory": 16.439,
+        "corrected_secretory": 3.966,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.881,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 80,
+        "uncorrected_secretory": 16.52,
+        "corrected_secretory": 3.978,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.911,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 81,
+        "uncorrected_secretory": 16.599,
+        "corrected_secretory": 3.989,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.941,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 82,
+        "uncorrected_secretory": 16.677,
+        "corrected_secretory": 4.0,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.97,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 83,
+        "uncorrected_secretory": 16.753,
+        "corrected_secretory": 4.011,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 43.999,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 84,
+        "uncorrected_secretory": 16.828,
+        "corrected_secretory": 4.022,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.027,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 85,
+        "uncorrected_secretory": 16.902,
+        "corrected_secretory": 4.033,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.055,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 86,
+        "uncorrected_secretory": 16.975,
+        "corrected_secretory": 4.043,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.083,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 87,
+        "uncorrected_secretory": 17.046,
+        "corrected_secretory": 4.053,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.111,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 88,
+        "uncorrected_secretory": 17.116,
+        "corrected_secretory": 4.064,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.138,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 89,
+        "uncorrected_secretory": 17.185,
+        "corrected_secretory": 4.073,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.165,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 90,
+        "uncorrected_secretory": 17.252,
+        "corrected_secretory": 4.083,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.192,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 91,
+        "uncorrected_secretory": 17.319,
+        "corrected_secretory": 4.093,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.218,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 92,
+        "uncorrected_secretory": 17.384,
+        "corrected_secretory": 4.102,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.244,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 93,
+        "uncorrected_secretory": 17.448,
+        "corrected_secretory": 4.111,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.269,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 94,
+        "uncorrected_secretory": 17.512,
+        "corrected_secretory": 4.12,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.295,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 95,
+        "uncorrected_secretory": 17.574,
+        "corrected_secretory": 4.129,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.32,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 96,
+        "uncorrected_secretory": 17.634,
+        "corrected_secretory": 4.138,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.345,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 97,
+        "uncorrected_secretory": 17.694,
+        "corrected_secretory": 4.147,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.369,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 98,
+        "uncorrected_secretory": 17.753,
+        "corrected_secretory": 4.155,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.394,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 99,
+        "uncorrected_secretory": 17.811,
+        "corrected_secretory": 4.164,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.417,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 100,
+        "uncorrected_secretory": 17.868,
+        "corrected_secretory": 4.172,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.441,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 101,
+        "uncorrected_secretory": 17.924,
+        "corrected_secretory": 4.18,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.465,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 102,
+        "uncorrected_secretory": 17.979,
+        "corrected_secretory": 4.188,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.488,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 103,
+        "uncorrected_secretory": 18.033,
+        "corrected_secretory": 4.196,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.511,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 104,
+        "uncorrected_secretory": 18.086,
+        "corrected_secretory": 4.203,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.533,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 105,
+        "uncorrected_secretory": 18.138,
+        "corrected_secretory": 4.211,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.556,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 106,
+        "uncorrected_secretory": 18.189,
+        "corrected_secretory": 4.218,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.578,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 107,
+        "uncorrected_secretory": 18.239,
+        "corrected_secretory": 4.225,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.599,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 108,
+        "uncorrected_secretory": 18.289,
+        "corrected_secretory": 4.232,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.621,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 109,
+        "uncorrected_secretory": 18.337,
+        "corrected_secretory": 4.239,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.642,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 110,
+        "uncorrected_secretory": 18.385,
+        "corrected_secretory": 4.246,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.663,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 111,
+        "uncorrected_secretory": 18.432,
+        "corrected_secretory": 4.253,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.684,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 112,
+        "uncorrected_secretory": 18.478,
+        "corrected_secretory": 4.26,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.705,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 113,
+        "uncorrected_secretory": 18.523,
+        "corrected_secretory": 4.266,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.725,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 114,
+        "uncorrected_secretory": 18.568,
+        "corrected_secretory": 4.273,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.745,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 115,
+        "uncorrected_secretory": 18.612,
+        "corrected_secretory": 4.279,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.765,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 116,
+        "uncorrected_secretory": 18.655,
+        "corrected_secretory": 4.285,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.785,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 117,
+        "uncorrected_secretory": 18.697,
+        "corrected_secretory": 4.291,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.804,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 118,
+        "uncorrected_secretory": 18.739,
+        "corrected_secretory": 4.297,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.824,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 119,
+        "uncorrected_secretory": 18.779,
+        "corrected_secretory": 4.303,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.843,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 120,
+        "uncorrected_secretory": 18.82,
+        "corrected_secretory": 4.309,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.861,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 121,
+        "uncorrected_secretory": 18.859,
+        "corrected_secretory": 4.315,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.88,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 122,
+        "uncorrected_secretory": 18.898,
+        "corrected_secretory": 4.32,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.898,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 123,
+        "uncorrected_secretory": 18.936,
+        "corrected_secretory": 4.326,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.917,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 124,
+        "uncorrected_secretory": 18.973,
+        "corrected_secretory": 4.331,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.934,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 125,
+        "uncorrected_secretory": 19.01,
+        "corrected_secretory": 4.336,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.952,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 126,
+        "uncorrected_secretory": 19.046,
+        "corrected_secretory": 4.342,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.97,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 127,
+        "uncorrected_secretory": 19.082,
+        "corrected_secretory": 4.347,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 44.987,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 128,
+        "uncorrected_secretory": 19.117,
+        "corrected_secretory": 4.352,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.004,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 129,
+        "uncorrected_secretory": 19.151,
+        "corrected_secretory": 4.357,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.021,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 130,
+        "uncorrected_secretory": 19.185,
+        "corrected_secretory": 4.362,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.038,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 131,
+        "uncorrected_secretory": 19.218,
+        "corrected_secretory": 4.366,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.054,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 132,
+        "uncorrected_secretory": 19.25,
+        "corrected_secretory": 4.371,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.071,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 133,
+        "uncorrected_secretory": 19.282,
+        "corrected_secretory": 4.376,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.087,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 134,
+        "uncorrected_secretory": 19.314,
+        "corrected_secretory": 4.38,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.103,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 135,
+        "uncorrected_secretory": 19.345,
+        "corrected_secretory": 4.385,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.119,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 136,
+        "uncorrected_secretory": 19.375,
+        "corrected_secretory": 4.389,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.134,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 137,
+        "uncorrected_secretory": 19.405,
+        "corrected_secretory": 4.393,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.15,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 138,
+        "uncorrected_secretory": 19.434,
+        "corrected_secretory": 4.397,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.165,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 139,
+        "uncorrected_secretory": 19.463,
+        "corrected_secretory": 4.402,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.18,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 140,
+        "uncorrected_secretory": 19.491,
+        "corrected_secretory": 4.406,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.195,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 141,
+        "uncorrected_secretory": 19.519,
+        "corrected_secretory": 4.41,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.21,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 142,
+        "uncorrected_secretory": 19.547,
+        "corrected_secretory": 4.414,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.224,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 143,
+        "uncorrected_secretory": 19.574,
+        "corrected_secretory": 4.418,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.239,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 144,
+        "uncorrected_secretory": 19.6,
+        "corrected_secretory": 4.421,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.253,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 145,
+        "uncorrected_secretory": 19.626,
+        "corrected_secretory": 4.425,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.267,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 146,
+        "uncorrected_secretory": 19.652,
+        "corrected_secretory": 4.429,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.281,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 147,
+        "uncorrected_secretory": 19.677,
+        "corrected_secretory": 4.432,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.294,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 148,
+        "uncorrected_secretory": 19.701,
+        "corrected_secretory": 4.436,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.308,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 149,
+        "uncorrected_secretory": 19.725,
+        "corrected_secretory": 4.439,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.321,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 150,
+        "uncorrected_secretory": 19.749,
+        "corrected_secretory": 4.443,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.335,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 151,
+        "uncorrected_secretory": 19.773,
+        "corrected_secretory": 4.446,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.348,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 152,
+        "uncorrected_secretory": 19.796,
+        "corrected_secretory": 4.45,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.361,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 153,
+        "uncorrected_secretory": 19.818,
+        "corrected_secretory": 4.453,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.374,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 154,
+        "uncorrected_secretory": 19.84,
+        "corrected_secretory": 4.456,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.386,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 155,
+        "uncorrected_secretory": 19.862,
+        "corrected_secretory": 4.459,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.399,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 156,
+        "uncorrected_secretory": 19.884,
+        "corrected_secretory": 4.462,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.411,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 157,
+        "uncorrected_secretory": 19.905,
+        "corrected_secretory": 4.465,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.423,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 158,
+        "uncorrected_secretory": 19.926,
+        "corrected_secretory": 4.468,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.436,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 159,
+        "uncorrected_secretory": 19.946,
+        "corrected_secretory": 4.471,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.447,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 160,
+        "uncorrected_secretory": 19.966,
+        "corrected_secretory": 4.474,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.459,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 161,
+        "uncorrected_secretory": 19.986,
+        "corrected_secretory": 4.477,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.471,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 162,
+        "uncorrected_secretory": 20.005,
+        "corrected_secretory": 4.48,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.483,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 163,
+        "uncorrected_secretory": 20.024,
+        "corrected_secretory": 4.482,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.494,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 164,
+        "uncorrected_secretory": 20.043,
+        "corrected_secretory": 4.485,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.505,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 165,
+        "uncorrected_secretory": 20.061,
+        "corrected_secretory": 4.488,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.516,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 166,
+        "uncorrected_secretory": 20.079,
+        "corrected_secretory": 4.49,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.527,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 167,
+        "uncorrected_secretory": 20.097,
+        "corrected_secretory": 4.493,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.538,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 168,
+        "uncorrected_secretory": 20.114,
+        "corrected_secretory": 4.495,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.549,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 169,
+        "uncorrected_secretory": 20.131,
+        "corrected_secretory": 4.498,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.56,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 170,
+        "uncorrected_secretory": 20.148,
+        "corrected_secretory": 4.5,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.57,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 171,
+        "uncorrected_secretory": 20.164,
+        "corrected_secretory": 4.503,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.581,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 172,
+        "uncorrected_secretory": 20.181,
+        "corrected_secretory": 4.505,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.591,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 173,
+        "uncorrected_secretory": 20.197,
+        "corrected_secretory": 4.507,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.601,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 174,
+        "uncorrected_secretory": 20.212,
+        "corrected_secretory": 4.51,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.611,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 175,
+        "uncorrected_secretory": 20.228,
+        "corrected_secretory": 4.512,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.621,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 176,
+        "uncorrected_secretory": 20.243,
+        "corrected_secretory": 4.514,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.631,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 177,
+        "uncorrected_secretory": 20.258,
+        "corrected_secretory": 4.516,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.641,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 178,
+        "uncorrected_secretory": 20.272,
+        "corrected_secretory": 4.518,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.65,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 179,
+        "uncorrected_secretory": 20.287,
+        "corrected_secretory": 4.52,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.66,
+        "cftr_plus_stem_cell_pct": 18.02
+      },
+      {
+        "day": 180,
+        "uncorrected_secretory": 20.301,
+        "corrected_secretory": 4.522,
+        "transient_intermediate": 0.0,
+        "corrected_basal_stem_cells": 5.405,
+        "ciliated": 45.669,
+        "cftr_plus_stem_cell_pct": 18.02
+      }
+    ]
+  },
+  "checksums": {
+    "bfi_rankings_tsv": "05f4f6c66bc2a9cb6bb36ea518c8a0cec650a4f9698f47ac48966609685de8e7",
+    "transcytosis_kinetics_tsv": "6c2d92249597b3dce0d4d5bfeb45779d8ab342af75480f11f54cee9d743fd5e1",
+    "epithelial_trajectory_tsv": "6756d589261d8eb6b368b9008e57e3fc484f4e215afafb02e902a87d7bc60604",
+    "datasets_block": "e921200bb601e7d6841b24040fcce4b189349ccb1bb81f06283c41fc99fc8686",
+    "data_block": "e921200bb601e7d6841b24040fcce4b189349ccb1bb81f06283c41fc99fc8686"
+  }
+}

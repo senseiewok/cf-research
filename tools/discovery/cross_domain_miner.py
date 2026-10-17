@@ -179,6 +179,38 @@ def screen_innovations(donor_field: Optional[str] = None, min_bfi: float = 0.70)
     return results
 
 
+
+class CrossDomainInnovationMiner:
+    """Mines and ranks cross-domain biomedical innovations for CF delivery."""
+
+    def __init__(self, min_bfi: float = 0.70):
+        self.min_bfi = min_bfi
+
+    def rank_candidates(self, min_bfi: Optional[float] = None) -> List[Dict[str, Any]]:
+        """Screen and rank candidate delivery innovations with physical barrier mapping."""
+        cutoff = self.min_bfi if min_bfi is None else min_bfi
+        innovations = screen_innovations(donor_field=None, min_bfi=cutoff)
+
+        barriers_map = {
+            "CDI-001": "Sputum mucin meshwork steric entrapment; apical endocytic barrier",
+            "CDI-002": "Epithelial tight junctions; endosomal/lysosomal degradation pathway",
+            "CDI-003": "Polyanionic mucin adhesion; alveolar macrophage TLR7/8 activation and PEG clearance",
+            "CDI-004": "Basal niche inaccessibility; tight junction penetration requirement",
+            "CDI-005": "Mucosal endosomal entrapment; lysosomal TLR pattern recognition",
+        }
+
+        ranked = []
+        for inn in innovations:
+            item = dict(inn)
+            item["transfer_domain"] = inn["donor_field"]
+            item["bfi_score"] = inn["bfi"]
+            item["physical_barriers"] = barriers_map.get(
+                inn["id"], "Steric meshwork, charge adhesion, endosomal degradation, macrophage clearance"
+            )
+            ranked.append(item)
+        return ranked
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Cross-Domain Biomedical Innovation Miner for CF")
     parser.add_argument("--field", default="all", help="Donor field (all, solid_tumor_desmoplasia, blood_brain_barrier, mucosal_immunology, epithelial_plasticity, synthetic_virology)")
@@ -206,3 +238,4 @@ def main(argv=None) -> int:
 if __name__ == "__main__":
     import sys
     sys.exit(main())
+

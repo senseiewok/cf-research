@@ -167,6 +167,121 @@ def simulate_dedifferentiation_bypass(
     }
 
 
+
+class AirwayEpithelialPlasticitySimulator:
+    """Simulates airway epithelial dedifferentiation plasticity and niche repopulation over 180 days."""
+
+    def __init__(
+        self,
+        apical_editing_efficiency: float = 0.40,
+        notch_inhibitor_pulse_days: float = 5.0,
+        dediff_rate_per_day: float = 0.25,
+    ):
+        if not (0.0 <= apical_editing_efficiency <= 1.0):
+            raise ValueError("Apical editing efficiency must be between 0.0 and 1.0")
+        if notch_inhibitor_pulse_days < 0:
+            raise ValueError("Pulse days must be non-negative")
+        self.apical_editing_efficiency = apical_editing_efficiency
+        self.notch_inhibitor_pulse_days = notch_inhibitor_pulse_days
+        self.dediff_rate_per_day = dediff_rate_per_day
+
+    def simulate_180d_trajectory(
+        self,
+        total_days: float = 180.0,
+        dt_days: float = 0.5,
+    ) -> List[Dict[str, Any]]:
+        """Simulate long-term epithelial trajectory returning day-by-day points (days 0 to 180)."""
+        b_total = 100.0 * AIRWAY_EPITHELIAL_BASELINE["cell_fractions"]["basal_stem_cells"]
+        s_total = 100.0 * AIRWAY_EPITHELIAL_BASELINE["cell_fractions"]["secretory_club_cells"]
+        c_total = 100.0 * AIRWAY_EPITHELIAL_BASELINE["cell_fractions"]["ciliated_cells"]
+
+        b_wt = b_total
+        b_ed = 0.0
+        s_ed = s_total * self.apical_editing_efficiency
+        s_wt = s_total - s_ed
+        c_wt = c_total
+        c_ed = 0.0
+
+        inter_wt = 0.0
+        inter_ed = 0.0
+
+        b_capacity = b_total
+        k_diff_secretory = 0.015
+        k_diff_ciliated = 0.018
+        k_mature_intermediate = 0.50  # Dedifferentiating intermediate maturation rate
+
+        k_turnover_cilia = math.log(2.0) / AIRWAY_EPITHELIAL_BASELINE["turnover_half_life_days"]["ciliated_cells"]
+        k_turnover_secretory = math.log(2.0) / AIRWAY_EPITHELIAL_BASELINE["turnover_half_life_days"]["secretory_cells"]
+
+        steps = int(round(total_days / dt_days))
+        trajectory = []
+        recorded_days = set()
+
+        for step in range(steps + 1):
+            t = step * dt_days
+            int_day = int(round(t))
+
+            # Record point at each integer day (0, 1, 2, ..., 180)
+            if abs(t - int_day) < 1e-5 and int_day not in recorded_days and int_day <= int(total_days):
+                recorded_days.add(int_day)
+                current_b_total = max(0.001, b_wt + b_ed)
+                cftr_plus_stem_cell_pct = (b_ed / current_b_total) * 100.0
+                trajectory.append({
+                    "day": int_day,
+                    "uncorrected_secretory": round(s_wt, 3),
+                    "corrected_secretory": round(s_ed, 3),
+                    "transient_intermediate": round(inter_wt + inter_ed, 3),
+                    "corrected_basal_stem_cells": round(b_ed, 3),
+                    "ciliated": round(c_wt + c_ed, 3),
+                    "cftr_plus_stem_cell_pct": round(cftr_plus_stem_cell_pct, 2),
+                })
+
+            in_notch_pulse = (self.notch_inhibitor_pulse_days > 0.0) and (t <= self.notch_inhibitor_pulse_days)
+            if in_notch_pulse:
+                dediff_flux_wt = s_wt * self.dediff_rate_per_day * dt_days
+                dediff_flux_ed = s_ed * self.dediff_rate_per_day * dt_days
+                s_wt = max(0.0, s_wt - dediff_flux_wt)
+                s_ed = max(0.0, s_ed - dediff_flux_ed)
+                inter_wt += dediff_flux_wt
+                inter_ed += dediff_flux_ed
+
+            # Maturation of transient intermediate plastic cells into basal stem cells
+            mat_flux_wt = inter_wt * k_mature_intermediate * dt_days
+            mat_flux_ed = inter_ed * k_mature_intermediate * dt_days
+            inter_wt = max(0.0, inter_wt - mat_flux_wt)
+            inter_ed = max(0.0, inter_ed - mat_flux_ed)
+            b_wt += mat_flux_wt
+            b_ed += mat_flux_ed
+
+            # Carrying capacity regulation
+            b_sum = b_wt + b_ed
+            if b_sum > b_capacity:
+                excess_ratio = b_capacity / b_sum
+                b_wt *= excess_ratio
+                b_ed *= excess_ratio
+
+            # Differentiation flux from basal cells
+            f_ed_basal = b_ed / max(0.001, b_wt + b_ed)
+            f_wt_basal = b_wt / max(0.001, b_wt + b_ed)
+
+            flux_to_s = b_capacity * k_diff_secretory * dt_days
+            flux_to_c = b_capacity * k_diff_ciliated * dt_days
+
+            s_wt += flux_to_s * f_wt_basal
+            s_ed += flux_to_s * f_ed_basal
+
+            c_wt += flux_to_c * f_wt_basal
+            c_ed += flux_to_c * f_ed_basal
+
+            # Turnover
+            s_wt = max(0.0, s_wt - s_wt * k_turnover_secretory * dt_days)
+            s_ed = max(0.0, s_ed - s_ed * k_turnover_secretory * dt_days)
+            c_wt = max(0.0, c_wt - c_wt * k_turnover_cilia * dt_days)
+            c_ed = max(0.0, c_ed - c_ed * k_turnover_cilia * dt_days)
+
+        return trajectory
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Airway Secretory-to-Basal Dedifferentiation Plasticity Model")
     parser.add_argument("--edit-eff", type=float, default=0.35, help="Apical secretory editing efficiency (0.0 - 1.0)")
