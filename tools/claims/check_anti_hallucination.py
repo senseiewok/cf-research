@@ -39,11 +39,41 @@ PROHIBITED_OVERCLAIM_PHRASES: tuple[str, ...] = (
 
 # Unfiltered 1,053-cohort counts that indicate contamination if cited in PRISMA-included context
 UNFILTERED_COHORT_CONTAMINATION: tuple[tuple[re.Pattern, str], ...] = (
-    (re.compile(r"\b169\b.*?\b(?:fev1|lung_function)", re.IGNORECASE), "169 lung_function_fev1 (unfiltered)"),
-    (re.compile(r"\b39\b.*?\b(?:exacerbation|pulmonary_exacerbation)", re.IGNORECASE), "39 pulmonary_exacerbations (unfiltered)"),
-    (re.compile(r"\b163\b.*?\b(?:quality_of_life|cfq|qol)", re.IGNORECASE), "163 quality_of_life (unfiltered)"),
-    (re.compile(r"\b453\b.*?\b(?:safety|adverse_events)", re.IGNORECASE), "453 safety_adverse_events (unfiltered)"),
-    (re.compile(r"\b1[,]?114\b.*?\b(?:other|other_or_not_stated)", re.IGNORECASE), "1,114 other_or_not_stated (unfiltered)"),
+    (
+        re.compile(
+            r"(?:\b169\b\s*(?:entries|outcomes|studies|records|classified|primary)\b.*?\b(?:fev1|lung_function)|\b(?:fev1|lung_function).*?\b169\s*(?:entries|outcomes|studies|records|classified))",
+            re.IGNORECASE,
+        ),
+        "169 lung_function_fev1 (unfiltered)",
+    ),
+    (
+        re.compile(
+            r"(?:\b39\b\s*(?:entries|outcomes|studies|records|classified|primary)\b.*?\b(?:exacerbation|pulmonary_exacerbation)|\b(?:exacerbation|pulmonary_exacerbation).*?\b39\s*(?:entries|outcomes|studies|records|classified))",
+            re.IGNORECASE,
+        ),
+        "39 pulmonary_exacerbations (unfiltered)",
+    ),
+    (
+        re.compile(
+            r"(?:\b163\b\s*(?:entries|outcomes|studies|records|classified|primary)\b.*?\b(?:quality_of_life|cfq|qol)|\b(?:quality_of_life|cfq|qol).*?\b163\s*(?:entries|outcomes|studies|records|classified))",
+            re.IGNORECASE,
+        ),
+        "163 quality_of_life (unfiltered)",
+    ),
+    (
+        re.compile(
+            r"(?:\b453\b\s*(?:entries|outcomes|studies|records|classified|primary)\b.*?\b(?:safety|adverse_events)|\b(?:safety|adverse_events).*?\b453\s*(?:entries|outcomes|studies|records|classified))",
+            re.IGNORECASE,
+        ),
+        "453 safety_adverse_events (unfiltered)",
+    ),
+    (
+        re.compile(
+            r"(?:\b1[,]?114\b\s*(?:entries|outcomes|studies|records|classified|primary)\b.*?\b(?:other|other_or_not_stated)|\b(?:other|other_or_not_stated).*?\b1[,]?114\s*(?:entries|outcomes|studies|records|classified))",
+            re.IGNORECASE,
+        ),
+        "1,114 other_or_not_stated (unfiltered)",
+    ),
 )
 
 NCT_RE = re.compile(r"\bNCT\d{8}\b")

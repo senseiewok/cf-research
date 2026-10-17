@@ -31,6 +31,8 @@
 40  # Eur Respir J volume 40 for Quanjer PH et al. 2012
 331  # N Engl J Med volume 331 for Fuchs HJ et al. 1994
 128  # Chest volume 128 for Quittner AL et al. 2005
+135  # Chest volume 135 for Quittner AL et al. 2009
+2009  # Quittner AL et al. Chest publication year
 365  # N Engl J Med volume 365 for Ramsey BW et al. 2011
 373  # N Engl J Med volume 373 for Wainwright CE et al. 2015
 381  # N Engl J Med volume 381 for Middleton PG et al. 2019

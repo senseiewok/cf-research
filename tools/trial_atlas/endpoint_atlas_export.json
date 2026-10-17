@@ -126,7 +126,7 @@
       "nutritional_bmi": 11
     },
     "2020-2026": {
-      "other_or_not_stated": 295,
+      "other_or_not_stated": 291,
       "safety_adverse_events": 131,
       "nutritional_bmi": 20,
       "quality_of_life": 62,
@@ -134,54 +134,77 @@
       "pulmonary_exacerbations": 2,
       "microbiology_cfu": 22,
       "sweat_chloride": 3
+    },
+    "unknown": {
+      "other_or_not_stated": 4
     }
   },
   "benchmark_trials": [
     {
       "nct_id": "NCT00909532",
       "name": "STRIVE",
+      "title": "Study of Ivacaftor in Cystic Fibrosis Subjects Aged 12 Years and Older With the G551D Mutation",
       "phase": "PHASE3",
+      "status": "COMPLETED",
       "modality": "ivacaftor (VX-770)",
       "population": "G551D gating mutation",
-      "primary_endpoint": "Absolute change in ppFEV1 per GLI reference equations",
+      "primary_endpoint": [
+        "Absolute Mean Change From Baseline in Percent Predicted Forced Expiratory Volume in 1 Second (FEV1) Through Week 24"
+      ],
       "citation": "Ramsey BW et al., N Engl J Med 2011;365:1663-1672"
     },
     {
       "nct_id": "NCT01807923",
       "name": "TRAFFIC",
+      "title": "A Study of Lumacaftor in Combination With Ivacaftor in Cystic Fibrosis Subjects Aged 12 Years and Older Who Are Homozygous for the F508del-CFTR Mutation",
       "phase": "PHASE3",
+      "status": "COMPLETED",
       "modality": "lumacaftor / ivacaftor",
       "population": "F508del homozygous",
-      "primary_endpoint": "Absolute change in ppFEV1 through Week 24",
+      "primary_endpoint": [
+        "Absolute Change From Baseline in Percent Predicted Forced Expiratory Volume in 1 Second (FEV1) at Week 24"
+      ],
       "citation": "Wainwright CE et al., N Engl J Med 2015;373:220-231"
     },
     {
       "nct_id": "NCT03525444",
       "name": "AURORA-44",
+      "title": "A Phase 3 Study of VX-445 Combination Therapy in Subjects With Cystic Fibrosis Heterozygous for the F508del Mutation and a Minimal Function Mutation (F/MF)",
       "phase": "PHASE3",
+      "status": "COMPLETED",
       "modality": "elexacaftor / tezacaftor / ivacaftor",
       "population": "F508del heterozygous with minimal function (F/MF)",
-      "primary_endpoint": "Absolute change from baseline in percent predicted FEV1 (ppFEV1)",
+      "primary_endpoint": [
+        "Absolute Change in Percent Predicted Forced Expiratory Volume in 1 Second (ppFEV1)"
+      ],
       "citation": "Middleton PG et al., N Engl J Med 2019;381:1809-1819"
     },
     {
       "nct_id": "NCT05033080",
       "name": "SKYLINE 102",
+      "title": "A Phase 3 Study of VX-121 Combination Therapy in Participants With Cystic Fibrosis (CF) Heterozygous for F508del and a Minimal Function Mutation (F/MF)",
       "phase": "PHASE3",
+      "status": "COMPLETED",
       "modality": "vanzacaftor / tezacaftor / deutivacaftor",
       "population": "F508del heterozygous with minimal function (F/MF)",
-      "primary_endpoint": "Absolute change in percent predicted FEV1 through Week 24",
+      "primary_endpoint": [
+        "Absolute Change in Percent Predicted Forced Expiratory Volume in 1 Second (ppFEV1)"
+      ],
       "citation": "ClinicalTrials.gov NCT05033080"
     },
     {
       "nct_id": "NCT05668741",
       "name": "BEACON-CF",
-      "phase": "PHASE1/PHASE2",
+      "title": "A Phase 1/2 Study of VX-522 in Participants With Cystic Fibrosis (CF)",
+      "phase": "PHASE2",
+      "status": "COMPLETED",
       "modality": "VX-522 (inhaled CFTR mRNA)",
       "population": "CF adults ineligible for CFTR modulators",
-      "primary_endpoint": "Safety, tolerability (TEAEs/SAEs) and pharmacokinetics",
+      "primary_endpoint": [
+        "Safety and Tolerability as Assessed by Number of Participants With Adverse Events (AEs) and Serious Adverse Events (SAEs)"
+      ],
       "citation": "ClinicalTrials.gov NCT05668741 (Terminated)"
     }
   ],
-  "export_sha256": "3cd27b8a21f59941fa1777ca934fed2442ad24a0184ee3e863ede7c7c7baaa79"
+  "export_sha256": "f507cee9c49db97409a4d53dc1d85b86ab5553f014c610231c7dd0d335512d95"
 }

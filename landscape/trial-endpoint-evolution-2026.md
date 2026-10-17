@@ -6,7 +6,7 @@
 **Task Anchor**: `T-0172` (Trial Endpoint Atlas: PRISMA screening flow & surrogate-to-registrational endpoint evolution)  
 **Answer Tier**: `T2` Certified  
 **Review Tier**: `elevated`  
-**Primary Sources**: ClinicalTrials.gov API v2 CF Snapshot (`snapshot.json`, `cf-snapshot-1`), PRISMA 2020 Statement (Page MJ et al., *BMJ* 2021;372:n71), GLI-2012 Spirometry Equations (Quanjer PH et al., *Eur Respir J* 2012), CFF Sweat Chloride Diagnostic Guidelines (Farrell PM et al., *J Pediatr* 2017), CFQ-R Quality of Life Validation (Quittner AL et al., *Chest* 2005), Fuchs Exacerbation Criteria (Fuchs HJ et al., *N Engl J Med* 1994).
+**Primary Sources**: ClinicalTrials.gov API v2 CF Snapshot (`snapshot.json`, `cf-snapshot-1`), PRISMA 2020 Statement (Page MJ et al., *BMJ* 2021;372:n71), GLI-2012 Spirometry Equations (Quanjer PH et al., *Eur Respir J* 2012), CFF Sweat Chloride Diagnostic Guidelines (Farrell PM et al., *J Pediatr* 2017), CFQ-R Quality of Life Validation (Quittner AL et al., *Chest* 2009), Fuchs Exacerbation Criteria (Fuchs HJ et al., *N Engl J Med* 1994).
 
 ---
 
@@ -42,14 +42,14 @@ flowchart TD
 
     subgraph Classification["4. 8-Class Canonical Taxonomy"]
         D["1,821 Outcome Entries Tagged"]
-        D1["lung_function_fev1 (169 entries / 157 studies)"]
+        D1["lung_function_fev1 (164 entries / 152 studies)"]
         D2["sweat_chloride (16 entries / 12 studies)"]
-        D3["pulmonary_exacerbations (39 entries / 39 studies)"]
-        D4["quality_of_life (163 entries / 100 studies)"]
-        D5["microbiology_cfu (76 entries / 61 studies)"]
-        D6["nutritional_bmi (57 entries / 39 studies)"]
-        D7["safety_adverse_events (453 entries / 229 studies)"]
-        D8["other_or_not_stated (1,114 entries / 642 studies)"]
+        D3["pulmonary_exacerbations (26 entries / 26 studies)"]
+        D4["quality_of_life (129 entries / 75 studies)"]
+        D5["microbiology_cfu (66 entries / 51 studies)"]
+        D6["nutritional_bmi (55 entries / 37 studies)"]
+        D7["safety_adverse_events (404 entries / 201 studies)"]
+        D8["other_or_not_stated (1,037 entries / 583 studies)"]
         D --> D1 & D2 & D3 & D4 & D5 & D6 & D7 & D8
     end
 
@@ -110,7 +110,7 @@ xychart-beta
 1. **Percent Predicted FEV1 (`lung_function_fev1`)**: Forced expiratory volume in 1 second standardized against Global Lung Function Initiative (GLI-2012) all-age multi-ethnic reference equations (*Quanjer PH et al., Eur Respir J 2012;40:1324-1343*). Serves as the primary registrational efficacy surrogate across Phase 3 programs.
 2. **Sweat Chloride Concentration (`sweat_chloride`)**: Quantitative pilocarpine iontophoresis measuring chloride ion flux (mmol/L) directly reflecting CFTR channel pore open probability and in vivo rescue (*Farrell PM et al., J Pediatr 2017;181S:S4-S15*). Diagnostic threshold established at 60 mmol/L. Farrell PM et al. 2017 established sweat chloride concentration guidelines with a diagnostic threshold of 60 mmol/L.
 3. **Protocol-Defined Pulmonary Exacerbations (`pulmonary_exacerbations`)**: Acute respiratory deterioration requiring systemic antibiotics evaluated per standardized criteria (*Fuchs HJ et al., N Engl J Med 1994;331:637-642*).
-4. **Patient-Reported Quality of Life (`quality_of_life`)**: Cystic Fibrosis Questionnaire-Revised (CFQ-R) Respiratory Domain evaluating symptom burden (*Quittner AL et al., Chest 2005;128:2347-2354*). Quittner AL et al. 2005 established that the minimal clinically important difference for the CFQ-R respiratory domain is 4.0 points.
+4. **Patient-Reported Quality of Life (`quality_of_life`)**: Cystic Fibrosis Questionnaire-Revised (CFQ-R) Respiratory Domain evaluating symptom burden (*Quittner AL et al., Chest 2009;135:1610-1618*). Quittner AL et al. 2009 established that the minimal clinically important difference for the CFQ-R respiratory domain is 4.0 points.
 5. **Microbiology & Sputum Density (`microbiology_cfu`)**: Quantitative log10 colony forming units per gram of sputum for airway pathogens (*Pseudomonas aeruginosa*, *Burkholderia cepacia*).
 6. **Nutritional & Anthropometric Status (`nutritional_bmi`)**: Body Mass Index (BMI in $\text{kg/m}^2$) and pediatric BMI-for-age percentiles.
 7. **Safety, Tolerability & Toxicity (`safety_adverse_events`)**: Treatment-emergent adverse events (TEAEs), serious adverse events (SAEs), and laboratory hepatic signals (ALT/AST transaminases and total bilirubin elevations).
@@ -155,7 +155,7 @@ The canonical taxonomy maps directly to the benchmark trials that established re
 | `NCT01807923` | **TRAFFIC** | Phase 3 | lumacaftor / ivacaftor | F508del homozygous ($\ge 12\ \text{yr}$) | Absolute change in ppFEV1 through Week 24 | Wainwright CE et al., *N Engl J Med* 2015;373:220-231 |
 | `NCT03525444` | **AURORA-44** | Phase 3 | elexacaftor / tezacaftor / ivacaftor | F508del heterozygous minimal function (F/MF) | Absolute change from baseline in percent predicted FEV1 (ppFEV1) | Middleton PG et al., *N Engl J Med* 2019;381:1809-1819 |
 | `NCT05033080` | **SKYLINE 102** | Phase 3 | vanzacaftor / tezacaftor / deutivacaftor | F508del heterozygous minimal function (F/MF) | Absolute change in percent predicted FEV1 through Week 24 | ClinicalTrials.gov NCT05033080 |
-| `NCT05668741` | **BEACON-CF** | Phase 1/2 | VX-522 (inhaled CFTR mRNA) | Adults with CF ineligible for modulators | Safety, tolerability (TEAEs/SAEs) and pharmacokinetics | Terminated due to tolerability/delivery hurdles |
+| `NCT05668741` | **BEACON-CF** | Phase 1/2 | VX-522 (inhaled CFTR mRNA) | Adults with CF ineligible for modulators | Safety, tolerability (TEAEs/SAEs) and pharmacokinetics | ClinicalTrials.gov NCT05668741 (Status: TERMINATED) |
 | `NCT00909727` | **ENVISION** | Phase 3 | ivacaftor | G551D pediatric subjects ($6\text{--}11\ \text{yr}$) | Absolute change in ppFEV1 and sweat chloride | Davies JC et al., *Am J Respir Crit Care Med* 2013;187:1219-1225 |
 
 ---

@@ -17,9 +17,9 @@
   "total_proposed_quotes": 93,
   "valid_verbatim_quotes": 93,
   "quote_fidelity": 1.0,
-  "precision": 1.0,
-  "recall": 0.9901,
-  "f1": 0.995,
+  "precision": 0.99,
+  "recall": 0.9802,
+  "f1": 0.9851,
   "per_class": {
    "lung_function_fev1": {
     "tp": 14,
@@ -44,12 +44,12 @@
    "pulmonary_exacerbations": {
     "tp": 5,
     "fp": 0,
-    "fn": 0,
-    "positives": 5,
+    "fn": 1,
+    "positives": 6,
     "predicted": 5,
     "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0
+    "recall": 0.8333,
+    "f1": 0.9091
    },
    "quality_of_life": {
     "tp": 5,
@@ -92,14 +92,14 @@
     "f1": 1.0
    },
    "other_or_not_stated": {
-    "tp": 36,
-    "fp": 0,
+    "tp": 35,
+    "fp": 1,
     "fn": 1,
-    "positives": 37,
+    "positives": 36,
     "predicted": 36,
-    "precision": 1.0,
-    "recall": 0.973,
-    "f1": 0.9863
+    "precision": 0.9722,
+    "recall": 0.9722,
+    "f1": 0.9722
    }
   },
   "phase_distribution": {
@@ -397,7 +397,7 @@
    "description": "Pseudomonas mucoidy conversion Quality of life Pulmonary function",
    "time_frame": "18 months",
    "ground_truth_classes": [
-    "other_or_not_stated"
+    "pulmonary_exacerbations"
    ],
    "proposer_tags": [],
    "challenger_tags": [],
@@ -405,7 +405,7 @@
     "other_or_not_stated"
    ],
    "consensus_tags": [],
-   "agreement": true
+   "agreement": false
   },
   {
    "entry_id": "NCT02144246:P3",
@@ -4395,5 +4395,5 @@
    "agreement": true
   }
  ],
- "key_sha256": "249c2675ea854e3718ea82ee028c10f8299766ee8aea535ab2b14cdcce21135a"
+ "key_sha256": "6a9fd930bfbd61eeb6b2fe2a6c418b2a0349b3a169c33f5a1847190e23f488a9"
 }

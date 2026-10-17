@@ -19,6 +19,7 @@ sys.path.insert(0, str(HERE))
 import lexicon as lex_mod
 import scope as scope_mod
 import snapshot as snap
+from consensus_audit import _to_raw_study, normalize_phase
 
 SNAPSHOT_JSON_PATH = HERE / "snapshot.json"
 EXPORT_JSON_PATH = HERE / "endpoint_atlas_export.json"
@@ -36,28 +37,7 @@ def compute_atlas_export(snapshot_path: Path = SNAPSHOT_JSON_PATH) -> dict:
     included_studies = []
 
     for s in studies:
-        raw = {
-            "protocolSection": {
-                "identificationModule": {
-                    "nctId": s["nct_id"],
-                    "briefTitle": s.get("brief_title", ""),
-                },
-                "statusModule": {
-                    "overallStatus": s.get("overall_status", ""),
-                    "startDateStruct": {"date": s.get("start_date", "")},
-                },
-                "designModule": {
-                    "studyType": s.get("study_type", "INTERVENTIONAL"),
-                    "phases": s.get("phases", []),
-                },
-                "conditionsModule": {
-                    "conditions": s.get("conditions", ["Cystic Fibrosis"]),
-                },
-                "outcomesModule": {
-                    "primaryOutcomes": s.get("primary_outcomes", []),
-                },
-            }
-        }
+        raw = _to_raw_study(s)
         rec = snap.study_record(raw)
         rule, reason = scope_mod.classify(rec)
         if rule:
@@ -85,11 +65,14 @@ def compute_atlas_export(snapshot_path: Path = SNAPSHOT_JSON_PATH) -> dict:
 
         phases = s.get("phases") or ["NA"]
         start_year = scope_mod.start_info(rec)["start_year"]
-        era = (
-            "pre-2012"
-            if (start_year and start_year < 2012)
-            else ("2012-2019" if (start_year and start_year < 2020) else "2020-2026")
-        )
+        if start_year is None:
+            era = "unknown"
+        elif start_year < 2012:
+            era = "pre-2012"
+        elif start_year < 2020:
+            era = "2012-2019"
+        else:
+            era = "2020-2026"
 
         for e in entries:
             tagged = lex.tag_entry(e)
@@ -100,6 +83,8 @@ def compute_atlas_export(snapshot_path: Path = SNAPSHOT_JSON_PATH) -> dict:
                 for p in phases:
                     phase_transition_matrix[p][c8] += 1
                 era_transition_matrix[era][c8] += 1
+
+    studies_by_nct = {s["nct_id"]: s for s in studies}
 
     # Format output dictionary
     export = {
@@ -152,54 +137,60 @@ def compute_atlas_export(snapshot_path: Path = SNAPSHOT_JSON_PATH) -> dict:
         },
         "era_transition_matrix": {
             era: dict(era_transition_matrix[era])
-            for era in ["pre-2012", "2012-2019", "2020-2026"]
+            for era in (["pre-2012", "2012-2019", "2020-2026"] + (["unknown"] if "unknown" in era_transition_matrix else []))
         },
         "benchmark_trials": [
             {
-                "nct_id": "NCT00909532",
-                "name": "STRIVE",
-                "phase": "PHASE3",
-                "modality": "ivacaftor (VX-770)",
-                "population": "G551D gating mutation",
-                "primary_endpoint": "Absolute change in ppFEV1 per GLI reference equations",
-                "citation": "Ramsey BW et al., N Engl J Med 2011;365:1663-1672",
-            },
-            {
-                "nct_id": "NCT01807923",
-                "name": "TRAFFIC",
-                "phase": "PHASE3",
-                "modality": "lumacaftor / ivacaftor",
-                "population": "F508del homozygous",
-                "primary_endpoint": "Absolute change in ppFEV1 through Week 24",
-                "citation": "Wainwright CE et al., N Engl J Med 2015;373:220-231",
-            },
-            {
-                "nct_id": "NCT03525444",
-                "name": "AURORA-44",
-                "phase": "PHASE3",
-                "modality": "elexacaftor / tezacaftor / ivacaftor",
-                "population": "F508del heterozygous with minimal function (F/MF)",
-                "primary_endpoint": "Absolute change from baseline in percent predicted FEV1 (ppFEV1)",
-                "citation": "Middleton PG et al., N Engl J Med 2019;381:1809-1819",
-            },
-            {
-                "nct_id": "NCT05033080",
-                "name": "SKYLINE 102",
-                "phase": "PHASE3",
-                "modality": "vanzacaftor / tezacaftor / deutivacaftor",
-                "population": "F508del heterozygous with minimal function (F/MF)",
-                "primary_endpoint": "Absolute change in percent predicted FEV1 through Week 24",
-                "citation": "ClinicalTrials.gov NCT05033080",
-            },
-            {
-                "nct_id": "NCT05668741",
-                "name": "BEACON-CF",
-                "phase": "PHASE1/PHASE2",
-                "modality": "VX-522 (inhaled CFTR mRNA)",
-                "population": "CF adults ineligible for CFTR modulators",
-                "primary_endpoint": "Safety, tolerability (TEAEs/SAEs) and pharmacokinetics",
-                "citation": "ClinicalTrials.gov NCT05668741 (Terminated)",
-            },
+                "nct_id": b["nct_id"],
+                "name": b["name"],
+                "title": studies_by_nct.get(b["nct_id"], {}).get("brief_title", ""),
+                "phase": normalize_phase(studies_by_nct.get(b["nct_id"], {}).get("phases")),
+                "status": studies_by_nct.get(b["nct_id"], {}).get("overall_status", ""),
+                "modality": b["modality"],
+                "population": b["population"],
+                "primary_endpoint": [
+                    o.get("measure", "")
+                    for o in studies_by_nct.get(b["nct_id"], {}).get("primary_outcomes", [])
+                ],
+                "citation": b["citation"],
+            }
+            for b in [
+                {
+                    "nct_id": "NCT00909532",
+                    "name": "STRIVE",
+                    "modality": "ivacaftor (VX-770)",
+                    "population": "G551D gating mutation",
+                    "citation": "Ramsey BW et al., N Engl J Med 2011;365:1663-1672",
+                },
+                {
+                    "nct_id": "NCT01807923",
+                    "name": "TRAFFIC",
+                    "modality": "lumacaftor / ivacaftor",
+                    "population": "F508del homozygous",
+                    "citation": "Wainwright CE et al., N Engl J Med 2015;373:220-231",
+                },
+                {
+                    "nct_id": "NCT03525444",
+                    "name": "AURORA-44",
+                    "modality": "elexacaftor / tezacaftor / ivacaftor",
+                    "population": "F508del heterozygous with minimal function (F/MF)",
+                    "citation": "Middleton PG et al., N Engl J Med 2019;381:1809-1819",
+                },
+                {
+                    "nct_id": "NCT05033080",
+                    "name": "SKYLINE 102",
+                    "modality": "vanzacaftor / tezacaftor / deutivacaftor",
+                    "population": "F508del heterozygous with minimal function (F/MF)",
+                    "citation": "ClinicalTrials.gov NCT05033080",
+                },
+                {
+                    "nct_id": "NCT05668741",
+                    "name": "BEACON-CF",
+                    "modality": "VX-522 (inhaled CFTR mRNA)",
+                    "population": "CF adults ineligible for CFTR modulators",
+                    "citation": "ClinicalTrials.gov NCT05668741 (Terminated)",
+                },
+            ]
         ],
     }
 

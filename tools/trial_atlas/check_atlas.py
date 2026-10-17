@@ -1249,15 +1249,22 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
         # Default self-check mode (for T-0172 acceptance: python tools/trial_atlas/check_atlas.py)
         import consensus_audit
         print("TRIAL ENDPOINT ATLAS: DEFAULT SELF-CHECK & RUN RECORD VERIFICATION")
-        consensus_audit.ensure_artifacts()
         rec_path = HERE / "run-records" / "2026-10-11-run-1.json"
-        if rec_path.exists():
-            code_rec = check_record(rec_path)
-            if code_rec != 0:
-                return code_rec
-        s = snap.load(consensus_audit.DEFAULT_SNAPSHOT_DIR)
-        tags_data = read_json(consensus_audit.DEFAULT_TAGS_PATH, "tags file")
-        code_audit = consensus_audit.run_audit(s, tags_data, consensus_audit.DEFAULT_KEY_PATH)
+        if not rec_path.exists():
+            print(f"FAIL default self-check: missing run record {rec_path}")
+            return 1
+        code_rec = check_record(rec_path)
+        if code_rec != 0:
+            return code_rec
+        snap_dir = consensus_audit.DEFAULT_SNAPSHOT_DIR
+        tags_path = consensus_audit.DEFAULT_TAGS_PATH
+        key_path = consensus_audit.DEFAULT_KEY_PATH
+        if not snap_dir.exists() or not tags_path.exists() or not key_path.exists():
+            print("FAIL default self-check: consensus artifacts missing. Run consensus_audit.py --generate first.")
+            return 1
+        s = snap.load(snap_dir)
+        tags_data = read_json(tags_path, "tags file")
+        code_audit = consensus_audit.run_audit(s, tags_data, key_path)
         if code_audit != 0:
             return code_audit
 

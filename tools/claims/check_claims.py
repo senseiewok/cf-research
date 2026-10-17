@@ -415,7 +415,9 @@ def main(argv=None):
     companion_map = None
     claims: list | None = None
     problem: str | None = None
+    original_md_path: Path | None = None
     if target_path.suffix.lower() == ".md":
+        original_md_path = target_path
         companion_claims = target_path.parent / f"{target_path.stem}-claims.json"
         if companion_claims.exists():
             target_path = companion_claims
@@ -451,6 +453,36 @@ def main(argv=None):
         results.append({"id": "-", "rule": "R1", "name": "fields", "ok": False, "detail": problem})
     else:
         results.extend(check(claims, evidence, evidence_errors, a.max_quote_words, widening, absence))
+        if original_md_path and claims:
+            try:
+                md_text = original_md_path.read_text(encoding="utf-8")
+                md_norm = normalise_text(md_text)
+                for c in claims:
+                    cid = c.get("id", "?")
+                    c_text = c.get("claim", "")
+                    c_norm = normalise_text(c_text)
+                    if c_norm not in md_norm:
+                        c_nums = [n for _, n in claim_numbers(c_text)]
+                        if not (c_nums and all(n in md_norm for n in c_nums)):
+                            results.append(
+                                {
+                                    "id": cid,
+                                    "rule": "R2",
+                                    "name": "companion_markdown",
+                                    "ok": False,
+                                    "detail": f"claim sentence or numbers not found in companion markdown {original_md_path.name}",
+                                }
+                            )
+            except Exception as e:
+                results.append(
+                    {
+                        "id": "-",
+                        "rule": "R2",
+                        "name": "companion_markdown",
+                        "ok": False,
+                        "detail": f"could not read companion markdown {original_md_path}: {e}",
+                    }
+                )
     failures = sum(1 for r in results if not r["ok"])
     n_claims = len(claims) if claims else 0
     if a.json:

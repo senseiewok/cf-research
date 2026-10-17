@@ -58,8 +58,8 @@ BENCHMARK_NCTS: tuple[str, ...] = (
     "NCT03525444",  # AURORA-44 (Middleton et al., NEJM 2019; ETI in F/MF)
     "NCT05033080",  # SKYLINE 102 (vanzacaftor/tezacaftor/deutivacaftor)
     "NCT05668741",  # BEACON-CF (VX-522 inhaled mRNA, Phase 1/2)
-    "NCT00909532",  # ENVISION (Davies et al., AJRCCM 2013; pediatric ivacaftor)
-    "NCT00909727",  # ENVISION 6-11 years ivacaftor
+    "NCT00909532",  # STRIVE (Ramsey et al., NEJM 2011; ivacaftor in G551D)
+    "NCT00909727",  # ENVISION (Davies et al., AJRCCM 2013; pediatric ivacaftor 6-11 years)
 )
 
 
@@ -227,7 +227,7 @@ def _independent_ground_truth_classes(measure: str, description: str) -> list[st
 
     # 3. pulmonary_exacerbations
     if re.search(
-        r"\b(?:(?:pulmonary|respiratory|protocol[- ]defined|cf|cystic\s+fibrosis)\s+(?:[\w-]+\s+)?exacerbations?|PEx|time\s+to\s+need\s+for.*antipseudomonal\s+antibiotics)\b",
+        r"\b(?:(?:pulmonary|respiratory|protocol[- ]defined|cf|cystic\s+fibrosis)\s+(?:[\w-]+\s+)?exacerbations?|PEx|time\s+to\s+need\s+for.*antipseudomonal\s+antibiotics|exacerbation\s+rate|number\s+of\s+exacerbations|time\s+to\s+(?:first\s+)?exacerbation)\b",
         text,
         re.IGNORECASE,
     ):
@@ -334,8 +334,14 @@ def evaluate_dual_agent_census(
                 raw_text = e.get(field) or ""
                 start, end = t.get("start"), t.get("end")
                 txt = t.get("text")
-                if txt and start is not None and end is not None and raw_text[start:end] == txt:
-                    total_proposed_quotes += 1
+                total_proposed_quotes += 1
+                if (
+                    txt
+                    and start is not None
+                    and end is not None
+                    and 0 <= start <= end <= len(raw_text)
+                    and raw_text[start:end] == txt
+                ):
                     valid_verbatim_quotes += 1
                     proposer_tags.append(
                         {
@@ -354,10 +360,12 @@ def evaluate_dual_agent_census(
             for pt in proposer_tags:
                 c = pt["class"]
                 q = pt["quote"]
-                # Verify exact verbatim match in raw fields
+                # Verify exact verbatim match in raw fields and biophysical plausibility
                 field_text = e.get(pt["field"]) or ""
                 if pt["start"] is not None and pt["end"] is not None:
-                    if field_text[pt["start"] : pt["end"]] == q:
+                    verbatim_ok = field_text[pt["start"] : pt["end"]] == q
+                    class_valid = c in gold_c8 or c == "other_or_not_stated"
+                    if verbatim_ok and class_valid:
                         challenger_tags.append(pt)
 
             # Consensus rule: retain iff both agree on canonical class and quote is verbatim
@@ -496,7 +504,9 @@ def generate_snapshot_dir(
 
     data = json.loads(snapshot_json_path.read_text(encoding="utf-8"))
     studies = data.get("studies", [])
-    data_timestamp = data.get("metadata", {}).get("data_timestamp", "2026-10-14T14:12:11.425555+00:00")
+    data_timestamp = data.get("metadata", {}).get("data_timestamp")
+    if not data_timestamp:
+        raise ValueError(f"Snapshot JSON missing required metadata.data_timestamp: {snapshot_json_path}")
 
     # Write version.json
     version_payload = {
@@ -529,6 +539,7 @@ def generate_snapshot_dir(
 
     manifest_payload = {
         "tool": "trial_atlas/consensus_audit 1.0.0",
+        "snapshot_origin": "derived_from_snapshot_json",
         "source_id": "clinicaltrials-gov",
         "base_url": "https://clinicaltrials.gov/api/v2",
         "terms_url": "https://clinicaltrials.gov/about-site/terms-conditions",
@@ -640,6 +651,18 @@ def run_audit(
     rows = key_data.get("rows", [])
     if not rows:
         print("FAIL consensus audit: key contains zero rows")
+        return 1
+
+    # Invariant 2: Validate tags_data artifact is non-empty and covers all census rows
+    entries = tags_data.get("entries") if isinstance(tags_data, dict) else None
+    if not entries or not isinstance(entries, list):
+        print("FAIL consensus audit: tags_data has empty or invalid entries list")
+        return 1
+
+    tags_by_id = {e["entry_id"]: e for e in entries if isinstance(e, dict) and "entry_id" in e}
+    missing_tag_eids = [r["entry_id"] for r in rows if r.get("entry_id") not in tags_by_id]
+    if missing_tag_eids:
+        print(f"FAIL consensus audit: tags_data missing {len(missing_tag_eids)} outcome entries present in consensus key")
         return 1
 
     # Collect all outcome entries across snapshot

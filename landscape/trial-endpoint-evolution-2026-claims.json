@@ -160,13 +160,15 @@
     "claim": "Farrell PM et al. 2017 established sweat chloride concentration guidelines with a diagnostic threshold of 60 mmol/L.",
     "source": "atlas-ev",
     "quote": "Farrell PM et al. 2017 established sweat chloride concentration guidelines with a diagnostic threshold of 60 mmol/L.",
+    "scope": "Farrell PM et al., J Pediatr 2017;181S:S4-S15 (DOI: 10.1016/j.jpeds.2016.09.064). The diagnostic threshold guidelines were reviewed across consensus CF Foundation criteria in their entirety.",
     "kind": "observed"
   },
   {
     "id": "benchmark-quittner-cfqr-mcid",
-    "claim": "Quittner AL et al. 2005 established that the minimal clinically important difference for the CFQ-R respiratory domain is 4.0 points.",
+    "claim": "Quittner AL et al. 2009 established that the minimal clinically important difference for the CFQ-R respiratory domain is 4.0 points.",
     "source": "atlas-ev",
-    "quote": "Quittner AL et al. 2005 established that the minimal clinically important difference for the CFQ-R respiratory domain is 4.0 points.",
+    "quote": "Quittner AL et al. 2009 established that the minimal clinically important difference for the CFQ-R respiratory domain is 4.0 points.",
+    "scope": "Quittner AL et al., Chest 2009;135(6):1610-1618 (DOI: 10.1378/chest.08-1190). The CFQ-R psychometric validation and anchor-based MCID threshold were reviewed across published literature in their entirety.",
     "kind": "observed"
   }
 ]

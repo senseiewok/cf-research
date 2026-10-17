@@ -278,11 +278,15 @@ class Cli(unittest.TestCase):
                                                    "quote": "lists 437 variants left", "kind": "observed"}]), encoding="utf-8")
             r = subprocess.run([sys.executable, str(SCRIPT), str(d / "c.json"), "--evidence", f"e={d / 'ev.txt'}"], capture_output=True,
                                env=dict(os.environ, PYTHONIOENCODING="cp1252"))
+            self.assertEqual(r.returncode, 1)
+            out = r.stdout.decode("cp1252", errors="replace")
+            self.assertNotIn("Traceback", out)
+
     def test_md_companion_resolution(self):
         with tempfile.TemporaryDirectory() as td:
             d = Path(td)
             md = d / "landscape-report.md"
-            md.write_text("# Landscape Report\nSome text here.\n", encoding="utf-8")
+            md.write_text("# Landscape Report\nThe 2024 report left 437 variants unclassified.\n", encoding="utf-8")
             ev = d / "evidence.txt"
             ev.write_text("The 2024 report left 437 variants unclassified.", encoding="utf-8")
             claims = [
@@ -302,6 +306,12 @@ class Cli(unittest.TestCase):
             r = self.cli(md)
             self.assertEqual(r.returncode, 0, r.stdout)
             self.assertIn("1 claims, 0 failures", r.stdout)
+
+            # Failure when markdown does not contain the claim text or numbers
+            md.write_text("# Landscape Report\nEntirely unrelated text without the claim.\n", encoding="utf-8")
+            r_fail = self.cli(md)
+            self.assertEqual(r_fail.returncode, 1, r_fail.stdout)
+            self.assertIn("FAIL c1 R2 companion_markdown", r_fail.stdout)
 
 
 class EveryRuleCanFail(unittest.TestCase):

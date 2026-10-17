@@ -6,6 +6,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 HERE = Path(__file__).resolve().parent
 import sys
@@ -54,6 +55,26 @@ class TestConsensusAudit(unittest.TestCase):
                 field = t["field"]
                 raw_text = r[field]
                 self.assertEqual(raw_text[t["start"] : t["end"]], t["quote"])
+
+    def test_evaluate_dual_agent_census_detects_non_verbatim_quote(self):
+        data = json.loads(ca.DEFAULT_SNAPSHOT_JSON.read_text(encoding="utf-8"))
+        sampled = ca.sample_stratified_studies(data, seed=ca.DEFAULT_SEED, count=ca.DEFAULT_CENSUS_SIZE)
+        lex = ca.lex_mod.load()
+        orig_tag_entry = lex.tag_entry
+
+        def corrupted_tag_entry(entry):
+            res = orig_tag_entry(entry)
+            if res.get("tags"):
+                # Corrupt the text of the first tag so it does not match verbatim
+                corrupted_tags = [dict(t) for t in res["tags"]]
+                corrupted_tags[0]["text"] = "CORRUPTED_NON_VERBATIM_QUOTE"
+                res["tags"] = corrupted_tags
+            return res
+
+        with patch.object(ca.lex_mod, "load", return_value=lex):
+            with patch.object(lex, "tag_entry", side_effect=corrupted_tag_entry):
+                summary, _ = ca.evaluate_dual_agent_census(sampled)
+                self.assertLess(summary["quote_fidelity"], 1.00)
 
     def test_precision_recall_thresholds(self):
         data = json.loads(ca.DEFAULT_SNAPSHOT_JSON.read_text(encoding="utf-8"))
