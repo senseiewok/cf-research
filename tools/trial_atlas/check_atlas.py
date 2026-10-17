@@ -1260,7 +1260,17 @@ def main(argv=None, *, allow_synthetic_for_tests: bool = False) -> int:
         code_audit = consensus_audit.run_audit(s, tags_data, consensus_audit.DEFAULT_KEY_PATH)
         if code_audit != 0:
             return code_audit
-        print("PASS default self-check: consensus audit and run records verified.")
+
+        # Anti-hallucination guardrail audit across proposals and landscape
+        claims_dir = HERE.parent / "claims"
+        if str(claims_dir) not in sys.path:
+            sys.path.insert(0, str(claims_dir))
+        import check_anti_hallucination as cah
+        code_ah = cah.main(["--root", str(HERE.parents[1])])
+        if code_ah != 0:
+            return code_ah
+
+        print("PASS default self-check: consensus audit, run records, and anti-hallucination guardrails verified.")
         print("RESULT: PASS (default self-check)")
         return 0
 
