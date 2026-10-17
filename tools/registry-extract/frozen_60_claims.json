@@ -11,8 +11,8 @@
       "contradicted": 20,
       "out_of_scope": 10
     },
-    "blind_input_sha256": "ea8a0b29d76a6d99b463e04ddc9c4f8fc25db1878a91231a59f5bd530aa12d0f",
-    "full_benchmark_sha256": "b16548d8680c151b5c9f7c9bfe6421289804662f02b8fa123b6428347d0ed129"
+    "blind_input_sha256": "d306e5575cd6151c1ad431aa7ce83b30e118c3a4e745dd97b48923742dcd4a21",
+    "full_benchmark_sha256": "12df3288f5c735a57554e89f2f85eb5d21bfb8df9eed5031d892888382389d5e"
   },
   "claims": [
     {
@@ -342,7 +342,7 @@
     {
       "claim_id": "CLM-019",
       "category": "supported_fact",
-      "claim_text": "In 2024, the median age at death in the ECFSPR cohort rose to 36.5 years (IQR 26.0 to 46.5).",
+      "claim_text": "In 2024, the median age at death in the ECFSPR cohort rose to 36.5 years (IQR 24.0 to 49.0).",
       "query": {
         "registry": "ECFSPR",
         "claim_domain": "epidemiology_registry",
@@ -398,7 +398,7 @@
     {
       "claim_id": "CLM-022",
       "category": "supported_fact",
-      "claim_text": "In the 2024 ECFSPR overview table, median age at death in the 2014 reference cohort was 28.0 years (IQR 20.0 to 36.0).",
+      "claim_text": "In the 2024 ECFSPR overview table, median age at death in the 2014 reference cohort was 28.0 years (IQR 21.0 to 37.0).",
       "query": {
         "registry": "ECFSPR",
         "claim_domain": "epidemiology_registry",

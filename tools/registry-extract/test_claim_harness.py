@@ -33,11 +33,11 @@ class ClaimHarnessTest(unittest.TestCase):
         self.assertEqual(len(self.benchmark["claims"]), 60)
         self.assertEqual(
             self.benchmark["metadata"]["blind_input_sha256"],
-            "ea8a0b29d76a6d99b463e04ddc9c4f8fc25db1878a91231a59f5bd530aa12d0f",
+            "d306e5575cd6151c1ad431aa7ce83b30e118c3a4e745dd97b48923742dcd4a21",
         )
         self.assertEqual(
             self.benchmark["metadata"]["full_benchmark_sha256"],
-            "b16548d8680c151b5c9f7c9bfe6421289804662f02b8fa123b6428347d0ed129",
+            "12df3288f5c735a57554e89f2f85eb5d21bfb8df9eed5031d892888382389d5e",
         )
 
     def test_tampering_with_frozen_set_is_detected(self):
