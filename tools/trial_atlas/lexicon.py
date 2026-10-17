@@ -36,6 +36,81 @@ import snapshot as snap  # noqa: E402
 
 LEXICON_PATH = HERE / "lexicon.json"
 
+# The 8 canonical outcome classes per PRISMA 2020 CF trial census consensus
+CANONICAL_8_CLASSES: tuple[str, ...] = (
+    "lung_function_fev1",
+    "sweat_chloride",
+    "pulmonary_exacerbations",
+    "quality_of_life",
+    "microbiology_cfu",
+    "nutritional_bmi",
+    "safety_adverse_events",
+    "other_or_not_stated",
+)
+
+CANONICAL_8_MAP: dict[str, str] = {
+    "fev1": "lung_function_fev1",
+    "sweat_chloride": "sweat_chloride",
+    "exacerbations": "pulmonary_exacerbations",
+    "cfqr": "quality_of_life",
+    "pro_named_other": "quality_of_life",
+    "pro_unnamed": "quality_of_life",
+    "microbiology_sputum": "microbiology_cfu",
+    "nutrition_growth": "nutritional_bmi",
+    "safety_tolerability": "safety_adverse_events",
+}
+
+
+def to_canonical_8(cls: str) -> str:
+    """Map a granular trial atlas class to one of the 8 canonical consensus outcome classes."""
+    return CANONICAL_8_MAP.get(cls, "other_or_not_stated")
+
+
+def map_tags_to_canonical_8(tags: list[dict]) -> list[str]:
+    """Return deduplicated, ordered list of 8 canonical classes for a list of tag dictionaries."""
+    if not tags:
+        return ["other_or_not_stated"]
+    canonical: list[str] = []
+    for t in tags:
+        c = to_canonical_8(t.get("class", ""))
+        if c not in canonical:
+            canonical.append(c)
+    return canonical or ["other_or_not_stated"]
+
+
+def canonical_8_spans(entry: dict, tags: list[dict]) -> list[dict]:
+    """Generate verbatim character span tuples [start, end] and verify 100% exact substring match."""
+    spans = []
+    for t in tags:
+        field = t.get("field")
+        start = t.get("start")
+        end = t.get("end")
+        text = t.get("text")
+        c_cls = to_canonical_8(t.get("class", ""))
+        span_tuple = [start, end] if start is not None and end is not None else None
+
+        # Verify verbatim substring invariant when field, span, and text are present
+        if field and start is not None and end is not None and text is not None:
+            raw_field = entry.get(field) or ""
+            extracted = raw_field[start:end]
+            if extracted != text:
+                raise ValueError(
+                    f"Verbatim span mismatch for rule {t.get('rule_id')}: "
+                    f"raw[{start}:{end}]='{extracted}' != '{text}'"
+                )
+        spans.append({
+            "canonical_class": c_cls,
+            "granular_class": t.get("class"),
+            "rule_id": t.get("rule_id"),
+            "field": field,
+            "start": start,
+            "end": end,
+            "span": span_tuple,
+            "text": text,
+            "from_description": bool(t.get("from_description")),
+        })
+    return spans
+
 
 _WS_RUN = re.compile(r"\s+")
 # One character to one character, so spans still map back exactly: subscript digits to ASCII digits, and the hyphen-like dashes
@@ -302,6 +377,11 @@ class Lexicon:
         return {"class": h["rule"]["class"], "by": "rule", "rule_id": h["rule"]["id"], "field": h["field"], "start": h["start"],
                 "end": h["end"], "text": h["text"], "from_description": bool(h.get("from_description"))}
 
+    def _finalize_entry(self, out: dict, entry: dict) -> dict:
+        out["canonical_8_classes"] = map_tags_to_canonical_8(out.get("tags", []))
+        out["canonical_8_spans"] = canonical_8_spans(entry, out.get("tags", []))
+        return out
+
     def tag_entry(self, entry: dict) -> dict:
         out = {"entry_id": entry["entry_id"], "nct_id": entry["nct_id"], "status": "unclassified", "tags": [], "safety_subtypes": [],
                "flags": {"composite": False, "multi_class": False, "vague": False,
@@ -311,7 +391,7 @@ class Lexicon:
             out["status"] = "not_stated"
             out["tags"] = [{"class": "not_stated", "by": "rule", "rule_id": "NS-00", "field": None, "start": None, "end": None, "text": None,
                             "from_description": False}]
-            return out
+            return self._finalize_entry(out, entry)
         hits = self._match_group(entry, self.match_fields)
         if not any(not h["rule"].get("vague") for h in hits):
             # The measure gave no class, or only vague wording: the description is read. A measure stated there (FEV1, say) is
@@ -342,14 +422,14 @@ class Lexicon:
                 out["composite_span"] = comp
             elif len(seen) > 1:
                 out["flags"]["multi_class"] = True
-            return out
+            return self._finalize_entry(out, entry)
         measure = entry.get("measure") or ""
         m = self.placeholder.match(measure)
         if m:
             out["status"] = "not_stated"
             out["tags"] = [{"class": "not_stated", "by": "rule", "rule_id": "NS-01", "field": "measure", "start": m.start(),
                             "end": m.end(), "text": m.group(0), "from_description": False}]
-            return out
+            return self._finalize_entry(out, entry)
         for f in self.match_fields + self.fallback_fields:
             found = self.find(self.vague_ns, entry.get(f) or "")
             if found:
@@ -357,8 +437,8 @@ class Lexicon:
                 out["flags"]["vague"] = True
                 out["tags"] = [{"class": "not_stated", "by": "rule", "rule_id": "NS-V1", "field": f, "start": found[0], "end": found[1],
                                 "text": found[2], "from_description": f != self.match_fields[0]}]
-                return out
-        return out
+                return self._finalize_entry(out, entry)
+        return self._finalize_entry(out, entry)
 
     # ------------------------------------------------------------- time frame
 
@@ -419,6 +499,7 @@ def main(argv=None) -> int:
     g.add_argument("--out", type=Path, required=True)
     g.add_argument("--exclude", type=Path)
     sub.add_parser("classes", help="list every class id with its domain and a one-line gloss (for the person labelling)")
+    sub.add_parser("canonical-classes", help="list the 8 canonical outcome classes and their mapped granular classes")
     a = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
@@ -432,6 +513,12 @@ def main(argv=None) -> int:
         for d in lex.data["domains"]:
             for c in d["classes"]:
                 print(f"{c['id']:28} {d['id']:24} {c.get('gloss', '')}")
+        return 0
+    if a.cmd == "canonical-classes":
+        for canon in CANONICAL_8_CLASSES:
+            granular = [k for k, v in CANONICAL_8_MAP.items() if v == canon]
+            mapped_str = ", ".join(granular) if granular else "all other physiological/unclassified/not-stated measures"
+            print(f"{canon:28} -> {mapped_str}")
         return 0
     if a.out.exists():
         print(f"ERROR: {a.out.name} exists; a tags file is never overwritten (choose a new name)", file=sys.stderr)

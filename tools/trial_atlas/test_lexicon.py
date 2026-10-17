@@ -1135,5 +1135,92 @@ class SnapshotTaggingTest(unittest.TestCase):
         self.assertEqual([e["entry_id"] for e in entries if any(t["class"] in LEX.cf_specific for t in e["tags"])], [])
 
 
+class Canonical8TaxonomyAndSpanTest(unittest.TestCase):
+    def setUp(self):
+        sf.block_network(self)
+
+    def test_all_lexicon_classes_map_to_canonical_8(self):
+        for c in LEX.class_order:
+            canonical = lexicon.to_canonical_8(c)
+            self.assertIn(canonical, lexicon.CANONICAL_8_CLASSES, f"Class {c} must map to valid canonical 8 class")
+
+    def test_canonical_8_primary_mappings(self):
+        expected_mappings = {
+            "fev1": "lung_function_fev1",
+            "sweat_chloride": "sweat_chloride",
+            "exacerbations": "pulmonary_exacerbations",
+            "cfqr": "quality_of_life",
+            "pro_named_other": "quality_of_life",
+            "pro_unnamed": "quality_of_life",
+            "microbiology_sputum": "microbiology_cfu",
+            "nutrition_growth": "nutritional_bmi",
+            "safety_tolerability": "safety_adverse_events",
+            "spirometry_other": "other_or_not_stated",
+            "lci": "other_or_not_stated",
+            "other": "other_or_not_stated",
+            "not_stated": "other_or_not_stated",
+        }
+        for granular, expected_canon in expected_mappings.items():
+            self.assertEqual(lexicon.to_canonical_8(granular), expected_canon)
+
+    def test_canonical_classes_cli(self):
+        import contextlib
+        import io
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(lexicon.main(["canonical-classes"]), 0)
+        output = out.getvalue()
+        for canon in lexicon.CANONICAL_8_CLASSES:
+            self.assertIn(canon, output)
+
+    def test_tag_entry_populates_canonical_8_classes_and_spans(self):
+        entry = {
+            "entry_id": "NCT00744159:P1",
+            "nct_id": "NCT00744159",
+            "measure": "Absolute change from baseline in percent predicted FEV1 through Week 24",
+            "description": "",
+            "time_frame": "Day 1 to Week 24",
+        }
+        res = LEX.tag_entry(entry)
+        self.assertIn("canonical_8_classes", res)
+        self.assertEqual(res["canonical_8_classes"], ["lung_function_fev1"])
+        self.assertIn("canonical_8_spans", res)
+        self.assertEqual(len(res["canonical_8_spans"]), 1)
+        span_info = res["canonical_8_spans"][0]
+        self.assertEqual(span_info["canonical_class"], "lung_function_fev1")
+        self.assertIsNotNone(span_info["span"])
+        start, end = span_info["span"]
+        self.assertEqual(entry["measure"][start:end], span_info["text"])
+
+    def test_verbatim_span_integrity_across_synthetic_cases(self):
+        for cls, positives, _ in CASES:
+            for text in positives:
+                entry = {
+                    "entry_id": f"SYN:{cls}",
+                    "nct_id": "NCT00000000",
+                    "measure": text,
+                    "description": "",
+                    "time_frame": "Week 12",
+                }
+                res = LEX.tag_entry(entry)
+                for s in res["canonical_8_spans"]:
+                    if s["field"] and s["span"]:
+                        start, end = s["span"]
+                        raw_text = entry[s["field"]]
+                        self.assertEqual(raw_text[start:end], s["text"])
+
+    def test_span_integrity_failure_on_corrupted_span(self):
+        bad_tags = [{
+            "class": "fev1",
+            "rule_id": "TEST",
+            "field": "measure",
+            "start": 0,
+            "end": 5,
+            "text": "DIFFERENT",
+        }]
+        entry = {"measure": "Exact string"}
+        with self.assertRaises(ValueError):
+            lexicon.canonical_8_spans(entry, bad_tags)
+
+
 if __name__ == "__main__":
     unittest.main()
