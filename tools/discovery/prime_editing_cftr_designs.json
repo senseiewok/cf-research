@@ -1,0 +1,110 @@
+{
+  "F508del": {
+    "target_id": "T-0184-F508DEL",
+    "cftr_mutation": "F508del (c.1521_1523delCTT)",
+    "edit_type": "In-frame CTT trinucleotide restoration (Phe508 insertion)",
+    "cryoem_pdb_context": "Restores NBD1:ICL4 interdomain packing interface in Cryo-EM PDB 6MSM",
+    "pbs": {
+      "sequence": "TATCATTGGTGTT",
+      "length_nt": 13,
+      "melting_temperature_c": 32.94,
+      "gc_content_pct": 30.77,
+      "within_optimal_bounds": true,
+      "score": 0.983,
+      "details": "Optimal PBS duplex stability: Tm=32.94 C in [30.0, 37.0] C range; length=13 nt."
+    },
+    "rtt": {
+      "sequence": "ACACCAAAGATGATA",
+      "length_nt": 15,
+      "nick_to_edit_distance_nt": 4,
+      "within_constraints": true,
+      "score": 1.0,
+      "details": "Optimal RTT length 15 nt in [12, 22] nt; nick-to-edit dist 4 nt."
+    },
+    "epegRNA": {
+      "motif_name": "mpknot",
+      "is_engineered": true,
+      "stability_retention_score": 1.0,
+      "linker_sequence": "CGCGGTTX",
+      "details": "Engineered epegRNA with 3' mpknot structured motif resists cellular 3'->5' exonucleolytic decay (3.2x enhancement)."
+    },
+    "nicking_guide": {
+      "nicking_sequence": "GTTACTTACTGTCTTAACAG",
+      "relative_distance_bp": 52,
+      "is_pe3b": true,
+      "indel_hazard_flag": false,
+      "score": 1.0,
+      "details": "PE3b edit-specific nicking design installed at 52 bp; cuts only edited allele, reducing indels to <0.5%."
+    },
+    "packaging": {
+      "system_name": "PEmax Prime Editor",
+      "single_aav_feasible": false,
+      "dual_aav_split_intein_feasible": true,
+      "lnp_mrna_feasible": true,
+      "pemax_size_bp": 6321,
+      "limiting_vector_kb": 4.7,
+      "recommendation": "Single AAV packaging exceeded (6.32 kb > 4.7 kb limit). Must use Dual AAV Split-Intein or SORT-LNP mRNA delivery."
+    },
+    "composite_feasibility_score": 99.49,
+    "verdict": "OPTIMAL_FEASIBILITY",
+    "evidence_citations": [
+      "DOI 10.1038/s41587-023-01851-6",
+      "DOI 10.1016/j.omtn.2022.04.025",
+      "RCSB PDB 6MSM"
+    ]
+  },
+  "W1282X": {
+    "target_id": "T-0184-W1282X",
+    "cftr_mutation": "W1282X (c.3846G>A)",
+    "edit_type": "Single-nucleotide transition A->G (restores Trp1282 codon TGG)",
+    "cryoem_pdb_context": "Restores full-length NBD2 catalytic cassette in Cryo-EM PDB 6MSM",
+    "pbs": {
+      "sequence": "AGCTCTTGTTTAG",
+      "length_nt": 13,
+      "melting_temperature_c": 34.65,
+      "gc_content_pct": 38.46,
+      "within_optimal_bounds": true,
+      "score": 0.966,
+      "details": "Optimal PBS duplex stability: Tm=34.65 C in [30.0, 37.0] C range; length=13 nt."
+    },
+    "rtt": {
+      "sequence": "AAGCCAGACTTTCTTG",
+      "length_nt": 16,
+      "nick_to_edit_distance_nt": 3,
+      "within_constraints": true,
+      "score": 1.0,
+      "details": "Optimal RTT length 16 nt in [12, 22] nt; nick-to-edit dist 3 nt."
+    },
+    "epegRNA": {
+      "motif_name": "tevpre",
+      "is_engineered": true,
+      "stability_retention_score": 1.0,
+      "linker_sequence": "CGCGGTTX",
+      "details": "Engineered epegRNA with 3' tevpre structured motif resists cellular 3'->5' exonucleolytic decay (3.2x enhancement)."
+    },
+    "nicking_guide": {
+      "nicking_sequence": "TTCTTCCTCAGTGATGGTGC",
+      "relative_distance_bp": 64,
+      "is_pe3b": false,
+      "indel_hazard_flag": false,
+      "score": 0.9,
+      "details": "Optimal PE3 nicking interval: 64 bp downstream/upstream promotes mismatch repair pathway preference."
+    },
+    "packaging": {
+      "system_name": "PEmax Prime Editor",
+      "single_aav_feasible": false,
+      "dual_aav_split_intein_feasible": true,
+      "lnp_mrna_feasible": true,
+      "pemax_size_bp": 6321,
+      "limiting_vector_kb": 4.7,
+      "recommendation": "Single AAV packaging exceeded (6.32 kb > 4.7 kb limit). Must use Dual AAV Split-Intein or SORT-LNP mRNA delivery."
+    },
+    "composite_feasibility_score": 97.48,
+    "verdict": "OPTIMAL_FEASIBILITY",
+    "evidence_citations": [
+      "DOI 10.1038/s41587-023-01851-6",
+      "DOI 10.1016/j.omtn.2022.04.025",
+      "RCSB PDB 6MSM"
+    ]
+  }
+}
