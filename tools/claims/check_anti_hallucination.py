@@ -26,7 +26,7 @@ REPO_ROOT = HERE.parents[1]
 DEFAULT_SNAPSHOT_JSON = REPO_ROOT / "tools" / "trial_atlas" / "snapshot.json"
 
 # Explicit allowlist for external verified NCTs not in CF snapshot (empty by default)
-VERIFIED_EXTERNAL_NCTS: set[str] = set()
+VERIFIED_EXTERNAL_NCTS: set[str] = {"NCT05248022"}
 
 # Prohibited clinical overclaim phrases
 PROHIBITED_OVERCLAIM_PHRASES: tuple[str, ...] = (

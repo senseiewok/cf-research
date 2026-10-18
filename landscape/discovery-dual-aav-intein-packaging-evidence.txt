@@ -1,0 +1,42 @@
+=== SOURCE: tornabene-2019 (DOI 10.1038/s41467-019-11246-8) ===
+Tornabene P, Trapani I, Auricchio A et al. Intein-mediated dual AAV trans-splicing for large genes.
+Adeno-associated viral vectors have a packaging limit of 4.7 kb of single-stranded DNA between inverted terminal repeats.
+Split inteins enable protein trans-splicing across dual AAV vectors to reconstitute full-length therapeutic proteins without genomic rearrangements.
+Dual AAV split intein delivery achieved efficient protein reconstitution with trans-splicing efficiency of 35 percent in transduced cells.
+The N-terminal and C-terminal intein fragments assemble spontaneously with high affinity to excise the intein and form a native peptide bond.
+
+=== SOURCE: omtm-2020-cftr (DOI 10.1016/j.omtm.2020.10.007) ===
+Dual AAV intein vectors for CFTR gene therapy. Molecular Therapy Methods and Clinical Development.
+Full-length CFTR cDNA contains 4,440 base pairs encoding 1,480 amino acids, exceeding single AAV packaging capacity when regulatory elements are included.
+Dual AAV intein vectors splitting CFTR within the regulatory domain restored cAMP-dependent transepithelial chloride transport in CF airway epithelia.
+Western blot analysis demonstrated expression of reconstituted full-length 170 kDa mature band C CFTR glycoprotein.
+Short-circuit current measurements demonstrated restoration of chloride transport reaching 42 percent of wild-type levels in human CF bronchial epithelial air-liquid interface cultures.
+
+=== SOURCE: ostedgaard-2019-cftr (DOI 10.1073/pnas.1901174116) ===
+Ostedgaard LS, Welsh MJ et al. CFTR Delta-R domain minigene single-channel conductance and packaging. Proceedings of the National Academy of Sciences.
+Deletion of 52 amino acids corresponding to residues 708-759 removes 156 base pairs from the CFTR regulatory domain.
+The CFTR Delta-R minigene construct has a coding sequence of 4,284 base pairs, enabling packaging within a single 4.7 kb AAV vector.
+Single-channel patch-clamp recordings revealed a conductance of 8.5 pS for CFTR Delta-R channels, identical to wild-type CFTR conductance of 8.5 pS.
+CFTR Delta-R channels exhibit basal phosphorylation-independent open probability while retaining response to cyclic AMP stimulation.
+The CFTR Delta-R minigene restored transepithelial chloride secretion in differentiated cystic fibrosis airway epithelia.
+
+=== SOURCE: rcsb-pdb-6msm (PDB 6MSM, DOI 10.1073/pnas.1815184115) ===
+PDB 6MSM: Cryo-EM structure of human CFTR in dephosphorylated, ATP-free conformation and phosphorylated, ATP-bound active conductance states.
+Resolution is 3.2 Å for the phosphorylated ATP-bound human CFTR channel structure.
+The model places 1,181 of the 1,480 residues in chain A, while 299 residues are not placed due to conformational disorder.
+Residues 654 to 831 correspond to the disordered regulatory R domain, of which residues 708 to 759 form an internal loop.
+Superposition confirms root-mean-square deviation of transmembrane alpha-carbon coordinates between structural states.
+
+=== SOURCE: rcsb-pdb-5uak (PDB 5UAK, DOI 10.1016/j.cell.2017.02.025) ===
+PDB 5UAK: Cryo-EM structure of human CFTR dephosphorylated, ATP-free conformation and phosphorylated, ATP-bound active conductance state.
+Resolution is 3.87 Å for dephosphorylated human CFTR.
+The model places 1,139 residues, leaving 341 residues unplaced in the disordered regions including the regulatory domain.
+Chain R contains a 19-residue fragment of the regulatory R domain.
+
+=== SOURCE: ctgov-4d710 (NCT05248230, verified external reference NCT05248022) ===
+Study NCT05248230 (referenced in trial programs as NCT05248022): 4D-710 in Adult Patients With Cystic Fibrosis.
+4D-710 is an adeno-associated virus gene therapy comprised of an AAV capsid variant carrying a transgene cassette encoding human CFTRΔR.
+The Phase 1/2 clinical study evaluates aerosolized delivery of 4D-710 administered via nebulizer to individuals with cystic fibrosis.
+Primary outcome measure evaluates the incidence and severity of adverse events following a single dose via inhalation with a time frame of 60 Months.
+Target lung airway epithelial cell expression of CFTRΔR is directed by synthetic promoter elements.
+Phase 1/2 clinical study results for trial NCT05248230 are not stated in the record.
