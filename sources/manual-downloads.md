@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-25 to download by hand, 1 to ask for, 3 not to download.
+28 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -54,6 +54,24 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | eu-ctr | EU Clinical Trials Register (EudraCT) | [page](https://www.clinicaltrialsregister.eu/) | link only | robots.txt: none (404). |
+
+### Federación Española de Fibrosis Quística
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| fefq-resource-pages | Federación Española de Fibrosis Quística (FEFQ) website (fibrosisquistica.org) | [page](https://fibrosisquistica.org/) | link only | Official national federation of regional cystic fibrosis associations in Spain. |
+
+### FIPAN (Asociación Argentina de Lucha contra la Enfermedad Fibroquística del Páncreas)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| fipan-resource-pages | Asociación Argentina de Lucha contra la Enfermedad Fibroquística del Páncreas (FIPAN) website (fipan.org.ar) | [page](https://fipan.org.ar/) | link only | Official national cystic fibrosis patient and household support association in Argentina. |
+
+### Fundación Colombiana para Fibrosis Quística
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| fcfq-resource-pages | Fundación Colombiana para Fibrosis Quística (FCFQ) website (fibrosisquisticacolombia.org) | [page](https://fibrosisquisticacolombia.org/) | link only | Official national cystic fibrosis patient advocacy and education foundation in Colombia. |
 
 ### gnomAD consortium (Broad Institute)
 
