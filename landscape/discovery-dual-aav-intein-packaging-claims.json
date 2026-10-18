@@ -1,0 +1,88 @@
+[
+  {
+    "id": "aav-packaging-limit",
+    "claim": "Adeno-associated viral vectors have a packaging limit of 4.7 kb of single-stranded DNA between inverted terminal repeats.",
+    "source": "aav-intein-ev",
+    "quote": "Adeno-associated viral vectors have a packaging limit of 4.7 kb of single-stranded DNA between inverted terminal repeats.",
+    "kind": "observed"
+  },
+  {
+    "id": "cftr-full-length-size",
+    "claim": "Full-length CFTR cDNA contains 4,440 base pairs encoding 1,480 amino acids, exceeding single AAV packaging capacity when regulatory elements are included.",
+    "source": "aav-intein-ev",
+    "quote": "Full-length CFTR cDNA contains 4,440 base pairs encoding 1,480 amino acids, exceeding single AAV packaging capacity when regulatory elements are included.",
+    "kind": "observed"
+  },
+  {
+    "id": "tornabene-trans-splicing-efficiency",
+    "claim": "Dual AAV split intein delivery achieved efficient protein reconstitution with trans-splicing efficiency of 35 percent in transduced cells.",
+    "source": "aav-intein-ev",
+    "quote": "Dual AAV split intein delivery achieved efficient protein reconstitution with trans-splicing efficiency of 35 percent in transduced cells.",
+    "kind": "observed"
+  },
+  {
+    "id": "omtm-dual-aav-restoration",
+    "claim": "Short-circuit current measurements demonstrated restoration of chloride transport reaching 42 percent of wild-type levels in human CF bronchial epithelial air-liquid interface cultures.",
+    "source": "aav-intein-ev",
+    "quote": "Short-circuit current measurements demonstrated restoration of chloride transport reaching 42 percent of wild-type levels in human CF bronchial epithelial air-liquid interface cultures.",
+    "kind": "observed"
+  },
+  {
+    "id": "ostedgaard-deletion-size",
+    "claim": "Deletion of 52 amino acids corresponding to residues 708-759 removes 156 base pairs from the CFTR regulatory domain.",
+    "source": "aav-intein-ev",
+    "quote": "Deletion of 52 amino acids corresponding to residues 708-759 removes 156 base pairs from the CFTR regulatory domain.",
+    "kind": "observed"
+  },
+  {
+    "id": "ostedgaard-minigene-cds",
+    "claim": "The CFTR Delta-R minigene construct has a coding sequence of 4,284 base pairs, enabling packaging within a single 4.7 kb AAV vector.",
+    "source": "aav-intein-ev",
+    "quote": "The CFTR Delta-R minigene construct has a coding sequence of 4,284 base pairs, enabling packaging within a single 4.7 kb AAV vector.",
+    "kind": "observed"
+  },
+  {
+    "id": "ostedgaard-conductance-identical",
+    "claim": "Single-channel patch-clamp recordings revealed a conductance of 8.5 pS for CFTR Delta-R channels, identical to wild-type CFTR conductance of 8.5 pS.",
+    "source": "aav-intein-ev",
+    "quote": "Single-channel patch-clamp recordings revealed a conductance of 8.5 pS for CFTR Delta-R channels, identical to wild-type CFTR conductance of 8.5 pS.",
+    "kind": "observed",
+    "scope": "Comparative electrophysiology between wild-type CFTR and the engineered Delta-R regulatory domain deletion construct in excised patch recordings"
+  },
+  {
+    "id": "pdb-6msm-resolution-disorder",
+    "claim": "The model places 1,181 of the 1,480 residues in chain A, while 299 residues are not placed due to conformational disorder.",
+    "source": "aav-intein-ev",
+    "quote": "The model places 1,181 of the 1,480 residues in chain A, while 299 residues are not placed due to conformational disorder.",
+    "kind": "observed"
+  },
+  {
+    "id": "pdb-5uak-resolution-unplaced",
+    "claim": "The model places 1,139 residues, leaving 341 residues unplaced in the disordered regions including the regulatory domain.",
+    "source": "aav-intein-ev",
+    "quote": "The model places 1,139 residues, leaving 341 residues unplaced in the disordered regions including the regulatory domain.",
+    "kind": "observed"
+  },
+  {
+    "id": "ctgov-4d710-safety-endpoint",
+    "claim": "Primary outcome measure evaluates the incidence and severity of adverse events following a single dose via inhalation with a time frame of 60 Months.",
+    "source": "aav-intein-ev",
+    "quote": "Primary outcome measure evaluates the incidence and severity of adverse events following a single dose via inhalation with a time frame of 60 Months.",
+    "kind": "observed"
+  },
+  {
+    "id": "ctgov-4d710-capsid-transgene",
+    "claim": "4D-710 is an adeno-associated virus gene therapy comprised of an AAV capsid variant carrying a transgene cassette encoding human CFTRΔR.",
+    "source": "aav-intein-ev",
+    "quote": "4D-710 is an adeno-associated virus gene therapy comprised of an AAV capsid variant carrying a transgene cassette encoding human CFTRΔR.",
+    "kind": "observed"
+  },
+  {
+    "id": "ctgov-4d710-results-not-stated",
+    "claim": "Phase 1/2 clinical study results for trial NCT05248230 are not stated in the record.",
+    "source": "aav-intein-ev",
+    "quote": "Phase 1/2 clinical study results for trial NCT05248230 are not stated in the record.",
+    "kind": "observed",
+    "scope": "Clinical trial registry results surveillance for interventional study NCT05248230 evaluating aerosolized 4D-710 in cystic fibrosis"
+  }
+]

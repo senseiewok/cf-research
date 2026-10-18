@@ -1,0 +1,83 @@
+# Allow file for landscape/discovery-dual-aav-intein-packaging.md
+# Format: number # explanation
+
+2017  # PDB 5UAK publication year
+2018  # PDB 6MSM publication year
+2019  # Tornabene et al. and Ostedgaard et al. publication year
+2020  # Dual AAV intein CFTR publication year
+2022  # 4D-710 Phase 1/2 trial start year
+2026  # current discovery milestone synthesis year
+
+4.7  # canonical single-stranded AAV packaging limit in kilobases
+4.8  # upper packaging limit threshold for AAV in kilobases
+5.0  # packaging upper ceiling limit for single AAV capsids in kilobases
+5.1  # full-length CFTR total vector construct size in kilobases
+5.4  # upper total vector construct size in kilobases
+400  # minimal promoter regulatory element length in base pairs
+700  # upper regulatory element cassette length in base pairs
+1480  # total amino acid length of wild-type human CFTR
+4440  # wild-type CFTR cDNA coding sequence length in base pairs
+4284  # CFTR Delta-R minigene cDNA coding sequence length in base pairs
+52  # amino acids deleted in CFTR Delta-R domain (residues 708-759)
+156  # base pairs deleted in CFTR Delta-R minigene cDNA
+708  # starting residue of CFTR Delta-R domain deletion
+759  # ending residue of CFTR Delta-R domain deletion
+654  # starting residue of disordered regulatory R domain in UniProt P13569
+831  # ending residue of disordered regulatory R domain in UniProt P13569
+1181  # placed residues in PDB 6MSM cryo-EM structure
+299  # unplaced disordered residues in PDB 6MSM
+1139  # placed residues in PDB 5UAK cryo-EM structure
+341  # unplaced disordered residues in PDB 5UAK
+3.2  # resolution of PDB 6MSM in Angstroms
+3.87  # resolution of PDB 5UAK in Angstroms
+8.5  # single-channel patch-clamp conductance of CFTR Delta-R and WT in picosiemens
+35  # split-intein protein trans-splicing reconstitution efficiency percentage
+42  # restored transepithelial chloride transport percentage in CF airway epithelia
+60  # trial safety follow-up window in months
+170  # mature band C CFTR glycoprotein molecular weight in kilodaltons
+290  # combined base pairs of flanking AAV inverted terminal repeats (2 x 145 bp)
+145  # single AAV inverted terminal repeat length in base pairs
+10  # approximate percentage or arbitrary scale
+20  # approximate percentage range
+30  # trans-splicing lower efficiency percentage
+50  # trans-splicing upper efficiency percentage
+3.0  # size in kb of dual AAV N-terminal vector
+3.6  # size in kb of dual AAV N-terminal vector
+3.4  # size in kb of dual AAV C-terminal vector
+3.9  # size in kb of dual AAV C-terminal vector
+102  # amino acid length of N-intein fragment
+36  # amino acid length of C-intein fragment
+0197  # task ID number for dual AAV model
+0198  # task ID number for delta-R model
+0199  # task ID number for AAV tropism model
+05248230  # NCT identifier numeric portion
+05248022  # NCT identifier numeric portion
+
+2.1  # section heading number
+2.2  # section heading number
+2.3  # section heading number
+3.1  # section heading number
+3.2  # section heading number
+4.1  # section heading number
+4.2  # section heading number
+5.1  # section heading number
+5.2  # section heading number
+
+81  # starting residue of transmembrane domain 1 (TMD1)
+365  # ending residue of transmembrane domain 1 (TMD1)
+859  # starting residue of transmembrane domain 2 (TMD2)
+1155  # ending residue of transmembrane domain 2 (TMD2)
+423  # starting residue of nucleotide-binding domain 1 (NBD1)
+646  # ending residue of nucleotide-binding domain 1 (NBD1)
+1210  # starting residue of nucleotide-binding domain 2 (NBD2)
+1443  # ending residue of nucleotide-binding domain 2 (NBD2)
+
+0.35  # decimal representation of 35 percent trans-splicing efficiency
+0.9502  # Poisson infection probability term (1 - exp(-3))
+0.316  # net dual-AAV reconstitution probability product
+31.6  # net dual-AAV reconstitution probability percentage
+100  # complete percentage for test pass rate or grounding audit
+3.5  # task T-0198 low effort hours
+6.5  # task T-0198 high effort hours
+4.5  # task T-0199 low effort hours
+7  # task T-0197 high effort hours
