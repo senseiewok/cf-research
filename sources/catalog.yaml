@@ -1450,6 +1450,48 @@ sources:
       listed in resources.yaml. Not covered: any other page, and any other host of this organisation.
       The Irish registry (cfri.ie) is a different organisation and host and has its own entry (cfri-adr-2024).
 
+  - id: fefq-resource-pages
+    title: Federación Española de Fibrosis Quística (FEFQ) website (fibrosisquistica.org)
+    publisher: Federación Española de Fibrosis Quística
+    kind: resource_pages
+    access: manual
+    robots: unknown
+    landing_page: https://fibrosisquistica.org/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national federation of regional cystic fibrosis associations in Spain. No automated tool requests this host;
+      access stays manual. The lab links to the public landing page and describes the organisation in its own plain words,
+      copying no page text, logo, image, phone number, email address or person's name.
+
+  - id: fipan-resource-pages
+    title: Asociación Argentina de Lucha contra la Enfermedad Fibroquística del Páncreas (FIPAN) website (fipan.org.ar)
+    publisher: FIPAN (Asociación Argentina de Lucha contra la Enfermedad Fibroquística del Páncreas)
+    kind: resource_pages
+    access: manual
+    robots: unknown
+    landing_page: https://fipan.org.ar/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient and household support association in Argentina. No automated tool requests
+      this host; access stays manual. The lab links to the public landing page and describes the organisation in its own plain
+      words, copying no page text, logo, image, phone number, email address or person's name.
+
+  - id: fcfq-resource-pages
+    title: Fundación Colombiana para Fibrosis Quística (FCFQ) website (fibrosisquisticacolombia.org)
+    publisher: Fundación Colombiana para Fibrosis Quística
+    kind: resource_pages
+    access: manual
+    robots: unknown
+    landing_page: https://fibrosisquisticacolombia.org/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient advocacy and education foundation in Colombia. No automated tool requests
+      this host; access stays manual. The lab links to the public landing page and describes the organisation in its own plain
+      words, copying no page text, logo, image, phone number, email address or person's name.
+
   - id: natural-earth-110m-countries
     title: Natural Earth 1:110m Admin 0 Countries (vector, GeoJSON)
     publisher: Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors; supported by NACIS)
