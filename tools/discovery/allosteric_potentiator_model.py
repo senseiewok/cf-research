@@ -626,9 +626,8 @@ def main() -> None:
         print(f"Single-Channel Current:        {result.single_channel_current_pA:.3f} pA")
         print(f"Thermodynamic Synergy Metric:  {result.thermodynamic_synergy_s:.2f} (>1.0 = positive synergy)")
         print(f"Predicted Delta Sweat Cl-:     {result.predicted_delta_swcl_mmol_L:.1f} mmol/L (Clinical: {reg_spec.clinical_delta_swcl_mmol_L:.1f})")
-        print("-" * 75)
-        print(f"NLM Disclaimer: {result.nl_registry_disclaimer}")
-        print(f"Medical Disclaimer: {result.medical_disclaimer}")
+        print(f"NLM Registry: {result.nl_registry_disclaimer}")
+        print(f"Notice: {result.medical_disclaimer}")
         print("=" * 75)
 
 
