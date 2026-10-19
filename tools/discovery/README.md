@@ -52,6 +52,17 @@ flowchart TD
   - **W1282X (Exon 23, `UGA A`)**: Proximity to poly(A) tail confers partial baseline NMD escape ($38\%$ baseline mRNA); $40.0\%$ NMD inhibition + $6.0\%$ suppressor tRNA yields **$13.91\%$ wild-type $\Delta I_{\text{sc}}$**.
   - **Transcriptome Safety Margin**: Native human termination codons utilize tandem stops or stringent eRF1 context, maintaining proteome integrity at suppressor tRNA efficiencies $< 12\%$.
 
+### Module 3: Aerosolized AAV Capsid Tropism & NAb Neutralization Calculator (`aav_tropism_model.py` - T-0208)
+- **Clinical Problem**: Overcoming thick CF mucus mesh steric/adhesive entrapment and pre-existing mucosal neutralizing antibodies (NAbs) during aerosol gene delivery (e.g. 4D-710 Phase 1/2 clinical program, `NCT05248230`).
+- **Biophysical Model**:
+  - Inhaled aerosol droplet deposition across conducting airways (tracheobronchial generations 0–16) vs extrathoracic and alveolar impaction/diffusion.
+  - De Gennes mucin mesh pore scaling $\xi(w) = \xi_{\text{ref}} (w / 2.0\%)^{-\nu}$ (Hill et al., `DOI 10.1126/sciadv.aaw3507`) coupled to Ogston steric hindrance and capsid-mucin electrostatic adhesion penalties.
+  - Log-logistic mucosal neutralizing antibody titration and apical epithelial receptor-mediated endocytosis.
+  - Cellular Poisson transgene delivery ($P(\ge 1\text{ vg}) = 1 - e^{-\text{MOI}}$) across $10^9$ conducting airway target cells.
+- **Council-Derived Specifications**:
+  - **Directed-Evolution Advantage**: Engineered capsid `4D-A101` exhibits an engineered low-adhesion surface charge ($k_{\text{adhesion}} = 0.04$) and shifted neutralizing titer threshold ($\text{IC}_{50} = 120.0$), achieving $> 15$-fold higher cellular coverage in CF mucus with antibodies compared to wild-type `AAV2`.
+  - **Registry Grounding**: NCT05248230 verified in `tools/trial_atlas/snapshot.json`. Disclaimer: *ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.*
+
 ---
 
 ## 3. Running the Discovery Council
