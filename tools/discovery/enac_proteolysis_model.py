@@ -58,7 +58,7 @@ NLM_REGISTRY_DISCLAIMER: str = (
     "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement."
 )
 
-MEDICAL_DISCLAIMER: str = (
+RESEARCH_BOUNDARY: str = (
     "Preclinical biophysical modeling tool for research purposes only; not medical advice. "
     "No therapeutic safety or clinical efficacy claims are made."
 )
@@ -153,7 +153,7 @@ class SimulationResult:
     primary_pdb_structures: Tuple[str, ...]
     grounded_clinical_trials: Tuple[str, ...]
     nlm_disclaimer: str
-    medical_disclaimer: str
+    research_boundary: str
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert result to a JSON-serializable dictionary."""
@@ -471,7 +471,7 @@ def simulate_enac_proteolysis_scenario(
         primary_pdb_structures=("6BQN", "6WTH"),
         grounded_clinical_trials=grounded_trials,
         nlm_disclaimer=NLM_REGISTRY_DISCLAIMER,
-        medical_disclaimer=MEDICAL_DISCLAIMER,
+        research_boundary=RESEARCH_BOUNDARY,
     )
 
 
@@ -689,7 +689,7 @@ def main() -> int:
             "neutrophil_elastase_nm": args.ne_conc_nm if args.ne_conc_nm is not None else DEFAULT_NE_CF_NM,
             "matrix": matrix_data,
             "nlm_disclaimer": NLM_REGISTRY_DISCLAIMER,
-            "medical_disclaimer": MEDICAL_DISCLAIMER,
+            "research_boundary": RESEARCH_BOUNDARY,
         }
         if args.output:
             out_path = args.output.resolve()
@@ -733,7 +733,7 @@ def main() -> int:
     else:
         print(format_summary_table(scenarios if args.scenario == "ALL" else {args.scenario: res}))
         print("\n" + NLM_REGISTRY_DISCLAIMER)
-        print(MEDICAL_DISCLAIMER)
+        print("Scope: Research, not medical advice.")
 
     return 0
 

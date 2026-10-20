@@ -24,7 +24,7 @@ from tools.discovery.enac_proteolysis_model import (
     PHYSIOLOGICAL_ASL_THRESHOLD_UM,
     COLLAPSED_ASL_CF_UM,
     NLM_REGISTRY_DISCLAIMER,
-    MEDICAL_DISCLAIMER,
+    RESEARCH_BOUNDARY,
     calculate_cleavage_kinetics,
     simulate_cleavage_ode_dynamics,
     calculate_electrophysiology,
@@ -225,9 +225,9 @@ class TestENaCProteolysisModel(unittest.TestCase):
 
         cf_entry = data["CF_UNTREATED"]
         self.assertIn("nlm_disclaimer", cf_entry)
-        self.assertIn("medical_disclaimer", cf_entry)
+        self.assertIn("research_boundary", cf_entry)
         self.assertIn("ClinicalTrials.gov", cf_entry["nlm_disclaimer"])
-        self.assertIn("not medical advice", cf_entry["medical_disclaimer"])
+        self.assertIn("not medical advice", cf_entry["research_boundary"])
 
         # Test --matrix flag
         cmd_matrix = [sys.executable, str(script), "--matrix", "--json"]
