@@ -421,9 +421,9 @@ def main() -> None:
             hydr = rdata["hydration"]
             print(f"Regimen: {name}")
             print(f"  Conductances (mS/cm2): CFTR={rdata['conductance']['g_cftr_ms_cm2']} | ENaC={rdata['conductance']['g_enac_ms_cm2']} | SLC26A9={rdata['conductance']['g_slc26a9_ms_cm2']} | TMEM16A={rdata['conductance']['g_tmem16a_ms_cm2']}")
-            print(f"  Currents (uA/cm2): I_Na={curr['i_na_ua_cm2']} | I_Cl={curr['i_cl_ua_cm2']} | I_HCO3={curr['i_hco3_ua_cm2']} | Delta I_sc={curr['delta_isc_ua_cm2']} ({curr['secretory_flux_direction']})")
+            print(f"  Currents (uA/cm2): I_Na={curr['i_na_ua_cm2']} | I_Cl={curr['i_cl_ua_cm2']} | I_HCO3={curr['i_hco3_ua_cm2']} | Delta I_sc={curr['delta_isc_ua_cm2']} ({'SECRETORY' if curr['delta_isc_ua_cm2'] >= 25.0 else ('BALANCED' if curr['delta_isc_ua_cm2'] >= 15.0 else 'ABSORPTIVE')})")
             print(f"  ASL Height: {hydr['steady_state_asl_height_um']} um (Cilia: {hydr['ciliary_beating_status']}) | pH: {hydr['luminal_ph']}")
-            print(f"  % WT Anion Secretion: {rdata['pct_wt_anion_secretion']}% | Synergy: {rdata['epistatic_synergy_ratio']}x")
+            print(f"  % WT Anion Secretion: {round(min(100.0, ((curr['i_cl_ua_cm2'] + curr['i_hco3_ua_cm2']) / 45.0) * 100.0), 2)}% | Synergy: {rdata['epistatic_synergy_ratio']}x")
             print(f"  Verdict: {rdata['verdict']}")
             print("-" * 76)
 

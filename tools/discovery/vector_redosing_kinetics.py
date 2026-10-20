@@ -579,7 +579,7 @@ def main() -> int:
                 )
             print("=" * 88)
             print(f"NLM Disclaimer: {NLM_REGISTRY_DISCLAIMER}")
-            print(f"Scope: {MEDICAL_DISCLAIMER}")
+            print("Scope: Research, not medical advice.")
         return 0
 
     doses, traj, summary = simulate_redosing_trajectory(
@@ -624,7 +624,7 @@ def main() -> int:
         print(f"  Redosing Attenuation (E_N / E_1): {summary.redosing_attenuation_ratio:.4f}")
         print("=" * 80)
         print(f"NLM Disclaimer: {NLM_REGISTRY_DISCLAIMER}")
-        print(f"Scope: {MEDICAL_DISCLAIMER}")
+        print("Scope: Research, not medical advice.")
 
     return 0
 
