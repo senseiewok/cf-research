@@ -1,6 +1,6 @@
 ---
 name: source-grounding
-description: How to ground every public sentence that states a fact, a definition, a term or a number before it is published, covering the grounding ladder (computed from data, a registry statement checked verbatim, a definition quoted from an open-access primary source, a lab position labelled as such), the answer tiers T0 to T3, what each checker proves and does not prove, the licence rule for quotes, the guard against invented claims, how a local model may help safely, and Spanish (es-MX) terms. Use before writing or reviewing any page text, caption, gloss, definition, claims file or note that others will read, and before asking a model to find or extract a definition.
+description: How to ground every public sentence that states a fact, a definition, a term or a number before it is published, covering the grounding ladder (computed from data, a registry statement checked verbatim, a definition quoted from an open-access primary source, a lab position labelled as such), the answer tiers T0 to T3, the Two-Speed Plain-English First contract, deterministic anti-hallucination guardrails (AH-1 to AH-4), what each checker proves and does not prove, the licence rule for quotes, how a local model may help safely, and Spanish (es-MX) terms. Use before writing or reviewing any page text, caption, gloss, definition, claims file or note that others will read, and before asking a model to find or extract a definition.
 license: CC0-1.0
 compatibility: Works with any Agent-Skills-spec-compatible tool that reads .claude/skills (Claude Code, GitHub Copilot; see AGENTS.md in cf-lab). The checkers it names need Python 3.9 or newer; the model steps need PowerShell 7 and a local Ollama model. A local worker model does not load skills; it gets pasted packet text from references/local-worker-packets.md.
 ---
@@ -28,14 +28,19 @@ Use the highest rung that fits. A sentence that fits none is not published.
 | 3. Definition | A definition quoted from a primary open-access source | The grounding tool finds it and verifies the quote as an exact substring of the article (in progress: see below) |
 | 4. Lab position | The lab's own reading or choice | Labelled as the lab's position or "our inference" in the sentence itself |
 
-## Tiers
+## Tiers & Two-Speed Plain-English First Contract
 
 As in `cf-research-context`: T0 a summary or memory, unverified; T1 a quote from a primary source with its id and date; T2 T1 plus a script check and a different model's check, each flag confirmed on the source; T3 T2 plus a person's review. Public claims need T2; scientific copy on a site and anything that could affect care need T3. Say the tier.
+
+Every CF-facing explanation, research summary, or interactive workbench follows the **Two-Speed Plain-English First Contract**:
+1. **Speed 1 — Plain-English First (Screen Zero)**: Lead with 2–4 warm, jargon-free sentences explaining what the finding means in everyday life and who it helps, followed by the explicit dignity boundary (*"This is research, not medical advice"*). Every acronym (`CFTR`, `FEV1`, `LCI`, `NMD`, `ASO`, `LNP`, `TMEM16A`) is defined in plain words on first use.
+2. **Speed 2 — Grounded Biophysical & Registry Depth**: Immediately below, present the Tier T1–T3 quantitative evidence, governing equations, exact cohort denominators, primary DOIs/PDBs/NCTs, and explicit `not stated` boundaries, cross-referenced against `.claude/skills/cf-research-context/references/biophysical-index.md` in `cf-lab`.
 
 ## What each checker proves, and does not
 
 | Checker | Proves | Does not prove |
 | --- | --- | --- |
+| `tools/claims/check_anti_hallucination.py` | **AH-1**: Every `NCT` ID exists in `tools/trial_atlas/snapshot.json` (or explicit external allowlist); **AH-2**: PRISMA-screened (`940` studies / `1,821` entries) vs unfiltered (`1,053`-study) cohort counts are never mixed; **AH-3**: Every `NCT`, `DOI`, and `PDB` ID in `landscape/<stem>.md` is grounded in companion `-evidence.txt` / `-claims.json` files; **AH-4**: No unhedged clinical overclaims (*"proven to cure"*, *"guarantees clinical benefit"*) | That a grounded quote is interpreted fairly |
 | `tools/claims/check_claims.py` | Each quote is exact; each number is in the quote or computed from it; widening words and absence claims carry a scope; inferences carry a basis | That the quote supports the sentence |
 | `tools/trial_atlas/check_registry_claims.py` | Every registry sentence the tools emit is covered by claims, and (with saved pages) every quote is on the registry's page | That the claim is a fair reading of the page |
 | `check_atlas.py` model-tag check | A model's quote is an exact substring of the entry | That the class is right |
@@ -81,4 +86,5 @@ Specifics live in `references/lessons.md` as dated observations (date, what was 
 ## Verification
 
 - `python -m unittest -v` in `tools/claims` and in `tools/trial_atlas` (no network).
+- `python tools/claims/check_anti_hallucination.py` (enforces AH-1 through AH-4).
 - Before publishing: the claims file passes `check_claims.py`, the draft passes `check_source_overlap.py --quotes-only`, and a different model or a person has read each quote against its sentence.
