@@ -669,7 +669,7 @@ def main() -> int:
             print("=" * 96)
             print("Grounded Cryo-EM PDB Structures: PDB:5UAK (inward-facing), PDB:6MSM (outward-facing dimer)")
             print(f"NLM Disclaimer: {NLM_REGISTRY_DISCLAIMER}")
-            print(f"Scope: {MEDICAL_DISCLAIMER}")
+            print("Scope: Research, not medical advice.")
         return 0
 
     profile = evaluate_nbd1_thermodynamics(
@@ -707,7 +707,7 @@ def main() -> int:
         print("=" * 84)
         print("Cryo-EM Grounding: PDB:5UAK (inward-facing), PDB:6MSM (ATP-bound outward-facing)")
         print(f"NLM Disclaimer: {NLM_REGISTRY_DISCLAIMER}")
-        print(f"Scope: {MEDICAL_DISCLAIMER}")
+        print("Scope: Research, not medical advice.")
 
     return 0
 

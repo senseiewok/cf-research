@@ -524,7 +524,7 @@ def main() -> int:
                 )
             print("=" * 96)
             print(f"NLM Disclaimer: {NLM_REGISTRY_DISCLAIMER}")
-            print(f"Scope: {MEDICAL_DISCLAIMER}")
+            print("Scope: Research, not medical advice.")
         return 0
 
     profiles, report = simulate_enac_knockdown(
@@ -568,7 +568,7 @@ def main() -> int:
         print(f"    Hyperkalemia Risk Level:       {report.hyperkalemia_risk_level}")
         print("=" * 84)
         print(f"NLM Disclaimer: {NLM_REGISTRY_DISCLAIMER}")
-        print(f"Scope: {MEDICAL_DISCLAIMER}")
+        print("Scope: Research, not medical advice.")
 
     return 0
 
