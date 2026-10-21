@@ -753,3 +753,145 @@ resources:
     content_hash: e0e4faabb9ebfdf684c0a3cd2816fc25b7af9cf35a4b37f6375cf80faa595477
     last_checked: 2026-10-10
     status: active
+
+  # Candidate lead_only rows for the remaining 9 countries in the 15-country compass (ES, AR, CO, NZ, FR, DE, IT, BR, CL).
+  # Each row is basis: lead_only and awaits human browser inspection and confirmation before pinning to senseiewok.ai/resources/.
+
+  - id: fefq-vivir-con-fq
+    name: "Vivir con FQ"
+    organisation: Federación Española de Fibrosis Quística
+    countries: [ES]
+    url: https://fibrosisquistica.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, daily_life]
+    summary: "National federation of regional CF associations in Spain offering care unit directories, social support guidance, and daily living resources."
+    summary_es: "Federación nacional de asociaciones regionales en España con directorio de unidades clínicas, orientación social y recursos para la vida diaria."
+    who_for: not_checked
+    lang: es-ES
+    source_id: fefq-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: fipan-informacion-y-apoyo
+    name: "Información y apoyo en fibrosis quística"
+    organisation: FIPAN (Asociación Argentina de Lucha contra la Enfermedad Fibroquística del Páncreas)
+    countries: [AR]
+    url: https://fipan.org.ar/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, medicines_access]
+    summary: "Argentine national patient association providing guidance on newborn screening, care access, and national legal protections for people with CF."
+    summary_es: "Asociación nacional en Argentina que brinda orientación sobre pesquisa neonatal, acceso al tratamiento y cobertura legal para personas con fibrosis quística."
+    who_for: not_checked
+    lang: es-AR
+    source_id: fipan-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: fcfq-orientacion-y-apoyo
+    name: "Orientación para pacientes y familias"
+    organisation: Fundación Colombiana para Fibrosis Quística
+    countries: [CO]
+    url: https://fibrosisquisticacolombia.org/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, community_peer]
+    summary: "Colombian foundation supporting families and adults with cystic fibrosis through diagnostic navigation, education, and community peer support."
+    summary_es: "Fundación colombiana que acompaña a familias y adultos con fibrosis quística mediante orientación diagnóstica, educación y apoyo comunitario."
+    who_for: not_checked
+    lang: es-CO
+    source_id: fcfq-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: cfnz-support-services
+    name: "Support for people with CF and whānau"
+    organisation: Cystic Fibrosis New Zealand
+    countries: [NZ]
+    url: https://www.cfnz.org.nz/
+    audience: [adult_with_cf, parent_carer_of_child, partner_family_carer_of_adult]
+    category: [daily_life, community_peer, money_insurance]
+    summary: "New Zealand national organization offering social work support, practical assistance, and guidance for individuals with CF and their families."
+    who_for: not_checked
+    lang: en
+    source_id: cfnz-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: vaincrelamuco-vivre-avec
+    name: "Vivre avec la mucoviscidose"
+    organisation: Vaincre la Mucoviscidose
+    countries: [FR]
+    url: https://www.vaincrelamuco.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [daily_life, find_care_team, money_insurance]
+    summary: "French national association providing guidance on specialized CF care centers, social rights, financial assistance, and daily life."
+    who_for: not_checked
+    lang: fr
+    source_id: vaincrelamuco-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: muko-leben-mit-mukoviszidose
+    name: "Leben mit Mukoviszidose"
+    organisation: Mukoviszidose e.V.
+    countries: [DE]
+    url: https://www.muko.info/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, daily_life]
+    summary: "German federal association offering certified care center directories, social counseling, and everyday guidance for people with CF and families."
+    who_for: not_checked
+    lang: de
+    source_id: muko-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: lifc-vivere-con-la-fc
+    name: "Vivere con la fibrosi cistica"
+    organisation: Lega Italiana Fibrosi Cistica
+    countries: [IT]
+    url: https://www.fibrosicistica.it/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [daily_life, money_insurance, find_care_team]
+    summary: "Italian national association connecting patients and families with regional CF associations, legal rights guidance, and care support."
+    who_for: not_checked
+    lang: it
+    source_id: lifc-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: unidospelavida-fibrose-cistica
+    name: "Apoio e informação sobre fibrose cística"
+    organisation: Instituto Unidos pela Vida
+    countries: [BR]
+    url: https://unidospelavida.org.br/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, advocacy_involved]
+    summary: "Brazilian institute providing plain-language educational materials, diagnostic center directories, and regional association links for people with CF."
+    who_for: not_checked
+    lang: pt-BR
+    source_id: unidospelavida-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: cfqchile-apoyo-familias
+    name: "Apoyo e información en fibrosis quística"
+    organisation: Corporación para la Fibrosis Quística de Chile
+    countries: [CL]
+    url: https://fibrosisquistica.cl/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, community_peer]
+    summary: "Chilean patient and family corporation offering orientation on public health coverage, respiratory care, and peer community support."
+    summary_es: "Corporación chilena de pacientes y familias que brinda orientación sobre garantías de salud, cuidado respiratorio y apoyo comunitario."
+    who_for: not_checked
+    lang: es-CL
+    source_id: cfqchile-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
