@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-34 to download by hand, 1 to ask for, 3 not to download.
+46 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -17,6 +17,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | amfq-resource-pages | Asociación Mexicana de Fibrosis Quística, A.C. (AMFQ) website (www.fq.org.mx) | [page](https://www.fq.org.mx/) | link only | The address came from the reference list of an AI-written report the maintainer pasted on 2026-10-09 and from a web search limited to this host. |
+
+### Asociación Peruana de Fibrosis Quística (FIQPER)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| fiqper-resource-pages | Fibrosis Quística Perú website (fiqper.org) | [page](https://fiqper.org/) | link only | Official national cystic fibrosis patient and family association in Peru. |
+
+### Associação Nacional de Fibrose Quística
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| anfq-pt-resource-pages | Associação Nacional de Fibrose Quística website (anfq.pt) | [page](https://www.anfq.pt/) | link only | Official national cystic fibrosis patient association in Portugal. |
 
 ### Cochrane
 
@@ -61,6 +73,30 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cfnz-resource-pages | Cystic Fibrosis New Zealand (CFNZ) website (www.cfnz.org.nz) | [page](https://www.cfnz.org.nz/) | link only | Official national cystic fibrosis support and advocacy organization in New Zealand. |
 
+### Cystic Fibrosis Trust India
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cfindia-resource-pages | Cystic Fibrosis Trust India support pages (cftrustindia.org) | [page](https://www.cftrustindia.org/) | link only | National cystic fibrosis patient support and diagnostic awareness organization in India. |
+
+### Cystische Fibrose Hilfe Österreich
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cfhilfe-at-resource-pages | Cystische Fibrose Hilfe Österreich website (cystischefibrose.info) | [page](https://www.cystischefibrose.info/) | link only | National cystic fibrosis support organization in Austria. |
+
+### Cystische Fibrose Schweiz (CFS)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cfschweiz-resource-pages | Cystische Fibrose Schweiz website (cysticfibrosisschweiz.ch) | [page](https://cysticfibrosisschweiz.ch/) | link only | Official national cystic fibrosis patient organization in Switzerland. |
+
+### Cystisk Fibrose Foreningen
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cff-dk-resource-pages | Cystisk Fibrose Foreningen website (cystiskfibrose.dk) | [page](https://cystiskfibrose.dk/) | link only | Official national cystic fibrosis association in Denmark. |
+
 ### European Medicines Agency
 
 | ID | What | Open | Save as | Notes |
@@ -97,6 +133,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gtex-portal-api | GTEx Portal API (gene expression by tissue) | [page](https://gtexportal.org/) | link only | robots.txt on gtexportal.org was fetched directly 2026-10-07 with the lab user agent: it allows only Googlebot and Bingbot (Crawl-delay 30) and has "User-agent… |
 
+### Hengitysliitto (Organization for Respiratory Health in Finland)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| hengitysliitto-fi-resource-pages | Hengitysliitto cystic fibrosis support pages (hengitysliitto.fi) | [page](https://www.hengitysliitto.fi/) | link only | National respiratory health and rare lung disease organization in Finland hosting support resources for people with cystic fibrosis. |
+
 ### INSERM (Orphanet)
 
 | ID | What | Open | Save as | Notes |
@@ -127,17 +169,47 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | lifc-resource-pages | Lega Italiana Fibrosi Cistica (LIFC) website (www.fibrosicistica.it) | [page](https://www.fibrosicistica.it/) | link only | Official national cystic fibrosis patient and family association in Italy. |
 
+### Muco vzw / Association Muco
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| mucobe-resource-pages | Muco vzw / Association Muco website (muco.be) | [page](https://www.muco.be/) | link only | Official national cystic fibrosis association in Belgium. |
+
 ### Mukoviszidose e.V.
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | muko-resource-pages | Mukoviszidose e.V. website (www.muko.info) | [page](https://www.muko.info/) | link only | Official federal cystic fibrosis patient, family, clinician, and researcher association in Germany. |
 
+### Nederlandse Cystic Fibrosis Stichting
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ncfs-resource-pages | Nederlandse Cystic Fibrosis Stichting website (ncfs.nl) | [page](https://ncfs.nl/) | link only | Official national cystic fibrosis foundation in the Netherlands. |
+
+### Norsk Forening for Cystisk Fibrose
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cfnorge-resource-pages | Norsk Forening for Cystisk Fibrose website (cfnorge.no) | [page](https://cfnorge.no/) | link only | Official national cystic fibrosis association in Norway. |
+
 ### Publications Office of the European Union
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cordis | CORDIS (EU-funded research projects and results) | [page](https://cordis.europa.eu/) | link only | Legal notice read 2026-10-05: unless a notice says otherwise, the editorial content owned by the EU may be reused under CC BY 4.0, and the Commission's reuse p… |
+
+### Riksförbundet Cystisk Fibros
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| rfcf-se-resource-pages | Riksförbundet Cystisk Fibros website (rfcf.se) | [page](https://www.rfcf.se/) | link only | Official national cystic fibrosis federation in Sweden. |
+
+### South African Cystic Fibrosis Association
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sacfa-resource-pages | South African Cystic Fibrosis Association website (sacfa.org.za) | [page](https://www.sacfa.org.za/) | link only | Official national cystic fibrosis association in South Africa. |
 
 ### Vaincre la Mucoviscidose
 

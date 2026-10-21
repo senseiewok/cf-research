@@ -1,6 +1,7 @@
 """Unit tests for tools/claims/check_anti_hallucination.py."""
 from __future__ import annotations
 
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -83,6 +84,30 @@ class TestCheckAntiHallucination(unittest.TestCase):
             self.assertEqual(len(fails), 1, f"Expected rejection for phrase: {phrase}")
             self.assertIn("FAIL AH-4 [clinical-overclaim-guard]", fails[0])
             self.assertIn(phrase, fails[0])
+
+    def test_ah5_discovery_module_registration_rejects_unregistered_module(self):
+        """Rule AH-5 must reject an unregistered biophysical model in tools/discovery/."""
+        snapshot_ncts = cah.load_snapshot_ncts(REPO_ROOT / "tools" / "trial_atlas" / "snapshot.json")
+        self.assertEqual(cah.check_discovery_module_registration(REPO_ROOT, snapshot_ncts), [])
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_root = Path(tmpdir)
+            disc_dst = tmp_root / "tools" / "discovery"
+            shutil.copytree(REPO_ROOT / "tools" / "discovery", disc_dst)
+            rogue = disc_dst / "rogue_unverified_model.py"
+            rogue.write_text(
+                '"""Unregistered model citing invented NCT99999999."""\ndef compute(): return 1\n',
+                encoding="utf-8",
+            )
+            fails = cah.check_discovery_module_registration(tmp_root, snapshot_ncts)
+            self.assertTrue(
+                any("rogue_unverified_model" in f and "AH-5" in f for f in fails),
+                f"Expected AH-5 failure for rogue_unverified_model, got: {fails}",
+            )
+            self.assertTrue(
+                any("NCT99999999" in f and "AH-5" in f for f in fails),
+                f"Expected AH-5 NCT failure for NCT99999999, got: {fails}",
+            )
 
     def test_main_cli_execution(self):
         """CLI main entry point must execute cleanly and return 0 for the valid repository."""

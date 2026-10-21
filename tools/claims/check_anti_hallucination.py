@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Deterministic anti-hallucination guardrails across cf-research.
 
-Enforces 4 strict deterministic invariants across proposals and landscape documents:
+Enforces 5 strict deterministic invariants across proposals, landscape documents,
+and tools/discovery biophysical models:
   AH-1 [nct-provenance]: Every NCT identifier cited in proposals/*.md, landscape/*.md,
        or landscape/*-claims.json must exist in tools/trial_atlas/snapshot.json.
   AH-2 [prisma-cohort-consistency]: Documents citing the PRISMA-screened included cohort
@@ -10,12 +11,17 @@ Enforces 4 strict deterministic invariants across proposals and landscape docume
        with companion evidence/claims files must be grounded verbatim in those companions.
   AH-4 [clinical-overclaim-guard]: Prohibits unhedged curative promises or clinical practice directives
        (e.g., 'proven to cure', 'safe and effective for patients', 'guarantees clinical benefit').
+  AH-5 [discovery-module-registration]: Every biophysical model in tools/discovery/*.py
+       (excluding test_*.py and infrastructure scripts) must be registered in
+       discovery_council.DISCOVERY_MODULE_REGISTRY with verified NCT provenance and
+       zero prohibited clinical overclaims.
 
 Zero network. Deterministic verification. Standard library only.
 """
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import re
 import sys
@@ -186,11 +192,72 @@ def check_clinical_overclaim_guard(
     return failures
 
 
+def check_discovery_module_registration(
+    repo_root: Path,
+    snapshot_ncts: set[str],
+) -> list[str]:
+    """Rule AH-5: Every biophysical model in tools/discovery/*.py must be registered in discovery_council.py."""
+    failures: list[str] = []
+    discovery_dir = repo_root / "tools" / "discovery"
+    council_file = discovery_dir / "discovery_council.py"
+    if not discovery_dir.exists() or not council_file.exists():
+        return failures
+
+    spec = importlib.util.spec_from_file_location("discovery_council", council_file)
+    if spec is None or spec.loader is None:
+        return [f"FAIL AH-5 [discovery-module-registration]: cannot load {council_file.as_posix()}"]
+    mod = importlib.util.module_from_spec(spec)
+    sys.path.insert(0, str(discovery_dir))
+    try:
+        spec.loader.exec_module(mod)
+    finally:
+        if sys.path and sys.path[0] == str(discovery_dir):
+            sys.path.pop(0)
+
+    registry = getattr(mod, "DISCOVERY_MODULE_REGISTRY", {})
+    infra_modules = getattr(mod, "INFRASTRUCTURE_MODULES", {"__init__", "discovery_council", "cross_domain_miner", "export_delivery_web_data"})
+    audit_fn = getattr(mod, "audit_discovery_module_registry", None)
+    if audit_fn is None:
+        return [
+            f"FAIL AH-5 [discovery-module-registration] {council_file.as_posix()}: "
+            "missing audit_discovery_module_registry() or DISCOVERY_MODULE_REGISTRY"
+        ]
+
+    audit_res = audit_fn(discovery_dir)
+    for mod_name in audit_res.get("unregistered_modules", []):
+        failures.append(
+            f"FAIL AH-5 [discovery-module-registration] {council_file.as_posix()}: "
+            f"unregistered biophysical module '{mod_name}'"
+        )
+    for mod_name in audit_res.get("missing_test_suites", []):
+        failures.append(
+            f"FAIL AH-5 [discovery-module-registration] {council_file.as_posix()}: "
+            f"biophysical module '{mod_name}' missing companion unit test suite"
+        )
+
+    for py_file in sorted(discovery_dir.glob("*.py")):
+        if py_file.name.startswith("test_") or py_file.name.startswith("_"):
+            continue
+        content = py_file.read_text(encoding="utf-8")
+        for nct_fail in check_nct_provenance(py_file, content, snapshot_ncts):
+            failures.append(nct_fail.replace("AH-1 [nct-provenance]", "AH-5 [discovery-module-registration]"))
+        for oc_fail in check_clinical_overclaim_guard(py_file, content):
+            failures.append(oc_fail.replace("AH-4 [clinical-overclaim-guard]", "AH-5 [discovery-module-registration]"))
+
+        if py_file.stem not in infra_modules and py_file.stem not in registry:
+            failures.append(
+                f"FAIL AH-5 [discovery-module-registration] {py_file.as_posix()}: "
+                f"biophysical module '{py_file.stem}' is not registered in discovery_council.DISCOVERY_MODULE_REGISTRY"
+            )
+
+    return failures
+
+
 def run_checks(
     repo_root: Path | str | None = None,
     snapshot_path: Path | str | None = None,
 ) -> list[str]:
-    """Execute all 4 anti-hallucination checks across proposals and landscape."""
+    """Execute all 5 anti-hallucination checks across proposals, landscape, and tools/discovery."""
     root = Path(repo_root or REPO_ROOT).resolve()
     snap_path = Path(snapshot_path or root / "tools" / "trial_atlas" / "snapshot.json")
     snapshot_ncts = load_snapshot_ncts(snap_path)
@@ -229,6 +296,9 @@ def run_checks(
                 cl_text = cl_file.read_text(encoding="utf-8") if cl_file.exists() else ""
                 failures.extend(check_companion_identifier_grounding(p, content, ev_text, cl_text))
 
+    # Rule AH-5: Discovery Module Registration & Provenance
+    failures.extend(check_discovery_module_registration(root, snapshot_ncts))
+
     return failures
 
 
@@ -245,9 +315,10 @@ def main(argv: list[str] | None = None) -> int:
 
     print("=" * 72)
     print("ANTI-HALLUCINATION & PROVENANCE GUARDRAIL AUDIT")
-    print(f"Scanning proposals/*.md, landscape/*.md, landscape/*-claims.json")
+    print("Scanning proposals/*.md, landscape/*.md, landscape/*-claims.json, tools/discovery/*.py")
     print("Enforcing: AH-1 (NCT Provenance), AH-2 (PRISMA Consistency),")
-    print("           AH-3 (Companion Grounding), AH-4 (Clinical Overclaim Guard)")
+    print("           AH-3 (Companion Grounding), AH-4 (Clinical Overclaim Guard),")
+    print("           AH-5 (Discovery Module Registration & Council Verification)")
     print("=" * 72)
 
     failures = run_checks(args.root, args.snapshot)
@@ -262,6 +333,7 @@ def main(argv: list[str] | None = None) -> int:
     print("PASS AH-2 [prisma-cohort-consistency]: zero unfiltered 1,053-cohort count contamination")
     print("PASS AH-3 [companion-identifier-grounding]: 100% of markdown identifiers grounded in companions")
     print("PASS AH-4 [clinical-overclaim-guard]: zero prohibited clinical promise phrases detected")
+    print("PASS AH-5 [discovery-module-registration]: 100% of tools/discovery models registered & verified")
     print("=" * 72)
     print("RESULT: PASS (all anti-hallucination guardrails satisfied)")
     return 0

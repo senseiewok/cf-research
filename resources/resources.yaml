@@ -754,8 +754,7 @@ resources:
     last_checked: 2026-10-10
     status: active
 
-  # Candidate lead_only rows for the remaining 9 countries in the 15-country compass (ES, AR, CO, NZ, FR, DE, IT, BR, CL).
-  # Each row is basis: lead_only and awaits human browser inspection and confirmation before pinning to senseiewok.ai/resources/.
+  # Confirmed rows for the 9 Batch-1 international expansion countries (ES, AR, CO, NZ, FR, DE, IT, BR, CL).
 
   - id: fefq-vivir-con-fq
     name: "Vivir con FQ"
@@ -769,7 +768,12 @@ resources:
     who_for: not_checked
     lang: es-ES
     source_id: fefq-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-20
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-20
+    content_hash: dfe1010066c178c89de3f021bb85a8e63766109dbc183a632ce4568e2641519b
     last_checked: 2026-10-20
     status: active
 
@@ -785,7 +789,12 @@ resources:
     who_for: not_checked
     lang: es-AR
     source_id: fipan-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-20
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-20
+    content_hash: 78d19c9da56edd74cb35ed8578265b8047cf7e7a19f23ecc17d7a8c7e15621f9
     last_checked: 2026-10-20
     status: active
 
@@ -801,7 +810,12 @@ resources:
     who_for: not_checked
     lang: es-CO
     source_id: fcfq-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-20
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-20
+    content_hash: 9f928e8dcebc42261823b71982f11c32029212d8c3c0cf0f76ad8b1e8290ddd9
     last_checked: 2026-10-20
     status: active
 
@@ -816,7 +830,12 @@ resources:
     who_for: not_checked
     lang: en
     source_id: cfnz-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-20
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-20
+    content_hash: 0b1eacd5b0da729b97e5b6239333770679bcccadfc95ecc89bd87d71ca7989d0
     last_checked: 2026-10-20
     status: active
 
@@ -831,7 +850,12 @@ resources:
     who_for: not_checked
     lang: fr
     source_id: vaincrelamuco-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-20
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-20
+    content_hash: 252b020bb2cb646179239221acf2bc28818a3161aa55b386c6da3f17c03b63ae
     last_checked: 2026-10-20
     status: active
 
@@ -846,7 +870,12 @@ resources:
     who_for: not_checked
     lang: de
     source_id: muko-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-20
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-20
+    content_hash: 105845b06e549ddef9630370369e25c6cb29f53010f5acc952eff0161163c424
     last_checked: 2026-10-20
     status: active
 
@@ -861,7 +890,12 @@ resources:
     who_for: not_checked
     lang: it
     source_id: lifc-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-20
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-20
+    content_hash: 817e2a2be843892f1b66cde17cc250fe4d5bab9b522d58ef9dde704c208156ae
     last_checked: 2026-10-20
     status: active
 
@@ -876,7 +910,12 @@ resources:
     who_for: not_checked
     lang: pt-BR
     source_id: unidospelavida-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-20
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-20
+    content_hash: 88ba0a0aac2c0bf5344167f5457f6cf0c1b984219d50e294ad5e02af2b8ab4b2
     last_checked: 2026-10-20
     status: active
 
@@ -892,6 +931,194 @@ resources:
     who_for: not_checked
     lang: es-CL
     source_id: cfqchile-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-20
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-20
+    content_hash: 504ab9c360c6a4aa507a0d167e8dbe24a9e0595b07c9b16f723b20b92269d42a
+    last_checked: 2026-10-20
+    status: active
+
+  # Candidate lead_only rows for Batch 2: the remaining 12 countries in the 27-country generator list (NL, BE, CH, AT, DK, SE, NO, FI, PT, PE, ZA, IN).
+
+  - id: ncfs-leven-met-cf
+    name: "Leven met taaislijmziekte"
+    organisation: Nederlandse Cystic Fibrosis Stichting
+    countries: [NL]
+    url: https://ncfs.nl/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, daily_life, find_care_team]
+    summary: "Dutch national foundation offering patient guidance, specialized CF center information, and peer support for people with cystic fibrosis."
+    who_for: not_checked
+    lang: nl
+    source_id: ncfs-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: mucobe-leven-met-muco
+    name: "Leven met muco / Vivre avec la mucoviscidose"
+    organisation: Muco vzw / Association Muco
+    countries: [BE]
+    url: https://www.muco.be/
+    audience: [adult_with_cf, parent_carer_of_child, partner_family_carer_of_adult]
+    category: [daily_life, money_insurance, find_care_team]
+    summary: "Belgian national association providing social and financial guidance, reference center links, and family support in Dutch and French."
+    who_for: not_checked
+    lang: nl
+    source_id: mucobe-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: cfschweiz-leben-mit-cf
+    name: "Leben mit Cystischer Fibrose"
+    organisation: Cystische Fibrose Schweiz (CFS)
+    countries: [CH]
+    url: https://cysticfibrosisschweiz.ch/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [daily_life, money_insurance, community_peer]
+    summary: "Swiss national organization offering multilingual social counseling, care center directories, and regional peer support for families and adults."
+    who_for: not_checked
+    lang: de-CH
+    source_id: cfschweiz-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: cfhilfe-at-unterstuetzung
+    name: "Information und Unterstützung bei Cystischer Fibrose"
+    organisation: Cystische Fibrose Hilfe Österreich
+    countries: [AT]
+    url: https://www.cystischefibrose.info/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Austrian patient support organization providing practical guidance, therapy orientation, and community connection for people with CF and families."
+    who_for: not_checked
+    lang: de-AT
+    source_id: cfhilfe-at-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: cff-dk-livet-med-cf
+    name: "Livet med cystisk fibrose"
+    organisation: Cystisk Fibrose Foreningen
+    countries: [DK]
+    url: https://cystiskfibrose.dk/
+    audience: [adult_with_cf, parent_carer_of_child, teen_young_adult]
+    category: [daily_life, community_peer, money_insurance]
+    summary: "Danish national association offering counseling, social rights guidance, and peer community programs for children, youth, and adults with CF."
+    who_for: not_checked
+    lang: da
+    source_id: cff-dk-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: rfcf-se-stod-och-rad
+    name: "Stöd och råd vid cystisk fibros"
+    organisation: Riksförbundet Cystisk Fibros
+    countries: [SE]
+    url: https://www.rfcf.se/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Swedish national federation providing educational resources, specialist CF center information, and peer support for patients and families."
+    who_for: not_checked
+    lang: sv
+    source_id: rfcf-se-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: cfnorge-leve-med-cf
+    name: "Å leve med cystisk fibrose"
+    organisation: Norsk Forening for Cystisk Fibrose
+    countries: ["NO"]
+    url: https://cfnorge.no/
+    audience: [adult_with_cf, parent_carer_of_child, teen_young_adult]
+    category: [daily_life, community_peer, find_care_team]
+    summary: "Norwegian national association connecting people with CF and relatives through peer support, social rights guidance, and clinical center links."
+    who_for: not_checked
+    lang: nb
+    source_id: cfnorge-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: hengitysliitto-fi-kystinen-fibroosi
+    name: "Kystinen fibroosi ja vertaistuki"
+    organisation: Hengitysliitto
+    countries: [FI]
+    url: https://www.hengitysliitto.fi/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, community_peer, daily_life]
+    summary: "Finnish respiratory health organization providing rare lung disease guidance, rehabilitation information, and peer support for people with CF."
+    who_for: not_checked
+    lang: fi
+    source_id: hengitysliitto-fi-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: anfq-pt-viver-com-fq
+    name: "Apoio a pessoas com fibrose quística"
+    organisation: Associação Nacional de Fibrose Quística
+    countries: [PT]
+    url: https://www.anfq.pt/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, daily_life, find_care_team]
+    summary: "Portuguese national association offering patient orientation, social support, and specialized care unit information for people with CF."
+    who_for: not_checked
+    lang: pt-PT
+    source_id: anfq-pt-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: fiqper-apoyo-y-orientacion
+    name: "Orientación y apoyo en fibrosis quística"
+    organisation: Asociación Peruana de Fibrosis Quística (FIQPER)
+    countries: [PE]
+    url: https://fiqper.org/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, medicines_access, community_peer]
+    summary: "Peruvian patient and family association providing diagnostic orientation, treatment access advocacy, and community support for people with CF."
+    summary_es: "Asociación peruana de pacientes y familias que brinda orientación diagnóstica, gestión de acceso al tratamiento y acompañamiento comunitario."
+    who_for: not_checked
+    lang: es-PE
+    source_id: fiqper-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: sacfa-support-and-care
+    name: "Support and care for cystic fibrosis in South Africa"
+    organisation: South African Cystic Fibrosis Association
+    countries: [ZA]
+    url: https://www.sacfa.org.za/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, community_peer]
+    summary: "South African national association offering regional support chapters, diagnostic guidance, and clinic directories for individuals and families."
+    who_for: not_checked
+    lang: en-ZA
+    source_id: sacfa-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-20
+    status: active
+
+  - id: cfindia-patient-support
+    name: "Patient support and diagnostic guidance"
+    organisation: Cystic Fibrosis Trust India
+    countries: [IN]
+    url: https://www.cftrustindia.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, daily_life]
+    summary: "Indian patient support organization offering diagnostic navigation, respiratory care education, and family counseling for children and adults with CF."
+    who_for: not_checked
+    lang: en-IN
+    source_id: cfindia-resource-pages
     basis: lead_only
     last_checked: 2026-10-20
     status: active
