@@ -12,6 +12,10 @@ from biophysical_models import (
     calculate_transcriptome_readthrough_safety_score,
 )
 from discovery_council import (
+    COUNCIL_VERIFIER_FAMILIES,
+    DISCOVERY_MODULE_REGISTRY,
+    audit_discovery_module_registry,
+    discover_biophysical_modules,
     phase1_generative_synthesis,
     phase2_orthogonal_falsification,
     phase3_epistemic_verification,
@@ -164,3 +168,29 @@ def test_discovery_council_cryoem_round():
     assert round_cryo["phase_2_falsification"]["falsification_status"] == "STRESS_TESTED_AND_RESOLVED"
     assert len(round_cryo["phase_2_falsification"]["challenges_raised"]) == 2
     assert round_cryo["phase_3_verification"]["answer_tier"] == "T2"
+
+
+def test_discovery_council_aso_splice_round():
+    """Verify Discovery Council Round execution for ASO splice-switching kinetics topic (T-0254/T-0259)."""
+    round_aso = execute_discovery_council_round("aso_splice_kinetics")
+    assert round_aso["council_status"] == "APPROVED"
+    assert round_aso["phase_2_falsification"]["falsification_status"] == "STRESS_TESTED_AND_RESOLVED"
+    assert round_aso["phase_3_verification"]["answer_tier"] == "T2"
+    assert len(round_aso["phase_3_verification"]["verified_claims"]) >= 1
+
+
+def test_dynamic_module_registry_audit():
+    """Verify every biophysical model in tools/discovery/ is registered and passes audit (T-0259)."""
+    discovered = discover_biophysical_modules()
+    assert "biophysical_models" in discovered
+    assert "aso_splice_kinetics" in discovered
+    assert "cryoem_truncation_model" in discovered
+
+    audit = audit_discovery_module_registry()
+    assert audit["status"] == "PASS", f"Expected PASS, got: {audit}"
+    assert audit["unregistered_modules"] == []
+    assert audit["missing_test_suites"] == []
+    assert len(audit["verifier_families"]) >= 4
+    assert len(COUNCIL_VERIFIER_FAMILIES) >= 4
+    assert "biophysical_models" in DISCOVERY_MODULE_REGISTRY
+    assert "aso_splice_kinetics" in DISCOVERY_MODULE_REGISTRY
