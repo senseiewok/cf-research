@@ -1492,6 +1492,90 @@ sources:
       this host; access stays manual. The lab links to the public landing page and describes the organisation in its own plain
       words, copying no page text, logo, image, phone number, email address or person's name.
 
+  - id: cfnz-resource-pages
+    title: Cystic Fibrosis New Zealand (CFNZ) website (www.cfnz.org.nz)
+    publisher: Cystic Fibrosis New Zealand
+    kind: resource_pages
+    access: manual
+    robots: unknown
+    landing_page: https://www.cfnz.org.nz/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis support and advocacy organization in New Zealand. No automated tool requests
+      this host until robots.txt and policy pages are audited; access stays manual. Rows hold a link and the lab's own
+      one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: vaincrelamuco-resource-pages
+    title: Vaincre la Mucoviscidose website (www.vaincrelamuco.org)
+    publisher: Vaincre la Mucoviscidose
+    kind: resource_pages
+    access: manual
+    robots: unknown
+    landing_page: https://www.vaincrelamuco.org/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient and research association in France. No automated tool requests
+      this host until robots.txt and policy pages are audited; access stays manual. Rows hold a link and the lab's own
+      one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: muko-resource-pages
+    title: Mukoviszidose e.V. website (www.muko.info)
+    publisher: Mukoviszidose e.V.
+    kind: resource_pages
+    access: manual
+    robots: unknown
+    landing_page: https://www.muko.info/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official federal cystic fibrosis patient, family, clinician, and researcher association in Germany. No automated tool
+      requests this host until robots.txt and policy pages are audited; access stays manual. Rows hold a link and the lab's own
+      one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: lifc-resource-pages
+    title: Lega Italiana Fibrosi Cistica (LIFC) website (www.fibrosicistica.it)
+    publisher: Lega Italiana Fibrosi Cistica
+    kind: resource_pages
+    access: manual
+    robots: unknown
+    landing_page: https://www.fibrosicistica.it/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient and family association in Italy. No automated tool requests
+      this host until robots.txt and policy pages are audited; access stays manual. Rows hold a link and the lab's own
+      one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: unidospelavida-resource-pages
+    title: Instituto Unidos pela Vida website (unidospelavida.org.br)
+    publisher: Instituto Unidos pela Vida
+    kind: resource_pages
+    access: manual
+    robots: unknown
+    landing_page: https://unidospelavida.org.br/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis awareness, diagnosis navigation, and patient support institute in Brazil. No automated
+      tool requests this host until robots.txt and policy pages are audited; access stays manual. Rows hold a link and the lab's
+      own one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: cfqchile-resource-pages
+    title: Corporación para la Fibrosis Quística de Chile website (fibrosisquistica.cl)
+    publisher: Corporación para la Fibrosis Quística de Chile
+    kind: resource_pages
+    access: manual
+    robots: unknown
+    landing_page: https://fibrosisquistica.cl/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient and family support corporation in Chile. No automated tool requests
+      this host until robots.txt and policy pages are audited; access stays manual. Rows hold a link and the lab's own
+      one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
   - id: natural-earth-110m-countries
     title: Natural Earth 1:110m Admin 0 Countries (vector, GeoJSON)
     publisher: Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors; supported by NACIS)

@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-28 to download by hand, 1 to ask for, 3 not to download.
+34 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -23,6 +23,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cochrane-cf-reviews | Cochrane systematic reviews on cystic fibrosis (Cochrane Library) | [page](https://www.cochranelibrary.com/) | link only | robots.txt on www.cochranelibrary.com (read 2026-10-05) has a group "User-agent: Claude" with "Disallow: /", and the site answered a single plain request with… |
+
+### Corporación para la Fibrosis Quística de Chile
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cfqchile-resource-pages | Corporación para la Fibrosis Quística de Chile website (fibrosisquistica.cl) | [page](https://fibrosisquistica.cl/) | link only | Official national cystic fibrosis patient and family support corporation in Chile. |
 
 ### Cystic Fibrosis Canada
 
@@ -48,6 +54,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | cffpr-highlights-2025 | CFF Patient Registry Highlights 2025 | [page](https://www.cff.org/medical-professionals/2025-patient-registry-highlights) | `CFFPR_Highlights_2025.pdf` | Opened 2026-10-05 from the maintainer's browser download. |
 | cff-resource-pages | Cystic Fibrosis Foundation public help pages (www.cff.org) | [page](https://www.cff.org/support) | link only | Same host and same evidence as the twelve Foundation registry entries above: robots.txt was unreadable on 2026-10-05 and the notes there say the site refuses a… |
 | cff-apps-resource-pages | Cystic Fibrosis Foundation tools host (apps.cff.org) | [page](https://apps.cff.org/ccd) | link only | A second host of the Foundation, for the care center locator and the clinical trial finder. |
+
+### Cystic Fibrosis New Zealand
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cfnz-resource-pages | Cystic Fibrosis New Zealand (CFNZ) website (www.cfnz.org.nz) | [page](https://www.cfnz.org.nz/) | link only | Official national cystic fibrosis support and advocacy organization in New Zealand. |
 
 ### European Medicines Agency
 
@@ -97,17 +109,41 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cftr-france | CFTR-France (public variant list) | [page](https://cftr.chu-montpellier.fr/cgi-bin/variant_list.cgi) [file](https://cftr.chu-montpellier.fr/CFTR/data/img/AllVarCFTR-FranceToDownload_14092026.xlsx) | `AllVarCFTR-FranceToDownload_14092026.xlsx` | Read 2026-10-05; the site has moved from cftr.iurc.montp.inserm.fr to cftr.chu-montpellier.fr (robots.txt: none, 404). |
 
+### Instituto Unidos pela Vida
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| unidospelavida-resource-pages | Instituto Unidos pela Vida website (unidospelavida.org.br) | [page](https://unidospelavida.org.br/) | link only | Official national cystic fibrosis awareness, diagnosis navigation, and patient support institute in Brazil. |
+
 ### Johns Hopkins University and the Cystic Fibrosis Foundation
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cftr2 | CFTR2 - Clinical and Functional Translation of CFTR | [page](https://cftr2.org/) | link only | Terms read verbatim 2026-10-05 from the publisher's own Legal Terms and Conditions PDF (linked from the site footer; text extracted with pdftotext). |
 
+### Lega Italiana Fibrosi Cistica
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| lifc-resource-pages | Lega Italiana Fibrosi Cistica (LIFC) website (www.fibrosicistica.it) | [page](https://www.fibrosicistica.it/) | link only | Official national cystic fibrosis patient and family association in Italy. |
+
+### Mukoviszidose e.V.
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| muko-resource-pages | Mukoviszidose e.V. website (www.muko.info) | [page](https://www.muko.info/) | link only | Official federal cystic fibrosis patient, family, clinician, and researcher association in Germany. |
+
 ### Publications Office of the European Union
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cordis | CORDIS (EU-funded research projects and results) | [page](https://cordis.europa.eu/) | link only | Legal notice read 2026-10-05: unless a notice says otherwise, the editorial content owned by the EU may be reused under CC BY 4.0, and the Commission's reuse p… |
+
+### Vaincre la Mucoviscidose
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| vaincrelamuco-resource-pages | Vaincre la Mucoviscidose website (www.vaincrelamuco.org) | [page](https://www.vaincrelamuco.org/) | link only | Official national cystic fibrosis patient and research association in France. |
 
 ### Zenodo (host of the record; creators at Google DeepMind, copyright DeepMind Technologies Limited)
 
