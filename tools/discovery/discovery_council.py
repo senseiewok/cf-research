@@ -93,6 +93,7 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "epithelial_plasticity": {"task": "T-0178", "track": "Track A", "tier": "T2"},
     "ev_basal_tropism": {"task": "T-0234", "track": "Track A", "tier": "T2"},
     "gating_potentiator_energy_coupling": {"task": "T-0270", "track": "Track A", "tier": "T2"},
+    "glycocalyx_permeabilization_model": {"task": "T-0291", "track": "Track A", "tier": "T2"},
     "intronic_splice_foundation": {"task": "T-0269", "track": "Track A", "tier": "T2"},
     "lnp_escape_dynamics": {"task": "T-0285", "track": "Track A", "tier": "T2"},
     "macrophage_evasion_kinetics": {"task": "T-0271", "track": "Track A", "tier": "T2"},
@@ -114,6 +115,7 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "suppressor_trna_model": {"task": "T-0216", "track": "Track A", "tier": "T2"},
     "tmem16a_conductance_model": {"task": "T-0240", "track": "Track A", "tier": "T2"},
     "transcytosis_model": {"task": "T-0177", "track": "Track A", "tier": "T2"},
+    "u1_snrnp_decoy_kinetics": {"task": "T-0292", "track": "Track A", "tier": "T2"},
     "vector_redosing_kinetics": {"task": "T-0198", "track": "Track A", "tier": "T2"},
 }
 
