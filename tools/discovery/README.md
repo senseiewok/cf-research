@@ -65,7 +65,7 @@ flowchart TD
 
 ### Complete Registered Biophysical Module Index (`DISCOVERY_MODULE_REGISTRY`)
 
-All 33 biophysical simulation modules in `tools/discovery/` are dynamically registered in `discovery_council.py` (`DISCOVERY_MODULE_REGISTRY`) and documented in [`../../landscape/biophysical-index.md`](../../landscape/biophysical-index.md):
+All 36 biophysical simulation modules in `tools/discovery/` are dynamically registered in `discovery_council.py` (`DISCOVERY_MODULE_REGISTRY`) and documented in [`../../landscape/biophysical-index.md`](../../landscape/biophysical-index.md):
 
 | Module | Task | Track | Focus |
 | --- | --- | --- | --- |
@@ -103,6 +103,8 @@ All 33 biophysical simulation modules in `tools/discovery/` are dynamically regi
 | `aso_splice_kinetics.py` | `T-0254` | Track A | Cryptic splice-site steric blocking and productive pre-mRNA splicing partitioning |
 | `class1_prime_base_editing.py` | `T-0255` | Track A | Class I nonsense allele (`G542X`, `W1282X`, `R553X`, `R1162X`) ABE8e and PE3 basal stem cell editing |
 | `slc26a9_tmem16a_bypass.py` | `T-0256` | Track A | Constitutive SLC26A9 Cl-/HCO3- conductance and TMEM16A dual-channel bypass |
+| `cftr_sequence_scanner.py` | `T-0264` | Track A | RefSeq `NM_000492.4` arbitrary-allele PAM/ABE8e bystander scanner, cryptic splice ASO walk, and CpG/codon auditor |
+| `science_model_benchmark.py` | `T-0265` | Track A | Open-source biological foundation model benchmark (ESM-2, ThermoMPNN, Evo-2) vs mechanistic CFTR models |
 
 ---
 
