@@ -63,6 +63,46 @@ flowchart TD
   - **Directed-Evolution Advantage**: Engineered capsid `4D-A101` exhibits an engineered low-adhesion surface charge ($k_{\text{adhesion}} = 0.04$) and shifted neutralizing titer threshold ($\text{IC}_{50} = 120.0$), achieving $> 15$-fold higher cellular coverage in CF mucus with antibodies compared to wild-type `AAV2`.
   - **Registry Grounding**: NCT05248230 verified in `tools/trial_atlas/snapshot.json`. Disclaimer: *ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.*
 
+### Complete Registered Biophysical Module Index (`DISCOVERY_MODULE_REGISTRY`)
+
+All 33 biophysical simulation modules in `tools/discovery/` are dynamically registered in `discovery_council.py` (`DISCOVERY_MODULE_REGISTRY`) and documented in [`../../landscape/biophysical-index.md`](../../landscape/biophysical-index.md):
+
+| Module | Task | Track | Focus |
+| --- | --- | --- | --- |
+| `biophysical_models.py` | `T-0154` | Track A | Core Stokes-Einstein diffusion, Ogston mucus steric hindrance, and nonsense readthrough kinetics |
+| `cryoem_truncation_model.py` | `T-0151` | Track A | 3D Cryo-EM (`6MSM` / `8EIQ`) truncation geometry and catalytic domain loss (`G542X`, `W1282X`) |
+| `transcytosis_model.py` | `T-0177` | Track A | Systemic LNP endothelial transcytosis vs hepatic clearance kinetics |
+| `epithelial_plasticity.py` | `T-0178` | Track A | Ionocyte vs secretory cell lineage plasticity and CFTR current density |
+| `aso_splice_model.py` | `T-0183` | Track A | Splice-switching ASO (`3849+10kbC->T`, `2789+5G->A`) thermodynamic occupancy |
+| `prime_editing_cftr.py` | `T-0184` | Track A | Twin-PE and pegRNA nicking/flap resolution efficiency at `F508del` and `G542X` |
+| `mucus_rheology.py` | `T-0185` | Track A | Viscoelastic storage/loss moduli and disulfide cross-link cleavage kinetics |
+| `modifier_interactome.py` | `T-0186` | Track A | *SLC26A9*, *SLC9A3*, and *TGFB1* epistatic modifier ion-transport compensation |
+| `phage_biofilm_kinetics.py` | `T-0197` | Track A | *P. aeruginosa* biofilm reaction-diffusion and phage-antibiotic synergy |
+| `vector_redosing_kinetics.py` | `T-0198` | Track A | Mucosal IgA/neutralizing antibody memory decay and repeat-dosing windows |
+| `nbd1_thermodynamics.py` | `T-0199` | Track A | NBD1 thermal unfolding ($\Delta\Delta G$) and allosteric corrector rescue |
+| `enac_knockdown_model.py` | `T-0200` | Track A | Epithelial sodium channel (*SCNN1A*) siRNA/ASO knockdown and ASL hydration |
+| `rare_allele_matrix.py` | `T-0201` | Track B | Multi-modal therapeutic routing across rare CFTR genotype classes |
+| `dual_aav_intein_model.py` | `T-0206` | Track A | Dual-AAV split-intein *trans*-splicing and full-length CFTR reconstitution |
+| `cftr_minigene_model.py` | `T-0207` | Track A | $\Delta\text{R}$-CFTR minigene packaging limits and gating thermodynamics |
+| `aav_tropism_model.py` | `T-0208` | Track A | Directed-evolution AAV capsid mucus transport and NAb titration (`NCT05248230`) |
+| `suppressor_trna_model.py` | `T-0216` | Track A | Engineered suppressor tRNA decoding competition vs eRF1 and near-cognate aminoacylation |
+| `ptc_cryoem_allostery.py` | `T-0217` | Track A | Allosteric coupling between readthrough amino acid substitutions and TMD pockets |
+| `base_editing_cftr.py` | `T-0219` | Track A | Adenine base editor (`ABE8e`) catalytic deamination window and bystander edits |
+| `basal_stem_persistence.py` | `T-0220` | Track A | Airway basal stem cell (`KRT5+`/`TP63+`) editing persistence vs mucociliary turnover |
+| `allosteric_potentiator_model.py` | `T-0221` | Track A | Dual-potentiator / co-potentiator Monod-Wyman-Changeux open-probability gating |
+| `mechano_acoustic_delivery.py` | `T-0228` | Track A | Acoustic shear thinning and mucociliary beat alignment for non-viral delivery |
+| `minidna_evasion_model.py` | `T-0233` | Track A | CpG-depleted minicircle / nanoplasmid TLR9 and cGAS-STING innate immune evasion |
+| `ev_basal_tropism.py` | `T-0234` | Track A | Engineered extracellular vesicle integrin-targeted basal cell tropism |
+| `mrna_lnp_escape_model.py` | `T-0239` | Track A | Ionizable lipid $pK_a$ proton-sponge / membrane-fusion endosomal escape kinetics |
+| `tmem16a_conductance_model.py` | `T-0240` | Track A | Calcium-activated chloride channel (*ANO1*/TMEM16A) bypass conductance kinetics |
+| `nmd_ptc_kinetics.py` | `T-0241` | Track A | Position-dependent EJC nonsense-mediated decay vs SMG1i window |
+| `enac_proteolysis_model.py` | `T-0245` | Track A | Prostasin/neutrophil elastase ENaC $\gamma$-subunit proteolytic activation blockade |
+| `phage_omko1_tradeoff.py` | `T-0246` | Track A | Phage OMKO1 OprM efflux receptor evolutionary trade-off and antibiotic resensitization |
+| `macrophage_efferocytosis_model.py` | `T-0251` | Track A | CF macrophage efferocytosis restoration and resolvin D1 inflammation clearance |
+| `enac_tmem16a_equilibrium.py` | `T-0252` | Track A | Coupled ENaC inhibition and TMEM16A potentiation airway surface liquid equilibrium |
+| `aso_splice_kinetics.py` | `T-0254` | Track A | Cryptic splice-site steric blocking and productive pre-mRNA splicing partitioning |
+| `class1_prime_base_editing.py` | `T-0255` | Track A | Class I nonsense allele (`G542X`, `W1282X`, `R553X`, `R1162X`) ABE8e and PE3 basal stem cell editing |
+
 ---
 
 ## 3. Running the Discovery Council
