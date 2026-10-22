@@ -104,6 +104,8 @@ All 35 biophysical simulation modules in `tools/discovery/` are dynamically regi
 | `class1_prime_base_editing.py` | `T-0255` | Track A | Class I nonsense allele (`G542X`, `W1282X`, `R553X`, `R1162X`) ABE8e and PE3 basal stem cell editing |
 | `cftr_sequence_scanner.py` | `T-0264` | Track A | RefSeq `NM_000492.4` arbitrary-allele PAM/ABE8e bystander scanner, cryptic splice ASO walk, and CpG/codon auditor |
 | `science_model_benchmark.py` | `T-0265` | Track A | Open-source biological foundation model benchmark (ESM-2, ThermoMPNN, Evo-2) vs mechanistic CFTR models |
+| `intronic_splice_foundation.py` | `T-0269` | Track A | Deep intronic cryptic exon & splice foundation model benchmark (SpliceAI, Evo-2, 2'-MOE/PMO ASO dose-response) |
+| `mucus_cleavage_kinetics.py` | `T-0253` | Track A | CF airway mucus micro-rheology and polymer cross-linking cleavage kinetics under rhDNase and thiol-reducing mucolytics |
 
 ---
 
