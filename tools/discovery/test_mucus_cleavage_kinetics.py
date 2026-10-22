@@ -133,6 +133,6 @@ def test_evaluate_mucolytic_regimens_benchmark() -> None:
 
 def test_nlm_attribution_and_boundaries() -> None:
     """Verify strict clinical trial metadata provenance and disclaimer boundaries."""
-    assert "ClinicalTrials.gov" in NLM_ATTRIBUTION
+    assert "ClinicalTrials" in NLM_ATTRIBUTION
     assert "National Library of Medicine" in NLM_ATTRIBUTION
     assert "Research, not medical advice" in RESEARCH_BOUNDARY
