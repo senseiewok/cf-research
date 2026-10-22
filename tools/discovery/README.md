@@ -65,7 +65,7 @@ flowchart TD
 
 ### Complete Registered Biophysical Module Index (`DISCOVERY_MODULE_REGISTRY`)
 
-All 32 biophysical simulation modules in `tools/discovery/` are dynamically registered in `discovery_council.py` (`DISCOVERY_MODULE_REGISTRY`) and documented in [`../../landscape/biophysical-index.md`](../../landscape/biophysical-index.md):
+All 33 biophysical simulation modules in `tools/discovery/` are dynamically registered in `discovery_council.py` (`DISCOVERY_MODULE_REGISTRY`) and documented in [`../../landscape/biophysical-index.md`](../../landscape/biophysical-index.md):
 
 | Module | Task | Track | Focus |
 | --- | --- | --- | --- |
@@ -101,6 +101,7 @@ All 32 biophysical simulation modules in `tools/discovery/` are dynamically regi
 | `macrophage_efferocytosis_model.py` | `T-0251` | Track A | CF macrophage efferocytosis restoration and resolvin D1 inflammation clearance |
 | `enac_tmem16a_equilibrium.py` | `T-0252` | Track A | Coupled ENaC inhibition and TMEM16A potentiation airway surface liquid equilibrium |
 | `aso_splice_kinetics.py` | `T-0254` | Track A | Cryptic splice-site steric blocking and productive pre-mRNA splicing partitioning |
+| `class1_prime_base_editing.py` | `T-0255` | Track A | Class I nonsense allele (`G542X`, `W1282X`, `R553X`, `R1162X`) ABE8e and PE3 basal stem cell editing |
 
 ---
 
