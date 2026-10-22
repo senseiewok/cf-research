@@ -106,6 +106,7 @@ All 35 biophysical simulation modules in `tools/discovery/` are dynamically regi
 | `science_model_benchmark.py` | `T-0265` | Track A | Open-source biological foundation model benchmark (ESM-2, ThermoMPNN, Evo-2) vs mechanistic CFTR models |
 | `intronic_splice_foundation.py` | `T-0269` | Track A | Deep intronic cryptic exon & splice foundation model benchmark (SpliceAI, Evo-2, 2'-MOE/PMO ASO dose-response) |
 | `mucus_cleavage_kinetics.py` | `T-0253` | Track A | CF airway mucus micro-rheology and polymer cross-linking cleavage kinetics under rhDNase and thiol-reducing mucolytics |
+| `mpp_obstruction_scaling.py` | `T-0244` | Track A | Airway mucus-penetrating particle (MPP) dense PEG brush shielding and steric pore transport scaling |
 
 ---
 
