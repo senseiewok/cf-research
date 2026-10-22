@@ -97,6 +97,7 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "minidna_evasion_model": {"task": "T-0233", "track": "Track A", "tier": "T2"},
     "modifier_interactome": {"task": "T-0186", "track": "Track A", "tier": "T2"},
     "mrna_lnp_escape_model": {"task": "T-0239", "track": "Track A", "tier": "T2"},
+    "mrna_translation_velocity": {"task": "T-0272", "track": "Track A", "tier": "T2"},
     "mucus_cleavage_kinetics": {"task": "T-0253", "track": "Track A", "tier": "T2"},
     "mucus_rheology": {"task": "T-0185", "track": "Track A", "tier": "T2"},
     "nbd1_thermodynamics": {"task": "T-0199", "track": "Track A", "tier": "T2"},
