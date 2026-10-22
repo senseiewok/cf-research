@@ -94,6 +94,8 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "ev_basal_tropism": {"task": "T-0234", "track": "Track A", "tier": "T2"},
     "gating_potentiator_energy_coupling": {"task": "T-0270", "track": "Track A", "tier": "T2"},
     "intronic_splice_foundation": {"task": "T-0269", "track": "Track A", "tier": "T2"},
+    "lnp_escape_dynamics": {"task": "T-0285", "track": "Track A", "tier": "T2"},
+    "macrophage_evasion_kinetics": {"task": "T-0271", "track": "Track A", "tier": "T2"},
     "mechano_acoustic_delivery": {"task": "T-0228", "track": "Track A", "tier": "T2"},
     "minidna_evasion_model": {"task": "T-0233", "track": "Track A", "tier": "T2"},
     "modifier_interactome": {"task": "T-0186", "track": "Track A", "tier": "T2"},
