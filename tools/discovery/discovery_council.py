@@ -103,6 +103,7 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "prime_editing_cftr": {"task": "T-0184", "track": "Track A", "tier": "T2"},
     "ptc_cryoem_allostery": {"task": "T-0217", "track": "Track A", "tier": "T2"},
     "rare_allele_matrix": {"task": "T-0201", "track": "Track B", "tier": "T2"},
+    "slc26a9_tmem16a_bypass": {"task": "T-0256", "track": "Track A", "tier": "T2"},
     "suppressor_trna_model": {"task": "T-0216", "track": "Track A", "tier": "T2"},
     "tmem16a_conductance_model": {"task": "T-0240", "track": "Track A", "tier": "T2"},
     "transcytosis_model": {"task": "T-0177", "track": "Track A", "tier": "T2"},
