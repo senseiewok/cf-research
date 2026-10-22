@@ -106,6 +106,7 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "mucus_rheology": {"task": "T-0185", "track": "Track A", "tier": "T2"},
     "nbd1_thermodynamics": {"task": "T-0199", "track": "Track A", "tier": "T2"},
     "nmd_ptc_kinetics": {"task": "T-0241", "track": "Track A", "tier": "T2"},
+    "pdi_redox_remodeling": {"task": "T-0281", "track": "Track A", "tier": "T2"},
     "phage_biofilm_kinetics": {"task": "T-0197", "track": "Track A", "tier": "T2"},
     "phage_omko1_tradeoff": {"task": "T-0246", "track": "Track A", "tier": "T2"},
     "prime_editing_cftr": {"task": "T-0184", "track": "Track A", "tier": "T2"},
