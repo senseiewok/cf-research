@@ -82,6 +82,7 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "base_editing_cftr": {"task": "T-0217", "track": "Track A", "tier": "T2"},
     "biophysical_models": {"task": "T-0154", "track": "Track A", "tier": "T2"},
     "cftr_minigene_model": {"task": "T-0219", "track": "Track A", "tier": "T2"},
+    "class1_prime_base_editing": {"task": "T-0255", "track": "Track A", "tier": "T2"},
     "cryoem_truncation_model": {"task": "T-0163", "track": "Track A", "tier": "T2"},
     "dual_aav_intein_model": {"task": "T-0208", "track": "Track A", "tier": "T2"},
     "macrophage_efferocytosis_model": {"task": "T-0251", "track": "Track A", "tier": "T2"},
