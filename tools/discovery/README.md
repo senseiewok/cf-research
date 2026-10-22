@@ -94,6 +94,7 @@ All 35 biophysical simulation modules in `tools/discovery/` are dynamically regi
 | `minidna_evasion_model.py` | `T-0233` | Track A | CpG-depleted minicircle / nanoplasmid TLR9 and cGAS-STING innate immune evasion |
 | `ev_basal_tropism.py` | `T-0234` | Track A | Engineered extracellular vesicle integrin-targeted basal cell tropism |
 | `mrna_lnp_escape_model.py` | `T-0239` | Track A | Ionizable lipid $pK_a$ proton-sponge / membrane-fusion endosomal escape kinetics |
+| `mrna_translation_velocity.py` | `T-0272` | Track A | Inhaled CFTR synthetic mRNA TASEP ribosome dynamics, poly(A) deadenylation, and co-translational folding |
 | `tmem16a_conductance_model.py` | `T-0240` | Track A | Calcium-activated chloride channel (*ANO1*/TMEM16A) bypass conductance kinetics |
 | `nmd_ptc_kinetics.py` | `T-0241` | Track A | Position-dependent EJC nonsense-mediated decay vs SMG1i window |
 | `enac_proteolysis_model.py` | `T-0245` | Track A | Prostasin/neutrophil elastase ENaC $\gamma$-subunit proteolytic activation blockade |
