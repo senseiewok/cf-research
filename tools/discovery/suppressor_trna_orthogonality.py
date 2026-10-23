@@ -182,6 +182,7 @@ SUPPRESSOR_TRNA_PROFILES: Dict[str, Dict[str, Any]] = {
         "k_sup_rel": 0.85,
         "km_apparent_nm": 25.0,
         "folding_efficiency_eta": 0.32,  # Misfolding penalty for non-cognate charge insertion
+        "conductance_ratio": 0.80,  # Subconductance (6.8 pS / 8.5 pS) from charged Arg substitution
     },
 }
 
@@ -362,10 +363,11 @@ class SuppressorTRNAOrthogonalityModel:
         mature_band_c = (mrna_pct / 100.0) * f_rt * eta_folding * 100.0
 
         # Functional electrophysiology: Transepithelial Delta Isc (% of WT)
-        # Basal cAMP stimulated: Po = 0.38 / 0.38 = 1.0x Band C
-        delta_isc_basal = mature_band_c * (WT_CAMP_OPEN_PROBABILITY / WT_CAMP_OPEN_PROBABILITY)
-        # Potentiated with Ivacaftor (VX-770): Po = 0.72 / 0.38 = 1.89x
-        delta_isc_potentiated = mature_band_c * (IVACAFTOR_POTENTIATED_PO / WT_CAMP_OPEN_PROBABILITY)
+        # Scaled by single-channel conductance ratio and cAMP open probability relative to WT (Po_WT = 0.38)
+        cond_ratio = trna.get("conductance_ratio", 1.0)
+        single_channel_conductance = WT_CFTR_CONDUCTANCE_PS * cond_ratio
+        delta_isc_basal = mature_band_c * cond_ratio * (WT_CAMP_OPEN_PROBABILITY / WT_CAMP_OPEN_PROBABILITY)
+        delta_isc_potentiated = mature_band_c * cond_ratio * (IVACAFTOR_POTENTIATED_PO / WT_CAMP_OPEN_PROBABILITY)
 
         meets_clinical = delta_isc_potentiated >= CLINICAL_CURATIVE_THRESHOLD_PCT
 
@@ -391,7 +393,7 @@ class SuppressorTRNAOrthogonalityModel:
             tau_mrna_hours=tau_mrna,
             mrna_abundance_pct=mrna_pct,
             mature_band_c_pct=mature_band_c,
-            single_channel_conductance_ps=WT_CFTR_CONDUCTANCE_PS,
+            single_channel_conductance_ps=single_channel_conductance,
             open_probability=WT_CAMP_OPEN_PROBABILITY,
             potentiated_open_probability=IVACAFTOR_POTENTIATED_PO,
             delta_isc_basal_pct=delta_isc_basal,
