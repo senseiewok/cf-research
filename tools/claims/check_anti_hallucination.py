@@ -389,6 +389,19 @@ def run_checks(
             py_content = py_file.read_text(encoding="utf-8")
             failures.extend(check_cite_check_ledger_provenance(py_file, py_content, verified_ledger))
 
+    # Rule AH-7: Synthetic discovery scripts and exported snapshot must never claim Tier T2/T3 Certified
+    synth_tier_re = re.compile(r"\bTier\s+T[23]\s+Certified\b", re.IGNORECASE)
+    for synth_file in sorted(list((root / "tools" / "discovery").glob("*.py")) + [root / "data" / "delivery_discovery_snapshot.json"]):
+        if not synth_file.exists() or synth_file.name.startswith("test_"):
+            continue
+        synth_content = synth_file.read_text(encoding="utf-8")
+        for line_no, line in enumerate(synth_content.splitlines(), 1):
+            if synth_tier_re.search(line):
+                failures.append(
+                    f"FAIL AH-7 [synthetic-discovery-tier-guard] {synth_file.as_posix()}:{line_no}: "
+                    "synthetic discovery script or snapshot cannot claim 'Tier T2/T3 Certified' without line-level source quotes"
+                )
+
     return failures
 
 

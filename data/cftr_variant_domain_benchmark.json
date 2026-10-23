@@ -1,0 +1,2121 @@
+{
+  "schema_version": "1.0.0",
+  "benchmark_id": "cftr-variant-predictor-and-structural-domain-benchmark-v1",
+  "tier": "Tier T2 Verified Fixture & Structural Coordinate Benchmark",
+  "grounding_note": "Evaluates 17 recorded ClinVar variation records (across 9 distinct CFTR protein changes) and MyVariant.info annotations against UniProt P13569 / RefSeq NM_000492.4 / Cryo-EM (PDB 5UAK, 6MSM, 8EIQ) structural domain coordinates. No synthetic scores or unverified LoRA weights are used; every missing annotation is explicitly recorded as 'not stated'.",
+  "summary_metrics": {
+    "total_clinvar_records_evaluated": 17,
+    "distinct_protein_changes": 9,
+    "domains_represented": 5,
+    "total_cftr_domains_defined": 6,
+    "consequence_class_counts": {
+      "inframe_deletion": 2,
+      "missense_snv": 6,
+      "nonsense_premature_termination": 5,
+      "frameshift_indel": 1,
+      "complex_haplotype": 3
+    },
+    "multi_nucleotide_protein_groups_count": 4
+  },
+  "key_benchmark_findings": [
+    {
+      "finding_id": "VF-1",
+      "label": "[observed]",
+      "summary": "Sequence conservation vs. structural benignity split on Lasso-motif VUS R31L (VCV000054087): CADD Phred is 22.9 (top <1% conserved, GERP++ RS=437.4), whereas PolyPhen-2 (0.131, benign) and SIFT (0.13, tolerated) classify p.Arg31Leu as benign, matching ClinVar expert panel 'Uncertain significance'."
+    },
+    {
+      "finding_id": "VF-2",
+      "label": "[observed]",
+      "summary": "Codon degeneracy & review-tier asymmetry across identical protein changes: N1303K (NBD2), Y1092* (TMD2), W1282* (NBD2), and F508del (NBD1) each map to multiple ClinVar Variation IDs with distinct cDNA changes and review statuses (e.g., N1303K c.3909C>G [uid 7136, practice guideline, 52 SCVs] vs. c.3909C>A [uid 4818550, single submitter, 1 SCV]). Protein-only predictors score both identically, masking clinical evidence depth."
+    },
+    {
+      "finding_id": "VF-3",
+      "label": "[observed]",
+      "summary": "ClinVar 'drug response' classification on TMD2 pore/hinge missense variant D1152H (VCV000035867, review_status: reviewed by expert panel, trait: 'ivacaftor response - Efficacy'): binary pathogenic/benign classifiers misrepresent pharmacogenomic residual-function variants without a separate modulator-response label."
+    }
+  ],
+  "multi_nucleotide_degeneracy_audit": {
+    "F508del": [
+      {
+        "clinvar_variation_id": "7105",
+        "cdna_change": "c.1521_1523del",
+        "classification": "Pathogenic",
+        "review_status": "practice guideline",
+        "supporting_scv_count": 101
+      },
+      {
+        "clinvar_variation_id": "4072070",
+        "cdna_change": "c.1522_1524del",
+        "classification": "Pathogenic",
+        "review_status": "criteria provided, single submitter",
+        "supporting_scv_count": 1
+      }
+    ],
+    "W1282*": [
+      {
+        "clinvar_variation_id": "7129",
+        "cdna_change": "c.3846G>A",
+        "classification": "Pathogenic",
+        "review_status": "practice guideline",
+        "supporting_scv_count": 43
+      },
+      {
+        "clinvar_variation_id": "983867",
+        "cdna_change": "c.3845G>A",
+        "classification": "Likely pathogenic",
+        "review_status": "criteria provided, single submitter",
+        "supporting_scv_count": 1
+      }
+    ],
+    "N1303K": [
+      {
+        "clinvar_variation_id": "7136",
+        "cdna_change": "c.3909C>G",
+        "classification": "Pathogenic",
+        "review_status": "practice guideline",
+        "supporting_scv_count": 52
+      },
+      {
+        "clinvar_variation_id": "4818550",
+        "cdna_change": "c.3909C>A",
+        "classification": "Likely pathogenic",
+        "review_status": "criteria provided, single submitter",
+        "supporting_scv_count": 1
+      }
+    ],
+    "Y1092*": [
+      {
+        "clinvar_variation_id": "7211",
+        "cdna_change": "c.3276C>G",
+        "classification": "Pathogenic",
+        "review_status": "reviewed by expert panel",
+        "supporting_scv_count": 6
+      },
+      {
+        "clinvar_variation_id": "38728",
+        "cdna_change": "c.3276C>A",
+        "classification": "Pathogenic",
+        "review_status": "reviewed by expert panel",
+        "supporting_scv_count": 26
+      },
+      {
+        "clinvar_variation_id": "375475",
+        "cdna_change": "c.3276C>R",
+        "classification": "Pathogenic",
+        "review_status": "no assertion criteria provided",
+        "supporting_scv_count": 1
+      }
+    ]
+  },
+  "structural_domain_breakdown": [
+    {
+      "domain_id": "Lasso_N_terminal",
+      "name": "Lasso Motif / N-terminal interfacial region",
+      "residue_range": "1-80",
+      "uniprot_ref": "UniProtKB:P13569:1-80",
+      "pdb_refs": [
+        "5UAK",
+        "6MSM",
+        "8EIQ"
+      ],
+      "variant_records_count": 2,
+      "classifications": {
+        "Conflicting classifications of pathogenicity": 1,
+        "Uncertain significance": 1
+      },
+      "consequence_classes": {
+        "missense_snv": 2
+      },
+      "variants": [
+        "R31C (c.91C>T, VCV:35893)",
+        "R31L (c.92G>T, VCV:54087)"
+      ]
+    },
+    {
+      "domain_id": "TMD1",
+      "name": "Transmembrane Domain 1 (TM1-TM6 & ICL1/ICL2)",
+      "residue_range": "81-380",
+      "uniprot_ref": "UniProtKB:P13569:81-380",
+      "pdb_refs": [
+        "5UAK",
+        "6MSM",
+        "8EIQ"
+      ],
+      "variant_records_count": 3,
+      "classifications": {
+        "Pathogenic": 3
+      },
+      "consequence_classes": {
+        "missense_snv": 1,
+        "frameshift_indel": 1,
+        "complex_haplotype": 1
+      },
+      "variants": [
+        "R117H (c.350G>A, VCV:7109)",
+        "R104fs (c.310del, VCV:53653)",
+        "R117H (c.350G>A, VCV:209047)"
+      ]
+    },
+    {
+      "domain_id": "NBD1",
+      "name": "Nucleotide-Binding Domain 1",
+      "residue_range": "381-630",
+      "uniprot_ref": "UniProtKB:P13569:381-630",
+      "pdb_refs": [
+        "5UAK",
+        "6MSM",
+        "8EIQ"
+      ],
+      "variant_records_count": 2,
+      "classifications": {
+        "Pathogenic": 2
+      },
+      "consequence_classes": {
+        "inframe_deletion": 2
+      },
+      "variants": [
+        "F508del (c.1521_1523del, VCV:7105)",
+        "F508del (c.1522_1524del, VCV:4072070)"
+      ]
+    },
+    {
+      "domain_id": "R_domain",
+      "name": "Regulatory (R) Domain (intrinsically disordered)",
+      "residue_range": "631-845",
+      "uniprot_ref": "UniProtKB:P13569:631-845",
+      "pdb_refs": [
+        "5UAK",
+        "6MSM"
+      ],
+      "variant_records_count": 0,
+      "classifications": {},
+      "consequence_classes": {},
+      "variants": []
+    },
+    {
+      "domain_id": "TMD2",
+      "name": "Transmembrane Domain 2 (TM7-TM12 & ICL3/ICL4)",
+      "residue_range": "846-1190",
+      "uniprot_ref": "UniProtKB:P13569:846-1190",
+      "pdb_refs": [
+        "5UAK",
+        "6MSM",
+        "8EIQ"
+      ],
+      "variant_records_count": 4,
+      "classifications": {
+        "Pathogenic": 3,
+        "drug response": 1
+      },
+      "consequence_classes": {
+        "nonsense_premature_termination": 3,
+        "missense_snv": 1
+      },
+      "variants": [
+        "Y1092* (c.3276C>G, VCV:7211)",
+        "D1152H (c.3454G>C, VCV:35867)",
+        "Y1092* (c.3276C>A, VCV:38728)",
+        "Y1092* (c.3276C>R, VCV:375475)"
+      ]
+    },
+    {
+      "domain_id": "NBD2_C_terminal",
+      "name": "Nucleotide-Binding Domain 2 & C-terminal PDZ tail",
+      "residue_range": "1191-1480",
+      "uniprot_ref": "UniProtKB:P13569:1191-1480",
+      "pdb_refs": [
+        "5UAK",
+        "6MSM",
+        "8EIQ"
+      ],
+      "variant_records_count": 5,
+      "classifications": {
+        "Pathogenic": 3,
+        "Likely pathogenic": 2
+      },
+      "consequence_classes": {
+        "nonsense_premature_termination": 2,
+        "missense_snv": 2,
+        "complex_haplotype": 1
+      },
+      "variants": [
+        "W1282* (c.3846G>A, VCV:7129)",
+        "N1303K (c.3909C>G, VCV:7136)",
+        "W1282* (c.3845G>A, VCV:983867)",
+        "W1282*, R1283M (c.3846G>A, VCV:1300168)",
+        "N1303K (c.3909C>A, VCV:4818550)"
+      ]
+    }
+  ],
+  "variant_records": [
+    {
+      "clinvar_variation_id": {
+        "value": "7105",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000007105.213",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.3(CFTR):c.1521_1523del (p.Phe508del)",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "Deletion",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.1521_1523del",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "F508del",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title (protein_change empty on ClinVar 7105/634837)]"
+      },
+      "residue_position": {
+        "value": 508,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "NBD1",
+        "name": "Nucleotide-Binding Domain 1",
+        "uniprot_ref": "UniProtKB:P13569:381-630",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "ATP binding and canonical F508 cotranslational folding hub; contacts ICL1 and ICL4."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "inframe_deletion",
+        "canonical_cftr_class_note": "Class II (in-frame deletion affecting domain folding/maturation, e.g. F508del in NBD1).",
+        "source": "[computed from esummary:protein_change / HGVS p.*del]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "practice guideline",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2004/03/03 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 101,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "7109",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000007109.185",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.350G>A (p.Arg117His)",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "single nucleotide variant",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.350G>A",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "R117H",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 117,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "TMD1",
+        "name": "Transmembrane Domain 1 (TM1-TM6 & ICL1/ICL2)",
+        "uniprot_ref": "UniProtKB:P13569:81-380",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Forms anion pore lining (TM1, TM6) and intracellular coupling helices (ICL1 contacts NBD1; ICL2 contacts NBD2)."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "missense_snv",
+        "canonical_cftr_class_note": "Missense substitution (may act via Class II folding, Class III gating, Class IV conductance, or VUS).",
+        "source": "[computed from esummary:protein_change / HGVS missense]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "practice guideline",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2004/03/03 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 49,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "7129",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000007129.173",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.3846G>A (p.Trp1282Ter)",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "single nucleotide variant",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.3846G>A",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "W1282*",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 1282,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "NBD2_C_terminal",
+        "name": "Nucleotide-Binding Domain 2 & C-terminal PDZ tail",
+        "uniprot_ref": "UniProtKB:P13569:1191-1480",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Catalytic ATP hydrolysis site via NBD1:NBD2 head-to-tail dimerization; late cotranslational folding domain (N1303)."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "nonsense_premature_termination",
+        "canonical_cftr_class_note": "Class I (premature termination codon / nonsense-mediated decay candidate).",
+        "source": "[computed from esummary:protein_change / HGVS p.*]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "practice guideline",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2004/03/03 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 43,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "7136",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000007136.180",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.3909C>G (p.Asn1303Lys)",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "single nucleotide variant",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.3909C>G",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "N1303K",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 1303,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "NBD2_C_terminal",
+        "name": "Nucleotide-Binding Domain 2 & C-terminal PDZ tail",
+        "uniprot_ref": "UniProtKB:P13569:1191-1480",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Catalytic ATP hydrolysis site via NBD1:NBD2 head-to-tail dimerization; late cotranslational folding domain (N1303)."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "missense_snv",
+        "canonical_cftr_class_note": "Missense substitution (may act via Class II folding, Class III gating, Class IV conductance, or VUS).",
+        "source": "[computed from esummary:protein_change / HGVS missense]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "practice guideline",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2004/03/03 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 52,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "7211",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000007211.12",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.3276C>G (p.Tyr1092Ter)",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "single nucleotide variant",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.3276C>G",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "Y1092*",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 1092,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "TMD2",
+        "name": "Transmembrane Domain 2 (TM7-TM12 & ICL3/ICL4)",
+        "uniprot_ref": "UniProtKB:P13569:846-1190",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Forms anion pore lining (TM8, TM12), ivacaftor potentiator cleft (TM8 hinge), and ICL4 socket for NBD1 F508."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "nonsense_premature_termination",
+        "canonical_cftr_class_note": "Class I (premature termination codon / nonsense-mediated decay candidate).",
+        "source": "[computed from esummary:protein_change / HGVS p.*]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "reviewed by expert panel",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2017/03/17 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 6,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "35867",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000035867.107",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.3454G>C (p.Asp1152His)",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "single nucleotide variant",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.3454G>C",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "D1152H",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 1152,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "TMD2",
+        "name": "Transmembrane Domain 2 (TM7-TM12 & ICL3/ICL4)",
+        "uniprot_ref": "UniProtKB:P13569:846-1190",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Forms anion pore lining (TM8, TM12), ivacaftor potentiator cleft (TM8 hinge), and ICL4 socket for NBD1 F508."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "missense_snv",
+        "canonical_cftr_class_note": "Missense substitution (may act via Class II folding, Class III gating, Class IV conductance, or VUS).",
+        "source": "[computed from esummary:protein_change / HGVS missense]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "drug response",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "reviewed by expert panel",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2021/03/24 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 46,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "35893",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000035893.57",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.91C>T (p.Arg31Cys)",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:title]"
+      },
+      "obj_type": {
+        "value": "single nucleotide variant",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.91C>T",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "R31C",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 31,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "Lasso_N_terminal",
+        "name": "Lasso Motif / N-terminal interfacial region",
+        "uniprot_ref": "UniProtKB:P13569:1-80",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Wraps around TMD1/TMD2 transmembrane helices and contacts R-domain; ETI corrector binding vicinity in TMD1."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "missense_snv",
+        "canonical_cftr_class_note": "Missense substitution (may act via Class II folding, Class III gating, Class IV conductance, or VUS).",
+        "source": "[computed from esummary:protein_change / HGVS missense]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Conflicting classifications of pathogenicity",
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "criteria provided, conflicting classifications",
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2026/05/01 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 21,
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "38728",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000038728.59",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.3276C>A (p.Tyr1092Ter)",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "single nucleotide variant",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.3276C>A",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "Y1092*",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 1092,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "TMD2",
+        "name": "Transmembrane Domain 2 (TM7-TM12 & ICL3/ICL4)",
+        "uniprot_ref": "UniProtKB:P13569:846-1190",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Forms anion pore lining (TM8, TM12), ivacaftor potentiator cleft (TM8 hinge), and ICL4 socket for NBD1 F508."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "nonsense_premature_termination",
+        "canonical_cftr_class_note": "Class I (premature termination codon / nonsense-mediated decay candidate).",
+        "source": "[computed from esummary:protein_change / HGVS p.*]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "reviewed by expert panel",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2017/03/17 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 26,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "53653",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000053653.7",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.310del (p.Arg104fs)",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:title]"
+      },
+      "obj_type": {
+        "value": "Deletion",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.310del",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "R104fs",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 104,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "TMD1",
+        "name": "Transmembrane Domain 1 (TM1-TM6 & ICL1/ICL2)",
+        "uniprot_ref": "UniProtKB:P13569:81-380",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Forms anion pore lining (TM1, TM6) and intracellular coupling helices (ICL1 contacts NBD1; ICL2 contacts NBD2)."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "frameshift_indel",
+        "canonical_cftr_class_note": "Class I (frameshift insertion/deletion leading to premature termination).",
+        "source": "[computed from esummary:protein_change / HGVS p.*fs]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "reviewed by expert panel",
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2017/03/17 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 6,
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "54087",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000054087.29",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.92G>T (p.Arg31Leu)",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:title]"
+      },
+      "obj_type": {
+        "value": "single nucleotide variant",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.92G>T",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "R31L",
+        "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 31,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "Lasso_N_terminal",
+        "name": "Lasso Motif / N-terminal interfacial region",
+        "uniprot_ref": "UniProtKB:P13569:1-80",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Wraps around TMD1/TMD2 transmembrane helices and contacts R-domain; ETI corrector binding vicinity in TMD1."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "missense_snv",
+        "canonical_cftr_class_note": "Missense substitution (may act via Class II folding, Class III gating, Class IV conductance, or VUS).",
+        "source": "[computed from esummary:protein_change / HGVS missense]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Uncertain significance",
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "reviewed by expert panel",
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2017/03/03 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 13,
+          "source": "[tools/variant_profile/fixtures/esummary_54087_53653_35893.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "[tools/variant_profile/fixtures/myvariant_CFTR_R31L.json]",
+        "cadd_phred": {
+          "value": 22.9,
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": 3.36173,
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": 102,
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "2/27",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "ndomain",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "benign",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": 0.131,
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "tolerated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": 0.13,
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "evaluated_from_fixture",
+        "cadd_ge_20_deleterious": true,
+        "polyphen_damaging": false,
+        "sift_deleterious": false,
+        "predictors_disagree_internally": true,
+        "clinvar_reference": "Uncertain significance",
+        "predictor_agreement_note": "ClinVar classification is 'Uncertain significance'. CADD Phred=22.9 (deleterious>=20: True), PolyPhen-2='benign' (damaging: False), SIFT='tolerated' (deleterious: False). Sequence conservation (CADD>=20) diverges from structural/PSSM benign calls (PolyPhen-2/SIFT) on this VUS."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "209047",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000209047.3",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.3(CFTR):c.[350G>A;1210-12[5]]",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "Haplotype",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.350G>A",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "R117H",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 117,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "TMD1",
+        "name": "Transmembrane Domain 1 (TM1-TM6 & ICL1/ICL2)",
+        "uniprot_ref": "UniProtKB:P13569:81-380",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Forms anion pore lining (TM1, TM6) and intracellular coupling helices (ICL1 contacts NBD1; ICL2 contacts NBD2)."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "complex_haplotype",
+        "canonical_cftr_class_note": "Complex allele / cis-haplotype (e.g. R117H;5T or F508del;I1027T); phenotype depends on cis-modifier.",
+        "source": "[computed from esummary:obj_type and esummary:title]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "reviewed by expert panel",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "not stated",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 1,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "375475",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000375475.1",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.3276C>R (p.Tyr1092Ter)",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "single nucleotide variant",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.3276C>R",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "Y1092*",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 1092,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "TMD2",
+        "name": "Transmembrane Domain 2 (TM7-TM12 & ICL3/ICL4)",
+        "uniprot_ref": "UniProtKB:P13569:846-1190",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Forms anion pore lining (TM8, TM12), ivacaftor potentiator cleft (TM8 hinge), and ICL4 socket for NBD1 F508."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "nonsense_premature_termination",
+        "canonical_cftr_class_note": "Class I (premature termination codon / nonsense-mediated decay candidate).",
+        "source": "[computed from esummary:protein_change / HGVS p.*]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "no assertion criteria provided",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "1993/01/01 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 1,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "634837",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000634837.2",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.3(CFTR):c.[1521_1523delCTT;3080T>C]",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "Haplotype",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.1521_1523del",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "not stated",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": "not stated",
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "not stated",
+        "name": "not stated",
+        "uniprot_ref": "not stated",
+        "pdb_refs": [],
+        "structural_role": "not stated"
+      },
+      "molecular_mechanism": {
+        "consequence_class": "complex_haplotype",
+        "canonical_cftr_class_note": "Complex allele / cis-haplotype (e.g. R117H;5T or F508del;I1027T); phenotype depends on cis-modifier.",
+        "source": "[computed from esummary:obj_type and esummary:title]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "reviewed by expert panel",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2019/03/11 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 1,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "983867",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV000983867.3",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.3845G>A (p.Trp1282Ter)",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "single nucleotide variant",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.3845G>A",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "W1282*",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 1282,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "NBD2_C_terminal",
+        "name": "Nucleotide-Binding Domain 2 & C-terminal PDZ tail",
+        "uniprot_ref": "UniProtKB:P13569:1191-1480",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Catalytic ATP hydrolysis site via NBD1:NBD2 head-to-tail dimerization; late cotranslational folding domain (N1303)."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "nonsense_premature_termination",
+        "canonical_cftr_class_note": "Class I (premature termination codon / nonsense-mediated decay candidate).",
+        "source": "[computed from esummary:protein_change / HGVS p.*]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Likely pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "criteria provided, single submitter",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2019/09/29 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 1,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "1300168",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV001300168.2",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.[3846G>A;3848G>T]",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "Haplotype",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.3846G>A",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "W1282*, R1283M",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 1282,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "NBD2_C_terminal",
+        "name": "Nucleotide-Binding Domain 2 & C-terminal PDZ tail",
+        "uniprot_ref": "UniProtKB:P13569:1191-1480",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Catalytic ATP hydrolysis site via NBD1:NBD2 head-to-tail dimerization; late cotranslational folding domain (N1303)."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "complex_haplotype",
+        "canonical_cftr_class_note": "Complex allele / cis-haplotype (e.g. R117H;5T or F508del;I1027T); phenotype depends on cis-modifier.",
+        "source": "[computed from esummary:obj_type and esummary:title]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "reviewed by expert panel",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2020/01/10 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 1,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "4072070",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV004072070.1",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.1522_1524del (p.Phe508del)",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "Deletion",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.1522_1524del",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "F508del",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 508,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "NBD1",
+        "name": "Nucleotide-Binding Domain 1",
+        "uniprot_ref": "UniProtKB:P13569:381-630",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "ATP binding and canonical F508 cotranslational folding hub; contacts ICL1 and ICL4."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "inframe_deletion",
+        "canonical_cftr_class_note": "Class II (in-frame deletion affecting domain folding/maturation, e.g. F508del in NBD1).",
+        "source": "[computed from esummary:protein_change / HGVS p.*del]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "criteria provided, single submitter",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2025/06/28 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 1,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    },
+    {
+      "clinvar_variation_id": {
+        "value": "4818550",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:uid]"
+      },
+      "accession_version": {
+        "value": "VCV004818550.1",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:accession_version]"
+      },
+      "title": {
+        "value": "NM_000492.4(CFTR):c.3909C>A (p.Asn1303Lys)",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:title]"
+      },
+      "obj_type": {
+        "value": "single nucleotide variant",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:obj_type]"
+      },
+      "cdna_change": {
+        "value": "c.3909C>A",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:variation_set[0].cdna_change]"
+      },
+      "protein_change": {
+        "value": "N1303K",
+        "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:protein_change]"
+      },
+      "residue_position": {
+        "value": 1303,
+        "source": "[computed from protein_change]"
+      },
+      "structural_domain": {
+        "domain_id": "NBD2_C_terminal",
+        "name": "Nucleotide-Binding Domain 2 & C-terminal PDZ tail",
+        "uniprot_ref": "UniProtKB:P13569:1191-1480",
+        "pdb_refs": [
+          "5UAK",
+          "6MSM",
+          "8EIQ"
+        ],
+        "structural_role": "Catalytic ATP hydrolysis site via NBD1:NBD2 head-to-tail dimerization; late cotranslational folding domain (N1303)."
+      },
+      "molecular_mechanism": {
+        "consequence_class": "missense_snv",
+        "canonical_cftr_class_note": "Missense substitution (may act via Class II folding, Class III gating, Class IV conductance, or VUS).",
+        "source": "[computed from esummary:protein_change / HGVS missense]"
+      },
+      "clinvar_classification": {
+        "description": {
+          "value": "Likely pathogenic",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.description]"
+        },
+        "review_status": {
+          "value": "criteria provided, single submitter",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.review_status]"
+        },
+        "last_evaluated": {
+          "value": "2025/08/03 00:00",
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:germline_classification.last_evaluated]"
+        },
+        "supporting_scv_count": {
+          "value": 1,
+          "source": "[tools/variant_profile/fixtures/esummary_15_ids_trimmed.json:supporting_submissions.scv]"
+        }
+      },
+      "in_silico_annotations": {
+        "fixture_source": "not stated",
+        "cadd_phred": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.phred]"
+        },
+        "cadd_rawscore": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.rawscore]"
+        },
+        "grantham_distance": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.grantham]"
+        },
+        "exon": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.exon]"
+        },
+        "cadd_prot_domain": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.gene.prot.domain]"
+        },
+        "polyphen2_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.cat]"
+        },
+        "polyphen2_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.polyphen.val]"
+        },
+        "sift_category": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.cat]"
+        },
+        "sift_score": {
+          "value": "not stated",
+          "source": "[myvariant:cadd.sift.val]"
+        }
+      },
+      "predictor_concordance": {
+        "status": "no_in_silico_fixture",
+        "cadd_ge_20_deleterious": "not stated",
+        "polyphen_damaging": "not stated",
+        "sift_deleterious": "not stated",
+        "predictor_agreement_note": "No offline MyVariant fixture recorded for this variation ID; sequence-conservation scores reported as 'not stated' rather than imputed."
+      }
+    }
+  ],
+  "footer": "Research tool, not medical advice. A database entry or structural domain annotation is not an interpretation of any person's genotype; that belongs with their clinical genetics team. Sources: ClinVar via NCBI E-utilities fixtures, MyVariant.info fixtures, UniProt P13569 / PDB 5UAK, 6MSM, 8EIQ."
+}

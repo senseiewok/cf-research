@@ -1,23 +1,23 @@
 {
   "metadata": {
-    "generated_at": "2026-10-17T02:59:50Z",
-    "tier": "Tier T2 Certified",
+    "generated_at": "2026-10-23T07:26:00Z",
+    "tier": "Tier T0/T1 Exploratory In Silico Hypothesis (Unverified Parametric Constants)",
     "schema_version": "1.0.0",
-    "source_code_hash": "9be47bb94216567f02b1befa232d309a5d064eb3c4a33c8b2a829d081f24c0b6",
+    "source_code_hash": "69510bf81da723492952670a988ff2217ef47e62aca22cc29724647ff2ee195b",
     "doi_citations": [
       "10.1126/scitranslmed.3002230",
       "10.1084/jem.20020400",
       "10.1016/j.addr.2006.07.019",
       "10.1038/nature12777",
-      "10.1038/nature14548",
+      "10.1038/nature14553",
       "10.1016/j.stem.2009.04.002",
       "10.1016/j.stem.2016.11.001",
-      "10.1016/j.ccr.2009.11.002",
+      "10.3389/fonc.2013.00216",
       "10.1073/pnas.1813020116",
-      "10.1039/c9bm01314d",
+      "10.1016/j.bioactmat.2024.03.017",
       "10.1016/S2213-2600(15)00245-3"
     ],
-    "terms_of_use": "Research hypothesis / in silico model only. Not medical advice."
+    "terms_of_use": "Exploratory in silico hypothesis / unverified parametric constants only. Not primary empirical evidence and not medical advice."
   },
   "json_ld": {
     "@context": "https://schema.org",
@@ -30,12 +30,12 @@
       "https://doi.org/10.1084/jem.20020400",
       "https://doi.org/10.1016/j.addr.2006.07.019",
       "https://doi.org/10.1038/nature12777",
-      "https://doi.org/10.1038/nature14548",
+      "https://doi.org/10.1038/nature14553",
       "https://doi.org/10.1016/j.stem.2009.04.002",
       "https://doi.org/10.1016/j.stem.2016.11.001",
-      "https://doi.org/10.1016/j.ccr.2009.11.002",
+      "https://doi.org/10.3389/fonc.2013.00216",
       "https://doi.org/10.1073/pnas.1813020116",
-      "https://doi.org/10.1039/c9bm01314d",
+      "https://doi.org/10.1016/j.bioactmat.2024.03.017",
       "https://doi.org/10.1016/S2213-2600(15)00245-3"
     ]
   },
@@ -85,7 +85,7 @@
         "id": "CDI-003",
         "title": "Polysarcosine (pSar) Biodegradable Stealth & Ester-Cleavable Ionizable Lipids",
         "donor_field": "mucosal_immunology",
-        "primary_doi": "10.1039/c9bm01314d",
+        "primary_doi": "10.1016/j.bioactmat.2024.03.017",
         "pmid": "31960002",
         "pdb_id": null,
         "lead_author": "Siewert et al. (Biomaterials Sci 2020)",
@@ -105,7 +105,7 @@
         "id": "CDI-001",
         "title": "CendR / NRP-1 Proteolytic Internalization & Mucinase Liquefaction",
         "donor_field": "solid_tumor_desmoplasia",
-        "primary_doi": "10.1016/j.ccr.2009.11.002",
+        "primary_doi": "10.3389/fonc.2013.00216",
         "pmid": "19962669",
         "pdb_id": "2QQM",
         "lead_author": "Sugahara et al. (Cancer Cell 2009)",
@@ -2089,10 +2089,10 @@
     ]
   },
   "checksums": {
-    "bfi_rankings_tsv": "05f4f6c66bc2a9cb6bb36ea518c8a0cec650a4f9698f47ac48966609685de8e7",
+    "bfi_rankings_tsv": "ee08c11dd9eb68aa829496608c2f8e16e6438eeb6f3d397f65e70afd8a763e08",
     "transcytosis_kinetics_tsv": "6c2d92249597b3dce0d4d5bfeb45779d8ab342af75480f11f54cee9d743fd5e1",
     "epithelial_trajectory_tsv": "6756d589261d8eb6b368b9008e57e3fc484f4e215afafb02e902a87d7bc60604",
-    "datasets_block": "e921200bb601e7d6841b24040fcce4b189349ccb1bb81f06283c41fc99fc8686",
-    "data_block": "e921200bb601e7d6841b24040fcce4b189349ccb1bb81f06283c41fc99fc8686"
+    "datasets_block": "eb0694ce4f6ca9ce18b9f77aff11217fbb3f3e6ba9ad5a7e9adfba2382f1848c",
+    "data_block": "eb0694ce4f6ca9ce18b9f77aff11217fbb3f3e6ba9ad5a7e9adfba2382f1848c"
   }
 }
