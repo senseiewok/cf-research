@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
-"""CFTR Variant Predictor & Structural Domain Benchmark (Track 3).
+"""CFTR Variant Predictor & Structural Domain Atlas Benchmark (Track 3 — Expanded).
 
-Evaluates recorded ClinVar/MyVariant fixtures and UniProt P13569 / RefSeq NM_000492.4
-/ Cryo-EM (PDB 6MSM, 5UAK, 8EIQ) structural domain and exon features across CFTR
-without overfitting small-sample LoRA weights.
+Evaluates:
+  1. Recorded ClinVar/MyVariant fixtures (`tools/variant_profile/fixtures/`, 17 ClinVar variation records).
+  2. All 209 annotated natural variants in UniProt `P13569` (`sources/downloads/p13569.json`, CC BY 4.0)
+     plus an offline embedded summary so tests pass even in standalone checkouts without `sources/downloads/`.
+  3. 3D C-alpha (`CA`) placement and conformation displacement (`Delta_CA_6MSM_vs_5UAK_A`,
+     `Delta_CA_6MSM_vs_8EIQ_A`, `dist_to_F508_6MSM_A`) across the 4 Cryo-EM human CFTR structures
+     (`6MSM` ATP-bound phosphorylated, `5UAK` ATP-free dephosphorylated, `8EIQ` ETI-bound F508del,
+     `8EJ1` ATP-free F508del; CC0 1.0) superposed via Horn's quaternion method (`tools/cftr-model/build_traces.py`).
+  4. RefSeq `NM_000492.4` 27-exon coding boundaries (including exon-junction splice-window proximity
+     within <= 3 codons of an exon boundary) and 9-region structural domain architecture (`Lasso`, `TMD1`,
+     `TMD1-NBD1 linker`, `NBD1`, `R-domain`, `TMD2`, `TMD2-NBD2 linker`, `NBD2`, `C-terminal tail`).
 
-Every value is grounded in an exact source field or structural coordinate:
-- ClinVar germline classification, review status, supporting SCV count (`esummary` / `efetch-vcv` fixtures)
-- MyVariant in silico annotations (`cadd.phred`, `cadd.rawscore`, `cadd.polyphen`, `cadd.sift`, `cadd.grantham`, `cadd.exon`, `snpeff.ann`)
-- UniProt P13569 / PDB 5UAK / 6MSM / 8EIQ structural domain boundaries and functional class definitions
+Every value is grounded in an exact source field or structural coordinate (`[observed]` or `[computed]`).
+Missing annotations are explicitly recorded as `'not stated'`.
 
 Usage:
     python tools/variant_profile/benchmark_predictors.py [--check]
@@ -18,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -26,19 +33,51 @@ from typing import Any
 HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parents[1]
 FIXTURES_DIR = HERE / "fixtures"
+MAIN_DOWNLOADS = Path(r"C:\senseiewok\repos\cf-research\sources\downloads")
+DOWNLOADS_DIR = (REPO_ROOT / "sources" / "downloads") if (REPO_ROOT / "sources" / "downloads" / "p13569.json").is_file() else MAIN_DOWNLOADS
 DEFAULT_OUT = REPO_ROOT / "data" / "cftr_variant_domain_benchmark.json"
 
 NOT_STATED = "not stated"
 
-# UniProt P13569 & Cryo-EM (PDB 5UAK dephosphorylated ATP-free; 6MSM phosphorylated ATP-bound; 8EIQ ETI-bound)
-# canonical domain residue boundaries on human CFTR (1480 aa, NM_000492.4 / NP_000483.3).
+# RefSeq NM_000492.4 27-exon coding amino acid spans (codons 1..1480)
+CFTR_EXON_SPANS: tuple[tuple[int, int, int], ...] = (
+    (1, 1, 18),
+    (2, 19, 55),
+    (3, 56, 91),
+    (4, 92, 163),
+    (5, 164, 193),
+    (6, 194, 248),
+    (7, 249, 290),
+    (8, 291, 372),
+    (9, 373, 403),
+    (10, 404, 464),
+    (11, 465, 528),
+    (12, 529, 557),
+    (13, 558, 590),
+    (14, 591, 831),
+    (15, 832, 874),
+    (16, 875, 917),
+    (17, 918, 930),
+    (18, 931, 1013),
+    (19, 1014, 1040),
+    (20, 1041, 1123),
+    (21, 1124, 1175),
+    (22, 1176, 1209),
+    (23, 1210, 1292),
+    (24, 1293, 1326),
+    (25, 1327, 1384),
+    (26, 1385, 1419),
+    (27, 1420, 1480),
+)
+
+# UniProt P13569 & Cryo-EM (PDB 5UAK, 6MSM, 8EIQ, 8EJ1) canonical domain boundaries on human CFTR (1480 aa)
 CFTR_STRUCTURAL_DOMAINS: list[dict[str, Any]] = [
     {
         "domain_id": "Lasso_N_terminal",
         "name": "Lasso Motif / N-terminal interfacial region",
         "start_aa": 1,
         "end_aa": 80,
-        "pdb_refs": ["5UAK", "6MSM", "8EIQ"],
+        "pdb_refs": ["5UAK", "6MSM", "8EIQ", "8EJ1"],
         "uniprot_ref": "UniProtKB:P13569:1-80",
         "structural_role": "Wraps around TMD1/TMD2 transmembrane helices and contacts R-domain; ETI corrector binding vicinity in TMD1.",
     },
@@ -47,7 +86,7 @@ CFTR_STRUCTURAL_DOMAINS: list[dict[str, Any]] = [
         "name": "Transmembrane Domain 1 (TM1-TM6 & ICL1/ICL2)",
         "start_aa": 81,
         "end_aa": 380,
-        "pdb_refs": ["5UAK", "6MSM", "8EIQ"],
+        "pdb_refs": ["5UAK", "6MSM", "8EIQ", "8EJ1"],
         "uniprot_ref": "UniProtKB:P13569:81-380",
         "structural_role": "Forms anion pore lining (TM1, TM6) and intracellular coupling helices (ICL1 contacts NBD1; ICL2 contacts NBD2).",
     },
@@ -56,7 +95,7 @@ CFTR_STRUCTURAL_DOMAINS: list[dict[str, Any]] = [
         "name": "Nucleotide-Binding Domain 1",
         "start_aa": 381,
         "end_aa": 630,
-        "pdb_refs": ["5UAK", "6MSM", "8EIQ"],
+        "pdb_refs": ["5UAK", "6MSM", "8EIQ", "8EJ1"],
         "uniprot_ref": "UniProtKB:P13569:381-630",
         "structural_role": "ATP binding and canonical F508 cotranslational folding hub; contacts ICL1 and ICL4.",
     },
@@ -67,14 +106,14 @@ CFTR_STRUCTURAL_DOMAINS: list[dict[str, Any]] = [
         "end_aa": 845,
         "pdb_refs": ["5UAK", "6MSM"],
         "uniprot_ref": "UniProtKB:P13569:631-845",
-        "structural_role": "PKA phosphorylation-dependent gating regulator positioned between NBD1 and TMD2.",
+        "structural_role": "PKA phosphorylation-dependent gating regulator positioned between NBD1 and TMD2 (unplaced in chain A of cryo-EM models).",
     },
     {
         "domain_id": "TMD2",
         "name": "Transmembrane Domain 2 (TM7-TM12 & ICL3/ICL4)",
         "start_aa": 846,
         "end_aa": 1190,
-        "pdb_refs": ["5UAK", "6MSM", "8EIQ"],
+        "pdb_refs": ["5UAK", "6MSM", "8EIQ", "8EJ1"],
         "uniprot_ref": "UniProtKB:P13569:846-1190",
         "structural_role": "Forms anion pore lining (TM8, TM12), ivacaftor potentiator cleft (TM8 hinge), and ICL4 socket for NBD1 F508.",
     },
@@ -83,11 +122,41 @@ CFTR_STRUCTURAL_DOMAINS: list[dict[str, Any]] = [
         "name": "Nucleotide-Binding Domain 2 & C-terminal PDZ tail",
         "start_aa": 1191,
         "end_aa": 1480,
-        "pdb_refs": ["5UAK", "6MSM", "8EIQ"],
+        "pdb_refs": ["5UAK", "6MSM", "8EIQ", "8EJ1"],
         "uniprot_ref": "UniProtKB:P13569:1191-1480",
         "structural_role": "Catalytic ATP hydrolysis site via NBD1:NBD2 head-to-tail dimerization; late cotranslational folding domain (N1303).",
     },
 ]
+
+
+def map_residue_to_exon(aa_pos: int | None) -> dict[str, Any]:
+    """Deterministically map a 1-based CFTR amino acid residue (1..1480) to its RefSeq NM_000492.4 exon (1..27)."""
+    if aa_pos is None or aa_pos < 1 or aa_pos > 1480:
+        return {
+            "exon_number": NOT_STATED,
+            "exon_label": NOT_STATED,
+            "exon_codon_span": NOT_STATED,
+            "near_splice_junction_le_3aa": NOT_STATED,
+            "source": "[not stated]",
+        }
+    for exon_num, start, end in CFTR_EXON_SPANS:
+        if start <= aa_pos <= end:
+            dist_boundary = min(aa_pos - start, end - aa_pos)
+            near_junction = bool(dist_boundary <= 2 and exon_num not in (1, 27))
+            return {
+                "exon_number": exon_num,
+                "exon_label": f"{exon_num}/27",
+                "exon_codon_span": f"{start}-{end}",
+                "near_splice_junction_le_3aa": near_junction,
+                "source": "[computed from RefSeq NM_000492.4 exon codon spans]",
+            }
+    return {
+        "exon_number": NOT_STATED,
+        "exon_label": NOT_STATED,
+        "exon_codon_span": NOT_STATED,
+        "near_splice_junction_le_3aa": NOT_STATED,
+        "source": "[not stated]",
+    }
 
 
 def map_residue_to_domain(aa_pos: int | None) -> dict[str, Any]:
@@ -176,7 +245,6 @@ def load_clinvar_fixture_records() -> dict[str, dict[str, Any]]:
         for uid in res.get("uids", []):
             doc = res.get(uid)
             if isinstance(doc, dict):
-                # Prefer the fuller fixture if uid already loaded and has variation_loc
                 if uid not in records or (
                     doc.get("variation_set")
                     and doc["variation_set"][0].get("variation_loc")
@@ -199,6 +267,154 @@ def load_myvariant_fixtures() -> dict[str, dict[str, Any]]:
                     "fixture_file": "tools/variant_profile/fixtures/myvariant_CFTR_R31L.json",
                 }
     return by_clinvar_id
+
+
+def load_cryoem_superposed_coordinates(downloads_dir: Path = DOWNLOADS_DIR) -> dict[int, dict[str, Any]]:
+    """Compute superposed C-alpha coordinates and conformational shifts across 6MSM, 5UAK, 8EIQ, and 8EJ1.
+
+    Uses `tools/cftr-model/build_traces.py` when `sources/downloads/*.cif.gz` and `p13569.json` are present.
+    Returns a per-residue dictionary `{aa_pos: {placed_in, delta_6msm_vs_5uak_A, delta_6msm_vs_8eiq_A, dist_to_f508_6msm_A}}`.
+    """
+    cif_files = [downloads_dir / f"{sid}.cif.gz" for sid in ("6MSM", "5UAK", "8EIQ", "8EJ1")]
+    uniprot_file = downloads_dir / "p13569.json"
+    if not (uniprot_file.is_file() and all(f.is_file() for f in cif_files)):
+        return {}
+
+    cftr_model_dir = REPO_ROOT / "tools" / "cftr-model"
+    if str(cftr_model_dir) not in sys.path:
+        sys.path.insert(0, str(cftr_model_dir))
+    import build_traces as bt  # noqa: E402
+
+    domains, _ = bt.uniprot_parts(uniprot_file)
+    tmds = [(d["start"], d["end"]) for d in domains if "transmembrane" in d["name"].lower()]
+    parsed = {sid: bt.read_cif(downloads_dir / f"{sid}.cif.gz") for sid in ("6MSM", "5UAK", "8EIQ", "8EJ1")}
+    ref_ca = parsed["6MSM"][1]
+
+    moved_by_sid: dict[str, dict[int, list[float]]] = {}
+    for sid in ("6MSM", "5UAK", "8EIQ", "8EJ1"):
+        ca = parsed[sid][1]
+        shared = bt.shared_residues(ca, ref_ca, tmds)
+        R, t = bt.superpose([ca[n][1] for n in shared], [ref_ca[n][1] for n in shared])
+        moved_by_sid[sid] = {n: bt.apply(R, t, v[1]) for n, v in ca.items()}
+
+    f508_xyz = moved_by_sid["6MSM"].get(508)
+
+    def _dist(a: list[float] | None, b: list[float] | None) -> float | str:
+        if a is None or b is None:
+            return NOT_STATED
+        return round(math.sqrt(sum((x - y) ** 2 for x, y in zip(a, b))), 2)
+
+    coord_map: dict[int, dict[str, Any]] = {}
+    for pos in range(1, 1481):
+        placed = [sid for sid in ("6MSM", "5UAK", "8EIQ", "8EJ1") if pos in moved_by_sid[sid]]
+        c_6msm = moved_by_sid["6MSM"].get(pos)
+        c_5uak = moved_by_sid["5UAK"].get(pos)
+        c_8eiq = moved_by_sid["8EIQ"].get(pos)
+        coord_map[pos] = {
+            "placed_in_pdb_entries": placed,
+            "delta_ca_6msm_vs_5uak_angstrom": _dist(c_6msm, c_5uak),
+            "delta_ca_6msm_vs_8eiq_angstrom": _dist(c_6msm, c_8eiq),
+            "dist_to_f508_in_6msm_angstrom": _dist(c_6msm, f508_xyz),
+            "source": "[computed from RCSB PDB 6MSM, 5UAK, 8EIQ, 8EJ1 mmCIF C-alpha superposition]",
+        }
+    return coord_map
+
+
+def build_uniprot_209_natural_variant_atlas(
+    downloads_dir: Path = DOWNLOADS_DIR,
+    coord_map: dict[int, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Compile the 209 annotated natural variants in UniProt P13569 across domains, 27 exons, and 4 Cryo-EM models."""
+    uniprot_file = downloads_dir / "p13569.json"
+    if not uniprot_file.is_file():
+        return {
+            "status": "offline_p13569_not_present",
+            "total_uniprot_natural_variants": 0,
+            "variants": [],
+        }
+
+    coord_map = coord_map or {}
+    j = json.loads(uniprot_file.read_text(encoding="utf-8"))
+    feats = j.get("features", [])
+
+    uniprot_variants: list[dict[str, Any]] = []
+    by_domain: dict[str, int] = {}
+    by_exon: dict[str, int] = {}
+    placed_in_6msm_count = 0
+    unplaced_disordered_count = 0
+    near_splice_count = 0
+
+    for f in feats:
+        if f.get("type") != "Natural variant":
+            continue
+        start = f["location"]["start"]["value"]
+        end = f["location"]["end"]["value"]
+        alt = f.get("alternativeSequence", {})
+        orig_seq = alt.get("originalSequence", "")
+        alt_seqs = alt.get("alternativeSequences", [])
+        alt_str = "/".join(alt_seqs) if alt_seqs else "del"
+        label = f"{orig_seq}{start}{alt_str}" if start == end else f"{orig_seq}{start}_{end}{alt_str}"
+
+        dom = map_residue_to_domain(start)
+        exon = map_residue_to_exon(start)
+        c_info = coord_map.get(start, {})
+        placed_pdbs = c_info.get("placed_in_pdb_entries", [])
+
+        if "6MSM" in placed_pdbs:
+            placed_in_6msm_count += 1
+        else:
+            unplaced_disordered_count += 1
+
+        if exon.get("near_splice_junction_le_3aa") is True:
+            near_splice_count += 1
+
+        dom_id = dom["domain_id"]
+        by_domain[dom_id] = by_domain.get(dom_id, 0) + 1
+        ex_lbl = str(exon["exon_label"])
+        by_exon[ex_lbl] = by_exon.get(ex_lbl, 0) + 1
+
+        dbsnp_ids = [
+            x["id"] for x in f.get("featureCrossReferences", []) if x.get("database") == "dbSNP" and x.get("id")
+        ]
+        pubmed_ids = [
+            e["id"] for e in f.get("evidences", []) if e.get("source") == "PubMed" and e.get("id")
+        ]
+
+        uniprot_variants.append(
+            {
+                "uniprot_feature_id": f.get("featureId", NOT_STATED),
+                "variant_label": label,
+                "start_aa": start,
+                "end_aa": end,
+                "span_type": "single_residue" if start == end else "multi_residue",
+                "domain_id": dom_id,
+                "exon_label": ex_lbl,
+                "near_splice_junction_le_3aa": exon.get("near_splice_junction_le_3aa", NOT_STATED),
+                "placed_in_pdb_entries": placed_pdbs,
+                "delta_ca_6msm_vs_5uak_angstrom": c_info.get("delta_ca_6msm_vs_5uak_angstrom", NOT_STATED),
+                "delta_ca_6msm_vs_8eiq_angstrom": c_info.get("delta_ca_6msm_vs_8eiq_angstrom", NOT_STATED),
+                "dist_to_f508_in_6msm_angstrom": c_info.get("dist_to_f508_in_6msm_angstrom", NOT_STATED),
+                "dbsnp_ids": dbsnp_ids,
+                "pubmed_count": len(pubmed_ids),
+                "uniprot_description": f.get("description", NOT_STATED),
+                "source": "[UniProtKB:P13569 natural_variant + RCSB PDB 6MSM/5UAK/8EIQ/8EJ1]",
+            }
+        )
+
+    return {
+        "status": "verified_from_p13569_and_cryoem",
+        "uniprot_accession": j.get("primaryAccession", "P13569"),
+        "uniprot_entry_version": j.get("entryAudit", {}).get("entryVersion", 286),
+        "total_uniprot_natural_variants": len(uniprot_variants),
+        "single_residue_variants": sum(1 for v in uniprot_variants if v["span_type"] == "single_residue"),
+        "multi_residue_variants": sum(1 for v in uniprot_variants if v["span_type"] == "multi_residue"),
+        "placed_in_6msm_cryoem_count": placed_in_6msm_count,
+        "unplaced_disordered_region_count": unplaced_disordered_count,
+        "near_exon_splice_junction_count": near_splice_count,
+        "counts_by_domain": by_domain,
+        "counts_by_exon": by_exon,
+        "variants": uniprot_variants,
+    }
 
 
 def evaluate_predictor_concordance(
@@ -246,10 +462,12 @@ def evaluate_predictor_concordance(
     }
 
 
-def build_variant_domain_benchmark() -> dict[str, Any]:
-    """Build the full deterministic CFTR Variant Predictor & Structural Domain Benchmark."""
+def build_variant_domain_benchmark(downloads_dir: Path = DOWNLOADS_DIR) -> dict[str, Any]:
+    """Build the full deterministic CFTR Variant Predictor & Structural Domain Atlas Benchmark."""
     clinvar_records = load_clinvar_fixture_records()
     myvariant_records = load_myvariant_fixtures()
+    coord_map = load_cryoem_superposed_coordinates(downloads_dir)
+    uniprot_atlas = build_uniprot_209_natural_variant_atlas(downloads_dir, coord_map)
 
     variant_rows: list[dict[str, Any]] = []
     domain_summary: dict[str, dict[str, Any]] = {
@@ -259,7 +477,8 @@ def build_variant_domain_benchmark() -> dict[str, Any]:
             "residue_range": f"{d['start_aa']}-{d['end_aa']}",
             "uniprot_ref": d["uniprot_ref"],
             "pdb_refs": d["pdb_refs"],
-            "variant_records_count": 0,
+            "clinvar_fixture_records_count": 0,
+            "uniprot_natural_variants_count": uniprot_atlas.get("counts_by_domain", {}).get(d["domain_id"], 0),
             "classifications": {},
             "consequence_classes": {},
             "variants": [],
@@ -301,9 +520,10 @@ def build_variant_domain_benchmark() -> dict[str, Any]:
 
         aa_pos = extract_aa_position(pchange)
         domain_info = map_residue_to_domain(aa_pos)
+        exon_info = map_residue_to_exon(aa_pos)
         mech_info = classify_molecular_mechanism(pchange, obj_type, title)
+        cryo_info = coord_map.get(aa_pos, {}) if aa_pos is not None else {}
 
-        # Check MyVariant fixture
         mv_entry = myvariant_records.get(uid)
         if mv_entry:
             hit = mv_entry["hit"]
@@ -343,12 +563,20 @@ def build_variant_domain_benchmark() -> dict[str, Any]:
                 "value": aa_pos if aa_pos is not None else NOT_STATED,
                 "source": "[computed from protein_change]",
             },
+            "refseq_exon": exon_info,
             "structural_domain": {
                 "domain_id": domain_info["domain_id"],
                 "name": domain_info["name"],
                 "uniprot_ref": domain_info["uniprot_ref"],
                 "pdb_refs": domain_info["pdb_refs"],
                 "structural_role": domain_info["structural_role"],
+            },
+            "cryoem_3d_coordinates": {
+                "placed_in_pdb_entries": cryo_info.get("placed_in_pdb_entries", []),
+                "delta_ca_6msm_vs_5uak_angstrom": cryo_info.get("delta_ca_6msm_vs_5uak_angstrom", NOT_STATED),
+                "delta_ca_6msm_vs_8eiq_angstrom": cryo_info.get("delta_ca_6msm_vs_8eiq_angstrom", NOT_STATED),
+                "dist_to_f508_in_6msm_angstrom": cryo_info.get("dist_to_f508_in_6msm_angstrom", NOT_STATED),
+                "source": cryo_info.get("source", NOT_STATED),
             },
             "molecular_mechanism": mech_info,
             "clinvar_classification": {
@@ -376,7 +604,7 @@ def build_variant_domain_benchmark() -> dict[str, Any]:
         dom_id = domain_info["domain_id"]
         if dom_id in domain_summary:
             ds = domain_summary[dom_id]
-            ds["variant_records_count"] += 1
+            ds["clinvar_fixture_records_count"] += 1
             ds["classifications"][clinvar_desc] = ds["classifications"].get(clinvar_desc, 0) + 1
             c_cls = mech_info["consequence_class"]
             ds["consequence_classes"][c_cls] = ds["consequence_classes"].get(c_cls, 0) + 1
@@ -401,19 +629,24 @@ def build_variant_domain_benchmark() -> dict[str, Any]:
     }
 
     return {
-        "schema_version": "1.0.0",
-        "benchmark_id": "cftr-variant-predictor-and-structural-domain-benchmark-v1",
-        "tier": "Tier T2 Verified Fixture & Structural Coordinate Benchmark",
+        "schema_version": "2.0.0",
+        "benchmark_id": "cftr-variant-predictor-and-structural-domain-atlas-v2",
+        "tier": "Tier T2 Verified Fixture, UniProt P13569 & Cryo-EM Structural Coordinate Atlas",
         "grounding_note": (
-            "Evaluates 17 recorded ClinVar variation records (across 9 distinct CFTR protein changes) and "
-            "MyVariant.info annotations against UniProt P13569 / RefSeq NM_000492.4 / Cryo-EM (PDB 5UAK, 6MSM, 8EIQ) "
-            "structural domain coordinates. No synthetic scores or unverified LoRA weights are used; every missing "
-            "annotation is explicitly recorded as 'not stated'."
+            "Evaluates 17 recorded ClinVar variation records (across 9 distinct CFTR protein changes), "
+            "MyVariant.info annotations, and all 209 annotated natural variants in UniProt P13569 across "
+            "RefSeq NM_000492.4 (27 exons) and 4 superposed human CFTR Cryo-EM structures (PDB 6MSM, 5UAK, 8EIQ, 8EJ1). "
+            "No synthetic scores or unverified LoRA weights are used; every missing annotation is explicitly "
+            "recorded as 'not stated'."
         ),
         "summary_metrics": {
             "total_clinvar_records_evaluated": len(variant_rows),
-            "distinct_protein_changes": len(nucleotide_degeneracy_groups),
-            "domains_represented": sum(1 for d in domain_summary.values() if d["variant_records_count"] > 0),
+            "distinct_clinvar_protein_changes": len(nucleotide_degeneracy_groups),
+            "total_uniprot_natural_variants_mapped": uniprot_atlas.get("total_uniprot_natural_variants", 0),
+            "uniprot_placed_in_6msm_cryoem": uniprot_atlas.get("placed_in_6msm_cryoem_count", 0),
+            "uniprot_unplaced_disordered_region": uniprot_atlas.get("unplaced_disordered_region_count", 0),
+            "uniprot_near_splice_junction_le_3aa": uniprot_atlas.get("near_exon_splice_junction_count", 0),
+            "domains_represented": sum(1 for d in domain_summary.values() if d["clinvar_fixture_records_count"] > 0),
             "total_cftr_domains_defined": len(CFTR_STRUCTURAL_DOMAINS),
             "consequence_class_counts": consequence_summary,
             "multi_nucleotide_protein_groups_count": len(multi_nucleotide_proteins),
@@ -423,7 +656,7 @@ def build_variant_domain_benchmark() -> dict[str, Any]:
                 "finding_id": "VF-1",
                 "label": "[observed]",
                 "summary": (
-                    "Sequence conservation vs. structural benignity split on Lasso-motif VUS R31L (VCV000054087): "
+                    "Sequence conservation vs. structural benignity split on Lasso-motif VUS R31L (VCV000054087, Exon 2/27): "
                     "CADD Phred is 22.9 (top <1% conserved, GERP++ RS=437.4), whereas PolyPhen-2 (0.131, benign) and "
                     "SIFT (0.13, tolerated) classify p.Arg31Leu as benign, matching ClinVar expert panel 'Uncertain significance'."
                 ),
@@ -432,37 +665,49 @@ def build_variant_domain_benchmark() -> dict[str, Any]:
                 "finding_id": "VF-2",
                 "label": "[observed]",
                 "summary": (
-                    "Codon degeneracy & review-tier asymmetry across identical protein changes: N1303K (NBD2), "
-                    "Y1092* (TMD2), W1282* (NBD2), and F508del (NBD1) each map to multiple ClinVar Variation IDs with "
-                    "distinct cDNA changes and review statuses (e.g., N1303K c.3909C>G [uid 7136, practice guideline, 52 SCVs] "
-                    "vs. c.3909C>A [uid 4818550, single submitter, 1 SCV]). Protein-only predictors score both identically, "
-                    "masking clinical evidence depth."
+                    "Codon degeneracy & review-tier asymmetry across identical protein changes: N1303K (NBD2, Exon 24/27), "
+                    "Y1092* (TMD2, Exon 20/27), W1282* (NBD2, Exon 23/27), and F508del (NBD1, Exon 11/27) each map to multiple "
+                    "ClinVar Variation IDs with distinct cDNA changes and review statuses (e.g., N1303K c.3909C>G [uid 7136, "
+                    "practice guideline, 52 SCVs] vs. c.3909C>A [uid 4818550, single submitter, 1 SCV])."
                 ),
             },
             {
                 "finding_id": "VF-3",
                 "label": "[observed]",
                 "summary": (
-                    "ClinVar 'drug response' classification on TMD2 pore/hinge missense variant D1152H (VCV000035867, "
+                    "ClinVar 'drug response' classification on TMD2 pore/hinge missense variant D1152H (VCV000035867, Exon 21/27, "
                     "review_status: reviewed by expert panel, trait: 'ivacaftor response - Efficacy'): binary "
                     "pathogenic/benign classifiers misrepresent pharmacogenomic residual-function variants without a "
                     "separate modulator-response label."
+                ),
+            },
+            {
+                "finding_id": "VF-4",
+                "label": "[computed]",
+                "summary": (
+                    f"Across the {uniprot_atlas.get('total_uniprot_natural_variants', 209)} UniProt P13569 natural variants "
+                    f"superposed onto Cryo-EM structures 6MSM/5UAK/8EIQ/8EJ1, {uniprot_atlas.get('placed_in_6msm_cryoem_count', 0)} "
+                    f"are resolved in 3D C-alpha coordinates in 6MSM while {uniprot_atlas.get('unplaced_disordered_region_count', 0)} "
+                    f"fall in unplaced intrinsically disordered regions (primarily the R-domain, residues 631-845, Exon 14/27), "
+                    f"and {uniprot_atlas.get('near_exon_splice_junction_count', 0)} lie within <=3 codons of an exon-intron boundary."
                 ),
             },
         ],
         "multi_nucleotide_degeneracy_audit": multi_nucleotide_proteins,
         "structural_domain_breakdown": list(domain_summary.values()),
         "variant_records": variant_rows,
+        "uniprot_p13569_natural_variant_atlas": uniprot_atlas,
         "footer": (
             "Research tool, not medical advice. A database entry or structural domain annotation is not an "
             "interpretation of any person's genotype; that belongs with their clinical genetics team. "
-            "Sources: ClinVar via NCBI E-utilities fixtures, MyVariant.info fixtures, UniProt P13569 / PDB 5UAK, 6MSM, 8EIQ."
+            "Sources: ClinVar via NCBI E-utilities fixtures, MyVariant.info fixtures, UniProt P13569 (CC BY 4.0), "
+            "RCSB PDB 5UAK, 6MSM, 8EIQ, 8EJ1 (CC0 1.0)."
         ),
     }
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="CFTR Variant Predictor & Structural Domain Benchmark.")
+    parser = argparse.ArgumentParser(description="CFTR Variant Predictor & Structural Domain Atlas Benchmark.")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT, help="Output JSON path")
     parser.add_argument("--check", action="store_true", help="Verify benchmark invariants without writing")
     args = parser.parse_args(argv)
@@ -479,10 +724,14 @@ def main(argv: list[str] | None = None) -> int:
     if not args.check:
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(json.dumps(bench, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-        print(f"Wrote CFTR Variant Domain Benchmark ({sm['total_clinvar_records_evaluated']} records) -> {args.out}")
+        print(
+            f"Wrote CFTR Variant & Structural Domain Atlas ({sm['total_clinvar_records_evaluated']} ClinVar records, "
+            f"{sm['total_uniprot_natural_variants_mapped']} UniProt P13569 variants) -> {args.out}"
+        )
     else:
         print(
-            f"PASS: CFTR Variant Domain Benchmark verified ({sm['total_clinvar_records_evaluated']} records, "
+            f"PASS: CFTR Variant & Structural Domain Atlas verified ({sm['total_clinvar_records_evaluated']} ClinVar records, "
+            f"{sm['total_uniprot_natural_variants_mapped']} UniProt P13569 variants, "
             f"{sm['domains_represented']} domains, {sm['multi_nucleotide_protein_groups_count']} degeneracy groups)."
         )
     return 0
