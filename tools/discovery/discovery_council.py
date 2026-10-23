@@ -81,6 +81,7 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "basal_stem_persistence": {"task": "T-0220", "track": "Track A", "tier": "T2"},
     "base_editing_cftr": {"task": "T-0219", "track": "Track A", "tier": "T2"},
     "biophysical_models": {"task": "T-0154", "track": "Track A", "tier": "T2"},
+    "cftr_gquadruplex_stability_model": {"task": "T-0316", "track": "Track A", "tier": "T2"},
     "cftr_minigene_model": {"task": "T-0207", "track": "Track A", "tier": "T2"},
     "cftr_sequence_scanner": {"task": "T-0264", "track": "Track A", "tier": "T2"},
     "ciliary_wave_clearance_model": {"task": "T-0315", "track": "Track A", "tier": "T2"},
@@ -119,6 +120,7 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "tmem16a_conductance_model": {"task": "T-0240", "track": "Track A", "tier": "T2"},
     "transcytosis_model": {"task": "T-0177", "track": "Track A", "tier": "T2"},
     "u1_snrnp_decoy_kinetics": {"task": "T-0292", "track": "Track A", "tier": "T2"},
+    "u1_snrnp_decoy_thermodynamics": {"task": "T-0352", "track": "Track A", "tier": "T2"},
     "vector_redosing_kinetics": {"task": "T-0198", "track": "Track A", "tier": "T2"},
 }
 
