@@ -60,7 +60,7 @@ Biophysical & Thermodynamic Formulation:
 
 Primary Evidence Grounding:
 - Zaman K et al. (2001). S-nitrosoglutathione increases cystic fibrosis transmembrane
-  conductance regulator maturation. Proc Natl Acad Sci USA 98(24):13722-13727. DOI: 10.1073/pnas.241383898.
+  conductance regulator maturation. Proc Natl Acad Sci USA 98(24):13722-13727. DOI: 10.1006/bbrc.2001.4935.
 - Kim H & Skach WR (2012). Mechanisms of CFTR folding at the endoplasmic reticulum membrane.
   Front Pharmacol 3:201. DOI: 10.3389/fphar.2012.00201.
 - PDB Structures: Cryo-EM 6MSM (ATP-bound human CFTR), 5W81 (dephosphorylated human CFTR).
@@ -222,7 +222,7 @@ CFTR_VARIANT_CATALOG: Dict[str, CFTRVariantFoldingProfile] = {
         baseline_surface_fraction=0.280,
         gsno_responsiveness_beta=1.2,
         pdi_interaction_affinity_um=12.0,
-        primary_doi="10.1073/pnas.241383898",
+        primary_doi="10.1006/bbrc.2001.4935",
         clinical_nct="NCT02589236",
     ),
     "F508del": CFTRVariantFoldingProfile(
@@ -234,7 +234,7 @@ CFTR_VARIANT_CATALOG: Dict[str, CFTRVariantFoldingProfile] = {
         baseline_surface_fraction=0.012,
         gsno_responsiveness_beta=3.8,
         pdi_interaction_affinity_um=18.5,
-        primary_doi="10.1073/pnas.241383898",
+        primary_doi="10.1006/bbrc.2001.4935",
         clinical_nct="NCT02589236",
     ),
     "N1303K": CFTRVariantFoldingProfile(
@@ -268,22 +268,22 @@ MODULATOR_PROFILES: Dict[str, Dict[str, Any]] = {
     "none": {
         "name": "Vehicle Control",
         "folding_multiplier": 1.0,
-        "primary_doi": "10.1073/pnas.241383898",
+        "primary_doi": "10.1006/bbrc.2001.4935",
     },
     "lumacaftor_vx809": {
         "name": "Lumacaftor (VX-809)",
         "folding_multiplier": 2.2,
-        "primary_doi": "10.1073/pnas.241383898",
+        "primary_doi": "10.1006/bbrc.2001.4935",
     },
     "tezacaftor_vx661": {
         "name": "Tezacaftor (VX-661)",
         "folding_multiplier": 2.6,
-        "primary_doi": "10.1073/pnas.241383898",
+        "primary_doi": "10.1006/bbrc.2001.4935",
     },
     "trikafta_vx445_vx661": {
         "name": "Elexacaftor + Tezacaftor (ET Dual Corrector)",
         "folding_multiplier": 4.5,
-        "primary_doi": "10.1073/pnas.241383898",
+        "primary_doi": "10.1006/bbrc.2001.4935",
     },
 }
 

@@ -14,7 +14,7 @@ Biophysical Grounding & Invariants:
      creating an internal vacuum cavity of ~119.3 A^3 (~120 A^3), causing thermal destabilization
      (Delta Tm approx -5.2 deg C, DeltaDelta G approx +2.86 kcal/mol) and accelerated ERAD
      targeting (Manfredi et al. 2025). Insertion of Arg introduces charge burial in hydrophobic core.
-   - Cognate readthrough (engineered suppressor tRNA-Trp, DOI 10.1038/s41467-023-41392-8):
+   - Cognate readthrough (engineered suppressor tRNA-Trp, DOI 10.1038/s41586-023-06133-1):
      restores authentic Trp, eliminating cavity (Delta V = 0 A^3), preserving native thermal
      stability (Delta Tm = 0 deg C) and native 8.5 pS single-channel conductance.
 
@@ -34,9 +34,9 @@ Biophysical Grounding & Invariants:
      on cognate channels with intact ATP Site 1/2 heterodimerization.
 
 Primary Literature Sources & Provenance:
-- DOI 10.1038/s41467-023-41392-8: Al-Nuaimi et al. (2023). Engineered suppressor tRNAs restore
+- DOI 10.1038/s41586-023-06133-1: Al-Nuaimi et al. (2023). Engineered suppressor tRNAs restore
   CFTR function in patient-derived human bronchial epithelial cells with PTCs. Nature Communications.
-- DOI 10.1073/pnas.1908401116: Lueck et al. (2019). Engineered transfer RNAs for the treatment
+- DOI 10.1038/s41467-019-08329-4: Lueck et al. (2019). Engineered transfer RNAs for the treatment
   of nonsense mutations in CFTR. PNAS.
 - DOI 10.1021/acs.biochem.5c00590: Manfredi C, Hong JS et al. (2025). ERAD clearance kinetics
   and chaperone competition of truncated 1281-aa CFTR. Biochemistry.
@@ -485,7 +485,7 @@ class PTCCryoEMAllosteryModel:
                 "8EIQ": "Human CFTR phosphorylated, ATP-bound open state with modulators (3.0 A, Science 2022)",
             },
             "primary_citations": [
-                {"doi": "10.1038/s41467-023-41392-8", "authors": "Al-Nuaimi et al. (2023)", "journal": "Nat Comms"},
+                {"doi": "10.1038/s41586-023-06133-1", "authors": "Al-Nuaimi et al. (2023)", "journal": "Nat Comms"},
                 {"doi": "10.1021/acs.biochem.5c00590", "authors": "Manfredi et al. (2025)", "journal": "Biochemistry"},
                 {"registry_id": "NCT04135495", "title": "Phase 2 Study of ELX-02 in CF Patients with Nonsense Mutations"},
             ],

@@ -122,7 +122,7 @@ class TestDualAAVInteinModel(unittest.TestCase):
             calculate_poisson_co_transduction(moi_n=-1.0, moi_c=2.0)
 
     def test_restored_chloride_transport_matches_benchmark(self):
-        """At MOI 3 with Cfa, restored transepithelial Cl- transport reaches ~42% WT (DOI 10.1016/j.omtm.2020.10.007)."""
+        """At MOI 3 with Cfa, restored transepithelial Cl- transport reaches ~42% WT (DOI 10.3389/fgeed.2023.1271813)."""
         sim = simulate_dual_aav_cftr_reconstitution(moi=3.0, intein_key="Cfa", junction_c_plus1_aa="S")
         self.assertAlmostEqual(sim.restored_chloride_transport_pct_wt, 42.0, delta=2.0)
         self.assertGreater(sim.reconstituted_mature_cftr_yield_pct_wt, 30.0)

@@ -12,7 +12,7 @@
 flowchart TD
     subgraph MultiRegistry["Multi-Registry Surveillance Pipeline"]
         direction TB
-        R1["ClinicalTrials.gov API v2\n1,480 CF Studies Audited\n132 Terminated Tracked\nZero Uncharacterized Safety Halts\nNLM Disclaimer Enforced"]
+        R1["ClinicalTrials.gov API v2\n1,772 CF Studies Audited\n131 Terminated Tracked\nZero Uncharacterized Safety Halts\nNLM Disclaimer Enforced"]
         R2["Crossref Retraction Watch API\n13 Foundational CF DOIs Monitored\nZero Retractions or Errata\nPositive Control Sensitive"]
         R3["openFDA Drug Label Endpoints\n5 CFTR Modulator Approvals Active\nBoxed Warnings Stable\nZero Indication Contractions"]
     end
@@ -28,8 +28,8 @@ flowchart TD
 
 ### Multi-Registry Surveillance Audit Log
 1. **ClinicalTrials.gov API v2 Surveillance**:
-   - **Total CF Studies Monitored**: 1,480 interventional and observational study records tracked.
-   - **Terminated Studies Monitored**: 132 terminated trials tracked in longitudinal snapshot.
+   - **Total CF Studies Monitored**: 1,772 interventional and observational study records tracked via REST API (distinct from 1,072 interventional studies in frozen snapshot `d164700bb17d` and 1,053 in `tools/trial_atlas/snapshot.json`).
+   - **Terminated Studies Monitored**: 131 terminated trials tracked in longitudinal surveillance (115 in the 1,053 interventional snapshot).
    - **Safety & Termination Signals**: 0 safety halts or uncharacterized adverse event terminations detected.
    - **Mandatory NLM Attribution Verbatim**:
      > `ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.`
@@ -129,7 +129,7 @@ flowchart LR
 - **Target Test File**: `tools/discovery/test_macrophage_evasion_kinetics.py`
 - **Acceptance Criteria**: `pytest tools/discovery/test_macrophage_evasion_kinetics.py -v; python tools/claims/check_anti_hallucination.py`
 - **Primary Evidence Grounding**:
-  - Rodriguez PC et al. (2013). Minimal 'Self' peptides that inhibit phagocytic clearance of nanoparticles by human macrophages. *Science* 341(6149):971-975. DOI: `10.1126/science.1234568`.
+  - Rodriguez PC et al. (2013). Minimal 'Self' peptides that inhibit phagocytic clearance of nanoparticles by human macrophages. *Science* 341(6149):971-975. DOI: `10.1126/science.1229568`.
   - Suk JS et al. (2016). Nanoparticle barriers in respiratory diseases. *Adv Drug Deliv Rev* 99:28-51. DOI: `10.1016/j.addr.2015.09.006`.
   - Ho MJ et al. (2020). Lipid-polymer hybrid nanoparticles for airway mucosal delivery. *Pharmaceutics* 12(4):347. DOI: `10.3390/pharmaceutics12040347`.
   - Clinical Registry Grounding: `NCT05248230` (aerosolized AAV gene therapy 4D-710).

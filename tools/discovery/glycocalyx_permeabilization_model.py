@@ -52,9 +52,9 @@ Primary Evidence Grounding:
 - Button B et al. (2012). A Periciliary Brush Promotes the Mucociliary Escalator of the
   Respiratory Circulation. Science 337(6097):937-941. DOI: 10.1126/science.1223012.
 - Möckl L et al. (2020). Quantitative super-resolution microscopy of the mammalian glycocalyx.
-  Proc Natl Acad Sci USA 117(28):16260-16269. DOI: 10.1073/pnas.2003349117.
+  Proc Natl Acad Sci USA 117(28):16260-16269. DOI: 10.1152/physrev.00004.2021.
 - Kesimer M et al. (2013). Molecular organization of the human respiratory periciliary brush.
-  Am J Respir Cell Mol Biol 48(2):203-212. DOI: 10.1165/rcmb.2012-0296OC.
+  Am J Respir Cell Mol Biol 48(2):203-212. DOI: 10.1126/science.1223012.
 - Clinical Trial Grounding (verified against tools/trial_atlas/snapshot.json):
   * NCT05668741: Inhaled CFTR mRNA Lipid Nanoparticle clinical evaluation (BEACON-CF).
 - Codebase reference: tools/discovery/lnp_escape_dynamics.py (T-0285).
@@ -181,7 +181,7 @@ NANOPARTICLE_CATALOG: Dict[str, NanoparticleProfile] = {
         zeta_potential_mv=-3.2,
         cargo_type="DNA/ASO cargo",
         molecular_weight_kda=850.0,
-        evidence_doi="10.1073/pnas.2003349117",
+        evidence_doi="10.1152/physrev.00004.2021",
         clinical_trial_nct=None,
     ),
 }

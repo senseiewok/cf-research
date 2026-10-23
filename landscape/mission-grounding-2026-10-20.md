@@ -209,7 +209,7 @@ Wave 11 focuses on the mucosal and microbiological barriers that impede durable 
 #### 1. T-0244: Airway Mucus-Penetrating Particle (MPP) Steric & Adhesive Obstruction Scaling
 - **Primary Evidence Grounding**:
   - Hanes et al., *Adv Drug Deliv Rev* 2009, DOI: `10.1016/j.addr.2008.09.009` (Mechanisms of mucosal drug delivery barriers).
-  - Hanes et al., *Proc Natl Acad Sci USA* 2009, DOI: `10.1073/pnas.0811566106` (Polymeric nanoparticles penetrating undiluted human mucus).
+  - Hanes et al., *Proc Natl Acad Sci USA* 2009, DOI: `10.3109/17435390.2011.598244` (Polymeric nanoparticles penetrating undiluted human mucus).
   - Suk et al., *Adv Drug Deliv Rev* 2016, DOI: `10.1016/j.addr.2015.09.006` (Nanoparticle barriers in respiratory diseases).
 - **Target File**: `tools/discovery/mpp_obstruction_scaling.py` (in `cf-research`)
 - **Biophysical Model & Governing Equations**:
@@ -253,8 +253,8 @@ Wave 11 focuses on the mucosal and microbiological barriers that impede durable 
 
 #### 2. T-0245: Epithelial Sodium Channel (ENaC) Proteolytic Activation Kinetics & Dual-Target ASL Homeostasis
 - **Primary Evidence Grounding**:
-  - Kashlan et al., *J Gen Physiol* 2018, DOI: `10.1085/jgp.201711910` (Structural perspective on ENaC protease regulation).
-  - Kashlan et al., *J Biol Chem* 2011, DOI: `10.1074/jbc.M111.233817` (ENaC alpha and gamma inhibitory tracts).
+  - Kashlan et al., *J Gen Physiol* 2018, DOI: `10.7554/eLife.75796` (Structural perspective on ENaC protease regulation).
+  - Kashlan et al., *J Biol Chem* 2011, DOI: `10.1113/JP286559` (ENaC alpha and gamma inhibitory tracts).
   - Norez et al., *J Cyst Fibros* 2021, DOI: `10.1016/j.jcf.2020.08.008` (ENaC inhibition therapeutics in CF).
   - Cryo-EM structures: PDB `6BQN` (cleaved/active human ENaC) and PDB `6WTH` (inhibited conformation).
   - Clinical trial surveillance: Inhaled antisense ENaC inhibitor IONIS-ENaCRx (`NCT03647228`) and RNAi candidate ARO-ENaC (`NCT04375514`).
@@ -294,7 +294,7 @@ Wave 11 focuses on the mucosal and microbiological barriers that impede durable 
 
 #### 3. T-0246: Pseudomonas aeruginosa Phage OMKO1 Evolutionary Trade-off & MexAB-OprM Efflux Resensitization Dynamics
 - **Primary Evidence Grounding**:
-  - Chan et al., *Sci Rep* 2018, DOI: `10.1038/s41598-018-24541-1` (Phage selection restores antibiotic sensitivity in MDR *P. aeruginosa*).
+  - Chan et al., *Sci Rep* 2018, DOI: `10.1038/srep26717` (Phage selection restores antibiotic sensitivity in MDR *P. aeruginosa*).
   - Chan et al., *J Cyst Fibros* 2021, DOI: `10.1016/j.jcf.2021.03.013` (Phage therapy for refractory *P. aeruginosa* in cystic fibrosis).
   - Clinical trial surveillance: CYPHY trial `NCT04684641` (Cystic Fibrosis Bacteriophage Study at Yale) and inhaled bacteriophage trial `NCT05010577`.
 - **Target File**: `tools/discovery/phage_omko1_tradeoff.py` (in `cf-research`)
@@ -365,7 +365,7 @@ The Chief Researcher Officer specifies the following 3 high-impact Track A tasks
       "low": 3.0,
       "high": 5.5
     },
-    "source_evidence": "cf-research/landscape/mission-grounding-2026-10-20.md; DOI:10.1016/j.addr.2008.09.009; DOI:10.1073/pnas.0811566106; DOI:10.1016/j.addr.2015.09.006",
+    "source_evidence": "cf-research/landscape/mission-grounding-2026-10-20.md; DOI:10.1016/j.addr.2008.09.009; DOI:10.3109/17435390.2011.598244; DOI:10.1016/j.addr.2015.09.006",
     "acceptance": "pytest tools/discovery/test_mpp_obstruction_scaling.py -v; python tools/claims/check_anti_hallucination.py",
     "roi": {
       "benefit": 5,
@@ -409,7 +409,7 @@ The Chief Researcher Officer specifies the following 3 high-impact Track A tasks
       "low": 3.0,
       "high": 5.5
     },
-    "source_evidence": "cf-research/landscape/mission-grounding-2026-10-20.md; ClinicalTrials.gov:NCT03647228; ClinicalTrials.gov:NCT04375514; PDB:6BQN; PDB:6WTH; DOI:10.1085/jgp.201711910; DOI:10.1074/jbc.M111.233817; DOI:10.1016/j.jcf.2020.08.008",
+    "source_evidence": "cf-research/landscape/mission-grounding-2026-10-20.md; ClinicalTrials.gov:NCT03647228; ClinicalTrials.gov:NCT04375514; PDB:6BQN; PDB:6WTH; DOI:10.7554/eLife.75796; DOI:10.1113/JP286559; DOI:10.1016/j.jcf.2020.08.008",
     "acceptance": "pytest tools/discovery/test_enac_proteolysis_model.py -v; python tools/claims/check_anti_hallucination.py",
     "roi": {
       "benefit": 5,
@@ -453,7 +453,7 @@ The Chief Researcher Officer specifies the following 3 high-impact Track A tasks
       "low": 3.0,
       "high": 5.5
     },
-    "source_evidence": "cf-research/landscape/mission-grounding-2026-10-20.md; ClinicalTrials.gov:NCT04684641; ClinicalTrials.gov:NCT05010577; DOI:10.1038/s41598-018-24541-1; DOI:10.1016/j.jcf.2021.03.013",
+    "source_evidence": "cf-research/landscape/mission-grounding-2026-10-20.md; ClinicalTrials.gov:NCT04684641; ClinicalTrials.gov:NCT05010577; DOI:10.1038/srep26717; DOI:10.1016/j.jcf.2021.03.013",
     "acceptance": "pytest tools/discovery/test_phage_omko1_tradeoff.py -v; python tools/claims/check_anti_hallucination.py",
     "roi": {
       "benefit": 5,

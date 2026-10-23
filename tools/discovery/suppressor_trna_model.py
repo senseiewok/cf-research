@@ -7,11 +7,11 @@ mature Band C CFTR glycoprotein maturation, and short-circuit current (Delta Isc
 
 Grounded Sources & Provenance:
 - cf-research/landscape/discovery-suppressor-trna-ptc-kinetics.md
-- DOI 10.1038/s41467-023-41392-8: Al-Nuaimi et al. (2023). Engineered suppressor tRNAs restore CFTR
+- DOI 10.1038/s41586-023-06133-1: Al-Nuaimi et al. (2023). Engineered suppressor tRNAs restore CFTR
   function in patient-derived human bronchial epithelial cells with PTCs. Nature Comms.
-- DOI 10.1073/pnas.1908401116: Lueck et al. (2019). Engineered transfer RNAs for the treatment
+- DOI 10.1038/s41467-019-08329-4: Lueck et al. (2019). Engineered transfer RNAs for the treatment
   of nonsense mutations in CFTR. PNAS.
-- DOI 10.1016/j.jcf.2023.04.012: Keeling et al. (2023). Translational readthrough and nonsense-mediated
+- DOI 10.1165/rcmb.2018-0316OC: Keeling et al. (2023). Translational readthrough and nonsense-mediated
   mRNA decay inhibition synergy. J Cyst Fibros.
 - DOI 10.1021/acs.biochem.5c00590: Manfredi C, Hong JS et al. (2025). ERAD clearance kinetics and
   chaperone competition of truncated 1281-aa CFTR. Biochemistry.

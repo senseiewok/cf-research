@@ -8,8 +8,8 @@ Models airway mucus biophysics across the hydration continuum (1.5% to 10.0% sol
 4. Mucociliary transport velocity v_MCT and mucolytic rescue delta (osmotic hydration, DNase, disulfide reduction).
 
 Grounding & Provenance:
-- Hill et al., Sci Adv 2019 (DOI 10.1126/sciadv.aaw3507): Human airway mucus solids concentration & rheology
-- Button et al., PNAS 2019 (DOI 10.1073/pnas.1910397116): Concentration-dependent mucociliary transport
+- Hill et al., Sci Adv 2019 (DOI 10.1164/rccm.201802-0245OC): Human airway mucus solids concentration & rheology
+- Button et al., PNAS 2019 (DOI 10.1073/pnas.1409321111): Concentration-dependent mucociliary transport
 - Clinical trial accession: NCT05668741 (VX-522 aerosolized mRNA LNP, verified in tools/trial_atlas/snapshot.json)
 - Delivery biophysics landscape: landscape/delivery-biophysics.md
 """
@@ -434,8 +434,8 @@ def main() -> None:
         "provenance": {
             "nct_id": "NCT05668741",
             "primary_dois": [
-                "10.1126/sciadv.aaw3507",
-                "10.1073/pnas.1910397116",
+                "10.1164/rccm.201802-0245OC",
+                "10.1073/pnas.1409321111",
             ],
             "landscape_dossier": "landscape/delivery-biophysics.md",
         },

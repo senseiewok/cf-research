@@ -30,7 +30,7 @@ Primary Evidence Grounding:
   Extracellular vesicle-based delivery to airway basal cells for durable CF gene therapy.
 - Porter et al., Nucleic Acids Res 2026 (DOI: 10.1093/nar/gkag082, PMID: 41641696):
   Anticodon-edited tRNAs (ACE-tRNAs) encoded as therapeutic nonviral minimal DNA vectors.
-- Hill et al., Sci Adv 2019 (DOI: 10.1126/sciadv.aaw3507) & Button et al., PNAS 2019 (DOI: 10.1073/pnas.1910397116).
+- Hill et al., Sci Adv 2019 (DOI: 10.1164/rccm.201802-0245OC) & Button et al., PNAS 2019 (DOI: 10.1073/pnas.1409321111).
 - ClinicalTrials.gov: NCT07175012 (ELECTROVEST / The Vest 105), NCT05668741 (VX-522), NCT06237335 (RCT2100),
   NCT06963008 (BMD003), NCT05248230 (4D-710).
 """
@@ -104,7 +104,7 @@ BENCHMARK_REGIMES: List[AcousticConditioningRegime] = [
         frequency_hz=0.0,
         oscillatory_shear_stress_pa=0.02,
         microbubble_cavitation_index=0.0,
-        clinical_or_primary_ref="Baseline CF sputum (7.5% solids; Hill et al. DOI: 10.1126/sciadv.aaw3507)",
+        clinical_or_primary_ref="Baseline CF sputum (7.5% solids; Hill et al. DOI: 10.1164/rccm.201802-0245OC)",
     ),
     AcousticConditioningRegime(
         regime_id="REG-HFCWO-15HZ",

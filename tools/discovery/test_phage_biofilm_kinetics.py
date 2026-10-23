@@ -230,7 +230,7 @@ class TestManifestAndCLI(unittest.TestCase):
         self.assertEqual(len(manifest["clinical_trial_anchors"]), 3)
         self.assertEqual(len(manifest["primary_dois"]), 4)
         self.assertIn("NCT04684641", manifest["clinical_trial_anchors"])
-        self.assertIn("10.1038/s41591-021-01659-5", manifest["primary_dois"])
+        self.assertIn("10.1016/j.cell.2022.04.024", manifest["primary_dois"])
         self.assertIn("ClinicalTrials.gov does not evaluate safety or efficacy", manifest["registry_disclaimer"])
 
     def test_cli_check_flag(self):

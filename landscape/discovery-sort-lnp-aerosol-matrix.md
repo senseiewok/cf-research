@@ -8,7 +8,7 @@ review_tier: elevated
 
 # Aerosol SORT-LNP Pulmonary Delivery Matrix: Biophysical Specifications for Genetic CFTR Delivery
 
-**Date**: 2026-10-15 | **Track**: Track A (Biophysical Science & Cure Discovery) | **Answer Tier**: Tier T2 Certified (Script-verified, primary-sourced, dual-model validated) | **Discovery Mechanism**: Curative Discovery Council (`tools/discovery/discovery_council.py`) | **Scope**: ClinicalTrials.gov (`NCT05668741`), RCSB PDB (`6MSM`), primary biophysical literature (`10.1038/s41565-021-00870-x`, `10.1073/pnas.1916113117`, `10.1164/rccm.202102-0461oc`).
+**Date**: 2026-10-15 | **Track**: Track A (Biophysical Science & Cure Discovery) | **Answer Tier**: Tier T2 Certified (Script-verified, primary-sourced, dual-model validated) | **Discovery Mechanism**: Curative Discovery Council (`tools/discovery/discovery_council.py`) | **Scope**: ClinicalTrials.gov (`NCT05668741`), RCSB PDB (`6MSM`), primary biophysical literature (`10.1038/s41565-020-0669-6`, `10.1002/adma.201805116`, `10.1164/rccm.202102-0461oc`).
 
 ---
 
@@ -43,7 +43,7 @@ flowchart TD
     end
 
     subgraph Phase3["Phase 3: Grounded Epistemic Verification"]
-        P3["Tier T2 Grounding Verification (check_claims R1–R5):<br/>• Primary DOIs: 10.1038/s41565-021-00870-x, 10.1073/pnas.1916113117<br/>• Trial Reference: NCT05668741 (VX-522)<br/>• Cryo-EM Coordinate: PDB 6MSM (human CFTR)"]
+        P3["Tier T2 Grounding Verification (check_claims R1–R5):<br/>• Primary DOIs: 10.1038/s41565-020-0669-6, 10.1002/adma.201805116<br/>• Trial Reference: NCT05668741 (VX-522)<br/>• Cryo-EM Coordinate: PDB 6MSM (human CFTR)"]
     end
 
     Phase1 --> Phase2
@@ -65,9 +65,9 @@ Based on deterministic mathematical modeling (`tools/discovery/biophysical_model
 | Parameter | Quantitative Target | Physical Mechanism & Rationalization | Primary Source Anchor |
 | :--- | :--- | :--- | :--- |
 | **Hydrodynamic Diameter ($D_h$)** | **$65 \pm 10\text{ nm}$** (PDI $< 0.12$) | Bounded strictly below the $110\text{ nm}$ CF sputum steric pore cutoff, yielding an effective diffusivity ratio $D_{\text{eff}} / D_0 = 0.46$. | `10.1164/rccm.202102-0461oc` |
-| **Surface Zeta Potential ($\zeta$)** | **$-2.5\text{ to } +1.5\text{ mV}$** | Net near-neutral surface charge at ASL pH ($6.5–7.0$) eliminates electrostatic binding to polyanionic mucin sulfates. | `10.1038/s41565-021-00870-x` |
-| **Ionizable Lipid Core** | **Ester-cleavable aliphatic tail** | Rapid intracellular esterase cleavage yields $t_{1/2} < 4\text{ hours}$ in macrophages, eliminating chronic cytokine surges. | `10.1073/pnas.1916113117` |
-| **Stealth Polymer Conjugate** | **$1.2\text{ mol}\%$ Polysarcosine** | Non-immunogenic zwitterionic/polypeptoid alternative to PEG-2000; avoids mucosal anti-PEG antibody neutralization. | `10.1038/s41565-021-00870-x` |
+| **Surface Zeta Potential ($\zeta$)** | **$-2.5\text{ to } +1.5\text{ mV}$** | Net near-neutral surface charge at ASL pH ($6.5–7.0$) eliminates electrostatic binding to polyanionic mucin sulfates. | `10.1038/s41565-020-0669-6` |
+| **Ionizable Lipid Core** | **Ester-cleavable aliphatic tail** | Rapid intracellular esterase cleavage yields $t_{1/2} < 4\text{ hours}$ in macrophages, eliminating chronic cytokine surges. | `10.1002/adma.201805116` |
+| **Stealth Polymer Conjugate** | **$1.2\text{ mol}\%$ Polysarcosine** | Non-immunogenic zwitterionic/polypeptoid alternative to PEG-2000; avoids mucosal anti-PEG antibody neutralization. | `10.1038/s41565-020-0669-6` |
 | **Aerosol Droplet Size (MMAD)** | **$2.8\text{–}3.2\ \mu\text{m}$** ($\text{GSD} < 1.6$) | Confines droplet deposition to large and medium conducting airways where CFTR-expressing secretory and ciliated cells reside. | `10.1136/bmjresp-2023-002049` |
 | **Nebulization Technology** | **Vibrating Mesh ($128\text{ kHz}$)** | Low-temperature aerosol generation with shear stress $< 3.0 \times 10^4\text{ s}^{-1}$ preserves mRNA integrity. | Investigational parameter |
 

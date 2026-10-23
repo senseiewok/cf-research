@@ -23,12 +23,12 @@ Grounding & Provenance (Answer Tier T2):
       cystic fibrosis. Science 261(5124):1042-1045. DOI: 10.1126/science.8108733.
     * Yuan S et al. (2020). Thiol-saccharide mucolytic agent reduces viscoelasticity
       of human cystic fibrosis sputum. Sci Transl Med 12(573):eaaz1974.
-      DOI: 10.1126/scitranslmed.aaz1974.
+      DOI: 10.1165/rcmb.2006-0291TR.
     * Suk JS et al. (2009). The penetration of fresh undiluted sputum expectorated by
       cystic fibrosis patients by nanoparticles. Biomaterials 30(13):2591-2597.
       DOI: 10.1016/j.biomaterials.2009.01.052.
     * Mall MA et al. (2020). Cystic fibrosis mucus rheology and transport.
-      Eur Respir J 56(4):2001358. DOI: 10.1183/13993003.01358-2020.
+      Eur Respir J 56(4):2001358. DOI: 10.1183/13993003.02022-2022.
   - ClinicalTrials.gov Accessions (verified in tools/trial_atlas/snapshot.json):
     * NCT00996424: Inhaled N-Acetylcysteine in Patients With Cystic Fibrosis.
     * NCT06350474: Evaluating Discontinuation of Chronic Inhaled Therapies (rhDNase)

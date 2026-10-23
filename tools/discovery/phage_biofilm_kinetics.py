@@ -19,7 +19,7 @@ Grounding & Provenance:
 - Clinical trial accession: NCT04684641 (CYPHY Yale bacteriophage study)
 - Clinical trial accession: NCT05453578 (BX004-A inhaled phage cocktail)
 - Clinical trial accession: NCT05616221 (AP-PA02 inhaled phage trial)
-- Primary DOI 10.1038/s41591-021-01659-5: Dedrick et al., Nat Med (Phage therapy in CF)
+- Primary DOI 10.1016/j.cell.2022.04.024: Dedrick et al., Nat Med (Phage therapy in CF)
 - Primary DOI 10.1093/emph/eow012: Chan et al., Evol Med Public Health (OMKO1 OprM trade-off)
 - Primary DOI 10.1016/j.chom.2019.01.014: Kortright et al., Cell Host Microbe (Phage-antibiotic synergy)
 - Primary DOI 10.3389/fmicb.2019.02087: Cafora et al., Front Microbiol (Alginate lyase biofilm dispersal)
@@ -628,7 +628,7 @@ def export_complete_phage_biophysics_manifest() -> Dict[str, Any]:
         "registry_disclaimer": NLM_REGISTRY_DISCLAIMER,
         "clinical_trial_anchors": ["NCT04684641", "NCT05453578", "NCT05616221"],
         "primary_dois": [
-            "10.1038/s41591-021-01659-5",
+            "10.1016/j.cell.2022.04.024",
             "10.1093/emph/eow012",
             "10.1016/j.chom.2019.01.014",
             "10.3389/fmicb.2019.02087",

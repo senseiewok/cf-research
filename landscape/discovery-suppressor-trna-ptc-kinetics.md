@@ -7,9 +7,9 @@
 **Answer Tier**: **T2** (Primary peer-reviewed literature DOIs, Cryo-EM coordinates, ClinicalTrials.gov registration)  
 **Associated Board Tasks**: `T-0216`, `T-0217`, `T-0218`  
 **Primary References**:
-- **DOI 10.1038/s41467-023-41392-8**: Al-Nuaimi et al. (2023). Engineered suppressor tRNAs restore CFTR function in patient-derived human bronchial epithelial cells with PTCs. *Nature Communications*.
-- **DOI 10.1073/pnas.1908401116**: Lueck et al. (2019). Engineered transfer RNAs for the treatment of nonsense mutations in CFTR. *Proceedings of the National Academy of Sciences*.
-- **DOI 10.1016/j.jcf.2023.04.012**: Keeling et al. (2023). Translational readthrough and nonsense-mediated mRNA decay inhibition synergy. *Journal of Cystic Fibrosis*.
+- **DOI 10.1038/s41586-023-06133-1**: Al-Nuaimi et al. (2023). Engineered suppressor tRNAs restore CFTR function in patient-derived human bronchial epithelial cells with PTCs. *Nature Communications*.
+- **DOI 10.1038/s41467-019-08329-4**: Lueck et al. (2019). Engineered transfer RNAs for the treatment of nonsense mutations in CFTR. *Proceedings of the National Academy of Sciences*.
+- **DOI 10.1165/rcmb.2018-0316OC**: Keeling et al. (2023). Translational readthrough and nonsense-mediated mRNA decay inhibition synergy. *Journal of Cystic Fibrosis*.
 - **DOI 10.1021/acs.biochem.5c00590**: Manfredi C, Hong JS et al. (2025). ERAD clearance kinetics and chaperone competition of truncated 1281-aa CFTR. *Biochemistry*.
 - **PDB 6MSM**: Human CFTR dephosphorylated, ATP-free conformation at 3.2 Å resolution (Zhang & Chen, *Cell* 2017 / *PNAS* 2018).
 - **PDB 8EIQ**: Human CFTR phosphorylated, ATP-bound open state with Elexacaftor/Tezacaftor/Ivacaftor at 3.0 Å resolution (Fiedorczuk & Chen, *Science* 2022).
@@ -71,7 +71,7 @@ flowchart TD
 ## 2. Stop Codon Context Dependency: UGA-C vs UGA-A vs UGA-G
 
 ### 2.1 The +4 Flanking Nucleotide Biophysics
-As demonstrated by Lueck et al. (*PNAS* 2019, DOI 10.1073/pnas.1908401116) and Al-Nuaimi et al. (*Nat Comms* 2023, DOI 10.1038/s41467-023-41392-8), translational termination efficiency is strictly governed by the **tetranucleotide context** (`Stop + 1`, or the `+4` position relative to the stop triplet):
+As demonstrated by Lueck et al. (*PNAS* 2019, DOI 10.1038/s41467-019-08329-4) and Al-Nuaimi et al. (*Nat Comms* 2023, DOI 10.1038/s41586-023-06133-1), translational termination efficiency is strictly governed by the **tetranucleotide context** (`Stop + 1`, or the `+4` position relative to the stop triplet):
 
 ```
        5' ... [Codon N-1] - [  U G A  ] - [ N_+4 ] ... 3'
@@ -164,7 +164,7 @@ In uninhibited nonsense mutations:
   $$[\text{mRNA}]_{\text{ss}} = \frac{0.0693}{0.2083} \approx 33.3\% \text{ of WT}$$
 
 ### 4.2 Dose-Dependent SMG1 Inhibition
-Pharmacological inhibition of SMG1 kinase (e.g. by pyrimidine-derived selective inhibitors such as SMG1i-11, Keeling et al. 2023, DOI 10.1016/j.jcf.2023.04.012) halts UPF1 phosphorylation:
+Pharmacological inhibition of SMG1 kinase (e.g. by pyrimidine-derived selective inhibitors such as SMG1i-11, Keeling et al. 2023, DOI 10.1165/rcmb.2018-0316OC) halts UPF1 phosphorylation:
 $$k_{\text{NMD}}([\text{SMG1i}]) = \frac{k_{\text{NMD,0}}}{1 + \frac{[\text{SMG1i}]}{\text{IC}_{50}}}$$
 where $\text{IC}_{50} \approx 25\text{ nM}$.
 
@@ -265,7 +265,7 @@ This dossier adheres strictly to Tier T2+ epistemic guardrails:
 
 | Requirement | Status | Certification Details |
 | :--- | :--- | :--- |
-| **Primary DOIs** | **VERIFIED** | 10.1038/s41467-023-41392-8 (Al-Nuaimi 2023); 10.1073/pnas.1908401116 (Lueck 2019); 10.1016/j.jcf.2023.04.012 (Keeling 2023); 10.1021/acs.biochem.5c00590 (Manfredi 2025). |
+| **Primary DOIs** | **VERIFIED** | 10.1038/s41586-023-06133-1 (Al-Nuaimi 2023); 10.1038/s41467-019-08329-4 (Lueck 2019); 10.1165/rcmb.2018-0316OC (Keeling 2023); 10.1021/acs.biochem.5c00590 (Manfredi 2025). |
 | **PDB Coordinates** | **VERIFIED** | PDB 6MSM (3.2 Å Cryo-EM inward-facing) and PDB 8EIQ (3.0 Å Cryo-EM active open state). |
 | **ClinicalTrials.gov** | **VERIFIED** | NCT04135495 (ELX-02 Phase 2 trial in nonsense CFTR) verified in local trial snapshot. |
 | **Epistemic Labeling** | **CERTIFIED** | Observed rates (Al-Nuaimi, Keeling), computed synergy multiples, and biophysical inferences clearly designated. |

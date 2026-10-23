@@ -179,7 +179,7 @@ LIPID_ALC0315 = IonizableLipidProfile(
     apparent_pka=6.68,
     charge_ratio_n_p=6.0,
     molecular_weight_da=766.3,
-    evidence_doi="10.1038/s41565-021-01040-4",
+    evidence_doi="10.1038/s41467-024-50093-7",
     notes="Tertiary amine with branched ester tails; validated in lipid nanoparticle delivery",
 )
 
@@ -188,7 +188,7 @@ LIPID_SM102 = IonizableLipidProfile(
     apparent_pka=6.55,
     charge_ratio_n_p=6.0,
     molecular_weight_da=710.2,
-    evidence_doi="10.1038/s41565-021-01040-4",
+    evidence_doi="10.1038/s41467-024-50093-7",
     notes="Ionizable amino lipid with heptadecan-9-yl tail and 8-carbon ester spacer",
 )
 
@@ -248,7 +248,7 @@ FORMULATION_CATALOG: Dict[str, LNPFormulation] = {
         peg_lipid_mol_pct=1.5,
         h_ii_propensity_factor=0.85,
         mean_diameter_nm=80.0,
-        citation_doi="10.1038/s41565-021-01040-4",
+        citation_doi="10.1038/s41467-024-50093-7",
         trial_surveillance="NCT05668741",
     ),
     "SM102_standard": LNPFormulation(
@@ -261,7 +261,7 @@ FORMULATION_CATALOG: Dict[str, LNPFormulation] = {
         peg_lipid_mol_pct=1.5,
         h_ii_propensity_factor=0.90,
         mean_diameter_nm=78.0,
-        citation_doi="10.1038/s41565-021-01040-4",
+        citation_doi="10.1038/s41467-024-50093-7",
         trial_surveillance="NCT05668741",
     ),
 }

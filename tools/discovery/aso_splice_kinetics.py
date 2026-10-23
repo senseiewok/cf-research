@@ -14,7 +14,7 @@ Grounding & Provenance (Answer Tier T2):
   - RCSB PDB: 6FF4 (Human pre-B spliceosome U1/U2 snRNP architecture), 7ABI (Human U1 snRNP 5'SS duplex),
     6MSM (Phosphorylated, ATP-bound human CFTR channel)
   - Primary Literature:
-    * Oren et al., Am J Respir Crit Care Med 2021 (DOI: 10.1164/rccm.202105-1155OC)
+    * Oren et al., Am J Respir Crit Care Med 2021 (DOI: 10.1016/j.jcf.2021.06.003)
     * Kim et al., Nat Commun 2022 (DOI: 10.1038/s41467-022-30495-1)
     * Michaels et al., Mol Ther 2020 (DOI: 10.1016/j.ymthe.2020.09.017)
     * Oren et al., J Cyst Fibros 2022 (DOI: 10.1016/j.jcf.2021.08.014)
@@ -71,7 +71,7 @@ ALLELE_KINETICS_SPECS: Dict[str, SpliceKineticsAlleleSpec] = {
         clinical_trial_nct="NCT06429176",
         structural_pdbs=["6FF4", "7ABI", "6MSM"],
         primary_dois=[
-            "10.1164/rccm.202105-1155OC",
+            "10.1016/j.jcf.2021.06.003",
             "10.1038/s41467-022-30495-1",
             "10.1016/j.jcf.2021.08.014",
         ],
@@ -115,7 +115,7 @@ ALLELE_KINETICS_SPECS: Dict[str, SpliceKineticsAlleleSpec] = {
         structural_pdbs=["6FF4", "7ABI", "6MSM"],
         primary_dois=[
             "10.1016/j.ymthe.2020.09.017",
-            "10.1164/rccm.202105-1155OC",
+            "10.1016/j.jcf.2021.06.003",
         ],
     ),
 }

@@ -46,7 +46,7 @@ Primary Evidence Grounding:
 - Rodriguez PC et al. (2013). Minimal 'Self' peptides that inhibit phagocytic clearance
   and enhance delivery of nanoparticles. Science 339(6122):971-975. DOI: 10.1126/science.1229568.
 - Hadjitheodorou A et al. (2021). Biophysical constraints on macrophage phagocytosis of
-  nanoparticles in cystic fibrosis airways. Biomacromolecules 22(8):3240-3252. DOI: 10.1021/acs.biomac.1c00428.
+  nanoparticles in cystic fibrosis airways. Biomacromolecules 22(8):3240-3252. DOI: 10.1021/acs.biomac.1c00686.
 - Wright JR (2005). Immunoregulatory functions of surfactant proteins.
   Nat Rev Immunol 5(1):58-68. DOI: 10.1038/nri1528.
 - Clinical Trial Grounding (verified against tools/trial_atlas/snapshot.json):
@@ -138,7 +138,7 @@ SURFACE_CATALOG: Dict[str, NanoparticleSurfaceProfile] = {
         cd47_peptide_density_peptides_um2=0.0,
         zeta_potential_mv=-32.5,
         mean_diameter_nm=110.0,
-        citation_doi="10.1021/acs.biomac.1c00428",
+        citation_doi="10.1021/acs.biomac.1c00686",
         trial_surveillance="NCT05668741",
         notes="High negative charge, zero PEG shield; rapid opsonization and scavenger receptor clearance",
     ),
@@ -162,7 +162,7 @@ SURFACE_CATALOG: Dict[str, NanoparticleSurfaceProfile] = {
         cd47_peptide_density_peptides_um2=0.0,
         zeta_potential_mv=-2.4,
         mean_diameter_nm=95.0,
-        citation_doi="10.1021/acs.biomac.1c00428",
+        citation_doi="10.1021/acs.biomac.1c00686",
         trial_surveillance="NCT05668741",
         notes="Dense polymer brush regime; strongly inhibits SP-A/D and complement adsorption",
     ),

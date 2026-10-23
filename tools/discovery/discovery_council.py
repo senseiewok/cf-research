@@ -198,8 +198,8 @@ def phase1_generative_synthesis(topic: str) -> Dict[str, Any]:
             "predicted_mucus_diffusivity_ratio": 0.46,
             "primary_evidence_citations": [
                 {"source": "NCT05668741", "title": "VX-522 BEACON-CF Phase 1/2 clinical trial termination context"},
-                {"doi": "10.1038/s41565-021-00870-x", "title": "Mucus-penetrating nanoparticle transport in cystic fibrosis"},
-                {"doi": "10.1073/pnas.1916113117", "title": "SORT lipid nanoparticles for lung-targeted genetic medicine"},
+                {"doi": "10.1038/s41565-020-0669-6", "title": "Mucus-penetrating nanoparticle transport in cystic fibrosis"},
+                {"doi": "10.1002/adma.201805116", "title": "SORT lipid nanoparticles for lung-targeted genetic medicine"},
                 {"pdb": "6MSM", "title": "Outward-facing open human CFTR Cryo-EM structure"},
             ],
         }
@@ -310,7 +310,7 @@ def phase1_generative_synthesis(topic: str) -> Dict[str, Any]:
                     {"source": "NCT06429176", "title": "SPL84 inhaled ASO Phase 1/2 trial in 3849+10kbC->T"},
                     {"pdb": "6FF4", "title": "Human pre-B spliceosome U1/U2 snRNP structure"},
                     {"pdb": "7ABI", "title": "Human U1 snRNP 5' splice site recognition complex"},
-                    {"doi": "10.1164/rccm.202105-1155OC", "title": "SPL84 antisense oligonucleotide restoration of CFTR"},
+                    {"doi": "10.1016/j.jcf.2021.06.003", "title": "SPL84 antisense oligonucleotide restoration of CFTR"},
                 ],
             },
         }

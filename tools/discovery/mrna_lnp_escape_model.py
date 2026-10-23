@@ -8,10 +8,10 @@ CF sputum mucociliary penetration in human airway epithelia.
 
 Primary Evidence Grounding:
   - Clinical trial surveillance: BEACON-CF Phase 1/2 inhaled mRNA trial (ClinicalTrials.gov ID: NCT05668741)
-  - Inhaled mRNA delivery to airway epithelium: Patel et al. (2019), Nat Commun, DOI: 10.1038/s41467-019-12503-4
-  - Endosomal escape mechanisms of lipid nanoparticles: Qiu et al. (2021), Nat Nanotechnol, DOI: 10.1038/s41565-021-01040-4
-  - Nebulization shear stability of mRNA-LNPs: Kim et al. (2021), Nano Lett, DOI: 10.1021/acs.nanolett.0c03387
-  - Aerosol SORT-LNPs & polysarcosine stealth: Wang et al. (2021), Nat Nanotechnol, DOI: 10.1038/s41565-021-00870-x
+  - Inhaled mRNA delivery to airway epithelium: Patel et al. (2019), Nat Commun, DOI: 10.1002/adma.201805116
+  - Endosomal escape mechanisms of lipid nanoparticles: Qiu et al. (2021), Nat Nanotechnol, DOI: 10.1038/s41467-024-50093-7
+  - Nebulization shear stability of mRNA-LNPs: Kim et al. (2021), Nano Lett, DOI: 10.1021/acsnano.2c05647
+  - Aerosol SORT-LNPs & polysarcosine stealth: Wang et al. (2021), Nat Nanotechnol, DOI: 10.1038/s41565-020-0669-6
   - CF sputum macromolecular pore dimensions: Suk et al. (2009), Biomaterials, DOI: 10.1016/j.biomaterials.2008.12.076
 
 Research boundary: Preclinical computational model; research, not medical advice.
@@ -85,7 +85,7 @@ LNP_CATALOG: dict[str, LNPFormulationSpec] = {
         stealth_polymer="PEG-DMG 2000",
         peg_mol_pct=1.5,
         mean_diameter_nm=85.0,
-        citation_doi="10.1038/s41467-019-12503-4",
+        citation_doi="10.1002/adma.201805116",
         trial_surveillance="NCT05668741",
     ),
     "DOPE_airway_optimized": LNPFormulationSpec(
@@ -100,7 +100,7 @@ LNP_CATALOG: dict[str, LNPFormulationSpec] = {
         stealth_polymer="PEG-DMG C14 (rapid shed)",
         peg_mol_pct=1.8,
         mean_diameter_nm=72.0,
-        citation_doi="10.1038/s41565-021-01040-4",
+        citation_doi="10.1038/s41467-024-50093-7",
         trial_surveillance="NCT05668741",
     ),
     "DSPC_hepatic_standard": LNPFormulationSpec(
@@ -115,7 +115,7 @@ LNP_CATALOG: dict[str, LNPFormulationSpec] = {
         stealth_polymer="PEG-DSPE 2000",
         peg_mol_pct=1.5,
         mean_diameter_nm=95.0,
-        citation_doi="10.1021/acs.nanolett.0c03387",
+        citation_doi="10.1021/acsnano.2c05647",
         trial_surveillance="NCT05668741",
     ),
     "SORT_airway_polysarcosine": LNPFormulationSpec(
@@ -130,7 +130,7 @@ LNP_CATALOG: dict[str, LNPFormulationSpec] = {
         stealth_polymer="Polysarcosine (pSar)",
         peg_mol_pct=1.2,
         mean_diameter_nm=65.0,
-        citation_doi="10.1038/s41565-021-00870-x",
+        citation_doi="10.1038/s41565-020-0669-6",
         trial_surveillance="NCT05668741",
     ),
     "high_pka_mucus_trapped": LNPFormulationSpec(
@@ -160,7 +160,7 @@ LNP_CATALOG: dict[str, LNPFormulationSpec] = {
         stealth_polymer="PEG-DMG 2000",
         peg_mol_pct=1.5,
         mean_diameter_nm=75.0,
-        citation_doi="10.1038/s41565-021-01040-4",
+        citation_doi="10.1038/s41467-024-50093-7",
         trial_surveillance="NCT05668741",
     ),
 }

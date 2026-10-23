@@ -7,11 +7,11 @@ probability (Po), macroscopic apical current, and ER Band C maturation.
 
 Grounded Sources & Provenance:
 - landscape/discovery-dual-aav-intein-packaging.md
-- DOI 10.1073/pnas.1901174116: Ostedgaard LS, Welsh MJ et al. CFTR Delta-R domain minigene
+- DOI 10.1073/pnas.261714599: Ostedgaard LS, Welsh MJ et al. CFTR Delta-R domain minigene
   single-channel conductance and packaging in AAV. PNAS 2019.
 - RCSB PDB 6MSM: Cryo-EM structure of human CFTR phosphorylated, ATP-bound active conductance states at 3.2 A.
 - RCSB PDB 5UAK: Cryo-EM structure of human CFTR dephosphorylated conformation at 3.87 A.
-- ClinicalTrials.gov NCT05248230 (referenced in programs under NCT05248022):
+- ClinicalTrials.gov NCT05248230:
   Phase 1/2 aerosolized CFTR gene therapy (4D-710 encoding CFTR Delta-R).
 
 NLM Attribution & Research Boundary:
@@ -247,7 +247,7 @@ def simulate_patch_clamp_electrophysiology(
 
     c_info = CONSTRUCTS[construct_key]
 
-    # Zero ATP strictly prevents gating opening (DOI 10.1073/pnas.1901174116)
+    # Zero ATP strictly prevents gating opening (DOI 10.1073/pnas.261714599)
     if atp_concentration_mm <= 0.0 or construct_key == "CFTR_Delta264":
         po = 0.0
     else:
@@ -317,7 +317,7 @@ def simulate_cftr_minigene(
         structural_notes=CONSTRUCTS[construct_key]["structural_integrity"],
         relevant_nct_ids=["NCT05248230"],
         evidence_citations=[
-            "DOI: 10.1073/pnas.1901174116",
+            "DOI: 10.1073/pnas.261714599",
             "ClinicalTrials.gov: NCT05248230",
             "PDB: 6MSM",
             "PDB: 5UAK",

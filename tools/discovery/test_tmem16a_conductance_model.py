@@ -7,7 +7,7 @@ Verifies:
   - Resting cytosolic calcium ([Ca2+]_i = 95 nM) activation without crossing the 350 nM bronchoconstriction threshold
   - Transepithelial chloride current I_Cl,TMEM16A >= 20% WT CFTR restoring ASL height >= 7.0 um (nominal ~7.2 um)
   - Genotype-agnostic rescue across Class I pan-null, Class II refractory, and Class III cohorts
-  - Grounding in NCT06478706, PDB 5OYB/6QP6, and DOIs 10.1038/nature24652, 10.1038/s41598-020-73905-2, 10.1016/j.jcf.2019.06.004
+  - Grounding in NCT06478706, PDB 5OYB/6QP6, and DOIs 10.1038/nature24652, 10.1164/rccm.201908-1641OC, 10.1016/j.jcf.2019.06.004
 """
 
 from __future__ import annotations
@@ -165,7 +165,7 @@ class TestTMEM16AConductanceModel:
         assert "5OYB" in report
         assert "6QP6" in report
         assert "10.1038/nature24652" in report
-        assert "10.1038/s41598-020-73905-2" in report
+        assert "10.1164/rccm.201908-1641OC" in report
         assert "10.1016/j.jcf.2019.06.004" in report
         assert NLM_ATTRIBUTION in report
         assert RESEARCH_BOUNDARY in report

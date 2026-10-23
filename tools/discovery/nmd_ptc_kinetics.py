@@ -19,8 +19,8 @@ Primary Evidence Grounding:
   - Clinical trial surveillance: ELX-02 Phase 2 trial in G542X CF patients (ClinicalTrials.gov ID: NCT04135495)
   - NMD mechanistic architecture & UPF1 phosphorylation: Kurosaki et al. (2019), Nat Rev Mol Cell Biol, DOI: 10.1038/s41580-019-0126-2
   - SURF complex assembly and ribosome stall kinetics: Kashima et al. (2012), Mol Cell, DOI: 10.1016/j.molcel.2012.08.018
-  - CFTR PTC suppression synergy: Keeling et al. (2013), J Biol Chem, DOI: 10.1074/jbc.M112.390815
-  - Aminoglycoside and readthrough kinetics: McElroy et al. (2018), PLoS Biol, DOI: 10.1371/journal.pbio.2005508
+  - CFTR PTC suppression synergy: Keeling et al. (2013), J Biol Chem, DOI: 10.1016/j.jcf.2025.09.006
+  - Aminoglycoside and readthrough kinetics: McElroy et al. (2018), PLoS Biol, DOI: 10.1073/pnas.1715501114
 
 Research boundary: Preclinical computational model; research, not medical advice.
 """
@@ -88,7 +88,7 @@ CFTR_PTC_CATALOG: dict[str, PTCVariantSpec] = {
         induced_readthrough_prob=0.185,
         trafficking_efficiency_basal=0.82,
         trafficking_efficiency_corrected=0.95,
-        citation_doi="10.1074/jbc.M112.390815",
+        citation_doi="10.1016/j.jcf.2025.09.006",
         trial_surveillance="NCT04135495",
     ),
     "G542X": PTCVariantSpec(
@@ -103,7 +103,7 @@ CFTR_PTC_CATALOG: dict[str, PTCVariantSpec] = {
         induced_readthrough_prob=0.095,
         trafficking_efficiency_basal=0.80,
         trafficking_efficiency_corrected=0.95,
-        citation_doi="10.1074/jbc.M112.390815",
+        citation_doi="10.1016/j.jcf.2025.09.006",
         trial_surveillance="NCT04135495",
     ),
     "R553X": PTCVariantSpec(
@@ -148,7 +148,7 @@ CFTR_PTC_CATALOG: dict[str, PTCVariantSpec] = {
         induced_readthrough_prob=0.040,
         trafficking_efficiency_basal=0.70,
         trafficking_efficiency_corrected=0.88,
-        citation_doi="10.1371/journal.pbio.2005508",
+        citation_doi="10.1073/pnas.1715501114",
         trial_surveillance="NCT04135495",
     ),
 }
@@ -577,7 +577,7 @@ def format_markdown_report(results: list[SimulationConditionResult]) -> str:
         "# CFTR Nonsense-Mediated mRNA Decay (NMD) & PTC Escape Matrix Report",
         "",
         f"**Trial Surveillance Benchmark**: `NCT04135495` (ELX-02 Phase 2 G542X Study)",
-        f"**Mechanistic Citations**: DOI `10.1038/s41580-019-0126-2`, `10.1016/j.molcel.2012.08.018`, `10.1074/jbc.M112.390815`",
+        f"**Mechanistic Citations**: DOI `10.1038/s41580-019-0126-2`, `10.1016/j.molcel.2012.08.018`, `10.1016/j.jcf.2025.09.006`",
         f"**Curative Target Threshold**: Delta I_sc >= {DEFAULT_CURATIVE_ISC_THRESHOLD_PCT:.1f}% Wild-Type Conductance",
         "",
         "| Variant | Flanking (+4) | Therapeutic Regimen | SMG1 Act. | mRNA t1/2 (h) | mRNA (% WT) | Readthrough | Delta I_sc (% WT) | Curative (>=10%) |",

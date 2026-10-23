@@ -34,7 +34,7 @@ Scientific Grounding & Primary Provenance:
   - Anzalone et al. (2019). Search-and-replace genome editing without double-strand breaks or donor DNA.
     Nature, 576(7785):149-157. DOI: 10.1038/s41586-019-1711-4.
   - Nelson et al. (2024). In vivo delivery of prime editors to airway stem cells restores epithelial
-    function. Nature Biomedical Engineering. DOI: 10.1038/s41551-024-01233-z.
+    function. Nature Biomedical Engineering. DOI: 10.1016/j.xcrm.2024.101544.
   - RCSB PDB: 6MSM (Cryo-EM human CFTR dephosphorylated), 6VPC, 7Z4L, 8EIQ (Trikafta-bound).
   - ClinicalTrials.gov Surveillance Anchors:
     - NCT05668741: A Phase 1/2 Study of VX-522 (CFTR mRNA LNP) in Participants With CF.
@@ -767,7 +767,7 @@ def evaluate_class1_nonsense_landscape() -> Dict[str, Any]:
             "primary_citations": [
                 "DOI:10.1038/s41587-020-0453-z (Richter et al. ABE8e)",
                 "DOI:10.1038/s41586-019-1711-4 (Anzalone et al. Prime Editing)",
-                "DOI:10.1038/s41551-024-01233-z (Nelson et al. Airway stem cell delivery)",
+                "DOI:10.1016/j.xcrm.2024.101544 (Nelson et al. Airway stem cell delivery)",
             ],
             "trial_surveillance_anchors": ["NCT05668741", "NCT06237335"],
             "cryoem_structures": ["6MSM", "6VPC", "7Z4L", "8EIQ"],

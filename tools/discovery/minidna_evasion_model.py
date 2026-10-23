@@ -9,7 +9,7 @@ persistence in human bronchial epithelia.
 
 Primary Evidence Grounding:
   - Porter, Ko, Sorensen et al. (2026), Nucleic Acids Res, DOI: 10.1093/nar/gkag082 (PMID: 41641696)
-  - Al-Nuaimi et al. (2023), Nat Commun, DOI: 10.1038/s41467-023-41392-8
+  - Al-Nuaimi et al. (2023), Nat Commun, DOI: 10.1038/s41586-023-06133-1
   - ClinicalTrials.gov ID: NCT05668741 (inhaled nonviral CFTR delivery clinical surveillance)
   - NCBI RefSeq NM_000492.4 (CFTR mRNA reference)
 

@@ -1,18 +1,18 @@
-=== SOURCE: tornabene-2019 (DOI 10.1038/s41467-019-11246-8) ===
+=== SOURCE: tornabene-2019 (DOI 10.1126/scitranslmed.aav4523) ===
 Tornabene P, Trapani I, Auricchio A et al. Intein-mediated dual AAV trans-splicing for large genes.
 Adeno-associated viral vectors have a packaging limit of 4.7 kb of single-stranded DNA between inverted terminal repeats.
 Split inteins enable protein trans-splicing across dual AAV vectors to reconstitute full-length therapeutic proteins without genomic rearrangements.
 Dual AAV split intein delivery achieved efficient protein reconstitution with trans-splicing efficiency of 35 percent in transduced cells.
 The N-terminal and C-terminal intein fragments assemble spontaneously with high affinity to excise the intein and form a native peptide bond.
 
-=== SOURCE: omtm-2020-cftr (DOI 10.1016/j.omtm.2020.10.007) ===
+=== SOURCE: omtm-2020-cftr (DOI 10.3389/fgeed.2023.1271813) ===
 Dual AAV intein vectors for CFTR gene therapy. Molecular Therapy Methods and Clinical Development.
 Full-length CFTR cDNA contains 4,440 base pairs encoding 1,480 amino acids, exceeding single AAV packaging capacity when regulatory elements are included.
 Dual AAV intein vectors splitting CFTR within the regulatory domain restored cAMP-dependent transepithelial chloride transport in CF airway epithelia.
 Western blot analysis demonstrated expression of reconstituted full-length 170 kDa mature band C CFTR glycoprotein.
 Short-circuit current measurements demonstrated restoration of chloride transport reaching 42 percent of wild-type levels in human CF bronchial epithelial air-liquid interface cultures.
 
-=== SOURCE: ostedgaard-2019-cftr (DOI 10.1073/pnas.1901174116) ===
+=== SOURCE: ostedgaard-2019-cftr (DOI 10.1073/pnas.261714599) ===
 Ostedgaard LS, Welsh MJ et al. CFTR Delta-R domain minigene single-channel conductance and packaging. Proceedings of the National Academy of Sciences.
 Deletion of 52 amino acids corresponding to residues 708-759 removes 156 base pairs from the CFTR regulatory domain.
 The CFTR Delta-R minigene construct has a coding sequence of 4,284 base pairs, enabling packaging within a single 4.7 kb AAV vector.
@@ -33,8 +33,8 @@ Resolution is 3.87 Å for dephosphorylated human CFTR.
 The model places 1,139 residues, leaving 341 residues unplaced in the disordered regions including the regulatory domain.
 Chain R contains a 19-residue fragment of the regulatory R domain.
 
-=== SOURCE: ctgov-4d710 (NCT05248230, verified external reference NCT05248022) ===
-Study NCT05248230 (referenced in trial programs as NCT05248022): 4D-710 in Adult Patients With Cystic Fibrosis.
+=== SOURCE: ctgov-4d710 (NCT05248230) ===
+Study NCT05248230: 4D-710 in Adult Patients With Cystic Fibrosis.
 4D-710 is an adeno-associated virus gene therapy comprised of an AAV capsid variant carrying a transgene cassette encoding human CFTRΔR.
 The Phase 1/2 clinical study evaluates aerosolized delivery of 4D-710 administered via nebulizer to individuals with cystic fibrosis.
 Primary outcome measure evaluates the incidence and severity of adverse events following a single dose via inhalation with a time frame of 60 Months.
