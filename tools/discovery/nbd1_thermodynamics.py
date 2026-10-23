@@ -13,26 +13,26 @@ Biophysical Invariants & Thermodynamics:
    - T_m is the thermal melting temperature in Kelvin (WT approx 49.5 deg C = 322.65 K)
    - Delta H_m is unfolding enthalpy at T_m (approx 110.0 kcal/mol)
    - Delta C_p is change in heat capacity upon denaturation (approx 1.8 kcal/(mol*K))
-2. Variant Thermal Destabilization & Structural Classes:
-   - WT: T_m = 49.5 deg C (Delta T_m = 0.0 deg C), Delta G_fold = -5.2 kcal/mol, Band C ~ 85%
+2. Variant Thermal Destabilization & Structural Classes [unverified exploratory parameterization — illustrative constants not quoted from PDB/NCT sources]:
+   - WT: T_m = 49.5 deg C (Delta T_m = 0.0 deg C), Delta G_fold = -5.2 kcal/mol, Band C ~ 85% [unverified parameter]
    - F508del: Core NBD1 loop deletion; disrupts ICL4 interaction pocket.
-     T_m = 42.0 deg C (Delta T_m = -7.5 deg C), Delta G_fold = +2.1 kcal/mol, Band C < 2%
+     T_m = 42.0 deg C (Delta T_m = -7.5 deg C), Delta G_fold = +2.1 kcal/mol, Band C < 2% [unverified parameter]
    - R560T: NBD1 core / signature region missense; severe destabilization.
-     T_m = 40.5 deg C (Delta T_m = -9.0 deg C), Delta G_fold = +3.4 kcal/mol, Band C < 1%
+     T_m = 40.5 deg C (Delta T_m = -9.0 deg C), Delta G_fold = +3.4 kcal/mol, Band C < 1% [unverified parameter]
    - N1303K: NBD2 catalytic pocket missense; NBD1 core intact.
-     T_m = 49.0 deg C (Delta T_m = -0.5 deg C), Band C ~ 8%, gating defect Po ~ 0.06
+     T_m = 49.0 deg C (Delta T_m = -0.5 deg C), Band C ~ 8%, gating defect Po ~ 0.06 [unverified parameter]
    - G85E: TMD1 membrane-spanning helix defect; NBD1 core intact.
-     T_m = 48.5 deg C (Delta T_m = -1.0 deg C), severe misprocessing (Band C < 3%)
+     T_m = 48.5 deg C (Delta T_m = -1.0 deg C), severe misprocessing (Band C < 3%) [unverified parameter]
    - G551D: NBD1 ABC signature motif (LSGGQ) gating lesion; normal folding.
-     T_m = 49.2 deg C (Delta T_m = -0.3 deg C), Band C ~ 80%, severe gating arrest Po < 0.02
-3. Modulator Mechanism & Thermodynamic Synergy:
+     T_m = 49.2 deg C (Delta T_m = -0.3 deg C), Band C ~ 80%, severe gating arrest Po < 0.02 [unverified parameter]
+3. Modulator Mechanism & Thermodynamic Synergy [unverified exploratory parameterization]:
    - Type I Corrector (Tezacaftor, Lumacaftor): binds TMD1/ICL4 interface, stabilizes interdomain coupling
-     (DeltaDelta G_ICL4 approx -1.8 kcal/mol, Delta T_m approx +1.0 deg C).
+     (DeltaDelta G_ICL4 approx -1.8 kcal/mol, Delta T_m approx +1.0 deg C) [unverified parameter].
    - Type III Corrector (Elexacaftor): binds TMD2/NBD1, directly stabilizes NBD1 core
-     (DeltaDelta G approx -2.2 kcal/mol, Delta T_m approx +4.0 deg C).
+     (DeltaDelta G approx -2.2 kcal/mol, Delta T_m approx +4.0 deg C) [unverified parameter].
    - Type III Next-Gen Corrector (Vanzacaftor): optimized NBD1/TMD interface binding
-     (DeltaDelta G approx -2.6 kcal/mol, Delta T_m approx +4.8 deg C).
-   - Dual/Triple combination: allosteric thermodynamic cooperativity (DeltaDelta G_coop approx -4.8 kcal/mol),
+     (DeltaDelta G approx -2.6 kcal/mol, Delta T_m approx +4.8 deg C) [unverified parameter].
+   - Dual/Triple combination: allosteric thermodynamic cooperativity (DeltaDelta G_coop approx -4.8 kcal/mol) [unverified parameter],
      restoring F508del T_m toward wild-type levels and shifting the Boltzmann folding equilibrium.
    - Potentiator (Ivacaftor / Deutivacaftor): uncouples gating / stabilizes open burst conformation (Po).
 4. Boltzmann Maturation Equilibrium:

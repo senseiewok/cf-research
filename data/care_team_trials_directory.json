@@ -1,0 +1,2018 @@
+{
+  "schema_version": "1.0.0",
+  "tier": "Tier T2 Deterministic Registry & Care-Team Question Directory",
+  "metadata": {
+    "source": "ClinicalTrials.gov API v2 (PRISMA-screened interventional CF studies)",
+    "snapshot_data_timestamp": "2026-10-14T14:12:11.425555+00:00",
+    "total_prisma_included_studies": 940,
+    "recruiting_studies_count": 57,
+    "active_not_recruiting_studies_count": 22,
+    "recruiting_by_modality": {
+      "not stated": 36,
+      "CFTR Modulator": 13,
+      "AAV / Gene Therapy": 3,
+      "mRNA": 2,
+      "Bacteriophage": 3,
+      "ENaC Inhibitor": 1
+    },
+    "safety_contract": "cf-ai-safe-use + cf-visit-prep compliant (zero personal eligibility claims, zero doses, verbatim registry fields)"
+  },
+  "bilingual_visit_prep_templates": {
+    "en": {
+      "urgent_banner": "If a symptom is new, severe, getting worse fast or worrying, above all in a baby or child: Do not wait for me. Call your CF team's urgent or out-of-hours line, or local emergency services (911 in the US), now.",
+      "top_questions": [
+        "Which clinical research options or registry studies make sense for us to discuss with our CF care team right now?",
+        "When we look up the NCT identifiers listed below with our doctor on the official website, what do the study requirements involve for day-to-day care?",
+        "What changes in breathing, digestion, or daily energy should we watch for and report before our next clinic visit?"
+      ],
+      "what_to_bring": [
+        "Your top three questions written in your own words.",
+        "Every medicine and airway-clearance device as actually used at home.",
+        "Brief notes on what you noticed, since about when, and how often."
+      ],
+      "closing_line": "Please check this with your CF care team before changing anything. If anything on this list is new, getting worse, or worries you, call your care team now. Do not wait for the visit. This is not a diagnosis.",
+      "sample_sheet_markdown": "# CF Clinic Visit Prep: Registered Clinical Trials and Questions for Your Care Team\n\nThis preparation sheet is an educational research summary, not medical advice. Please check this with your CF care team before changing anything. If a symptom is new, severe, getting worse fast or worrying, above all in a baby or child: Do not wait for me. Call your CF team's urgent or out-of-hours line, or local emergency services (911 in the US), now.\n\n## 1. Privacy Reminder Before You Write Notes\nPlease do not write names, dates of birth, medical record numbers, or places on shared forms. Use general words such as 'my child' or 'about two weeks ago' rather than personal identifiers.\n\n## 2. Top Three Open Questions to Ask Your CF Care Team\n- Which clinical research options or registry studies make sense for us to discuss with our CF care team right now?\n- When we look up the NCT identifiers listed below with our doctor on the official website, what do the study requirements involve for day-to-day care?\n- What changes in breathing, digestion, or daily energy should we watch for and report before our next clinic visit?\n\n## 3. Registered Studies Matching Your Selected Registry Filters [T1]\n[T1] Source: ClinicalTrials.gov API v2 snapshot (snapshot date: 2026-10-14; deterministic filter: status=RECRUITING, modality=All modalities, phase=All phases, term=None). Listing on the registry does not evaluate safety or efficacy and does not denote government endorsement. I cannot tell you if anyone is eligible for a trial; only your CF care team and the study investigators can review official criteria. Please check each NCT record on the official website with your CF care team.\n\n- **[T1] NCT06132048** — *A Usability Validation of the MuCopilot Mobile Application, a Digital Tool for the Unsupervised Objective Assessment of Cystic Fibrosis* | Registry status: `RECRUITING` | Phase: `NA` | Modality: `not stated` | Lead sponsor: Ad scientiam | Named interventions: MuCopilot mobile application | Registered primary outcome: Validation of usability (1) (time frame: 2 hours).\n- **[T1] NCT02965326** — *Surrogate Markers of Response to New Therapies in Cystic Fibrosis Patients* | Registry status: `RECRUITING` | Phase: `NA` | Modality: `CFTR Modulator` | Lead sponsor: Hôpital Necker-Enfants Malades | Named interventions: Nasal swab; rectal biopsy. | Registered primary outcome: Forced Expiratory Volume in 1 second (time frame: initiation, 7 days, 1 month, 6 months, 1 year and every 6 months).\n- **[T1] NCT05248230** — *4D-710 in Adult Patients With Cystic Fibrosis* | Registry status: `RECRUITING` | Phase: `PHASE2` | Modality: `AAV / Gene Therapy` | Lead sponsor: 4D Molecular Therapeutics | Named interventions: 4D-710 | Registered primary outcome: Incidence and severity of adverse events (time frame: 60 Months).\n- **[T1] NCT04580368** — *Testing Drug Efficacy in Cystic Fibrosis Through N-of-1 Trials* | Registry status: `RECRUITING` | Phase: `NA` | Modality: `CFTR Modulator` | Lead sponsor: Children's Hospital Medical Center, Cincinnati | Named interventions: CFTR Modulators | Registered primary outcome: ppFEV1 (time frame: 16 weeks).\n- **[T1] NCT07314229** — *Prevalence of Exercise-induced Ventilatory Limitation and Associated Factors in Patients With Cystic Fibrosis Receiving Elexacaftor-Tezacaftor-Ivacaftor* | Registry status: `RECRUITING` | Phase: `NA` | Modality: `CFTR Modulator` | Lead sponsor: University Hospital, Lille | Named interventions: Measurement of resistance through forced oscillations and continuous measurement of ventilation and inspiratory capacity during TM6 | Registered primary outcome: Estimate the prevalence of ventilatory limitation measured by a portable spirometer during a submaximal exercise test (6-minute walk test) in patients with cystic fibrosis undergoing ETI. (time frame: duration of 56 weeks starting in December 2025).\n\n## 4. What to Bring to Your CF Clinic Visit\n- Your top three questions written in your own words.\n- Every medicine and airway-clearance device as actually used at home.\n- Brief notes on what you noticed, since about when, and how often.\n- Space to write down the answers from your CF doctor, nurse, pharmacist, or dietitian.\n\nPlease check this with your CF care team before changing anything. If anything on this list is new, getting worse, or worries you, call your care team now. Do not wait for the visit. This is not a diagnosis."
+    },
+    "es_MX": {
+      "urgent_banner": "Si presenta un síntoma nuevo, grave, que empeora rápido o que le preocupa —especialmente en un bebé o niño—, no espere a la consulta: llame ahora a la línea de urgencias de su equipo de FQ o a los servicios locales de emergencia (911 in the US).",
+      "top_questions": [
+        "¿Qué opciones de estudio o seguimiento clínico se adaptan a nuestra situación actual según nuestro equipo de FQ?",
+        "Si revisamos alguno de los identificadores NCT listados abajo en el sitio web oficial del registro, ¿qué significan sus criterios y qué implicaría participar para nuestra rutina diaria?",
+        "¿Qué cambios recientes en la respiración, la digestión o la energía debemos vigilar antes de la próxima visita?"
+      ],
+      "what_to_bring": [
+        "Esta lista impresa con sus tres preguntas principales marcadas.",
+        "Todos los medicamentos y dispositivos tal como se usan realmente en casa.",
+        "Notas breves sobre cualquier cambio reciente (desde cuándo aproximadamente y con qué frecuencia).",
+        "Si necesita traducción durante la consulta, solicite un intérprete médico calificado en su clínica."
+      ],
+      "closing_line": "Por favor consulte esto con su equipo de atención de FQ antes de cambiar cualquier tratamiento. Si algo en esta lista es nuevo, empeora o le preocupa, llame a su equipo de atención ahora; no espere a la consulta. Esto no es un diagnóstico.",
+      "sample_sheet_markdown": "# Hoja de Preparación para Consulta de FQ: Ensayos Registrados y Preguntas para su Equipo Médico\n\nEsta hoja informativa es una herramienta de preparación para su consulta y no constituye consejo médico ni diagnóstico. Si presenta un síntoma nuevo, grave, que empeora rápido o que le preocupa —especialmente en un bebé o niño—, no espere a la consulta: llame ahora a la línea de urgencias de su equipo de fibrosis quística (FQ) o a los servicios locales de emergencia (911 in the US).\n\n## 1. Privacidad Antes de Escribir sus Notas\nNo anote nombres completos, fechas de nacimiento, números de expediente ni datos personales en herramientas en línea. Use palabras generales como \"mi hijo\" o \"hace aproximadamente dos semanas\".\n\n## 2. Tres Preguntas Abiertas para Llevar a su Equipo de FQ\n- ¿Qué opciones de estudio o seguimiento clínico se adaptan a nuestra situación actual según nuestro equipo de FQ?\n- Si revisamos alguno de los identificadores NCT listados abajo en el sitio web oficial del registro, ¿qué significan sus criterios y qué implicaría participar para nuestra rutina diaria?\n- ¿Qué cambios recientes en la respiración, la digestión o la energía debemos vigilar antes de la próxima visita?\n\n## 3. Ensayos Clínicos Registrados que Coinciden con los Criterios de Búsqueda [T1]\n[T1] Fuente verificada: Instantánea de ClinicalTrials.gov API v2 (fecha de corte: 2026-10-14, filtro determinista: estado=RECRUITING, modalidad=Todas las modalidades, fase=Todas las fases, término=Ninguno). Estar listado en el registro no significa que un estudio sea seguro, eficaz ni respaldado por el gobierno, y esta lista no evalúa si una persona cumple criterios de inclusión. Verifique cada código NCT en el sitio web oficial con su equipo de atención de FQ.\n\n- **[T1] NCT06132048** — *A Usability Validation of the MuCopilot Mobile Application, a Digital Tool for the Unsupervised Objective Assessment of Cystic Fibrosis* | Estado en registro: `RECRUITING` | Fase: `NA` | Modalidad: `not stated` | Patrocinador principal: Ad scientiam | Intervenciones nombradas: MuCopilot mobile application | Desenlace primario registrado: Validation of usability (1) (marco temporal: 2 hours).\n- **[T1] NCT02965326** — *Surrogate Markers of Response to New Therapies in Cystic Fibrosis Patients* | Estado en registro: `RECRUITING` | Fase: `NA` | Modalidad: `CFTR Modulator` | Patrocinador principal: Hôpital Necker-Enfants Malades | Intervenciones nombradas: Nasal swab; rectal biopsy. | Desenlace primario registrado: Forced Expiratory Volume in 1 second (marco temporal: initiation, 7 days, 1 month, 6 months, 1 year and every 6 months).\n- **[T1] NCT05248230** — *4D-710 in Adult Patients With Cystic Fibrosis* | Estado en registro: `RECRUITING` | Fase: `PHASE2` | Modalidad: `AAV / Gene Therapy` | Patrocinador principal: 4D Molecular Therapeutics | Intervenciones nombradas: 4D-710 | Desenlace primario registrado: Incidence and severity of adverse events (marco temporal: 60 Months).\n- **[T1] NCT04580368** — *Testing Drug Efficacy in Cystic Fibrosis Through N-of-1 Trials* | Estado en registro: `RECRUITING` | Fase: `NA` | Modalidad: `CFTR Modulator` | Patrocinador principal: Children's Hospital Medical Center, Cincinnati | Intervenciones nombradas: CFTR Modulators | Desenlace primario registrado: ppFEV1 (marco temporal: 16 weeks).\n- **[T1] NCT07314229** — *Prevalence of Exercise-induced Ventilatory Limitation and Associated Factors in Patients With Cystic Fibrosis Receiving Elexacaftor-Tezacaftor-Ivacaftor* | Estado en registro: `RECRUITING` | Fase: `NA` | Modalidad: `CFTR Modulator` | Patrocinador principal: University Hospital, Lille | Intervenciones nombradas: Measurement of resistance through forced oscillations and continuous measurement of ventilation and inspiratory capacity during TM6 | Desenlace primario registrado: Estimate the prevalence of ventilatory limitation measured by a portable spirometer during a submaximal exercise test (6-minute walk test) in patients with cystic fibrosis undergoing ETI. (marco temporal: duration of 56 weeks starting in December 2025).\n\n## 4. Qué Llevar a la Consulta de FQ\n- Esta lista impresa con sus tres preguntas principales marcadas.\n- Todos los medicamentos y dispositivos tal como se usan realmente en casa.\n- Notas breves sobre cualquier cambio reciente (desde cuándo aproximadamente y con qué frecuencia).\n- Si necesita traducción durante la consulta, solicite un intérprete médico calificado en su clínica.\n\nPor favor consulte esto con su equipo de atención de FQ antes de cambiar cualquier tratamiento. Si algo en esta lista es nuevo, empeora o le preocupa, llame a su equipo de atención ahora; no espere a la consulta. Esto no es un diagnóstico."
+    }
+  },
+  "recruiting_studies": [
+    {
+      "nct_id": "NCT06132048",
+      "brief_title": "A Usability Validation of the MuCopilot Mobile Application, a Digital Tool for the Unsupervised Objective Assessment of Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2024-07-01",
+      "lead_sponsor": "Ad scientiam",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "MuCopilot mobile application",
+          "type": "DEVICE"
+        }
+      ],
+      "primary_outcome_measure": "Validation of usability (1)",
+      "primary_outcome_time_frame": "2 hours",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT02965326",
+      "brief_title": "Surrogate Markers of Response to New Therapies in Cystic Fibrosis Patients",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2016-05",
+      "lead_sponsor": "Hôpital Necker-Enfants Malades",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "Nasal swab; rectal biopsy.",
+          "type": "PROCEDURE"
+        }
+      ],
+      "primary_outcome_measure": "Forced Expiratory Volume in 1 second",
+      "primary_outcome_time_frame": "initiation, 7 days, 1 month, 6 months, 1 year and every 6 months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05248230",
+      "brief_title": "4D-710 in Adult Patients With Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE2"
+      ],
+      "start_date": "2022-03-29",
+      "lead_sponsor": "4D Molecular Therapeutics",
+      "modalities": [
+        "AAV / Gene Therapy"
+      ],
+      "interventions": [
+        {
+          "name": "4D-710",
+          "type": "BIOLOGICAL"
+        }
+      ],
+      "primary_outcome_measure": "Incidence and severity of adverse events",
+      "primary_outcome_time_frame": "60 Months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT04580368",
+      "brief_title": "Testing Drug Efficacy in Cystic Fibrosis Through N-of-1 Trials",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2021-05-01",
+      "lead_sponsor": "Children's Hospital Medical Center, Cincinnati",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "CFTR Modulators",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "ppFEV1",
+      "primary_outcome_time_frame": "16 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07314229",
+      "brief_title": "Prevalence of Exercise-induced Ventilatory Limitation and Associated Factors in Patients With Cystic Fibrosis Receiving Elexacaftor-Tezacaftor-Ivacaftor",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2025-12-17",
+      "lead_sponsor": "University Hospital, Lille",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "Measurement of resistance through forced oscillations and continuous measurement of ventilation and inspiratory capacity during TM6",
+          "type": "DEVICE"
+        }
+      ],
+      "primary_outcome_measure": "Estimate the prevalence of ventilatory limitation measured by a portable spirometer during a submaximal exercise test (6-minute walk test) in patients with cystic fibrosis undergoing ETI.",
+      "primary_outcome_time_frame": "duration of 56 weeks starting in December 2025",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06313827",
+      "brief_title": "e-Health Program to Prevent Exacerbations in the Cystic Fibrosis Population",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2024-10-01",
+      "lead_sponsor": "University of Valencia",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Exercise plus Monitoring Group (TG-2)",
+          "type": "BEHAVIORAL"
+        },
+        {
+          "name": "Exercise plus monitoring and follow-up group (TGF-3)",
+          "type": "BEHAVIORAL"
+        },
+        {
+          "name": "Exercise Group (CG-1)",
+          "type": "BEHAVIORAL"
+        }
+      ],
+      "primary_outcome_measure": "Clinical exacerbation",
+      "primary_outcome_time_frame": "At baseline (T1), at 6 months (T2) and at 12 months(T3).",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07559175",
+      "brief_title": "A Study to Evaluate Safety and Explore Efficacy of New Lipase NHS7108 in Adult Participants With Exocrine Pancreatic Insufficiency.",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE2"
+      ],
+      "start_date": "2026-10",
+      "lead_sponsor": "Aimmune Nestlé Health Science US R&D, LLC",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "NHS7108",
+          "type": "DRUG"
+        },
+        {
+          "name": "Zenpep®",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Primary Objectives: Safety of different doses of NHS7108 administered daily for 14 days in participants with exocrine pancreatic insufficiency (EPI). Coefficient of nitrogen absorption (CNA) will be measured as part of safety.",
+      "primary_outcome_time_frame": "14 days after NHS7108 Treatment",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07031323",
+      "brief_title": "OnTrackCF: Engagement, Feasibility, and Acceptability Study",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2025-11-20",
+      "lead_sponsor": "Boston Children's Hospital",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "OnTrackCF",
+          "type": "BEHAVIORAL"
+        }
+      ],
+      "primary_outcome_measure": "System Usability Survey (SUS)",
+      "primary_outcome_time_frame": "through study completion, projected to be 1 year",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06526923",
+      "brief_title": "A Phase 1/2 Trial of SP-101 for the Treatment of Cystic Fibrosis (CF)",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "start_date": "2024-09-16",
+      "lead_sponsor": "Spirovant Sciences, Inc.",
+      "modalities": [
+        "AAV / Gene Therapy"
+      ],
+      "interventions": [
+        {
+          "name": "SP-101 and doxorubicin Cohort 1",
+          "type": "COMBINATION_PRODUCT"
+        },
+        {
+          "name": "SP-101 and doxorubicin Cohort 2",
+          "type": "COMBINATION_PRODUCT"
+        }
+      ],
+      "primary_outcome_measure": "Incidence and severity of adverse events",
+      "primary_outcome_time_frame": "52 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT04624490",
+      "brief_title": "Hyperpolarized 129Xe MR Imaging of Lung Function in Healthy Volunteers and Subjects With Pulmonary Disease",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE1"
+      ],
+      "start_date": "2020-11-02",
+      "lead_sponsor": "Mario Castro, MD, MPH",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Hyperpolarized Xe129",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "RBC/Barrier Ratio",
+      "primary_outcome_time_frame": "Day 1",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06616857",
+      "brief_title": "Personalized Mobile Health Platform to Promote Physical Activity in Adolescents and Young Adults With Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2025-02-18",
+      "lead_sponsor": "Nemours Children's Clinic",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "NUDGE",
+          "type": "BEHAVIORAL"
+        },
+        {
+          "name": "Education",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Recruitment",
+      "primary_outcome_time_frame": "Baseline",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05766774",
+      "brief_title": "FEED-Cystic Fibrosis (FEED-CF)",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2023-06-28",
+      "lead_sponsor": "Emory University",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Low-added sugar, high-fat diet",
+          "type": "OTHER"
+        },
+        {
+          "name": "High-added sugar, high-fat CF diet",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Change in acute insulin response to arginine (AIRarg) from baseline",
+      "primary_outcome_time_frame": "Baseline and 8 weeks post intervention",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06284577",
+      "brief_title": "Quality of Life and Gut Health in Pediatric Patients With Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2024-01-02",
+      "lead_sponsor": "Oslo University Hospital",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "Multistrain Probiotic",
+          "type": "DIETARY_SUPPLEMENT"
+        },
+        {
+          "name": "Placebo - maltodextrin",
+          "type": "DIETARY_SUPPLEMENT"
+        }
+      ],
+      "primary_outcome_measure": "Changes in GI related QoL using the questionnaire PedsQL GI",
+      "primary_outcome_time_frame": "0-6 months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05704036",
+      "brief_title": "Estrogen Supplementation and Bone Health in Women With CF",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE4"
+      ],
+      "start_date": "2023-05-02",
+      "lead_sponsor": "Johns Hopkins University",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Transdermal estrogen",
+          "type": "DRUG"
+        },
+        {
+          "name": "Progesterone",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Change in lumbar spine bone mineral density assessed by dual-energy x-ray absorptiometry (DXA)",
+      "primary_outcome_time_frame": "Baseline and 12 months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05818319",
+      "brief_title": "Cystic Fibrosis in the Kidney: Monitoring the Effectiveness of Elexacaftor/tezacaftor/ivacaftor in Urine After a Short Pause of Therapy",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2023-06-01",
+      "lead_sponsor": "University of Aarhus",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "12 hours ETI pause",
+          "type": "OTHER"
+        },
+        {
+          "name": "36 hours ETI pause",
+          "type": "OTHER"
+        },
+        {
+          "name": "60 hours ETI pause",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Difference in cumulative urine bicarbonate excretion before, during, and after ETI pause.",
+      "primary_outcome_time_frame": "At baseline, after 12/36/60 hours of therapy pause and after therapy is resumed.",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06339593",
+      "brief_title": "Regional Monitoring of CF Lung Disease",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "EARLY_PHASE1"
+      ],
+      "start_date": "2024-01-05",
+      "lead_sponsor": "Children's Hospital Medical Center, Cincinnati",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Airway-clearance vest",
+          "type": "PROCEDURE"
+        },
+        {
+          "name": "Hyperpolarized Xe129",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Assessing functional lung abnormalities via Xenon MRI",
+      "primary_outcome_time_frame": "two weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06512064",
+      "brief_title": "Acoustic Waveform Respiratory Evaluation",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2024-07-23",
+      "lead_sponsor": "Indiana University",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "AWARE",
+          "type": "DIAGNOSTIC_TEST"
+        }
+      ],
+      "primary_outcome_measure": "Accurate and reliable disease diagnosis",
+      "primary_outcome_time_frame": "Up to two weeks per subject",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07283770",
+      "brief_title": "Dose Escalation Study Evaluating the Safety and Pharmacokinetics of VX-581 in Healthy Participants",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE1"
+      ],
+      "start_date": "2025-12-09",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "VX-581",
+          "type": "DRUG"
+        },
+        {
+          "name": "Placebo",
+          "type": "DRUG"
+        },
+        {
+          "name": "D-IVA",
+          "type": "DRUG"
+        },
+        {
+          "name": "TEZ",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Part A: Safety and Tolerability as Assessed by Number of Participants With Adverse Events (AEs) and Serious Adverse Events (SAEs)",
+      "primary_outcome_time_frame": "From Day -1 up to Day 8",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05802264",
+      "brief_title": "Study to Assess Amphotericin B Cystetic for Inhalation (ABCI) Doses in Healthy Volunteers & People with Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE1"
+      ],
+      "start_date": "2023-03-21",
+      "lead_sponsor": "Cystetic Medicines, Inc.",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "ABCI",
+          "type": "COMBINATION_PRODUCT"
+        },
+        {
+          "name": "Placebo",
+          "type": "COMBINATION_PRODUCT"
+        }
+      ],
+      "primary_outcome_measure": "Adverse Events (AEs), and Serious Adverse Events (SAEs)",
+      "primary_outcome_time_frame": "up to 10 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06364176",
+      "brief_title": "Targeting Inflammation With Losartan to Improve Response to Modulator Therapy in Cystic Fibrosis.",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE2"
+      ],
+      "start_date": "2024-06-03",
+      "lead_sponsor": "University of Kansas Medical Center",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Losartan",
+          "type": "DRUG"
+        },
+        {
+          "name": "Placebo",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Sweat chloride",
+      "primary_outcome_time_frame": "Baseline through week 12",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07485543",
+      "brief_title": "Safety and Efficacy of Inhaled BMD003 (CFTR mRNA) in Chinese Cystic Fibrosis Patients Aged ≥12 Years",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "EARLY_PHASE1"
+      ],
+      "start_date": "2026-04-03",
+      "lead_sponsor": "Peking Union Medical College Hospital",
+      "modalities": [
+        "mRNA"
+      ],
+      "interventions": [
+        {
+          "name": "BMD003 (CFTR mRNA)",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Incidence of adverse events (AE) and serious adverse events (SAE) assessed by CTCAE 6.0",
+      "primary_outcome_time_frame": "From first dose up to approximately 12 months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT03921060",
+      "brief_title": "Markers of Osteoporosis in Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE4"
+      ],
+      "start_date": "2021-09-02",
+      "lead_sponsor": "University of Texas Southwestern Medical Center",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Denosumab",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "DEXA results",
+      "primary_outcome_time_frame": "Looking at single timepoints and well as changes for up to 5 years for those in the sub-study",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05504837",
+      "brief_title": "A Study Assessing KB407 for the Treatment of Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE1"
+      ],
+      "start_date": "2023-06-30",
+      "lead_sponsor": "Krystal Biotech, Inc.",
+      "modalities": [
+        "AAV / Gene Therapy"
+      ],
+      "interventions": [
+        {
+          "name": "KB407 (Nebulization)",
+          "type": "BIOLOGICAL"
+        }
+      ],
+      "primary_outcome_measure": "To evaluate safety and tolerability of KB407 based upon assessment of adverse events (frequency, severity, relatedness), and changes from baseline in physical examinations, vital signs, ECG, and clinical laboratory test results",
+      "primary_outcome_time_frame": "6 months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06996951",
+      "brief_title": "Sinonasal Therapies and Histologic Correlations of Patients With Cystic Fibrosis in the Era of Highly Effective Modulator Therapy",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE3"
+      ],
+      "start_date": "2025-07-02",
+      "lead_sponsor": "Indiana University",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "STOP NASAL SALINE IRRIGATION WITH OR WITHOUT STEROID",
+          "type": "OTHER"
+        },
+        {
+          "name": "CONTINUE NASAL SALINE IRRIGATION WITH OR WITHOUT STEROID",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Change in Lund Kennedy Score",
+      "primary_outcome_time_frame": "Baseline, 12 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05998629",
+      "brief_title": "Skin-interfaced Colorimetric Bifluidic Sweat Sensor Device for the Diagnosis of Cystic Fibrosis (CF)",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2024-07-01",
+      "lead_sponsor": "Milton S. Hershey Medical Center",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "a skin-interfaced colorimetric bifluidic sweat device with two synchronous channels",
+          "type": "DEVICE"
+        },
+        {
+          "name": "Standard of Care laboratory procedure for measurement of sweat",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Sweat chloride concentration using standard of care lab assessment",
+      "primary_outcome_time_frame": "Single point in time measurement 60 minutes after device attachment",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT04137133",
+      "brief_title": "Patienthèque of Finisterian (South of Brittany) Children With Cystic Fibrosis in the Time of Precision Medicine",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2022-03-21",
+      "lead_sponsor": "University Hospital, Brest",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "collection",
+          "type": "DIAGNOSTIC_TEST"
+        }
+      ],
+      "primary_outcome_measure": "Presence of P. aeruginosa in bacterial sputum cultures in one of bronchial secretions sample",
+      "primary_outcome_time_frame": "3 years",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06747858",
+      "brief_title": "Safety, Tolerability and Efficacy Study of ARCT-032 in People With Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE2"
+      ],
+      "start_date": "2024-12-12",
+      "lead_sponsor": "Arcturus Therapeutics, Inc.",
+      "modalities": [
+        "mRNA"
+      ],
+      "interventions": [
+        {
+          "name": "ARCT-032",
+          "type": "BIOLOGICAL"
+        }
+      ],
+      "primary_outcome_measure": "Incidence, severity and dose relationship of adverse events",
+      "primary_outcome_time_frame": "Cohorts 1-3: 16 weeks and Cohort 4: 24 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05548283",
+      "brief_title": "Standardizing Treatments for Pulmonary Exacerbations - Aminoglycoside Study",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE4"
+      ],
+      "start_date": "2023-04-23",
+      "lead_sponsor": "Chris Goss",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Beta-lactam antibiotic",
+          "type": "DRUG"
+        },
+        {
+          "name": "Aminoglycoside",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Absolute Change in FEV1 % Predicted at Week 4 in Aminoglycoside (AG) Study",
+      "primary_outcome_time_frame": "Four weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT02740868",
+      "brief_title": "Xenon-129 and Inert Fluorinated Gas Lung MRI: Study of Healthy Volunteers and Participants With Pulmonary Disease",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE2"
+      ],
+      "start_date": "2015-08",
+      "lead_sponsor": "The Hospital for Sick Children",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Xenon-129 and Perfluoropropane (19F)",
+          "type": "DRUG"
+        },
+        {
+          "name": "Magnetic Resonance Imaging",
+          "type": "DEVICE"
+        },
+        {
+          "name": "Lung Clearance Index",
+          "type": "DEVICE"
+        }
+      ],
+      "primary_outcome_measure": "Significant differences in lung function between CF and healthy group and asthma and healthy group for ventilation defect percent (VDP) measurement",
+      "primary_outcome_time_frame": "1 year",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07223255",
+      "brief_title": "Gastrointestinal Response of Pediatric Cystic Fibrosis Patients on Mediterranean Diet",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2026-09-01",
+      "lead_sponsor": "Dartmouth-Hitchcock Medical Center",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Mediterranean diet",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Metagenomic sequencing",
+      "primary_outcome_time_frame": "6 months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06836453",
+      "brief_title": "Evaluation of New Device for Beta-adrenergic Sweat Test in the Context of Stratification of Patient With Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2025-01-01",
+      "lead_sponsor": "Cliniques universitaires Saint-Luc- Université Catholique de Louvain",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Sweat stimulation and secretion quantification",
+          "type": "DEVICE"
+        }
+      ],
+      "primary_outcome_measure": "Sweat secretion",
+      "primary_outcome_time_frame": "2 hours",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT01851694",
+      "brief_title": "Beta-cell Response to Incretin Hormones in Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2013-05",
+      "lead_sponsor": "University of Pennsylvania",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "GLP-1",
+          "type": "DRUG"
+        },
+        {
+          "name": "GIP",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Second-phase insulin response during GPA test",
+      "primary_outcome_time_frame": "5 hours",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05723445",
+      "brief_title": "The Effects of a Low Glycemic Load Diet on Dysglycemia and Body Composition in Adults With Cystic Fibrosis-Related Diabetes",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2023-09-01",
+      "lead_sponsor": "Rhode Island Hospital",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Low Glycemic Load Diet",
+          "type": "BEHAVIORAL"
+        }
+      ],
+      "primary_outcome_measure": "Change in percent time in target range 70-180 mg/dL",
+      "primary_outcome_time_frame": "Baseline, post-meal delivery phase (8 weeks), post-free-living conditions phase (4 months)",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06457451",
+      "brief_title": "Impact of a Coordinated Dietetic-adapted Physical Activity Program on the Percentage of Lean Body Mass in Adults With Cystic Fibrosis Treated With Elexacaftor-Tezacaftor-Ivacaftor: Multicentre Randomised Controlled Trial",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2024-11-25",
+      "lead_sponsor": "University Hospital, Tours",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "DIAPASOM program",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Evolution of percentage of patients lean mass as a percentage of body mass",
+      "primary_outcome_time_frame": "From randomization, up to 12 months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06995651",
+      "brief_title": "Dorzagliatin in Pancreatic Insufficient Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE1"
+      ],
+      "start_date": "2025-10-21",
+      "lead_sponsor": "Michael R. Rickels, MD, MS",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Dorzagliatin",
+          "type": "DRUG"
+        },
+        {
+          "name": "Placebo",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Drug concentrations (PK; Cmax)",
+      "primary_outcome_time_frame": "2 months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05359991",
+      "brief_title": "Exercise in Child Health",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2020-11-12",
+      "lead_sponsor": "University of California, Irvine",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Exercise",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Gas Exchange Variables",
+      "primary_outcome_time_frame": "8 Months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07729787",
+      "brief_title": "Autogenic Drainage Versus Mechanical Percussion in Children With Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2026-06-14",
+      "lead_sponsor": "Riphah International University",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Autogenic Drainage",
+          "type": "PROCEDURE"
+        },
+        {
+          "name": "Mechanical Percussion",
+          "type": "DEVICE"
+        }
+      ],
+      "primary_outcome_measure": "Forced Expiratory Volume in One Second (FEV₁)",
+      "primary_outcome_time_frame": "Baseline (Week 0) and post-intervention (Week 6).",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06413368",
+      "brief_title": "Maralixibat in Patients With Cystic Fibrosis and Constipation",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "start_date": "2025-04-09",
+      "lead_sponsor": "Children's Hospital Los Angeles",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Maralixibat 9.5 MG/ML [Livmarli]",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Change in Stool Consistency Measured by the Bristol Stool Scale",
+      "primary_outcome_time_frame": "baseline to 4 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07437105",
+      "brief_title": "Dose Escalation Study Evaluating the Safety and Pharmacokinetics of VX-272 in Healthy Participants",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE1"
+      ],
+      "start_date": "2026-02-25",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "VX-272",
+          "type": "DRUG"
+        },
+        {
+          "name": "Placebo",
+          "type": "DRUG"
+        },
+        {
+          "name": "Tezacaftor",
+          "type": "DRUG"
+        },
+        {
+          "name": "Deutivacaftor",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Part A: Safety and Tolerability as Assessed by Number of Participants With Adverse Events (AEs) and Serious Adverse Events (SAEs)",
+      "primary_outcome_time_frame": "From Signing of Informed Consent Form (ICF) up to Safety Follow Up (Up to Day 34)",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06998043",
+      "brief_title": "Study With Phage for CF Subjects With Pseudomonas Lung Infection",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE2"
+      ],
+      "start_date": "2025-07-02",
+      "lead_sponsor": "BiomX Ltd",
+      "modalities": [
+        "Bacteriophage"
+      ],
+      "interventions": [
+        {
+          "name": "BX004",
+          "type": "BIOLOGICAL"
+        },
+        {
+          "name": "Placebo",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Change in sputum Pseudomonas aeruginosa (PsA) burden at 8 weeks (EOT)",
+      "primary_outcome_time_frame": "8 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT04530383",
+      "brief_title": "Metformin for People With CFRD on CFTR Modulator Therapy to Improve Ion Channel Function",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE2"
+      ],
+      "start_date": "2022-02-14",
+      "lead_sponsor": "University of Kansas Medical Center",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "Metformin Hydrochloride",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Change in BK channel gene expression",
+      "primary_outcome_time_frame": "Baseline through week 14 of metformin treatment",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07508904",
+      "brief_title": "Exercises' Effect on Muscle Strength, Aerobic Capacity and Respiratory Functions in Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2025-12-01",
+      "lead_sponsor": "Riphah International University",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Arm Cycle Ergometry",
+          "type": "OTHER"
+        },
+        {
+          "name": "Leg Cycle Ergometry",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Incremental Shuttle Walk Test (ISWT)",
+      "primary_outcome_time_frame": "Baseline; 4th Week; 8th Week",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07148739",
+      "brief_title": "Ensuring Access to Optimal Therapy in CF: The ENACT Study",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE4"
+      ],
+      "start_date": "2025-06-10",
+      "lead_sponsor": "Arkansas Children's Hospital Research Institute",
+      "modalities": [
+        "ENaC Inhibitor",
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "Elexacaftor / Ivacaftor / Tezacaftor",
+          "type": "DRUG"
+        },
+        {
+          "name": "therapeutic drug monitoring",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Concentration (ng/mL)",
+      "primary_outcome_time_frame": "One time assessment for observational part of the study, up to 6 times (6 months or more) for the therapeutic drug monitoring pilot and feasibility study.",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07275905",
+      "brief_title": "Bacteriophages for Adults With Cystic Fibrosis and Chronic Achromobacter Lung Infection",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE1"
+      ],
+      "start_date": "2026-08-20",
+      "lead_sponsor": "Ghady Haidar",
+      "modalities": [
+        "Bacteriophage"
+      ],
+      "interventions": [
+        {
+          "name": "AchromoPhage",
+          "type": "BIOLOGICAL"
+        }
+      ],
+      "primary_outcome_measure": "Incidence of treatment-related Grade ≥4 adverse events or treatment-limiting toxicities",
+      "primary_outcome_time_frame": "42 Days",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05937815",
+      "brief_title": "Intestine-lung Axis of Cystic Fibrosis Patients Treated With the Combination Elexacaftor/Tezacaftor/Ivacaftor",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2021-09-13",
+      "lead_sponsor": "University Hospital, Bordeaux",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "Sample collection",
+          "type": "PROCEDURE"
+        }
+      ],
+      "primary_outcome_measure": "composition of the digestive bacterial microbiota",
+      "primary_outcome_time_frame": "12 months after baseline (treatment initiation)",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT04731272",
+      "brief_title": "GLP-1 Agonist Therapy in Cystic Fibrosis-Related Glucose Intolerance",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE2"
+      ],
+      "start_date": "2021-07-16",
+      "lead_sponsor": "University of Pennsylvania",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Dulaglutide 0.75Mg/0.5Ml Inj Pen",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Early-phase insulin secretion",
+      "primary_outcome_time_frame": "18 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06429176",
+      "brief_title": "Safety, Tolerability, Pharmacokinetics, and Preliminary Efficacy of SPL84 in Patients With Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE2"
+      ],
+      "start_date": "2024-06-24",
+      "lead_sponsor": "SpliSense Ltd.",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "SPL84",
+          "type": "DRUG"
+        },
+        {
+          "name": "Placebo",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Safety and Tolerability of SPL84 as evaluated by number of subjects with at least one treatment-related adverse event (AE) or serious adverse event (SAEs)",
+      "primary_outcome_time_frame": "Day 1 through Day 87 (Cohort 1-3) or 108 (Cohort 4)",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05463289",
+      "brief_title": "ACCESS 2: AI for pediatriC diabetiC Eye examS Study 2",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2022-07-11",
+      "lead_sponsor": "Johns Hopkins University",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Point of Care Autonomous AI diabetic retinopathy exam",
+          "type": "DIAGNOSTIC_TEST"
+        }
+      ],
+      "primary_outcome_measure": "Proportion screened for diabetic retinopathy",
+      "primary_outcome_time_frame": "Day 1",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07569419",
+      "brief_title": "Proof of Principle Study for an Efficacy Trial of Linaclotide for Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "EARLY_PHASE1"
+      ],
+      "start_date": "2026-03-09",
+      "lead_sponsor": "University of Nottingham",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Linaclotide 290 micrograms",
+          "type": "DRUG"
+        },
+        {
+          "name": "Lactose placebo pill",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Small bowel water content",
+      "primary_outcome_time_frame": "Baseline, and 0, 60, 120, 180, 240, 300, 360 minutes post-dose",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07450547",
+      "brief_title": "Phase 2 Study to Assess the Safety and Efficacy of ANG003",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE2"
+      ],
+      "start_date": "2026-04-24",
+      "lead_sponsor": "Anagram Therapeutics, Inc.",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "ANG003 Dose A",
+          "type": "DRUG"
+        },
+        {
+          "name": "ANG003 Dose B",
+          "type": "DRUG"
+        },
+        {
+          "name": "Creon",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Adverse events (AEs); Treatment-emergent AEs; Serious AEs; Discontinuation due to AEs; Clinical laboratory values",
+      "primary_outcome_time_frame": "From Visit 1 to Visit 5, anticipated average 80 days",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07436351",
+      "brief_title": "ACT With CF Self-Help Toolkit",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2026-01-20",
+      "lead_sponsor": "Thomas Jefferson University",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "ACT with CF Self-Help Toolkit",
+          "type": "BEHAVIORAL"
+        },
+        {
+          "name": "Waitlist",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Anxiety",
+      "primary_outcome_time_frame": "at each time point (baseline, 6 weeks, 3 months)",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT03587961",
+      "brief_title": "Personalized Theratyping Trial",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "EARLY_PHASE1"
+      ],
+      "start_date": "2019-08-01",
+      "lead_sponsor": "George Solomon",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "Symdeko",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "spirometry",
+      "primary_outcome_time_frame": "32 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07071324",
+      "brief_title": "CF Wellness Program",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2026-02-03",
+      "lead_sponsor": "Johns Hopkins University",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "CF Wellness Program",
+          "type": "BEHAVIORAL"
+        }
+      ],
+      "primary_outcome_measure": "Intervention Adherence as assessed by the number of CFWP participants",
+      "primary_outcome_time_frame": "Up to 15 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06617013",
+      "brief_title": "GERD in Children With Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2024-10-23",
+      "lead_sponsor": "Duke University",
+      "modalities": [
+        "Bacteriophage"
+      ],
+      "interventions": [
+        {
+          "name": "Discontinuation of GERD therapy",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Change from baseline in the mean GSAS score (only if GERD medication discontinued)",
+      "primary_outcome_time_frame": "baseline and 12 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06654752",
+      "brief_title": "Streamlined Treatment of Pulmonary Exacerbations in Pediatrics",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2024-12-01",
+      "lead_sponsor": "University of Washington, the Collaborative Health Studies Coordinating Center",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Immediate Oral Antibiotics",
+          "type": "OTHER"
+        },
+        {
+          "name": "Tailored Treatment: Oral Antibiotics only if Additional Treatment needed",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "One-year change in pulmonary function by spirometry-measured ppFEV1",
+      "primary_outcome_time_frame": "1 year",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06032273",
+      "brief_title": "Lung Transplant READY CF 2: CARING CF Ancillary RCT",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2023-09-06",
+      "lead_sponsor": "University of Washington",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Investigator-designed lung transplant education website",
+          "type": "BEHAVIORAL"
+        }
+      ],
+      "primary_outcome_measure": "Brief Assessment Scale for Caregivers (BASC)",
+      "primary_outcome_time_frame": "Measured at the 3-month and 6-month study visits",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT07809867",
+      "brief_title": "Pharmacokinetics of Elexacaftor/Tezacaftor/Ivacaftor in Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "phases": [
+        "PHASE4"
+      ],
+      "start_date": "2026-09-18",
+      "lead_sponsor": "Istituto Giannina Gaslini",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "Elexacaftor, Tezacaftor, Ivacaftor",
+          "type": "DRUG"
+        },
+        {
+          "name": "Ivacaftor (VX-770)",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Plasma concentrations of elexacaftor, tezacaftor and ivacaftor at steady-state",
+      "primary_outcome_time_frame": "[Visit 1 - Day 0] [Visit 2 - Day 90±5] [Visit 3 - Day 180±5]",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    }
+  ],
+  "active_not_recruiting_studies": [
+    {
+      "nct_id": "NCT06120465",
+      "brief_title": "YOGA-CF (Yoga Outcomes Get Assessed in Cystic Fibrosis)",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2024-04-22",
+      "lead_sponsor": "Royal Brompton & Harefield NHS Foundation Trust",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Yoga",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Respiratory Health- related quality of life - measured by the respiratory domain of the Cystic Fibrosis Questionnaire - Revised.",
+      "primary_outcome_time_frame": "Baseline, 12 and 24-weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06030206",
+      "brief_title": "Lung Transplant READY CF 2: A Multi-site RCT",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2023-09-06",
+      "lead_sponsor": "University of Washington",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Investigator-designed lung transplant education resource (Research Intervention)",
+          "type": "BEHAVIORAL"
+        },
+        {
+          "name": "Publicly available transplant education resource (Attention-control)",
+          "type": "BEHAVIORAL"
+        }
+      ],
+      "primary_outcome_measure": "Preparedness for Shared Decision Making (PrepDM) Scale",
+      "primary_outcome_time_frame": "Measured at the 3-month study visit",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06322446",
+      "brief_title": "Exercise in People With Cystic Fibrosis on CFTR Modulator Therapy",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2024-02-27",
+      "lead_sponsor": "Universidad Politecnica de Madrid",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "Exercise",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Changes in peripheral muscle strength",
+      "primary_outcome_time_frame": "Baseline, pre-intervention and immediately after the intervention.",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT04602468",
+      "brief_title": "Real World Clinical Outcomes With Novel Modulator Therapy Combinations in People With CF (RECOVER)",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE4"
+      ],
+      "start_date": "2020-09-03",
+      "lead_sponsor": "Royal College of Surgeons, Ireland",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "Elexacaftor/Tezacaftor/Ivacaftor",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Change in LCI on treatment with ETI in children and adults with CF.",
+      "primary_outcome_time_frame": "84 month period",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT04467957",
+      "brief_title": "Non-contrast Lung Perfusion Mapping Applied for New Insights in Cystic Fibrosis",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE4"
+      ],
+      "start_date": "2020-11-15",
+      "lead_sponsor": "Children's Hospital Medical Center, Cincinnati",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "Initiation of CFTR Modulator",
+          "type": "DRUG"
+        },
+        {
+          "name": "Hyperpolarized Xenon 129",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Ventilation Defect Percentage (VDP)",
+      "primary_outcome_time_frame": "Baseline and 6 months post Trikafta initiation for CF group. Baseline for CF and control groups.",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT02690064",
+      "brief_title": "Mechanisms for Vascular Dysfunction and Exercise Tolerance in CF",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2015-04",
+      "lead_sponsor": "Augusta University",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Acute Antioxidant",
+          "type": "DIETARY_SUPPLEMENT"
+        },
+        {
+          "name": "Chronic Antioxidant",
+          "type": "DIETARY_SUPPLEMENT"
+        },
+        {
+          "name": "Placebo",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Acute Change in Flow mediated dilation",
+      "primary_outcome_time_frame": "Change from baseline (2 hours)",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06149793",
+      "brief_title": "SGLT2 Inhibitor Therapy in Cystic Fibrosis-related Diabetes",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE2",
+        "PHASE3"
+      ],
+      "start_date": "2024-01-08",
+      "lead_sponsor": "University of Minnesota",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Empagliflozin",
+          "type": "DRUG"
+        },
+        {
+          "name": "Placebo Control",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Continuous Glucose Monitor (CGM): Percentage of Time in Range 70-180mg/dL",
+      "primary_outcome_time_frame": "4 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT03522831",
+      "brief_title": "CF Bronchodilation",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2018-05-01",
+      "lead_sponsor": "University of British Columbia",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Salbutamol",
+          "type": "DRUG"
+        },
+        {
+          "name": "Placebo",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Standardized dyspnea score at the highest equivalent submaximal exercise time achieved on both constant load exercise tests (i.e., iso-time).",
+      "primary_outcome_time_frame": "30 min post-dose.",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06963008",
+      "brief_title": "A Prospective, Single-center, Open-label Study of Inhaled BMD003 (CFTR mRNA) in Chinese Adults With Cystic Fibrosis",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "EARLY_PHASE1"
+      ],
+      "start_date": "2025-06-27",
+      "lead_sponsor": "Peking Union Medical College Hospital",
+      "modalities": [
+        "mRNA",
+        "AAV / Gene Therapy"
+      ],
+      "interventions": [
+        {
+          "name": "inhaled BMD003(CFTR mRNA)",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Observe adverse events (AE) and serious adverse events (SAE)",
+      "primary_outcome_time_frame": "From enrollment to the end of treatment at 13 months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06964074",
+      "brief_title": "PEP and O-PEP Device for Nebulization in Cystic Fibrosis",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2022-01-01",
+      "lead_sponsor": "National Institute for Tuberculosis and Lung Diseases, Poland",
+      "modalities": [
+        "Mucolytic / Anti-Infective"
+      ],
+      "interventions": [
+        {
+          "name": "Nebulization with OPEP device",
+          "type": "DEVICE"
+        },
+        {
+          "name": "Nebulization with PEP device",
+          "type": "DEVICE"
+        },
+        {
+          "name": "Nebulization with Pari LC Sprint",
+          "type": "DEVICE"
+        }
+      ],
+      "primary_outcome_measure": "1. Pulmonary Function Test (PFT)",
+      "primary_outcome_time_frame": "From baseline to study completion, the average duration is 10 days.",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05562492",
+      "brief_title": "Closed-loop for People Living With Cystic Fibrosis Related Diabetes",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2023-04-12",
+      "lead_sponsor": "University of Cambridge",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "CamAPS FX",
+          "type": "DEVICE"
+        },
+        {
+          "name": "Standard insulin therapy with CGM",
+          "type": "OTHER"
+        }
+      ],
+      "primary_outcome_measure": "Time spent in the target glucose range between 3.9 and 10.0 mmol/L based on CGM glucose levels",
+      "primary_outcome_time_frame": "6 month intervention period",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05517655",
+      "brief_title": "BEGIN Novel ImagiNG Biomarkers",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE4"
+      ],
+      "start_date": "2022-05-01",
+      "lead_sponsor": "Children's Hospital Medical Center, Cincinnati",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "129Xe",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Ventilation Defect Percentage change from baseline",
+      "primary_outcome_time_frame": "1 year",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05422222",
+      "brief_title": "Evaluation of VX-121/Tezacaftor/Deutivacaftor in Cystic Fibrosis (CF) Participants 1 Through 11 Years of Age",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE3"
+      ],
+      "start_date": "2022-06-21",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "VX-121/TEZ/D-IVA",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Part A: Observed Pre-dose Plasma Concentration (Ctrough) of VX-121, TEZ, D-IVA, and Relevant Metabolites",
+      "primary_outcome_time_frame": "From Day 1 up to Day 22",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06962852",
+      "brief_title": "A Long-term Study to Monitor the Health Status of People With Cystic Fibrosis Who Took Part in a Previous Study With BI 3720931 (Lenticlair™-ON)",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE1",
+        "PHASE2"
+      ],
+      "start_date": "2025-05-20",
+      "lead_sponsor": "Boehringer Ingelheim",
+      "modalities": [
+        "AAV / Gene Therapy"
+      ],
+      "interventions": [
+        {
+          "name": "BI 3720931",
+          "type": "GENETIC"
+        }
+      ],
+      "primary_outcome_measure": "Occurrence of treatment-emergent delayed adverse events (AEs)",
+      "primary_outcome_time_frame": "up to 15 years",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT03947957",
+      "brief_title": "Microbial Biomarkers of EArly Pseudomonas Aeruginosa Colonization in CHildren With Cystic Fibrosis",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2020-10-02",
+      "lead_sponsor": "University Hospital, Brest",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "collection of expectoration, stools and blood",
+          "type": "DIAGNOSTIC_TEST"
+        }
+      ],
+      "primary_outcome_measure": "Presence of P. aeruginosa in bacterial sputum cultures collected at 36 months of age",
+      "primary_outcome_time_frame": "36 months",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06237335",
+      "brief_title": "A Phase 2 Study Evaluating Safety and Tolerability of RCT2100 (CFTR mRNA) in Healthy Participants and in Participants With CF",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE2"
+      ],
+      "start_date": "2024-02-01",
+      "lead_sponsor": "ReCode Therapeutics",
+      "modalities": [
+        "mRNA",
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "RCT2100",
+          "type": "DRUG"
+        },
+        {
+          "name": "Placebo",
+          "type": "OTHER"
+        },
+        {
+          "name": "RCT2100",
+          "type": "DRUG"
+        },
+        {
+          "name": "RCT2100",
+          "type": "DRUG"
+        },
+        {
+          "name": "Ivacaftor",
+          "type": "DRUG"
+        },
+        {
+          "name": "RCT2100",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Part 1: The number of participants with Adverse Events (AEs) and Serious Adverse Events (SAEs).",
+      "primary_outcome_time_frame": "From Baseline Through Day 29",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05444257",
+      "brief_title": "A Study Evaluating the Long-term Safety and Efficacy of VX-121 Combination Therapy",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE3"
+      ],
+      "start_date": "2022-11-08",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "VX-121/TEZ/D-IVA",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Safety and Tolerability as Assessed by Number of Participants With Adverse Events (AEs) and Serious Adverse Events (SAEs)",
+      "primary_outcome_time_frame": "From Baseline up to Week 148",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05331183",
+      "brief_title": "Study to Evaluate Elexacaftor/Tezacaftor/Ivacaftor (ELX/TEZ/IVA) Long-term Safety and Efficacy in Subjects Without F508del",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE3"
+      ],
+      "start_date": "2022-11-23",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "ELX/TEZ/IVA",
+          "type": "DRUG"
+        },
+        {
+          "name": "IVA",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Parts A and B: Safety and Tolerability as Assessed by Number of Participants With Adverse Events (AEs) and Serious Adverse Events (SAEs)",
+      "primary_outcome_time_frame": "Day 1 up to Week 196",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06449677",
+      "brief_title": "Bionic Pancreas in CFRD",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE3"
+      ],
+      "start_date": "2024-09-24",
+      "lead_sponsor": "Jaeb Center for Health Research",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "iLet Bionic Pancreas System (BP)",
+          "type": "DEVICE"
+        },
+        {
+          "name": "Usual Care (UC)",
+          "type": "DEVICE"
+        }
+      ],
+      "primary_outcome_measure": "CGM-measured Time In Target Range of 70-180 mg/dL (TIR)",
+      "primary_outcome_time_frame": "13 weeks",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06810167",
+      "brief_title": "Assessing Tenapanor as a Treatment of CF-related Constipation.",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE3"
+      ],
+      "start_date": "2025-06-01",
+      "lead_sponsor": "Massachusetts General Hospital",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Tenapanor",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Increase in SBM frequency",
+      "primary_outcome_time_frame": "Patients will record SBM frequency over the 4-week treatment period.",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT06460506",
+      "brief_title": "Evaluation of Long-term Safety and Efficacy of ELX/TEZ/IVA in Cystic Fibrosis Participants 12 Months of Age and Older",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "PHASE3"
+      ],
+      "start_date": "2024-11-21",
+      "lead_sponsor": "Vertex Pharmaceuticals Incorporated",
+      "modalities": [
+        "CFTR Modulator"
+      ],
+      "interventions": [
+        {
+          "name": "ELX/TEZ/IVA",
+          "type": "DRUG"
+        },
+        {
+          "name": "IVA",
+          "type": "DRUG"
+        }
+      ],
+      "primary_outcome_measure": "Safety and Tolerability as Assessed by Number of Participants with Adverse Events (AEs) and Serious Adverse Events (SAEs)",
+      "primary_outcome_time_frame": "Day 1 up to Week 100",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    },
+    {
+      "nct_id": "NCT05206097",
+      "brief_title": "Determinants of Daily Physical Activity Level in Patients With Cystic Fibrosis - Pilot Study Protocol",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "phases": [
+        "NA"
+      ],
+      "start_date": "2022-09-19",
+      "lead_sponsor": "University Hospital, Limoges",
+      "modalities": [
+        "not stated"
+      ],
+      "interventions": [
+        {
+          "name": "Accelerometer",
+          "type": "DEVICE"
+        }
+      ],
+      "primary_outcome_measure": "Physical Activity Time",
+      "primary_outcome_time_frame": "Week 1",
+      "field_provenance": "[ClinicalTrials.gov API v2 snapshot.json]"
+    }
+  ]
+}

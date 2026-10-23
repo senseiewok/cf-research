@@ -37,9 +37,9 @@ from transcytosis_model import TranscytosisModel
 from epithelial_plasticity import AirwayEpithelialPlasticitySimulator
 from cross_domain_miner import CrossDomainInnovationMiner
 
-TIER = "Tier T2 Certified"
+TIER = "Tier T0/T1 Exploratory In Silico Hypothesis (Unverified Parametric Constants)"
 SCHEMA_VERSION = "1.0.0"
-TERMS_OF_USE = "Research hypothesis / in silico model only. Not medical advice."
+TERMS_OF_USE = "Exploratory in silico hypothesis / unverified parametric constants only. Not primary empirical evidence and not medical advice."
 
 DOI_CITATIONS = [
     "10.1126/scitranslmed.3002230",
