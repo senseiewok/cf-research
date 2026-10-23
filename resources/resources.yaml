@@ -1122,3 +1122,138 @@ resources:
     basis: lead_only
     last_checked: 2026-10-20
     status: active
+
+  # Candidate lead_only rows from permitted fetch sources (UK FAQs).
+
+  - id: cftrust-faqs
+    name: "Cystic fibrosis frequently asked questions"
+    organisation: Cystic Fibrosis Trust
+    countries: [GB]
+    url: https://www.cysticfibrosis.org.uk/what-is-cystic-fibrosis/faqs
+    audience: [adult_with_cf, parent_carer_of_child, everyone]
+    category: [newly_diagnosed_basics, daily_life]
+    summary: "Introductory answers to common questions about cystic fibrosis diagnosis, genetics, lung health, daily care routines, and specialist clinical support."
+    who_for: stated_anyone
+    format: online
+    lang: en
+    source_id: cftrust-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-23
+    status: active
+
+  # Candidate lead_only rows for Batch 3: international expansion countries (UY, EC, PL, CZ, GR, IL, TR).
+  # Each row is basis: lead_only and awaits human browser inspection and confirmation before pinning to senseiewok.ai/resources/.
+
+  - id: ahlfq-apoyo-y-orientacion
+    name: "Orientación y apoyo en fibrosis quística"
+    organisation: Asociación Honoraria Fibrosis Quística del Uruguay
+    countries: [UY]
+    url: https://fquruguay.org/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, medicines_access, community_peer]
+    summary: "Uruguayan national patient association providing diagnostic orientation, national treatment coverage guidance, and community support for people with CF."
+    summary_es: "Asociación nacional uruguaya que brinda orientación diagnóstica, asesoramiento sobre cobertura de tratamiento y acompañamiento comunitario a familias con fibrosis quística."
+    who_for: not_checked
+    format: online
+    lang: es-UY
+    source_id: ahlfq-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-23
+    status: active
+
+  - id: fibroq-orientacion-y-cuidado
+    name: "Orientación y cuidado en fibrosis quística"
+    organisation: Fundación Ecuatoriana de Fibrosis Quística
+    countries: [EC]
+    url: https://www.fqec.org/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, find_care_team, community_peer]
+    summary: "Ecuadorian foundation offering newborn screening education, respiratory therapy orientation, and community peer support for individuals with CF and families."
+    summary_es: "Fundación ecuatoriana que ofrece educación sobre pesquisa neonatal, orientación en terapia respiratoria y apoyo comunitario para personas con fibrosis quística."
+    who_for: not_checked
+    format: online
+    lang: es-EC
+    source_id: fibroq-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-23
+    status: active
+
+  - id: ptwm-pomoc-i-wsparcie
+    name: "Pomoc i wsparcie w mukowiscydozie"
+    organisation: Polskie Towarzystwo Walki z Mukowiscydozą
+    countries: [PL]
+    url: https://ptwm.org.pl/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Polish national cystic fibrosis association providing diagnostic orientation, equipment lending, social counseling, and peer support for families."
+    who_for: not_checked
+    format: online
+    lang: pl
+    source_id: ptwm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-23
+    status: active
+
+  - id: klubcf-podpora-a-pomoc
+    name: "Podpora a pomoc pro nemocné cystickou fibrózou"
+    organisation: Klub nemocných cystickou fibrózou
+    countries: [CZ]
+    url: https://klubcf.cz/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, daily_life, find_care_team]
+    summary: "Czech national patient organization offering social and psychological counseling, physiotherapy guidance, and specialized CF center directories."
+    who_for: not_checked
+    format: online
+    lang: cs
+    source_id: klubcf-cz-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-23
+    status: active
+
+  - id: hcfa-gr-support-and-care
+    name: "Υποστήριξη και ενημέρωση για την Κυστική Ίνωση"
+    organisation: Hellenic Cystic Fibrosis Association
+    countries: [GR]
+    url: https://www.cysticfibrosis.gr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, medicines_access, community_peer]
+    summary: "Greek national cystic fibrosis association advocating for treatment access, providing specialized clinic navigation, and supporting patient community welfare."
+    who_for: not_checked
+    format: online
+    lang: el
+    source_id: hcfa-gr-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-23
+    status: active
+
+  - id: cffi-support-and-information
+    name: "מידע ותמיכה בסיסטיק פיברוזיס"
+    organisation: Cystic Fibrosis Foundation of Israel
+    countries: [IL]
+    url: https://www.cff.org.il/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, daily_life, find_care_team]
+    summary: "Israeli national foundation providing social assistance, respiratory therapy guidance, and specialist care center navigation for individuals with CF."
+    who_for: not_checked
+    format: online
+    lang: he
+    source_id: cffi-il-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-23
+    status: active
+
+  - id: kifder-bilgi-ve-destek
+    name: "Kistik Fibrozis Bilgi ve Dayanışma"
+    organisation: Kistik Fibrozis Yardımlaşma ve Dayanışma Derneği
+    countries: [TR]
+    url: https://www.kifder.org.tr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Turkish cystic fibrosis association connecting families with diagnosis information, treatment access guidance, and national peer solidarity networks."
+    who_for: not_checked
+    format: online
+    lang: tr
+    source_id: kifder-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-23
+    status: active

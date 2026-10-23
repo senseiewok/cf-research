@@ -1745,6 +1745,111 @@ sources:
       requests this host until robots.txt and policy pages are audited; access stays manual. Rows hold a link and
       the lab's own one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
 
+  - id: ahlfq-resource-pages
+    title: Asociación Honoraria Fibrosis Quística del Uruguay website (fquruguay.org)
+    publisher: Asociación Honoraria Fibrosis Quística del Uruguay
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-23
+    landing_page: https://fquruguay.org/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient organization in Uruguay (Asociación Honoraria de Lucha contra la Fibrosis Quística).
+      Robots.txt verified under project user agent on 2026-10-23 (HTTP 200); access stays manual until full terms audit.
+      Rows hold a link and the lab's own one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: fibroq-resource-pages
+    title: Fundación Ecuatoriana de Fibrosis Quística website (fqec.org)
+    publisher: Fundación Ecuatoriana de Fibrosis Quística
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-23
+    landing_page: https://www.fqec.org/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis foundation in Ecuador (FIBROQ). Robots.txt verified under project user agent on
+      2026-10-23 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab's own one-sentence
+      summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: ptwm-resource-pages
+    title: Polskie Towarzystwo Walki z Mukowiscydozą website (ptwm.org.pl)
+    publisher: Polskie Towarzystwo Walki z Mukowiscydozą
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-23
+    landing_page: https://ptwm.org.pl/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis association in Poland (PTWM). Robots.txt verified under project user agent on
+      2026-10-23 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab's own one-sentence
+      summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: klubcf-cz-resource-pages
+    title: Klub nemocných cystickou fibrózou website (klubcf.cz)
+    publisher: Klub nemocných cystickou fibrózou
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-23
+    landing_page: https://klubcf.cz/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient club in the Czech Republic. Robots.txt verified under project user agent on
+      2026-10-23 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab's own one-sentence
+      summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: hcfa-gr-resource-pages
+    title: Hellenic Cystic Fibrosis Association website (cysticfibrosis.gr)
+    publisher: Hellenic Cystic Fibrosis Association
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-23
+    landing_page: https://www.cysticfibrosis.gr/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient association in Greece. Robots.txt verified under project user agent on
+      2026-10-23 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab's own one-sentence
+      summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: cffi-il-resource-pages
+    title: Cystic Fibrosis Foundation of Israel website (cff.org.il)
+    publisher: Cystic Fibrosis Foundation of Israel
+    kind: resource_pages
+    access: manual
+    robots: refuse
+    robots_checked: 2026-10-23
+    landing_page: https://www.cff.org.il/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis foundation in Israel. Robots.txt answered HTTP 403 on 2026-10-23; access stays
+      strictly manual under project conduct. Rows hold a link and the lab's own one-sentence summary only: no page text,
+      logo, image, phone number, email address or person's name.
+
+  - id: kifder-resource-pages
+    title: KifDer cystic fibrosis association website (kifder.org.tr)
+    publisher: Kistik Fibrozis Yardımlaşma ve Dayanışma Derneği
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-23
+    landing_page: https://www.kifder.org.tr/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient solidarity association in Turkey (KifDer). Robots.txt verified under project user
+      agent on 2026-10-23 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab's own
+      one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
   - id: natural-earth-110m-countries
     title: Natural Earth 1:110m Admin 0 Countries (vector, GeoJSON)
     publisher: Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors; supported by NACIS)
