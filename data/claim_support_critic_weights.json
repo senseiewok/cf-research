@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "model_id": "cf-claim-support-critic-l2-v1",
+  "architecture": "L2-Regularized Logistic Entailment & Rule-Feature Critic + Bradley-Terry DPO Margin Verifier",
+  "tier": "Tier T2/T3 Trained Epistemic Verifier Artifact",
+  "model_sha256": "6e08ef533ec9d59e6f40a74b7026fbe4641b590e1bebe0272ab432bcbe7a1839",
+  "training_summary": {
+    "total_training_items": 128,
+    "supported_count": 64,
+    "unsupported_count": 64,
+    "l2_lambda": 0.05,
+    "epochs": 600,
+    "training_duration_ms": 126.46,
+    "inference_latency_us_per_claim": 0.85
+  },
+  "cross_validation_5fold": {
+    "k_folds": 5,
+    "total_evaluated": 128,
+    "oof_accuracy": 1.0,
+    "oof_precision_on_violations": 1.0,
+    "oof_recall_on_violations": 1.0,
+    "oof_f1_on_violations": 1.0,
+    "oof_tp": 64,
+    "oof_tn": 64,
+    "oof_fp": 0,
+    "oof_fn": 0,
+    "fold_accuracies": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "dpo_preference_ranking": {
+    "total_dpo_pairs": 62,
+    "preference_accuracy": 1.0,
+    "mean_probability_margin": 0.766,
+    "min_probability_margin": 0.4931
+  },
+  "decision_threshold_unsupported": 0.5,
+  "bias": 2.075494,
+  "feature_names": [
+    "f_ungrounded_num_ratio",
+    "f_has_ungrounded_num",
+    "f_unscoped_widening",
+    "f_safe_use_directive",
+    "f_cross_registry_pool",
+    "f_silent_extrapolation",
+    "f_unverified_citation",
+    "f_polarity_inversion",
+    "f_tier_overclaim",
+    "f_lexical_recall",
+    "f_bigram_overlap",
+    "f_number_exact_match_ratio",
+    "f_quote_coverage_log",
+    "f_scope_present"
+  ],
+  "feature_weights": {
+    "f_ungrounded_num_ratio": 1.236831,
+    "f_has_ungrounded_num": 2.783792,
+    "f_unscoped_widening": 2.90889,
+    "f_safe_use_directive": 2.436098,
+    "f_cross_registry_pool": 2.493785,
+    "f_silent_extrapolation": 1.456323,
+    "f_unverified_citation": 0.532386,
+    "f_polarity_inversion": 0.421816,
+    "f_tier_overclaim": 0.006308,
+    "f_lexical_recall": -2.230682,
+    "f_bigram_overlap": -1.308015,
+    "f_number_exact_match_ratio": -1.064191,
+    "f_quote_coverage_log": 0.035008,
+    "f_scope_present": -0.154694
+  },
+  "disclaimer": "Epistemic claim-support verifier trained on verified CF claim-quote pairs and adversarial mutations. Evaluates whether a candidate sentence is grounded in a provided source excerpt; never stores clinical trial statuses or medical advice in weights."
+}

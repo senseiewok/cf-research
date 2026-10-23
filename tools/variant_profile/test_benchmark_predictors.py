@@ -16,11 +16,12 @@ from tools.variant_profile.benchmark_predictors import (
     extract_aa_position,
     main,
     map_residue_to_domain,
+    map_residue_to_exon,
 )
 
 
 class TestBenchmarkPredictors(unittest.TestCase):
-    def test_domain_mapping_boundaries(self) -> None:
+    def test_domain_and_exon_mapping_boundaries(self) -> None:
         self.assertEqual(map_residue_to_domain(31)["domain_id"], "Lasso_N_terminal")
         self.assertEqual(map_residue_to_domain(117)["domain_id"], "TMD1")
         self.assertEqual(map_residue_to_domain(508)["domain_id"], "NBD1")
@@ -29,6 +30,13 @@ class TestBenchmarkPredictors(unittest.TestCase):
         self.assertEqual(map_residue_to_domain(1303)["domain_id"], "NBD2_C_terminal")
         self.assertEqual(map_residue_to_domain(None)["domain_id"], NOT_STATED)
         self.assertEqual(map_residue_to_domain(9999)["domain_id"], NOT_STATED)
+
+        self.assertEqual(map_residue_to_exon(31)["exon_label"], "2/27")
+        self.assertEqual(map_residue_to_exon(508)["exon_label"], "11/27")
+        self.assertEqual(map_residue_to_exon(1282)["exon_label"], "23/27")
+        self.assertEqual(map_residue_to_exon(1303)["exon_label"], "24/27")
+        self.assertTrue(map_residue_to_exon(55)["near_splice_junction_le_3aa"])
+        self.assertEqual(map_residue_to_exon(None)["exon_label"], NOT_STATED)
 
     def test_extract_aa_position_and_mechanism(self) -> None:
         self.assertEqual(extract_aa_position("R31L"), 31)
@@ -65,15 +73,16 @@ class TestBenchmarkPredictors(unittest.TestCase):
         self.assertIn("N1303K", bench["multi_nucleotide_degeneracy_audit"])
         self.assertIn("F508del", bench["multi_nucleotide_degeneracy_audit"])
 
-        # Verify R31L has real MyVariant numbers and others have NOT_STATED (no hallucinated scores)
         by_uid = {r["clinvar_variation_id"]["value"]: r for r in bench["variant_records"]}
         r31l = by_uid["54087"]
         self.assertEqual(r31l["in_silico_annotations"]["cadd_phred"]["value"], 22.9)
         self.assertEqual(r31l["structural_domain"]["domain_id"], "Lasso_N_terminal")
+        self.assertEqual(r31l["refseq_exon"]["exon_label"], "2/27")
 
         d1152h = by_uid["35867"]
         self.assertEqual(d1152h["clinvar_classification"]["description"]["value"], "drug response")
         self.assertEqual(d1152h["in_silico_annotations"]["cadd_phred"]["value"], NOT_STATED)
+        self.assertEqual(d1152h["refseq_exon"]["exon_label"], "21/27")
 
     def test_cli_check_and_write(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
