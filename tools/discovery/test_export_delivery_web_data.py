@@ -92,11 +92,11 @@ class TestExportDeliveryWebData(unittest.TestCase):
             tmp_path = Path(tmp_dir)
             snapshot, _, _, _ = exporter.build_snapshot_and_tsv(tmp_path)
             meta = snapshot["metadata"]
-            self.assertEqual(meta["tier"], "Tier T2 Certified")
+            self.assertEqual(meta["tier"], "Tier T0/T1 Exploratory In Silico Hypothesis (Unverified Parametric Constants)")
             self.assertEqual(meta["schema_version"], "1.0.0")
             self.assertEqual(
                 meta["terms_of_use"],
-                "Research hypothesis / in silico model only. Not medical advice."
+                "Exploratory in silico hypothesis / unverified parametric constants only. Not primary empirical evidence and not medical advice."
             )
             self.assertEqual(len(meta["source_code_hash"]), 64)
             self.assertIsInstance(meta["doi_citations"], list)
