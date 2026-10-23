@@ -117,6 +117,7 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "rare_allele_matrix": {"task": "T-0201", "track": "Track B", "tier": "T2"},
     "science_model_benchmark": {"task": "T-0265", "track": "Track A", "tier": "T2"},
     "suppressor_trna_model": {"task": "T-0216", "track": "Track A", "tier": "T2"},
+    "tmem16a_calcium_conductance_model": {"task": "T-0392", "track": "Track A", "tier": "T2"},
     "tmem16a_conductance_model": {"task": "T-0240", "track": "Track A", "tier": "T2"},
     "transcytosis_model": {"task": "T-0177", "track": "Track A", "tier": "T2"},
     "u1_snrnp_decoy_kinetics": {"task": "T-0292", "track": "Track A", "tier": "T2"},
