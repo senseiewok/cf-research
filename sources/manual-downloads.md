@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-46 to download by hand, 1 to ask for, 3 not to download.
+53 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -11,6 +11,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 3. When you have saved the files, paste the prompt at the bottom into your agent.
 
 ## Download in a browser
+
+### Asociación Honoraria Fibrosis Quística del Uruguay
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ahlfq-resource-pages | Asociación Honoraria Fibrosis Quística del Uruguay website (fquruguay.org) | [page](https://fquruguay.org/) | link only | Official national cystic fibrosis patient organization in Uruguay (Asociación Honoraria de Lucha contra la Fibrosis Quística). |
 
 ### Asociación Mexicana de Fibrosis Quística, A.C.
 
@@ -67,6 +73,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | cff-resource-pages | Cystic Fibrosis Foundation public help pages (www.cff.org) | [page](https://www.cff.org/support) | link only | Same host and same evidence as the twelve Foundation registry entries above: robots.txt was unreadable on 2026-10-05 and the notes there say the site refuses a… |
 | cff-apps-resource-pages | Cystic Fibrosis Foundation tools host (apps.cff.org) | [page](https://apps.cff.org/ccd) | link only | A second host of the Foundation, for the care center locator and the clinical trial finder. |
 
+### Cystic Fibrosis Foundation of Israel
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cffi-il-resource-pages | Cystic Fibrosis Foundation of Israel website (cff.org.il) | [page](https://www.cff.org.il/) | link only | Official national cystic fibrosis foundation in Israel. |
+
 ### Cystic Fibrosis New Zealand
 
 | ID | What | Open | Save as | Notes |
@@ -121,6 +133,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | fcfq-resource-pages | Fundación Colombiana para Fibrosis Quística (FCFQ) website (fibrosisquisticacolombia.org) | [page](https://fibrosisquisticacolombia.org/) | link only | Official national cystic fibrosis patient advocacy and education foundation in Colombia. |
 
+### Fundación Ecuatoriana de Fibrosis Quística
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| fibroq-resource-pages | Fundación Ecuatoriana de Fibrosis Quística website (fqec.org) | [page](https://www.fqec.org/) | link only | Official national cystic fibrosis foundation in Ecuador (FIBROQ). |
+
 ### gnomAD consortium (Broad Institute)
 
 | ID | What | Open | Save as | Notes |
@@ -132,6 +150,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | gtex-portal-api | GTEx Portal API (gene expression by tissue) | [page](https://gtexportal.org/) | link only | robots.txt on gtexportal.org was fetched directly 2026-10-07 with the lab user agent: it allows only Googlebot and Bingbot (Crawl-delay 30) and has "User-agent… |
+
+### Hellenic Cystic Fibrosis Association
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| hcfa-gr-resource-pages | Hellenic Cystic Fibrosis Association website (cysticfibrosis.gr) | [page](https://www.cysticfibrosis.gr/) | link only | Official national cystic fibrosis patient association in Greece. |
 
 ### Hengitysliitto (Organization for Respiratory Health in Finland)
 
@@ -163,6 +187,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cftr2 | CFTR2 - Clinical and Functional Translation of CFTR | [page](https://cftr2.org/) | link only | Terms read verbatim 2026-10-05 from the publisher's own Legal Terms and Conditions PDF (linked from the site footer; text extracted with pdftotext). |
 
+### Kistik Fibrozis Yardımlaşma ve Dayanışma Derneği
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kifder-resource-pages | KifDer cystic fibrosis association website (kifder.org.tr) | [page](https://www.kifder.org.tr/) | link only | Official national cystic fibrosis patient solidarity association in Turkey (KifDer). |
+
+### Klub nemocných cystickou fibrózou
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| klubcf-cz-resource-pages | Klub nemocných cystickou fibrózou website (klubcf.cz) | [page](https://klubcf.cz/) | link only | Official national cystic fibrosis patient club in the Czech Republic. |
+
 ### Lega Italiana Fibrosi Cistica
 
 | ID | What | Open | Save as | Notes |
@@ -192,6 +228,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cfnorge-resource-pages | Norsk Forening for Cystisk Fibrose website (cfnorge.no) | [page](https://cfnorge.no/) | link only | Official national cystic fibrosis association in Norway. |
+
+### Polskie Towarzystwo Walki z Mukowiscydozą
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ptwm-resource-pages | Polskie Towarzystwo Walki z Mukowiscydozą website (ptwm.org.pl) | [page](https://ptwm.org.pl/) | link only | Official national cystic fibrosis association in Poland (PTWM). |
 
 ### Publications Office of the European Union
 
