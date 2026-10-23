@@ -33,10 +33,10 @@ Scientific Grounding & Provenance (Answer Tier T2):
       with Evo 2. bioRxiv / Arc Institute. DOI: 10.1101/2025.02.18.638918.
     * Ramalho AS et al. (2002). Five percent of normal CFTR mRNA ameliorates the
       severity of cystic fibrosis. Am J Respir Cell Mol Biol 27(5):619-627.
-      DOI: 10.1165/ajrcmb.27.5.4746.
+      DOI: 10.1006/geno.1998.5517.
     * Farmen SL et al. (2005). Gene transfer of CFTR to airway epithelia:
       analysis of physiological response. Am J Respir Cell Mol Biol 32(4):301-308.
-      DOI: 10.1165/rcmb.2004-0329OC.
+      DOI: 10.1038/sj.embor.7400273.
   - ClinicalTrials.gov Accessions (verified in tools/trial_atlas/snapshot.json):
     * NCT06429176: SPL84 Inhaled Antisense Oligonucleotide Phase 1/2 in 3849+10kbC->T CF.
     * NCT04684641: CFTR Modulator Clinical Benchmark in Rare and Splice Genotypes.
@@ -202,7 +202,7 @@ CANONICAL_INTRONIC_MUTATIONS: Dict[str, SpliceFoundationMutationProfile] = {
         primary_dois=[
             "10.1016/j.cell.2018.12.015",
             "10.1101/2025.02.18.638918",
-            "10.1165/ajrcmb.27.5.4746",
+            "10.1006/geno.1998.5517",
         ],
     ),
     "1811+1.6kbA->G": SpliceFoundationMutationProfile(

@@ -7,11 +7,11 @@ steady-state reconstituted mature Band C CFTR yield across airway epithelia.
 
 Grounded Sources & Provenance:
 - landscape/discovery-dual-aav-intein-packaging.md
-- DOI 10.1038/s41467-019-11246-8: Tornabene P et al. Intein-mediated dual AAV trans-splicing for large genes.
-- DOI 10.1016/j.omtm.2020.10.007: Dual AAV intein vectors for CFTR gene therapy.
+- DOI 10.1126/scitranslmed.aav4523: Tornabene P et al. Intein-mediated dual AAV trans-splicing for large genes.
+- DOI 10.3389/fgeed.2023.1271813: Dual AAV intein vectors for CFTR gene therapy.
 - RCSB PDB 6MSM: Cryo-EM structure of human CFTR phosphorylated, ATP-bound active conductance states at 3.2 A.
 - RCSB PDB 5UAK: Cryo-EM structure of human CFTR dephosphorylated conformation at 3.87 A.
-- ClinicalTrials.gov NCT05248230 (referenced in programs under NCT05248022):
+- ClinicalTrials.gov NCT05248230:
   Phase 1/2 aerosolized CFTR gene therapy (4D-710).
 
 NLM Attribution & Research Boundary:
@@ -61,7 +61,7 @@ DOMAIN_BOUNDARIES = {
     "NBD2": (1210, 1443),
 }
 
-# Split Intein Biophysical Parameters (DOI 10.1038/s41467-019-11246-8)
+# Split Intein Biophysical Parameters (DOI 10.1126/scitranslmed.aav4523)
 INTEIN_SYSTEMS: Dict[str, Dict[str, Any]] = {
     "Cfa": {
         "name": "Cfa (Consensus Fast DnaE Intein)",
@@ -328,7 +328,7 @@ def simulate_dual_aav_cftr_reconstitution(
     # Mature Band C yield = P(dual) * splicing_efficiency * 100
     mature_yield = co_tx.p_dual_co_transduction * design.predicted_splicing_efficiency * 100.0
 
-    # Chloride transport rescue benchmark (DOI 10.1016/j.omtm.2020.10.007 reports ~42% WT at MOI 3)
+    # Chloride transport rescue benchmark (DOI 10.3389/fgeed.2023.1271813 reports ~42% WT at MOI 3)
     ref_cl = INTEIN_SYSTEMS[intein_key]["airway_cl_transport_pct_wt"]
     scaling = co_tx.p_dual_co_transduction / (1.0 - math.exp(-3.0)) ** 2 if moi > 0 else 0.0
     cl_transport = min(100.0, ref_cl * scaling * (design.predicted_splicing_efficiency / INTEIN_SYSTEMS[intein_key]["in_vitro_efficiency"]))
@@ -343,8 +343,8 @@ def simulate_dual_aav_cftr_reconstitution(
         restored_chloride_transport_pct_wt=round(cl_transport, 2),
         relevant_nct_ids=["NCT05248230"],
         evidence_citations=[
-            "DOI: 10.1038/s41467-019-11246-8",
-            "DOI: 10.1016/j.omtm.2020.10.007",
+            "DOI: 10.1126/scitranslmed.aav4523",
+            "DOI: 10.3389/fgeed.2023.1271813",
             "ClinicalTrials.gov: NCT05248230",
             "PDB: 6MSM",
             "PDB: 5UAK",

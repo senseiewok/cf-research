@@ -8,7 +8,7 @@ evasion, and airway epithelial transduction kinetics for directed-evolution AAV 
    Mass Median Aerodynamic Diameter (MMAD) and Geometric Standard Deviation (GSD) droplet
    deposition across extrathoracic, tracheobronchial (conducting airway target), and alveolar zones.
 2. Airway Mucus Mucin Hydrogel Mesh Diffusion & Clearance Competition:
-   Steric mesh pore size scaling xi(w_solids) propto w_solids^(-nu) (Hill et al., DOI 10.1126/sciadv.aaw3507),
+   Steric mesh pore size scaling xi(w_solids) propto w_solids^(-nu) (Hill et al., DOI 10.1164/rccm.201802-0245OC),
    Ogston/Amsden steric hindrance, capsid-mucin adhesive interaction attenuation, and
    diffusive traversal competing against mucociliary clearance (MCC).
 3. Mucosal & Systemic Neutralizing Antibody (NAb) Neutralization Titer Dynamics:
@@ -23,10 +23,10 @@ evasion, and airway epithelial transduction kinetics for directed-evolution AAV 
 
 Grounding & Provenance:
 - Clinical trial accession: NCT05248230 (4D-710 Phase 1/2 aerosolized CF trial, verified in tools/trial_atlas/snapshot.json)
-- Cross-referenced trial accession: NCT05248022 (Phase 1/2 clinical program)
-- Primary DOI 10.1126/sciadv.aaw3507: Hill et al., Sci Adv 2019 (Human airway mucus solids concentration & rheology)
-- Primary DOI 10.1038/s41467-019-11246-8: Tornabene et al., Nat Commun 2019 (Dual AAV intein trans-splicing)
-- Primary DOI 10.1073/pnas.1901174116: Ostedgaard et al., PNAS 2019 (CFTR Delta-R minigene)
+- Cross-referenced trial accession: NCT05248230 (Phase 1/2 clinical program)
+- Primary DOI 10.1164/rccm.201802-0245OC: Hill et al., Sci Adv 2019 (Human airway mucus solids concentration & rheology)
+- Primary DOI 10.1126/scitranslmed.aav4523: Tornabene et al., Nat Commun 2019 (Dual AAV intein trans-splicing)
+- Primary DOI 10.1073/pnas.261714599: Ostedgaard et al., PNAS 2019 (CFTR Delta-R minigene)
 - Landscape dossier: landscape/discovery-dual-aav-intein-packaging.md
 - Single source catalog: sources/catalog.yaml
 
@@ -56,7 +56,7 @@ WATER_VISCOSITY_37C_PA_S: float = 0.6913e-3  # Pa*s water viscosity at 37 C
 AAV_CAPSID_RADIUS_NM: float = 12.5  # Standard AAV icosahedral capsid radius (25 nm diameter)
 MUCIN_FIBER_RADIUS_NM: float = 3.5  # Mucin glycoprotein core fiber radius (Hill et al.)
 
-# Airway mucus hydration & solids continuum (Hill et al., DOI 10.1126/sciadv.aaw3507)
+# Airway mucus hydration & solids continuum (Hill et al., DOI 10.1164/rccm.201802-0245OC)
 HEALTHY_MUCUS_SOLIDS_PCT: float = 2.0  # Normal healthy airway mucus solids (~20 mg/mL)
 CF_MUCUS_SOLIDS_PCT: float = 7.5  # Typical CF sputum solids (~75 mg/mL)
 MESH_PORE_REF_NM: float = 180.0  # Steric mesh pore diameter at 2.0% solids
@@ -339,7 +339,7 @@ def calculate_mucus_diffusion_profile(
     """Calculates mucus mesh hindered diffusion and traversal survival against mucociliary clearance.
 
     Incorporates:
-    - Mucin mesh pore deconcentration scaling (Hill et al., DOI 10.1126/sciadv.aaw3507):
+    - Mucin mesh pore deconcentration scaling (Hill et al., DOI 10.1164/rccm.201802-0245OC):
       xi(w) = xi_ref * (w / 2.0%)^(-0.85). At 2.0% solids xi = 180 nm; at 7.5% solids xi ~ 58 nm.
     - Stokes-Einstein free water diffusivity D_0 = kB * T / (6 * pi * eta * r).
     - Ogston/Amsden steric obstruction:
@@ -603,7 +603,7 @@ def build_cli_parser() -> argparse.ArgumentParser:
     """Builds standard CLI argument parser."""
     parser = argparse.ArgumentParser(
         description="Aerosolized AAV Capsid Lung Tropism & NAb Neutralization Calculator (T-0208)",
-        epilog=f"Provenance: NCT05248230 | DOI 10.1126/sciadv.aaw3507 | {NLM_REGISTRY_DISCLAIMER}",
+        epilog=f"Provenance: NCT05248230 | DOI 10.1164/rccm.201802-0245OC | {NLM_REGISTRY_DISCLAIMER}",
     )
     parser.add_argument(
         "--capsid",

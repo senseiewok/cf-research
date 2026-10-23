@@ -1,6 +1,6 @@
 # tools/discovery
 
-The **Curative Discovery Council** engine provides a rigorous multi-agent and biophysical modeling architecture to transition the lab from passive surveillance and defensive checking into proactive, grounded therapeutic discovery (Track A: Biophysical Science & Cure Discovery).
+The **Curative Discovery Council** (`tools/discovery/`) provides **Literature-Parameterized Mechanistic Hypothesis Explorers (In-Silico Educational Models — Pre-Empirical / Unvalidated Against Wet-Lab Raw Data)** illustrating biophysical bottlenecks in Cystic Fibrosis research (Track A). These scripts evaluate closed-form textbook and ODE equations using published literature constants; they are educational and hypothesis-scoping calculators, not empirical curve fits to raw wet-lab datasets or clinical predictors.
 
 ---
 
@@ -56,7 +56,7 @@ flowchart TD
 - **Clinical Problem**: Overcoming thick CF mucus mesh steric/adhesive entrapment and pre-existing mucosal neutralizing antibodies (NAbs) during aerosol gene delivery (e.g. 4D-710 Phase 1/2 clinical program, `NCT05248230`).
 - **Biophysical Model**:
   - Inhaled aerosol droplet deposition across conducting airways (tracheobronchial generations 0–16) vs extrathoracic and alveolar impaction/diffusion.
-  - De Gennes mucin mesh pore scaling $\xi(w) = \xi_{\text{ref}} (w / 2.0\%)^{-\nu}$ (Hill et al., `DOI 10.1126/sciadv.aaw3507`) coupled to Ogston steric hindrance and capsid-mucin electrostatic adhesion penalties.
+  - De Gennes mucin mesh pore scaling $\xi(w) = \xi_{\text{ref}} (w / 2.0\%)^{-\nu}$ (Hill et al., `DOI 10.1164/rccm.201802-0245OC`) coupled to Ogston steric hindrance and capsid-mucin electrostatic adhesion penalties.
   - Log-logistic mucosal neutralizing antibody titration and apical epithelial receptor-mediated endocytosis.
   - Cellular Poisson transgene delivery ($P(\ge 1\text{ vg}) = 1 - e^{-\text{MOI}}$) across $10^9$ conducting airway target cells.
 - **Council-Derived Specifications**:
@@ -65,7 +65,7 @@ flowchart TD
 
 ### Complete Registered Biophysical Module Index (`DISCOVERY_MODULE_REGISTRY`)
 
-All 35 biophysical simulation modules in `tools/discovery/` are dynamically registered in `discovery_council.py` (`DISCOVERY_MODULE_REGISTRY`) and documented in [`../../landscape/biophysical-index.md`](../../landscape/biophysical-index.md):
+All 35 biophysical simulation modules in `tools/discovery/` are dynamically registered in `discovery_council.py` (`DISCOVERY_MODULE_REGISTRY`) and documented in `cf-lab/.claude/skills/cf-research-context/references/biophysical-index.md`:
 
 | Module | Task | Track | Focus |
 | --- | --- | --- | --- |

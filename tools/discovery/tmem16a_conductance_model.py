@@ -16,7 +16,7 @@ Quantitative biophysical modeling of:
 Primary Evidence Grounding:
   - Clinical trial surveillance: Inhaled TMEM16A potentiator ETD001 (ClinicalTrials.gov ID: NCT06478706)
   - Cryo-EM structures of TMEM16A in apo and Ca2+-bound states: Paulino et al. (2017), Nature, DOI: 10.1038/nature24652 (PDB: 5OYB, 6QP6)
-  - Mucociliary clearance restoration without goblet cell metaplasia: Danahay et al. (2020), Sci Rep, DOI: 10.1038/s41598-020-73905-2
+  - Mucociliary clearance restoration without goblet cell metaplasia: Danahay et al. (2020), Sci Rep, DOI: 10.1164/rccm.201908-1641OC
   - Alternative chloride conductance therapeutics in CF: Sondo et al. (2019), J Cyst Fibros, DOI: 10.1016/j.jcf.2019.06.004
 
 Research boundary: Preclinical computational model; research, not medical advice.
@@ -347,7 +347,7 @@ class TMEM16AConductanceModel:
             trial_surveillance="NCT06478706",
             citation_dois=(
                 "10.1038/nature24652",
-                "10.1038/s41598-020-73905-2",
+                "10.1164/rccm.201908-1641OC",
                 "10.1016/j.jcf.2019.06.004",
             ),
         )
@@ -374,7 +374,7 @@ def format_markdown_report(results: list[TMEM16ASimulationResult]) -> str:
         "",
         "**Clinical Trial Surveillance**: `NCT06478706` (Inhaled TMEM16A Potentiator ETD001)",
         "**Cryo-EM Structural Grounding**: PDB `5OYB` (Ca2+-free apo), PDB `6QP6` (Ca2+-bound open dimer; Glu654/Glu702/Glu705/Glu734/Asp738)",
-        "**Primary Literature DOIs**: `10.1038/nature24652`, `10.1038/s41598-020-73905-2`, `10.1016/j.jcf.2019.06.004`",
+        "**Primary Literature DOIs**: `10.1038/nature24652`, `10.1164/rccm.201908-1641OC`, `10.1016/j.jcf.2019.06.004`",
         f"**Curative Hydration Target**: ASL Height >= {DEFAULT_CURATIVE_ASL_THRESHOLD_UM:.1f} um at I_Cl,TMEM16A >= {DEFAULT_CURATIVE_ICL_PCT_WT:.1f}% WT CFTR",
         "",
         "| Cohort | [L] (nM) | [Ca2+]_i (nM) | App. EC50 (nM) | P_open | I_Cl (uA/cm2) | % WT CFTR | ASL Height (um) | Hydration Status |",

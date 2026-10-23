@@ -15,6 +15,9 @@ and tools/discovery biophysical models:
        (excluding test_*.py and infrastructure scripts) must be registered in
        discovery_council.DISCOVERY_MODULE_REGISTRY with verified NCT provenance and
        zero prohibited clinical overclaims.
+  AH-6 [cite-check-ledger-provenance]: Every DOI, PMID, and NCT identifier cited in
+       landscape/*.md and tools/discovery/*.py must be verified with verdict=PASS in
+       sources/cite-check-ledger.jsonl (offline ledger generated via cf-evidence-loop cite-check).
 
 Zero network. Deterministic verification. Standard library only.
 """
@@ -32,7 +35,17 @@ REPO_ROOT = HERE.parents[1]
 DEFAULT_SNAPSHOT_JSON = REPO_ROOT / "tools" / "trial_atlas" / "snapshot.json"
 
 # Explicit allowlist for external verified NCTs not in CF snapshot (empty by default)
-VERIFIED_EXTERNAL_NCTS: set[str] = {"NCT05248022"}
+VERIFIED_EXTERNAL_NCTS: set[str] = set()
+
+# Extrapolated Boxed Warning guard (openFDA SPL Boxed Warning is `not stated` for Kalydeco, Orkambi, Symdeko)
+EXTRAPOLATED_BOXED_WARNING_RE = re.compile(
+    r"\b(?:kalydeco|orkambi|symdeko)\b[^.\n]*?\b(?:boxed\s+warning|black\s+box\s+warning)\b",
+    re.IGNORECASE,
+)
+BOXED_WARNING_NEGATION_RE = re.compile(
+    r"\b(?:not\s+stated|none|no\b|lacks?|without|absent|versus|vs\.?)",
+    re.IGNORECASE,
+)
 
 # Prohibited clinical overclaim phrases
 PROHIBITED_OVERCLAIM_PHRASES: tuple[str, ...] = (
@@ -84,7 +97,9 @@ UNFILTERED_COHORT_CONTAMINATION: tuple[tuple[re.Pattern, str], ...] = (
 
 NCT_RE = re.compile(r"\bNCT\d{8}\b")
 DOI_RE = re.compile(r"\b10\.\d{4,9}/[-._;()/:A-Za-z0-9]+")
+PMID_RE = re.compile(r"\bPMID[:\s]+(\d{6,9})\b", re.IGNORECASE)
 PDB_RE = re.compile(r"\bPDB\s*(?:ID:?|entry:?|code:?)?\s*([0-9][A-Za-z0-9]{3})\b", re.IGNORECASE)
+DEFAULT_CITE_LEDGER = REPO_ROOT / "sources" / "cite-check-ledger.jsonl"
 
 
 def load_snapshot_ncts(snapshot_path: Path | str | None = None) -> set[str]:
@@ -189,6 +204,12 @@ def check_clinical_overclaim_guard(
                     f"FAIL AH-4 [clinical-overclaim-guard] {file_path.as_posix()}:{line_no}: "
                     f"prohibited clinical overclaim phrase: {phrase!r}"
                 )
+        for m in EXTRAPOLATED_BOXED_WARNING_RE.finditer(line):
+            if not BOXED_WARNING_NEGATION_RE.search(line):
+                failures.append(
+                    f"FAIL AH-4 [clinical-overclaim-guard] {file_path.as_posix()}:{line_no}: "
+                    f"extrapolated Boxed Warning on Kalydeco/Orkambi/Symdeko without 'not stated' boundary: {m.group(0)!r}"
+                )
     return failures
 
 
@@ -253,16 +274,70 @@ def check_discovery_module_registration(
     return failures
 
 
+def load_cite_check_ledger(ledger_path: Path | str | None = None) -> set[tuple[str, str]]:
+    """Load verified (kind, id_lower) pairs with verdict == 'PASS' from sources/cite-check-ledger.jsonl."""
+    lp = Path(ledger_path or DEFAULT_CITE_LEDGER)
+    if not lp.exists():
+        return set()
+    verified: set[tuple[str, str]] = set()
+    for line in lp.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        rec = json.loads(line)
+        if rec.get("verdict") == "PASS" and rec.get("kind") and rec.get("id"):
+            verified.add((str(rec["kind"]).upper(), str(rec["id"]).lower()))
+    return verified
+
+
+def check_cite_check_ledger_provenance(
+    file_path: Path,
+    content: str,
+    verified_ledger: set[tuple[str, str]],
+) -> list[str]:
+    """Rule AH-6: Every DOI, PMID, and NCT in landscape/*.md and tools/discovery/*.py must be in cite-check-ledger.jsonl."""
+    failures: list[str] = []
+    for line_no, line in enumerate(content.splitlines(), 1):
+        for m in DOI_RE.finditer(line):
+            doi = m.group(0).rstrip(").,:;")
+            if ("DOI", doi.lower()) not in verified_ledger:
+                failures.append(
+                    f"FAIL AH-6 [cite-check-ledger-provenance] {file_path.as_posix()}:{line_no}: "
+                    f"DOI {doi} not verified in sources/cite-check-ledger.jsonl"
+                )
+        for m in PMID_RE.finditer(line):
+            pmid = m.group(1)
+            if ("PMID", pmid.lower()) not in verified_ledger:
+                failures.append(
+                    f"FAIL AH-6 [cite-check-ledger-provenance] {file_path.as_posix()}:{line_no}: "
+                    f"PMID {pmid} not verified in sources/cite-check-ledger.jsonl"
+                )
+        for m in NCT_RE.finditer(line):
+            nct = m.group(0).upper()
+            if ("NCT", nct.lower()) not in verified_ledger:
+                failures.append(
+                    f"FAIL AH-6 [cite-check-ledger-provenance] {file_path.as_posix()}:{line_no}: "
+                    f"NCT {nct} not verified in sources/cite-check-ledger.jsonl"
+                )
+    return failures
+
+
 def run_checks(
     repo_root: Path | str | None = None,
     snapshot_path: Path | str | None = None,
 ) -> list[str]:
-    """Execute all 5 anti-hallucination checks across proposals, landscape, and tools/discovery."""
+    """Execute all 6 anti-hallucination checks across proposals, landscape, and tools/discovery."""
     root = Path(repo_root or REPO_ROOT).resolve()
     snap_path = Path(snapshot_path or root / "tools" / "trial_atlas" / "snapshot.json")
     snapshot_ncts = load_snapshot_ncts(snap_path)
+    ledger_path = root / "sources" / "cite-check-ledger.jsonl"
+    verified_ledger = load_cite_check_ledger(ledger_path)
 
     failures: list[str] = []
+    if not ledger_path.exists():
+        failures.append(
+            f"FAIL AH-6 [cite-check-ledger-provenance]: missing {ledger_path.as_posix()}"
+        )
 
     target_files = sorted(
         list(root.glob("proposals/*.md"))
@@ -289,15 +364,30 @@ def run_checks(
         # Rule AH-3: Companion Identifier Grounding (for landscape/<stem>.md)
         if p.suffix == ".md" and p.parent.name == "landscape":
             stem = p.stem
+            base_stem = re.sub(r"-\d{4}$", "", stem)
             ev_file = p.parent / f"{stem}-evidence.txt"
+            if not ev_file.exists() and base_stem != stem:
+                ev_file = p.parent / f"{base_stem}-evidence.txt"
             cl_file = p.parent / f"{stem}-claims.json"
+            if not cl_file.exists() and base_stem != stem:
+                cl_file = p.parent / f"{base_stem}-claims.json"
             if ev_file.exists() or cl_file.exists():
                 ev_text = ev_file.read_text(encoding="utf-8") if ev_file.exists() else ""
                 cl_text = cl_file.read_text(encoding="utf-8") if cl_file.exists() else ""
                 failures.extend(check_companion_identifier_grounding(p, content, ev_text, cl_text))
+            if verified_ledger:
+                failures.extend(check_cite_check_ledger_provenance(p, content, verified_ledger))
 
     # Rule AH-5: Discovery Module Registration & Provenance
     failures.extend(check_discovery_module_registration(root, snapshot_ncts))
+
+    # Rule AH-6 on tools/discovery/*.py
+    if verified_ledger:
+        for py_file in sorted((root / "tools" / "discovery").glob("*.py")):
+            if py_file.name.startswith("test_"):
+                continue
+            py_content = py_file.read_text(encoding="utf-8")
+            failures.extend(check_cite_check_ledger_provenance(py_file, py_content, verified_ledger))
 
     return failures
 
@@ -318,7 +408,8 @@ def main(argv: list[str] | None = None) -> int:
     print("Scanning proposals/*.md, landscape/*.md, landscape/*-claims.json, tools/discovery/*.py")
     print("Enforcing: AH-1 (NCT Provenance), AH-2 (PRISMA Consistency),")
     print("           AH-3 (Companion Grounding), AH-4 (Clinical Overclaim Guard),")
-    print("           AH-5 (Discovery Module Registration & Council Verification)")
+    print("           AH-5 (Discovery Module Registration & Council Verification),")
+    print("           AH-6 (Cite-Check Ledger Provenance for DOIs, PMIDs, and NCTs)")
     print("=" * 72)
 
     failures = run_checks(args.root, args.snapshot)
@@ -334,6 +425,7 @@ def main(argv: list[str] | None = None) -> int:
     print("PASS AH-3 [companion-identifier-grounding]: 100% of markdown identifiers grounded in companions")
     print("PASS AH-4 [clinical-overclaim-guard]: zero prohibited clinical promise phrases detected")
     print("PASS AH-5 [discovery-module-registration]: 100% of tools/discovery models registered & verified")
+    print("PASS AH-6 [cite-check-ledger-provenance]: 100% of DOIs, PMIDs, and NCTs verified in sources/cite-check-ledger.jsonl")
     print("=" * 72)
     print("RESULT: PASS (all anti-hallucination guardrails satisfied)")
     return 0

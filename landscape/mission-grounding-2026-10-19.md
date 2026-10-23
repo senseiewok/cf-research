@@ -203,9 +203,9 @@ With all prior Wave 1–9 biophysical models delivered and merged into main, the
 #### 1. T-0239: Inhaled CFTR mRNA Lipid Nanoparticle (LNP) Endosomal Escape Kinetics, Ionizable Lipid pKa Inversion & Nebulization Shear Stability Model
 - **Primary Evidence Grounding**:
   - Clinical trial surveillance: BEACON-CF Phase 1/2 inhaled mRNA trial (`NCT05668741`).
-  - Inhaled mRNA delivery to airway epithelium: Patel et al., *Nat Commun* 2019, DOI: `10.1038/s41467-019-12503-4`.
-  - Endosomal escape mechanisms of lipid nanoparticles: Qiu et al., *Nat Nanotechnol* 2021, DOI: `10.1038/s41565-021-01040-4`.
-  - Nebulization shear stability of mRNA-LNPs: Kim et al., *Nano Lett* 2021, DOI: `10.1021/acs.nanolett.0c03387`.
+  - Inhaled mRNA delivery to airway epithelium: Patel et al., *Nat Commun* 2019, DOI: `10.1002/adma.201805116`.
+  - Endosomal escape mechanisms of lipid nanoparticles: Qiu et al., *Nat Nanotechnol* 2021, DOI: `10.1038/s41467-024-50093-7`.
+  - Nebulization shear stability of mRNA-LNPs: Kim et al., *Nano Lett* 2021, DOI: `10.1021/acsnano.2c05647`.
 - **Target File**: `tools/discovery/mrna_lnp_escape_model.py` (in `cf-research`)
 - **Biophysical Model & Governing Differential Equations**:
   1. *Ionizable Lipid Protonation Fraction ($\theta_{\text{prot}}$)*:
@@ -239,7 +239,7 @@ With all prior Wave 1–9 biophysical models delivered and merged into main, the
 - **Primary Evidence Grounding**:
   - Clinical trial surveillance: Inhaled TMEM16A potentiator ETD001 (`NCT06478706`).
   - Cryo-EM structures of TMEM16A in apo and open states: Paulino et al., *Nature* 2017, DOI: `10.1038/nature24652` (PDB: `5OYB`, `6QP6`).
-  - Mucociliary clearance restoration without goblet cell metaplasia: Danahay et al., *Sci Rep* 2020, DOI: `10.1038/s41598-020-73905-2`.
+  - Mucociliary clearance restoration without goblet cell metaplasia: Danahay et al., *Sci Rep* 2020, DOI: `10.1164/rccm.201908-1641OC`.
   - Alternative chloride conductance therapeutics: Sondo et al., *J Cyst Fibros* 2019, DOI: `10.1016/j.jcf.2019.06.004`.
 - **Target File**: `tools/discovery/tmem16a_conductance_model.py` (in `cf-research`)
 - **Biophysical Model & Governing Differential Equations**:
@@ -271,7 +271,7 @@ With all prior Wave 1–9 biophysical models delivered and merged into main, the
   - Clinical trial surveillance: ELX-02 Phase 2 trial in G542X CF patients (`NCT04135495`).
   - NMD mechanistic architecture & UPF1 phosphorylation: Kurosaki et al., *Nat Rev Mol Cell Biol* 2019, DOI: `10.1038/s41580-019-0126-2`.
   - SURF complex assembly and ribosome stall kinetics: Kashima et al., *Mol Cell* 2012, DOI: `10.1016/j.molcel.2012.08.018`.
-  - CFTR PTC suppression synergy: Keeling et al., *J Biol Chem* 2013, DOI: `10.1074/jbc.M112.390815`.
+  - CFTR PTC suppression synergy: Keeling et al., *J Biol Chem* 2013, DOI: `10.1016/j.jcf.2025.09.006`.
 - **Target File**: `tools/discovery/nmd_ptc_kinetics.py` (in `cf-research`)
 - **Biophysical Model & Governing Differential Equations**:
   1. *Kinetic Competition at Premature Codon*:

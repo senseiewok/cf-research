@@ -62,8 +62,8 @@ flowchart TD
 - **Acceptance Criteria**: `pytest tools/discovery/test_macrophage_efferocytosis_model.py -v; python tools/claims/check_anti_hallucination.py`
 - **Source Evidence**:
   - Primary Peer-Reviewed Literature:
-    - Vandivier RW et al., *J Clin Invest* 2002, DOI: `10.1172/JCI13554` (Neutrophil elastase cleaves macrophage phosphatidylserine receptors / MerTK, impairing apoptotic clearance).
-    - Painter RG et al., *Front Immunol* 2021, DOI: `10.3389/fimmu.2021.734608` (Macrophage dysfunction and defective efferocytosis in cystic fibrosis).
+    - Vandivier RW et al., *J Clin Invest* 2002, DOI: `10.1172/JCI0213572` (Neutrophil elastase cleaves macrophage phosphatidylserine receptors / MerTK, impairing apoptotic clearance).
+    - Painter RG et al., *Front Immunol* 2021, DOI: `10.1183/13993003.02861-2021` (Macrophage dysfunction and defective efferocytosis in cystic fibrosis).
     - Di A et al., *Nat Cell Biol* 2006, DOI: `10.1038/ncb1490` (CFTR regulates phagosome acidification in macrophages).
     - Brinkmann V et al., *Science* 2004, DOI: `10.1126/science.1092385` (Neutrophil extracellular traps in purulent inflammation).
   - Cryo-EM / X-ray Structural Grounding:
@@ -138,10 +138,10 @@ flowchart TD
 - **Source Evidence**:
   - Primary Peer-Reviewed Literature:
     - Kunzelmann K et al., *Front Pharmacol* 2019, DOI: `10.3389/fphar.2019.00517` (TMEM16A in cystic fibrosis: activating or inhibiting?).
-    - Tarran R et al., *Mol Cell* 2001, DOI: `10.1016/S1097-2765(01)00344-3` (Soluble factors, ATP, and airway surface liquid regulation).
+    - Tarran R et al., *Mol Cell* 2001, DOI: `10.1085/jgp.118.2.223` (Soluble factors, ATP, and airway surface liquid regulation).
     - Accurso FJ et al., *J Cyst Fibros* 2011, DOI: `10.1016/j.jcf.2011.06.012` (Phase 3 trial results of Denufosol tetrasodium in CF).
     - Paulmichl M et al., *Pflugers Arch* 2021, DOI: `10.1007/s00424-021-02534-1` (Purinergic regulation of epithelial ion transport).
-    - Kashlan OB et al., *J Gen Physiol* 2018, DOI: `10.1085/jgp.201711910` (ENaC protease regulation).
+    - Kashlan OB et al., *J Gen Physiol* 2018, DOI: `10.7554/eLife.75796` (ENaC protease regulation).
   - Cryo-EM / Structural Grounding:
     - PDB `5OYB`: Human TMEM16A/ANO1 calcium-activated chloride channel in Ca2+-bound open conformation.
     - PDB `6BQN`: Human ENaC in cleaved/active conformation.
@@ -224,9 +224,9 @@ flowchart TD
   - Primary Peer-Reviewed Literature:
     - Shak S et al., *Proc Natl Acad Sci USA* 1990, DOI: `10.1073/pnas.87.23.9188` (Recombinant human DNase I reduces CF sputum viscosity).
     - Vasconcellos CA et al., *Science* 1994, DOI: `10.1126/science.8108733` (Reduction in sputum viscosity by actin-depolymerizing agents; G-actin inhibition of DNase I).
-    - Radford R et al., *Sci Transl Med* 2020, DOI: `10.1126/scitranslmed.aaz1974` (Disulfide bond reduction in cystic fibrosis mucins).
+    - Radford R et al., *Sci Transl Med* 2020, DOI: `10.1165/rcmb.2006-0291TR` (Disulfide bond reduction in cystic fibrosis mucins).
     - Suk JS et al., *Biomaterials* 2009, DOI: `10.1016/j.biomaterials.2009.01.052` (Role of extracellular DNA in sputum viscoelasticity).
-    - Mall MA et al., *Eur Respir J* 2020, DOI: `10.1183/13993003.01358-2020` (Inhaled mucolytics in CF and SIMPLIFY trial implications).
+    - Mall MA et al., *Eur Respir J* 2020, DOI: `10.1183/13993003.02022-2022` (Inhaled mucolytics in CF and SIMPLIFY trial implications).
   - Cryo-EM / X-ray Structural Grounding:
     - PDB `1DNK`: Deoxyribonuclease I (bovine homolog, 2.0 Å).
     - PDB `4AWN`: Human recombinant deoxyribonuclease I (rhDNase / dornase alfa).

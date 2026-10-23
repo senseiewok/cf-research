@@ -17,7 +17,7 @@ mutation-agnostic Cystic Fibrosis genetic therapies across human CFTR (RefSeq NM
 Scientific Grounding & Provenance:
 - RefSeq NM_000492.4 / NP_000483.3: Homo sapiens CFTR mRNA (4,443-bp CDS, 27 exons, 1,480 aa).
 - Richter et al. (2020). Phage-assisted evolution of an adenine base editor with greatly
-  increased on-target activity (ABE8e). Nature Biotechnology. DOI: 10.1038/s41587-020-0458-4.
+  increased on-target activity (ABE8e). Nature Biotechnology. DOI: 10.1038/s41587-020-0453-z.
 - Anzalone et al. (2019). Search-and-replace genome editing without double-strand breaks
   or donor DNA. Nature. DOI: 10.1038/s41586-019-1711-4.
 - Walton et al. (2020). Unconstrained genome targeting with near-PAMless engineered

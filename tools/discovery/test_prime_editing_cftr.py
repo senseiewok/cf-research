@@ -152,7 +152,7 @@ class TestCFTRPrimeEditingDesigns:
         # Score & Verdict
         assert design.composite_feasibility_score >= 85.0
         assert design.verdict == "OPTIMAL_FEASIBILITY"
-        assert "DOI 10.1038/s41587-023-01851-6" in design.evidence_citations
+        assert "DOI 10.1016/j.cell.2021.09.018" in design.evidence_citations
 
     def test_w1282x_cftr_design(self):
         design = pe.build_cftr_w1282x_prime_editing_design()
@@ -171,7 +171,7 @@ class TestCFTRPrimeEditingDesigns:
         # Score & Verdict
         assert design.composite_feasibility_score >= 85.0
         assert design.verdict == "OPTIMAL_FEASIBILITY"
-        assert "DOI 10.1038/s41587-023-01851-6" in design.evidence_citations
+        assert "DOI 10.1016/j.cell.2021.09.018" in design.evidence_citations
 
 
 class TestNickingSgRNAConstraints:

@@ -21,7 +21,7 @@ Biophysical modeling of:
          bacterial density B_tot -> 0 without treatment escape.
 
 Primary Evidence Grounding:
-  - Chan et al. (2018), Sci Rep, DOI: 10.1038/s41598-018-24541-1
+  - Chan et al. (2018), Sci Rep, DOI: 10.1038/srep26717
     (Phage selection restores antibiotic sensitivity in MDR Pseudomonas aeruginosa).
   - Chan et al. (2021), J Cyst Fibros, DOI: 10.1016/j.jcf.2021.03.013
     (Phage therapy for refractory Pseudomonas aeruginosa in cystic fibrosis).
@@ -462,7 +462,7 @@ def format_markdown_report(comparisons: Dict[str, SimulationResult]) -> str:
         f"> **Research Scope**: {RESEARCH_BOUNDARY}",
         "",
         "## 1. Primary Evidence Grounding",
-        "- **Chan et al. (2018)**, *Sci Rep*, DOI: `10.1038/s41598-018-24541-1`",
+        "- **Chan et al. (2018)**, *Sci Rep*, DOI: `10.1038/srep26717`",
         "- **Chan et al. (2021)**, *J Cyst Fibros*, DOI: `10.1016/j.jcf.2021.03.013`",
         "- **CYPHY Trial**: `NCT04684641` (Yale CF Bacteriophage Study)",
         "- **Inhaled Bacteriophage Trial**: `NCT05010577`",

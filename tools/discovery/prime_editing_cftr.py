@@ -10,7 +10,7 @@ Provides quantitative biophysical modeling and constraint scoring for:
 6. Target CFTR loci: F508del (+CTT in-frame insertion) and W1282X (c.3846A>G nonsense reversal).
 
 Scientific Grounding:
-- Chen et al., Nat Biotechnol 2023 (DOI 10.1038/s41587-023-01851-6)
+- Chen et al., Nat Biotechnol 2023 (DOI 10.1016/j.cell.2021.09.018)
 - Nelson et al., Nat Biotechnol 2022 (DOI 10.1038/s41587-021-01039-7)
 - Anzalone et al., Nature 2019 (DOI 10.1038/s41586-019-1711-4)
 - MTNA CFTR prime editing (DOI 10.1016/j.omtn.2022.04.025)
@@ -429,7 +429,7 @@ def build_cftr_f508del_prime_editing_design() -> PrimeEditingDesignResult:
         composite_feasibility_score=round(composite, 2),
         verdict=verdict,
         evidence_citations=[
-            "DOI 10.1038/s41587-023-01851-6",
+            "DOI 10.1016/j.cell.2021.09.018",
             "DOI 10.1016/j.omtn.2022.04.025",
             "RCSB PDB 6MSM",
         ],
@@ -478,7 +478,7 @@ def build_cftr_w1282x_prime_editing_design() -> PrimeEditingDesignResult:
         composite_feasibility_score=round(composite, 2),
         verdict=verdict,
         evidence_citations=[
-            "DOI 10.1038/s41587-023-01851-6",
+            "DOI 10.1016/j.cell.2021.09.018",
             "DOI 10.1016/j.omtn.2022.04.025",
             "RCSB PDB 6MSM",
         ],

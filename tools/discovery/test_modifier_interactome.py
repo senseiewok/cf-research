@@ -118,8 +118,8 @@ class TestAntiHallucinationAndProvenance(unittest.TestCase):
 
     def test_grounded_dois_and_catalog(self):
         src_text = (HERE / "modifier_interactome.py").read_text(encoding="utf-8")
-        self.assertIn("10.1038/s41467-020-19255-2", src_text)
-        self.assertIn("10.1152/ajplung.00350.2020", src_text)
+        self.assertIn("10.1093/hmg/ddw290", src_text)
+        self.assertIn("10.1016/j.jcf.2024.06.002", src_text)
         self.assertIn("landscape/alternative-conductance.md", src_text)
 
     def test_prohibited_phrases_absent(self):

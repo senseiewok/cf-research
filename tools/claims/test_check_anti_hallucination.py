@@ -85,6 +85,14 @@ class TestCheckAntiHallucination(unittest.TestCase):
             self.assertIn("FAIL AH-4 [clinical-overclaim-guard]", fails[0])
             self.assertIn(phrase, fails[0])
 
+        bad_bw = "KALYDECO carries an active Boxed Warning for acute hepatic failure."
+        fails_bw = cah.check_clinical_overclaim_guard(Path("test.md"), bad_bw)
+        self.assertEqual(len(fails_bw), 1)
+        self.assertIn("extrapolated Boxed Warning", fails_bw[0])
+
+        good_bw = "KALYDECO (ivacaftor, NDA 203188): Boxed Warning is `not stated` (none present in SPL)."
+        self.assertEqual(cah.check_clinical_overclaim_guard(Path("test.md"), good_bw), [])
+
     def test_ah5_discovery_module_registration_rejects_unregistered_module(self):
         """Rule AH-5 must reject an unregistered biophysical model in tools/discovery/."""
         snapshot_ncts = cah.load_snapshot_ncts(REPO_ROOT / "tools" / "trial_atlas" / "snapshot.json")
@@ -108,6 +116,23 @@ class TestCheckAntiHallucination(unittest.TestCase):
                 any("NCT99999999" in f and "AH-5" in f for f in fails),
                 f"Expected AH-5 NCT failure for NCT99999999, got: {fails}",
             )
+
+    def test_ah6_cite_check_ledger_provenance_rejects_unverified_identifiers(self):
+        """Rule AH-6 must verify DOIs, PMIDs, and NCTs against sources/cite-check-ledger.jsonl."""
+        ledger = cah.load_cite_check_ledger(REPO_ROOT / "sources" / "cite-check-ledger.jsonl")
+        self.assertGreaterEqual(len(ledger), 186)
+
+        clean_text = "Verified DOI 10.1056/NEJMoa1908639, PMID: 30661751, and NCT03525444."
+        self.assertEqual(
+            cah.check_cite_check_ledger_provenance(Path("test.md"), clean_text, ledger),
+            [],
+        )
+
+        bad_text = "Hallucinated DOI 10.1056/NEJMoa9999999 and PMID: 99999999."
+        fails = cah.check_cite_check_ledger_provenance(Path("test.md"), bad_text, ledger)
+        self.assertEqual(len(fails), 2)
+        self.assertTrue(any("10.1056/NEJMoa9999999" in f and "AH-6" in f for f in fails))
+        self.assertTrue(any("PMID 99999999" in f and "AH-6" in f for f in fails))
 
     def test_main_cli_execution(self):
         """CLI main entry point must execute cleanly and return 0 for the valid repository."""

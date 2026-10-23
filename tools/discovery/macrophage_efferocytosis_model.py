@@ -27,9 +27,9 @@ Biophysical modeling of:
        - Thiol-reducing / antioxidant therapy (N-acetylcysteine / glutathione) dampening NETosis.
 
 Primary Evidence Grounding:
-  - Vandivier RW et al., J Clin Invest 2002, DOI: 10.1172/JCI13554
+  - Vandivier RW et al., J Clin Invest 2002, DOI: 10.1172/JCI0213572
     (Neutrophil elastase cleaves macrophage phosphatidylserine receptors / MerTK, impairing apoptotic clearance).
-  - Painter RG et al., Front Immunol 2021, DOI: 10.3389/fimmu.2021.734608
+  - Painter RG et al., Front Immunol 2021, DOI: 10.1183/13993003.02861-2021
     (Macrophage dysfunction and defective efferocytosis in cystic fibrosis).
   - Di A et al., Nat Cell Biol 2006, DOI: 10.1038/ncb1490
     (CFTR regulates phagosome acidification in macrophages).
@@ -504,8 +504,8 @@ def format_markdown_report(regimens: Dict[str, SimulationResult]) -> str:
         "## 3. Grounding & Surveillance Provenance",
         "",
         "- **Primary Peer-Reviewed Citations**:",
-        "  - Vandivier RW et al., *J Clin Invest* 2002, DOI: `10.1172/JCI13554`",
-        "  - Painter RG et al., *Front Immunol* 2021, DOI: `10.3389/fimmu.2021.734608`",
+        "  - Vandivier RW et al., *J Clin Invest* 2002, DOI: `10.1172/JCI0213572`",
+        "  - Painter RG et al., *Front Immunol* 2021, DOI: `10.1183/13993003.02861-2021`",
         "  - Di A et al., *Nat Cell Biol* 2006, DOI: `10.1038/ncb1490`",
         "  - Brinkmann V et al., *Science* 2004, DOI: `10.1126/science.1092385`",
         "- **Structural PDB Grounding**:",

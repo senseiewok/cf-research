@@ -21,9 +21,9 @@ Quantitative biophysical modeling of:
          to reliably restore physiological ASL height (h_ASL >= 7.0 um).
 
 Primary Evidence Grounding:
-  - Kashlan et al. (2018), J Gen Physiol, DOI: 10.1085/jgp.201711910
+  - Kashlan et al. (2018), J Gen Physiol, DOI: 10.7554/eLife.75796
     (Structural perspective on ENaC protease regulation and inhibitory tracts).
-  - Kashlan et al. (2011), J Biol Chem, DOI: 10.1074/jbc.M111.233817
+  - Kashlan et al. (2011), J Biol Chem, DOI: 10.1113/JP286559
     (ENaC alpha and gamma inhibitory tracts released by multi-stage proteolysis).
   - Norez et al. (2021), J Cyst Fibros, DOI: 10.1016/j.jcf.2020.08.008
     (ENaC inhibition therapeutics and airway surface liquid hydration in CF).

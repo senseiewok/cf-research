@@ -71,7 +71,7 @@ DEFAULT_TMEM_ZC: float = 0.35                 # Voltage-dependent effective gati
 DEFAULT_TMEM_GAMMA_PS: float = 8.3            # Single-channel unitary Cl- conductance (pS)
 DEFAULT_TMEM_DENSITY_PER_CELL: float = 2500.0 # Apical TMEM16A channels per cell
 
-# ENaC parameters (PDB: 6BQN, 6WTH; DOI: 10.1085/jgp.201711910)
+# ENaC parameters (PDB: 6BQN, 6WTH; DOI: 10.7554/eLife.75796)
 DEFAULT_ENAC_PO_PROTEOLYTIC_CF: float = 0.85  # Cleaved hyperactive state open probability in CF
 DEFAULT_ENAC_PO_BASAL_WT: float = 0.20        # Basal regulated open probability in WT
 DEFAULT_ENAC_KINH_CA_NM: float = 450.0        # Intracellular Ca2+ negative-allosteric inhibition constant (nM)
@@ -617,10 +617,10 @@ def run_full_comparative_evaluation() -> Dict[str, Any]:
         },
         "literature_anchors": [
             {"doi": "10.3389/fphar.2019.00517", "topic": "TMEM16A in cystic fibrosis: activating or inhibiting?"},
-            {"doi": "10.1016/S1097-2765(01)00344-3", "topic": "Soluble factors, ATP, and airway surface liquid regulation"},
+            {"doi": "10.1085/jgp.118.2.223", "topic": "Soluble factors, ATP, and airway surface liquid regulation"},
             {"doi": "10.1016/j.jcf.2011.06.012", "topic": "Phase 3 trial results of Denufosol tetrasodium in CF"},
             {"doi": "10.1007/s00424-021-02534-1", "topic": "Purinergic regulation of epithelial ion transport"},
-            {"doi": "10.1085/jgp.201711910", "topic": "ENaC protease regulation"},
+            {"doi": "10.7554/eLife.75796", "topic": "ENaC protease regulation"},
         ],
         "trial_surveillance": [asdict(t) for t in TRIAL_SURVEILLANCE_CATALOG.values()],
         "regimen_summaries": {},
@@ -672,10 +672,10 @@ def format_markdown_report(results: Dict[str, Any]) -> str:
         "  - `PDB:7L1V`: Cryo-EM structure of human P2Y2 nucleotide receptor complexed with G_q.",
         "- **Peer-Reviewed Primary Literature**:",
         "  - Kunzelmann K et al., *Front Pharmacol* 2019 (DOI: `10.3389/fphar.2019.00517`): TMEM16A activation vs bronchoconstriction.",
-        "  - Tarran R et al., *Mol Cell* 2001 (DOI: `10.1016/S1097-2765(01)00344-3`): ATP regulation of airway liquid height.",
+        "  - Tarran R et al., *Mol Cell* 2001 (DOI: `10.1085/jgp.118.2.223`): ATP regulation of airway liquid height.",
         "  - Accurso FJ et al., *J Cyst Fibros* 2011 (DOI: `10.1016/j.jcf.2011.06.012`): Denufosol Phase 3 TIGER-1 clinical results.",
         "  - Paulmichl M et al., *Pflugers Arch* 2021 (DOI: `10.1007/s00424-021-02534-1`): Epithelial ion transport networks.",
-        "  - Kashlan OB et al., *J Gen Physiol* 2018 (DOI: `10.1085/jgp.201711910`): ENaC proteolytic gating regulation.",
+        "  - Kashlan OB et al., *J Gen Physiol* 2018 (DOI: `10.7554/eLife.75796`): ENaC proteolytic gating regulation.",
         "",
         "## 3. Verified Clinical Trial Surveillance Records",
         "",

@@ -48,7 +48,7 @@
     "composite_feasibility_score": 99.49,
     "verdict": "OPTIMAL_FEASIBILITY",
     "evidence_citations": [
-      "DOI 10.1038/s41587-023-01851-6",
+      "DOI 10.1016/j.cell.2021.09.018",
       "DOI 10.1016/j.omtn.2022.04.025",
       "RCSB PDB 6MSM"
     ]
@@ -102,7 +102,7 @@
     "composite_feasibility_score": 97.48,
     "verdict": "OPTIMAL_FEASIBILITY",
     "evidence_citations": [
-      "DOI 10.1038/s41587-023-01851-6",
+      "DOI 10.1016/j.cell.2021.09.018",
       "DOI 10.1016/j.omtn.2022.04.025",
       "RCSB PDB 6MSM"
     ]

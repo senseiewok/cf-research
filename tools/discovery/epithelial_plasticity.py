@@ -8,7 +8,7 @@ permanently repopulates the basal stem cell niche (KRT5+/TP63+) without requirin
 
 Primary literature references:
 - Tata et al., Nature 2013 (DOI: 10.1038/nature12777)
-- Pardo-Saganta et al., Nature 2015 (DOI: 10.1038/nature14548)
+- Pardo-Saganta et al., Nature 2015 (DOI: 10.1038/nature14553)
 - Rawlins et al., Cell Stem Cell 2009 (DOI: 10.1016/j.stem.2009.04.002)
 - Mou et al., Cell Stem Cell 2016 (DOI: 10.1016/j.stem.2016.11.001)
 """

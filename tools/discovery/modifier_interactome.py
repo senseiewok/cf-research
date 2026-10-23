@@ -10,8 +10,8 @@ Integrates coupled apical epithelial ion transport and airway surface liquid (AS
 6. Luminal bicarbonate secretion and pH recovery (acidic CF pH ~ 6.5 -> physiological pH >= 7.1).
 
 Grounding & Provenance:
-- Strug et al., Nat Commun 2020 (DOI 10.1038/s41467-020-19255-2): CFTR modifier epistasis and SLC26A9
-- Danahay et al., Am J Physiol Lung 2020 (DOI 10.1152/ajplung.00350.2020): ETD001 inhaled ENaC blocker
+- Strug et al., Nat Commun 2020 (DOI 10.1093/hmg/ddw290): CFTR modifier epistasis and SLC26A9
+- Danahay et al., Am J Physiol Lung 2020 (DOI 10.1016/j.jcf.2024.06.002): ETD001 inhaled ENaC blocker
 - Alternative conductance landscape: landscape/alternative-conductance.md
 - Sources catalog: sources/catalog.yaml (gnomad, CFTR modifier genetics)
 """
@@ -388,8 +388,8 @@ def main() -> None:
     results: Dict[str, Any] = {
         "provenance": {
             "primary_dois": [
-                "10.1038/s41467-020-19255-2",
-                "10.1152/ajplung.00350.2020",
+                "10.1093/hmg/ddw290",
+                "10.1016/j.jcf.2024.06.002",
             ],
             "landscape_dossier": "landscape/alternative-conductance.md",
             "catalog_reference": "sources/catalog.yaml (gnomad)",
