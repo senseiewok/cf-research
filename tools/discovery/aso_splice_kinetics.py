@@ -16,7 +16,7 @@ Grounding & Provenance (Answer Tier T2):
   - Primary Literature:
     * Oren et al., Am J Respir Crit Care Med 2021 (DOI: 10.1016/j.jcf.2021.06.003)
     * Kim et al., Nat Commun 2022 (DOI: 10.1038/s41467-022-30495-1)
-    * Michaels et al., Mol Ther 2020 (DOI: 10.1016/j.ymthe.2020.09.017)
+    * Caraco et al., J Cyst Fibros 2025 (DOI: 10.1016/j.jcf.2024.10.004)
     * Oren et al., J Cyst Fibros 2022 (DOI: 10.1016/j.jcf.2021.08.014)
 """
 from __future__ import annotations
@@ -94,7 +94,7 @@ ALLELE_KINETICS_SPECS: Dict[str, SpliceKineticsAlleleSpec] = {
         structural_pdbs=["6FF4", "7ABI", "6MSM"],
         primary_dois=[
             "10.1038/s41467-022-30495-1",
-            "10.1016/j.ymthe.2020.09.017",
+            "10.1016/j.jcf.2024.10.004",
         ],
     ),
     "1811+1.6kbA->G": SpliceKineticsAlleleSpec(
@@ -114,7 +114,7 @@ ALLELE_KINETICS_SPECS: Dict[str, SpliceKineticsAlleleSpec] = {
         clinical_trial_nct="NCT06429176",
         structural_pdbs=["6FF4", "7ABI", "6MSM"],
         primary_dois=[
-            "10.1016/j.ymthe.2020.09.017",
+            "10.1016/j.jcf.2024.10.004",
             "10.1016/j.jcf.2021.06.003",
         ],
     ),

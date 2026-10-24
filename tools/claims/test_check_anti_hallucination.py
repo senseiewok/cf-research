@@ -134,6 +134,19 @@ class TestCheckAntiHallucination(unittest.TestCase):
         self.assertTrue(any("10.1056/NEJMoa9999999" in f and "AH-6" in f for f in fails))
         self.assertTrue(any("PMID 99999999" in f and "AH-6" in f for f in fails))
 
+        # Verify that non-control RETRACTED:/WITHDRAWN: titles are rejected even if verdict == 'PASS'
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_ledger = Path(tmpdir) / "ledger.jsonl"
+            tmp_ledger.write_text(
+                '{"id": "10.1016/j.omtn.2020.08.017", "kind": "DOI", "title": "RETRACTED: Example Paper", "verdict": "PASS"}\n'
+                '{"id": "10.1016/j.jcf.2024.10.004", "kind": "DOI", "title": "Valid SPL84 Study", "verdict": "PASS"}\n',
+                encoding="utf-8",
+            )
+            loaded = cah.load_cite_check_ledger(tmp_ledger)
+            self.assertNotIn(("DOI", "10.1016/j.omtn.2020.08.017"), loaded)
+            self.assertIn(("DOI", "10.1016/j.jcf.2024.10.004"), loaded)
+
     def test_ah8_multi_source_cross_verification_guards(self):
         """Rule AH-8 must reject bare ChEMBL potency without assay context, FAERS causal overclaims, and unlabelled Scite polarity."""
         # 1. Clean ChEMBL, FAERS, and Scite sentences

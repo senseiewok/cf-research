@@ -32,7 +32,7 @@ Biophysical & Thermodynamic Formulation:
      v_correct = (k_skip,nat + k_skip,induced * theta_SSO) * [pre-mRNA]
    The steady-state fraction of full-length functional CFTR mRNA follows Hill-Langmuir kinetics:
      F_correct([SSO]) = F_baseline + (F_max - F_baseline) * [SSO]^h / (EC_50^h + [SSO]^h)
-   Scalet et al. 2020 and Michaels et al. 2020 demonstrated EC_50 ~ 20 - 80 nM, restoring full-length
+   Oren et al. 2021 and Caraco et al. 2025 (SPL84) demonstrated EC_50 ~ 20 - 80 nM, restoring full-length
    CFTR mRNA from a baseline of ~10 - 15% up to >85% of normal physiological levels.
 
 4. Transepithelial Chloride Conductance & Short-Circuit Current Restoration:
@@ -44,11 +44,11 @@ Biophysical & Thermodynamic Formulation:
    crosses the established curative benchmark for mucosal hydration.
 
 Primary Evidence Grounding:
-- Nissim-Rafinia M et al. (2004). Cellular and viral splicing factors can modify the inclusion
-  of a pseudoexon in CFTR pre-mRNA. Hum Mol Genet 13(19):2205-2216. DOI: 10.1093/hmg/ddh247.
-- Scalet D et al. (2020). Splice-switching antisense oligonucleotides restore CFTR function in
-  cystic fibrosis cells bearing the 3849+10kb C-to-T mutation. Mol Ther Nucleic Acids 22:421-432.
-  DOI: 10.1016/j.omtn.2020.08.017.
+- Nissim-Rafinia M et al. (2000). Cellular and viral splicing factors can modify the splicing
+  pattern of CFTR transcripts carrying splicing mutations. Hum Mol Genet 9(12):1771-1778. DOI: 10.1093/hmg/9.12.1771.
+- Caraco Y et al. (2025). A phase I study assessing the safety and tolerability of SPL84, an inhaled
+  antisense oligonucleotide for treatment of cystic fibrosis patients with the 3849 +10kb C->T mutation.
+  J Cyst Fibros 24(1):112-119. DOI: 10.1016/j.jcf.2024.10.004.
 - Highsmith WE et al. (1994). A novel mutation in the cystic fibrosis gene in patients of Celtic
   origin result in aberrant splicing. N Engl J Med 331(15):974-980. DOI: 10.1056/NEJM199410133311503.
 - Clinical Trial Grounding (verified against tools/trial_atlas/snapshot.json):
@@ -147,7 +147,7 @@ MUTATION_SPLICE_CATALOG: Dict[str, MutationSpliceProfile] = {
         wt_delta_g_kcal_mol=-3.2,
         mut_delta_g_kcal_mol=-10.4,
         baseline_full_length_fraction=0.14,
-        evidence_doi="10.1016/j.omtn.2020.08.017",
+        evidence_doi="10.1016/j.jcf.2024.10.004",
         clinical_trial_nct="NCT06429176",
     ),
     "1811_plus_1_6kb_A_to_G": MutationSpliceProfile(
@@ -178,7 +178,7 @@ SSO_CHEMISTRY_CATALOG: Dict[str, SSOChemistryProfile] = {
         potency_ec50_nm=34.0,
         hill_coefficient=1.45,
         max_restoration_fraction=0.88,
-        evidence_doi="10.1016/j.omtn.2020.08.017",
+        evidence_doi="10.1016/j.jcf.2024.10.004",
     ),
     "PMO_pseudoexon_blocker": SSOChemistryProfile(
         name="PMO Phosphorodiamidate Morpholino Exon Blocker",
@@ -190,7 +190,7 @@ SSO_CHEMISTRY_CATALOG: Dict[str, SSOChemistryProfile] = {
         potency_ec50_nm=52.0,
         hill_coefficient=1.30,
         max_restoration_fraction=0.82,
-        evidence_doi="10.1093/hmg/ddh247",
+        evidence_doi="10.1093/hmg/9.12.1771",
     ),
     "MOE_ISS_enhancer_blocker": SSOChemistryProfile(
         name="2'-MOE Intronic Splicing Silencer / Enhancer Targeter",
@@ -202,7 +202,7 @@ SSO_CHEMISTRY_CATALOG: Dict[str, SSOChemistryProfile] = {
         potency_ec50_nm=41.0,
         hill_coefficient=1.38,
         max_restoration_fraction=0.85,
-        evidence_doi="10.1016/j.omtn.2020.08.017",
+        evidence_doi="10.1016/j.jcf.2024.10.004",
     ),
 }
 

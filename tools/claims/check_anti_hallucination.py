@@ -280,7 +280,13 @@ def check_discovery_module_registration(
 
 
 def load_cite_check_ledger(ledger_path: Path | str | None = None) -> set[tuple[str, str]]:
-    """Load verified (kind, id_lower) pairs with verdict == 'PASS' from sources/cite-check-ledger.jsonl."""
+    """Load verified (kind, id_lower) pairs with verdict == 'PASS' from sources/cite-check-ledger.jsonl.
+
+    Rejects any entry whose title starts with 'RETRACTED:' or 'WITHDRAWN:' or whose
+    retracted flag is truthy, even if verdict was historically recorded as 'PASS',
+    unless the entry is explicitly marked with positive_control == True (used solely for
+    Retraction Watch detector sensitivity verification).
+    """
     lp = Path(ledger_path or DEFAULT_CITE_LEDGER)
     if not lp.exists():
         return set()
@@ -290,6 +296,10 @@ def load_cite_check_ledger(ledger_path: Path | str | None = None) -> set[tuple[s
         if not line:
             continue
         rec = json.loads(line)
+        title_upper = str(rec.get("title") or "").strip().upper()
+        is_retracted = title_upper.startswith(("RETRACTED:", "WITHDRAWN:")) or bool(rec.get("retracted"))
+        if is_retracted and not bool(rec.get("positive_control")):
+            continue
         if rec.get("verdict") == "PASS" and rec.get("kind") and rec.get("id"):
             verified.add((str(rec["kind"]).upper(), str(rec["id"]).lower()))
     return verified
