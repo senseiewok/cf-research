@@ -1,0 +1,646 @@
+{
+  "schema_version": 1,
+  "audit_status": "PASS",
+  "surface_primary_axis": "discipline",
+  "persona_scopes": [
+    "researchers",
+    "builders"
+  ],
+  "total_modules": 51,
+  "infrastructure_modules_count": 3,
+  "test_suites_count": 52,
+  "persona_summary": {
+    "researchers": 50,
+    "builders": 1
+  },
+  "triage_summary": {
+    "keep": 33,
+    "merge": 14,
+    "archive": 4
+  },
+  "discipline_summary": {
+    "structural_biology": 7,
+    "rna_gene_editing": 16,
+    "airway_delivery": 21,
+    "microbiology_host": 4,
+    "clinical_trials": 2,
+    "ai_verification": 1
+  },
+  "disciplines": {
+    "structural_biology": {
+      "label": "Structural Biology & CFTR Biophysics",
+      "count": 7,
+      "keep_count": 4,
+      "merge_count": 2,
+      "archive_count": 1,
+      "modules": [
+        {
+          "module": "allosteric_potentiator_model",
+          "task": "T-0221",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "gating_potentiator_energy_coupling",
+          "test_verified": true
+        },
+        {
+          "module": "cftr_sequence_scanner",
+          "task": "T-0264",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "cryoem_truncation_model",
+          "task": "T-0151",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "gating_potentiator_energy_coupling",
+          "task": "T-0270",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "nbd1_thermodynamics",
+          "task": "T-0199",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "pdi_redox_remodeling",
+          "task": "T-0281",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "archive",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "ptc_cryoem_allostery",
+          "task": "T-0217",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "cryoem_truncation_model",
+          "test_verified": true
+        }
+      ]
+    },
+    "rna_gene_editing": {
+      "label": "RNA, Nonsense Readthrough & Gene Editing",
+      "count": 16,
+      "keep_count": 9,
+      "merge_count": 5,
+      "archive_count": 2,
+      "modules": [
+        {
+          "module": "aso_splice_kinetics",
+          "task": "T-0254",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "aso_splice_model",
+          "task": "T-0183",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "aso_splice_kinetics",
+          "test_verified": true
+        },
+        {
+          "module": "base_editing_cftr",
+          "task": "T-0219",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "class1_prime_base_editing",
+          "test_verified": true
+        },
+        {
+          "module": "cftr_gquadruplex_stability_model",
+          "task": "T-0316",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "archive",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "cftr_minigene_model",
+          "task": "T-0207",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "class1_prime_base_editing",
+          "task": "T-0255",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "dual_aav_intein_model",
+          "task": "T-0206",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "intronic_splice_foundation",
+          "task": "T-0269",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "minidna_evasion_model",
+          "task": "T-0233",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "archive",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "mrna_translation_velocity",
+          "task": "T-0272",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "nmd_ptc_kinetics",
+          "task": "T-0241",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "ptc_erf_depletion_readthrough",
+          "test_verified": true
+        },
+        {
+          "module": "prime_editing_cftr",
+          "task": "T-0184",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "class1_prime_base_editing",
+          "test_verified": true
+        },
+        {
+          "module": "ptc_erf_depletion_readthrough",
+          "task": "T-0401",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "suppressor_trna_model",
+          "task": "T-0216",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "u1_snrnp_decoy_kinetics",
+          "task": "T-0292",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "u1_snrnp_decoy_thermodynamics",
+          "test_verified": true
+        },
+        {
+          "module": "u1_snrnp_decoy_thermodynamics",
+          "task": "T-0352",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        }
+      ]
+    },
+    "airway_delivery": {
+      "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
+      "count": 21,
+      "keep_count": 14,
+      "merge_count": 6,
+      "archive_count": 1,
+      "modules": [
+        {
+          "module": "aav_tropism_model",
+          "task": "T-0208",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "basal_stem_persistence",
+          "task": "T-0220",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "biophysical_models",
+          "task": "T-0154",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "ciliary_wave_clearance_model",
+          "task": "T-0315",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "enac_knockdown_model",
+          "task": "T-0200",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "enac_tmem16a_equilibrium",
+          "test_verified": true
+        },
+        {
+          "module": "enac_proteolysis_model",
+          "task": "T-0245",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "enac_tmem16a_equilibrium",
+          "test_verified": true
+        },
+        {
+          "module": "enac_tmem16a_equilibrium",
+          "task": "T-0252",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "epithelial_plasticity",
+          "task": "T-0178",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "ev_basal_tropism",
+          "task": "T-0234",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "archive",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "glycocalyx_charge_barrier_model",
+          "task": "T-0351",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "glycocalyx_permeabilization_model",
+          "test_verified": true
+        },
+        {
+          "module": "glycocalyx_permeabilization_model",
+          "task": "T-0291",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "lnp_escape_dynamics",
+          "task": "T-0285",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "mechano_acoustic_delivery",
+          "task": "T-0228",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "mrna_lnp_escape_model",
+          "task": "T-0239",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "lnp_escape_dynamics",
+          "test_verified": true
+        },
+        {
+          "module": "mucus_cleavage_kinetics",
+          "task": "T-0253",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "mucus_rheology",
+          "test_verified": true
+        },
+        {
+          "module": "mucus_rheology",
+          "task": "T-0185",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "tmem16a_calcium_conductance_model",
+          "task": "T-0392",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "tmem16a_conductance_model",
+          "task": "T-0240",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "tmem16a_calcium_conductance_model",
+          "test_verified": true
+        },
+        {
+          "module": "transcytosis_model",
+          "task": "T-0177",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "vector_redosing_kinetics",
+          "task": "T-0198",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "vx522_inhaled_lnp_mucus_diffusion",
+          "task": "T-0400",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        }
+      ]
+    },
+    "microbiology_host": {
+      "label": "Microbiology, Phage Therapy & Host Defense",
+      "count": 4,
+      "keep_count": 3,
+      "merge_count": 1,
+      "archive_count": 0,
+      "modules": [
+        {
+          "module": "macrophage_efferocytosis_model",
+          "task": "T-0251",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "microbiology_host",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "macrophage_evasion_kinetics",
+          "test_verified": true
+        },
+        {
+          "module": "macrophage_evasion_kinetics",
+          "task": "T-0271",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "microbiology_host",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "phage_biofilm_kinetics",
+          "task": "T-0197",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "microbiology_host",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "phage_omko1_tradeoff",
+          "task": "T-0246",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "microbiology_host",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        }
+      ]
+    },
+    "clinical_trials": {
+      "label": "Clinical Trials, Registries & Theratyping",
+      "count": 2,
+      "keep_count": 2,
+      "merge_count": 0,
+      "archive_count": 0,
+      "modules": [
+        {
+          "module": "modifier_interactome",
+          "task": "T-0186",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "clinical_trials",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "rare_allele_matrix",
+          "task": "T-0201",
+          "track": "Track B",
+          "tier": "T2",
+          "discipline": "clinical_trials",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        }
+      ]
+    },
+    "ai_verification": {
+      "label": "AI Verification & Scientific Benchmarking",
+      "count": 1,
+      "keep_count": 1,
+      "merge_count": 0,
+      "archive_count": 0,
+      "modules": [
+        {
+          "module": "science_model_benchmark",
+          "task": "T-0265",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "ai_verification",
+          "persona": "builders",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        }
+      ]
+    }
+  }
+}
