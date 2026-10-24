@@ -6,22 +6,22 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 54,
+  "total_modules": 55,
   "infrastructure_modules_count": 3,
-  "test_suites_count": 55,
+  "test_suites_count": 56,
   "persona_summary": {
-    "researchers": 53,
+    "researchers": 54,
     "builders": 1
   },
   "triage_summary": {
-    "keep": 36,
+    "keep": 37,
     "merge": 14,
     "archive": 4
   },
   "discipline_summary": {
     "structural_biology": 7,
     "rna_gene_editing": 17,
-    "airway_delivery": 22,
+    "airway_delivery": 23,
     "microbiology_host": 5,
     "clinical_trials": 2,
     "ai_verification": 1
@@ -311,8 +311,8 @@
     },
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
-      "count": 22,
-      "keep_count": 15,
+      "count": 23,
+      "keep_count": 16,
       "merge_count": 6,
       "archive_count": 1,
       "modules": [
@@ -440,6 +440,17 @@
         {
           "module": "glycocalyx_permeabilization_model",
           "task": "T-0291",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "lentiviral_basal_integration_persistence",
+          "task": "T-0407",
           "track": "Track A",
           "tier": "T2",
           "discipline": "airway_delivery",
