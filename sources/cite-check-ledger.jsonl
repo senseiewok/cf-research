@@ -211,3 +211,4 @@
 {"id": "10.1038/s41467-020-18009-7", "kind": "DOI", "publisher_date": "2020", "source_id": "crossref", "title": "Alginate lyase improves antibiotic penetration and biofilm eradication in Pseudomonas aeruginosa", "verdict": "PASS"}
 {"id": "NCT04596319", "kind": "NCT", "source_id": "clinicaltrials-gov", "title": "Phase 1/2 Study Evaluating Safety and Tolerability of Inhaled AP-PA02 in Subjects With Chronic Pseudomonas Aeruginosa Lung Infections and Cystic Fibrosis", "verdict": "PASS"}
 {"id": "10.1513/pats.200409-046ta", "kind": "DOI", "publisher_date": "2004", "source_id": "crossref", "title": "Deposition of Inhaled Particles in the Human Respiratory Tract", "verdict": "PASS"}
+{"id": "10.1016/j.ymthe.2018.04.014", "kind": "DOI", "publisher_date": "2018", "source_id": "crossref", "title": "Lentiviral-mediated gene transfer, targeting airway basal cells, results in persistent CFTR expression in cystic fibrosis airways", "verdict": "PASS"}
