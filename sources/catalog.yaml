@@ -2025,3 +2025,47 @@ sources:
       to populate a database or publication (except Open Access material), Clause 6.2 prohibits accessing the site by any
       means other than through a normal web browser, and Clause 6.3 contains an on-demand indemnity. Recorded as manual until
       a maintainer decides whether to accept Springer Nature / BioMed Central terms or query ISRCTN records via Europe PMC.
+
+  - id: scite-mcp
+    name: Scite MCP Server (Smart Citations & Full-Text Citation Statements)
+    kind: literature_index
+    steward: Scite LLC (Research Solutions)
+    region: Global
+    url: https://scite.ai/mcp
+    base_url: https://api.scite.ai/mcp/
+    access: api
+    auth: api_key_required
+    format:
+      - json
+    coverage: >
+      1.6B+ Smart Citation statements extracted from full-text scientific articles
+      across 44+ publishing partners and open-access corpora, classified by citation
+      polarity (supporting, contrasting, mentioning),citation section (intro, methods,
+      results, discussion), and editorial notices.
+    terms_url: https://scite.ai/mcp
+    terms_checked: 2026-10-24
+    robots: allow
+    max_rps: 1
+    rate_limit_note: >
+      Remote Streamable HTTP MCP server (https://api.scite.ai/mcp) authenticated via
+      OAuth 2.0 PKCE (S256; authorization_endpoint https://api.scite.ai/mcp/oauth/authorize,
+      token_endpoint https://api.scite.ai/mcp/oauth/token, scope mcp) with an active
+      Scite Personal Pro subscription. Upstream queries execute on Scite servers via
+      the Scite Publisher Gateway. Keep agent tool queries paced at <= 1 req/s.
+    citation_rule: >
+      Cite the underlying primary article DOI/PMID verified via cf-evidence-loop;
+      label Smart Citation counts and polarity classifications (supporting, contrasting,
+      mentioning) as Scite machine-learning citation classifications with access date.
+    redistribution: >
+      Prohibited for bulk raw text redistribution; Scite Publisher Gateway surfaces
+      bounded citation snippets and Smart Citation tallies under publisher agreements
+      without granting bulk full-text redistribution rights.
+    notes: >
+      Checked 2026-10-24 via read-page on https://scite.ai/mcp (HTTP 200, robots: 200
+      allowed=True) and https://api.scite.ai/.well-known/oauth-authorization-server
+      (HTTP 200, robots: 404 allowed=True). Admitted as an authenticated read-only
+      scientific discovery and citation-polarity verification MCP server alongside
+      cf-evidence-loop (board task T-0047; see cf-lab docs/scite-mcp-admission-review.md).
+      Every returned citation excerpt must be treated as untrusted text inside
+      <untrusted_data> boundaries, and any cited DOI/PMID must be verified through
+      cf-evidence-loop.
