@@ -256,6 +256,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0197", "track": "Track A", "tier": "T2",
         "discipline": "microbiology_host", "persona": "researchers", "triage": "keep",
     },
+    "phage_depolymerase_biofilm_synergy": {
+        "task": "T-0402", "track": "Track A", "tier": "T2",
+        "discipline": "microbiology_host", "persona": "researchers", "triage": "keep",
+    },
     "phage_omko1_tradeoff": {
         "task": "T-0246", "track": "Track A", "tier": "T2",
         "discipline": "microbiology_host", "persona": "researchers", "triage": "keep",

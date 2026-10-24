@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `51` (plus 3 infrastructure scripts and 52 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `33`
+- **Total Verified Modules:** `52` (plus 3 infrastructure scripts and 53 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `34`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -75,13 +75,14 @@ python tools/discovery/discovery_council.py --check-index
 | `vector_redosing_kinetics.py` | `T-0198` | `T2` | `keep` | Canonical workbench |
 | `vx522_inhaled_lnp_mucus_diffusion.py` | `T-0400` | `T2` | `keep` | Canonical workbench |
 
-## Microbiology, Phage Therapy & Host Defense (`microbiology_host` — 4 modules)
+## Microbiology, Phage Therapy & Host Defense (`microbiology_host` — 5 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
 | `macrophage_efferocytosis_model.py` | `T-0251` | `T2` | `merge` | Merge into `macrophage_evasion_kinetics.py` |
 | `macrophage_evasion_kinetics.py` | `T-0271` | `T2` | `keep` | Canonical workbench |
 | `phage_biofilm_kinetics.py` | `T-0197` | `T2` | `keep` | Canonical workbench |
+| `phage_depolymerase_biofilm_synergy.py` | `T-0402` | `T2` | `keep` | Canonical workbench |
 | `phage_omko1_tradeoff.py` | `T-0246` | `T2` | `keep` | Canonical workbench |
 
 ## Clinical Trials, Registries & Theratyping (`clinical_trials` — 2 modules)
