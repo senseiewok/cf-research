@@ -2,7 +2,11 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
+<<<<<<< HEAD
 62 to download by hand, 1 to ask for, 3 not to download.
+=======
+55 to download by hand, 1 to ask for, 3 not to download.
+>>>>>>> origin/main
 
 ## How this works
 
@@ -54,6 +58,7 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | anfq-pt-resource-pages | Associação Nacional de Fibrose Quística website (anfq.pt) | [page](https://www.anfq.pt/) | link only | Official national cystic fibrosis patient association in Portugal. |
 
+<<<<<<< HEAD
 ### Bulgarian Cystic Fibrosis Association
 
 | ID | What | Open | Save as | Notes |
@@ -65,6 +70,13 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cisztasfibrozis-hu-resource-pages | Cisztás Fibrózis Betegek Egyesülete website (cisztasfibrozis.hu) | [page](https://www.cisztasfibrozis.hu/) | link only | Official national cystic fibrosis patient association in Hungary (Cisztás Fibrózis Betegek Egyesülete). |
+=======
+### BioMed Central Limited on behalf of ISRCTN
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| isrctn | ISRCTN Clinical Study Registry (UK and international clinical trials) | [page](https://www.isrctn.com/) | link only | Terms read 2026-10-24 via read-page on https://www.isrctn.com/page/terms (robots.txt 200, allowed). |
+>>>>>>> origin/main
 
 ### Cochrane
 
@@ -264,6 +276,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | muko-resource-pages | Mukoviszidose e.V. website (www.muko.info) | [page](https://www.muko.info/) | link only | Official federal cystic fibrosis patient, family, clinician, and researcher association in Germany. |
+
+### National Institute for Health and Care Excellence (NICE)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| nice-guidance | UK NICE Clinical Guidance and Technology Appraisals (NG78 Cystic Fibrosis and TA988) | [page](https://www.nice.org.uk/guidance/ng78) | link only | Terms read 2026-10-24 via read-page on https://www.nice.org.uk/terms-and-conditions (robots.txt 200, allowed). |
 
 ### Nederlandse Cystic Fibrosis Stichting
 

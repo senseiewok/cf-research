@@ -134,6 +134,52 @@ class TestCheckAntiHallucination(unittest.TestCase):
         self.assertTrue(any("10.1056/NEJMoa9999999" in f and "AH-6" in f for f in fails))
         self.assertTrue(any("PMID 99999999" in f and "AH-6" in f for f in fails))
 
+    def test_ah8_multi_source_cross_verification_guards(self):
+        """Rule AH-8 must reject bare ChEMBL potency without assay context, FAERS causal overclaims, and unlabelled Scite polarity."""
+        # 1. Clean ChEMBL, FAERS, and Scite sentences
+        clean = (
+            "Ivacaftor (CHEMBL2010601) demonstrated EC50 = 22.0 nM (pChEMBL 7.66) in primary HBE Ussing chamber assay CHEMBL3385212 (F508del,G551D).\n"
+            "Open Targets FAERS disproportionality (logLR = 9317.7) reflects confounding by the treated CF indication, not causal toxicity.\n"
+            "Scite reports 142 supporting citations [observed: Scite ML citation classification, accessed 2026-10-24].\n"
+        )
+        self.assertEqual(cah.check_multi_source_cross_verification(Path("test.md"), clean), [])
+
+        # 2. Bare ChEMBL potency without assay context
+        bad_chembl = "Ivacaftor (CHEMBL2010601) has a universal EC50 = 22.0 nM across patients."
+        fails_chembl = cah.check_multi_source_cross_verification(Path("test.md"), bad_chembl)
+        self.assertEqual(len(fails_chembl), 1)
+        self.assertIn("FAIL AH-8 [multi-source-cross-verification]", fails_chembl[0])
+        self.assertIn("ChEMBL potency value", fails_chembl[0])
+
+        # 2b. Line-wrapped markdown with assay context on the adjacent line passes cleanly
+        wrapped_clean = (
+            "Ivacaftor (CHEMBL2010601) demonstrated pEC50 = 7.66\n"
+            "in primary HBE Ussing chambers (F508del,G551D).\n"
+        )
+        self.assertEqual(cah.check_multi_source_cross_verification(Path("test.md"), wrapped_clean), [])
+
+        # 2c. Bare pEC50 without assay context fails
+        bad_pec50 = "Ivacaftor (CHEMBL2010601) has pEC50 = 7.66."
+        self.assertEqual(len(cah.check_multi_source_cross_verification(Path("test.md"), bad_pec50)), 1)
+
+        # 3. FAERS causal overclaim (including article bypass 'proves a causal link')
+        for bad_faers in (
+            "The Open Targets FAERS logLR = 9317.7 proves causal toxicity of ivacaftor.",
+            "FAERS logLR proves a causal link between ivacaftor and pulmonary exacerbations.",
+        ):
+            fails_faers = cah.check_multi_source_cross_verification(Path("test.md"), bad_faers)
+            self.assertEqual(len(fails_faers), 1)
+            self.assertIn("FAERS disproportionality", fails_faers[0])
+
+        # 4. Unlabelled Scite citation polarity (citations, statements, studies)
+        for bad_scite in (
+            "Scite shows 142 supporting citations and 0 contrasting citations for this study.",
+            "Scite identified 3 contrasting statements in subsequent papers.",
+        ):
+            fails_scite = cah.check_multi_source_cross_verification(Path("test.md"), bad_scite)
+            self.assertEqual(len(fails_scite), 1)
+            self.assertIn("Scite supporting/contrasting citation polarity", fails_scite[0])
+
     def test_main_cli_execution(self):
         """CLI main entry point must execute cleanly and return 0 for the valid repository."""
         ret = cah.main(["--root", str(REPO_ROOT)])
