@@ -51,7 +51,7 @@ class TestCatalogAndGrounding:
     def test_clinical_trial_grounding(self):
         for name, mut in MUTATION_SPLICE_CATALOG.items():
             assert mut.clinical_trial_nct == "NCT06429176"
-            assert mut.evidence_doi in ("10.1016/j.omtn.2020.08.017", "10.1056/NEJM199410133311503")
+            assert mut.evidence_doi in ("10.1016/j.jcf.2024.10.004", "10.1056/NEJM199410133311503")
 
 
 class TestBiophysicalMechanisms:
