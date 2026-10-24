@@ -22,6 +22,7 @@ from discovery_council import (
     discover_biophysical_modules,
     generate_discovery_catalog,
     render_discovery_readme,
+    synthesize_cross_scale_discoveries,
     phase1_generative_synthesis,
     phase2_orthogonal_falsification,
     phase3_epistemic_verification,
@@ -217,3 +218,31 @@ def test_dynamic_module_registry_audit():
 
     drift = check_discovery_index_drift()
     assert drift["status"] == "PASS", f"On-disk catalog.json or README.md out of sync: {drift}"
+
+
+def test_synthesize_cross_scale_discoveries():
+    """Verify deterministic 3-engine cross-scale discovery synthesis with observed, computed, and inferred tiers."""
+    report = synthesize_cross_scale_discoveries()
+    assert report["status"] == "PASS"
+    assert report["answer_tier"] == "T2"
+
+    eng_a = report["engine_a_genotype_trial_registry_gap"]
+    assert eng_a["observed"]["kind"] == "observed"
+    assert eng_a["observed"]["cftr2_variants_indexed"] == 209
+    assert eng_a["observed"]["recruiting_trials"] == 57
+    assert eng_a["computed"]["kind"] == "computed"
+    assert eng_a["computed"]["genetic_replacement_recruiting_count"] == 5
+    assert eng_a["inferred"]["kind"] == "inferred"
+
+    eng_b = report["engine_b_modality_endpoint_compartmentalization"]
+    assert eng_b["observed"]["nonzero_outcome_pairs"] == 102
+    assert eng_b["computed"]["fev1_sweat_co_primary_studies"] == 4
+    assert eng_b["computed"]["fev1_sweat_share_of_fev1_pct"] == 1.53
+    assert "NCT05668741" in eng_b["inferred"]["synthesis"]
+
+    eng_c = report["engine_c_chained_curative_bottleneck_pipeline"]
+    assert eng_c["observed"]["indexed_discovery_modules"] == 50
+    assert eng_c["computed"]["g542x_trimodal_isc_pct_wt"] >= 10.0
+    assert eng_c["computed"]["mucus_penetration_fold_gain"] > 100.0
+    assert eng_c["inferred"]["rate_limiting_bottleneck"] == "airway_delivery_and_stem_cell_persistence"
+

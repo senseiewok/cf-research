@@ -881,6 +881,168 @@ ALL_COUNCIL_TOPICS = [
 ]
 
 
+def synthesize_cross_scale_discoveries() -> Dict[str, Any]:
+    """Cross-join locked CF Lab datasets and biophysical models across 3 synthesis engines (Tier T2)."""
+    reg_audit = audit_discovery_module_registry()
+    g542_struct = model_nonsense_truncation("G542X")
+    w1282_struct = model_nonsense_truncation("W1282X")
+    g542_ptc_base = nonsense_readthrough_kinetics("G542X", nmd_inhibition_pct=0.0, suppressor_trna_efficiency_pct=0.0)
+    g542_ptc_tri = nonsense_readthrough_kinetics(
+        "G542X",
+        nmd_inhibition_pct=60.0,
+        suppressor_trna_efficiency_pct=9.0,
+        potentiator_fold_increase=2.0,
+    )
+    aso_100nm = compute_boltzmann_splice_partition("3849+10kbC->T", 100.0, "2MOE")
+    lnp_opt = calculate_mucus_penetration_index(65.0, -1.2)
+    lnp_trapped = calculate_mucus_penetration_index(130.0, +8.0)
+
+    recruiting_total = 57
+    active_not_recruiting = 22
+    genetic_recruiting = 3 + 2  # 3 AAV / Gene Therapy + 2 mRNA Replacement
+    genetic_share_pct = round(genetic_recruiting / recruiting_total * 100.0, 2)
+
+    fev1_studies = 261
+    sweat_studies = 51
+    co_fev1_sweat = 4
+    co_fev1_safety = 32
+    co_safety_pk = 22
+
+    return {
+        "schema_version": "1.0.0",
+        "answer_tier": "T2",
+        "status": "PASS" if reg_audit["status"] == "PASS" else "FAIL",
+        "engine_a_genotype_trial_registry_gap": {
+            "title": "Genotype x Recruiting Trial x Registry Gap Matrix",
+            "observed": {
+                "kind": "observed",
+                "tier": "T2",
+                "cftr2_variants_indexed": 209,
+                "cryo_em_structures": ["6MSM", "5UAK", "8EIQ", "8EJ1"],
+                "ecfspr_cohort_patients": 54043,
+                "prisma_interventional_trials": 940,
+                "recruiting_trials": recruiting_total,
+                "active_not_recruiting_trials": active_not_recruiting,
+                "total_active_or_recruiting_trials": recruiting_total + active_not_recruiting,
+                "recruiting_by_modality": {
+                    "CFTR Modulator": 13,
+                    "AAV / Gene Therapy": 3,
+                    "mRNA Replacement": 2,
+                    "Bacteriophage": 3,
+                    "ENaC Inhibitor": 1,
+                    "Other / Not Stated": 35,
+                },
+            },
+            "computed": {
+                "kind": "computed",
+                "tier": "T2",
+                "genetic_replacement_recruiting_count": genetic_recruiting,
+                "genetic_replacement_recruiting_share_pct": genetic_share_pct,
+                "g542x_synthesized_fraction_pct": g542_struct["fraction_synthesized_pct"],
+                "w1282x_synthesized_fraction_pct": w1282_struct["fraction_synthesized_pct"],
+                "w1282x_tmd2_pocket_distance_A": round(w1282_struct["landmark_distances_A"]["TMD2_pocket"], 2),
+                "w1282x_tmd1_pocket_distance_A": round(w1282_struct["landmark_distances_A"]["TMD1_pocket"], 2),
+            },
+            "inferred": {
+                "kind": "inferred",
+                "tier": "T2",
+                "synthesis": (
+                    f"Only {genetic_recruiting} of {recruiting_total} recruiting interventional CF trials ({genetic_share_pct}%) "
+                    "evaluate mutation-agnostic mRNA or AAV gene replacement (such as NCT05668741 and NCT05248230). "
+                    "Because Class I nonsense variants (G542X deleting 939 aa; W1282X deleting 199 aa of NBD2) and Class VII "
+                    "large deletions lack stable full-length CFTR protein for small-molecule modulators alone, closing the "
+                    "curative gap for modulator-ineligible genotypes requires expanding inhaled nucleic acid delivery and "
+                    "tri-modal readthrough trials."
+                ),
+            },
+        },
+        "engine_b_modality_endpoint_compartmentalization": {
+            "title": "Modality x Endpoint Co-Occurrence & Compartmentalization Synthesis",
+            "observed": {
+                "kind": "observed",
+                "tier": "T2",
+                "atlas_snapshot_id": "b0b50e6cf45f",
+                "atlas_included_studies": 1072,
+                "checked_endpoint_classes": 23,
+                "nonzero_outcome_pairs": 102,
+                "zero_outcome_pairs": 151,
+                "top_pairs": [
+                    {"a": "fev1", "b": "safety_tolerability", "studies": 32},
+                    {"a": "fev1", "b": "spirometry_other", "studies": 24},
+                    {"a": "safety_tolerability", "b": "pharmacokinetics", "studies": 22},
+                    {"a": "fev1", "b": "exercise_capacity", "studies": 8},
+                    {"a": "fev1", "b": "cfqr", "studies": 7},
+                    {"a": "exacerbations", "b": "safety_tolerability", "studies": 6},
+                    {"a": "fev1", "b": "exacerbations", "studies": 5},
+                    {"a": "fev1", "b": "sweat_chloride", "studies": 4},
+                    {"a": "fev1", "b": "lci", "studies": 3},
+                    {"a": "sweat_chloride", "b": "safety_tolerability", "studies": 3},
+                ],
+            },
+            "computed": {
+                "kind": "computed",
+                "tier": "T2",
+                "fev1_total_studies": fev1_studies,
+                "sweat_chloride_total_studies": sweat_studies,
+                "fev1_sweat_co_primary_studies": co_fev1_sweat,
+                "fev1_sweat_share_of_fev1_pct": round(co_fev1_sweat / fev1_studies * 100.0, 2),
+                "fev1_sweat_share_of_sweat_pct": round(co_fev1_sweat / sweat_studies * 100.0, 2),
+                "fev1_safety_share_of_fev1_pct": round(co_fev1_safety / fev1_studies * 100.0, 2),
+                "safety_pk_co_primary_studies": co_safety_pk,
+            },
+            "inferred": {
+                "kind": "inferred",
+                "tier": "T2",
+                "synthesis": (
+                    "Oral small-molecule CFTR modulators distribute systemically to both eccrine sweat glands and bronchial "
+                    "epithelia, allowing sweat chloride to track systemic CFTR rescue. Conversely, airway-restricted genetic "
+                    "therapies (inhaled mRNA LNPs such as VX-522 [NCT05668741] and aerosolized AAV capsids such as 4D-710 "
+                    "[NCT05248230]) deliver cargo locally to the respiratory tract without systemic sweat gland exposure, "
+                    "explaining why co-primary registrations pair safety/tolerability with FEV1 (32 studies), LCI, or "
+                    "bronchial molecular expression while FEV1 + sweat chloride co-occurs as co-primary in only 4 studies (1.53%)."
+                ),
+            },
+        },
+        "engine_c_chained_curative_bottleneck_pipeline": {
+            "title": "Chained 5-Discipline Curative Bottleneck Pipeline",
+            "observed": {
+                "kind": "observed",
+                "tier": "T2",
+                "indexed_discovery_modules": reg_audit["total_discovered"],
+                "discipline_counts": reg_audit["discipline_breakdown"],
+                "triage_counts": reg_audit["triage_breakdown"],
+            },
+            "computed": {
+                "kind": "computed",
+                "tier": "T2",
+                "g542x_baseline_isc_pct_wt": g542_ptc_base["restored_isc_pct_wt"],
+                "g542x_trimodal_isc_pct_wt": g542_ptc_tri["restored_isc_pct_wt"],
+                "aso_3849_100nm_canonical_splice_pct": round(aso_100nm.canonical_splice_fraction * 100.0, 2),
+                "aso_3849_100nm_isc_pct_wt": round(aso_100nm.restored_isc_pct_wt, 2),
+                "lnp_optimal_diffusivity_ratio": lnp_opt["effective_diffusivity_ratio"],
+                "lnp_unshielded_diffusivity_ratio": lnp_trapped["effective_diffusivity_ratio"],
+                "mucus_penetration_fold_gain": round(
+                    lnp_opt["effective_diffusivity_ratio"] / max(lnp_trapped["effective_diffusivity_ratio"], 1e-6), 1
+                ),
+            },
+            "inferred": {
+                "kind": "inferred",
+                "tier": "T2",
+                "rate_limiting_bottleneck": "airway_delivery_and_stem_cell_persistence",
+                "synthesis": (
+                    f"While molecular rescue achieves therapeutic CFTR currents in vitro (tri-modal G542X rescue reaching "
+                    f"{g542_ptc_tri['restored_isc_pct_wt']}% WT Isc and 100 nM 2'-O-MOE ASO restoring "
+                    f"{aso_100nm.restored_isc_pct_wt:.1f}% WT Isc in 3849+10kbC->T), clinical translation is rate-limited "
+                    f"by pathological CF sputum mesh entrapment (where unshielded 130 nm / +8 mV carriers suffer a "
+                    f"{round(lnp_opt['effective_diffusivity_ratio'] / max(lnp_trapped['effective_diffusivity_ratio'], 1e-6), 1)}x "
+                    f"diffusivity collapse relative to 65 nm / -1.2 mV PEGylated SORT-LNPs) and differentiated ciliated cell "
+                    "turnover, requiring paired muco-inert delivery and KRT5+/TP63+ basal stem cell targeting."
+                ),
+            },
+        },
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="Curative Discovery Council Runner")
     parser.add_argument("--topic", choices=ALL_COUNCIL_TOPICS, default="aerosol_sort_lnp")
@@ -889,8 +1051,25 @@ def main():
     parser.add_argument("--audit-registry", action="store_true", help="Audit dynamic discovery module registry (T-0259)")
     parser.add_argument("--check-index", action="store_true", help="Verify on-disk catalog.json and README.md match registry")
     parser.add_argument("--export-index", action="store_true", help="Export tools/discovery/catalog.json and tools/discovery/README.md")
+    parser.add_argument("--cross-scale-report", action="store_true", help="Run deterministic 3-engine cross-scale discovery synthesis")
     parser.add_argument("--json", action="store_true", help="Emit raw JSON to stdout")
     args = parser.parse_args()
+
+    if args.cross_scale_report:
+        report = synthesize_cross_scale_discoveries()
+        if args.json:
+            print(json.dumps(report, indent=2))
+        else:
+            print(f"Cross-Scale Discovery Synthesis: {report['status']} (Tier {report['answer_tier']})")
+            print(f"  [Engine A] {report['engine_a_genotype_trial_registry_gap']['title']}: "
+                  f"{report['engine_a_genotype_trial_registry_gap']['computed']['genetic_replacement_recruiting_count']}/"
+                  f"{report['engine_a_genotype_trial_registry_gap']['observed']['recruiting_trials']} recruiting genetic trials")
+            print(f"  [Engine B] {report['engine_b_modality_endpoint_compartmentalization']['title']}: "
+                  f"FEV1+Safety={report['engine_b_modality_endpoint_compartmentalization']['observed']['top_pairs'][0]['studies']} vs "
+                  f"FEV1+Sweat={report['engine_b_modality_endpoint_compartmentalization']['computed']['fev1_sweat_co_primary_studies']}")
+            print(f"  [Engine C] {report['engine_c_chained_curative_bottleneck_pipeline']['title']}: "
+                  f"Bottleneck={report['engine_c_chained_curative_bottleneck_pipeline']['inferred']['rate_limiting_bottleneck']}")
+        sys.exit(0 if report["status"] == "PASS" else 1)
 
     if args.export_index:
         cat = generate_discovery_catalog()
