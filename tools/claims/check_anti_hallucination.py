@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Deterministic anti-hallucination guardrails across cf-research.
 
-Enforces 5 strict deterministic invariants across proposals, landscape documents,
+Enforces 8 strict deterministic invariants across proposals, landscape documents,
 and tools/discovery biophysical models:
   AH-1 [nct-provenance]: Every NCT identifier cited in proposals/*.md, landscape/*.md,
        or landscape/*-claims.json must exist in tools/trial_atlas/snapshot.json.
@@ -18,6 +18,11 @@ and tools/discovery biophysical models:
   AH-6 [cite-check-ledger-provenance]: Every DOI, PMID, and NCT identifier cited in
        landscape/*.md and tools/discovery/*.py must be verified with verdict=PASS in
        sources/cite-check-ledger.jsonl (offline ledger generated via cf-evidence-loop cite-check).
+  AH-7 [synthetic-discovery-tier-guard]: Synthetic discovery scripts and exported snapshots
+       must never claim 'Tier T2/T3 Certified' without line-level source quotes.
+  AH-8 [multi-source-cross-verification]: ChEMBL potency values (EC50/IC50/pEC50/pIC50/Ki/Kd/pChEMBL)
+       require assay context (assay ID / cell system / genotype), FAERS logLR must never be asserted
+       as causal toxicity, and Scite polarity counts require '[observed: Scite ML citation classification...]'.
 
 Zero network. Deterministic verification. Standard library only.
 """
@@ -322,6 +327,57 @@ def check_cite_check_ledger_provenance(
     return failures
 
 
+CHEMBL_BARE_POTENCY_RE = re.compile(
+    r"\bCHEMBL\d+\b[^\n]*?\b(?:p?EC50|p?IC50|Ki|Kd|pChEMBL)\b|\b(?:p?EC50|p?IC50|Ki|Kd|pChEMBL)\b[^\n]*?\bCHEMBL\d+\b",
+    re.IGNORECASE,
+)
+ASSAY_CONTEXT_RE = re.compile(
+    r"\b(?:assay|HBE|hNEC|ALI|Ussing|NIH-3T3|FRT|HEK|CHO|CFBE|Calu-3|organoid|nasal|transepithelial|electrophysiology|primary|cell|chamber|optical|patch|F508del|G551D|W1282X|G542X|N1303K|R117H|wild-type|WT|genotype|variant)\b",
+    re.IGNORECASE,
+)
+FAERS_CAUSAL_OVERCLAIM_RE = re.compile(
+    r"\b(?:FAERS|logLR|log_lr)\b[^\n]*?\b(?:proves?|establishes?|confirm(?:s|ed)?)\b[^\n]*?\bcausal(?:ity)?\b|"
+    r"\b(?:FAERS|logLR|log_lr)\b[^\n]*?\bcauses?\s+pulmonary\s+exacerbation\b",
+    re.IGNORECASE,
+)
+SCITE_UNLABELLED_POLARITY_RE = re.compile(
+    r"\bScite\b[^\n]*?\b(?:supporting|contrasting)\s+(?:citations?|statements?|studies|papers)\b",
+    re.IGNORECASE,
+)
+SCITE_PROVENANCE_LABEL_RE = re.compile(
+    r"\[observed:\s*Scite\s+ML\s+citation\s+classification|Scite\s+ML\s+classifier|machine-learning\s+citation",
+    re.IGNORECASE,
+)
+
+
+def check_multi_source_cross_verification(
+    file_path: Path,
+    content: str,
+) -> list[str]:
+    """Rule AH-8: Multi-source cross-verification for ChEMBL assay context, FAERS confounding, and Scite polarity."""
+    failures: list[str] = []
+    lines = content.splitlines()
+    for idx, line in enumerate(lines):
+        line_no = idx + 1
+        window = " ".join(lines[max(0, idx - 1) : min(len(lines), idx + 2)])
+        if CHEMBL_BARE_POTENCY_RE.search(line) and not ASSAY_CONTEXT_RE.search(window):
+            failures.append(
+                f"FAIL AH-8 [multi-source-cross-verification] {file_path.as_posix()}:{line_no}: "
+                "ChEMBL potency value (EC50/IC50/pEC50/pIC50/Ki/Kd/pChEMBL) cited without assay context (assay ID, cell system, or variant genotype)"
+            )
+        if FAERS_CAUSAL_OVERCLAIM_RE.search(line):
+            failures.append(
+                f"FAIL AH-8 [multi-source-cross-verification] {file_path.as_posix()}:{line_no}: "
+                "FAERS disproportionality (logLR) asserted as causal drug toxicity (confounding-by-indication violation)"
+            )
+        if SCITE_UNLABELLED_POLARITY_RE.search(line) and not SCITE_PROVENANCE_LABEL_RE.search(window):
+            failures.append(
+                f"FAIL AH-8 [multi-source-cross-verification] {file_path.as_posix()}:{line_no}: "
+                "Scite supporting/contrasting citation polarity cited without '[observed: Scite ML citation classification...]' provenance label"
+            )
+    return failures
+
+
 def run_checks(
     repo_root: Path | str | None = None,
     snapshot_path: Path | str | None = None,
@@ -402,6 +458,14 @@ def run_checks(
                     "synthetic discovery script or snapshot cannot claim 'Tier T2/T3 Certified' without line-level source quotes"
                 )
 
+    # Rule AH-8: Multi-Source Cross-Verification (ChEMBL Assay Context, FAERS Confounding, Scite Polarity)
+    for p in target_files:
+        try:
+            content = p.read_text(encoding="utf-8")
+        except Exception:
+            continue
+        failures.extend(check_multi_source_cross_verification(p, content))
+
     return failures
 
 
@@ -422,7 +486,8 @@ def main(argv: list[str] | None = None) -> int:
     print("Enforcing: AH-1 (NCT Provenance), AH-2 (PRISMA Consistency),")
     print("           AH-3 (Companion Grounding), AH-4 (Clinical Overclaim Guard),")
     print("           AH-5 (Discovery Module Registration & Council Verification),")
-    print("           AH-6 (Cite-Check Ledger Provenance for DOIs, PMIDs, and NCTs)")
+    print("           AH-6 (Cite-Check Ledger Provenance), AH-7 (Synthetic Discovery Tier Guard),")
+    print("           AH-8 (Multi-Source Cross-Verification: ChEMBL, Open Targets FAERS & Scite)")
     print("=" * 72)
 
     failures = run_checks(args.root, args.snapshot)
@@ -439,6 +504,8 @@ def main(argv: list[str] | None = None) -> int:
     print("PASS AH-4 [clinical-overclaim-guard]: zero prohibited clinical promise phrases detected")
     print("PASS AH-5 [discovery-module-registration]: 100% of tools/discovery models registered & verified")
     print("PASS AH-6 [cite-check-ledger-provenance]: 100% of DOIs, PMIDs, and NCTs verified in sources/cite-check-ledger.jsonl")
+    print("PASS AH-7 [synthetic-discovery-tier-guard]: synthetic discovery scripts strictly forbid ungrounded Tier T2/T3 certification")
+    print("PASS AH-8 [multi-source-cross-verification]: ChEMBL assay context, FAERS non-causality, and Scite ML polarity labels verified")
     print("=" * 72)
     print("RESULT: PASS (all anti-hallucination guardrails satisfied)")
     return 0
