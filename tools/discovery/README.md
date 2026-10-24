@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `52` (plus 3 infrastructure scripts and 53 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `34`
+- **Total Verified Modules:** `53` (plus 3 infrastructure scripts and 54 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `35`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -28,7 +28,7 @@ python tools/discovery/discovery_council.py --check-index
 | `pdi_redox_remodeling.py` | `T-0281` | `T2` | `archive` | Candidate for archive |
 | `ptc_cryoem_allostery.py` | `T-0217` | `T2` | `merge` | Merge into `cryoem_truncation_model.py` |
 
-## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 16 modules)
+## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 17 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -45,6 +45,7 @@ python tools/discovery/discovery_council.py --check-index
 | `nmd_ptc_kinetics.py` | `T-0241` | `T2` | `merge` | Merge into `ptc_erf_depletion_readthrough.py` |
 | `prime_editing_cftr.py` | `T-0184` | `T2` | `merge` | Merge into `class1_prime_base_editing.py` |
 | `ptc_erf_depletion_readthrough.py` | `T-0401` | `T2` | `keep` | Canonical workbench |
+| `split_intein_cftr_reconstitution.py` | `T-0393` | `T2` | `keep` | Canonical workbench |
 | `suppressor_trna_model.py` | `T-0216` | `T2` | `keep` | Canonical workbench |
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |

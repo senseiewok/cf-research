@@ -286,6 +286,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0265", "track": "Track A", "tier": "T2",
         "discipline": "ai_verification", "persona": "builders", "triage": "keep",
     },
+    "split_intein_cftr_reconstitution": {
+        "task": "T-0393", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
     "suppressor_trna_model": {
         "task": "T-0216", "track": "Track A", "tier": "T2",
         "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
