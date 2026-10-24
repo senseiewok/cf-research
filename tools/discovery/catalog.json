@@ -6,21 +6,21 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 52,
+  "total_modules": 53,
   "infrastructure_modules_count": 3,
-  "test_suites_count": 53,
+  "test_suites_count": 54,
   "persona_summary": {
-    "researchers": 51,
+    "researchers": 52,
     "builders": 1
   },
   "triage_summary": {
-    "keep": 34,
+    "keep": 35,
     "merge": 14,
     "archive": 4
   },
   "discipline_summary": {
     "structural_biology": 7,
-    "rna_gene_editing": 16,
+    "rna_gene_editing": 17,
     "airway_delivery": 21,
     "microbiology_host": 5,
     "clinical_trials": 2,
@@ -115,8 +115,8 @@
     },
     "rna_gene_editing": {
       "label": "RNA, Nonsense Readthrough & Gene Editing",
-      "count": 16,
-      "keep_count": 9,
+      "count": 17,
+      "keep_count": 10,
       "merge_count": 5,
       "archive_count": 2,
       "modules": [
@@ -255,6 +255,17 @@
         {
           "module": "ptc_erf_depletion_readthrough",
           "task": "T-0401",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "split_intein_cftr_reconstitution",
+          "task": "T-0393",
           "track": "Track A",
           "tier": "T2",
           "discipline": "rna_gene_editing",
