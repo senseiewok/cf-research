@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `50` (plus 3 infrastructure scripts and 51 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `32`
+- **Total Verified Modules:** `51` (plus 3 infrastructure scripts and 52 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `33`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -49,7 +49,7 @@ python tools/discovery/discovery_council.py --check-index
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 20 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 21 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -73,6 +73,7 @@ python tools/discovery/discovery_council.py --check-index
 | `tmem16a_conductance_model.py` | `T-0240` | `T2` | `merge` | Merge into `tmem16a_calcium_conductance_model.py` |
 | `transcytosis_model.py` | `T-0177` | `T2` | `keep` | Canonical workbench |
 | `vector_redosing_kinetics.py` | `T-0198` | `T2` | `keep` | Canonical workbench |
+| `vx522_inhaled_lnp_mucus_diffusion.py` | `T-0400` | `T2` | `keep` | Canonical workbench |
 
 ## Microbiology, Phage Therapy & Host Defense (`microbiology_host` — 4 modules)
 

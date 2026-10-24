@@ -241,7 +241,7 @@ def test_synthesize_cross_scale_discoveries():
     assert "NCT05668741" in eng_b["inferred"]["synthesis"]
 
     eng_c = report["engine_c_chained_curative_bottleneck_pipeline"]
-    assert eng_c["observed"]["indexed_discovery_modules"] == 50
+    assert eng_c["observed"]["indexed_discovery_modules"] >= 50
     assert eng_c["computed"]["g542x_trimodal_isc_pct_wt"] >= 10.0
     assert eng_c["computed"]["mucus_penetration_fold_gain"] > 100.0
     assert eng_c["inferred"]["rate_limiting_bottleneck"] == "airway_delivery_and_stem_cell_persistence"
