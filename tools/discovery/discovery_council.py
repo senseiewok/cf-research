@@ -124,6 +124,7 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "u1_snrnp_decoy_kinetics": {"task": "T-0292", "track": "Track A", "tier": "T2"},
     "u1_snrnp_decoy_thermodynamics": {"task": "T-0352", "track": "Track A", "tier": "T2"},
     "vector_redosing_kinetics": {"task": "T-0198", "track": "Track A", "tier": "T2"},
+    "vx522_inhaled_lnp_mucus_diffusion": {"task": "T-0400", "track": "Track A", "tier": "T2"},
 }
 
 
