@@ -114,6 +114,7 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "phage_omko1_tradeoff": {"task": "T-0246", "track": "Track A", "tier": "T2"},
     "prime_editing_cftr": {"task": "T-0184", "track": "Track A", "tier": "T2"},
     "ptc_cryoem_allostery": {"task": "T-0217", "track": "Track A", "tier": "T2"},
+    "ptc_erf_depletion_readthrough": {"task": "T-0401", "track": "Track A", "tier": "T2"},
     "rare_allele_matrix": {"task": "T-0201", "track": "Track B", "tier": "T2"},
     "science_model_benchmark": {"task": "T-0265", "track": "Track A", "tier": "T2"},
     "suppressor_trna_model": {"task": "T-0216", "track": "Track A", "tier": "T2"},
