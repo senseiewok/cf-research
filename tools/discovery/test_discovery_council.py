@@ -14,8 +14,14 @@ from biophysical_models import (
 from discovery_council import (
     COUNCIL_VERIFIER_FAMILIES,
     DISCOVERY_MODULE_REGISTRY,
+    VALID_DISCIPLINES,
+    VALID_PERSONAS,
+    VALID_TRIAGE_DISPOSITIONS,
     audit_discovery_module_registry,
+    check_discovery_index_drift,
     discover_biophysical_modules,
+    generate_discovery_catalog,
+    render_discovery_readme,
     phase1_generative_synthesis,
     phase2_orthogonal_falsification,
     phase3_epistemic_verification,
@@ -35,7 +41,7 @@ def test_cf_mucus_steric_retardation():
     """Particles under 70 nm must diffuse through 110 nm pores; >150 nm particles entrapped."""
     retard_65nm = cf_mucus_steric_retardation(65.0, mesh_pore_diameter_nm=110.0)
     retard_160nm = cf_mucus_steric_retardation(160.0, mesh_pore_diameter_nm=110.0)
-    
+
     assert retard_65nm > 0.25, f"Expected high transmission for 65 nm particle, got {retard_65nm}"
     assert retard_160nm <= 0.01, f"Expected entrapment for 160 nm particle, got {retard_160nm}"
 
@@ -44,7 +50,7 @@ def test_electrostatic_mucin_adhesion_penalty():
     """Near-neutral zeta (-2 mV) transmits freely; cationic (+10 mV) trapped by polyanionic mucins."""
     neutral_pen = electrostatic_mucin_adhesion_penalty(-2.0)
     cationic_pen = electrostatic_mucin_adhesion_penalty(+10.0)
-    
+
     assert neutral_pen > 0.85, f"Expected >85% transmission for near-neutral particle, got {neutral_pen}"
     assert cationic_pen < 0.05, f"Expected severe entrapment for cationic particle, got {cationic_pen}"
 
@@ -61,12 +67,10 @@ def test_mucus_penetration_index_optimal_bounds():
 
 def test_nonsense_readthrough_kinetics_g542x():
     """G542X requires tri-modal rescue (NMD inhibition + suppressor tRNA + potentiator) to hit 10% WT current."""
-    # Baseline alone
     base = nonsense_readthrough_kinetics("G542X", nmd_inhibition_pct=0.0, suppressor_trna_efficiency_pct=0.0)
     assert base["clinical_therapeutic_threshold_met"] is False
     assert base["restored_isc_pct_wt"] < 1.0
 
-    # Tri-modal synergy
     synergy = nonsense_readthrough_kinetics(
         "G542X",
         nmd_inhibition_pct=60.0,
@@ -189,8 +193,27 @@ def test_dynamic_module_registry_audit():
     audit = audit_discovery_module_registry()
     assert audit["status"] == "PASS", f"Expected PASS, got: {audit}"
     assert audit["unregistered_modules"] == []
+    assert audit["stale_registry_entries"] == []
     assert audit["missing_test_suites"] == []
+    assert audit["invalid_taxonomy"] == []
+    assert sum(audit["discipline_breakdown"].values()) == audit["total_discovered"]
+    assert sum(audit["triage_breakdown"].values()) == audit["total_discovered"]
+    assert sum(audit["persona_breakdown"].values()) == audit["total_discovered"]
     assert len(audit["verifier_families"]) >= 4
     assert len(COUNCIL_VERIFIER_FAMILIES) >= 4
     assert "biophysical_models" in DISCOVERY_MODULE_REGISTRY
     assert "aso_splice_kinetics" in DISCOVERY_MODULE_REGISTRY
+
+    catalog = generate_discovery_catalog()
+    assert catalog["audit_status"] == "PASS"
+    assert catalog["surface_primary_axis"] == "discipline"
+    assert catalog["persona_scopes"] == list(VALID_PERSONAS)
+    assert catalog["total_modules"] == audit["total_discovered"]
+    for disc in VALID_DISCIPLINES:
+        assert disc in catalog["disciplines"]
+    readme = render_discovery_readme(catalog)
+    assert "# CF Research Discovery Workbench" in readme
+    assert "Structural Biology & CFTR Biophysics" in readme
+
+    drift = check_discovery_index_drift()
+    assert drift["status"] == "PASS", f"On-disk catalog.json or README.md out of sync: {drift}"
