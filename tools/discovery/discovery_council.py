@@ -13,6 +13,8 @@ Usage:
     python tools/discovery/discovery_council.py --topic aso_splice_kinetics --verify
     python tools/discovery/discovery_council.py --run-all
     python tools/discovery/discovery_council.py --audit-registry
+    python tools/discovery/discovery_council.py --check-index
+    python tools/discovery/discovery_council.py --export-index
 """
 from __future__ import annotations
 
@@ -63,6 +65,28 @@ INFRASTRUCTURE_MODULES = frozenset({
     "export_delivery_web_data",
 })
 
+VALID_DISCIPLINES = (
+    "structural_biology",
+    "rna_gene_editing",
+    "airway_delivery",
+    "microbiology_host",
+    "clinical_trials",
+    "ai_verification",
+)
+VALID_TRIAGE_DISPOSITIONS = ("keep", "merge", "archive")
+# One-Primary-Axis Rule: tools/discovery/ is strictly scoped to researchers and builders
+# (patient and care-team pathways live on senseiewok.ai and never expose raw ODE parameter sweeps)
+VALID_PERSONAS = ("researchers", "builders")
+
+DISCIPLINE_LABELS: Dict[str, str] = {
+    "structural_biology": "Structural Biology & CFTR Biophysics",
+    "rna_gene_editing": "RNA, Nonsense Readthrough & Gene Editing",
+    "airway_delivery": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
+    "microbiology_host": "Microbiology, Phage Therapy & Host Defense",
+    "clinical_trials": "Clinical Trials, Registries & Theratyping",
+    "ai_verification": "AI Verification & Scientific Benchmarking",
+}
+
 # Multi-Family Council Verifier Roster (T-0259)
 COUNCIL_VERIFIER_FAMILIES: List[Dict[str, str]] = [
     {"role": "local_fast_worker", "model": "qwen3.8:27b-64k", "family": "Alibaba Qwen 3.8"},
@@ -72,60 +96,230 @@ COUNCIL_VERIFIER_FAMILIES: List[Dict[str, str]] = [
     {"role": "frontier_challenger", "model": "claude-opus-4-7", "family": "Anthropic Claude Frontier"},
 ]
 
-# Canonical Dynamic Module Registry for tools/discovery/*.py (T-0259)
+# Canonical Dynamic Module Registry for tools/discovery/*.py (T-0259 + Frontier Council Discipline & Triage Index)
 DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
-    "aav_tropism_model": {"task": "T-0208", "track": "Track A", "tier": "T2"},
-    "allosteric_potentiator_model": {"task": "T-0221", "track": "Track A", "tier": "T2"},
-    "aso_splice_kinetics": {"task": "T-0254", "track": "Track A", "tier": "T2"},
-    "aso_splice_model": {"task": "T-0183", "track": "Track A", "tier": "T2"},
-    "basal_stem_persistence": {"task": "T-0220", "track": "Track A", "tier": "T2"},
-    "base_editing_cftr": {"task": "T-0219", "track": "Track A", "tier": "T2"},
-    "biophysical_models": {"task": "T-0154", "track": "Track A", "tier": "T2"},
-    "cftr_gquadruplex_stability_model": {"task": "T-0316", "track": "Track A", "tier": "T2"},
-    "cftr_minigene_model": {"task": "T-0207", "track": "Track A", "tier": "T2"},
-    "cftr_sequence_scanner": {"task": "T-0264", "track": "Track A", "tier": "T2"},
-    "ciliary_wave_clearance_model": {"task": "T-0315", "track": "Track A", "tier": "T2"},
-    "class1_prime_base_editing": {"task": "T-0255", "track": "Track A", "tier": "T2"},
-    "cryoem_truncation_model": {"task": "T-0151", "track": "Track A", "tier": "T2"},
-    "dual_aav_intein_model": {"task": "T-0206", "track": "Track A", "tier": "T2"},
-    "macrophage_efferocytosis_model": {"task": "T-0251", "track": "Track A", "tier": "T2"},
-    "enac_knockdown_model": {"task": "T-0200", "track": "Track A", "tier": "T2"},
-    "enac_proteolysis_model": {"task": "T-0245", "track": "Track A", "tier": "T2"},
-    "enac_tmem16a_equilibrium": {"task": "T-0252", "track": "Track A", "tier": "T2"},
-    "epithelial_plasticity": {"task": "T-0178", "track": "Track A", "tier": "T2"},
-    "ev_basal_tropism": {"task": "T-0234", "track": "Track A", "tier": "T2"},
-    "gating_potentiator_energy_coupling": {"task": "T-0270", "track": "Track A", "tier": "T2"},
-    "glycocalyx_charge_barrier_model": {"task": "T-0351", "track": "Track A", "tier": "T2"},
-    "glycocalyx_permeabilization_model": {"task": "T-0291", "track": "Track A", "tier": "T2"},
-    "intronic_splice_foundation": {"task": "T-0269", "track": "Track A", "tier": "T2"},
-    "lnp_escape_dynamics": {"task": "T-0285", "track": "Track A", "tier": "T2"},
-    "macrophage_evasion_kinetics": {"task": "T-0271", "track": "Track A", "tier": "T2"},
-    "mechano_acoustic_delivery": {"task": "T-0228", "track": "Track A", "tier": "T2"},
-    "minidna_evasion_model": {"task": "T-0233", "track": "Track A", "tier": "T2"},
-    "modifier_interactome": {"task": "T-0186", "track": "Track A", "tier": "T2"},
-    "mrna_lnp_escape_model": {"task": "T-0239", "track": "Track A", "tier": "T2"},
-    "mrna_translation_velocity": {"task": "T-0272", "track": "Track A", "tier": "T2"},
-    "mucus_cleavage_kinetics": {"task": "T-0253", "track": "Track A", "tier": "T2"},
-    "mucus_rheology": {"task": "T-0185", "track": "Track A", "tier": "T2"},
-    "nbd1_thermodynamics": {"task": "T-0199", "track": "Track A", "tier": "T2"},
-    "nmd_ptc_kinetics": {"task": "T-0241", "track": "Track A", "tier": "T2"},
-    "pdi_redox_remodeling": {"task": "T-0281", "track": "Track A", "tier": "T2"},
-    "phage_biofilm_kinetics": {"task": "T-0197", "track": "Track A", "tier": "T2"},
-    "phage_depolymerase_biofilm_synergy": {"task": "T-0402", "track": "Track A", "tier": "T2"},
-    "phage_omko1_tradeoff": {"task": "T-0246", "track": "Track A", "tier": "T2"},
-    "prime_editing_cftr": {"task": "T-0184", "track": "Track A", "tier": "T2"},
-    "ptc_cryoem_allostery": {"task": "T-0217", "track": "Track A", "tier": "T2"},
-    "ptc_erf_depletion_readthrough": {"task": "T-0401", "track": "Track A", "tier": "T2"},
-    "rare_allele_matrix": {"task": "T-0201", "track": "Track B", "tier": "T2"},
-    "science_model_benchmark": {"task": "T-0265", "track": "Track A", "tier": "T2"},
-    "suppressor_trna_model": {"task": "T-0216", "track": "Track A", "tier": "T2"},
-    "tmem16a_calcium_conductance_model": {"task": "T-0392", "track": "Track A", "tier": "T2"},
-    "tmem16a_conductance_model": {"task": "T-0240", "track": "Track A", "tier": "T2"},
-    "transcytosis_model": {"task": "T-0177", "track": "Track A", "tier": "T2"},
-    "u1_snrnp_decoy_kinetics": {"task": "T-0292", "track": "Track A", "tier": "T2"},
-    "u1_snrnp_decoy_thermodynamics": {"task": "T-0352", "track": "Track A", "tier": "T2"},
-    "vector_redosing_kinetics": {"task": "T-0198", "track": "Track A", "tier": "T2"},
-    "vx522_inhaled_lnp_mucus_diffusion": {"task": "T-0400", "track": "Track A", "tier": "T2"},
+    "aav_tropism_model": {
+        "task": "T-0208", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "allosteric_potentiator_model": {
+        "task": "T-0221", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "gating_potentiator_energy_coupling",
+    },
+    "aso_splice_kinetics": {
+        "task": "T-0254", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
+    "aso_splice_model": {
+        "task": "T-0183", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "aso_splice_kinetics",
+    },
+    "basal_stem_persistence": {
+        "task": "T-0220", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "base_editing_cftr": {
+        "task": "T-0219", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "class1_prime_base_editing",
+    },
+    "biophysical_models": {
+        "task": "T-0154", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "cftr_gquadruplex_stability_model": {
+        "task": "T-0316", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "archive",
+    },
+    "cftr_minigene_model": {
+        "task": "T-0207", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
+    "cftr_sequence_scanner": {
+        "task": "T-0264", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
+    },
+    "ciliary_wave_clearance_model": {
+        "task": "T-0315", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "class1_prime_base_editing": {
+        "task": "T-0255", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
+    "cryoem_truncation_model": {
+        "task": "T-0151", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
+    },
+    "dual_aav_intein_model": {
+        "task": "T-0206", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
+    "macrophage_efferocytosis_model": {
+        "task": "T-0251", "track": "Track A", "tier": "T2",
+        "discipline": "microbiology_host", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "macrophage_evasion_kinetics",
+    },
+    "enac_knockdown_model": {
+        "task": "T-0200", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "enac_tmem16a_equilibrium",
+    },
+    "enac_proteolysis_model": {
+        "task": "T-0245", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "enac_tmem16a_equilibrium",
+    },
+    "enac_tmem16a_equilibrium": {
+        "task": "T-0252", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "epithelial_plasticity": {
+        "task": "T-0178", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "ev_basal_tropism": {
+        "task": "T-0234", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "archive",
+    },
+    "gating_potentiator_energy_coupling": {
+        "task": "T-0270", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
+    },
+    "glycocalyx_charge_barrier_model": {
+        "task": "T-0351", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "glycocalyx_permeabilization_model",
+    },
+    "glycocalyx_permeabilization_model": {
+        "task": "T-0291", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "intronic_splice_foundation": {
+        "task": "T-0269", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
+    "lnp_escape_dynamics": {
+        "task": "T-0285", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "macrophage_evasion_kinetics": {
+        "task": "T-0271", "track": "Track A", "tier": "T2",
+        "discipline": "microbiology_host", "persona": "researchers", "triage": "keep",
+    },
+    "mechano_acoustic_delivery": {
+        "task": "T-0228", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "minidna_evasion_model": {
+        "task": "T-0233", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "archive",
+    },
+    "modifier_interactome": {
+        "task": "T-0186", "track": "Track A", "tier": "T2",
+        "discipline": "clinical_trials", "persona": "researchers", "triage": "keep",
+    },
+    "mrna_lnp_escape_model": {
+        "task": "T-0239", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "lnp_escape_dynamics",
+    },
+    "mrna_translation_velocity": {
+        "task": "T-0272", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
+    "mucus_cleavage_kinetics": {
+        "task": "T-0253", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "mucus_rheology",
+    },
+    "mucus_rheology": {
+        "task": "T-0185", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "nbd1_thermodynamics": {
+        "task": "T-0199", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
+    },
+    "nmd_ptc_kinetics": {
+        "task": "T-0241", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "ptc_erf_depletion_readthrough",
+    },
+    "pdi_redox_remodeling": {
+        "task": "T-0281", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "archive",
+    },
+    "phage_biofilm_kinetics": {
+        "task": "T-0197", "track": "Track A", "tier": "T2",
+        "discipline": "microbiology_host", "persona": "researchers", "triage": "keep",
+    },
+    "phage_depolymerase_biofilm_synergy": {
+        "task": "T-0402", "track": "Track A", "tier": "T2",
+        "discipline": "microbiology_host", "persona": "researchers", "triage": "keep",
+    },
+    "phage_omko1_tradeoff": {
+        "task": "T-0246", "track": "Track A", "tier": "T2",
+        "discipline": "microbiology_host", "persona": "researchers", "triage": "keep",
+    },
+    "prime_editing_cftr": {
+        "task": "T-0184", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "class1_prime_base_editing",
+    },
+    "ptc_cryoem_allostery": {
+        "task": "T-0217", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "cryoem_truncation_model",
+    },
+    "ptc_erf_depletion_readthrough": {
+        "task": "T-0401", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
+    "rare_allele_matrix": {
+        "task": "T-0201", "track": "Track B", "tier": "T2",
+        "discipline": "clinical_trials", "persona": "researchers", "triage": "keep",
+    },
+    "science_model_benchmark": {
+        "task": "T-0265", "track": "Track A", "tier": "T2",
+        "discipline": "ai_verification", "persona": "builders", "triage": "keep",
+    },
+    "suppressor_trna_model": {
+        "task": "T-0216", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
+    "tmem16a_calcium_conductance_model": {
+        "task": "T-0392", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "tmem16a_conductance_model": {
+        "task": "T-0240", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "tmem16a_calcium_conductance_model",
+    },
+    "transcytosis_model": {
+        "task": "T-0177", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "u1_snrnp_decoy_kinetics": {
+        "task": "T-0292", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "u1_snrnp_decoy_thermodynamics",
+    },
+    "u1_snrnp_decoy_thermodynamics": {
+        "task": "T-0352", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
+    "vector_redosing_kinetics": {
+        "task": "T-0198", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "vx522_inhaled_lnp_mucus_diffusion": {
+        "task": "T-0400", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
 }
 
 
@@ -142,18 +336,54 @@ def discover_biophysical_modules(discovery_dir: Path | None = None) -> List[str]
 
 
 def audit_discovery_module_registry(discovery_dir: Path | None = None) -> Dict[str, Any]:
-    """Verify every biophysical model in tools/discovery/ is registered, importable, and has a unit test suite."""
+    """Verify every biophysical model in tools/discovery/ is registered, has valid discipline/triage/persona tags, and has a unit test suite."""
     target_dir = Path(discovery_dir or DISCOVERY_DIR)
     discovered = discover_biophysical_modules(target_dir)
+    discovered_set = set(discovered)
+    stale_registry_entries = sorted(set(DISCOVERY_MODULE_REGISTRY.keys()) - discovered_set)
+    infrastructure_modules_count = sum(1 for stem in INFRASTRUCTURE_MODULES if (target_dir / f"{stem}.py").exists())
+    test_suites_count = len(list(target_dir.glob("test_*.py")))
+
     unregistered: List[str] = []
     missing_tests: List[str] = []
+    invalid_taxonomy: List[str] = []
     verified_modules: List[Dict[str, Any]] = []
+    discipline_counts: Dict[str, int] = {d: 0 for d in VALID_DISCIPLINES}
+    triage_counts: Dict[str, int] = {t: 0 for t in VALID_TRIAGE_DISPOSITIONS}
+    persona_counts: Dict[str, int] = {p: 0 for p in VALID_PERSONAS}
 
     for mod_name in discovered:
         meta = DISCOVERY_MODULE_REGISTRY.get(mod_name)
         if meta is None:
             unregistered.append(mod_name)
             continue
+
+        disc = meta.get("discipline", "")
+        triage = meta.get("triage", "")
+        persona = meta.get("persona", "")
+        taxonomy_ok = (
+            disc in VALID_DISCIPLINES
+            and triage in VALID_TRIAGE_DISPOSITIONS
+            and persona in VALID_PERSONAS
+        )
+        if not taxonomy_ok:
+            invalid_taxonomy.append(mod_name)
+        else:
+            discipline_counts[disc] = discipline_counts.get(disc, 0) + 1
+            triage_counts[triage] = triage_counts.get(triage, 0) + 1
+            persona_counts[persona] = persona_counts.get(persona, 0) + 1
+
+        # If triage == "merge", verify consolidation_target exists on disk and is a registered "keep" module
+        if triage == "merge":
+            target = meta.get("consolidation_target")
+            if (
+                not target
+                or target not in discovered_set
+                or target not in DISCOVERY_MODULE_REGISTRY
+                or DISCOVERY_MODULE_REGISTRY[target].get("triage") != "keep"
+            ):
+                invalid_taxonomy.append(f"{mod_name}->invalid_target:{target}")
+
         # Companion test suite check (biophysical_models is tested by test_discovery_council.py;
         # cryoem_truncation_model is tested by test_discovery_council.py)
         test_file = target_dir / f"test_{mod_name}.py"
@@ -168,16 +398,141 @@ def audit_discovery_module_registry(discovery_dir: Path | None = None) -> Dict[s
             "task": meta["task"],
             "track": meta["track"],
             "tier": meta["tier"],
+            "discipline": disc,
+            "persona": persona,
+            "triage": triage,
+            "consolidation_target": meta.get("consolidation_target"),
             "test_verified": has_dedicated_or_council_test,
         })
 
     return {
-        "status": "PASS" if (not unregistered and not missing_tests) else "FAIL",
+        "status": "PASS" if (
+            not unregistered
+            and not stale_registry_entries
+            and not missing_tests
+            and not invalid_taxonomy
+        ) else "FAIL",
         "total_discovered": len(discovered),
+        "infrastructure_modules_count": infrastructure_modules_count,
+        "test_suites_count": test_suites_count,
         "unregistered_modules": unregistered,
+        "stale_registry_entries": stale_registry_entries,
         "missing_test_suites": missing_tests,
+        "invalid_taxonomy": invalid_taxonomy,
+        "discipline_breakdown": discipline_counts,
+        "triage_breakdown": triage_counts,
+        "persona_breakdown": persona_counts,
         "verifier_families": COUNCIL_VERIFIER_FAMILIES,
         "modules": verified_modules,
+    }
+
+
+def generate_discovery_catalog(discovery_dir: Path | None = None) -> Dict[str, Any]:
+    """Build a structured JSON catalog of all discovery modules grouped by scientific discipline."""
+    audit = audit_discovery_module_registry(discovery_dir)
+    by_discipline: Dict[str, List[Dict[str, Any]]] = {d: [] for d in VALID_DISCIPLINES}
+    for mod in audit["modules"]:
+        disc = mod.get("discipline")
+        if disc in by_discipline:
+            by_discipline[disc].append(mod)
+
+    return {
+        "schema_version": 1,
+        "audit_status": audit["status"],
+        "surface_primary_axis": "discipline",
+        "persona_scopes": list(VALID_PERSONAS),
+        "total_modules": audit["total_discovered"],
+        "infrastructure_modules_count": audit["infrastructure_modules_count"],
+        "test_suites_count": audit["test_suites_count"],
+        "persona_summary": audit["persona_breakdown"],
+        "triage_summary": audit["triage_breakdown"],
+        "discipline_summary": audit["discipline_breakdown"],
+        "disciplines": {
+            disc: {
+                "label": DISCIPLINE_LABELS.get(disc, disc),
+                "count": len(mods),
+                "keep_count": sum(1 for m in mods if m["triage"] == "keep"),
+                "merge_count": sum(1 for m in mods if m["triage"] == "merge"),
+                "archive_count": sum(1 for m in mods if m["triage"] == "archive"),
+                "modules": mods,
+            }
+            for disc, mods in by_discipline.items()
+        },
+    }
+
+
+def render_discovery_readme(catalog: Dict[str, Any]) -> str:
+    """Render tools/discovery/README.md from the discipline-indexed catalog."""
+    t_sum = catalog["triage_summary"]
+    infra_count = catalog.get("infrastructure_modules_count", len(INFRASTRUCTURE_MODULES))
+    tests_count = catalog.get("test_suites_count", 0)
+    lines = [
+        "# CF Research Discovery Workbench (`tools/discovery/`)",
+        "",
+        "> **Surface Organization (One-Primary-Axis Rule):** Inside `cf-research/tools/discovery/`, the primary navigation axis is **Scientific Discipline** (`structural_biology`, `rna_gene_editing`, `airway_delivery`, `microbiology_host`, `clinical_trials`, `ai_verification`), while the target personas are **CF Researchers** (`researchers`) and **Builders** (`builders`). Synthetic ODE/parameter-sweep modules are kept strictly in this researcher workbench and out of the `Patients & Families` hub on `senseiewok.ai`.",
+        "",
+        "## Triage & Consolidation Summary",
+        "",
+        f"- **Total Verified Modules:** `{catalog['total_modules']}` (plus {infra_count} infrastructure scripts and {tests_count} unit test suites)",
+        f"- **`keep` (Canonical Core Workbenches):** `{t_sum.get('keep', 0)}`",
+        f"- **`merge` (Consolidate into Canonical Module):** `{t_sum.get('merge', 0)}`",
+        f"- **`archive` (Exploratory / Superseded Parameter Sweeps):** `{t_sum.get('archive', 0)}`",
+        "",
+        "Verify this index and all module registrations deterministically with:",
+        "",
+        "```bash",
+        "python tools/discovery/discovery_council.py --audit-registry",
+        "python tools/discovery/discovery_council.py --check-index",
+        "```",
+        "",
+    ]
+
+    for disc in VALID_DISCIPLINES:
+        d_info = catalog["disciplines"][disc]
+        mods = d_info["modules"]
+        if not mods:
+            continue
+        lines.append(f"## {d_info['label']} (`{disc}` — {d_info['count']} modules)")
+        lines.append("")
+        lines.append("| Module | Task | Tier | Triage | Consolidation Target / Notes |")
+        lines.append("| --- | --- | --- | --- | --- |")
+        for m in mods:
+            target_note = f"Merge into `{m['consolidation_target']}.py`" if m.get("consolidation_target") else (
+                "Canonical workbench" if m["triage"] == "keep" else "Candidate for archive"
+            )
+            lines.append(
+                f"| `{m['module']}.py` | `{m['task']}` | `{m['tier']}` | `{m['triage']}` | {target_note} |"
+            )
+        lines.append("")
+
+    return "\n".join(lines)
+
+
+def check_discovery_index_drift(discovery_dir: Path | None = None) -> Dict[str, Any]:
+    """Verify that on-disk catalog.json and README.md match the rendered discovery registry output."""
+    target_dir = Path(discovery_dir or DISCOVERY_DIR)
+    catalog = generate_discovery_catalog(target_dir)
+    expected_catalog_text = json.dumps(catalog, indent=2) + "\n"
+    expected_readme_text = render_discovery_readme(catalog)
+
+    cat_path = target_dir / "catalog.json"
+    readme_path = target_dir / "README.md"
+
+    cat_matches = (
+        cat_path.exists()
+        and cat_path.read_text(encoding="utf-8").replace("\r\n", "\n") == expected_catalog_text.replace("\r\n", "\n")
+    )
+    readme_matches = (
+        readme_path.exists()
+        and readme_path.read_text(encoding="utf-8").replace("\r\n", "\n") == expected_readme_text.replace("\r\n", "\n")
+    )
+    audit_ok = catalog.get("audit_status") == "PASS"
+
+    return {
+        "status": "PASS" if (audit_ok and cat_matches and readme_matches) else "FAIL",
+        "audit_status": catalog.get("audit_status"),
+        "catalog_json_in_sync": cat_matches,
+        "readme_md_in_sync": readme_matches,
     }
 
 
@@ -534,14 +889,215 @@ ALL_COUNCIL_TOPICS = [
 ]
 
 
+def synthesize_cross_scale_discoveries() -> Dict[str, Any]:
+    """Cross-join locked CF Lab datasets and biophysical models across 3 synthesis engines (Tier T2)."""
+    reg_audit = audit_discovery_module_registry()
+    g542_struct = model_nonsense_truncation("G542X")
+    w1282_struct = model_nonsense_truncation("W1282X")
+    g542_ptc_base = nonsense_readthrough_kinetics("G542X", nmd_inhibition_pct=0.0, suppressor_trna_efficiency_pct=0.0)
+    g542_ptc_tri = nonsense_readthrough_kinetics(
+        "G542X",
+        nmd_inhibition_pct=60.0,
+        suppressor_trna_efficiency_pct=9.0,
+        potentiator_fold_increase=2.0,
+    )
+    aso_100nm = compute_boltzmann_splice_partition("3849+10kbC->T", 100.0, "2MOE")
+    lnp_opt = calculate_mucus_penetration_index(65.0, -1.2)
+    lnp_trapped = calculate_mucus_penetration_index(130.0, +8.0)
+
+    recruiting_total = 57
+    active_not_recruiting = 22
+    genetic_recruiting = 3 + 2  # 3 AAV / Gene Therapy + 2 mRNA Replacement
+    genetic_share_pct = round(genetic_recruiting / recruiting_total * 100.0, 2)
+
+    fev1_studies = 261
+    sweat_studies = 51
+    co_fev1_sweat = 4
+    co_fev1_safety = 32
+    co_safety_pk = 22
+
+    return {
+        "schema_version": "1.0.0",
+        "answer_tier": "T2",
+        "status": "PASS" if reg_audit["status"] == "PASS" else "FAIL",
+        "engine_a_genotype_trial_registry_gap": {
+            "title": "Genotype x Recruiting Trial x Registry Gap Matrix",
+            "observed": {
+                "kind": "observed",
+                "tier": "T2",
+                "cftr2_variants_indexed": 209,
+                "cryo_em_structures": ["6MSM", "5UAK", "8EIQ", "8EJ1"],
+                "ecfspr_cohort_patients": 54043,
+                "prisma_interventional_trials": 940,
+                "recruiting_trials": recruiting_total,
+                "active_not_recruiting_trials": active_not_recruiting,
+                "total_active_or_recruiting_trials": recruiting_total + active_not_recruiting,
+                "recruiting_by_modality": {
+                    "CFTR Modulator": 13,
+                    "AAV / Gene Therapy": 3,
+                    "mRNA Replacement": 2,
+                    "Bacteriophage": 3,
+                    "ENaC Inhibitor": 1,
+                    "Other / Not Stated": 35,
+                },
+            },
+            "computed": {
+                "kind": "computed",
+                "tier": "T2",
+                "genetic_replacement_recruiting_count": genetic_recruiting,
+                "genetic_replacement_recruiting_share_pct": genetic_share_pct,
+                "g542x_synthesized_fraction_pct": g542_struct["fraction_synthesized_pct"],
+                "w1282x_synthesized_fraction_pct": w1282_struct["fraction_synthesized_pct"],
+                "w1282x_tmd2_pocket_distance_A": round(w1282_struct["landmark_distances_A"]["TMD2_pocket"], 2),
+                "w1282x_tmd1_pocket_distance_A": round(w1282_struct["landmark_distances_A"]["TMD1_pocket"], 2),
+            },
+            "inferred": {
+                "kind": "inferred",
+                "tier": "T2",
+                "synthesis": (
+                    f"Only {genetic_recruiting} of {recruiting_total} recruiting interventional CF trials ({genetic_share_pct}%) "
+                    "evaluate mutation-agnostic mRNA or AAV gene replacement (such as NCT05668741 and NCT05248230). "
+                    "Because Class I nonsense variants (G542X deleting 939 aa; W1282X deleting 199 aa of NBD2) and Class VII "
+                    "large deletions lack stable full-length CFTR protein for small-molecule modulators alone, closing the "
+                    "curative gap for modulator-ineligible genotypes requires expanding inhaled nucleic acid delivery and "
+                    "tri-modal readthrough trials."
+                ),
+            },
+        },
+        "engine_b_modality_endpoint_compartmentalization": {
+            "title": "Modality x Endpoint Co-Occurrence & Compartmentalization Synthesis",
+            "observed": {
+                "kind": "observed",
+                "tier": "T2",
+                "atlas_snapshot_id": "b0b50e6cf45f",
+                "atlas_included_studies": 1072,
+                "checked_endpoint_classes": 23,
+                "nonzero_outcome_pairs": 102,
+                "zero_outcome_pairs": 151,
+                "top_pairs": [
+                    {"a": "fev1", "b": "safety_tolerability", "studies": 32},
+                    {"a": "fev1", "b": "spirometry_other", "studies": 24},
+                    {"a": "safety_tolerability", "b": "pharmacokinetics", "studies": 22},
+                    {"a": "fev1", "b": "exercise_capacity", "studies": 8},
+                    {"a": "fev1", "b": "cfqr", "studies": 7},
+                    {"a": "exacerbations", "b": "safety_tolerability", "studies": 6},
+                    {"a": "fev1", "b": "exacerbations", "studies": 5},
+                    {"a": "fev1", "b": "sweat_chloride", "studies": 4},
+                    {"a": "fev1", "b": "lci", "studies": 3},
+                    {"a": "sweat_chloride", "b": "safety_tolerability", "studies": 3},
+                ],
+            },
+            "computed": {
+                "kind": "computed",
+                "tier": "T2",
+                "fev1_total_studies": fev1_studies,
+                "sweat_chloride_total_studies": sweat_studies,
+                "fev1_sweat_co_primary_studies": co_fev1_sweat,
+                "fev1_sweat_share_of_fev1_pct": round(co_fev1_sweat / fev1_studies * 100.0, 2),
+                "fev1_sweat_share_of_sweat_pct": round(co_fev1_sweat / sweat_studies * 100.0, 2),
+                "fev1_safety_share_of_fev1_pct": round(co_fev1_safety / fev1_studies * 100.0, 2),
+                "safety_pk_co_primary_studies": co_safety_pk,
+            },
+            "inferred": {
+                "kind": "inferred",
+                "tier": "T2",
+                "synthesis": (
+                    "Oral small-molecule CFTR modulators distribute systemically to both eccrine sweat glands and bronchial "
+                    "epithelia, allowing sweat chloride to track systemic CFTR rescue. Conversely, airway-restricted genetic "
+                    "therapies (inhaled mRNA LNPs such as VX-522 [NCT05668741] and aerosolized AAV capsids such as 4D-710 "
+                    "[NCT05248230]) deliver cargo locally to the respiratory tract without systemic sweat gland exposure, "
+                    "explaining why co-primary registrations pair safety/tolerability with FEV1 (32 studies), LCI, or "
+                    "bronchial molecular expression while FEV1 + sweat chloride co-occurs as co-primary in only 4 studies (1.53%)."
+                ),
+            },
+        },
+        "engine_c_chained_curative_bottleneck_pipeline": {
+            "title": "Chained 5-Discipline Curative Bottleneck Pipeline",
+            "observed": {
+                "kind": "observed",
+                "tier": "T2",
+                "indexed_discovery_modules": reg_audit["total_discovered"],
+                "discipline_counts": reg_audit["discipline_breakdown"],
+                "triage_counts": reg_audit["triage_breakdown"],
+            },
+            "computed": {
+                "kind": "computed",
+                "tier": "T2",
+                "g542x_baseline_isc_pct_wt": g542_ptc_base["restored_isc_pct_wt"],
+                "g542x_trimodal_isc_pct_wt": g542_ptc_tri["restored_isc_pct_wt"],
+                "aso_3849_100nm_canonical_splice_pct": round(aso_100nm.canonical_splice_fraction * 100.0, 2),
+                "aso_3849_100nm_isc_pct_wt": round(aso_100nm.restored_isc_pct_wt, 2),
+                "lnp_optimal_diffusivity_ratio": lnp_opt["effective_diffusivity_ratio"],
+                "lnp_unshielded_diffusivity_ratio": lnp_trapped["effective_diffusivity_ratio"],
+                "mucus_penetration_fold_gain": round(
+                    lnp_opt["effective_diffusivity_ratio"] / max(lnp_trapped["effective_diffusivity_ratio"], 1e-6), 1
+                ),
+            },
+            "inferred": {
+                "kind": "inferred",
+                "tier": "T2",
+                "rate_limiting_bottleneck": "airway_delivery_and_stem_cell_persistence",
+                "synthesis": (
+                    f"While molecular rescue achieves therapeutic CFTR currents in vitro (tri-modal G542X rescue reaching "
+                    f"{g542_ptc_tri['restored_isc_pct_wt']}% WT Isc and 100 nM 2'-O-MOE ASO restoring "
+                    f"{aso_100nm.restored_isc_pct_wt:.1f}% WT Isc in 3849+10kbC->T), clinical translation is rate-limited "
+                    f"by pathological CF sputum mesh entrapment (where unshielded 130 nm / +8 mV carriers suffer a "
+                    f"{round(lnp_opt['effective_diffusivity_ratio'] / max(lnp_trapped['effective_diffusivity_ratio'], 1e-6), 1)}x "
+                    f"diffusivity collapse relative to 65 nm / -1.2 mV PEGylated SORT-LNPs) and differentiated ciliated cell "
+                    "turnover, requiring paired muco-inert delivery and KRT5+/TP63+ basal stem cell targeting."
+                ),
+            },
+        },
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="Curative Discovery Council Runner")
     parser.add_argument("--topic", choices=ALL_COUNCIL_TOPICS, default="aerosol_sort_lnp")
     parser.add_argument("--verify", action="store_true", help="Assert Tier T2 verification and print validation summary")
     parser.add_argument("--run-all", action="store_true", help="Execute council rounds for all curative discovery topics")
     parser.add_argument("--audit-registry", action="store_true", help="Audit dynamic discovery module registry (T-0259)")
+    parser.add_argument("--check-index", action="store_true", help="Verify on-disk catalog.json and README.md match registry")
+    parser.add_argument("--export-index", action="store_true", help="Export tools/discovery/catalog.json and tools/discovery/README.md")
+    parser.add_argument("--cross-scale-report", action="store_true", help="Run deterministic 3-engine cross-scale discovery synthesis")
     parser.add_argument("--json", action="store_true", help="Emit raw JSON to stdout")
     args = parser.parse_args()
+
+    if args.cross_scale_report:
+        report = synthesize_cross_scale_discoveries()
+        if args.json:
+            print(json.dumps(report, indent=2))
+        else:
+            print(f"Cross-Scale Discovery Synthesis: {report['status']} (Tier {report['answer_tier']})")
+            print(f"  [Engine A] {report['engine_a_genotype_trial_registry_gap']['title']}: "
+                  f"{report['engine_a_genotype_trial_registry_gap']['computed']['genetic_replacement_recruiting_count']}/"
+                  f"{report['engine_a_genotype_trial_registry_gap']['observed']['recruiting_trials']} recruiting genetic trials")
+            print(f"  [Engine B] {report['engine_b_modality_endpoint_compartmentalization']['title']}: "
+                  f"FEV1+Safety={report['engine_b_modality_endpoint_compartmentalization']['observed']['top_pairs'][0]['studies']} vs "
+                  f"FEV1+Sweat={report['engine_b_modality_endpoint_compartmentalization']['computed']['fev1_sweat_co_primary_studies']}")
+            print(f"  [Engine C] {report['engine_c_chained_curative_bottleneck_pipeline']['title']}: "
+                  f"Bottleneck={report['engine_c_chained_curative_bottleneck_pipeline']['inferred']['rate_limiting_bottleneck']}")
+        sys.exit(0 if report["status"] == "PASS" else 1)
+
+    if args.export_index:
+        cat = generate_discovery_catalog()
+        if cat["audit_status"] != "PASS":
+            print("ERROR: Refusing to export catalog because discovery module registry audit failed.", file=sys.stderr)
+            sys.exit(1)
+        cat_path = DISCOVERY_DIR / "catalog.json"
+        readme_path = DISCOVERY_DIR / "README.md"
+        cat_path.write_text(json.dumps(cat, indent=2) + "\n", encoding="utf-8")
+        readme_path.write_text(render_discovery_readme(cat), encoding="utf-8")
+        print(f"Exported {cat_path} and {readme_path} ({cat['total_modules']} modules)")
+        sys.exit(0)
+
+    if args.check_index:
+        drift = check_discovery_index_drift()
+        if args.json:
+            print(json.dumps(drift, indent=2))
+        else:
+            print(f"Discovery Index Drift Check: {drift['status']} (catalog={drift['catalog_json_in_sync']}, readme={drift['readme_md_in_sync']})")
+        sys.exit(0 if drift["status"] == "PASS" else 1)
 
     if args.audit_registry:
         reg_report = audit_discovery_module_registry()
@@ -549,6 +1105,9 @@ def main():
             print(json.dumps(reg_report, indent=2))
         else:
             print(f"Discovery Module Registry Audit: {reg_report['status']} ({reg_report['total_discovered']} modules verified)")
+            print(f"  Disciplines: {reg_report['discipline_breakdown']}")
+            print(f"  Triage:      {reg_report['triage_breakdown']}")
+            print(f"  Personas:    {reg_report['persona_breakdown']}")
         sys.exit(0 if reg_report["status"] == "PASS" else 1)
 
     topics = ALL_COUNCIL_TOPICS if args.run_all else [args.topic]

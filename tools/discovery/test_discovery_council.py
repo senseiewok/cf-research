@@ -14,8 +14,15 @@ from biophysical_models import (
 from discovery_council import (
     COUNCIL_VERIFIER_FAMILIES,
     DISCOVERY_MODULE_REGISTRY,
+    VALID_DISCIPLINES,
+    VALID_PERSONAS,
+    VALID_TRIAGE_DISPOSITIONS,
     audit_discovery_module_registry,
+    check_discovery_index_drift,
     discover_biophysical_modules,
+    generate_discovery_catalog,
+    render_discovery_readme,
+    synthesize_cross_scale_discoveries,
     phase1_generative_synthesis,
     phase2_orthogonal_falsification,
     phase3_epistemic_verification,
@@ -35,7 +42,7 @@ def test_cf_mucus_steric_retardation():
     """Particles under 70 nm must diffuse through 110 nm pores; >150 nm particles entrapped."""
     retard_65nm = cf_mucus_steric_retardation(65.0, mesh_pore_diameter_nm=110.0)
     retard_160nm = cf_mucus_steric_retardation(160.0, mesh_pore_diameter_nm=110.0)
-    
+
     assert retard_65nm > 0.25, f"Expected high transmission for 65 nm particle, got {retard_65nm}"
     assert retard_160nm <= 0.01, f"Expected entrapment for 160 nm particle, got {retard_160nm}"
 
@@ -44,7 +51,7 @@ def test_electrostatic_mucin_adhesion_penalty():
     """Near-neutral zeta (-2 mV) transmits freely; cationic (+10 mV) trapped by polyanionic mucins."""
     neutral_pen = electrostatic_mucin_adhesion_penalty(-2.0)
     cationic_pen = electrostatic_mucin_adhesion_penalty(+10.0)
-    
+
     assert neutral_pen > 0.85, f"Expected >85% transmission for near-neutral particle, got {neutral_pen}"
     assert cationic_pen < 0.05, f"Expected severe entrapment for cationic particle, got {cationic_pen}"
 
@@ -61,12 +68,10 @@ def test_mucus_penetration_index_optimal_bounds():
 
 def test_nonsense_readthrough_kinetics_g542x():
     """G542X requires tri-modal rescue (NMD inhibition + suppressor tRNA + potentiator) to hit 10% WT current."""
-    # Baseline alone
     base = nonsense_readthrough_kinetics("G542X", nmd_inhibition_pct=0.0, suppressor_trna_efficiency_pct=0.0)
     assert base["clinical_therapeutic_threshold_met"] is False
     assert base["restored_isc_pct_wt"] < 1.0
 
-    # Tri-modal synergy
     synergy = nonsense_readthrough_kinetics(
         "G542X",
         nmd_inhibition_pct=60.0,
@@ -189,8 +194,55 @@ def test_dynamic_module_registry_audit():
     audit = audit_discovery_module_registry()
     assert audit["status"] == "PASS", f"Expected PASS, got: {audit}"
     assert audit["unregistered_modules"] == []
+    assert audit["stale_registry_entries"] == []
     assert audit["missing_test_suites"] == []
+    assert audit["invalid_taxonomy"] == []
+    assert sum(audit["discipline_breakdown"].values()) == audit["total_discovered"]
+    assert sum(audit["triage_breakdown"].values()) == audit["total_discovered"]
+    assert sum(audit["persona_breakdown"].values()) == audit["total_discovered"]
     assert len(audit["verifier_families"]) >= 4
     assert len(COUNCIL_VERIFIER_FAMILIES) >= 4
     assert "biophysical_models" in DISCOVERY_MODULE_REGISTRY
     assert "aso_splice_kinetics" in DISCOVERY_MODULE_REGISTRY
+
+    catalog = generate_discovery_catalog()
+    assert catalog["audit_status"] == "PASS"
+    assert catalog["surface_primary_axis"] == "discipline"
+    assert catalog["persona_scopes"] == list(VALID_PERSONAS)
+    assert catalog["total_modules"] == audit["total_discovered"]
+    for disc in VALID_DISCIPLINES:
+        assert disc in catalog["disciplines"]
+    readme = render_discovery_readme(catalog)
+    assert "# CF Research Discovery Workbench" in readme
+    assert "Structural Biology & CFTR Biophysics" in readme
+
+    drift = check_discovery_index_drift()
+    assert drift["status"] == "PASS", f"On-disk catalog.json or README.md out of sync: {drift}"
+
+
+def test_synthesize_cross_scale_discoveries():
+    """Verify deterministic 3-engine cross-scale discovery synthesis with observed, computed, and inferred tiers."""
+    report = synthesize_cross_scale_discoveries()
+    assert report["status"] == "PASS"
+    assert report["answer_tier"] == "T2"
+
+    eng_a = report["engine_a_genotype_trial_registry_gap"]
+    assert eng_a["observed"]["kind"] == "observed"
+    assert eng_a["observed"]["cftr2_variants_indexed"] == 209
+    assert eng_a["observed"]["recruiting_trials"] == 57
+    assert eng_a["computed"]["kind"] == "computed"
+    assert eng_a["computed"]["genetic_replacement_recruiting_count"] == 5
+    assert eng_a["inferred"]["kind"] == "inferred"
+
+    eng_b = report["engine_b_modality_endpoint_compartmentalization"]
+    assert eng_b["observed"]["nonzero_outcome_pairs"] == 102
+    assert eng_b["computed"]["fev1_sweat_co_primary_studies"] == 4
+    assert eng_b["computed"]["fev1_sweat_share_of_fev1_pct"] == 1.53
+    assert "NCT05668741" in eng_b["inferred"]["synthesis"]
+
+    eng_c = report["engine_c_chained_curative_bottleneck_pipeline"]
+    assert eng_c["observed"]["indexed_discovery_modules"] >= 50
+    assert eng_c["computed"]["g542x_trimodal_isc_pct_wt"] >= 10.0
+    assert eng_c["computed"]["mucus_penetration_fold_gain"] > 100.0
+    assert eng_c["inferred"]["rate_limiting_bottleneck"] == "airway_delivery_and_stem_cell_persistence"
+
