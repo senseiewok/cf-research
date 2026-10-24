@@ -1257,3 +1257,152 @@ resources:
     basis: lead_only
     last_checked: 2026-10-23
     status: active
+
+  # Candidate lead_only rows for Batch 4: international expansion countries (HU, SK, HR, RO, LT, BG, SI, PA, GT).
+  # Each row is basis: lead_only and awaits human browser inspection and confirmation before pinning to senseiewok.ai/resources/.
+
+  - id: cfbe-informacio-es-tamogatas
+    name: "Tájékoztatás és segítségnyújtás cisztás fibrózissal élőknek"
+    organisation: Cisztás Fibrózis Betegek Egyesülete
+    countries: [HU]
+    url: https://www.cisztasfibrozis.hu/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Hungarian national patient association offering cystic fibrosis diagnosis information, dietary and physiotherapy counseling, and peer support for families."
+    who_for: not_checked
+    format: online
+    lang: hu
+    source_id: cisztasfibrozis-hu-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-24
+    status: active
+
+  - id: scfa-pomoc-a-poradenstvo
+    name: "Pomoc a sociálne poradenstvo pri cystickej fibróze"
+    organisation: Slovenská asociácia cystickej fibrózy
+    countries: [SK]
+    url: https://www.cfasociacia.sk/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, daily_life, find_care_team]
+    summary: "Slovak cystic fibrosis association providing social counseling, inhaler and physiotherapy guidance, and specialized CF clinic navigation across Slovakia."
+    who_for: not_checked
+    format: online
+    lang: sk
+    source_id: cfasociacia-sk-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-24
+    status: active
+
+  - id: cfcro-podrska-i-informacije
+    name: "Podrška i informacije za oboljele od cistične fibroze"
+    organisation: Hrvatska udruga oboljelih od cistične fibroze
+    countries: [HR]
+    url: https://cystic-fibrosis.hr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, medicines_access, community_peer]
+    summary: "Croatian cystic fibrosis association providing diagnostic orientation, advocacy for medicine access, and community peer support for patients and families."
+    who_for: not_checked
+    format: online
+    lang: hr
+    source_id: cystic-fibrosis-hr-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-24
+    status: active
+
+  - id: afcr-suport-si-informare
+    name: "Suport și informare pentru persoanele cu fibroză chistică"
+    organisation: Asociația de Fibroză Chistică din România
+    countries: [RO]
+    url: https://afcr.ro/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Romanian national cystic fibrosis association providing patient advocacy, medical equipment support, and practical guidance for living with CF."
+    who_for: not_checked
+    format: online
+    lang: ro
+    source_id: afcr-ro-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-24
+    status: active
+
+  - id: lcfa-pagalba-ir-zinios
+    name: "Pagalba ir žinios apie cistinę fibrozę"
+    organisation: Lietuvos cistinės fibrozės asociacija
+    countries: [LT]
+    url: https://www.cistinefibroze.lt/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Lithuanian national cystic fibrosis association connecting families with diagnostic resources, respiratory therapy advice, and patient advocacy support."
+    who_for: not_checked
+    format: online
+    lang: lt
+    source_id: cistinefibroze-lt-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-24
+    status: active
+
+  - id: bcfa-pomosht-i-orientaciya
+    name: "Помощ и ориентация при муковисцидоза"
+    organisation: Bulgarian Cystic Fibrosis Association
+    countries: [BG]
+    url: https://lifewithcf.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, medicines_access, community_peer]
+    summary: "Bulgarian patient organization offering cystic fibrosis guidance, advocacy for modern treatments, and family counseling for children and adults."
+    who_for: not_checked
+    format: online
+    lang: bg
+    source_id: lifewithcf-bg-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-24
+    status: active
+
+  - id: dcfs-pomoc-in-svetovanje
+    name: "Pomoč in svetovanje za bolnike s cistično fibrozo"
+    organisation: Društvo za cistično fibrozo Slovenije
+    countries: [SI]
+    url: https://drustvocf.si/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Slovenian cystic fibrosis association offering psychosocial counseling, physical therapy advice, and peer support for individuals with CF."
+    who_for: not_checked
+    format: online
+    lang: sl
+    source_id: drustvocf-si-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-24
+    status: active
+
+  - id: fqpanama-orientacion-y-apoyo
+    name: "Orientación y apoyo en fibrosis quística en Panamá"
+    organisation: Asociación Panameña de Fibrosis Quística
+    countries: [PA]
+    url: https://fqpanama.com/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, find_care_team, community_peer]
+    summary: "Panamanian cystic fibrosis association offering diagnostic orientation, multidisciplinary care navigation, and community peer support for families living with CF."
+    summary_es: "Asociación panameña que brinda orientación diagnóstica, navegación de atención multidisciplinaria y acompañamiento comunitario para familias con fibrosis quística."
+    who_for: not_checked
+    format: online
+    lang: es-PA
+    source_id: fqpanama-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-24
+    status: active
+
+  - id: agafq-apoyo-y-educacion
+    name: "Apoyo y educación sobre fibrosis quística en Guatemala"
+    organisation: Asociación Guatemalteca de Fibrosis Quística
+    countries: [GT]
+    url: https://fibrosisquisticagt.site/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Guatemalan cystic fibrosis association providing newborn screening awareness, respiratory therapy orientation, and solidarity support for patients and caregivers."
+    summary_es: "Asociación guatemalteca que promueve la pesquisa neonatal, orientación en terapia respiratoria y apoyo solidario para pacientes y cuidadores."
+    who_for: not_checked
+    format: online
+    lang: es-GT
+    source_id: agafq-gt-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-24
+    status: active

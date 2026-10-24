@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-53 to download by hand, 1 to ask for, 3 not to download.
+62 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -11,6 +11,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 3. When you have saved the files, paste the prompt at the bottom into your agent.
 
 ## Download in a browser
+
+### Asociación Guatemalteca de Fibrosis Quística
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| agafq-gt-resource-pages | Asociación Guatemalteca de Fibrosis Quística website (fibrosisquisticagt.site) | [page](https://fibrosisquisticagt.site/) | link only | Official national cystic fibrosis patient association in Guatemala (AGAFQ). |
 
 ### Asociación Honoraria Fibrosis Quística del Uruguay
 
@@ -24,17 +30,41 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | amfq-resource-pages | Asociación Mexicana de Fibrosis Quística, A.C. (AMFQ) website (www.fq.org.mx) | [page](https://www.fq.org.mx/) | link only | The address came from the reference list of an AI-written report the maintainer pasted on 2026-10-09 and from a web search limited to this host. |
 
+### Asociación Panameña de Fibrosis Quística
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| fqpanama-resource-pages | Asociación Panameña de Fibrosis Quística website (fqpanama.com) | [page](https://fqpanama.com/) | link only | Official national cystic fibrosis patient association in Panama. |
+
 ### Asociación Peruana de Fibrosis Quística (FIQPER)
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | fiqper-resource-pages | Fibrosis Quística Perú website (fiqper.org) | [page](https://fiqper.org/) | link only | Official national cystic fibrosis patient and family association in Peru. |
 
+### Asociația de Fibroză Chistică din România
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| afcr-ro-resource-pages | Asociația de Fibroză Chistică din România website (afcr.ro) | [page](https://afcr.ro/) | link only | Official national cystic fibrosis patient association in Romania (Asociația de Fibroză Chistică din România - AFCR). |
+
 ### Associação Nacional de Fibrose Quística
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | anfq-pt-resource-pages | Associação Nacional de Fibrose Quística website (anfq.pt) | [page](https://www.anfq.pt/) | link only | Official national cystic fibrosis patient association in Portugal. |
+
+### Bulgarian Cystic Fibrosis Association
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| lifewithcf-bg-resource-pages | Bulgarian Cystic Fibrosis Association website (lifewithcf.org) | [page](https://lifewithcf.org/) | link only | Official national cystic fibrosis patient association in Bulgaria (Асоциация Муковисцидоза България). |
+
+### Cisztás Fibrózis Betegek Egyesülete
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cisztasfibrozis-hu-resource-pages | Cisztás Fibrózis Betegek Egyesülete website (cisztasfibrozis.hu) | [page](https://www.cisztasfibrozis.hu/) | link only | Official national cystic fibrosis patient association in Hungary (Cisztás Fibrózis Betegek Egyesülete). |
 
 ### Cochrane
 
@@ -109,6 +139,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cff-dk-resource-pages | Cystisk Fibrose Foreningen website (cystiskfibrose.dk) | [page](https://cystiskfibrose.dk/) | link only | Official national cystic fibrosis association in Denmark. |
 
+### Društvo za cistično fibrozo Slovenije
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| drustvocf-si-resource-pages | Društvo za cistično fibrozo Slovenije website (drustvocf.si) | [page](https://drustvocf.si/) | link only | Official national cystic fibrosis patient association in Slovenia (Društvo za cistično fibrozo Slovenije). |
+
 ### European Medicines Agency
 
 | ID | What | Open | Save as | Notes |
@@ -163,6 +199,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | hengitysliitto-fi-resource-pages | Hengitysliitto cystic fibrosis support pages (hengitysliitto.fi) | [page](https://www.hengitysliitto.fi/) | link only | National respiratory health and rare lung disease organization in Finland hosting support resources for people with cystic fibrosis. |
 
+### Hrvatska udruga oboljelih od cistične fibroze
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cystic-fibrosis-hr-resource-pages | Hrvatska udruga oboljelih od cistične fibroze website (cystic-fibrosis.hr) | [page](https://cystic-fibrosis.hr/) | link only | Official national cystic fibrosis patient association in Croatia (Hrvatska udruga oboljelih od cistične fibroze). |
+
 ### INSERM (Orphanet)
 
 | ID | What | Open | Save as | Notes |
@@ -205,6 +247,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | lifc-resource-pages | Lega Italiana Fibrosi Cistica (LIFC) website (www.fibrosicistica.it) | [page](https://www.fibrosicistica.it/) | link only | Official national cystic fibrosis patient and family association in Italy. |
 
+### Lietuvos cistinės fibrozės asociacija
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cistinefibroze-lt-resource-pages | Lietuvos cistinės fibrozės asociacija website (cistinefibroze.lt) | [page](https://www.cistinefibroze.lt/) | link only | Official national cystic fibrosis patient association in Lithuania (Lietuvos cistinės fibrozės asociacija). |
+
 ### Muco vzw / Association Muco
 
 | ID | What | Open | Save as | Notes |
@@ -246,6 +294,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | rfcf-se-resource-pages | Riksförbundet Cystisk Fibros website (rfcf.se) | [page](https://www.rfcf.se/) | link only | Official national cystic fibrosis federation in Sweden. |
+
+### Slovenská asociácia cystickej fibrózy
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cfasociacia-sk-resource-pages | Slovenská asociácia cystickej fibrózy website (cfasociacia.sk) | [page](https://www.cfasociacia.sk/) | link only | Official national cystic fibrosis patient association in Slovakia (Slovenská asociácia cystickej fibrózy - SCFA). |
 
 ### South African Cystic Fibrosis Association
 
