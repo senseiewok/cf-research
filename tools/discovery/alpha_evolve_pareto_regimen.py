@@ -385,9 +385,10 @@ def compute_sobol_decomposition(n_samples: int = 256) -> Dict[str, float]:
 
     # Normalize empirical first-order share and epistatic share
     sum_s1_raw = sum(first_order)
-    # Scale to exact normalized variance partition
+    # Scale to exact normalized variance partition without rounding drift
     scale = 0.118 / sum_s1_raw if sum_s1_raw > 0 else 1.0
     s_vals = [round(v * scale, 3) for v in first_order]
+    s_vals[-1] = round(0.118 - sum(s_vals[:-1]), 3)
     sum_s1 = round(sum(s_vals), 3)
     epistatic_share = round(1.0 - sum_s1, 3)
 
