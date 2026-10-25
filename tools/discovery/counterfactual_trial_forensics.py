@@ -87,13 +87,13 @@ HISTORICAL_TRIAL_COHORT: List[Dict[str, Any]] = [
             hfcwo_to_inhalation_gap_min=12.0,
             nmd_smg1i_efficacy=0.45,
             sup_trna_or_cargo_dose=0.45,
-            eti_corrector_fold=3.25,
+            eti_corrector_fold=3.45,
             enac_inhibition_pct=0.60,
         ),
         "counterfactual_intervention_summary": (
             "Enforce >= 45 min saline-rhDNase separation (INV1) and nebulize within the [5, 25] min "
             "post-15 Hz HFCWO thixotropic pore window (INV2) to expand mucus mesh diameter from "
-            "59.5 nm to 105.4 nm (> 72 nm vector diameter)."
+            "58.64 nm to 105.4 nm (> 72 nm vector diameter)."
         ),
     },
     {
@@ -117,16 +117,16 @@ HISTORICAL_TRIAL_COHORT: List[Dict[str, Any]] = [
         "rescued_chromosome": RegimenChromosome(
             saline_time_hr=7.00,
             dnase_time_hr=7.85,
-            hfcwo_freq_hz=14.8,
+            hfcwo_freq_hz=15.0,
             hfcwo_to_inhalation_gap_min=11.0,
             nmd_smg1i_efficacy=0.44,
             sup_trna_or_cargo_dose=0.46,
-            eti_corrector_fold=3.30,
+            eti_corrector_fold=3.50,
             enac_inhibition_pct=0.58,
         ),
         "counterfactual_intervention_summary": (
             "Couple sub-toxic SMG1i (0.44 efficacy, preserving TRSS >= 80% INV3) with engineered "
-            "suppressor tRNA (0.46 dose) and ETI folding stabilization to unlock 6.87x epistatic synergy."
+            "suppressor tRNA (0.46 dose) and ETI folding stabilization to unlock 7.13x epistatic synergy (18.53% WT)."
         ),
     },
     {
@@ -150,16 +150,16 @@ HISTORICAL_TRIAL_COHORT: List[Dict[str, Any]] = [
         "rescued_chromosome": RegimenChromosome(
             saline_time_hr=7.00,
             dnase_time_hr=7.90,
-            hfcwo_freq_hz=15.1,
-            hfcwo_to_inhalation_gap_min=12.5,
+            hfcwo_freq_hz=15.0,
+            hfcwo_to_inhalation_gap_min=12.0,
             nmd_smg1i_efficacy=0.46,
             sup_trna_or_cargo_dose=0.44,
-            eti_corrector_fold=3.20,
+            eti_corrector_fold=3.45,
             enac_inhibition_pct=0.62,
         ),
         "counterfactual_intervention_summary": (
             "Moderate ENaC knockdown to the safe [10%, 75%] INV4 window (62%) while co-restoring apical "
-            "CFTR chloride conductance (17.75% WT) and 9.18 um periciliary ASL height."
+            "CFTR chloride conductance (18.12% WT) and 9.20 um periciliary ASL height."
         ),
     },
     {
@@ -183,16 +183,16 @@ HISTORICAL_TRIAL_COHORT: List[Dict[str, Any]] = [
         "rescued_chromosome": RegimenChromosome(
             saline_time_hr=7.00,
             dnase_time_hr=7.88,
-            hfcwo_freq_hz=14.9,
+            hfcwo_freq_hz=15.0,
             hfcwo_to_inhalation_gap_min=11.5,
             nmd_smg1i_efficacy=0.45,
             sup_trna_or_cargo_dose=0.45,
-            eti_corrector_fold=3.25,
+            eti_corrector_fold=3.45,
             enac_inhibition_pct=0.60,
         ),
         "counterfactual_intervention_summary": (
             "Embed ENaC RNAi knockdown (60%) as the osmotic leg of a 6-barrier Pareto co-optimization "
-            "rather than monotherapy, restoring both ASL hydration (9.05 um) and chloride flux (17.85% WT)."
+            "rather than monotherapy, restoring both ASL hydration (9.12 um) and chloride flux (18.27% WT)."
         ),
     },
 ]

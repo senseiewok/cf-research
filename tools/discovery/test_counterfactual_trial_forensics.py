@@ -2,7 +2,11 @@
 """Unit tests for Counterfactual Clinical Trial Failure Forensics (T-0428)."""
 from __future__ import annotations
 
+from pathlib import Path
+import sys
 import unittest
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from counterfactual_trial_forensics import (
     HISTORICAL_TRIAL_COHORT,

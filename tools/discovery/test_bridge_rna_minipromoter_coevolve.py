@@ -2,8 +2,13 @@
 """Unit tests for Pan-Mutation IS110 Bridge-RNA Recombinase & Airway Minipromoter Co-Evolution (T-0427)."""
 from __future__ import annotations
 
+from pathlib import Path
+import sys
 import unittest
-from tools.discovery.bridge_rna_minipromoter_coevolve import (
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from bridge_rna_minipromoter_coevolve import (
     BridgeRnaAavCassette,
     evaluate_bridge_rna_cassette,
     run_halton_patient_cohort_uq,
