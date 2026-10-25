@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `55` (plus 3 infrastructure scripts and 56 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `37`
+- **Total Verified Modules:** `56` (plus 3 infrastructure scripts and 57 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `38`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -50,7 +50,7 @@ python tools/discovery/discovery_council.py --check-index
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 23 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 24 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -63,6 +63,7 @@ python tools/discovery/discovery_council.py --check-index
 | `enac_knockdown_model.py` | `T-0200` | `T2` | `merge` | Merge into `enac_tmem16a_equilibrium.py` |
 | `enac_proteolysis_model.py` | `T-0245` | `T2` | `merge` | Merge into `enac_tmem16a_equilibrium.py` |
 | `enac_tmem16a_equilibrium.py` | `T-0252` | `T2` | `keep` | Canonical workbench |
+| `endocytosis_mucociliary_competition.py` | `T-0416` | `T2` | `keep` | Canonical workbench |
 | `epithelial_plasticity.py` | `T-0178` | `T2` | `keep` | Canonical workbench |
 | `ev_basal_tropism.py` | `T-0234` | `T2` | `archive` | Candidate for archive |
 | `glycocalyx_charge_barrier_model.py` | `T-0351` | `T2` | `merge` | Merge into `glycocalyx_permeabilization_model.py` |
