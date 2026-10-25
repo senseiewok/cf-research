@@ -102,6 +102,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0208", "track": "Track A", "tier": "T2",
         "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
     },
+    "alpha_evolve_pareto_regimen": {
+        "task": "T-0426", "track": "Track A", "tier": "T2",
+        "discipline": "ai_verification", "persona": "researchers", "triage": "keep",
+    },
     "aerosol_droplet_deposition_mechanics": {
         "task": "T-0408", "track": "Track A", "tier": "T2",
         "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
