@@ -90,6 +90,29 @@ class TestAlphaEvolveCompoundHetPtc(unittest.TestCase):
             self.assertTrue(res.inv_chaperone_bound_passed, f"Chaperone bound failed for {a1}")
             self.assertTrue(res.inv_biallelic_monotonicity_passed, f"Monotonicity failed for {a1}")
 
+    def test_deconvoluted_proteoform_currents_sum_to_scaled_allele_net_current(self) -> None:
+        """Verify ERAD-scaled proteoform currents + truncated current sum to allele_net_current_pct_wt."""
+        res = evaluate_compound_het_genotype(
+            "G542X",
+            "W1282X",
+            CompoundHetRegimen(
+                small_mol_readthrough_u=0.90,
+                nmd_stabilization_u=0.80,
+                eti_corrector_u=0.90,
+                ivacaftor_potentiator_u=0.90,
+            ),
+        )
+        for breakdown in (res.allele_1_breakdown, res.allele_2_breakdown):
+            sum_parts = (
+                sum(breakdown["proteoform_currents_pct_wt"].values())
+                + breakdown["truncated_current_pct_wt"]
+            )
+            self.assertAlmostEqual(
+                sum_parts,
+                breakdown["allele_net_current_pct_wt"],
+                delta=0.015,
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

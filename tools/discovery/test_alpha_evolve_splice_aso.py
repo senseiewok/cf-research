@@ -41,6 +41,27 @@ class TestAlphaEvolveSpliceAso(unittest.TestCase):
             distal.predicted_canonical_wt_mrna_pct + 25.0,
         )
 
+    def test_negative_control_immunogenic_and_g4_motifs_fail_invariants(self) -> None:
+        """Verify that engineered CpG, TLR7/8 GUUG/UGUU motifs, and GGGG tetrads trigger formal UNSAT violations."""
+        # Target containing CCCC (reverse complement GGGG) and CG + CAAC (reverse complement GUUG)
+        bad_window = "UUUGAUUUGAUAAUGACCCCCGCAACUUGGUAAGUAACUAAUGCCAAUUGAAUAAAUUG"
+        cand = evaluate_aso_candidate(start_offset_nt=12, length_nt=19, pre_mrna_window=bad_window)
+        self.assertTrue(cand.has_g_tetrad)
+        self.assertGreater(cand.cpg_count, 0)
+        self.assertGreater(cand.tlr78_gu_motif_count, 0)
+        self.assertFalse(cand.inv_no_g4_agg_passed)
+        self.assertFalse(cand.inv_tlr_immune_safe_passed)
+        self.assertFalse(cand.all_invariants_passed)
+        self.assertTrue(any("UNSAT_G4_AGGREGATION" in u for u in cand.unsat_core))
+        self.assertTrue(any("UNSAT_TLR_IMMUNE" in u for u in cand.unsat_core))
+
+    def test_out_of_bounds_offset_raises_value_error(self) -> None:
+        """Verify negative start offsets or slices exceeding pre_mrna_window length raise ValueError."""
+        with self.assertRaises(ValueError):
+            evaluate_aso_candidate(start_offset_nt=-2, length_nt=19)
+        with self.assertRaises(ValueError):
+            evaluate_aso_candidate(start_offset_nt=50, length_nt=19)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -51,6 +51,15 @@ class TestAlphaEvolveCassetteShield(unittest.TestCase):
         self.assertFalse(comp_bad.all_invariants_passed)
         self.assertTrue(any("UNSAT_TAI_PAUSE_DRIFT" in u for u in comp_bad.unsat_core))
 
+    def test_short_cds_and_rna_alphabet_normalization_succeed(self) -> None:
+        """Verify RNA ('U') transcripts and short (<35-codon) sequences do not raise KeyError or empty max() ValueError."""
+        rna_short = "AUGUGCCGCGGCGGCCGCGUGGGCGAGCGCCUG"  # 11 codons with U, CpGs, and G-runs
+        opt_short = evolve_shielded_cds(rna_short)
+        self.assertEqual(translate_cds(opt_short), translate_cds(rna_short))
+        comp_short = evaluate_cassette_shield(rna_short.replace("U", "T"), opt_short)
+        self.assertEqual(comp_short.amino_acid_identity_pct, 100.0)
+        self.assertEqual(comp_short.shielded_cpg_count, 0)
+
 
 if __name__ == "__main__":
     unittest.main()

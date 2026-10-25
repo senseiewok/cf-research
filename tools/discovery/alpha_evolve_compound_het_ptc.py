@@ -38,8 +38,8 @@ Primary Literature & Clinical Registry Provenance (Cite-Check Verified):
 
 Boundary Statement:
   Tier T2 exploratory in-silico computational hypothesis model. Research, not medical advice.
-  ClinicalTrials.gov does not evaluate safety or efficacy. Never alter prescribed CF care
-  based on computational models.
+  ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not
+  denote government endorsement. Never alter prescribed CF care based on computational models.
 """
 from __future__ import annotations
 
@@ -648,16 +648,24 @@ def evaluate_compound_het_genotype(
 
     d1, d2, m_unfolded, lambda_erad, total_pct_wt = _compute_raw_total_current(spec_1, spec_2, reg)
 
-    # Scale per-allele net current by the shared ERAD competition factor
+    # Scale per-allele net current and deconvoluted proteoform components by the shared ERAD competition factor
     d1_scaled = AlleleRescueDeconvolution(
         **{
             **asdict(d1),
+            "proteoform_currents_pct_wt": {
+                k: round(v * lambda_erad, 3) for k, v in d1.proteoform_currents_pct_wt.items()
+            },
+            "truncated_current_pct_wt": round(d1.truncated_current_pct_wt * lambda_erad, 3),
             "allele_net_current_pct_wt": round(d1.allele_net_current_pct_wt * lambda_erad, 3),
         }
     )
     d2_scaled = AlleleRescueDeconvolution(
         **{
             **asdict(d2),
+            "proteoform_currents_pct_wt": {
+                k: round(v * lambda_erad, 3) for k, v in d2.proteoform_currents_pct_wt.items()
+            },
+            "truncated_current_pct_wt": round(d2.truncated_current_pct_wt * lambda_erad, 3),
             "allele_net_current_pct_wt": round(d2.allele_net_current_pct_wt * lambda_erad, 3),
         }
     )

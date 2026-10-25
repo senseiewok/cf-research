@@ -8,8 +8,8 @@ cryptic 5' donor site and 2789+5G->A (c.2657+5G>A) intronic splice locus.
 
 Incorporates Council Round 2's three mandatory biophysical upgrades:
   1. Net Hybridization Free Energy (dG_net) accounting for local pre-mRNA secondary structure
-     (hairpin stem-loop opening cost dG_target_open) and ASO self-structure (dG_aso_self):
-       dG_net = dG_duplex_2moe - dG_target_open - dG_aso_self <= -14.0 kcal/mol
+     (hairpin stem-loop opening cost dG_target_open > 0) and ASO self-structure (dG_aso_self > 0):
+       dG_net = dG_duplex_2moe + dG_target_open + dG_aso_self <= -14.0 kcal/mol
   2. 2'-MOE phosphorothioate thermal stability calibration (+0.9 C per modified ribose over
      nearest-neighbor baseline) and off-target specificity gap dTm >= 5.0 C.
   3. Formal SMT innate-immunity & aggregation proofs:
@@ -37,7 +37,8 @@ Primary Literature & Clinical Registry Provenance (Cite-Check Verified):
 
 Boundary Statement:
   Tier T2 exploratory in-silico computational hypothesis model. Research, not medical advice.
-  ClinicalTrials.gov does not evaluate safety or efficacy.
+  ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not
+  denote government endorsement. Never alter prescribed CF care based on computational models.
 """
 from __future__ import annotations
 
@@ -188,6 +189,11 @@ def evaluate_aso_candidate(
     pre_mrna_window: str = LOCUS_3849_PRE_MRNA_WINDOW,
 ) -> AsoCandidateEvaluation:
     """Evaluate a single 2'-MOE ASO candidate at start_offset_nt across pre_mrna_window."""
+    if start_offset_nt < 0 or length_nt < 1 or start_offset_nt + length_nt > len(pre_mrna_window):
+        raise ValueError(
+            f"Invalid window slice: start_offset_nt={start_offset_nt}, length_nt={length_nt} "
+            f"for pre_mrna_window of length {len(pre_mrna_window)}"
+        )
     target_sub = pre_mrna_window[start_offset_nt : start_offset_nt + length_nt]
     aso_seq = reverse_complement_rna(target_sub)
     gc_pct = round(100.0 * (aso_seq.count("G") + aso_seq.count("C")) / max(1, len(aso_seq)), 1)
@@ -195,7 +201,7 @@ def evaluate_aso_candidate(
     dg_dup, tm_on = compute_2moe_duplex_thermodynamics(target_sub)
     dg_open = compute_local_hairpin_opening_cost(target_sub)
     dg_self = compute_aso_self_dimer_cost(aso_seq)
-    dg_net = round(dg_dup - (-dg_open) - (-dg_self), 2)  # dG_dup is negative; opening & self costs reduce net stability
+    dg_net = round(dg_dup + dg_open + dg_self, 2)  # dG_dup is negative; positive opening & self costs reduce net stability
 
     # Closest 2-mismatch transcriptome off-target Tm model
     tm_off = round(tm_on - (6.8 + 0.08 * gc_pct), 2)

@@ -44,8 +44,8 @@ Primary Literature & Clinical Registry Provenance (Cite-Check Verified):
 
 Boundary Statement:
   Tier T2 exploratory in-silico computational hypothesis model. Research, not medical advice.
-  ClinicalTrials.gov does not evaluate safety or efficacy. Never alter prescribed CF care
-  based on computational models.
+  ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not
+  denote government endorsement. Never alter prescribed CF care based on computational models.
 """
 from __future__ import annotations
 
@@ -248,8 +248,13 @@ def compute_codon_tai_profile(cds: str, window_codons: int = 5) -> List[float]:
 
 def evolve_shielded_cds(native_cds: str = UNSHIELDED_SUPEREXON_HOTSPOT_CDS) -> str:
     """Optimize synonymous codons to eliminate CpGs, G4 runs, and >=8 bp repeats while preserving native tAI."""
-    s = native_cds.upper()
+    s = native_cds.upper().replace("U", "T")
+    if len(s) == 0 or len(s) % 3 != 0:
+        raise ValueError(f"CDS length {len(s)} must be a positive multiple of 3")
     native_codons = [s[i : i + 3] for i in range(0, len(s), 3)]
+    for c in native_codons:
+        if c not in CODON_TO_AA:
+            raise ValueError(f"Invalid codon '{c}' in native_cds")
     chosen: List[str] = []
 
     for idx, orig_codon in enumerate(native_codons):
@@ -367,16 +372,20 @@ def evaluate_cassette_shield(
 
     tai_before = compute_codon_tai_profile(native_cds, window_codons=5)
     tai_after = compute_codon_tai_profile(opt_cds, window_codons=5)
-    # Evaluate tAI drift across the MSD2->NBD2 inter-domain pause boundary (windows 31..40)
+    # Evaluate tAI drift across the MSD2->NBD2 inter-domain pause boundary (windows 31..40, or full profile on short CDS)
+    drift_slice_before = tai_before[31:40] if len(tai_before) > 31 else tai_before
+    drift_slice_after = tai_after[31:40] if len(tai_after) > 31 else tai_after
     max_tai_drift = round(
-        max(abs(a - b) for a, b in zip(tai_before[31:40], tai_after[31:40])),
+        max((abs(a - b) for a, b in zip(drift_slice_before, drift_slice_after)), default=0.0),
         4,
     )
-    # Pause valley is in Segment 4 (codons 33..44 -> window indices 33..40)
-    pause_valley_mean_before = sum(tai_before[33:40]) / max(1, len(tai_before[33:40]))
-    pause_valley_mean_after = sum(tai_after[33:40]) / max(1, len(tai_after[33:40]))
+    # Pause valley is in Segment 4 (codons 33..44 -> window indices 33..40, or full profile on short CDS)
+    pause_slice_before = tai_before[33:40] if len(tai_before) > 33 else tai_before
+    pause_slice_after = tai_after[33:40] if len(tai_after) > 33 else tai_after
+    pause_valley_mean_before = sum(pause_slice_before) / max(1, len(pause_slice_before))
+    pause_valley_mean_after = sum(pause_slice_after) / max(1, len(pause_slice_after))
     pause_preserved = (
-        pause_valley_mean_after < 0.45
+        (pause_valley_mean_after < 0.45 if len(tai_after) > 33 else True)
         and abs(pause_valley_mean_after - pause_valley_mean_before) <= MAX_ALLOWED_TAI_DRIFT
     )
 
