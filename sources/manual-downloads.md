@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-64 to download by hand, 1 to ask for, 3 not to download.
+84 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -11,6 +11,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 3. When you have saved the files, paste the prompt at the bottom into your agent.
 
 ## Download in a browser
+
+### Asociación Civil Humberto Da Silva (Mis Chiquiticos)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| mischiquiticos-ve-resource-pages | Asociación Civil Mis Chiquiticos website (mischiquiticos.com) | [page](https://www.mischiquiticos.com/) | link only | Venezuelan non-profit patient and family orientation organization covering rare, genetic, and metabolic conditions including cystic fibrosis. |
 
 ### Asociación Guatemalteca de Fibrosis Quística
 
@@ -36,17 +42,23 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | fqpanama-resource-pages | Asociación Panameña de Fibrosis Quística website (fqpanama.com) | [page](https://fqpanama.com/) | link only | Official national cystic fibrosis patient association in Panama. |
 
-### Asociación Peruana de Fibrosis Quística (FIQPER)
+### Asociación Peruana de Fibrosis Quística (FIQUIPERU)
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
-| fiqper-resource-pages | Fibrosis Quística Perú website (fiqper.org) | [page](https://fiqper.org/) | link only | Official national cystic fibrosis patient and family association in Peru. |
+| fiqper-resource-pages | Fibrosis Quística Perú website (fiquiperu.org.pe) | [page](https://fiquiperu.org.pe/) | link only | Official national cystic fibrosis patient and family association in Peru. |
 
 ### Asociația de Fibroză Chistică din România
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | afcr-ro-resource-pages | Asociația de Fibroză Chistică din România website (afcr.ro) | [page](https://afcr.ro/) | link only | Official national cystic fibrosis patient association in Romania (Asociația de Fibroză Chistică din România - AFCR). |
+
+### Association Luxembourgeoise de Lutte contre la Mucoviscidose
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| allm-lu-resource-pages | Association Luxembourgeoise de Lutte contre la Mucoviscidose website (allm.lu) | [page](https://www.allm.lu/) | link only | Official national cystic fibrosis patient association in Luxembourg (ALLM). |
 
 ### Associação Nacional de Fibrose Quística
 
@@ -125,7 +137,7 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
-| cfindia-resource-pages | Cystic Fibrosis Trust India support pages (cftrustindia.org) | [page](https://www.cftrustindia.org/) | link only | National cystic fibrosis patient support and diagnostic awareness organization in India. |
+| cfindia-resource-pages | Cystic Fibrosis Trust India support pages (cysticfibrosisindia.org) | [page](https://www.cysticfibrosisindia.org/) | link only | National cystic fibrosis patient support and diagnostic awareness organization in India. |
 
 ### Cystische Fibrose Hilfe Österreich
 
@@ -137,7 +149,7 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
-| cfschweiz-resource-pages | Cystische Fibrose Schweiz website (cysticfibrosisschweiz.ch) | [page](https://cysticfibrosisschweiz.ch/) | link only | Official national cystic fibrosis patient organization in Switzerland. |
+| cfschweiz-resource-pages | Cystische Fibrose Schweiz website (cystischefibroseschweiz.ch) | [page](https://cystischefibroseschweiz.ch/) | link only | Official national cystic fibrosis patient organization in Switzerland. |
 
 ### Cystisk Fibrose Foreningen
 
@@ -151,11 +163,29 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | drustvocf-si-resource-pages | Društvo za cistično fibrozo Slovenije website (drustvocf.si) | [page](https://drustvocf.si/) | link only | Official national cystic fibrosis patient association in Slovenia (Društvo za cistično fibrozo Slovenije). |
 
+### Eesti Tsüstilise Fibroosi Ühing
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| etfy-ee-resource-pages | Eesti Tsüstilise Fibroosi Ühing website (etfy.ee) | [page](https://etfy.ee/) | link only | Official national cystic fibrosis patient society in Estonia (Eesti Tsüstilise Fibroosi Ühing - ETFY). |
+
+### Einstök börn
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| einstokborn-is-resource-pages | Einstök börn rare disease support website (einstokborn.is) | [page](https://einstokborn.is/) | link only | National rare disease patient and family association in Iceland (Einstök börn) providing support and education for cystic fibrosis (slímseigjusjúkdómur). |
+
 ### European Medicines Agency
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | eu-ctr | EU Clinical Trials Register (EudraCT) | [page](https://www.clinicaltrialsregister.eu/) | link only | robots.txt: none (404). |
+
+### Federación Costarricense de Enfermedades Raras
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| fecoer-cr-resource-pages | Federación Costarricense de Enfermedades Raras website (federacionenfermedadesrarascr.org) | [page](https://federacionenfermedadesrarascr.org/) | link only | National rare and genetic disease patient federation in Costa Rica (FECOER). |
 
 ### Federación Española de Fibrosis Quística
 
@@ -175,11 +205,23 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | fcfq-resource-pages | Fundación Colombiana para Fibrosis Quística (FCFQ) website (fibrosisquisticacolombia.org) | [page](https://fibrosisquisticacolombia.org/) | link only | Official national cystic fibrosis patient advocacy and education foundation in Colombia. |
 
+### Fundación Dominicana de Apoyo a la Fibrosis Quística
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| fundofq-do-resource-pages | Fundación Dominicana de Apoyo a la Fibrosis Quística website (fibrosisquisticadominicana.org) | [page](https://www.fibrosisquisticadominicana.org/) | link only | Official national cystic fibrosis patient support foundation in the Dominican Republic (FUNDOFQ). |
+
 ### Fundación Ecuatoriana de Fibrosis Quística
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | fibroq-resource-pages | Fundación Ecuatoriana de Fibrosis Quística website (fqec.org) | [page](https://www.fqec.org/) | link only | Official national cystic fibrosis foundation in Ecuador (FIBROQ). |
+
+### Fundación Salvadoreña para la Salud y el Desarrollo Humano (FUSAL)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| fusal-sv-resource-pages | Fundación Salvadoreña para la Salud y el Desarrollo Humano website (fusal.org) | [page](https://www.fusal.org/) | link only | Salvadoran health foundation channeling humanitarian medicine access and pediatric hospital support alongside the Benjamín Bloom Cystic Fibrosis Foundation. |
 
 ### gnomAD consortium (Broad Institute)
 
@@ -229,11 +271,23 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | unidospelavida-resource-pages | Instituto Unidos pela Vida website (unidospelavida.org.br) | [page](https://unidospelavida.org.br/) | link only | Official national cystic fibrosis awareness, diagnosis navigation, and patient support institute in Brazil. |
 
+### Japan Intractable Diseases Information Center (難病情報センター)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| nanbyou-jp-resource-pages | Japan Intractable Diseases Information Center website (nanbyou.or.jp) | [page](https://www.nanbyou.or.jp/) | link only | Official Japanese national intractable disease information center (指定難病 嚢胞性線維症 entry). |
+
 ### Johns Hopkins University and the Cystic Fibrosis Foundation
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cftr2 | CFTR2 - Clinical and Functional Translation of CFTR | [page](https://cftr2.org/) | link only | Terms read verbatim 2026-10-05 from the publisher's own Legal Terms and Conditions PDF (linked from the site footer; text extracted with pdftotext). |
+
+### Jordan Cystic Fibrosis Friends Charity
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| jcfc-jo-resource-pages | Jordan Cystic Fibrosis Friends Charity website (jordancysticfibrosis.com) | [page](https://jordancysticfibrosis.com/) | link only | Official cystic fibrosis patient and family charity in Jordan. |
 
 ### Kistik Fibrozis Yardımlaşma ve Dayanışma Derneği
 
@@ -247,6 +301,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | klubcf-cz-resource-pages | Klub nemocných cystickou fibrózou website (klubcf.cz) | [page](https://klubcf.cz/) | link only | Official national cystic fibrosis patient club in the Czech Republic. |
 
+### Korean Organization for Rare Diseases (한국희귀·난치성질환연합회)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kord-kr-resource-pages | Korean Organization for Rare Diseases website (kord.or.kr) | [page](https://www.kord.or.kr/) | link only | Official national federation for rare and intractable disease patients in South Korea (KORD). |
+
+### Latvijas Cistiskās fibrozes biedrība
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cistiskafibroze-lv-resource-pages | Latvijas Cistiskās fibrozes biedrība website (cistiskafibroze.lv) | [page](https://cistiskafibroze.lv/) | link only | Official national cystic fibrosis patient association in Latvia (Latvijas Cistiskās fibrozes biedrība - LCFB). |
+
 ### Lega Italiana Fibrosi Cistica
 
 | ID | What | Open | Save as | Notes |
@@ -258,6 +324,24 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cistinefibroze-lt-resource-pages | Lietuvos cistinės fibrozės asociacija website (cistinefibroze.lt) | [page](https://www.cistinefibroze.lt/) | link only | Official national cystic fibrosis patient association in Lithuania (Lietuvos cistinės fibrozės asociacija). |
+
+### Malaysia Rare Disorders Society
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| mrds-my-resource-pages | Malaysia Rare Disorders Society website (mrds.org.my) | [page](https://mrds.org.my/) | link only | Official national rare disorders patient society in Malaysia listing cystic fibrosis under rare pulmonary disorders. |
+
+### Middle East Cystic Fibrosis Association
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| mecfa-mena-resource-pages | Middle East Cystic Fibrosis Association website (mecfa.org) | [page](https://www.mecfa.org/) | link only | Regional cystic fibrosis care, diagnostic capacity, and patient support organization partnering with clinics and families in Egypt, Morocco, Jordan, and the Mi… |
+
+### Ministerio de Salud y Deportes de Bolivia
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| minsalud-bo-resource-pages | Ministerio de Salud y Deportes de Bolivia website (minsalud.gob.bo) | [page](https://www.minsalud.gob.bo/) | link only | Official Bolivian Ministry of Health portal covering public hospital directories, Unified Health System (SUS) access, and national clinical programs. |
 
 ### Muco vzw / Association Muco
 
@@ -289,6 +373,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cfnorge-resource-pages | Norsk Forening for Cystisk Fibrose website (cfnorge.no) | [page](https://cfnorge.no/) | link only | Official national cystic fibrosis association in Norway. |
 
+### Philippine Society for Orphan Disorders
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| psod-ph-resource-pages | Philippine Society for Orphan Disorders website (psod.org.ph) | [page](https://www.psod.org.ph/) | link only | Official national rare and orphan genetic disorders patient organization in the Philippines. |
+
 ### Polskie Towarzystwo Walki z Mukowiscydozą
 
 | ID | What | Open | Save as | Notes |
@@ -307,6 +397,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | rfcf-se-resource-pages | Riksförbundet Cystisk Fibros website (rfcf.se) | [page](https://www.rfcf.se/) | link only | Official national cystic fibrosis federation in Sweden. |
 
+### Secretaría Nacional por los Derechos Humanos de las Personas con Discapacidad (SENADIS)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| senadis-py-resource-pages | Secretaría Nacional por los Derechos Humanos de las Personas con Discapacidad website (senadis.gov.py) | [page](https://senadis.gov.py/) | link only | Official Paraguayan national agency providing rehabilitation, social rights, and multidisciplinary support for disabling and chronic conditions. |
+
 ### Slovenská asociácia cystickej fibrózy
 
 | ID | What | Open | Save as | Notes |
@@ -319,6 +415,24 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | sacfa-resource-pages | South African Cystic Fibrosis Association website (sacfa.org.za) | [page](https://www.sacfa.org.za/) | link only | Official national cystic fibrosis association in South Africa. |
 
+### Taiwan Foundation for Rare Disorders (財團法人罕見疾病基金會)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| tfrd-tw-resource-pages | Taiwan Foundation for Rare Disorders website (tfrd.org.tw) | [page](https://www.tfrd.org.tw/) | link only | Official rare disorders foundation in Taiwan supporting designated rare genetic diseases including cystic fibrosis. |
+
+### Thai Rare Disease Foundation
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| thairdf-th-resource-pages | Thai Rare Disease Foundation website (thairdf.org) | [page](https://thairdf.org/) | link only | Official national rare disease patient foundation in Thailand. |
+
+### Udruženje za pomoć i podršku osobama sa cističnom fibrozom Srbije
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cfsrbija-rs-resource-pages | CF Srbija cystic fibrosis association website (cfsrbija.rs) | [page](https://cfsrbija.rs/) | link only | Official national cystic fibrosis patient association in Serbia (Udruženje za pomoć i podršku osobama sa cističnom fibrozom Srbije). |
+
 ### Vaincre la Mucoviscidose
 
 | ID | What | Open | Save as | Notes |
@@ -330,6 +444,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | alphamissense-predictions | AlphaMissense predictions (Zenodo record) | [page](https://zenodo.org/records/10813168) | link only | Fetched directly 2026-10-07 with the lab user agent: zenodo.org robots.txt (does not disallow /records/ except /records/*/preview; allows /api/records/*/files;… |
+
+### Громадська спілка Орфанні захворювання України
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| rare-ua-resource-pages | Orphan Diseases of Ukraine public union website (rare.org.ua) | [page](https://rare.org.ua/) | link only | Official national rare disease patient union in Ukraine (Громадська спілка «Орфанні захворювання України») representing cystic fibrosis (муковісцидоз) patient… |
 
 ## Ask first (access by request)
 

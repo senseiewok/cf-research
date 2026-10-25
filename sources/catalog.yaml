@@ -1581,7 +1581,8 @@ sources:
     publisher: Nederlandse Cystic Fibrosis Stichting
     kind: resource_pages
     access: manual
-    robots: unknown
+    robots: allow
+    robots_checked: 2026-10-25
     landing_page: https://ncfs.nl/
     url: null
     claim_label: unverified
@@ -1595,7 +1596,8 @@ sources:
     publisher: Muco vzw / Association Muco
     kind: resource_pages
     access: manual
-    robots: unknown
+    robots: allow
+    robots_checked: 2026-10-25
     landing_page: https://www.muco.be/
     url: null
     claim_label: unverified
@@ -1605,12 +1607,13 @@ sources:
       summary only: no page text, logo, image, phone number, email address or person's name.
 
   - id: cfschweiz-resource-pages
-    title: Cystische Fibrose Schweiz website (cysticfibrosisschweiz.ch)
+    title: Cystische Fibrose Schweiz website (cystischefibroseschweiz.ch)
     publisher: Cystische Fibrose Schweiz (CFS)
     kind: resource_pages
     access: manual
-    robots: unknown
-    landing_page: https://cysticfibrosisschweiz.ch/
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://cystischefibroseschweiz.ch/
     url: null
     claim_label: unverified
     notes: >-
@@ -1623,7 +1626,8 @@ sources:
     publisher: Cystische Fibrose Hilfe Österreich
     kind: resource_pages
     access: manual
-    robots: unknown
+    robots: allow
+    robots_checked: 2026-10-25
     landing_page: https://www.cystischefibrose.info/
     url: null
     claim_label: unverified
@@ -1637,7 +1641,8 @@ sources:
     publisher: Cystisk Fibrose Foreningen
     kind: resource_pages
     access: manual
-    robots: unknown
+    robots: allow
+    robots_checked: 2026-10-25
     landing_page: https://cystiskfibrose.dk/
     url: null
     claim_label: unverified
@@ -1651,7 +1656,8 @@ sources:
     publisher: Riksförbundet Cystisk Fibros
     kind: resource_pages
     access: manual
-    robots: unknown
+    robots: allow
+    robots_checked: 2026-10-25
     landing_page: https://www.rfcf.se/
     url: null
     claim_label: unverified
@@ -1665,7 +1671,8 @@ sources:
     publisher: Norsk Forening for Cystisk Fibrose
     kind: resource_pages
     access: manual
-    robots: unknown
+    robots: allow
+    robots_checked: 2026-10-25
     landing_page: https://cfnorge.no/
     url: null
     claim_label: unverified
@@ -1679,7 +1686,8 @@ sources:
     publisher: Hengitysliitto (Organization for Respiratory Health in Finland)
     kind: resource_pages
     access: manual
-    robots: unknown
+    robots: allow
+    robots_checked: 2026-10-25
     landing_page: https://www.hengitysliitto.fi/
     url: null
     claim_label: unverified
@@ -1694,7 +1702,8 @@ sources:
     publisher: Associação Nacional de Fibrose Quística
     kind: resource_pages
     access: manual
-    robots: unknown
+    robots: allow
+    robots_checked: 2026-10-25
     landing_page: https://www.anfq.pt/
     url: null
     claim_label: unverified
@@ -1704,12 +1713,13 @@ sources:
       summary only: no page text, logo, image, phone number, email address or person's name.
 
   - id: fiqper-resource-pages
-    title: Fibrosis Quística Perú website (fiqper.org)
-    publisher: Asociación Peruana de Fibrosis Quística (FIQPER)
+    title: Fibrosis Quística Perú website (fiquiperu.org.pe)
+    publisher: Asociación Peruana de Fibrosis Quística (FIQUIPERU)
     kind: resource_pages
     access: manual
-    robots: unknown
-    landing_page: https://fiqper.org/
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://fiquiperu.org.pe/
     url: null
     claim_label: unverified
     notes: >-
@@ -1722,7 +1732,8 @@ sources:
     publisher: South African Cystic Fibrosis Association
     kind: resource_pages
     access: manual
-    robots: unknown
+    robots: allow
+    robots_checked: 2026-10-25
     landing_page: https://www.sacfa.org.za/
     url: null
     claim_label: unverified
@@ -1732,12 +1743,13 @@ sources:
       summary only: no page text, logo, image, phone number, email address or person's name.
 
   - id: cfindia-resource-pages
-    title: Cystic Fibrosis Trust India support pages (cftrustindia.org)
+    title: Cystic Fibrosis Trust India support pages (cysticfibrosisindia.org)
     publisher: Cystic Fibrosis Trust India
     kind: resource_pages
     access: manual
-    robots: unknown
-    landing_page: https://www.cftrustindia.org/
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.cysticfibrosisindia.org/
     url: null
     claim_label: unverified
     notes: >-
@@ -1984,6 +1996,266 @@ sources:
       Official national cystic fibrosis patient association in Guatemala (AGAFQ).
       Robots.txt verified under project user agent on 2026-10-24 (HTTP 200); access stays manual until full terms audit.
       Rows hold a link and the lab's own one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: etfy-ee-resource-pages
+    title: Eesti Tsüstilise Fibroosi Ühing website (etfy.ee)
+    publisher: Eesti Tsüstilise Fibroosi Ühing
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://etfy.ee/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient society in Estonia (Eesti Tsüstilise Fibroosi Ühing - ETFY). Robots.txt verified under project user agent on 2026-10-25 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab's own one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: cistiskafibroze-lv-resource-pages
+    title: Latvijas Cistiskās fibrozes biedrība website (cistiskafibroze.lv)
+    publisher: Latvijas Cistiskās fibrozes biedrība
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://cistiskafibroze.lv/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient association in Latvia (Latvijas Cistiskās fibrozes biedrība - LCFB). Robots.txt verified under project user agent on 2026-10-25 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab's own one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: cfsrbija-rs-resource-pages
+    title: CF Srbija cystic fibrosis association website (cfsrbija.rs)
+    publisher: Udruženje za pomoć i podršku osobama sa cističnom fibrozom Srbije
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://cfsrbija.rs/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient association in Serbia (Udruženje za pomoć i podršku osobama sa cističnom fibrozom Srbije). Robots.txt answered HTTP 404 (no restrictions) under project user agent on 2026-10-25; access stays manual until full terms audit. Rows hold a link and the lab's own one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: allm-lu-resource-pages
+    title: Association Luxembourgeoise de Lutte contre la Mucoviscidose website (allm.lu)
+    publisher: Association Luxembourgeoise de Lutte contre la Mucoviscidose
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.allm.lu/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient association in Luxembourg (ALLM). Robots.txt verified under project user agent on 2026-10-25 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab's own one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: einstokborn-is-resource-pages
+    title: Einstök börn rare disease support website (einstokborn.is)
+    publisher: Einstök börn
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://einstokborn.is/
+    url: null
+    claim_label: unverified
+    notes: >-
+      National rare disease patient and family association in Iceland (Einstök börn) providing support and education for cystic fibrosis (slímseigjusjúkdómur). Robots.txt verified under project user agent on 2026-10-25 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab's own one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: rare-ua-resource-pages
+    title: Orphan Diseases of Ukraine public union website (rare.org.ua)
+    publisher: Громадська спілка Орфанні захворювання України
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://rare.org.ua/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national rare disease patient union in Ukraine (Громадська спілка «Орфанні захворювання України») representing cystic fibrosis (муковісцидоз) patient organizations. Robots.txt verified under project user agent on 2026-10-25 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab's own one-sentence summary only: no page text, logo, image, phone number, email address or person's name.
+
+  - id: fundofq-do-resource-pages
+    title: Fundación Dominicana de Apoyo a la Fibrosis Quística website (fibrosisquisticadominicana.org)
+    publisher: Fundación Dominicana de Apoyo a la Fibrosis Quística
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.fibrosisquisticadominicana.org/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national cystic fibrosis patient support foundation in the Dominican Republic (FUNDOFQ). Robots.txt verified under project user agent on 2026-10-25 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: fecoer-cr-resource-pages
+    title: Federación Costarricense de Enfermedades Raras website (federacionenfermedadesrarascr.org)
+    publisher: Federación Costarricense de Enfermedades Raras
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://federacionenfermedadesrarascr.org/
+    url: null
+    claim_label: unverified
+    notes: >-
+      National rare and genetic disease patient federation in Costa Rica (FECOER). Robots.txt verified under project user agent on 2026-10-25 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: mischiquiticos-ve-resource-pages
+    title: Asociación Civil Mis Chiquiticos website (mischiquiticos.com)
+    publisher: Asociación Civil Humberto Da Silva (Mis Chiquiticos)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.mischiquiticos.com/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Venezuelan non-profit patient and family orientation organization covering rare, genetic, and metabolic conditions including cystic fibrosis. Robots.txt verified under project user agent on 2026-10-25 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: fusal-sv-resource-pages
+    title: Fundación Salvadoreña para la Salud y el Desarrollo Humano website (fusal.org)
+    publisher: Fundación Salvadoreña para la Salud y el Desarrollo Humano (FUSAL)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.fusal.org/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Salvadoran health foundation channeling humanitarian medicine access and pediatric hospital support alongside the Benjamín Bloom Cystic Fibrosis Foundation. Robots.txt verified under project user agent on 2026-10-25 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: senadis-py-resource-pages
+    title: Secretaría Nacional por los Derechos Humanos de las Personas con Discapacidad website (senadis.gov.py)
+    publisher: Secretaría Nacional por los Derechos Humanos de las Personas con Discapacidad (SENADIS)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://senadis.gov.py/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official Paraguayan national agency providing rehabilitation, social rights, and multidisciplinary support for disabling and chronic conditions. Robots.txt verified under project user agent on 2026-10-25 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: minsalud-bo-resource-pages
+    title: Ministerio de Salud y Deportes de Bolivia website (minsalud.gob.bo)
+    publisher: Ministerio de Salud y Deportes de Bolivia
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.minsalud.gob.bo/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official Bolivian Ministry of Health portal covering public hospital directories, Unified Health System (SUS) access, and national clinical programs. Robots.txt verified under project user agent on 2026-10-25 (HTTP 200); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: nanbyou-jp-resource-pages
+    title: Japan Intractable Diseases Information Center website (nanbyou.or.jp)
+    publisher: Japan Intractable Diseases Information Center (難病情報センター)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.nanbyou.or.jp/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official Japanese national intractable disease information center (指定難病 嚢胞性線維症 entry). Robots.txt verified under project user agent on 2026-10-25 (HTTP 200, allow); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: kord-kr-resource-pages
+    title: Korean Organization for Rare Diseases website (kord.or.kr)
+    publisher: Korean Organization for Rare Diseases (한국희귀·난치성질환연합회)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.kord.or.kr/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national federation for rare and intractable disease patients in South Korea (KORD). Robots.txt verified under project user agent on 2026-10-25 (HTTP 200, allow); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: mrds-my-resource-pages
+    title: Malaysia Rare Disorders Society website (mrds.org.my)
+    publisher: Malaysia Rare Disorders Society
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://mrds.org.my/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national rare disorders patient society in Malaysia listing cystic fibrosis under rare pulmonary disorders. Robots.txt verified under project user agent on 2026-10-25 (HTTP 200, allow); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: psod-ph-resource-pages
+    title: Philippine Society for Orphan Disorders website (psod.org.ph)
+    publisher: Philippine Society for Orphan Disorders
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.psod.org.ph/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national rare and orphan genetic disorders patient organization in the Philippines. Robots.txt verified under project user agent on 2026-10-25 (HTTP 200, allow); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: jcfc-jo-resource-pages
+    title: Jordan Cystic Fibrosis Friends Charity website (jordancysticfibrosis.com)
+    publisher: Jordan Cystic Fibrosis Friends Charity
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://jordancysticfibrosis.com/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official cystic fibrosis patient and family charity in Jordan. Robots.txt verified under project user agent on 2026-10-25 (HTTP 200, allow); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: mecfa-mena-resource-pages
+    title: Middle East Cystic Fibrosis Association website (mecfa.org)
+    publisher: Middle East Cystic Fibrosis Association
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.mecfa.org/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Regional cystic fibrosis care, diagnostic capacity, and patient support organization partnering with clinics and families in Egypt, Morocco, Jordan, and the Middle East. Robots.txt verified under project user agent on 2026-10-25 (HTTP 200, allow); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: thairdf-th-resource-pages
+    title: Thai Rare Disease Foundation website (thairdf.org)
+    publisher: Thai Rare Disease Foundation
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://thairdf.org/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official national rare disease patient foundation in Thailand. Robots.txt verified under project user agent on 2026-10-25 (HTTP 200, allow); access stays manual until full terms audit. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
+
+  - id: tfrd-tw-resource-pages
+    title: Taiwan Foundation for Rare Disorders website (tfrd.org.tw)
+    publisher: Taiwan Foundation for Rare Disorders (財團法人罕見疾病基金會)
+    kind: resource_pages
+    access: manual
+    robots: unreadable
+    robots_checked: 2026-10-25
+    landing_page: https://www.tfrd.org.tw/
+    url: null
+    claim_label: unverified
+    notes: >-
+      Official rare disorders foundation in Taiwan supporting designated rare genetic diseases including cystic fibrosis. Automated TLS verification failed on 2026-10-25 (expired certificate on www.tfrd.org.tw); access stays strictly manual. Rows hold a link and the lab own one-sentence summary only: no page text, logo, image, phone number, email address or person name.
 
   - id: natural-earth-110m-countries
     title: Natural Earth 1:110m Admin 0 Countries (vector, GeoJSON)

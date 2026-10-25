@@ -944,7 +944,7 @@ resources:
 
   - id: ncfs-leven-met-cf
     name: "Leven met taaislijmziekte"
-    organisation: Nederlandse Cystic Fibrosis Stichting
+    organisation: "Nederlandse Cystic Fibrosis Stichting"
     countries: [NL]
     url: https://ncfs.nl/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
@@ -953,13 +953,18 @@ resources:
     who_for: not_checked
     lang: nl
     source_id: ncfs-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-20
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: e44652ce4611715b3cde4025f30412d4ba8c3337a1e4afe87a1929fbc739b937
+    last_checked: 2026-10-25
     status: active
 
   - id: mucobe-leven-met-muco
     name: "Leven met muco / Vivre avec la mucoviscidose"
-    organisation: Muco vzw / Association Muco
+    organisation: "Muco vzw / Association Muco"
     countries: [BE]
     url: https://www.muco.be/
     audience: [adult_with_cf, parent_carer_of_child, partner_family_carer_of_adult]
@@ -969,27 +974,32 @@ resources:
     lang: nl
     source_id: mucobe-resource-pages
     basis: lead_only
-    last_checked: 2026-10-20
+    last_checked: 2026-10-25
     status: active
 
   - id: cfschweiz-leben-mit-cf
     name: "Leben mit Cystischer Fibrose"
-    organisation: Cystische Fibrose Schweiz (CFS)
+    organisation: "Cystische Fibrose Schweiz (CFS)"
     countries: [CH]
-    url: https://cysticfibrosisschweiz.ch/
+    url: https://cystischefibroseschweiz.ch/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [daily_life, money_insurance, community_peer]
     summary: "Swiss national organization offering multilingual social counseling, care center directories, and regional peer support for families and adults."
     who_for: not_checked
     lang: de-CH
     source_id: cfschweiz-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-20
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: a2ce151750dfa104b4f5a4a8a505fcf3634553464d831ded92bcc57e2f31f4ca
+    last_checked: 2026-10-25
     status: active
 
   - id: cfhilfe-at-unterstuetzung
     name: "Information und Unterstützung bei Cystischer Fibrose"
-    organisation: Cystische Fibrose Hilfe Österreich
+    organisation: "Cystische Fibrose Hilfe Österreich"
     countries: [AT]
     url: https://www.cystischefibrose.info/
     audience: [adult_with_cf, parent_carer_of_child]
@@ -999,12 +1009,12 @@ resources:
     lang: de-AT
     source_id: cfhilfe-at-resource-pages
     basis: lead_only
-    last_checked: 2026-10-20
+    last_checked: 2026-10-25
     status: active
 
   - id: cff-dk-livet-med-cf
     name: "Livet med cystisk fibrose"
-    organisation: Cystisk Fibrose Foreningen
+    organisation: "Cystisk Fibrose Foreningen"
     countries: [DK]
     url: https://cystiskfibrose.dk/
     audience: [adult_with_cf, parent_carer_of_child, teen_young_adult]
@@ -1014,12 +1024,12 @@ resources:
     lang: da
     source_id: cff-dk-resource-pages
     basis: lead_only
-    last_checked: 2026-10-20
+    last_checked: 2026-10-25
     status: active
 
   - id: rfcf-se-stod-och-rad
     name: "Stöd och råd vid cystisk fibros"
-    organisation: Riksförbundet Cystisk Fibros
+    organisation: "Riksförbundet Cystisk Fibros"
     countries: [SE]
     url: https://www.rfcf.se/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
@@ -1028,13 +1038,18 @@ resources:
     who_for: not_checked
     lang: sv
     source_id: rfcf-se-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-20
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 97900b3e5322561dc54a08d31e291c3dc2e3b26b4604a821a6d5610fe6b2f2e1
+    last_checked: 2026-10-25
     status: active
 
   - id: cfnorge-leve-med-cf
     name: "Å leve med cystisk fibrose"
-    organisation: Norsk Forening for Cystisk Fibrose
+    organisation: "Norsk Forening for Cystisk Fibrose"
     countries: ["NO"]
     url: https://cfnorge.no/
     audience: [adult_with_cf, parent_carer_of_child, teen_young_adult]
@@ -1043,13 +1058,18 @@ resources:
     who_for: not_checked
     lang: nb
     source_id: cfnorge-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-20
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 0b57585147ce914877f03c8e7fe6ea41989b96ce192423009830c271823ae5ad
+    last_checked: 2026-10-25
     status: active
 
   - id: hengitysliitto-fi-kystinen-fibroosi
     name: "Kystinen fibroosi ja vertaistuki"
-    organisation: Hengitysliitto
+    organisation: "Hengitysliitto"
     countries: [FI]
     url: https://www.hengitysliitto.fi/
     audience: [adult_with_cf, parent_carer_of_child]
@@ -1059,12 +1079,12 @@ resources:
     lang: fi
     source_id: hengitysliitto-fi-resource-pages
     basis: lead_only
-    last_checked: 2026-10-20
+    last_checked: 2026-10-25
     status: active
 
   - id: anfq-pt-viver-com-fq
     name: "Apoio a pessoas com fibrose quística"
-    organisation: Associação Nacional de Fibrose Quística
+    organisation: "Associação Nacional de Fibrose Quística"
     countries: [PT]
     url: https://www.anfq.pt/
     audience: [adult_with_cf, parent_carer_of_child]
@@ -1074,14 +1094,14 @@ resources:
     lang: pt-PT
     source_id: anfq-pt-resource-pages
     basis: lead_only
-    last_checked: 2026-10-20
+    last_checked: 2026-10-25
     status: active
 
   - id: fiqper-apoyo-y-orientacion
     name: "Orientación y apoyo en fibrosis quística"
-    organisation: Asociación Peruana de Fibrosis Quística (FIQPER)
+    organisation: "Asociación Peruana de Fibrosis Quística (FIQUIPERU)"
     countries: [PE]
-    url: https://fiqper.org/
+    url: https://fiquiperu.org.pe/
     audience: [adult_with_cf, parent_carer_of_child]
     category: [newly_diagnosed_basics, medicines_access, community_peer]
     summary: "Peruvian patient and family association providing diagnostic orientation, treatment access advocacy, and community support for people with CF."
@@ -1089,13 +1109,18 @@ resources:
     who_for: not_checked
     lang: es-PE
     source_id: fiqper-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-20
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 3a1f60b431d3451ce3bd70469e2e5a9838017eb7aa1b8e6d1edc3a7063104b9f
+    last_checked: 2026-10-25
     status: active
 
   - id: sacfa-support-and-care
     name: "Support and care for cystic fibrosis in South Africa"
-    organisation: South African Cystic Fibrosis Association
+    organisation: "South African Cystic Fibrosis Association"
     countries: [ZA]
     url: https://www.sacfa.org.za/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
@@ -1105,29 +1130,32 @@ resources:
     lang: en-ZA
     source_id: sacfa-resource-pages
     basis: lead_only
-    last_checked: 2026-10-20
+    last_checked: 2026-10-25
     status: active
 
   - id: cfindia-patient-support
     name: "Patient support and diagnostic guidance"
-    organisation: Cystic Fibrosis Trust India
+    organisation: "Cystic Fibrosis Trust India"
     countries: [IN]
-    url: https://www.cftrustindia.org/
+    url: https://www.cysticfibrosisindia.org/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, find_care_team, daily_life]
     summary: "Indian patient support organization offering diagnostic navigation, respiratory care education, and family counseling for children and adults with CF."
     who_for: not_checked
     lang: en-IN
     source_id: cfindia-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-20
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 636548764791c7cc83a1df31dc23279394dd839ccee7753bae15468231b6cc5b
+    last_checked: 2026-10-25
     status: active
-
-  # Candidate lead_only rows from permitted fetch sources (UK FAQs).
 
   - id: cftrust-faqs
     name: "Cystic fibrosis frequently asked questions"
-    organisation: Cystic Fibrosis Trust
+    organisation: "Cystic Fibrosis Trust"
     countries: [GB]
     url: https://www.cysticfibrosis.org.uk/what-is-cystic-fibrosis/faqs
     audience: [adult_with_cf, parent_carer_of_child, everyone]
@@ -1137,16 +1165,18 @@ resources:
     format: online
     lang: en
     source_id: cftrust-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-23
+    basis: script_fetch
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 818074c133038b3f0ac982308ea3fa7b967f27ebc6d1902befe264c787ba5833
+    last_checked: 2026-10-25
     status: active
-
-  # Candidate lead_only rows for Batch 3: international expansion countries (UY, EC, PL, CZ, GR, IL, TR).
-  # Each row is basis: lead_only and awaits human browser inspection and confirmation before pinning to senseiewok.ai/resources/.
 
   - id: ahlfq-apoyo-y-orientacion
     name: "Orientación y apoyo en fibrosis quística"
-    organisation: Asociación Honoraria Fibrosis Quística del Uruguay
+    organisation: "Asociación Honoraria Fibrosis Quística del Uruguay"
     countries: [UY]
     url: https://fquruguay.org/
     audience: [adult_with_cf, parent_carer_of_child]
@@ -1157,13 +1187,18 @@ resources:
     format: online
     lang: es-UY
     source_id: ahlfq-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-23
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 09fe9c730499b35f1c2b562d6532cb36c8a039b04c00180308cdf44611e84574
+    last_checked: 2026-10-25
     status: active
 
   - id: fibroq-orientacion-y-cuidado
     name: "Orientación y cuidado en fibrosis quística"
-    organisation: Fundación Ecuatoriana de Fibrosis Quística
+    organisation: "Fundación Ecuatoriana de Fibrosis Quística"
     countries: [EC]
     url: https://www.fqec.org/
     audience: [adult_with_cf, parent_carer_of_child]
@@ -1174,13 +1209,18 @@ resources:
     format: online
     lang: es-EC
     source_id: fibroq-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-23
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: f7ce85953dec9073be885b06bcca94f53de00a9634421c2c115e3505b0319394
+    last_checked: 2026-10-25
     status: active
 
   - id: ptwm-pomoc-i-wsparcie
     name: "Pomoc i wsparcie w mukowiscydozie"
-    organisation: Polskie Towarzystwo Walki z Mukowiscydozą
+    organisation: "Polskie Towarzystwo Walki z Mukowiscydozą"
     countries: [PL]
     url: https://ptwm.org.pl/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
@@ -1190,13 +1230,18 @@ resources:
     format: online
     lang: pl
     source_id: ptwm-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-23
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: bd8bef0b329df509ff7d95e2b052ff53aba4b68bebe7905fe4122ec62be70e2b
+    last_checked: 2026-10-25
     status: active
 
   - id: klubcf-podpora-a-pomoc
     name: "Podpora a pomoc pro nemocné cystickou fibrózou"
-    organisation: Klub nemocných cystickou fibrózou
+    organisation: "Klub nemocných cystickou fibrózou"
     countries: [CZ]
     url: https://klubcf.cz/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
@@ -1207,12 +1252,12 @@ resources:
     lang: cs
     source_id: klubcf-cz-resource-pages
     basis: lead_only
-    last_checked: 2026-10-23
+    last_checked: 2026-10-25
     status: active
 
   - id: hcfa-gr-support-and-care
     name: "Υποστήριξη και ενημέρωση για την Κυστική Ίνωση"
-    organisation: Hellenic Cystic Fibrosis Association
+    organisation: "Hellenic Cystic Fibrosis Association"
     countries: [GR]
     url: https://www.cysticfibrosis.gr/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
@@ -1222,13 +1267,18 @@ resources:
     format: online
     lang: el
     source_id: hcfa-gr-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-23
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: c7a07e9f29a2606a30e3eb85b421923eb7d9bfa7eb61737288313a1981976ed3
+    last_checked: 2026-10-25
     status: active
 
   - id: cffi-support-and-information
     name: "מידע ותמיכה בסיסטיק פיברוזיס"
-    organisation: Cystic Fibrosis Foundation of Israel
+    organisation: "Cystic Fibrosis Foundation of Israel"
     countries: [IL]
     url: https://www.cff.org.il/
     audience: [adult_with_cf, parent_carer_of_child]
@@ -1239,12 +1289,12 @@ resources:
     lang: he
     source_id: cffi-il-resource-pages
     basis: lead_only
-    last_checked: 2026-10-23
+    last_checked: 2026-10-25
     status: active
 
   - id: kifder-bilgi-ve-destek
     name: "Kistik Fibrozis Bilgi ve Dayanışma"
-    organisation: Kistik Fibrozis Yardımlaşma ve Dayanışma Derneği
+    organisation: "Kistik Fibrozis Yardımlaşma ve Dayanışma Derneği"
     countries: [TR]
     url: https://www.kifder.org.tr/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
@@ -1254,16 +1304,18 @@ resources:
     format: online
     lang: tr
     source_id: kifder-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-23
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: f8dde9324409b7f8ff2564d77d5abe46a2c60c9c1399d0d72d6b018d9a8821a7
+    last_checked: 2026-10-25
     status: active
-
-  # Candidate lead_only rows for Batch 4: international expansion countries (HU, SK, HR, RO, LT, BG, SI, PA, GT).
-  # Each row is basis: lead_only and awaits human browser inspection and confirmation before pinning to senseiewok.ai/resources/.
 
   - id: cfbe-informacio-es-tamogatas
     name: "Tájékoztatás és segítségnyújtás cisztás fibrózissal élőknek"
-    organisation: Cisztás Fibrózis Betegek Egyesülete
+    organisation: "Cisztás Fibrózis Betegek Egyesülete"
     countries: [HU]
     url: https://www.cisztasfibrozis.hu/
     audience: [adult_with_cf, parent_carer_of_child]
@@ -1274,12 +1326,12 @@ resources:
     lang: hu
     source_id: cisztasfibrozis-hu-resource-pages
     basis: lead_only
-    last_checked: 2026-10-24
+    last_checked: 2026-10-25
     status: active
 
   - id: scfa-pomoc-a-poradenstvo
     name: "Pomoc a sociálne poradenstvo pri cystickej fibróze"
-    organisation: Slovenská asociácia cystickej fibrózy
+    organisation: "Slovenská asociácia cystickej fibrózy"
     countries: [SK]
     url: https://www.cfasociacia.sk/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
@@ -1290,12 +1342,12 @@ resources:
     lang: sk
     source_id: cfasociacia-sk-resource-pages
     basis: lead_only
-    last_checked: 2026-10-24
+    last_checked: 2026-10-25
     status: active
 
   - id: cfcro-podrska-i-informacije
     name: "Podrška i informacije za oboljele od cistične fibroze"
-    organisation: Hrvatska udruga oboljelih od cistične fibroze
+    organisation: "Hrvatska udruga oboljelih od cistične fibroze"
     countries: [HR]
     url: https://cystic-fibrosis.hr/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
@@ -1306,12 +1358,12 @@ resources:
     lang: hr
     source_id: cystic-fibrosis-hr-resource-pages
     basis: lead_only
-    last_checked: 2026-10-24
+    last_checked: 2026-10-25
     status: active
 
   - id: afcr-suport-si-informare
     name: "Suport și informare pentru persoanele cu fibroză chistică"
-    organisation: Asociația de Fibroză Chistică din România
+    organisation: "Asociația de Fibroză Chistică din România"
     countries: [RO]
     url: https://afcr.ro/
     audience: [adult_with_cf, parent_carer_of_child]
@@ -1322,12 +1374,12 @@ resources:
     lang: ro
     source_id: afcr-ro-resource-pages
     basis: lead_only
-    last_checked: 2026-10-24
+    last_checked: 2026-10-25
     status: active
 
   - id: lcfa-pagalba-ir-zinios
     name: "Pagalba ir žinios apie cistinę fibrozę"
-    organisation: Lietuvos cistinės fibrozės asociacija
+    organisation: "Lietuvos cistinės fibrozės asociacija"
     countries: [LT]
     url: https://www.cistinefibroze.lt/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
@@ -1338,12 +1390,12 @@ resources:
     lang: lt
     source_id: cistinefibroze-lt-resource-pages
     basis: lead_only
-    last_checked: 2026-10-24
+    last_checked: 2026-10-25
     status: active
 
   - id: bcfa-pomosht-i-orientaciya
     name: "Помощ и ориентация при муковисцидоза"
-    organisation: Bulgarian Cystic Fibrosis Association
+    organisation: "Bulgarian Cystic Fibrosis Association"
     countries: [BG]
     url: https://lifewithcf.org/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
@@ -1354,12 +1406,12 @@ resources:
     lang: bg
     source_id: lifewithcf-bg-resource-pages
     basis: lead_only
-    last_checked: 2026-10-24
+    last_checked: 2026-10-25
     status: active
 
   - id: dcfs-pomoc-in-svetovanje
     name: "Pomoč in svetovanje za bolnike s cistično fibrozo"
-    organisation: Društvo za cistično fibrozo Slovenije
+    organisation: "Društvo za cistično fibrozo Slovenije"
     countries: [SI]
     url: https://drustvocf.si/
     audience: [adult_with_cf, parent_carer_of_child]
@@ -1370,12 +1422,12 @@ resources:
     lang: sl
     source_id: drustvocf-si-resource-pages
     basis: lead_only
-    last_checked: 2026-10-24
+    last_checked: 2026-10-25
     status: active
 
   - id: fqpanama-orientacion-y-apoyo
     name: "Orientación y apoyo en fibrosis quística en Panamá"
-    organisation: Asociación Panameña de Fibrosis Quística
+    organisation: "Asociación Panameña de Fibrosis Quística"
     countries: [PA]
     url: https://fqpanama.com/
     audience: [adult_with_cf, parent_carer_of_child]
@@ -1387,12 +1439,12 @@ resources:
     lang: es-PA
     source_id: fqpanama-resource-pages
     basis: lead_only
-    last_checked: 2026-10-24
+    last_checked: 2026-10-25
     status: active
 
   - id: agafq-apoyo-y-educacion
     name: "Apoyo y educación sobre fibrosis quística en Guatemala"
-    organisation: Asociación Guatemalteca de Fibrosis Quística
+    organisation: "Asociación Guatemalteca de Fibrosis Quística"
     countries: [GT]
     url: https://fibrosisquisticagt.site/
     audience: [adult_with_cf, parent_carer_of_child]
@@ -1404,5 +1456,335 @@ resources:
     lang: es-GT
     source_id: agafq-gt-resource-pages
     basis: lead_only
-    last_checked: 2026-10-24
+    last_checked: 2026-10-25
+    status: active
+
+  - id: etfy-ee-toetus-ja-info
+    name: "Toetus ja info tsüstilise fibroosiga inimestele"
+    organisation: "Eesti Tsüstilise Fibroosi Ühing"
+    countries: [EE]
+    url: https://etfy.ee/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Estonian national cystic fibrosis society providing diagnostic orientation, treatment advocacy, and peer community support for patients and families."
+    who_for: not_checked
+    format: online
+    lang: et
+    source_id: etfy-ee-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: lcfb-lv-atbalsts-un-informacija
+    name: "Atbalsts un informācija cistiskās fibrozes pacientiem"
+    organisation: "Latvijas Cistiskās fibrozes biedrība"
+    countries: [LV]
+    url: https://cistiskafibroze.lv/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, medicines_access, community_peer]
+    summary: "Latvian national cystic fibrosis association offering patient advocacy, multidisciplinary care navigation, and peer support for children and adults."
+    who_for: not_checked
+    format: online
+    lang: lv
+    source_id: cistiskafibroze-lv-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: cfsrbija-podrska-i-pomoc
+    name: "Pomoć i podrška osobama sa cističnom fibrozom"
+    organisation: "Udruženje za pomoć i podršku osobama sa cističnom fibrozom Srbije"
+    countries: [RS]
+    url: https://cfsrbija.rs/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, medicines_access, community_peer]
+    summary: "Serbian national cystic fibrosis association providing diagnostic orientation, treatment access advocacy, and family support across Serbia."
+    who_for: not_checked
+    format: online
+    lang: sr
+    source_id: cfsrbija-rs-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: allm-lu-vivre-avec-la-mucoviscidose
+    name: "Soutien et information sur la mucoviscidose au Luxembourg"
+    organisation: "Association Luxembourgeoise de Lutte contre la Mucoviscidose"
+    countries: [LU]
+    url: https://www.allm.lu/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Luxembourg national cystic fibrosis association offering patient and family counseling, social rights orientation, and community peer support."
+    who_for: not_checked
+    format: online
+    lang: fr-LU
+    source_id: allm-lu-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: einstokborn-is-slimseigjusjukdomur
+    name: "Stuðningur við börn og fjölskyldur með sjaldgæfa sjúkdóma"
+    organisation: "Einstök börn"
+    countries: [IS]
+    url: https://einstokborn.is/
+    audience: [parent_carer_of_child, teen_young_adult, adult_with_cf]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Icelandic rare disease association supporting children and families affected by cystic fibrosis through peer networks and social rights guidance."
+    who_for: not_checked
+    format: online
+    lang: is
+    source_id: einstokborn-is-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: rare-ua-orfanni-zahvoryuvannya
+    name: "Підтримка пацієнтів з орфанними захворюваннями та муковісцидозом"
+    organisation: "Громадська спілка Орфанні захворювання України"
+    countries: [UA]
+    url: https://rare.org.ua/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, medicines_access, community_peer]
+    summary: "Ukrainian national rare disease union supporting cystic fibrosis patients and families with diagnostic navigation, medicine access advocacy, and peer solidarity."
+    who_for: not_checked
+    format: online
+    lang: uk
+    source_id: rare-ua-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: fundofq-apoyo-y-orientacion
+    name: "Orientación y apoyo en fibrosis quística en República Dominicana"
+    organisation: "Fundación Dominicana de Apoyo a la Fibrosis Quística"
+    countries: [DO]
+    url: https://www.fibrosisquisticadominicana.org/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, medicines_access, community_peer]
+    summary: "Dominican foundation offering diagnostic orientation, treatment access advocacy, and family support for children and adults living with cystic fibrosis."
+    summary_es: "Fundación dominicana que brinda orientación diagnóstica, gestión de acceso al tratamiento y acompañamiento comunitario para familias con fibrosis quística."
+    who_for: not_checked
+    format: online
+    lang: es-DO
+    source_id: fundofq-do-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 2be81ea635031c360eeef6f94fec0402cc2034cfdb2204340cf26bc75cec713e
+    last_checked: 2026-10-25
+    status: active
+
+  - id: fecoer-orientacion-enfermedades-raras
+    name: "Orientación y apoyo para enfermedades raras y fibrosis quística en Costa Rica"
+    organisation: "Federación Costarricense de Enfermedades Raras"
+    countries: [CR]
+    url: https://federacionenfermedadesrarascr.org/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, advocacy_involved, community_peer]
+    summary: "Costa Rican national federation connecting families living with cystic fibrosis and rare genetic conditions to patient advocacy and peer support."
+    summary_es: "Federación costarricense que vincula a familias con fibrosis quística y enfermedades poco frecuentes con defensa de derechos y apoyo comunitario."
+    who_for: not_checked
+    format: online
+    lang: es-CR
+    source_id: fecoer-cr-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: mischiquiticos-orientacion-y-apoyo
+    name: "Orientación familiar y directorio de apoyo en Venezuela"
+    organisation: "Asociación Civil Humberto Da Silva (Mis Chiquiticos)"
+    countries: [VE]
+    url: https://www.mischiquiticos.com/
+    audience: [parent_carer_of_child, adult_with_cf]
+    category: [newly_diagnosed_basics, find_care_team, community_peer]
+    summary: "Venezuelan non-profit association offering family guidance, specialist directories, and patient rights information for genetic conditions including cystic fibrosis."
+    summary_es: "Asociación civil venezolana que brinda orientación familiar, directorios de especialistas e información sobre derechos de pacientes con condiciones genéticas."
+    who_for: not_checked
+    format: online
+    lang: es-VE
+    source_id: mischiquiticos-ve-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: fusal-apoyo-salud-el-salvador
+    name: "Programas de ayuda humanitaria y acceso a medicamentos en El Salvador"
+    organisation: "Fundación Salvadoreña para la Salud y el Desarrollo Humano (FUSAL)"
+    countries: [SV]
+    url: https://www.fusal.org/
+    audience: [parent_carer_of_child, adult_with_cf, care_team]
+    category: [medicines_access, find_care_team]
+    summary: "Salvadoran health foundation coordinating humanitarian medicine donations and hospital support for pediatric and chronic conditions including cystic fibrosis."
+    summary_es: "Fundación salvadoreña de salud que coordina donaciones humanitarias de medicamentos y apoyo hospitalario para condiciones crónicas como la fibrosis quística."
+    who_for: not_checked
+    format: online
+    lang: es-SV
+    source_id: fusal-sv-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: senadis-py-rehabilitacion-y-apoyo
+    name: "Orientación en rehabilitación y derechos de salud en Paraguay"
+    organisation: "Secretaría Nacional por los Derechos Humanos de las Personas con Discapacidad (SENADIS)"
+    countries: [PY]
+    url: https://senadis.gov.py/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [daily_life, money_insurance, find_care_team]
+    summary: "Paraguayan national institution providing multidisciplinary rehabilitation, social protection guidance, and support services for people with chronic conditions."
+    summary_es: "Institución nacional paraguaya que brinda rehabilitación multidisciplinaria, orientación en protección social y servicios de apoyo para personas con condiciones crónicas."
+    who_for: not_checked
+    format: both
+    lang: es-PY
+    source_id: senadis-py-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: minsalud-bo-orientacion-salud
+    name: "Sistema Único de Salud y orientación hospitalaria en Bolivia"
+    organisation: "Ministerio de Salud y Deportes de Bolivia"
+    countries: [BO]
+    url: https://www.minsalud.gob.bo/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, medicines_access]
+    summary: "Bolivian Ministry of Health portal offering public hospital directories, national health coverage guidance, and clinical program information for families."
+    summary_es: "Portal del Ministerio de Salud de Bolivia con directorios de hospitales públicos, orientación sobre cobertura sanitaria e información de programas clínicos."
+    who_for: not_checked
+    format: online
+    lang: es-BO
+    source_id: minsalud-bo-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: nanbyou-jp-cystic-fibrosis
+    name: "嚢胞性線維症の疾患情報と医療費助成案内"
+    organisation: "難病情報センター (Japan Intractable Diseases Information Center)"
+    countries: [JP]
+    url: https://www.nanbyou.or.jp/entry/4532
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, money_insurance, find_care_team]
+    summary: "Japanese national intractable disease center providing cystic fibrosis diagnostic criteria, clinical management guidance, and public medical subsidy navigation."
+    who_for: not_checked
+    format: online
+    lang: ja
+    source_id: nanbyou-jp-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 1626c8910becd1af6aad89a6f55c9b7364239c84cc2d848f787e9df6f7797738
+    last_checked: 2026-10-25
+    status: active
+
+  - id: kord-kr-rare-disease-support
+    name: "희귀·난치성질환 환우 및 가족 지원 안내"
+    organisation: "한국희귀·난치성질환연합회 (Korean Organization for Rare Diseases)"
+    countries: [KR]
+    url: https://www.kord.or.kr/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, money_insurance, community_peer]
+    summary: "South Korean national rare disease federation offering medical expense assistance, social welfare counseling, and family support for rare genetic disorders."
+    who_for: not_checked
+    format: online
+    lang: ko
+    source_id: kord-kr-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 0753eba23996a6b77af26a5f7436896a28acfa3ebae1a038a15cc33adfd1dc6d
+    last_checked: 2026-10-25
+    status: active
+
+  - id: mrds-my-rare-disease-support
+    name: "Sokongan dan maklumat penyakit jarang jumpa di Malaysia"
+    organisation: "Malaysia Rare Disorders Society"
+    countries: [MY]
+    url: https://mrds.org.my/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, community_peer, advocacy_involved]
+    summary: "Malaysian national rare disorders society providing family peer networks, specialist referral orientation, and patient advocacy for rare pulmonary and genetic conditions."
+    who_for: not_checked
+    format: online
+    lang: en-MY
+    source_id: mrds-my-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: psod-ph-orphan-disorders-support
+    name: "Patient support and care navigation for rare genetic disorders"
+    organisation: "Philippine Society for Orphan Disorders"
+    countries: [PH]
+    url: https://www.psod.org.ph/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, community_peer]
+    summary: "Philippine rare disease organization connecting individuals and families with multidisciplinary care navigation, newborn screening education, and community support."
+    who_for: not_checked
+    format: online
+    lang: en-PH
+    source_id: psod-ph-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: jcfc-jo-support-and-awareness
+    name: "دعم ورعاية مرضى التليف الكيسي في الأردن"
+    organisation: "Jordan Cystic Fibrosis Friends Charity"
+    countries: [JO]
+    url: https://jordancysticfibrosis.com/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, daily_life, community_peer]
+    summary: "Jordanian cystic fibrosis charity providing family counseling, respiratory and nutritional care awareness, and community support for children and adults."
+    who_for: not_checked
+    format: online
+    lang: ar-JO
+    source_id: jcfc-jo-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: mecfa-mena-support-and-care
+    name: "Regional cystic fibrosis care and family support network"
+    organisation: "Middle East Cystic Fibrosis Association"
+    countries: [EG]
+    url: https://www.mecfa.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, medicines_access]
+    summary: "Middle East and North Africa cystic fibrosis network supporting diagnostic sweat testing, multidisciplinary clinical care, and patient education in Egypt."
+    who_for: not_checked
+    format: online
+    lang: en
+    source_id: mecfa-mena-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 5ca6c761138e93a41b4d9091a313f484849a53e0f3a78cab7c28467278884f28
+    last_checked: 2026-10-25
+    status: active
+
+  - id: thairdf-th-rare-disease-support
+    name: "การดูแลและสนับสนุนผู้ป่วยโรคหายากในประเทศไทย"
+    organisation: "Thai Rare Disease Foundation (มูลนิธิเพื่อผู้ป่วยโรคหายาก)"
+    countries: [TH]
+    url: https://thairdf.org/
+    audience: [adult_with_cf, parent_carer_of_child]
+    category: [newly_diagnosed_basics, find_care_team, community_peer]
+    summary: "Thai national rare disease foundation connecting patients and families with genetic counseling referrals, treatment access advocacy, and peer support networks."
+    who_for: not_checked
+    format: online
+    lang: th
+    source_id: thairdf-th-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
     status: active
