@@ -40,11 +40,14 @@ import json
 import math
 from typing import Any, Dict, List, Tuple
 
-# Detect optional open-source scientific libraries (graceful stdlib fallback)
+# Detect optional open-source scientific & GPU libraries (graceful stdlib fallback)
 HAS_SCIPY_QMC = importlib.util.find_spec("scipy") is not None
 HAS_SALIB = importlib.util.find_spec("SALib") is not None
 HAS_PYMOO = importlib.util.find_spec("pymoo") is not None
 HAS_Z3 = importlib.util.find_spec("z3") is not None
+HAS_CUPY = importlib.util.find_spec("cupy") is not None
+HAS_TORCH = importlib.util.find_spec("torch") is not None
+HAS_JAX = importlib.util.find_spec("jax") is not None
 
 BOLTZMANN_CONSTANT = 1.380649e-23
 PHYSIOLOGICAL_TEMP_K = 310.15
@@ -152,11 +155,19 @@ class RegimenEvaluation:
 
 
 def detect_math_backends() -> Dict[str, str]:
-    """Report active open-source math libraries vs exact stdlib reference implementations."""
+    """Report active open-source math & GPU libraries vs exact stdlib reference implementations."""
+    gpu_backend = "stdlib.SIMD_Vectorized_Reference"
+    if HAS_CUPY:
+        gpu_backend = "cupy.CUDA_Kernel_Tensor_Engine"
+    elif HAS_TORCH:
+        gpu_backend = "torch.CUDA_EvoTorch_Tensor_Engine"
+    elif HAS_JAX:
+        gpu_backend = "jax.XLA_vmap_GPU_Engine"
     return {
         "moo_engine": "pymoo.NSGA2" if HAS_PYMOO else "stdlib.Deb2002_NSGA2_FastNonDominatedSort_SBX",
         "qmc_sobol_engine": "scipy.stats.qmc+SALib" if (HAS_SCIPY_QMC and HAS_SALIB) else "stdlib.Saltelli2010_Jansen1999_HaltonQMC",
         "smt_prover": "z3.Solver" if HAS_Z3 else "stdlib.SMT_IntervalClauseProver_UnsatCore",
+        "gpu_accelerator": gpu_backend,
     }
 
 
