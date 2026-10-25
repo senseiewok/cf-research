@@ -149,6 +149,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0264", "track": "Track A", "tier": "T2",
         "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
     },
+    "cftr_variant_catalog_concordance": {
+        "task": "T-0420", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
+    },
     "ciliary_wave_clearance_model": {
         "task": "T-0315", "track": "Track A", "tier": "T2",
         "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
