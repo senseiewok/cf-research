@@ -175,6 +175,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
         "consolidation_target": "enac_tmem16a_equilibrium",
     },
+    "enac_proteolysis_asl_regulation": {
+        "task": "T-0417", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
     "enac_proteolysis_model": {
         "task": "T-0245", "track": "Track A", "tier": "T2",
         "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
