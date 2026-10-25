@@ -2284,6 +2284,382 @@ sources:
       the site's Resources page; the raw file is not published, a trimmed copy and its hashes are kept in the site repository's
       data folder.
 
+  - id: ukim-mk-resource-pages
+    title: Медицински факултет, Универзитет Св. Кирил и Методиј во Скопје website (medf.ukim.edu.mk)
+    publisher: Медицински факултет, Универзитет Св. Кирил и Методиј во Скопје
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://medf.ukim.edu.mk/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      and one-sentence summary only).
+  - id: savezzarijetke-ba-resource-pages
+    title: Savez za rijetke bolesti Republike Srpske website (savezzarijetke.org)
+    publisher: Savez za rijetke bolesti Republike Srpske
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://savezzarijetke.org/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      only).
+  - id: kccg-me-resource-pages
+    title: Klinički centar Crne Gore website (www.kccg.me)
+    publisher: Klinički centar Crne Gore
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.kccg.me/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+  - id: qsut-al-resource-pages
+    title: Qendra Spitalore Universitare Nënë Tereza Tiranë website (qsut.gov.al)
+    publisher: Qendra Spitalore Universitare Nënë Tereza Tiranë
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://qsut.gov.al/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      summary only).
+  - id: cing-cy-resource-pages
+    title: The Cyprus Institute of Neurology and Genetics website (www.cing.ac.cy)
+    publisher: The Cyprus Institute of Neurology and Genetics
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.cing.ac.cy/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      summary only).
+  - id: anifc-md-resource-pages
+    title: Asociația Învingem Fibroza Chistică din Moldova website (anifc.org)
+    publisher: Asociația Învingem Fibroza Chistică din Moldova
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://anifc.org/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      summary only).
+  - id: tsmu-ge-resource-pages
+    title: Tbilisi State Medical University website (tsmu.edu)
+    publisher: Tbilisi State Medical University
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://tsmu.edu/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+  - id: muratsan-am-resource-pages
+    title: Muratsan University Hospital Complex website (muratsan.am)
+    publisher: Muratsan University Hospital Complex
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://muratsan.am/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      only).
+  - id: medcenter-by-resource-pages
+    title: Республиканский научно-практический центр Мать и дитя website (medcenter.by)
+    publisher: Республиканский научно-практический центр Мать и дитя
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://medcenter.by/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      summary only).
+  - id: ostrovaru-resource-pages
+    title: Благотворительный фонд Острова website (ostrovaru.com)
+    publisher: Благотворительный фонд Острова
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://ostrovaru.com/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+  - id: hospitalmaria-hn-resource-pages
+    title: Hospital María, Especialidades Pediátricas website (hospitalmaria.org)
+    publisher: Hospital María, Especialidades Pediátricas
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://hospitalmaria.org/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      summary only).
+  - id: unan-ni-resource-pages
+    title: Universidad Nacional Autónoma de Nicaragua website (unan.edu.ni)
+    publisher: Universidad Nacional Autónoma de Nicaragua (UNAN-Managua)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.unan.edu.ni/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      one-sentence summary only).
+  - id: infomed-cu-resource-pages
+    title: Infomed Portal de la Red de Salud de Cuba website (sld.cu)
+    publisher: Centro Nacional de Información de Ciencias Médicas (Infomed - MINSAP)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.sld.cu/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      link and one-sentence summary only).
+  - id: salud-pr-resource-pages
+    title: Departamento de Salud de Puerto Rico website (salud.pr.gov)
+    publisher: Departamento de Salud de Puerto Rico
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.salud.pr.gov/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      only).
+  - id: moh-jm-resource-pages
+    title: Ministry of Health and Wellness Jamaica website (moh.gov.jm)
+    publisher: Ministry of Health and Wellness, Jamaica
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.moh.gov.jm/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      only).
+  - id: moh-tt-resource-pages
+    title: Ministry of Health of Trinidad and Tobago website (health.gov.tt)
+    publisher: Ministry of Health of Trinidad and Tobago
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://health.gov.tt/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      only).
+  - id: pha-bs-resource-pages
+    title: Public Hospitals Authority Bahamas website (phabahamas.org)
+    publisher: Public Hospitals Authority of The Bahamas
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.phabahamas.org/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      only).
+  - id: moh-gy-resource-pages
+    title: Ministry of Health Guyana website (health.gov.gy)
+    publisher: Ministry of Health of Guyana
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://health.gov.gy/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+  - id: cord-cn-resource-pages
+    title: Chinese Organization for Rare Disorders (蔻德罕见病中心) website (www.cord.org.cn)
+    publisher: Chinese Organization for Rare Disorders (蔻德罕见病中心)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.cord.org.cn/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      summary only).
+  - id: idai-id-resource-pages
+    title: Ikatan Dokter Anak Indonesia (Indonesian Pediatric Society) website (www.idai.or.id)
+    publisher: Ikatan Dokter Anak Indonesia (Indonesian Pediatric Society)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.idai.or.id/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      and one-sentence summary only).
+  - id: vnch-vn-resource-pages
+    title: Bệnh viện Nhi Trung ương (Vietnam National Children’s Hospital) website (benhviennhitrunguong.gov.vn)
+    publisher: Bệnh viện Nhi Trung ương (Vietnam National Children’s Hospital)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://benhviennhitrunguong.gov.vn/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      and one-sentence summary only).
+  - id: akuh-pk-resource-pages
+    title: Aga Khan University Hospital Pakistan website (hospitals.aku.edu/pakistan)
+    publisher: Aga Khan University Hospital Pakistan
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://hospitals.aku.edu/pakistan
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      only).
+  - id: bshi-bd-resource-pages
+    title: Bangladesh Shishu Hospital & Institute website (bshi.gov.bd)
+    publisher: Bangladesh Shishu Hospital & Institute
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://bshi.gov.bd/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      only).
+  - id: lrh-lk-resource-pages
+    title: Lady Ridgeway Hospital for Children website (lrh.health.gov.lk)
+    publisher: Lady Ridgeway Hospital for Children
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://lrh.health.gov.lk/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      only).
+  - id: kanti-np-resource-pages
+    title: Kanti Children’s Hospital website (kantichildrenhospital.gov.np)
+    publisher: Kanti Children’s Hospital
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://kantichildrenhospital.gov.np/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+  - id: laumcrh-lb-resource-pages
+    title: LAU Medical Center–Rizk Hospital website (www.laumcrh.com)
+    publisher: LAU Medical Center–Rizk Hospital
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.laumcrh.com/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+  - id: kfshrc-sa-resource-pages
+    title: King Faisal Specialist Hospital & Research Centre website (www.kfshrc.edu.sa)
+    publisher: King Faisal Specialist Hospital & Research Centre
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.kfshrc.edu.sa/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      summary only).
+  - id: dubaihealth-ae-resource-pages
+    title: Dubai Health (Al Jalila Children’s Specialty Hospital Network) website (dubaihealth.ae)
+    publisher: Dubai Health (Al Jalila Children’s Specialty Hospital Network)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://dubaihealth.ae/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      and one-sentence summary only).
+  - id: pasteur-tn-resource-pages
+    title: Institut Pasteur de Tunis website (pasteur.tn)
+    publisher: Institut Pasteur de Tunis
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://pasteur.tn/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+  - id: chumarrakech-ma-resource-pages
+    title: Centre Hospitalier Universitaire Mohammed VI Marrakech website (www.chumarrakech.ma)
+    publisher: Centre Hospitalier Universitaire Mohammed VI Marrakech
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.chumarrakech.ma/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+      summary only).
+  - id: knh-ke-resource-pages
+    title: Kenyatta National Hospital website (knh.or.ke)
+    publisher: Kenyatta National Hospital
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://knh.or.ke/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+  - id: pan-ng-resource-pages
+    title: Paediatric Association of Nigeria website (pan-ng.org)
+    publisher: Paediatric Association of Nigeria
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://pan-ng.org/
+    url: null
+    claim_label: unverified
+    notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information

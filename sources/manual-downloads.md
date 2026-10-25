@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-84 to download by hand, 1 to ask for, 3 not to download.
+116 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -11,6 +11,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 3. When you have saved the files, paste the prompt at the bottom into your agent.
 
 ## Download in a browser
+
+### Aga Khan University Hospital Pakistan
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| akuh-pk-resource-pages | Aga Khan University Hospital Pakistan website (hospitals.aku.edu/pakistan) | [page](https://hospitals.aku.edu/pakistan) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
 ### Asociación Civil Humberto Da Silva (Mis Chiquiticos)
 
@@ -54,6 +60,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | afcr-ro-resource-pages | Asociația de Fibroză Chistică din România website (afcr.ro) | [page](https://afcr.ro/) | link only | Official national cystic fibrosis patient association in Romania (Asociația de Fibroză Chistică din România - AFCR). |
 
+### Asociația Învingem Fibroza Chistică din Moldova
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| anifc-md-resource-pages | Asociația Învingem Fibroza Chistică din Moldova website (anifc.org) | [page](https://anifc.org/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Association Luxembourgeoise de Lutte contre la Mucoviscidose
 
 | ID | What | Open | Save as | Notes |
@@ -66,6 +78,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | anfq-pt-resource-pages | Associação Nacional de Fibrose Quística website (anfq.pt) | [page](https://www.anfq.pt/) | link only | Official national cystic fibrosis patient association in Portugal. |
 
+### Bangladesh Shishu Hospital & Institute
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| bshi-bd-resource-pages | Bangladesh Shishu Hospital & Institute website (bshi.gov.bd) | [page](https://bshi.gov.bd/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### BioMed Central Limited on behalf of ISRCTN
 
 | ID | What | Open | Save as | Notes |
@@ -77,6 +95,30 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | lifewithcf-bg-resource-pages | Bulgarian Cystic Fibrosis Association website (lifewithcf.org) | [page](https://lifewithcf.org/) | link only | Official national cystic fibrosis patient association in Bulgaria (Асоциация Муковисцидоза България). |
+
+### Bệnh viện Nhi Trung ương (Vietnam National Children’s Hospital)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| vnch-vn-resource-pages | Bệnh viện Nhi Trung ương (Vietnam National Children’s Hospital) website (benhviennhitrunguong.gov.vn) | [page](https://benhviennhitrunguong.gov.vn/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Centre Hospitalier Universitaire Mohammed VI Marrakech
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| chumarrakech-ma-resource-pages | Centre Hospitalier Universitaire Mohammed VI Marrakech website (www.chumarrakech.ma) | [page](https://www.chumarrakech.ma/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Centro Nacional de Información de Ciencias Médicas (Infomed - MINSAP)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| infomed-cu-resource-pages | Infomed Portal de la Red de Salud de Cuba website (sld.cu) | [page](https://www.sld.cu/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Chinese Organization for Rare Disorders (蔻德罕见病中心)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cord-cn-resource-pages | Chinese Organization for Rare Disorders (蔻德罕见病中心) website (www.cord.org.cn) | [page](https://www.cord.org.cn/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
 ### Cisztás Fibrózis Betegek Egyesülete
 
@@ -157,11 +199,23 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cff-dk-resource-pages | Cystisk Fibrose Foreningen website (cystiskfibrose.dk) | [page](https://cystiskfibrose.dk/) | link only | Official national cystic fibrosis association in Denmark. |
 
+### Departamento de Salud de Puerto Rico
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| salud-pr-resource-pages | Departamento de Salud de Puerto Rico website (salud.pr.gov) | [page](https://www.salud.pr.gov/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Društvo za cistično fibrozo Slovenije
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | drustvocf-si-resource-pages | Društvo za cistično fibrozo Slovenije website (drustvocf.si) | [page](https://drustvocf.si/) | link only | Official national cystic fibrosis patient association in Slovenia (Društvo za cistično fibrozo Slovenije). |
+
+### Dubai Health (Al Jalila Children’s Specialty Hospital Network)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| dubaihealth-ae-resource-pages | Dubai Health (Al Jalila Children’s Specialty Hospital Network) website (dubaihealth.ae) | [page](https://dubaihealth.ae/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
 ### Eesti Tsüstilise Fibroosi Ühing
 
@@ -247,11 +301,23 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | hengitysliitto-fi-resource-pages | Hengitysliitto cystic fibrosis support pages (hengitysliitto.fi) | [page](https://www.hengitysliitto.fi/) | link only | National respiratory health and rare lung disease organization in Finland hosting support resources for people with cystic fibrosis. |
 
+### Hospital María, Especialidades Pediátricas
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| hospitalmaria-hn-resource-pages | Hospital María, Especialidades Pediátricas website (hospitalmaria.org) | [page](https://hospitalmaria.org/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Hrvatska udruga oboljelih od cistične fibroze
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cystic-fibrosis-hr-resource-pages | Hrvatska udruga oboljelih od cistične fibroze website (cystic-fibrosis.hr) | [page](https://cystic-fibrosis.hr/) | link only | Official national cystic fibrosis patient association in Croatia (Hrvatska udruga oboljelih od cistične fibroze). |
+
+### Ikatan Dokter Anak Indonesia (Indonesian Pediatric Society)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| idai-id-resource-pages | Ikatan Dokter Anak Indonesia (Indonesian Pediatric Society) website (www.idai.or.id) | [page](https://www.idai.or.id/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
 ### INSERM (Orphanet)
 
@@ -264,6 +330,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cftr-france | CFTR-France (public variant list) | [page](https://cftr.chu-montpellier.fr/cgi-bin/variant_list.cgi) [file](https://cftr.chu-montpellier.fr/CFTR/data/img/AllVarCFTR-FranceToDownload_14092026.xlsx) | `AllVarCFTR-FranceToDownload_14092026.xlsx` | Read 2026-10-05; the site has moved from cftr.iurc.montp.inserm.fr to cftr.chu-montpellier.fr (robots.txt: none, 404). |
+
+### Institut Pasteur de Tunis
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| pasteur-tn-resource-pages | Institut Pasteur de Tunis website (pasteur.tn) | [page](https://pasteur.tn/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
 ### Instituto Unidos pela Vida
 
@@ -289,11 +361,35 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | jcfc-jo-resource-pages | Jordan Cystic Fibrosis Friends Charity website (jordancysticfibrosis.com) | [page](https://jordancysticfibrosis.com/) | link only | Official cystic fibrosis patient and family charity in Jordan. |
 
+### Kanti Children’s Hospital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kanti-np-resource-pages | Kanti Children’s Hospital website (kantichildrenhospital.gov.np) | [page](https://kantichildrenhospital.gov.np/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Kenyatta National Hospital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| knh-ke-resource-pages | Kenyatta National Hospital website (knh.or.ke) | [page](https://knh.or.ke/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### King Faisal Specialist Hospital & Research Centre
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kfshrc-sa-resource-pages | King Faisal Specialist Hospital & Research Centre website (www.kfshrc.edu.sa) | [page](https://www.kfshrc.edu.sa/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Kistik Fibrozis Yardımlaşma ve Dayanışma Derneği
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | kifder-resource-pages | KifDer cystic fibrosis association website (kifder.org.tr) | [page](https://www.kifder.org.tr/) | link only | Official national cystic fibrosis patient solidarity association in Turkey (KifDer). |
+
+### Klinički centar Crne Gore
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kccg-me-resource-pages | Klinički centar Crne Gore website (www.kccg.me) | [page](https://www.kccg.me/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
 ### Klub nemocných cystickou fibrózou
 
@@ -307,11 +403,23 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | kord-kr-resource-pages | Korean Organization for Rare Diseases website (kord.or.kr) | [page](https://www.kord.or.kr/) | link only | Official national federation for rare and intractable disease patients in South Korea (KORD). |
 
+### Lady Ridgeway Hospital for Children
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| lrh-lk-resource-pages | Lady Ridgeway Hospital for Children website (lrh.health.gov.lk) | [page](https://lrh.health.gov.lk/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Latvijas Cistiskās fibrozes biedrība
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cistiskafibroze-lv-resource-pages | Latvijas Cistiskās fibrozes biedrība website (cistiskafibroze.lv) | [page](https://cistiskafibroze.lv/) | link only | Official national cystic fibrosis patient association in Latvia (Latvijas Cistiskās fibrozes biedrība - LCFB). |
+
+### LAU Medical Center–Rizk Hospital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| laumcrh-lb-resource-pages | LAU Medical Center–Rizk Hospital website (www.laumcrh.com) | [page](https://www.laumcrh.com/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
 ### Lega Italiana Fibrosi Cistica
 
@@ -343,6 +451,24 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | minsalud-bo-resource-pages | Ministerio de Salud y Deportes de Bolivia website (minsalud.gob.bo) | [page](https://www.minsalud.gob.bo/) | link only | Official Bolivian Ministry of Health portal covering public hospital directories, Unified Health System (SUS) access, and national clinical programs. |
 
+### Ministry of Health and Wellness, Jamaica
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| moh-jm-resource-pages | Ministry of Health and Wellness Jamaica website (moh.gov.jm) | [page](https://www.moh.gov.jm/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Ministry of Health of Guyana
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| moh-gy-resource-pages | Ministry of Health Guyana website (health.gov.gy) | [page](https://health.gov.gy/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Ministry of Health of Trinidad and Tobago
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| moh-tt-resource-pages | Ministry of Health of Trinidad and Tobago website (health.gov.tt) | [page](https://health.gov.tt/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Muco vzw / Association Muco
 
 | ID | What | Open | Save as | Notes |
@@ -354,6 +480,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | muko-resource-pages | Mukoviszidose e.V. website (www.muko.info) | [page](https://www.muko.info/) | link only | Official federal cystic fibrosis patient, family, clinician, and researcher association in Germany. |
+
+### Muratsan University Hospital Complex
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| muratsan-am-resource-pages | Muratsan University Hospital Complex website (muratsan.am) | [page](https://muratsan.am/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
 ### National Institute for Health and Care Excellence (NICE)
 
@@ -373,6 +505,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cfnorge-resource-pages | Norsk Forening for Cystisk Fibrose website (cfnorge.no) | [page](https://cfnorge.no/) | link only | Official national cystic fibrosis association in Norway. |
 
+### Paediatric Association of Nigeria
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| pan-ng-resource-pages | Paediatric Association of Nigeria website (pan-ng.org) | [page](https://pan-ng.org/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Philippine Society for Orphan Disorders
 
 | ID | What | Open | Save as | Notes |
@@ -385,17 +523,35 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | ptwm-resource-pages | Polskie Towarzystwo Walki z Mukowiscydozą website (ptwm.org.pl) | [page](https://ptwm.org.pl/) | link only | Official national cystic fibrosis association in Poland (PTWM). |
 
+### Public Hospitals Authority of The Bahamas
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| pha-bs-resource-pages | Public Hospitals Authority Bahamas website (phabahamas.org) | [page](https://www.phabahamas.org/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Publications Office of the European Union
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cordis | CORDIS (EU-funded research projects and results) | [page](https://cordis.europa.eu/) | link only | Legal notice read 2026-10-05: unless a notice says otherwise, the editorial content owned by the EU may be reused under CC BY 4.0, and the Commission's reuse p… |
 
+### Qendra Spitalore Universitare Nënë Tereza Tiranë
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| qsut-al-resource-pages | Qendra Spitalore Universitare Nënë Tereza Tiranë website (qsut.gov.al) | [page](https://qsut.gov.al/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Riksförbundet Cystisk Fibros
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | rfcf-se-resource-pages | Riksförbundet Cystisk Fibros website (rfcf.se) | [page](https://www.rfcf.se/) | link only | Official national cystic fibrosis federation in Sweden. |
+
+### Savez za rijetke bolesti Republike Srpske
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| savezzarijetke-ba-resource-pages | Savez za rijetke bolesti Republike Srpske website (savezzarijetke.org) | [page](https://savezzarijetke.org/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
 ### Secretaría Nacional por los Derechos Humanos de las Personas con Discapacidad (SENADIS)
 
@@ -421,17 +577,35 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | tfrd-tw-resource-pages | Taiwan Foundation for Rare Disorders website (tfrd.org.tw) | [page](https://www.tfrd.org.tw/) | link only | Official rare disorders foundation in Taiwan supporting designated rare genetic diseases including cystic fibrosis. |
 
+### Tbilisi State Medical University
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| tsmu-ge-resource-pages | Tbilisi State Medical University website (tsmu.edu) | [page](https://tsmu.edu/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Thai Rare Disease Foundation
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | thairdf-th-resource-pages | Thai Rare Disease Foundation website (thairdf.org) | [page](https://thairdf.org/) | link only | Official national rare disease patient foundation in Thailand. |
 
+### The Cyprus Institute of Neurology and Genetics
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cing-cy-resource-pages | The Cyprus Institute of Neurology and Genetics website (www.cing.ac.cy) | [page](https://www.cing.ac.cy/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Udruženje za pomoć i podršku osobama sa cističnom fibrozom Srbije
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cfsrbija-rs-resource-pages | CF Srbija cystic fibrosis association website (cfsrbija.rs) | [page](https://cfsrbija.rs/) | link only | Official national cystic fibrosis patient association in Serbia (Udruženje za pomoć i podršku osobama sa cističnom fibrozom Srbije). |
+
+### Universidad Nacional Autónoma de Nicaragua (UNAN-Managua)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| unan-ni-resource-pages | Universidad Nacional Autónoma de Nicaragua website (unan.edu.ni) | [page](https://www.unan.edu.ni/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
 ### Vaincre la Mucoviscidose
 
@@ -445,11 +619,29 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | alphamissense-predictions | AlphaMissense predictions (Zenodo record) | [page](https://zenodo.org/records/10813168) | link only | Fetched directly 2026-10-07 with the lab user agent: zenodo.org robots.txt (does not disallow /records/ except /records/*/preview; allows /api/records/*/files;… |
 
+### Благотворительный фонд Острова
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ostrovaru-resource-pages | Благотворительный фонд Острова website (ostrovaru.com) | [page](https://ostrovaru.com/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
 ### Громадська спілка Орфанні захворювання України
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | rare-ua-resource-pages | Orphan Diseases of Ukraine public union website (rare.org.ua) | [page](https://rare.org.ua/) | link only | Official national rare disease patient union in Ukraine (Громадська спілка «Орфанні захворювання України») representing cystic fibrosis (муковісцидоз) patient… |
+
+### Медицински факултет, Универзитет Св. Кирил и Методиј во Скопје
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ukim-mk-resource-pages | Медицински факултет, Универзитет Св. Кирил и Методиј во Скопје website (medf.ukim.edu.mk) | [page](https://medf.ukim.edu.mk/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Республиканский научно-практический центр Мать и дитя
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| medcenter-by-resource-pages | Республиканский научно-практический центр Мать и дитя website (medcenter.by) | [page](https://medcenter.by/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
 ## Ask first (access by request)
 
