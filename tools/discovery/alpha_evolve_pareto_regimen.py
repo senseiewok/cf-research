@@ -241,7 +241,7 @@ def prove_formal_smt_invariants(
 ) -> Tuple[Dict[str, bool], Tuple[str, ...]]:
     """Run formal SMT-style clause verification and return (invariant_map, unsat_core)."""
     inv1 = abs(chrom.dnase_time_hr - chrom.saline_time_hr) >= 0.75
-    inv2 = 5.0 <= chrom.hfcwo_to_inhalation_gap_min <= 25.0 and chrom.hfcwo_freq_hz >= 12.0
+    inv2 = 5.0 <= chrom.hfcwo_to_inhalation_gap_min <= 25.0 and 12.0 <= chrom.hfcwo_freq_hz <= 18.0
     inv3 = trss_score >= 80.0
     inv4 = cyp3a4_load <= 1.0 and 0.10 <= chrom.enac_inhibition_pct <= 0.75 and steady_asl >= PHYSIOLOGICAL_ASL_TARGET_UM
 
