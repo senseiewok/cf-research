@@ -364,6 +364,18 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0430", "track": "Track A", "tier": "T2",
         "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
     },
+    "alpha_evolve_compound_het_ptc": {
+        "task": "T-0432", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
+    },
+    "alpha_evolve_cassette_shield": {
+        "task": "T-0433", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
+    "alpha_evolve_splice_aso": {
+        "task": "T-0434", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
 }
 
 
