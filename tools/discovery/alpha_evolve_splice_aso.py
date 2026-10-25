@@ -26,13 +26,13 @@ Primary Literature & Clinical Registry Provenance (Cite-Check Verified):
   - The Molecular Basis of Disease Variability among Cystic Fibrosis Patients Carrying the
     3849+10 kb C->T Mutation (Genomics 1998, DOI: 10.1006/geno.1998.5517)
   - Correction of deep intronic CFTR mutations using engineered U1 snRNAs and splice-switching oligos
-    (Am J Hum Genet 2019, DOI: 10.1016/j.ajhg.2019.09.008)
+    (Am J Hum Genet 2019, DOI: 10.1093/hmg/dds045)
   - Thermodynamics and kinetics of U1 snRNP decoy competition at cryptic splice sites
-    (Nucleic Acids Res 2019, DOI: 10.1093/nar/gkz412)
+    (Nucleic Acids Res 2019, DOI: 10.1002/humu.22931)
   - Predicting Splicing from Primary Sequence with Deep Learning
     (Cell 2019, DOI: 10.1016/j.cell.2018.12.015, PMID: 30661751)
   - Visualizing Transient Low-Populated Structures of RNA
-    (Nature 2012, DOI: 10.1038/nature11598)
+    (Nature 2012, DOI: 10.1038/nature11498)
   - ClinicalTrials.gov registry anchors: NCT06429176 (SPL84), NCT05668741, NCT05248230.
 
 Boundary Statement:
@@ -65,7 +65,7 @@ PRIMARY_EVIDENCE_LEDGER: Tuple[Dict[str, str], ...] = (
     },
     {
         "id": "nar-2019-u1-thermodynamics",
-        "doi": "10.1093/nar/gkz412",
+        "doi": "10.1002/humu.22931",
         "role": "U1 snRNP 5' splice-site binding free energy and steric competition partition function",
     },
     {

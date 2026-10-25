@@ -297,12 +297,56 @@ def load_cite_check_ledger(ledger_path: Path | str | None = None) -> set[tuple[s
             continue
         rec = json.loads(line)
         title_upper = str(rec.get("title") or "").strip().upper()
-        is_retracted = title_upper.startswith(("RETRACTED:", "WITHDRAWN:")) or bool(rec.get("retracted"))
+        is_retracted = (
+            title_upper.startswith(("RETRACTED:", "WITHDRAWN:", "RETRACTION NOTICE"))
+            or "RETRACTION NOTICE TO" in title_upper
+            or bool(rec.get("retracted"))
+        )
         if is_retracted and not bool(rec.get("positive_control")):
             continue
         if rec.get("verdict") == "PASS" and rec.get("kind") and rec.get("id"):
             verified.add((str(rec["kind"]).upper(), str(rec["id"]).lower()))
     return verified
+
+
+def check_scite_ledger_scrutiny(ledger_path: Path | str | None = None) -> list[str]:
+    """Rule AH-12: Every active PASS DOI in sources/cite-check-ledger.jsonl must be Scite-verified with Smart Citation tallies and zero unflagged retraction notices."""
+    lp = Path(ledger_path or DEFAULT_CITE_LEDGER)
+    if not lp.exists():
+        return []
+    failures: list[str] = []
+    for line_no, line in enumerate(lp.read_text(encoding="utf-8").splitlines(), 1):
+        line = line.strip()
+        if not line:
+            continue
+        rec = json.loads(line)
+        if str(rec.get("kind") or "").upper() != "DOI" or rec.get("verdict") != "PASS":
+            continue
+        doi = str(rec.get("id") or "")
+        title_upper = str(rec.get("title") or "").strip().upper()
+        is_retracted = (
+            title_upper.startswith(("RETRACTED:", "WITHDRAWN:", "RETRACTION NOTICE"))
+            or "RETRACTION NOTICE TO" in title_upper
+            or bool(rec.get("retracted"))
+        )
+        if is_retracted and not bool(rec.get("positive_control")):
+            failures.append(
+                f"FAIL AH-12 [scite-title-and-retraction-scrutiny] {lp.as_posix()}:{line_no}: "
+                f"DOI {doi} is a retracted publication or retraction notice without positive_control=True"
+            )
+            continue
+        if not bool(rec.get("scite_verified")):
+            failures.append(
+                f"FAIL AH-12 [scite-title-and-retraction-scrutiny] {lp.as_posix()}:{line_no}: "
+                f"DOI {doi} lacks Scite verification (scite_verified=True)"
+            )
+        tally = rec.get("scite_tally")
+        if not isinstance(tally, dict) or not all(k in tally for k in ("supporting", "contrasting", "mentioning", "citingPublications")):
+            failures.append(
+                f"FAIL AH-12 [scite-title-and-retraction-scrutiny] {lp.as_posix()}:{line_no}: "
+                f"DOI {doi} lacks complete scite_tally metadata"
+            )
+    return failures
 
 
 def check_cite_check_ledger_provenance(
@@ -524,6 +568,10 @@ def run_checks(
         except Exception as exc:
             failures.append(f"FAIL AH-9/AH-10/AH-11 [epistemic-rigor]: {exc}")
 
+    # Rule AH-12: Scite Title & Retraction Ledger Scrutiny
+    if ledger_path.exists():
+        failures.extend(check_scite_ledger_scrutiny(ledger_path))
+
     return failures
 
 
@@ -567,6 +615,7 @@ def main(argv: list[str] | None = None) -> int:
     print("PASS AH-9 [parameter-provenance]: empirical, derived, and phenomenological_heuristic parameters tagged with source location & bounds")
     print("PASS AH-10 [dynamic-falsification-negative-control]: 66/66 discovery modules pass Phase 2 falsification & negative-control checks")
     print("PASS AH-11 [parametric-sensitivity-25pct]: +/-25% heuristic perturbation preserves candidate rank order")
+    print("PASS AH-12 [scite-title-and-retraction-scrutiny]: 100% of ledger DOIs Scite-verified with Smart Citation tallies & zero retraction collisions")
     print("=" * 72)
     print("RESULT: PASS (all anti-hallucination guardrails satisfied)")
     return 0

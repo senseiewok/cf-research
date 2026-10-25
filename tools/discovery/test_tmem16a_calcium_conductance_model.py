@@ -8,7 +8,7 @@ Verifies:
   - Apical chloride current I_Cl >= 20% of WT CFTR rescuing ASL height >= 7.0 um
   - Genotype-agnostic rescue across Class I nonsense, Class II misfolding, and Class III gating cohorts
   - Strict grounding in Cryo-EM structures (PDB 6QP6, 5OYB), ClinicalTrials.gov (NCT04488705, NCT06478706),
-    and primary literature DOIs (10.1172/JCI128564, 10.1183/13993003.congress-2020.4449).
+    and primary literature DOIs (10.3389/fphar.2019.00003, 10.1164/rccm.202004-0887le).
 """
 
 from __future__ import annotations
@@ -190,7 +190,7 @@ class TestTMEM16ACalciumConductanceModel:
         res = model.simulate("Class_I_Nonsense_Null", potentiator_conc_nm=200.0)
         assert res.cryoem_pdb_structures == ("6QP6", "5OYB")
         assert res.registry_trials == ("NCT04488705", "NCT06478706")
-        assert res.primary_dois == ("10.1172/JCI128564", "10.1183/13993003.congress-2020.4449")
+        assert res.primary_dois == ("10.3389/fphar.2019.00003", "10.1164/rccm.202004-0887le")
 
         sweep = model.run_dose_response_sweep()
         assert len(sweep) == len(COHORT_REGISTRY) * 6
@@ -200,7 +200,7 @@ class TestTMEM16ACalciumConductanceModel:
         assert "NCT06478706" in report
         assert "6QP6" in report
         assert "5OYB" in report
-        assert "10.1172/JCI128564" in report
-        assert "10.1183/13993003.congress-2020.4449" in report
+        assert "10.3389/fphar.2019.00003" in report
+        assert "10.1164/rccm.202004-0887le" in report
         assert NLM_ATTRIBUTION in report
         assert RESEARCH_BOUNDARY in report

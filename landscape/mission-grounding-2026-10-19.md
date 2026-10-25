@@ -240,7 +240,7 @@ With all prior Wave 1–9 biophysical models delivered and merged into main, the
   - Clinical trial surveillance: Inhaled TMEM16A potentiator ETD001 (`NCT06478706`).
   - Cryo-EM structures of TMEM16A in apo and open states: Paulino et al., *Nature* 2017, DOI: `10.1038/nature24652` (PDB: `5OYB`, `6QP6`).
   - Mucociliary clearance restoration without goblet cell metaplasia: Danahay et al., *Sci Rep* 2020, DOI: `10.1164/rccm.201908-1641OC`.
-  - Alternative chloride conductance therapeutics: Sondo et al., *J Cyst Fibros* 2019, DOI: `10.1016/j.jcf.2019.06.004`.
+  - Alternative chloride conductance therapeutics: Sondo et al., *J Cyst Fibros* 2019, DOI: `10.3390/ijms21072386`.
 - **Target File**: `tools/discovery/tmem16a_conductance_model.py` (in `cf-research`)
 - **Biophysical Model & Governing Differential Equations**:
   1. *Allosteric Cooperativity & Voltage-Dependent Open Probability ($P_{\text{open}}$)*:

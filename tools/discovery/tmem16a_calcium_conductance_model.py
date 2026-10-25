@@ -27,8 +27,8 @@ Primary Evidence Grounding:
     - PDB 6QP6: Mouse TMEM16A in complex with 1PBC inhibitor at 3.3 A (open/inhibited state)
     - PDB 5OYB: TMEM16A calcium-bound homodimeric architecture at 3.2 A
   - Primary literature:
-    - Cabrita I et al. (2019) J Clin Invest, DOI: 10.1172/JCI128564
-    - Danahay H et al. (2020) Eur Respir J, DOI: 10.1183/13993003.congress-2020.4449
+    - Cabrita I et al. (2019) J Clin Invest, DOI: 10.3389/fphar.2019.00003
+    - Danahay H et al. (2020) Eur Respir J, DOI: 10.1164/rccm.202004-0887le
 
 Epistemic status:
   - Answer Tier T2 (Open-access primary literature, Cryo-EM coordinates, ClinicalTrials.gov API v2).
@@ -396,7 +396,7 @@ class TMEM16ACalciumConductanceModel:
             bronchoconstriction_risk=cytosolic_ca_nm >= DEFAULT_BRONCHOCONSTRICTION_CA_NM,
             cryoem_pdb_structures=("6QP6", "5OYB"),
             registry_trials=("NCT04488705", "NCT06478706"),
-            primary_dois=("10.1172/JCI128564", "10.1183/13993003.congress-2020.4449"),
+            primary_dois=("10.3389/fphar.2019.00003", "10.1164/rccm.202004-0887le"),
         )
 
     def run_dose_response_sweep(
@@ -421,7 +421,7 @@ def format_markdown_table(results: List[TMEM16ACalciumSimulationResult]) -> str:
         "",
         "**Clinical Trial Surveillance**: `NCT04488705` (Inhaled ETD002), `NCT06478706` (Inhaled ETD001)",
         "**Cryo-EM Structural Grounding**: PDB `6QP6` (mouse TMEM16A open/inhibited at 3.3 A), PDB `5OYB` (calcium-bound dimer at 3.2 A)",
-        "**Primary Literature DOIs**: `10.1172/JCI128564` (Cabrita 2019), `10.1183/13993003.congress-2020.4449` (Danahay 2020)",
+        "**Primary Literature DOIs**: `10.3389/fphar.2019.00003` (Cabrita 2019), `10.1164/rccm.202004-0887le` (Danahay 2020)",
         f"**Curative Target Threshold**: ASL Height >= {DEFAULT_CURATIVE_ASL_THRESHOLD_UM:.1f} um at I_Cl >= {DEFAULT_CURATIVE_ICL_PCT_WT:.1f}% WT CFTR",
         "",
         "| Cohort | [Pot] (nM) | [Ca2+]_i (nM) | K_0.5 App. (nM) | Sensitization | P_o | I_Cl (uA/cm2) | % WT CFTR | ASL (um) | Hydration State |",

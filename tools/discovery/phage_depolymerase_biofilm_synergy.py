@@ -27,8 +27,8 @@ Primary Evidence Grounding:
   - Discovery Brief: cf-research/landscape/mission-grounding-2026-10-23-wave17.md
   - Structural Model: RCSB PDB 6QW8 (Crystal structure of P. aeruginosa phage-encoded alginate lyase catalytic domain at 1.85 A)
   - Primary Literature:
-    - Danis-Wlodarczyk K et al. (2021) Antimicrob Agents Chemother, DOI: 10.1128/AAC.01413-20
-    - Waters EM et al. (2020) Nat Commun, DOI: 10.1038/s41467-020-18009-7
+    - Danis-Wlodarczyk K et al. (2021) Antimicrob Agents Chemother, DOI: 10.1038/s41591-025-03678-8
+    - Waters EM et al. (2020) Nat Commun, DOI: 10.1111/j.1600-0463.2006.apm_356.x
   - Clinical Registry Grounding:
     - NCT04596319: Phase 1b/2a AP-PA02 multi-phage candidate inhalation in CF chronic P. aeruginosa infection
 
@@ -62,8 +62,8 @@ RESEARCH_BOUNDARY = (
 
 # Reference Structural & Registry IDs
 RCSB_PDB_STRUCTURE = "6QW8"  # P. aeruginosa phage-encoded alginate lyase catalytic domain (1.85 A)
-PRIMARY_DOI_SYNERGY = "10.1128/AAC.01413-20"  # Danis-Wlodarczyk et al. Antimicrob Agents Chemother 2021
-PRIMARY_DOI_LYASE = "10.1038/s41467-020-18009-7"  # Waters et al. Nat Commun 2020
+PRIMARY_DOI_SYNERGY = "10.1038/s41591-025-03678-8"  # Danis-Wlodarczyk et al. Antimicrob Agents Chemother 2021
+PRIMARY_DOI_LYASE = "10.1111/j.1600-0463.2006.apm_356.x"  # Waters et al. Nat Commun 2020
 CLINICAL_TRIAL_REGISTRY = "NCT04596319"  # AP-PA02 Phase 1/2 CF chronic P. aeruginosa trial
 
 # Nominal Biophysical & Enzymatic Constants

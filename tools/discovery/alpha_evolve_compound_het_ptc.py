@@ -31,7 +31,7 @@ Primary Literature & Clinical Registry Provenance (Cite-Check Verified):
   - Elexacaftor-Tezacaftor-Ivacaftor for Cystic Fibrosis with a Single Phe508del Allele
     (N Engl J Med 2019, DOI: 10.1056/NEJMoa1908639)
   - Defining the disease liability of variants in the CFTR gene (Nat Genet 2013, DOI: 10.1038/ng.2745)
-  - From CFTR biology toward combinatorial pharmacotherapy (Mol Biol Cell 2016, DOI: 10.1091/mbc.E15-04-0223)
+  - From CFTR biology toward combinatorial pharmacotherapy (Mol Biol Cell 2016, DOI: 10.1091/mbc.e14-04-0935)
   - Mechanisms of CFTR Folding at the Endoplasmic Reticulum (Front Pharmacol 2012, DOI: 10.3389/fphar.2012.00201)
   - ClinicalTrials.gov registry anchors: NCT04126473, NCT04135495, NCT05033080, NCT03525444,
     NCT05668741, NCT05248230, NCT06429176.

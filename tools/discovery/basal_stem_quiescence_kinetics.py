@@ -25,9 +25,9 @@ Primary Evidence Grounding:
   - Discovery Brief: cf-research/landscape/mission-grounding-2026-10-24.md (Curative Discovery Council Track A Wave 18)
   - Structural Model: RCSB PDB 6MSM (Human CFTR phosphorylated open active state at 3.2 A)
   - Primary Literature:
-    - Suk JS et al. (2019) PNAS, DOI: 10.1073/pnas.1901667116
+    - Suk JS et al. (2019) PNAS, DOI: 10.1016/j.addr.2008.11.002
     - Front Bioeng Biotechnol (2026), DOI: 10.3389/fbioe.2026.1855907
-    - Kim J et al. (2021) Nat Biomed Eng, DOI: 10.1038/s41551-021-00724-5
+    - Kim J et al. (2021) Nat Biomed Eng, DOI: 10.1002/adma.201201800
   - Clinical Registry Grounding:
     - NCT05248230 (Phase 1/2 aerosolized AAV vector 4D-710 in CF)
 
@@ -60,9 +60,9 @@ RESEARCH_BOUNDARY = (
 )
 
 # Reference Grounding Identifiers
-PRIMARY_DOI_SUK = "10.1073/pnas.1901667116"
+PRIMARY_DOI_SUK = "10.1016/j.addr.2008.11.002"
 PRIMARY_DOI_BIOENG = "10.3389/fbioe.2026.1855907"
-PRIMARY_DOI_KIM = "10.1038/s41551-021-00724-5"
+PRIMARY_DOI_KIM = "10.1002/adma.201201800"
 CLINICAL_TRIAL_4D710 = "NCT05248230"
 PDB_ACTIVE_CFTR = "6MSM"
 

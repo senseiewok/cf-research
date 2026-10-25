@@ -18,7 +18,7 @@ Primary Literature & Clinical Registry Provenance:
   - Figueroa-Landeta M et al. (2025) Sci Rep, DOI: 10.1038/s41598-025-16178-z (thixotropic 14-16 Hz clearance)
   - Middleton PG et al. (2019) N Engl J Med, DOI: 10.1056/NEJMoa1908639 (ETI clinical benchmark)
   - Sosnay PR et al. (2013) Nat Genet, DOI: 10.1038/ng.2745 (CFTR2 variant liability)
-  - Veit G et al. (2016) Mol Biol Cell, DOI: 10.1091/mbc.E15-04-0223 (combinatorial CFTR theratyping)
+  - Veit G et al. (2016) Mol Biol Cell, DOI: 10.1091/mbc.e14-04-0935 (combinatorial CFTR theratyping)
   - J Cyst Fibros (2024), DOI: 10.1016/j.jcf.2024.10.004 (inhaled ASO SPL84 phase 1 trial forensics)
   - ClinicalTrials.gov registry anchors: NCT03375047 (MRT5005), NCT05033080 (ELX-02),
     NCT03647228 (IONIS-ENaCRx), NCT04375514 (ARO-ENaC), NCT05668741 (VX-522), NCT05248230 (4D-710).

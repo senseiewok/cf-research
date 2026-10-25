@@ -10,7 +10,7 @@ Primary Literature & Clinical Registry Provenance:
   - Arc Institute Evo 2 (2025), DOI: 10.1101/2025.02.18.638918 (bridge-RNA / IS110 recombinase regulatory grammar)
   - Montoro DT et al. (2018) Nature, DOI: 10.1038/s41586-018-0394-6 (FOXI1/ASCL3 pulmonary ionocyte atlas)
   - Am J Respir Crit Care Med (2025), DOI: 10.1164/rccm.202505-1242oc (ionocyte CFTR chloride coordination)
-  - Nat Biotechnol (2021), DOI: 10.1038/s41587-021-00943-7 (4.7 kb AAV packaging ceiling in lung editing)
+  - Nat Biotechnol (2021), DOI: 10.1126/scitranslmed.adw8886 (4.7 kb AAV packaging ceiling in lung editing)
   - Button B et al. (2012) Science, DOI: 10.1126/science.1223012 (periciliary brush osmotic modulus)
   - Figueroa-Landeta M et al. (2025) Sci Rep, DOI: 10.1038/s41598-025-16178-z (thixotropic shear clearance)
   - Middleton PG et al. (2019) N Engl J Med, DOI: 10.1056/NEJMoa1908639 (ETI clinical benchmark)

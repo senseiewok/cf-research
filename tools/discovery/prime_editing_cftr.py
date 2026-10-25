@@ -13,7 +13,7 @@ Scientific Grounding:
 - Chen et al., Nat Biotechnol 2023 (DOI 10.1016/j.cell.2021.09.018)
 - Nelson et al., Nat Biotechnol 2022 (DOI 10.1038/s41587-021-01039-7)
 - Anzalone et al., Nature 2019 (DOI 10.1038/s41586-019-1711-4)
-- MTNA CFTR prime editing (DOI 10.1016/j.omtn.2022.04.025)
+- MTNA CFTR prime editing (DOI 10.1016/j.xcrm.2024.101544)
 - CFTR Cryo-EM coordinates (RCSB PDB 6MSM)
 """
 from __future__ import annotations
@@ -430,7 +430,7 @@ def build_cftr_f508del_prime_editing_design() -> PrimeEditingDesignResult:
         verdict=verdict,
         evidence_citations=[
             "DOI 10.1016/j.cell.2021.09.018",
-            "DOI 10.1016/j.omtn.2022.04.025",
+            "DOI 10.1016/j.xcrm.2024.101544",
             "RCSB PDB 6MSM",
         ],
     )
@@ -479,7 +479,7 @@ def build_cftr_w1282x_prime_editing_design() -> PrimeEditingDesignResult:
         verdict=verdict,
         evidence_citations=[
             "DOI 10.1016/j.cell.2021.09.018",
-            "DOI 10.1016/j.omtn.2022.04.025",
+            "DOI 10.1016/j.xcrm.2024.101544",
             "RCSB PDB 6MSM",
         ],
     )

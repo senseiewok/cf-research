@@ -69,7 +69,7 @@ PRIMARY_EVIDENCE_LEDGER: Tuple[Dict[str, str], ...] = (
     {
         "id": "veit-2016",
         "citation": "Veit G et al. From CFTR biology toward combinatorial pharmacotherapy: expanded classification of cystic fibrosis mutations. Mol Biol Cell 2016;27:424-433.",
-        "doi": "10.1091/mbc.E15-04-0223",
+        "doi": "10.1091/mbc.e14-04-0935",
         "role": "Combinatorial multi-barrier CFTR rescue framework across mutation classes",
     },
     {

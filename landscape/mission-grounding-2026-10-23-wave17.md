@@ -148,7 +148,7 @@ T-0395 U1 Decoy, T-0398 TMEM16A, T-0399 Split-Intein"]
    $$\alpha_{\text{prot}}(\text{pH}) = \frac{1}{1 + 10^{\text{pH} - \text{p}K_a}}$$
    With $\text{p}K_a \in [6.2, 6.5]$, $\alpha_{\text{prot}} < 0.10$ at extracellular pH $7.2\text{--}7.4$ and $\alpha_{\text{prot}} > 0.85\text{--}0.90$ at endosomal pH $5.0\text{--}5.5$.
 
-- **Anchoring**: DOI `10.1073/pnas.1901667116`, DOI `10.1038/s41551-021-00724-5`, NCT `NCT06237335`.
+- **Anchoring**: DOI `10.1016/j.addr.2008.11.002`, DOI `10.1002/adma.201201800`, NCT `NCT06237335`.
 
 ---
 
@@ -169,7 +169,7 @@ T-0395 U1 Decoy, T-0398 TMEM16A, T-0399 Split-Intein"]
 4. **Coupled NMD Escape & Mature Band C Expression**:
    $$[\text{CFTR}_{\text{Band C}}] = [\text{mRNA}_{\text{CFTR}}] \cdot k_{\text{elongation}} \cdot F_{\text{readthrough}} \cdot \eta_{\text{folding}} \cdot \frac{1}{k_{\text{internalize}} + k_{\text{ERAD}}}$$
 
-- **Anchoring**: DOI `10.1038/s41589-020-00662-8`, DOI `10.1093/nar/gkaa728`, RCSB PDB `6O2P`, NCT `NCT04135495`.
+- **Anchoring**: DOI `10.1172/jci154571`, DOI `10.3390/ph17030314`, RCSB PDB `6O2P`, NCT `NCT04135495`.
 
 ---
 
@@ -189,7 +189,7 @@ T-0395 U1 Decoy, T-0398 TMEM16A, T-0399 Split-Intein"]
 4. **Synergistic Dual-Mechanism Bactericidal Eradication**:
    $$\Delta \log_{10}(\text{CFU}) = \log_{10} N_{\text{control}} - \log_{10} N_{\text{combo}} \ge 3.5\ \log_{10}\text{ reduction}$$
 
-- **Anchoring**: DOI `10.1128/AAC.01413-20`, DOI `10.1038/s41467-020-18009-7`, RCSB PDB `6QW8`, NCT `NCT04596319`.
+- **Anchoring**: DOI `10.1038/s41591-025-03678-8`, DOI `10.1111/j.1600-0463.2006.apm_356.x`, RCSB PDB `6QW8`, NCT `NCT04596319`.
 
 ---
 

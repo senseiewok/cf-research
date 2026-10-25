@@ -173,7 +173,7 @@ class TestFullReportAndProvenance:
         # Verify all primary citations present
         citation_ids = [c["id"] for c in report.primary_citations]
         assert "10.1126/scitranslmed.aav4523" in citation_ids
-        assert "10.1038/s41587-021-00943-7" in citation_ids
+        assert "10.1126/scitranslmed.adw8886" in citation_ids
         assert "NCT05248230" in citation_ids
         assert "PDB:6MSM" in citation_ids
         assert "PDB:5UAK" in citation_ids

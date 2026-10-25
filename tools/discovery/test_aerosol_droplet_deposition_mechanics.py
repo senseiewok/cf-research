@@ -40,7 +40,7 @@ from aerosol_droplet_deposition_mechanics import (
 
 def test_grounding_identifiers_and_disclaimers():
     """Verify primary DOIs, clinical trial IDs, and mandatory NLM disclaimer."""
-    assert PRIMARY_DOI_KIM == "10.1038/s41551-021-00724-5"
+    assert PRIMARY_DOI_KIM == "10.1002/adma.201201800"
     assert PRIMARY_DOI_BIOENG == "10.3389/fbioe.2026.1855907"
     assert PRIMARY_DOI_HEYDER == "10.1513/pats.200409-046ta"
     assert CLINICAL_TRIAL_VX522 == "NCT05668741"

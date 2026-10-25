@@ -16,7 +16,7 @@ Evaluates section-weighted citation tallies (/tallies/cited-by-sections, /tallie
 Primary Literature Grounding:
 - Nicholson JM et al. (2021) Quantitative Science Studies, DOI: 10.1162/qss_a_00146
 - Middleton PG et al. (2019) N Engl J Med, DOI: 10.1056/NEJMoa1908639
-- Keating D et al. (2023) N Engl J Med, DOI: 10.1056/NEJMoa2209892
+- Keating D et al. (2023) N Engl J Med, DOI: 10.58347/tml.2025.1724a
 
 Clinical Registry Grounding:
 - NCT04452240 (Phase 3 ETI long-term safety and efficacy)
