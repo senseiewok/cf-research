@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `61` (plus 3 infrastructure scripts and 62 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `43`
+- **Total Verified Modules:** `66` (plus 3 infrastructure scripts and 67 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `48`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -16,11 +16,12 @@ python tools/discovery/discovery_council.py --audit-registry
 python tools/discovery/discovery_council.py --check-index
 ```
 
-## Structural Biology & CFTR Biophysics (`structural_biology` — 8 modules)
+## Structural Biology & CFTR Biophysics (`structural_biology` — 10 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
 | `allosteric_potentiator_model.py` | `T-0221` | `T2` | `merge` | Merge into `gating_potentiator_energy_coupling.py` |
+| `alpha_evolve_compound_het_ptc.py` | `T-0432` | `T2` | `keep` | Canonical workbench |
 | `cftr_sequence_scanner.py` | `T-0264` | `T2` | `keep` | Canonical workbench |
 | `cftr_variant_catalog_concordance.py` | `T-0420` | `T2` | `keep` | Canonical workbench |
 | `cryoem_truncation_model.py` | `T-0151` | `T2` | `keep` | Canonical workbench |
@@ -28,11 +29,14 @@ python tools/discovery/discovery_council.py --check-index
 | `nbd1_thermodynamics.py` | `T-0199` | `T2` | `keep` | Canonical workbench |
 | `pdi_redox_remodeling.py` | `T-0281` | `T2` | `archive` | Candidate for archive |
 | `ptc_cryoem_allostery.py` | `T-0217` | `T2` | `merge` | Merge into `cryoem_truncation_model.py` |
+| `tmem16a_enac_synergy_model.py` | `T-0430` | `T2` | `keep` | Canonical workbench |
 
-## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 18 modules)
+## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 20 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
+| `alpha_evolve_cassette_shield.py` | `T-0433` | `T2` | `keep` | Canonical workbench |
+| `alpha_evolve_splice_aso.py` | `T-0434` | `T2` | `keep` | Canonical workbench |
 | `aso_splice_kinetics.py` | `T-0254` | `T2` | `keep` | Canonical workbench |
 | `aso_splice_model.py` | `T-0183` | `T2` | `merge` | Merge into `aso_splice_kinetics.py` |
 | `base_editing_cftr.py` | `T-0219` | `T2` | `merge` | Merge into `class1_prime_base_editing.py` |
@@ -52,12 +56,13 @@ python tools/discovery/discovery_council.py --check-index
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 25 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 26 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
 | `aav_tropism_model.py` | `T-0208` | `T2` | `keep` | Canonical workbench |
 | `aerosol_droplet_deposition_mechanics.py` | `T-0408` | `T2` | `keep` | Canonical workbench |
+| `airway_basal_tight_junction_kinetics.py` | `T-0429` | `T2` | `keep` | Canonical workbench |
 | `basal_stem_persistence.py` | `T-0220` | `T2` | `keep` | Canonical workbench |
 | `basal_stem_quiescence_kinetics.py` | `T-0414` | `T2` | `keep` | Canonical workbench |
 | `biophysical_models.py` | `T-0154` | `T2` | `keep` | Canonical workbench |
