@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-116 to download by hand, 1 to ask for, 3 not to download.
+148 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -11,6 +11,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 3. When you have saved the files, paste the prompt at the bottom into your agent.
 
 ## Download in a browser
+
+### Addis Ababa University College of Health Sciences
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| aau-et-resource-pages | Addis Ababa University College of Health Sciences website (www.aau.edu.et) | [page](https://www.aau.edu.et/) | link only | Official CF or pediatric referral resource (Addis Ababa University College of Health Sciences); robots.txt allow (2026-10-25), manual access, link and summary… |
 
 ### Aga Khan University Hospital Pakistan
 
@@ -78,6 +84,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | anfq-pt-resource-pages | Associação Nacional de Fibrose Quística website (anfq.pt) | [page](https://www.anfq.pt/) | link only | Official national cystic fibrosis patient association in Portugal. |
 
+### Azərbaycan Tibb Universiteti
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| amu-az-resource-pages | Azərbaycan Tibb Universiteti website (amu.edu.az) | [page](https://amu.edu.az/) | link only | Official CF or pediatric referral resource (Azərbaycan Tibb Universiteti); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Bangladesh Shishu Hospital & Institute
 
 | ID | What | Open | Save as | Notes |
@@ -107,6 +119,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | chumarrakech-ma-resource-pages | Centre Hospitalier Universitaire Mohammed VI Marrakech website (www.chumarrakech.ma) | [page](https://www.chumarrakech.ma/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Centre Pasteur du Cameroun
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| pasteur-cm-resource-pages | Centre Pasteur du Cameroun website (pasteur-yaounde.org) | [page](https://pasteur-yaounde.org/) | link only | Official CF or pediatric referral resource (Centre Pasteur du Cameroun); robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Centro Nacional de Información de Ciencias Médicas (Infomed - MINSAP)
 
@@ -199,6 +217,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cff-dk-resource-pages | Cystisk Fibrose Foreningen website (cystiskfibrose.dk) | [page](https://cystiskfibrose.dk/) | link only | Official national cystic fibrosis association in Denmark. |
 
+### Dasman Diabetes and Genetic Institute
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| dasman-kw-resource-pages | Dasman Diabetes and Genetic Institute website (www.dasmaninstitute.org) | [page](https://www.dasmaninstitute.org/) | link only | Official CF or pediatric referral resource (Dasman Diabetes and Genetic Institute); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Departamento de Salud de Puerto Rico
 
 | ID | What | Open | Save as | Notes |
@@ -283,6 +307,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gnomad | gnomAD (Genome Aggregation Database) browser and downloads | [page](https://gnomad.broadinstitute.org/) | link only | Terms page read in full 2026-10-04 (/terms redirects to /policies). |
 
+### Government of Botswana Ministry of Health Services
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| govbw-bw-resource-pages | Government of Botswana Ministry of Health Services website (www.gov.bw) | [page](https://www.gov.bw/) | link only | Official CF or pediatric referral resource (Government of Botswana Ministry of Health Services); robots.txt allow (2026-10-25), manual access, link and summary… |
+
+### Government of the Republic of Suriname (Ministerie van Volksgezondheid)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-sr-resource-pages | Government of the Republic of Suriname portal (gov.sr) | [page](https://gov.sr/) | link only | Official CF or pediatric referral resource (Government of the Republic of Suriname (Ministerie van Volksgezondheid)); robots.txt allow (2026-10-25), manual acc… |
+
 ### GTEx Portal (publisher not read; robots.txt disallows our agent on the whole host)
 
 | ID | What | Open | Save as | Notes |
@@ -331,11 +367,35 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cftr-france | CFTR-France (public variant list) | [page](https://cftr.chu-montpellier.fr/cgi-bin/variant_list.cgi) [file](https://cftr.chu-montpellier.fr/CFTR/data/img/AllVarCFTR-FranceToDownload_14092026.xlsx) | `AllVarCFTR-FranceToDownload_14092026.xlsx` | Read 2026-10-05; the site has moved from cftr.iurc.montp.inserm.fr to cftr.chu-montpellier.fr (robots.txt: none, 404). |
 
+### Institut Pasteur d'Algérie
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| pasteur-dz-resource-pages | Institut Pasteur d'Algérie website (www.pasteur.dz) | [page](https://www.pasteur.dz/) | link only | Official CF or pediatric referral resource (Institut Pasteur d'Algérie); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Institut Pasteur de Côte d’Ivoire
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| pasteur-ci-resource-pages | Institut Pasteur de Côte d’Ivoire website (pasteur.ci) | [page](https://pasteur.ci/) | link only | Official CF or pediatric referral resource (Institut Pasteur de Côte d’Ivoire); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Institut Pasteur de Tunis
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | pasteur-tn-resource-pages | Institut Pasteur de Tunis website (pasteur.tn) | [page](https://pasteur.tn/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Institut Pasteur du Cambodge
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| pasteur-kh-resource-pages | Institut Pasteur du Cambodge website (www.pasteur-kh.org) | [page](https://www.pasteur-kh.org/) | link only | Official CF or pediatric referral resource (Institut Pasteur du Cambodge); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Instituto Nacional de Saúde de Moçambique
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ins-mz-resource-pages | Instituto Nacional de Saúde de Moçambique website (ins.gov.mz) | [page](https://ins.gov.mz/) | link only | Official CF or pediatric referral resource (Instituto Nacional de Saúde de Moçambique); robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Instituto Unidos pela Vida
 
@@ -361,17 +421,41 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | jcfc-jo-resource-pages | Jordan Cystic Fibrosis Friends Charity website (jordancysticfibrosis.com) | [page](https://jordancysticfibrosis.com/) | link only | Official cystic fibrosis patient and family charity in Jordan. |
 
+### Kamuzu University of Health Sciences
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kuhes-mw-resource-pages | Kamuzu University of Health Sciences website (www.kuhes.ac.mw) | [page](https://www.kuhes.ac.mw/) | link only | Official CF or pediatric referral resource (Kamuzu University of Health Sciences); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Kanti Children’s Hospital
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | kanti-np-resource-pages | Kanti Children’s Hospital website (kantichildrenhospital.gov.np) | [page](https://kantichildrenhospital.gov.np/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### Karl Heusner Memorial Hospital Authority
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| khmh-bz-resource-pages | Karl Heusner Memorial Hospital Authority website (khmh.bz) | [page](https://khmh.bz/) | link only | Official CF or pediatric referral resource (Karl Heusner Memorial Hospital Authority); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Kenyatta National Hospital
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | knh-ke-resource-pages | Kenyatta National Hospital website (knh.or.ke) | [page](https://knh.or.ke/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Kilimanjaro Christian Medical Centre
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kcmc-tz-resource-pages | Kilimanjaro Christian Medical Centre website (www.kcmc.ac.tz) | [page](https://www.kcmc.ac.tz/) | link only | Official CF or pediatric referral resource (Kilimanjaro Christian Medical Centre); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### King Faisal Hospital Rwanda
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kfhr-rw-resource-pages | King Faisal Hospital Rwanda website (kfh.rw) | [page](https://kfh.rw/) | link only | Official CF or pediatric referral resource (King Faisal Hospital Rwanda); robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### King Faisal Specialist Hospital & Research Centre
 
@@ -403,6 +487,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | kord-kr-resource-pages | Korean Organization for Rare Diseases website (kord.or.kr) | [page](https://www.kord.or.kr/) | link only | Official national federation for rare and intractable disease patients in South Korea (KORD). |
 
+### Korle Bu Teaching Hospital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kbth-gh-resource-pages | Korle Bu Teaching Hospital website (kbth.gov.gh) | [page](https://kbth.gov.gh/) | link only | Official CF or pediatric referral resource (Korle Bu Teaching Hospital); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Lady Ridgeway Hospital for Children
 
 | ID | What | Open | Save as | Notes |
@@ -432,6 +522,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cistinefibroze-lt-resource-pages | Lietuvos cistinės fibrozės asociacija website (cistinefibroze.lt) | [page](https://www.cistinefibroze.lt/) | link only | Official national cystic fibrosis patient association in Lithuania (Lietuvos cistinės fibrozės asociacija). |
+
+### Makerere University College of Health Sciences
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| makchs-ug-resource-pages | Makerere University College of Health Sciences website (chs.mak.ac.ug) | [page](https://chs.mak.ac.ug/) | link only | Official CF or pediatric referral resource (Makerere University College of Health Sciences); robots.txt allow (2026-10-25), manual access, link and summary onl… |
 
 ### Malaysia Rare Disorders Society
 
@@ -469,6 +565,42 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | moh-tt-resource-pages | Ministry of Health of Trinidad and Tobago website (health.gov.tt) | [page](https://health.gov.tt/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### Ministry of Health Sultanate of Oman
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| moh-om-resource-pages | Ministry of Health Sultanate of Oman website (www.moh.gov.om) | [page](https://www.moh.gov.om/) | link only | Official CF or pediatric referral resource (Ministry of Health Sultanate of Oman); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Ministère de la Santé de la République du Bénin
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sante-bj-resource-pages | Ministère de la Santé du Bénin website (sante.gouv.bj) | [page](https://sante.gouv.bj/) | link only | Official CF or pediatric referral resource (Ministère de la Santé de la République du Bénin); robots.txt allow (2026-10-25), manual access, link and summary on… |
+
+### Ministère de la Santé Publique et de la Population (MSPP)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| mspp-ht-resource-pages | Ministère de la Santé Publique et de la Population Haïti website (mspp.gouv.ht) | [page](https://mspp.gouv.ht/) | link only | Official CF or pediatric referral resource (Ministère de la Santé Publique et de la Population (MSPP)); robots.txt allow (2026-10-25), manual access, link and… |
+
+### Ministère de la Santé, de l’Hygiène Publique et de la Couverture Sanitaire Universelle du Togo
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sante-tg-resource-pages | Ministère de la Santé et de la Couverture Sanitaire Universelle Togo website (sante-assurances.gouv.tg) | [page](https://sante-assurances.gouv.tg/) | link only | Official CF or pediatric referral resource (Ministère de la Santé, de l’Hygiène Publique et de la Couverture Sanitaire Universelle du Togo); robots.txt allow (… |
+
+### Ministério da Saúde de Angola (MINSA)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| minsa-ao-resource-pages | Ministério da Saúde de Angola website (minsa.gov.ao) | [page](https://minsa.gov.ao/) | link only | Official CF or pediatric referral resource (Ministério da Saúde de Angola (MINSA)); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Mongolian National University of Medical Sciences (АШУҮИС)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| mnums-mn-resource-pages | Mongolian National University of Medical Sciences (АШУҮИС) website (mnums.edu.mn) | [page](https://mnums.edu.mn/) | link only | Official CF or pediatric referral resource (Mongolian National University of Medical Sciences (АШУҮИС)); robots.txt allow (2026-10-25), manual access, link and… |
+
 ### Muco vzw / Association Muco
 
 | ID | What | Open | Save as | Notes |
@@ -504,6 +636,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cfnorge-resource-pages | Norsk Forening for Cystisk Fibrose website (cfnorge.no) | [page](https://cfnorge.no/) | link only | Official national cystic fibrosis association in Norway. |
+
+### Osh State University Medical Faculty
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| oshsu-kg-resource-pages | Osh State University Medical Faculty website (www.oshsu.kg) | [page](https://www.oshsu.kg/) | link only | Official CF or pediatric referral resource (Osh State University Medical Faculty); robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Paediatric Association of Nigeria
 
@@ -541,6 +679,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | qsut-al-resource-pages | Qendra Spitalore Universitare Nënë Tereza Tiranë website (qsut.gov.al) | [page](https://qsut.gov.al/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### Respublika ixtisoslashtirilgan pediatriya ilmiy-amaliy tibbiyot markazi
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| pediatriya-uz-resource-pages | Respublika ixtisoslashtirilgan pediatriya ilmiy-amaliy tibbiyot markazi website (pediatriya.uz) | [page](https://pediatriya.uz/) | link only | Official CF or pediatric referral resource (Respublika ixtisoslashtirilgan pediatriya ilmiy-amaliy tibbiyot markazi); robots.txt allow (2026-10-25), manual acc… |
+
 ### Riksförbundet Cystisk Fibros
 
 | ID | What | Open | Save as | Notes |
@@ -558,6 +702,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | senadis-py-resource-pages | Secretaría Nacional por los Derechos Humanos de las Personas con Discapacidad website (senadis.gov.py) | [page](https://senadis.gov.py/) | link only | Official Paraguayan national agency providing rehabilitation, social rights, and multidisciplinary support for disabling and chronic conditions. |
+
+### Shahid Beheshti University of Medical Sciences
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sbmu-ir-resource-pages | Shahid Beheshti University of Medical Sciences website (sbmu.ac.ir) | [page](https://sbmu.ac.ir/) | link only | Official CF or pediatric referral resource (Shahid Beheshti University of Medical Sciences); robots.txt allow (2026-10-25), manual access, link and summary onl… |
+
+### Sidra Medicine
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sidra-qa-resource-pages | Sidra Medicine website (www.sidra.org) | [page](https://www.sidra.org/) | link only | Official CF or pediatric referral resource (Sidra Medicine); robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Slovenská asociácia cystickej fibrózy
 
@@ -607,6 +763,36 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | unan-ni-resource-pages | Universidad Nacional Autónoma de Nicaragua website (unan.edu.ni) | [page](https://www.unan.edu.ni/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### University of Baghdad College of Medicine
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| uobaghdad-iq-resource-pages | University of Baghdad College of Medicine website (comed.uobaghdad.edu.iq) | [page](https://comed.uobaghdad.edu.iq/) | link only | Official CF or pediatric referral resource (University of Baghdad College of Medicine); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### University of Namibia School of Medicine
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| unam-na-resource-pages | University of Namibia School of Medicine website (www.unam.edu.na) | [page](https://www.unam.edu.na/) | link only | Official CF or pediatric referral resource (University of Namibia School of Medicine); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### University of Zambia School of Medicine
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| unza-zm-resource-pages | University of Zambia School of Medicine website (www.unza.zm) | [page](https://www.unza.zm/) | link only | Official CF or pediatric referral resource (University of Zambia School of Medicine); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### University of Zimbabwe Faculty of Medicine and Health Sciences
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| uz-zw-resource-pages | University of Zimbabwe Faculty of Medicine and Health Sciences website (www.uz.ac.zw) | [page](https://www.uz.ac.zw/) | link only | Official CF or pediatric referral resource (University of Zimbabwe Faculty of Medicine and Health Sciences); robots.txt allow (2026-10-25), manual access, link… |
+
+### Université Cheikh Anta Diop de Dakar (UCAD)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ucad-sn-resource-pages | Université Cheikh Anta Diop de Dakar website (ucad.sn) | [page](https://www.ucad.sn/) | link only | Official CF or pediatric referral resource (Université Cheikh Anta Diop de Dakar (UCAD)); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Vaincre la Mucoviscidose
 
 | ID | What | Open | Save as | Notes |
@@ -642,6 +828,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | medcenter-by-resource-pages | Республиканский научно-практический центр Мать и дитя website (medcenter.by) | [page](https://medcenter.by/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### С.Ж. Асфендияров атындағы Қазақ ұлттық медицина университеті
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kaznmu-kz-resource-pages | С.Ж. Асфендияров атындағы Қазақ ұлттық медицина университеті website (kaznmu.edu.kz) | [page](https://kaznmu.edu.kz/) | link only | Official CF or pediatric referral resource (С.Ж. |
 
 ## Ask first (access by request)
 

@@ -761,8 +761,8 @@ resources:
     organisation: Federación Española de Fibrosis Quística
     countries: [ES]
     url: https://fibrosisquistica.org/
-    audience: [adult_with_cf, parent_carer_of_child, care_team]
-    category: [newly_diagnosed_basics, find_care_team, daily_life]
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "National federation of regional CF associations in Spain offering care unit directories, social support guidance, and daily living resources."
     summary_es: "Federación nacional de asociaciones regionales en España con directorio de unidades clínicas, orientación social y recursos para la vida diaria."
     who_for: not_checked
@@ -782,8 +782,8 @@ resources:
     organisation: FIPAN (Asociación Argentina de Lucha contra la Enfermedad Fibroquística del Páncreas)
     countries: [AR]
     url: https://fipan.org.ar/
-    audience: [adult_with_cf, parent_carer_of_child]
-    category: [newly_diagnosed_basics, medicines_access]
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Argentine national patient association providing guidance on newborn screening, care access, and national legal protections for people with CF."
     summary_es: "Asociación nacional en Argentina que brinda orientación sobre pesquisa neonatal, acceso al tratamiento y cobertura legal para personas con fibrosis quística."
     who_for: not_checked
@@ -803,8 +803,8 @@ resources:
     organisation: Fundación Colombiana para Fibrosis Quística
     countries: [CO]
     url: https://fibrosisquisticacolombia.org/
-    audience: [adult_with_cf, parent_carer_of_child]
-    category: [newly_diagnosed_basics, community_peer]
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Colombian foundation supporting families and adults with cystic fibrosis through diagnostic navigation, education, and community peer support."
     summary_es: "Fundación colombiana que acompaña a familias y adultos con fibrosis quística mediante orientación diagnóstica, educación y apoyo comunitario."
     who_for: not_checked
@@ -824,8 +824,8 @@ resources:
     organisation: Cystic Fibrosis New Zealand
     countries: [NZ]
     url: https://www.cfnz.org.nz/
-    audience: [adult_with_cf, parent_carer_of_child, partner_family_carer_of_adult]
-    category: [daily_life, community_peer, money_insurance]
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "New Zealand national organization offering social work support, practical assistance, and guidance for individuals with CF and their families."
     who_for: not_checked
     lang: en
@@ -844,8 +844,8 @@ resources:
     organisation: Vaincre la Mucoviscidose
     countries: [FR]
     url: https://www.vaincrelamuco.org/
-    audience: [adult_with_cf, parent_carer_of_child, care_team]
-    category: [daily_life, find_care_team, money_insurance]
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "French national association providing guidance on specialized CF care centers, social rights, financial assistance, and daily life."
     who_for: not_checked
     lang: fr
@@ -864,8 +864,8 @@ resources:
     organisation: Mukoviszidose e.V.
     countries: [DE]
     url: https://www.muko.info/
-    audience: [adult_with_cf, parent_carer_of_child, care_team]
-    category: [newly_diagnosed_basics, find_care_team, daily_life]
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "German federal association offering certified care center directories, social counseling, and everyday guidance for people with CF and families."
     who_for: not_checked
     lang: de
@@ -884,8 +884,8 @@ resources:
     organisation: Lega Italiana Fibrosi Cistica
     countries: [IT]
     url: https://www.fibrosicistica.it/
-    audience: [adult_with_cf, parent_carer_of_child]
-    category: [daily_life, money_insurance, find_care_team]
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Italian national association connecting patients and families with regional CF associations, legal rights guidance, and care support."
     who_for: not_checked
     lang: it
@@ -904,8 +904,8 @@ resources:
     organisation: Instituto Unidos pela Vida
     countries: [BR]
     url: https://unidospelavida.org.br/
-    audience: [adult_with_cf, parent_carer_of_child, care_team]
-    category: [newly_diagnosed_basics, find_care_team, advocacy_involved]
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Brazilian institute providing plain-language educational materials, diagnostic center directories, and regional association links for people with CF."
     who_for: not_checked
     lang: pt-BR
@@ -924,8 +924,8 @@ resources:
     organisation: Corporación para la Fibrosis Quística de Chile
     countries: [CL]
     url: https://fibrosisquistica.cl/
-    audience: [adult_with_cf, parent_carer_of_child]
-    category: [newly_diagnosed_basics, community_peer]
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Chilean patient and family corporation offering orientation on public health coverage, respiratory care, and peer community support."
     summary_es: "Corporación chilena de pacientes y familias que brinda orientación sobre garantías de salud, cuidado respiratorio y apoyo comunitario."
     who_for: not_checked
@@ -2153,15 +2153,20 @@ resources:
     organisation: Bệnh viện Nhi Trung ương (Vietnam National Children’s Hospital)
     countries: [VN]
     url: https://benhviennhitrunguong.gov.vn/
-    audience: [parent_carer_of_child, care_team]
-    category: [newly_diagnosed_basics, find_care_team, daily_life]
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: Vietnamese national tertiary pediatric referral hospital offering specialized respiratory care, genetic testing navigation, and family
       guidance for children with rare disorders.
     who_for: not_checked
     format: online
     lang: vi
     source_id: vnch-vn-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: e25f86e7c40ff7ac802680d63e59e0b9f62baf7306a5506d9e0b1ce36cfae75e
     last_checked: 2026-10-25
     status: active
   - id: akuh-pk-pediatric-pulmonology-care
@@ -2206,15 +2211,20 @@ resources:
     organisation: Lady Ridgeway Hospital for Children
     countries: [LK]
     url: https://lrh.health.gov.lk/
-    audience: [parent_carer_of_child, care_team]
-    category: [newly_diagnosed_basics, find_care_team, daily_life]
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: Sri Lankan national tertiary referral children hospital providing specialized pediatric pulmonology clinics, diagnostic services, and
       multidisciplinary care support for families.
     who_for: not_checked
     format: online
     lang: en-LK
     source_id: lrh-lk-resource-pages
-    basis: lead_only
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 88ad11f003bbac3cd4ef3007b266ccb31cf45eabbd664b9f867b36f9f5488f53
     last_checked: 2026-10-25
     status: active
   - id: kanti-np-pediatric-referral-care
@@ -2358,5 +2368,532 @@ resources:
     confirmed_by: maintainer
     confirmed_on: 2026-10-25
     content_hash: 70a5bfc7a4d1b772062c7251ff02d14f3ba1a4d4b8dd8966f562fb9335c31221
+    last_checked: 2026-10-25
+    status: active
+  - id: amu-az-pediatriya-ve-genetika
+    name: Pediatriya və tibbi genetika üzrə klinik xidmətlər
+    organisation: Azərbaycan Tibb Universiteti
+    countries: [AZ]
+    url: https://amu.edu.az/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team]
+    summary: National medical university in Baku operating teaching pediatric clinics, medical genetics services, and specialist respiratory care
+      for children with cystic fibrosis in Azerbaijan.
+    who_for: not_checked
+    format: online
+    lang: az
+    source_id: amu-az-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: kaznmu-kz-pediatriya-mukovistsidoz
+    name: Педиатрия мектебі және балалар пульмонологиясы
+    organisation: С.Ж. Асфендияров атындағы Қазақ ұлттық медицина университеті
+    countries: [KZ]
+    url: https://kaznmu.edu.kz/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team]
+    summary: Kazakh national medical university operating the School of Pediatrics and university children's clinical hospital for respiratory and
+      cystic fibrosis care in Kazakhstan.
+    who_for: not_checked
+    format: online
+    lang: kk
+    source_id: kaznmu-kz-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: pediatriya-uz-bolalar-pulmonologiyasi
+    name: Bolalar pulmonologiyasi va mukovistsidoz diagnostikasi
+    organisation: Respublika ixtisoslashtirilgan pediatriya ilmiy-amaliy tibbiyot markazi
+    countries: [UZ]
+    url: https://pediatriya.uz/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team]
+    summary: National specialized pediatric medical center in Tashkent providing pediatric pulmonology care, diagnostic evaluation, and clinical
+      follow-up for children with cystic fibrosis in Uzbekistan.
+    who_for: not_checked
+    format: online
+    lang: uz
+    source_id: pediatriya-uz-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: oshsu-kg-pediatrics-and-child-health
+    name: Педиатрия жана балдардын респиратордук саламаттыгы
+    organisation: Osh State University Medical Faculty
+    countries: [KG]
+    url: https://www.oshsu.kg/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team]
+    summary: State university medical faculty in Kyrgyzstan training pediatric specialists and coordinating children's clinical hospital respiratory
+      and genetic disease care.
+    who_for: not_checked
+    format: online
+    lang: ky
+    source_id: oshsu-kg-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: pasteur-dz-genetique-et-diagnostic
+    name: Diagnostic biologique et génétique médicale en Algérie
+    organisation: Institut Pasteur d'Algérie
+    countries: [DZ]
+    url: https://www.pasteur.dz/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team]
+    summary: National public biomedical reference institute in Algeria providing specialized laboratory diagnostics, molecular biology testing,
+      and public health guidance.
+    who_for: not_checked
+    format: online
+    lang: fr
+    source_id: pasteur-dz-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: sidra-qa-pediatric-cf-center
+    name: Pediatric pulmonology and cystic fibrosis center
+    organisation: Sidra Medicine
+    countries: [QA]
+    url: https://www.sidra.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, daily_life]
+    summary: Specialty children's academic hospital in Doha hosting Qatar's multidisciplinary cystic fibrosis clinic, sweat testing, genetic counseling,
+      and family respiratory education.
+    who_for: not_checked
+    format: online
+    lang: en
+    source_id: sidra-qa-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: dasman-kw-medical-genetics-research
+    name: Genetics and genomic medicine services in Kuwait
+    organisation: Dasman Diabetes and Genetic Institute
+    countries: [KW]
+    url: https://www.dasmaninstitute.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team, researcher]
+    category: [newly_diagnosed_basics, trials_research_registries]
+    summary: National research and clinical institute in Kuwait conducting human genomic sequencing, hereditary disorder diagnostics, and translational
+      clinical research.
+    who_for: not_checked
+    format: online
+    lang: en
+    source_id: dasman-kw-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: moh-om-genetic-and-pediatric-care
+    name: الخدمات الصحية والمراكز الوراثية والتنفسية في سلطنة عُمان
+    organisation: Ministry of Health Sultanate of Oman
+    countries: [OM]
+    url: https://www.moh.gov.om/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team]
+    summary: Omani health ministry portal connecting families with tertiary hospital pediatric pulmonology clinics, the National Genetic Center,
+      and rare disease care services.
+    who_for: not_checked
+    format: online
+    lang: ar
+    source_id: moh-om-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: uobaghdad-iq-pediatrics-and-cf
+    name: فرع طب الأطفال والأمراض التنفسية والوراثية
+    organisation: University of Baghdad College of Medicine
+    countries: [IQ]
+    url: https://comed.uobaghdad.edu.iq/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team]
+    summary: Academic medical college in Baghdad training pediatric pulmonology specialists and supporting teaching hospital diagnostic and clinical
+      care for cystic fibrosis in Iraq.
+    who_for: not_checked
+    format: online
+    lang: ar
+    source_id: uobaghdad-iq-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: sbmu-ir-pediatric-respiratory-center
+    name: مرکز تحقیقات بیماری های تنفسی کودکان و فیبروز سیستیک
+    organisation: Shahid Beheshti University of Medical Sciences
+    countries: [IR]
+    url: https://sbmu.ac.ir/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, trials_research_registries]
+    summary: Iranian medical sciences university operating Mofid Children's Hospital and the Pediatric Respiratory Disease Research Center for multidisciplinary
+      cystic fibrosis care.
+    who_for: not_checked
+    format: online
+    lang: fa
+    source_id: sbmu-ir-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: khmh-bz-national-referral-hospital
+    name: National referral hospital and pediatric care guidance in Belize
+    organisation: Karl Heusner Memorial Hospital Authority
+    countries: [BZ]
+    url: https://khmh.bz/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Belizean national tertiary referral hospital providing specialist pediatric, respiratory, and diagnostic services for children and
+      adults.
+    who_for: not_checked
+    format: online
+    lang: en-BZ
+    source_id: khmh-bz-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: gov-sr-volksgezondheid-en-zorg
+    name: Openbare gezondheidszorg en ziekenhuisinformatie in Suriname
+    organisation: Ministerie van Volksgezondheid, Welzijn en Arbeid Suriname
+    countries: [SR]
+    url: https://gov.sr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, medicines_access, daily_life]
+    summary: Surinamese government portal connecting families and clinicians with Ministry of Public Health services, hospital directories, and
+      national health guidance.
+    who_for: not_checked
+    format: online
+    lang: nl-SR
+    source_id: gov-sr-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: mspp-ht-sante-publique-orientation
+    name: Services de santé publique et orientation hospitalière en Haïti
+    organisation: Ministère de la Santé Publique et de la Population (MSPP)
+    countries: [HT]
+    url: https://mspp.gouv.ht/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, medicines_access]
+    summary: Haitian Ministry of Public Health portal providing national hospital directories, maternal and child health programs, and clinical
+      care guidance.
+    who_for: not_checked
+    format: online
+    lang: fr-HT
+    source_id: mspp-ht-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: kbth-gh-specialist-and-pediatric-care
+    name: Specialist pediatric and respiratory care services in Ghana
+    organisation: Korle Bu Teaching Hospital
+    countries: [GH]
+    url: https://kbth.gov.gh/
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
+    summary: Ghanaian national teaching hospital offering tertiary child health clinics, respiratory medicine, and diagnostic referral services
+      for families.
+    who_for: not_checked
+    format: online
+    lang: en-GH
+    source_id: kbth-gh-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 31ce14ce84aee34e6dc6bf7bb0aaf22bf9cfbf472d13771f1e2d0b4a87b30dbf
+    last_checked: 2026-10-25
+    status: active
+  - id: ucad-sn-medecine-et-sante
+    name: Recherche médicale et orientation clinique universitaire au Sénégal
+    organisation: Université Cheikh Anta Diop de Dakar (UCAD)
+    countries: [SN]
+    url: https://www.ucad.sn/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [trials_research_registries, find_care_team, newly_diagnosed_basics]
+    summary: Senegalese national university portal supporting medical faculty research, pediatric pulmonology training, and university hospital
+      clinical directories in Dakar.
+    who_for: not_checked
+    format: online
+    lang: fr-SN
+    source_id: ucad-sn-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: pasteur-ci-diagnostic-et-recherche
+    name: Diagnostic biologique et recherche médicale en Côte d’Ivoire
+    organisation: Institut Pasteur de Côte d’Ivoire
+    countries: [CI]
+    url: https://pasteur.ci/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, trials_research_registries, find_care_team]
+    summary: Ivorian national biomedical research and reference laboratory institute providing molecular diagnostics, microbiology services, and
+      public health guidance.
+    who_for: not_checked
+    format: online
+    lang: fr-CI
+    source_id: pasteur-ci-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: pasteur-cm-laboratoire-et-sante-publique
+    name: Laboratoire national de référence et santé publique au Cameroun
+    organisation: Centre Pasteur du Cameroun
+    countries: [CM]
+    url: https://pasteur-yaounde.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, trials_research_registries, find_care_team]
+    summary: Cameroonian national public health reference laboratory offering diagnostic testing, respiratory microbiology, and clinical orientation
+      in Yaoundé.
+    who_for: not_checked
+    format: online
+    lang: fr-CM
+    source_id: pasteur-cm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: minsa-ao-servicos-nacionais-de-saude
+    name: Serviços públicos de saúde e orientação hospitalar em Angola
+    organisation: Ministério da Saúde de Angola (MINSA)
+    countries: [AO]
+    url: https://minsa.gov.ao/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, medicines_access, daily_life]
+    summary: Angolan Ministry of Health portal providing national public hospital directories, maternal and pediatric health programs, and clinical
+      guidance.
+    who_for: not_checked
+    format: online
+    lang: pt-AO
+    source_id: minsa-ao-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: sante-bj-services-de-sante-publique
+    name: Services publics de santé et orientation hospitalière au Bénin
+    organisation: Ministère de la Santé de la République du Bénin
+    countries: [BJ]
+    url: https://sante.gouv.bj/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, medicines_access, daily_life]
+    summary: Beninese Ministry of Health portal connecting families and clinicians with national hospital care directories, public health programs,
+      and medical guidance.
+    who_for: not_checked
+    format: online
+    lang: fr-BJ
+    source_id: sante-bj-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: sante-tg-couverture-sanitaire-et-soins
+    name: Services publics de santé et couverture sanitaire au Togo
+    organisation: Ministère de la Santé, de l’Hygiène Publique et de la Couverture Sanitaire Universelle du Togo
+    countries: [TG]
+    url: https://sante-assurances.gouv.tg/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, money_insurance, medicines_access]
+    summary: Togolese Ministry of Health and Universal Health Coverage portal providing public hospital directories, health insurance guidance,
+      and national care programs.
+    who_for: not_checked
+    format: online
+    lang: fr-TG
+    source_id: sante-tg-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: kcmc-tz-pediatric-referral-care
+    name: Tertiary pediatric and respiratory referral care services
+    organisation: Kilimanjaro Christian Medical Centre
+    countries: [TZ]
+    url: https://www.kcmc.ac.tz/
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
+    summary: Tanzanian zonal tertiary referral teaching hospital providing specialized pediatric respiratory evaluation, clinical diagnostics, and
+      multidisciplinary family care orientation.
+    who_for: not_checked
+    format: online
+    lang: en-TZ
+    source_id: kcmc-tz-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 1e627a868957e0761e26f99f6d49b7aa9da019909047ff73b51fa9ea7c67b9cb
+    last_checked: 2026-10-25
+    status: active
+  - id: makchs-ug-pediatric-health-sciences
+    name: Academic pediatric pulmonology and clinical referral guidance
+    organisation: Makerere University College of Health Sciences
+    countries: [UG]
+    url: https://chs.mak.ac.ug/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, trials_research_registries]
+    summary: Ugandan national academic health sciences college partnering with tertiary teaching hospitals to provide pediatric respiratory care
+      education and clinical referral guidance.
+    who_for: not_checked
+    format: online
+    lang: en-UG
+    source_id: makchs-ug-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: aau-et-pediatric-specialist-care
+    name: University teaching hospital pediatric and respiratory care
+    organisation: Addis Ababa University College of Health Sciences
+    countries: [ET]
+    url: https://www.aau.edu.et/
+    audience: [everyone]
+    category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
+    summary: Ethiopian national university health sciences center operating Tikur Anbessa Specialized Hospital with tertiary pediatric pulmonology
+      and genetic care orientation.
+    who_for: not_checked
+    format: online
+    lang: en-ET
+    source_id: aau-et-resource-pages
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-25
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-25
+    content_hash: 9a3d87b07229c994f97efec73958b4dd6c0bb380c248ddb887c118839c896cc0
+    last_checked: 2026-10-25
+    status: active
+  - id: kfhr-rw-tertiary-pediatric-care
+    name: Multidisciplinary pediatric and pulmonary specialist care
+    organisation: King Faisal Hospital Rwanda
+    countries: [RW]
+    url: https://kfh.rw/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, daily_life]
+    summary: Rwandan quaternary referral hospital in Kigali providing specialized pediatric respiratory medicine, diagnostic laboratory evaluation,
+      and multidisciplinary care navigation.
+    who_for: not_checked
+    format: online
+    lang: en-RW
+    source_id: kfhr-rw-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: unza-zm-medical-pediatric-guidance
+    name: Academic medicine and pediatric respiratory clinical guidance
+    organisation: University of Zambia School of Medicine
+    countries: [ZM]
+    url: https://www.unza.zm/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, trials_research_registries]
+    summary: Zambian national university medical school affiliated with the University Teaching Hospital in Lusaka for pediatric respiratory education
+      and specialist referral orientation.
+    who_for: not_checked
+    format: online
+    lang: en-ZM
+    source_id: unza-zm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: uz-zw-health-sciences-pediatric-care
+    name: Faculty of Medicine and Health Sciences clinical orientation
+    organisation: University of Zimbabwe Faculty of Medicine and Health Sciences
+    countries: [ZW]
+    url: https://www.uz.ac.zw/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, trials_research_registries]
+    summary: Zimbabwean national academic medical faculty partnering with central teaching hospitals in Harare for pediatric respiratory care education
+      and clinical referral guidance.
+    who_for: not_checked
+    format: online
+    lang: en-ZW
+    source_id: uz-zw-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: unam-na-school-of-medicine-guidance
+    name: School of Medicine pediatric and genetic health orientation
+    organisation: University of Namibia School of Medicine
+    countries: [NA]
+    url: https://www.unam.edu.na/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, trials_research_registries]
+    summary: Namibian national university medical school providing clinical training, respiratory and genetic health education, and specialist referral
+      orientation in Windhoek.
+    who_for: not_checked
+    format: online
+    lang: en-NA
+    source_id: unam-na-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: govbw-bw-health-and-wellness-services
+    name: National public health and specialist hospital referral services
+    organisation: Government of Botswana Ministry of Health Services
+    countries: [BW]
+    url: https://www.gov.bw/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, money_insurance]
+    summary: Botswanan national public health portal providing hospital referral navigation, chronic respiratory disease information, and patient
+      care guidance for families.
+    who_for: not_checked
+    format: online
+    lang: en-BW
+    source_id: govbw-bw-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: kuhes-mw-pediatric-health-sciences
+    name: Pediatric respiratory medicine and health sciences guidance
+    organisation: Kamuzu University of Health Sciences
+    countries: [MW]
+    url: https://www.kuhes.ac.mw/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, trials_research_registries]
+    summary: Malawian national health sciences university partnering with Queen Elizabeth Central Hospital for pediatric respiratory care education
+      and clinical referral guidance.
+    who_for: not_checked
+    format: online
+    lang: en-MW
+    source_id: kuhes-mw-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: ins-mz-national-health-institute
+    name: Vigilância em saúde respiratória e orientação diagnóstica
+    organisation: Instituto Nacional de Saúde de Moçambique
+    countries: [MZ]
+    url: https://ins.gov.mz/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, trials_research_registries]
+    summary: Mozambican national public health and biomedical research institute providing reference laboratory diagnostics, respiratory health
+      education, and clinical referral guidance.
+    who_for: not_checked
+    format: online
+    lang: pt-MZ
+    source_id: ins-mz-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: pasteur-kh-medical-diagnostics-guidance
+    name: Biomedical reference diagnostics and respiratory health guidance
+    organisation: Institut Pasteur du Cambodge
+    countries: [KH]
+    url: https://www.pasteur-kh.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, trials_research_registries]
+    summary: Cambodian non-profit biomedical research and diagnostic center offering medical laboratory testing, respiratory pathogen diagnostics,
+      and clinical referral orientation.
+    who_for: not_checked
+    format: online
+    lang: en-KH
+    source_id: pasteur-kh-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+  - id: mnums-mn-academic-pediatric-care
+    name: Хүүхдийн уушги болон удамшлын эмгэгийн клиникийн лавлагаа
+    organisation: Mongolian National University of Medical Sciences (АШУҮИС)
+    countries: [MN]
+    url: https://mnums.edu.mn/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [newly_diagnosed_basics, find_care_team, daily_life]
+    summary: Mongolian national medical university and teaching hospital system providing pediatric pulmonology education, genetic diagnostics orientation,
+      and specialist clinic referrals.
+    who_for: not_checked
+    format: online
+    lang: mn
+    source_id: mnums-mn-resource-pages
+    basis: lead_only
     last_checked: 2026-10-25
     status: active

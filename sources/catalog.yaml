@@ -2660,6 +2660,421 @@ sources:
     claim_label: unverified
     notes: Robots.txt verified 2026-10-25; manual access (link and summary only).
 
+  - id: amu-az-resource-pages
+    title: Azərbaycan Tibb Universiteti website (amu.edu.az)
+    publisher: Azərbaycan Tibb Universiteti
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://amu.edu.az/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Azərbaycan Tibb Universiteti); robots.txt allow (2026-10-25), manual access, link and summary
+      only.
+
+  - id: kaznmu-kz-resource-pages
+    title: С.Ж. Асфендияров атындағы Қазақ ұлттық медицина университеті website (kaznmu.edu.kz)
+    publisher: С.Ж. Асфендияров атындағы Қазақ ұлттық медицина университеті
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://kaznmu.edu.kz/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (С.Ж. Асфендияров атындағы Қазақ ұлттық медицина университеті); robots.txt allow (2026-10-25),
+      manual access, link and summary only.
+
+  - id: pediatriya-uz-resource-pages
+    title: Respublika ixtisoslashtirilgan pediatriya ilmiy-amaliy tibbiyot markazi website (pediatriya.uz)
+    publisher: Respublika ixtisoslashtirilgan pediatriya ilmiy-amaliy tibbiyot markazi
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://pediatriya.uz/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Respublika ixtisoslashtirilgan pediatriya ilmiy-amaliy tibbiyot markazi); robots.txt allow
+      (2026-10-25), manual access, link and summary only.
+
+  - id: oshsu-kg-resource-pages
+    title: Osh State University Medical Faculty website (www.oshsu.kg)
+    publisher: Osh State University Medical Faculty
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.oshsu.kg/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Osh State University Medical Faculty); robots.txt allow (2026-10-25), manual access, link
+      and summary only.
+
+  - id: pasteur-dz-resource-pages
+    title: Institut Pasteur d'Algérie website (www.pasteur.dz)
+    publisher: Institut Pasteur d'Algérie
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.pasteur.dz/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Institut Pasteur d'Algérie); robots.txt allow (2026-10-25), manual access, link and summary
+      only.
+
+  - id: sidra-qa-resource-pages
+    title: Sidra Medicine website (www.sidra.org)
+    publisher: Sidra Medicine
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.sidra.org/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Sidra Medicine); robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: dasman-kw-resource-pages
+    title: Dasman Diabetes and Genetic Institute website (www.dasmaninstitute.org)
+    publisher: Dasman Diabetes and Genetic Institute
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.dasmaninstitute.org/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Dasman Diabetes and Genetic Institute); robots.txt allow (2026-10-25), manual access, link
+      and summary only.
+
+  - id: moh-om-resource-pages
+    title: Ministry of Health Sultanate of Oman website (www.moh.gov.om)
+    publisher: Ministry of Health Sultanate of Oman
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.moh.gov.om/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Ministry of Health Sultanate of Oman); robots.txt allow (2026-10-25), manual access, link
+      and summary only.
+
+  - id: uobaghdad-iq-resource-pages
+    title: University of Baghdad College of Medicine website (comed.uobaghdad.edu.iq)
+    publisher: University of Baghdad College of Medicine
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://comed.uobaghdad.edu.iq/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (University of Baghdad College of Medicine); robots.txt allow (2026-10-25), manual access,
+      link and summary only.
+
+  - id: sbmu-ir-resource-pages
+    title: Shahid Beheshti University of Medical Sciences website (sbmu.ac.ir)
+    publisher: Shahid Beheshti University of Medical Sciences
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://sbmu.ac.ir/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Shahid Beheshti University of Medical Sciences); robots.txt allow (2026-10-25), manual access,
+      link and summary only.
+
+  - id: khmh-bz-resource-pages
+    title: Karl Heusner Memorial Hospital Authority website (khmh.bz)
+    publisher: Karl Heusner Memorial Hospital Authority
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://khmh.bz/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Karl Heusner Memorial Hospital Authority); robots.txt allow (2026-10-25), manual access,
+      link and summary only.
+
+  - id: gov-sr-resource-pages
+    title: Government of the Republic of Suriname portal (gov.sr)
+    publisher: Government of the Republic of Suriname (Ministerie van Volksgezondheid)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://gov.sr/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Government of the Republic of Suriname (Ministerie van Volksgezondheid)); robots.txt allow
+      (2026-10-25), manual access, link and summary only.
+
+  - id: mspp-ht-resource-pages
+    title: Ministère de la Santé Publique et de la Population Haïti website (mspp.gouv.ht)
+    publisher: Ministère de la Santé Publique et de la Population (MSPP)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://mspp.gouv.ht/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Ministère de la Santé Publique et de la Population (MSPP)); robots.txt allow (2026-10-25),
+      manual access, link and summary only.
+
+  - id: kbth-gh-resource-pages
+    title: Korle Bu Teaching Hospital website (kbth.gov.gh)
+    publisher: Korle Bu Teaching Hospital
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://kbth.gov.gh/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Korle Bu Teaching Hospital); robots.txt allow (2026-10-25), manual access, link and summary
+      only.
+
+  - id: ucad-sn-resource-pages
+    title: Université Cheikh Anta Diop de Dakar website (ucad.sn)
+    publisher: Université Cheikh Anta Diop de Dakar (UCAD)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.ucad.sn/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Université Cheikh Anta Diop de Dakar (UCAD)); robots.txt allow (2026-10-25), manual access,
+      link and summary only.
+
+  - id: pasteur-ci-resource-pages
+    title: Institut Pasteur de Côte d’Ivoire website (pasteur.ci)
+    publisher: Institut Pasteur de Côte d’Ivoire
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://pasteur.ci/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Institut Pasteur de Côte d’Ivoire); robots.txt allow (2026-10-25), manual access, link and
+      summary only.
+
+  - id: pasteur-cm-resource-pages
+    title: Centre Pasteur du Cameroun website (pasteur-yaounde.org)
+    publisher: Centre Pasteur du Cameroun
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://pasteur-yaounde.org/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Centre Pasteur du Cameroun); robots.txt allow (2026-10-25), manual access, link and summary
+      only.
+
+  - id: minsa-ao-resource-pages
+    title: Ministério da Saúde de Angola website (minsa.gov.ao)
+    publisher: Ministério da Saúde de Angola (MINSA)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://minsa.gov.ao/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Ministério da Saúde de Angola (MINSA)); robots.txt allow (2026-10-25), manual access, link
+      and summary only.
+
+  - id: sante-bj-resource-pages
+    title: Ministère de la Santé du Bénin website (sante.gouv.bj)
+    publisher: Ministère de la Santé de la République du Bénin
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://sante.gouv.bj/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Ministère de la Santé de la République du Bénin); robots.txt allow (2026-10-25), manual access,
+      link and summary only.
+
+  - id: sante-tg-resource-pages
+    title: Ministère de la Santé et de la Couverture Sanitaire Universelle Togo website (sante-assurances.gouv.tg)
+    publisher: Ministère de la Santé, de l’Hygiène Publique et de la Couverture Sanitaire Universelle du Togo
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://sante-assurances.gouv.tg/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Ministère de la Santé, de l’Hygiène Publique et de la Couverture Sanitaire Universelle du
+      Togo); robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: kcmc-tz-resource-pages
+    title: Kilimanjaro Christian Medical Centre website (www.kcmc.ac.tz)
+    publisher: Kilimanjaro Christian Medical Centre
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.kcmc.ac.tz/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Kilimanjaro Christian Medical Centre); robots.txt allow (2026-10-25), manual access, link
+      and summary only.
+
+  - id: makchs-ug-resource-pages
+    title: Makerere University College of Health Sciences website (chs.mak.ac.ug)
+    publisher: Makerere University College of Health Sciences
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://chs.mak.ac.ug/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Makerere University College of Health Sciences); robots.txt allow (2026-10-25), manual access,
+      link and summary only.
+
+  - id: aau-et-resource-pages
+    title: Addis Ababa University College of Health Sciences website (www.aau.edu.et)
+    publisher: Addis Ababa University College of Health Sciences
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.aau.edu.et/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Addis Ababa University College of Health Sciences); robots.txt allow (2026-10-25), manual
+      access, link and summary only.
+
+  - id: kfhr-rw-resource-pages
+    title: King Faisal Hospital Rwanda website (kfh.rw)
+    publisher: King Faisal Hospital Rwanda
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://kfh.rw/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (King Faisal Hospital Rwanda); robots.txt allow (2026-10-25), manual access, link and summary
+      only.
+
+  - id: unza-zm-resource-pages
+    title: University of Zambia School of Medicine website (www.unza.zm)
+    publisher: University of Zambia School of Medicine
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.unza.zm/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (University of Zambia School of Medicine); robots.txt allow (2026-10-25), manual access, link
+      and summary only.
+
+  - id: uz-zw-resource-pages
+    title: University of Zimbabwe Faculty of Medicine and Health Sciences website (www.uz.ac.zw)
+    publisher: University of Zimbabwe Faculty of Medicine and Health Sciences
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.uz.ac.zw/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (University of Zimbabwe Faculty of Medicine and Health Sciences); robots.txt allow (2026-10-25),
+      manual access, link and summary only.
+
+  - id: unam-na-resource-pages
+    title: University of Namibia School of Medicine website (www.unam.edu.na)
+    publisher: University of Namibia School of Medicine
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.unam.edu.na/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (University of Namibia School of Medicine); robots.txt allow (2026-10-25), manual access,
+      link and summary only.
+
+  - id: govbw-bw-resource-pages
+    title: Government of Botswana Ministry of Health Services website (www.gov.bw)
+    publisher: Government of Botswana Ministry of Health Services
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.gov.bw/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Government of Botswana Ministry of Health Services); robots.txt allow (2026-10-25), manual
+      access, link and summary only.
+
+  - id: kuhes-mw-resource-pages
+    title: Kamuzu University of Health Sciences website (www.kuhes.ac.mw)
+    publisher: Kamuzu University of Health Sciences
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.kuhes.ac.mw/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Kamuzu University of Health Sciences); robots.txt allow (2026-10-25), manual access, link
+      and summary only.
+
+  - id: ins-mz-resource-pages
+    title: Instituto Nacional de Saúde de Moçambique website (ins.gov.mz)
+    publisher: Instituto Nacional de Saúde de Moçambique
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://ins.gov.mz/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Instituto Nacional de Saúde de Moçambique); robots.txt allow (2026-10-25), manual access,
+      link and summary only.
+
+  - id: pasteur-kh-resource-pages
+    title: Institut Pasteur du Cambodge website (www.pasteur-kh.org)
+    publisher: Institut Pasteur du Cambodge
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.pasteur-kh.org/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Institut Pasteur du Cambodge); robots.txt allow (2026-10-25), manual access, link and summary
+      only.
+
+  - id: mnums-mn-resource-pages
+    title: Mongolian National University of Medical Sciences (АШУҮИС) website (mnums.edu.mn)
+    publisher: Mongolian National University of Medical Sciences (АШУҮИС)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://mnums.edu.mn/
+    url: null
+    claim_label: unverified
+    notes: Official CF or pediatric referral resource (Mongolian National University of Medical Sciences (АШУҮИС)); robots.txt allow (2026-10-25),
+      manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information
