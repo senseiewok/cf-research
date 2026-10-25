@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `59` (plus 3 infrastructure scripts and 60 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `41`
+- **Total Verified Modules:** `61` (plus 3 infrastructure scripts and 62 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `43`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -29,13 +29,14 @@ python tools/discovery/discovery_council.py --check-index
 | `pdi_redox_remodeling.py` | `T-0281` | `T2` | `archive` | Candidate for archive |
 | `ptc_cryoem_allostery.py` | `T-0217` | `T2` | `merge` | Merge into `cryoem_truncation_model.py` |
 
-## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 17 modules)
+## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 18 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
 | `aso_splice_kinetics.py` | `T-0254` | `T2` | `keep` | Canonical workbench |
 | `aso_splice_model.py` | `T-0183` | `T2` | `merge` | Merge into `aso_splice_kinetics.py` |
 | `base_editing_cftr.py` | `T-0219` | `T2` | `merge` | Merge into `class1_prime_base_editing.py` |
+| `bridge_rna_minipromoter_coevolve.py` | `T-0427` | `T2` | `keep` | Canonical workbench |
 | `cftr_gquadruplex_stability_model.py` | `T-0316` | `T2` | `archive` | Candidate for archive |
 | `cftr_minigene_model.py` | `T-0207` | `T2` | `keep` | Canonical workbench |
 | `class1_prime_base_editing.py` | `T-0255` | `T2` | `keep` | Canonical workbench |
@@ -91,10 +92,11 @@ python tools/discovery/discovery_council.py --check-index
 | `phage_depolymerase_biofilm_synergy.py` | `T-0402` | `T2` | `keep` | Canonical workbench |
 | `phage_omko1_tradeoff.py` | `T-0246` | `T2` | `keep` | Canonical workbench |
 
-## Clinical Trials, Registries & Theratyping (`clinical_trials` — 2 modules)
+## Clinical Trials, Registries & Theratyping (`clinical_trials` — 3 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
+| `counterfactual_trial_forensics.py` | `T-0428` | `T2` | `keep` | Canonical workbench |
 | `modifier_interactome.py` | `T-0186` | `T2` | `keep` | Canonical workbench |
 | `rare_allele_matrix.py` | `T-0201` | `T2` | `keep` | Canonical workbench |
 

@@ -141,6 +141,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0154", "track": "Track A", "tier": "T2",
         "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
     },
+    "bridge_rna_minipromoter_coevolve": {
+        "task": "T-0427", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
     "cftr_gquadruplex_stability_model": {
         "task": "T-0316", "track": "Track A", "tier": "T2",
         "discipline": "rna_gene_editing", "persona": "researchers", "triage": "archive",
@@ -164,6 +168,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
     "class1_prime_base_editing": {
         "task": "T-0255", "track": "Track A", "tier": "T2",
         "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
+    "counterfactual_trial_forensics": {
+        "task": "T-0428", "track": "Track B", "tier": "T2",
+        "discipline": "clinical_trials", "persona": "researchers", "triage": "keep",
     },
     "cryoem_truncation_model": {
         "task": "T-0151", "track": "Track A", "tier": "T2",
