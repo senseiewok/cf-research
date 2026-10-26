@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-167 to download by hand, 1 to ask for, 3 not to download.
+172 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -120,6 +120,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | vnch-vn-resource-pages | Bệnh viện Nhi Trung ương (Vietnam National Children’s Hospital) website (benhviennhitrunguong.gov.vn) | [page](https://benhviennhitrunguong.gov.vn/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### Centre d'Infectiologie Charles Mérieux du Mali
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cicm-ml-resource-pages | Centre d'Infectiologie Charles Mérieux du Mali website (www.cicm-mali.org) | [page](https://www.cicm-mali.org/) | link only | Official public biomedical and clinical diagnostic center in Mali; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Centre Hospitalier Universitaire Mohammed VI Marrakech
 
 | ID | What | Open | Save as | Notes |
@@ -131,6 +137,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | chuk-bi-resource-pages | Centre Hospitalo-Universitaire de Kamenge portal (chuk.bi) | [page](https://www.chuk.bi/) | link only | Official national university teaching and referral hospital portal in Burundi; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Centre Muraz, Institut National de Santé Publique
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| centre-muraz-bf-resource-pages | Centre Muraz Institut National de Santé Publique website (www.centre-muraz.bf) | [page](https://www.centre-muraz.bf/) | link only | Official national public health and biomedical research institute in Burkina Faso; robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Centre Pasteur du Cameroun
 
@@ -409,6 +421,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cftr-france | CFTR-France (public variant list) | [page](https://cftr.chu-montpellier.fr/cgi-bin/variant_list.cgi) [file](https://cftr.chu-montpellier.fr/CFTR/data/img/AllVarCFTR-FranceToDownload_14092026.xlsx) | `AllVarCFTR-FranceToDownload_14092026.xlsx` | Read 2026-10-05; the site has moved from cftr.iurc.montp.inserm.fr to cftr.chu-montpellier.fr (robots.txt: none, 404). |
 
+### Institut National de Recherches en Santé Publique
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| inrsp-mr-resource-pages | Institut National de Recherches en Santé Publique website (inrsp.mr) | [page](https://inrsp.mr/) | link only | Official public health institute and reference laboratory portal in Mauritania; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Institut Pasteur d'Algérie
 
 | ID | What | Open | Save as | Notes |
@@ -420,6 +438,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | pasteur-ci-resource-pages | Institut Pasteur de Côte d’Ivoire website (pasteur.ci) | [page](https://pasteur.ci/) | link only | Official CF or pediatric referral resource (Institut Pasteur de Côte d’Ivoire); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Institut Pasteur de Madagascar
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| pasteur-mg-resource-pages | Institut Pasteur de Madagascar website (www.pasteur.mg) | [page](https://www.pasteur.mg/) | link only | Official biomedical research and clinical diagnostic foundation in Madagascar; robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Institut Pasteur de Tunis
 
@@ -882,6 +906,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | uobaghdad-iq-resource-pages | University of Baghdad College of Medicine website (comed.uobaghdad.edu.iq) | [page](https://comed.uobaghdad.edu.iq/) | link only | Official CF or pediatric referral resource (University of Baghdad College of Medicine); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### University of Health Sciences, Laos
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| uhs-la-resource-pages | University of Health Sciences Laos website (uhs.edu.la) | [page](https://uhs.edu.la/) | link only | Official health sciences university portal in Laos; robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### University of Namibia School of Medicine
 

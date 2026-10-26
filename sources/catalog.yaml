@@ -3303,6 +3303,66 @@ sources:
     claim_label: unverified
     notes: Official tertiary pediatric referral and university teaching hospital portal in Syria; robots.txt allow (2026-10-25), manual access, link and summary only.
 
+  - id: uhs-la-resource-pages
+    title: University of Health Sciences Laos website (uhs.edu.la)
+    publisher: University of Health Sciences, Laos
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://uhs.edu.la/
+    url: null
+    claim_label: unverified
+    notes: Official health sciences university portal in Laos; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: pasteur-mg-resource-pages
+    title: Institut Pasteur de Madagascar website (www.pasteur.mg)
+    publisher: Institut Pasteur de Madagascar
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.pasteur.mg/
+    url: null
+    claim_label: unverified
+    notes: Official biomedical research and clinical diagnostic foundation in Madagascar; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: cicm-ml-resource-pages
+    title: Centre d'Infectiologie Charles Mérieux du Mali website (www.cicm-mali.org)
+    publisher: Centre d'Infectiologie Charles Mérieux du Mali
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.cicm-mali.org/
+    url: null
+    claim_label: unverified
+    notes: Official public biomedical and clinical diagnostic center in Mali; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: centre-muraz-bf-resource-pages
+    title: Centre Muraz Institut National de Santé Publique website (www.centre-muraz.bf)
+    publisher: Centre Muraz, Institut National de Santé Publique
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.centre-muraz.bf/
+    url: null
+    claim_label: unverified
+    notes: Official national public health and biomedical research institute in Burkina Faso; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: inrsp-mr-resource-pages
+    title: Institut National de Recherches en Santé Publique website (inrsp.mr)
+    publisher: Institut National de Recherches en Santé Publique
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://inrsp.mr/
+    url: null
+    claim_label: unverified
+    notes: Official public health institute and reference laboratory portal in Mauritania; robots.txt allow (2026-10-25), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information

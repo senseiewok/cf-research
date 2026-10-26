@@ -3200,3 +3200,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-25
     status: active
+
+  - id: uhs-la-health-sciences-guidance
+    name: National university health sciences and clinical hospital guidance in Laos
+    organisation: University of Health Sciences, Laos
+    countries: [LA]
+    url: https://uhs.edu.la/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health sciences university in Vientiane coordinating medical education, specialized clinical diagnostics, and pediatric referral pathways across major teaching hospitals in Laos.
+    who_for: not_checked
+    format: online
+    lang: lo-LA
+    source_id: uhs-la-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: pasteur-mg-biomedical-diagnostics
+    name: Biomedical diagnostics and clinical laboratory services in Madagascar
+    organisation: Institut Pasteur de Madagascar
+    countries: [MG]
+    url: https://www.pasteur.mg/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Biomedical reference institute in Antananarivo providing clinical biology laboratories, specialized diagnostic testing, and medical research coordination across Madagascar.
+    who_for: not_checked
+    format: online
+    lang: fr-MG
+    source_id: pasteur-mg-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: cicm-ml-clinical-diagnostics
+    name: Clinical biology diagnostics and healthcare training in Mali
+    organisation: Centre d'Infectiologie Charles Mérieux du Mali
+    countries: [ML]
+    url: https://www.cicm-mali.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Biomedical research and clinical laboratory center in Bamako providing specialized diagnostic testing, healthcare professional training, and disease surveillance in Mali.
+    who_for: not_checked
+    format: online
+    lang: fr-ML
+    source_id: cicm-ml-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: centre-muraz-bf-biomedical-surveillance
+    name: Biomedical research and specialized laboratory diagnostics in Burkina Faso
+    organisation: Centre Muraz, Institut National de Santé Publique
+    countries: [BF]
+    url: https://www.centre-muraz.bf/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National public health research institute in Bobo-Dioulasso providing specialized biomedical analysis, disease surveillance, and clinical investigation services in Burkina Faso.
+    who_for: not_checked
+    format: online
+    lang: fr-BF
+    source_id: centre-muraz-bf-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: inrsp-mr-laboratory-referral-care
+    name: Public health laboratory diagnostics and clinical referral in Mauritania
+    organisation: Institut National de Recherches en Santé Publique
+    countries: [MR]
+    url: https://inrsp.mr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National public health research institute in Nouakchott providing specialized medical bacteriology, clinical biochemistry, and diagnostic laboratory referral services in Mauritania.
+    who_for: not_checked
+    format: online
+    lang: fr-MR
+    source_id: inrsp-mr-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
