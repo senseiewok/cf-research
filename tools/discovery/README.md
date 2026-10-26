@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `76` (plus 4 infrastructure scripts and 78 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `58`
+- **Total Verified Modules:** `77` (plus 4 infrastructure scripts and 79 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `59`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -16,12 +16,13 @@ python tools/discovery/discovery_council.py --audit-registry
 python tools/discovery/discovery_council.py --check-index
 ```
 
-## Structural Biology & CFTR Biophysics (`structural_biology` — 11 modules)
+## Structural Biology & CFTR Biophysics (`structural_biology` — 12 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
 | `allosteric_potentiator_model.py` | `T-0221` | `T2` | `merge` | Merge into `gating_potentiator_energy_coupling.py` |
 | `alpha_evolve_compound_het_ptc.py` | `T-0432` | `T2` | `keep` | Canonical workbench |
+| `cftr_interdomain_allosteric_energetics.py` | `T-0447` | `T2` | `keep` | Canonical workbench |
 | `cftr_sequence_scanner.py` | `T-0264` | `T2` | `keep` | Canonical workbench |
 | `cftr_variant_catalog_concordance.py` | `T-0420` | `T2` | `keep` | Canonical workbench |
 | `cryoem_truncation_model.py` | `T-0151` | `T2` | `keep` | Canonical workbench |
