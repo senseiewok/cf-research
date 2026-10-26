@@ -3041,3 +3041,82 @@ resources:
     last_checked: 2026-10-25
     status: active
 
+  - id: fig-fk-health-and-social-services
+    name: Public healthcare services and hospital guidance in the Falkland Islands
+    organisation: Falkland Islands Government Health and Social Services Department
+    countries: [FK]
+    url: https://www.gov.fk/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Falkland Islands health authority coordinating public healthcare, community services, and specialist clinical referrals through King Edward VII Memorial Hospital in Stanley.
+    who_for: not_checked
+    format: online
+    lang: en-FK
+    source_id: fig-fk-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: naalakkersuisut-gl-health-services
+    name: Public healthcare services and national medical care in Greenland
+    organisation: Government of Greenland - Department of Health (Naalakkersuisut)
+    countries: [GL]
+    url: https://naalakkersuisut.gl/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official Greenlandic government portal coordinating national public healthcare services, territorial hospital care, and specialized medical referral pathways across Greenland.
+    who_for: not_checked
+    format: online
+    lang: kl-GL
+    source_id: naalakkersuisut-gl-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: health-pg-pediatric-referral-care
+    name: Pediatric referral care and tertiary hospital services in Papua New Guinea
+    organisation: National Department of Health, Papua New Guinea
+    countries: [PG]
+    url: https://www.health.gov.pg/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Papua New Guinea Department of Health portal coordinating public health services and specialized tertiary hospital referral pathways across Port Moresby.
+    who_for: not_checked
+    format: online
+    lang: en-PG
+    source_id: health-pg-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: ncdc-ly-disease-control-care
+    name: Disease surveillance and public health guidance in Libya
+    organisation: National Centre for Disease Control Libya
+    countries: [LY]
+    url: https://ncdc.org.ly/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Libyan National Centre for Disease Control portal coordinating public health surveillance, disease prevention guidance, and specialist medical care in Tripoli.
+    who_for: not_checked
+    format: online
+    lang: ar-LY
+    source_id: ncdc-ly-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: sante-cg-pediatric-referral-care
+    name: Pediatric referral care and specialized hospital guidance in Republic of the Congo
+    organisation: Ministère de la Santé et de la Population de la République du Congo
+    countries: [CG]
+    url: https://sante.gouv.cg/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Republic of the Congo health ministry portal directing families and clinicians to tertiary pediatric referral care and university hospitals in Brazzaville.
+    who_for: not_checked
+    format: online
+    lang: fr-CG
+    source_id: sante-cg-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
