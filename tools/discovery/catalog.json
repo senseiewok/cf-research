@@ -6,22 +6,22 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 69,
+  "total_modules": 74,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 71,
+  "test_suites_count": 76,
   "persona_summary": {
-    "researchers": 68,
+    "researchers": 73,
     "builders": 1
   },
   "triage_summary": {
-    "keep": 51,
+    "keep": 56,
     "merge": 14,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 10,
-    "rna_gene_editing": 21,
-    "airway_delivery": 27,
+    "structural_biology": 11,
+    "rna_gene_editing": 22,
+    "airway_delivery": 30,
     "microbiology_host": 6,
     "clinical_trials": 3,
     "ai_verification": 2
@@ -29,8 +29,8 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 10,
-      "keep_count": 7,
+      "count": 11,
+      "keep_count": 8,
       "merge_count": 2,
       "archive_count": 1,
       "modules": [
@@ -134,6 +134,17 @@
           "test_verified": true
         },
         {
+          "module": "slc26a9_tmem16a_bypass",
+          "task": "T-0256",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
           "module": "tmem16a_enac_synergy_model",
           "task": "T-0430",
           "track": "Track A",
@@ -148,8 +159,8 @@
     },
     "rna_gene_editing": {
       "label": "RNA, Nonsense Readthrough & Gene Editing",
-      "count": 21,
-      "keep_count": 14,
+      "count": 22,
+      "keep_count": 15,
       "merge_count": 5,
       "archive_count": 2,
       "modules": [
@@ -363,6 +374,17 @@
           "test_verified": true
         },
         {
+          "module": "suppressor_trna_orthogonality",
+          "task": "T-0394",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
           "module": "u1_snrnp_decoy_kinetics",
           "task": "T-0292",
           "track": "Track A",
@@ -388,8 +410,8 @@
     },
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
-      "count": 27,
-      "keep_count": 20,
+      "count": 30,
+      "keep_count": 23,
       "merge_count": 6,
       "archive_count": 1,
       "modules": [
@@ -570,6 +592,17 @@
           "test_verified": true
         },
         {
+          "module": "lentiviral_basal_integration_persistence",
+          "task": "T-0407",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
           "module": "lnp_escape_dynamics",
           "task": "T-0285",
           "track": "Track A",
@@ -603,6 +636,17 @@
           "test_verified": true
         },
         {
+          "module": "mpp_obstruction_scaling",
+          "task": "T-0244",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
           "module": "mrna_lnp_escape_model",
           "task": "T-0239",
           "track": "Track A",
@@ -627,6 +671,17 @@
         {
           "module": "mucus_rheology",
           "task": "T-0185",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "nebulizer_shear_stress_integrity",
+          "task": "T-0413",
           "track": "Track A",
           "tier": "T2",
           "discipline": "airway_delivery",

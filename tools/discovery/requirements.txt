@@ -1,1 +1,1 @@
-# Python standard library only (no third-party packages required for offline checks and tests).
+# Python standard library for discovery_council.py; pytest required for running tools/discovery/test_*.py.
