@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-157 to download by hand, 1 to ask for, 3 not to download.
+162 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -265,6 +265,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | eu-ctr | EU Clinical Trials Register (EudraCT) | [page](https://www.clinicaltrialsregister.eu/) | link only | robots.txt: none (404). |
 
+### Falkland Islands Government Health and Social Services Department
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| fig-fk-resource-pages | Falkland Islands Government Health and Social Services Department website (gov.fk) | [page](https://www.gov.fk/) | link only | Official public health authority and hospital referral portal in the Falkland Islands; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Federación Costarricense de Enfermedades Raras
 
 | ID | What | Open | Save as | Notes |
@@ -318,6 +324,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | govbw-bw-resource-pages | Government of Botswana Ministry of Health Services website (www.gov.bw) | [page](https://www.gov.bw/) | link only | Official CF or pediatric referral resource (Government of Botswana Ministry of Health Services); robots.txt allow (2026-10-25), manual access, link and summary… |
+
+### Government of Greenland (Naalakkersuisut)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| naalakkersuisut-gl-resource-pages | Government of Greenland health portal (naalakkersuisut.gl) | [page](https://naalakkersuisut.gl/) | link only | Official government portal of Greenland providing access to the Department of Health (Departementet for Sundhed / Peqqissutsimut Naalakkersuisoqarfik) and nati… |
 
 ### Government of the Republic of Suriname (Ministerie van Volksgezondheid)
 
@@ -607,6 +619,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | sante-bj-resource-pages | Ministère de la Santé du Bénin website (sante.gouv.bj) | [page](https://sante.gouv.bj/) | link only | Official CF or pediatric referral resource (Ministère de la Santé de la République du Bénin); robots.txt allow (2026-10-25), manual access, link and summary on… |
 
+### Ministère de la Santé et de la Population de la République du Congo
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sante-cg-resource-pages | Ministère de la Santé et de la Population République du Congo portal (sante.gouv.cg) | [page](https://sante.gouv.cg/) | link only | Official public healthcare and tertiary pediatric referral portal in Republic of the Congo; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Ministère de la Santé Gabon
 
 | ID | What | Open | Save as | Notes |
@@ -660,6 +678,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | muratsan-am-resource-pages | Muratsan University Hospital Complex website (muratsan.am) | [page](https://muratsan.am/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### National Centre for Disease Control Libya
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ncdc-ly-resource-pages | National Centre for Disease Control Libya portal (ncdc.org.ly) | [page](https://ncdc.org.ly/) | link only | Official public disease control and healthcare guidance portal in Libya; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### National Department of Health, Papua New Guinea
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| health-pg-resource-pages | National Department of Health Papua New Guinea portal (health.gov.pg) | [page](https://www.health.gov.pg/) | link only | Official public healthcare and tertiary referral portal in Papua New Guinea; robots.txt 404 allow (2026-10-25), manual access, link and summary only. |
 
 ### National Institute for Health and Care Excellence (NICE)
 
