@@ -112,7 +112,7 @@ def get_default_scratch_dir() -> Path:
     # Note: in a worktree, REPO_ROOT may be .worktrees/cf-research/<branch>
     curr = REPO_ROOT
     for _ in range(5):
-        for cand_root in (curr.parent / "cf-lab" / ".lab-files", curr.parent / "cf-lab-files"):
+        for cand_root in (curr.parent / "cf-lab" / ".lab-files", curr.parent / ".lab-files", curr.parent / "cf-lab-files"):
             if cand_root.is_dir() and not is_inside_repo(cand_root):
                 return cand_root / "scratch" / "resource_intake"
         curr = curr.parent

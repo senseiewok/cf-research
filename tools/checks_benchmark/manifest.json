@@ -3,8 +3,6 @@
   "frozen_date": "2026-10-15",
   "file_hashes": {
     "tasks.json": "d3aaa28f2f05e35f2588b4c0af4c69d7dfc88b03b8e73b084b0871653d895544",
-    "sources_fixture.json": "452e5d14ad81c0fde89bbb912b4145b752c33bd95654fd53291f8486ba5d02a1",
-    "benchmark_runner.py": "e84fe278b4e5e7fb6e749bb3ad0d265a9f2aa4df19eef363450cfc812b76a3dc",
-    "evaluate_local_worker.py": "c34ff43db4e09e9d18bd116455a7b42be733ad2b73accbca2a861da10751e7cc"
+    "sources_fixture.json": "452e5d14ad81c0fde89bbb912b4145b752c33bd95654fd53291f8486ba5d02a1"
   }
 }

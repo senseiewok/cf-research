@@ -78,3 +78,15 @@ jobs:
       - name: CFTR model tests (standard library; browser cases skip)
         working-directory: tools/cftr-model/tests
         run: python -m unittest discover -v
+      - name: discovery models and index check
+        run: python tools/discovery/discovery_council.py --check-index && python tools/discovery/discovery_council.py --falsify-all
+      - name: benchmark suite tests
+        run: python -m unittest discover -s tools/benchmark -v
+      - name: checks_benchmark suite tests
+        run: python -m unittest discover -s tools/checks_benchmark -v
+      - name: registry-extract suite tests
+        run: python -m unittest discover -s tools/registry-extract -v
+      - name: evidence loop cross-check tests
+        run: python -m unittest tools/test_evidence_loop_cross_check.py -v
+      - name: ledger tally self-check
+        run: python ledger/tally.py --self-check
