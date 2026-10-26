@@ -3075,6 +3075,54 @@ sources:
     notes: Official CF or pediatric referral resource (Mongolian National University of Medical Sciences (АШУҮИС)); robots.txt allow (2026-10-25),
       manual access, link and summary only.
 
+  - id: tajmedun-tj-resource-pages
+    title: Tajik State Medical University website (tajmedun.tj)
+    publisher: Tajik State Medical University named after Abuali ibn Sino
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://tajmedun.tj/
+    url: null
+    claim_label: unverified
+    notes: Official CF and pediatric pulmonary referral medical center in Tajikistan; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: moh-bn-resource-pages
+    title: Ministry of Health Brunei Darussalam public healthcare portal (www.moh.gov.bn)
+    publisher: Ministry of Health Brunei Darussalam - RIPAHS Hospital
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.moh.gov.bn/
+    url: null
+    claim_label: unverified
+    notes: Official pediatric specialist and tertiary pulmonary care portal for Brunei; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: health-fj-resource-pages
+    title: Ministry of Health and Medical Services Fiji portal (www.health.gov.fj)
+    publisher: Ministry of Health and Medical Services, Fiji
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.health.gov.fj/
+    url: null
+    claim_label: unverified
+    notes: Official pediatric specialty and tertiary respiratory referral guidance for Fiji; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: avh-ps-resource-pages
+    title: Augusta Victoria Hospital clinical services portal (avh.org)
+    publisher: Augusta Victoria Hospital
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://avh.org/
+    url: null
+    claim_label: unverified
+    notes: Specialized pediatric pulmonary referral hospital and clinical care center in Palestine; robots.txt allow (2026-10-25), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information
