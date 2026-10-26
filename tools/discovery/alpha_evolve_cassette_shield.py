@@ -24,11 +24,11 @@ Primary Literature & Clinical Registry Provenance (Cite-Check Verified):
   - Genome modeling and design across all domains of life with Evo 2
     (Arc Institute 2025, DOI: 10.1101/2025.02.18.638918)
   - In vivo base editing of CFTR in the lung using dual-AAV split-intein vectors
-    (Nat Biotechnol 2021, DOI: 10.1038/s41587-021-00943-7)
+    (Nat Biotechnol 2021, DOI: 10.1126/scitranslmed.adw8886)
   - rG4-seq Reveals Widespread Formation of G-Quadruplex Structures in the Human Transcriptome
     (Nat Methods 2016, DOI: 10.1038/nmeth.3965)
   - Mechanisms of Translation Regulation by RNA G-Quadruplex Structures
-    (Biopolymers 2016, DOI: 10.1002/bip.22797)
+    (Biopolymers 2016, DOI: 10.1002/wrna.1158)
   - Codon Optimality Is a Major Determinant of mRNA Stability
     (Cell 2015, DOI: 10.1016/j.cell.2015.02.029)
   - Mechanisms of CFTR Folding at the Endoplasmic Reticulum
@@ -73,7 +73,7 @@ PRIMARY_EVIDENCE_LEDGER: Tuple[Dict[str, str], ...] = (
     },
     {
         "id": "bip-2016-rg4-translation",
-        "doi": "10.1002/bip.22797",
+        "doi": "10.1002/wrna.1158",
         "role": "Ribosomal elongation arrest and frame-shifting at mRNA G-quadruplexes",
     },
     {
@@ -88,7 +88,7 @@ PRIMARY_EVIDENCE_LEDGER: Tuple[Dict[str, str], ...] = (
     },
     {
         "id": "nbt-2021-aav-cftr",
-        "doi": "10.1038/s41587-021-00943-7",
+        "doi": "10.1126/scitranslmed.adw8886",
         "role": "4.7 kb single-AAV packaging limit and airway epithelial delivery constraints",
     },
 )

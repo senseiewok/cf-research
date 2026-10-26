@@ -17,7 +17,7 @@ R117H, 3849+10kbC->T):
 
 Primary Literature Grounding:
 - Sosnay PR et al. (2013) Nat Genet, DOI: 10.1038/ng.2745
-- Veit G et al. (2016) Mol Biol Cell, DOI: 10.1091/mbc.E15-04-0223
+- Veit G et al. (2016) Mol Biol Cell, DOI: 10.1091/mbc.e14-04-0935
 - Holmes JB et al. (2020) Bioinformatics, DOI: 10.1093/bioinformatics/btz856
 - Middleton PG et al. (2019) N Engl J Med, DOI: 10.1056/NEJMoa1908639
 

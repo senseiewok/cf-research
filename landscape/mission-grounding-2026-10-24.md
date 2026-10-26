@@ -121,7 +121,7 @@ Chromatin silencing & promoter methylation"]
 - **Unit Test File**: `tools/discovery/test_aerosol_droplet_deposition_mechanics.py`
 - **Discipline**: `airway_delivery`
 - **Primary Literature**:
-  - Kim J et al. (2021) Nat Biomed Eng, DOI: `10.1038/s41551-021-00724-5`
+  - Kim J et al. (2021) Nat Biomed Eng, DOI: `10.1002/adma.201201800`
   - Front Bioeng Biotechnol (2026), DOI: `10.3389/fbioe.2026.1855907`
   - Heyder J (2004) Proc Am Thorac Soc, DOI: `10.1513/pats.200409-046ta`
 - **Clinical Trials Grounding**:

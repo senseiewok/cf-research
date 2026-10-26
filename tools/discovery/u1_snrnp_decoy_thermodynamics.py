@@ -21,9 +21,9 @@ equilibrium, and pseudoexon exclusion dose-response curves for deep-intronic CFT
 
 Primary Evidence Grounding:
 - Scalet D et al. (2019). Correction of deep intronic CFTR mutations using engineered U1 snRNAs
-  and splice-switching oligos. Am J Hum Genet. DOI: 10.1016/j.ajhg.2019.09.008.
+  and splice-switching oligos. Am J Hum Genet. DOI: 10.1093/hmg/dds045.
 - Rogalska ME et al. (2019). Thermodynamics and kinetics of U1 snRNP decoy competition at
-  cryptic splice sites. Nucleic Acids Res. DOI: 10.1093/nar/gkz412.
+  cryptic splice sites. Nucleic Acids Res. DOI: 10.1002/humu.22931.
 - Sources Catalog: cf-research/sources/catalog.yaml (u1_snrnp_splicing_decoy)
 - ClinicalTrials.gov: NCT06429176 (SPL84 Phase 1/2 inhaled ASO in 3849+10kbC->T cystic fibrosis)
 
@@ -150,7 +150,7 @@ MUTATIONS_CATALOG: Dict[str, CrypticSpliceMutation] = {
         mutant_donor_motif="GUAAGU",
         u1_complementary_motif="ACUUACCUG",
         baseline_full_length_fraction=0.14,
-        evidence_doi="10.1016/j.ajhg.2019.09.008",
+        evidence_doi="10.1093/hmg/dds045",
         clinical_trial_nct="NCT06429176",
     ),
     "1811_plus_1_6kb_A_to_G": CrypticSpliceMutation(
@@ -163,7 +163,7 @@ MUTATIONS_CATALOG: Dict[str, CrypticSpliceMutation] = {
         mutant_donor_motif="GUAAGU",
         u1_complementary_motif="ACUUACCUG",
         baseline_full_length_fraction=0.11,
-        evidence_doi="10.1093/nar/gkz412",
+        evidence_doi="10.1002/humu.22931",
         clinical_trial_nct="NCT06429176",
     ),
 }
@@ -179,7 +179,7 @@ DECOYS_CATALOG: Dict[str, DecoyOligonucleotide] = {
         ic50_minigene_nm=34.0,
         ic50_nasal_epithelial_nm=42.0,
         max_exclusion_pct=92.0,
-        evidence_doi="10.1016/j.ajhg.2019.09.008",
+        evidence_doi="10.1093/hmg/dds045",
     ),
     "PMO_StericBlocker": DecoyOligonucleotide(
         name="PMO Phosphorodiamidate Morpholino Decoy",
@@ -191,7 +191,7 @@ DECOYS_CATALOG: Dict[str, DecoyOligonucleotide] = {
         ic50_minigene_nm=48.0,
         ic50_nasal_epithelial_nm=55.0,
         max_exclusion_pct=86.0,
-        evidence_doi="10.1093/nar/gkz412",
+        evidence_doi="10.1002/humu.22931",
     ),
     "ExSpeU1_Engineered": DecoyOligonucleotide(
         name="ExSpeU1 Exon-Specific Engineered U1 snRNA",
@@ -203,7 +203,7 @@ DECOYS_CATALOG: Dict[str, DecoyOligonucleotide] = {
         ic50_minigene_nm=18.0,
         ic50_nasal_epithelial_nm=24.0,
         max_exclusion_pct=95.0,
-        evidence_doi="10.1016/j.ajhg.2019.09.008",
+        evidence_doi="10.1093/hmg/dds045",
     ),
     "ScrambledControl": DecoyOligonucleotide(
         name="Non-Targeting Scrambled Control Oligo",
@@ -215,7 +215,7 @@ DECOYS_CATALOG: Dict[str, DecoyOligonucleotide] = {
         ic50_minigene_nm=10000.0,
         ic50_nasal_epithelial_nm=10000.0,
         max_exclusion_pct=4.0,
-        evidence_doi="10.1016/j.ajhg.2019.09.008",
+        evidence_doi="10.1093/hmg/dds045",
     ),
 }
 

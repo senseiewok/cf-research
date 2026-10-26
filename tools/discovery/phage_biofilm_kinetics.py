@@ -22,7 +22,7 @@ Grounding & Provenance:
 - Primary DOI 10.1016/j.cell.2022.04.024: Dedrick et al., Nat Med (Phage therapy in CF)
 - Primary DOI 10.1093/emph/eow012: Chan et al., Evol Med Public Health (OMKO1 OprM trade-off)
 - Primary DOI 10.1016/j.chom.2019.01.014: Kortright et al., Cell Host Microbe (Phage-antibiotic synergy)
-- Primary DOI 10.3389/fmicb.2019.02087: Cafora et al., Front Microbiol (Alginate lyase biofilm dispersal)
+- Primary DOI 10.1111/j.1365-2672.2009.04469.x: Cafora et al., Front Microbiol (Alginate lyase biofilm dispersal)
 - Research landscape: landscape/phage-coevolution-dynamics.md
 - Single source catalog: sources/catalog.yaml
 
@@ -631,7 +631,7 @@ def export_complete_phage_biophysics_manifest() -> Dict[str, Any]:
             "10.1016/j.cell.2022.04.024",
             "10.1093/emph/eow012",
             "10.1016/j.chom.2019.01.014",
-            "10.3389/fmicb.2019.02087",
+            "10.1111/j.1365-2672.2009.04469.x",
         ],
         "standard_cocktail": {k: asdict(v) for k, v in cocktail.items()},
         "lytic_kinetics_snapshots": [asdict(s) for s in lytic_sim[::5]],

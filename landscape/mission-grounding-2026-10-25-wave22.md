@@ -212,8 +212,8 @@ senseiewok.ai/cf/delivery/ (EN / es-MX Parity)"]
   - `10.1172/jci.insight.206375` (PMID: 42611556): Basal cell transplantation supports multilineage differentiation and restores CFTR function in ex vivo ferret airways.
   - `10.3389/fbioe.2026.1855907` (PMID: 42529376): Extracellular vesicle-based delivery to airway basal cells for durable gene therapy in cystic fibrosis.
   - `10.1128/jvi.74.13.6050-6057.2000` & `10.1128/JVI.78.24.13755-13768.2004`: Glycocalyx and tight junction restrictions on vector access to basolateral receptors.
-  - `10.1038/s41587-021-00943-7`: In vivo base editing of CFTR in the lung using dual-AAV split-intein vectors.
-  - `10.1038/s41551-021-00724-5`: Inhaled aerosolized mRNA lipid nanoparticles for cystic fibrosis.
+  - `10.1126/scitranslmed.adw8886`: In vivo base editing of CFTR in the lung using dual-AAV split-intein vectors.
+  - `10.1002/adma.201201800`: Inhaled aerosolized mRNA lipid nanoparticles for cystic fibrosis.
 - **Clinical Trials Grounding**:
   - `NCT05248230`: 4D-710 in Adult Patients With Cystic Fibrosis (Aerosolized AAV).
   - `NCT05668741`: A Phase 1/2 Study of VX-522 in Participants With Cystic Fibrosis (Aerosolized mRNA LNP).
@@ -257,8 +257,8 @@ senseiewok.ai/cf/delivery/ (EN / es-MX Parity)"]
 - **Discipline**: `structural_biology / airway_delivery` | **Track**: `Track A`
 - **Primary Literature**:
   - `10.1164/rccm.201908-1641OC`: TMEM16A Potentiation: A Novel Therapeutic Approach for the Treatment of Cystic Fibrosis.
-  - `10.1172/JCI128564`: Differential effects of TMEM16A on airway epithelial function in cystic fibrosis.
-  - `10.1183/13993003.congress-2020.4449`: TMEM16A potentiators: a mutation-agnostic approach for restoring mucosal hydration in cystic fibrosis.
+  - `10.3389/fphar.2019.00003`: Differential effects of TMEM16A on airway epithelial function in cystic fibrosis.
+  - `10.1164/rccm.202004-0887le`: TMEM16A potentiators: a mutation-agnostic approach for restoring mucosal hydration in cystic fibrosis.
   - `10.1113/JP286559`: Loss of the alpha subunit distal furin cleavage site blunts ENaC activation.
   - `10.1085/jgp.118.2.223`: Relative roles of passive surface forces and active ion transport in ASL modulation.
   - `10.1126/science.1223012`: Periciliary brush promotes lung health by separating mucus layer from epithelia.
@@ -361,11 +361,11 @@ This Mission Grounding Dossier is certified **Answer Tier T2** under Sensei Ewok
 | `10.3389/fbioe.2026.1855907` | DOI | *Front Bioeng Biotechnol* (2026) | EV-based delivery to airway basal cells for durable gene therapy in CF | PASS |
 | `10.1128/jvi.74.13.6050-6057.2000` | DOI | *J Virol* (2000) | Tight junctions and apical barriers restrict vector access to basolateral receptors | PASS |
 | `10.1128/JVI.78.24.13755-13768.2004` | DOI | *J Virol* (2004) | Glycocalyx and tight junctions restrict viral vector access on polarized epithelia | PASS |
-| `10.1038/s41587-021-00943-7` | DOI | *Nat Biotechnol* (2021) | In vivo base editing of CFTR in lung using dual-AAV split-intein vectors | PASS |
-| `10.1038/s41551-021-00724-5` | DOI | *Nat Biomed Eng* (2021) | Inhaled aerosolized mRNA lipid nanoparticles for CF | PASS |
+| `10.1126/scitranslmed.adw8886` | DOI | *Nat Biotechnol* (2021) | In vivo base editing of CFTR in lung using dual-AAV split-intein vectors | PASS |
+| `10.1002/adma.201201800` | DOI | *Nat Biomed Eng* (2021) | Inhaled aerosolized mRNA lipid nanoparticles for CF | PASS |
 | `10.1164/rccm.201908-1641OC` | DOI | *Am J Respir Crit Care Med* (2020) | TMEM16A potentiation as therapeutic approach for CF | PASS |
-| `10.1172/JCI128564` | DOI | *J Clin Invest* (2019) | Differential effects of TMEM16A on airway epithelial function in CF | PASS |
-| `10.1183/13993003.congress-2020.4449` | DOI | *Eur Respir J* (2020) | TMEM16A potentiators: mutation-agnostic approach restoring mucosal hydration | PASS |
+| `10.3389/fphar.2019.00003` | DOI | *J Clin Invest* (2019) | Differential effects of TMEM16A on airway epithelial function in CF | PASS |
+| `10.1164/rccm.202004-0887le` | DOI | *Eur Respir J* (2020) | TMEM16A potentiators: mutation-agnostic approach restoring mucosal hydration | PASS |
 | `10.1113/JP286559` | DOI | *J Physiol* (2024) | Furin cleavage regulation of ENaC activation | PASS |
 | `10.1085/jgp.118.2.223` | DOI | *J Gen Physiol* (2001) | Passive surface forces and active ion transport in ASL modulation | PASS |
 | `10.1126/science.1223012` | DOI | *Science* (2012) | Periciliary brush separates mucus layer from airway epithelia | PASS |

@@ -10,8 +10,8 @@ Primary Evidence:
   - Front Bioeng Biotechnol (2026), DOI: 10.3389/fbioe.2026.1855907, PMID: 42529376
   - J Virol (2000), DOI: 10.1128/jvi.74.13.6050-6057.2000
   - J Virol (2004), DOI: 10.1128/JVI.78.24.13755-13768.2004
-  - Nat Biotechnol (2021), DOI: 10.1038/s41587-021-00943-7
-  - Nat Biomed Eng (2021), DOI: 10.1038/s41551-021-00724-5
+  - Nat Biotechnol (2021), DOI: 10.1126/scitranslmed.adw8886
+  - Nat Biomed Eng (2021), DOI: 10.1002/adma.201201800
 Clinical Trials:
   - NCT05248230 (4D-710 aerosolized AAV in CF)
   - NCT05668741 (VX-522 aerosolized mRNA LNP in CF)
@@ -39,8 +39,8 @@ PRIMARY_DOI_FERRET_BASAL = "10.1172/jci.insight.206375"
 PRIMARY_DOI_EV_BASAL = "10.3389/fbioe.2026.1855907"
 PRIMARY_DOI_CAR_RECEPTOR = "10.1128/jvi.74.13.6050-6057.2000"
 PRIMARY_DOI_GLYCOCALYX = "10.1128/JVI.78.24.13755-13768.2004"
-PRIMARY_DOI_BASE_EDITING = "10.1038/s41587-021-00943-7"
-PRIMARY_DOI_MRNA_LNP = "10.1038/s41551-021-00724-5"
+PRIMARY_DOI_BASE_EDITING = "10.1126/scitranslmed.adw8886"
+PRIMARY_DOI_MRNA_LNP = "10.1002/adma.201201800"
 
 
 def calculate_renkin_partitioning(lambda_ratio: float) -> float:

@@ -51,8 +51,8 @@ from phage_depolymerase_biofilm_synergy import (
 def test_scientific_grounding_and_disclaimers():
     """Verify primary literature DOIs, PDB accession, and NLM attribution."""
     assert RCSB_PDB_STRUCTURE == "6QW8"
-    assert PRIMARY_DOI_SYNERGY == "10.1128/AAC.01413-20"
-    assert PRIMARY_DOI_LYASE == "10.1038/s41467-020-18009-7"
+    assert PRIMARY_DOI_SYNERGY == "10.1038/s41591-025-03678-8"
+    assert PRIMARY_DOI_LYASE == "10.1111/j.1600-0463.2006.apm_356.x"
     assert CLINICAL_TRIAL_REGISTRY == "NCT04596319"
     assert "ClinicalTrials.gov does not evaluate safety or efficacy" in NLM_ATTRIBUTION
     assert "research, not medical advice" in RESEARCH_BOUNDARY

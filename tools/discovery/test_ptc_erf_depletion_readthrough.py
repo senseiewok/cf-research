@@ -55,8 +55,8 @@ from ptc_erf_depletion_readthrough import (
 def test_scientific_grounding_and_disclaimers():
     """Verify primary evidence identifiers, PDB structure, and NLM attribution."""
     assert RCSB_PDB_STRUCTURE == "6O2P"
-    assert PRIMARY_DOI_DEPLETION == "10.1038/s41589-020-00662-8"
-    assert PRIMARY_DOI_CONTEXT == "10.1093/nar/gkaa728"
+    assert PRIMARY_DOI_DEPLETION == "10.1172/jci154571"
+    assert PRIMARY_DOI_CONTEXT == "10.3390/ph17030314"
     assert CLINICAL_TRIAL_REGISTRY == "NCT04135495"
     assert "ClinicalTrials.gov does not evaluate safety or efficacy" in NLM_ATTRIBUTION
     assert "research, not medical advice" in RESEARCH_BOUNDARY

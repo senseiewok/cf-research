@@ -22,9 +22,9 @@ Primary Evidence Grounding:
 - Kwok CK et al. (2016). rG4-seq Reveals Widespread Formation of G-Quadruplex Structures
   in the Human Transcriptome. Nat Methods 13(10):841-844. DOI: 10.1038/nmeth.3965.
 - Endoh T, Sugimoto N (2016). Mechanisms of Translation Regulation by RNA G-Quadruplex Structures.
-  Biopolymers 105(5):241-253. DOI: 10.1002/bip.22797.
+  Biopolymers 105(5):241-253. DOI: 10.1002/wrna.1158.
 - Dethoff EA et al. (2012). Visualizing Transient Low-Populated Structures of RNA.
-  Nature 491(7426):724-728. DOI: 10.1038/nature11598.
+  Nature 491(7426):724-728. DOI: 10.1038/nature11498.
 - ClinicalTrials.gov: NCT05668741 (BEACON-CF inhaled CFTR mRNA clinical surveillance)
 
 Attribution & Research Boundary:
@@ -379,7 +379,7 @@ def simulate_small_molecule_perturbation() -> Dict[str, SmallMoleculePerturbatio
             delta_delta_g_kcal_mol=-3.8,
             dhx36_helicase_active=False,
             cftr_protein_yield_pct=42.0,
-            evidence_doi="10.1002/bip.22797",
+            evidence_doi="10.1002/wrna.1158",
         ),
         "TMPyP4": SmallMoleculePerturbation(
             ligand_name="TMPyP4 (Cationic Porphyrin G4-Ligand)",
@@ -388,7 +388,7 @@ def simulate_small_molecule_perturbation() -> Dict[str, SmallMoleculePerturbatio
             delta_delta_g_kcal_mol=-2.2,
             dhx36_helicase_active=False,
             cftr_protein_yield_pct=65.0,
-            evidence_doi="10.1038/nature11598",
+            evidence_doi="10.1038/nature11498",
         ),
         "PDS_Plus_DHX36_Rescue": SmallMoleculePerturbation(
             ligand_name="Pyridostatin + Overexpressed DHX36 Helicase Rescue",

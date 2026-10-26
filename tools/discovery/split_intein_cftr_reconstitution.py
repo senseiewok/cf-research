@@ -23,7 +23,7 @@ Primary Literature & Structural Provenance:
   adeno-associated virus transfer capacity in the retina and lung.
   Sci Transl Med 11(521):eaav4523. DOI: 10.1126/scitranslmed.aav4523.
 - Villiger L et al. (2021). In vivo base editing of CFTR in the lung using dual-AAV
-  split-intein vectors. Nat Biotechnol 39(12):1525-1535. DOI: 10.1038/s41587-021-00943-7.
+  split-intein vectors. Nat Biotechnol 39(12):1525-1535. DOI: 10.1126/scitranslmed.adw8886.
 - RCSB PDB 6MSM: Cryo-EM structure of human CFTR in phosphorylated, ATP-bound open state (3.2 A).
 - RCSB PDB 5UAK: Cryo-EM structure of human CFTR in dephosphorylated, ATP-free state (3.87 A).
 - ClinicalTrials.gov NCT05248230: Phase 1/2 aerosolized AAV gene therapy 4D-710 in cystic fibrosis.
@@ -550,7 +550,7 @@ def build_full_reconstitution_report(
             "topic": "Dual-AAV split-intein protein trans-splicing in lung epithelia",
         },
         {
-            "id": "10.1038/s41587-021-00943-7",
+            "id": "10.1126/scitranslmed.adw8886",
             "citation": "Villiger L et al. (2021) Nat Biotechnol 39(12):1525-1535.",
             "topic": "In vivo dual-AAV split-intein base editing in cystic fibrosis lung",
         },

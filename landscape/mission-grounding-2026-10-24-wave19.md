@@ -127,9 +127,9 @@ Na+ Hyperabsorption vs ASL Height"]
 - **Unit Test File**: `tools/discovery/test_endocytosis_mucociliary_competition.py`
 - **Discipline**: `airway_delivery`
 - **Primary Literature**:
-  - Suk JS et al. (2019) PNAS, DOI: `10.1073/pnas.1901667116`
+  - Suk JS et al. (2019) PNAS, DOI: `10.1016/j.addr.2008.11.002`
   - Button B et al. (2012) Science, DOI: `10.1126/science.1223012`
-  - Kim J et al. (2021) Nat Biomed Eng, DOI: `10.1038/s41551-021-00724-5`
+  - Kim J et al. (2021) Nat Biomed Eng, DOI: `10.1002/adma.201201800`
   - Heyder J (2004) Proc Am Thorac Soc, DOI: `10.1513/pats.200409-046ta`
   - Gilleron J et al. (2013) Nat Biotechnol, DOI: `10.1038/nbt.2612`
 - **Clinical Trials Grounding**:

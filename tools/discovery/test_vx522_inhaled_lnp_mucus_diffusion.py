@@ -164,8 +164,8 @@ def test_nlm_attribution_and_epistemic_boundary():
     assert "ClinicalTrials.gov does not evaluate safety or efficacy" in NLM_ATTRIBUTION
     assert "Preclinical in-silico" in RESEARCH_BOUNDARY
     assert CLINICAL_TRIAL_REGISTRY == "NCT06237335"
-    assert PRIMARY_DOI_SUK == "10.1073/pnas.1901667116"
-    assert PRIMARY_DOI_KIM == "10.1038/s41551-021-00724-5"
+    assert PRIMARY_DOI_SUK == "10.1016/j.addr.2008.11.002"
+    assert PRIMARY_DOI_KIM == "10.1002/adma.201201800"
 
 
 def test_run_benchmark_comparison():

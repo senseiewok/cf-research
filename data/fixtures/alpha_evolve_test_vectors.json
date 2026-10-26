@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "source_module": "cf-research/tools/discovery/alpha_evolve_pareto_regimen.py",
+  "target_js_module": ".ai/src/scripts/alpha-evolve-pareto.js",
+  "tolerances": {
+    "float64_abs_tol": 0.0001,
+    "float32_webgpu_rel_tol": 0.001,
+    "smt_boolean_exact": true
+  },
+  "test_vectors": [
+    {
+      "preset_key": "monotherapy",
+      "regimen_id": "MRT5005_UNCONDITIONED_MONOTHERAPY",
+      "input_chromosome": {
+        "salineTimeHr": 8.0,
+        "dnaseTimeHr": 8.0,
+        "hfcwoFreqHz": 0.0,
+        "hfcwoGapMin": 60.0,
+        "smg1iDose": 0.0,
+        "trnaCargoDose": 0.55,
+        "etiFold": 1.0,
+        "enacInhib": 0.0
+      },
+      "expected_outputs": {
+        "pore_size_at_vector_nm": 58.52,
+        "vector_mucus_permeation": 0.015,
+        "dnase_activity_factor": 0.0041,
+        "delta_isc_pct_wt": 0.65,
+        "asl_depth_um": 2.5,
+        "delta_lci_2p5": -0.0,
+        "trss_safety_score": 91.03,
+        "cyp3a4_metabolic_load": 0.077,
+        "epistatic_synergy_ratio": 0.25,
+        "invariants_passed": false,
+        "violation_count": 3,
+        "invariant_details": {
+          "INV1_DNase_Ionic_Protection": false,
+          "INV2_Thixotropic_Pore_Window": false,
+          "INV3_Ribosomal_TRSS_Safety": true,
+          "INV4_CYP3A4_And_ASL_Floor": false
+        }
+      }
+    },
+    {
+      "preset_key": "naive_simultaneous",
+      "regimen_id": "NAIVE_SIMULTANEOUS_COMBINATION",
+      "input_chromosome": {
+        "salineTimeHr": 8.0,
+        "dnaseTimeHr": 8.0,
+        "hfcwoFreqHz": 15.0,
+        "hfcwoGapMin": -5.0,
+        "smg1iDose": 0.88,
+        "trnaCargoDose": 0.85,
+        "etiFold": 4.6,
+        "enacInhib": 0.05
+      },
+      "expected_outputs": {
+        "pore_size_at_vector_nm": 112.5,
+        "vector_mucus_permeation": 0.0827,
+        "dnase_activity_factor": 0.0041,
+        "delta_isc_pct_wt": 0.68,
+        "asl_depth_um": 2.5,
+        "delta_lci_2p5": -0.0,
+        "trss_safety_score": 61.08,
+        "cyp3a4_metabolic_load": 0.94,
+        "epistatic_synergy_ratio": 0.26,
+        "invariants_passed": false,
+        "violation_count": 4,
+        "invariant_details": {
+          "INV1_DNase_Ionic_Protection": false,
+          "INV2_Thixotropic_Pore_Window": false,
+          "INV3_Ribosomal_TRSS_Safety": false,
+          "INV4_CYP3A4_And_ASL_Floor": false
+        }
+      }
+    },
+    {
+      "preset_key": "pareto_optimal",
+      "regimen_id": "ALPHAEVOLVE_PARETO_SEQUENCED",
+      "input_chromosome": {
+        "salineTimeHr": 7.0,
+        "dnaseTimeHr": 7.85,
+        "hfcwoFreqHz": 15.0,
+        "hfcwoGapMin": 12.0,
+        "smg1iDose": 0.45,
+        "trnaCargoDose": 0.45,
+        "etiFold": 3.45,
+        "enacInhib": 0.6
+      },
+      "expected_outputs": {
+        "pore_size_at_vector_nm": 105.4,
+        "vector_mucus_permeation": 0.6722,
+        "dnase_activity_factor": 0.9526,
+        "delta_isc_pct_wt": 17.84,
+        "asl_depth_um": 9.05,
+        "delta_lci_2p5": -2.74,
+        "trss_safety_score": 87.69,
+        "cyp3a4_metabolic_load": 0.571,
+        "epistatic_synergy_ratio": 6.86,
+        "invariants_passed": true,
+        "violation_count": 0,
+        "invariant_details": {
+          "INV1_DNase_Ionic_Protection": true,
+          "INV2_Thixotropic_Pore_Window": true,
+          "INV3_Ribosomal_TRSS_Safety": true,
+          "INV4_CYP3A4_And_ASL_Floor": true
+        }
+      }
+    }
+  ]
+}

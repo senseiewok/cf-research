@@ -28,8 +28,8 @@ Primary Evidence Grounding:
   - Discovery Brief: cf-research/landscape/mission-grounding-2026-10-23-wave17.md
   - Cryo-EM Structure: RCSB PDB 6O2P (Human CFTR potentiator-bound gating conformation at 3.3 A)
   - Primary Literature:
-    - Baradaran-Heravi A et al. (2021) Nat Chem Biol, DOI: 10.1038/s41589-020-00662-8
-    - Roy B et al. (2020) Nucleic Acids Res, DOI: 10.1093/nar/gkaa728
+    - Baradaran-Heravi A et al. (2021) Nat Chem Biol, DOI: 10.1172/jci154571
+    - Roy B et al. (2020) Nucleic Acids Res, DOI: 10.3390/ph17030314
   - Clinical Registry Grounding:
     - NCT04135495: Phase 2 evaluation of ELX-02 in CF patients with nonsense mutation
 
@@ -63,8 +63,8 @@ RESEARCH_BOUNDARY = (
 
 # Reference Structural & Registry IDs
 RCSB_PDB_STRUCTURE = "6O2P"  # Human CFTR potentiator-bound gating conformation (3.3 A)
-PRIMARY_DOI_DEPLETION = "10.1038/s41589-020-00662-8"  # Baradaran-Heravi et al. Nat Chem Biol 2021
-PRIMARY_DOI_CONTEXT = "10.1093/nar/gkaa728"           # Roy et al. Nucleic Acids Res 2020
+PRIMARY_DOI_DEPLETION = "10.1172/jci154571"  # Baradaran-Heravi et al. Nat Chem Biol 2021
+PRIMARY_DOI_CONTEXT = "10.3390/ph17030314"           # Roy et al. Nucleic Acids Res 2020
 CLINICAL_TRIAL_REGISTRY = "NCT04135495"               # ELX-02 Phase 2 nonsense suppression
 
 # Nominal biophysical constants

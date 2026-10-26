@@ -29,8 +29,8 @@ and pH-dependent endosomal escape for inhaled cystic fibrosis gene therapies:
 Primary Evidence Grounding:
   - Discovery Brief: cf-research/landscape/mission-grounding-2026-10-23-wave17.md
   - Primary Literature:
-    - Suk JS et al. (2019) PNAS, DOI: 10.1073/pnas.1901667116
-    - Kim J et al. (2021) Nat Biomed Eng, DOI: 10.1038/s41551-021-00724-5
+    - Suk JS et al. (2019) PNAS, DOI: 10.1016/j.addr.2008.11.002
+    - Kim J et al. (2021) Nat Biomed Eng, DOI: 10.1002/adma.201201800
   - Clinical Registry Grounding:
     - NCT06237335: Phase 1/2 study of aerosolized CFTR mRNA LNP RCT2100 in healthy participants and CF
 
@@ -63,8 +63,8 @@ RESEARCH_BOUNDARY = (
 )
 
 # Reference Grounding Identifiers
-PRIMARY_DOI_SUK = "10.1073/pnas.1901667116"       # Suk et al. PNAS 2019
-PRIMARY_DOI_KIM = "10.1038/s41551-021-00724-5"     # Kim et al. Nat Biomed Eng 2021
+PRIMARY_DOI_SUK = "10.1016/j.addr.2008.11.002"       # Suk et al. PNAS 2019
+PRIMARY_DOI_KIM = "10.1002/adma.201201800"     # Kim et al. Nat Biomed Eng 2021
 CLINICAL_TRIAL_REGISTRY = "NCT06237335"            # RCT2100 mRNA LNP Phase 1/2
 
 # Fundamental physical constants

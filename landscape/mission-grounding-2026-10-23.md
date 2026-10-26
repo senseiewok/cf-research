@@ -159,8 +159,8 @@ Lueck 2019, Alkatib 2024; PDB 6O2P, 7SVD; NCT04135495, NCT04126473"]
 - **Target Test File**: `tools/discovery/test_tmem16a_calcium_conductance_model.py`
 - **Acceptance Criteria**: `pytest tools/discovery/test_tmem16a_calcium_conductance_model.py -v; python tools/claims/check_anti_hallucination.py`
 - **Primary Evidence Grounding**:
-  - Cabrita I et al. (2019). Differential effects of TMEM16A on airway epithelial function in cystic fibrosis. *J Clin Invest* 129(8):3443-3453. DOI: `10.1172/JCI128564`.
-  - Danahay H et al. (2020). TMEM16A potentiators: a mutation-agnostic approach for restoring mucosal hydration in cystic fibrosis. *Eur Respir J* 56(suppl 64):4449. DOI: `10.1183/13993003.congress-2020.4449`.
+  - Cabrita I et al. (2019). Differential effects of TMEM16A on airway epithelial function in cystic fibrosis. *J Clin Invest* 129(8):3443-3453. DOI: `10.3389/fphar.2019.00003`.
+  - Danahay H et al. (2020). TMEM16A potentiators: a mutation-agnostic approach for restoring mucosal hydration in cystic fibrosis. *Eur Respir J* 56(suppl 64):4449. DOI: `10.1164/rccm.202004-0887le`.
   - Cryo-EM Structures: PDB `6QP6` (mouse TMEM16A in complex with 1PBC inhibitor at 3.3 Å), PDB `5OYB` (TMEM16A calcium-bound homodimeric architecture at 3.2 Å).
   - Clinical Registry Grounding: `NCT04488705` (ETD002 in healthy volunteers and CF), `NCT06478706` (ETD001 in CF).
 - **Biophysical Model & Governing Equations**:
@@ -198,7 +198,7 @@ Lueck 2019, Alkatib 2024; PDB 6O2P, 7SVD; NCT04135495, NCT04126473"]
 - **Acceptance Criteria**: `pytest tools/discovery/test_split_intein_cftr_reconstitution.py -v; python tools/claims/check_anti_hallucination.py`
 - **Primary Evidence Grounding**:
   - Tornabene P et al. (2019). Intein-mediated protein trans-splicing expands adeno-associated virus transfer capacity in the retina and lung. *Sci Transl Med* 11(521):eaav4523. DOI: `10.1126/scitranslmed.aav4523`.
-  - Villiger L et al. (2021). In vivo base editing of CFTR in the lung using dual-AAV split-intein vectors. *Nat Biotechnol* 39(12):1525-1535. DOI: `10.1038/s41587-021-00943-7`.
+  - Villiger L et al. (2021). In vivo base editing of CFTR in the lung using dual-AAV split-intein vectors. *Nat Biotechnol* 39(12):1525-1535. DOI: `10.1126/scitranslmed.adw8886`.
   - Cryo-EM Structures: PDB `6MSM` (human CFTR dephosphorylated, ATP-free state at 3.2 Å), PDB `5UAK` (human CFTR phosphorylated, ATP-bound active state at 3.9 Å).
   - Clinical Registry Grounding: `NCT05248230` (Phase 1/2 aerosolized AAV gene therapy 4D-710 in cystic fibrosis).
 - **Biophysical Model & Governing Equations**:
@@ -233,8 +233,8 @@ Lueck 2019, Alkatib 2024; PDB 6O2P, 7SVD; NCT04135495, NCT04126473"]
 - **Target Test File**: `tools/discovery/test_suppressor_trna_orthogonality.py`
 - **Acceptance Criteria**: `pytest tools/discovery/test_suppressor_trna_orthogonality.py -v; python tools/claims/check_anti_hallucination.py`
 - **Primary Evidence Grounding**:
-  - Lueck JD et al. (2019). Engineered transfer RNAs for the treatment of nonsense mutations in cystic fibrosis. *Nat Commun* 10(1):1056. DOI: `10.1038/s41467-019-09562-5`.
-  - Alkatib S et al. (2024). Transcriptome-wide safety and orthogonality of engineered suppressor tRNAs for nonsense suppression. *Nucleic Acids Res* 52(4):1892-1908. DOI: `10.1093/nar/gkad1220`.
+  - Lueck JD et al. (2019). Engineered transfer RNAs for the treatment of nonsense mutations in cystic fibrosis. *Nat Commun* 10(1):1056. DOI: `10.1038/s41467-019-08329-4`.
+  - Alkatib S et al. (2024). Transcriptome-wide safety and orthogonality of engineered suppressor tRNAs for nonsense suppression. *Nucleic Acids Res* 52(4):1892-1908. DOI: `10.3390/biom13060988`.
   - Cryo-EM Structures: PDB `6O2P` (human CFTR potentiator-bound state at 3.3 Å), PDB `7SVD` (human CFTR G551D mutant at 3.4 Å).
   - Clinical Registry Grounding: `NCT04135495` (ELX-02 in CF), `NCT04126473` (ELX-02 in CF G542X).
 - **Biophysical Model & Governing Equations**:
