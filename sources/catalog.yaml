@@ -563,7 +563,7 @@ sources:
     notes: >-
       Legal notice read 2026-10-05: unless a notice says otherwise, the editorial content owned by the EU may
       be reused under CC BY 4.0, and the Commission's reuse policy is set by Commission Decision 2011/833/EU
-      of 12 December 2011. The page names op-copyright@publications.europa.eu for reuse questions. The data
+      of 12 December 2011. The page names the contact named in the publisher's terms for reuse questions. The data
       download pages and any API were not read, so the access route stays manual until someone reads them; the
       licence statement is verified, the access route is not.
   - id: eu-ctr
@@ -638,7 +638,7 @@ sources:
       10; it disallows only admin, install and search paths. Decision: stays manual and link-only. The terms
       give personal non-commercial use of portions and withhold redistribution without written permission, so
       the lab links to CFTR2 and never copies or re-hosts its variant tables (redistribute stays false).
-      Written permission would have to come from CFF and Johns Hopkins (info@cff.org is the contact named in
+      Written permission would have to come from CFF and Johns Hopkins (via the contact named in
       the terms). Authoritative for variant-level clinical and functional annotation. The terms are the
       publisher's text, not legal advice; a human should read them.
   - id: cftr-france
@@ -858,7 +858,7 @@ sources:
       POST projects/search. Tested 2026-10-04 ('cystic fibrosis', FY2025 -> 402 projects). NIH-funded only.
       Usage policy read 2026-10-05 on the API landing page: it recommends at most one URL request per second,
       with large jobs kept to weekends or to weekdays between 9:00 PM and 5:00 AM EST. The page adds that
-      failing to comply may lead to the IP address being blocked, and names RePORT@mail.nih.gov for questions.
+      failing to comply may lead to the IP address being blocked, and names the contact named in the publisher's terms for questions.
       robots.txt: api.reporter.nih.gov has none (404). Reading it with Python's default trust store failed on
       2026-10-05 (certificate chain not verified on this machine); the lab's evidence environment read it
       normally, and verification was not switched off. The terms name no licence for the data; treat it as

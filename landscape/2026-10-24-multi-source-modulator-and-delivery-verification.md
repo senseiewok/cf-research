@@ -1,6 +1,6 @@
 # Multi-Source Cross-Verification of CFTR Modulator Potency, Target Tractability, Citation Polarity, and Inhaled Genetic Delivery Hardware
 
-**Date**: 2026-10-24 | **Track**: Track A & Track B (Multi-Source Evidence Synthesis & Curative Delivery Architecture) | **Answer tier**: T2 (primary API records from ChEMBL 34, Open Targets v4, UKRI GtR, FDA 510(k)/NDA, MHRA, and Scite Smart Citations) | **Associated Tasks**: [`T-0047`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json), [`T-0071`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json)
+**Date**: 2026-10-24 | **Track**: Track A & Track B (Multi-Source Evidence Synthesis & Curative Delivery Architecture) | **Answer tier**: T2 (primary API records from ChEMBL 34, Open Targets v4, UKRI GtR, FDA 510(k)/NDA, MHRA, and Scite Smart Citations) | **Associated Tasks**: [`T-0047`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json), [`T-0071`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json)
 
 ---
 

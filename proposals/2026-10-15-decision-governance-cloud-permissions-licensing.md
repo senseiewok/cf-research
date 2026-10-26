@@ -66,7 +66,7 @@ If a document or registry report carries unread terms or restricts reproduction:
 
 ### 2. Decision Options for Maintainer
 - [ ] **Option 2A: Send Letters 1 & 3 from Official Lab Address (Recommended)**
-  - Maintainer reviews, fills official contact details, and sends Letter 1 to CFF and Letter 3 to the UK CF Trust from the lab's official contact address (`contact@senseiewok.ai`).
+  - Maintainer reviews, fills official contact details, and sends Letter 1 to CFF and Letter 3 to the UK CF Trust via the lab's contact page.
   - Replies are tracked in `landscape/registry-data-access.md`.
   - Until written permission arrives, the lab maintains its strict policy: link and cite only, no table reproduction, max 8-word quotation limit.
 - [ ] **Option 2B: Defer Letters and Maintain Pure Citation / Fair Use Mode**

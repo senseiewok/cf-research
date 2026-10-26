@@ -3,7 +3,7 @@
 **Status**: Proposal & Molecular Genetic Specification  
 **Date**: 2026-10-13  
 **Review Tier**: Elevated  
-**Associated Board Task**: [`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5549)  
+**Associated Board Task**: [`T-0151`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json)  
 **Evidence Standard**: T2 (RefSeq `NM_000492.4`, primary literature, CFF research initiatives)
 
 ---
