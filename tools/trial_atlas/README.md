@@ -84,10 +84,10 @@ Every command below is run from the repository root. `SNAP` stands for the snaps
    python tools/trial_atlas/lexicon.py tag SNAP --out sources/downloads/trial_atlas/tags-1.json
    ```
 
-4. **Draw the frozen set** (the same agent or second person). The seed is required: choose it when the draw is made and write it down. The key may not go into the sheet's folder or any folder inside it.
+4. **Draw the frozen set** (the same agent or second person). The seed is required: choose it when the draw is made and write it down. The key may not go into the sheet's folder or any folder inside it. Both `handover/` and `sealed/*` (except the deterministic rule-vs-rule reference fixture `sealed/key.json`) are git-ignored; real blind keys for human labelling must never be committed and should be written to `.lab-files` or an ignored path such as `sealed/blind-key.secret.json`.
 
    ```
-   python tools/trial_atlas/make_labelling_sheet.py --snapshot SNAP --tags sources/downloads/trial_atlas/tags-1.json --sheet handover/sheet.csv --key sealed/key.json --seed 4711
+   python tools/trial_atlas/make_labelling_sheet.py --snapshot SNAP --tags sources/downloads/trial_atlas/tags-1.json --sheet handover/sheet.csv --key sealed/blind-key.secret.json --seed 4711
    ```
 
    - The tool also writes `handover/sheet.TERMS.txt`, the registry's terms for the text in the sheet.
@@ -107,7 +107,7 @@ Every command below is run from the repository root. `SNAP` stands for the snaps
 8. **The gate:**
 
    ```
-   python tools/trial_atlas/check_atlas.py --snapshot SNAP --tags sources/downloads/trial_atlas/tags-1.json --counts counts.json --model-tags model-tags.json --frozen-sheet handover/sheet.csv --frozen-key sealed/key.json --explained explained.json --negative-controls --canary canary.json --planted planted.json --control-snapshot sources/downloads/trial_atlas/control-1
+   python tools/trial_atlas/check_atlas.py --snapshot SNAP --tags sources/downloads/trial_atlas/tags-1.json --counts counts.json --model-tags model-tags.json --frozen-sheet handover/sheet.csv --frozen-key sealed/blind-key.secret.json --explained explained.json --negative-controls --canary canary.json --planted planted.json --control-snapshot sources/downloads/trial_atlas/control-1
    ```
 
 ### Files the gate reads

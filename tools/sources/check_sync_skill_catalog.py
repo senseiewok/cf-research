@@ -15,7 +15,7 @@ results = []
 
 
 def run(src: Path, dst: Path, *extra: str):
-    p = subprocess.run([sys.executable, str(cand), "--source", str(src), "--target", str(dst), *extra], capture_output=True, text=True)
+    p = subprocess.run([sys.executable, str(cand), "--source", str(src), "--target", str(dst), *extra], capture_output=True, text=True, timeout=120)
     return p.returncode, (p.stdout + p.stderr)
 
 
@@ -73,7 +73,7 @@ with tempfile.TemporaryDirectory() as td:
     t4 = d / "t4.yaml"
     code, out = run(hdr, t4)
     case("a source that already carries the header does not get any header line twice", code == 0 and t4.exists() and t4.read_text(encoding="utf-8") == HEADER + "\n" + SRC, f"exit={code} {t4.read_text(encoding='utf-8')[:300] if t4.exists() else out}")
-    code, out = subprocess.run([sys.executable, str(cand)], capture_output=True, text=True).returncode, ""
+    code, out = subprocess.run([sys.executable, str(cand)], capture_output=True, text=True, timeout=120).returncode, ""
     case("no arguments is a usage error (non-zero)", code != 0)
 
 passed = sum(results)
