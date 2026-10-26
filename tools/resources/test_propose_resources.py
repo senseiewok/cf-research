@@ -577,6 +577,26 @@ class ProposeResourcesConductTest(unittest.TestCase):
         self.assertEqual(ret, 0)
         self.assertFalse(txt_path.exists())
 
+    def test_cf_lab_dot_lab_files_scratch_allowed_but_other_repos_blocked(self):
+        fake_root = Path(self._tmp.name) / "workspace"
+        cf_lab = fake_root / "cf-lab"
+        (cf_lab / ".git").mkdir(parents=True)
+        lab_files_scratch = cf_lab / ".lab-files" / "scratch" / "resource_intake"
+        lab_files_scratch.mkdir(parents=True)
+        self.assertFalse(pr.is_inside_repo(lab_files_scratch))
+
+        # A .lab-files folder inside cf-research (where it is not git-ignored) must still be blocked
+        cf_res = fake_root / "cf-research"
+        (cf_res / ".git").mkdir(parents=True)
+        bad_scratch = cf_res / ".lab-files" / "scratch"
+        bad_scratch.mkdir(parents=True)
+        self.assertTrue(pr.is_inside_repo(bad_scratch))
+
+        # A nested .git inside cf-lab/.lab-files must also be blocked
+        nested_git = cf_lab / ".lab-files" / "nested"
+        (nested_git / ".git").mkdir(parents=True)
+        self.assertTrue(pr.is_inside_repo(nested_git / "scratch"))
+
     # --- 10. Dry Run on One Real Host ------------------------------------------------
     def test_dry_run_real_host_description(self):
         # Dry run on cftrust-resource-pages
