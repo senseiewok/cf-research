@@ -393,6 +393,26 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0446", "track": "Track A", "tier": "T2",
         "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
     },
+    "lentiviral_basal_integration_persistence": {
+        "task": "T-0407", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "mpp_obstruction_scaling": {
+        "task": "T-0244", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "nebulizer_shear_stress_integrity": {
+        "task": "T-0413", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "slc26a9_tmem16a_bypass": {
+        "task": "T-0256", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
+    },
+    "suppressor_trna_orthogonality": {
+        "task": "T-0394", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
 }
 
 
@@ -593,11 +613,13 @@ def check_discovery_index_drift(discovery_dir: Path | None = None) -> Dict[str, 
 
     cat_matches = (
         cat_path.exists()
-        and cat_path.read_text(encoding="utf-8").replace("\r\n", "\n") == expected_catalog_text.replace("\r\n", "\n")
+        and cat_path.read_text(encoding="utf-8").replace("\r\n", "\n").rstrip("\n")
+        == expected_catalog_text.replace("\r\n", "\n").rstrip("\n")
     )
     readme_matches = (
         readme_path.exists()
-        and readme_path.read_text(encoding="utf-8").replace("\r\n", "\n") == expected_readme_text.replace("\r\n", "\n")
+        and readme_path.read_text(encoding="utf-8").replace("\r\n", "\n").rstrip("\n")
+        == expected_readme_text.replace("\r\n", "\n").rstrip("\n")
     )
     audit_ok = catalog.get("audit_status") == "PASS"
 

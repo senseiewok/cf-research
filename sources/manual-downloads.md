@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-162 to download by hand, 1 to ask for, 3 not to download.
+167 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -126,6 +126,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | chumarrakech-ma-resource-pages | Centre Hospitalier Universitaire Mohammed VI Marrakech website (www.chumarrakech.ma) | [page](https://www.chumarrakech.ma/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### Centre Hospitalo-Universitaire de Kamenge
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| chuk-bi-resource-pages | Centre Hospitalo-Universitaire de Kamenge portal (chuk.bi) | [page](https://www.chuk.bi/) | link only | Official national university teaching and referral hospital portal in Burundi; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Centre Pasteur du Cameroun
 
 | ID | What | Open | Save as | Notes |
@@ -137,6 +143,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | infomed-cu-resource-pages | Infomed Portal de la Red de Salud de Cuba website (sld.cu) | [page](https://www.sld.cu/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Children's University Hospital, Damascus University
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cuh-sy-resource-pages | Children's University Hospital Damascus portal (children-hospital.edu.sy) | [page](https://www.children-hospital.edu.sy/) | link only | Official tertiary pediatric referral and university teaching hospital portal in Syria; robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Chinese Organization for Rare Disorders (蔻德罕见病中心)
 
@@ -234,6 +246,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | salud-pr-resource-pages | Departamento de Salud de Puerto Rico website (salud.pr.gov) | [page](https://www.salud.pr.gov/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Direction des Affaires Sanitaires et Sociales de la Nouvelle-Calédonie
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| dass-nc-resource-pages | Direction des Affaires Sanitaires et Sociales de Nouvelle-Calédonie portal (dass.gouv.nc) | [page](https://dass.gouv.nc/) | link only | Official public healthcare administration and territorial hospital referral portal in New Caledonia; robots.txt allow (2026-10-25), manual access, link and sum… |
 
 ### Društvo za cistično fibrozo Slovenije
 
@@ -360,6 +378,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | hospitalmaria-hn-resource-pages | Hospital María, Especialidades Pediátricas website (hospitalmaria.org) | [page](https://hospitalmaria.org/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Hospital Nacional Guido Valadares, Timor-Leste
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| hngv-tl-resource-pages | Hospital Nacional Guido Valadares portal (hngv.ms.gov.tl) | [page](https://hngv.ms.gov.tl/) | link only | Official tertiary referral and university hospital portal in Timor-Leste; robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Hrvatska udruga oboljelih od cistične fibroze
 
@@ -606,6 +630,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | moh-om-resource-pages | Ministry of Health Sultanate of Oman website (www.moh.gov.om) | [page](https://www.moh.gov.om/) | link only | Official CF or pediatric referral resource (Ministry of Health Sultanate of Oman); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Ministry of Health, Republic of Vanuatu
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| moh-vu-resource-pages | Ministry of Health Republic of Vanuatu portal (moh.gov.vu) | [page](https://moh.gov.vu/) | link only | Official public health authority and hospital referral portal in Vanuatu; robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Ministry of Health, Royal Government of Bhutan
 
