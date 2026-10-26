@@ -98,8 +98,8 @@ This file is public. A lead that **cannot** be public does not go here at all:
 - anything that identifies a person or an institution through what they presented or said;
 - anything else private: patient data, site details, keys, transcripts, email addresses.
 
-Such leads stay in the maintainer's private lab-files folder (the untracked `cf-lab-files` folder beside the
-repositories, in its `memory/` area, under the rules in the control repository's `AGENTS.md`, section "Local files and
+Such leads stay in the maintainer's private lab-files folder (the untracked `.lab-files` folder inside
+`cf-lab`, in its `memory/` area, under the rules in the control repository's `AGENTS.md`, section "Local files and
 memory"). The public register may point at one only through a source of type `conference-private` with `ref: "private"`
 and an empty note, as L-0019 does: no names, no institutions, no poster contents. The checker refuses any other detail
 on such a source, any email-like text, any user folder path, and any trial registration id.

@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-152 to download by hand, 1 to ask for, 3 not to download.
+157 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -571,6 +571,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | moh-bn-resource-pages | Ministry of Health Brunei Darussalam public healthcare portal (www.moh.gov.bn) | [page](https://www.moh.gov.bn/) | link only | Official pediatric specialist and tertiary pulmonary care portal for Brunei; robots.txt allow (2026-10-25), manual access, link and summary only. |
 
+### Ministry of Health Liberia
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| moh-lr-resource-pages | Ministry of Health Liberia public health portal (moh.gov.lr) | [page](https://moh.gov.lr/) | link only | Official national health authority coordinating specialized pediatric care and tertiary hospital guidance in Liberia; robots.txt allow (2026-10-25), manual acc… |
+
 ### Ministry of Health of Guyana
 
 | ID | What | Open | Save as | Notes |
@@ -589,17 +595,35 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | moh-om-resource-pages | Ministry of Health Sultanate of Oman website (www.moh.gov.om) | [page](https://www.moh.gov.om/) | link only | Official CF or pediatric referral resource (Ministry of Health Sultanate of Oman); robots.txt allow (2026-10-25), manual access, link and summary only. |
 
+### Ministry of Health, Royal Government of Bhutan
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| moh-bt-resource-pages | Ministry of Health Bhutan public health portal (www.moh.gov.bt) | [page](https://www.moh.gov.bt/) | link only | Official national health authority coordinating public healthcare and specialized pediatric referral care in Bhutan; robots.txt allow (2026-10-25), manual acce… |
+
 ### Ministère de la Santé de la République du Bénin
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | sante-bj-resource-pages | Ministère de la Santé du Bénin website (sante.gouv.bj) | [page](https://sante.gouv.bj/) | link only | Official CF or pediatric referral resource (Ministère de la Santé de la République du Bénin); robots.txt allow (2026-10-25), manual access, link and summary on… |
 
+### Ministère de la Santé Gabon
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sante-ga-resource-pages | Ministère de la Santé Gabon portal (sante.gouv.ga) | [page](https://sante.gouv.ga/) | link only | Official public healthcare and tertiary pediatric referral portal in Gabon; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Ministère de la Santé Publique et de la Population (MSPP)
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | mspp-ht-resource-pages | Ministère de la Santé Publique et de la Population Haïti website (mspp.gouv.ht) | [page](https://mspp.gouv.ht/) | link only | Official CF or pediatric referral resource (Ministère de la Santé Publique et de la Population (MSPP)); robots.txt allow (2026-10-25), manual access, link and… |
+
+### Ministère de la Santé Publique, Hygiène et Prévoyance Sociale RDC
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sante-cd-resource-pages | Ministère de la Santé Publique RDC portal (sante.gouv.cd) | [page](https://sante.gouv.cd/) | link only | Official public health authority directing patients to tertiary university medical centers in the Democratic Republic of the Congo; robots.txt allow (2026-10-2… |
 
 ### Ministère de la Santé, de l’Hygiène Publique et de la Couverture Sanitaire Universelle du Togo
 
@@ -750,6 +774,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | tfrd-tw-resource-pages | Taiwan Foundation for Rare Disorders website (tfrd.org.tw) | [page](https://www.tfrd.org.tw/) | link only | Official rare disorders foundation in Taiwan supporting designated rare genetic diseases including cystic fibrosis. |
+
+### Taiwan Society of Pulmonary and Critical Care Medicine
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| tspccm-resource-pages | Taiwan Society of Pulmonary and Critical Care Medicine portal (www.tspccm.org.tw) | [page](https://www.tspccm.org.tw/) | link only | Official thoracic and critical care medicine society providing respiratory specialist guidance in Taiwan; robots.txt allow (2026-10-25), manual access, link an… |
 
 ### Tajik State Medical University named after Abuali ibn Sino
 

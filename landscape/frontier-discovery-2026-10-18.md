@@ -8,7 +8,7 @@
 
 ## 1. Executive Synthesis: Connecting Four Frontier Threads
 
-A cross-domain discovery round was executed on 2026-10-18 across four adjacent biomedical frontiers—**oscillatory mechano-acoustic mucus conditioning**, **airway basal stem cell niche persistence and lineage plasticity**, **next-generation nonviral DNA and prime-editing payloads**, and **extracellular vesicle / stealth nanoparticle delivery**—to identify quantitative synergies capable of overcoming the primary barriers to a universal Cystic Fibrosis cure.
+A cross-domain discovery round was executed on 2026-10-18 across four adjacent biomedical frontiers—**oscillatory mechano-acoustic mucus conditioning**, **airway basal stem cell niche persistence and lineage plasticity**, **next-generation nonviral DNA and prime-editing payloads**, and **extracellular vesicle / stealth nanoparticle delivery**—to identify quantitative synergies capable of addressing key biophysical barriers to mutation-agnostic CFTR restoration.
 
 | Frontier Thread | Primary Bottleneck Addressed | Verified Primary Sources (Checked 2026-10-18) | Deterministic Model & Key Computed Finding |
 | :--- | :--- | :--- | :--- |
@@ -58,7 +58,7 @@ A cross-domain discovery round was executed on 2026-10-18 across four adjacent b
 2. **Prime editing translational landscape:** Prime editing advances for precision genetic medicine are reviewed in *"Prime Editing for Precision Genetic Medicine: A Systematic Review of Technologies, Delivery, and Therapeutic Applications"*, DOI `10.3390/genes17091138` (PMID: 42793032), and *"A primer on prime: A prime editing update from advances to first-in-human trial"*, DOI `10.1016/j.ymthe.2026.04.033` (PMID: 42015509).
 3. **Live ClinicalTrials.gov inhaled genetic therapy status (checked 2026-10-18):**
    - `NCT06515002`: *"A Study to Test How Well BI 3720931 is Tolerated and Whether it Improves Lung Function in People With Cystic Fibrosis (Lenticlair 1)"* — Status: **`TERMINATED`** (updated 2026-04-15, enrollment 5, Phase 1/2, Boehringer Ingelheim).
-   - `NCT05668741`: *"A Phase 1/2 Study of VX-522 in Participants With Cystic Fibrosis (CF)"* — Status: **`COMPLETED`** (updated 2026-04-21, enrollment 26; program discontinued May 2026 due to airway inflammation).
+   - `NCT05668741`: *"A Phase 1/2 Study of VX-522 in Participants With Cystic Fibrosis (CF)"* — Status: **`COMPLETED`** (`completion_date: 2026-09-09`, `why_stopped: null`, enrollment 26; reported sponsor program discontinuation due to airway inflammation `[unverified]`).
    - `NCT05712538`: *"Safety, Tolerability, and Pharmacokinetics of ARCT-032 in Healthy Adult Subjects and Adults With Cystic Fibrosis."* — Status: **`COMPLETED`** (enrollment 39, Phase 1, Arcturus Therapeutics).
    - `NCT05248230`: *"4D-710 in Adult Patients With Cystic Fibrosis"* — Status: **`RECRUITING`** (updated 2026-07-06, enrollment 30, Phase 2, 4D Molecular Therapeutics).
    - `NCT06237335`: *"A Phase 2 Study Evaluating Safety and Tolerability of RCT2100 (CFTR mRNA) in Healthy Participants and in Participants With CF"* — Status: **`ACTIVE_NOT_RECRUITING`** (enrollment 128, Phase 2, ReCode Therapeutics).

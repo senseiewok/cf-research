@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "generated_at": "2026-10-23T07:26:00Z",
+    "generated_at": "2026-10-26T04:32:45Z",
     "tier": "Tier T0/T1 Exploratory In Silico Hypothesis (Unverified Parametric Constants)",
     "schema_version": "1.0.0",
-    "source_code_hash": "69510bf81da723492952670a988ff2217ef47e62aca22cc29724647ff2ee195b",
+    "source_code_hash": "5175c0be761cd79ea8ab7a7f1c807bf124b8dab1f3bb16b05249ba6e95ac47a1",
     "doi_citations": [
       "10.1126/scitranslmed.3002230",
       "10.1084/jem.20020400",
@@ -94,7 +94,7 @@
         "zeta_potential_mv": 0.5,
         "endosomal_escape_score": 0.88,
         "macrophage_stealth_score": 0.98,
-        "cf_application": "Abolishes the acute alveolar macrophage TLR7/8 cytokine storm (IL-8/TNF-alpha) and anti-PEG neutralizing antibody clearance that terminated VX-522.",
+        "cf_application": "Models reduction of alveolar macrophage TLR7/8 cytokine signaling (IL-8/TNF-alpha) and anti-PEG antibody clearance for inhaled LNP dosing (NCT05668741 registry status: COMPLETED, why_stopped: null; sponsor discontinuation rationale [unverified]).",
         "bfi": 0.9085,
         "feasibility_tier": "HIGH_FEASIBILITY",
         "transfer_domain": "mucosal_immunology",
@@ -2092,7 +2092,7 @@
     "bfi_rankings_tsv": "ee08c11dd9eb68aa829496608c2f8e16e6438eeb6f3d397f65e70afd8a763e08",
     "transcytosis_kinetics_tsv": "6c2d92249597b3dce0d4d5bfeb45779d8ab342af75480f11f54cee9d743fd5e1",
     "epithelial_trajectory_tsv": "6756d589261d8eb6b368b9008e57e3fc484f4e215afafb02e902a87d7bc60604",
-    "datasets_block": "eb0694ce4f6ca9ce18b9f77aff11217fbb3f3e6ba9ad5a7e9adfba2382f1848c",
-    "data_block": "eb0694ce4f6ca9ce18b9f77aff11217fbb3f3e6ba9ad5a7e9adfba2382f1848c"
+    "datasets_block": "a3692ddf2c93f85d950fc5afe26256df1ef25c6393a4ed5faab3565299874ccf",
+    "data_block": "a3692ddf2c93f85d950fc5afe26256df1ef25c6393a4ed5faab3565299874ccf"
   }
 }

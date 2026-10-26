@@ -1,6 +1,6 @@
 # PTC Readthrough and Nonsense-Mediated Decay (NMD) Suppression: Biophysical Architecture for Non-Modulator CFTR
 
-**Date**: 2026-10-14 | **Track**: Track A (Biophysical Science & Cure Discovery) | **Answer tier**: T2 (primary literature grounded, RefSeq transcripts, electrophysiology) | **Associated Task**: [`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json)
+**Date**: 2026-10-14 | **Track**: Track A (Biophysical Science & Cure Discovery) | **Answer tier**: T2 (primary literature grounded, RefSeq transcripts, electrophysiology) | **Associated Task**: [`T-0151`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json)
 
 ---
 
@@ -120,7 +120,7 @@ Where:
 | **Aminoglycoside Monotherapy (G418 / ELX-02)** | $< 15\%$ | $\sim 2–4\%$ | $< 0.5\%$ WT | **$1.0–2.5\%$** | Failed Phase 2/3 (below 10% threshold) |
 | **Suppressor tRNA Alone** | $< 15\%$ | $\sim 10–15\%$ | $\sim 1.5–2.0\%$ WT | **$3.5–5.0\%$** | Sub-therapeutic; NMD limits substrate |
 | **SMG1i + Readthrough Agent** | $60–80\%$ | $\sim 10–15\%$ | $\sim 6–8\%$ WT | **$8.0–11.0\%$** | Marginal threshold; gating unpotentiated |
-| **Tri-Modal Therapy (SMG1i + Suppressor tRNA + VX-770)** | **$60–80\%$** | **$\ge 15\%$** | **$\ge 10\%$ WT** | **$\ge 15–25\%$** | **Curative Benchmark Exceeded** ($\ge 10\%$ WT) |
+| **Tri-Modal Therapy (SMG1i + Suppressor tRNA + VX-770)** | **$60–80\%$** | **$\ge 15\%$** | **$\ge 10\%$ WT** | **$\ge 15–25\%$** | **In-Silico Reference Benchmark Exceeded** ($\ge 10\%$ WT) |
 
 ---
 
@@ -139,8 +139,8 @@ Where:
 
 ## 6. Curative Synthesis & Next Research Steps
 
-1. **Aerosol Delivery Co-Formulation**: Pair the tri-modal payload with the mucus-penetrating, non-inflammatory LNP criteria established in [`delivery-biophysics.md`](file:///C:/senseiewok/repos/cf-research/landscape/delivery-biophysics.md) ($50–100\text{ nm}$, neutral zeta potential, polysarcosine shielding).
+1. **Aerosol Delivery Co-Formulation**: Pair the tri-modal payload with the mucus-penetrating, non-inflammatory LNP criteria established in [`delivery-biophysics.md`](delivery-biophysics.md) ($50–100\text{ nm}$, neutral zeta potential, polysarcosine shielding).
 2. **Organoid Validation (FIS Benchmark)**: Test tri-modal combinations in patient-derived human rectal organoids homozygous for `W1282X` or `G542X`, utilizing Forskolin-Induced Swelling (FIS) as an established functional biomarker.
-3. **Dual-Track Synergy**: For patients intolerant to SMG1 inhibitors, combine suppressor tRNAs with the alternative conductance bypass therapies modeled in [`alternative-conductance.md`](file:///C:/senseiewok/repos/cf-research/landscape/alternative-conductance.md) (TMEM16A potentiators + ENaC blockers) to ensure airway surface liquid rehydration irrespective of genotype.
+3. **Dual-Track Synergy**: For patients intolerant to SMG1 inhibitors, combine suppressor tRNAs with the alternative conductance bypass therapies modeled in [`alternative-conductance.md`](alternative-conductance.md) (TMEM16A potentiators + ENaC blockers) to ensure airway surface liquid rehydration irrespective of genotype.
 
 *Answer Tier: T2 (Primary transcript coordinates from RefSeq, electrophysiological equations, and published pharmacological literature verified; investigational research, not clinical advice).*

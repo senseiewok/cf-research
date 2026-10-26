@@ -70,7 +70,7 @@ CURATED_INNOVATIONS: List[Dict[str, Any]] = [
         "zeta_potential_mv": +0.5,
         "endosomal_escape_score": 0.88,
         "macrophage_stealth_score": 0.98,
-        "cf_application": "Abolishes the acute alveolar macrophage TLR7/8 cytokine storm (IL-8/TNF-alpha) and anti-PEG neutralizing antibody clearance that terminated VX-522.",
+        "cf_application": "Models reduction of alveolar macrophage TLR7/8 cytokine signaling (IL-8/TNF-alpha) and anti-PEG antibody clearance for inhaled LNP dosing (NCT05668741 registry status: COMPLETED, why_stopped: null; sponsor discontinuation rationale [unverified]).",
     },
     {
         "id": "CDI-004",

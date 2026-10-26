@@ -6,18 +6,22 @@ it. Alongside the notes it holds small, single-purpose tools under `tools/`, bui
 so the CF community can run and check them. It is not a clinical product.
 
 ```text
-⠀⠀⠀⠀⠀⡀⠄⠂⠂⠁⠁⠛⠛⠶⢦⣄⡀⠀⠀⠀⠀⠀⠀⠀⡀⠄⠂⠂⠁⠁⠛⠛⠶⢦⣄⡀⠀⠀⠀⠀⠀⠀⠀⡀⠄⠂⠂⠁⠁⠛⠛⠶⢦⣄⡀
-⠀⠀⠀⠄⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠶⣄⠀⠀⠀⠄⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠶⣄⠀⠀⠀⠄⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠶⣄
-⠀⢦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⢦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⢦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⢦
-⠀⠀⠈⠳⢦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠂⠁⠀⠀⠈⠳⢦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠂⠁⠀⠀⠈⠳⢦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠂⠁
-⠀⠀⠀⠀⠀⠉⠛⠶⢦⣤⣤⡄⠄⠂⠂⠁⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠆⠀⠀⠄⠠⠀⠒⢆⠁⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠶⢦⣤⣤⡄⠄⠂⠂⠁
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠑⠢⠄⣀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠂⠒⠤⠄⠤⣀⡀⣀⡀
+               .               .
+                          .
+                         .
+ o o o o o o o o o o \     / o o o o o
+ | | | | | | | | | |  )   (  | | | | |
+ | | | | | | | | | |  )  . ( | | | | |
+ o o o o o o o o o o /      \  o o o o
+
+                           .
+
+                               .
 ```
 
-*A double helix drawn in Braille dots twists gently across an empty field; one strand has a small gap near the middle, and a thin thread curves up toward it from the lower right.*
+*A cell membrane drawn in plain line characters as two rows of small circles with lines between them, crossed right of center by one narrow channel standing slightly open; a few dots drift above it, one is inside, and two have passed below.*
 
-> *Into the gap we work a thread of questions, slowly, and check each one before the next.*
+> *If a wall has a door, patience is the slow work of learning where the hinge is, and writing down each place it was not.*
 
 **Research notes, a catalog of 197 sources and what each permits, a 3D model of the CFTR protein from four published structures, and a ledger of our own mistakes.** Research, not medical advice.
 
@@ -27,7 +31,7 @@ This repository is the lab's notebook, kept where anyone can read it. The notes 
 
 Beside the notes are the things the notes rest on. The **source catalog**, [`sources/catalog.yaml`](sources/catalog.yaml), records every external source we rely on and what its publisher permits. On 2026-10-25 it held 197 sources (`updated: 2026-10-24`), counted from the file: 21 a tool may fetch after reading the site's `robots.txt`, 24 APIs with a recorded usage policy, 148 a person must download by hand, 3 refused by their publisher and 1 that needs a written request. Our tools may use nothing the catalog does not allow, and no restricted third-party source document (such as a registry PDF) is committed here; those reports are linked and checksummed, whereas openly licensed structures (four CC0 PDB `.cif.gz` files with [`tools/cftr-model/data/ATTRIBUTION.md`](tools/cftr-model/data/ATTRIBUTION.md)) and public ClinicalTrials.gov API v2 snapshot records (`tools/trial_atlas/snapshot.json`) carry their required attribution. Five **agent skills** under `.claude/skills/` cover reading CFF and ECFS registry reports, reading genotype and variant figures across six registries, running the trial endpoint atlas pipeline, and grounding public sentences. No registry scientist has reviewed the guides yet, so they are reading aids, and we compare no figure from one registry with another.
 
-The **CFTR model**, [`tools/cftr-model/`](tools/cftr-model/README.md), is an interactive 3D drawing of the human CFTR protein built from four published structures (6MSM, 5UAK, 8EIQ and 8EJ1, from the Protein Data Bank), numbered as in UniProt P13569. It draws one point per amino acid each structure places and says plainly what it leaves out: no pore, no gate, no medicine, no motion, and nothing about what any person with CF can expect. Residue 508 is marked where a structure has it and shown as a gap where the file says it is absent, as it is in two of the four. The website's [CFTR model](https://senseiewok.ai/cf/cftr/) page is the same model with the same tables. The picture at the top of this page echoes that gap, but it is an emblem of the work of understanding, not a diagram of a gene or a protein, and it shows no treatment.
+The **CFTR model**, [`tools/cftr-model/`](tools/cftr-model/README.md), is an interactive 3D drawing of the human CFTR protein built from four published structures (6MSM, 5UAK, 8EIQ and 8EJ1, from the Protein Data Bank), numbered as in UniProt P13569. It draws one point per amino acid each structure places and says plainly what it leaves out: no pore, no gate, no medicine, no motion, and nothing about what any person with CF can expect. Residue 508 is marked where a structure has it and shown as a gap where the file says it is absent, as it is in two of the four. The website's [CFTR model](https://senseiewok.ai/cf/cftr/) page is the same model with the same tables. The picture at the top of this page is an emblem, a door in a wall standing a little open: it is not a diagram of CFTR or of how it works, it is not the model, and it shows no treatment.
 
 The **ledger**, [`ledger/`](ledger/), logs the real mistakes caught in our working sessions, what caught each one and a cheap guard against the next: 138 entries in two session logs on 2026-10-08, by `ledger/tally.py`. A single entry is an observation, not a lesson. [`proposals/`](proposals/) holds changes to sibling repositories that an agent could not or should not apply directly, each with its evidence and a verification step.
 
@@ -73,23 +77,21 @@ With care,
 Sensei Ewok
 
 ```text
-                        (   )
-                     (  * * *  )
-                   (  (       )  )
-                (  (   (  *  )   )  )
-               (  (  (  (    )  )  )  )
-              (  (  (  (  *  )  )  )  )
-             (  (  (  ( ( ( ) )  )  )  )
-             (  (  ( ( ( ( ) )  )  )  )
-              (  (  ( (   )  )  )  )
-               (  (  (  )  )  )
-                (  (   )  )
-                 (  (  )
-                   ( )
-                    (
-                    (
-                    (
+                        /\
+_______________________/__\_______________
+                      /     \
+                     /   :   \
+                    /         \
+                  /      :      \
+                /                 \
+               /         |         \
+              /                     \
+            /            |            \
+          /                             \
+         /               |               \
 ```
+
+*A straight road drawn in plain line characters runs in perspective from the bottom of the picture to a small pyramid on a level horizon, through an otherwise empty desert.*
 
 > *You will cross the desert to find what you already carry. That is not a
 > disappointment. That is the whole point of crossing.*

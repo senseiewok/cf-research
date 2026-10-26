@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic 50-study stratified ground-truth census generator & dual-agent consensus audit module.
+"""Deterministic 50-study stratified rule-vs-rule reference census generator & dual-agent consensus audit module.
 
 Mission:
   1. Draw a reproducible 50-study stratified ground-truth census from the 1,053 real CF studies in
@@ -212,7 +212,7 @@ def sample_stratified_studies(
 
 
 def _independent_ground_truth_classes(measure: str, description: str) -> list[str]:
-    """Derive ground-truth canonical 8 classes independently from lexicon rules via clinical construct regex matching."""
+    """Derive reference canonical 8 classes via clinical construct regex matching (rule-vs-rule reference, not human labels)."""
     text = (measure + " " + (description or "")).strip()
     m_text = measure.strip()
     classes = []
@@ -270,22 +270,8 @@ def _independent_ground_truth_classes(measure: str, description: str) -> list[st
     ):
         classes.append("safety_adverse_events")
 
-    # Non-canonical / other additions
+    # Non-canonical / other fallback when no specific canonical rule matched
     if not classes:
-        classes.append("other_or_not_stated")
-    elif re.search(
-        r"\b(?:glucose|feno|ph\b|pharmacokinetics|pk\b|absorption|signal\s+to\s+noise|blood\s+samples)\b",
-        text,
-        re.IGNORECASE,
-    ):
-        classes.append("other_or_not_stated")
-    elif re.search(r"\b(?:sinus\s+ostia)\b", text, re.IGNORECASE):
-        classes.append("other_or_not_stated")
-    elif (
-        "safety_adverse_events" in classes
-        and re.search(r"\bspirometry\b", text, re.IGNORECASE)
-        and "lung_function_fev1" not in classes
-    ):
         classes.append("other_or_not_stated")
 
     return sorted(list(set(classes)))
@@ -323,7 +309,7 @@ def evaluate_dual_agent_census(
             tags = tagged.get("tags", [])
             pred_c8 = lex_mod.map_tags_to_canonical_8(tags)
 
-            # Ground truth: validated independent biophysical reference mapping
+            # Reference classes: rule-vs-rule clinical construct regex mapping (not human labels)
             gold_c8 = _independent_ground_truth_classes(measure, desc)
 
             # Dual-agent evaluation
@@ -364,7 +350,7 @@ def evaluate_dual_agent_census(
                 field_text = e.get(pt["field"]) or ""
                 if pt["start"] is not None and pt["end"] is not None:
                     verbatim_ok = field_text[pt["start"] : pt["end"]] == q
-                    class_valid = c in gold_c8 or c == "other_or_not_stated"
+                    class_valid = c in CANONICAL_8_CLASSES
                     if verbatim_ok and class_valid:
                         challenger_tags.append(pt)
 

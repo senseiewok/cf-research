@@ -184,7 +184,7 @@ The assertions, quantitative parameters, and receptor models in this dossier are
 ## 8. Maintainer Governance & Actionable Recommendations
 
 1. **Task Board Milestone Reconciliation**:
-   - The acceptance criteria for [`T-0154`](file:///c:/senseiewok/repos/cf-lab/tasks/board.json) are completely satisfied: bacterial receptor mutations (*oprM*, *pilA*, LPS O-antigen) are mapped, fitness trade-offs formalized, and frontline antibiotic pair recommendations documented.
+   - The acceptance criteria for [`T-0154`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json) are completely satisfied: bacterial receptor mutations (*oprM*, *pilA*, LPS O-antigen) are mapped, fitness trade-offs formalized, and frontline antibiotic pair recommendations documented.
    - Authorize transition of `T-0154` from `status: ready` to `status: done`, recording $4.0\text{ hours}$ measured effort.
 2. **Curative Showcase Integration**:
    - Provide structured data blocks to `.ai` (`scheduled-site-showcase`) under `#phage-steering` to illustrate the evolutionary trap for the public and care teams in English and Mexican Spanish (`/es/`).

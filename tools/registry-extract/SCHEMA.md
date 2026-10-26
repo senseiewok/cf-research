@@ -24,7 +24,7 @@ Per project scoping memo and task `T-0008`, everything downstream—automated ta
 
 ## 2. Schema Specification
 
-The formal JSON Schema is defined in [`row_schema.json`](file:///tools/registry-extract/row_schema.json). Every extraction row represents an atomic stratum observation from a report table.
+The formal JSON Schema is defined in [`row_schema.json`](row_schema.json). Every extraction row represents an atomic stratum observation from a report table.
 
 ### 2.1 Field Reference
 
@@ -81,7 +81,7 @@ The formal JSON Schema is defined in [`row_schema.json`](file:///tools/registry-
 
 ## 4. Gold Sample Verification (ECFSPR 2022 p.8)
 
-A hand-extracted reference dataset comprising **27 rows** across all 9 summary indicators and 3 sex strata (females, males, total) from page 8 of the *European Cystic Fibrosis Society Patient Registry 2022 Annual Data Report* is provided in [`gold_sample_ecfspr_2022_p8.json`](file:///tools/registry-extract/gold_sample_ecfspr_2022_p8.json).
+A hand-extracted reference dataset comprising **27 rows** across all 9 summary indicators and 3 sex strata (females, males, total) from page 8 of the *European Cystic Fibrosis Society Patient Registry 2022 Annual Data Report* is provided in [`gold_sample_ecfspr_2022_p8.json`](gold_sample_ecfspr_2022_p8.json).
 
 - **Source Document**: `sources/downloads/ECFSPR_Annual_Report_2022_v1.0.pdf`
 - **Source SHA-256**: `22868219bcaeb5e4b2090643b0d5b1e8be91fddb1cf37ba74bf1bfaeec11506e`

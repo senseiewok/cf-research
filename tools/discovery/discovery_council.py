@@ -377,6 +377,14 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0434", "track": "Track A", "tier": "T2",
         "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
     },
+    "lnp_mucus_shear_shedding_kinetics": {
+        "task": "T-0439", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "prime_editing_ptc_nmd_kinetics": {
+        "task": "T-0440", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
 }
 
 
@@ -639,7 +647,7 @@ def phase1_generative_synthesis(topic: str) -> Dict[str, Any]:
             "nebulization_shear_tolerance_s_inv": 3.0e4,
             "predicted_mucus_diffusivity_ratio": 0.46,
             "primary_evidence_citations": [
-                {"source": "NCT05668741", "title": "VX-522 BEACON-CF Phase 1/2 clinical trial termination context"},
+                {"source": "NCT05668741", "title": "VX-522 BEACON-CF Phase 1/2 clinical trial context (registry status: COMPLETED)"},
                 {"doi": "10.1038/s41565-020-0669-6", "title": "Mucus-penetrating nanoparticle transport in cystic fibrosis"},
                 {"doi": "10.1002/adma.201805116", "title": "SORT lipid nanoparticles for lung-targeted genetic medicine"},
                 {"pdb": "6MSM", "title": "Outward-facing open human CFTR Cryo-EM structure"},

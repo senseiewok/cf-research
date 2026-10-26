@@ -8,13 +8,13 @@ review_tier: elevated
 
 # Aerosol SORT-LNP Pulmonary Delivery Matrix: Biophysical Specifications for Genetic CFTR Delivery
 
-**Date**: 2026-10-15 | **Track**: Track A (Biophysical Science & Cure Discovery) | **Answer Tier**: Tier T2 Certified (Script-verified, primary-sourced, dual-model validated) | **Discovery Mechanism**: Curative Discovery Council (`tools/discovery/discovery_council.py`) | **Scope**: ClinicalTrials.gov (`NCT05668741`), RCSB PDB (`6MSM`), primary biophysical literature (`10.1038/s41565-020-0669-6`, `10.1002/adma.201805116`, `10.1164/rccm.202102-0461oc`).
+**Date**: 2026-10-15 | **Track**: Track A (Biophysical Science & Cure Discovery) | **Answer Tier**: T2 (provisional — script-verified, primary-sourced) | **Discovery Mechanism**: Curative Discovery Council (`tools/discovery/discovery_council.py`) | **Scope**: ClinicalTrials.gov (`NCT05668741`), RCSB PDB (`6MSM`), primary biophysical literature (`10.1038/s41565-020-0669-6`, `10.1002/adma.201805116`, `10.1164/rccm.202102-0461oc`).
 
 ---
 
 ## 1. Executive Summary & Clinical Gating Bottleneck
 
-The clinical discontinuation of **VX-522** (BEACON-CF Phase 1/2 trial, `NCT05668741`) in May 2026 established that pulmonary tolerability, rather than CFTR chloride conductance mechanics, represents the primary gating bottleneck to a universal genetic cure for Cystic Fibrosis.
+The Phase 1/2 BEACON-CF study of **VX-522** (`NCT05668741`, registry `overall_status: COMPLETED`, `completion_date: 2026-09-09`, `why_stopped: null`; reported sponsor program discontinuation `[unverified]`) underscores that pulmonary delivery tolerability is a critical biophysical bottleneck for mutation-agnostic genetic CFTR restoration.
 
 Conventional aerosolized lipid nanoparticles (LNPs) fail in the CF lung because of three intersecting biophysical barriers:
 1. **Steric & Electrostatic Mucin Entrapment**: CF sputum contains dense macromolecular meshworks of crosslinked mucin glycoproteins (MUC5AC and MUC5B) with average pore dimensions of approximately **$90\text{–}140\text{ nm}$** (mean $\approx 110\text{ nm}$). Particles larger than $100\text{ nm}$ or exhibiting cationic surfaces are immobilized before reaching the airway epithelium.
@@ -77,7 +77,7 @@ Based on deterministic mathematical modeling (`tools/discovery/biophysical_model
 
 The Discovery Council certifies compliance with the lab's core scientific integrity guardrails:
 
-- **Answer Tier**: **Tier T2 Certified**. Evaluated via deterministic biophysical scripts (`biophysical_models.py`) and authenticated registry endpoints.
+- **Answer Tier**: **T2 (provisional)**. Evaluated via deterministic biophysical scripts (`biophysical_models.py`) and authenticated registry endpoints.
 - **Epistemic Modality**: All mechanistic deductions are explicitly marked as inferences (*"We infer that a 65 nm diameter combined with near-neutral zeta potential yields optimal CF mucus penetration"*), backed by formal 8-word logical bases.
 - **Widening Words Scope Record**: Absolute claims (*"only"*, *"all"*, *"cures"*) are omitted. Comparisons are strictly bounded to the audited database: ClinicalTrials.gov query date 2026-10-15 (NCT05668741) and published CF sputum rheology studies.
 - **Dignity & Hope Boundary**: This document establishes engineering criteria for investigational research software and preclinical modeling. It does not promise treatment timelines or constitute individualized medical guidance.

@@ -3,7 +3,7 @@
 **Status**: Proposal & Molecular Genetic Specification  
 **Date**: 2026-10-13  
 **Review Tier**: Elevated  
-**Associated Board Task**: [`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5549)  
+**Associated Board Task**: [`T-0151`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json)  
 **Evidence Standard**: T2 (RefSeq `NM_000492.4`, primary literature, CFF research initiatives)
 
 ---
@@ -84,7 +84,7 @@ Predicted short-circuit current ($\Delta I_{\text{sc}}$) responses in primary hu
 | **Small-Molecule Readthrough Alone (Ataluren class)** | $\approx 10\%$ (No change) | $\approx 35\%$ (No change) | $1.5–3.0\%$ | Sub-therapeutic; trial failure mode |
 | **SMG1i Alone (NMD suppression only)** | $\approx 45\%$ | $\approx 85\%$ | $< 1.5\%$ | Transcripts rescued, but protein truncated |
 | **Suppressor tRNA Alone** | $\approx 10\%$ | $\approx 35\%$ | $3.5–6.0\%$ | Borderline; insufficient transcript substrate |
-| **Tri-Modal Synergy (SMG1i + tRNA + VX-770)** | **$\ge 50\%$** | **$\ge 85\%$** | **$\ge 15.0–22.0\%$** | **Curative threshold achieved ($\ge 10\%$ WT)\*** |
+| **Tri-Modal Synergy (SMG1i + tRNA + VX-770)** | **$\ge 50\%$** | **$\ge 85\%$** | **$\ge 15.0–22.0\%$** | **In-silico reference threshold achieved ($\ge 10\%$ WT)\*** |
 
 *\*Computational / in vitro electrophysiological modeling threshold; not a claim of clinical curative efficacy.*
 

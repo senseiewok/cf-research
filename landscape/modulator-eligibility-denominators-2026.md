@@ -9,7 +9,7 @@ task_anchor: T-0134
 
 # Which 10 Percent? A Definitions Ledger for Modulator-Eligibility Denominators (2020–2026)
 
-**Date**: 2026-10-17 | **Track**: Track A / Track B | **Answer Tier**: Tier T2 Certified (Script-verified, primary-sourced, zero cross-registry arithmetic) | **Task Anchor**: `T-0134`  
+**Date**: 2026-10-17 | **Track**: Track A / Track B | **Answer Tier**: Tier T2 (provisional) (Script-verified, primary-sourced, zero cross-registry arithmetic) | **Task Anchor**: `T-0134`  
 **Primary Sources**:
 - European Cystic Fibrosis Society Patient Registry (`ECFSPR`) Annual Data Reports for data years 2020, 2021, 2022, 2023, and 2024 (published 2022–2026).
 - Cystic Fibrosis Foundation Patient Registry (`CFFPR`) 2024 Annual Data Report (published 2025).

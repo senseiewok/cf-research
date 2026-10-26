@@ -38,7 +38,7 @@ Middleton PG et al. 2019 demonstrated that elexacaftor/tezacaftor/ivacaftor in A
 Farrell PM et al. 2017 established sweat chloride concentration guidelines with a diagnostic threshold of 60 mmol/L.
 Quittner AL et al. 2009 established that the minimal clinically important difference for the CFQ-R respiratory domain is 4.0 points.
 Fuchs HJ et al. 1994 established standardized criteria for protocol-defined pulmonary exacerbations.
-NCT05668741 BEACON-CF evaluated inhaled mRNA VX-522 with overall status: TERMINATED.
+NCT05668741 BEACON-CF evaluated inhaled mRNA VX-522 with overall status: COMPLETED (completion_date: 2026-09-09, why_stopped: null; sponsor program discontinuation [unverified]).
 NCT05033080 SKYLINE 102 evaluated vanzacaftor/tezacaftor/deutivacaftor in subjects heterozygous for F508del and a minimal function mutation.
 
 Section 6: Mandatory Disclaimer
