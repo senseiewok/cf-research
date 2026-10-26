@@ -2897,3 +2897,67 @@ resources:
     basis: lead_only
     last_checked: 2026-10-25
     status: active
+  - id: tajmedun-tj-pediatric-pulmonology
+    name: Pediatric pulmonology and medical genetics guidance in Tajikistan
+    organisation: Tajik State Medical University named after Abuali ibn Sino
+    countries: [TJ]
+    url: https://tajmedun.tj/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Tajik national medical university providing specialist pediatric pulmonary, clinical genetics, and rare respiratory disease orientation for families and clinicians.
+    who_for: not_checked
+    format: online
+    lang: tg-TJ
+    source_id: tajmedun-tj-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: moh-bn-pediatric-respiratory-care
+    name: Pediatric specialist care and pulmonary services in Brunei
+    organisation: Ministry of Health Brunei Darussalam - RIPAHS Hospital
+    countries: [BN]
+    url: https://www.moh.gov.bn/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Bruneian Ministry of Health portal connecting families with tertiary pediatric, pulmonary, and chronic disease specialist services at national referral hospitals.
+    who_for: not_checked
+    format: online
+    lang: en-BN
+    source_id: moh-bn-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: health-fj-pediatric-specialist-care
+    name: Pediatric specialist care and respiratory services in Fiji
+    organisation: Ministry of Health and Medical Services, Fiji
+    countries: [FJ]
+    url: https://www.health.gov.fj/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Fijian Ministry of Health portal providing public referral information for pediatric specialty clinics and respiratory care across national divisional hospitals.
+    who_for: not_checked
+    format: online
+    lang: en-FJ
+    source_id: health-fj-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: avh-ps-pediatric-pulmonology-care
+    name: Specialized pediatric pulmonary and comprehensive care in Palestine
+    organisation: Augusta Victoria Hospital
+    countries: [PS]
+    url: https://avh.org/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Specialized referral hospital providing multidisciplinary pediatric pulmonology, chronic care management, and diagnostic services for children across the Palestinian territories.
+    who_for: not_checked
+    format: online
+    lang: en-PS
+    source_id: avh-ps-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+

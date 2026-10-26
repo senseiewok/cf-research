@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-148 to download by hand, 1 to ask for, 3 not to download.
+152 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -83,6 +83,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | anfq-pt-resource-pages | Associação Nacional de Fibrose Quística website (anfq.pt) | [page](https://www.anfq.pt/) | link only | Official national cystic fibrosis patient association in Portugal. |
+
+### Augusta Victoria Hospital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| avh-ps-resource-pages | Augusta Victoria Hospital clinical services portal (avh.org) | [page](https://avh.org/) | link only | Specialized pediatric pulmonary referral hospital and clinical care center in Palestine; robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Azərbaycan Tibb Universiteti
 
@@ -547,11 +553,23 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | minsalud-bo-resource-pages | Ministerio de Salud y Deportes de Bolivia website (minsalud.gob.bo) | [page](https://www.minsalud.gob.bo/) | link only | Official Bolivian Ministry of Health portal covering public hospital directories, Unified Health System (SUS) access, and national clinical programs. |
 
+### Ministry of Health and Medical Services, Fiji
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| health-fj-resource-pages | Ministry of Health and Medical Services Fiji portal (www.health.gov.fj) | [page](https://www.health.gov.fj/) | link only | Official pediatric specialty and tertiary respiratory referral guidance for Fiji; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
 ### Ministry of Health and Wellness, Jamaica
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | moh-jm-resource-pages | Ministry of Health and Wellness Jamaica website (moh.gov.jm) | [page](https://www.moh.gov.jm/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Ministry of Health Brunei Darussalam - RIPAHS Hospital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| moh-bn-resource-pages | Ministry of Health Brunei Darussalam public healthcare portal (www.moh.gov.bn) | [page](https://www.moh.gov.bn/) | link only | Official pediatric specialist and tertiary pulmonary care portal for Brunei; robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Ministry of Health of Guyana
 
@@ -732,6 +750,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | tfrd-tw-resource-pages | Taiwan Foundation for Rare Disorders website (tfrd.org.tw) | [page](https://www.tfrd.org.tw/) | link only | Official rare disorders foundation in Taiwan supporting designated rare genetic diseases including cystic fibrosis. |
+
+### Tajik State Medical University named after Abuali ibn Sino
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| tajmedun-tj-resource-pages | Tajik State Medical University website (tajmedun.tj) | [page](https://tajmedun.tj/) | link only | Official CF and pediatric pulmonary referral medical center in Tajikistan; robots.txt allow (2026-10-25), manual access, link and summary only. |
 
 ### Tbilisi State Medical University
 
