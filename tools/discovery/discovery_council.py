@@ -417,6 +417,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0394", "track": "Track A", "tier": "T2",
         "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
     },
+    "cftr_interdomain_allosteric_energetics": {
+        "task": "T-0447", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
+    },
 }
 
 
