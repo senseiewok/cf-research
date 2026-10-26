@@ -24,5 +24,23 @@ sources/downloads/
 
 # tool caches and scratch ledgers
 __pycache__/
+*.pyc
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+*.egg-info/
+node_modules/
+.vscode/
+.idea/
 evidence/*-smoke.jsonl
+
+# Trial-atlas blind sheets and real human keys must never be committed.
+# sealed/key.json is a deterministic rule-vs-rule reference fixture only.
+handover/
+sealed/*
+!sealed/key.json
+!sealed/README.md

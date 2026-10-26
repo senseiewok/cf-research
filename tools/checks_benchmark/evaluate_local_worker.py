@@ -11,6 +11,7 @@ from pathlib import Path
 import sys
 import os
 import urllib.error
+import urllib.parse
 import urllib.request
 from typing import Any, Dict, List
 
@@ -26,11 +27,34 @@ import check_claims
 
 DEFAULT_HOST = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434").rstrip("/")
 OLLAMA_URL = f"{DEFAULT_HOST}/api/generate"
+LOOPBACK_HOSTNAMES = frozenset({"127.0.0.1", "localhost", "::1"})
+
+
+class RemoteHostRefused(ValueError):
+    """Raised when OLLAMA_HOST names a non-loopback host and remote use was not allowed."""
+
+
+def check_host(url: str, allow_remote: bool = False) -> str:
+    """Return url when it points at this machine (loopback); refuse any other host unless allow_remote.
+
+    The prompts carry lab task text, so they go to a model on this machine only, unless the person
+    running the script passes --allow-remote-host on purpose.
+    """
+    host = (urllib.parse.urlsplit(url).hostname or "").lower()
+    if host in LOOPBACK_HOSTNAMES or host.startswith("127."):
+        return url
+    if allow_remote:
+        return url
+    raise RemoteHostRefused(
+        f"refusing to send prompts to non-loopback host {host or url!r} (from OLLAMA_HOST); "
+        "pass --allow-remote-host to allow it"
+    )
 DEFAULT_MODEL = os.environ.get("LOCAL_WORKER_MODEL", "qwen3.8:27b-64k")
 
 
-def query_local_worker(prompt: str, model: str = DEFAULT_MODEL, timeout: int = 60) -> str:
+def query_local_worker(prompt: str, model: str = DEFAULT_MODEL, timeout: int = 60, allow_remote: bool = False) -> str:
     """Send prompt to local Ollama worker via loopback HTTP with graceful fallback."""
+    check_host(OLLAMA_URL, allow_remote)
     payload = json.dumps({
         "model": model,
         "prompt": prompt,
@@ -55,7 +79,7 @@ def query_local_worker(prompt: str, model: str = DEFAULT_MODEL, timeout: int = 6
         return ""
 
 
-def run_worker_evaluation(output_path: Path | None = None) -> Dict[str, Any]:
+def run_worker_evaluation(output_path: Path | None = None, allow_remote: bool = False) -> Dict[str, Any]:
     sources_path = BENCHMARK_DIR / "sources_fixture.json"
     with open(sources_path, "r", encoding="utf-8") as f:
         sources = json.load(f)
@@ -135,7 +159,7 @@ def run_worker_evaluation(output_path: Path | None = None) -> Dict[str, Any]:
         prompt = scenario["prompt"]
         source_text = sources[source_id]
 
-        worker_reply = query_local_worker(prompt)
+        worker_reply = query_local_worker(prompt, allow_remote=allow_remote)
 
         # Parse claim object from worker reply or construct one for evaluation
         claim_obj = {
@@ -219,7 +243,18 @@ def run_worker_evaluation(output_path: Path | None = None) -> Dict[str, Any]:
 
 
 if __name__ == "__main__":
+    import argparse
+
+    ap = argparse.ArgumentParser(description="Run the checks benchmark tasks against the local worker model.")
+    ap.add_argument("--allow-remote-host", action="store_true",
+                    help="allow OLLAMA_HOST to name a host other than this machine (off by default)")
+    args = ap.parse_args()
+    try:
+        check_host(OLLAMA_URL, args.allow_remote_host)
+    except RemoteHostRefused as exc:
+        sys.stderr.write(f"error: {exc}\n")
+        sys.exit(2)
     out = BENCHMARK_DIR / "local_worker_results.json"
     print(f"Running evaluation against local worker {DEFAULT_MODEL}...")
-    res = run_worker_evaluation(out)
+    res = run_worker_evaluation(out, allow_remote=args.allow_remote_host)
     print(f"Done. Evaluated {len(res['results'])} scenarios. Results saved to {out}")
