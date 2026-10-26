@@ -85,33 +85,36 @@ class ConductViolation(RuntimeError):
 
 
 def is_inside_repo(path: Path) -> bool:
-    """True if path resolves inside any repository root in the workspace."""
+    """True if path resolves inside any tracked repository root in the workspace."""
     resolved = path.resolve()
-    # Check parents for .git or known repo names
+    # Check parents for .git; exempt the git-ignored cf-lab/.lab-files directory
+    # unless a nested .git exists inside .lab-files itself.
     curr = resolved
     for _ in range(len(resolved.parts)):
         if (curr / ".git").is_dir() or (curr / ".git").is_file():
             return True
+        if curr.name == ".lab-files" and curr.parent.name == "cf-lab" and ((curr.parent / ".git").is_dir() or (curr.parent / ".git").is_file()):
+            return False
         curr = curr.parent
     return False
 
 
 def get_default_scratch_dir() -> Path:
-    """Returns a scratch directory outside every repository."""
-    # Preferred: sibling cf-lab-files/scratch/resource_intake
+    """Returns a scratch directory outside every tracked repository."""
+    # Preferred: $LAB_FILES/scratch/resource_intake
     env_lab_files = os.environ.get("LAB_FILES")
     if env_lab_files:
         cand = Path(env_lab_files) / "scratch" / "resource_intake"
         if not is_inside_repo(cand):
             return cand
 
-    # Check sibling ../cf-lab-files relative to repository root
+    # Check ../cf-lab/.lab-files (or legacy ../cf-lab-files) relative to repository root
     # Note: in a worktree, REPO_ROOT may be .worktrees/cf-research/<branch>
     curr = REPO_ROOT
     for _ in range(5):
-        sibling = curr.parent / "cf-lab-files"
-        if sibling.is_dir() and not is_inside_repo(sibling):
-            return sibling / "scratch" / "resource_intake"
+        for cand_root in (curr.parent / "cf-lab" / ".lab-files", curr.parent / "cf-lab-files"):
+            if cand_root.is_dir() and not is_inside_repo(cand_root):
+                return cand_root / "scratch" / "resource_intake"
         curr = curr.parent
 
     # Fallback to system temp directory outside git repos

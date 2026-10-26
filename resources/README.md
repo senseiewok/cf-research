@@ -34,7 +34,7 @@ Conduct invariants:
 - **Catalog gate**: The target host must have an entry in `sources/catalog.yaml` with `access: fetch`. All requested URLs must reside on that same host.
 - **Robots gate**: `robots.txt` is fetched first under the project user agent (`senseiewok-research-evidence/1.0.0`). Every declared agent group is verified; an unreadable file stops the run immediately.
 - **Pacing & size cap**: Requests are strictly paced 3.0 seconds apart, same-host only, with no cross-host redirects followed, and capped at 500 KB per page.
-- **Scratch isolation**: Screenshots and extracted text reside exclusively in a scratch directory outside all repositories (e.g. `cf-lab-files/scratch/resource_intake`) and can be deleted on request via `--delete-scratch`.
+- **Scratch isolation**: Screenshots and extracted text reside exclusively in the untracked scratch directory (e.g. `../cf-lab/.lab-files/scratch/resource_intake`) and can be deleted on request via `--delete-scratch`.
 - **Worker boundary**: The local worker model operates inside a strict data boundary with no tools or network access.
 - **Rule enforcement**: Any draft failing the checker's rules (word cap of 25, no digits except four-digit years, no quote marks, no URLs, no contact numbers or emails) is dropped.
 - **Human confirmation invariant**: The tool emits candidate rows with `basis: lead_only`. A person must confirm every row; the tool strictly never writes `confirmed_by`, `confirmed_on`, or `content_hash`.
