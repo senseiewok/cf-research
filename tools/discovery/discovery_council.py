@@ -377,6 +377,14 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0434", "track": "Track A", "tier": "T2",
         "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
     },
+    "lnp_mucus_shear_shedding_kinetics": {
+        "task": "T-0439", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
+    "prime_editing_ptc_nmd_kinetics": {
+        "task": "T-0440", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+    },
 }
 
 
