@@ -6,21 +6,21 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 77,
+  "total_modules": 78,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 79,
+  "test_suites_count": 80,
   "persona_summary": {
-    "researchers": 76,
+    "researchers": 77,
     "builders": 1
   },
   "triage_summary": {
-    "keep": 59,
+    "keep": 60,
     "merge": 14,
     "archive": 4
   },
   "discipline_summary": {
     "structural_biology": 12,
-    "rna_gene_editing": 22,
+    "rna_gene_editing": 23,
     "airway_delivery": 32,
     "microbiology_host": 6,
     "clinical_trials": 3,
@@ -170,8 +170,8 @@
     },
     "rna_gene_editing": {
       "label": "RNA, Nonsense Readthrough & Gene Editing",
-      "count": 22,
-      "keep_count": 15,
+      "count": 23,
+      "keep_count": 16,
       "merge_count": 5,
       "archive_count": 2,
       "modules": [
@@ -304,6 +304,17 @@
           "discipline": "rna_gene_editing",
           "persona": "researchers",
           "triage": "archive",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "mrna_hypoxia_translation_dynamics",
+          "task": "T-0452",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "keep",
           "consolidation_target": null,
           "test_verified": true
         },
