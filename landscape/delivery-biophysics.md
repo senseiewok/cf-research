@@ -6,11 +6,11 @@
 
 ## 1. Executive Summary & Clinical Gating Context
 
-In May 2026, clinical development of **VX-522** (BEACON-CF Phase 1/2 trial, ClinicalTrials.gov accession `NCT05668741`), an aerosolized lipid nanoparticle (LNP) carrying full-length human CFTR mRNA, was discontinued. The trial termination was not caused by failure of CFTR chloride conductance, but by localized pulmonary tolerability limits: nebulized delivery provoked dose-limiting airway inflammation, cytokine surges, and acute bronchospasms in trial participants.
+ClinicalTrials.gov lists the Phase 1/2 BEACON-CF study of **VX-522** (`NCT05668741`), an aerosolized lipid nanoparticle (LNP) carrying full-length human CFTR mRNA, with `overall_status: COMPLETED` (`completion_date: 2026-09-09`, `why_stopped: null`). Subsequent sponsor program discontinuation and hypotheses attributing it to localized pulmonary tolerability limits (airway inflammation or bronchospasm) are marked `[unverified: not stated in ClinicalTrials.gov NCT05668741 record]`.
 
 Simultaneously, ReCode Therapeutics has advanced **RCT-2100** (Selective Organ Targeting SORT-LNPs for CFTR mRNA) through early clinical evaluation, demonstrating that pulmonary genetic delivery is biologically viable when formulation biophysics explicitly address airway mucin barriers and macrophage endosomal sensors.
 
-Delivery tolerability is the **primary gating bottleneck** to a universal genetic cure for Cystic Fibrosis. This landscape dossier establishes open-access biophysical criteria to engineer non-inflammatory, mucus-penetrating delivery platforms for CFTR mRNA and prime-editing ribonucleoproteins (investigational biophysical research, not clinical advice).
+Delivery tolerability is a **central biophysical bottleneck** for mutation-agnostic genetic CFTR restoration. This landscape dossier establishes open-access biophysical criteria to engineer non-inflammatory, mucus-penetrating delivery platforms for CFTR mRNA and prime-editing ribonucleoproteins (investigational biophysical research, not clinical advice).
 
 ---
 
@@ -30,7 +30,7 @@ flowchart TD
     FM2 --> Inflammation["Dose-Limiting Bronchospasm & IL-8 Surge"]
     FM3 --> Neutralization["Loss of Efficacy on Repeat Dosing"]
 
-    Barrier --> Termination["VX-522 Trial Discontinuation (May 2026)"]
+    Barrier --> Termination["Inhaled LNP Tolerability Bottleneck (VX-522 / NCT05668741 Completed; Program Discontinuation [unverified])"]
     Inflammation --> Termination
     Neutralization --> Termination
 ```
@@ -109,7 +109,7 @@ When $r_h \to 50\text{ nm}$ (particle diameter $100\text{ nm}$) and the surface 
 
 The formulation specifications in this dossier rest on the following primary scientific records:
 
-1. **BEACON-CF (`NCT05668741`)**: ClinicalTrials.gov Phase 1/2 study of VX-522 inhaled mRNA in adults with cystic fibrosis (terminated May 2026 due to localized airway tolerability limits).
+1. **BEACON-CF (`NCT05668741`)**: ClinicalTrials.gov Phase 1/2 study of VX-522 inhaled mRNA in adults with cystic fibrosis (`overall_status: COMPLETED`, `completion_date: 2026-09-09`, `why_stopped: null`; reported sponsor discontinuation due to airway tolerability `[unverified]`).
 2. **ReCode Therapeutics RCT-2100**: Selective Organ Targeting (SORT) lipid nanoparticle platform for inhaled CFTR mRNA delivery.
 3. **Mucus Diffusion Kinetics**: Published particle-tracking microrheology demonstrating unhindered diffusion of $\le 100\text{ nm}$ neutral nanoparticles in human CF sputum.
 4. **Alveolar Macrophage Activation Dynamics**: Mechanistic evidence proving that CpG depletion and $\text{m1}\Psi$ incorporation abrogate pro-inflammatory IL-8 and TNF-$\alpha$ induction in primary human bronchial epithelial co-cultures.

@@ -2,7 +2,7 @@
 
 **Date**: 2026-10-17  
 **Track**: Track A (Biophysical Science & Curative Discovery)  
-**Answer Tier**: Tier T2 Certified (Script-verified biophysics, primary literature grounded, dual-family frontier review)  
+**Answer Tier**: T2 (provisional — script-verified in-silico biophysics, primary literature grounded)  
 **Author / Strategist**: Argon (Gemini 4 Argon / Pro, Chief Researcher Officer Strategist)  
 **Participating Council Agents**: Gemini 4 Argon (CRO Strategist) & Local Worker `qwen3.8:27b-64k` (Biophysical Modeling & Code Review)  
 **Associated Tasks**: `T-0147` (Inhaled Delivery Biophysics), `T-0151` (PTC Trimodal Kinetics), `T-0177`–`T-0179` (Proposed Cross-Domain Discovery Tasks)
@@ -11,9 +11,9 @@
 
 ## Executive Summary: Reframing the "Intractable" Stem Cell Bottleneck
 
-The grand challenge of a permanent, universal genetic cure for Cystic Fibrosis (CF) has converged upon a single biological reality: **the airway basal stem cell bottleneck**. 
+A central biophysical challenge for durable, mutation-agnostic genetic CFTR restoration in Cystic Fibrosis (CF) is **the airway basal stem cell delivery barrier**. 
 
-Following the May 2026 termination of the Phase 1/2 BEACON-CF trial (`NCT05668741`, inhaled VX-522 mRNA LNPs) due to dose-limiting airway inflammation, the gene therapy field has wrestled with the fact that non-integrating mRNA delivered to the apical surface cannot confer durable clinical cure without frequent, immunogenic re-dosing. Yet, the self-renewing stem cells that maintain the human pseudostratified airway epithelium—**basal cells (${\text{KRT5}}^+ / {\text{TP63}}^+$)**—reside on the basolateral side of intact apical tight junctions, completely insulated from the airway lumen.
+Following completion of the Phase 1/2 BEACON-CF trial (`NCT05668741`, inhaled VX-522 mRNA LNPs; registry `overall_status: COMPLETED`, `completion_date: 2026-09-09`, `why_stopped: null`; reported sponsor program discontinuation due to airway inflammation `[unverified]`), non-integrating mRNA delivered to the apical surface remains limited by the need for repeated dosing. Yet, the self-renewing stem cells that maintain the human pseudostratified airway epithelium—**basal cells (${\text{KRT5}}^+ / {\text{TP63}}^+$)**—reside on the basolateral side of intact apical tight junctions, completely insulated from the airway lumen.
 
 The traditional mindset treats this as a binary deadlock: either develop a "magic bullet" vector that somehow passes through tight junctions unhindered, or accept lifelong repeat aerosol dosing.
 
@@ -63,7 +63,7 @@ flowchart TD
 
 ### Why Apical Aerosol Delivery Hit a Wall (The VX-522 Failure Analysis)
 
-The Phase 1/2 BEACON-CF trial (`NCT05668741`) tested aerosolized VX-522 mRNA LNPs in adults with Cystic Fibrosis. Its termination in May 2026 revealed three biological realities:
+The Phase 1/2 BEACON-CF trial (`NCT05668741`, registry `overall_status: COMPLETED`, `why_stopped: null`; reported sponsor discontinuation `[unverified]`) tested aerosolized VX-522 mRNA LNPs in adults with Cystic Fibrosis and highlights three biophysical constraints:
 1. **The Ephemeral Lifetime of Apical Epithelial Cells**: Ciliated (${\text{FOXJ1}}^+$) and goblet (${\text{MUC5AC}}^+$) cells turn over every 30 to 90 days. Non-integrating mRNA delivered exclusively to apical cells requires perpetual monthly administration.
 2. **Macrophage Hyper-Reactivity in Neutrophilic Airways**: CF airways are populated by primed alveolar macrophages and active neutrophil elastase ($[{\text{NE}}] > 10\text{--}100\ \mu\text{M}$). Conventional ionizable lipids and exogenous mRNA trigger endosomal pattern recognition receptors (TLR3, TLR7, TLR8), inducing acute bronchospasms and neutrophilic infiltration.
 3. **The Tight Junction Impasse**: Basal stem cells (${\text{KRT5}}^+ / {\text{TP63}}^+$) are buried beneath the columnar layer, attached to the basal lamina. Apical tight junctions (claudin-1, claudin-3, claudin-4, occludin, and ZO-1) maintain a transepithelial electrical resistance (${\text{TEER}} > 1000\ \Omega\cdot\text{cm}^2$) and an absolute paracellular pore cutoff of **$0.8\text{--}1.5\ \text{nm}$**. Intact tight junctions physically prevent nanoparticles ($50\text{--}120\ \text{nm}$) and viral capsids ($25\text{--}100\ \text{nm}$) from reaching the basal stem cell compartment.
@@ -259,7 +259,7 @@ To translate this council deliberation into verifiable engineering execution, we
 
 Per `cf-research-context` and the lab's anti-hallucination standards:
 - **Observed**:
-  1. The clinical termination of the Phase 1/2 BEACON-CF trial (`NCT05668741`, VX-522 mRNA LNPs) in May 2026 was driven by localized airway tolerability limits and inflammatory responses, observed directly in the trial registry record.
+  1. The Phase 1/2 BEACON-CF trial (`NCT05668741`, VX-522 mRNA LNPs) has registry `overall_status: COMPLETED` (`completion_date: 2026-09-09`, `why_stopped: null`); any claim that the program was discontinued due to localized airway inflammation is `[unverified]` in the registry record.
   2. Apical tight junctions in human airway epithelium restrict paracellular diffusion of solutes $> 1\text{--}1.5\ \text{nm}$, with baseline ${\text{TEER}} > 500\text{--}2000\ \Omega\cdot\text{cm}^2$.
   3. C-CPE enterotoxin fragments bind claudin-3 and claudin-4 with dissociation constants $K_D \approx 10\text{--}50\ \text{nM}$ (PDB `2QUO`, `3AMR`), producing reversible reduction in transepithelial resistance.
   4. Lineage-tracing experiments in mouse trachea and human ALI cultures establish that ${\text{SCGB1A1}}^+$ secretory cells dedifferentiate into multipotent ${\text{KRT5}}^+ / {\text{TP63}}^+$ basal cells upon injury or Notch signaling inhibition (Tata et al. 2013).

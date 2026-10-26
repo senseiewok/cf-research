@@ -2,7 +2,7 @@
 
 **Chief Researcher Officer Sentinel Audit & Proactive Discovery Engine**  
 *Sensei Ewok CF Lab — Track A: Biophysical Science & Cure Discovery*  
-*Certification: Answer Tier T2 Certified (Open-access primary literature, RCSB PDB structures, ClinicalTrials.gov API v2)*
+*Certification: Answer Tier T2 (provisional) (Open-access primary literature, RCSB PDB structures, ClinicalTrials.gov API v2)*
 
 ---
 

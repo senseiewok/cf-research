@@ -120,7 +120,7 @@ flowchart TD
 ### Track A: Biophysical Science & Cure Discovery (Molecular Integrity)
 
 1. **Aerosol SORT-LNP Delivery Biophysics (Overcoming Mucus & Macrophage Clearance)**:
-   - *Target Problem*: Systemic and inhaled genetic therapies (highlighted by the discontinuation of BEACON-CF `NCT05668741`) encounter the severe barrier of dehydrated, hyperviscous CF sputum—a dense crosslinked mesh of MUC5AC, MUC5B, and extruded neutrophil extracellular traps (NETs / eDNA).
+   - *Target Problem*: Systemic and inhaled genetic therapies (highlighted by reported sponsor discontinuation `[unverified]` following BEACON-CF `NCT05668741`, registry `overall_status: COMPLETED`) encounter the severe barrier of dehydrated, hyperviscous CF sputum—a dense crosslinked mesh of MUC5AC, MUC5B, and extruded neutrophil extracellular traps (NETs / eDNA).
    - *Biophysical Constraints & Design Rules*:
      - **Hydrodynamic Diameter**: Maintained at **$50\text{--}100\ \text{nm}$**. Given native CF sputum pore cutoffs of $100\text{--}200\ \text{nm}$, nanoparticles $>100\ \text{nm}$ suffer irreversible steric trapping.
      - **Surface Charge (Zeta Potential)**: Restricted to **$-5\ \text{to}\ +5\ \text{mV}$** (near-neutral). Cationic formulations bind polyanionic mucin oligosaccharides and DNA; high negative charges trigger rapid electrostatic expulsion.

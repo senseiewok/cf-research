@@ -2,7 +2,7 @@
 
 **Chief Researcher Officer Sentinel Audit & Proactive Discovery Engine**  
 *Sensei Ewok CF Lab — Track A: Biophysical Science & Cure Discovery*  
-*Certification: Answer Tier T2 Certified (Open-access primary literature, RCSB PDB structures, ClinicalTrials.gov API v2, openFDA SPL)*
+*Certification: Answer Tier T2 (provisional) (Open-access primary literature, RCSB PDB structures, ClinicalTrials.gov API v2, openFDA SPL)*
 
 ---
 
@@ -350,7 +350,7 @@ senseiewok.ai/cf/delivery/ (EN / es-MX Parity)"]
    - For suppressor tRNA: $\Phi_{\text{cognate}} \in [0.60, 0.95]$ depending on suppressor tRNA aminoacylation fidelity.
    Transepithelial short-circuit current ($\Delta I_{\text{sc}}$ in $\mu\text{A}/\text{cm}^2$):
    $$\Delta I_{\text{sc}} = \Delta I_{\text{sc,WT}} \cdot \left(\frac{[\text{Band C}]}{[\text{Band C}]_{\text{WT}}}\right) \cdot \left(\frac{P_{o,\text{basal}}}{P_{o,\text{WT}}}\right)$$
-   Where clinical curative benchmark threshold $\Delta I_{\text{sc}} \ge 10.0\%\ \Delta I_{\text{sc,WT}}$ is achieved when functional Band C reaches $\ge 12.5\%$ of wild-type levels.
+   Where the in-silico reference threshold $\Delta I_{\text{sc}} \ge 10.0\%\ \Delta I_{\text{sc,WT}}$ is achieved when functional Band C reaches $\ge 12.5\%$ of wild-type levels.
 
 #### Parameter Provenance & Epistemic Rigor Ledger (T-0440):
 

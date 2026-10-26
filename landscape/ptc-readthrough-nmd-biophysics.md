@@ -120,7 +120,7 @@ Where:
 | **Aminoglycoside Monotherapy (G418 / ELX-02)** | $< 15\%$ | $\sim 2–4\%$ | $< 0.5\%$ WT | **$1.0–2.5\%$** | Failed Phase 2/3 (below 10% threshold) |
 | **Suppressor tRNA Alone** | $< 15\%$ | $\sim 10–15\%$ | $\sim 1.5–2.0\%$ WT | **$3.5–5.0\%$** | Sub-therapeutic; NMD limits substrate |
 | **SMG1i + Readthrough Agent** | $60–80\%$ | $\sim 10–15\%$ | $\sim 6–8\%$ WT | **$8.0–11.0\%$** | Marginal threshold; gating unpotentiated |
-| **Tri-Modal Therapy (SMG1i + Suppressor tRNA + VX-770)** | **$60–80\%$** | **$\ge 15\%$** | **$\ge 10\%$ WT** | **$\ge 15–25\%$** | **Curative Benchmark Exceeded** ($\ge 10\%$ WT) |
+| **Tri-Modal Therapy (SMG1i + Suppressor tRNA + VX-770)** | **$60–80\%$** | **$\ge 15\%$** | **$\ge 10\%$ WT** | **$\ge 15–25\%$** | **In-Silico Reference Benchmark Exceeded** ($\ge 10\%$ WT) |
 
 ---
 

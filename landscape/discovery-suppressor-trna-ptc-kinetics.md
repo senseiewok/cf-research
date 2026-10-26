@@ -218,7 +218,7 @@ $$\text{Synergy Quotient} = \frac{13.91\%}{2.92\%} = \mathbf{4.76\times \text{ (
 +---------------------------+------------------+-----------------+---------------+---------------------+
 | Untreated W1282X          | 33.3%            | 1.8%            | ~0.6%         | ~1.1% (Non-funct)   |
 | Suppressor tRNA Monother. | 33.3%            | 24.0%           | ~8.0%         | ~14.4% (Borderline) |
-| Bimodal (tRNA + SMG1i)    | 84.5%            | 24.0%           | 20.3%         | 36.5% (CURATIVE)    |
+| Bimodal (tRNA + SMG1i)    | 84.5%            | 24.0%           | 20.3%         | 36.5% (>=10% WT ref)|
 +----------------------------------------------------------------------------------------------------+
 ```
 
@@ -233,7 +233,7 @@ Transepithelial apical chloride conductance is modeled via the Goldman-Hodgkin-K
 $$\Delta I_{\text{sc}} = N_{\text{channel}} \times \gamma \times P_o \times \frac{F^2 V_m}{R T} \frac{[\text{Cl}^-]_{\text{cyt}} - [\text{Cl}^-]_{\text{lumen}} e^{-F V_m / RT}}{1 - e^{-F V_m / RT}}$$
 where:
 - $N_{\text{channel}} \propto [\text{Band C}]_{\text{membrane}}$.
-- Single-channel conductance $\gamma = 8.5\text{ pS}$ for cognate Trp1282/Gly542 restored channels (verified against Cryo-EM coordinate models **PDB 6MSM** and **PDB 8EIQ**).
+- Single-channel conductance $\gamma = 8.5\text{ pS}$ assumed for cognate Trp1282/Gly542 restored channels in this in-silico model (structural pore geometry referenced from **PDB 6MSM** and **PDB 8EIQ**; conductance itself is an electrophysiological parameter, not derived from coordinates).
 - Open probability under cAMP stimulation alone: $P_o \approx 0.38$.
 - Open probability with allosteric potentiator Ivacaftor (VX-770): $P_o \approx 0.72$ (a $1.89\times$ gating amplification).
 
@@ -241,7 +241,7 @@ Consequently, the bimodal rescue regimen achieves:
 - **G542X**: $\Delta I_{\text{sc}} = 13.9\% \times 1.89 \approx \mathbf{25.0\% \text{ of Wild-Type } \Delta I_{\text{sc}}}$.
 - **W1282X**: $\Delta I_{\text{sc}} = 20.3\% \times 1.89 \approx \mathbf{36.5\% \text{ of Wild-Type } \Delta I_{\text{sc}}}$.
 
-Both alleles comfortably exceed the clinically established curative threshold of **$\ge 10–15\%$ WT $\Delta I_{\text{sc}}$**, which in clinical trials is associated with sweat chloride normalization ($< 60\text{ mmol/L}$) and long-term stabilization of lung function ($\text{ppFEV}_1$).
+In this in-silico projection, both alleles exceed the **$\ge 10–15\%$ WT $\Delta I_{\text{sc}}$** in-vitro electrophysiological reference benchmark; in clinical studies of CFTR modulators, reductions in sweat chloride below the $60\text{ mmol/L}$ CF diagnostic cutoff (Farrell et al., 2017; normal reference range is $< 30\text{ mmol/L}$) have been studied alongside $\text{ppFEV}_1$ outcomes (in-silico model output, not clinical proof).
 
 ---
 

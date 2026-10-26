@@ -1,6 +1,6 @@
 # Curative Mission Grounding & Alignment Brief (2026-10-15)
 
-**Cadence**: Turbo Mode Cadence | **Sentinel**: `scheduled-chief-researcher` | **CRO Strategist**: Argon (Gemini 4 Argon / Pro) | **Local Worker**: `qwen3.8:27b-64k` (Ollama) | **Answer Tier**: Tier T2 Certified (Script-verified, primary-sourced, dual-model validated) | **Scope**: `tasks/board.json` (164 tasks), `tasks/HUMAN-TASKS.md`, `cf-research/sources/catalog.yaml`, ClinicalTrials.gov API v2, Crossref Retraction Watch, openFDA Drug Labels SPL.
+**Cadence**: Turbo Mode Cadence | **Sentinel**: `scheduled-chief-researcher` | **CRO Strategist**: Argon (Gemini 4 Argon / Pro) | **Local Worker**: `qwen3.8:27b-64k` (Ollama) | **Answer Tier**: Tier T2 (provisional) (Script-verified, primary-sourced, dual-model validated) | **Scope**: `tasks/board.json` (164 tasks), `tasks/HUMAN-TASKS.md`, `cf-research/sources/catalog.yaml`, ClinicalTrials.gov API v2, Crossref Retraction Watch, openFDA Drug Labels SPL.
 
 ---
 
@@ -131,7 +131,7 @@ flowchart TD
 ### Track A Milestone Assessment: Biophysical Science & Cure Discovery
 
 1. **Aerosol SORT-LNP Formulation & Biophysics (VX-522 Delivery Bypass)**:
-   - *Target Problem*: Overcoming the pulmonary delivery failure and dense sputum barrier that resulted in the termination of the Vertex/Moderna inhaled mRNA trial BEACON-CF (`NCT05668741`).
+   - *Target Problem*: Overcoming the pulmonary delivery failure and dense sputum barrier that challenged the Vertex/Moderna inhaled mRNA trial BEACON-CF (`NCT05668741`, registry `overall_status: COMPLETED`, `why_stopped: null`; reported sponsor program discontinuation `[unverified]`).
    - *Biophysical Specifications*:
      - **Hydrodynamic Diameter**: Strictly **50–100 nm** to penetrate through the pathological CF sputum mesh (steric mesh cutoff $\approx 100\ \text{nm}$).
      - **Surface Charge**: Zeta potential constrained to **$-5\ \text{to}\ +5\ \text{mV}$** (near-neutral) to prevent electrostatic entrapment by polyanionic mucin glycoprotein strands (MUC5AC/MUC5B) and extracellular DNA polymers.
@@ -194,7 +194,7 @@ The Chief Researcher Officer Strategist certifies compliance with the workspace'
 
 | Guardrail Requirement | Audit Status | Certification Details |
 | :--- | :--- | :--- |
-| **Answer Tier Declaration** | **Tier T2 Certified** | All synthesized metrics, study counts, and biophysical parameters are backed by deterministic script runs, authenticated API endpoints, and dual-model validation (Gemini 4 Argon + Ollama `qwen3.8:27b-64k`). |
+| **Answer Tier Declaration** | **Tier T2 (provisional)** | All synthesized metrics, study counts, and biophysical parameters are backed by deterministic script runs, authenticated API endpoints, and dual-model validation (Gemini 4 Argon + Ollama `qwen3.8:27b-64k`). |
 | **Widening Words Scope Record** | **BOUNDED & AUDITED** | Prohibited ungrounded widening words (`only`, `novel`, `all`, `cures`, `first`) are strictly bounded by audited databases: ClinicalTrials.gov API v2 query date 2026-10-15 (1,478 studies, 131 terminated); Crossref Retraction Watch query date 2026-10-15 (8 catalog DOIs); openFDA Drug Labels SPL query date 2026-10-15 (5 NDA labels). Outside this scope, assertions of completeness or uniqueness are explicitly disclaimed. |
 | **Dignity & Hope Invariant** | **ZERO EXTRAPOLATION** | The lab produces research software and biophysical models, never individualized clinical advice. Zero cure timelines or guaranteed treatment outcomes are ever promised. Missing endpoints are recorded strictly as `not stated`. |
 

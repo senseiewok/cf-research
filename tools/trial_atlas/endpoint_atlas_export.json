@@ -203,7 +203,7 @@
       "primary_endpoint": [
         "Safety and Tolerability as Assessed by Number of Participants With Adverse Events (AEs) and Serious Adverse Events (SAEs)"
       ],
-      "citation": "ClinicalTrials.gov NCT05668741 (Terminated)"
+      "citation": "ClinicalTrials.gov NCT05668741 (Completed; program discontinuation [unverified])"
     }
   ],
   "care_team_guide": {
@@ -436,5 +436,5 @@
     ],
     "clinician_review_gate": "Plain-language class notes stay unpublished until a clinician has read them (a person, not a model)."
   },
-  "export_sha256": "e72bb15d92ec89f2a53f11a8e9a5603dea8ba06b4216467bb67c49796dc81206"
+  "export_sha256": "2b1dc95ab7b97525d9dca9bdd77a8221b591eb12440db9a622424d0d69eb4a87"
 }

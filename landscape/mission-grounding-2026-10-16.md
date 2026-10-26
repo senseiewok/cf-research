@@ -1,6 +1,6 @@
 # Curative Mission Grounding & Alignment Brief (2026-10-16)
 
-**Cadence**: Turbo Mode Cadence | **Sentinel**: `scheduled-chief-researcher` | **CRO Strategist**: Argon (Gemini 4 Argon / Pro) | **Local Worker**: `qwen3.8:27b-64k` (Ollama) | **Answer Tier**: Tier T2 Certified (Script-verified, primary-sourced, dual-model validated) | **Scope**: `tasks/board.json` (164 tasks), `tasks/HUMAN-TASKS.md`, `cf-research/sources/catalog.yaml`, ClinicalTrials.gov API v2, Crossref Retraction Watch, openFDA Drug Labels SPL.
+**Cadence**: Turbo Mode Cadence | **Sentinel**: `scheduled-chief-researcher` | **CRO Strategist**: Argon (Gemini 4 Argon / Pro) | **Local Worker**: `qwen3.8:27b-64k` (Ollama) | **Answer Tier**: Tier T2 (provisional) (Script-verified, primary-sourced, dual-model validated) | **Scope**: `tasks/board.json` (164 tasks), `tasks/HUMAN-TASKS.md`, `cf-research/sources/catalog.yaml`, ClinicalTrials.gov API v2, Crossref Retraction Watch, openFDA Drug Labels SPL.
 
 ---
 
@@ -131,8 +131,8 @@ flowchart TD
 
 ### Track A Milestone Assessment: Biophysical Science & Cure Discovery
 
-1. **Aerosol SORT-LNP Delivery Biophysics (Overcoming BEACON-CF Termination)**:
-   - *Target Problem*: Systemic and inhaled genetic therapies have repeatedly failed due to the impenetrable macromolecular barrier of CF sputum. The recent termination of the Vertex/Moderna inhaled mRNA trial BEACON-CF (`NCT05668741`) underscores that without solving mucus penetration and endosomal escape, genetic payloads cannot reach basal airway epithelial cells.
+1. **Aerosol SORT-LNP Delivery Biophysics (Overcoming Inhaled LNP Tolerability Barriers)**:
+   - *Target Problem*: Systemic and inhaled genetic therapies have repeatedly failed due to the impenetrable macromolecular barrier of CF sputum. The reported sponsor discontinuation following the Vertex/Moderna inhaled mRNA trial BEACON-CF (`NCT05668741`, registry `overall_status: COMPLETED`, `why_stopped: null`; discontinuation rationale `[unverified]`) underscores that without solving mucus penetration and endosomal escape, genetic payloads cannot reach basal airway epithelial cells.
    - *Biophysical Constraints*:
      - **Hydrodynamic Diameter**: Constrained strictly to **$50\text{--}100\ \text{nm}$**. CF sputum forms a dense steric mesh with pore cutoffs between $100\text{--}200\ \text{nm}$; particles $> 100\ \text{nm}$ undergo total steric immobilization.
      - **Surface Charge (Zeta Potential)**: Maintained within **$-5\ \text{to}\ +5\ \text{mV}$** (near-neutral). Cationic surfaces bind irreversibly to polyanionic mucin glycoproteins (MUC5AC and MUC5B) and extruded extracellular DNA polymers, while strong anionic surfaces encounter electrostatic repulsion.
@@ -199,7 +199,7 @@ The Chief Researcher Officer Strategist certifies compliance with the workspace'
 
 | Guardrail Requirement | Audit Status | Certification Details |
 | :--- | :--- | :--- |
-| **Answer Tier Declaration** | **Tier T2 Certified** | All synthesized metrics, study counts, and biophysical parameters are backed by deterministic script runs, authenticated API endpoints, and dual-family frontier validation (Gemini 4 Argon + Ollama `qwen3.8:27b-64k`). |
+| **Answer Tier Declaration** | **Tier T2 (provisional)** | All synthesized metrics, study counts, and biophysical parameters are backed by deterministic script runs, authenticated API endpoints, and dual-family frontier validation (Gemini 4 Argon + Ollama `qwen3.8:27b-64k`). |
 | **Widening Words Scope Record** | **BOUNDED & AUDITED** | Prohibited ungrounded widening words (`only`, `novel`, `all`, `cures`, `first`) are strictly bounded by audited databases: ClinicalTrials.gov API v2 query date 2026-10-16 (1,478 studies, 131 terminated); Crossref Retraction Watch query date 2026-10-16 (8 catalog DOIs); openFDA Drug Labels SPL query date 2026-10-16 (5 NDA labels). Outside this scope, assertions of completeness or uniqueness are explicitly disclaimed. |
 | **Dignity & Hope Invariant** | **ZERO EXTRAPOLATION** | The lab produces research software, open-source educational tooling, and biophysical models, never individualized clinical advice. Zero cure timelines or guaranteed treatment outcomes are ever promised. Missing endpoints are recorded strictly as `not stated`. |
 
