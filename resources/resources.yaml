@@ -3120,3 +3120,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-25
     status: active
+
+  - id: dass-nc-health-services
+    name: Public healthcare services and hospital guidance in New Caledonia
+    organisation: Direction des Affaires Sanitaires et Sociales de la Nouvelle-Calédonie
+    countries: [NC]
+    url: https://dass.gouv.nc/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: New Caledonia health department portal coordinating territorial healthcare administration, public hospital networks, and medical referral pathways across Noumea.
+    who_for: not_checked
+    format: online
+    lang: fr-NC
+    source_id: dass-nc-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: moh-vu-health-services
+    name: Public healthcare services and hospital guidance in Vanuatu
+    organisation: Ministry of Health, Republic of Vanuatu
+    countries: [VU]
+    url: https://moh.gov.vu/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Vanuatu health ministry portal providing clinical guidance, public healthcare coordination, and national hospital referral pathways across Port Vila.
+    who_for: not_checked
+    format: online
+    lang: en-VU
+    source_id: moh-vu-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: hngv-tl-tertiary-referral-care
+    name: Tertiary hospital care and pediatric referral services in Timor-Leste
+    organisation: Hospital Nacional Guido Valadares
+    countries: [TL]
+    url: https://hngv.ms.gov.tl/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National tertiary referral hospital in Dili coordinating specialized inpatient medicine, pediatric care, and clinical diagnostic services in Timor-Leste.
+    who_for: not_checked
+    format: online
+    lang: pt-TL
+    source_id: hngv-tl-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: chuk-bi-pediatric-referral-care
+    name: Pediatric referral care and university hospital services in Burundi
+    organisation: Centre Hospitalo-Universitaire de Kamenge
+    countries: [BI]
+    url: https://www.chuk.bi/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Burundi national university hospital portal directing patients and families to specialized pediatric care, diagnostic clinics, and referral services in Bujumbura.
+    who_for: not_checked
+    format: online
+    lang: fr-BI
+    source_id: chuk-bi-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: cuh-sy-pediatric-pulmonary-care
+    name: Pediatric referral care and specialized hospital guidance in Syria
+    organisation: Children's University Hospital Damascus
+    countries: [SY]
+    url: https://www.children-hospital.edu.sy/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Syrian specialized pediatric university hospital providing tertiary clinical care, pediatric pulmonary medicine, and outpatient referral services in Damascus.
+    who_for: not_checked
+    format: online
+    lang: ar-SY
+    source_id: cuh-sy-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active

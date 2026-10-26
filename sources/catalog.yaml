@@ -3243,6 +3243,66 @@ sources:
     claim_label: unverified
     notes: Official public healthcare and tertiary pediatric referral portal in Republic of the Congo; robots.txt allow (2026-10-25), manual access, link and summary only.
 
+  - id: dass-nc-resource-pages
+    title: Direction des Affaires Sanitaires et Sociales de Nouvelle-Calédonie portal (dass.gouv.nc)
+    publisher: Direction des Affaires Sanitaires et Sociales de la Nouvelle-Calédonie
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://dass.gouv.nc/
+    url: null
+    claim_label: unverified
+    notes: Official public healthcare administration and territorial hospital referral portal in New Caledonia; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: moh-vu-resource-pages
+    title: Ministry of Health Republic of Vanuatu portal (moh.gov.vu)
+    publisher: Ministry of Health, Republic of Vanuatu
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://moh.gov.vu/
+    url: null
+    claim_label: unverified
+    notes: Official public health authority and hospital referral portal in Vanuatu; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: hngv-tl-resource-pages
+    title: Hospital Nacional Guido Valadares portal (hngv.ms.gov.tl)
+    publisher: Hospital Nacional Guido Valadares, Timor-Leste
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://hngv.ms.gov.tl/
+    url: null
+    claim_label: unverified
+    notes: Official tertiary referral and university hospital portal in Timor-Leste; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: chuk-bi-resource-pages
+    title: Centre Hospitalo-Universitaire de Kamenge portal (chuk.bi)
+    publisher: Centre Hospitalo-Universitaire de Kamenge
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.chuk.bi/
+    url: null
+    claim_label: unverified
+    notes: Official national university teaching and referral hospital portal in Burundi; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: cuh-sy-resource-pages
+    title: Children's University Hospital Damascus portal (children-hospital.edu.sy)
+    publisher: Children's University Hospital, Damascus University
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.children-hospital.edu.sy/
+    url: null
+    claim_label: unverified
+    notes: Official tertiary pediatric referral and university teaching hospital portal in Syria; robots.txt allow (2026-10-25), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information
