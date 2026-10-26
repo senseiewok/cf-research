@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-177 to download by hand, 1 to ask for, 3 not to download.
+182 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -757,6 +757,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | nice-guidance | UK NICE Clinical Guidance and Technology Appraisals (NG78 Cystic Fibrosis and TA988) | [page](https://www.nice.org.uk/guidance/ng78) | link only | Terms read 2026-10-24 via read-page on https://www.nice.org.uk/terms-and-conditions (robots.txt 200, allowed). |
 
+### National University of Lesotho
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| nul-ls-resource-pages | National University of Lesotho website (www.nul.ls) | [page](https://www.nul.ls/) | link only | Official national university and health sciences faculty portal in Lesotho; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### Nederlandse Cystic Fibrosis Stichting
 
 | ID | What | Open | Save as | Notes |
@@ -859,11 +865,23 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | sinu-sb-resource-pages | Solomon Islands National University website (www.sinu.edu.sb) | [page](https://www.sinu.edu.sb/) | link only | Official national university and health sciences faculty portal in Solomon Islands; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
+### Somali National University
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| snu-so-resource-pages | Somali National University website (snu.edu.so) | [page](https://snu.edu.so/) | link only | Official public state university and medical faculty portal in Somalia; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### South African Cystic Fibrosis Association
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | sacfa-resource-pages | South African Cystic Fibrosis Association website (sacfa.org.za) | [page](https://www.sacfa.org.za/) | link only | Official national cystic fibrosis association in South Africa. |
+
+### State Medical University of Turkmenistan
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| tdlu-tm-resource-pages | State Medical University of Turkmenistan website (tdlu.edu.tm) | [page](https://tdlu.edu.tm/) | link only | Official state medical university portal in Turkmenistan; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
 ### Taiwan Foundation for Rare Disorders (財團法人罕見疾病基金會)
 
@@ -966,6 +984,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | ucad-sn-resource-pages | Université Cheikh Anta Diop de Dakar website (ucad.sn) | [page](https://www.ucad.sn/) | link only | Official CF or pediatric referral resource (Université Cheikh Anta Diop de Dakar (UCAD)); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Université de N'Djaména
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| un-td-resource-pages | Université de N'Djaména website (www.universite-ndjamena.td) | [page](https://www.universite-ndjamena.td/) | link only | Official public university and health sciences faculty portal in Chad; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
+### Université Gamal Abdel Nasser de Conakry
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| uganc-gn-resource-pages | Université Gamal Abdel Nasser de Conakry website (uganc.edu.gn) | [page](https://uganc.edu.gn/) | link only | Official public university and medical faculty portal in Guinea; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
 ### Vaincre la Mucoviscidose
 

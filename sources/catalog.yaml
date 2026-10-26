@@ -3423,6 +3423,66 @@ sources:
     claim_label: unverified
     notes: Official public university and medical faculty portal in Sudan; robots.txt allow (2026-10-26), manual access, link and summary only.
 
+  - id: tdlu-tm-resource-pages
+    title: State Medical University of Turkmenistan website (tdlu.edu.tm)
+    publisher: State Medical University of Turkmenistan
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://tdlu.edu.tm/
+    url: null
+    claim_label: unverified
+    notes: Official state medical university portal in Turkmenistan; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: uganc-gn-resource-pages
+    title: Université Gamal Abdel Nasser de Conakry website (uganc.edu.gn)
+    publisher: Université Gamal Abdel Nasser de Conakry
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://uganc.edu.gn/
+    url: null
+    claim_label: unverified
+    notes: Official public university and medical faculty portal in Guinea; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: snu-so-resource-pages
+    title: Somali National University website (snu.edu.so)
+    publisher: Somali National University
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://snu.edu.so/
+    url: null
+    claim_label: unverified
+    notes: Official public state university and medical faculty portal in Somalia; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: un-td-resource-pages
+    title: Université de N'Djaména website (www.universite-ndjamena.td)
+    publisher: Université de N'Djaména
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://www.universite-ndjamena.td/
+    url: null
+    claim_label: unverified
+    notes: Official public university and health sciences faculty portal in Chad; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: nul-ls-resource-pages
+    title: National University of Lesotho website (www.nul.ls)
+    publisher: National University of Lesotho
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://www.nul.ls/
+    url: null
+    claim_label: unverified
+    notes: Official national university and health sciences faculty portal in Lesotho; robots.txt allow (2026-10-26), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information
