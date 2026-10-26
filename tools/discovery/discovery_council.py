@@ -389,6 +389,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0445", "track": "Track A", "tier": "T2",
         "discipline": "microbiology_host", "persona": "researchers", "triage": "keep",
     },
+    "ali_airway_lnp_transfection_kinetics": {
+        "task": "T-0446", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
 }
 
 
