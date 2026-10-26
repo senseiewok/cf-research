@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `69` (plus 4 infrastructure scripts and 71 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `51`
+- **Total Verified Modules:** `74` (plus 4 infrastructure scripts and 76 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `56`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -16,7 +16,7 @@ python tools/discovery/discovery_council.py --audit-registry
 python tools/discovery/discovery_council.py --check-index
 ```
 
-## Structural Biology & CFTR Biophysics (`structural_biology` — 10 modules)
+## Structural Biology & CFTR Biophysics (`structural_biology` — 11 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -29,9 +29,10 @@ python tools/discovery/discovery_council.py --check-index
 | `nbd1_thermodynamics.py` | `T-0199` | `T2` | `keep` | Canonical workbench |
 | `pdi_redox_remodeling.py` | `T-0281` | `T2` | `archive` | Candidate for archive |
 | `ptc_cryoem_allostery.py` | `T-0217` | `T2` | `merge` | Merge into `cryoem_truncation_model.py` |
+| `slc26a9_tmem16a_bypass.py` | `T-0256` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_enac_synergy_model.py` | `T-0430` | `T2` | `keep` | Canonical workbench |
 
-## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 21 modules)
+## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 22 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -54,10 +55,11 @@ python tools/discovery/discovery_council.py --check-index
 | `ptc_erf_depletion_readthrough.py` | `T-0401` | `T2` | `keep` | Canonical workbench |
 | `split_intein_cftr_reconstitution.py` | `T-0393` | `T2` | `keep` | Canonical workbench |
 | `suppressor_trna_model.py` | `T-0216` | `T2` | `keep` | Canonical workbench |
+| `suppressor_trna_orthogonality.py` | `T-0394` | `T2` | `keep` | Canonical workbench |
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 27 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 30 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -77,12 +79,15 @@ python tools/discovery/discovery_council.py --check-index
 | `ev_basal_tropism.py` | `T-0234` | `T2` | `archive` | Candidate for archive |
 | `glycocalyx_charge_barrier_model.py` | `T-0351` | `T2` | `merge` | Merge into `glycocalyx_permeabilization_model.py` |
 | `glycocalyx_permeabilization_model.py` | `T-0291` | `T2` | `keep` | Canonical workbench |
+| `lentiviral_basal_integration_persistence.py` | `T-0407` | `T2` | `keep` | Canonical workbench |
 | `lnp_escape_dynamics.py` | `T-0285` | `T2` | `keep` | Canonical workbench |
 | `lnp_mucus_shear_shedding_kinetics.py` | `T-0439` | `T2` | `keep` | Canonical workbench |
 | `mechano_acoustic_delivery.py` | `T-0228` | `T2` | `keep` | Canonical workbench |
+| `mpp_obstruction_scaling.py` | `T-0244` | `T2` | `keep` | Canonical workbench |
 | `mrna_lnp_escape_model.py` | `T-0239` | `T2` | `merge` | Merge into `lnp_escape_dynamics.py` |
 | `mucus_cleavage_kinetics.py` | `T-0253` | `T2` | `merge` | Merge into `mucus_rheology.py` |
 | `mucus_rheology.py` | `T-0185` | `T2` | `keep` | Canonical workbench |
+| `nebulizer_shear_stress_integrity.py` | `T-0413` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_calcium_conductance_model.py` | `T-0392` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_conductance_model.py` | `T-0240` | `T2` | `merge` | Merge into `tmem16a_calcium_conductance_model.py` |
 | `transcytosis_model.py` | `T-0177` | `T2` | `keep` | Canonical workbench |
