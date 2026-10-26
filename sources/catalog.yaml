@@ -3123,6 +3123,66 @@ sources:
     claim_label: unverified
     notes: Specialized pediatric pulmonary referral hospital and clinical care center in Palestine; robots.txt allow (2026-10-25), manual access, link and summary only.
 
+  - id: tspccm-resource-pages
+    title: Taiwan Society of Pulmonary and Critical Care Medicine portal (www.tspccm.org.tw)
+    publisher: Taiwan Society of Pulmonary and Critical Care Medicine
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.tspccm.org.tw/
+    url: null
+    claim_label: unverified
+    notes: Official thoracic and critical care medicine society providing respiratory specialist guidance in Taiwan; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: moh-bt-resource-pages
+    title: Ministry of Health Bhutan public health portal (www.moh.gov.bt)
+    publisher: Ministry of Health, Royal Government of Bhutan
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://www.moh.gov.bt/
+    url: null
+    claim_label: unverified
+    notes: Official national health authority coordinating public healthcare and specialized pediatric referral care in Bhutan; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: sante-ga-resource-pages
+    title: Ministère de la Santé Gabon portal (sante.gouv.ga)
+    publisher: Ministère de la Santé Gabon
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://sante.gouv.ga/
+    url: null
+    claim_label: unverified
+    notes: Official public healthcare and tertiary pediatric referral portal in Gabon; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: sante-cd-resource-pages
+    title: Ministère de la Santé Publique RDC portal (sante.gouv.cd)
+    publisher: Ministère de la Santé Publique, Hygiène et Prévoyance Sociale RDC
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://sante.gouv.cd/
+    url: null
+    claim_label: unverified
+    notes: Official public health authority directing patients to tertiary university medical centers in the Democratic Republic of the Congo; robots.txt allow (2026-10-25), manual access, link and summary only.
+
+  - id: moh-lr-resource-pages
+    title: Ministry of Health Liberia public health portal (moh.gov.lr)
+    publisher: Ministry of Health Liberia
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-25
+    landing_page: https://moh.gov.lr/
+    url: null
+    claim_label: unverified
+    notes: Official national health authority coordinating specialized pediatric care and tertiary hospital guidance in Liberia; robots.txt allow (2026-10-25), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information

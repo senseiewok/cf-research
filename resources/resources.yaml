@@ -2961,3 +2961,83 @@ resources:
     last_checked: 2026-10-25
     status: active
 
+  - id: tspccm-tw-pulmonary-medicine
+    name: Pulmonary medicine and respiratory specialist guidance in Taiwan
+    organisation: Taiwan Society of Pulmonary and Critical Care Medicine
+    countries: [TW]
+    url: https://www.tspccm.org.tw/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Taiwanese thoracic society providing clinical pulmonary practice guidelines, respiratory specialist directories, and patient educational resources across Taiwan.
+    who_for: not_checked
+    format: online
+    lang: zh-TW
+    source_id: tspccm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: moh-bt-pediatric-referral-care
+    name: Pediatric specialist care and public healthcare services in Bhutan
+    organisation: Ministry of Health, Royal Government of Bhutan
+    countries: [BT]
+    url: https://www.moh.gov.bt/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Bhutanese Ministry of Health portal coordinating national public healthcare services and specialized tertiary pediatric referral care in Thimphu.
+    who_for: not_checked
+    format: online
+    lang: en-BT
+    source_id: moh-bt-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: sante-ga-pediatric-specialist-care
+    name: Pediatric specialty care and tertiary hospital guidance in Gabon
+    organisation: Ministère de la Santé Gabon
+    countries: [GA]
+    url: https://sante.gouv.ga/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Gabonese Ministry of Health portal directing families and clinicians to tertiary pediatric specialty care and national referral hospitals in Libreville.
+    who_for: not_checked
+    format: online
+    lang: fr-GA
+    source_id: sante-ga-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: sante-cd-pediatric-referral-care
+    name: Pediatric referral care and specialized hospital guidance in DR Congo
+    organisation: Ministère de la Santé Publique, Hygiène et Prévoyance Sociale RDC
+    countries: [CD]
+    url: https://sante.gouv.cd/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Congolese Ministry of Public Health portal guiding patients to tertiary university medical centers and specialized pediatric referral care across Kinshasa.
+    who_for: not_checked
+    format: online
+    lang: fr-CD
+    source_id: sante-cd-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
+  - id: moh-lr-pediatric-specialist-care
+    name: Pediatric specialist care and public healthcare services in Liberia
+    organisation: Ministry of Health Liberia
+    countries: [LR]
+    url: https://moh.gov.lr/
+    audience: [parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Liberian Ministry of Health portal coordinating national public healthcare services and specialized pediatric referral care at tertiary hospitals in Monrovia.
+    who_for: not_checked
+    format: online
+    lang: en-LR
+    source_id: moh-lr-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-25
+    status: active
+
