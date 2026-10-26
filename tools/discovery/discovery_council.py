@@ -385,6 +385,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0440", "track": "Track A", "tier": "T2",
         "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
     },
+    "phage_biofilm_penetration_coevolution": {
+        "task": "T-0445", "track": "Track A", "tier": "T2",
+        "discipline": "microbiology_host", "persona": "researchers", "triage": "keep",
+    },
 }
 
 
