@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-172 to download by hand, 1 to ask for, 3 not to download.
+177 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -125,6 +125,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cicm-ml-resource-pages | Centre d'Infectiologie Charles Mérieux du Mali website (www.cicm-mali.org) | [page](https://www.cicm-mali.org/) | link only | Official public biomedical and clinical diagnostic center in Mali; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Centre de Recherche Médicale et Sanitaire
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cermes-ne-resource-pages | Centre de Recherche Médicale et Sanitaire website (cermes.net) | [page](https://cermes.net/) | link only | Official public biomedical research and Pasteur Network diagnostic institute in Niger; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
 ### Centre Hospitalier Universitaire Mohammed VI Marrakech
 
@@ -847,6 +853,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cfasociacia-sk-resource-pages | Slovenská asociácia cystickej fibrózy website (cfasociacia.sk) | [page](https://www.cfasociacia.sk/) | link only | Official national cystic fibrosis patient association in Slovakia (Slovenská asociácia cystickej fibrózy - SCFA). |
 
+### Solomon Islands National University
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sinu-sb-resource-pages | Solomon Islands National University website (www.sinu.edu.sb) | [page](https://www.sinu.edu.sb/) | link only | Official national university and health sciences faculty portal in Solomon Islands; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### South African Cystic Fibrosis Association
 
 | ID | What | Open | Save as | Notes |
@@ -901,6 +913,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | unan-ni-resource-pages | Universidad Nacional Autónoma de Nicaragua website (unan.edu.ni) | [page](https://www.unan.edu.ni/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### University of Aden
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| aden-ye-resource-pages | University of Aden website (www.aden-univ.net) | [page](https://www.aden-univ.net/) | link only | Official public university and medical faculty portal in Yemen; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### University of Baghdad College of Medicine
 
 | ID | What | Open | Save as | Notes |
@@ -912,6 +930,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | uhs-la-resource-pages | University of Health Sciences Laos website (uhs.edu.la) | [page](https://uhs.edu.la/) | link only | Official health sciences university portal in Laos; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### University of Khartoum
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| uofk-sd-resource-pages | University of Khartoum website (uofk.edu) | [page](https://uofk.edu/) | link only | Official public university and medical faculty portal in Sudan; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
+### University of Medicine 2, Yangon
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| um2-mm-resource-pages | University of Medicine 2 Yangon website (um2ygn.edu.mm) | [page](https://um2ygn.edu.mm/) | link only | Official public medical university portal in Myanmar; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
 ### University of Namibia School of Medicine
 

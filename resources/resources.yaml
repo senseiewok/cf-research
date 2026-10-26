@@ -3280,3 +3280,82 @@ resources:
     basis: lead_only
     last_checked: 2026-10-25
     status: active
+  - id: um2-mm-clinical-education-guidance
+    name: National medical education and teaching hospital clinical guidance in Myanmar
+    organisation: University of Medicine 2, Yangon
+    countries: [MM]
+    url: https://um2ygn.edu.mm/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Public medical university in Yangon providing clinical training, specialized pediatric education, and diagnostic referral coordination across affiliated teaching hospitals in Myanmar.
+    who_for: not_checked
+    format: online
+    lang: my-MM
+    source_id: um2-mm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: sinu-sb-health-sciences-guidance
+    name: National health sciences education and clinical referral guidance in Solomon Islands
+    organisation: Solomon Islands National University
+    countries: [SB]
+    url: https://www.sinu.edu.sb/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National university in Honiara offering nursing and health sciences education, public health care guidance, and clinical training partnerships across Solomon Islands.
+    who_for: not_checked
+    format: online
+    lang: en-SB
+    source_id: sinu-sb-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: aden-ye-medical-faculty-guidance
+    name: Medical education and specialized hospital clinical guidance in Yemen
+    organisation: University of Aden
+    countries: [YE]
+    url: https://www.aden-univ.net/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Public university in Aden coordinating medical sciences education, clinical pediatric training, and tertiary hospital referral networks across southern Yemen.
+    who_for: not_checked
+    format: online
+    lang: ar-YE
+    source_id: aden-ye-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: cermes-ne-biomedical-diagnostics
+    name: Biomedical research and clinical biology diagnostics in Niger
+    organisation: Centre de Recherche Médicale et Sanitaire
+    countries: [NE]
+    url: https://cermes.net/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National biomedical institute in Niamey conducting epidemiological surveillance, specialized laboratory diagnostics, and clinical research within the Pasteur Network in Niger.
+    who_for: not_checked
+    format: online
+    lang: fr-NE
+    source_id: cermes-ne-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: uofk-sd-medical-faculty-guidance
+    name: Tertiary medical education and clinical hospital referral in Sudan
+    organisation: University of Khartoum
+    countries: [SD]
+    url: https://uofk.edu/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Public national university in Khartoum coordinating undergraduate and postgraduate medical education, specialized clinical diagnostics, and hospital referral services in Sudan.
+    who_for: not_checked
+    format: online
+    lang: ar-SD
+    source_id: uofk-sd-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active

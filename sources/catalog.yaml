@@ -3363,6 +3363,66 @@ sources:
     claim_label: unverified
     notes: Official public health institute and reference laboratory portal in Mauritania; robots.txt allow (2026-10-25), manual access, link and summary only.
 
+  - id: um2-mm-resource-pages
+    title: University of Medicine 2 Yangon website (um2ygn.edu.mm)
+    publisher: University of Medicine 2, Yangon
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://um2ygn.edu.mm/
+    url: null
+    claim_label: unverified
+    notes: Official public medical university portal in Myanmar; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: sinu-sb-resource-pages
+    title: Solomon Islands National University website (www.sinu.edu.sb)
+    publisher: Solomon Islands National University
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://www.sinu.edu.sb/
+    url: null
+    claim_label: unverified
+    notes: Official national university and health sciences faculty portal in Solomon Islands; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: aden-ye-resource-pages
+    title: University of Aden website (www.aden-univ.net)
+    publisher: University of Aden
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://www.aden-univ.net/
+    url: null
+    claim_label: unverified
+    notes: Official public university and medical faculty portal in Yemen; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: cermes-ne-resource-pages
+    title: Centre de Recherche Médicale et Sanitaire website (cermes.net)
+    publisher: Centre de Recherche Médicale et Sanitaire
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://cermes.net/
+    url: null
+    claim_label: unverified
+    notes: Official public biomedical research and Pasteur Network diagnostic institute in Niger; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: uofk-sd-resource-pages
+    title: University of Khartoum website (uofk.edu)
+    publisher: University of Khartoum
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://uofk.edu/
+    url: null
+    claim_label: unverified
+    notes: Official public university and medical faculty portal in Sudan; robots.txt allow (2026-10-26), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information
