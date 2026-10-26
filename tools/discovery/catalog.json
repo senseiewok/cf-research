@@ -6,40 +6,22 @@
     "researchers",
     "builders"
   ],
-<<<<<<< HEAD
-  "total_modules": 70,
+  "total_modules": 75,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 72,
+  "test_suites_count": 77,
   "persona_summary": {
-    "researchers": 69,
+    "researchers": 74,
     "builders": 1
   },
   "triage_summary": {
-    "keep": 52,
-=======
-  "total_modules": 74,
-  "infrastructure_modules_count": 4,
-  "test_suites_count": 76,
-  "persona_summary": {
-    "researchers": 73,
-    "builders": 1
-  },
-  "triage_summary": {
-    "keep": 56,
->>>>>>> origin/main
+    "keep": 57,
     "merge": 14,
     "archive": 4
   },
   "discipline_summary": {
-<<<<<<< HEAD
-    "structural_biology": 10,
-    "rna_gene_editing": 21,
-    "airway_delivery": 28,
-=======
     "structural_biology": 11,
     "rna_gene_editing": 22,
-    "airway_delivery": 30,
->>>>>>> origin/main
+    "airway_delivery": 31,
     "microbiology_host": 6,
     "clinical_trials": 3,
     "ai_verification": 2
@@ -428,13 +410,8 @@
     },
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
-<<<<<<< HEAD
-      "count": 28,
-      "keep_count": 21,
-=======
-      "count": 30,
-      "keep_count": 23,
->>>>>>> origin/main
+      "count": 31,
+      "keep_count": 24,
       "merge_count": 6,
       "archive_count": 1,
       "modules": [
