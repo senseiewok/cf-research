@@ -109,9 +109,10 @@ def get_default_scratch_dir() -> Path:
     # Note: in a worktree, REPO_ROOT may be .worktrees/cf-research/<branch>
     curr = REPO_ROOT
     for _ in range(5):
-        sibling = curr.parent / "cf-lab-files"
-        if sibling.is_dir() and not is_inside_repo(sibling):
-            return sibling / "scratch" / "resource_intake"
+        for folder_name in ("cf-lab-files", ".lab-files"):
+            sibling = curr.parent / folder_name
+            if sibling.is_dir() and not is_inside_repo(sibling):
+                return sibling / "scratch" / "resource_intake"
         curr = curr.parent
 
     # Fallback to system temp directory outside git repos

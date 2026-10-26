@@ -35,12 +35,9 @@ except ImportError:
 
 
 def compute_sha256(path: Path) -> str:
-    """Compute standard SHA-256 hex digest for a file."""
-    h = hashlib.sha256()
-    with open(path, "rb") as f:
-        while chunk := f.read(65536):
-            h.update(chunk)
-    return h.hexdigest()
+    """Compute LF-normalized SHA-256 hex digest for a file across OS checkouts."""
+    data = path.read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def verify_manifest(manifest_path: Path) -> Tuple[bool, Dict[str, Any]]:
