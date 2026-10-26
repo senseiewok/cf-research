@@ -1,6 +1,6 @@
 # Proposal: Decomposing Oversized Flagship Task T-0130 into Bounded Sentinel Tasks
 
-**Status**: proposed  
+**Status**: superseded (by `proposals/2026-10-16-trial-endpoint-atlas-decomposition.md`)  
 **Date**: 2026-10-15  
 **Author**: daily-research-sentinel (CRO Proactive Discovery)  
 **Parent Task**: `T-0130` ("CF trial endpoint atlas from a dated ClinicalTrials.gov snapshot (flagship showcase)", effort: 12-24h)  
