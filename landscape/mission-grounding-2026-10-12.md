@@ -6,7 +6,7 @@
 
 ## 1. Executive summary & lazy delta execution
 
-The Chief Researcher Officer grounding sentinel executed its bi-weekly grounding audit. Lazy delta check compared current board state against baseline: a major delta was detected with **15 newly registered tasks** ([`T-0147`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5400) through [`T-0161`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5940)) on 2026-10-12 covering generative curative discovery engines and defensive integrity sentinels. Following the board hygiene and branch-coordination cleanup, total board inventory stands at 161 tasks: 13 in progress (with active worktree branches recorded), 3 ready, 104 proposed, 30 completed (`done`), and 11 dropped (`dropped`).
+The Chief Researcher Officer grounding sentinel executed its bi-weekly grounding audit. Lazy delta check compared current board state against baseline: a major delta was detected with **15 newly registered tasks** ([`T-0147`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json) through [`T-0161`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json)) on 2026-10-12 covering generative curative discovery engines and defensive integrity sentinels. Following the board hygiene and branch-coordination cleanup, total board inventory stands at 161 tasks: 13 in progress (with active worktree branches recorded), 3 ready, 104 proposed, 30 completed (`done`), and 11 dropped (`dropped`).
 
 Zero tokens are burned during idle states. Because new scientific proposals were staged, this full deterministic grounding audit evaluated evidence quality, worktree coordination, and curative alignment.
 
@@ -79,9 +79,9 @@ flowchart TD
 Per lab policy, all autonomous models propose; **only the human maintainer sets tasks to `ready` or authorizes worktree merges**.
 
 1. **Recommended for immediate `ready` approval**:
-   - [`T-0147`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5400) (Inhaled delivery biophysics brief) — directly addresses the May 2026 VX-522 failure.
-   - [`T-0150`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5510)–[`T-0154`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5660) (Biophysical discovery engines: Cryo-EM, PTC readthrough, alternative conductance, organoid surrogates, phage steering).
-   - [`T-0156`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5740)–[`T-0158`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5820) (Retraction Watch / openFDA monitor, Trial Endpoint Atlas surveillance, and Site Health & Dignity sentinel).
+   - [`T-0147`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json) (Inhaled delivery biophysics brief) — directly addresses the May 2026 VX-522 failure.
+   - [`T-0150`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json)–[`T-0154`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json) (Biophysical discovery engines: Cryo-EM, PTC readthrough, alternative conductance, organoid surrogates, phage steering).
+   - [`T-0156`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json)–[`T-0158`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json) (Retraction Watch / openFDA monitor, Trial Endpoint Atlas surveillance, and Site Health & Dignity sentinel).
 2. **Active branch coordination verified**:
    - `site/showcase-2026-10-12` (`T-0148`, `T-0149`, `T-0160`) and `feat/antigravity-discovery-and-pr-rules` (`T-0155`, `T-0159`, `T-0161`) are tracked via the `"branch"` field in `tasks/board.json`.
 

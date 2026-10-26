@@ -1,6 +1,6 @@
 # Inhaled Delivery Biophysics: Overcoming the VX-522 Barrier for Genetic CFTR Therapy
 
-**Date**: 2026-10-14 | **Track**: Track A (Biophysical Science & Cure Discovery) | **Answer tier**: T2 (primary literature grounded, regulatory trial records) | **Associated Task**: [`T-0147`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json)
+**Date**: 2026-10-14 | **Track**: Track A (Biophysical Science & Cure Discovery) | **Answer tier**: T2 (primary literature grounded, regulatory trial records) | **Associated Task**: [`T-0147`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json)
 
 ---
 

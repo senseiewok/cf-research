@@ -16,7 +16,7 @@ This replaces the single draft in `landscape/registry-data-access.md` with one l
 ## Before sending: facts to fill in or check
 
 - Sender line: the lab's name and a lab-owned address. Never a personal address or the maintainer's name; the lab speaks for itself.
-- Recipient: copy each address from the report's own permissions or contact paragraph. The catalog does not hold them, and `info@cff.org` is named only for CFTR2, not for the registry.
+- Recipient: copy each address from the report's own permissions or contact paragraph. The catalog does not hold them, and the contact named in the publisher's terms is for CFTR2, not for the registry.
 - Re-read the report's copyright paragraph and note its date in the reply log below.
 - Do not attach or paste any report text beyond a short citation.
 

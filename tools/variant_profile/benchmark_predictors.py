@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import re
 import sys
 from pathlib import Path
@@ -33,8 +34,7 @@ from typing import Any
 HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parents[1]
 FIXTURES_DIR = HERE / "fixtures"
-MAIN_DOWNLOADS = Path(r"C:\senseiewok\repos\cf-research\sources\downloads")
-DOWNLOADS_DIR = (REPO_ROOT / "sources" / "downloads") if (REPO_ROOT / "sources" / "downloads" / "p13569.json").is_file() else MAIN_DOWNLOADS
+DOWNLOADS_DIR = Path(os.environ.get("CF_RESEARCH_DOWNLOADS", REPO_ROOT / "sources" / "downloads"))
 DEFAULT_OUT = REPO_ROOT / "data" / "cftr_variant_domain_benchmark.json"
 
 NOT_STATED = "not stated"
@@ -709,10 +709,11 @@ def build_variant_domain_benchmark(downloads_dir: Path = DOWNLOADS_DIR) -> dict[
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="CFTR Variant Predictor & Structural Domain Atlas Benchmark.")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT, help="Output JSON path")
+    parser.add_argument("--downloads", type=Path, default=DOWNLOADS_DIR, help="Path to sources/downloads directory (or set CF_RESEARCH_DOWNLOADS)")
     parser.add_argument("--check", action="store_true", help="Verify benchmark invariants without writing")
     args = parser.parse_args(argv)
 
-    bench = build_variant_domain_benchmark()
+    bench = build_variant_domain_benchmark(downloads_dir=args.downloads)
     sm = bench["summary_metrics"]
     if sm["total_clinvar_records_evaluated"] < 15:
         print(f"FAIL: expected >=15 ClinVar fixture records, got {sm['total_clinvar_records_evaluated']}", file=sys.stderr)

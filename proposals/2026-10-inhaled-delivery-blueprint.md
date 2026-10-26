@@ -3,7 +3,7 @@
 **Status**: Proposal & Biophysical Specification  
 **Date**: 2026-10-13  
 **Review Tier**: Elevated  
-**Associated Board Task**: [`T-0147`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5393)  
+**Associated Board Task**: [`T-0147`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json)  
 **Evidence Standard**: T2 (primary literature grounded, regulatory trial records)
 
 ---
@@ -103,4 +103,4 @@ The formulation specifications in this blueprint are grounded in the following p
 
 1. **Public Brief**: Synthesize an accessible public explainer on `senseiewok.ai/cf/delivery/` detailing why genetic delivery failed historically and how biophysical engineering overcomes the barrier.
 2. **Computational Verification**: Submit claims to `cf-research/tools/claims/check_claims.py` against primary NCT and DOI citations.
-3. **Variant Application**: Cross-reference delivery specifications with [`T-0151`](file:///C:/senseiewok/repos/cf-lab/tasks/board.json#L5549) to ensure the formulation carries dual mRNA and suppressor tRNA payloads.
+3. **Variant Application**: Cross-reference delivery specifications with [`T-0151`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json) to ensure the formulation carries dual mRNA and suppressor tRNA payloads.

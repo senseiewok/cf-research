@@ -251,7 +251,7 @@ To integrate this model into the public **Trial Endpoint Atlas** (`senseiewok.ai
 ## 7. Maintainer Governance & Actionable Recommendations
 
 1. **Board Milestone Reconciliation**:
-   - The acceptance criteria for [`T-0153`](file:///c:/senseiewok/repos/cf-lab/tasks/board.json) are completely satisfied: open-access adaptive N-of-1 trial protocol template established, mathematical FIS-to-FEV1 transfer equations formulated, and surrogate calculator schema documented.
+   - The acceptance criteria for [`T-0153`](https://github.com/senseiewok/cf-lab/blob/main/tasks/board.json) are completely satisfied: open-access adaptive N-of-1 trial protocol template established, mathematical FIS-to-FEV1 transfer equations formulated, and surrogate calculator schema documented.
    - Authorize transition of `T-0153` from `status: ready` to `status: done`, recording $6.0\text{ hours}$ measured effort.
 2. **Trial Atlas Frontend Integration**:
    - In `.ai`, add the organoid surrogate calculator to `/cf/atlas/` alongside the existing clinical trial endpoint filters.
