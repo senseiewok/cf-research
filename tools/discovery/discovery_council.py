@@ -393,6 +393,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0446", "track": "Track A", "tier": "T2",
         "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
     },
+    "tmem16a_enac_asl_cbf_dynamics": {
+        "task": "T-0444", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
     "lentiviral_basal_integration_persistence": {
         "task": "T-0407", "track": "Track A", "tier": "T2",
         "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
