@@ -17,9 +17,9 @@
   "total_proposed_quotes": 93,
   "valid_verbatim_quotes": 93,
   "quote_fidelity": 1.0,
-  "precision": 0.99,
-  "recall": 0.9802,
-  "f1": 0.9851,
+  "precision": 0.97,
+  "recall": 0.9898,
+  "f1": 0.9798,
   "per_class": {
    "lung_function_fev1": {
     "tp": 14,
@@ -92,14 +92,14 @@
     "f1": 1.0
    },
    "other_or_not_stated": {
-    "tp": 35,
-    "fp": 1,
-    "fn": 1,
-    "positives": 36,
+    "tp": 33,
+    "fp": 3,
+    "fn": 0,
+    "positives": 33,
     "predicted": 36,
-    "precision": 0.9722,
-    "recall": 0.9722,
-    "f1": 0.9722
+    "precision": 0.9167,
+    "recall": 1.0,
+    "f1": 0.9565
    }
   },
   "phase_distribution": {
@@ -236,7 +236,6 @@
    "description": "",
    "time_frame": "7 days",
    "ground_truth_classes": [
-    "other_or_not_stated",
     "safety_adverse_events"
    ],
    "proposer_tags": [
@@ -297,7 +296,7 @@
      "rule_id": "SAFE-AE"
     }
    ],
-   "agreement": true
+   "agreement": false
   },
   {
    "entry_id": "NCT01910415:P2",
@@ -2728,8 +2727,7 @@
    "description": "The number of times that the phenotypic features of low EBC pH ( high BMI (\\>30), low methacholine PC20 (\\<5), age, and bronchoalveolar lavage neutrophils) are also shared with participants that are found to have a low airway pH.",
    "time_frame": "Baseline, 3 months",
    "ground_truth_classes": [
-    "nutritional_bmi",
-    "other_or_not_stated"
+    "nutritional_bmi"
    ],
    "proposer_tags": [
     {
@@ -2764,7 +2762,7 @@
      "rule_id": "NUTR-02"
     }
    ],
-   "agreement": false
+   "agreement": true
   },
   {
    "entry_id": "NCT03617718:P3",
@@ -3233,8 +3231,7 @@
    "description": "",
    "time_frame": "15 days",
    "ground_truth_classes": [
-    "microbiology_cfu",
-    "other_or_not_stated"
+    "microbiology_cfu"
    ],
    "proposer_tags": [
     {
@@ -3294,7 +3291,7 @@
      "rule_id": "MICRO-02"
     }
    ],
-   "agreement": true
+   "agreement": false
   },
   {
    "entry_id": "NCT03460990:P1",
@@ -4395,5 +4392,5 @@
    "agreement": true
   }
  ],
- "key_sha256": "6a9fd930bfbd61eeb6b2fe2a6c418b2a0349b3a169c33f5a1847190e23f488a9"
+ "key_sha256": "4e9cd5a838c6fbbee00731072de2a04e97e96359b3debcaf11cffeeb62f35aa5"
 }

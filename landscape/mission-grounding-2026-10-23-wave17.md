@@ -2,7 +2,7 @@
 
 **Chief Researcher Officer Sentinel Audit & Proactive Discovery Engine**  
 *Sensei Ewok CF Lab — Track A: Biophysical Science & Cure Discovery*  
-*Certification: Answer Tier T2 Certified (Open-access primary literature, RCSB PDB structures, ClinicalTrials.gov API v2)*
+*Certification: Answer Tier T2 (provisional) (Open-access primary literature, RCSB PDB structures, ClinicalTrials.gov API v2)*
 
 ---
 
@@ -195,6 +195,6 @@ T-0395 U1 Decoy, T-0398 TMEM16A, T-0399 Split-Intein"]
 
 ## 4. Governance & Anti-Hallucination Compliance Certification
 
-- **Answer Tier**: Tier T2 Certified (deterministic verification, independent model review, primary source cross-grounding).
+- **Answer Tier**: Tier T2 (provisional) (deterministic verification, independent model review, primary source cross-grounding).
 - **NLM Compliance**: All registry metrics cite ClinicalTrials.gov API v2 with mandatory attribution. No clinical efficacy is inferred from administrative listing.
 - **DOIs & PDB IDs**: All cited DOIs verified in `sources/cite-check-ledger.jsonl`.

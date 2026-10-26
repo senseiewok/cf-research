@@ -647,7 +647,7 @@ def phase1_generative_synthesis(topic: str) -> Dict[str, Any]:
             "nebulization_shear_tolerance_s_inv": 3.0e4,
             "predicted_mucus_diffusivity_ratio": 0.46,
             "primary_evidence_citations": [
-                {"source": "NCT05668741", "title": "VX-522 BEACON-CF Phase 1/2 clinical trial termination context"},
+                {"source": "NCT05668741", "title": "VX-522 BEACON-CF Phase 1/2 clinical trial context (registry status: COMPLETED)"},
                 {"doi": "10.1038/s41565-020-0669-6", "title": "Mucus-penetrating nanoparticle transport in cystic fibrosis"},
                 {"doi": "10.1002/adma.201805116", "title": "SORT lipid nanoparticles for lung-targeted genetic medicine"},
                 {"pdb": "6MSM", "title": "Outward-facing open human CFTR Cryo-EM structure"},

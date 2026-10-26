@@ -155,7 +155,7 @@ The canonical taxonomy maps directly to the benchmark trials that established re
 | `NCT01807923` | **TRAFFIC** | Phase 3 | lumacaftor / ivacaftor | F508del homozygous ($\ge 12\ \text{yr}$) | Absolute change in ppFEV1 through Week 24 | Wainwright CE et al., *N Engl J Med* 2015;373:220-231 |
 | `NCT03525444` | **AURORA-44** | Phase 3 | elexacaftor / tezacaftor / ivacaftor | F508del heterozygous minimal function (F/MF) | Absolute change from baseline in percent predicted FEV1 (ppFEV1) | Middleton PG et al., *N Engl J Med* 2019;381:1809-1819 |
 | `NCT05033080` | **SKYLINE 102** | Phase 3 | vanzacaftor / tezacaftor / deutivacaftor | F508del heterozygous minimal function (F/MF) | Absolute change in percent predicted FEV1 through Week 24 | ClinicalTrials.gov NCT05033080 |
-| `NCT05668741` | **BEACON-CF** | Phase 1/2 | VX-522 (inhaled CFTR mRNA) | Adults with CF ineligible for modulators | Safety, tolerability (TEAEs/SAEs) and pharmacokinetics | ClinicalTrials.gov NCT05668741 (Status: TERMINATED) |
+| `NCT05668741` | **BEACON-CF** | Phase 1/2 | VX-522 (inhaled CFTR mRNA) | Adults with CF ineligible for modulators | Safety, tolerability (TEAEs/SAEs) and pharmacokinetics | ClinicalTrials.gov NCT05668741 (Status: COMPLETED; completion_date: 2026-09-09, why_stopped: null; sponsor program discontinuation [unverified]) |
 | `NCT00909727` | **ENVISION** | Phase 3 | ivacaftor | G551D pediatric subjects ($6\text{--}11\ \text{yr}$) | Absolute change in ppFEV1 and sweat chloride | Davies JC et al., *Am J Respir Crit Care Med* 2013;187:1219-1225 |
 
 ---

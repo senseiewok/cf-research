@@ -116,7 +116,7 @@ flowchart TD
         C4 --> C5["Ivacaftor (VX-770): Decouples Gating; Po: 0.08 --> 0.45"]
     end
 
-    C5 --> Curative_Outcome["Macroscopic Chloride Conductance:<br/>ΔIsc ≥ 11-16% WT (Curative Threshold Exceeded)"]
+    C5 --> Curative_Outcome["Macroscopic Chloride Conductance:<br/>ΔIsc ≥ 11-16% WT (>=10% WT In-Silico Reference Threshold)"]
 ```
 
 ### 2.1 Specific Target Inhibition for SMG1 Kinase (SMG1i-11 / Compound 11)

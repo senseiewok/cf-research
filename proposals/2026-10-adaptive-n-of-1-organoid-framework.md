@@ -13,7 +13,7 @@
 
 The advent of highly effective CFTR modulator therapies (such as elexacaftor/tezacaftor/ivacaftor and vanzacaftor/tezacaftor/deutivacaftor) has transformed the clinical landscape for individuals carrying at least one $F508del$ allele or approved responsive gating/residual function variants. However, approximately **10% of the global CF population** carries ultra-rare, unclassified, or non-responsive genotypes.
 
-Over **1,000 of the 2,100+ known CFTR variants** exist in fewer than 5 diagnosed individuals worldwide. Conventional regulatory approval pathways rely on randomized, double-blind, placebo-controlled Phase 3 clinical trials powered to detect changes in percent predicted forced expiratory volume in 1 second ($\Delta\text{ppFEV}_1$) across cohorts of dozens to hundreds of participants (e.g., $N=71$ in pediatric `NCT03691779`, $N=403$ in `NCT03525444`). For an individual with an ultra-rare variant (e.g., $R347H$, $N1303K$, $R334W$, or unique splicing/missense combinations), an adequately powered traditional clinical trial is **statistically and logistically impossible**.
+Hundreds of rare CFTR variants documented in public variant databases (such as CFTR2 and ClinVar) occur in very small patient cohorts worldwide (`[unverified: exact per-variant global case counts require CFTR2 source table verification]`). Conventional regulatory approval pathways rely on randomized, double-blind, placebo-controlled Phase 3 clinical trials powered to detect changes in percent predicted forced expiratory volume in 1 second ($\Delta\text{ppFEV}_1$) across cohorts of dozens to hundreds of participants (e.g., $N=71$ in pediatric `NCT03691779`, $N=403$ in `NCT03525444`). For an individual with an ultra-rare variant (e.g., $R347H$, $N1303K$, $R334W$, or unique splicing/missense combinations), an adequately powered traditional clinical trial is **statistically and logistically impossible**.
 
 ```mermaid
 flowchart TD
@@ -61,7 +61,7 @@ graph LR
     subgraph InVitro["In Vitro Organoid Swelling"]
         AUC["Delta-AUC120 (Normalized Swelling Units)"]
     end
-    subgraph InVivoSurrogates["Predicted In Vivo Clinical Outcomes"]
+    subgraph InVivoSurrogates["Published Cohort Biomarker Correlations (Berkers et al., 2020)"]
         SwCl["Sweat Chloride: Delta-SwCl (mmol/L)<br/>r = -0.71, P < 0.0001"]
         FEV1["Lung Function: Delta-ppFEV1 (%)<br/>r = 0.62, P < 0.001"]
     end

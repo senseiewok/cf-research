@@ -17,7 +17,7 @@ showcase_targets:
 
 # Multi-Registry CFTR Modulator Eligibility & Ultra-Rare Variant Denominators (2026 Dossier)
 
-**Date**: 2026-10-15 | **Track**: Track A / Track B | **Answer Tier**: Tier T2 Certified (Script-verified, primary-sourced, dual-model validated) | **Scope**: Verified 2024–2025 national registry data reports (`CFFPR`, `ECFSPR`, `UKCFR`, `CCFR`, `ACFDR`) and openFDA drug label records (`NDA 212273`, `NDA 218730`, `NDA 203188`, `NDA 206038`, `NDA 210491`).
+**Date**: 2026-10-15 | **Track**: Track A / Track B | **Answer Tier**: Tier T2 (provisional) (Script-verified, primary-sourced, dual-model validated) | **Scope**: Verified 2024–2025 national registry data reports (`CFFPR`, `ECFSPR`, `UKCFR`, `CCFR`, `ACFDR`) and openFDA drug label records (`NDA 212273`, `NDA 218730`, `NDA 203188`, `NDA 206038`, `NDA 210491`).
 
 ---
 

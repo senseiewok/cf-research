@@ -191,7 +191,7 @@ def compute_atlas_export(snapshot_path: Path = SNAPSHOT_JSON_PATH) -> dict:
                     "name": "BEACON-CF",
                     "modality": "VX-522 (inhaled CFTR mRNA)",
                     "population": "CF adults ineligible for CFTR modulators",
-                    "citation": "ClinicalTrials.gov NCT05668741 (Terminated)",
+                    "citation": "ClinicalTrials.gov NCT05668741 (Completed; program discontinuation [unverified])",
                 },
             ]
         ],
