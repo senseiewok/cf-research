@@ -79,7 +79,7 @@ jobs:
         working-directory: tools/cftr-model/tests
         run: python -m unittest discover -v
       - name: discovery models and index check
-        run: python -m unittest discover -s tools/discovery -v && python tools/discovery/discovery_council.py --check-index
+        run: python tools/discovery/discovery_council.py --check-index && python tools/discovery/discovery_council.py --falsify-all
       - name: benchmark suite tests
         run: python -m unittest discover -s tools/benchmark -v
       - name: checks_benchmark suite tests
