@@ -3517,3 +3517,68 @@ resources:
     basis: lead_only
     last_checked: 2026-10-26
     status: active
+  - id: msp-cf-health-ministry-guidance
+    name: National public health administration and clinical hospital guidance in the Central African Republic
+    organisation: Ministère de la Santé et de la Population
+    countries: [CF]
+    url: https://sante.gouv.cf/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Bangui directing public healthcare administration, disease surveillance, and hospital clinical referral networks across the Central African Republic.
+    who_for: not_checked
+    format: online
+    lang: fr-CF
+    source_id: msp-cf-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: efsth-gm-teaching-hospital-guidance
+    name: National tertiary hospital care and pediatric clinical referral in The Gambia
+    organisation: Edward Francis Small Teaching Hospital
+    countries: [GM]
+    url: https://efsth.gm/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National tertiary teaching hospital in Banjul providing specialized clinical care, pediatric inpatient services, and health professional education across The Gambia.
+    who_for: not_checked
+    format: online
+    lang: en-GM
+    source_id: efsth-gm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: minsabs-gq-health-ministry-guidance
+    name: National public health administration and hospital guidance in Equatorial Guinea
+    organisation: Ministerio de Sanidad y Bienestar Social
+    countries: [GQ]
+    url: https://guineasalud.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Malabo directing public healthcare policy, hospital administration, and disease prevention programs across Equatorial Guinea.
+    summary_es: Ministerio nacional de salud en Malabo que coordina políticas sanitarias, administración hospitalaria y programas de prevención en Guinea Ecuatorial.
+    who_for: not_checked
+    format: online
+    lang: es-GQ
+    source_id: minsabs-gq-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: minsap-gw-health-ministry-guidance
+    name: National healthcare governance and clinical referral coordination in Guinea-Bissau
+    organisation: Ministério da Saúde Pública da Guiné-Bissau
+    countries: [GW]
+    url: https://minsap.gw/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Bissau coordinating public healthcare governance, specialized hospital referral services, and disease control strategies across Guinea-Bissau.
+    who_for: not_checked
+    format: online
+    lang: pt-GW
+    source_id: minsap-gw-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
