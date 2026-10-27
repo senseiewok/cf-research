@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-191 to download by hand, 1 to ask for, 3 not to download.
+196 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -23,6 +23,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | akuh-pk-resource-pages | Aga Khan University Hospital Pakistan website (hospitals.aku.edu/pakistan) | [page](https://hospitals.aku.edu/pakistan) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Arabian Gulf University College of Medicine and Medical Sciences
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| agu-bh-resource-pages | Arabian Gulf University College of Medicine and Medical Sciences website (agu.edu.bh) | [page](https://www.agu.edu.bh/) | link only | Regional medical education and tertiary pediatric clinical training portal in Bahrain; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
 ### Asociación Civil Humberto Da Silva (Mis Chiquiticos)
 
@@ -553,6 +559,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | kifder-resource-pages | KifDer cystic fibrosis association website (kifder.org.tr) | [page](https://www.kifder.org.tr/) | link only | Official national cystic fibrosis patient solidarity association in Turkey (KifDer). |
 
+### KK Women's and Children's Hospital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kkh-sg-resource-pages | KK Women's and Children's Hospital website (kkh.com.sg) | [page](https://www.kkh.com.sg/) | link only | Official tertiary pediatric referral hospital and specialized respiratory care portal in Singapore; robots.txt allow (2026-10-26), manual access, link and summ… |
+
 ### Klinički centar Crne Gore
 
 | ID | What | Open | Save as | Notes |
@@ -757,6 +769,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | minsa-ao-resource-pages | Ministério da Saúde de Angola website (minsa.gov.ao) | [page](https://minsa.gov.ao/) | link only | Official CF or pediatric referral resource (Ministério da Saúde de Angola (MINSA)); robots.txt allow (2026-10-25), manual access, link and summary only. |
 
+### Ministério da Saúde de Cabo Verde
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| minsaude-cv-resource-pages | Ministério da Saúde de Cabo Verde website (minsaude.gov.cv) | [page](https://minsaude.gov.cv/) | link only | Official national health ministry and hospital clinical referral portal in Cabo Verde; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### Ministério da Saúde Pública da Guiné-Bissau
 
 | ID | What | Open | Save as | Notes |
@@ -865,6 +883,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | qsut-al-resource-pages | Qendra Spitalore Universitare Nënë Tereza Tiranë website (qsut.gov.al) | [page](https://qsut.gov.al/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### Queen Elizabeth Hospital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| qeh-bb-resource-pages | Queen Elizabeth Hospital website (qehconnect.com) | [page](https://www.qehconnect.com/) | link only | Official public tertiary hospital and pediatric clinical referral portal in Barbados; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### Respublika ixtisoslashtirilgan pediatriya ilmiy-amaliy tibbiyot markazi
 
 | ID | What | Open | Save as | Notes |
@@ -888,6 +912,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | senadis-py-resource-pages | Secretaría Nacional por los Derechos Humanos de las Personas con Discapacidad website (senadis.gov.py) | [page](https://senadis.gov.py/) | link only | Official Paraguayan national agency providing rehabilitation, social rights, and multidisciplinary support for disabling and chronic conditions. |
+
+### Servei Andorrà d'Atenció Sanitària
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| saas-ad-resource-pages | Servei Andorrà d'Atenció Sanitària website (saas.ad) | [page](https://www.saas.ad/) | link only | Official national public health agency and hospital clinical referral portal in Andorra; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
 ### Shahid Beheshti University of Medical Sciences
 
