@@ -3483,6 +3483,66 @@ sources:
     claim_label: unverified
     notes: Official national university and health sciences faculty portal in Lesotho; robots.txt allow (2026-10-26), manual access, link and summary only.
 
+  - id: uneswa-sz-resource-pages
+    title: University of Eswatini website (www.uneswa.ac.sz)
+    publisher: University of Eswatini
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://www.uneswa.ac.sz/
+    url: null
+    claim_label: unverified
+    notes: Official public university and health sciences faculty portal in Eswatini; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: kums-af-resource-pages
+    title: Kabul University of Medical Sciences website (kums.edu.af)
+    publisher: Kabul University of Medical Sciences (KUMS)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://kums.edu.af/
+    url: null
+    claim_label: unverified
+    notes: Official public medical university and tertiary teaching hospital portal in Afghanistan; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: sante-dj-resource-pages
+    title: Ministère de la Santé de Djibouti website (sante.gouv.dj)
+    publisher: Ministère de la Santé de la République de Djibouti
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://sante.gouv.dj/
+    url: null
+    claim_label: unverified
+    notes: Official national health ministry and clinical referral portal in Djibouti; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: mohs-sl-resource-pages
+    title: Ministry of Health and Sanitation of Sierra Leone website (mohs.gov.sl)
+    publisher: Ministry of Health and Sanitation of Sierra Leone (MoHS)
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://mohs.gov.sl/
+    url: null
+    claim_label: unverified
+    notes: Official national health ministry and pediatric clinical referral portal in Sierra Leone; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: moh-ss-resource-pages
+    title: Ministry of Health Republic of South Sudan website (moh.gov.ss)
+    publisher: Ministry of Health, Republic of South Sudan
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://moh.gov.ss/
+    url: null
+    claim_label: unverified
+    notes: Official national health ministry and clinical referral coordination portal in South Sudan; robots.txt allow (2026-10-26), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information

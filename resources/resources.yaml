@@ -3438,3 +3438,82 @@ resources:
     basis: lead_only
     last_checked: 2026-10-26
     status: active
+  - id: uneswa-sz-health-sciences-guidance
+    name: Health sciences education and clinical nursing guidance in Eswatini
+    organisation: University of Eswatini
+    countries: [SZ]
+    url: https://www.uneswa.ac.sz/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Public national university in Kwaluseni coordinating health sciences education, community nursing instruction, and clinical hospital referral partnerships across Eswatini.
+    who_for: not_checked
+    format: online
+    lang: en-SZ
+    source_id: uneswa-sz-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: kums-af-medical-university-guidance
+    name: National medical education and tertiary teaching hospital referral in Afghanistan
+    organisation: Kabul University of Medical Sciences
+    countries: [AF]
+    url: https://kums.edu.af/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Public medical university in Kabul coordinating undergraduate clinical education, specialized pediatric medicine instruction, and tertiary teaching hospital referral networks across Afghanistan.
+    who_for: not_checked
+    format: online
+    lang: fa-AF
+    source_id: kums-af-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: sante-dj-health-ministry-guidance
+    name: National public health administration and clinical hospital guidance in Djibouti
+    organisation: Ministère de la Santé de Djibouti
+    countries: [DJ]
+    url: https://sante.gouv.dj/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Djibouti coordinating public healthcare administration, specialized clinical services, and tertiary hospital referral networks across the republic.
+    who_for: not_checked
+    format: online
+    lang: fr-DJ
+    source_id: sante-dj-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: mohs-sl-health-ministry-guidance
+    name: National healthcare delivery and hospital referral guidance in Sierra Leone
+    organisation: Ministry of Health and Sanitation of Sierra Leone
+    countries: [SL]
+    url: https://mohs.gov.sl/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Freetown directing public health policy, clinical healthcare delivery, specialized pediatric guidelines, and tertiary hospital referral networks across Sierra Leone.
+    who_for: not_checked
+    format: online
+    lang: en-SL
+    source_id: mohs-sl-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: moh-ss-health-ministry-guidance
+    name: National healthcare governance and clinical referral coordination in South Sudan
+    organisation: Ministry of Health, Republic of South Sudan
+    countries: [SS]
+    url: https://moh.gov.ss/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Juba coordinating public healthcare governance, disease prevention strategies, and hospital clinical referral networks across South Sudan.
+    who_for: not_checked
+    format: online
+    lang: en-SS
+    source_id: moh-ss-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
