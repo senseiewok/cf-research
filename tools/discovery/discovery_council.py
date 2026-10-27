@@ -433,6 +433,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0456", "track": "Track A", "tier": "T2",
         "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
     },
+    "asl_osmotic_ciliary_transport": {
+        "task": "T-0459", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
 }
 
 
