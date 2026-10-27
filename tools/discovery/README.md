@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `87` (plus 4 infrastructure scripts and 89 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `69`
+- **Total Verified Modules:** `88` (plus 4 infrastructure scripts and 90 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `70`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -35,7 +35,7 @@ python tools/discovery/discovery_council.py --check-index
 | `slc26a9_tmem16a_bypass.py` | `T-0256` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_enac_synergy_model.py` | `T-0430` | `T2` | `keep` | Canonical workbench |
 
-## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 24 modules)
+## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 25 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -45,6 +45,7 @@ python tools/discovery/discovery_council.py --check-index
 | `aso_splice_model.py` | `T-0183` | `T2` | `merge` | Merge into `aso_splice_kinetics.py` |
 | `base_editing_cftr.py` | `T-0219` | `T2` | `merge` | Merge into `class1_prime_base_editing.py` |
 | `bridge_rna_minipromoter_coevolve.py` | `T-0427` | `T2` | `keep` | Canonical workbench |
+| `cftr_cryptic_splice_aso_kinetics.py` | `T-0470` | `T2` | `keep` | Canonical workbench |
 | `cftr_gquadruplex_stability_model.py` | `T-0316` | `T2` | `archive` | Candidate for archive |
 | `cftr_minigene_model.py` | `T-0207` | `T2` | `keep` | Canonical workbench |
 | `class1_prime_base_editing.py` | `T-0255` | `T2` | `keep` | Canonical workbench |
