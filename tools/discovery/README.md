@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `81` (plus 4 infrastructure scripts and 83 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `63`
+- **Total Verified Modules:** `82` (plus 4 infrastructure scripts and 84 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `64`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -33,7 +33,7 @@ python tools/discovery/discovery_council.py --check-index
 | `slc26a9_tmem16a_bypass.py` | `T-0256` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_enac_synergy_model.py` | `T-0430` | `T2` | `keep` | Canonical workbench |
 
-## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 23 modules)
+## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 24 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -50,6 +50,7 @@ python tools/discovery/discovery_council.py --check-index
 | `intronic_splice_foundation.py` | `T-0269` | `T2` | `keep` | Canonical workbench |
 | `minidna_evasion_model.py` | `T-0233` | `T2` | `archive` | Candidate for archive |
 | `mrna_hypoxia_translation_dynamics.py` | `T-0452` | `T2` | `keep` | Canonical workbench |
+| `mrna_poly_a_deadenylation_kinetics.py` | `T-0449` | `T2` | `keep` | Canonical workbench |
 | `mrna_translation_velocity.py` | `T-0272` | `T2` | `keep` | Canonical workbench |
 | `nmd_ptc_kinetics.py` | `T-0241` | `T2` | `merge` | Merge into `ptc_erf_depletion_readthrough.py` |
 | `prime_editing_cftr.py` | `T-0184` | `T2` | `merge` | Merge into `class1_prime_base_editing.py` |
