@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-201 to download by hand, 1 to ask for, 3 not to download.
+206 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -433,6 +433,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | idai-id-resource-pages | Ikatan Dokter Anak Indonesia (Indonesian Pediatric Society) website (www.idai.or.id) | [page](https://www.idai.or.id/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### Indira Gandhi Memorial Hospital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| igmh-gov-mv-resource-pages | Indira Gandhi Memorial Hospital website (igmh.gov.mv) | [page](https://www.igmh.gov.mv/) | link only | National public tertiary referral hospital in Male providing inpatient, pediatric, and respiratory clinical services across Maldives; robots.txt allow (2026-10… |
+
 ### INSERM (Orphanet)
 
 | ID | What | Open | Save as | Notes |
@@ -715,6 +721,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | moh-tt-resource-pages | Ministry of Health of Trinidad and Tobago website (health.gov.tt) | [page](https://health.gov.tt/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### Ministry of Health Seychelles
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| health-gov-sc-resource-pages | Ministry of Health Seychelles website (health.gov.sc) | [page](https://www.health.gov.sc/) | link only | Official national health ministry directing hospital networks and public healthcare services in Seychelles; robots.txt allow (2026-10-27), manual access, link… |
+
 ### Ministry of Health Sultanate of Oman
 
 | ID | What | Open | Save as | Notes |
@@ -744,6 +756,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | dominica-gov-dm-resource-pages | Ministry of Health, Wellness and Social Services website (dominica.gov.dm) | [page](https://dominica.gov.dm/) | link only | Official national public health ministry and clinical referral portal in Dominica; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
+### Ministry of Health, Wellness, Social Transformation and the Environment
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| health-gov-ag-resource-pages | Ministry of Health, Wellness, Social Transformation and the Environment website (health.gov.ag) | [page](https://health.gov.ag/) | link only | Official national health ministry coordinating public healthcare administration and clinical referrals in Antigua and Barbuda; robots.txt allow (2026-10-27), m… |
 
 ### Ministère de la Santé de la République de Djibouti
 
@@ -876,6 +894,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | oshsu-kg-resource-pages | Osh State University Medical Faculty website (www.oshsu.kg) | [page](https://www.oshsu.kg/) | link only | Official CF or pediatric referral resource (Osh State University Medical Faculty); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Ospedale Pediatrico Bambino Gesù
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ospedalebambinogesu-it-resource-pages | Ospedale Pediatrico Bambino Gesù website (ospedalebambinogesu.it) | [page](https://www.ospedalebambinogesu.it/) | link only | Official pediatric hospital of the Holy See providing specialized cystic fibrosis and pulmonary clinical care; robots.txt allow (2026-10-27), manual access, li… |
 
 ### Paediatric Association of Nigeria
 
@@ -1014,6 +1038,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | tsmu-ge-resource-pages | Tbilisi State Medical University website (tsmu.edu) | [page](https://tsmu.edu/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Te Marae Ora Cook Islands Ministry of Health
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| health-gov-ck-resource-pages | Te Marae Ora Cook Islands Ministry of Health website (health.gov.ck) | [page](https://www.health.gov.ck/) | link only | Official national health ministry directing hospital operations, primary care, and overseas medical referral in the Cook Islands; robots.txt allow (2026-10-27)… |
 
 ### Thai Rare Disease Foundation
 
