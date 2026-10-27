@@ -3543,6 +3543,54 @@ sources:
     claim_label: unverified
     notes: Official national health ministry and clinical referral coordination portal in South Sudan; robots.txt allow (2026-10-26), manual access, link and summary only.
 
+  - id: msp-cf-resource-pages
+    title: Ministère de la Santé et de la Population de la République Centrafricaine website (sante.gouv.cf)
+    publisher: Ministère de la Santé et de la Population
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://sante.gouv.cf/
+    url: null
+    claim_label: unverified
+    notes: Official national health ministry and hospital clinical referral portal in the Central African Republic; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: efsth-gm-resource-pages
+    title: Edward Francis Small Teaching Hospital website (efsth.gm)
+    publisher: Edward Francis Small Teaching Hospital
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://efsth.gm/
+    url: null
+    claim_label: unverified
+    notes: Official public tertiary teaching hospital and pediatric clinical referral portal in The Gambia; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: minsabs-gq-resource-pages
+    title: Ministerio de Sanidad y Bienestar Social de Guinea Ecuatorial website (guineasalud.org)
+    publisher: Ministerio de Sanidad y Bienestar Social
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://guineasalud.org/
+    url: null
+    claim_label: unverified
+    notes: Official national health ministry and hospital guidance portal in Equatorial Guinea; robots.txt allow (2026-10-26), manual access, link and summary only.
+
+  - id: minsap-gw-resource-pages
+    title: Ministério da Saúde Pública da Guiné-Bissau website (minsap.gw)
+    publisher: Ministério da Saúde Pública da Guiné-Bissau
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-26
+    landing_page: https://minsap.gw/
+    url: null
+    claim_label: unverified
+    notes: Official national health ministry and clinical referral coordination portal in Guinea-Bissau; robots.txt allow (2026-10-26), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information

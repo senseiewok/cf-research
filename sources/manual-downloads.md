@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-187 to download by hand, 1 to ask for, 3 not to download.
+191 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -282,6 +282,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | dubaihealth-ae-resource-pages | Dubai Health (Al Jalila Children’s Specialty Hospital Network) website (dubaihealth.ae) | [page](https://dubaihealth.ae/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Edward Francis Small Teaching Hospital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| efsth-gm-resource-pages | Edward Francis Small Teaching Hospital website (efsth.gm) | [page](https://efsth.gm/) | link only | Official public tertiary teaching hospital and pediatric clinical referral portal in The Gambia; robots.txt allow (2026-10-26), manual access, link and summary… |
 
 ### Eesti Tsüstilise Fibroosi Ühing
 
@@ -625,6 +631,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | minsalud-bo-resource-pages | Ministerio de Salud y Deportes de Bolivia website (minsalud.gob.bo) | [page](https://www.minsalud.gob.bo/) | link only | Official Bolivian Ministry of Health portal covering public hospital directories, Unified Health System (SUS) access, and national clinical programs. |
 
+### Ministerio de Sanidad y Bienestar Social
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| minsabs-gq-resource-pages | Ministerio de Sanidad y Bienestar Social de Guinea Ecuatorial website (guineasalud.org) | [page](https://guineasalud.org/) | link only | Official national health ministry and hospital guidance portal in Equatorial Guinea; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### Ministry of Health and Medical Services, Fiji
 
 | ID | What | Open | Save as | Notes |
@@ -703,6 +715,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | sante-bj-resource-pages | Ministère de la Santé du Bénin website (sante.gouv.bj) | [page](https://sante.gouv.bj/) | link only | Official CF or pediatric referral resource (Ministère de la Santé de la République du Bénin); robots.txt allow (2026-10-25), manual access, link and summary on… |
 
+### Ministère de la Santé et de la Population
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| msp-cf-resource-pages | Ministère de la Santé et de la Population de la République Centrafricaine website (sante.gouv.cf) | [page](https://sante.gouv.cf/) | link only | Official national health ministry and hospital clinical referral portal in the Central African Republic; robots.txt allow (2026-10-26), manual access, link and… |
+
 ### Ministère de la Santé et de la Population de la République du Congo
 
 | ID | What | Open | Save as | Notes |
@@ -738,6 +756,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | minsa-ao-resource-pages | Ministério da Saúde de Angola website (minsa.gov.ao) | [page](https://minsa.gov.ao/) | link only | Official CF or pediatric referral resource (Ministério da Saúde de Angola (MINSA)); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Ministério da Saúde Pública da Guiné-Bissau
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| minsap-gw-resource-pages | Ministério da Saúde Pública da Guiné-Bissau website (minsap.gw) | [page](https://minsap.gw/) | link only | Official national health ministry and clinical referral coordination portal in Guinea-Bissau; robots.txt allow (2026-10-26), manual access, link and summary on… |
 
 ### Mongolian National University of Medical Sciences (АШУҮИС)
 
