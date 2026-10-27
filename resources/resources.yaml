@@ -3661,3 +3661,82 @@ resources:
     basis: lead_only
     last_checked: 2026-10-26
     status: active
+  - id: chpg-mc-hospital-guidance
+    name: Public hospital care and specialized clinical services in Monaco
+    organisation: Centre Hospitalier Princesse Grace
+    countries: [MC]
+    url: https://www.chpg.mc/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Sole public hospital center in Monaco providing inpatient care, specialized respiratory services, emergency facilities, and clinical pediatric referrals across the principality.
+    who_for: not_checked
+    format: online
+    lang: fr-MC
+    source_id: chpg-mc-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: dominica-gov-dm-health-guidance
+    name: National public health administration and clinical services in Dominica
+    organisation: Ministry of Health, Wellness and Social Services
+    countries: [DM]
+    url: https://dominica.gov.dm/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Roseau coordinating public healthcare administration, community clinics, primary health programs, and hospital clinical referral across Dominica.
+    who_for: not_checked
+    format: online
+    lang: en-DM
+    source_id: dominica-gov-dm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: landesspital-li-hospital-guidance
+    name: Public hospital care and clinical referral services in Liechtenstein
+    organisation: Liechtensteinisches Landesspital
+    countries: [LI]
+    url: https://landesspital.li/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Public hospital in Vaduz providing emergency medicine, acute inpatient treatment, internal medicine, pneumology consultations, and clinical referral services across Liechtenstein.
+    who_for: not_checked
+    format: online
+    lang: de-LI
+    source_id: landesspital-li-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: health-govmu-org-ministry-guidance
+    name: National public health administration and hospital guidance in Mauritius
+    organisation: Ministry of Health and Wellness
+    countries: [MU]
+    url: https://health.govmu.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Port Louis directing public health administration, regional hospital networks, primary care services, and disease prevention programs across Mauritius.
+    who_for: not_checked
+    format: online
+    lang: en-MU
+    source_id: health-govmu-org-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: health-gov-ws-ministry-guidance
+    name: National public health administration and clinical guidance in Samoa
+    organisation: Ministry of Health of Samoa
+    countries: [WS]
+    url: https://www.health.gov.ws/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Apia directing public healthcare administration, disease surveillance, hospital clinical operations, and health promotion programs across Samoa.
+    who_for: not_checked
+    format: online
+    lang: en-WS
+    source_id: health-gov-ws-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active

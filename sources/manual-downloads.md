@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-196 to download by hand, 1 to ask for, 3 not to download.
+201 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -137,6 +137,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cermes-ne-resource-pages | Centre de Recherche Médicale et Sanitaire website (cermes.net) | [page](https://cermes.net/) | link only | Official public biomedical research and Pasteur Network diagnostic institute in Niger; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
+### Centre Hospitalier Princesse Grace
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| chpg-mc-resource-pages | Centre Hospitalier Princesse Grace website (chpg.mc) | [page](https://www.chpg.mc/) | link only | Official public hospital center and clinical referral institution in Monaco; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
 ### Centre Hospitalier Universitaire Mohammed VI Marrakech
 
@@ -613,6 +619,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | lifc-resource-pages | Lega Italiana Fibrosi Cistica (LIFC) website (www.fibrosicistica.it) | [page](https://www.fibrosicistica.it/) | link only | Official national cystic fibrosis patient and family association in Italy. |
 
+### Liechtensteinisches Landesspital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| landesspital-li-resource-pages | Liechtensteinisches Landesspital website (landesspital.li) | [page](https://landesspital.li/) | link only | Official national public hospital and clinical referral institution in Liechtenstein; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### Lietuvos cistinės fibrozės asociacija
 
 | ID | What | Open | Save as | Notes |
@@ -661,6 +673,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | mohs-sl-resource-pages | Ministry of Health and Sanitation of Sierra Leone website (mohs.gov.sl) | [page](https://mohs.gov.sl/) | link only | Official national health ministry and pediatric clinical referral portal in Sierra Leone; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
+### Ministry of Health and Wellness
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| health-govmu-org-resource-pages | Ministry of Health and Wellness website (health.govmu.org) | [page](https://health.govmu.org/) | link only | Official national public health ministry and clinical referral portal in Mauritius; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### Ministry of Health and Wellness, Jamaica
 
 | ID | What | Open | Save as | Notes |
@@ -684,6 +702,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | moh-gy-resource-pages | Ministry of Health Guyana website (health.gov.gy) | [page](https://health.gov.gy/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Ministry of Health of Samoa
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| health-gov-ws-resource-pages | Ministry of Health of Samoa website (health.gov.ws) | [page](https://www.health.gov.ws/) | link only | Official national public health ministry and clinical referral portal in Samoa; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
 ### Ministry of Health of Trinidad and Tobago
 
@@ -714,6 +738,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | moh-bt-resource-pages | Ministry of Health Bhutan public health portal (www.moh.gov.bt) | [page](https://www.moh.gov.bt/) | link only | Official national health authority coordinating public healthcare and specialized pediatric referral care in Bhutan; robots.txt allow (2026-10-25), manual acce… |
+
+### Ministry of Health, Wellness and Social Services
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| dominica-gov-dm-resource-pages | Ministry of Health, Wellness and Social Services website (dominica.gov.dm) | [page](https://dominica.gov.dm/) | link only | Official national public health ministry and clinical referral portal in Dominica; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
 ### Ministère de la Santé de la République de Djibouti
 
