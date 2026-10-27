@@ -3359,3 +3359,82 @@ resources:
     basis: lead_only
     last_checked: 2026-10-26
     status: active
+  - id: tdlu-tm-medical-university-guidance
+    name: National medical education and clinical hospital guidance in Turkmenistan
+    organisation: State Medical University of Turkmenistan
+    countries: [TM]
+    url: https://tdlu.edu.tm/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: State medical university in Ashgabat providing clinical medical training, specialized pediatric healthcare education, and tertiary hospital referral coordination in Turkmenistan.
+    who_for: not_checked
+    format: online
+    lang: tk-TM
+    source_id: tdlu-tm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: uganc-gn-medical-sciences-guidance
+    name: National medical training and clinical referral guidance in Guinea
+    organisation: Université Gamal Abdel Nasser de Conakry
+    countries: [GN]
+    url: https://uganc.edu.gn/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National public university in Conakry coordinating medical sciences training, clinical pediatric education, and specialized hospital diagnostic referral across Guinea.
+    who_for: not_checked
+    format: online
+    lang: fr-GN
+    source_id: uganc-gn-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: snu-so-medical-faculty-guidance
+    name: National medical education and teaching hospital referral in Somalia
+    organisation: Somali National University
+    countries: [SO]
+    url: https://snu.edu.so/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National public university in Mogadishu coordinating undergraduate medical education, clinical healthcare training, and tertiary hospital referral partnerships across Somalia.
+    who_for: not_checked
+    format: online
+    lang: so-SO
+    source_id: snu-so-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: un-td-medical-sciences-guidance
+    name: Health sciences instruction and clinical hospital referral in Chad
+    organisation: Université de N'Djaména
+    countries: [TD]
+    url: https://www.universite-ndjamena.td/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Public university in N'Djamena providing medical education, human health sciences instruction, and clinical hospital diagnostic coordination across Chad.
+    who_for: not_checked
+    format: online
+    lang: fr-TD
+    source_id: un-td-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: nul-ls-health-sciences-guidance
+    name: Health sciences education and community medical guidance in Lesotho
+    organisation: National University of Lesotho
+    countries: [LS]
+    url: https://www.nul.ls/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National university in Roma providing nursing education, health sciences instruction, and community medical training partnerships across Lesotho.
+    who_for: not_checked
+    format: online
+    lang: en-LS
+    source_id: nul-ls-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
