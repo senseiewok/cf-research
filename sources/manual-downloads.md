@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-182 to download by hand, 1 to ask for, 3 not to download.
+187 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -493,6 +493,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | jcfc-jo-resource-pages | Jordan Cystic Fibrosis Friends Charity website (jordancysticfibrosis.com) | [page](https://jordancysticfibrosis.com/) | link only | Official cystic fibrosis patient and family charity in Jordan. |
 
+### Kabul University of Medical Sciences (KUMS)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kums-af-resource-pages | Kabul University of Medical Sciences website (kums.edu.af) | [page](https://kums.edu.af/) | link only | Official public medical university and tertiary teaching hospital portal in Afghanistan; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### Kamuzu University of Health Sciences
 
 | ID | What | Open | Save as | Notes |
@@ -625,6 +631,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | health-fj-resource-pages | Ministry of Health and Medical Services Fiji portal (www.health.gov.fj) | [page](https://www.health.gov.fj/) | link only | Official pediatric specialty and tertiary respiratory referral guidance for Fiji; robots.txt allow (2026-10-25), manual access, link and summary only. |
 
+### Ministry of Health and Sanitation of Sierra Leone (MoHS)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| mohs-sl-resource-pages | Ministry of Health and Sanitation of Sierra Leone website (mohs.gov.sl) | [page](https://mohs.gov.sl/) | link only | Official national health ministry and pediatric clinical referral portal in Sierra Leone; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### Ministry of Health and Wellness, Jamaica
 
 | ID | What | Open | Save as | Notes |
@@ -661,6 +673,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | moh-om-resource-pages | Ministry of Health Sultanate of Oman website (www.moh.gov.om) | [page](https://www.moh.gov.om/) | link only | Official CF or pediatric referral resource (Ministry of Health Sultanate of Oman); robots.txt allow (2026-10-25), manual access, link and summary only. |
 
+### Ministry of Health, Republic of South Sudan
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| moh-ss-resource-pages | Ministry of Health Republic of South Sudan website (moh.gov.ss) | [page](https://moh.gov.ss/) | link only | Official national health ministry and clinical referral coordination portal in South Sudan; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
 ### Ministry of Health, Republic of Vanuatu
 
 | ID | What | Open | Save as | Notes |
@@ -672,6 +690,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | moh-bt-resource-pages | Ministry of Health Bhutan public health portal (www.moh.gov.bt) | [page](https://www.moh.gov.bt/) | link only | Official national health authority coordinating public healthcare and specialized pediatric referral care in Bhutan; robots.txt allow (2026-10-25), manual acce… |
+
+### Ministère de la Santé de la République de Djibouti
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sante-dj-resource-pages | Ministère de la Santé de Djibouti website (sante.gouv.dj) | [page](https://sante.gouv.dj/) | link only | Official national health ministry and clinical referral portal in Djibouti; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
 ### Ministère de la Santé de la République du Bénin
 
@@ -942,6 +966,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | uobaghdad-iq-resource-pages | University of Baghdad College of Medicine website (comed.uobaghdad.edu.iq) | [page](https://comed.uobaghdad.edu.iq/) | link only | Official CF or pediatric referral resource (University of Baghdad College of Medicine); robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### University of Eswatini
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| uneswa-sz-resource-pages | University of Eswatini website (www.uneswa.ac.sz) | [page](https://www.uneswa.ac.sz/) | link only | Official public university and health sciences faculty portal in Eswatini; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
 ### University of Health Sciences, Laos
 
