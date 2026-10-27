@@ -3740,3 +3740,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-26
     status: active
+
+  - id: ospedalebambinogesu-it-pediatric-cf-care
+    name: Bambino Gesù Children's Hospital specialized pediatric and cystic fibrosis clinical care
+    organisation: Ospedale Pediatrico Bambino Gesù
+    countries: [VA]
+    url: https://www.ospedalebambinogesu.it/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Extraterritorial pediatric hospital of the Holy See providing specialized cystic fibrosis care, pulmonary diagnostics, family counseling, and clinical research facilities in Rome.
+    who_for: not_checked
+    format: online
+    lang: it
+    source_id: ospedalebambinogesu-it-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-27
+    status: active
+
+  - id: health-gov-ag-ministry-guidance
+    name: National public health administration and clinical services in Antigua and Barbuda
+    organisation: Ministry of Health, Wellness, Social Transformation and the Environment
+    countries: [AG]
+    url: https://health.gov.ag/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Saint John directing public healthcare administration, community clinics, primary health programs, and hospital clinical referral across Antigua and Barbuda.
+    who_for: not_checked
+    format: online
+    lang: en-AG
+    source_id: health-gov-ag-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-27
+    status: active
+
+  - id: health-gov-sc-ministry-guidance
+    name: National public health administration and hospital guidance in Seychelles
+    organisation: Ministry of Health Seychelles
+    countries: [SC]
+    url: https://www.health.gov.sc/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Victoria directing public healthcare policy, hospital networks, community clinics, specialized medical referrals, and disease surveillance across Seychelles.
+    who_for: not_checked
+    format: online
+    lang: en-SC
+    source_id: health-gov-sc-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-27
+    status: active
+
+  - id: igmh-gov-mv-hospital-guidance
+    name: Public tertiary hospital care and specialized clinical services in Maldives
+    organisation: Indira Gandhi Memorial Hospital
+    countries: [MV]
+    url: https://www.igmh.gov.mv/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Major public tertiary referral hospital in Male providing inpatient treatment, specialized pediatric and respiratory care, diagnostic testing, and emergency services across Maldives.
+    who_for: not_checked
+    format: online
+    lang: en-MV
+    source_id: igmh-gov-mv-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-27
+    status: active
+
+  - id: health-gov-ck-ministry-guidance
+    name: National public health administration and clinical services in the Cook Islands
+    organisation: Te Marae Ora Cook Islands Ministry of Health
+    countries: [CK]
+    url: https://www.health.gov.ck/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Rarotonga directing public healthcare administration, hospital operations, community clinical care, and overseas medical referrals across the Cook Islands.
+    who_for: not_checked
+    format: online
+    lang: en-CK
+    source_id: health-gov-ck-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-27
+    status: active
