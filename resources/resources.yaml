@@ -3581,4 +3581,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-26
     status: active
+  - id: saas-ad-health-agency-guidance
+    name: National public health administration and clinical hospital guidance in Andorra
+    organisation: Servei Andorrà d'Atenció Sanitària
+    countries: [AD]
+    url: https://www.saas.ad/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National public health agency in Escaldes-Engordany coordinating hospital care, specialized pediatric services, and regional medical referral across Andorra.
+    summary_es: Organismo público de salud en Escaldes-Engordany que coordina atención hospitalaria, servicios pediátricos especializados y derivaciones médicas en Andorra.
+    who_for: not_checked
+    format: online
+    lang: ca-AD
+    source_id: saas-ad-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
 
+  - id: qeh-bb-hospital-guidance
+    name: National tertiary hospital care and pediatric clinical referral in Barbados
+    organisation: Queen Elizabeth Hospital
+    countries: [BB]
+    url: https://www.qehconnect.com/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Principal public tertiary hospital in Bridgetown providing specialized inpatient care, pediatric clinical services, and medical referral across Barbados.
+    who_for: not_checked
+    format: online
+    lang: en-BB
+    source_id: qeh-bb-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: agu-bh-medical-university-guidance
+    name: Regional medical education and tertiary pediatric clinical training in Bahrain
+    organisation: Arabian Gulf University College of Medicine and Medical Sciences
+    countries: [BH]
+    url: https://www.agu.edu.bh/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Regional medical university in Manama providing tertiary health sciences education, clinical pediatric training, and specialized research guidance in Bahrain.
+    who_for: not_checked
+    format: online
+    lang: ar-BH
+    source_id: agu-bh-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: minsaude-cv-health-ministry-guidance
+    name: National public health administration and clinical hospital guidance in Cabo Verde
+    organisation: Ministério da Saúde de Cabo Verde
+    countries: [CV]
+    url: https://minsaude.gov.cv/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National health ministry in Praia directing public healthcare administration, disease surveillance, and hospital clinical referral networks across Cabo Verde.
+    who_for: not_checked
+    format: online
+    lang: pt-CV
+    source_id: minsaude-cv-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
+
+  - id: kkh-sg-pediatric-referral-guidance
+    name: Tertiary pediatric respiratory care and clinical genetics referral in Singapore
+    organisation: KK Women's and Children's Hospital
+    countries: [SG]
+    url: https://www.kkh.com.sg/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Major tertiary pediatric and maternal referral hospital in Singapore providing comprehensive specialized respiratory care and clinical genetics services.
+    who_for: not_checked
+    format: online
+    lang: en-SG
+    source_id: kkh-sg-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-26
+    status: active
