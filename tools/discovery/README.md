@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `79` (plus 4 infrastructure scripts and 81 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `61`
+- **Total Verified Modules:** `80` (plus 4 infrastructure scripts and 82 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `62`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -61,7 +61,7 @@ python tools/discovery/discovery_council.py --check-index
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 33 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 34 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -86,6 +86,7 @@ python tools/discovery/discovery_council.py --check-index
 | `lnp_escape_dynamics.py` | `T-0285` | `T2` | `keep` | Canonical workbench |
 | `lnp_mucus_shear_shedding_kinetics.py` | `T-0439` | `T2` | `keep` | Canonical workbench |
 | `lnp_stem_endosomal_escape_kinetics.py` | `T-0455` | `T2` | `keep` | Canonical workbench |
+| `lnp_surfactant_corona_remodeling.py` | `T-0456` | `T2` | `keep` | Canonical workbench |
 | `mechano_acoustic_delivery.py` | `T-0228` | `T2` | `keep` | Canonical workbench |
 | `mpp_obstruction_scaling.py` | `T-0244` | `T2` | `keep` | Canonical workbench |
 | `mrna_lnp_escape_model.py` | `T-0239` | `T2` | `merge` | Merge into `lnp_escape_dynamics.py` |
