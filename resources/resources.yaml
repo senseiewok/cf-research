@@ -4139,3 +4139,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-28
     status: active
+  - id: regeringen-ax-health-services
+    name: Public healthcare administration and clinical hospital services in Aland
+    organisation: Ålands landskapsregering
+    countries: [AX]
+    url: https://www.regeringen.ax/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal administering public health policy, community care, and clinical hospital operations through the central hospital system across Aland.
+    who_for: not_checked
+    format: online
+    lang: sv
+    source_id: regeringen-ax-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-vg-health-services
+    name: Public health administration and hospital clinical services in the British Virgin Islands
+    organisation: Government of the Virgin Islands
+    countries: [VG]
+    url: https://gov.vg/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal administering public health programs, community clinics, and hospital care through the territorial health services authority in the Virgin Islands.
+    who_for: not_checked
+    format: online
+    lang: en-VG
+    source_id: gov-vg-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-ms-health-services
+    name: Public healthcare administration and hospital operations in Montserrat
+    organisation: Government of Montserrat
+    countries: [MS]
+    url: https://www.gov.ms/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating public healthcare administration, community clinics, Glendon Hospital operations, and specialized medical referrals across Montserrat.
+    who_for: not_checked
+    format: online
+    lang: en-MS
+    source_id: gov-ms-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: guam-gov-health-services
+    name: Public healthcare administration and hospital clinical care in Guam
+    organisation: Government of Guam
+    countries: [GU]
+    url: https://www.guam.gov/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating public healthcare administration, public health programs, and clinical hospital operations through the civilian hospital authority across Guam.
+    who_for: not_checked
+    format: online
+    lang: en-GU
+    source_id: guam-gov-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: sainthelena-gov-sh-health-services
+    name: Public healthcare administration and general hospital operations in Saint Helena
+    organisation: St Helena Government
+    countries: [SH]
+    url: https://www.sainthelena.gov.sh/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating public healthcare administration, community medical clinics, General Hospital operations, and overseas clinical referrals across Saint Helena.
+    who_for: not_checked
+    format: online
+    lang: en-SH
+    source_id: sainthelena-gov-sh-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
