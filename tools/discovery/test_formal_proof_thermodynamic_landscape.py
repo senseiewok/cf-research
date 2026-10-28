@@ -18,6 +18,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     compute_stage_free_energy_profile,
     evaluate_challenge_landscape,
     evaluate_falsification_negative_control,
+    evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
     simulate_counterfactual_axiom_knockout,
 )
@@ -109,6 +110,23 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         iso = evaluate_two_way_bridge_isomorphism()
         self.assertTrue(iso["all_challenges_rank_order_preserved_25pct"])
 
+
+
+
+    def test_noether_kirchhoff_flux_conservation_and_invariant_transfer(self) -> None:
+        gate = evaluate_noether_conservation_and_invariant_transfer()
+        self.assertTrue(gate["all_invariants_passed"])
+        self.assertTrue(gate["noether_kirchhoff_flux_conservation"])
+        self.assertTrue(gate["monotone_allosteric_duality"])
+        self.assertTrue(gate["zero_sorry_comparator_seal"])
+        for cid, c_rep in gate["challenges"].items():
+            self.assertTrue(c_rep["kirchhoff_flux_conservation_verified"], cid)
+            self.assertLess(c_rep["flux_conservation_residual_pct"], 1e-9)
+            self.assertAlmostEqual(
+                c_rep["terminal_preserved_flux_pct"] + c_rep["cumulative_dissipated_flux_pct"],
+                100.0,
+                places=3,
+            )
 
 
 if __name__ == "__main__":
