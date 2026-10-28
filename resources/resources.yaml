@@ -4060,3 +4060,82 @@ resources:
     last_checked: 2026-10-28
     status: active
 
+  - id: gov-gg-health-services
+    name: Public health administration and hospital services in Guernsey
+    organisation: States of Guernsey
+    countries: [GG]
+    url: https://www.gov.gg/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating public health services, Princess Elizabeth Hospital operations, community clinical care, and specialized off-island pediatric referrals in Guernsey.
+    who_for: not_checked
+    format: online
+    lang: en-GG
+    source_id: gov-gg-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: govt-lc-health-services
+    name: National public health administration and clinical services in Saint Lucia
+    organisation: Government of Saint Lucia
+    countries: [LC]
+    url: https://www.govt.lc/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating national health administration, public hospital care, community wellness centers, and pediatric specialist consultations in Saint Lucia.
+    who_for: not_checked
+    format: online
+    lang: en-LC
+    source_id: govt-lc-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: president-gov-ki-health-services
+    name: National government portal and public healthcare coordination in Kiribati
+    organisation: Government of Kiribati
+    countries: [KI]
+    url: https://www.president.gov.ki/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official national portal coordinating public health administration, Tungaru Central Hospital operations, outer-island medical clinics, and pediatric healthcare access in Kiribati.
+    who_for: not_checked
+    format: online
+    lang: en-KI
+    source_id: president-gov-ki-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: mayotte-gouv-fr-health-services
+    name: Public administration and hospital healthcare coordination in Mayotte
+    organisation: Préfecture de Mayotte
+    countries: [YT]
+    url: https://www.mayotte.gouv.fr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official prefecture portal coordinating territorial public health administration, Centre Hospitalier de Mayotte operations, and specialized pediatric medical referrals across Mayotte.
+    who_for: not_checked
+    format: online
+    lang: fr-YT
+    source_id: mayotte-gouv-fr-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-ai-health-services
+    name: National public health administration and clinical hospital care in Anguilla
+    organisation: Government of Anguilla
+    countries: [AI]
+    url: https://gov.ai/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating public health programs, Princess Alexandra Hospital clinical services, community health centers, and pediatric consultations in Anguilla.
+    who_for: not_checked
+    format: online
+    lang: en-AI
+    source_id: gov-ai-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
