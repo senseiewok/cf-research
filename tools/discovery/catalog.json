@@ -6,22 +6,22 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 92,
+  "total_modules": 93,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 94,
+  "test_suites_count": 95,
   "persona_summary": {
-    "researchers": 91,
+    "researchers": 92,
     "builders": 1
   },
   "triage_summary": {
-    "keep": 74,
+    "keep": 75,
     "merge": 14,
     "archive": 4
   },
   "discipline_summary": {
     "structural_biology": 14,
     "rna_gene_editing": 25,
-    "airway_delivery": 41,
+    "airway_delivery": 42,
     "microbiology_host": 6,
     "clinical_trials": 3,
     "ai_verification": 3
@@ -476,8 +476,8 @@
     },
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
-      "count": 41,
-      "keep_count": 34,
+      "count": 42,
+      "keep_count": 35,
       "merge_count": 6,
       "archive_count": 1,
       "modules": [
@@ -847,6 +847,17 @@
         {
           "module": "nebulizer_shear_stress_integrity",
           "task": "T-0413",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "surfactant_shielded_rnp_mucus_transport",
+          "task": "T-0482",
           "track": "Track A",
           "tier": "T2",
           "discipline": "airway_delivery",
