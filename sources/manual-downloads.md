@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-236 to download by hand, 1 to ask for, 3 not to download.
+241 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -23,6 +23,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | akuh-pk-resource-pages | Aga Khan University Hospital Pakistan website (hospitals.aku.edu/pakistan) | [page](https://hospitals.aku.edu/pakistan) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Agence Régionale de Santé Guyane
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ars-gf-resource-pages | Agence Régionale de Santé Guyane website (www.guyane.ars.sante.fr) | [page](https://www.guyane.ars.sante.fr/) | link only | French regional health authority coordinating public hospital care, community medical prevention, specialized clinical networks, and patient guidance across Fr… |
+
+### American Samoa Department of Health
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| doh-as-resource-pages | American Samoa Department of Health website (doh.as) | [page](https://doh.as/) | link only | Official territorial health department administering community medical clinics, pediatric health programs, chronic disease surveillance, and hospital clinical… |
 
 ### Arabian Gulf University College of Medicine and Medical Sciences
 
@@ -149,6 +161,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cermes-ne-resource-pages | Centre de Recherche Médicale et Sanitaire website (cermes.net) | [page](https://cermes.net/) | link only | Official public biomedical research and Pasteur Network diagnostic institute in Niger; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
+### Centre Hospitalier de Polynésie française
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| chpf-pf-resource-pages | Centre Hospitalier de Polynésie française website (www.chpf.pf) | [page](https://www.chpf.pf/) | link only | Principal territorial referral hospital coordinating inpatient clinical care, specialized pediatric medicine, diagnostic consultations, and medical evacuations… |
 
 ### Centre Hospitalier Princesse Grace
 
@@ -475,6 +493,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gov-vc-resource-pages | Government of Saint Vincent and the Grenadines website (www.gov.vc) | [page](https://www.gov.vc/) | link only | Official government portal coordinating public healthcare administration, community medical clinics, Milton Cato Memorial Hospital operations, and overseas spe… |
 
+### Government of Sint Maarten
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-sx-resource-pages | Government of Sint Maarten website (www.sintmaartengov.org) | [page](https://www.sintmaartengov.org/) | link only | Official government portal coordinating public healthcare administration, social security programs, hospital clinical services, and specialized pediatric refer… |
+
 ### Government of the Republic of Suriname (Ministerie van Volksgezondheid)
 
 | ID | What | Open | Save as | Notes |
@@ -522,6 +546,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | arubahospital-com-resource-pages | Horacio Oduber Hospital website (www.arubahospital.com) | [page](https://www.arubahospital.com/) | link only | Main public hospital providing specialized pediatric and respiratory care in Aruba; robots.txt allow (2026-10-27), manual access, link and summary only. |
+
+### Hospice Isle of Man
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| hospice-im-resource-pages | Hospice Isle of Man website (www.hospice.org.im) | [page](https://www.hospice.org.im/) | link only | Palliative care and clinical support charity coordinating community medical care, respite guidance, symptom control, and family counseling across the Isle of M… |
 
 ### Hospital Authority
 
