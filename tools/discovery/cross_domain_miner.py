@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
-"""Cross-Domain Biomedical Innovation Surveillance Engine & Analogy Miner (T-0179).
+"""Cross-Domain Biomedical Innovation Surveillance Engine & Cross-Disease Mechanistic Bridge (T-0179).
 
 Mines and evaluates mechanical breakthroughs from analogous medical and biophysical disciplines
 (solid tumor desmoplasia, blood-brain barrier drug delivery, mucosal immunology, developmental plasticity,
 and paramyxoviral synthetic virology) and translates them into actionable CF curative delivery hypotheses.
+
+Also implements the Council-governed CrossDiseaseMechanisticBridge enforcing:
+  1. INV-CF-ANCHOR: Every cross-disease connection must map back to a concrete CF curative bottleneck
+     and forbid clinical efficacy extrapolation across diseases.
+  2. INV-MECH-ISOMORPHISM: Every cross-disease connection must be governed by an explicit biophysical
+     equation or shared molecular target class with built-in negative-control falsification gates.
 
 Computes the deterministic Biophysical Feasibility Index (BFI) to filter and rank candidate technologies:
     BFI = w_pore * S_steric + w_zeta * S_charge + w_esc * S_endosome + w_tol * S_macrophage
@@ -13,7 +19,9 @@ from __future__ import annotations
 import argparse
 import json
 import math
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
+
+from epistemic_rigor import BiophysicalParameter, validate_physical_bounds
 
 
 # Weighting factors for the Biophysical Feasibility Index (sum = 1.0)
@@ -161,14 +169,14 @@ def screen_innovations(donor_field: Optional[str] = None, min_bfi: float = 0.70)
     for item in CURATED_INNOVATIONS:
         if field_filter and item["donor_field"] != field_filter:
             continue
-        
+
         bfi = calculate_biophysical_feasibility_index(
             diameter_nm=item["particle_diameter_nm"],
             zeta_mv=item["zeta_potential_mv"],
             endosomal_escape_score=item["endosomal_escape_score"],
             macrophage_stealth_score=item["macrophage_stealth_score"],
         )
-        
+
         if bfi >= min_bfi:
             res = dict(item)
             res["bfi"] = bfi
@@ -177,7 +185,6 @@ def screen_innovations(donor_field: Optional[str] = None, min_bfi: float = 0.70)
 
     results.sort(key=lambda x: x["bfi"], reverse=True)
     return results
-
 
 
 class CrossDomainInnovationMiner:
@@ -211,12 +218,384 @@ class CrossDomainInnovationMiner:
         return ranked
 
 
+# ============================================================================
+# Council-Governed Cross-Disease Mechanistic Bridge (INV-CF-ANCHOR & INV-MECH-ISOMORPHISM)
+# ============================================================================
+
+VALID_CF_BOTTLENECKS: Tuple[str, ...] = (
+    "class_i_nonsense_ptc",
+    "abc_domain_interface_folding",
+    "multidomain_cotranslational_pause",
+    "muco_obstructive_viscoelastic_shear",
+    "mdr_efflux_phage_steering",
+)
+
+VALID_ISOMORPHISM_LAWS: Tuple[str, ...] = (
+    "boltzmann_abc_domain_interface_folding",
+    "coupled_nmd_ptc_matthews_salvage",
+    "cotranslational_tai_pause_valley_conservation",
+    "thixotropic_yield_stress_and_endpoint_facets",
+    "rnd_efflux_porin_phage_tradeoff",
+)
+
+CROSS_DISEASE_PARAMETERS: Dict[str, BiophysicalParameter] = {
+    "RT_310K_KCAL_MOL": BiophysicalParameter(
+        name="RT_310K_KCAL_MOL",
+        value=0.61633,
+        units="kcal/mol",
+        category="derived",
+        doi_or_pdb="10.1126/science.ade2216",
+        location_in_source="R * 310.15 K thermal energy scale for ER domain folding",
+        uncertainty_range=(0.612, 0.619),
+    ),
+    "ABC_INTERFACE_WT_DG_KCAL_MOL": BiophysicalParameter(
+        name="ABC_INTERFACE_WT_DG_KCAL_MOL",
+        value=-2.2,
+        units="kcal/mol",
+        category="empirical",
+        doi_or_pdb="PDB:8EIQ | 10.1126/science.ade2216",
+        location_in_source="Wild-type NBD1-TMD2 domain-interface folding free energy at 37 C",
+        uncertainty_range=(-2.8, -1.6),
+    ),
+    "W1282X_NEAR_COGNATE_CAVITY_PENALTY_KCAL_MOL": BiophysicalParameter(
+        name="W1282X_NEAR_COGNATE_CAVALTY_PENALTY_KCAL_MOL",
+        value=2.8,
+        units="kcal/mol",
+        category="empirical",
+        doi_or_pdb="10.1021/acs.biochem.5c00590 | 10.1016/j.jcf.2025.09.006",
+        location_in_source="NBD2 destabilization penalty upon near-cognate amino acid insertion at W1282X/G542X",
+        uncertainty_range=(2.0, 3.6),
+    ),
+    "PAUSE_VALLEY_CONSERVATION_MIN_PEARSON_R": BiophysicalParameter(
+        name="PAUSE_VALLEY_CONSERVATION_MIN_PEARSON_R",
+        value=0.85,
+        units="dimensionless",
+        category="phenomenological_heuristic",
+        doi_or_pdb="10.1016/j.cell.2015.02.029",
+        location_in_source="Minimum tAI ribosomal pause-valley correlation required to prevent inter-domain collision",
+        uncertainty_range=(0.75, 0.92),
+    ),
+    "SPUTUM_DNA_DOMINANCE_THRESHOLD_MG_ML": BiophysicalParameter(
+        name="SPUTUM_DNA_DOMINANCE_THRESHOLD_MG_ML",
+        value=1.5,
+        units="mg/mL",
+        category="empirical",
+        doi_or_pdb="10.1073/pnas.87.23.9188 | 10.1056/NEJMra1813799",
+        location_in_source="Extracellular neutrophil DNA concentration above which rhDNase lowers sputum viscosity",
+        uncertainty_range=(0.8, 2.5),
+    ),
+}
+
+CURATED_CROSS_DISEASE_BRIDGES: List[Dict[str, Any]] = [
+    {
+        "id": "CDB-001",
+        "lead_id": "L-0039",
+        "title": "Muco-Obstructive Airway Endpoint & Thixotropic Yield-Stress Bridge",
+        "cf_anchor_target": "CF airway mucociliary clearance & 15 Hz thixotropic acoustic liquefaction",
+        "sister_diseases": ["Primary Ciliary Dyskinesia (PCD)", "Non-CF Bronchiectasis (NCFB)", "Alpha-1 Antitrypsin Deficiency (AATD)"],
+        "cf_bottleneck": "muco_obstructive_viscoelastic_shear",
+        "isomorphism_law": "thixotropic_yield_stress_and_endpoint_facets",
+        "primary_dois": ["10.1056/NEJMra1813799", "10.1038/s41598-025-16178-z", "10.1073/pnas.87.23.9188"],
+        "negative_control_guard": "rhDNase lowers viscoelastic modulus only when extracellular DNA dominates sputum solids (CF purulent plugs), failing in low-DNA mucin-only plugs.",
+        "clinical_extrapolation_permitted": False,
+    },
+    {
+        "id": "CDB-002",
+        "lead_id": "L-0040",
+        "title": "Homologous ABC-Transporter Domain-Interface Folding & ERAD Escape Bridge",
+        "cf_anchor_target": "ABCC7 (CFTR) TMD-NBD1/NBD2 interface folding & RNF5/CHIP ER quality control",
+        "sister_diseases": ["ABCA4 (Stargardt retinopathy)", "ABCB11 (PFIC2 bile salt export deficiency)", "ABCC6 (Pseudoxanthoma elasticum)"],
+        "cf_bottleneck": "abc_domain_interface_folding",
+        "isomorphism_law": "boltzmann_abc_domain_interface_folding",
+        "primary_dois": ["10.1126/science.ade2216", "10.3389/fphar.2012.00201", "10.1091/mbc.e14-04-0935"],
+        "negative_control_guard": "CFTR (ABCC7) is the sole ATP-gated ion channel in the ABC superfamily; channel gating potentiation (Po) does not transfer to active pump turnover (k_cat).",
+        "clinical_extrapolation_permitted": False,
+    },
+    {
+        "id": "CDB-003",
+        "lead_id": "L-0041",
+        "title": "Nonsense PTC Readthrough, eRF3a Depletion & Near-Cognate Folding Salvage Bridge",
+        "cf_anchor_target": "Class I CFTR nonsense variants (G542X, W1282X, R553X, R1162X) in the ~8-11.5% modulator-ineligible cohort",
+        "sister_diseases": ["DMD (nonsense Duchenne muscular dystrophy)", "USH2A (Usher syndrome type 2A)", "IDUA (Hurler syndrome)"],
+        "cf_bottleneck": "class_i_nonsense_ptc",
+        "isomorphism_law": "coupled_nmd_ptc_matthews_salvage",
+        "primary_dois": ["10.1172/jci154571", "10.1021/acs.biochem.5c00590", "10.1016/j.jcf.2025.09.006", "10.1038/s41586-023-06133-1"],
+        "negative_control_guard": "Near-cognate amino acid insertion tolerated in structural repeats (DMD) destabilizes CFTR NBD1/NBD2 unless paired with folding correctors (trimodal co-therapy).",
+        "clinical_extrapolation_permitted": False,
+    },
+    {
+        "id": "CDB-004",
+        "lead_id": "L-0042",
+        "title": "Multi-Domain Co-Translational Pause-Valley Conservation & Split-Intein Reconstitution Bridge",
+        "cf_anchor_target": "Full-length CFTR mRNA (4,443 bp) NBD1-R-TMD2 pause valleys (INV-tAI-PROFILE) & dual-AAV split-intein assembly",
+        "sister_diseases": ["ABCA4 (dual-AAV intein trans-splicing)", "F8 (Factor VIII multi-domain expression)", "DYSF (Dysferlin dual-cassette reconstitution)"],
+        "cf_bottleneck": "multidomain_cotranslational_pause",
+        "isomorphism_law": "cotranslational_tai_pause_valley_conservation",
+        "primary_dois": ["10.1016/j.cell.2015.02.029", "10.1126/scitranslmed.aav4523", "10.1016/j.ymthe.2017.05.013"],
+        "negative_control_guard": "Naive global Codon Adaptation Index maximization (CAI = 1.0) erases inter-domain pause valleys and triggers co-translational domain collision.",
+        "clinical_extrapolation_permitted": False,
+    },
+]
+
+
+class CrossDiseaseMechanisticBridge:
+    """Deterministic evaluator for CF-anchored cross-disease mechanistic isomorphism.
+
+    Enforces two Council invariants across every cross-disease research branch:
+      - INV-CF-ANCHOR: Must return to a concrete CF curative bottleneck and forbid clinical
+        efficacy extrapolation across diseases.
+      - INV-MECH-ISOMORPHISM: Must evaluate a shared biophysical governing equation with an
+        explicit negative-control falsification check.
+    """
+
+    @staticmethod
+    def verify_bridge_invariants(bridge_record: Dict[str, Any]) -> Dict[str, Any]:
+        """Verify that a cross-disease bridge satisfies INV-CF-ANCHOR and INV-MECH-ISOMORPHISM."""
+        bottleneck = bridge_record.get("cf_bottleneck", "")
+        if bottleneck not in VALID_CF_BOTTLENECKS:
+            raise ValueError(
+                f"INV-CF-ANCHOR violation: cf_bottleneck {bottleneck!r} not in {VALID_CF_BOTTLENECKS}"
+            )
+        law = bridge_record.get("isomorphism_law", "")
+        if law not in VALID_ISOMORPHISM_LAWS:
+            raise ValueError(
+                f"INV-MECH-ISOMORPHISM violation: isomorphism_law {law!r} not in {VALID_ISOMORPHISM_LAWS}"
+            )
+        if bridge_record.get("clinical_extrapolation_permitted", False) is not False:
+            raise ValueError(
+                "INV-CF-ANCHOR violation: clinical_extrapolation_permitted must be False for all cross-disease bridges"
+            )
+        if not bridge_record.get("negative_control_guard"):
+            raise ValueError(
+                "INV-MECH-ISOMORPHISM violation: negative_control_guard must be non-empty"
+            )
+        return {
+            "id": bridge_record.get("id"),
+            "lead_id": bridge_record.get("lead_id"),
+            "inv_cf_anchor_satisfied": True,
+            "inv_mech_isomorphism_satisfied": True,
+            "clinical_extrapolation_permitted": False,
+        }
+
+    @staticmethod
+    def evaluate_abc_transporter_folding_bridge(
+        delta_delta_g_interface_kcal_mol: float,
+        corrector_stabilization_kcal_mol: float,
+        rnf5_erad_escape_factor: float = 1.0,
+        *,
+        claims_channel_gating_equivalence: bool = False,
+    ) -> Dict[str, Any]:
+        """Evaluate Boltzmann domain-interface folding rescue across homologous ABC transporters (L-0040).
+
+        Models shared TMD-NBD interface folding thermodynamics (10.1126/science.ade2216,
+        10.3389/fphar.2012.00201) while rejecting equivalence between CFTR ion-channel
+        open probability (Po) and active ABC pump ATPase turnover (k_cat).
+        """
+        validate_physical_bounds(
+            "delta_delta_g_interface_kcal_mol",
+            delta_delta_g_interface_kcal_mol,
+            kind="free_energy_kcal_mol",
+        )
+        validate_physical_bounds(
+            "corrector_stabilization_kcal_mol",
+            corrector_stabilization_kcal_mol,
+            kind="free_energy_kcal_mol",
+        )
+        validate_physical_bounds("rnf5_erad_escape_factor", rnf5_erad_escape_factor, kind="non_negative")
+
+        if claims_channel_gating_equivalence:
+            return {
+                "isomorphic": False,
+                "escaped_folded_fraction": 0.0,
+                "falsification_reason": (
+                    "REJECTED: CFTR (ABCC7) is the sole ATP-gated ion channel in the ABC superfamily; "
+                    "channel gating Po does not transfer to active pump turnover k_cat."
+                ),
+            }
+
+        rt = CROSS_DISEASE_PARAMETERS["RT_310K_KCAL_MOL"].value
+        wt_dg = CROSS_DISEASE_PARAMETERS["ABC_INTERFACE_WT_DG_KCAL_MOL"].value
+        net_dg = wt_dg + delta_delta_g_interface_kcal_mol + corrector_stabilization_kcal_mol
+        boltzmann_folded = 1.0 / (1.0 + math.exp(net_dg / rt))
+        escaped_fraction = min(1.0, max(0.0, boltzmann_folded * min(rnf5_erad_escape_factor, 2.5)))
+        validate_physical_bounds("escaped_folded_fraction", escaped_fraction, kind="probability")
+
+        return {
+            "isomorphic": True,
+            "net_interface_dg_kcal_mol": round(net_dg, 4),
+            "boltzmann_folded_fraction": round(boltzmann_folded, 4),
+            "escaped_folded_fraction": round(escaped_fraction, 4),
+            "falsification_reason": None,
+        }
+
+    @staticmethod
+    def evaluate_ptc_readthrough_folding_salvage(
+        nmd_escape_fraction: float,
+        basal_readthrough_prob: float,
+        near_cognate_cavity_penalty_kcal_mol: float,
+        corrector_rescue_kcal_mol: float = 0.0,
+    ) -> Dict[str, Any]:
+        """Evaluate coupled NMD escape * PTC readthrough * near-cognate folding salvage (L-0041).
+
+        Models why standalone stop-codon readthrough in a tolerant structural repeat differs from
+        CFTR W1282X/G542X (10.1172/jci154571, 10.1021/acs.biochem.5c00590, 10.1016/j.jcf.2025.09.006),
+        where near-cognate amino acid insertion destabilizes NBD1/NBD2 unless rescued by correctors.
+        """
+        validate_physical_bounds("nmd_escape_fraction", nmd_escape_fraction, kind="probability")
+        validate_physical_bounds("basal_readthrough_prob", basal_readthrough_prob, kind="probability")
+        validate_physical_bounds(
+            "near_cognate_cavity_penalty_kcal_mol",
+            near_cognate_cavity_penalty_kcal_mol,
+            kind="free_energy_kcal_mol",
+        )
+        validate_physical_bounds(
+            "corrector_rescue_kcal_mol",
+            corrector_rescue_kcal_mol,
+            kind="free_energy_kcal_mol",
+        )
+
+        rt = CROSS_DISEASE_PARAMETERS["RT_310K_KCAL_MOL"].value
+        wt_dg = CROSS_DISEASE_PARAMETERS["ABC_INTERFACE_WT_DG_KCAL_MOL"].value
+        net_dg = wt_dg + near_cognate_cavity_penalty_kcal_mol + corrector_rescue_kcal_mol
+        p_fold = 1.0 / (1.0 + math.exp(net_dg / rt))
+        functional_salvage_fraction = nmd_escape_fraction * basal_readthrough_prob * p_fold
+        validate_physical_bounds(
+            "functional_salvage_fraction", functional_salvage_fraction, kind="probability"
+        )
+
+        standalone_dg = wt_dg + near_cognate_cavity_penalty_kcal_mol
+        standalone_p_fold = 1.0 / (1.0 + math.exp(standalone_dg / rt))
+        trimodal_required = standalone_p_fold < 0.50
+
+        return {
+            "nmd_escape_fraction": round(nmd_escape_fraction, 4),
+            "basal_readthrough_prob": round(basal_readthrough_prob, 4),
+            "post_readthrough_fold_prob": round(p_fold, 4),
+            "functional_salvage_fraction": round(functional_salvage_fraction, 6),
+            "functional_salvage_pct_wt": round(functional_salvage_fraction * 100.0, 4),
+            "trimodal_salvage_required": trimodal_required,
+        }
+
+    @staticmethod
+    def evaluate_cotranslational_pause_bridge(
+        pause_valley_pearson_r: float,
+        interdomain_dwell_sec: float,
+        *,
+        global_cai_maximized: bool = False,
+    ) -> Dict[str, Any]:
+        """Evaluate multi-domain co-translational pause-valley conservation INV-tAI-PROFILE (L-0042).
+
+        Models inter-domain ribosomal pause conservation across large multi-domain cassettes
+        (CFTR, ABCA4, F8, DYSF; 10.1016/j.cell.2015.02.029, 10.1126/scitranslmed.aav4523,
+        10.1016/j.ymthe.2017.05.013). Rejects naive global CAI maximization (CAI = 1.0).
+        """
+        if not (-1.0 <= pause_valley_pearson_r <= 1.0):
+            raise ValueError(f"pause_valley_pearson_r must be in [-1, 1], got {pause_valley_pearson_r}")
+        validate_physical_bounds("interdomain_dwell_sec", interdomain_dwell_sec, kind="non_negative")
+
+        min_r = CROSS_DISEASE_PARAMETERS["PAUSE_VALLEY_CONSERVATION_MIN_PEARSON_R"].value
+        pause_preserved = (not global_cai_maximized) and (pause_valley_pearson_r >= min_r) and (interdomain_dwell_sec >= 0.8)
+
+        if global_cai_maximized:
+            cotranslational_folding_yield = 0.22
+        else:
+            r_factor = max(0.0, min(1.0, (pause_valley_pearson_r + 1.0) / 2.0))
+            dwell_factor = 1.0 - math.exp(-interdomain_dwell_sec / 1.2)
+            cotranslational_folding_yield = min(1.0, max(0.0, r_factor * dwell_factor))
+
+        validate_physical_bounds(
+            "cotranslational_folding_yield", cotranslational_folding_yield, kind="probability"
+        )
+        return {
+            "pause_valley_preserved": pause_preserved,
+            "cotranslational_folding_yield": round(cotranslational_folding_yield, 4),
+            "inv_tai_profile_status": "PASS" if pause_preserved else "COLLISION_RISK",
+        }
+
+    @staticmethod
+    def evaluate_muco_obstructive_rheology_bridge(
+        solids_wt_pct: float,
+        extracellular_dna_mg_ml: float,
+        oscillation_freq_hz: float = 15.0,
+        modality: str = "thixotropic_15hz_shear",
+    ) -> Dict[str, Any]:
+        """Evaluate muco-obstructive yield-stress reduction & negative-control drug specificity (L-0039).
+
+        Models mucus hyperconcentration and 15 Hz oscillatory shear (10.1056/NEJMra1813799,
+        10.1038/s41598-025-16178-z) alongside the rhDNase negative control (10.1073/pnas.87.23.9188):
+        rhDNase requires DNA-dominated purulent sputum and fails in low-DNA mucin-only plugs.
+        """
+        validate_physical_bounds("solids_wt_pct", solids_wt_pct, kind="percentage")
+        validate_physical_bounds("extracellular_dna_mg_ml", extracellular_dna_mg_ml, kind="non_negative")
+        validate_physical_bounds("oscillation_freq_hz", oscillation_freq_hz, kind="non_negative")
+
+        dna_threshold = CROSS_DISEASE_PARAMETERS["SPUTUM_DNA_DOMINANCE_THRESHOLD_MG_ML"].value
+        baseline_yield_stress_pa = 0.12 * (max(1.0, solids_wt_pct) ** 2.6) + 1.8 * extracellular_dna_mg_ml
+
+        if modality == "rhDNase":
+            if extracellular_dna_mg_ml < dna_threshold:
+                return {
+                    "mechanistic_transfer_valid": False,
+                    "baseline_yield_stress_pa": round(baseline_yield_stress_pa, 3),
+                    "post_treatment_yield_stress_pa": round(baseline_yield_stress_pa * 0.96, 3),
+                    "falsification_reason": (
+                        "REJECTED: Extracellular DNA is below threshold; rhDNase cleaves DNA polymers "
+                        "and does not liquefy mucin-dominated non-CF plugs."
+                    ),
+                }
+            post_yield = baseline_yield_stress_pa * 0.42
+            return {
+                "mechanistic_transfer_valid": True,
+                "baseline_yield_stress_pa": round(baseline_yield_stress_pa, 3),
+                "post_treatment_yield_stress_pa": round(post_yield, 3),
+                "falsification_reason": None,
+            }
+
+        # Physical 15 Hz thixotropic shear + osmotic hydration / disulfide cleavage
+        freq_detuning = abs(oscillation_freq_hz - 15.0)
+        shear_efficiency = math.exp(-0.04 * (freq_detuning ** 2))
+        post_yield = baseline_yield_stress_pa * (1.0 - 0.65 * shear_efficiency)
+        return {
+            "mechanistic_transfer_valid": shear_efficiency >= 0.50,
+            "baseline_yield_stress_pa": round(baseline_yield_stress_pa, 3),
+            "post_treatment_yield_stress_pa": round(post_yield, 3),
+            "shear_resonance_efficiency": round(shear_efficiency, 4),
+            "falsification_reason": None if shear_efficiency >= 0.50 else "Off-resonance acoustic frequency",
+        }
+
+    @classmethod
+    def audit_all_curated_bridges(cls) -> List[Dict[str, Any]]:
+        """Verify all curated cross-disease bridges against INV-CF-ANCHOR and INV-MECH-ISOMORPHISM."""
+        audited = []
+        for bridge in CURATED_CROSS_DISEASE_BRIDGES:
+            verdict = cls.verify_bridge_invariants(bridge)
+            entry = dict(bridge)
+            entry["verification"] = verdict
+            audited.append(entry)
+        return audited
+
+
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="Cross-Domain Biomedical Innovation Miner for CF")
+    parser = argparse.ArgumentParser(description="Cross-Domain Biomedical Innovation Miner & Cross-Disease Bridge for CF")
     parser.add_argument("--field", default="all", help="Donor field (all, solid_tumor_desmoplasia, blood_brain_barrier, mucosal_immunology, epithelial_plasticity, synthetic_virology)")
     parser.add_argument("--min-bfi", type=float, default=0.70, help="Minimum Biophysical Feasibility Index (0.0 - 1.0)")
+    parser.add_argument("--bridges", action="store_true", help="Audit Council-governed cross-disease mechanistic bridges (L-0039 to L-0042)")
     parser.add_argument("--json", action="store_true", help="Print JSON output")
     args = parser.parse_args(argv)
+
+    if args.bridges:
+        bridges = CrossDiseaseMechanisticBridge.audit_all_curated_bridges()
+        if args.json:
+            print(json.dumps({"bridge_count": len(bridges), "bridges": bridges}, indent=2))
+        else:
+            print(f"=== CF-Anchored Cross-Disease Mechanistic Bridges ({len(bridges)} verified) ===")
+            for b in bridges:
+                print(f"\n[{b['id']} -> {b['lead_id']}] {b['title']}")
+                print(f"   CF Anchor:          {b['cf_anchor_target']} ({b['cf_bottleneck']})")
+                print(f"   Sister Diseases:    {', '.join(b['sister_diseases'])}")
+                print(f"   Isomorphism Law:    {b['isomorphism_law']}")
+                print(f"   Negative Control:   {b['negative_control_guard']}")
+        return 0
 
     innovations = screen_innovations(donor_field=args.field, min_bfi=args.min_bfi)
 
@@ -238,4 +617,3 @@ def main(argv=None) -> int:
 if __name__ == "__main__":
     import sys
     sys.exit(main())
-
