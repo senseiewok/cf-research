@@ -16,6 +16,9 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     FORMAL_MATH_CHALLENGE_PROFILES,
     PROOF_THERMODYNAMIC_PARAMETERS,
     compute_stage_free_energy_profile,
+    compute_stage_state_vector,
+    evaluate_mechanistic_basis_span,
+    evaluate_vector_space_isomorphism,
     evaluate_challenge_landscape,
     evaluate_continuum_percolation_phase_transition,
     evaluate_falsification_negative_control,
@@ -142,6 +145,42 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertTrue(perc["cftr_allosteric_network"]["eti_rescued_percolates"])
         with self.assertRaises(ValueError):
             evaluate_continuum_percolation_phase_transition(particle_radius_nm=0.0)
+
+
+    def test_hilbert_vector_space_isomorphism_and_orthogonal_knockouts(self) -> None:
+        vec_iso = evaluate_vector_space_isomorphism()
+        self.assertTrue(vec_iso["pythagorean_unitary_norm_verified"])
+        self.assertTrue(vec_iso["allosteric_bridge_vector_rotation_verified"])
+        self.assertTrue(vec_iso["orthogonal_knockout_subspace_hierarchy_verified"])
+        self.assertTrue(vec_iso["multi_axis_mechanistic_span_verified"])
+
+        # Verify 4D non-compensatory span exposes scalar fallacy on W1282X + ETI alone
+        w1282x_eti = vec_iso["mechanistic_span_matrix"]["W1282X_with_ETI_only"]
+        self.assertFalse(w1282x_eti["basis_fully_spanned"])
+        self.assertEqual(w1282x_eti["dominant_unspanned_basis_axis"], "e1_transcript_axiom_entry")
+        self.assertGreater(w1282x_eti["scalar_fallacy_overestimate_pct"], 50.0)
+
+        w1282x_tri = vec_iso["mechanistic_span_matrix"]["W1282X_with_trimodal"]
+        self.assertTrue(w1282x_tri["basis_fully_spanned"])
+        self.assertGreater(w1282x_tri["directional_cosine_alignment"], 0.99)
+
+        with self.assertRaises(ValueError):
+            evaluate_mechanistic_basis_span([0.5, 0.5], [0.5, 0.5, 0.5, 0.5])
+
+        # Terminal QED stage in intact FLT aligns near 0 deg (cos theta > 0.99)
+        flt_vec = vec_iso["challenge_vector_profiles"]["fermats_last_theorem"]
+        self.assertGreater(flt_vec["terminal_qed_cos_theta"], 0.99)
+        self.assertLess(flt_vec["peak_stage_bridge_rotation_deg"], -15.0)
+
+        # Fractured stage deflects orthogonally (> 84 deg, cos theta < 0.10)
+        frac_vec = compute_stage_state_vector(11.69, 3.49, is_fractured=True)
+        self.assertLess(frac_vec["psi_parallel_cos_theta"], 0.10)
+        self.assertGreater(frac_vec["psi_orthogonal_sin_theta"], 0.99)
+        self.assertGreater(frac_vec["phase_deflection_angle_deg"], 84.0)
+        self.assertAlmostEqual(frac_vec["unitary_norm_squared"], 1.0, places=9)
+
+        with self.assertRaises(ValueError):
+            compute_stage_state_vector(-1.0)
 
 
 if __name__ == "__main__":
