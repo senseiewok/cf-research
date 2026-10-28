@@ -3980,3 +3980,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-28
     status: active
+  - id: gov-je-health-services
+    name: Public health administration and general hospital services in Jersey
+    organisation: Government of Jersey
+    countries: [JE]
+    url: https://www.gov.je/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating public healthcare administration, hospital services at Jersey General Hospital, specialized pediatric clinics, and community clinical care across Jersey.
+    who_for: not_checked
+    format: online
+    lang: en-JE
+    source_id: gov-je-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-gd-health-services
+    name: National public health administration and hospital services in Grenada
+    organisation: Government of Grenada
+    countries: [GD]
+    url: https://gov.gd/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating public healthcare administration, community medical clinics, General Hospital services, and pediatric clinical consultations across Grenada.
+    who_for: not_checked
+    format: online
+    lang: en-GD
+    source_id: gov-gd-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-tc-health-services
+    name: Public health administration and clinical hospital care in Turks and Caicos
+    organisation: Turks and Caicos Islands Government
+    countries: [TC]
+    url: https://www.gov.tc/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal administering public health programs, clinical hospital operations, primary medical centers, and specialized pediatric referrals across Turks and Caicos.
+    who_for: not_checked
+    format: online
+    lang: en-TC
+    source_id: gov-tc-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-mo-health-services
+    name: Public health administration and hospital services in Macao
+    organisation: Government of Macao SAR
+    countries: [MO]
+    url: https://www.gov.mo/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official portal coordinating public health policy, Conde de Sao Januario hospital administration, specialized pediatric consultations, and community healthcare across Macao.
+    who_for: not_checked
+    format: online
+    lang: zh-MO
+    source_id: gov-mo-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: stp-gov-st-health-services
+    name: National government portal and public health coordination in Sao Tome and Principe
+    organisation: Governo de São Tomé e Príncipe
+    countries: [ST]
+    url: https://stp.gov.st/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating national healthcare administration, public health programs, hospital care, and specialized medical referrals across Sao Tome and Principe.
+    who_for: not_checked
+    format: online
+    lang: pt-ST
+    source_id: stp-gov-st-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
