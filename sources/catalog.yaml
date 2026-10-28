@@ -4071,6 +4071,66 @@ sources:
     claim_label: unverified
     notes: Official government portal coordinating public healthcare administration, community medical clinics, General Hospital operations, and overseas clinical referrals across Saint Helena; robots.txt allow (2026-10-28), manual access, link and summary only.
 
+  - id: maltabreathewell-resource-pages
+    title: Malta Breathe Well Association website (www.maltabreathewell.org)
+    publisher: Malta Breathe Well Association
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.maltabreathewell.org/
+    url: null
+    claim_label: unverified
+    notes: Maltese respiratory association providing patient support, public health education, and advocacy for people living with cystic fibrosis and chronic lung conditions across Malta; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: gov-vc-resource-pages
+    title: Government of Saint Vincent and the Grenadines website (www.gov.vc)
+    publisher: Government of Saint Vincent and the Grenadines
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.gov.vc/
+    url: null
+    claim_label: unverified
+    notes: Official government portal coordinating public healthcare administration, community medical clinics, Milton Cato Memorial Hospital operations, and overseas specialist referrals in Saint Vincent; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: doh-vi-resource-pages
+    title: Virgin Islands Department of Health website (doh.vi.gov)
+    publisher: Virgin Islands Department of Health
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://doh.vi.gov/
+    url: null
+    claim_label: unverified
+    notes: Official territorial health department administering public healthcare programs, maternal and child clinical services, and specialized medical referrals across the Virgin Islands; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: gov-to-resource-pages
+    title: Government of Tonga website (www.gov.to)
+    publisher: Government of Tonga
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.gov.to/
+    url: null
+    claim_label: unverified
+    notes: Official government portal coordinating public healthcare administration, community clinical centers, Vaiola Hospital operations, and specialized medical referrals across Tonga; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: rmihealth-resource-pages
+    title: Ministry of Health and Human Services website (rmihealth.org)
+    publisher: Ministry of Health and Human Services
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://rmihealth.org/
+    url: null
+    claim_label: unverified
+    notes: Official ministry portal administering public healthcare programs, community health centers, Majuro Hospital operations, and specialized medical referrals across the Marshall Islands; robots.txt allow (2026-10-28), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information

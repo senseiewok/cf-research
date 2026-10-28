@@ -4219,3 +4219,82 @@ resources:
     last_checked: 2026-10-28
     status: active
 
+  - id: maltabreathewell-mt-respiratory-support
+    name: Respiratory health and cystic fibrosis patient guidance in Malta
+    organisation: Malta Breathe Well Association
+    countries: [MT]
+    url: https://www.maltabreathewell.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Maltese respiratory association providing patient support, public health education, and advocacy for people living with cystic fibrosis and chronic lung conditions across Malta.
+    who_for: not_checked
+    format: online
+    lang: en-MT
+    source_id: maltabreathewell-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-vc-health-services
+    name: Public healthcare administration and hospital clinical care in Saint Vincent and the Grenadines
+    organisation: Government of Saint Vincent and the Grenadines
+    countries: [VC]
+    url: https://www.gov.vc/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating public healthcare administration, community medical clinics, Milton Cato Memorial Hospital operations, and overseas specialist referrals in Saint Vincent.
+    who_for: not_checked
+    format: online
+    lang: en-VC
+    source_id: gov-vc-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: doh-vi-health-services
+    name: Public health programs and clinical healthcare administration in the United States Virgin Islands
+    organisation: Virgin Islands Department of Health
+    countries: [VI]
+    url: https://doh.vi.gov/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official territorial health department administering public healthcare programs, maternal and child clinical services, and specialized medical referrals across the Virgin Islands.
+    who_for: not_checked
+    format: online
+    lang: en-VI
+    source_id: doh-vi-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-to-health-services
+    name: Public healthcare administration and hospital clinical services in Tonga
+    organisation: Government of Tonga
+    countries: [TO]
+    url: https://www.gov.to/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating public healthcare administration, community clinical centers, Vaiola Hospital operations, and specialized medical referrals across Tonga.
+    who_for: not_checked
+    format: online
+    lang: en-TO
+    source_id: gov-to-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: rmihealth-mh-health-services
+    name: Public healthcare administration and hospital clinical services in the Marshall Islands
+    organisation: Ministry of Health and Human Services
+    countries: [MH]
+    url: https://rmihealth.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official ministry portal administering public healthcare programs, community health centers, Majuro Hospital operations, and specialized medical referrals across the Marshall Islands.
+    who_for: not_checked
+    format: online
+    lang: en-MH
+    source_id: rmihealth-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
