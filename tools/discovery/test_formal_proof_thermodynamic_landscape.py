@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unit tests for Formal Proof Thermodynamic Landscape & CFTR Allosteric Bridge Model (T-0475)."""
+"""Unit tests for Formal Proof Thermodynamic Landscape & CFTR Allosteric Bridge Model (T-0479)."""
 from __future__ import annotations
 
 import sys
@@ -16,6 +16,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     FORMAL_MATH_CHALLENGE_PROFILES,
     PROOF_THERMODYNAMIC_PARAMETERS,
     compute_stage_free_energy_profile,
+    evaluate_challenge_landscape,
     evaluate_falsification_negative_control,
     evaluate_two_way_bridge_isomorphism,
     simulate_counterfactual_axiom_knockout,
@@ -87,6 +88,21 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             simulate_counterfactual_axiom_knockout("nonexistent_knockout")
         with self.assertRaises(ValueError):
             compute_stage_free_energy_profile(FLT_LEAN4_STAGES[0], fan_in_weight=-0.5)
+        with self.assertRaises(ValueError):
+            evaluate_challenge_landscape("unknown_challenge")
+
+    def test_all_three_anthropic_challenge_landscapes_sum_and_verify(self) -> None:
+        expected_totals = {
+            "fermats_last_theorem": 29500,
+            "formal_math_zeta23": 1420,
+            "formal_math_3sum_apsp": 980,
+        }
+        for cid, total in expected_totals.items():
+            land = evaluate_challenge_landscape(cid, apply_allosteric_bridge=True)
+            self.assertEqual(land["total_theorems"], total)
+            self.assertEqual(len(land["stages"]), 5)
+            self.assertGreater(land["final_alluvial_hypothesis_flux_pct"], 60.0)
+
 
 
 if __name__ == "__main__":

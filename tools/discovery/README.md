@@ -133,5 +133,5 @@ python tools/discovery/discovery_council.py --check-index
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
 | `alpha_evolve_pareto_regimen.py` | `T-0426` | `T2` | `keep` | Canonical workbench |
-| `formal_proof_thermodynamic_landscape.py` | `T-0475` | `T2` | `keep` | Canonical workbench |
+| `formal_proof_thermodynamic_landscape.py` | `T-0479` | `T2` | `keep` | Canonical workbench |
 | `science_model_benchmark.py` | `T-0265` | `T2` | `keep` | Canonical workbench |
