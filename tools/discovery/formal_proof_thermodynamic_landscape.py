@@ -44,10 +44,15 @@ import argparse
 from dataclasses import asdict, dataclass
 import json
 import math
+from pathlib import Path
 import sys
 from typing import Any, Dict, List, Mapping, Sequence, Tuple
 
-from epistemic_rigor import (
+_DISCOVERY_DIR = Path(__file__).resolve().parent
+if str(_DISCOVERY_DIR) not in sys.path:
+    sys.path.insert(0, str(_DISCOVERY_DIR))
+
+from epistemic_rigor import (  # noqa: E402
     BiophysicalParameter,
     run_parametric_sensitivity,
     validate_physical_bounds,
@@ -266,7 +271,7 @@ ZETA23_LEAN4_STAGES: Tuple[ProofStageNode, ...] = (
         allosteric_bridge_bonus_kcal=-1.2,
         required_axioms=("critical_strip_analytic_continuation",),
         cf_biophysical_analog="Pre-mRNA intron 19 splice donor/acceptor window recognition (3849+10kb C->T)",
-        cf_pdb_or_doi="DOI: 10.1056/NEJMoa1908639 | NCT05668741",
+        cf_pdb_or_doi="DOI: 10.1056/NEJMoa1908639 | NCT06429176",
         plain_english_summary=(
             "Approximates zeta(s) inside the critical strip by finite Dirichlet polynomials, mirroring how "
             "spliceosomal snRNPs scan local cis-acting sequence windows along CFTR pre-mRNA."
@@ -300,7 +305,7 @@ ZETA23_LEAN4_STAGES: Tuple[ProofStageNode, ...] = (
         allosteric_bridge_bonus_kcal=-2.4,
         required_axioms=("critical_strip_analytic_continuation", "weyl_kloosterman_cancellation"),
         cf_biophysical_analog="2'-O-MOE antisense oligonucleotide (ASO) steric hybridization barrier on pseudoexon",
-        cf_pdb_or_doi="DOI: 10.1126/science.ade2216 | NCT05668741",
+        cf_pdb_or_doi="DOI: 10.1126/science.ade2216 | NCT06429176",
         plain_english_summary=(
             "Cancels oscillatory phases in short intervals via Weyl differencing, mirroring how steric-blocking "
             "ASOs suppress aberrant pseudoexon inclusion to restore canonical exon 19-20 splicing."
@@ -371,7 +376,7 @@ THREESUM_APSP_LEAN4_STAGES: Tuple[ProofStageNode, ...] = (
         allosteric_bridge_bonus_kcal=-1.6,
         required_axioms=("word_ram_w_log_n_invariant", "overflow_bucket_sparsity_bound"),
         cf_biophysical_analog="Mucus mesh-size steric partitioning & PEGylated LNP diffusivity filtering",
-        cf_pdb_or_doi="DOI: 10.1126/science.aaw7611 | NCT06429176",
+        cf_pdb_or_doi="DOI: 10.1126/science.aaw7611 | NCT05668741",
         plain_english_summary=(
             "Separates heavy overflow buckets from sparse buckets to convert unstructured 3SUM into structured "
             "convolution, mirroring size-exclusion transport across airway mucin networks."
@@ -731,6 +736,8 @@ def evaluate_challenge_landscape(
     cumulative_flux_pct = 100.0
     peak_barrier = 0.0
     peak_stage_id = ""
+    unbridged_peak_barrier = 0.0
+    unbridged_peak_stage_id = ""
     for stage in stages:
         prof = compute_stage_free_energy_profile(
             stage,
@@ -738,9 +745,13 @@ def evaluate_challenge_landscape(
         )
         cumulative_flux_pct = cumulative_flux_pct * prof["stage_transmission_probability"]
         eff_b = prof["effective_activation_barrier_kcal_mol"]
+        raw_b = prof["raw_activation_barrier_kcal_mol"]
         if eff_b > peak_barrier:
             peak_barrier = eff_b
             peak_stage_id = stage.stage_id
+        if raw_b > unbridged_peak_barrier:
+            unbridged_peak_barrier = raw_b
+            unbridged_peak_stage_id = stage.stage_id
         stage_profiles.append({
             **prof,
             "alluvial_hypothesis_flux_pct": round(max(0.0, min(100.0, cumulative_flux_pct)), 2),
@@ -752,6 +763,8 @@ def evaluate_challenge_landscape(
         "title": meta["title"],
         "total_theorems": sum(s.theorem_count for s in stages),
         "apply_allosteric_bridge": apply_allosteric_bridge,
+        "unbridged_peak_stage_id": unbridged_peak_stage_id,
+        "unbridged_peak_barrier_kcal_mol": round(unbridged_peak_barrier, 4),
         "rate_limiting_peak_stage_id": peak_stage_id,
         "rate_limiting_peak_barrier_kcal_mol": round(peak_barrier, 4),
         "final_alluvial_hypothesis_flux_pct": stage_profiles[-1]["alluvial_hypothesis_flux_pct"],
@@ -761,7 +774,7 @@ def evaluate_challenge_landscape(
 
 
 def evaluate_two_way_bridge_isomorphism() -> Dict[str, Any]:
-    """Quantify the mathematical-biophysical isomorphism across all 5 knockout scenarios."""
+    """Quantify the mathematical-biophysical isomorphism across all 5 knockout scenarios and 3 challenges."""
     scenarios = {
         k_id: simulate_counterfactual_axiom_knockout(k_id)
         for k_id in COUNTERFACTUAL_KNOCKOUT_CATALOG
@@ -779,25 +792,36 @@ def evaluate_two_way_bridge_isomorphism() -> Dict[str, Any]:
     bridged_peak = intact["rate_limiting_peak_barrier_kcal_mol"]
     barrier_reduction_kcal = round(unbridged_peak - bridged_peak, 4)
 
-    # AH-11 +/-25% parametric sensitivity verification on the stage barrier rank order
-    def _eval_stage_barriers(p_map: Mapping[str, float]) -> Dict[str, float]:
-        w_fan = p_map["PROOF_FAN_IN_ENTROPY_WEIGHT"]
-        w_depth = p_map["PROOF_TACTIC_DEPTH_COUPLING"]
-        return {
-            s.stage_id: compute_stage_free_energy_profile(
-                s,
-                fan_in_weight=w_fan,
-                depth_coupling=w_depth,
-                apply_allosteric_bridge=True,
-            )["raw_activation_barrier_kcal_mol"]
-            for s in FLT_LEAN4_STAGES
-        }
+    # AH-11 +/-25% parametric sensitivity verification across all 3 challenge landscapes
+    challenge_sensitivity_25pct: Dict[str, Dict[str, Any]] = {}
+    for c_id, c_stages in CHALLENGE_STAGE_MAP.items():
+        def _eval_challenge_barriers(
+            p_map: Mapping[str, float],
+            stage_tuple: Tuple[ProofStageNode, ...] = c_stages,
+        ) -> Dict[str, float]:
+            w_fan = p_map["PROOF_FAN_IN_ENTROPY_WEIGHT"]
+            w_depth = p_map["PROOF_TACTIC_DEPTH_COUPLING"]
+            return {
+                s.stage_id: compute_stage_free_energy_profile(
+                    s,
+                    fan_in_weight=w_fan,
+                    depth_coupling=w_depth,
+                    apply_allosteric_bridge=False,
+                )["raw_activation_barrier_kcal_mol"]
+                for s in stage_tuple
+            }
 
-    sensitivity_report = run_parametric_sensitivity(
-        _eval_stage_barriers,
-        list(PROOF_THERMODYNAMIC_PARAMETERS.values()),
-        perturbation_pct=0.25,
-        only_heuristics=True,
+        challenge_sensitivity_25pct[c_id] = run_parametric_sensitivity(
+            _eval_challenge_barriers,
+            list(PROOF_THERMODYNAMIC_PARAMETERS.values()),
+            perturbation_pct=0.25,
+            only_heuristics=True,
+        )
+
+    sensitivity_report = challenge_sensitivity_25pct["fermats_last_theorem"]
+    all_challenges_preserved = all(
+        rep["top_candidate_preserved"] and rep["full_ranking_preserved"]
+        for rep in challenge_sensitivity_25pct.values()
     )
 
     return {
@@ -812,7 +836,9 @@ def evaluate_two_way_bridge_isomorphism() -> Dict[str, Any]:
         "bridged_peak_barrier_kcal_mol": round(bridged_peak, 4),
         "rate_limiting_stage_preserved_25pct": sensitivity_report["top_candidate_preserved"],
         "full_stage_rank_order_preserved_25pct": sensitivity_report["full_ranking_preserved"],
+        "all_challenges_rank_order_preserved_25pct": all_challenges_preserved,
         "sensitivity_25pct": sensitivity_report,
+        "challenge_sensitivity_25pct": challenge_sensitivity_25pct,
         "counterfactual_scenarios": scenarios,
     }
 
@@ -856,12 +882,28 @@ def main(argv: Sequence[str] | None = None) -> int:
         default="wild_type_intact_proof",
         help="Counterfactual axiom knockout scenario to simulate",
     )
+    parser.add_argument(
+        "--challenge",
+        choices=sorted(CHALLENGE_STAGE_MAP.keys()),
+        default=None,
+        help="Evaluate a specific formal-math challenge landscape (fermats_last_theorem, formal_math_zeta23, formal_math_3sum_apsp)",
+    )
+    parser.add_argument(
+        "--no-bridge",
+        action="store_true",
+        help="Disable the allosteric / modularity bridge when evaluating a challenge landscape",
+    )
     parser.add_argument("--all-scenarios", action="store_true", help="Run full two-way bridge isomorphism report")
     parser.add_argument("--json", action="store_true", help="Emit JSON output")
     args = parser.parse_args(list(argv) if argv is not None else None)
 
     if args.all_scenarios:
         report = evaluate_two_way_bridge_isomorphism()
+    elif args.challenge is not None:
+        report = evaluate_challenge_landscape(
+            args.challenge,
+            apply_allosteric_bridge=not args.no_bridge,
+        )
     else:
         report = simulate_counterfactual_axiom_knockout(args.knockout)
 
@@ -878,7 +920,16 @@ def main(argv: Sequence[str] | None = None) -> int:
                 f"-{report['taylor_wiles_allosteric_stabilization_kcal_mol']:.2f} kcal/mol "
                 f"({report['unbridged_peak_barrier_kcal_mol']:.2f} -> {report['bridged_peak_barrier_kcal_mol']:.2f} kcal/mol)"
             )
-            print(f"AH-11 +/-25% Rate-Limiting Bottleneck Invariant: {report['rate_limiting_stage_preserved_25pct']}")
+            print(
+                f"AH-11 +/-25% Rate-Limiting Bottleneck Invariant (All 3 Challenges): "
+                f"{report['all_challenges_rank_order_preserved_25pct']}"
+            )
+            for c_id, cl in report["challenge_landscapes"].items():
+                print(
+                    f"  [Challenge: {c_id}] Theorems={cl['total_theorems']} | "
+                    f"UnbridgedPeak={cl['unbridged_peak_stage_id']} ({cl['unbridged_peak_barrier_kcal_mol']:.2f} kcal/mol) | "
+                    f"BridgedFlux={cl['final_alluvial_hypothesis_flux_pct']:.2f}%"
+                )
             for k_id, sc in report["counterfactual_scenarios"].items():
                 print(
                     f"  [{k_id}] QED={sc['qed_comparator_verified']} | "
@@ -886,6 +937,17 @@ def main(argv: Sequence[str] | None = None) -> int:
                     f"Flux={sc['final_alluvial_hypothesis_flux_pct']:.2f}% | "
                     f"CFTR Analog={sc['parallel_cf_biophysics']['predicted_anion_efflux_pct_wt']:.1f}% WT"
                 )
+        elif args.challenge is not None:
+            print(f"Challenge: {report['title']} ({report['total_theorems']} theorems)")
+            print(
+                f"Unbridged Peak Stage: {report['unbridged_peak_stage_id']} "
+                f"({report['unbridged_peak_barrier_kcal_mol']:.2f} kcal/mol)"
+            )
+            print(
+                f"Effective Peak Stage: {report['rate_limiting_peak_stage_id']} "
+                f"({report['rate_limiting_peak_barrier_kcal_mol']:.2f} kcal/mol)"
+            )
+            print(f"Final Alluvial Hypothesis Flux: {report['final_alluvial_hypothesis_flux_pct']:.2f}%")
         else:
             print(f"Scenario: {report['label']}")
             print(f"QED Verified: {report['qed_comparator_verified']} ({report['verified_theorems_count']}/29500 theorems)")

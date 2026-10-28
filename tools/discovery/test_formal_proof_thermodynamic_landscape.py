@@ -102,6 +102,12 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             self.assertEqual(land["total_theorems"], total)
             self.assertEqual(len(land["stages"]), 5)
             self.assertGreater(land["final_alluvial_hypothesis_flux_pct"], 60.0)
+            self.assertEqual(
+                land["unbridged_peak_stage_id"],
+                FORMAL_MATH_CHALLENGE_PROFILES[cid]["peak_stage_id"],
+            )
+        iso = evaluate_two_way_bridge_isomorphism()
+        self.assertTrue(iso["all_challenges_rank_order_preserved_25pct"])
 
 
 
