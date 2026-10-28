@@ -6,15 +6,15 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 90,
+  "total_modules": 91,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 92,
+  "test_suites_count": 93,
   "persona_summary": {
-    "researchers": 89,
+    "researchers": 90,
     "builders": 1
   },
   "triage_summary": {
-    "keep": 72,
+    "keep": 73,
     "merge": 14,
     "archive": 4
   },
@@ -24,7 +24,7 @@
     "airway_delivery": 40,
     "microbiology_host": 6,
     "clinical_trials": 3,
-    "ai_verification": 2
+    "ai_verification": 3
   },
   "disciplines": {
     "structural_biology": {
@@ -1042,14 +1042,25 @@
     },
     "ai_verification": {
       "label": "AI Verification & Scientific Benchmarking",
-      "count": 2,
-      "keep_count": 2,
+      "count": 3,
+      "keep_count": 3,
       "merge_count": 0,
       "archive_count": 0,
       "modules": [
         {
           "module": "alpha_evolve_pareto_regimen",
           "task": "T-0426",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "ai_verification",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "formal_proof_thermodynamic_landscape",
+          "task": "T-0479",
           "track": "Track A",
           "tier": "T2",
           "discipline": "ai_verification",
