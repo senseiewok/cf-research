@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-206 to download by hand, 1 to ask for, 3 not to download.
+211 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -125,6 +125,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | vnch-vn-resource-pages | Bệnh viện Nhi Trung ương (Vietnam National Children’s Hospital) website (benhviennhitrunguong.gov.vn) | [page](https://benhviennhitrunguong.gov.vn/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Cayman Islands Health Services Authority
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| hsa-ky-resource-pages | Cayman Islands Health Services Authority website (www.hsa.ky) | [page](https://www.hsa.ky/) | link only | Principal public healthcare system and hospital provider in the Cayman Islands; robots.txt allow (2026-10-27), manual access, link and summary only. |
 
 ### Centre d'Infectiologie Charles Mérieux du Mali
 
@@ -277,6 +283,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | salud-pr-resource-pages | Departamento de Salud de Puerto Rico website (salud.pr.gov) | [page](https://www.salud.pr.gov/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### Department of Health and Social Affairs
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-fm-resource-pages | Department of Health and Social Affairs website (gov.fm) | [page](https://gov.fm/) | link only | Official national health department coordinating public healthcare and hospital referrals across the Federated States of Micronesia; robots.txt allow (2026-10-… |
+
 ### Direction des Affaires Sanitaires et Sociales de la Nouvelle-Calédonie
 
 | ID | What | Open | Save as | Notes |
@@ -367,6 +379,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | fusal-sv-resource-pages | Fundación Salvadoreña para la Salud y el Desarrollo Humano website (fusal.org) | [page](https://www.fusal.org/) | link only | Salvadoran health foundation channeling humanitarian medicine access and pediatric hospital support alongside the Benjamín Bloom Cystic Fibrosis Foundation. |
 
+### Gibraltar Health Authority
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gha-gi-resource-pages | Gibraltar Health Authority website (www.gha.gi) | [page](https://www.gha.gi/) | link only | Official public healthcare authority operating Saint Bernard Hospital in Gibraltar; robots.txt allow (2026-10-27), manual access, link and summary only. |
+
 ### gnomAD consortium (Broad Institute)
 
 | ID | What | Open | Save as | Notes |
@@ -408,6 +426,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | hengitysliitto-fi-resource-pages | Hengitysliitto cystic fibrosis support pages (hengitysliitto.fi) | [page](https://www.hengitysliitto.fi/) | link only | National respiratory health and rare lung disease organization in Finland hosting support resources for people with cystic fibrosis. |
+
+### Horacio Oduber Hospital
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| arubahospital-com-resource-pages | Horacio Oduber Hospital website (www.arubahospital.com) | [page](https://www.arubahospital.com/) | link only | Main public hospital providing specialized pediatric and respiratory care in Aruba; robots.txt allow (2026-10-27), manual access, link and summary only. |
 
 ### Hospital María, Especialidades Pediátricas
 
@@ -498,6 +522,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | unidospelavida-resource-pages | Instituto Unidos pela Vida website (unidospelavida.org.br) | [page](https://unidospelavida.org.br/) | link only | Official national cystic fibrosis awareness, diagnosis navigation, and patient support institute in Brazil. |
+
+### Istituto per la Sicurezza Sociale
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| iss-sm-resource-pages | Istituto per la Sicurezza Sociale website (www.iss.sm) | [page](https://www.iss.sm/) | link only | Robots.txt returned 403 on 2026-10-27; manual access (link and summary only). |
 
 ### Japan Intractable Diseases Information Center (難病情報センター)
 

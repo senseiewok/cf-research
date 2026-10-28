@@ -3820,3 +3820,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-27
     status: active
+
+  - id: iss-sm-hospital-care
+    name: Public healthcare administration, hospital operations, and pediatric clinical services in San Marino
+    organisation: Istituto per la Sicurezza Sociale
+    countries: [SM]
+    url: https://www.iss.sm/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: State institute providing public healthcare management, hospital operations, pediatric clinical consultations, and specialist medical care in San Marino.
+    who_for: not_checked
+    format: online
+    lang: it
+    source_id: iss-sm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-27
+    status: active
+
+  - id: gov-fm-health-services
+    name: National public health administration and clinical services in the Federated States of Micronesia
+    organisation: Department of Health and Social Affairs
+    countries: [FM]
+    url: https://gov.fm/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National government department coordinating public healthcare policy, hospital standards, community wellness programs, and specialized clinical referrals across the Federated States of Micronesia.
+    who_for: not_checked
+    format: online
+    lang: en-FM
+    source_id: gov-fm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-27
+    status: active
+
+  - id: hsa-ky-hospital-guidance
+    name: Public tertiary hospital care and specialized clinical services in the Cayman Islands
+    organisation: Cayman Islands Health Services Authority
+    countries: [KY]
+    url: https://www.hsa.ky/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Principal public healthcare system operating the Cayman Islands Hospital, specialized pediatric clinics, pulmonary therapy, and primary community care across the Cayman Islands.
+    who_for: not_checked
+    format: online
+    lang: en-KY
+    source_id: hsa-ky-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-27
+    status: active
+
+  - id: gha-gi-hospital-guidance
+    name: Public healthcare administration and specialized hospital services in Gibraltar
+    organisation: Gibraltar Health Authority
+    countries: [GI]
+    url: https://www.gha.gi/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Public healthcare provider directing Saint Bernard Hospital, pediatric medical care, respiratory clinics, and specialist tertiary referrals in Gibraltar.
+    who_for: not_checked
+    format: online
+    lang: en-GI
+    source_id: gha-gi-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-27
+    status: active
+
+  - id: arubahospital-com-pediatric-care
+    name: Public hospital care and specialized clinical services in Aruba
+    organisation: Horacio Oduber Hospital
+    countries: [AW]
+    url: https://www.arubahospital.com/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Main public general hospital in Oranjestad delivering acute inpatient treatment, specialized pediatric medicine, respiratory support, and diagnostic care across Aruba.
+    who_for: not_checked
+    format: online
+    lang: nl-AW
+    source_id: arubahospital-com-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-27
+    status: active
