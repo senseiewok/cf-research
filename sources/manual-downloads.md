@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-231 to download by hand, 1 to ask for, 3 not to download.
+236 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -469,6 +469,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | govt-lc-resource-pages | Government of Saint Lucia website (www.govt.lc) | [page](https://www.govt.lc/) | link only | National government portal administering public health programs, Owen King EU Hospital services, community clinics, and specialized pediatric referrals in Sain… |
 
+### Government of Saint Vincent and the Grenadines
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-vc-resource-pages | Government of Saint Vincent and the Grenadines website (www.gov.vc) | [page](https://www.gov.vc/) | link only | Official government portal coordinating public healthcare administration, community medical clinics, Milton Cato Memorial Hospital operations, and overseas spe… |
+
 ### Government of the Republic of Suriname (Ministerie van Volksgezondheid)
 
 | ID | What | Open | Save as | Notes |
@@ -480,6 +486,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | gov-vg-resource-pages | Government of the Virgin Islands website (gov.vg) | [page](https://gov.vg/) | link only | Official government portal administering public health programs, community clinics, and hospital care through the territorial health services authority in the… |
+
+### Government of Tonga
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-to-resource-pages | Government of Tonga website (www.gov.to) | [page](https://www.gov.to/) | link only | Official government portal coordinating public healthcare administration, community clinical centers, Vaiola Hospital operations, and specialized medical refer… |
 
 ### Governo de São Tomé e Príncipe
 
@@ -769,6 +781,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | mrds-my-resource-pages | Malaysia Rare Disorders Society website (mrds.org.my) | [page](https://mrds.org.my/) | link only | Official national rare disorders patient society in Malaysia listing cystic fibrosis under rare pulmonary disorders. |
 
+### Malta Breathe Well Association
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| maltabreathewell-resource-pages | Malta Breathe Well Association website (www.maltabreathewell.org) | [page](https://www.maltabreathewell.org/) | link only | Maltese respiratory association providing patient support, public health education, and advocacy for people living with cystic fibrosis and chronic lung condit… |
+
 ### Middle East Cystic Fibrosis Association
 
 | ID | What | Open | Save as | Notes |
@@ -786,6 +804,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | minsabs-gq-resource-pages | Ministerio de Sanidad y Bienestar Social de Guinea Ecuatorial website (guineasalud.org) | [page](https://guineasalud.org/) | link only | Official national health ministry and hospital guidance portal in Equatorial Guinea; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
+### Ministry of Health and Human Services
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| rmihealth-resource-pages | Ministry of Health and Human Services website (rmihealth.org) | [page](https://rmihealth.org/) | link only | Official ministry portal administering public healthcare programs, community health centers, Majuro Hospital operations, and specialized medical referrals acro… |
 
 ### Ministry of Health and Medical Services, Fiji
 
@@ -1290,6 +1314,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | vaincrelamuco-resource-pages | Vaincre la Mucoviscidose website (www.vaincrelamuco.org) | [page](https://www.vaincrelamuco.org/) | link only | Official national cystic fibrosis patient and research association in France. |
+
+### Virgin Islands Department of Health
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| doh-vi-resource-pages | Virgin Islands Department of Health website (doh.vi.gov) | [page](https://doh.vi.gov/) | link only | Official territorial health department administering public healthcare programs, maternal and child clinical services, and specialized medical referrals across… |
 
 ### Zenodo (host of the record; creators at Google DeepMind, copyright DeepMind Technologies Limited)
 
