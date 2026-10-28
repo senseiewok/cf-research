@@ -20,6 +20,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_mechanistic_basis_span,
     evaluate_anthropic_proof_visual_geometries,
     evaluate_kramers_escape_and_brinkman_permeability,
+    evaluate_spectral_laplacian_and_cheeger_bottleneck,
     evaluate_vector_space_isomorphism,
     evaluate_challenge_landscape,
     evaluate_continuum_percolation_phase_transition,
@@ -214,6 +215,22 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             geom["formal_math_3sum_apsp"]["zero_triangle_witness_weights"]["cycle_sum"], 0
         )
         self.assertEqual(geom["formal_math_3sum_apsp"]["bit_packing_speedup_factor"], 64.0)
+
+
+
+    def test_spectral_laplacian_and_cheeger_bottleneck_bridge(self) -> None:
+        sp = evaluate_spectral_laplacian_and_cheeger_bottleneck()
+        self.assertTrue(sp["spectral_cheeger_bridge_verified"])
+        self.assertGreater(sp["proof_dag_bottleneck_cut"]["fiedler_connectivity_gain_fold"], 6.0)
+        self.assertGreater(sp["cftr_allosteric_contact_graph"]["allosteric_fiedler_gain_fold"], 7.0)
+        for cid, c_prof in sp["challenge_spectral_profiles"].items():
+            self.assertTrue(c_prof["unbridged"]["cheeger_inequality_satisfied"], cid)
+            self.assertTrue(c_prof["bridged"]["cheeger_inequality_satisfied"], cid)
+            self.assertEqual(c_prof["knockout_disconnected_lambda_2"], 0.0)
+        with self.assertRaises(ValueError):
+            evaluate_spectral_laplacian_and_cheeger_bottleneck(
+                unbridged_cut_conductance=0.60, bridged_cut_conductance=0.20
+            )
 
 
 if __name__ == "__main__":
