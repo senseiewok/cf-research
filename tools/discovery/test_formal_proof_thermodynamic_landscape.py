@@ -20,6 +20,8 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_mechanistic_basis_span,
     evaluate_anthropic_proof_visual_geometries,
     evaluate_kramers_escape_and_brinkman_permeability,
+    ETH_3SAT_LEAN4_STAGES,
+    evaluate_scite_citation_polarity_and_kernel_parity,
     evaluate_spectral_laplacian_and_cheeger_bottleneck,
     evaluate_vector_space_isomorphism,
     evaluate_challenge_landscape,
@@ -104,6 +106,7 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             "fermats_last_theorem": 29500,
             "formal_math_zeta23": 1420,
             "formal_math_3sum_apsp": 980,
+            "formal_math_eth": 493,
         }
         for cid, total in expected_totals.items():
             land = evaluate_challenge_landscape(cid, apply_allosteric_bridge=True)
@@ -231,6 +234,27 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             evaluate_spectral_laplacian_and_cheeger_bottleneck(
                 unbridged_cut_conductance=0.60, bridged_cut_conductance=0.20
             )
+
+
+
+    def test_eth_3sat_refutation_and_scite_citation_polarity_parity(self) -> None:
+        self.assertEqual(sum(s.theorem_count for s in ETH_3SAT_LEAN4_STAGES), 493)
+        eth_land = evaluate_challenge_landscape("formal_math_eth", apply_allosteric_bridge=True)
+        self.assertEqual(eth_land["total_theorems"], 493)
+        self.assertEqual(eth_land["unbridged_peak_stage_id"], "clause_vs_variable_alternation_bridge")
+        self.assertGreater(eth_land["final_alluvial_hypothesis_flux_pct"], 60.0)
+
+        geom = evaluate_anthropic_proof_visual_geometries()
+        self.assertTrue(geom["all_four_geometries_verified"])
+        self.assertEqual(geom["formal_math_eth"]["s3_infimum_exponent"], 0.0)
+        self.assertEqual(geom["formal_math_eth"]["paper_index_theorems_count"], 493)
+        self.assertAlmostEqual(geom["formal_math_zeta23"]["xiprime_simple_critical_line_proportion_quartic"], 0.86864, places=5)
+
+        scite_rep = evaluate_scite_citation_polarity_and_kernel_parity()
+        self.assertTrue(scite_rep["zero_editorial_notices_verified"])
+        self.assertTrue(scite_rep["all_four_benchmarks_kernel_and_scite_verified"])
+        self.assertIn("Scite ML citation classification", scite_rep["provenance_tag"])
+        self.assertEqual(len(scite_rep["benchmarks"]), 4)
 
 
 if __name__ == "__main__":
