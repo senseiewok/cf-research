@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-221 to download by hand, 1 to ask for, 3 not to download.
+226 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -403,6 +403,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gnomad | gnomAD (Genome Aggregation Database) browser and downloads | [page](https://gnomad.broadinstitute.org/) | link only | Terms page read in full 2026-10-04 (/terms redirects to /policies). |
 
+### Government of Anguilla
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-ai-resource-pages | Government of Anguilla website (gov.ai) | [page](https://gov.ai/) | link only | Official government portal administering public health programs, Princess Alexandra Hospital services, community clinical centers, and pediatric medical referr… |
+
 ### Government of Botswana Ministry of Health Services
 
 | ID | What | Open | Save as | Notes |
@@ -427,6 +433,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gov-je-resource-pages | Government of Jersey website (www.gov.je) | [page](https://www.gov.je/) | link only | Official government portal coordinating public healthcare administration, hospital operations at Jersey General Hospital, and community clinical services in Je… |
 
+### Government of Kiribati
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| president-gov-ki-resource-pages | Government of Kiribati website (www.president.gov.ki) | [page](https://www.president.gov.ki/) | link only | Official government portal coordinating national health policy, Tungaru Central Hospital administration, community clinics, and specialized pediatric referrals… |
+
 ### Government of Macao SAR
 
 | ID | What | Open | Save as | Notes |
@@ -438,6 +450,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | gov-kn-resource-pages | Government of Saint Kitts and Nevis website (www.gov.kn) | [page](https://www.gov.kn/) | link only | Official federal government portal coordinating national health administration and specialized pediatric medical referrals in Saint Kitts and Nevis; robots.txt… |
+
+### Government of Saint Lucia
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| govt-lc-resource-pages | Government of Saint Lucia website (www.govt.lc) | [page](https://www.govt.lc/) | link only | National government portal administering public health programs, Owen King EU Hospital services, community clinics, and specialized pediatric referrals in Sain… |
 
 ### Government of the Republic of Suriname (Ministerie van Volksgezondheid)
 
@@ -1003,6 +1021,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | ptwm-resource-pages | Polskie Towarzystwo Walki z Mukowiscydozą website (ptwm.org.pl) | [page](https://ptwm.org.pl/) | link only | Official national cystic fibrosis association in Poland (PTWM). |
 
+### Préfecture de Mayotte
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| mayotte-gouv-fr-resource-pages | Préfecture de Mayotte website (www.mayotte.gouv.fr) | [page](https://www.mayotte.gouv.fr/) | link only | Official state portal coordinating public healthcare administration, Centre Hospitalier de Mayotte services, community clinics, and specialized pediatric consu… |
+
 ### Public Hospitals Authority of The Bahamas
 
 | ID | What | Open | Save as | Notes |
@@ -1098,6 +1122,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | tdlu-tm-resource-pages | State Medical University of Turkmenistan website (tdlu.edu.tm) | [page](https://tdlu.edu.tm/) | link only | Official state medical university portal in Turkmenistan; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
+### States of Guernsey
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-gg-resource-pages | States of Guernsey website (www.gov.gg) | [page](https://www.gov.gg/) | link only | Official government portal coordinating public healthcare administration, hospital operations at Princess Elizabeth Hospital, and community clinical services i… |
 
 ### Taiwan Foundation for Rare Disorders (財團法人罕見疾病基金會)
 

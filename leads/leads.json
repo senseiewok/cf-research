@@ -2625,6 +2625,335 @@
       },
       "visibility": "public",
       "notes": "Kept apart from L-0004 (registry dates beside approvals, no inference) and L-0012 (core outcome set): this lead reads the literature, not the registry. Article text stays in private folders."
+    },
+    {
+      "id": "L-0039",
+      "title": "Muco-obstructive airway trial endpoints across CF, primary ciliary dyskinesia, non-CF bronchiectasis and alpha-1 antitrypsin deficiency",
+      "question": "How do registered primary outcome definitions for FEV1, lung clearance index, pulmonary exacerbation and mucociliary clearance compare across CF, primary ciliary dyskinesia, non-CF bronchiectasis and alpha-1 antitrypsin deficiency trials?",
+      "why_it_matters": "Inhaled mucolytic, epithelial sodium channel and bacteriophage trials for modulator-ineligible CF share airway clearance endpoints with sister muco-obstructive cohorts, and comparing their registered definitions shows where outcome rules align or diverge.",
+      "status": "idea",
+      "sources": [
+        {
+          "type": "literature",
+          "ref": "Boucher, NEJM 2019, doi 10.1056/NEJMra1813799",
+          "tier": "T1",
+          "read_on": "2026-10-28",
+          "read_via": "direct",
+          "note": "Groups CF, primary ciliary dyskinesia, non-CF bronchiectasis and chronic bronchitis under mucus hyperconcentration and osmotic periciliary brush compression, while noting distinct upstream defects."
+        },
+        {
+          "type": "literature",
+          "ref": "Shak et al., PNAS 1990, doi 10.1073/pnas.87.23.9188",
+          "tier": "T1",
+          "read_on": "2026-10-28",
+          "read_via": "direct",
+          "note": "Mechanistic negative control: recombinant human DNase cleaves extracellular neutrophil DNA in purulent CF sputum, a mechanism that depends on DNA-dominated rather than mucin-only rheology."
+        },
+        {
+          "type": "council",
+          "ref": "Multi-Family Cross-Disease Grounding Council review, 2026-10-28",
+          "tier": "T0",
+          "read_on": null,
+          "note": "Anchored to INV-CF-ANCHOR (mucus clearance for all CF genotypes) and INV-MECH-ISOMORPHISM (viscoelastic yield stress and shared spirometry/washout endpoint facets)."
+        }
+      ],
+      "data_needed": {
+        "catalog_ids": [
+          "clinicaltrials-gov",
+          "europe-pmc"
+        ],
+        "access": "api",
+        "already_have": false,
+        "fields_missing": [
+          "ClinicalTrials.gov condition snapshots for primary ciliary dyskinesia, non-CF bronchiectasis and alpha-1 antitrypsin deficiency",
+          "primaryOutcome measure and timeFrame fields across sister cohorts"
+        ]
+      },
+      "effort": {
+        "size": "M",
+        "estimate": true
+      },
+      "guard": {
+        "ladder": [
+          "computed",
+          "registry-statement-verbatim",
+          "lab-position"
+        ],
+        "note": "Facet counts across condition snapshots are computed; outcome text is quoted verbatim from the registry; any cross-disease comparison is a descriptive lab position."
+      },
+      "must_not_claim": [
+        "That a mucolytic, channel modulator or bacteriophage effective in CF is effective in non-CF bronchiectasis, primary ciliary dyskinesia or alpha-1 antitrypsin deficiency, or vice versa.",
+        "That sharing a registered endpoint definition implies shared clinical response or interchangeable trial populations.",
+        "Any clinical recommendation or off-label treatment guidance."
+      ],
+      "needs_person": [
+        "clinician-reader",
+        "maintainer-approval"
+      ],
+      "links": {
+        "board": [],
+        "proposals": [],
+        "prs": []
+      },
+      "created": "2026-10-28",
+      "updated": "2026-10-28",
+      "created_by": {
+        "kind": "model",
+        "model_id": "claude-opus-5-5"
+      },
+      "visibility": "public",
+      "notes": "Extends the L-0003 outcome-facet grammar to sister muco-obstructive conditions only after maintainer approval of the non-CF registry query."
+    },
+    {
+      "id": "L-0040",
+      "title": "Homologous ABC-transporter domain-interface folding and ER quality-control bioactivity bridge (ABCC7/CFTR, ABCA4, ABCB11, ABCC6)",
+      "question": "Which small-molecule chemotypes and ER quality-control targets in ChEMBL and Open Targets are assayed across CFTR (ABCC7) and homologous ABC transporters with missense domain-interface folding defects (ABCA4, ABCB11, ABCC6)?",
+      "why_it_matters": "Rare CFTR missense variants that resist current modulators share nucleotide-binding to transmembrane domain interface misfolding and RNF5/CHIP ubiquitin-ligase premature degradation with sister ABC-transporter folding disorders.",
+      "status": "idea",
+      "sources": [
+        {
+          "type": "literature",
+          "ref": "Fiedorczuk and Chen, Science 2022, doi 10.1126/science.ade2216",
+          "tier": "T1",
+          "read_on": "2026-10-28",
+          "read_via": "direct",
+          "note": "Cryo-EM structures of F508del CFTR bound to elexacaftor, tezacaftor and ivacaftor define the TMD1 and TMD2-NBD1 allosteric folding cavities."
+        },
+        {
+          "type": "literature",
+          "ref": "Farinha and Matos, Front Pharmacol 2012, doi 10.3389/fphar.2012.00201",
+          "tier": "T1",
+          "read_on": "2026-10-28",
+          "read_via": "direct",
+          "note": "Reviews endoplasmic reticulum CFTR domain assembly, Hsp70/Hsp90 chaperone checkpoints and ubiquitin-dependent ER-associated degradation."
+        },
+        {
+          "type": "council",
+          "ref": "Multi-Family Cross-Disease Grounding Council review, 2026-10-28",
+          "tier": "T0",
+          "read_on": null,
+          "note": "Scopes INV-MECH-ISOMORPHISM strictly to domain-interface folding free energy and ERAD escape, explicitly rejecting equivalence between CFTR ion-channel gating and active ABC pump ATPase turnover."
+        }
+      ],
+      "data_needed": {
+        "catalog_ids": [
+          "chembl",
+          "open-targets",
+          "europe-pmc"
+        ],
+        "access": "api",
+        "already_have": false,
+        "fields_missing": [
+          "ChEMBL target bioactivity records for ABCA4, ABCB11 and ABCC6 alongside CFTR (CHEMBL1951)",
+          "Open Targets target-disease and chemical-probe associations for homologous ABC transporters"
+        ]
+      },
+      "effort": {
+        "size": "M",
+        "estimate": true
+      },
+      "guard": {
+        "ladder": [
+          "computed",
+          "open-access-quote",
+          "lab-position"
+        ],
+        "note": "Every ChEMBL potency figure must carry its assay identifier, cell system and variant genotype (rule AH-8); cross-transporter pocket comparisons are labeled as structural hypotheses."
+      },
+      "must_not_claim": [
+        "That a CFTR corrector or potentiator has clinical efficacy in Stargardt disease (ABCA4), progressive familial intrahepatic cholestasis (ABCB11) or pseudoxanthoma elasticum (ABCC6), or vice versa.",
+        "That CFTR chloride channel open-probability potentiation transfers to active substrate pump turnover in other ABC subfamilies.",
+        "Any ChEMBL potency number without its assay context, cell line and variant genotype."
+      ],
+      "needs_person": [
+        "maintainer-approval"
+      ],
+      "links": {
+        "board": [],
+        "proposals": [],
+        "prs": []
+      },
+      "created": "2026-10-28",
+      "updated": "2026-10-28",
+      "created_by": {
+        "kind": "model",
+        "model_id": "claude-opus-5-5"
+      },
+      "visibility": "public",
+      "notes": "Anchored to refractory Class II and rare missense CFTR folding rescue via shared ABC domain-interface thermodynamics."
+    },
+    {
+      "id": "L-0041",
+      "title": "Premature termination codon readthrough, release-factor modulation and near-cognate folding salvage across shared nonsense contexts",
+      "question": "In open literature and trial registries across nonsense-mediated genetic diseases (CFTR G542X and W1282X, DMD, USH2A, IDUA), when is stop-codon readthrough or suppressor tRNA delivery paired with protein-folding rescue of the inserted near-cognate amino acid?",
+      "why_it_matters": "For the roughly 8 to 11.5 percent of people with CF who are modulator-ineligible due to Class I nonsense variants, standalone ribosomal readthrough often inserts a destabilizing amino acid that fails endoplasmic reticulum folding checks unless paired with chaperone or corrector salvage.",
+      "status": "idea",
+      "sources": [
+        {
+          "type": "literature",
+          "ref": "Laselva et al., JCI 2022, doi 10.1172/jci154571",
+          "tier": "T1",
+          "read_on": "2026-10-28",
+          "read_via": "direct",
+          "note": "Demonstrates that small-molecule eRF3a degraders synergize with CFTR modulators to rescue CFTR nonsense mutations across stop-codon contexts."
+        },
+        {
+          "type": "literature",
+          "ref": "Oliver et al., Biochemistry 2025, doi 10.1021/acs.biochem.5c00590",
+          "tier": "T1",
+          "read_on": "2026-10-28",
+          "read_via": "direct",
+          "note": "Identifies thermodynamic folding and trafficking barriers to the pharmacologic rescue of W1282X CFTR polypeptides."
+        },
+        {
+          "type": "literature",
+          "ref": "Ignatova et al., Nature 2023, doi 10.1038/s41586-023-06133-1",
+          "tier": "T1",
+          "read_on": "2026-10-28",
+          "read_via": "direct",
+          "note": "Reports engineered transfer RNAs that suppress premature termination codons in cells and in vivo across nonsense reporters."
+        },
+        {
+          "type": "council",
+          "ref": "Multi-Family Cross-Disease Grounding Council review, 2026-10-28",
+          "tier": "T0",
+          "read_on": null,
+          "note": "Enforces the coupled product invariant: functional rescue equals NMD escape times ribosomal readthrough times recipient domain folding probability."
+        }
+      ],
+      "data_needed": {
+        "catalog_ids": [
+          "clinicaltrials-gov",
+          "europe-pmc",
+          "chembl"
+        ],
+        "access": "api",
+        "already_have": false,
+        "fields_missing": [
+          "cross-disease nonsense trial intervention pairings (readthrough agent alone versus readthrough plus folding corrector)",
+          "stop-codon identity (UGA, UAG, UAA) and +4 nucleotide context tables across assayed alleles"
+        ]
+      },
+      "effort": {
+        "size": "M",
+        "estimate": true
+      },
+      "guard": {
+        "ladder": [
+          "computed",
+          "open-access-quote",
+          "lab-position"
+        ],
+        "note": "Separates ribosomal readthrough efficiency (shared by codon and +4 base) from recipient protein folding tolerance (specific to CFTR domain cavities)."
+      },
+      "must_not_claim": [
+        "That readthrough efficiency observed in a reporter gene or a structural rod protein (such as dystrophin) yields equivalent functional chloride transport in CFTR.",
+        "That any investigational readthrough compound, eRF3a degrader or suppressor tRNA is clinically proven or safe for patients.",
+        "Any clinical equivalence across distinct nonsense-mediated diseases."
+      ],
+      "needs_person": [
+        "clinician-reader",
+        "maintainer-approval"
+      ],
+      "links": {
+        "board": [],
+        "proposals": [],
+        "prs": []
+      },
+      "created": "2026-10-28",
+      "updated": "2026-10-28",
+      "created_by": {
+        "kind": "model",
+        "model_id": "claude-opus-5-5"
+      },
+      "visibility": "public",
+      "notes": "Directly serves the Class I nonsense CF cohort (G542X, W1282X, R553X, R1162X) by mining cross-disease PTC pharmacology for trimodal CF salvage."
+    },
+    {
+      "id": "L-0042",
+      "title": "Multi-domain co-translational pause-valley conservation and split-cassette reconstitution across large therapeutic transgenes (CFTR, ABCA4, F8, DYSF)",
+      "question": "What experimental evidence in open-access literature measures how preserving inter-domain ribosomal pause valleys and split-intein splice junctions affects functional folding of large multi-domain therapeutic transgenes such as CFTR (4,443 bp), ABCA4, Factor VIII and dysferlin?",
+      "why_it_matters": "Naive global codon optimization of full-length CFTR mRNA or dual-AAV cassettes can erase evolutionary ribosomal pause valleys between NBD1, the R-domain and TMD2, causing co-translational misfolding even when transcript abundance is high.",
+      "status": "idea",
+      "sources": [
+        {
+          "type": "literature",
+          "ref": "Presnyak et al., Cell 2015, doi 10.1016/j.cell.2015.02.029",
+          "tier": "T1",
+          "read_on": "2026-10-28",
+          "read_via": "direct",
+          "note": "Establishes that codon optimality governs mRNA stability and ribosomal elongation kinetics."
+        },
+        {
+          "type": "literature",
+          "ref": "Tornabene et al., Sci Transl Med 2019, doi 10.1126/scitranslmed.aav4523",
+          "tier": "T1",
+          "read_on": "2026-10-28",
+          "read_via": "direct",
+          "note": "Demonstrates intein-mediated protein trans-splicing to reconstitute large multi-domain proteins (including ABCA4) that exceed single-AAV packaging limits."
+        },
+        {
+          "type": "literature",
+          "ref": "Llanga et al., Mol Ther 2017, doi 10.1016/j.ymthe.2017.05.013",
+          "tier": "T1",
+          "read_on": "2026-10-28",
+          "read_via": "direct",
+          "note": "Shows structure-guided domain boundary engineering for oversized dysferlin cassettes within adeno-associated viral vectors."
+        },
+        {
+          "type": "council",
+          "ref": "Multi-Family Cross-Disease Grounding Council review, 2026-10-28",
+          "tier": "T0",
+          "read_on": null,
+          "note": "Enforces unidirectional INV-CF-ANCHOR return: external multi-domain transgene studies are mined strictly to parameterize CFTR pause-valley conservation (INV-tAI-PROFILE) and dual-AAV trans-splicing."
+        }
+      ],
+      "data_needed": {
+        "catalog_ids": [
+          "europe-pmc",
+          "ncbi-eutils",
+          "uniprot-rest"
+        ],
+        "access": "api",
+        "already_have": false,
+        "fields_missing": [
+          "ribosome profiling (Ribo-seq) and codon-adaptation pause-valley benchmarks across multi-domain human transgenes",
+          "split-intein trans-splicing yield and misfolded byproduct ratios across domain-linker boundaries"
+        ]
+      },
+      "effort": {
+        "size": "M",
+        "estimate": true
+      },
+      "guard": {
+        "ladder": [
+          "computed",
+          "open-access-quote",
+          "lab-position"
+        ],
+        "note": "Sequence pause-valley profiles and CpG counts are computed; literature findings are cited from open-access records; application to CFTR cassette design is labeled as a biophysical model."
+      },
+      "must_not_claim": [
+        "That global Codon Adaptation Index maximization (CAI = 1.0) maximizes functional folded CFTR channel density at the apical membrane.",
+        "That split-intein reconstitution efficiency in retinal or skeletal-muscle tissue equals transduction efficiency in mucus-covered human airway epithelia.",
+        "Any clinical readiness of synthetic CFTR mRNA or dual-AAV constructs."
+      ],
+      "needs_person": [
+        "maintainer-approval"
+      ],
+      "links": {
+        "board": [],
+        "proposals": [],
+        "prs": []
+      },
+      "created": "2026-10-28",
+      "updated": "2026-10-28",
+      "created_by": {
+        "kind": "model",
+        "model_id": "claude-opus-5-5"
+      },
+      "visibility": "public",
+      "notes": "Connects external multi-domain mRNA/AAV transgene engineering directly back to the lab's INV-tAI-PROFILE pause-valley invariant for genotype-agnostic CFTR replacement."
     }
   ]
 }

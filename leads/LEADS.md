@@ -10,7 +10,7 @@ someone writes that row; only a person sets a row `ready`. How to add, update or
 Tiers: T0 a summary or memory, unverified; T1 a quote from a primary source with its id and date; T2 T1 plus a script
 check and a different model's check; T3 T2 plus a person's review. Effort is an estimate.
 
-38 leads: 23 idea, 1 scoping, 13 data-available, 1 done.
+42 leads: 27 idea, 1 scoping, 13 data-available, 1 done.
 
 | Id | Title | Status | Best tier | Effort | Needs a person |
 | --- | --- | --- | --- | --- | --- |
@@ -37,6 +37,10 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 | L-0036 | Title against eligibility text: does a genotype flag from the title agree? | idea | T1 | S (estimate) | clinician-reader, maintainer-approval |
 | L-0037 | Background modulator use stated in trials that are not testing a modulator | idea | T1 | M (estimate) | clinician-reader |
 | L-0038 | Endpoints by population and modulator era in the open literature | idea | T1 | M (estimate) | clinician-reader |
+| L-0039 | Muco-obstructive airway trial endpoints across CF, primary ciliary dyskinesia, non-CF bronchiectasis and alpha-1 antitrypsin deficiency | idea | T1 | M (estimate) | clinician-reader, maintainer-approval |
+| L-0040 | Homologous ABC-transporter domain-interface folding and ER quality-control bioactivity bridge (ABCC7/CFTR, ABCA4, ABCB11, ABCC6) | idea | T1 | M (estimate) | maintainer-approval |
+| L-0041 | Premature termination codon readthrough, release-factor modulation and near-cognate folding salvage across shared nonsense contexts | idea | T1 | M (estimate) | clinician-reader, maintainer-approval |
+| L-0042 | Multi-domain co-translational pause-valley conservation and split-cassette reconstitution across large therapeutic transgenes (CFTR, ABCA4, F8, DYSF) | idea | T1 | M (estimate) | maintainer-approval |
 | L-0017 | Plain-language class glosses and Spanish (es-MX) terms grounded in authoritative public pages | scoping | T1 | M (estimate) | clinician-reader, maintainer-approval |
 | L-0003 | How differently trials define pulmonary exacerbation, FEV1 and sweat chloride outcomes | data-available | T0 | M (estimate) | clinician-reader |
 | L-0007 | Trials per class, deduplicated by lead sponsor | data-available | T0 | S (estimate) | maintainer-approval |
@@ -499,6 +503,88 @@ check and a different model's check; T3 T2 plus a person's review. Effort is an 
 - **Links:** none
 - **Recorded:** created 2026-10-11 by model (claude-opus-5-5); updated 2026-10-11
 - **Notes:** Kept apart from L-0004 (registry dates beside approvals, no inference) and L-0012 (core outcome set): this lead reads the literature, not the registry. Article text stays in private folders.
+
+### L-0039 Muco-obstructive airway trial endpoints across CF, primary ciliary dyskinesia, non-CF bronchiectasis and alpha-1 antitrypsin deficiency
+
+- **Question:** How do registered primary outcome definitions for FEV1, lung clearance index, pulmonary exacerbation and mucociliary clearance compare across CF, primary ciliary dyskinesia, non-CF bronchiectasis and alpha-1 antitrypsin deficiency trials?
+- **Why it matters:** Inhaled mucolytic, epithelial sodium channel and bacteriophage trials for modulator-ineligible CF share airway clearance endpoints with sister muco-obstructive cohorts, and comparing their registered definitions shows where outcome rules align or diverge.
+- **Sources:**
+  - T1, literature, read 2026-10-28 (direct). Boucher, NEJM 2019, doi 10.1056/NEJMra1813799: Groups CF, primary ciliary dyskinesia, non-CF bronchiectasis and chronic bronchitis under mucus hyperconcentration and osmotic periciliary brush compression, while noting distinct upstream defects.
+  - T1, literature, read 2026-10-28 (direct). Shak et al., PNAS 1990, doi 10.1073/pnas.87.23.9188: Mechanistic negative control: recombinant human DNase cleaves extracellular neutrophil DNA in purulent CF sputum, a mechanism that depends on DNA-dominated rather than mucin-only rheology.
+  - T0, council, not read by us. Multi-Family Cross-Disease Grounding Council review, 2026-10-28: Anchored to INV-CF-ANCHOR (mucus clearance for all CF genotypes) and INV-MECH-ISOMORPHISM (viscoelastic yield stress and shared spirometry/washout endpoint facets).
+- **Data:** clinicaltrials-gov, europe-pmc (api); already have: no; fields missing: ClinicalTrials.gov condition snapshots for primary ciliary dyskinesia, non-CF bronchiectasis and alpha-1 antitrypsin deficiency, primaryOutcome measure and timeFrame fields across sister cohorts
+- **Effort:** M (estimate)
+- **Guard:** computed, registry-statement-verbatim, lab-position. Facet counts across condition snapshots are computed; outcome text is quoted verbatim from the registry; any cross-disease comparison is a descriptive lab position.
+- **Must not claim:**
+  - That a mucolytic, channel modulator or bacteriophage effective in CF is effective in non-CF bronchiectasis, primary ciliary dyskinesia or alpha-1 antitrypsin deficiency, or vice versa.
+  - That sharing a registered endpoint definition implies shared clinical response or interchangeable trial populations.
+  - Any clinical recommendation or off-label treatment guidance.
+- **Needs a person:** clinician-reader, maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-28 by model (claude-opus-5-5); updated 2026-10-28
+- **Notes:** Extends the L-0003 outcome-facet grammar to sister muco-obstructive conditions only after maintainer approval of the non-CF registry query.
+
+### L-0040 Homologous ABC-transporter domain-interface folding and ER quality-control bioactivity bridge (ABCC7/CFTR, ABCA4, ABCB11, ABCC6)
+
+- **Question:** Which small-molecule chemotypes and ER quality-control targets in ChEMBL and Open Targets are assayed across CFTR (ABCC7) and homologous ABC transporters with missense domain-interface folding defects (ABCA4, ABCB11, ABCC6)?
+- **Why it matters:** Rare CFTR missense variants that resist current modulators share nucleotide-binding to transmembrane domain interface misfolding and RNF5/CHIP ubiquitin-ligase premature degradation with sister ABC-transporter folding disorders.
+- **Sources:**
+  - T1, literature, read 2026-10-28 (direct). Fiedorczuk and Chen, Science 2022, doi 10.1126/science.ade2216: Cryo-EM structures of F508del CFTR bound to elexacaftor, tezacaftor and ivacaftor define the TMD1 and TMD2-NBD1 allosteric folding cavities.
+  - T1, literature, read 2026-10-28 (direct). Farinha and Matos, Front Pharmacol 2012, doi 10.3389/fphar.2012.00201: Reviews endoplasmic reticulum CFTR domain assembly, Hsp70/Hsp90 chaperone checkpoints and ubiquitin-dependent ER-associated degradation.
+  - T0, council, not read by us. Multi-Family Cross-Disease Grounding Council review, 2026-10-28: Scopes INV-MECH-ISOMORPHISM strictly to domain-interface folding free energy and ERAD escape, explicitly rejecting equivalence between CFTR ion-channel gating and active ABC pump ATPase turnover.
+- **Data:** chembl, open-targets, europe-pmc (api); already have: no; fields missing: ChEMBL target bioactivity records for ABCA4, ABCB11 and ABCC6 alongside CFTR (CHEMBL1951), Open Targets target-disease and chemical-probe associations for homologous ABC transporters
+- **Effort:** M (estimate)
+- **Guard:** computed, open-access-quote, lab-position. Every ChEMBL potency figure must carry its assay identifier, cell system and variant genotype (rule AH-8); cross-transporter pocket comparisons are labeled as structural hypotheses.
+- **Must not claim:**
+  - That a CFTR corrector or potentiator has clinical efficacy in Stargardt disease (ABCA4), progressive familial intrahepatic cholestasis (ABCB11) or pseudoxanthoma elasticum (ABCC6), or vice versa.
+  - That CFTR chloride channel open-probability potentiation transfers to active substrate pump turnover in other ABC subfamilies.
+  - Any ChEMBL potency number without its assay context, cell line and variant genotype.
+- **Needs a person:** maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-28 by model (claude-opus-5-5); updated 2026-10-28
+- **Notes:** Anchored to refractory Class II and rare missense CFTR folding rescue via shared ABC domain-interface thermodynamics.
+
+### L-0041 Premature termination codon readthrough, release-factor modulation and near-cognate folding salvage across shared nonsense contexts
+
+- **Question:** In open literature and trial registries across nonsense-mediated genetic diseases (CFTR G542X and W1282X, DMD, USH2A, IDUA), when is stop-codon readthrough or suppressor tRNA delivery paired with protein-folding rescue of the inserted near-cognate amino acid?
+- **Why it matters:** For the roughly 8 to 11.5 percent of people with CF who are modulator-ineligible due to Class I nonsense variants, standalone ribosomal readthrough often inserts a destabilizing amino acid that fails endoplasmic reticulum folding checks unless paired with chaperone or corrector salvage.
+- **Sources:**
+  - T1, literature, read 2026-10-28 (direct). Laselva et al., JCI 2022, doi 10.1172/jci154571: Demonstrates that small-molecule eRF3a degraders synergize with CFTR modulators to rescue CFTR nonsense mutations across stop-codon contexts.
+  - T1, literature, read 2026-10-28 (direct). Oliver et al., Biochemistry 2025, doi 10.1021/acs.biochem.5c00590: Identifies thermodynamic folding and trafficking barriers to the pharmacologic rescue of W1282X CFTR polypeptides.
+  - T1, literature, read 2026-10-28 (direct). Ignatova et al., Nature 2023, doi 10.1038/s41586-023-06133-1: Reports engineered transfer RNAs that suppress premature termination codons in cells and in vivo across nonsense reporters.
+  - T0, council, not read by us. Multi-Family Cross-Disease Grounding Council review, 2026-10-28: Enforces the coupled product invariant: functional rescue equals NMD escape times ribosomal readthrough times recipient domain folding probability.
+- **Data:** clinicaltrials-gov, europe-pmc, chembl (api); already have: no; fields missing: cross-disease nonsense trial intervention pairings (readthrough agent alone versus readthrough plus folding corrector), stop-codon identity (UGA, UAG, UAA) and +4 nucleotide context tables across assayed alleles
+- **Effort:** M (estimate)
+- **Guard:** computed, open-access-quote, lab-position. Separates ribosomal readthrough efficiency (shared by codon and +4 base) from recipient protein folding tolerance (specific to CFTR domain cavities).
+- **Must not claim:**
+  - That readthrough efficiency observed in a reporter gene or a structural rod protein (such as dystrophin) yields equivalent functional chloride transport in CFTR.
+  - That any investigational readthrough compound, eRF3a degrader or suppressor tRNA is clinically proven or safe for patients.
+  - Any clinical equivalence across distinct nonsense-mediated diseases.
+- **Needs a person:** clinician-reader, maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-28 by model (claude-opus-5-5); updated 2026-10-28
+- **Notes:** Directly serves the Class I nonsense CF cohort (G542X, W1282X, R553X, R1162X) by mining cross-disease PTC pharmacology for trimodal CF salvage.
+
+### L-0042 Multi-domain co-translational pause-valley conservation and split-cassette reconstitution across large therapeutic transgenes (CFTR, ABCA4, F8, DYSF)
+
+- **Question:** What experimental evidence in open-access literature measures how preserving inter-domain ribosomal pause valleys and split-intein splice junctions affects functional folding of large multi-domain therapeutic transgenes such as CFTR (4,443 bp), ABCA4, Factor VIII and dysferlin?
+- **Why it matters:** Naive global codon optimization of full-length CFTR mRNA or dual-AAV cassettes can erase evolutionary ribosomal pause valleys between NBD1, the R-domain and TMD2, causing co-translational misfolding even when transcript abundance is high.
+- **Sources:**
+  - T1, literature, read 2026-10-28 (direct). Presnyak et al., Cell 2015, doi 10.1016/j.cell.2015.02.029: Establishes that codon optimality governs mRNA stability and ribosomal elongation kinetics.
+  - T1, literature, read 2026-10-28 (direct). Tornabene et al., Sci Transl Med 2019, doi 10.1126/scitranslmed.aav4523: Demonstrates intein-mediated protein trans-splicing to reconstitute large multi-domain proteins (including ABCA4) that exceed single-AAV packaging limits.
+  - T1, literature, read 2026-10-28 (direct). Llanga et al., Mol Ther 2017, doi 10.1016/j.ymthe.2017.05.013: Shows structure-guided domain boundary engineering for oversized dysferlin cassettes within adeno-associated viral vectors.
+  - T0, council, not read by us. Multi-Family Cross-Disease Grounding Council review, 2026-10-28: Enforces unidirectional INV-CF-ANCHOR return: external multi-domain transgene studies are mined strictly to parameterize CFTR pause-valley conservation (INV-tAI-PROFILE) and dual-AAV trans-splicing.
+- **Data:** europe-pmc, ncbi-eutils, uniprot-rest (api); already have: no; fields missing: ribosome profiling (Ribo-seq) and codon-adaptation pause-valley benchmarks across multi-domain human transgenes, split-intein trans-splicing yield and misfolded byproduct ratios across domain-linker boundaries
+- **Effort:** M (estimate)
+- **Guard:** computed, open-access-quote, lab-position. Sequence pause-valley profiles and CpG counts are computed; literature findings are cited from open-access records; application to CFTR cassette design is labeled as a biophysical model.
+- **Must not claim:**
+  - That global Codon Adaptation Index maximization (CAI = 1.0) maximizes functional folded CFTR channel density at the apical membrane.
+  - That split-intein reconstitution efficiency in retinal or skeletal-muscle tissue equals transduction efficiency in mucus-covered human airway epithelia.
+  - Any clinical readiness of synthetic CFTR mRNA or dual-AAV constructs.
+- **Needs a person:** maintainer-approval
+- **Links:** none
+- **Recorded:** created 2026-10-28 by model (claude-opus-5-5); updated 2026-10-28
+- **Notes:** Connects external multi-domain mRNA/AAV transgene engineering directly back to the lab's INV-tAI-PROFILE pause-valley invariant for genotype-agnostic CFTR replacement.
 
 ## Scoping
 

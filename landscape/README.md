@@ -12,6 +12,7 @@ This directory holds two groups of Markdown notes:
 - [`cf-repositories.md`](cf-repositories.md)
 - [`cftr-structures.md`](cftr-structures.md)
 - [`delivery-biophysics.md`](delivery-biophysics.md)
+- [`discovery-cross-disease-mechanistic-bridge.md`](discovery-cross-disease-mechanistic-bridge.md)
 - [`discovery-cross-domain-stem-cell-delivery.md`](discovery-cross-domain-stem-cell-delivery.md)
 - [`discovery-cryoem-3d-truncation-model.md`](discovery-cryoem-3d-truncation-model.md)
 - [`discovery-dual-aav-intein-packaging.md`](discovery-dual-aav-intein-packaging.md)
