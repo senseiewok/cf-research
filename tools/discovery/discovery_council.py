@@ -469,6 +469,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0473", "track": "Track A", "tier": "T2",
         "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
     },
+    "formal_proof_thermodynamic_landscape": {
+        "task": "T-0475", "track": "Track A", "tier": "T2",
+        "discipline": "ai_verification", "persona": "researchers", "triage": "keep",
+    },
 
 }
 

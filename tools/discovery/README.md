@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `89` (plus 4 infrastructure scripts and 91 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `71`
+- **Total Verified Modules:** `90` (plus 4 infrastructure scripts and 92 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `72`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -128,9 +128,10 @@ python tools/discovery/discovery_council.py --check-index
 | `modifier_interactome.py` | `T-0186` | `T2` | `keep` | Canonical workbench |
 | `rare_allele_matrix.py` | `T-0201` | `T2` | `keep` | Canonical workbench |
 
-## AI Verification & Scientific Benchmarking (`ai_verification` — 2 modules)
+## AI Verification & Scientific Benchmarking (`ai_verification` — 3 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
 | `alpha_evolve_pareto_regimen.py` | `T-0426` | `T2` | `keep` | Canonical workbench |
+| `formal_proof_thermodynamic_landscape.py` | `T-0475` | `T2` | `keep` | Canonical workbench |
 | `science_model_benchmark.py` | `T-0265` | `T2` | `keep` | Canonical workbench |
