@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-226 to download by hand, 1 to ask for, 3 not to download.
+231 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -427,6 +427,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gov-gd-resource-pages | Government of Grenada website (gov.gd) | [page](https://gov.gd/) | link only | National government portal administering public health programs, community clinics, General Hospital operations, and specialized pediatric consultations in Gre… |
 
+### Government of Guam
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| guam-gov-resource-pages | Government of Guam website (www.guam.gov) | [page](https://www.guam.gov/) | link only | Official government portal coordinating public healthcare administration, public health programs, and clinical hospital operations through the civilian hospita… |
+
 ### Government of Jersey
 
 | ID | What | Open | Save as | Notes |
@@ -445,6 +451,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gov-mo-resource-pages | Government of Macao SAR website (www.gov.mo) | [page](https://www.gov.mo/) | link only | Official government portal coordinating public health administration, Conde de Sao Januario hospital operations, and pediatric specialist consultations in Maca… |
 
+### Government of Montserrat
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-ms-resource-pages | Government of Montserrat website (www.gov.ms) | [page](https://www.gov.ms/) | link only | Official government portal coordinating public healthcare administration, community clinics, Glendon Hospital operations, and specialized medical referrals acr… |
+
 ### Government of Saint Kitts and Nevis
 
 | ID | What | Open | Save as | Notes |
@@ -462,6 +474,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | gov-sr-resource-pages | Government of the Republic of Suriname portal (gov.sr) | [page](https://gov.sr/) | link only | Official CF or pediatric referral resource (Government of the Republic of Suriname (Ministerie van Volksgezondheid)); robots.txt allow (2026-10-25), manual acc… |
+
+### Government of the Virgin Islands
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-vg-resource-pages | Government of the Virgin Islands website (gov.vg) | [page](https://gov.vg/) | link only | Official government portal administering public health programs, community clinics, and hospital care through the territorial health services authority in the… |
 
 ### Governo de São Tomé e Príncipe
 
@@ -1117,6 +1135,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | sacfa-resource-pages | South African Cystic Fibrosis Association website (sacfa.org.za) | [page](https://www.sacfa.org.za/) | link only | Official national cystic fibrosis association in South Africa. |
 
+### St Helena Government
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sainthelena-gov-sh-resource-pages | St Helena Government website (www.sainthelena.gov.sh) | [page](https://www.sainthelena.gov.sh/) | link only | Official government portal coordinating public healthcare administration, community medical clinics, General Hospital operations, and overseas clinical referra… |
+
 ### State Medical University of Turkmenistan
 
 | ID | What | Open | Save as | Notes |
@@ -1272,6 +1296,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | alphamissense-predictions | AlphaMissense predictions (Zenodo record) | [page](https://zenodo.org/records/10813168) | link only | Fetched directly 2026-10-07 with the lab user agent: zenodo.org robots.txt (does not disallow /records/ except /records/*/preview; allows /api/records/*/files;… |
+
+### Ålands landskapsregering
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| regeringen-ax-resource-pages | Ålands landskapsregering website (www.regeringen.ax) | [page](https://www.regeringen.ax/) | link only | Official government portal administering public health policy, community care, and clinical hospital operations through the central hospital system across Alan… |
 
 ### Благотворительный фонд Острова
 
