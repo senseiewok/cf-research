@@ -18,6 +18,8 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     compute_stage_free_energy_profile,
     compute_stage_state_vector,
     evaluate_mechanistic_basis_span,
+    evaluate_anthropic_proof_visual_geometries,
+    evaluate_kramers_escape_and_brinkman_permeability,
     evaluate_vector_space_isomorphism,
     evaluate_challenge_landscape,
     evaluate_continuum_percolation_phase_transition,
@@ -181,6 +183,37 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             compute_stage_state_vector(-1.0)
+
+
+
+    def test_kramers_escape_and_stokes_brinkman_permeability_bridge(self) -> None:
+        kb = evaluate_kramers_escape_and_brinkman_permeability()
+        self.assertTrue(kb["kramers_brinkman_bridge_verified"])
+        self.assertGreater(kb["darcy_permeability_collapse_fold"], 6.0)
+        self.assertGreater(kb["healthy_2pct_asl"]["brinkman_screening_length_nm"], 15.0)
+        self.assertLess(kb["cf_8pct_dehydrated_mucus"]["brinkman_screening_length_nm"], 8.5)
+
+        flt_k = kb["challenge_kramers_escape_profiles"]["fermats_last_theorem"]
+        self.assertGreater(flt_k["kramers_escape_speedup_fold"], 5000.0)
+        self.assertLess(
+            flt_k["mean_first_passage_time_ms_bridged"],
+            flt_k["mean_first_passage_time_ms_unbridged"],
+        )
+        with self.assertRaises(ValueError):
+            evaluate_kramers_escape_and_brinkman_permeability(
+                healthy_solid_fraction=0.10, cf_dehydrated_solid_fraction=0.05
+            )
+
+    def test_anthropic_solved_proof_visual_geometries(self) -> None:
+        geom = evaluate_anthropic_proof_visual_geometries()
+        self.assertTrue(geom["all_three_geometries_verified"])
+        self.assertEqual(geom["fermats_last_theorem"]["terminal_cusp_space_dim"], 0)
+        self.assertEqual(geom["fermats_last_theorem"]["pythagorean_p2_lattice_witness"]["lhs"], 25)
+        self.assertAlmostEqual(geom["formal_math_zeta23"]["critical_line_re_s"], 0.5)
+        self.assertEqual(
+            geom["formal_math_3sum_apsp"]["zero_triangle_witness_weights"]["cycle_sum"], 0
+        )
+        self.assertEqual(geom["formal_math_3sum_apsp"]["bit_packing_speedup_factor"], 64.0)
 
 
 if __name__ == "__main__":
