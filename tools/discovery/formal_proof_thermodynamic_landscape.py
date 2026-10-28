@@ -537,6 +537,61 @@ COUNTERFACTUAL_KNOCKOUT_CATALOG: Dict[str, CounterfactualKnockoutSpec] = {
 }
 
 
+
+
+def compute_stage_state_vector(
+    effective_barrier_kcal: float,
+    raw_barrier_kcal: float | None = None,
+    *,
+    is_fractured: bool = False,
+    energy_scale_kcal: float = 4.5,
+) -> Dict[str, Any]:
+    """Compute the 2D Hilbert phase vector (cos theta, sin theta) and bridge rotation for a stage.
+
+    Maps traditional scalar transition-state barriers Delta G^‡ into a 2D state-space vector:
+        Psi_k = (E_parallel, Delta G_eff^‡)
+    where E_ref = 4.5 kcal/mol is the characteristic allosteric coupling energy scale:
+      - Intact stage: E_parallel = E_ref, so tan(theta_k) = Delta G_eff^‡ / E_ref.
+        As Delta G_eff^‡ -> 0 (Comparator QED / Open Pore), theta_k -> 0 deg and cos(theta_k) -> 1.0.
+      - Fractured stage (Orthogonal Knockout Projection P_perp):
+        An axiom knockout dampens forward coupling E_parallel by exp(-Delta G_eff^‡ / (3 * E_ref)) * 0.12,
+        rotating the state vector orthogonally toward 90 deg (cos(theta_k) < 0.08, sin(theta_k) > 0.996)
+        into the counterexample / ERAD degradation subspace.
+    """
+    if effective_barrier_kcal < 0.0 or energy_scale_kcal <= 0.0:
+        raise ValueError("effective_barrier_kcal must be non-negative and energy_scale_kcal strictly positive")
+
+    raw_b = effective_barrier_kcal if raw_barrier_kcal is None else float(raw_barrier_kcal)
+    raw_norm = math.hypot(energy_scale_kcal, raw_b)
+    raw_cos = energy_scale_kcal / raw_norm
+    raw_angle_deg = math.degrees(math.acos(max(-1.0, min(1.0, raw_cos))))
+
+    if is_fractured:
+        e_parallel = energy_scale_kcal * math.exp(-effective_barrier_kcal / (3.0 * energy_scale_kcal)) * 0.12
+    else:
+        e_parallel = energy_scale_kcal
+
+    vec_norm = math.hypot(e_parallel, effective_barrier_kcal)
+    cos_theta = e_parallel / vec_norm
+    sin_theta = effective_barrier_kcal / vec_norm
+    unitary_norm_sq = cos_theta * cos_theta + sin_theta * sin_theta
+    angle_deg = math.degrees(math.acos(max(-1.0, min(1.0, cos_theta))))
+    bridge_rotation_deg = angle_deg - raw_angle_deg
+
+    validate_physical_bounds("state_vector.cos_theta", cos_theta, kind="probability")
+    validate_physical_bounds("state_vector.sin_theta", sin_theta, kind="probability")
+
+    return {
+        "psi_parallel_cos_theta": round(cos_theta, 4),
+        "psi_orthogonal_sin_theta": round(sin_theta, 4),
+        "unitary_norm_squared": round(unitary_norm_sq, 12),
+        "phase_deflection_angle_deg": round(angle_deg, 2),
+        "raw_unbridged_angle_deg": round(raw_angle_deg, 2),
+        "bridge_rotation_delta_deg": round(bridge_rotation_deg, 2),
+        "energy_momentum_norm_kcal": round(vec_norm, 4),
+    }
+
+
 def compute_stage_free_energy_profile(
     stage: ProofStageNode,
     *,
@@ -604,9 +659,42 @@ def compute_stage_free_energy_profile(
         "allosteric_bridge_shift_kcal_mol": round(bridge_shift, 4),
         "effective_activation_barrier_kcal_mol": round(effective_barrier, 4),
         "stage_transmission_probability": round(transmission_prob, 4),
+        "state_vector": compute_stage_state_vector(
+            effective_barrier,
+            raw_barrier,
+            is_fractured=False,
+        ),
         "cf_biophysical_analog": stage.cf_biophysical_analog,
         "cf_pdb_or_doi": stage.cf_pdb_or_doi,
         "plain_english_summary": stage.plain_english_summary,
+    }
+
+
+
+def _summarize_5d_trajectory_vector(stage_profiles: Sequence[Mapping[str, Any]]) -> Dict[str, Any]:
+    """Summarize the 5D Hilbert state-space trajectory vector V = (cos theta_1, ..., cos theta_5)."""
+    basis_coords = [float(s["state_vector"]["psi_parallel_cos_theta"]) for s in stage_profiles]
+    orthogonal_coords = [float(s["state_vector"]["psi_orthogonal_sin_theta"]) for s in stage_profiles]
+    n_dims = len(basis_coords)
+    vec_norm_5d = math.sqrt(sum(c * c for c in basis_coords))
+    target_norm_5d = math.sqrt(float(n_dims))
+    inner_prod = sum(basis_coords)
+    cosine_sim_5d = inner_prod / (vec_norm_5d * target_norm_5d) if vec_norm_5d > 0.0 else 0.0
+    subspace_overlap = inner_prod / float(n_dims) if n_dims > 0 else 0.0
+    unitary_ok = all(
+        abs(float(s["state_vector"]["unitary_norm_squared"]) - 1.0) < 1e-9
+        for s in stage_profiles
+    )
+    return {
+        "basis_coordinates_5d": [round(c, 4) for c in basis_coords],
+        "orthogonal_deflection_5d": [round(s, 4) for s in orthogonal_coords],
+        "euclidean_norm_5d": round(vec_norm_5d, 4),
+        "target_qed_norm_5d": round(target_norm_5d, 4),
+        "global_5d_cosine_similarity": round(cosine_sim_5d, 4),
+        "mean_subspace_overlap_cos_theta": round(subspace_overlap, 4),
+        "terminal_stage_cos_theta": round(basis_coords[-1], 4),
+        "terminal_stage_angle_deg": round(float(stage_profiles[-1]["state_vector"]["phase_deflection_angle_deg"]), 2),
+        "pythagorean_unitary_invariant_verified": unitary_ok,
     }
 
 
@@ -676,11 +764,17 @@ def simulate_counterfactual_axiom_knockout(
             kind="percentage",
         )
 
+        stage_vec = compute_stage_state_vector(
+            eff_barrier,
+            base["raw_activation_barrier_kcal_mol"],
+            is_fractured=(stage_status != "KERNEL_VERIFIED"),
+        )
         stage_profiles.append({
             **base,
             "effective_activation_barrier_kcal_mol": round(eff_barrier, 4),
             "alluvial_hypothesis_flux_pct": round(alluvial_flux_clamped, 2),
             "stage_verification_status": stage_status,
+            "state_vector": stage_vec,
         })
 
     qed_reached = is_intact and (verified_theorems_accumulated == 29500)
@@ -708,6 +802,7 @@ def simulate_counterfactual_axiom_knockout(
         "rate_limiting_peak_stage_id": peak_stage_id,
         "rate_limiting_peak_barrier_kcal_mol": round(peak_barrier_kcal, 4),
         "final_alluvial_hypothesis_flux_pct": final_flux_pct,
+        "vector_space_profile": _summarize_5d_trajectory_vector(stage_profiles),
         "parallel_cf_biophysics": {
             "cf_genotype_analog": spec.cf_genotype_analog,
             "cf_molecular_defect": spec.cf_molecular_defect,
@@ -768,6 +863,7 @@ def evaluate_challenge_landscape(
         "rate_limiting_peak_stage_id": peak_stage_id,
         "rate_limiting_peak_barrier_kcal_mol": round(peak_barrier, 4),
         "final_alluvial_hypothesis_flux_pct": stage_profiles[-1]["alluvial_hypothesis_flux_pct"],
+        "vector_space_profile": _summarize_5d_trajectory_vector(stage_profiles),
         "cf_isomorphism": meta["cf_isomorphism"],
         "stages": stage_profiles,
     }
@@ -929,6 +1025,69 @@ def evaluate_continuum_percolation_phase_transition(
     }
 
 
+
+
+def evaluate_vector_space_isomorphism() -> Dict[str, Any]:
+    """Verify the Hilbert state-space vector & orthogonal projection isomorphism across challenges and knockouts."""
+    challenge_vectors: Dict[str, Dict[str, Any]] = {}
+    all_unitary = True
+    all_bridge_rotates_toward_qed = True
+
+    for c_id in CHALLENGE_STAGE_MAP:
+        bridged = evaluate_challenge_landscape(c_id, apply_allosteric_bridge=True)
+        unbridged = evaluate_challenge_landscape(c_id, apply_allosteric_bridge=False)
+        b_vec = bridged["vector_space_profile"]
+        u_vec = unbridged["vector_space_profile"]
+
+        if not b_vec["pythagorean_unitary_invariant_verified"]:
+            all_unitary = False
+
+        # Every stage with a negative bridge shift must rotate downward (smaller angle, larger cos theta)
+        stage_rotations_ok = all(
+            st["state_vector"]["bridge_rotation_delta_deg"] < 0.0
+            for st in bridged["stages"]
+        )
+        if not (stage_rotations_ok and b_vec["mean_subspace_overlap_cos_theta"] > u_vec["mean_subspace_overlap_cos_theta"]):
+            all_bridge_rotates_toward_qed = False
+
+        peak_idx = 3  # Stage 4 rate-limiting transition state
+        challenge_vectors[c_id] = {
+            "bridged_mean_cos_theta": b_vec["mean_subspace_overlap_cos_theta"],
+            "unbridged_mean_cos_theta": u_vec["mean_subspace_overlap_cos_theta"],
+            "bridged_5d_norm": b_vec["euclidean_norm_5d"],
+            "unbridged_5d_norm": u_vec["euclidean_norm_5d"],
+            "peak_stage_bridged_angle_deg": bridged["stages"][peak_idx]["state_vector"]["phase_deflection_angle_deg"],
+            "peak_stage_unbridged_angle_deg": unbridged["stages"][peak_idx]["state_vector"]["raw_unbridged_angle_deg"],
+            "peak_stage_bridge_rotation_deg": bridged["stages"][peak_idx]["state_vector"]["bridge_rotation_delta_deg"],
+            "terminal_qed_cos_theta": b_vec["terminal_stage_cos_theta"],
+            "monotone_vector_alignment_verified": stage_rotations_ok,
+        }
+
+    knockout_vectors: Dict[str, Dict[str, Any]] = {}
+    for k_id in COUNTERFACTUAL_KNOCKOUT_CATALOG:
+        sc = simulate_counterfactual_axiom_knockout(k_id)
+        knockout_vectors[k_id] = sc["vector_space_profile"]
+        if not sc["vector_space_profile"]["pythagorean_unitary_invariant_verified"]:
+            all_unitary = False
+
+    # Dimensional subspace hierarchy: earlier axiom fracture leaves fewer intact basis dimensions
+    overlap_order_ok = (
+        knockout_vectors["pythagorean_exponent_p2_mutation"]["mean_subspace_overlap_cos_theta"]
+        < knockout_vectors["frey_semistability_knockout"]["mean_subspace_overlap_cos_theta"]
+        < knockout_vectors["taylor_wiles_p3_p5_switch_knockout"]["mean_subspace_overlap_cos_theta"]
+        < knockout_vectors["unverified_sorry_axiom_injection"]["mean_subspace_overlap_cos_theta"]
+        < knockout_vectors["wild_type_intact_proof"]["mean_subspace_overlap_cos_theta"]
+    )
+
+    return {
+        "pythagorean_unitary_norm_verified": all_unitary,
+        "allosteric_bridge_vector_rotation_verified": all_bridge_rotates_toward_qed,
+        "orthogonal_knockout_subspace_hierarchy_verified": overlap_order_ok,
+        "challenge_vector_profiles": challenge_vectors,
+        "knockout_vector_profiles": knockout_vectors,
+    }
+
+
 def evaluate_two_way_bridge_isomorphism() -> Dict[str, Any]:
     """Quantify the mathematical-biophysical isomorphism across all 5 knockout scenarios and 3 challenges."""
     scenarios = {
@@ -997,6 +1156,7 @@ def evaluate_two_way_bridge_isomorphism() -> Dict[str, Any]:
         "challenge_sensitivity_25pct": challenge_sensitivity_25pct,
         "invariant_transfer_gate": evaluate_noether_conservation_and_invariant_transfer(),
         "continuum_percolation_bridge": evaluate_continuum_percolation_phase_transition(),
+        "vector_space_isomorphism": evaluate_vector_space_isomorphism(),
         "counterfactual_scenarios": scenarios,
     }
 

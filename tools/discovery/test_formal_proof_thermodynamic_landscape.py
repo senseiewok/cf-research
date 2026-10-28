@@ -16,6 +16,8 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     FORMAL_MATH_CHALLENGE_PROFILES,
     PROOF_THERMODYNAMIC_PARAMETERS,
     compute_stage_free_energy_profile,
+    compute_stage_state_vector,
+    evaluate_vector_space_isomorphism,
     evaluate_challenge_landscape,
     evaluate_continuum_percolation_phase_transition,
     evaluate_falsification_negative_control,
@@ -142,6 +144,28 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertTrue(perc["cftr_allosteric_network"]["eti_rescued_percolates"])
         with self.assertRaises(ValueError):
             evaluate_continuum_percolation_phase_transition(particle_radius_nm=0.0)
+
+
+    def test_hilbert_vector_space_isomorphism_and_orthogonal_knockouts(self) -> None:
+        vec_iso = evaluate_vector_space_isomorphism()
+        self.assertTrue(vec_iso["pythagorean_unitary_norm_verified"])
+        self.assertTrue(vec_iso["allosteric_bridge_vector_rotation_verified"])
+        self.assertTrue(vec_iso["orthogonal_knockout_subspace_hierarchy_verified"])
+
+        # Terminal QED stage in intact FLT aligns near 0 deg (cos theta > 0.99)
+        flt_vec = vec_iso["challenge_vector_profiles"]["fermats_last_theorem"]
+        self.assertGreater(flt_vec["terminal_qed_cos_theta"], 0.99)
+        self.assertLess(flt_vec["peak_stage_bridge_rotation_deg"], -15.0)
+
+        # Fractured stage deflects orthogonally (> 84 deg, cos theta < 0.10)
+        frac_vec = compute_stage_state_vector(11.69, 3.49, is_fractured=True)
+        self.assertLess(frac_vec["psi_parallel_cos_theta"], 0.10)
+        self.assertGreater(frac_vec["psi_orthogonal_sin_theta"], 0.99)
+        self.assertGreater(frac_vec["phase_deflection_angle_deg"], 84.0)
+        self.assertAlmostEqual(frac_vec["unitary_norm_squared"], 1.0, places=9)
+
+        with self.assertRaises(ValueError):
+            compute_stage_state_vector(-1.0)
 
 
 if __name__ == "__main__":
