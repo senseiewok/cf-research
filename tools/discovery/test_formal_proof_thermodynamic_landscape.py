@@ -17,6 +17,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     PROOF_THERMODYNAMIC_PARAMETERS,
     compute_stage_free_energy_profile,
     evaluate_challenge_landscape,
+    evaluate_continuum_percolation_phase_transition,
     evaluate_falsification_negative_control,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -127,6 +128,20 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
                 100.0,
                 places=3,
             )
+
+
+    def test_continuum_percolation_phase_transition(self) -> None:
+        perc = evaluate_continuum_percolation_phase_transition()
+        self.assertTrue(perc["phase_transition_verified"])
+        self.assertAlmostEqual(perc["continuum_critical_volume_fraction_phi_c"], 0.28957, places=4)
+        self.assertTrue(perc["compact_peg_lnp_in_cf_sputum"]["supercritical_percolation"])
+        self.assertGreater(perc["compact_peg_lnp_in_cf_sputum"]["spanning_cluster_probability_p_inf"], 0.5)
+        self.assertFalse(perc["unshielded_130nm_lnp_in_cf_sputum"]["supercritical_percolation"])
+        self.assertEqual(perc["unshielded_130nm_lnp_in_cf_sputum"]["spanning_cluster_probability_p_inf"], 0.0)
+        self.assertFalse(perc["cftr_allosteric_network"]["uncorrected_f508del_percolates"])
+        self.assertTrue(perc["cftr_allosteric_network"]["eti_rescued_percolates"])
+        with self.assertRaises(ValueError):
+            evaluate_continuum_percolation_phase_transition(particle_radius_nm=0.0)
 
 
 if __name__ == "__main__":
