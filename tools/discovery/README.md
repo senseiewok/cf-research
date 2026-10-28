@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `88` (plus 4 infrastructure scripts and 90 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `70`
+- **Total Verified Modules:** `89` (plus 4 infrastructure scripts and 91 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `71`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -65,12 +65,13 @@ python tools/discovery/discovery_council.py --check-index
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 38 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 39 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
 | `aav_tropism_model.py` | `T-0208` | `T2` | `keep` | Canonical workbench |
 | `aerosol_droplet_deposition_mechanics.py` | `T-0408` | `T2` | `keep` | Canonical workbench |
+| `aerosol_hygroscopic_deposition_kinetics.py` | `T-0473` | `T2` | `keep` | Canonical workbench |
 | `airway_basal_tight_junction_kinetics.py` | `T-0429` | `T2` | `keep` | Canonical workbench |
 | `ali_airway_lnp_transfection_kinetics.py` | `T-0446` | `T2` | `keep` | Canonical workbench |
 | `antimicrobial_peptide_acidification.py` | `T-0461` | `T2` | `keep` | Canonical workbench |
