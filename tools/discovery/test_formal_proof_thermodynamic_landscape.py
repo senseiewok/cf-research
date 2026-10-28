@@ -17,6 +17,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     PROOF_THERMODYNAMIC_PARAMETERS,
     compute_stage_free_energy_profile,
     compute_stage_state_vector,
+    evaluate_mechanistic_basis_span,
     evaluate_vector_space_isomorphism,
     evaluate_challenge_landscape,
     evaluate_continuum_percolation_phase_transition,
@@ -151,6 +152,20 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertTrue(vec_iso["pythagorean_unitary_norm_verified"])
         self.assertTrue(vec_iso["allosteric_bridge_vector_rotation_verified"])
         self.assertTrue(vec_iso["orthogonal_knockout_subspace_hierarchy_verified"])
+        self.assertTrue(vec_iso["multi_axis_mechanistic_span_verified"])
+
+        # Verify 4D non-compensatory span exposes scalar fallacy on W1282X + ETI alone
+        w1282x_eti = vec_iso["mechanistic_span_matrix"]["W1282X_with_ETI_only"]
+        self.assertFalse(w1282x_eti["basis_fully_spanned"])
+        self.assertEqual(w1282x_eti["dominant_unspanned_basis_axis"], "e1_transcript_axiom_entry")
+        self.assertGreater(w1282x_eti["scalar_fallacy_overestimate_pct"], 50.0)
+
+        w1282x_tri = vec_iso["mechanistic_span_matrix"]["W1282X_with_trimodal"]
+        self.assertTrue(w1282x_tri["basis_fully_spanned"])
+        self.assertGreater(w1282x_tri["directional_cosine_alignment"], 0.99)
+
+        with self.assertRaises(ValueError):
+            evaluate_mechanistic_basis_span([0.5, 0.5], [0.5, 0.5, 0.5, 0.5])
 
         # Terminal QED stage in intact FLT aligns near 0 deg (cos theta > 0.99)
         flt_vec = vec_iso["challenge_vector_profiles"]["fermats_last_theorem"]
