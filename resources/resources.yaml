@@ -3900,3 +3900,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-27
     status: active
+
+  - id: bermudahospitals-bm-clinical-care
+    name: Public hospital system and specialized pediatric care in Bermuda
+    organisation: Bermuda Hospitals Board
+    countries: [BM]
+    url: https://bermudahospitals.bm/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Public healthcare authority administering King Edward VII Memorial Hospital with inpatient medical treatment, specialized pediatric care, and diagnostic testing across Bermuda.
+    who_for: not_checked
+    format: online
+    lang: en-BM
+    source_id: bermudahospitals-bm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: ls-fo-hospital-services
+    name: National hospital operations and specialized clinical medicine in the Faroe Islands
+    organisation: Landssjúkrahúsið
+    countries: [FO]
+    url: https://ls.fo/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Main hospital center in Torshavn providing specialized pediatric consultations, inpatient clinical therapy, diagnostic laboratory testing, and tertiary referrals across the Faroe Islands.
+    who_for: not_checked
+    format: online
+    lang: fo
+    source_id: ls-fo-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-kn-health-services
+    name: National health administration and community medical services in Saint Kitts and Nevis
+    organisation: Government of Saint Kitts and Nevis
+    countries: [KN]
+    url: https://www.gov.kn/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Federal government portal overseeing national health administration, public community clinics, hospital oversight, and specialized pediatric referrals across Saint Kitts and Nevis.
+    who_for: not_checked
+    format: online
+    lang: en-KN
+    source_id: gov-kn-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: ha-org-hk-hospital-services
+    name: Public hospital network and pediatric clinical care in Hong Kong
+    organisation: Hospital Authority
+    countries: [HK]
+    url: https://www.ha.org.hk/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Statutory body governing public hospitals and specialist outpatient clinics delivering comprehensive pediatric medicine, respiratory therapy, and clinical care across Hong Kong.
+    who_for: not_checked
+    format: online
+    lang: zh-HK
+    source_id: ha-org-hk-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: chu-reunion-fr-hospital-care
+    name: University hospital operations and specialized pediatric medicine in Reunion
+    organisation: Centre Hospitalier Universitaire de La Réunion
+    countries: [RE]
+    url: https://www.chu-reunion.fr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Regional university hospital center providing specialized pediatric pulmonology, inpatient clinical consultations, diagnostic laboratory services, and acute medical treatment across Reunion.
+    who_for: not_checked
+    format: online
+    lang: fr-RE
+    source_id: chu-reunion-fr-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active

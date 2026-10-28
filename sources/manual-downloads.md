@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-211 to download by hand, 1 to ask for, 3 not to download.
+216 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -108,6 +108,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | bshi-bd-resource-pages | Bangladesh Shishu Hospital & Institute website (bshi.gov.bd) | [page](https://bshi.gov.bd/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### Bermuda Hospitals Board
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| bermudahospitals-bm-resource-pages | Bermuda Hospitals Board website (bermudahospitals.bm) | [page](https://bermudahospitals.bm/) | link only | Principal public hospital authority operating King Edward VII Memorial Hospital and specialized pediatric services in Bermuda; robots.txt allow (2026-10-28), m… |
+
 ### BioMed Central Limited on behalf of ISRCTN
 
 | ID | What | Open | Save as | Notes |
@@ -149,6 +155,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | chpg-mc-resource-pages | Centre Hospitalier Princesse Grace website (chpg.mc) | [page](https://www.chpg.mc/) | link only | Official public hospital center and clinical referral institution in Monaco; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
+### Centre Hospitalier Universitaire de La Réunion
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| chu-reunion-fr-resource-pages | Centre Hospitalier Universitaire de La Réunion website (www.chu-reunion.fr) | [page](https://www.chu-reunion.fr/) | link only | Regional university hospital center providing specialized pediatric pulmonology, clinical research, and acute care in Reunion; robots.txt allow (2026-10-28), m… |
 
 ### Centre Hospitalier Universitaire Mohammed VI Marrakech
 
@@ -403,6 +415,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | naalakkersuisut-gl-resource-pages | Government of Greenland health portal (naalakkersuisut.gl) | [page](https://naalakkersuisut.gl/) | link only | Official government portal of Greenland providing access to the Department of Health (Departementet for Sundhed / Peqqissutsimut Naalakkersuisoqarfik) and nati… |
 
+### Government of Saint Kitts and Nevis
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-kn-resource-pages | Government of Saint Kitts and Nevis website (www.gov.kn) | [page](https://www.gov.kn/) | link only | Official federal government portal coordinating national health administration and specialized pediatric medical referrals in Saint Kitts and Nevis; robots.txt… |
+
 ### Government of the Republic of Suriname (Ministerie van Volksgezondheid)
 
 | ID | What | Open | Save as | Notes |
@@ -432,6 +450,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | arubahospital-com-resource-pages | Horacio Oduber Hospital website (www.arubahospital.com) | [page](https://www.arubahospital.com/) | link only | Main public hospital providing specialized pediatric and respiratory care in Aruba; robots.txt allow (2026-10-27), manual access, link and summary only. |
+
+### Hospital Authority
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ha-org-hk-resource-pages | Hospital Authority website (www.ha.org.hk) | [page](https://www.ha.org.hk/) | link only | Statutory public healthcare authority managing all public hospitals and specialist outpatient pediatric and respiratory clinics in Hong Kong; robots.txt allow… |
 
 ### Hospital María, Especialidades Pediátricas
 
@@ -636,6 +660,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | lrh-lk-resource-pages | Lady Ridgeway Hospital for Children website (lrh.health.gov.lk) | [page](https://lrh.health.gov.lk/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Landssjúkrahúsið
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ls-fo-resource-pages | Landssjúkrahúsið website (ls.fo) | [page](https://ls.fo/) | link only | National referral hospital delivering acute inpatient care, specialized pediatric clinics, and diagnostic services in the Faroe Islands; robots.txt allow (2026… |
 
 ### Latvijas Cistiskās fibrozes biedrība
 
