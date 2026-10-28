@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-216 to download by hand, 1 to ask for, 3 not to download.
+221 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -415,6 +415,24 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | naalakkersuisut-gl-resource-pages | Government of Greenland health portal (naalakkersuisut.gl) | [page](https://naalakkersuisut.gl/) | link only | Official government portal of Greenland providing access to the Department of Health (Departementet for Sundhed / Peqqissutsimut Naalakkersuisoqarfik) and nati… |
 
+### Government of Grenada
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-gd-resource-pages | Government of Grenada website (gov.gd) | [page](https://gov.gd/) | link only | National government portal administering public health programs, community clinics, General Hospital operations, and specialized pediatric consultations in Gre… |
+
+### Government of Jersey
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-je-resource-pages | Government of Jersey website (www.gov.je) | [page](https://www.gov.je/) | link only | Official government portal coordinating public healthcare administration, hospital operations at Jersey General Hospital, and community clinical services in Je… |
+
+### Government of Macao SAR
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-mo-resource-pages | Government of Macao SAR website (www.gov.mo) | [page](https://www.gov.mo/) | link only | Official government portal coordinating public health administration, Conde de Sao Januario hospital operations, and pediatric specialist consultations in Maca… |
+
 ### Government of Saint Kitts and Nevis
 
 | ID | What | Open | Save as | Notes |
@@ -426,6 +444,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | gov-sr-resource-pages | Government of the Republic of Suriname portal (gov.sr) | [page](https://gov.sr/) | link only | Official CF or pediatric referral resource (Government of the Republic of Suriname (Ministerie van Volksgezondheid)); robots.txt allow (2026-10-25), manual acc… |
+
+### Governo de São Tomé e Príncipe
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| stp-gov-st-resource-pages | Governo de São Tomé e Príncipe website (stp.gov.st) | [page](https://stp.gov.st/) | link only | Official government portal coordinating national healthcare administration, public health programs, hospital care, and specialized medical referrals in Sao Tom… |
 
 ### GTEx Portal (publisher not read; robots.txt disallows our agent on the whole host)
 
@@ -1116,6 +1140,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cing-cy-resource-pages | The Cyprus Institute of Neurology and Genetics website (www.cing.ac.cy) | [page](https://www.cing.ac.cy/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Turks and Caicos Islands Government
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-tc-resource-pages | Turks and Caicos Islands Government website (www.gov.tc) | [page](https://www.gov.tc/) | link only | Official government portal administering public health programs, clinical hospital operations, primary medical centers, and specialized pediatric referrals in… |
 
 ### Udruženje za pomoć i podršku osobama sa cističnom fibrozom Srbije
 
