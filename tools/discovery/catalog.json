@@ -6,22 +6,22 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 89,
+  "total_modules": 90,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 91,
+  "test_suites_count": 92,
   "persona_summary": {
-    "researchers": 88,
+    "researchers": 89,
     "builders": 1
   },
   "triage_summary": {
-    "keep": 71,
+    "keep": 72,
     "merge": 14,
     "archive": 4
   },
   "discipline_summary": {
     "structural_biology": 14,
     "rna_gene_editing": 25,
-    "airway_delivery": 39,
+    "airway_delivery": 40,
     "microbiology_host": 6,
     "clinical_trials": 3,
     "ai_verification": 2
@@ -476,8 +476,8 @@
     },
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
-      "count": 39,
-      "keep_count": 32,
+      "count": 40,
+      "keep_count": 33,
       "merge_count": 6,
       "archive_count": 1,
       "modules": [
@@ -869,6 +869,17 @@
         {
           "module": "tmem16a_enac_asl_cbf_dynamics",
           "task": "T-0444",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "tmem16a_slc26a9_conductance_coupling",
+          "task": "T-0476",
           "track": "Track A",
           "tier": "T2",
           "discipline": "airway_delivery",
