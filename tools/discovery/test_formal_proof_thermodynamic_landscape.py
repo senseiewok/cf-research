@@ -44,6 +44,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_thermodynamic_speed_limits_gating,
     evaluate_stochastic_resetting_first_passage_gating,
     evaluate_thermodynamic_length_fisher_metric_gating,
+    evaluate_optimal_transport_wasserstein_benamou_brenier_gating,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -118,6 +119,8 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertTrue(report["thermodynamic_uncertainty_relations_tur_bridge"]["tur_precision_dissipation_bridge_verified"])
         self.assertIn("macroscopic_fluctuation_theory_mft_bridge", report)
         self.assertTrue(report["macroscopic_fluctuation_theory_mft_bridge"]["mft_large_deviations_bridge_verified"])
+        self.assertIn("optimal_transport_wasserstein_bridge", report)
+        self.assertTrue(report["optimal_transport_wasserstein_bridge"]["optimal_transport_bridge_verified"])
 
     def test_ah9_parameter_provenance_and_ah10_negative_control(self) -> None:
         self.assertGreaterEqual(len(PROOF_THERMODYNAMIC_PARAMETERS), 5)
@@ -796,6 +799,50 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         # Invalid inputs raise ValueError
         with self.assertRaises(ValueError):
             evaluate_thermodynamic_length_fisher_metric_gating(n_cycle_states=3)
+
+    def test_optimal_transport_wasserstein_and_benamou_brenier_bridge(self) -> None:
+        ot = evaluate_optimal_transport_wasserstein_benamou_brenier_gating()
+        self.assertTrue(ot["optimal_transport_bridge_verified"])
+        self.assertTrue(ot["cftr_transport_verified"])
+        self.assertTrue(ot["proof_transport_verified"])
+        self.assertTrue(ot["negative_control_detects_violation"])
+
+        wt = ot["cftr_profiles"]["wt_cftr"]
+        eti = ot["cftr_profiles"]["eti_rescued_8eiq"]
+        f508 = ot["cftr_profiles"]["uncorrected_f508del_5uak"]
+        w1282x = ot["cftr_profiles"]["w1282x_truncated"]
+
+        # WT and ETI follow near-optimal Benamou-Brenier potential flow with high efficiency
+        self.assertGreaterEqual(wt["transport_efficiency_eta"], 0.75)
+        self.assertLessEqual(wt["action_overhead_theta"], 1.25)
+        self.assertGreaterEqual(wt["a_actual"], wt["a_min"])
+        self.assertGreaterEqual(wt["w2_distance"], wt["w1_distance"])
+
+        self.assertGreaterEqual(eti["transport_efficiency_eta"], 0.70)
+        self.assertLessEqual(eti["action_overhead_theta"], 1.35)
+        self.assertGreaterEqual(eti["a_actual"], eti["a_min"])
+        self.assertGreaterEqual(eti["w2_distance"], eti["w1_distance"])
+
+        # Uncorrected F508del suffers turbulent eddies and high excess action
+        self.assertLess(f508["transport_efficiency_eta"], 0.40)
+        self.assertGreater(f508["action_overhead_theta"], 2.0)
+        self.assertGreater(f508["a_actual"], 2.0 * f508["a_min"])
+
+        # W1282X lacks active catalytic domain -> impossible active transition
+        self.assertFalse(w1282x["active_transition_possible"])
+        self.assertEqual(w1282x["w2_distance"], "infinity")
+        self.assertEqual(w1282x["transport_efficiency_eta"], 0.0)
+
+        # Formal proof challenges have tight belief transport along deductive DAG
+        for cid, prof in ot["challenge_profiles"].items():
+            self.assertGreaterEqual(prof["transport_efficiency_eta"], 0.70, cid)
+            self.assertLessEqual(prof["action_overhead_theta"], 1.35, cid)
+            self.assertGreaterEqual(prof["a_actual"], prof["a_min"], cid)
+
+        # Invalid inputs raise ValueError
+        with self.assertRaises(ValueError):
+            evaluate_optimal_transport_wasserstein_benamou_brenier_gating(n_cycle_states=3)
+
 
 
 class FactoringDeltaBitsTests(unittest.TestCase):
