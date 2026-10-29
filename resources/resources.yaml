@@ -1013,8 +1013,13 @@ resources:
     who_for: not_checked
     lang: de-AT
     source_id: cfhilfe-at-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: cacc61203eb6e8fc153fe3b1a66a1137e8a366e8a5c7192830286b7b89cf8f92
+    last_checked: 2026-10-29
     status: active
 
   - id: cff-dk-livet-med-cf
@@ -1470,8 +1475,13 @@ resources:
     format: online
     lang: es-GT
     source_id: agafq-gt-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 1c18d0de0341daf08db0415a64ddf08564c97de2e4ea4a047b5edd04529c826c
+    last_checked: 2026-10-29
     status: active
 
   - id: etfy-ee-toetus-ja-info
@@ -1736,8 +1746,13 @@ resources:
     format: online
     lang: en-MY
     source_id: mrds-my-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 6cf8d9da89cd581df516b6830391cd78d920612e71f22d8e46bfa0d56b26adf3
+    last_checked: 2026-10-29
     status: active
 
   - id: psod-ph-orphan-disorders-support
@@ -2478,8 +2493,13 @@ resources:
     format: online
     lang: en
     source_id: sidra-qa-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 46dacff49d56e4b3c48c65a9a64993dfb6bff56f3712841e3722a6d8b9b1d3ed
+    last_checked: 2026-10-29
     status: active
   - id: dasman-kw-medical-genetics-research
     name: Genetics and genomic medicine services in Kuwait
@@ -2786,8 +2806,13 @@ resources:
     format: online
     lang: en-RW
     source_id: kfhr-rw-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 8950948a87668f0e19b4fb6effc1b4fab276ff15693d55e9dbecd7b7c68f54c7
+    last_checked: 2026-10-29
     status: active
   - id: unza-zm-medical-pediatric-guidance
     name: Academic medicine and pediatric respiratory clinical guidance
