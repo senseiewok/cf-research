@@ -48,3 +48,5 @@ This directory holds two groups of Markdown notes:
 - [`mission-grounding-2026-10-25-wave21.md`](mission-grounding-2026-10-25-wave21.md)
 - [`mission-grounding-2026-10-25-wave22.md`](mission-grounding-2026-10-25-wave22.md)
 - [`mission-grounding-2026-10-25-wave24.md`](mission-grounding-2026-10-25-wave24.md)
+- [`mission-grounding-2026-10-28-wave25.md`](mission-grounding-2026-10-28-wave25.md)
+- [`mission-grounding-2026-10-29.md`](mission-grounding-2026-10-29.md)
