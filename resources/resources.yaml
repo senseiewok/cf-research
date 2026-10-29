@@ -4698,3 +4698,66 @@ resources:
     basis: lead_only
     last_checked: 2026-10-28
     status: active
+  - id: nirc-nf-public-administration
+    name: Municipal administration and community health coordination in Norfolk Island
+    organisation: Norfolk Island Regional Council
+    countries: [NF]
+    url: https://www.nirc.gov.au/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Regional council portal coordinating municipal administration, public health services, community aged care, and emergency medical logistics across Norfolk Island.
+    who_for: not_checked
+    format: online
+    lang: en-NF
+    source_id: nirc-nf-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: taaf-tf-public-administration
+    name: Public administration and scientific medical logistics across French Southern Territories
+    organisation: Administration des Terres australes et antarctiques françaises
+    countries: [TF]
+    url: https://taaf.fr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Territorial administration portal coordinating environmental preservation, polar scientific missions, emergency medical evacuation logistics, and overseas research personnel support across French Southern Territories.
+    who_for: not_checked
+    format: online
+    lang: fr-TF
+    source_id: taaf-tf-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-gs-public-administration
+    name: Territorial governance and polar maritime medical safety in South Georgia
+    organisation: Government of South Georgia and the South Sandwich Islands
+    countries: [GS]
+    url: https://gov.gs/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Overseas territorial government directing environmental conservation, sustainable fisheries management, maritime visitor safety, and search and rescue medical coordination across South Georgia.
+    who_for: not_checked
+    format: online
+    lang: en-GS
+    source_id: gov-gs-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: biot-gov-io-public-administration
+    name: Territorial administration and environmental maritime medical coordination in Diego Garcia
+    organisation: British Indian Ocean Territory Administration
+    countries: [IO]
+    url: https://www.biot.gov.io/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Public administration portal directing environmental protection, maritime governance, island conservation programs, and emergency medical logistics across the British Indian Ocean Territory.
+    who_for: not_checked
+    format: online
+    lang: en-IO
+    source_id: biot-gov-io-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active

@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-261 to download by hand, 1 to ask for, 3 not to download.
+265 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -17,6 +17,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | aau-et-resource-pages | Addis Ababa University College of Health Sciences website (www.aau.edu.et) | [page](https://www.aau.edu.et/) | link only | Official CF or pediatric referral resource (Addis Ababa University College of Health Sciences); robots.txt allow (2026-10-25), manual access, link and summary… |
+
+### Administration des Terres australes et antarctiques françaises
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| taaf-tf-resource-pages | Terres australes et antarctiques françaises website (taaf.fr) | [page](https://taaf.fr/) | link only | Territorial administration portal coordinating environmental preservation, polar scientific missions, emergency medical evacuation logistics, and overseas rese… |
 
 ### Administration supérieure des îles Wallis et Futuna
 
@@ -143,6 +149,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | isrctn | ISRCTN Clinical Study Registry (UK and international clinical trials) | [page](https://www.isrctn.com/) | link only | Terms read 2026-10-24 via read-page on https://www.isrctn.com/page/terms (robots.txt 200, allowed). |
+
+### British Indian Ocean Territory Administration
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| biot-gov-io-resource-pages | British Indian Ocean Territory Administration website (www.biot.gov.io) | [page](https://www.biot.gov.io/) | link only | Public administration portal directing environmental protection, maritime governance, island conservation programs, and emergency medical logistics across the… |
 
 ### Bulgarian Cystic Fibrosis Association
 
@@ -552,6 +564,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | gov-sx-resource-pages | Government of Sint Maarten website (www.sintmaartengov.org) | [page](https://www.sintmaartengov.org/) | link only | Official government portal coordinating public healthcare administration, social security programs, hospital clinical services, and specialized pediatric refer… |
+
+### Government of South Georgia and the South Sandwich Islands
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-gs-resource-pages | Government of South Georgia and the South Sandwich Islands website (gov.gs) | [page](https://gov.gs/) | link only | Overseas territorial government directing environmental conservation, sustainable fisheries management, maritime visitor safety, and search and rescue medical… |
 
 ### Government of the Pitcairn Islands
 
@@ -1140,6 +1158,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | ncfs-resource-pages | Nederlandse Cystic Fibrosis Stichting website (ncfs.nl) | [page](https://ncfs.nl/) | link only | Official national cystic fibrosis foundation in the Netherlands. |
+
+### Norfolk Island Regional Council
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| nirc-nf-resource-pages | Norfolk Island Regional Council website (www.nirc.gov.au) | [page](https://www.nirc.gov.au/) | link only | Regional council portal coordinating municipal administration, public health services, community aged care, and emergency medical logistics across Norfolk Isla… |
 
 ### Norsk Forening for Cystisk Fibrose
 
