@@ -8,7 +8,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
+import unittest
 
 # Ensure tools/discovery is importable
 HERE = Path(__file__).resolve().parent
@@ -31,7 +31,7 @@ from split_intein_cftr_reconstitution import (
 )
 
 
-class TestCoTransductionPoissonKinetics:
+class TestCoTransductionPoissonKinetics(unittest.TestCase):
     def test_equimolar_poisson_distribution(self):
         kinetics = compute_cotransduction_poisson(moi_n=3.0, moi_c=3.0, entry_efficiency=0.65)
         assert kinetics.optimal_ratio is True
@@ -58,11 +58,11 @@ class TestCoTransductionPoissonKinetics:
         assert kinetics.p_dual_cotransduction < compute_cotransduction_poisson(3.0, 3.0).p_dual_cotransduction
 
     def test_negative_moi_raises_value_error(self):
-        with pytest.raises(ValueError, match="must be non-negative"):
+        with self.assertRaisesRegex(ValueError, "must be non-negative"):
             compute_cotransduction_poisson(-1.0, 3.0)
 
 
-class TestInteinThermodynamics:
+class TestInteinThermodynamics(unittest.TestCase):
     def test_cfa_intein_thermodynamics(self):
         thermo = compute_intein_thermodynamics("Cfa")
         assert thermo.intein_key == "Cfa"
@@ -87,11 +87,11 @@ class TestInteinThermodynamics:
         assert thermo.t_half_splice_seconds < 35.0
 
     def test_unknown_intein_raises_key_error(self):
-        with pytest.raises(KeyError, match="Unknown intein"):
+        with self.assertRaisesRegex(KeyError, "Unknown intein"):
             compute_intein_thermodynamics("UnknownInteinXYZ")
 
 
-class TestCryoEMDomainMapping:
+class TestCryoEMDomainMapping(unittest.TestCase):
     def test_ser744_in_disordered_r_domain(self):
         m = map_split_junction_to_cryoem(744, "Cfa")
         assert m["split_residue"] == 744
@@ -112,13 +112,13 @@ class TestCryoEMDomainMapping:
         assert m["both_fit_aav_limit"] is True
 
     def test_invalid_residue_raises_value_error(self):
-        with pytest.raises(ValueError, match="split_residue must be between"):
+        with self.assertRaisesRegex(ValueError, "split_residue must be between"):
             map_split_junction_to_cryoem(0)
-        with pytest.raises(ValueError, match="split_residue must be between"):
+        with self.assertRaisesRegex(ValueError, "split_residue must be between"):
             map_split_junction_to_cryoem(CFTR_WT_RESIDUES + 10)
 
 
-class TestReconstitutionYieldAndODE:
+class TestReconstitutionYieldAndODE(unittest.TestCase):
     def test_cfa_trans_splicing_yield(self):
         cotrans = compute_cotransduction_poisson(3.0, 3.0)
         thermo = compute_intein_thermodynamics("Cfa")
@@ -139,7 +139,7 @@ class TestReconstitutionYieldAndODE:
         assert recon.reaches_therapeutic_threshold is False
 
 
-class TestRepeatDosingHumoralAttenuation:
+class TestRepeatDosingHumoralAttenuation(unittest.TestCase):
     def test_redosing_nab_attenuation_trajectory(self):
         report = simulate_vector_repeat_dosing(
             moi_base=3.0,
@@ -159,11 +159,11 @@ class TestRepeatDosingHumoralAttenuation:
         assert report.nct_id == "NCT05248230"
 
     def test_invalid_doses_raises_value_error(self):
-        with pytest.raises(ValueError, match="total_doses must be >= 1"):
+        with self.assertRaisesRegex(ValueError, "total_doses must be >= 1"):
             simulate_vector_repeat_dosing(total_doses=0)
 
 
-class TestFullReportAndProvenance:
+class TestFullReportAndProvenance(unittest.TestCase):
     def test_full_report_assembly(self):
         report = build_full_reconstitution_report()
         assert "Split-Intein Dual-AAV" in report.title
@@ -192,3 +192,7 @@ class TestFullReportAndProvenance:
         assert "redosing_kinetics" in data
         assert "cryoem_domain_mapping" in data
         assert data["nlm_attribution"] == NLM_REGISTRY_DISCLAIMER
+
+
+if __name__ == "__main__":
+    unittest.main()

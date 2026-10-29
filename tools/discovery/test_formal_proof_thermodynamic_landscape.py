@@ -46,6 +46,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_thermodynamic_length_fisher_metric_gating,
     evaluate_optimal_transport_wasserstein_benamou_brenier_gating,
     evaluate_transfer_entropy_causal_directionality_gating,
+    evaluate_harada_sasa_fluctuation_dissipation_gating,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -891,6 +892,57 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         # Invalid inputs raise ValueError
         with self.assertRaises(ValueError):
             evaluate_transfer_entropy_causal_directionality_gating(n_cycle_states=3)
+
+
+
+    def test_harada_sasa_fluctuation_dissipation_bridge(self) -> None:
+            """Verify Round 21 (T-0536) Harada-Sasa energy dissipation and FDT violation bridge."""
+            rep = evaluate_two_way_bridge_isomorphism()
+            self.assertIn("harada_sasa_fluctuation_dissipation_bridge", rep)
+            hs = rep["harada_sasa_fluctuation_dissipation_bridge"]
+            self.assertTrue(hs["harada_sasa_bridge_verified"])
+            self.assertTrue(hs["cftr_fdt_stratification_verified"])
+            self.assertTrue(hs["proof_fdt_parity_verified"])
+            self.assertTrue(hs["negative_control_detects_violation"])
+
+            cftr = hs["cftr_profiles"]
+            wt = cftr["wt_cftr"]
+            eti = cftr["eti_rescued_8eiq"]
+            f508 = cftr["uncorrected_f508del_5uak"]
+            w1282x = cftr["w1282x_truncated"]
+
+            # WT CFTR has significant FDT violation and active torque
+            self.assertTrue(wt["active_torque_verified"])
+            self.assertGreaterEqual(wt["dissipation_rate_kcal_mol_s"], 14.0)
+            self.assertGreaterEqual(wt["fdt_violation_ratio"], 2.5)
+            self.assertTrue(wt["harada_sasa_balance_satisfied"])
+
+            # ETI-rescued F508del restores active non-equilibrium driving with high efficiency
+            self.assertTrue(eti["active_torque_verified"])
+            self.assertGreaterEqual(eti["dissipation_rate_kcal_mol_s"], 12.0)
+            self.assertGreaterEqual(eti["fdt_violation_ratio"], 2.2)
+            self.assertGreaterEqual(eti["dissipation_recovery_pct_wt"], 75.0)
+            self.assertTrue(eti["harada_sasa_balance_satisfied"])
+
+            # Uncorrected F508del suffers collapsed active torque and near-equilibrium idling
+            self.assertFalse(f508["active_torque_verified"])
+            self.assertLess(f508["dissipation_rate_kcal_mol_s"], 0.50)
+            self.assertLess(f508["fdt_violation_ratio"], 1.15)
+
+            # W1282X nonsense truncation is exact equilibrium thermal baseline
+            self.assertFalse(w1282x["active_torque_verified"])
+            self.assertEqual(w1282x["dissipation_rate_kcal_mol_s"], 0.0)
+            self.assertEqual(w1282x["fdt_violation_integral_kcal_mol_s"], 0.0)
+            self.assertEqual(w1282x["fdt_violation_ratio"], 1.0)
+
+            # Formal proof challenges have non-equilibrium logical drives
+            for cid, prof in hs["challenge_profiles"].items():
+                self.assertGreaterEqual(prof["logical_dissipation_rate"], 12.0, cid)
+                self.assertGreaterEqual(prof["fdt_violation_ratio"], 2.5, cid)
+
+            # Invalid inputs raise ValueError
+            with self.assertRaises(ValueError):
+                evaluate_harada_sasa_fluctuation_dissipation_gating(n_cycle_states=3)
 
 
 
