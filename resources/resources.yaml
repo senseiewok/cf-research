@@ -973,8 +973,13 @@ resources:
     who_for: not_checked
     lang: nl
     source_id: mucobe-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 73431d5b26029a5226f3003b3a901997ff3ccb2f408a5882bf3fa9a156bc1ee9
+    last_checked: 2026-10-29
     status: active
 
   - id: cfschweiz-leben-mit-cf
@@ -1443,8 +1448,13 @@ resources:
     format: online
     lang: es-PA
     source_id: fqpanama-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: dca912afb22b1a0f02cf96dcfbbe259e07d369afcaa763f4d36a79a044e972fc
+    last_checked: 2026-10-29
     status: active
 
   - id: agafq-apoyo-y-educacion
@@ -1763,8 +1773,13 @@ resources:
     format: online
     lang: ar-JO
     source_id: jcfc-jo-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 6ab8fd17c1beb6d925b96fba4c0e321342576f748957f468fc684b6b4c76d805
+    last_checked: 2026-10-29
     status: active
 
   - id: mecfa-mena-support-and-care
@@ -2729,8 +2744,13 @@ resources:
     format: online
     lang: en-UG
     source_id: makchs-ug-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: a5794bb6925abcbe3bb9dc08b5c2a6bcbdd162d4434e07ce8978efc94344d648
+    last_checked: 2026-10-29
     status: active
   - id: aau-et-pediatric-specialist-care
     name: University teaching hospital pediatric and respiratory care
@@ -2973,8 +2993,13 @@ resources:
     format: online
     lang: zh-TW
     source_id: tspccm-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: b11b42a5bcd3d8803c8b385e30aae188f0726c19a605951da1728c661fd36fbc
+    last_checked: 2026-10-29
     status: active
 
   - id: moh-bt-pediatric-referral-care
