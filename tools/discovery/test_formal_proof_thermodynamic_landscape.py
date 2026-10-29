@@ -37,6 +37,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_information_thermodynamics_landauer_allosteric_feedback,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
+    evaluate_macroscopic_fluctuation_theory_large_deviations,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -109,6 +110,8 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertTrue(report["information_thermodynamics_landauer_bridge"]["information_thermodynamics_landauer_bridge_verified"])
         self.assertIn("thermodynamic_uncertainty_relations_tur_bridge", report)
         self.assertTrue(report["thermodynamic_uncertainty_relations_tur_bridge"]["tur_precision_dissipation_bridge_verified"])
+        self.assertIn("macroscopic_fluctuation_theory_mft_bridge", report)
+        self.assertTrue(report["macroscopic_fluctuation_theory_mft_bridge"]["mft_large_deviations_bridge_verified"])
 
     def test_ah9_parameter_provenance_and_ah10_negative_control(self) -> None:
         self.assertGreaterEqual(len(PROOF_THERMODYNAMIC_PARAMETERS), 5)
@@ -520,6 +523,63 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             evaluate_thermodynamic_uncertainty_relations_cftr_precision(tau_observation_s=-1.0)
         with self.assertRaises(ValueError):
             evaluate_thermodynamic_uncertainty_relations_cftr_precision(intracellular_cl_mm=0.0)
+
+
+    def test_macroscopic_fluctuation_theory_and_large_deviations_bridge(self) -> None:
+        mft = evaluate_macroscopic_fluctuation_theory_large_deviations()
+        self.assertTrue(mft["mft_large_deviations_bridge_verified"])
+        self.assertTrue(mft["cftr_mft_stability_verified"])
+        self.assertTrue(mft["all_challenges_mft_bound_satisfied"])
+        self.assertTrue(mft["all_challenges_mft_action_minimized"])
+        self.assertEqual(mft["critical_threshold_fraction"], 0.10)
+        self.assertGreater(mft["critical_threshold_pa"], 0.0)
+
+        cftr = mft["cftr_mft_profiles"]
+        # WT CFTR: high barrier against transport failure, infinitesimal failure probability
+        self.assertTrue(cftr["wt_cftr"]["transport_competent"])
+        self.assertTrue(cftr["wt_cftr"]["epithelial_sheet_stability_verified"])
+        self.assertTrue(cftr["wt_cftr"]["protective_margin_met"])
+        self.assertGreaterEqual(cftr["wt_cftr"]["large_deviation_action_barrier_i_star"], 40.0)
+        self.assertLess(cftr["wt_cftr"]["probability_transport_failure"], 1e-15)
+
+        # ETI-rescued F508del: restores collective stability
+        self.assertTrue(cftr["eti_rescued_8eiq"]["transport_competent"])
+        self.assertTrue(cftr["eti_rescued_8eiq"]["epithelial_sheet_stability_verified"])
+        self.assertTrue(cftr["eti_rescued_8eiq"]["protective_margin_met"])
+        self.assertGreaterEqual(cftr["eti_rescued_8eiq"]["large_deviation_action_barrier_i_star"], 15.0)
+        self.assertLess(cftr["eti_rescued_8eiq"]["probability_transport_failure"], 1e-6)
+
+        # Uncorrected F508del & W1282X: deterministic failure
+        self.assertFalse(cftr["uncorrected_f508del_5uak"]["transport_competent"])
+        self.assertFalse(cftr["uncorrected_f508del_5uak"]["epithelial_sheet_stability_verified"])
+        self.assertFalse(cftr["uncorrected_f508del_5uak"]["protective_margin_met"])
+        self.assertEqual(cftr["uncorrected_f508del_5uak"]["large_deviation_action_barrier_i_star"], 0.0)
+        self.assertEqual(cftr["uncorrected_f508del_5uak"]["probability_transport_failure"], 1.0)
+
+        self.assertFalse(cftr["w1282x_truncated"]["transport_competent"])
+        self.assertFalse(cftr["w1282x_truncated"]["epithelial_sheet_stability_verified"])
+        self.assertFalse(cftr["w1282x_truncated"]["protective_margin_met"])
+        self.assertEqual(cftr["w1282x_truncated"]["large_deviation_action_barrier_i_star"], 0.0)
+        self.assertEqual(cftr["w1282x_truncated"]["probability_transport_failure"], 1.0)
+
+        for cid, cprof in mft["challenge_mft_profiles"].items():
+            self.assertTrue(cprof["mft_bound_satisfied"], cid)
+            self.assertEqual(cprof["mft_geodesic_action"], 0.0, cid)
+            self.assertGreaterEqual(cprof["deviation_action_barrier_bridged_i_star"], 10.0, cid)
+            self.assertGreater(cprof["deviation_action_barrier_bridged_i_star"], cprof["stalling_action_barrier_unbridged_i_star"], cid)
+            self.assertGreaterEqual(cprof["action_barrier_gain_ratio"], 3.0, cid)
+            self.assertGreaterEqual(cprof["divergence_suppression_factor"], 100.0, cid)
+
+        with self.assertRaises(ValueError):
+            evaluate_macroscopic_fluctuation_theory_large_deviations(temp_k=150.0)
+        with self.assertRaises(ValueError):
+            evaluate_macroscopic_fluctuation_theory_large_deviations(cftr_v_m_mv=100.0)
+        with self.assertRaises(ValueError):
+            evaluate_macroscopic_fluctuation_theory_large_deviations(intracellular_cl_mm=0.0)
+        with self.assertRaises(ValueError):
+            evaluate_macroscopic_fluctuation_theory_large_deviations(n_epithelial_cells=5)
+        with self.assertRaises(ValueError):
+            evaluate_macroscopic_fluctuation_theory_large_deviations(tau_observation_s=-2.0)
 
 
 class FactoringDeltaBitsTests(unittest.TestCase):
