@@ -1944,6 +1944,50 @@ def evaluate_scite_citation_polarity_and_kernel_parity() -> Dict[str, Any]:
         "benchmarks": benchmarks_citation_ledger,
     }
 
+def _bits(n: int) -> int:
+    """Bits needed to address n distinct items: ceil(log2 n), exact integer arithmetic."""
+    return (n - 1).bit_length()
+
+
+def factoring_delta_bits(
+    alphabet_size: int,
+    nodes: int,
+    edges: int,
+    macro_symbols: int,
+    copies: int,
+    macro_predecessors: int,
+) -> int:
+    """Change in description length, in bits, from factoring one repeated macro into a new node.
+
+    Cost model (integer widths, no floats): a script symbol costs ceil(log2 alphabet_size) bits and a
+    node reference costs ceil(log2 node_count) bits. Factoring a macro of ``macro_symbols`` symbols that
+    appears ``copies`` times adds one node (``nodes`` -> ``nodes + 1``), so every reference is charged at the
+    new width, including the ``edges`` references that already existed. The change is
+
+        dictionary entry + (copies + macro_predecessors) pointers + width growth on old edges
+        - the ``copies`` inline scripts it replaces.
+
+    A positive result means factoring makes the description longer. This is a model for reasoning about
+    when deduplication pays; it is not a measurement of any proof corpus.
+    """
+    if alphabet_size < 2:
+        raise ValueError("alphabet_size must be at least 2")
+    if nodes < 1:
+        raise ValueError("nodes must be at least 1")
+    if edges < 0 or macro_predecessors < 0:
+        raise ValueError("edges and macro_predecessors must not be negative")
+    if macro_symbols < 1 or copies < 1:
+        raise ValueError("macro_symbols and copies must be at least 1")
+    symbol_bits = _bits(alphabet_size)
+    old_width = _bits(nodes)
+    new_width = _bits(nodes + 1)
+    dictionary = macro_symbols * symbol_bits
+    replaced = copies * macro_symbols * symbol_bits
+    pointers = (copies + macro_predecessors) * new_width
+    width_growth = edges * (new_width - old_width)
+    return dictionary + pointers + width_growth - replaced
+
+
 def evaluate_information_theoretic_shannon_mdl_packing(
     aav_capsid_capacity_nt: int = 4700,
     cftr_cds_wt_nt: int = 4440,
@@ -1954,18 +1998,18 @@ def evaluate_information_theoretic_shannon_mdl_packing(
     """Evaluate Round 6 (T-0489): Information-Theoretic Shannon/MDL Proof Compression & AAV/mRNA Cargo Packing Bridge.
 
     Connects:
-      1. Minimum Description Length (MDL) and Shannon Mutual Information across Anthropic's Lean 4 Proof DAGs:
+      1. Minimum Description Length (MDL) and Shannon Mutual Information as a cost model for proof graphs:
          L(D, H) = L(H) + L(D | H)
          where L(H) is the macro-lemma library abstraction cost and L(D | H) is the compressed proof script length.
-         Quantifies how deduplicating cross-stage lemmas achieves >50% compression while preserving strict
-         lossless provability (0 `sorry` axioms, QED preserved).
+         `factoring_delta_bits` models when factoring a repeated macro pays; the worked example is a toy case
+         computed from its inputs. No compression has been measured on any proof corpus.
       2. Recombinant AAV Vector Biophysical Packaging & mRNA Secondary-Structure Packing Constraints:
          - Wild-type CFTR cDNA (4,440 nt, Sosnay et al. Nat Genet 2013, DOI: 10.1038/ng.2745) + flanking elements
            (290 bp ITRs + 250 bp promoter/5'UTR + 150 bp polyA/3'UTR = 690 nt) = 5,130 nt, exceeding the ~4.7 kb
            rAAV capsid packaging limit (DOI: 10.1126/scitranslmed.aav4523) by 430 nt (9.15% oversize), causing genome truncation.
          - Delta-R Minigene Deletion (Delta708-835, deleting 128 aa / 384 nt in the non-essential disordered R-domain) +
            compact synthetic promoter/polyA (saving 120 nt) reduces total vector size to 4,626 nt (98.43% capacity),
-           fitting within the 4.7 kb limit while preserving PKA/cAMP channel regulation.
+           fitting within the 4.7 kb limit (whether PKA/cAMP regulation is retained is not asserted here).
          - Split-AAV trans-splicing inteins (Trapani et al. 2019) partition CFTR across two modular vectors (2,820 nt & 2,760 nt),
            mirroring lemma-library modular decomposition.
     """
@@ -1998,59 +2042,21 @@ def evaluate_information_theoretic_shannon_mdl_packing(
     split_v2_size = 2190 + compact_flanking
     split_feasible = (split_v1_size <= aav_capsid_capacity_nt) and (split_v2_size <= aav_capsid_capacity_nt)
 
-    challenge_compression: Dict[str, Dict[str, Any]] = {
-        "fermats_last_theorem": {
-            "uncompressed_proof_symbols": 13_200_000,
-            "lemma_dictionary_mdl_symbols": 420_000,
-            "compressed_script_symbols": 5_180_000,
-            "total_mdl_description_length": 5_600_000,
-            "compression_ratio": round(5_600_000 / 13_200_000, 4),
-            "redundancy_elimination_pct": round((1.0 - 5_600_000 / 13_200_000) * 100.0, 2),
-            "shannon_entropy_reduction_bits": 2.78,
-            "lossless_zero_sorry_verified": True,
-        },
-        "formal_math_zeta23": {
-            "uncompressed_proof_symbols": 620_000,
-            "lemma_dictionary_mdl_symbols": 35_000,
-            "compressed_script_symbols": 250_000,
-            "total_mdl_description_length": 285_000,
-            "compression_ratio": round(285_000 / 620_000, 4),
-            "redundancy_elimination_pct": round((1.0 - 285_000 / 620_000) * 100.0, 2),
-            "shannon_entropy_reduction_bits": 2.45,
-            "lossless_zero_sorry_verified": True,
-        },
-        "formal_math_3sum_apsp": {
-            "uncompressed_proof_symbols": 410_000,
-            "lemma_dictionary_mdl_symbols": 22_000,
-            "compressed_script_symbols": 170_000,
-            "total_mdl_description_length": 192_000,
-            "compression_ratio": round(192_000 / 410_000, 4),
-            "redundancy_elimination_pct": round((1.0 - 192_000 / 410_000) * 100.0, 2),
-            "shannon_entropy_reduction_bits": 2.38,
-            "lossless_zero_sorry_verified": True,
-        },
-        "formal_math_eth": {
-            "uncompressed_proof_symbols": 245_000,
-            "lemma_dictionary_mdl_symbols": 14_000,
-            "compressed_script_symbols": 98_000,
-            "total_mdl_description_length": 112_000,
-            "compression_ratio": round(112_000 / 245_000, 4),
-            "redundancy_elimination_pct": round((1.0 - 112_000 / 245_000) * 100.0, 2),
-            "shannon_entropy_reduction_bits": 2.62,
-            "lossless_zero_sorry_verified": True,
-        },
+    # Toy case, computed here from the inputs below. It is not measured from any proof corpus.
+    worked_example_inputs = {
+        "alphabet_size": 256,
+        "nodes": 1000,
+        "edges": 2000,
+        "macro_symbols": 40,
+        "copies": 50,
+        "macro_predecessors": 0,
     }
-
-    all_proof_compressed_ok = all(
-        c["compression_ratio"] < 0.50 and c["lossless_zero_sorry_verified"]
-        for c in challenge_compression.values()
-    )
+    worked_example_delta_bits = factoring_delta_bits(**worked_example_inputs)
     all_cargo_ok = (not wt_feasible) and minigene_feasible and split_feasible
-    bridge_verified = all_proof_compressed_ok and all_cargo_ok
 
     return {
         "task_id": "T-0489",
-        "shannon_mdl_bridge_verified": bridge_verified,
+        "cargo_arithmetic_ok": all_cargo_ok,
         "aav_capsid_packaging_evaluation": {
             "wt_cftr_oversize": {
                 "cds_nt": cftr_cds_wt_nt,
@@ -2071,7 +2077,7 @@ def evaluate_information_theoretic_shannon_mdl_packing(
                 "packaging_feasible": minigene_feasible,
                 "packaging_margin_headroom_nt": minigene_headroom,
                 "capsid_packing_density_pct": minigene_packing_density_pct,
-                "pka_camp_regulation_preserved": True,
+                "pka_camp_regulation": "not_asserted",
             },
             "split_aav_trans_splicing_intein": {
                 "split_vector_1_n_terminal_nt": split_v1_size,
@@ -2080,11 +2086,19 @@ def evaluate_information_theoretic_shannon_mdl_packing(
             },
         },
         "proof_dag_mdl_compression_evaluation": {
-            "challenge_compression_profiles": challenge_compression,
+            "provenance": "worked_example_computed",
+            "limitation": (
+                "Toy case only. No description length has been measured on any proof corpus; "
+                "the earlier corpus figures had no source and were removed."
+            ),
+            "worked_example": {
+                "inputs": worked_example_inputs,
+                "delta_bits": worked_example_delta_bits,
+            },
         },
         "shannon_mutual_information_isomorphism": {
-            "deductive_redundancy_shares_pattern_with_cds_intron_exon_structure": True,
-            "lossless_compression_preserves_full_qed_and_channel_function": True,
+            "provenance": "analogy_not_tested",
+            "note": "Repeated structure in proofs and in gene sequences is an analogy in the lab's framing, not a tested result.",
         },
 
     }
