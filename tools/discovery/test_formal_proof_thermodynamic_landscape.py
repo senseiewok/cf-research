@@ -43,6 +43,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_helmholtz_hodge_current_decomposition_gating,
     evaluate_thermodynamic_speed_limits_gating,
     evaluate_stochastic_resetting_first_passage_gating,
+    evaluate_thermodynamic_length_fisher_metric_gating,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -753,6 +754,48 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         # Invalid inputs raise ValueError
         with self.assertRaises(ValueError):
             evaluate_stochastic_resetting_first_passage_gating(n_cycle_states=3)
+
+
+    def test_thermodynamic_length_and_fisher_metric_geodesic_bridge(self) -> None:
+        tl = evaluate_thermodynamic_length_fisher_metric_gating()
+        self.assertTrue(tl["thermodynamic_length_bridge_verified"])
+        self.assertTrue(tl["cftr_geodesic_verified"])
+        self.assertTrue(tl["proof_geodesic_verified"])
+        self.assertTrue(tl["negative_control_detects_violation"])
+
+        wt = tl["cftr_profiles"]["wt_cftr"]
+        eti = tl["cftr_profiles"]["eti_rescued_8eiq"]
+        f508 = tl["cftr_profiles"]["uncorrected_f508del_5uak"]
+        w1282x = tl["cftr_profiles"]["w1282x_truncated"]
+
+        # WT and ETI follow near-geodesic paths with high efficiency
+        self.assertGreaterEqual(wt["geodesic_efficiency"], 0.75)
+        self.assertLessEqual(wt["elongation_factor_xi"], 1.15)
+        self.assertGreaterEqual(wt["l_actual_rad"], wt["l_geodesic_rad"])
+
+        self.assertGreaterEqual(eti["geodesic_efficiency"], 0.70)
+        self.assertLessEqual(eti["elongation_factor_xi"], 1.20)
+        self.assertGreaterEqual(eti["l_actual_rad"], eti["l_geodesic_rad"])
+
+        # Uncorrected F508del undergoes tortuous off-geodesic detour -> low efficiency (<0.50)
+        self.assertLess(f508["geodesic_efficiency"], 0.50)
+        self.assertGreater(f508["elongation_factor_xi"], 2.0)
+        self.assertGreater(f508["l_actual_rad"], 2.0 * f508["l_geodesic_rad"])
+
+        # W1282X lacks active catalytic domain -> impossible active transition
+        self.assertFalse(w1282x["active_transition_possible"])
+        self.assertEqual(w1282x["l_geodesic_rad"], "infinity")
+        self.assertEqual(w1282x["geodesic_efficiency"], 0.0)
+
+        # Formal proof challenges have tight deductive geodesics
+        for cid, prof in tl["challenge_profiles"].items():
+            self.assertGreaterEqual(prof["geodesic_efficiency"], 0.65, cid)
+            self.assertLessEqual(prof["elongation_factor_xi"], 1.25, cid)
+            self.assertGreaterEqual(prof["l_actual_rad"], prof["l_geodesic_rad"], cid)
+
+        # Invalid inputs raise ValueError
+        with self.assertRaises(ValueError):
+            evaluate_thermodynamic_length_fisher_metric_gating(n_cycle_states=3)
 
 
 class FactoringDeltaBitsTests(unittest.TestCase):
