@@ -21,6 +21,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_mechanistic_basis_span,
     evaluate_anthropic_proof_visual_geometries,
     evaluate_information_theoretic_shannon_mdl_packing,
+    factoring_delta_bits,
     evaluate_kramers_escape_and_brinkman_permeability,
     ETH_3SAT_LEAN4_STAGES,
     evaluate_scite_citation_polarity_and_kernel_parity,
@@ -93,7 +94,7 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertIn("formal_math_zeta23", FORMAL_MATH_CHALLENGE_PROFILES)
         self.assertIn("formal_math_3sum_apsp", FORMAL_MATH_CHALLENGE_PROFILES)
         self.assertIn("shannon_mdl_cargo_bridge", report)
-        self.assertTrue(report["shannon_mdl_cargo_bridge"]["shannon_mdl_bridge_verified"])
+        self.assertTrue(report["shannon_mdl_cargo_bridge"]["cargo_arithmetic_ok"])
         self.assertIn("jarzynski_crooks_power_stroke_bridge", report)
         self.assertTrue(report["jarzynski_crooks_power_stroke_bridge"]["jarzynski_crooks_bridge_verified"])
         self.assertIn("onsager_machlup_transition_path_bridge", report)
@@ -249,7 +250,8 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
 
     def test_information_theoretic_shannon_mdl_packing_bridge(self) -> None:
         pk = evaluate_information_theoretic_shannon_mdl_packing()
-        self.assertTrue(pk["shannon_mdl_bridge_verified"])
+        self.assertTrue(pk["cargo_arithmetic_ok"])
+        self.assertNotIn("shannon_mdl_bridge_verified", pk)
         wt = pk["aav_capsid_packaging_evaluation"]["wt_cftr_oversize"]
         self.assertFalse(wt["packaging_feasible"])
         self.assertGreater(wt["oversize_nt"], 400)
@@ -259,15 +261,25 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertTrue(mr["packaging_feasible"])
         self.assertLess(mr["capsid_packing_density_pct"], 100.0)
         self.assertGreater(mr["packaging_margin_headroom_nt"], 50)
-        self.assertTrue(mr["pka_camp_regulation_preserved"])
+        self.assertNotIn("pka_camp_regulation_preserved", mr)
+        self.assertEqual(mr["pka_camp_regulation"], "not_asserted")
 
         split = pk["aav_capsid_packaging_evaluation"]["split_aav_trans_splicing_intein"]
         self.assertTrue(split["both_vectors_within_capsid_limit"])
 
-        for cid, c_prof in pk["proof_dag_mdl_compression_evaluation"]["challenge_compression_profiles"].items():
-            self.assertLess(c_prof["compression_ratio"], 0.50, cid)
-            self.assertTrue(c_prof["lossless_zero_sorry_verified"], cid)
-            self.assertGreater(c_prof["redundancy_elimination_pct"], 50.0)
+        ev = pk["proof_dag_mdl_compression_evaluation"]
+        self.assertEqual(ev["provenance"], "worked_example_computed")
+        self.assertNotIn("challenge_compression_profiles", ev)
+        ex = ev["worked_example"]
+        self.assertEqual(ex["delta_bits"], -15180)
+        self.assertLess(ex["delta_bits"], 0)
+        blob = repr(pk)
+        for forbidden in ("lossless", "zero_sorry", "_verified", "13200000", "13_200_000", "5600000", "compression_ratio",
+                          "redundancy_elimination", "channel_function", "entropy_reduction",
+                          "challenge_compression"):
+            self.assertNotIn(forbidden, blob, forbidden)
+        iso = pk["shannon_mutual_information_isomorphism"]
+        self.assertEqual(iso["provenance"], "analogy_not_tested")
 
         with self.assertRaises(ValueError):
             evaluate_information_theoretic_shannon_mdl_packing(aav_capsid_capacity_nt=1000)
@@ -374,6 +386,40 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             evaluate_onsager_machlup_transition_paths(transition_time_ms=0.01)
         with self.assertRaises(ValueError):
             evaluate_onsager_machlup_transition_paths(diffusion_coeff=-0.5)
+
+
+class FactoringDeltaBitsTests(unittest.TestCase):
+    """Integer-width description-length change from factoring one repeated macro (T-0489 follow-up)."""
+
+    def test_pinned_vectors(self) -> None:
+        # sigma=256 (8 bits), |V|=2^15 -> |V'|=2^15+1 needs 16 bits: 16 + 2*16 - 2*2*8 = +16
+        self.assertEqual(factoring_delta_bits(256, 2 ** 15, 0, 2, 2, 0), 16)
+        # Boundary: |V|=2^15-1 -> |V'|=2^15 still needs 15 bits: 16 + 30 - 32 = +14
+        self.assertEqual(factoring_delta_bits(256, 2 ** 15 - 1, 0, 2, 2, 0), 14)
+        # Worked example shown on the site: 320 + 50*10 - 50*40*8 = -15180
+        self.assertEqual(factoring_delta_bits(256, 1000, 2000, 40, 50, 0), -15180)
+        # Pointer width growth is charged on every existing edge: 320 + 50*11 + 10000 - 16000
+        self.assertEqual(factoring_delta_bits(256, 1024, 10000, 40, 50, 0), -5130)
+        # A macro used once never pays: 320 + 10 - 320
+        self.assertEqual(factoring_delta_bits(256, 1000, 0, 40, 1, 0), 10)
+
+    def test_matches_break_even_inequality(self) -> None:
+        for nodes in (2, 3, 1023, 1024, 1025, 32767, 32768):
+            for edges in (0, 7, 5000):
+                for s in (1, 2, 5, 40):
+                    for k in (1, 2, 3, 50):
+                        for pred in (0, 3):
+                            delta = factoring_delta_bits(256, nodes, edges, s, k, pred)
+                            w0 = (nodes - 1).bit_length()
+                            w1 = nodes.bit_length()
+                            increases = (k - 1) * s * 8 < (k + pred) * w1 + edges * (w1 - w0)
+                            self.assertEqual(delta > 0, increases, (nodes, edges, s, k, pred))
+
+    def test_rejects_bad_input(self) -> None:
+        for bad in ((1, 10, 0, 2, 2, 0), (256, 0, 0, 2, 2, 0), (256, 10, -1, 2, 2, 0),
+                    (256, 10, 0, 0, 2, 0), (256, 10, 0, 2, 0, 0), (256, 10, 0, 2, 2, -1)):
+            with self.assertRaises(ValueError, msg=str(bad)):
+                factoring_delta_bits(*bad)
 
 
 if __name__ == "__main__":
