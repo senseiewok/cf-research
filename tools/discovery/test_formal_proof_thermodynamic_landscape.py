@@ -29,6 +29,8 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_challenge_landscape,
     evaluate_continuum_percolation_phase_transition,
     evaluate_falsification_negative_control,
+    evaluate_jarzynski_crooks_fluctuation_power_stroke,
+    evaluate_onsager_machlup_transition_paths,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
     simulate_counterfactual_axiom_knockout,
@@ -90,6 +92,10 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertIn("formal_math_3sum_apsp", FORMAL_MATH_CHALLENGE_PROFILES)
         self.assertIn("shannon_mdl_cargo_bridge", report)
         self.assertTrue(report["shannon_mdl_cargo_bridge"]["shannon_mdl_bridge_verified"])
+        self.assertIn("jarzynski_crooks_power_stroke_bridge", report)
+        self.assertTrue(report["jarzynski_crooks_power_stroke_bridge"]["jarzynski_crooks_bridge_verified"])
+        self.assertIn("onsager_machlup_transition_path_bridge", report)
+        self.assertTrue(report["onsager_machlup_transition_path_bridge"]["onsager_machlup_bridge_verified"])
 
     def test_ah9_parameter_provenance_and_ah10_negative_control(self) -> None:
         self.assertGreaterEqual(len(PROOF_THERMODYNAMIC_PARAMETERS), 5)
@@ -294,6 +300,65 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             self.assertEqual(len(ko_map), 5)
             unbridged_peak = evaluate_challenge_landscape(cid, apply_allosteric_bridge=False)["unbridged_peak_barrier_kcal_mol"]
             self.assertIn(f"{unbridged_peak:.2f} kcal/mol", ko_map["taylor_wiles_p3_p5_switch_knockout"]["counterexample"])
+
+
+    def test_jarzynski_crooks_fluctuation_and_power_stroke_bridge(self) -> None:
+        jc = evaluate_jarzynski_crooks_fluctuation_power_stroke()
+        self.assertTrue(jc["jarzynski_crooks_bridge_verified"])
+        self.assertTrue(jc["all_challenges_jarzynski_verified"])
+        self.assertTrue(jc["all_challenges_crooks_verified"])
+        self.assertTrue(jc["all_challenges_dissipation_reduced_60pct"])
+        self.assertTrue(jc["second_law_w_diss_non_negative"])
+        self.assertTrue(jc["cftr_power_stroke_coupling_verified"])
+
+        for cid, c_prof in jc["challenges"].items():
+            self.assertTrue(c_prof["jarzynski_equality_verified"], cid)
+            self.assertTrue(c_prof["crooks_intersection_verified"], cid)
+            self.assertGreaterEqual(c_prof["dissipation_reduction_pct"], 60.0, cid)
+            self.assertLess(c_prof["jarzynski_recovery_error_kcal_mol"], 0.08, cid)
+            self.assertGreater(c_prof["dissipated_work_unbridged_kcal_mol"], c_prof["dissipated_work_bridged_kcal_mol"], cid)
+
+        cftr = jc["cftr_power_stroke_profiles"]
+        self.assertTrue(cftr["wt_cftr"]["effective_gating_supported"])
+        self.assertGreaterEqual(cftr["wt_cftr"]["coupling_efficiency_eta"], 0.60)
+        self.assertTrue(cftr["eti_rescued_8eiq"]["effective_gating_supported"])
+        self.assertLess(cftr["eti_rescued_8eiq"]["dissipated_work_kcal_mol"], 2.80)
+        self.assertFalse(cftr["uncorrected_f508del_5uak"]["effective_gating_supported"])
+        self.assertGreater(cftr["uncorrected_f508del_5uak"]["dissipated_work_kcal_mol"], 8.0)
+        self.assertFalse(cftr["w1282x_truncated"]["effective_gating_supported"])
+
+        with self.assertRaises(ValueError):
+            evaluate_jarzynski_crooks_fluctuation_power_stroke(n_trajectories=5)
+        with self.assertRaises(ValueError):
+            evaluate_jarzynski_crooks_fluctuation_power_stroke(n_trajectories=20000)
+
+    def test_onsager_machlup_action_and_minimum_dissipation_paths(self) -> None:
+        om = evaluate_onsager_machlup_transition_paths()
+        self.assertTrue(om["onsager_machlup_bridge_verified"])
+        self.assertTrue(om["cftr_gating_action_reduction_verified"])
+        self.assertTrue(om["proof_geodesic_minimum_verified"])
+        self.assertTrue(om["knockouts_fracture_verified"])
+
+        cftr_gating = om["cftr_gating_transition"]
+        self.assertGreaterEqual(cftr_gating["gating_action_reduction_pct"], 60.0)
+        self.assertGreater(cftr_gating["instanton_opening_acceleration_fold"], 1000.0)
+        self.assertLess(cftr_gating["eti_rescued_8eiq_action"], cftr_gating["uncorrected_f508del_5uak_action"])
+
+        for cid, g_prof in om["proof_dag_geodesics"].items():
+            self.assertTrue(g_prof["least_dissipation_geodesic_verified"], cid)
+            self.assertGreaterEqual(g_prof["geodesic_action_gain_fold"], 2.0, cid)
+            self.assertLess(g_prof["bridged_geodesic_action_s_om"], g_prof["unbridged_proof_action_s_om"], cid)
+
+        ko = om["knockout_actions"]
+        self.assertLess(ko["wild_type_intact_proof"], ko["taylor_wiles_p3_p5_switch_knockout"])
+        self.assertLess(ko["wild_type_intact_proof"], ko["unverified_sorry_axiom_injection"])
+
+        with self.assertRaises(ValueError):
+            evaluate_onsager_machlup_transition_paths(n_path_steps=5)
+        with self.assertRaises(ValueError):
+            evaluate_onsager_machlup_transition_paths(transition_time_ms=0.01)
+        with self.assertRaises(ValueError):
+            evaluate_onsager_machlup_transition_paths(diffusion_coeff=-0.5)
 
 
 if __name__ == "__main__":
