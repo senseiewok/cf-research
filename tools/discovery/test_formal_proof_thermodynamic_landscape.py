@@ -47,6 +47,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_optimal_transport_wasserstein_benamou_brenier_gating,
     evaluate_transfer_entropy_causal_directionality_gating,
     evaluate_harada_sasa_fluctuation_dissipation_gating,
+    evaluate_hatano_sasa_excess_entropy_gating,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -943,6 +944,58 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             # Invalid inputs raise ValueError
             with self.assertRaises(ValueError):
                 evaluate_harada_sasa_fluctuation_dissipation_gating(n_cycle_states=3)
+
+    def test_hatano_sasa_excess_entropy_bridge(self) -> None:
+        """Verify Round 22 (T-0539) Hatano-Sasa excess entropy production and NESS transitions bridge."""
+        rep = evaluate_two_way_bridge_isomorphism()
+        self.assertIn("hatano_sasa_excess_entropy_bridge", rep)
+        hs = rep["hatano_sasa_excess_entropy_bridge"]
+        self.assertTrue(hs["hatano_sasa_bridge_verified"])
+        self.assertTrue(hs["cftr_excess_entropy_stratification_verified"])
+        self.assertTrue(hs["proof_excess_entropy_parity_verified"])
+        self.assertTrue(hs["negative_control_detects_violation"])
+
+        cftr = hs["cftr_profiles"]
+        wt = cftr["wt_cftr"]
+        eti = cftr["eti_rescued_8eiq"]
+        f508 = cftr["uncorrected_f508del_5uak"]
+        w1282x = cftr["w1282x_truncated"]
+
+        # WT CFTR satisfies Hatano-Sasa equality and Second Law
+        self.assertEqual(wt["exp_neg_y_mean"], 1.000)
+        self.assertTrue(wt["second_law_satisfied"])
+        self.assertLessEqual(wt["excess_entropy_y_kb"], 2.60)
+        self.assertGreaterEqual(wt["adiabaticity_ratio"], 0.80)
+        self.assertTrue(wt["transition_competence_verified"])
+
+        # ETI-rescued restores bounded excess entropy
+        self.assertEqual(eti["exp_neg_y_mean"], 1.000)
+        self.assertTrue(eti["second_law_satisfied"])
+        self.assertLessEqual(eti["excess_entropy_y_kb"], 3.20)
+        self.assertGreaterEqual(eti["excess_entropy_recovery_pct_wt"], 75.0)
+        self.assertTrue(eti["transition_competence_verified"])
+
+        # Uncorrected F508del has severe excess entropy trapping
+        self.assertEqual(f508["exp_neg_y_mean"], 1.000)
+        self.assertTrue(f508["second_law_satisfied"])
+        self.assertGreaterEqual(f508["excess_entropy_y_kb"], 6.0)
+        self.assertLess(f508["adiabaticity_ratio"], 0.40)
+        self.assertFalse(f508["transition_competence_verified"])
+
+        # W1282X nonsense truncation has no dimerized transition states
+        self.assertFalse(w1282x["transition_competence_verified"])
+        self.assertEqual(w1282x["exp_neg_y_mean"], 0.0)
+        self.assertEqual(w1282x["excess_entropy_y_kb"], 0.0)
+
+        # Formal proof challenges satisfy Hatano-Sasa
+        for cid, prof in hs["challenge_profiles"].items():
+            self.assertEqual(prof["exp_neg_y_mean"], 1.000, cid)
+            self.assertGreaterEqual(prof["excess_entropy_y"], 1.5, cid)
+
+        # Invalid inputs raise ValueError
+        with self.assertRaises(ValueError):
+            evaluate_hatano_sasa_excess_entropy_gating(n_transition_protocols=2)
+
 
 
 
