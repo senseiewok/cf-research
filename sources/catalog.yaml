@@ -4461,6 +4461,54 @@ sources:
     claim_label: unverified
     notes: National public service portal directing public administration, Princess Margaret Hospital clinical staffing, community healthcare services, and overseas medical referral coordination across Tuvalu; robots.txt allow (2026-10-28), manual access, link and summary only.
 
+  - id: nirc-nf-resource-pages
+    title: Norfolk Island Regional Council website (www.nirc.gov.au)
+    publisher: Norfolk Island Regional Council
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.nirc.gov.au/
+    url: null
+    claim_label: unverified
+    notes: Regional council portal coordinating municipal administration, public health services, community aged care, and emergency medical logistics across Norfolk Island; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: taaf-tf-resource-pages
+    title: Terres australes et antarctiques françaises website (taaf.fr)
+    publisher: Administration des Terres australes et antarctiques françaises
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://taaf.fr/
+    url: null
+    claim_label: unverified
+    notes: Territorial administration portal coordinating environmental preservation, polar scientific missions, emergency medical evacuation logistics, and overseas research personnel support across French Southern Territories; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: gov-gs-resource-pages
+    title: Government of South Georgia and the South Sandwich Islands website (gov.gs)
+    publisher: Government of South Georgia and the South Sandwich Islands
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://gov.gs/
+    url: null
+    claim_label: unverified
+    notes: Overseas territorial government directing environmental conservation, sustainable fisheries management, maritime visitor safety, and search and rescue medical coordination across South Georgia; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: biot-gov-io-resource-pages
+    title: British Indian Ocean Territory Administration website (www.biot.gov.io)
+    publisher: British Indian Ocean Territory Administration
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.biot.gov.io/
+    url: null
+    claim_label: unverified
+    notes: Public administration portal directing environmental protection, maritime governance, island conservation programs, and emergency medical logistics across the British Indian Ocean Territory; robots.txt allow (2026-10-28), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information
