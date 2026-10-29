@@ -29,6 +29,8 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_challenge_landscape,
     evaluate_continuum_percolation_phase_transition,
     evaluate_falsification_negative_control,
+    _erfinv,
+    _std_norm_inv,
     evaluate_jarzynski_crooks_fluctuation_power_stroke,
     evaluate_onsager_machlup_transition_paths,
     evaluate_noether_conservation_and_invariant_transfer,
@@ -331,6 +333,14 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             evaluate_jarzynski_crooks_fluctuation_power_stroke(n_trajectories=5)
         with self.assertRaises(ValueError):
             evaluate_jarzynski_crooks_fluctuation_power_stroke(n_trajectories=20000)
+        with self.assertRaises(ValueError):
+            _erfinv(1.0)
+        with self.assertRaises(ValueError):
+            _erfinv(-1.0)
+        with self.assertRaises(ValueError):
+            _std_norm_inv(0.0)
+        with self.assertRaises(ValueError):
+            _std_norm_inv(1.0)
 
     def test_onsager_machlup_action_and_minimum_dissipation_paths(self) -> None:
         om = evaluate_onsager_machlup_transition_paths()

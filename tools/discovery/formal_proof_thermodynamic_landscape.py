@@ -2092,6 +2092,8 @@ def evaluate_information_theoretic_shannon_mdl_packing(
 
 def _erfinv(x: float) -> float:
     """Winitzki approximation of inverse error function."""
+    if not (-1.0 < x < 1.0):
+        raise ValueError("x must be strictly between -1.0 and 1.0")
     a = 0.147
     sgn = 1.0 if x >= 0 else -1.0
     term1 = 2.0 / (math.pi * a) + math.log(1.0 - x * x) / 2.0
@@ -2101,6 +2103,8 @@ def _erfinv(x: float) -> float:
 
 def _std_norm_inv(p: float) -> float:
     """Standard normal quantile function via inverse error function."""
+    if not (0.0 < p < 1.0):
+        raise ValueError("p must be strictly between 0.0 and 1.0")
     return math.sqrt(2.0) * _erfinv(2.0 * p - 1.0)
 
 
