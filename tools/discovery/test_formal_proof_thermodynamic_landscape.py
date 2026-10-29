@@ -34,6 +34,9 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     _std_norm_inv,
     evaluate_jarzynski_crooks_fluctuation_power_stroke,
     evaluate_onsager_machlup_transition_paths,
+    evaluate_stochastic_thermodynamics_ness_ion_transport,
+    evaluate_information_thermodynamics_landauer_allosteric_feedback,
+    _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
     simulate_counterfactual_axiom_knockout,
@@ -99,6 +102,10 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertTrue(report["jarzynski_crooks_power_stroke_bridge"]["jarzynski_crooks_bridge_verified"])
         self.assertIn("onsager_machlup_transition_path_bridge", report)
         self.assertTrue(report["onsager_machlup_transition_path_bridge"]["onsager_machlup_bridge_verified"])
+        self.assertIn("stochastic_thermodynamics_ness_bridge", report)
+        self.assertTrue(report["stochastic_thermodynamics_ness_bridge"]["stochastic_thermodynamics_ness_bridge_verified"])
+        self.assertIn("information_thermodynamics_landauer_bridge", report)
+        self.assertTrue(report["information_thermodynamics_landauer_bridge"]["information_thermodynamics_landauer_bridge_verified"])
 
     def test_ah9_parameter_provenance_and_ah10_negative_control(self) -> None:
         self.assertGreaterEqual(len(PROOF_THERMODYNAMIC_PARAMETERS), 5)
@@ -386,6 +393,82 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             evaluate_onsager_machlup_transition_paths(transition_time_ms=0.01)
         with self.assertRaises(ValueError):
             evaluate_onsager_machlup_transition_paths(diffusion_coeff=-0.5)
+
+
+    def test_stochastic_thermodynamics_and_ness_ion_transport_bridge(self) -> None:
+        ness = evaluate_stochastic_thermodynamics_ness_ion_transport()
+        self.assertTrue(ness["stochastic_thermodynamics_ness_bridge_verified"])
+        self.assertTrue(ness["cftr_ness_anion_transport_verified"])
+        self.assertTrue(ness["all_challenges_sigma_reduced_60pct"])
+        self.assertTrue(ness["second_law_entropy_production_non_negative"])
+
+        cftr = ness["cftr_genotype_profiles"]
+        self.assertTrue(cftr["wt_cftr"]["ness_transport_competent"])
+        self.assertGreaterEqual(cftr["wt_cftr"]["total_anion_current_pa_cell"], 50.0)
+        self.assertGreaterEqual(cftr["wt_cftr"]["asl_height_um"], 7.0)
+        self.assertGreaterEqual(cftr["wt_cftr"]["asl_ph"], 7.0)
+
+        self.assertTrue(cftr["eti_rescued_8eiq"]["ness_transport_competent"])
+        self.assertGreaterEqual(cftr["eti_rescued_8eiq"]["total_anion_current_pa_cell"], 50.0)
+        self.assertGreaterEqual(cftr["eti_rescued_8eiq"]["asl_height_um"], 6.5)
+
+        self.assertFalse(cftr["uncorrected_f508del_5uak"]["ness_transport_competent"])
+        self.assertLess(cftr["uncorrected_f508del_5uak"]["total_anion_current_pa_cell"], 1.0)
+        self.assertLess(cftr["uncorrected_f508del_5uak"]["asl_height_um"], 3.0)
+
+        self.assertFalse(cftr["w1282x_truncated"]["ness_transport_competent"])
+        self.assertLess(cftr["w1282x_truncated"]["total_anion_current_pa_cell"], 0.1)
+
+        for cid, sprof in ness["proof_dag_stochastic_profiles"].items():
+            self.assertTrue(sprof["dissipation_reduction_60pct_met"], cid)
+            self.assertTrue(sprof["second_law_satisfied"], cid)
+            self.assertGreaterEqual(sprof["entropy_production_reduction_pct"], 60.0, cid)
+
+        with self.assertRaises(ValueError):
+            evaluate_stochastic_thermodynamics_ness_ion_transport(temp_k=200.0)
+        with self.assertRaises(ValueError):
+            evaluate_stochastic_thermodynamics_ness_ion_transport(channels_per_cell=5)
+        with self.assertRaises(ValueError):
+            evaluate_stochastic_thermodynamics_ness_ion_transport(intracellular_cl_mm=-10.0)
+        with self.assertRaises(ValueError):
+            evaluate_stochastic_thermodynamics_ness_ion_transport(extracellular_hco3_mm=0.0)
+        with self.assertRaises(ValueError):
+            evaluate_stochastic_thermodynamics_ness_ion_transport(cftr_v_m_mv=-150.0)
+
+    def test_information_thermodynamics_landauer_and_allosteric_feedback_bridge(self) -> None:
+        info = evaluate_information_thermodynamics_landauer_allosteric_feedback()
+        self.assertTrue(info["information_thermodynamics_landauer_bridge_verified"])
+        self.assertTrue(info["cftr_allosteric_feedback_verified"])
+        self.assertTrue(info["all_challenges_landauer_bound_satisfied"])
+        self.assertTrue(info["all_challenges_dissipation_reduced_60pct"])
+
+        cftr = info["cftr_feedback_profiles"]
+        self.assertTrue(cftr["wt_cftr"]["allosteric_coupling_competent"])
+        self.assertGreaterEqual(cftr["wt_cftr"]["mutual_information_bits"], 0.60)
+        self.assertTrue(cftr["eti_rescued_8eiq"]["allosteric_coupling_competent"])
+        self.assertGreaterEqual(cftr["eti_rescued_8eiq"]["mutual_information_bits"], 0.50)
+        self.assertFalse(cftr["uncorrected_f508del_5uak"]["allosteric_coupling_competent"])
+        self.assertLess(cftr["uncorrected_f508del_5uak"]["mutual_information_bits"], 0.10)
+        self.assertFalse(cftr["w1282x_truncated"]["allosteric_coupling_competent"])
+        self.assertLess(cftr["w1282x_truncated"]["mutual_information_bits"], 0.05)
+
+        for cid, lprof in info["challenge_landauer_profiles"].items():
+            self.assertTrue(lprof["landauer_bound_satisfied"], cid)
+            self.assertGreaterEqual(lprof["landauer_dissipation_reduction_pct"], 60.0, cid)
+            self.assertGreaterEqual(lprof["info_thermo_slack_kcal_mol"], 0.0, cid)
+
+        hx, hy, hxy, mi = _shannon_mutual_information_2x2(0.88, 0.96, 0.50)
+        self.assertGreater(hx, 0.0)
+        self.assertGreater(hy, 0.0)
+        self.assertGreater(hxy, 0.0)
+        self.assertGreater(mi, 0.50)
+
+        with self.assertRaises(ValueError):
+            evaluate_information_thermodynamics_landauer_allosteric_feedback(temp_k=150.0)
+        with self.assertRaises(ValueError):
+            evaluate_information_thermodynamics_landauer_allosteric_feedback(p_nbd_closed=0.0)
+        with self.assertRaises(ValueError):
+            evaluate_information_thermodynamics_landauer_allosteric_feedback(p_nbd_closed=1.0)
 
 
 class FactoringDeltaBitsTests(unittest.TestCase):
