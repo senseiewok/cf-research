@@ -41,6 +41,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_geometric_phase_allosteric_holonomy,
     evaluate_crooks_microscopic_reversibility_gating,
     evaluate_helmholtz_hodge_current_decomposition_gating,
+    evaluate_thermodynamic_speed_limits_gating,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -674,6 +675,41 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             self.assertEqual(prof["proof_dag_curl"], 0.0)
         with self.assertRaises(ValueError):
             evaluate_helmholtz_hodge_current_decomposition_gating(n_cycle_states=3)
+
+
+
+    def test_thermodynamic_speed_limits_and_finite_time_dissipation_bridge(self) -> None:
+        tsl = evaluate_thermodynamic_speed_limits_gating()
+        self.assertTrue(tsl["thermodynamic_speed_limits_verified"])
+        self.assertTrue(tsl["cftr_tsl_verified"])
+        self.assertTrue(tsl["proof_deductive_tsl_verified"])
+        self.assertTrue(tsl["negative_control_detects_violation"])
+
+        wt = tsl["cftr_profiles"]["wt_cftr"]
+        eti = tsl["cftr_profiles"]["eti_rescued_8eiq"]
+        f508 = tsl["cftr_profiles"]["uncorrected_f508del_5uak"]
+        w1282x = tsl["cftr_profiles"]["w1282x_truncated"]
+
+        # WT operates near speed limit frontier with high activity and low tau_min
+        self.assertLess(wt["tau_min_tsl_ms"], f508["tau_min_tsl_ms"])
+        self.assertGreater(wt["dynamical_activity_s"], f508["dynamical_activity_s"])
+        self.assertGreater(wt["entropy_production_rate_kB_s"], f508["entropy_production_rate_kB_s"])
+        self.assertGreaterEqual(wt["kinetic_slack_ratio"], 1.0)
+        self.assertGreaterEqual(eti["kinetic_slack_ratio"], 1.0)
+
+        # W1282X lacks active catalytic domain -> impossible active transition
+        self.assertFalse(w1282x["active_transition_possible"])
+        self.assertEqual(w1282x["tau_actual_ms"], "infinity")
+
+        # Formal proof challenges satisfy deductive speed limit
+        for cid, prof in tsl["challenge_profiles"].items():
+            self.assertTrue(prof["deductive_speed_limit_satisfied"], cid)
+            self.assertGreaterEqual(prof["actual_proof_stages"], prof["critical_path_depth_n_min"], cid)
+            self.assertGreaterEqual(prof["deductive_slack_ratio"], 1.0, cid)
+
+        # Invalid inputs raise ValueError
+        with self.assertRaises(ValueError):
+            evaluate_thermodynamic_speed_limits_gating(n_cycle_states=3)
 
 
 class FactoringDeltaBitsTests(unittest.TestCase):
