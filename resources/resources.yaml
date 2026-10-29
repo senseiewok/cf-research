@@ -4538,3 +4538,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-28
     status: active
+
+  - id: ars-gp-health-services
+    name: Regional health agency administration and public hospital coordination in Guadeloupe
+    organisation: Agence Régionale de Santé Guadeloupe
+    countries: [GP]
+    url: https://www.guadeloupe.ars.sante.fr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Regional health authority coordinating hospital networks, community prevention programs, specialized clinical services, and public healthcare orientation across Guadeloupe.
+    who_for: not_checked
+    format: online
+    lang: fr-GP
+    source_id: ars-gp-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: beit-salam-km-public-administration
+    name: National executive administration and public healthcare policy coordination in Comoros
+    organisation: Présidence de l'Union des Comores
+    countries: [KM]
+    url: https://beit-salam.km/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official presidency portal coordinating national healthcare initiatives, public administration, island hospital infrastructure, and international medical cooperation across Comoros.
+    who_for: not_checked
+    format: online
+    lang: fr-KM
+    source_id: beit-salam-km-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-nu-public-administration
+    name: National public administration and hospital healthcare coordination in Niue
+    organisation: Government of Niue
+    countries: [NU]
+    url: https://www.gov.nu/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National government portal coordinating public healthcare administration, Niue Foou Hospital clinical services, community wellness programs, and specialized overseas medical referrals.
+    who_for: not_checked
+    format: online
+    lang: en-NU
+    source_id: gov-nu-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: tokelau-org-nz-administration
+    name: Territorial government administration and atoll healthcare services in Tokelau
+    organisation: Government of Tokelau
+    countries: [TK]
+    url: https://www.tokelau.org.nz/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Territorial government portal directing public healthcare administration, atoll hospital operations, community health clinics, and specialized overseas medical referral coordination across Tokelau.
+    who_for: not_checked
+    format: online
+    lang: en-TK
+    source_id: tokelau-org-nz-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: government-pn-public-administration
+    name: Territorial public administration and island medical services in the Pitcairn Islands
+    organisation: Government of the Pitcairn Islands
+    countries: [PN]
+    url: https://www.government.pn/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Territorial administration portal coordinating primary healthcare services, community health center operations, emergency telemedicine, and overseas medical evacuation pathways across the Pitcairn Islands.
+    who_for: not_checked
+    format: online
+    lang: en-PN
+    source_id: government-pn-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active

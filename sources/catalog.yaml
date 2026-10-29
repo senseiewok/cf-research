@@ -4311,6 +4311,66 @@ sources:
     claim_label: unverified
     notes: Territorial government prefecture coordinating public hospital facilities, island dispensary networks, and specialized medical evacuation arrangements across Wallis and Futuna; robots.txt allow (2026-10-28), manual access, link and summary only.
 
+  - id: ars-gp-resource-pages
+    title: Agence Régionale de Santé Guadeloupe website (www.guadeloupe.ars.sante.fr)
+    publisher: Agence Régionale de Santé Guadeloupe
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.guadeloupe.ars.sante.fr/
+    url: null
+    claim_label: unverified
+    notes: French regional health authority coordinating public hospital care, community medical prevention, specialized clinical networks, and patient guidance across Guadeloupe; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: beit-salam-km-resource-pages
+    title: Présidence de l'Union des Comores website (beit-salam.km)
+    publisher: Présidence de l'Union des Comores
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://beit-salam.km/
+    url: null
+    claim_label: unverified
+    notes: Official presidency portal coordinating national healthcare initiatives, public administration, island hospital infrastructure, and international medical cooperation across Comoros; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: gov-nu-resource-pages
+    title: Government of Niue website (www.gov.nu)
+    publisher: Government of Niue
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.gov.nu/
+    url: null
+    claim_label: unverified
+    notes: National government portal coordinating public healthcare administration, Niue Foou Hospital clinical services, community wellness programs, and specialized overseas medical referrals; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: tokelau-org-nz-resource-pages
+    title: Government of Tokelau website (www.tokelau.org.nz)
+    publisher: Government of Tokelau
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.tokelau.org.nz/
+    url: null
+    claim_label: unverified
+    notes: Territorial government portal directing public healthcare administration, atoll hospital operations, community health clinics, and specialized overseas medical referral coordination across Tokelau; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: government-pn-resource-pages
+    title: Government of the Pitcairn Islands website (www.government.pn)
+    publisher: Government of the Pitcairn Islands
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.government.pn/
+    url: null
+    claim_label: unverified
+    notes: Territorial administration portal coordinating primary healthcare services, community health center operations, emergency telemedicine, and overseas medical evacuation pathways across the Pitcairn Islands; robots.txt allow (2026-10-28), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information

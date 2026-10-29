@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-251 to download by hand, 1 to ask for, 3 not to download.
+256 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -29,6 +29,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | akuh-pk-resource-pages | Aga Khan University Hospital Pakistan website (hospitals.aku.edu/pakistan) | [page](https://hospitals.aku.edu/pakistan) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
+
+### Agence Régionale de Santé Guadeloupe
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| ars-gp-resource-pages | Agence Régionale de Santé Guadeloupe website (www.guadeloupe.ars.sante.fr) | [page](https://www.guadeloupe.ars.sante.fr/) | link only | French regional health authority coordinating public hospital care, community medical prevention, specialized clinical networks, and patient guidance across Gu… |
 
 ### Agence Régionale de Santé Guyane
 
@@ -511,6 +517,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gov-ms-resource-pages | Government of Montserrat website (www.gov.ms) | [page](https://www.gov.ms/) | link only | Official government portal coordinating public healthcare administration, community clinics, Glendon Hospital operations, and specialized medical referrals acr… |
 
+### Government of Niue
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gov-nu-resource-pages | Government of Niue website (www.gov.nu) | [page](https://www.gov.nu/) | link only | National government portal coordinating public healthcare administration, Niue Foou Hospital clinical services, community wellness programs, and specialized ov… |
+
 ### Government of Saint Kitts and Nevis
 
 | ID | What | Open | Save as | Notes |
@@ -535,6 +547,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gov-sx-resource-pages | Government of Sint Maarten website (www.sintmaartengov.org) | [page](https://www.sintmaartengov.org/) | link only | Official government portal coordinating public healthcare administration, social security programs, hospital clinical services, and specialized pediatric refer… |
 
+### Government of the Pitcairn Islands
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| government-pn-resource-pages | Government of the Pitcairn Islands website (www.government.pn) | [page](https://www.government.pn/) | link only | Territorial administration portal coordinating primary healthcare services, community health center operations, emergency telemedicine, and overseas medical ev… |
+
 ### Government of the Republic of Suriname (Ministerie van Volksgezondheid)
 
 | ID | What | Open | Save as | Notes |
@@ -546,6 +564,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | gov-vg-resource-pages | Government of the Virgin Islands website (gov.vg) | [page](https://gov.vg/) | link only | Official government portal administering public health programs, community clinics, and hospital care through the territorial health services authority in the… |
+
+### Government of Tokelau
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| tokelau-org-nz-resource-pages | Government of Tokelau website (www.tokelau.org.nz) | [page](https://www.tokelau.org.nz/) | link only | Territorial government portal directing public healthcare administration, atoll hospital operations, community health clinics, and specialized overseas medical… |
 
 ### Government of Tonga
 
@@ -1140,6 +1164,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | mayotte-gouv-fr-resource-pages | Préfecture de Mayotte website (www.mayotte.gouv.fr) | [page](https://www.mayotte.gouv.fr/) | link only | Official state portal coordinating public healthcare administration, Centre Hospitalier de Mayotte services, community clinics, and specialized pediatric consu… |
+
+### Présidence de l'Union des Comores
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| beit-salam-km-resource-pages | Présidence de l'Union des Comores website (beit-salam.km) | [page](https://beit-salam.km/) | link only | Official presidency portal coordinating national healthcare initiatives, public administration, island hospital infrastructure, and international medical coope… |
 
 ### Public Hospitals Authority of The Bahamas
 
