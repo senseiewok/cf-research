@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-256 to download by hand, 1 to ask for, 3 not to download.
+261 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -282,6 +282,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cfqchile-resource-pages | Corporación para la Fibrosis Quística de Chile website (fibrosisquistica.cl) | [page](https://fibrosisquistica.cl/) | link only | Official national cystic fibrosis patient and family support corporation in Chile. |
 
+### Curaçao Medical Center
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cmc-cw-resource-pages | Curaçao Medical Center website (www.cmc.cw) | [page](https://www.cmc.cw/) | link only | Hospital center coordinating inpatient clinical care, pediatric medicine, specialized surgery, and outpatient medical services across Curaçao; robots.txt allow… |
+
 ### Cystic Fibrosis Canada
 
 | ID | What | Open | Save as | Notes |
@@ -553,6 +559,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | government-pn-resource-pages | Government of the Pitcairn Islands website (www.government.pn) | [page](https://www.government.pn/) | link only | Territorial administration portal coordinating primary healthcare services, community health center operations, emergency telemedicine, and overseas medical ev… |
 
+### Government of the Republic of Nauru
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| nauru-gov-nr-resource-pages | Government of the Republic of Nauru website (www.nauru.gov.nr) | [page](https://www.nauru.gov.nr/) | link only | National government administration portal directing public healthcare programs, community hospital operations, medical prevention initiatives, and overseas cli… |
+
 ### Government of the Republic of Suriname (Ministerie van Volksgezondheid)
 
 | ID | What | Open | Save as | Notes |
@@ -576,6 +588,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | gov-to-resource-pages | Government of Tonga website (www.gov.to) | [page](https://www.gov.to/) | link only | Official government portal coordinating public healthcare administration, community clinical centers, Vaiola Hospital operations, and specialized medical refer… |
+
+### Government of Tuvalu
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| psc-gov-tv-resource-pages | Tuvalu Public Service Commission website (psc.gov.tv) | [page](https://psc.gov.tv/) | link only | National public service portal directing public administration, Princess Margaret Hospital clinical staffing, community healthcare services, and overseas medic… |
 
 ### Governo de São Tomé e Príncipe
 
@@ -997,6 +1015,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | health-gov-ag-resource-pages | Ministry of Health, Wellness, Social Transformation and the Environment website (health.gov.ag) | [page](https://health.gov.ag/) | link only | Official national health ministry coordinating public healthcare administration and clinical referrals in Antigua and Barbuda; robots.txt allow (2026-10-27), m… |
 
+### Ministry of Information and Ministry of Health of Eritrea
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| shabait-er-resource-pages | Shabait Eritrea Ministry of Information website (shabait.com) | [page](https://shabait.com/) | link only | National public portal coordinating government health communications, referral hospital updates, disease prevention guidance, and community medical advisories… |
+
 ### Ministère de la Santé de la République de Djibouti
 
 | ID | What | Open | Save as | Notes |
@@ -1194,6 +1218,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | qeh-bb-resource-pages | Queen Elizabeth Hospital website (qehconnect.com) | [page](https://www.qehconnect.com/) | link only | Official public tertiary hospital and pediatric clinical referral portal in Barbados; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
+### Republic of Palau National Government
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| palaugov-pw-resource-pages | Republic of Palau National Government website (www.palaugov.pw) | [page](https://www.palaugov.pw/) | link only | National executive portal coordinating public healthcare administration, Belau National Hospital clinical operations, community health programs, and internatio… |
 
 ### Respublika ixtisoslashtirilgan pediatriya ilmiy-amaliy tibbiyot markazi
 
