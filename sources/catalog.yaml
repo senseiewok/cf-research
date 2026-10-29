@@ -1717,7 +1717,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://www.hengitysliitto.fi/
     url: null
     claim_label: unverified
@@ -1733,7 +1733,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://www.anfq.pt/
     url: null
     claim_label: unverified
@@ -1838,7 +1838,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-23
+    robots_checked: 2026-10-29
     landing_page: https://klubcf.cz/
     url: null
     claim_label: unverified
@@ -2150,7 +2150,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://www.fusal.org/
     url: null
     claim_label: unverified
@@ -2638,7 +2638,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://dubaihealth.ae/
     url: null
     claim_label: unverified

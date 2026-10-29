@@ -1088,8 +1088,13 @@ resources:
     who_for: not_checked
     lang: fi
     source_id: hengitysliitto-fi-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 8c510acc36d9025bd8eae581860f7937d5dbb9a3c79d4b12f958b4addc230784
+    last_checked: 2026-10-29
     status: active
 
   - id: anfq-pt-viver-com-fq
@@ -1103,8 +1108,13 @@ resources:
     who_for: not_checked
     lang: pt-PT
     source_id: anfq-pt-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 75b83bf5c0d58e22d57f5724f0355caff2ab84783d313635203aa2a2024684c8
+    last_checked: 2026-10-29
     status: active
 
   - id: fiqper-apoyo-y-orientacion
@@ -1266,8 +1276,13 @@ resources:
     format: online
     lang: cs
     source_id: klubcf-cz-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 66eabf09ae9b0878dd35e88c4c00aa396dd83432c1b23e9e6aa1ce78255ad124
+    last_checked: 2026-10-29
     status: active
 
   - id: hcfa-gr-support-and-care
@@ -1654,8 +1669,13 @@ resources:
     format: online
     lang: es-SV
     source_id: fusal-sv-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: c4c4f62bd40012320f56a6742bd1da265031ce8afd127710347f275562ad8647
+    last_checked: 2026-10-29
     status: active
 
   - id: senadis-py-rehabilitacion-y-apoyo
@@ -2323,8 +2343,13 @@ resources:
     format: online
     lang: en-AE
     source_id: dubaihealth-ae-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: e1e5464fced41b202d0b24a09c800f8636fdf03927c703035c10993d853a2ac7
+    last_checked: 2026-10-29
     status: active
   - id: pasteur-tn-genetic-diagnostic-services
     name: Diagnostic génétique et orientation pour les maladies rares
