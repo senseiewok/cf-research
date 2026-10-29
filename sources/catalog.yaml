@@ -4717,3 +4717,75 @@ sources:
       partner endpoints (/api_partner/recommend-papers/{doi}) gated by SCITE_API_KEY and fail-closed monthly caps
       (board task T-0047; docs read 2026-10-24 at https://docs.scite.ai/llms-full.txt). Returned polarity counts are
       labelled as Scite ML citation classifications and verified alongside cf-evidence-loop.
+
+  - id: antarctica-gov-au-resource-pages
+    title: Australian Antarctic Division website (www.antarctica.gov.au)
+    publisher: Australian Antarctic Division
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.antarctica.gov.au/
+    url: null
+    claim_label: unverified
+    notes: Australian government division directing sub-Antarctic environmental management, scientific research expeditions, operational safety, and polar telemedicine logistics across Heard Island and McDonald Islands; robots.txt allow (2026-10-29), manual access, link and summary only.
+
+  - id: fws-gov-resource-pages
+    title: U.S. Fish and Wildlife Service website (www.fws.gov)
+    publisher: U.S. Fish and Wildlife Service
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.fws.gov/
+    url: null
+    claim_label: unverified
+    notes: Federal conservation bureau overseeing national wildlife refuges, scientific research access, maritime expedition safety, and emergency evacuation coordination across United States Minor Outlying Islands; robots.txt allow (2026-10-29), manual access, link and summary only.
+
+  - id: comnap-aq-resource-pages
+    title: Council of Managers of National Antarctic Programs website (www.comnap.aq)
+    publisher: Council of Managers of National Antarctic Programs
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.comnap.aq/
+    url: null
+    claim_label: unverified
+    notes: International council coordinating national Antarctic programs, polar operational logistics, research station safety guidelines, telemedicine networks, and medical emergency evacuations across Antarctica; robots.txt allow (2026-10-29), manual access, link and summary only.
+
+  - id: hi-no-resource-pages
+    title: Havforskningsinstituttet website (www.hi.no)
+    publisher: Havforskningsinstituttet
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.hi.no/
+    url: null
+    claim_label: unverified
+    notes: Norwegian marine institute coordinating scientific ocean research, sub-Antarctic monitoring missions, maritime expedition logistics, and field emergency medical safety for operations near Bouvet Island; robots.txt allow (2026-10-29), manual access, link and summary only.
+
+  - id: cruzroja-es-resource-pages
+    title: Cruz Roja Española website (www.cruzroja.es)
+    publisher: Cruz Roja Española
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.cruzroja.es/
+    url: null
+    claim_label: unverified
+    notes: Humanitarian relief society providing medical aid, community health support, disaster response coordination, and primary healthcare assistance for Sahrawi families and vulnerable populations; robots.txt allow (2026-10-29), manual access, link and summary only.
+
+  - id: who-int-resource-pages
+    title: World Health Organization website (www.who.int)
+    publisher: World Health Organization
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.who.int/
+    url: null
+    claim_label: unverified
+    notes: United Nations health agency providing technical guidance, essential medicines distribution, infectious and pediatric disease surveillance, and humanitarian health cooperation in North Korea; robots.txt allow (2026-10-29), manual access, link and summary only.
