@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-265 to download by hand, 1 to ask for, 3 not to download.
+271 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -125,6 +125,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | avh-ps-resource-pages | Augusta Victoria Hospital clinical services portal (avh.org) | [page](https://avh.org/) | link only | Specialized pediatric pulmonary referral hospital and clinical care center in Palestine; robots.txt allow (2026-10-25), manual access, link and summary only. |
+
+### Australian Antarctic Division
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| antarctica-gov-au-resource-pages | Australian Antarctic Division website (www.antarctica.gov.au) | [page](https://www.antarctica.gov.au/) | link only | Australian government division directing sub-Antarctic environmental management, scientific research expeditions, operational safety, and polar telemedicine lo… |
 
 ### Azərbaycan Tibb Universiteti
 
@@ -293,6 +299,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cfqchile-resource-pages | Corporación para la Fibrosis Quística de Chile website (fibrosisquistica.cl) | [page](https://fibrosisquistica.cl/) | link only | Official national cystic fibrosis patient and family support corporation in Chile. |
+
+### Council of Managers of National Antarctic Programs
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| comnap-aq-resource-pages | Council of Managers of National Antarctic Programs website (www.comnap.aq) | [page](https://www.comnap.aq/) | link only | International council coordinating national Antarctic programs, polar operational logistics, research station safety guidelines, telemedicine networks, and med… |
+
+### Cruz Roja Española
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cruzroja-es-resource-pages | Cruz Roja Española website (www.cruzroja.es) | [page](https://www.cruzroja.es/) | link only | Humanitarian relief society providing medical aid, community health support, disaster response coordination, and primary healthcare assistance for Sahrawi fami… |
 
 ### Curaçao Medical Center
 
@@ -624,6 +642,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | gtex-portal-api | GTEx Portal API (gene expression by tissue) | [page](https://gtexportal.org/) | link only | robots.txt on gtexportal.org was fetched directly 2026-10-07 with the lab user agent: it allows only Googlebot and Bingbot (Crawl-delay 30) and has "User-agent… |
+
+### Havforskningsinstituttet
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| hi-no-resource-pages | Havforskningsinstituttet website (www.hi.no) | [page](https://www.hi.no/) | link only | Norwegian marine institute coordinating scientific ocean research, sub-Antarctic monitoring missions, maritime expedition logistics, and field emergency medica… |
 
 ### Hellenic Cystic Fibrosis Association
 
@@ -1399,6 +1423,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | gov-tc-resource-pages | Turks and Caicos Islands Government website (www.gov.tc) | [page](https://www.gov.tc/) | link only | Official government portal administering public health programs, clinical hospital operations, primary medical centers, and specialized pediatric referrals in… |
 
+### U.S. Fish and Wildlife Service
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| fws-gov-resource-pages | U.S. Fish and Wildlife Service website (www.fws.gov) | [page](https://www.fws.gov/) | link only | Federal conservation bureau overseeing national wildlife refuges, scientific research access, maritime expedition safety, and emergency evacuation coordination… |
+
 ### Udruženje za pomoć i podršku osobama sa cističnom fibrozom Srbije
 
 | ID | What | Open | Save as | Notes |
@@ -1494,6 +1524,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | doh-vi-resource-pages | Virgin Islands Department of Health website (doh.vi.gov) | [page](https://doh.vi.gov/) | link only | Official territorial health department administering public healthcare programs, maternal and child clinical services, and specialized medical referrals across… |
+
+### World Health Organization
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| who-int-resource-pages | World Health Organization website (www.who.int) | [page](https://www.who.int/) | link only | United Nations health agency providing technical guidance, essential medicines distribution, infectious and pediatric disease surveillance, and humanitarian he… |
 
 ### Zenodo (host of the record; creators at Google DeepMind, copyright DeepMind Technologies Limited)
 

@@ -4761,3 +4761,100 @@ resources:
     basis: lead_only
     last_checked: 2026-10-28
     status: active
+
+  - id: antarctica-gov-au-public-administration
+    name: Sub-Antarctic territorial administration and remote polar medical support in Heard and McDonald Islands
+    organisation: Australian Antarctic Division
+    countries: [HM]
+    url: https://www.antarctica.gov.au/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Australian government division directing sub-Antarctic environmental management, scientific research expeditions, operational safety, and polar telemedicine logistics across Heard Island and McDonald Islands.
+    who_for: not_checked
+    format: online
+    lang: en-HM
+    source_id: antarctica-gov-au-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: fws-gov-public-administration
+    name: Federal territorial refuge administration and remote maritime medical coordination in United States Minor Outlying Islands
+    organisation: U.S. Fish and Wildlife Service
+    countries: [UM]
+    url: https://www.fws.gov/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Federal conservation bureau overseeing national wildlife refuges, scientific research access, maritime expedition safety, and emergency evacuation coordination across United States Minor Outlying Islands.
+    who_for: not_checked
+    format: online
+    lang: en-UM
+    source_id: fws-gov-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: comnap-aq-polar-logistics
+    name: International polar operational logistics and remote medical safety coordination across Antarctica
+    organisation: Council of Managers of National Antarctic Programs
+    countries: [AQ]
+    url: https://www.comnap.aq/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: International council coordinating national Antarctic programs, polar operational logistics, research station safety guidelines, telemedicine networks, and medical emergency evacuations across Antarctica.
+    who_for: not_checked
+    format: online
+    lang: en-AQ
+    source_id: comnap-aq-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: hi-no-marine-research
+    name: Sub-Antarctic marine research logistics and remote expedition medical safety in Bouvet Island
+    organisation: Institute of Marine Research
+    countries: [BV]
+    url: https://www.hi.no/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Norwegian marine institute coordinating scientific ocean research, sub-Antarctic monitoring missions, maritime expedition logistics, and field emergency medical safety for operations near Bouvet Island.
+    who_for: not_checked
+    format: online
+    lang: no-BV
+    source_id: hi-no-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: cruzroja-es-humanitarian-healthcare
+    name: Humanitarian medical assistance, community health outreach, and emergency relief in Western Sahara
+    organisation: Cruz Roja Española
+    countries: [EH]
+    url: https://www.cruzroja.es/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Humanitarian relief society providing medical aid, community health support, disaster response coordination, and primary healthcare assistance for Sahrawi families and vulnerable populations.
+    summary_es: Sociedad humanitaria que brinda asistencia médica, apoyo comunitario de salud, auxilio en emergencias y atención primaria para familias saharauis y poblaciones vulnerables.
+    who_for: not_checked
+    format: online
+    lang: es-EH
+    source_id: cruzroja-es-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: who-int-health-cooperation-kp
+    name: International public health cooperation, essential medicines support, and disease surveillance in North Korea
+    organisation: World Health Organization
+    countries: [KP]
+    url: https://www.who.int/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: United Nations health agency providing technical guidance, essential medicines distribution, infectious and pediatric disease surveillance, and humanitarian health cooperation in North Korea.
+    who_for: not_checked
+    format: online
+    lang: en-KP
+    source_id: who-int-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
