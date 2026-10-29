@@ -9,7 +9,7 @@
 # Access policy evidence (what was tested, when): landscape/registry-data-access.md
 
 schema_version: 1
-updated: 2026-10-24
+updated: 2026-10-28
 
 # access  : fetch     - automated download is permitted; tools may retrieve it
 #           api       - queryable API, permitted; not a file download
@@ -951,6 +951,36 @@ sources:
       Terms are Google's general terms (linked from the docs footer); attribution guidance is linked
       as /attribution.html on docs.datacommons.org; licences of the underlying statistics vary by dataset
       and are listed at datacommons.org/datasets.
+
+  - id: wolfram-alpha-api
+    title: Wolfram|Alpha Non-Commercial API (Short Answers API and LLM API)
+    publisher: Wolfram Alpha LLC (Wolfram Research)
+    kind: api
+    access: api
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://products.wolframalpha.com/api
+    base_url: https://api.wolframalpha.com/
+    terms_url: https://products.wolframalpha.com/api/termsofuse
+    auth: api_key_required
+    max_rps: 1.0
+    published_limit: >-
+      Free Non-Commercial API tier states 2,000 non-commercial API calls per month across Short Answers
+      (/v1/result), LLM API (/api/v1/llm-api), and Full Results (/v2/query); hard-capped fail-closed in
+      cf-lab/tasks/wolfram_verifier.py at WOLFRAM_DAILY_CAP=25 and WOLFRAM_MONTHLY_CAP=1800 with 1.0 req/s
+      pacing and a SHA-256 content-addressed cache in git-ignored .lab-files/wolfram-cache.json
+    claim_label: verified
+    notes: >-
+      Admitted 2026-10-28 after maintainer sign-up and license review using the lab role address (board tasks
+      T-0503, T-0504, T-0505; WOLFRAM_APP_ID stored exclusively in git-ignored cf-lab/.env). Used strictly at
+      design time to cross-check closed-form algebraic derivatives, integrals, steady-state roots, and
+      dimensional homogeneity of pure-Python CFTR biophysical models. robots.txt checked 2026-10-28:
+      api.wolframalpha.com/robots.txt answered 404 (no crawler blocks on API host); products.wolframalpha.com
+      and www.wolframalpha.com answered 200 (User-agent: * Disallow: /facebook/). Per the Non-Commercial API
+      Terms of Use, redistribute stays false: raw Wolfram|Alpha pods are never committed into MIT/CC0
+      repositories, never served to public website visitors, and never cited as Tier T2/T3 clinical evidence;
+      all API responses are quarantined inside <untrusted_page> boundaries and outbound queries are scrubbed
+      for file paths, secrets, emails, URLs, and PHI composite tokens.
 
   # ----------------------------------------- read 2026-10-04 from the connector list
 
