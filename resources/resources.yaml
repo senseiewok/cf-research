@@ -4618,3 +4618,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-28
     status: active
+  - id: cmc-cw-pediatric-pulmonology
+    name: Inpatient clinical care and specialized pediatric medical services in Curaçao
+    organisation: Curaçao Medical Center
+    countries: [CW]
+    url: https://www.cmc.cw/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Hospital center coordinating inpatient clinical care, pediatric medicine, specialized surgery, and outpatient medical services across Curaçao.
+    summary_es: Centro hospitalario que coordina atención clínica hospitalaria, medicina pediátrica, cirugía especializada y servicios médicos ambulatorios en Curazao.
+    who_for: not_checked
+    format: online
+    lang: nl-CW
+    source_id: cmc-cw-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: shabait-er-health-communications
+    name: National public health communications and referral hospital directives in Eritrea
+    organisation: Ministry of Information and Ministry of Health
+    countries: [ER]
+    url: https://shabait.com/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National public portal coordinating government health communications, referral hospital updates, disease prevention guidance, and community medical advisories across Eritrea.
+    who_for: not_checked
+    format: online
+    lang: ti-ER
+    source_id: shabait-er-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: nauru-gov-nr-public-administration
+    name: National public health administration and community hospital care in Nauru
+    organisation: Government of the Republic of Nauru
+    countries: [NR]
+    url: https://www.nauru.gov.nr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National government administration portal directing public healthcare programs, community hospital operations, medical prevention initiatives, and overseas clinical referral pathways across Nauru.
+    who_for: not_checked
+    format: online
+    lang: en-NR
+    source_id: nauru-gov-nr-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: palaugov-pw-public-administration
+    name: National executive administration and public healthcare coordination in Palau
+    organisation: Republic of Palau National Government
+    countries: [PW]
+    url: https://www.palaugov.pw/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National executive portal coordinating public healthcare administration, Belau National Hospital clinical operations, community health programs, and international medical cooperation across Palau.
+    who_for: not_checked
+    format: online
+    lang: en-PW
+    source_id: palaugov-pw-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: psc-gov-tv-public-administration
+    name: National public service administration and medical hospital coordination in Tuvalu
+    organisation: Government of Tuvalu
+    countries: [TV]
+    url: https://psc.gov.tv/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: National public service portal directing public administration, Princess Margaret Hospital clinical staffing, community healthcare services, and overseas medical referral coordination across Tuvalu.
+    who_for: not_checked
+    format: online
+    lang: en-TV
+    source_id: psc-gov-tv-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active

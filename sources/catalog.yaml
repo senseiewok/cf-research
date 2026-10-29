@@ -4401,6 +4401,66 @@ sources:
     claim_label: unverified
     notes: Territorial administration portal coordinating primary healthcare services, community health center operations, emergency telemedicine, and overseas medical evacuation pathways across the Pitcairn Islands; robots.txt allow (2026-10-28), manual access, link and summary only.
 
+  - id: cmc-cw-resource-pages
+    title: Curaçao Medical Center website (www.cmc.cw)
+    publisher: Curaçao Medical Center
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.cmc.cw/
+    url: null
+    claim_label: unverified
+    notes: Hospital center coordinating inpatient clinical care, pediatric medicine, specialized surgery, and outpatient medical services across Curaçao; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: shabait-er-resource-pages
+    title: Shabait Eritrea Ministry of Information website (shabait.com)
+    publisher: Ministry of Information and Ministry of Health of Eritrea
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://shabait.com/
+    url: null
+    claim_label: unverified
+    notes: National public portal coordinating government health communications, referral hospital updates, disease prevention guidance, and community medical advisories across Eritrea; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: nauru-gov-nr-resource-pages
+    title: Government of the Republic of Nauru website (www.nauru.gov.nr)
+    publisher: Government of the Republic of Nauru
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.nauru.gov.nr/
+    url: null
+    claim_label: unverified
+    notes: National government administration portal directing public healthcare programs, community hospital operations, medical prevention initiatives, and overseas clinical referral pathways across Nauru; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: palaugov-pw-resource-pages
+    title: Republic of Palau National Government website (www.palaugov.pw)
+    publisher: Republic of Palau National Government
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.palaugov.pw/
+    url: null
+    claim_label: unverified
+    notes: National executive portal coordinating public healthcare administration, Belau National Hospital clinical operations, community health programs, and international medical cooperation across Palau; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: psc-gov-tv-resource-pages
+    title: Tuvalu Public Service Commission website (psc.gov.tv)
+    publisher: Government of Tuvalu
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://psc.gov.tv/
+    url: null
+    claim_label: unverified
+    notes: National public service portal directing public administration, Princess Margaret Hospital clinical staffing, community healthcare services, and overseas medical referral coordination across Tuvalu; robots.txt allow (2026-10-28), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information
