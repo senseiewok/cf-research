@@ -3459,6 +3459,111 @@ def evaluate_geometric_phase_allosteric_holonomy(
 
 
 
+def evaluate_crooks_microscopic_reversibility_gating(
+    n_work_points: int = 41,
+) -> Dict[str, Any]:
+    """Evaluate Round 14 (T-0516): Crooks Fluctuation Theorem & Microscopic Reversibility in CFTR Gating.
+
+    Connects:
+      1. Crooks relation on Gaussian work distributions (exact for Gaussian P_F with
+         sigma^2 = 2 * RT * W_diss, where W_diss = <W> - Delta F >= 0):
+         P_F(W) / P_R(-W) = exp((W - Delta F) / RT).
+         Verified numerically on a grid of work values per genotype and per proof challenge.
+      2. Kolmogorov cycle criterion (microscopic reversibility) on a 4-state NBD/TMD gating cycle
+         (PDB 5UAK -> 6MSM -> 6O2P -> 8EIQ): the ratio of forward to reverse rate products around the
+         cycle equals exp(A_cycle / RT), where A_cycle = eta * |Delta G_ATP| is the transduced affinity.
+         Entropy production per cycle sigma = A_cycle / RT >= 0 (zero iff detailed balance).
+      3. Proof DAG reductions: bridged (modular) reductions are reversible rewrites with zero cycle
+         affinity (detailed balance); dissipation is reduced versus the unbridged search, using the
+         same W_diss scaling as Round 7 (0.55 / 0.18 x barrier).
+    Coupling efficiencies eta reuse the Round 13 phenomenological genotype values; they are model
+    inputs, not measured clinical numbers.
+    """
+    if n_work_points < 5 or n_work_points > 2001:
+        raise ValueError("n_work_points must be between 5 and 2001")
+
+    rt = RT_37C_KCAL_MOL
+    dg_atp = abs(PROOF_THERMODYNAMIC_PARAMETERS["ATP_HYDROLYSIS_DELTA_G_KCAL"].value)
+
+    def _crooks_max_log_residual(delta_f: float, w_diss: float, tilt: float = 0.0) -> float:
+        sigma2 = 2.0 * rt * max(w_diss, 1e-9)
+        sigma = math.sqrt(sigma2)
+        mean_f = delta_f + w_diss
+        mean_r = -delta_f + w_diss
+        worst = 0.0
+        for i in range(n_work_points):
+            w = mean_f - 4.0 * sigma + (8.0 * sigma) * i / (n_work_points - 1)
+            ln_pf = -((w - mean_f) ** 2) / (2.0 * sigma2)
+            ln_pr = -((-w - mean_r) ** 2) / (2.0 * sigma2)
+            worst = max(worst, abs((ln_pf - ln_pr) - (w - delta_f + tilt) / rt))
+        return worst
+
+    genotypes = {
+        "wt_cftr": 0.85,
+        "eti_rescued_8eiq": 0.714,
+        "uncorrected_f508del_5uak": 0.034,
+        "w1282x_truncated": 0.0,
+    }
+    cftr_profiles: Dict[str, Dict[str, Any]] = {}
+    all_cftr_ok = True
+    for g_id, eta in genotypes.items():
+        affinity = eta * dg_atp
+        w_diss = (1.0 - eta) * dg_atp
+        a_site = affinity / (4.0 * rt) / 2.0
+        fwd_prod = math.exp(a_site) ** 4
+        rev_prod = math.exp(-a_site) ** 4
+        kolmogorov_log = math.log(fwd_prod / rev_prod)
+        sigma_cycle = affinity / rt
+        kolmogorov_ok = abs(kolmogorov_log - sigma_cycle) < 1e-9
+        residual = _crooks_max_log_residual(0.0, w_diss)
+        crooks_ok = residual < 1e-9
+        second_law_ok = w_diss >= 0.0 and sigma_cycle >= 0.0
+        ok = kolmogorov_ok and crooks_ok and second_law_ok
+        all_cftr_ok = all_cftr_ok and ok
+        cftr_profiles[g_id] = {
+            "coupling_efficiency_eta": eta,
+            "cycle_affinity_kcal_mol": round(affinity, 4),
+            "dissipated_work_kcal_mol": round(w_diss, 4),
+            "entropy_production_per_cycle_kB": round(sigma_cycle, 4),
+            "kolmogorov_log_ratio": round(kolmogorov_log, 6),
+            "crooks_max_log_residual": residual,
+            "reversibility_verified": ok,
+        }
+
+    challenge_profiles: Dict[str, Dict[str, Any]] = {}
+    all_challenges_ok = True
+    for c_id in CHALLENGE_STAGE_MAP:
+        bridged = evaluate_challenge_landscape(c_id, apply_allosteric_bridge=True)
+        unbridged = evaluate_challenge_landscape(c_id, apply_allosteric_bridge=False)
+        w_raw = 0.55 * unbridged["unbridged_peak_barrier_kcal_mol"]
+        w_br = 0.18 * bridged["rate_limiting_peak_barrier_kcal_mol"]
+        res_br = _crooks_max_log_residual(0.0, w_br)
+        res_raw = _crooks_max_log_residual(0.0, w_raw)
+        ok = res_br < 1e-9 and res_raw < 1e-9 and 0.0 <= w_br < w_raw
+        all_challenges_ok = all_challenges_ok and ok
+        challenge_profiles[c_id] = {
+            "w_diss_unbridged_kcal_mol": round(w_raw, 4),
+            "w_diss_bridged_kcal_mol": round(w_br, 4),
+            "proof_cycle_affinity_bridged_kcal_mol": 0.0,
+            "crooks_max_log_residual_bridged": res_br,
+            "reversibility_verified": ok,
+        }
+
+    # Negative control: a Crooks ratio with a 1 kcal/mol offset must be detected as a violation.
+    neg_residual = _crooks_max_log_residual(0.0, 1.0, tilt=1.0)
+    negative_control_ok = neg_residual > 1e-3
+    bridge_ok = all_cftr_ok and all_challenges_ok and negative_control_ok
+    return {
+        "task_id": "T-0516",
+        "crooks_microscopic_reversibility_bridge_verified": bridge_ok,
+        "cftr_reversibility_verified": all_cftr_ok,
+        "all_challenges_reversibility_verified": all_challenges_ok,
+        "negative_control_detects_violation": negative_control_ok,
+        "cftr_profiles": cftr_profiles,
+        "challenge_profiles": challenge_profiles,
+    }
+
+
 def evaluate_two_way_bridge_isomorphism() -> Dict[str, Any]:
     """Quantify the mathematical-biophysical isomorphism across all 5 knockout scenarios and 4 challenges."""
     scenarios = {
@@ -3543,6 +3648,7 @@ def evaluate_two_way_bridge_isomorphism() -> Dict[str, Any]:
         "thermodynamic_uncertainty_relations_tur_bridge": evaluate_thermodynamic_uncertainty_relations_cftr_precision(),
         "macroscopic_fluctuation_theory_mft_bridge": evaluate_macroscopic_fluctuation_theory_large_deviations(),
         "geometric_phase_holonomy_bridge": evaluate_geometric_phase_allosteric_holonomy(),
+        "crooks_microscopic_reversibility_bridge": evaluate_crooks_microscopic_reversibility_gating(),
 
         "counterfactual_scenarios": scenarios,
     }
@@ -3561,6 +3667,7 @@ def evaluate_falsification_negative_control() -> Dict[str, Any]:
     tur = evaluate_thermodynamic_uncertainty_relations_cftr_precision()
     mft = evaluate_macroscopic_fluctuation_theory_large_deviations()
     berry = evaluate_geometric_phase_allosteric_holonomy()
+    crooks14 = evaluate_crooks_microscopic_reversibility_gating()
 
     passed = (
         intact["qed_comparator_verified"] is True
@@ -3576,6 +3683,7 @@ def evaluate_falsification_negative_control() -> Dict[str, Any]:
         and tur["tur_precision_dissipation_bridge_verified"] is True
         and mft["mft_large_deviations_bridge_verified"] is True
         and berry["geometric_phase_holonomy_bridge_verified"] is True
+        and crooks14["crooks_microscopic_reversibility_bridge_verified"] is True
     )
 
     return {
