@@ -39,6 +39,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_macroscopic_fluctuation_theory_large_deviations,
     evaluate_geometric_phase_allosteric_holonomy,
+    evaluate_crooks_microscopic_reversibility_gating,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -627,6 +628,28 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             evaluate_geometric_phase_allosteric_holonomy(intracellular_cl_mm=0.0)
         with self.assertRaises(ValueError):
             evaluate_geometric_phase_allosteric_holonomy(cycle_frequency_hz=-1.0)
+
+    def test_crooks_microscopic_reversibility_bridge(self) -> None:
+        cr = evaluate_crooks_microscopic_reversibility_gating()
+        self.assertTrue(cr["crooks_microscopic_reversibility_bridge_verified"])
+        self.assertTrue(cr["negative_control_detects_violation"])
+        for gid, prof in cr["cftr_profiles"].items():
+            self.assertTrue(prof["reversibility_verified"], gid)
+            self.assertLess(prof["crooks_max_log_residual"], 1e-9, gid)
+            self.assertAlmostEqual(
+                prof["kolmogorov_log_ratio"], prof["entropy_production_per_cycle_kB"], places=3, msg=gid
+            )
+        wt = cr["cftr_profiles"]["wt_cftr"]
+        f508 = cr["cftr_profiles"]["uncorrected_f508del_5uak"]
+        self.assertLess(wt["dissipated_work_kcal_mol"], f508["dissipated_work_kcal_mol"])
+        self.assertGreater(wt["cycle_affinity_kcal_mol"], f508["cycle_affinity_kcal_mol"])
+        for cid, prof in cr["challenge_profiles"].items():
+            self.assertTrue(prof["reversibility_verified"], cid)
+            self.assertEqual(prof["proof_cycle_affinity_bridged_kcal_mol"], 0.0)
+            self.assertLess(prof["w_diss_bridged_kcal_mol"], prof["w_diss_unbridged_kcal_mol"])
+        with self.assertRaises(ValueError):
+            evaluate_crooks_microscopic_reversibility_gating(n_work_points=2)
+
 
 class FactoringDeltaBitsTests(unittest.TestCase):
     """Integer-width description-length change from factoring one repeated macro (T-0489 follow-up)."""
