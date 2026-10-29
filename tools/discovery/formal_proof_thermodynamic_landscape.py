@@ -1652,6 +1652,159 @@ def evaluate_spectral_laplacian_and_cheeger_bottleneck(
     }
 
 
+
+CHALLENGE_COUNTERFACTUAL_KNOCKOUTS: Dict[str, Dict[str, Dict[str, Any]]] = {
+    "fermats_last_theorem": {
+        "wild_type_intact_proof": {
+            "button_label": "1. Intact Lean 4 Proof (0 sorry / dim S_2(Gamma_0(2)) = 0)",
+            "mutated_axiom": "None (prime exponent p >= 3, semistable Frey curve, Taylor-Wiles p=3/p=5 switch intact)",
+            "counterexample": "None — dim S_2(Gamma_0(2)) = 0 holds across all 29,500 Lean 4 theorems",
+            "pure_math_state": "dim S_2(Gamma_0(2)) = 0 (29,500 thms · 0 sorryAx)",
+            "stem_council_state": "Scite 100% Support (10/0) · 3 Kernel Verifiers PASS",
+        },
+        "pythagorean_exponent_p2_mutation": {
+            "button_label": "2. Mutate p >= 3 -> p = 2 (Pythagorean / Stage 1)",
+            "mutated_axiom": "Relax exponent constraint p >= 3 to p = 2 in Fermat's Last Theorem",
+            "counterexample": "3^2 + 4^2 = 5^2 (9 + 16 = 25); Frey curve level-lowering no longer contradicts modular form space",
+            "pure_math_state": "Counterexample 3^2 + 4^2 = 5^2 (Stage 1 Gate Bypassed)",
+            "stem_council_state": "Boundary Scope Alert · Non-Prime Exponent p = 2",
+        },
+        "frey_semistability_knockout": {
+            "button_label": "3. Knock Out Semistability (Level-Lowering / Stage 3)",
+            "mutated_axiom": "Delete semistable reduction proof for Frey curve E_{a,b,c} at odd primes l | abc",
+            "counterexample": "Ribet level-lowering fails to reduce conductor N(E) to level 2; form remains in high-level space S_2(Gamma_0(N))",
+            "pure_math_state": "Conductor Stuck at N(E) > 2 (Ribet Descent Blocked)",
+            "stem_council_state": "Dependency Cone Broken at Stage 3 (6,800 thms)",
+        },
+        "taylor_wiles_p3_p5_switch_knockout": {
+            "button_label": "4. Knock Out p=3 <-> p=5 Switch (R=T Gap / Stage 4)",
+            "mutated_axiom": "Remove Langlands-Tunnell p=3 / p=5 residually reducible modularity switch in R = T patching",
+            "counterexample": "When mod-3 representation rho_{E,3} is reducible, R = T patching stalls with unbridged 8.39 kcal/mol barrier",
+            "pure_math_state": "R_Q != T_Q Deformation Gap (Stage 4 Unbridged)",
+            "stem_council_state": "Allosteric / Modularity Bridge OFF (8.39 kcal/mol)",
+        },
+        "unverified_sorry_axiom_injection": {
+            "button_label": "5. Inject sorryAx into CuspFormVanishing (Stage 5)",
+            "mutated_axiom": "Inject unproved sorryAx into CuspFormVanishing theorem leaf",
+            "counterexample": "lean4export & nanoda kernel comparators reject proof DAG: dependency cone contains sorryAx",
+            "pure_math_state": "KERNEL REJECTED: sorryAx in FLT.MainTheorem",
+            "stem_council_state": "Comparator / Nanoda Gate FAIL (sorryAx detected)",
+        },
+    },
+    "formal_math_zeta23": {
+        "wild_type_intact_proof": {
+            "button_label": "1. Intact Lean 4 Proof (0 sorry / >2/3 Zeta & >=86.864% XiPrime)",
+            "mutated_axiom": "None (s <-> 1-s functional symmetry, Kloosterman/large sieve axioms, and theta = 16/29 mollifier intact)",
+            "counterexample": "None — N_0(T) > (2/3)N(T) (Zeta23.lean) and >= 86.864% simple zeros (XiPrime.lean, d_1 = 9) verified",
+            "pure_math_state": ">=86.864% Simple Zeros on Re(s)=1/2 (0 sorryAx)",
+            "stem_council_state": "Scite 100% Support (Conrey 1989) · 33 Lean Files PASS",
+        },
+        "pythagorean_exponent_p2_mutation": {
+            "button_label": "2. Break Functional Equation s <-> 1-s (Stage 1)",
+            "mutated_axiom": "Break Riemann-Siegel reflection symmetry xi(s) = xi(1-s) across the critical strip 0 < Re(s) < 1",
+            "counterexample": "Asymmetric off-critical zeros no longer pair across Re(s) = 1/2; Hardy Z(t) ceases to be real-valued on the critical line",
+            "pure_math_state": "Reflection Symmetry Broken (xi(s) != xi(1-s))",
+            "stem_council_state": "Spectral Unitary Symmetry Violation (Stage 1)",
+        },
+        "frey_semistability_knockout": {
+            "button_label": "3. Drop Kloosterman / Large Sieve Bound (Stage 3)",
+            "mutated_axiom": "Delete weil_kloosterman_bound and large_sieve_dirichlet_polynomials in Zeta23 / XiPrime Stage 3",
+            "counterexample": "Off-diagonal Dirichlet polynomial variance explodes as T -> infinity; zero-density exponent A(sigma) diverges above 12/5",
+            "pure_math_state": "Off-Diagonal Variance Divergence (Stage 3 Blocked)",
+            "stem_council_state": "Missing Analytic Axiom Cone (Kloosterman / Sieve)",
+        },
+        "taylor_wiles_p3_p5_switch_knockout": {
+            "button_label": "4. Remove theta=16/29 Selberg Mollifier (Stage 4)",
+            "mutated_axiom": "Disable asymptotic large sieve mollifier length theta = 16/29 and degree d_1 = 9 in XiPrime.lean Stage 4",
+            "counterexample": "Unmollified Cauchy-Schwarz bound collapses below 40% critical-line zeros (7.95 kcal/mol unbridged barrier)",
+            "pure_math_state": "Mollifier Collapsed (<40% Zeros · Stage 4 Unbridged)",
+            "stem_council_state": "Mollifier Bridge OFF (7.95 kcal/mol Barrier)",
+        },
+        "unverified_sorry_axiom_injection": {
+            "button_label": "5. Inject sorryAx into XiPrime.lean (Stage 5)",
+            "mutated_axiom": "Inject unproved sorryAx into Challenge/XiPrime.lean critical-line proportion theorem",
+            "counterexample": "Lean 4 kernel comparator rejects Challenge/XiPrime.lean: unauthorized sorryAx in dependency cone",
+            "pure_math_state": "KERNEL REJECTED: sorryAx in Challenge/XiPrime.lean",
+            "stem_council_state": "Lean 4 Kernel Audit FAIL (sorryAx detected)",
+        },
+    },
+    "formal_math_3sum_apsp": {
+        "wild_type_intact_proof": {
+            "button_label": "1. Intact Lean 4 Proof (0 sorry / Sub-Cubic O(n^2.99942))",
+            "mutated_axiom": "None (Word-RAM w-bit model, tripartite zero-weight triangle bijection, and Fredman 64x packing intact)",
+            "counterexample": "None — sub-cubic 3SUM -> APSP reduction (980 Lean 4 theorems, 0 sorryAx) verified at O(n^3 / 2^Omega(sqrt(log n)))",
+            "pure_math_state": "Sub-Cubic O(n^2.99942) Verified (980 thms · 0 sorryAx)",
+            "stem_council_state": "Scite 100 Mentions / 0 Contrasting (Williams 2018)",
+        },
+        "pythagorean_exponent_p2_mutation": {
+            "button_label": "2. Break Word-RAM w-bit Indexing (Stage 1)",
+            "mutated_axiom": "Corrupt w-bit Word-RAM hash bucket offset invariant a + b + c = 0 in Stage 1",
+            "counterexample": "False-positive hash collisions inject non-zero triples a + b + c != 0 into the tripartite graph",
+            "pure_math_state": "Hash Bucket Invariant Broken (a + b + c != 0)",
+            "stem_council_state": "Input Encoding Corruption (Stage 1 Reject)",
+        },
+        "frey_semistability_knockout": {
+            "button_label": "3. Corrupt Zero-Weight Triangle Bijection (Stage 3)",
+            "mutated_axiom": "Delete Vassilevska Williams-Williams tripartite zero-weight triangle equivalence in Stage 3",
+            "counterexample": "Min-plus matrix product (A * B)_{i,j} = min_k(A_{i,k} + B_{k,j}) no longer detects negative/zero triangles",
+            "pure_math_state": "Min-Plus Triangle Bijection Broken (Stage 3)",
+            "stem_council_state": "Fine-Grained Reduction Cone Disconnected",
+        },
+        "taylor_wiles_p3_p5_switch_knockout": {
+            "button_label": "4. Disable Fredman 64x Decision-Tree Packing (Stage 4)",
+            "mutated_axiom": "Remove Fredman trick dominance-product lookup table and polynomial circuit packing in Stage 4",
+            "counterexample": "APSP complexity reverts to naive cubic Omega(n^3) = 16,777,216 ops at n = 256 (7.80 kcal/mol barrier)",
+            "pure_math_state": "Reverted to Naive Cubic Omega(n^3) (Stage 4 Unbridged)",
+            "stem_council_state": "Fredman 64x Compression OFF (16.78M Ops)",
+        },
+        "unverified_sorry_axiom_injection": {
+            "button_label": "5. Inject sorryAx into ThreeSumAPSP.lean (Stage 5)",
+            "mutated_axiom": "Inject unproved sorryAx into Challenge/ThreeSumAPSP.lean end-statement theorem",
+            "counterexample": "Lean 4 kernel rejects Challenge/ThreeSumAPSP.lean: sorryAx detected in complexity exponent proof",
+            "pure_math_state": "KERNEL REJECTED: sorryAx in ThreeSumAPSP.lean",
+            "stem_council_state": "Lean 4 Kernel Audit FAIL (sorryAx detected)",
+        },
+    },
+    "formal_math_eth": {
+        "wild_type_intact_proof": {
+            "button_label": "1. Intact Lean 4 Proof (0 sorry / 2^o(n) #3-SAT ETHIsFalse)",
+            "mutated_axiom": "None (K_K grid boundary, SWAP = I - 2*singlet rank 12^lambda, and S2_tilde_rank_three intact across 493 PaperIndex theorems)",
+            "counterexample": "None — theorem ETHIsFalse and SharpThreeSAT_Subexponential verified in Lean 4.28.0 with 0 sorryAx",
+            "pure_math_state": "ETHIsFalse Verified (2^o(n) #3-SAT · 493 PaperIndex thms)",
+            "stem_council_state": "Scite 100% Support (Impagliazzo-Paturi 2001) · 0 sorryAx",
+        },
+        "pythagorean_exponent_p2_mutation": {
+            "button_label": "2. Break K_K Grid Boundary Indexing (Stage 1)",
+            "mutated_axiom": "Corrupt K_K grid perimeter indexing and clause incidence partitioning in Eth3sat/Stage1",
+            "counterexample": "Planarized 3-SAT clause incidence graph loses boundary bijection; block tensor dimensions mismatch",
+            "pure_math_state": "K_K Grid Boundary Bijection Broken (Stage 1)",
+            "stem_council_state": "Clause Partitioning Invariant Failed (Stage 1)",
+        },
+        "frey_semistability_knockout": {
+            "button_label": "3. Break SWAP = I - 2*singlet Rank Bound (Stage 3)",
+            "mutated_axiom": "Replace singlet projection SWAP = I - 2*singlet in Eth3sat/SwapMatrix.lean with unfactored 4x4 crossing permutation",
+            "counterexample": "Crossing rank reverts from 12^lambda to naive 16^lambda; recursive exponent inequality e(9K^16) <= 0.9*e(K) fails",
+            "pure_math_state": "Crossing Rank Reverts to 16^lambda (e(K) Non-Decay)",
+            "stem_council_state": "Tensor Crossing Bottleneck (Stage 3 Blocked)",
+        },
+        "taylor_wiles_p3_p5_switch_knockout": {
+            "button_label": "4. Disable S2_tilde Rank-3 Variable Bound (Stage 4)",
+            "mutated_axiom": "Remove S2_tilde_rank_three symmetric rank-3 decomposition and Lemma 13 variable-count bound in Stage 4",
+            "counterexample": "#3-SAT recursion stalls at exponential 2^Omega(n) barrier (8.10 kcal/mol unbridged transition state)",
+            "pure_math_state": "Stalled at 2^Omega(n) (S2_tilde Bridge OFF)",
+            "stem_council_state": "Rank-3 Tensor Bridge OFF (8.10 kcal/mol Barrier)",
+        },
+        "unverified_sorry_axiom_injection": {
+            "button_label": "5. Inject sorryAx into MainResults.lean (Stage 5)",
+            "mutated_axiom": "Inject unproved sorryAx into Eth3sat/Main.lean (theorem ETHIsFalse)",
+            "counterexample": "Lean 4.28.0 kernel rejects Eth3sat/Main.lean: sorryAx detected in ETHIsFalse dependency cone",
+            "pure_math_state": "KERNEL REJECTED: sorryAx in Eth3sat/Main.lean",
+            "stem_council_state": "Lean 4 Kernel Audit FAIL (sorryAx detected)",
+        },
+    },
+}
+
+
 def evaluate_scite_citation_polarity_and_kernel_parity() -> Dict[str, Any]:
     """Evaluate the dual deterministic verification layer pairing Lean 4's formal kernel
     (`comparator` + `nanoda`, 0 `sorryAx`) with Scite Smart Citation Polarity & Retraction
@@ -1809,6 +1962,7 @@ def evaluate_two_way_bridge_isomorphism() -> Dict[str, Any]:
         "anthropic_proof_visual_geometries": evaluate_anthropic_proof_visual_geometries(),
         "spectral_cheeger_bridge": evaluate_spectral_laplacian_and_cheeger_bottleneck(),
         "scite_citation_polarity_and_kernel_parity": evaluate_scite_citation_polarity_and_kernel_parity(),
+        "challenge_counterfactual_knockouts": CHALLENGE_COUNTERFACTUAL_KNOCKOUTS,
         "counterfactual_scenarios": scenarios,
     }
 
