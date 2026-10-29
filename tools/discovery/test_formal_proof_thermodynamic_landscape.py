@@ -360,8 +360,13 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             self.assertLess(g_prof["bridged_geodesic_action_s_om"], g_prof["unbridged_proof_action_s_om"], cid)
 
         ko = om["knockout_actions"]
-        self.assertLess(ko["wild_type_intact_proof"], ko["taylor_wiles_p3_p5_switch_knockout"])
-        self.assertLess(ko["wild_type_intact_proof"], ko["unverified_sorry_axiom_injection"])
+        for k_id in (
+            "pythagorean_exponent_p2_mutation",
+            "frey_semistability_knockout",
+            "taylor_wiles_p3_p5_switch_knockout",
+            "unverified_sorry_axiom_injection",
+        ):
+            self.assertLess(ko["wild_type_intact_proof"], ko[k_id], k_id)
 
         with self.assertRaises(ValueError):
             evaluate_onsager_machlup_transition_paths(n_path_steps=5)
