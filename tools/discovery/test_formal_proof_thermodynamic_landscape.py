@@ -36,6 +36,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_onsager_machlup_transition_paths,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_information_thermodynamics_landauer_allosteric_feedback,
+    evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -106,6 +107,8 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertTrue(report["stochastic_thermodynamics_ness_bridge"]["stochastic_thermodynamics_ness_bridge_verified"])
         self.assertIn("information_thermodynamics_landauer_bridge", report)
         self.assertTrue(report["information_thermodynamics_landauer_bridge"]["information_thermodynamics_landauer_bridge_verified"])
+        self.assertIn("thermodynamic_uncertainty_relations_tur_bridge", report)
+        self.assertTrue(report["thermodynamic_uncertainty_relations_tur_bridge"]["tur_precision_dissipation_bridge_verified"])
 
     def test_ah9_parameter_provenance_and_ah10_negative_control(self) -> None:
         self.assertGreaterEqual(len(PROOF_THERMODYNAMIC_PARAMETERS), 5)
@@ -469,6 +472,54 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             evaluate_information_thermodynamics_landauer_allosteric_feedback(p_nbd_closed=0.0)
         with self.assertRaises(ValueError):
             evaluate_information_thermodynamics_landauer_allosteric_feedback(p_nbd_closed=1.0)
+
+
+    def test_thermodynamic_uncertainty_relations_and_cftr_precision_dissipation_bridge(self) -> None:
+        tur = evaluate_thermodynamic_uncertainty_relations_cftr_precision()
+        self.assertTrue(tur["tur_precision_dissipation_bridge_verified"])
+        self.assertTrue(tur["cftr_tur_precision_verified"])
+        self.assertTrue(tur["all_challenges_tur_bound_satisfied"])
+        self.assertTrue(tur["all_challenges_dissipation_reduced_60pct"])
+        self.assertEqual(tur["tur_universal_bound_q"], 2.0)
+
+        cftr = tur["cftr_tur_profiles"]
+        self.assertTrue(cftr["wt_cftr"]["transport_competent"])
+        self.assertTrue(cftr["wt_cftr"]["tur_bound_satisfied"])
+        self.assertTrue(cftr["wt_cftr"]["gating_tur_bound_satisfied"])
+        self.assertGreaterEqual(cftr["wt_cftr"]["tur_product_q"], 2.0)
+        self.assertLess(cftr["wt_cftr"]["relative_variance_epsilon_sq"], 0.01)
+
+        self.assertTrue(cftr["eti_rescued_8eiq"]["transport_competent"])
+        self.assertTrue(cftr["eti_rescued_8eiq"]["tur_bound_satisfied"])
+        self.assertTrue(cftr["eti_rescued_8eiq"]["gating_tur_bound_satisfied"])
+        self.assertGreaterEqual(cftr["eti_rescued_8eiq"]["tur_product_q"], 2.0)
+        self.assertLess(cftr["eti_rescued_8eiq"]["relative_variance_epsilon_sq"], 0.015)
+
+        self.assertFalse(cftr["uncorrected_f508del_5uak"]["transport_competent"])
+        self.assertTrue(cftr["uncorrected_f508del_5uak"]["tur_bound_satisfied"])
+        self.assertGreater(cftr["uncorrected_f508del_5uak"]["relative_variance_epsilon_sq"], 0.05)
+
+        self.assertFalse(cftr["w1282x_truncated"]["transport_competent"])
+        self.assertTrue(cftr["w1282x_truncated"]["tur_bound_satisfied"])
+        self.assertGreater(cftr["w1282x_truncated"]["relative_variance_epsilon_sq"], 0.10)
+
+        for cid, tprof in tur["challenge_tur_profiles"].items():
+            self.assertTrue(tprof["tur_bound_satisfied"], cid)
+            self.assertGreaterEqual(tprof["tur_product_bridged_q"], 2.0, cid)
+            self.assertGreaterEqual(tprof["tur_product_unbridged_q"], 2.0, cid)
+            self.assertGreater(tprof["tur_product_unbridged_q"], tprof["tur_product_bridged_q"], cid)
+            self.assertGreaterEqual(tprof["dissipation_reduction_pct"], 60.0, cid)
+            self.assertGreaterEqual(tprof["tur_slack_bridged_q"], 0.0, cid)
+            self.assertGreaterEqual(tprof["efficiency_gain_ratio"], 1.5, cid)
+
+        with self.assertRaises(ValueError):
+            evaluate_thermodynamic_uncertainty_relations_cftr_precision(temp_k=100.0)
+        with self.assertRaises(ValueError):
+            evaluate_thermodynamic_uncertainty_relations_cftr_precision(cftr_v_m_mv=100.0)
+        with self.assertRaises(ValueError):
+            evaluate_thermodynamic_uncertainty_relations_cftr_precision(tau_observation_s=-1.0)
+        with self.assertRaises(ValueError):
+            evaluate_thermodynamic_uncertainty_relations_cftr_precision(intracellular_cl_mm=0.0)
 
 
 class FactoringDeltaBitsTests(unittest.TestCase):
