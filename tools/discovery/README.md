@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `95` (plus 4 infrastructure scripts and 97 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `77`
+- **Total Verified Modules:** `96` (plus 4 infrastructure scripts and 98 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `78`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -65,7 +65,7 @@ python tools/discovery/discovery_council.py --check-index
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 43 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 44 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -102,6 +102,7 @@ python tools/discovery/discovery_council.py --check-index
 | `mrna_lnp_escape_model.py` | `T-0239` | `T2` | `merge` | Merge into `lnp_escape_dynamics.py` |
 | `mrna_lnp_nebulizer_shear_stability.py` | `T-0481` | `T2` | `keep` | Canonical workbench |
 | `mucus_cleavage_kinetics.py` | `T-0253` | `T2` | `merge` | Merge into `mucus_rheology.py` |
+| `mucus_penetrating_aso_kinetics.py` | `T-0497` | `T2` | `keep` | Canonical workbench |
 | `mucus_rheology.py` | `T-0185` | `T2` | `keep` | Canonical workbench |
 | `nebulizer_shear_stress_integrity.py` | `T-0413` | `T2` | `keep` | Canonical workbench |
 | `surfactant_shielded_rnp_mucus_transport.py` | `T-0482` | `T2` | `keep` | Canonical workbench |
