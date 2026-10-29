@@ -6,15 +6,15 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 94,
+  "total_modules": 95,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 96,
+  "test_suites_count": 97,
   "persona_summary": {
-    "researchers": 93,
+    "researchers": 94,
     "builders": 1
   },
   "triage_summary": {
-    "keep": 76,
+    "keep": 77,
     "merge": 14,
     "archive": 4
   },
@@ -22,7 +22,7 @@
     "structural_biology": 14,
     "rna_gene_editing": 25,
     "airway_delivery": 43,
-    "microbiology_host": 6,
+    "microbiology_host": 7,
     "clinical_trials": 3,
     "ai_verification": 3
   },
@@ -958,11 +958,22 @@
     },
     "microbiology_host": {
       "label": "Microbiology, Phage Therapy & Host Defense",
-      "count": 6,
-      "keep_count": 5,
+      "count": 7,
+      "keep_count": 6,
       "merge_count": 1,
       "archive_count": 0,
       "modules": [
+        {
+          "module": "alginate_lyase_phage_synergy",
+          "task": "T-0472",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "microbiology_host",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
         {
           "module": "macrophage_efferocytosis_model",
           "task": "T-0251",
