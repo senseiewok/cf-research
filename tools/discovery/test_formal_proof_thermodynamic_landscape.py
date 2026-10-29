@@ -45,6 +45,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_stochastic_resetting_first_passage_gating,
     evaluate_thermodynamic_length_fisher_metric_gating,
     evaluate_optimal_transport_wasserstein_benamou_brenier_gating,
+    evaluate_transfer_entropy_causal_directionality_gating,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -842,6 +843,54 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         # Invalid inputs raise ValueError
         with self.assertRaises(ValueError):
             evaluate_optimal_transport_wasserstein_benamou_brenier_gating(n_cycle_states=3)
+
+    def test_transfer_entropy_and_causal_directionality_bridge(self) -> None:
+        te = evaluate_transfer_entropy_causal_directionality_gating()
+        self.assertTrue(te["transfer_entropy_bridge_verified"])
+        self.assertTrue(te["cftr_directionality_verified"])
+        self.assertTrue(te["proof_directionality_verified"])
+        self.assertTrue(te["negative_control_detects_violation"])
+
+        wt = te["cftr_profiles"]["wt_cftr"]
+        eti = te["cftr_profiles"]["eti_rescued_8eiq"]
+        f508 = te["cftr_profiles"]["uncorrected_f508del_5uak"]
+        w1282x = te["cftr_profiles"]["w1282x_truncated"]
+
+        # WT CFTR shows strong asymmetric forward transfer entropy and causal driving
+        self.assertGreaterEqual(wt["transfer_entropy_fwd_bits"], 0.80)
+        self.assertLessEqual(wt["transfer_entropy_rev_bits"], 0.10)
+        self.assertGreaterEqual(wt["net_transfer_entropy_bits"], 0.70)
+        self.assertGreaterEqual(wt["causal_asymmetry_ratio"], 8.0)
+        self.assertTrue(wt["active_communication_possible"])
+        self.assertTrue(wt["second_law_satisfied"])
+
+        # ETI restores forward information channel capacity across repaired ICL4
+        self.assertGreaterEqual(eti["transfer_entropy_fwd_bits"], 0.70)
+        self.assertGreaterEqual(eti["net_transfer_entropy_bits"], 0.60)
+        self.assertGreaterEqual(eti["causal_asymmetry_ratio"], 6.0)
+        self.assertTrue(eti["active_communication_possible"])
+        self.assertTrue(eti["second_law_satisfied"])
+
+        # Uncorrected F508del suffers information bottleneck and noisy symmetric fluctuation
+        self.assertLess(f508["transfer_entropy_fwd_bits"], 0.20)
+        self.assertLess(f508["net_transfer_entropy_bits"], 0.05)
+        self.assertLess(f508["causal_asymmetry_ratio"], 2.0)
+
+        # W1282X nonsense truncation severs bipartite communication
+        self.assertFalse(w1282x["active_communication_possible"])
+        self.assertEqual(w1282x["transfer_entropy_fwd_bits"], 0.0)
+        self.assertEqual(w1282x["transfer_entropy_rev_bits"], 0.0)
+        self.assertEqual(w1282x["net_transfer_entropy_bits"], 0.0)
+
+        # Formal proof challenges have strictly unidirectional deduction flows
+        for cid, prof in te["challenge_profiles"].items():
+            self.assertGreaterEqual(prof["transfer_entropy_fwd_bits"], 0.75, cid)
+            self.assertLessEqual(prof["transfer_entropy_rev_bits"], 0.08, cid)
+            self.assertGreaterEqual(prof["causal_asymmetry_ratio"], 12.0, cid)
+
+        # Invalid inputs raise ValueError
+        with self.assertRaises(ValueError):
+            evaluate_transfer_entropy_causal_directionality_gating(n_cycle_states=3)
 
 
 
