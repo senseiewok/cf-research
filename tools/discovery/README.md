@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `94` (plus 4 infrastructure scripts and 96 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `76`
+- **Total Verified Modules:** `95` (plus 4 infrastructure scripts and 97 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `77`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -113,10 +113,11 @@ python tools/discovery/discovery_council.py --check-index
 | `vector_redosing_kinetics.py` | `T-0198` | `T2` | `keep` | Canonical workbench |
 | `vx522_inhaled_lnp_mucus_diffusion.py` | `T-0400` | `T2` | `keep` | Canonical workbench |
 
-## Microbiology, Phage Therapy & Host Defense (`microbiology_host` — 6 modules)
+## Microbiology, Phage Therapy & Host Defense (`microbiology_host` — 7 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
+| `alginate_lyase_phage_synergy.py` | `T-0472` | `T2` | `keep` | Canonical workbench |
 | `macrophage_efferocytosis_model.py` | `T-0251` | `T2` | `merge` | Merge into `macrophage_evasion_kinetics.py` |
 | `macrophage_evasion_kinetics.py` | `T-0271` | `T2` | `keep` | Canonical workbench |
 | `phage_biofilm_kinetics.py` | `T-0197` | `T2` | `keep` | Canonical workbench |
