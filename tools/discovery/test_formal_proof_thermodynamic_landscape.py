@@ -40,6 +40,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_macroscopic_fluctuation_theory_large_deviations,
     evaluate_geometric_phase_allosteric_holonomy,
     evaluate_crooks_microscopic_reversibility_gating,
+    evaluate_helmholtz_hodge_current_decomposition_gating,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -649,6 +650,30 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             self.assertLess(prof["w_diss_bridged_kcal_mol"], prof["w_diss_unbridged_kcal_mol"])
         with self.assertRaises(ValueError):
             evaluate_crooks_microscopic_reversibility_gating(n_work_points=2)
+
+
+    def test_helmholtz_hodge_current_decomposition_and_solenoidal_dissipation_bridge(self) -> None:
+        hh = evaluate_helmholtz_hodge_current_decomposition_gating()
+        self.assertTrue(hh["helmholtz_hodge_bridge_verified"])
+        self.assertTrue(hh["negative_control_detects_violation"])
+        for gid, prof in hh["cftr_profiles"].items():
+            self.assertTrue(prof["hodge_decomposition_verified"], gid)
+            self.assertLess(abs(prof["curl_grad"]), 1e-12, gid)
+            self.assertLess(abs(prof["orthogonality_inner_product"]), 1e-12, gid)
+        wt = hh["cftr_profiles"]["wt_cftr"]
+        f508 = hh["cftr_profiles"]["uncorrected_f508del_5uak"]
+        w1282x = hh["cftr_profiles"]["w1282x_truncated"]
+        self.assertGreater(wt["solenoidal_current"], f508["solenoidal_current"])
+        self.assertGreater(wt["entropy_production_cycle_kB"], f508["entropy_production_cycle_kB"])
+        self.assertEqual(w1282x["solenoidal_current"], 0.0)
+        self.assertEqual(w1282x["entropy_production_cycle_kB"], 0.0)
+        for cid, prof in hh["challenge_profiles"].items():
+            self.assertTrue(prof["acyclicity_verified"], cid)
+            self.assertEqual(prof["betti_1_cycles"], 0)
+            self.assertEqual(prof["solenoidal_proof_flux"], 0.0)
+            self.assertEqual(prof["proof_dag_curl"], 0.0)
+        with self.assertRaises(ValueError):
+            evaluate_helmholtz_hodge_current_decomposition_gating(n_cycle_states=3)
 
 
 class FactoringDeltaBitsTests(unittest.TestCase):
