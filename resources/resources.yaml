@@ -4458,3 +4458,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-28
     status: active
+
+  - id: chcc-mp-hospital-care
+    name: Community hospital healthcare and specialized pediatric clinical services in the Northern Mariana Islands
+    organisation: Commonwealth Healthcare Corporation
+    countries: [MP]
+    url: https://www.chcc.health/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Public healthcare system and hospital network coordinating inpatient medicine, pediatric clinics, and specialized medical referrals across the Northern Mariana Islands.
+    who_for: not_checked
+    format: online
+    lang: en-MP
+    source_id: chcc-mp-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: chfdunan-pm-hospital-care
+    name: Hospital center medical services and specialized clinical coordination in Saint Pierre and Miquelon
+    organisation: Centre Hospitalier François Dunan
+    countries: [PM]
+    url: https://www.ch-fdunan.fr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Principal territorial hospital center providing inpatient care, outpatient pediatric consultations, and specialized medical evacuation coordination across Saint Pierre and Miquelon.
+    who_for: not_checked
+    format: online
+    lang: fr-PM
+    source_id: chfdunan-pm-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: comstbarth-bl-health-services
+    name: Territorial public health administration and community medical coordination in Saint Barthélemy
+    organisation: Collectivité de Saint-Barthélemy
+    countries: [BL]
+    url: https://www.comstbarth.fr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Territorial collectivity authority overseeing public health guidance, community medical prevention, and regional hospital referral networks across Saint Barthélemy.
+    who_for: not_checked
+    format: online
+    lang: fr-BL
+    source_id: comstbarth-bl-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: com-saint-martin-mf-health-guidance
+    name: Territorial health guidance and social medical assistance in Saint Martin
+    organisation: Collectivité de Saint-Martin
+    countries: [MF]
+    url: https://www.com-saint-martin.fr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Territorial collectivity administering public healthcare orientation, pediatric social assistance, disability support programs, and hospital partnerships across Saint Martin.
+    who_for: not_checked
+    format: online
+    lang: fr-MF
+    source_id: com-saint-martin-mf-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: wallis-et-futuna-wf-administration
+    name: Territorial public administration and healthcare services oversight in Wallis and Futuna
+    organisation: Administration supérieure des îles Wallis et Futuna
+    countries: [WF]
+    url: https://www.wallis-et-futuna.gouv.fr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Territorial government prefecture coordinating public hospital facilities, island dispensary networks, and specialized medical evacuation arrangements across Wallis and Futuna.
+    who_for: not_checked
+    format: online
+    lang: fr-WF
+    source_id: wallis-et-futuna-wf-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active

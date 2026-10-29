@@ -4251,6 +4251,66 @@ sources:
     claim_label: unverified
     notes: Local public administration coordinating community wellness programs, health clinic operations, and medical transport across Christmas Island; robots.txt allow (2026-10-28), manual access, link and summary only.
 
+  - id: chcc-mp-resource-pages
+    title: Commonwealth Healthcare Corporation website (www.chcc.health)
+    publisher: Commonwealth Healthcare Corporation
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.chcc.health/
+    url: null
+    claim_label: unverified
+    notes: Public healthcare system and hospital network coordinating inpatient medicine, pediatric clinics, and specialized medical referrals across the Northern Mariana Islands; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: chfdunan-pm-resource-pages
+    title: Centre Hospitalier François Dunan website (www.ch-fdunan.fr)
+    publisher: Centre Hospitalier François Dunan
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.ch-fdunan.fr/
+    url: null
+    claim_label: unverified
+    notes: Principal territorial hospital center providing inpatient care, outpatient pediatric consultations, and specialized medical evacuation coordination across Saint Pierre and Miquelon; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: comstbarth-bl-resource-pages
+    title: Collectivité de Saint-Barthélemy website (www.comstbarth.fr)
+    publisher: Collectivité de Saint-Barthélemy
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.comstbarth.fr/
+    url: null
+    claim_label: unverified
+    notes: Territorial collectivity authority overseeing public health guidance, community medical prevention, and regional hospital referral networks across Saint Barthélemy; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: com-saint-martin-mf-resource-pages
+    title: Collectivité de Saint-Martin website (www.com-saint-martin.fr)
+    publisher: Collectivité de Saint-Martin
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.com-saint-martin.fr/
+    url: null
+    claim_label: unverified
+    notes: Territorial collectivity administering public healthcare orientation, pediatric social assistance, disability support programs, and hospital partnerships across Saint Martin; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: wallis-et-futuna-wf-resource-pages
+    title: Administration supérieure des îles Wallis et Futuna website (www.wallis-et-futuna.gouv.fr)
+    publisher: Administration supérieure des îles Wallis et Futuna
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.wallis-et-futuna.gouv.fr/
+    url: null
+    claim_label: unverified
+    notes: Territorial government prefecture coordinating public hospital facilities, island dispensary networks, and specialized medical evacuation arrangements across Wallis and Futuna; robots.txt allow (2026-10-28), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information

@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-246 to download by hand, 1 to ask for, 3 not to download.
+251 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -17,6 +17,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | aau-et-resource-pages | Addis Ababa University College of Health Sciences website (www.aau.edu.et) | [page](https://www.aau.edu.et/) | link only | Official CF or pediatric referral resource (Addis Ababa University College of Health Sciences); robots.txt allow (2026-10-25), manual access, link and summary… |
+
+### Administration supérieure des îles Wallis et Futuna
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| wallis-et-futuna-wf-resource-pages | Administration supérieure des îles Wallis et Futuna website (www.wallis-et-futuna.gouv.fr) | [page](https://www.wallis-et-futuna.gouv.fr/) | link only | Territorial government prefecture coordinating public hospital facilities, island dispensary networks, and specialized medical evacuation arrangements across W… |
 
 ### Aga Khan University Hospital Pakistan
 
@@ -168,6 +174,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | chpf-pf-resource-pages | Centre Hospitalier de Polynésie française website (www.chpf.pf) | [page](https://www.chpf.pf/) | link only | Principal territorial referral hospital coordinating inpatient clinical care, specialized pediatric medicine, diagnostic consultations, and medical evacuations… |
 
+### Centre Hospitalier François Dunan
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| chfdunan-pm-resource-pages | Centre Hospitalier François Dunan website (www.ch-fdunan.fr) | [page](https://www.ch-fdunan.fr/) | link only | Principal territorial hospital center providing inpatient care, outpatient pediatric consultations, and specialized medical evacuation coordination across Sain… |
+
 ### Centre Hospitalier Princesse Grace
 
 | ID | What | Open | Save as | Notes |
@@ -239,6 +251,24 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | cochrane-cf-reviews | Cochrane systematic reviews on cystic fibrosis (Cochrane Library) | [page](https://www.cochranelibrary.com/) | link only | robots.txt on www.cochranelibrary.com (read 2026-10-05) has a group "User-agent: Claude" with "Disallow: /", and the site answered a single plain request with… |
+
+### Collectivité de Saint-Barthélemy
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| comstbarth-bl-resource-pages | Collectivité de Saint-Barthélemy website (www.comstbarth.fr) | [page](https://www.comstbarth.fr/) | link only | Territorial collectivity authority overseeing public health guidance, community medical prevention, and regional hospital referral networks across Saint Barthé… |
+
+### Collectivité de Saint-Martin
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| com-saint-martin-mf-resource-pages | Collectivité de Saint-Martin website (www.com-saint-martin.fr) | [page](https://www.com-saint-martin.fr/) | link only | Territorial collectivity administering public healthcare orientation, pediatric social assistance, disability support programs, and hospital partnerships acros… |
+
+### Commonwealth Healthcare Corporation
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| chcc-mp-resource-pages | Commonwealth Healthcare Corporation website (www.chcc.health) | [page](https://www.chcc.health/) | link only | Public healthcare system and hospital network coordinating inpatient medicine, pediatric clinics, and specialized medical referrals across the Northern Mariana… |
 
 ### Corporación para la Fibrosis Quística de Chile
 
