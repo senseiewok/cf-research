@@ -11,6 +11,7 @@ if str(DISCOVERY_DIR) not in sys.path:
     sys.path.insert(0, str(DISCOVERY_DIR))
 
 from formal_proof_thermodynamic_landscape import (  # noqa: E402
+    CHALLENGE_COUNTERFACTUAL_KNOCKOUTS,
     COUNTERFACTUAL_KNOCKOUT_CATALOG,
     FLT_LEAN4_STAGES,
     FORMAL_MATH_CHALLENGE_PROFILES,
@@ -255,6 +256,10 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertTrue(scite_rep["all_four_benchmarks_kernel_and_scite_verified"])
         self.assertIn("Scite ML citation classification", scite_rep["provenance_tag"])
         self.assertEqual(len(scite_rep["benchmarks"]), 4)
+        for cid, ko_map in CHALLENGE_COUNTERFACTUAL_KNOCKOUTS.items():
+            self.assertEqual(len(ko_map), 5)
+            unbridged_peak = evaluate_challenge_landscape(cid, apply_allosteric_bridge=False)["unbridged_peak_barrier_kcal_mol"]
+            self.assertIn(f"{unbridged_peak:.2f} kcal/mol", ko_map["taylor_wiles_p3_p5_switch_knockout"]["counterexample"])
 
 
 if __name__ == "__main__":

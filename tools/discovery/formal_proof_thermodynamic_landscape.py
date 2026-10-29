@@ -589,7 +589,7 @@ COUNTERFACTUAL_KNOCKOUT_CATALOG: Dict[str, CounterfactualKnockoutSpec] = {
         fractured_stage_id="none",
         barrier_penalty_kcal_mol=0.0,
         cf_genotype_analog="Wild-Type CFTR (or Trikafta-rescued F508del in PDB 8EIQ)",
-        cf_molecular_defect="None; intact NBD1 thermal stability (Tm = 49.5 C) and cooperative NBD1-NBD2 gating (Po = 0.45).",
+        cf_molecular_defect="None; intact NBD1 thermal stability (Tm = 49.5 C) and cooperative NBD1-NBD2 gating (Po = 0.34, 75.3% WT Cl- flux).",
         rescue_bridge_mechanism="Comparator-verified Lean 4 kernel check with 0 `sorry` axioms.",
     ),
     "pythagorean_exponent_p2_mutation": CounterfactualKnockoutSpec(
@@ -1716,9 +1716,9 @@ CHALLENGE_COUNTERFACTUAL_KNOCKOUTS: Dict[str, Dict[str, Dict[str, Any]]] = {
         "taylor_wiles_p3_p5_switch_knockout": {
             "button_label": "4. Remove theta=16/29 Selberg Mollifier (Stage 4)",
             "mutated_axiom": "Disable asymptotic large sieve mollifier length theta = 16/29 and degree d_1 = 9 in XiPrime.lean Stage 4",
-            "counterexample": "Unmollified Cauchy-Schwarz bound collapses below 40% critical-line zeros (7.95 kcal/mol unbridged barrier)",
+            "counterexample": "Unmollified Cauchy-Schwarz bound collapses below 40% critical-line zeros (7.88 kcal/mol unbridged barrier)",
             "pure_math_state": "Mollifier Collapsed (<40% Zeros · Stage 4 Unbridged)",
-            "stem_council_state": "Mollifier Bridge OFF (7.95 kcal/mol Barrier)",
+            "stem_council_state": "Mollifier Bridge OFF (7.88 kcal/mol Barrier)",
         },
         "unverified_sorry_axiom_injection": {
             "button_label": "5. Inject sorryAx into XiPrime.lean (Stage 5)",
@@ -1753,7 +1753,7 @@ CHALLENGE_COUNTERFACTUAL_KNOCKOUTS: Dict[str, Dict[str, Dict[str, Any]]] = {
         "taylor_wiles_p3_p5_switch_knockout": {
             "button_label": "4. Disable Fredman 64x Decision-Tree Packing (Stage 4)",
             "mutated_axiom": "Remove Fredman trick dominance-product lookup table and polynomial circuit packing in Stage 4",
-            "counterexample": "APSP complexity reverts to naive cubic Omega(n^3) = 16,777,216 ops at n = 256 (7.80 kcal/mol barrier)",
+            "counterexample": "APSP complexity reverts to naive cubic Omega(n^3) = 16,777,216 ops at n = 256 (7.66 kcal/mol barrier)",
             "pure_math_state": "Reverted to Naive Cubic Omega(n^3) (Stage 4 Unbridged)",
             "stem_council_state": "Fredman 64x Compression OFF (16.78M Ops)",
         },
@@ -1890,7 +1890,7 @@ def evaluate_scite_citation_polarity_and_kernel_parity() -> Dict[str, Any]:
 
 
 def evaluate_two_way_bridge_isomorphism() -> Dict[str, Any]:
-    """Quantify the mathematical-biophysical isomorphism across all 5 knockout scenarios and 3 challenges."""
+    """Quantify the mathematical-biophysical isomorphism across all 5 knockout scenarios and 4 challenges."""
     scenarios = {
         k_id: simulate_counterfactual_axiom_knockout(k_id)
         for k_id in COUNTERFACTUAL_KNOCKOUT_CATALOG
@@ -1908,7 +1908,7 @@ def evaluate_two_way_bridge_isomorphism() -> Dict[str, Any]:
     bridged_peak = intact["rate_limiting_peak_barrier_kcal_mol"]
     barrier_reduction_kcal = round(unbridged_peak - bridged_peak, 4)
 
-    # AH-11 +/-25% parametric sensitivity verification across all 3 challenge landscapes
+    # AH-11 +/-25% parametric sensitivity verification across all 4 challenge landscapes
     challenge_sensitivity_25pct: Dict[str, Dict[str, Any]] = {}
     for c_id, c_stages in CHALLENGE_STAGE_MAP.items():
         def _eval_challenge_barriers(
@@ -2010,7 +2010,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--challenge",
         choices=sorted(CHALLENGE_STAGE_MAP.keys()),
         default=None,
-        help="Evaluate a specific formal-math challenge landscape (fermats_last_theorem, formal_math_zeta23, formal_math_3sum_apsp)",
+        help="Evaluate a specific formal-math challenge landscape (fermats_last_theorem, formal_math_zeta23, formal_math_3sum_apsp, formal_math_eth)",
     )
     parser.add_argument(
         "--no-bridge",
@@ -2045,7 +2045,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 f"({report['unbridged_peak_barrier_kcal_mol']:.2f} -> {report['bridged_peak_barrier_kcal_mol']:.2f} kcal/mol)"
             )
             print(
-                f"AH-11 +/-25% Rate-Limiting Bottleneck Invariant (All 3 Challenges): "
+                f"AH-11 +/-25% Rate-Limiting Bottleneck Invariant (All 4 Challenges): "
                 f"{report['all_challenges_rank_order_preserved_25pct']}"
             )
             for c_id, cl in report["challenge_landscapes"].items():
