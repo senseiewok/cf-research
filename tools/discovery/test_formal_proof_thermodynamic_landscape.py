@@ -38,6 +38,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_information_thermodynamics_landauer_allosteric_feedback,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_macroscopic_fluctuation_theory_large_deviations,
+    evaluate_geometric_phase_allosteric_holonomy,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -581,6 +582,51 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             evaluate_macroscopic_fluctuation_theory_large_deviations(tau_observation_s=-2.0)
 
+
+
+    def test_geometric_phase_and_allosteric_holonomy_bridge(self) -> None:
+        bp = evaluate_geometric_phase_allosteric_holonomy()
+        self.assertTrue(bp["geometric_phase_holonomy_bridge_verified"])
+        self.assertTrue(bp["cftr_holonomy_verified"])
+        self.assertTrue(bp["all_challenges_cyclic_invariance_verified"])
+        self.assertAlmostEqual(bp["wt_berry_phase_rad"], 1.25)
+
+        cftr = bp["cftr_berry_profiles"]
+        self.assertTrue(cftr["wt_cftr"]["holonomy_verified"])
+        self.assertTrue(cftr["wt_cftr"]["transport_competent"])
+        self.assertGreaterEqual(cftr["wt_cftr"]["berry_phase_gamma_rad"], 1.0)
+        self.assertGreaterEqual(cftr["wt_cftr"]["pumping_efficiency_eta"], 0.80)
+        self.assertGreater(cftr["wt_cftr"]["directed_charge_per_cycle_pc"], 0.0)
+
+        self.assertTrue(cftr["eti_rescued_8eiq"]["holonomy_verified"])
+        self.assertTrue(cftr["eti_rescued_8eiq"]["transport_competent"])
+        self.assertGreaterEqual(cftr["eti_rescued_8eiq"]["berry_phase_gamma_rad"], 1.0)
+        self.assertGreaterEqual(cftr["eti_rescued_8eiq"]["pumping_efficiency_eta"], 0.70)
+        self.assertGreater(cftr["eti_rescued_8eiq"]["relative_to_wt_pct"], 80.0)
+
+        self.assertFalse(cftr["uncorrected_f508del_5uak"]["transport_competent"])
+        self.assertLess(cftr["uncorrected_f508del_5uak"]["berry_phase_gamma_rad"], 0.10)
+        self.assertLess(cftr["uncorrected_f508del_5uak"]["pumping_efficiency_eta"], 0.05)
+
+        self.assertFalse(cftr["w1282x_truncated"]["transport_competent"])
+        self.assertEqual(cftr["w1282x_truncated"]["berry_phase_gamma_rad"], 0.0)
+        self.assertEqual(cftr["w1282x_truncated"]["pumping_efficiency_eta"], 0.0)
+        self.assertFalse(cftr["w1282x_truncated"]["cycle_closed"])
+
+        for cid, cprof in bp["challenge_berry_profiles"].items():
+            self.assertTrue(cprof["cyclic_invariance_verified"], cid)
+            self.assertAlmostEqual(cprof["proof_dag_holonomy_bridged_rad"], 0.0, places=6, msg=cid)
+            self.assertTrue(cprof["circular_reasoning_prevented"], cid)
+            self.assertEqual(cprof["deductive_loop_soundness"], "SOUND_WELL_FOUNDED", cid)
+
+        with self.assertRaises(ValueError):
+            evaluate_geometric_phase_allosteric_holonomy(temp_k=150.0)
+        with self.assertRaises(ValueError):
+            evaluate_geometric_phase_allosteric_holonomy(cftr_v_m_mv=100.0)
+        with self.assertRaises(ValueError):
+            evaluate_geometric_phase_allosteric_holonomy(intracellular_cl_mm=0.0)
+        with self.assertRaises(ValueError):
+            evaluate_geometric_phase_allosteric_holonomy(cycle_frequency_hz=-1.0)
 
 class FactoringDeltaBitsTests(unittest.TestCase):
     """Integer-width description-length change from factoring one repeated macro (T-0489 follow-up)."""
