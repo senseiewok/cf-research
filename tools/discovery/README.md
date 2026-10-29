@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `96` (plus 4 infrastructure scripts and 98 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `78`
+- **Total Verified Modules:** `97` (plus 4 infrastructure scripts and 99 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `79`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -65,7 +65,7 @@ python tools/discovery/discovery_council.py --check-index
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 44 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 45 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -79,6 +79,7 @@ python tools/discovery/discovery_council.py --check-index
 | `asl_ph_antimicrobial_potency.py` | `T-0469` | `T2` | `keep` | Canonical workbench |
 | `basal_stem_persistence.py` | `T-0220` | `T2` | `keep` | Canonical workbench |
 | `basal_stem_quiescence_kinetics.py` | `T-0414` | `T2` | `keep` | Canonical workbench |
+| `basal_stem_tropism_persistence.py` | `T-0498` | `T2` | `keep` | Canonical workbench |
 | `biophysical_models.py` | `T-0154` | `T2` | `keep` | Canonical workbench |
 | `ciliary_wave_clearance_model.py` | `T-0315` | `T2` | `keep` | Canonical workbench |
 | `enac_knockdown_model.py` | `T-0200` | `T2` | `merge` | Merge into `enac_tmem16a_equilibrium.py` |
