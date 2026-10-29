@@ -4191,6 +4191,66 @@ sources:
     claim_label: unverified
     notes: French regional health authority coordinating public hospital care, community medical prevention, specialized clinical networks, and patient guidance across French Guiana; robots.txt allow (2026-10-28), manual access, link and summary only.
 
+  - id: chum-mq-resource-pages
+    title: Centre Hospitalier Universitaire de Martinique website (www.chu-martinique.fr)
+    publisher: Centre Hospitalier Universitaire de Martinique
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.chu-martinique.fr/
+    url: null
+    claim_label: unverified
+    notes: Regional university hospital center in Fort-de-France coordinating pediatric, respiratory, and cystic fibrosis reference center services across Martinique; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: bonairegov-bq-resource-pages
+    title: Openbaar Lichaam Bonaire website (bonairegov.com)
+    publisher: Openbaar Lichaam Bonaire
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://bonairegov.com/
+    url: null
+    claim_label: unverified
+    notes: Official public entity coordinating community health policy, specialized hospital referrals, preventive medicine, and resident social assistance across Bonaire; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: sysselmesteren-sj-resource-pages
+    title: Sysselmesteren på Svalbard website (www.sysselmesteren.no)
+    publisher: Sysselmesteren på Svalbard
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://www.sysselmesteren.no/
+    url: null
+    claim_label: unverified
+    notes: Governor authority coordinating territorial rescue, emergency healthcare transport, and hospital clinic access on Svalbard; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: shire-cc-resource-pages
+    title: Shire of Cocos (Keeling) Islands website (shire.cc)
+    publisher: Shire of Cocos (Keeling) Islands
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://shire.cc/
+    url: null
+    claim_label: unverified
+    notes: Local government authority coordinating island health services, community medical facilities, and emergency referral transport across the Cocos Keeling Islands; robots.txt allow (2026-10-28), manual access, link and summary only.
+
+  - id: shire-cx-resource-pages
+    title: Shire of Christmas Island website (shire.gov.cx)
+    publisher: Shire of Christmas Island
+    kind: resource_pages
+    access: manual
+    robots: allow
+    robots_checked: 2026-10-28
+    landing_page: https://shire.gov.cx/
+    url: null
+    claim_label: unverified
+    notes: Local public administration coordinating community wellness programs, health clinic operations, and medical transport across Christmas Island; robots.txt allow (2026-10-28), manual access, link and summary only.
+
   - id: ncbi-variation
     title: NCBI Variation Services (SPDI and HGVS APIs)
     publisher: National Center for Biotechnology Information

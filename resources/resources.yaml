@@ -4378,3 +4378,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-28
     status: active
+
+  - id: chum-mq-pediatric-pulmonology
+    name: Specialized pediatric pulmonology and hospital clinical services in Martinique
+    organisation: Centre Hospitalier Universitaire de Martinique
+    countries: [MQ]
+    url: https://www.chu-martinique.fr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Regional university hospital center in Fort-de-France coordinating pediatric, respiratory, and cystic fibrosis reference center services.
+    who_for: not_checked
+    format: online
+    lang: fr-MQ
+    source_id: chum-mq-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: bonairegov-bq-public-health
+    name: Public health coordination and community medical services in Bonaire
+    organisation: Openbaar Lichaam Bonaire
+    countries: [BQ]
+    url: https://bonairegov.com/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official public administration coordinating community health policy, hospital referrals, and primary care clinics across Bonaire.
+    who_for: not_checked
+    format: online
+    lang: nl-BQ
+    source_id: bonairegov-bq-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: sysselmesteren-sj-health-rescue
+    name: Public health oversight and emergency medical rescue services in Svalbard
+    organisation: Sysselmesteren på Svalbard
+    countries: [SJ]
+    url: https://www.sysselmesteren.no/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, urgent_crisis]
+    summary: Governor authority coordinating territorial rescue, emergency healthcare transport, and hospital clinic access on Svalbard.
+    who_for: not_checked
+    format: online
+    lang: no-SJ
+    source_id: sysselmesteren-sj-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: shire-cc-health-administration
+    name: Community health clinic support and medical administration in the Cocos Keeling Islands
+    organisation: Shire of Cocos (Keeling) Islands
+    countries: [CC]
+    url: https://shire.cc/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Local administration coordinating island health services, community medical facilities, and emergency referral transport.
+    who_for: not_checked
+    format: online
+    lang: en-CC
+    source_id: shire-cc-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: shire-cx-health-services
+    name: Community health programs and public administration in Christmas Island
+    organisation: Shire of Christmas Island
+    countries: [CX]
+    url: https://shire.gov.cx/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Local public administration coordinating community wellness programs, health clinic operations, and medical transport across Christmas Island.
+    who_for: not_checked
+    format: online
+    lang: en-CX
+    source_id: shire-cx-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active

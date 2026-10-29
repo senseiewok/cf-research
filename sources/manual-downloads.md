@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-241 to download by hand, 1 to ask for, 3 not to download.
+246 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -179,6 +179,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | chu-reunion-fr-resource-pages | Centre Hospitalier Universitaire de La Réunion website (www.chu-reunion.fr) | [page](https://www.chu-reunion.fr/) | link only | Regional university hospital center providing specialized pediatric pulmonology, clinical research, and acute care in Reunion; robots.txt allow (2026-10-28), m… |
+
+### Centre Hospitalier Universitaire de Martinique
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| chum-mq-resource-pages | Centre Hospitalier Universitaire de Martinique website (www.chu-martinique.fr) | [page](https://www.chu-martinique.fr/) | link only | Regional university hospital center in Fort-de-France coordinating pediatric, respiratory, and cystic fibrosis reference center services across Martinique; rob… |
 
 ### Centre Hospitalier Universitaire Mohammed VI Marrakech
 
@@ -1063,6 +1069,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | cfnorge-resource-pages | Norsk Forening for Cystisk Fibrose website (cfnorge.no) | [page](https://cfnorge.no/) | link only | Official national cystic fibrosis association in Norway. |
 
+### Openbaar Lichaam Bonaire
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| bonairegov-bq-resource-pages | Openbaar Lichaam Bonaire website (bonairegov.com) | [page](https://bonairegov.com/) | link only | Official public entity coordinating community health policy, specialized hospital referrals, preventive medicine, and resident social assistance across Bonaire… |
+
 ### Osh State University Medical Faculty
 
 | ID | What | Open | Save as | Notes |
@@ -1159,6 +1171,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | sbmu-ir-resource-pages | Shahid Beheshti University of Medical Sciences website (sbmu.ac.ir) | [page](https://sbmu.ac.ir/) | link only | Official CF or pediatric referral resource (Shahid Beheshti University of Medical Sciences); robots.txt allow (2026-10-25), manual access, link and summary onl… |
 
+### Shire of Christmas Island
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| shire-cx-resource-pages | Shire of Christmas Island website (shire.gov.cx) | [page](https://shire.gov.cx/) | link only | Local public administration coordinating community wellness programs, health clinic operations, and medical transport across Christmas Island; robots.txt allow… |
+
+### Shire of Cocos (Keeling) Islands
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| shire-cc-resource-pages | Shire of Cocos (Keeling) Islands website (shire.cc) | [page](https://shire.cc/) | link only | Local government authority coordinating island health services, community medical facilities, and emergency referral transport across the Cocos Keeling Islands… |
+
 ### Sidra Medicine
 
 | ID | What | Open | Save as | Notes |
@@ -1206,6 +1230,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | gov-gg-resource-pages | States of Guernsey website (www.gov.gg) | [page](https://www.gov.gg/) | link only | Official government portal coordinating public healthcare administration, hospital operations at Princess Elizabeth Hospital, and community clinical services i… |
+
+### Sysselmesteren på Svalbard
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sysselmesteren-sj-resource-pages | Sysselmesteren på Svalbard website (www.sysselmesteren.no) | [page](https://www.sysselmesteren.no/) | link only | Governor authority coordinating territorial rescue, emergency healthcare transport, and hospital clinic access on Svalbard; robots.txt allow (2026-10-28), manu… |
 
 ### Taiwan Foundation for Rare Disorders (財團法人罕見疾病基金會)
 
