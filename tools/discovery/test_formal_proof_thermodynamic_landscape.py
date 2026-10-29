@@ -42,6 +42,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_crooks_microscopic_reversibility_gating,
     evaluate_helmholtz_hodge_current_decomposition_gating,
     evaluate_thermodynamic_speed_limits_gating,
+    evaluate_stochastic_resetting_first_passage_gating,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -710,6 +711,48 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         # Invalid inputs raise ValueError
         with self.assertRaises(ValueError):
             evaluate_thermodynamic_speed_limits_gating(n_cycle_states=3)
+
+
+    def test_stochastic_resetting_and_optimal_first_passage_bridge(self) -> None:
+        sr = evaluate_stochastic_resetting_first_passage_gating()
+        self.assertTrue(sr["stochastic_resetting_bridge_verified"])
+        self.assertTrue(sr["cftr_resetting_verified"])
+        self.assertTrue(sr["proof_resetting_verified"])
+        self.assertTrue(sr["negative_control_detects_violation"])
+
+        wt = sr["cftr_profiles"]["wt_cftr"]
+        eti = sr["cftr_profiles"]["eti_rescued_8eiq"]
+        f508 = sr["cftr_profiles"]["uncorrected_f508del_5uak"]
+        w1282x = sr["cftr_profiles"]["w1282x_truncated"]
+
+        # WT and ETI operate with low dispersion (CV0 <= 1.05) -> resetting does not accelerate
+        self.assertFalse(wt["reset_accelerates"])
+        self.assertEqual(wt["optimal_reset_rate_hz"], 0.0)
+        self.assertEqual(wt["acceleration_factor"], 1.0)
+        self.assertFalse(eti["reset_accelerates"])
+        self.assertEqual(eti["optimal_reset_rate_hz"], 0.0)
+
+        # Uncorrected F508del is kinetically trapped (CV0 > 1) -> Evans-Majumdar resetting accelerates
+        self.assertTrue(f508["reset_accelerates"])
+        self.assertGreater(f508["cv0"], 1.0)
+        self.assertGreater(f508["optimal_reset_rate_hz"], 0.0)
+        self.assertGreater(f508["acceleration_factor"], 2.0)
+        self.assertLess(f508["mfpt_optimal_ms"], f508["mu0_unperturbed_ms"])
+
+        # W1282X lacks active catalytic domain -> impossible active transition
+        self.assertFalse(w1282x["active_transition_possible"])
+        self.assertEqual(w1282x["mu0_unperturbed_ms"], "infinity")
+
+        # Formal proof challenges have heavy-tailed tactic search -> resetting accelerates
+        for cid, prof in sr["challenge_profiles"].items():
+            self.assertTrue(prof["reset_accelerates"], cid)
+            self.assertGreater(prof["cv0"], 1.0, cid)
+            self.assertGreater(prof["optimal_reset_rate_hz"], 0.0, cid)
+            self.assertGreater(prof["acceleration_factor"], 1.5, cid)
+
+        # Invalid inputs raise ValueError
+        with self.assertRaises(ValueError):
+            evaluate_stochastic_resetting_first_passage_gating(n_cycle_states=3)
 
 
 class FactoringDeltaBitsTests(unittest.TestCase):
