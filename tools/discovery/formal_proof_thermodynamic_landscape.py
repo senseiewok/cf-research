@@ -66,8 +66,9 @@ R_GAS_KCAL_MOL_K: float = 1.98720425864083e-3
 PHYSIOLOGICAL_TEMP_K: float = 310.15  # 37.0 deg C
 RT_37C_KCAL_MOL: float = R_GAS_KCAL_MOL_K * PHYSIOLOGICAL_TEMP_K  # ~0.61633 kcal/mol
 
-FARADAY_CONSTANT_C_MOL: float = 96485.332
-R_GAS_J_MOL_K: float = 8.314462618
+# SI constants for electrochemical Nernst potential V_T = (R_J * T / F) in mV
+FARADAY_CONSTANT_C_MOL: float = 96485.332  # C/mol (CODATA 2018)
+R_GAS_J_MOL_K: float = 8.314462618          # J/(mol*K) (CODATA 2018)
 
 RESEARCH_BOUNDARY: str = (
     "Independent open-source research and formal verification model, not medical advice. "
@@ -194,7 +195,7 @@ PROOF_THERMODYNAMIC_PARAMETERS: Dict[str, BiophysicalParameter] = {
         units="dimensionless",
         category="empirical",
         doi_or_pdb="10.1126/science.ade2216",
-        location_in_source="Bicarbonate-to-chloride single-channel permeability ratio in human CFTR pore (PDB 8EIQ / 6MSM)",
+        location_in_source="Bicarbonate-to-chloride permeability ratio in cryo-EM pore conduction pathway (Fiedorczuk and Chen, Science 2022, DOI: 10.1126/science.ade2216, PDB 8EIQ)",
         uncertainty_range=(0.20, 0.30),
     ),
     "LANDAUER_BIT_ERASURE_ENERGY_KCAL": BiophysicalParameter(
@@ -212,7 +213,7 @@ PROOF_THERMODYNAMIC_PARAMETERS: Dict[str, BiophysicalParameter] = {
         units="bits",
         category="phenomenological_heuristic",
         doi_or_pdb="10.1126/science.aaw7611",
-        location_in_source="Mutual information I(NBD; TMD) in bits between NBD dimer closure and TMD channel opening in wild-type CFTR",
+        location_in_source="Phenomenological mutual information I(NBD; TMD) in bits derived from cryo-EM state distributions of NBD dimer closure and TMD channel opening (Liu et al. Science 2019, DOI: 10.1126/science.aaw7611, PDB 6O2P)",
         uncertainty_range=(0.4875, 0.8125),
         notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
     ),
