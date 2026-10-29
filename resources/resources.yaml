@@ -4298,3 +4298,83 @@ resources:
     basis: lead_only
     last_checked: 2026-10-28
     status: active
+
+  - id: hospice-im-palliative-care
+    name: Palliative care clinical services and family support in the Isle of Man
+    organisation: Hospice Isle of Man
+    countries: [IM]
+    url: https://www.hospice.org.im/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [transplant_advanced, daily_life, find_care_team]
+    summary: Island palliative care charity providing community medical support, symptom control, respite guidance, and family counseling for people facing advanced conditions across the Isle of Man.
+    who_for: not_checked
+    format: online
+    lang: en-IM
+    source_id: hospice-im-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: gov-sx-health-services
+    name: Public health administration and hospital clinical coordination in Sint Maarten
+    organisation: Government of Sint Maarten
+    countries: [SX]
+    url: https://www.sintmaartengov.org/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official government portal coordinating public healthcare administration, social security programs, hospital services, and specialized pediatric referrals across Sint Maarten.
+    who_for: not_checked
+    format: online
+    lang: en-SX
+    source_id: gov-sx-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: doh-as-health-services
+    name: Territorial public health programs and clinical guidance in American Samoa
+    organisation: American Samoa Department of Health
+    countries: [AS]
+    url: https://doh.as/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Official territorial health department administering community medical clinics, pediatric health programs, chronic disease surveillance, and hospital referral coordination across American Samoa.
+    who_for: not_checked
+    format: online
+    lang: en-AS
+    source_id: doh-as-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: chpf-pf-hospital-care
+    name: Specialized hospital medical care and pediatric clinical services in French Polynesia
+    organisation: Centre Hospitalier de Polynésie française
+    countries: [PF]
+    url: https://www.chpf.pf/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: Principal territorial referral hospital coordinating inpatient clinical care, specialized pediatric medicine, diagnostic consultations, and medical evacuations across French Polynesia.
+    who_for: not_checked
+    format: online
+    lang: fr-PF
+    source_id: chpf-pf-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active
+
+  - id: ars-gf-health-services
+    name: Regional health agency administration and hospital coordination in French Guiana
+    organisation: Agence Régionale de Santé Guyane
+    countries: [GF]
+    url: https://www.guyane.ars.sante.fr/
+    audience: [adult_with_cf, parent_carer_of_child, care_team]
+    category: [find_care_team, newly_diagnosed_basics]
+    summary: French regional health authority coordinating public hospital care, community medical prevention, specialized clinical networks, and patient guidance across French Guiana.
+    who_for: not_checked
+    format: online
+    lang: fr-GF
+    source_id: ars-gf-resource-pages
+    basis: lead_only
+    last_checked: 2026-10-28
+    status: active

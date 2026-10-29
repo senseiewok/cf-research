@@ -20,6 +20,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     compute_stage_state_vector,
     evaluate_mechanistic_basis_span,
     evaluate_anthropic_proof_visual_geometries,
+    evaluate_information_theoretic_shannon_mdl_packing,
     evaluate_kramers_escape_and_brinkman_permeability,
     ETH_3SAT_LEAN4_STAGES,
     evaluate_scite_citation_polarity_and_kernel_parity,
@@ -87,6 +88,8 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         self.assertIn("fermats_last_theorem", FORMAL_MATH_CHALLENGE_PROFILES)
         self.assertIn("formal_math_zeta23", FORMAL_MATH_CHALLENGE_PROFILES)
         self.assertIn("formal_math_3sum_apsp", FORMAL_MATH_CHALLENGE_PROFILES)
+        self.assertIn("shannon_mdl_cargo_bridge", report)
+        self.assertTrue(report["shannon_mdl_cargo_bridge"]["shannon_mdl_bridge_verified"])
 
     def test_ah9_parameter_provenance_and_ah10_negative_control(self) -> None:
         self.assertGreaterEqual(len(PROOF_THERMODYNAMIC_PARAMETERS), 5)
@@ -235,6 +238,37 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             evaluate_spectral_laplacian_and_cheeger_bottleneck(
                 unbridged_cut_conductance=0.60, bridged_cut_conductance=0.20
             )
+
+    def test_information_theoretic_shannon_mdl_packing_bridge(self) -> None:
+        pk = evaluate_information_theoretic_shannon_mdl_packing()
+        self.assertTrue(pk["shannon_mdl_bridge_verified"])
+        wt = pk["aav_capsid_packaging_evaluation"]["wt_cftr_oversize"]
+        self.assertFalse(wt["packaging_feasible"])
+        self.assertGreater(wt["oversize_nt"], 400)
+        self.assertEqual(wt["truncation_risk"], "SEVERE_GENOME_TRUNCATION")
+
+        mr = pk["aav_capsid_packaging_evaluation"]["delta_r_minigene_rescue"]
+        self.assertTrue(mr["packaging_feasible"])
+        self.assertLess(mr["capsid_packing_density_pct"], 100.0)
+        self.assertGreater(mr["packaging_margin_headroom_nt"], 50)
+        self.assertTrue(mr["pka_camp_regulation_preserved"])
+
+        split = pk["aav_capsid_packaging_evaluation"]["split_aav_trans_splicing_intein"]
+        self.assertTrue(split["both_vectors_within_capsid_limit"])
+
+        for cid, c_prof in pk["proof_dag_mdl_compression_evaluation"]["challenge_compression_profiles"].items():
+            self.assertLess(c_prof["compression_ratio"], 0.50, cid)
+            self.assertTrue(c_prof["lossless_zero_sorry_verified"], cid)
+            self.assertGreater(c_prof["redundancy_elimination_pct"], 50.0)
+
+        with self.assertRaises(ValueError):
+            evaluate_information_theoretic_shannon_mdl_packing(aav_capsid_capacity_nt=1000)
+        with self.assertRaises(ValueError):
+            evaluate_information_theoretic_shannon_mdl_packing(cftr_cds_wt_nt=1000)
+        with self.assertRaises(ValueError):
+            evaluate_information_theoretic_shannon_mdl_packing(cftr_delta_r_deletion_nt=-5)
+        with self.assertRaises(ValueError):
+            evaluate_information_theoretic_shannon_mdl_packing(compact_promoter_poly_a_savings_nt=1000)
 
 
 
