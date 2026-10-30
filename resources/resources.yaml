@@ -1033,8 +1033,13 @@ resources:
     who_for: not_checked
     lang: da
     source_id: cff-dk-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 6ad450e002709069c44b042d640775dcb62587c54bb76e38c3740fceafa2eaab
+    last_checked: 2026-10-29
     status: active
 
   - id: rfcf-se-stod-och-rad
@@ -1733,8 +1738,13 @@ resources:
     format: online
     lang: es-BO
     source_id: minsalud-bo-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: a1aa194dae6d7dbe1546dd3cc839321d624658dda05186c2fd93085dcc4885e1
+    last_checked: 2026-10-29
     status: active
 
   - id: nanbyou-jp-cystic-fibrosis
@@ -2530,8 +2540,13 @@ resources:
     format: online
     lang: ky
     source_id: oshsu-kg-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: e7d644b835293f52644915a35b2aa368c982d4272ad37f8c23aa6b46b6709486
+    last_checked: 2026-10-29
     status: active
   - id: pasteur-dz-genetique-et-diagnostic
     name: Diagnostic biologique et génétique médicale en Algérie
@@ -2623,8 +2638,13 @@ resources:
     format: online
     lang: ar
     source_id: uobaghdad-iq-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: ce93accafeeb1b2f64c98633718da1e829c9fe4f2b40e0bfe4ba52ead114e43f
+    last_checked: 2026-10-29
     status: active
   - id: sbmu-ir-pediatric-respiratory-center
     name: مرکز تحقیقات بیماری های تنفسی کودکان و فیبروز سیستیک
@@ -2916,8 +2936,13 @@ resources:
     format: online
     lang: en-ZM
     source_id: unza-zm-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 004410e1b9c23e08b636b4f70c8e16dec3af8820c29f1173b44cb6ae90fe2c0c
+    last_checked: 2026-10-29
     status: active
   - id: uz-zw-health-sciences-pediatric-care
     name: Faculty of Medicine and Health Sciences clinical orientation
