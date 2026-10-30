@@ -238,6 +238,10 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0285", "track": "Track A", "tier": "T2",
         "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
     },
+    "macrophage_evasion": {
+        "task": "T-0544", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+    },
     "macrophage_evasion_kinetics": {
         "task": "T-0271", "track": "Track A", "tier": "T2",
         "discipline": "microbiology_host", "persona": "researchers", "triage": "keep",
