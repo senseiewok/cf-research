@@ -1943,7 +1943,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-24
+    robots_checked: 2026-10-29
     landing_page: https://afcr.ro/
     url: null
     claim_label: unverified
@@ -2163,7 +2163,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://senadis.gov.py/
     url: null
     claim_label: unverified
@@ -2722,7 +2722,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://pediatriya.uz/
     url: null
     claim_label: unverified
@@ -2786,7 +2786,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://www.moh.gov.om/
     url: null
     claim_label: unverified
@@ -2903,7 +2903,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://pasteur-yaounde.org/
     url: null
     claim_label: unverified
