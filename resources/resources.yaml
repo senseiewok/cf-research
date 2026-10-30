@@ -1413,8 +1413,13 @@ resources:
     format: online
     lang: ro
     source_id: afcr-ro-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: e67dce656de2dff8b33cf330e58ccd772bac1fc27c13c66c471f4fd4223367c4
+    last_checked: 2026-10-29
     status: active
 
   - id: lcfa-pagalba-ir-zinios
@@ -1706,8 +1711,13 @@ resources:
     format: both
     lang: es-PY
     source_id: senadis-py-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: e5f17357ee562329139c3a049ee49f50138ccb342efd0c3fef7c27cde7ddcb79
+    last_checked: 2026-10-29
     status: active
 
   - id: minsalud-bo-orientacion-salud
@@ -2494,14 +2504,18 @@ resources:
     url: https://pediatriya.uz/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, find_care_team]
-    summary: National specialized pediatric medical center in Tashkent providing pediatric pulmonology care, diagnostic evaluation, and clinical
-      follow-up for children with cystic fibrosis in Uzbekistan.
+    summary: National specialized pediatric medical center in Tashkent providing pediatric pulmonology care, diagnostic evaluation, and clinical follow-up for children with cystic fibrosis in Uzbekistan.
     who_for: not_checked
     format: online
     lang: uz
     source_id: pediatriya-uz-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 4091c7c48a2e11499f4e5159b642a0dde98b3d3a2816fe4602e5be64f14ffa05
+    last_checked: 2026-10-29
     status: active
   - id: oshsu-kg-pediatrics-and-child-health
     name: Педиатрия жана балдардын респиратордук саламаттыгы
@@ -2583,14 +2597,18 @@ resources:
     url: https://www.moh.gov.om/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, find_care_team]
-    summary: Omani health ministry portal connecting families with tertiary hospital pediatric pulmonology clinics, the National Genetic Center,
-      and rare disease care services.
+    summary: Omani health ministry portal connecting families with tertiary hospital pediatric pulmonology clinics, the National Genetic Center, and rare disease care services.
     who_for: not_checked
     format: online
     lang: ar
     source_id: moh-om-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 038cb65319072df7f6bf3f0fa8cc97ffd21a19f4ac082ceadbdfd01df5eb324d
+    last_checked: 2026-10-29
     status: active
   - id: uobaghdad-iq-pediatrics-and-cf
     name: فرع طب الأطفال والأمراض التنفسية والوراثية
@@ -2740,14 +2758,18 @@ resources:
     url: https://pasteur-yaounde.org/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, trials_research_registries, find_care_team]
-    summary: Cameroonian national public health reference laboratory offering diagnostic testing, respiratory microbiology, and clinical orientation
-      in Yaoundé.
+    summary: Cameroonian national public health reference laboratory offering diagnostic testing, respiratory microbiology, and clinical orientation in Yaoundé.
     who_for: not_checked
     format: online
     lang: fr-CM
     source_id: pasteur-cm-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 5a5e41bfa3cf867efc580d180f67b52bfed1e16f4ecdf8deb02ebacba48554af
+    last_checked: 2026-10-29
     status: active
   - id: minsa-ao-servicos-nacionais-de-saude
     name: Serviços públicos de saúde e orientação hospitalar em Angola
