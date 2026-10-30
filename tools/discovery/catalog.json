@@ -6,22 +6,22 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 98,
+  "total_modules": 99,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 101,
+  "test_suites_count": 102,
   "persona_summary": {
-    "researchers": 97,
+    "researchers": 98,
     "builders": 1
   },
   "triage_summary": {
-    "keep": 80,
+    "keep": 81,
     "merge": 14,
     "archive": 4
   },
   "discipline_summary": {
     "structural_biology": 14,
     "rna_gene_editing": 25,
-    "airway_delivery": 46,
+    "airway_delivery": 47,
     "microbiology_host": 7,
     "clinical_trials": 3,
     "ai_verification": 3
@@ -476,8 +476,8 @@
     },
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
-      "count": 46,
-      "keep_count": 39,
+      "count": 47,
+      "keep_count": 40,
       "merge_count": 6,
       "archive_count": 1,
       "modules": [
@@ -506,6 +506,17 @@
         {
           "module": "aerosol_hygroscopic_deposition_kinetics",
           "task": "T-0473",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "keep",
+          "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "aerosol_mmad_mucus_penetration",
+          "task": "T-0547",
           "track": "Track A",
           "tier": "T2",
           "discipline": "airway_delivery",
