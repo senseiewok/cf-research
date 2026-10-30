@@ -1376,8 +1376,13 @@ resources:
     format: online
     lang: sk
     source_id: cfasociacia-sk-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 5e62c7dd5bc950b11429390daea3df87e2a9268b4390af14a498ab5ee0e3b17e
+    last_checked: 2026-10-29
     status: active
 
   - id: cfcro-podrska-i-informacije
@@ -1657,8 +1662,13 @@ resources:
     format: online
     lang: es-VE
     source_id: mischiquiticos-ve-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 5e391f61aba044cd8b3ac2d3e73e7a990366f7cc72323d37b4c9578661f82889
+    last_checked: 2026-10-29
     status: active
 
   - id: fusal-apoyo-salud-el-salvador
@@ -2464,14 +2474,18 @@ resources:
     url: https://kaznmu.edu.kz/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, find_care_team]
-    summary: Kazakh national medical university operating the School of Pediatrics and university children's clinical hospital for respiratory and
-      cystic fibrosis care in Kazakhstan.
+    summary: Kazakh national medical university operating the School of Pediatrics and university children's clinical hospital for respiratory and cystic fibrosis care in Kazakhstan.
     who_for: not_checked
     format: online
     lang: kk
     source_id: kaznmu-kz-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 069d1be9ac461c147450412400476db751ef58d1e13903f3ac0881699c567733
+    last_checked: 2026-10-29
     status: active
   - id: pediatriya-uz-bolalar-pulmonologiyasi
     name: Bolalar pulmonologiyasi va mukovistsidoz diagnostikasi
@@ -2549,14 +2563,18 @@ resources:
     url: https://www.dasmaninstitute.org/
     audience: [adult_with_cf, parent_carer_of_child, care_team, researcher]
     category: [newly_diagnosed_basics, trials_research_registries]
-    summary: National research and clinical institute in Kuwait conducting human genomic sequencing, hereditary disorder diagnostics, and translational
-      clinical research.
+    summary: National research and clinical institute in Kuwait conducting human genomic sequencing, hereditary disorder diagnostics, and translational clinical research.
     who_for: not_checked
     format: online
     lang: en
     source_id: dasman-kw-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 52e44ebb166ed1b4bf0c9aeef3d0ce2bf2f097e9aeb738a8e2b31bb8567f64d3
+    last_checked: 2026-10-29
     status: active
   - id: moh-om-genetic-and-pediatric-care
     name: الخدمات الصحية والمراكز الوراثية والتنفسية في سلطنة عُمان
@@ -2702,14 +2720,18 @@ resources:
     url: https://pasteur.ci/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, trials_research_registries, find_care_team]
-    summary: Ivorian national biomedical research and reference laboratory institute providing molecular diagnostics, microbiology services, and
-      public health guidance.
+    summary: Ivorian national biomedical research and reference laboratory institute providing molecular diagnostics, microbiology services, and public health guidance.
     who_for: not_checked
     format: online
     lang: fr-CI
     source_id: pasteur-ci-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: b3deb2ad0509e5cc3d3b24e859fe6504cf1433444a399b67f848af43335ca860
+    last_checked: 2026-10-29
     status: active
   - id: pasteur-cm-laboratoire-et-sante-publique
     name: Laboratoire national de référence et santé publique au Cameroun
