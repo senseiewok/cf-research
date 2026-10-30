@@ -1898,7 +1898,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-24
+    robots_checked: 2026-10-29
     landing_page: https://www.cisztasfibrozis.hu/
     url: null
     claim_label: unverified
@@ -2437,7 +2437,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://hospitalmaria.org/
     url: null
     claim_label: unverified
@@ -2604,7 +2604,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://kantichildrenhospital.gov.np/
     url: null
     claim_label: unverified
@@ -2615,7 +2615,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://www.laumcrh.com/
     url: null
     claim_label: unverified
@@ -2877,7 +2877,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://www.ucad.sn/
     url: null
     claim_label: unverified

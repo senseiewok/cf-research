@@ -1355,8 +1355,13 @@ resources:
     format: online
     lang: hu
     source_id: cisztasfibrozis-hu-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: cb03e7661e3614e7c6e8b4623fe95432e6b4b4179910a6b385c5cde203156ac4
+    last_checked: 2026-10-29
     status: active
 
   - id: scfa-pomoc-a-poradenstvo
@@ -2027,16 +2032,19 @@ resources:
     url: https://hospitalmaria.org/
     audience: [parent_carer_of_child, care_team]
     category: [find_care_team, newly_diagnosed_basics]
-    summary: Honduran pediatric specialty hospital providing multidisciplinary respiratory, nutritional, and diagnostic care for children with complex
-      chronic conditions.
-    summary_es: Hospital hondureño de especialidades pediátricas que brinda atención multidisciplinaria respiratoria, nutricional y diagnóstica
-      para niños con condiciones crónicas complejas.
+    summary: Honduran pediatric specialty hospital providing multidisciplinary respiratory, nutritional, and diagnostic care for children with complex chronic conditions.
+    summary_es: Hospital hondureño de especialidades pediátricas que brinda atención multidisciplinaria respiratoria, nutricional y diagnóstica para niños con condiciones crónicas complejas.
     who_for: not_checked
     format: online
     lang: es-HN
     source_id: hospitalmaria-hn-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 338606f8c31ae1b594cb842924ddda7f77c985442ca6cd8ef6bbbffd83c1739b
+    last_checked: 2026-10-29
     status: active
   - id: unan-ni-investigacion-y-salud-pediatrica
     name: Orientación académica y salud pediátrica en Nicaragua
@@ -2284,14 +2292,18 @@ resources:
     url: https://kantichildrenhospital.gov.np/
     audience: [parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, find_care_team, daily_life]
-    summary: Nepalese government tertiary pediatric referral hospital offering specialized respiratory medicine, inpatient and outpatient child
-      care, and clinical consultation for families.
+    summary: Nepalese government tertiary pediatric referral hospital offering specialized respiratory medicine, inpatient and outpatient child care, and clinical consultation for families.
     who_for: not_checked
     format: online
     lang: en-NP
     source_id: kanti-np-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 0dfd4e178fe995c435a4f98537226f157a3975da40709f831d816cb04732f6d4
+    last_checked: 2026-10-29
     status: active
   - id: laumcrh-lb-pediatric-pulmonology-care
     name: Multidisciplinary pediatric pulmonology and genetic care
@@ -2300,14 +2312,18 @@ resources:
     url: https://www.laumcrh.com/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, find_care_team, daily_life]
-    summary: Lebanese academic medical center providing specialized pediatric pulmonology, sweat test diagnostics, and multidisciplinary respiratory
-      care for children and adults.
+    summary: Lebanese academic medical center providing specialized pediatric pulmonology, sweat test diagnostics, and multidisciplinary respiratory care for children and adults.
     who_for: not_checked
     format: online
     lang: en-LB
     source_id: laumcrh-lb-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: b025110e9d0401dd84a272b7eb2b79722a435d93d5cbcba1fb596cc0d81b8275
+    last_checked: 2026-10-29
     status: active
   - id: kfshrc-sa-cystic-fibrosis-care
     name: رعاية التليف الكيسي وأمراض الرئة الوراثية التخصصية
@@ -2666,14 +2682,18 @@ resources:
     url: https://www.ucad.sn/
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [trials_research_registries, find_care_team, newly_diagnosed_basics]
-    summary: Senegalese national university portal supporting medical faculty research, pediatric pulmonology training, and university hospital
-      clinical directories in Dakar.
+    summary: Senegalese national university portal supporting medical faculty research, pediatric pulmonology training, and university hospital clinical directories in Dakar.
     who_for: not_checked
     format: online
     lang: fr-SN
     source_id: ucad-sn-resource-pages
-    basis: lead_only
-    last_checked: 2026-10-25
+    basis: person_read_in_browser
+    summary_attested_by: maintainer
+    summary_attested_on: 2026-10-29
+    confirmed_by: maintainer
+    confirmed_on: 2026-10-29
+    content_hash: 0786a976410f549d797db4a54772349c917acd59176ef462fccd1c8b687beb19
+    last_checked: 2026-10-29
     status: active
   - id: pasteur-ci-diagnostic-et-recherche
     name: Diagnostic biologique et recherche médicale en Côte d’Ivoire
