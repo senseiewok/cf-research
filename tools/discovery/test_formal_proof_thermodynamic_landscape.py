@@ -47,6 +47,8 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_optimal_transport_wasserstein_benamou_brenier_gating,
     evaluate_transfer_entropy_causal_directionality_gating,
     evaluate_harada_sasa_fluctuation_dissipation_gating,
+    evaluate_hatano_sasa_excess_entropy_gating,
+    evaluate_clausius_duhem_continuum_mucus_rheology,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -944,6 +946,108 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 evaluate_harada_sasa_fluctuation_dissipation_gating(n_cycle_states=3)
 
+
+    def test_hatano_sasa_excess_entropy_bridge(self) -> None:
+        """Verify Round 22 (T-0539) Hatano-Sasa excess entropy production and NESS transitions bridge."""
+        rep = evaluate_two_way_bridge_isomorphism()
+        self.assertIn("hatano_sasa_excess_entropy_bridge", rep)
+        hs = rep["hatano_sasa_excess_entropy_bridge"]
+        self.assertTrue(hs["hatano_sasa_bridge_verified"])
+        self.assertTrue(hs["cftr_excess_entropy_stratification_verified"])
+        self.assertTrue(hs["proof_excess_entropy_parity_verified"])
+        self.assertTrue(hs["negative_control_detects_violation"])
+
+        cftr = hs["cftr_profiles"]
+        wt = cftr["wt_cftr"]
+        eti = cftr["eti_rescued_8eiq"]
+        f508 = cftr["uncorrected_f508del_5uak"]
+        w1282x = cftr["w1282x_truncated"]
+
+        # WT CFTR satisfies Hatano-Sasa equality and Second Law
+        self.assertEqual(wt["exp_neg_y_mean"], 1.000)
+        self.assertTrue(wt["second_law_satisfied"])
+        self.assertLessEqual(wt["excess_entropy_y_kb"], 2.60)
+        self.assertGreaterEqual(wt["adiabaticity_ratio"], 0.80)
+        self.assertTrue(wt["transition_competence_verified"])
+
+        # ETI-rescued restores bounded excess entropy
+        self.assertEqual(eti["exp_neg_y_mean"], 1.000)
+        self.assertTrue(eti["second_law_satisfied"])
+        self.assertLessEqual(eti["excess_entropy_y_kb"], 3.20)
+        self.assertGreaterEqual(eti["adiabaticity_ratio"], 0.75)
+        self.assertGreaterEqual(eti["excess_entropy_recovery_pct"], 75.0)
+        self.assertTrue(eti["transition_competence_verified"])
+
+        # Uncorrected F508del suffers non-adiabatic trapping and elevated excess dissipation
+        self.assertEqual(f508["exp_neg_y_mean"], 1.000)
+        self.assertTrue(f508["second_law_satisfied"])
+        self.assertGreaterEqual(f508["excess_entropy_y_kb"], 6.0)
+        self.assertLess(f508["adiabaticity_ratio"], 0.40)
+        self.assertTrue(f508["transition_competence_verified"])
+
+        # W1282X nonsense truncation is stalled transition
+        self.assertFalse(w1282x["transition_competence_verified"])
+        self.assertEqual(w1282x["exp_neg_y_mean"], 0.0)
+        self.assertEqual(w1282x["excess_entropy_y_kb"], 0.0)
+
+        # Formal proof challenges satisfy Hatano-Sasa equality
+        for cid, prof in hs["challenge_profiles"].items():
+            self.assertEqual(prof["exp_neg_y_mean"], 1.000, cid)
+            self.assertGreaterEqual(prof["excess_entropy_y"], 1.5, cid)
+
+        # Invalid inputs raise ValueError
+        with self.assertRaises(ValueError):
+            evaluate_hatano_sasa_excess_entropy_gating(n_transition_protocols=2)
+
+    def test_clausius_duhem_continuum_mucus_rheology_bridge(self) -> None:
+        """Verify Round 23 (T-0543) Clausius-Duhem dissipation inequality and CF mucus gel rheology bridge."""
+        rep = evaluate_two_way_bridge_isomorphism()
+        self.assertIn("clausius_duhem_mucus_rheology_bridge", rep)
+        cd = rep["clausius_duhem_mucus_rheology_bridge"]
+        self.assertTrue(cd["clausius_duhem_bridge_verified"])
+        self.assertTrue(cd["mucus_stratification_verified"])
+        self.assertTrue(cd["proof_continuum_parity_verified"])
+        self.assertTrue(cd["negative_control_detects_violation"])
+
+        mucus = cd["mucus_profiles"]
+        healthy = mucus["healthy_airway_mucus"]
+        cf = mucus["cf_sputum_f508del"]
+        rescue = mucus["enzymatic_lyase_rescue"]
+        passive = mucus["passive_water_control"]
+
+        # Healthy airway mucus has low viscous dissipation and high elastic storage
+        self.assertTrue(healthy["clausius_duhem_satisfied"])
+        self.assertLessEqual(healthy["dissipation_rate_kpa_s"], 1.20)
+        self.assertGreaterEqual(healthy["elastic_storage_fraction"], 0.65)
+        self.assertTrue(healthy["ciliary_transportable"])
+
+        # Dense pathological CF sputum has massive irreversible dissipation and yield stress
+        self.assertTrue(cf["clausius_duhem_satisfied"])
+        self.assertGreaterEqual(cf["dissipation_rate_kpa_s"], 8.50)
+        self.assertLess(cf["elastic_storage_fraction"], 0.25)
+        self.assertFalse(cf["ciliary_transportable"])
+
+        # Enzymatic / lyase rescue normalizes thermodynamic dissipation rate
+        self.assertTrue(rescue["clausius_duhem_satisfied"])
+        self.assertLessEqual(rescue["dissipation_rate_kpa_s"], 2.00)
+        self.assertGreaterEqual(rescue["elastic_storage_fraction"], 0.60)
+        self.assertTrue(rescue["ciliary_transportable"])
+
+        # Passive water control is exact equilibrium baseline
+        self.assertTrue(passive["clausius_duhem_satisfied"])
+        self.assertEqual(passive["dissipation_rate_kpa_s"], 0.0)
+        self.assertEqual(passive["elastic_storage_rate_kpa_s"], 0.0)
+        self.assertEqual(passive["stress_power_rate_kpa_s"], 0.0)
+
+        # Formal proof challenges satisfy continuum dissipation bounds
+        for cid, prof in cd["challenge_profiles"].items():
+            self.assertTrue(prof["clausius_duhem_satisfied"], cid)
+            self.assertLessEqual(prof["proof_dissipation"], 2.50, cid)
+            self.assertGreaterEqual(prof["elastic_lemma_fraction"], 0.80, cid)
+
+        # Invalid inputs raise ValueError
+        with self.assertRaises(ValueError):
+            evaluate_clausius_duhem_continuum_mucus_rheology(n_mucus_regimes=2)
 
 
 class FactoringDeltaBitsTests(unittest.TestCase):
