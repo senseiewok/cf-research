@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `97` (plus 4 infrastructure scripts and 100 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `79`
+- **Total Verified Modules:** `98` (plus 4 infrastructure scripts and 101 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `80`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -65,7 +65,7 @@ python tools/discovery/discovery_council.py --check-index
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 45 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 46 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -92,6 +92,7 @@ python tools/discovery/discovery_council.py --check-index
 | `glycocalyx_charge_barrier_model.py` | `T-0351` | `T2` | `merge` | Merge into `glycocalyx_permeabilization_model.py` |
 | `glycocalyx_permeabilization_model.py` | `T-0291` | `T2` | `keep` | Canonical workbench |
 | `lentiviral_basal_integration_persistence.py` | `T-0407` | `T2` | `keep` | Canonical workbench |
+| `lnp_endosomal_escape.py` | `T-0540` | `T2` | `keep` | Canonical workbench |
 | `lnp_escape_dynamics.py` | `T-0285` | `T2` | `keep` | Canonical workbench |
 | `lnp_mucus_shear_shedding_kinetics.py` | `T-0439` | `T2` | `keep` | Canonical workbench |
 | `lnp_nuclear_entry_basal_persistence.py` | `T-0478` | `T2` | `keep` | Canonical workbench |
