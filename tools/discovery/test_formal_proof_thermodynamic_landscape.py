@@ -49,6 +49,8 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_harada_sasa_fluctuation_dissipation_gating,
     evaluate_hatano_sasa_excess_entropy_gating,
     evaluate_clausius_duhem_continuum_mucus_rheology,
+    evaluate_onsager_electroosmotic_transport,
+    evaluate_prigogine_minimum_entropy_production,
     _shannon_mutual_information_2x2,
     evaluate_noether_conservation_and_invariant_transfer,
     evaluate_two_way_bridge_isomorphism,
@@ -1048,6 +1050,74 @@ class FormalProofThermodynamicLandscapeTests(unittest.TestCase):
         # Invalid inputs raise ValueError
         with self.assertRaises(ValueError):
             evaluate_clausius_duhem_continuum_mucus_rheology(n_mucus_regimes=2)
+
+    def test_onsager_reciprocal_relations_and_electroosmotic_transport_bridge(self) -> None:
+        """Verify Round 24 (T-0546) Onsager reciprocal relations and ASL electro-osmotic transport bridge."""
+        rep = evaluate_two_way_bridge_isomorphism()
+        self.assertIn("onsager_electroosmotic_transport_bridge", rep)
+        ons = rep["onsager_electroosmotic_transport_bridge"]
+        self.assertTrue(ons["onsager_transport_bridge_verified"])
+        self.assertTrue(ons["epithelial_transport_stratification_verified"])
+        self.assertTrue(ons["proof_reciprocal_parity_verified"])
+        self.assertTrue(ons["negative_control_detects_violation"])
+
+        profiles = ons["transport_profiles"]
+        wt = profiles["healthy_airway_cftr_wt"]
+        cf = profiles["cf_epithelium_f508del"]
+        rescued = profiles["rescued_epithelium_trikafta"]
+
+        self.assertTrue(wt["onsager_reciprocal_satisfied"])
+        self.assertGreaterEqual(wt["pcl_depth_um"], 7.0)
+        self.assertGreaterEqual(wt["coupling_degree_q"], 0.30)
+
+        self.assertTrue(cf["onsager_reciprocal_satisfied"])
+        self.assertLess(cf["pcl_depth_um"], 3.0)
+        self.assertLess(cf["coupling_degree_q"], 0.25)
+
+        self.assertTrue(rescued["onsager_reciprocal_satisfied"])
+        self.assertGreaterEqual(rescued["pcl_depth_um"], 6.5)
+        self.assertGreaterEqual(rescued["coupling_degree_q"], 0.30)
+
+        for cid, prof in ons["challenge_profiles"].items():
+            self.assertTrue(prof["onsager_reciprocal_satisfied"], cid)
+            self.assertGreater(prof["determinant"], 0.0, cid)
+
+        with self.assertRaises(ValueError):
+            evaluate_onsager_electroosmotic_transport(n_transport_regimes=2)
+
+    def test_prigogine_minimum_entropy_production_and_ness_stability_bridge(self) -> None:
+        """Verify Round 25 (T-0551) Prigogine minimum entropy production principle and NESS stability bridge."""
+        rep = evaluate_two_way_bridge_isomorphism()
+        self.assertIn("prigogine_minimum_entropy_production_bridge", rep)
+        prig = rep["prigogine_minimum_entropy_production_bridge"]
+        self.assertTrue(prig["prigogine_entropy_bridge_verified"])
+        self.assertTrue(prig["gating_stability_stratification_verified"])
+        self.assertTrue(prig["proof_minimum_entropy_parity_verified"])
+        self.assertTrue(prig["negative_control_detects_violation"])
+
+        profiles = prig["gating_profiles"]
+        wt = profiles["wt_cftr"]
+        g551d = profiles["g551d_uncoupled_cftr"]
+        rescued = profiles["rescued_cftr_ivacaftor"]
+
+        self.assertTrue(wt["prigogine_minimum_satisfied"])
+        self.assertEqual(wt["stationary_stability_status"], "STABLE_NESS_MINIMUM")
+        self.assertLess(wt["lyapunov_decay_rate"], 0.0)
+
+        self.assertFalse(g551d["prigogine_minimum_satisfied"])
+        self.assertEqual(g551d["stationary_stability_status"], "UNSTABLE_KINETIC_TRAP")
+        self.assertGreater(g551d["lyapunov_decay_rate"], 0.0)
+
+        self.assertTrue(rescued["prigogine_minimum_satisfied"])
+        self.assertEqual(rescued["stationary_stability_status"], "STABLE_NESS_MINIMUM")
+        self.assertLess(rescued["lyapunov_decay_rate"], 0.0)
+
+        for cid, prof in prig["challenge_profiles"].items():
+            self.assertTrue(prof["minimum_entropy_satisfied"], cid)
+            self.assertLess(prof["lyapunov_decay_rate"], 0.0, cid)
+
+        with self.assertRaises(ValueError):
+            evaluate_prigogine_minimum_entropy_production(n_gating_regimes=2)
 
 
 class FactoringDeltaBitsTests(unittest.TestCase):
