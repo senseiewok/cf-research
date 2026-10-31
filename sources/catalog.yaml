@@ -1672,7 +1672,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://cystiskfibrose.dk/
     url: null
     claim_label: unverified
@@ -2176,7 +2176,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://www.minsalud.gob.bo/
     url: null
     claim_label: unverified
@@ -2735,7 +2735,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://www.oshsu.kg/
     url: null
     claim_label: unverified
@@ -2799,7 +2799,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://comed.uobaghdad.edu.iq/
     url: null
     claim_label: unverified
@@ -3007,7 +3007,7 @@ sources:
     kind: resource_pages
     access: manual
     robots: allow
-    robots_checked: 2026-10-25
+    robots_checked: 2026-10-29
     landing_page: https://www.unza.zm/
     url: null
     claim_label: unverified
