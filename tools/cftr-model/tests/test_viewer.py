@@ -14,6 +14,17 @@ import unittest
 from support import (ARGS, BY_ID, DATA, PAGE, SRC, WEB, Look, Page, find_chrome, model_server, norm, pngpixels, sync_playwright)  # noqa: F401
 
 
+# The viewer's own words: its page head (eyebrow, title, lede, meta) and its sections, each counted once.
+VIEWER_TEXT_JS = """() => {
+    const parts = [...document.querySelectorAll("main .page-head > :is(.eyebrow, h1, p)")];
+    for (const id of ["view", "tools", "steps", "limits", "facts", "provenance", "sources"]) {
+        const el = document.getElementById(id);
+        if (el && !parts.some(p => p.contains(el))) parts.push(el);
+    }
+    return parts.map(el => el.innerText).join(" ");
+}"""
+
+
 @unittest.skipIf(sync_playwright is None, "Playwright is not installed in this Python")
 class ViewerTests(unittest.TestCase):
     @classmethod
@@ -426,7 +437,10 @@ class ViewerTests(unittest.TestCase):
         self.assertIn("508: phenylalanine is not in the file", rows["8EIQ"])
 
     def test_the_page_makes_no_claims_it_was_told_to_leave_out(self):
-        text = norm(self.open().page.inner_text("main")).lower()
+        # The viewer's own words: the page head (eyebrow, title, lede, meta) and the viewer's sections. On the website the same
+        # blocks sit in a longer page whose other workbenches measure, for example, an "open probability"; those are not this
+        # page's claims. The standalone page has nothing outside these blocks, so there it still reads everything.
+        text = norm(self.open().page.evaluate(VIEWER_TEXT_JS)).lower()
         allowed = "they do not say why, they do not say that any structure is open or closed, and they do not show what the medicines do."
         self.assertIn(allowed, text)
         rest = text.replace(allowed, " ")
