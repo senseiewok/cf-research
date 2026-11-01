@@ -99,7 +99,7 @@ def table(data):
 
 
 HOME_THETA, HOME_PHI = 0.6, 1.35          # the viewer's starting view (cftr-viewer.js, HOME)
-PART_RGB = [(0, 242, 255), (209, 92, 255), (77, 140, 255), (255, 173, 26)]
+PART_RGB = [(0, 242, 255), (156, 51, 255), (92, 151, 230), (255, 173, 26)]   # the viewer's PART_COLOURS (cftr-viewer.js), as 0-255
 GREY_RGB, ROSE_RGB = (140, 153, 168), (255, 120, 150)
 
 
