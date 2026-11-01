@@ -22,7 +22,10 @@ import DATA from './cftr-data.js';
 const GREY = [0.55, 0.6, 0.66];
 const ROSE = [1.0, 0.47, 0.59];
 const WHITE = [1.0, 1.0, 1.0];
-const PART_COLOURS = [[0.0, 0.95, 1.0], [0.82, 0.36, 1.0], [0.3, 0.55, 1.0], [1.0, 0.68, 0.1]];   // cyan, violet, blue, amber, in the order UniProt lists the four parts
+const PART_COLOURS = [[0.0, 0.95, 1.0], [0.612, 0.2, 1.0], [0.361, 0.592, 0.902], [1.0, 0.68, 0.1]];   // cyan, violet, blue, amber, in the order UniProt lists the four parts
+// The violet (nucleotide-binding part 1) is darker and the blue (membrane-spanning part 2) a little lighter than before 2026-10-31, so the two stay apart for a
+// visitor with red-green colour blindness: CIE76 colour difference 34.6 under simulated deuteranopia and 43.0 under protanopia (Machado 2009, full severity),
+// was 10.3 and 10.1. tests/test_page_blocks.py recomputes it. The ruler also prints each part's short name, so colour is never the only key.
 const DOT_SPACING = 3.0;     // Angstroms between the dots that mark a stretch a model does not place
 const FOV = 40 * Math.PI / 180;
 const HOME = { theta: 0.6, phi: 1.35, zoom: 1 };
@@ -404,7 +407,8 @@ export async function start() {
   let gpu = null, raf = 0, lastT = 0, lastDrawT = 0, dirty = true, lost = false, offscreen = false, frames = 0, w = 1, h = 1, dpr = 1, seenW = 0, seenH = 0;
   const $ = (id) => document.getElementById(id);
   const el = { readout: $('cftr-readout'), walkOut: $('cftr-walk-out'), walk: $('cftr-walk'), turn: $('cftr-turn'), tilt: $('cftr-tilt'), play: $('cftr-play'),
-               overlay: $('cftr-overlay'), legend: $('cftr-legend'), picks: $('cftr-picks'), caption: $('cftr-caption'), note: $('cftr-note'), ruler: $('cftr-ruler-svg') };
+               overlay: $('cftr-overlay'), legend: $('cftr-legend'), picks: $('cftr-picks'), caption: $('cftr-caption'), note: $('cftr-note'), ruler: $('cftr-ruler-svg'),
+               rulerLabels: $('cftr-ruler-labels') };
   const HASH_MODE = root ? (root.dataset.hash || '') : '';
   const fullLink = document.getElementById('cftr-full-link');
   const on = (node, type, fn, opts) => { if (node) node.addEventListener(type, fn, opts); };
@@ -524,6 +528,32 @@ export async function start() {
     if (st.res508) kids.push(rect(502, 12, 2, 24, css(ROSE), { 'data-mark': '508' }));
     else kids.push(rect(502, 12, 3, 22, 'none', { stroke: css(ROSE), 'stroke-width': '2', 'data-mark': '508-absent' }));
     el.ruler.replaceChildren(...kids);
+  }
+  // ---- the ruler's names: the short name of each marked part under its stretch of the strip, so the strip is not read by colour alone ----
+  // TMD1 and TMD2 are the membrane-spanning parts, NBD1 and NBD2 the nucleotide-binding parts, R the stretch UniProt marks as the disordered R region; each
+  // name sits under the residues its part covers (positions in per cent of the chain, set through the CSSOM, which the Content-Security-Policy allows).
+  function drawRulerLabels() {
+    if (!el.rulerLabels) return;
+    const css = (c) => 'rgb(' + c.map(v => Math.round(v * 255)).join(',') + ')';
+    const kinds = { membrane: 0, binding: 0 };
+    const named = parts.map(p => {
+      const membrane = /^Membrane/.test(p.label);
+      return { start: p.start, end: p.end, name: (membrane ? 'TMD' : 'NBD') + (++kinds[membrane ? 'membrane' : 'binding']), colour: css(p.colour), part: p.label };
+    });
+    const r = data.domains.find(d => d.type === 'Region' && /\bR region\b/i.test(d.name));
+    if (r) named.push({ start: r.start, end: r.end, name: 'R', colour: css(GREY), part: 'Disordered R region' });
+    named.sort((a, b) => a.start - b.start);
+    el.rulerLabels.replaceChildren(...named.map(q => {
+      const s = document.createElement('span');
+      s.className = 'cftr-ruler-label';
+      s.textContent = q.name;
+      s.title = q.part + ', residues ' + q.start + ' to ' + q.end;
+      s.dataset.part = q.name;
+      s.style.left = ((q.start - 1) / length * 100).toFixed(3) + '%';
+      s.style.width = ((q.end - q.start + 1) / length * 100).toFixed(3) + '%';
+      s.style.borderTopColor = q.colour;
+      return s;
+    }));
   }
 
   // ---- drawing ----
@@ -717,6 +747,7 @@ export async function start() {
     }).concat([legendRow('#8c99a8', 'Gray: placed, outside the four marked parts'), legendRow('#8c99a8', 'Dotted gray: not placed in this structure', 'dotted'),
                legendRow('#c9d1dc', 'Flat band: helix or strand, as UniProt annotates', 'band')]));
   }
+  drawRulerLabels();
   if (el.walk) { el.walk.min = '1'; el.walk.max = String(length); el.walk.value = '508'; }
   on(el.walk, 'input', () => setWalk(Number(el.walk.value)));
   on($('cftr-walk-clear'), 'click', () => setWalk(null));

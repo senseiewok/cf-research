@@ -49,6 +49,10 @@
 .cftr-ruler-input::-moz-range-track { height: 100%; background: transparent; }
 .cftr-ruler-input::-webkit-slider-thumb { -webkit-appearance: none; width: 0.75rem; height: 2.75rem; border: 2px solid var(--lime); border-radius: 3px; background: rgba(255, 255, 255, 0.25); }
 .cftr-ruler-input::-moz-range-thumb { width: 0.5rem; height: 2.5rem; border: 2px solid var(--lime); border-radius: 3px; background: rgba(255, 255, 255, 0.25); }
+/* the short name of each part under its stretch of the strip (cftr-viewer.js drawRulerLabels): a coloured top rule ties it to the strip, the text names it;
+   the row keeps its height before the script fills it, so nothing moves when the 3D view starts */
+.cftr-ruler-labels { position: relative; height: 1.35rem; margin: -0.3rem 0 0.35rem; font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.1rem; color: var(--ink-secondary); }
+.cftr-ruler-label { position: absolute; top: 0; overflow: hidden; border-top: 3px solid transparent; text-align: center; white-space: nowrap; }
 .cftr-note:empty { display: none; }
 /* the sequence strip and the stage legend; a slimmer thumb so the 508 mark stays visible */
 .cftr-seq { display: flex; flex-wrap: nowrap; gap: 2px; margin: 0.35rem 0 0; overflow: hidden; font-family: var(--font-mono); font-size: 0.82rem; }
@@ -92,8 +96,8 @@
 .sw-none { background: #8c99a8; }
 /* the colour key written into a page before the script runs (make_page_blocks.py legend_block); the script writes the same rows with these colours */
 .sw-part-1 { background: rgb(0, 242, 255); }
-.sw-part-2 { background: rgb(209, 92, 255); }
-.sw-part-3 { background: rgb(77, 140, 255); }
+.sw-part-2 { background: rgb(156, 51, 255); }
+.sw-part-3 { background: rgb(92, 151, 230); }
 .sw-part-4 { background: rgb(255, 173, 26); }
 .sw-grey { background: #8c99a8; }
 .sw-grey.is-dotted { background: transparent; border-top: 2px dotted #8c99a8; }

@@ -57,5 +57,58 @@ class PageBlockTests(unittest.TestCase):
             self.assertIn(f".sw-part-{i} {{ background: rgb({r}, {g}, {b}); }}", css)
 
 
+# Colour-vision simulation for the colour test below: Machado, Oliveira and Fernandes (2009), full severity, applied to linear sRGB; CIE76 difference in CIELAB (D65).
+_MACHADO = {"deuteranopia": ((0.367322, 0.860646, -0.227968), (0.280085, 0.672501, 0.047413), (-0.011820, 0.042940, 0.968881)),
+            "protanopia": ((0.152286, 1.052583, -0.204868), (0.114503, 0.786281, 0.099216), (-0.003882, -0.048116, 1.051998))}
+
+
+def _lin(c):
+    c /= 255
+    return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+
+
+def _enc(c):
+    c = min(1.0, max(0.0, c))
+    return 255 * (12.92 * c if c <= 0.0031308 else 1.055 * c ** (1 / 2.4) - 0.055)
+
+
+def _simulate(rgb, kind):
+    lin = [_lin(v) for v in rgb]
+    return tuple(_enc(sum(row[j] * lin[j] for j in range(3))) for row in _MACHADO[kind])
+
+
+def _lab(rgb):
+    r, g, b = (_lin(v) for v in rgb)
+    x, y, z = 0.4124 * r + 0.3576 * g + 0.1805 * b, 0.2126 * r + 0.7152 * g + 0.0722 * b, 0.0193 * r + 0.1192 * g + 0.9505 * b
+    f = lambda t: t ** (1 / 3) if t > 0.008856 else 7.787 * t + 16 / 116  # noqa: E731
+    fx, fy, fz = f(x / 0.95047), f(y), f(z / 1.08883)
+    return 116 * fy - 16, 500 * (fx - fy), 200 * (fy - fz)
+
+
+def _de76(a, b):
+    return sum((p - q) ** 2 for p, q in zip(_lab(a), _lab(b))) ** 0.5
+
+
+class ColourTests(unittest.TestCase):
+    def test_the_viewer_and_the_generator_use_the_same_part_colours(self):
+        import re
+        js = (PKG / "web" / "cftr-viewer.js").read_text(encoding="utf-8")
+        body = re.search(r"const PART_COLOURS = \[(.*?)\];", js).group(1)
+        triples = [tuple(round(float(v) * 255) for v in t.split(",")) for t in re.findall(r"\[([^\[\]]+)\]", body)]
+        self.assertEqual(triples, [tuple(c) for c in gen.PART_RGB])
+
+    def test_the_four_parts_stay_apart_for_red_green_colour_blindness(self):
+        """Every pair of part colours, and each against the gray of the rest of the chain, differs by CIE76 >= 20 under simulated deuteranopia and protanopia.
+        Before 2026-10-31 nucleotide-binding part 1 (violet) and membrane-spanning part 2 (blue) were 10.3 apart under deuteranopia."""
+        colours = [tuple(c) for c in gen.PART_RGB] + [gen.GREY_RGB]
+        for kind in _MACHADO:
+            for i in range(len(colours)):
+                for j in range(i + 1, len(colours)):
+                    d = _de76(_simulate(colours[i], kind), _simulate(colours[j], kind))
+                    self.assertGreaterEqual(d, 20, f"{kind}: {colours[i]} and {colours[j]} are only {d:.1f} apart")
+        self.assertAlmostEqual(_de76(_simulate((209, 92, 255), "deuteranopia"), _simulate((77, 140, 255), "deuteranopia")), 10.3, delta=0.1,
+                               msg="the simulation reproduces the measured value for the old pair")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -651,6 +651,27 @@ class ViewerTests(unittest.TestCase):
             self.assertTrue(wrap.evaluate("el => el.scrollWidth > el.clientWidth"), f"table {i} scrolls inside its own box on a phone")
             self.assertEqual(wrap.get_attribute("tabindex"), "0")
 
+    def test_the_ruler_names_each_part_under_its_stretch(self):
+        """The strip is not read by colour alone: TMD1, NBD1, R, TMD2 and NBD2 are printed under the residues each covers, whole and apart, on a desktop and a phone."""
+        parts = sorted([d for d in DATA["domains"] if d["type"] == "Domain"] + [d for d in DATA["domains"] if d["type"] == "Region" and "R region" in d["name"]],
+                       key=lambda d: d["start"])
+        for ctx in ({}, {"viewport": {"width": 360, "height": 740}, "has_touch": True, "is_mobile": True, "device_scale_factor": 2}):
+            with self.subTest(phone=bool(ctx)):
+                p = self.open(**ctx)
+                p.wait_drawn()
+                labels = p.page.evaluate("""() => { const strip = document.querySelector('#cftr-ruler-svg').getBoundingClientRect();
+                    return [...document.querySelectorAll('#cftr-ruler-labels .cftr-ruler-label')].map(e => { const r = e.getBoundingClientRect();
+                      return { name: e.textContent, left: r.left - strip.left, right: r.right - strip.left, width: strip.width, clipped: e.scrollWidth > e.clientWidth + 0.5,
+                               visible: getComputedStyle(e).visibility !== 'hidden' && r.height > 0 }; }); }""")
+                self.assertEqual([q["name"] for q in labels], ["TMD1", "NBD1", "R", "TMD2", "NBD2"])
+                for q, d in zip(labels, parts):
+                    self.assertTrue(q["visible"], q)
+                    self.assertFalse(q["clipped"], f"{q['name']} is cut off")
+                    self.assertAlmostEqual(q["left"], (d["start"] - 1) / DATA["length"] * q["width"], delta=1.5)
+                    self.assertAlmostEqual(q["right"], d["end"] / DATA["length"] * q["width"], delta=1.5)
+                for a, b in zip(labels, labels[1:]):
+                    self.assertLessEqual(a["right"], b["left"] + 0.5, f"{a['name']} and {b['name']} overlap")
+
     def test_the_picture_is_pinned_below_the_sticky_header_not_under_it(self):
         p = self.open()
         p.wait_drawn()
