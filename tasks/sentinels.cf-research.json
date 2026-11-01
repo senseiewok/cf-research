@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "repository": "senseiewok/cf-research",
+  "mission": "Open-source primary-literature Cystic Fibrosis research, 66-model biophysical discovery engine, Trial Endpoint Atlas surveillance, and curative invariant verification.",
+  "timezone": "America/Los_Angeles",
+  "sentinels": {
+    "cf-research-curative-sentinel": {
+      "canonical_lab_sentinel": "daily-research-sentinel",
+      "cron": "10 * * * *",
+      "display_name": "CF-Research Curative Discovery & Trial Surveillance Schedule",
+      "description": "Hourly at :10 past the hour. Polls ClinicalTrials.gov, Crossref Retraction Watch, openFDA, and Scite citation polarity; runs the 66-model discovery council falsifier suite (99/99 checks); scouts frontier AI biological/mathematical releases via frontier-ai-scout; and advances Track A (CFTR gating, PTC readthrough, splice rescue) and Track B (mucus rheology, non-viral LNP delivery, basal stem cell editing) toward the Cystic Fibrosis cure.",
+      "watch_paths": [
+        "proposals",
+        "landscape",
+        "tools/discovery",
+        "tools/trial_atlas",
+        "sources/catalog.yaml"
+      ],
+      "verification_commands": [
+        "python tools/discovery/discovery_council.py --audit-registry --check-index --falsify-all",
+        "python tools/claims/check_anti_hallucination.py",
+        "python tools/claims/check_claims.py"
+      ]
+    }
+  }
+}
