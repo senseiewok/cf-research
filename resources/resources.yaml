@@ -44,7 +44,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [money_insurance, daily_life]
     summary: "One-to-one help with insurance, costs and practical questions."
-    summary_es: "Ayuda personalizada con seguros, costos y preguntas prácticas."
+    summary_es: "Ayuda individual con seguros, costos y preguntas prácticas."
     who_for: not_checked
     lang: en
     source_id: cff-resource-pages
@@ -65,7 +65,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [money_insurance]
     summary: "A page about the costs of living with CF."
-    summary_es: "Una página sobre los costos de vivir con fibrosis quística (FQ)."
+    summary_es: "Una página sobre los costos de vivir con fibrosis quística."
     who_for: not_checked
     lang: en
     source_id: cff-resource-pages
@@ -107,7 +107,7 @@ resources:
     audience: [parent_carer_of_child]
     category: [daily_life]
     summary: "Guidance for the parents and guardians of a child with CF."
-    summary_es: "Orientación para los padres y tutores de un niño o niña con fibrosis quística (FQ)."
+    summary_es: "Orientación para los padres y tutores de un niño o niña con fibrosis quística."
     who_for: not_checked
     lang: en
     source_id: cff-resource-pages
@@ -151,7 +151,7 @@ resources:
     category: [find_care_team]
     # 2026-10-11: spelling only; re-attested on the maintainer's instruction after a three-model council review (the page was not reopened).
     summary: "A search for accredited CF care centers."
-    summary_es: "Un buscador de centros de atención de fibrosis quística (FQ) acreditados."
+    summary_es: "Un buscador de centros de atención de fibrosis quística acreditados."
     who_for: not_checked
     lang: en
     source_id: cff-apps-resource-pages
@@ -172,7 +172,7 @@ resources:
     audience: [adult_with_cf, care_team]
     category: [trials_research_registries]
     summary: "A search for studies that are enrolling."
-    summary_es: "Un buscador de estudios que están inscribiendo participantes."
+    summary_es: "Un buscador de estudios que aceptan participantes."
     who_for: not_checked
     lang: en
     source_id: cff-apps-resource-pages
@@ -288,7 +288,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child, partner_family_carer_of_adult]
     category: [daily_life]
     summary: "Confidential support and a listening ear for people with CF and those supporting them, by phone, email or social media messages."
-    summary_es: "Apoyo confidencial y alguien que escucha, para personas con fibrosis quística (FQ) y quienes las apoyan, por teléfono, correo electrónico o mensajes en redes sociales."
+    summary_es: "Apoyo confidencial y alguien que escucha, para personas con fibrosis quística y quienes las apoyan, por teléfono, correo electrónico o mensajes en redes sociales."
     who_for: not_checked
     lang: en
     source_id: cftrust-resource-pages
@@ -330,7 +330,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics]
     summary: "Explanations of what CF is, how it is diagnosed and treated and how it affects the body, with FAQs and an Easy Read section."
-    summary_es: "Explica qué es la fibrosis quística (FQ), cómo se diagnostica y trata y cómo afecta al cuerpo, con preguntas frecuentes y sección de lectura fácil."
+    summary_es: "Explica qué es la fibrosis quística, cómo se diagnostica y trata y cómo afecta al cuerpo, con preguntas frecuentes y una sección de lectura fácil."
     who_for: not_checked
     lang: en
     source_id: cftrust-resource-pages
@@ -351,7 +351,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [trials_research_registries]
     summary: "Guidance on searching for CF trials, checking who can join, what happens when a trial ends and what to do if none are nearby."
-    summary_es: "Guía para buscar ensayos de fibrosis quística (FQ), revisar quién puede participar, qué pasa al terminar un ensayo y qué hacer si no hay cercanos."
+    summary_es: "Guía para buscar ensayos de fibrosis quística, revisar quién puede participar, qué pasa al terminar uno y qué hacer si no hay ninguno cerca."
     who_for: not_checked
     lang: en
     source_id: cftrust-resource-pages
@@ -373,7 +373,7 @@ resources:
     category: [growing_up_transition, community_peer]
     # 2026-10-11: spelling only; re-attested on the maintainer's instruction after a three-model council review (the page was not reopened).
     summary: "Information for young people with CF on life after school, the youth program and the Youth Advisory Group."
-    summary_es: "Información para jóvenes con fibrosis quística (FQ) sobre la vida después de la escuela, el programa juvenil y el Youth Advisory Group."
+    summary_es: "Información para jóvenes con fibrosis quística sobre la vida después de la escuela, el programa juvenil y su grupo asesor juvenil, el Youth Advisory Group."
     who_for: not_checked
     lang: en
     source_id: cftrust-resource-pages
@@ -394,7 +394,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [daily_life]
     summary: "Practical topics for looking after your health with CF, including cross-infection, family planning, vaping, weather and neurodiversity."
-    summary_es: "Temas prácticos para cuidar su salud con fibrosis quística (FQ), como infección cruzada, planificación familiar, vapeo, clima y neurodiversidad."
+    summary_es: "Temas prácticos para cuidar su salud con fibrosis quística, como infección cruzada, planificación familiar, vapeo, clima y neurodiversidad."
     who_for: not_checked
     lang: en
     source_id: cftrust-resource-pages
@@ -416,7 +416,7 @@ resources:
     category: [find_care_team]
     # 2026-10-11: spelling only; re-attested on the maintainer's instruction after a three-model council review (the page was not reopened).
     summary: "Care consensus documents and pages on adult and children's CF centers."
-    summary_es: "Documentos de consenso sobre la atención y páginas sobre los centros de fibrosis quística (FQ) para adultos y para niños."
+    summary_es: "Documentos de consenso sobre la atención y páginas sobre los centros de fibrosis quística para adultos y para niños."
     who_for: not_checked
     lang: en
     source_id: cftrust-resource-pages
@@ -522,7 +522,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [find_care_team]
     summary: "Lists of CF clinics by province, to help people find their local clinic."
-    summary_es: "Listas de clínicas de fibrosis quística (FQ) por provincia, para ayudar a las personas a encontrar su clínica local."
+    summary_es: "Listas de clínicas de fibrosis quística por provincia, para ayudar a las personas a encontrar su clínica local."
     who_for: not_checked
     lang: en
     source_id: cfcanada-resource-pages
@@ -543,7 +543,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child, partner_family_carer_of_adult]
     category: [community_peer]
     summary: "A pilot of small virtual peer groups for the CF community, with upcoming groups listed and registration."
-    summary_es: "Un programa piloto de pequeños grupos virtuales entre pares para la comunidad de fibrosis quística (FQ), con la lista de próximos grupos y la inscripción."
+    summary_es: "Un programa piloto de pequeños grupos virtuales entre pares para la comunidad de fibrosis quística, con la lista de próximos grupos y la inscripción."
     who_for: not_checked
     lang: en
     source_id: cfcanada-resource-pages
@@ -585,7 +585,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [daily_life]
     summary: "An overview of daily life with CF and the routines of care."
-    summary_es: "Un panorama de la vida diaria con fibrosis quística (FQ) y de las rutinas de cuidado."
+    summary_es: "Un panorama de la vida diaria con fibrosis quística y de las rutinas de cuidado."
     who_for: not_checked
     lang: en
     source_id: cfaustralia-resource-pages
@@ -627,7 +627,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [trials_research_registries]
     summary: "A CF-specific list of clinical trials by type, with a way to ask about trials that are recruiting."
-    summary_es: "Una lista de ensayos clínicos específicos de fibrosis quística (FQ) por tipo, con una forma de preguntar por los que están inscribiendo participantes."
+    summary_es: "Una lista de ensayos clínicos específicos de fibrosis quística por tipo, con una forma de preguntar por los que aceptan participantes."
     who_for: not_checked
     lang: en
     source_id: cfaustralia-resource-pages
@@ -648,7 +648,7 @@ resources:
     audience: [adult_with_cf, teen_young_adult, parent_carer_of_child]
     category: [daily_life]
     summary: "A hub of guidance and personal stories for adults, young people and parents, with a way to contact member services."
-    summary_es: "Un espacio con orientación e historias personales para adultos, jóvenes y padres, con una forma de contactar a los servicios para socios."
+    summary_es: "Un espacio con orientación y testimonios para adultos, jóvenes y padres, con una forma de comunicarse con los servicios para socios."
     who_for: not_checked
     lang: en
     source_id: cfireland-resource-pages
@@ -669,7 +669,7 @@ resources:
     audience: [adult_with_cf]
     category: [money_insurance, daily_life]
     summary: "How member services help people with CF, including financial supports and information on exercise."
-    summary_es: "Cómo los servicios para socios ayudan a las personas con fibrosis quística (FQ), entre ellos apoyos económicos e información sobre ejercicio."
+    summary_es: "Cómo los servicios para socios ayudan a las personas con fibrosis quística, entre ellos apoyos económicos e información sobre ejercicio."
     who_for: not_checked
     lang: en
     source_id: cfireland-resource-pages
@@ -732,7 +732,7 @@ resources:
     audience: [parent_carer_of_child]
     category: [community_peer]
     summary: "Supports for parents of children with CF, including volunteer parents who offer a listening ear and a newborn care pack."
-    summary_es: "Apoyos para padres de niños con fibrosis quística (FQ), entre ellos padres voluntarios que ofrecen escucha y un paquete de cuidados para recién nacidos."
+    summary_es: "Apoyos para padres de niños con fibrosis quística, entre ellos padres voluntarios que ofrecen escucha y un paquete de cuidados para recién nacidos."
     who_for: not_checked
     lang: en
     source_id: cfireland-resource-pages
@@ -753,7 +753,7 @@ resources:
     audience: [teen_young_adult]
     category: [growing_up_transition]
     summary: "A space for young people with CF to learn about CF, staying healthy, hospital stays and moving to adult care."
-    summary_es: "Espacio para que jóvenes con fibrosis quística (FQ) aprendan sobre la FQ, cómo mantenerse sanos, hospitalizaciones y el paso a la atención adulta."
+    summary_es: "Espacio para que jóvenes con fibrosis quística (FQ) aprendan sobre la FQ, cómo mantenerse sanos, hospitalizaciones y el paso a la atención de adultos."
     who_for: not_checked
     lang: en
     source_id: cfireland-resource-pages
@@ -775,7 +775,7 @@ resources:
     category: [mental_health]
     # 2026-10-11: spelling only; re-attested on the maintainer's instruction after a three-model council review (the page was not reopened).
     summary: "Information on mental health and well-being, including financial help toward counseling for individuals and families."
-    summary_es: "Información sobre salud mental y bienestar, con ayuda económica para costear consejería psicológica individual y familiar."
+    summary_es: "Información sobre salud mental y bienestar, con ayuda económica destinada a consejería psicológica individual y familiar."
     who_for: not_checked
     lang: en
     source_id: cfireland-resource-pages
@@ -861,7 +861,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "New Zealand national organization offering social work support, practical assistance, and guidance for individuals with CF and their families."
-    summary_es: "Organización nacional de Nueva Zelanda que ofrece apoyo de trabajo social, ayuda práctica y orientación para personas con fibrosis quística (FQ) y sus familias."
+    summary_es: "Organización nacional de Nueva Zelanda que ofrece apoyo de trabajo social, ayuda práctica y orientación para personas con fibrosis quística y sus familias."
     who_for: not_checked
     lang: en
     source_id: cfnz-resource-pages
@@ -882,7 +882,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "French national association providing guidance on specialized CF care centers, social rights, financial assistance, and daily life."
-    summary_es: "Asociación nacional francesa que orienta sobre centros especializados en fibrosis quística (FQ), derechos sociales, ayuda económica y vida diaria."
+    summary_es: "Asociación nacional francesa que orienta sobre centros especializados en fibrosis quística, derechos sociales, ayuda económica y vida diaria."
     who_for: not_checked
     lang: fr
     source_id: vaincrelamuco-resource-pages
@@ -903,7 +903,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "German federal association offering certified care center directories, social counseling, and everyday guidance for people with CF and families."
-    summary_es: "Asociación federal alemana con directorios de centros de atención certificados, asesoría social y orientación para la vida diaria para personas con fibrosis quística y familias."
+    summary_es: "Asociación federal alemana con directorios de centros de atención certificados, asesoría social y orientación sobre la vida diaria para personas con fibrosis quística y familias."
     who_for: not_checked
     lang: de
     source_id: muko-resource-pages
@@ -924,7 +924,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Italian national association connecting patients and families with regional CF associations, legal rights guidance, and care support."
-    summary_es: "Asociación nacional italiana que vincula a pacientes y familias con asociaciones regionales de fibrosis quística (FQ), orientación sobre derechos legales y apoyo en la atención."
+    summary_es: "Asociación nacional italiana que vincula a pacientes y familias con asociaciones regionales de fibrosis quística, orientación sobre derechos legales y apoyo en la atención."
     who_for: not_checked
     lang: it
     source_id: lifc-resource-pages
@@ -945,7 +945,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Brazilian institute providing plain-language educational materials, diagnostic center directories, and regional association links for people with CF."
-    summary_es: "Instituto brasileño con materiales educativos en lenguaje sencillo, directorios de centros de diagnóstico y enlaces a asociaciones regionales para personas con fibrosis quística (FQ)."
+    summary_es: "Instituto brasileño con materiales educativos en lenguaje sencillo, directorios de centros de diagnóstico y enlaces a asociaciones regionales para personas con fibrosis quística."
     who_for: not_checked
     lang: pt-BR
     source_id: unidospelavida-resource-pages
@@ -966,7 +966,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Chilean patient and family corporation offering orientation on public health coverage, respiratory care, and peer community support."
-    summary_es: "Corporación chilena de pacientes y familias que brinda orientación sobre garantías de salud, cuidado respiratorio y apoyo comunitario."
+    summary_es: "Corporación chilena de pacientes y familias que brinda orientación sobre cobertura de salud pública, cuidado respiratorio y apoyo comunitario entre pares."
     who_for: not_checked
     lang: es-CL
     source_id: cfqchile-resource-pages
@@ -1052,7 +1052,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [newly_diagnosed_basics, daily_life, community_peer]
     summary: "Austrian patient support organization providing practical guidance, therapy orientation, and community connection for people with CF and families."
-    summary_es: "Organización austriaca de apoyo a pacientes que brinda orientación práctica, orientación sobre terapias y vínculos con la comunidad para personas con fibrosis quística y familias."
+    summary_es: "Organización austriaca de apoyo a pacientes que brinda orientación práctica y sobre terapias, y vínculos con la comunidad para personas con fibrosis quística y familias."
     who_for: not_checked
     lang: de-AT
     source_id: cfhilfe-at-resource-pages
@@ -1073,7 +1073,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child, teen_young_adult]
     category: [daily_life, community_peer, money_insurance]
     summary: "Danish national association offering counseling, social rights guidance, and peer community programs for children, youth, and adults with CF."
-    summary_es: "Asociación nacional danesa que ofrece asesoría, orientación sobre derechos sociales y programas comunitarios entre pares para niños, jóvenes y adultos con fibrosis quística (FQ)."
+    summary_es: "Asociación nacional danesa que ofrece asesoría, orientación sobre derechos sociales y programas comunitarios entre pares para niños, jóvenes y adultos con fibrosis quística."
     who_for: not_checked
     lang: da
     source_id: cff-dk-resource-pages
@@ -1094,7 +1094,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Swedish national federation providing educational resources, specialist CF center information, and peer support for patients and families."
-    summary_es: "Federación nacional sueca con recursos educativos, información sobre centros especializados en fibrosis quística (FQ) y apoyo entre pares para pacientes y familias."
+    summary_es: "Federación nacional sueca con recursos educativos, información sobre centros especializados en fibrosis quística y apoyo entre pares para pacientes y familias."
     who_for: not_checked
     lang: sv
     source_id: rfcf-se-resource-pages
@@ -1136,7 +1136,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [newly_diagnosed_basics, community_peer, daily_life]
     summary: "Finnish respiratory health organization providing rare lung disease guidance, rehabilitation information, and peer support for people with CF."
-    summary_es: "Organización finlandesa de salud respiratoria con orientación sobre enfermedades pulmonares raras, información sobre rehabilitación y apoyo entre pares para personas con fibrosis quística (FQ)."
+    summary_es: "Organización finlandesa de salud respiratoria con orientación sobre enfermedades pulmonares raras, información sobre rehabilitación y apoyo entre pares para personas con fibrosis quística."
     who_for: not_checked
     lang: fi
     source_id: hengitysliitto-fi-resource-pages
@@ -1157,7 +1157,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [newly_diagnosed_basics, daily_life, find_care_team]
     summary: "Portuguese national association offering patient orientation, social support, and specialized care unit information for people with CF."
-    summary_es: "Asociación nacional portuguesa que ofrece orientación a pacientes, apoyo social e información sobre unidades de atención especializada para personas con fibrosis quística (FQ)."
+    summary_es: "Asociación nacional portuguesa que ofrece orientación a pacientes, apoyo social e información sobre unidades de atención especializada para personas con fibrosis quística."
     who_for: not_checked
     lang: pt-PT
     source_id: anfq-pt-resource-pages
@@ -1220,7 +1220,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Indian patient support organization offering diagnostic navigation, respiratory care education, and family counseling for children and adults with CF."
-    summary_es: "Organización india de apoyo a pacientes con orientación diagnóstica, educación sobre cuidado respiratorio y consejería familiar para niños y adultos con fibrosis quística (FQ)."
+    summary_es: "Organización de la India de apoyo a pacientes con orientación diagnóstica, educación sobre cuidado respiratorio y consejería familiar para niños y adultos con fibrosis quística."
     who_for: not_checked
     lang: en-IN
     source_id: cfindia-resource-pages
@@ -1241,7 +1241,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child, everyone]
     category: [newly_diagnosed_basics, daily_life]
     summary: "Introductory answers to common questions about cystic fibrosis diagnosis, genetics, lung health, daily care routines, and specialist clinical support."
-    summary_es: "Respuestas introductorias a preguntas comunes sobre la fibrosis quística (FQ): diagnóstico, genética, salud pulmonar, rutinas diarias de cuidado y apoyo clínico especializado."
+    summary_es: "Respuestas introductorias a preguntas comunes sobre la fibrosis quística: diagnóstico, genética, salud pulmonar, rutinas diarias de cuidado y apoyo clínico especializado."
     who_for: stated_anyone
     format: online
     lang: en
@@ -1307,7 +1307,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Polish national cystic fibrosis association providing diagnostic orientation, equipment lending, social counseling, and peer support for families."
-    summary_es: "Asociación nacional polaca de fibrosis quística (FQ) con orientación diagnóstica, préstamo de equipos, asesoría social y apoyo entre pares para familias."
+    summary_es: "Asociación nacional polaca de fibrosis quística con orientación diagnóstica, préstamo de equipos, asesoría social y apoyo entre pares para familias."
     who_for: not_checked
     format: online
     lang: pl
@@ -1329,7 +1329,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, daily_life, find_care_team]
     summary: "Czech national patient organization offering social and psychological counseling, physiotherapy guidance, and specialized CF center directories."
-    summary_es: "Organización nacional checa de pacientes con asesoría social y psicológica, orientación sobre fisioterapia y directorios de centros especializados en fibrosis quística (FQ)."
+    summary_es: "Organización nacional checa de pacientes con asesoría social y consejería psicológica, orientación sobre fisioterapia y directorios de centros especializados en fibrosis quística."
     who_for: not_checked
     format: online
     lang: cs
@@ -1411,7 +1411,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [newly_diagnosed_basics, daily_life, community_peer]
     summary: "Hungarian national patient association offering cystic fibrosis diagnosis information, dietary and physiotherapy counseling, and peer support for families."
-    summary_es: "Asociación nacional húngara de pacientes con información sobre el diagnóstico de fibrosis quística (FQ), asesoría en alimentación y fisioterapia, y apoyo entre pares para familias."
+    summary_es: "Asociación nacional húngara de pacientes con información sobre el diagnóstico de fibrosis quística, asesoría en alimentación y fisioterapia, y apoyo entre pares para familias."
     who_for: not_checked
     format: online
     lang: hu
@@ -1433,7 +1433,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, daily_life, find_care_team]
     summary: "Slovak cystic fibrosis association providing social counseling, inhaler and physiotherapy guidance, and specialized CF clinic navigation across Slovakia."
-    summary_es: "Asociación eslovaca de fibrosis quística (FQ) que ofrece asesoría social, orientación sobre inhaladores y fisioterapia, y orientación hacia clínicas especializadas en FQ en toda Eslovaquia."
+    summary_es: "Asociación eslovaca de fibrosis quística (FQ) que ofrece asesoría social, orientación sobre inhaladores y fisioterapia, y guía hacia clínicas especializadas en FQ en toda Eslovaquia."
     who_for: not_checked
     format: online
     lang: sk
@@ -1471,7 +1471,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [newly_diagnosed_basics, daily_life, community_peer]
     summary: "Romanian national cystic fibrosis association providing patient advocacy, medical equipment support, and practical guidance for living with CF."
-    summary_es: "Asociación nacional rumana de fibrosis quística (FQ) con defensa de los pacientes, apoyo con equipo médico y orientación práctica para vivir con FQ."
+    summary_es: "Asociación nacional rumana de fibrosis quística (FQ) con defensa de los derechos de pacientes, apoyo con equipo médico y orientación práctica para vivir con FQ."
     who_for: not_checked
     format: online
     lang: ro
@@ -1813,7 +1813,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: "Japanese national intractable disease center providing cystic fibrosis diagnostic criteria, clinical management guidance, and public medical subsidy navigation."
-    summary_es: "Centro nacional japonés de enfermedades intratables con criterios diagnósticos de fibrosis quística (FQ), orientación sobre el manejo clínico y para tramitar subsidios médicos públicos."
+    summary_es: "Centro nacional japonés de enfermedades intratables con criterios diagnósticos de fibrosis quística, orientación sobre el manejo clínico y para tramitar subsidios médicos públicos."
     who_for: not_checked
     format: online
     lang: ja
@@ -1857,7 +1857,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [newly_diagnosed_basics, community_peer, advocacy_involved]
     summary: "Malaysian national rare disorders society providing family peer networks, specialist referral orientation, and patient advocacy for rare pulmonary and genetic conditions."
-    summary_es: "Sociedad nacional malasia de trastornos raros con redes familiares entre pares, orientación de referencia especializada y defensa de pacientes con afecciones pulmonares y genéticas raras."
+    summary_es: "Sociedad nacional malasia de trastornos raros con redes de familias, orientación para referencias a especialistas y defensa de pacientes con afecciones pulmonares y genéticas raras."
     who_for: not_checked
     format: online
     lang: en-MY
@@ -1901,7 +1901,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child]
     category: [newly_diagnosed_basics, daily_life, community_peer]
     summary: "Jordanian cystic fibrosis charity providing family counseling, respiratory and nutritional care awareness, and community support for children and adults."
-    summary_es: "Organización benéfica jordana de fibrosis quística (FQ) con consejería familiar, concientización sobre cuidado respiratorio y nutricional, y apoyo comunitario para niños y adultos."
+    summary_es: "Organización benéfica jordana de fibrosis quística con consejería familiar, concientización sobre cuidado respiratorio y nutricional, y apoyo comunitario para niños y adultos."
     who_for: not_checked
     format: online
     lang: ar-JO
@@ -1923,7 +1923,7 @@ resources:
     audience: [everyone]
     category: [newly_diagnosed_basics, daily_life, find_care_team, medicines_access, mental_health, growing_up_transition]
     summary: "Middle East and North Africa cystic fibrosis network supporting diagnostic sweat testing, multidisciplinary clinical care, and patient education in Egypt."
-    summary_es: "Red de fibrosis quística de Medio Oriente y Norte de África que apoya pruebas del sudor diagnósticas, atención multidisciplinaria y educación de pacientes en Egipto."
+    summary_es: "Red de fibrosis quística de Medio Oriente y Norte de África que apoya pruebas diagnósticas del sudor, atención multidisciplinaria y educación de pacientes en Egipto."
     who_for: not_checked
     format: online
     lang: en
@@ -2268,7 +2268,7 @@ resources:
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: Chinese national rare disease organization providing diagnostic orientation, specialist care navigation, and patient community support
       for families affected by cystic fibrosis.
-    summary_es: "Organización nacional china de enfermedades raras con orientación diagnóstica, guía hacia atención especializada y apoyo de la comunidad de pacientes para familias con fibrosis quística."
+    summary_es: "Organización nacional china de enfermedades raras con orientación diagnóstica, guía hacia atención especializada y apoyo comunitario de pacientes para familias afectadas por la fibrosis quística."
     who_for: not_checked
     format: online
     lang: zh-CN
@@ -2436,7 +2436,7 @@ resources:
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: Saudi national tertiary specialist hospital providing comprehensive cystic fibrosis diagnosis, genetic counseling, advanced pulmonary
       medicine, and transplant referral care.
-    summary_es: "Hospital especializado nacional saudí de tercer nivel con diagnóstico integral de fibrosis quística (FQ), asesoramiento genético, neumología avanzada y referencia a trasplante."
+    summary_es: "Hospital especializado nacional saudí de tercer nivel con diagnóstico integral de fibrosis quística, asesoramiento genético, neumología avanzada y referencia a trasplante."
     who_for: not_checked
     format: online
     lang: ar-SA
@@ -2458,7 +2458,7 @@ resources:
     category: [newly_diagnosed_basics, find_care_team, daily_life]
     summary: Emirati integrated academic health system offering specialized pediatric pulmonology, genomic diagnostics, and multidisciplinary care
       for children and adults with cystic fibrosis.
-    summary_es: "Sistema de salud académico integrado emiratí con neumología pediátrica especializada, diagnóstico genómico y atención multidisciplinaria para niños y adultos con fibrosis quística (FQ)."
+    summary_es: "Sistema de salud académico integrado emiratí con neumología pediátrica especializada, diagnóstico genómico y atención multidisciplinaria para niños y adultos con fibrosis quística."
     who_for: not_checked
     format: online
     lang: en-AE
@@ -2571,7 +2571,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, find_care_team]
     summary: Kazakh national medical university operating the School of Pediatrics and university children's clinical hospital for respiratory and cystic fibrosis care in Kazakhstan.
-    summary_es: "Universidad nacional de medicina en Kazajistán que opera la Escuela de Pediatría y el hospital clínico infantil universitario para atención respiratoria y de fibrosis quística."
+    summary_es: "Universidad nacional de medicina en Kazajistán que administra la Escuela de Pediatría y el hospital clínico infantil universitario para atención respiratoria y de fibrosis quística."
     who_for: not_checked
     format: online
     lang: kk
@@ -2592,7 +2592,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, find_care_team]
     summary: National specialized pediatric medical center in Tashkent providing pediatric pulmonology care, diagnostic evaluation, and clinical follow-up for children with cystic fibrosis in Uzbekistan.
-    summary_es: "Centro médico nacional especializado en pediatría en Taskent con neumología pediátrica, evaluación diagnóstica y seguimiento clínico para niños con fibrosis quística (FQ) en Uzbekistán."
+    summary_es: "Centro médico nacional especializado en pediatría en Taskent con neumología pediátrica, evaluación diagnóstica y seguimiento clínico para niños con fibrosis quística en Uzbekistán."
     who_for: not_checked
     format: online
     lang: uz
@@ -2694,7 +2694,7 @@ resources:
     audience: [adult_with_cf, parent_carer_of_child, care_team]
     category: [newly_diagnosed_basics, find_care_team]
     summary: Omani health ministry portal connecting families with tertiary hospital pediatric pulmonology clinics, the National Genetic Center, and rare disease care services.
-    summary_es: "Portal del ministerio de salud omaní: clínicas de neumología pediátrica de tercer nivel, el National Genetic Center y atención de enfermedades raras para familias."
+    summary_es: "Portal del ministerio de salud omaní que vincula a familias con neumología pediátrica de tercer nivel, el National Genetic Center y atención de enfermedades raras."
     who_for: not_checked
     format: online
     lang: ar
@@ -2716,7 +2716,7 @@ resources:
     category: [newly_diagnosed_basics, find_care_team]
     summary: Academic medical college in Baghdad training pediatric pulmonology specialists and supporting teaching hospital diagnostic and clinical
       care for cystic fibrosis in Iraq.
-    summary_es: "Facultad de medicina en Bagdad que forma neumólogos pediatras y apoya el diagnóstico y la atención de fibrosis quística (FQ) en hospitales escuela de Irak."
+    summary_es: "Facultad de medicina en Bagdad que forma neumólogos pediatras y apoya el diagnóstico y la atención de fibrosis quística en hospitales escuela de Irak."
     who_for: not_checked
     format: online
     lang: ar
@@ -2979,7 +2979,7 @@ resources:
     category: [newly_diagnosed_basics, daily_life, find_care_team, community_peer]
     summary: Ethiopian national university health sciences center operating Tikur Anbessa Specialized Hospital with tertiary pediatric pulmonology
       and genetic care orientation.
-    summary_es: "Centro universitario nacional etíope de ciencias de la salud que opera el Tikur Anbessa Specialized Hospital, con neumología pediátrica de tercer nivel y orientación genética."
+    summary_es: "Centro universitario nacional etíope de ciencias de la salud que administra el Tikur Anbessa Specialized Hospital, con neumología pediátrica de tercer nivel y orientación genética."
     who_for: not_checked
     format: online
     lang: en-ET
@@ -3001,7 +3001,7 @@ resources:
     category: [newly_diagnosed_basics, find_care_team, daily_life]
     summary: Rwandan quaternary referral hospital in Kigali providing specialized pediatric respiratory medicine, diagnostic laboratory evaluation,
       and multidisciplinary care navigation.
-    summary_es: "Hospital ruandés de referencia de cuarto nivel en Kigali con medicina respiratoria pediátrica especializada, evaluación por laboratorio diagnóstico y orientación en atención multidisciplinaria."
+    summary_es: "Hospital ruandés de referencia de cuarto nivel en Kigali con medicina respiratoria pediátrica especializada, evaluación en laboratorio de diagnóstico y orientación en atención multidisciplinaria."
     who_for: not_checked
     format: online
     lang: en-RW
@@ -3023,7 +3023,7 @@ resources:
     category: [newly_diagnosed_basics, find_care_team, trials_research_registries]
     summary: Zambian national university medical school affiliated with the University Teaching Hospital in Lusaka for pediatric respiratory education
       and specialist referral orientation.
-    summary_es: "Escuela de medicina de la universidad nacional zambiana, vinculada al University Teaching Hospital en Lusaka, para educación respiratoria pediátrica y orientación de referencia a especialistas."
+    summary_es: "Escuela de medicina de la universidad nacional zambiana, vinculada al University Teaching Hospital en Lusaka, para educación respiratoria pediátrica y orientación para referencias a especialistas."
     who_for: not_checked
     format: online
     lang: en-ZM
