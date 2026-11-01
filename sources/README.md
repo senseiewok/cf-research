@@ -44,6 +44,12 @@ If a source is not in the catalog, it has no permission. Add an entry first, wit
 | `text_layer` | `embedded` when the PDF has selectable text. No entry needs OCR yet |
 | `priority` | Optional hint for which documents to obtain first. Only `high` is used so far |
 | `reference_doi` | DOI of the paper that describes the source, where one exists |
+| `doi` | For a `journal_article` entry: the article's own DOI, checked with cf-evidence-loop `cite-check` |
+| `pmid` | For a `journal_article` entry: the PubMed id, as a quoted string |
+| `pmcid` | For a `journal_article` entry: the PubMed Central id the text was read from (through Europe PMC) |
+| `licence` | For a `journal_article` entry: the licence exactly as the article states it. When the article names no version (for example "Creative Commons Attribution License"), the entry says the version is not stated; a version is never guessed |
+| `accessed` | For a `journal_article` entry: the date the text was read |
+| `site_use` | For a `journal_article` entry: which public sentence on senseiewok.ai rests on it, in our words, with the claim id from the private claims file |
 | `base_url` | Root URL of an API, for entries with `access: api` |
 | `api_root` | Informational API root for an `api` source that is under admission review. The evidence client reads only `base_url`, so a source with `api_root` and no `base_url` cannot be reached by it |
 | `terms_url` | The page that states the API's usage policy. Required for every `api` source: the evidence client refuses to call one without it |
