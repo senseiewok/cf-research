@@ -306,6 +306,26 @@ class Attestation(Base):
     def test_confirmed_by_model(self):
         self.assertError(doc(row(confirmed_by="model")), "confirmed_by must name a person")
 
+    def test_council_confirmation_passes_with_correct_hash(self):
+        r = row(summary_es="Una línea de ayuda para familias, abierta entre semana.",
+                confirmed_by="council-on-behalf-of-maintainer")
+        self.assertPasses(doc(r))
+
+    def test_council_confirmation_needs_summary_es(self):
+        self.assertError(doc(row(confirmed_by="council-on-behalf-of-maintainer")), "only for a row with summary_es")
+
+    def test_council_confirmation_still_checks_hash(self):
+        r = row(summary_es="Una línea de ayuda para familias, abierta entre semana.",
+                confirmed_by="council-on-behalf-of-maintainer")
+        r["summary_es"] = "Otra frase distinta para familias."
+        self.assertError(doc(r), "hash mismatch")
+
+    def test_unknown_confirmed_by_fails(self):
+        for who in ("Maintainer", "council", "someone-else", "council-on-behalf-of-maintainer "):
+            with self.subTest(who=who):
+                self.assertError(doc(row(summary_es="Una frase para familias.", confirmed_by=who)),
+                                 "confirmed_by must be one of")
+
     def test_missing_confirmation(self):
         self.assertError(doc(row(drop=("confirmed_by",))), "missing confirmed_by")
         self.assertError(doc(row(drop=("confirmed_on",))), "missing confirmed_on")
