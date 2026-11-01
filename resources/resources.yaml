@@ -30,9 +30,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-09
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-09
-    content_hash: cfa5151743895cb314a1e57223639edc0ec4aacbcb4215144728035f39e79a71
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 5474cb5656ef54cbb3406f2ed0c1dec13b0e67e5fbbb911b995d89e90385bc63
     last_checked: 2026-10-09
     status: active
 
@@ -51,9 +51,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 164988d5711ce77f1a089242aba1a66e48bde6e51d00f97c164612f654e00bec
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 4d4ea2412ea7fcd028bdc2f80629e3ce1ec25b76e3455abff2bfecf7c433e080
     last_checked: 2026-10-09
     status: active
 
@@ -72,9 +72,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-09
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-09
-    content_hash: 750bc29f3f66df7ae0a7320dd569acb522268342f0f90beb045a41f9be59c028
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 071c05fb12da92f2cb515923b074a2df39f45a9b8d7525f588de033f9e3fc93a
     last_checked: 2026-10-09
     status: active
 
@@ -93,9 +93,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-09
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-09
-    content_hash: b8d1d0aaeb131921f8c2f3d3a111687cf441173d6cbd65bc4e1fa7d49ed13390
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: fff81a9324e01f176faea0ac6ecc447b32304a1853aeb3b895fea49fd25bb09d
     last_checked: 2026-10-09
     status: active
 
@@ -114,9 +114,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-09
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-09
-    content_hash: fd9291af4abca26fbd46242eae5584cf5afcc035a5ba8cf71dfa1be055e5cf07
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 20b8dc407b79b30383cdf522b1fda038ca75b61b042b5573856aef0b9e27ff12
     last_checked: 2026-10-09
     status: active
 
@@ -136,9 +136,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-11
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-11
-    content_hash: 341100e451cefe0c01371900731b58691e136224c5f238cf4b1ef7f3bb9553df
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: a8769e11c57609d31bc4bb34bf58f22bd0ba58039a02c73d32d5ed1bfe09a903
     last_checked: 2026-10-09
     status: active
 
@@ -158,9 +158,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-11
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-11
-    content_hash: 5367caeb0ae58abb824199ce2e7e72527bfa4329941952e52951dd5644808a1d
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: b466aea6b843c454cde43176766c113103bfea99849ad62fde201d95a780af96
     last_checked: 2026-10-09
     status: active
 
@@ -179,9 +179,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-09
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-09
-    content_hash: 660e56d34c8b76d7ade72e49bbd65d52cf2505f6f65054be2db8d4a5faad769f
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 7797e79e08ddcd9c979092c09d3e652e56813c931afd654d36380502060288dc
     last_checked: 2026-10-09
     status: active
 
@@ -200,9 +200,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-09
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-09
-    content_hash: bec65a63414614c79683a747a7c98b247fdfc141f08ddfd49fd8a3c646184781
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 5a577972468da9a950401031e4cd9a3f8ddb1ab1b479ebda3ef46fe94fbd507c
     last_checked: 2026-10-09
     status: active
 
@@ -274,9 +274,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: b823b0bfbb0928fae8c1b00b53cca0d76de9fdf335e266d1af428729c931f38b
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 2c8e0986e30a253b2f3db93ae7aac6c890ef0efc1b06c3a08d76dee14e816abd
     last_checked: 2026-10-10
     status: active
 
@@ -295,9 +295,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 2e9efecc52d3566957c078033cb679463d89817ed8370dd15fa37c0f6d344ae3
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 58d2ee073af4172b83a13183f46a674b1817ea5c3e0e92a849d811d321784143
     last_checked: 2026-10-10
     status: active
 
@@ -316,9 +316,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 5f46ca9a4adf6225427bf06abb9faff1a2901df8cb9a942c585b83f40000a515
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 8164d01c862b1fcdcedbb16d4e121f6fe5231c7d2725c22f6cd48b09f6399540
     last_checked: 2026-10-10
     status: active
 
@@ -337,9 +337,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: e7a0dc11b8c2f9e9f62184dad71a1b4b7e40c03e13fc5c8540e2fd94cf580acf
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: faf58dfb126ad7040a8629991bba6a0a037b377fce54761cf65aa95f5026a5e7
     last_checked: 2026-10-10
     status: active
 
@@ -358,9 +358,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 3d78c91e661d662389c35155d8952986d4a40bed6b0229a541ba5dd04bdfa978
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 9ad051589abed4f304d708923ef9e512311b20b444df43730555067607c3c021
     last_checked: 2026-10-10
     status: active
 
@@ -380,9 +380,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-11
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-11
-    content_hash: 575d5282b7e4b7e1deadcf1b3a33ffaa61deb8b2a63a6964f62fedab73ec739c
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 85882fade7e528bd101d05b6de68c31a2e3633d5cb18da8a420cce844c611d7c
     last_checked: 2026-10-10
     status: active
 
@@ -401,9 +401,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: f60763592da8df602f52517e764c6e255da7da2639cba13a715c6db84204bdb9
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: ce9f2602f1ba78edd70a5aea9de848900b1d2fc11329d5a76cc9c86283154510
     last_checked: 2026-10-10
     status: active
 
@@ -423,9 +423,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-11
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-11
-    content_hash: 20faf2e30729991d13397ee38669544f73398947989b11366b3e42e297a1a175
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: b4f73aed010807533c749b05eac78a174270216c20b986311bb8a22450ac45b8
     last_checked: 2026-10-10
     status: active
 
@@ -444,9 +444,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 877c3ccd44220996ffdbcfde77da607bc5bcb17195c35a9ee35e1995fcb75500
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 8c326f74ec9cd4e3de001eb5f165c5d4dcafa456c02004b9620dc4e19e054f0d
     last_checked: 2026-10-10
     status: active
 
@@ -465,9 +465,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: da64dfe5c12dd56715a37a56ee4e75094b0dcccdc05193b43647e00fe9b01547
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: fca26bfe3858cad57088229ec8759af2257c9c0aadc233bdab94e27c0fb27aae
     last_checked: 2026-10-10
     status: active
 
@@ -487,9 +487,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-11
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-11
-    content_hash: b834c0fd5d9dc9076f467f3ebca797f5409c62c37ebaad020a28036812c5ded3
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: c333c3906bc61eb848edf87f2f5804f5ddac558f03b3b8a7bafa61196d12ffda
     last_checked: 2026-10-10
     status: active
 
@@ -508,9 +508,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: bf0ffce674c31dda5ca6b59f56e0f875e9d99e449d0a13298dab87954268b446
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: e17a793996b3090638420174b3cc069aab5d33d07064bac62d32d4058e84f99c
     last_checked: 2026-10-10
     status: active
 
@@ -529,9 +529,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 260e2c3dd852094aeae2eeefed40d7b21ad15ff20cf38970c5aa42546e72b5ed
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 5807399f21169b8218b265a4b0ad7ebae73ee9b1720d96ea09907be8a4912557
     last_checked: 2026-10-10
     status: active
 
@@ -550,9 +550,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: d14fb34e5d2952eb50179e08f790d7605b1c200579800342e7d87b4e045289aa
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 7717b9dfdbda18c0eca29ddf20a83b4dc1c452958c1b83b549c704d3cf1e7e99
     last_checked: 2026-10-10
     status: active
 
@@ -571,9 +571,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 51b06a05115bdd94dce59861045cff67e6c1a5f848001371330da7a36fb032a0
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 5cdb1725333695c2f3925ea779fd7b4c8f49f2e670e756131b109219780a6aba
     last_checked: 2026-10-10
     status: active
 
@@ -592,9 +592,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 5c869223150ba7b22331f38aaa9080d8c51a85dee1cb12a00231c9ab2224e6bf
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 1b5d8d16c0179a40e27dfbdb56d062621ceb127536ae97806fca049d5d68ab72
     last_checked: 2026-10-10
     status: active
 
@@ -613,9 +613,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: e0191bf0a2167dcf905cc042ed42ebcecdc7ee49b067e2840b52248407d1ec6c
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 2019e46d57ff218fdd97b5eda3490bab27392e48c0f4ff33f74342bd1cbf4bed
     last_checked: 2026-10-10
     status: active
 
@@ -634,9 +634,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: f3a9a82ecd4f4aaa108f1cfa5439c8feca71244f9f8076d2eac2029baeac761e
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 322599171b0c1d9a10aeff7a47e81b4cca4292bd82e22fce2bfa0409788f332b
     last_checked: 2026-10-10
     status: active
 
@@ -655,9 +655,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 10a2e8be24fbac5e4f0175f15733c4051449c542e80ddfc2468703b3e833a7a0
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 3a8d1066649155bf7b91f91fcf47b4445e1b7814e34eb52b4c5c212e63c3134a
     last_checked: 2026-10-10
     status: active
 
@@ -676,9 +676,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 8dad3da886c522f2c8c330cf14455a4c93324fccbd328e230df5e96c8a415a04
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 9603142c510e72d9e98ce0c674baea9956273b1eab0d028d044c7810256e3b36
     last_checked: 2026-10-10
     status: active
 
@@ -697,9 +697,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 15e3dcf77dc83dac19eddfaaa891c48a70ee878366eeae7c85b6d316678b10ba
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 2c8fe3b5d56b5d6053945bef6cec197a6307f5df0cac7f885f17001a733d2001
     last_checked: 2026-10-10
     status: active
 
@@ -718,9 +718,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 6b366be820d75fed6fc013614d7c5fcd42cf0d7e9640c5bdfb3d36738efe2e20
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 5dfd1040bde041d2c502289cba32944208a01b7e71d728adb3c3e7df87fb60a5
     last_checked: 2026-10-10
     status: active
 
@@ -739,9 +739,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: 08e9ecaab55c4f30de20952ae4459412cd301d658aab0d445cf79ec41f8e1274
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 79dd701bd24c7a699a06ba6fc92e742dfc78dfb5bf820d68ab7aacfba2eadda5
     last_checked: 2026-10-10
     status: active
 
@@ -760,9 +760,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-10
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-10
-    content_hash: ea57277b71000d8880d7a755c68b25f9bf40eb94176a4e2cac077a55fd4f8cbf
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 4c20c66a870f2b409ba630058fb78d53ed12fbc7e254b934e5e5b91ee54222a0
     last_checked: 2026-10-10
     status: active
 
@@ -782,9 +782,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-11
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-11
-    content_hash: e0e4faabb9ebfdf684c0a3cd2816fc25b7af9cf35a4b37f6375cf80faa595477
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 30f4a7ebc9accc345e60af758cdd93d3d7dbfcae03fbfb2d8dc5f7b86a163152
     last_checked: 2026-10-10
     status: active
 
@@ -868,9 +868,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-20
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-20
-    content_hash: 0b1eacd5b0da729b97e5b6239333770679bcccadfc95ecc89bd87d71ca7989d0
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: a894ab8e34872b2debad4d0b3851dc07a1a9758959f226410db6cf09d96bfbaf
     last_checked: 2026-10-20
     status: active
 
@@ -889,9 +889,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-20
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-20
-    content_hash: 252b020bb2cb646179239221acf2bc28818a3161aa55b386c6da3f17c03b63ae
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 04920649e8b757bb10c10cc8deb21ac5f09c75ac6f6586a2539c5c310e4cbdf2
     last_checked: 2026-10-20
     status: active
 
@@ -910,9 +910,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-20
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-20
-    content_hash: 105845b06e549ddef9630370369e25c6cb29f53010f5acc952eff0161163c424
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: dc51cbdf89291d08e68d30525b7f73ff95ce75f4e90ea998d5a5d97d0d276c8a
     last_checked: 2026-10-20
     status: active
 
@@ -931,9 +931,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-20
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-20
-    content_hash: 817e2a2be843892f1b66cde17cc250fe4d5bab9b522d58ef9dde704c208156ae
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: a2c283ef0297cae2fb183762b9459ed9e329650d2e557369fbfea0bc26050127
     last_checked: 2026-10-20
     status: active
 
@@ -952,9 +952,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-20
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-20
-    content_hash: 88ba0a0aac2c0bf5344167f5457f6cf0c1b984219d50e294ad5e02af2b8ab4b2
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 5172fb44cd487c9dbd13fcb744e8d27ef1d5d0f9ca19de9c813d87405e75859c
     last_checked: 2026-10-20
     status: active
 
@@ -973,9 +973,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-20
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-20
-    content_hash: 504ab9c360c6a4aa507a0d167e8dbe24a9e0595b07c9b16f723b20b92269d42a
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: f1122a5ff39d3796b2001a72b6cd55f6dcff4972acd4a96ba197c02129f5c651
     last_checked: 2026-10-20
     status: active
 
@@ -996,9 +996,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: e44652ce4611715b3cde4025f30412d4ba8c3337a1e4afe87a1929fbc739b937
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 5238acde4127c6979262eced5ee1ae6ccb54508f7ead56d2093efb36c06afd5b
     last_checked: 2026-10-25
     status: active
 
@@ -1017,9 +1017,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 73431d5b26029a5226f3003b3a901997ff3ccb2f408a5882bf3fa9a156bc1ee9
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 5e31f23ab3e5e82855e0f4b2622bc8a80dbc1dda6d47abe8aab0eb95b13bce0b
     last_checked: 2026-10-29
     status: active
 
@@ -1038,9 +1038,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: a2ce151750dfa104b4f5a4a8a505fcf3634553464d831ded92bcc57e2f31f4ca
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 3e33c407aad14787151014464dd23338eb797558349ebe09e216e2e7b4fdf070
     last_checked: 2026-10-25
     status: active
 
@@ -1059,9 +1059,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: cacc61203eb6e8fc153fe3b1a66a1137e8a366e8a5c7192830286b7b89cf8f92
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 020d6786222a03ca98f7ec069fc69e5a756c512ff6ad007c294eb9b33481d0c6
     last_checked: 2026-10-29
     status: active
 
@@ -1080,9 +1080,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 6ad450e002709069c44b042d640775dcb62587c54bb76e38c3740fceafa2eaab
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 87f652fb64355bbcc48413c455dc9a8885362b61933a198fe6b01abc88a9d0c9
     last_checked: 2026-10-29
     status: active
 
@@ -1101,9 +1101,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 97900b3e5322561dc54a08d31e291c3dc2e3b26b4604a821a6d5610fe6b2f2e1
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 265c3b97a0e8b86b4851d14cd6cdb0cb45b6637cabf706fdc6830a4014fc4180
     last_checked: 2026-10-25
     status: active
 
@@ -1122,9 +1122,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 0b57585147ce914877f03c8e7fe6ea41989b96ce192423009830c271823ae5ad
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: b8e8cffa650caf8f3c2a44854259884dca06eb6be3f510fc272ef1577c8afca4
     last_checked: 2026-10-25
     status: active
 
@@ -1143,9 +1143,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 8c510acc36d9025bd8eae581860f7937d5dbb9a3c79d4b12f958b4addc230784
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: dfaecb813f402bd97f28252562acabc5be826bea8fd36dbbd5b3e0622cd2318f
     last_checked: 2026-10-29
     status: active
 
@@ -1164,9 +1164,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 75b83bf5c0d58e22d57f5724f0355caff2ab84783d313635203aa2a2024684c8
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: e5e209ceb36a7c689849d4b54e245b3c5daf5e5643fb5fcbffd1c44f676dc4f5
     last_checked: 2026-10-29
     status: active
 
@@ -1206,9 +1206,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 4da3457c99593f783880faa01e0c492cb48e7551fabf7d0ab3e6ef63b364587a
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 9d975fa1c39ed00f1e6751e86a880420956aaa03b2eab98b5e5d83a21b4b8f1a
     last_checked: 2026-10-25
     status: active
 
@@ -1227,9 +1227,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 636548764791c7cc83a1df31dc23279394dd839ccee7753bae15468231b6cc5b
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 5fdf95cca70d2ccfd0c7c146920c4891e8fd354db7d34772b5dffee11c288275
     last_checked: 2026-10-25
     status: active
 
@@ -1249,9 +1249,9 @@ resources:
     basis: script_fetch
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 818074c133038b3f0ac982308ea3fa7b967f27ebc6d1902befe264c787ba5833
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: d934c5ab37873910b87f17f0c45aae30478263667f95e9e9a1edc5d283686d83
     last_checked: 2026-10-25
     status: active
 
@@ -1315,9 +1315,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: bd8bef0b329df509ff7d95e2b052ff53aba4b68bebe7905fe4122ec62be70e2b
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 4ad78fc1aa960f1be817a1344b21e451756ef46ff51cf5843d15f9241e7a2a41
     last_checked: 2026-10-25
     status: active
 
@@ -1337,9 +1337,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 66eabf09ae9b0878dd35e88c4c00aa396dd83432c1b23e9e6aa1ce78255ad124
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 96578f42ef6b6930742ef5907b99a8762212c7310d0d7eb25481810b4e7f8bba
     last_checked: 2026-10-29
     status: active
 
@@ -1359,9 +1359,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: c7a07e9f29a2606a30e3eb85b421923eb7d9bfa7eb61737288313a1981976ed3
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 42676e7ba3c899462ba8210e0ad7271a75993b458b58a22d615a6b8b4296cd51
     last_checked: 2026-10-25
     status: active
 
@@ -1397,9 +1397,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: f8dde9324409b7f8ff2564d77d5abe46a2c60c9c1399d0d72d6b018d9a8821a7
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: bac8eb812a40e567111b69162649182d6b8f05249eda95ae5e37aa91c1cdeb0f
     last_checked: 2026-10-25
     status: active
 
@@ -1419,9 +1419,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: cb03e7661e3614e7c6e8b4623fe95432e6b4b4179910a6b385c5cde203156ac4
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 64b3278868e5b4e41d4465aae436c991c45b190defe99c442b59dd9ccd52ac48
     last_checked: 2026-10-29
     status: active
 
@@ -1441,9 +1441,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 5e62c7dd5bc950b11429390daea3df87e2a9268b4390af14a498ab5ee0e3b17e
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: ebedf6025debbceb23e1ed21657b602061f8459a9e382b5ab35fc35f9a64b73d
     last_checked: 2026-10-29
     status: active
 
@@ -1479,9 +1479,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: e67dce656de2dff8b33cf330e58ccd772bac1fc27c13c66c471f4fd4223367c4
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 18694a715ebb4bd853ec13d5b333277b0ec52fc1e7115e8a3d92469fb1b0b66e
     last_checked: 2026-10-29
     status: active
 
@@ -1821,9 +1821,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 1626c8910becd1af6aad89a6f55c9b7364239c84cc2d848f787e9df6f7797738
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: bedd396659ec911aa9ae893595ca1e00a3f2c3724f967cd7ae9a559df7993c08
     last_checked: 2026-10-25
     status: active
 
@@ -1843,9 +1843,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 0753eba23996a6b77af26a5f7436896a28acfa3ebae1a038a15cc33adfd1dc6d
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: e87ccf8d4f60f76755a891758e402a74534627118b05dfa1c8470535d59d1244
     last_checked: 2026-10-25
     status: active
 
@@ -1865,9 +1865,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 6cf8d9da89cd581df516b6830391cd78d920612e71f22d8e46bfa0d56b26adf3
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 04f3b227572f98ddfb9acb0e2b610bbf88d41da70b5b59b89f2fefd90fc63a9f
     last_checked: 2026-10-29
     status: active
 
@@ -1887,9 +1887,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 295459d099d5b2e4d006d4cf183fb4aae92b72405643e457f356eba1d1edd056
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: fc6ce4ee6e6f945616c38e45a2ee98e77f329663cb6c2164a019add36b04b5ba
     last_checked: 2026-10-25
     status: active
 
@@ -1909,9 +1909,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 6ab8fd17c1beb6d925b96fba4c0e321342576f748957f468fc684b6b4c76d805
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 37a106daaef2e45cad449b9635cdcd89790ad709509cbe659f48d3e1d25d2e60
     last_checked: 2026-10-29
     status: active
 
@@ -1931,9 +1931,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 5ca6c761138e93a41b4d9091a313f484849a53e0f3a78cab7c28467278884f28
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 5bb0cb875bcb61a1b671630390045e78f4f72f47bb6386fa6417e1b7949810fa
     last_checked: 2026-10-25
     status: active
 
@@ -1953,9 +1953,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 96fe25b8e4f327027225dcd6a9ef952f55fdf66eff5560b608a24e58b73bab83
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 9015331c8f5293d7a9e0aa1b3f1d84b72dea119e747a7526f671e5cd0931454a
     last_checked: 2026-10-25
     status: active
 
@@ -2276,9 +2276,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: da8e41728545523f9cedcebb95513f111ca2fff3eac424d6daf28c2ec6328f0c
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 22ac2bc0a11e7e36ca81d930ea87f3782a3b5f7a8ee0951e609de336b9eed193
     last_checked: 2026-10-25
     status: active
   - id: idai-id-pediatric-respiratory-care
@@ -2298,9 +2298,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 8177d68bea222040a98011a5c53bac8515ae486171caade2059fffddbb46cb8c
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 149699b99364f0cb7f1072c32c207740e126d329179dd17ecff95ea2d574be35
     last_checked: 2026-10-25
     status: active
   - id: vnch-vn-pediatric-respiratory-care
@@ -2320,9 +2320,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: e25f86e7c40ff7ac802680d63e59e0b9f62baf7306a5506d9e0b1ce36cfae75e
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 959666c221e9bbb9c36c880454dbb91275a44cdb7795fcf59ef785aaff3fb178
     last_checked: 2026-10-25
     status: active
   - id: akuh-pk-pediatric-pulmonology-care
@@ -2342,9 +2342,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: ccefbc50dbb93cb83268bec135e09744cf9f8e2650447006b4dc84d4e44a98c0
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 64923105b178771a1c81734715ddda0a9c41eee2f661a9dc12b5dc90f0efc61b
     last_checked: 2026-10-25
     status: active
   - id: bshi-bd-pediatric-respiratory-care
@@ -2380,9 +2380,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 88ad11f003bbac3cd4ef3007b266ccb31cf45eabbd664b9f867b36f9f5488f53
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 642dc9855961cf21704774b3c23da25700a1d67cd8d2a1f2dd6b37595b616bb3
     last_checked: 2026-10-25
     status: active
   - id: kanti-np-pediatric-referral-care
@@ -2401,9 +2401,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 0dfd4e178fe995c435a4f98537226f157a3975da40709f831d816cb04732f6d4
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: f41ca0b28f5319b1fd70aae84dac301a1ae9ffe4c8208a42fd401717caa36b2d
     last_checked: 2026-10-29
     status: active
   - id: laumcrh-lb-pediatric-pulmonology-care
@@ -2422,9 +2422,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: b025110e9d0401dd84a272b7eb2b79722a435d93d5cbcba1fb596cc0d81b8275
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 881f68802663d3bad9afe7efcc82105ae47db7fd9c1460dcc41eb6cdfa086740
     last_checked: 2026-10-29
     status: active
   - id: kfshrc-sa-cystic-fibrosis-care
@@ -2444,9 +2444,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 00c18eebaf55ef0e63c439e5c64969ac9456a8d2b73c5ff1a7d0c2683f70508d
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 1f652831d026aeb62f833faa2e2f03c9ea3fffbbe1b2814fd1cf2d61c62f0e30
     last_checked: 2026-10-25
     status: active
   - id: dubaihealth-ae-pediatric-pulmonology
@@ -2466,9 +2466,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: e1e5464fced41b202d0b24a09c800f8636fdf03927c703035c10993d853a2ac7
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 6f5b9f85ebc8c2080cd2d92de3fc3692ae3891e523c835c54b97f8cb4f6e4756
     last_checked: 2026-10-29
     status: active
   - id: pasteur-tn-genetic-diagnostic-services
@@ -2520,9 +2520,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 5276e01005bff09045441e8f4568ab4630e7f97f393a6e7475156a24c716008a
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: e9021a8b21cac67dff549b3bd1068a195261aec36b0c968adc7f2342c19374f0
     last_checked: 2026-10-25
     status: active
   - id: pan-ng-pediatric-respiratory-guidance
@@ -2542,9 +2542,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 70a5bfc7a4d1b772062c7251ff02d14f3ba1a4d4b8dd8966f562fb9335c31221
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 5933505b95c719c27d54fcd585463ea2bf07655728d3e886ed6bd1cfe9a6c03e
     last_checked: 2026-10-25
     status: active
   - id: amu-az-pediatriya-ve-genetika
@@ -2579,9 +2579,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 069d1be9ac461c147450412400476db751ef58d1e13903f3ac0881699c567733
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: f0c44f70e8d15144fe7b2f6577bf55fdafc07cd1646223eb89b5a8110f8e434a
     last_checked: 2026-10-29
     status: active
   - id: pediatriya-uz-bolalar-pulmonologiyasi
@@ -2600,9 +2600,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 4091c7c48a2e11499f4e5159b642a0dde98b3d3a2816fe4602e5be64f14ffa05
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: bf297a3a7d030a64a3abe4bdb8e5d57877833f01acea946f886cbdb685d9c24d
     last_checked: 2026-10-29
     status: active
   - id: oshsu-kg-pediatrics-and-child-health
@@ -2622,9 +2622,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: e7d644b835293f52644915a35b2aa368c982d4272ad37f8c23aa6b46b6709486
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 333480d1107cab0b7d6598658a0656978b2cde10d333f80a54ad1b14ba893d72
     last_checked: 2026-10-29
     status: active
   - id: pasteur-dz-genetique-et-diagnostic
@@ -2660,9 +2660,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 46dacff49d56e4b3c48c65a9a64993dfb6bff56f3712841e3722a6d8b9b1d3ed
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 68f184158ae571172274617990055adc9ef2924416a943577150826248a1cfbd
     last_checked: 2026-10-29
     status: active
   - id: dasman-kw-medical-genetics-research
@@ -2681,9 +2681,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 52e44ebb166ed1b4bf0c9aeef3d0ce2bf2f097e9aeb738a8e2b31bb8567f64d3
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: a66608ea0b45182181ddaab8b31074d67c99b5903cd81de3283c38e7ebfbb7a6
     last_checked: 2026-10-29
     status: active
   - id: moh-om-genetic-and-pediatric-care
@@ -2702,9 +2702,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 038cb65319072df7f6bf3f0fa8cc97ffd21a19f4ac082ceadbdfd01df5eb324d
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 821c922a3fd1f372d56543b912ff1901a58c175df4d76ffef89371f9f3d99f14
     last_checked: 2026-10-29
     status: active
   - id: uobaghdad-iq-pediatrics-and-cf
@@ -2724,9 +2724,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: ce93accafeeb1b2f64c98633718da1e829c9fe4f2b40e0bfe4ba52ead114e43f
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: a8f54979a7f2902c6d7f4be01d5dca7e02a3249c16dea7a8940a84910df8b58e
     last_checked: 2026-10-29
     status: active
   - id: sbmu-ir-pediatric-respiratory-center
@@ -2810,9 +2810,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 31ce14ce84aee34e6dc6bf7bb0aaf22bf9cfbf472d13771f1e2d0b4a87b30dbf
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: ace7283ead3a3211153c3bda896b8f86bdd635d13028ced163637bbf229fe558
     last_checked: 2026-10-25
     status: active
   - id: ucad-sn-medecine-et-sante
@@ -2831,9 +2831,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 0786a976410f549d797db4a54772349c917acd59176ef462fccd1c8b687beb19
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 95ed78825ba9e9fa61a2539009c6c23fa0fe446ffd8eda497b57460ab418658c
     last_checked: 2026-10-29
     status: active
   - id: pasteur-ci-diagnostic-et-recherche
@@ -2852,9 +2852,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: b3deb2ad0509e5cc3d3b24e859fe6504cf1433444a399b67f848af43335ca860
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: c116b2638ec97d681fae89458a2edecd4adbcbfa4ff639661648fae3bb7c4c88
     last_checked: 2026-10-29
     status: active
   - id: pasteur-cm-laboratoire-et-sante-publique
@@ -2873,9 +2873,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 5a5e41bfa3cf867efc580d180f67b52bfed1e16f4ecdf8deb02ebacba48554af
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 49a6de5af0f6caca1fc5a6a36f05b43f7f57e5ceadc4e343ef5ef203d03a98be
     last_checked: 2026-10-29
     status: active
   - id: minsa-ao-servicos-nacionais-de-saude
@@ -2943,9 +2943,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 1e627a868957e0761e26f99f6d49b7aa9da019909047ff73b51fa9ea7c67b9cb
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: a3d17b839f03b5480a5c77bbe478c42acbb55f8ef14d8d4d65c7194b1f9e0c39
     last_checked: 2026-10-25
     status: active
   - id: makchs-ug-pediatric-health-sciences
@@ -2965,9 +2965,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: a5794bb6925abcbe3bb9dc08b5c2a6bcbdd162d4434e07ce8978efc94344d648
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 2089a0a7cad73b6f4c6bcd2bb5528b67f33ff8efc37b943de2bcc36a153ab2aa
     last_checked: 2026-10-29
     status: active
   - id: aau-et-pediatric-specialist-care
@@ -2987,9 +2987,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-25
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-25
-    content_hash: 9a3d87b07229c994f97efec73958b4dd6c0bb380c248ddb887c118839c896cc0
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: d14b29541fd60f79b518eeab0d017230f1ef3f11fe76b20e526f0e1e4fb11bc3
     last_checked: 2026-10-25
     status: active
   - id: kfhr-rw-tertiary-pediatric-care
@@ -3009,9 +3009,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 8950948a87668f0e19b4fb6effc1b4fab276ff15693d55e9dbecd7b7c68f54c7
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 7313674fe63522651973a9fbdfd37e54cdde5631ea3c6ad411abae781fd499c5
     last_checked: 2026-10-29
     status: active
   - id: unza-zm-medical-pediatric-guidance
@@ -3031,9 +3031,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: 004410e1b9c23e08b636b4f70c8e16dec3af8820c29f1173b44cb6ae90fe2c0c
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: 3e5384a52808926806d122ce3932baf57f1957a83f77f6a6753cb62fd52f1a27
     last_checked: 2026-10-29
     status: active
   - id: uz-zw-health-sciences-pediatric-care
@@ -3228,9 +3228,9 @@ resources:
     basis: person_read_in_browser
     summary_attested_by: maintainer
     summary_attested_on: 2026-10-29
-    confirmed_by: maintainer
-    confirmed_on: 2026-10-29
-    content_hash: b11b42a5bcd3d8803c8b385e30aae188f0726c19a605951da1728c661fd36fbc
+    confirmed_by: council-on-behalf-of-maintainer
+    confirmed_on: 2026-10-31
+    content_hash: e9c3172d64d2a9168c81498d04030868ff37f4e5549087e24bd21473adb84c57
     last_checked: 2026-10-29
     status: active
 

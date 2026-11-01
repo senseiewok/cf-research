@@ -70,6 +70,12 @@ BASES = frozenset({"person_read_in_browser", "script_fetch", "lead_only"})
 STATUSES = frozenset({"active", "retired"})
 NON_FETCH_ACCESS = frozenset({"manual", "request", "forbidden"})
 MACHINE_NAMES = frozenset({"script", "model"})
+# Who may confirm a row. "maintainer" is a person who read the row (and its summary_es) and is never written by a
+# tool or model. "council-on-behalf-of-maintainer" means the summary_es was approved by a three-member model council
+# with a binding chair under the maintainer's written authorisation; no person who reads Spanish has confirmed it.
+CONFIRMED_BY_MAINTAINER = "maintainer"
+CONFIRMED_BY_COUNCIL = "council-on-behalf-of-maintainer"
+CONFIRMED_BY_VALUES = (CONFIRMED_BY_MAINTAINER, CONFIRMED_BY_COUNCIL)
 
 REQUIRED = (
     "id", "name", "organisation", "countries", "url", "audience", "category", "summary", "who_for",
@@ -400,6 +406,12 @@ def check_row(row, catalog, today):
                 errors.append(f"missing {k} (required unless basis is lead_only)")
         if "confirmed_by" in row:
             check_person(row, "confirmed_by", errors)
+            who = row["confirmed_by"]
+            if isinstance(who, str) and who.strip() and who.strip().lower() not in MACHINE_NAMES:
+                if who not in CONFIRMED_BY_VALUES:
+                    errors.append(f"confirmed_by must be one of {', '.join(CONFIRMED_BY_VALUES)}, not {who!r}")
+                elif who == CONFIRMED_BY_COUNCIL and "summary_es" not in row:
+                    errors.append(f"confirmed_by {CONFIRMED_BY_COUNCIL} is only for a row with summary_es")
         if "confirmed_on" in row:
             check_past_date(row, "confirmed_on", today, errors)
         if "content_hash" in row:
