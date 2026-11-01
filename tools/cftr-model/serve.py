@@ -56,6 +56,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         sys.stderr.write("  %s\n" % (fmt % args))
 
 
+class Server(http.server.ThreadingHTTPServer):
+    """ThreadingHTTPServer with a deeper listen queue and daemon threads. The default backlog of 5 overflows when a page asks for many files at once
+    (ERR_CONNECTION_REFUSED on Windows); daemon threads keep a stuck connection from holding the process open."""
+    request_queue_size = 128
+    daemon_threads = True
+
+
 def make_server(directory, port, tries=20):
     """A server for `directory` on 127.0.0.1, at `port` or the next free one (port 0 asks the system for any free port)."""
     directory = Path(directory)
@@ -65,7 +72,7 @@ def make_server(directory, port, tries=20):
     last = None
     for p in ([0] if port == 0 else range(port, port + tries)):
         try:
-            return http.server.ThreadingHTTPServer(("127.0.0.1", p), handler)
+            return Server(("127.0.0.1", p), handler)
         except OSError as e:
             last = e
     raise OSError(f"no free port from {port} to {port + tries - 1}: {last}")
