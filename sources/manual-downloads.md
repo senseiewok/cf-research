@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-271 to download by hand, 1 to ask for, 3 not to download.
+280 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -48,11 +48,23 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | ars-gf-resource-pages | Agence Régionale de Santé Guyane website (www.guyane.ars.sante.fr) | [page](https://www.guyane.ars.sante.fr/) | link only | French regional health authority coordinating public hospital care, community medical prevention, specialized clinical networks, and patient guidance across Fr… |
 
+### American Chemical Society
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| conte-2022-acsami | Hybrid Lipid/Polymer Nanoparticles to Tackle the Cystic Fibrosis Mucus Barrier in siRNA Delivery to the Lungs: Does PEGylation Make the Difference? | [page](https://doi.org/10.1021/acsami.1c14975) | link only | Supporting words are in the Introduction (the barrier and the viscous mucus) and the section on siRNA-loaded nanoparticles in CF sputum samples (dehydration). |
+
 ### American Samoa Department of Health
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | doh-as-resource-pages | American Samoa Department of Health website (doh.as) | [page](https://doh.as/) | link only | Official territorial health department administering community medical clinics, pediatric health programs, chronic disease surveillance, and hospital clinical… |
+
+### American Society for Clinical Investigation
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| lee-2022-jci | Small-molecule eRF3a degraders rescue CFTR nonsense mutations by promoting premature termination codon readthrough | [page](https://doi.org/10.1172/JCI154571) | link only | Supporting words are in the Abstract (the premature termination codon) and the Discussion (little to no protein). |
 
 ### Arabian Gulf University College of Medicine and Medical Sciences
 
@@ -155,6 +167,18 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | isrctn | ISRCTN Clinical Study Registry (UK and international clinical trials) | [page](https://www.isrctn.com/) | link only | Terms read 2026-10-24 via read-page on https://www.isrctn.com/page/terms (robots.txt 200, allowed). |
+
+### BMC
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| santos-2023-cellbiosci | Mutation-class dependent signatures outweigh disease-associated processes in cystic fibrosis cells | [page](https://doi.org/10.1186/s13578-023-00975-y) | link only | Supporting words are in the first paragraph of the Introduction. |
+
+### BMJ Publishing Group
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kovalenko-2025-bmjopen | Development of a novel intervention using a person-based approach to support physical activity among families of children with cystic fibrosis in the UK | [page](https://doi.org/10.1136/bmjopen-2024-093843) | link only | Supporting words are in the first paragraph of the Introduction. |
 
 ### British Indian Ocean Territory Administration
 
@@ -937,6 +961,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | maltabreathewell-resource-pages | Malta Breathe Well Association website (www.maltabreathewell.org) | [page](https://www.maltabreathewell.org/) | link only | Maltese respiratory association providing patient support, public health education, and advocacy for people living with cystic fibrosis and chronic lung condit… |
 
+### MDPI
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| anwar-2024-advrespirmed | Cystic Fibrosis: Understanding Cystic Fibrosis Transmembrane Regulator Mutation Classification and Modulator Therapies | [page](https://doi.org/10.3390/arm92040026) | link only | Supporting words are in section 5, Classification of CFTR Mutations. |
+
 ### Middle East Cystic Fibrosis Association
 
 | ID | What | Open | Save as | Notes |
@@ -1177,6 +1207,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | nul-ls-resource-pages | National University of Lesotho website (www.nul.ls) | [page](https://www.nul.ls/) | link only | Official national university and health sciences faculty portal in Lesotho; robots.txt allow (2026-10-26), manual access, link and summary only. |
 
+### Nature Publishing Group
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| comegna-2021-scirep | Assisting PNA transport through cystic fibrosis human airway epithelia with biodegradable hybrid lipid-polymer nanoparticles | [page](https://doi.org/10.1038/s41598-021-85549-z) | link only | Supporting words are in the Abstract. |
+
 ### Nederlandse Cystic Fibrosis Stichting
 
 | ID | What | Open | Save as | Notes |
@@ -1224,6 +1260,14 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | psod-ph-resource-pages | Philippine Society for Orphan Disorders website (psod.org.ph) | [page](https://www.psod.org.ph/) | link only | Official national rare and orphan genetic disorders patient organization in the Philippines. |
+
+### PLOS
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| solomon-2013-plosone | IP-10 Is a Potential Biomarker of Cystic Fibrosis Acute Pulmonary Exacerbations | [page](https://doi.org/10.1371/journal.pone.0072398) | link only | Supporting words are in the first paragraph of the Introduction. |
+| sharma-2018-plosgenet | Capitalizing on the heterogeneous effects of CFTR nonsense and frameshift variants to inform therapeutic strategy for cystic fibrosis | [page](https://doi.org/10.1371/journal.pgen.1007723) | link only | Supporting words are in the Introduction (nonsense-mediated decay lowers the transcript level; truncated proteins typically lack function). |
+| sousa-2012-plosone | Measurements of CFTR-Mediated Cl- Secretion in Human Rectal Biopsies Constitute a Robust Biomarker for Cystic Fibrosis Diagnosis and Prognosis | [page](https://doi.org/10.1371/journal.pone.0047708) | link only | Supporting words are in the Abstract and the Discussion. |
 
 ### Polskie Towarzystwo Walki z Mukowiscydozą
 
