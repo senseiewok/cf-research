@@ -5558,6 +5558,86 @@
           "trajectory_entropy_bound_satisfied": true
         }
       }
+    },
+    "prost_joanny_parrondo_fdt_bridge": {
+      "task_id": "T-0587",
+      "prost_joanny_parrondo_bridge_verified": true,
+      "fdt_response_stratification_verified": true,
+      "proof_dag_fdt_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "steady_state_cycling_velocity_s_inv": 2.28,
+          "fdt_violation_asymmetry_ratio": 0.76,
+          "cross_correlation_drift_term_cv": -0.82,
+          "equilibrium_correlation_derivative_dc_dt": -1.08,
+          "generalized_response_chi_eff": 1.9,
+          "gating_regime": "ACTIVE_NON_EQUILIBRIUM_MOTOR",
+          "generalized_fdt_satisfied": true
+        },
+        "rescued_cftr_ivacaftor": {
+          "steady_state_cycling_velocity_s_inv": 2.1,
+          "fdt_violation_asymmetry_ratio": 0.71,
+          "cross_correlation_drift_term_cv": -0.75,
+          "equilibrium_correlation_derivative_dc_dt": -1.05,
+          "generalized_response_chi_eff": 1.8,
+          "gating_regime": "ACTIVE_NON_EQUILIBRIUM_MOTOR",
+          "generalized_fdt_satisfied": true
+        },
+        "f508del_uncorrected": {
+          "steady_state_cycling_velocity_s_inv": 0.0006,
+          "fdt_violation_asymmetry_ratio": 0.008,
+          "cross_correlation_drift_term_cv": -0.0002,
+          "equilibrium_correlation_derivative_dc_dt": -0.025,
+          "generalized_response_chi_eff": 0.0252,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_COLLAPSE",
+          "generalized_fdt_satisfied": false
+        },
+        "g551d_uncoupled_cftr": {
+          "steady_state_cycling_velocity_s_inv": 0.0004,
+          "fdt_violation_asymmetry_ratio": 0.005,
+          "cross_correlation_drift_term_cv": -0.0001,
+          "equilibrium_correlation_derivative_dc_dt": -0.02,
+          "generalized_response_chi_eff": 0.0201,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_COLLAPSE",
+          "generalized_fdt_satisfied": false
+        },
+        "w1282x_nonsense_baseline": {
+          "steady_state_cycling_velocity_s_inv": 0.0,
+          "fdt_violation_asymmetry_ratio": 0.0,
+          "cross_correlation_drift_term_cv": 0.0,
+          "equilibrium_correlation_derivative_dc_dt": 0.0,
+          "generalized_response_chi_eff": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "generalized_fdt_satisfied": false
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_inductive_response_flow": 2.45,
+          "fdt_violation_asymmetry_ratio": 0.81,
+          "deductive_implication_velocity": 3.12,
+          "topological_flux_preservation_pct": 84.5,
+          "fdt_proof_parity_satisfied": true,
+          "generalized_response_bound_satisfied": true
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_inductive_response_flow": 2.25,
+          "fdt_violation_asymmetry_ratio": 0.77,
+          "deductive_implication_velocity": 2.85,
+          "topological_flux_preservation_pct": 80.2,
+          "fdt_proof_parity_satisfied": true,
+          "generalized_response_bound_satisfied": true
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_inductive_response_flow": 2.1,
+          "fdt_violation_asymmetry_ratio": 0.73,
+          "deductive_implication_velocity": 2.65,
+          "topological_flux_preservation_pct": 77.0,
+          "fdt_proof_parity_satisfied": true,
+          "generalized_response_bound_satisfied": true
+        }
+      }
     }
   },
   "challenges_unbridged": {
