@@ -113,5 +113,7 @@ Clinical Trial Decoupling Atlas"]
   - **`T-0582` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 38: Interactive Geometrical Thermodynamic Gauge Theory & Berry Holonomy Simulator on `senseiewok.ai`*.
   - **`T-0583` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 39: Non-Equilibrium Steady-State Transition Bounds & Sasa-Tasaki Equality in CFTR Catalytic Assemblies in `cf-research`*. Grounded in `DOI:10.1103/PhysRevLett.95.130602`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. Fully specified in `tasks/specs/T-0583.md`. Delivered in PR.
   - **`T-0584` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 40: Interactive Non-Equilibrium Steady-State Transition Bounds & Sasa-Tasaki Equality Simulator on `senseiewok.ai`*.
+  - **`T-0585` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 40: Seifert Trajectory Stochastic Entropy Production & Fluctuation Theorem in CFTR Catalytic Cycles in `cf-research`*. Grounded in `DOI:10.1088/0034-4885/75/12/126001`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. Fully specified in `tasks/specs/T-0585.md`. Delivered in PR.
+  - **`T-0586` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 41: Interactive Seifert Trajectory Entropy Production & Stochastic Fluctuation Theorem Simulator on `senseiewok.ai`*.
 
 *Report submitted by Frontier AI Scout (Round 165). Zero hallucinations detected across AH-1 through AH-12.*
