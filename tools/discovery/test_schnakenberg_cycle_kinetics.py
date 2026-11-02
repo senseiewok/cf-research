@@ -1,4 +1,4 @@
-"""Unit tests for Round 28 (T-0564): Schnakenberg Cycle Kinetics, Non-Equilibrium Cycle Flux Splitting & Detailed Balance Breaking in CFTR Gating.
+"""Unit tests for Round 28 (T-0565): Schnakenberg Cycle Kinetics, Non-Equilibrium Cycle Flux Splitting & Detailed Balance Breaking in CFTR Gating.
 
 Primary Biophysical Grounding & Evidence:
   - DOI:10.1103/RevModPhys.48.571 (Schnakenberg: Network theory of microscopic and macroscopic behavior of master equation systems)
@@ -24,7 +24,7 @@ class SchnakenbergCycleKineticsTests(unittest.TestCase):
         self.report = evaluate_schnakenberg_cycle_kinetics()
 
     def test_task_id_and_overall_bridge_verification(self) -> None:
-        self.assertEqual(self.report["task_id"], "T-0564")
+        self.assertEqual(self.report["task_id"], "T-0565")
         self.assertTrue(self.report["schnakenberg_bridge_verified"])
         self.assertTrue(self.report["cycle_flux_splitting_verified"])
         self.assertTrue(self.report["proof_cycle_acyclicity_parity_verified"])
