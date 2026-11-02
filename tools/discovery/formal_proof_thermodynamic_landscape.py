@@ -35,6 +35,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Schreiber T (Phys Rev Lett 2000, DOI: 10.1103/PhysRevLett.85.461)
   - Parrondo JMR et al. (Nat Phys 2015, DOI: 10.1038/nphys3230)
   - Hartich D et al. (J Stat Mech 2014, DOI: 10.1088/1742-5468/2014/10/P10016)
+  - Keizer J (J Chem Phys 1976, DOI: 10.1063/1.432650)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -523,6 +524,12 @@ def evaluate_glansdorff_prigogine_evolution(n_gating_regimes: int = 4) -> Dict[s
     if n_gating_regimes != 4:
         raise ValueError("n_gating_regimes must equal 4")
     return evaluate_two_way_bridge_isomorphism()["glansdorff_prigogine_evolution_bridge"]
+
+
+def evaluate_keizer_fluctuation_dissipation(n_reaction_diffusion_regimes: int = 4) -> Dict[str, Any]:
+    if n_reaction_diffusion_regimes != 4:
+        raise ValueError("n_reaction_diffusion_regimes must equal 4")
+    return evaluate_two_way_bridge_isomorphism()["keizer_fluctuation_dissipation_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:

@@ -4869,6 +4869,74 @@
           }
         ]
       }
+    },
+    "keizer_fluctuation_dissipation_bridge": {
+      "task_id": "T-0559",
+      "keizer_fluctuation_dissipation_bridge_verified": true,
+      "gating_stratification_verified": true,
+      "proof_variance_bounds_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "atp_affinity_kj_mol": 18.4,
+          "cl_flux_variance": 2.45,
+          "atp_cl_covariance": 3.85,
+          "coupling_efficiency": 0.88,
+          "dissipation_fluctuation_ratio": 1.12,
+          "transport_regime": "STABLE_COUPLED_CYCLE",
+          "keizer_criterion_satisfied": true
+        },
+        "g551d_uncoupled_cftr": {
+          "atp_affinity_kj_mol": 3.2,
+          "cl_flux_variance": 0.42,
+          "atp_cl_covariance": 0.05,
+          "coupling_efficiency": 0.08,
+          "dissipation_fluctuation_ratio": 8.75,
+          "transport_regime": "UNCOUPLED_DISSIPATIVE_TRAP",
+          "keizer_criterion_satisfied": false
+        },
+        "rescued_cftr_ivacaftor": {
+          "atp_affinity_kj_mol": 17.2,
+          "cl_flux_variance": 2.3,
+          "atp_cl_covariance": 3.6,
+          "coupling_efficiency": 0.84,
+          "dissipation_fluctuation_ratio": 1.18,
+          "transport_regime": "STABLE_COUPLED_CYCLE",
+          "keizer_criterion_satisfied": true
+        },
+        "w1282x_nonsense_baseline": {
+          "atp_affinity_kj_mol": 0.0,
+          "cl_flux_variance": 0.0,
+          "atp_cl_covariance": 0.0,
+          "coupling_efficiency": 0.0,
+          "dissipation_fluctuation_ratio": 0.0,
+          "transport_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "keizer_criterion_satisfied": false
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "inferential_variance_bound_satisfied": true,
+          "branching_covariance": 4.8,
+          "coupling_efficiency": 0.91,
+          "dissipation_margin": 4.2,
+          "total_theorems": 29500
+        },
+        "anthropics/formal-math/zeta23": {
+          "inferential_variance_bound_satisfied": true,
+          "branching_covariance": 4.2,
+          "coupling_efficiency": 0.87,
+          "dissipation_margin": 3.8,
+          "total_theorems": 18400
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "inferential_variance_bound_satisfied": true,
+          "branching_covariance": 3.9,
+          "coupling_efficiency": 0.85,
+          "dissipation_margin": 3.5,
+          "total_theorems": 14200
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -6663,5 +6731,5 @@
       }
     ]
   },
-  "snapshot_sha256": "7c6062f08351ff8dd481fb733baabc608959d5968b315a4005626c52bc0196b5"
+  "snapshot_sha256": "d10b6a2a31412b6292892acb0a2c3b1ec982d5384a571bcbda9ea6f35284afe5"
 }
