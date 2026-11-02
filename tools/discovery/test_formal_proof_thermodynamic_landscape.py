@@ -36,6 +36,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_onsager_machlup_action,
     evaluate_freidlin_wentzell_quasipotential,
     evaluate_graham_haken_potential,
+    evaluate_maes_netocny_response,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -86,6 +87,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_onsager_machlup_action()["onsager_machlup_action_bridge_verified"])
         self.assertTrue(evaluate_freidlin_wentzell_quasipotential()["freidlin_wentzell_bridge_verified"])
         self.assertTrue(evaluate_graham_haken_potential()["graham_haken_bridge_verified"])
+        self.assertTrue(evaluate_maes_netocny_response()["maes_netocny_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])

@@ -5162,6 +5162,83 @@
           "generalized_potential_bound_satisfied": true
         }
       }
+    },
+    "maes_netocny_response_bridge": {
+      "task_id": "T-0577",
+      "maes_netocny_bridge_verified": true,
+      "frenetic_response_stratification_verified": true,
+      "proof_dag_frenetic_acceleration_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "net_response_coefficient_r": 1.42,
+          "frenetic_activity_k": 1.85,
+          "excess_entropy_production_s": 2.45,
+          "frenetic_acceleration_ratio": 2.8,
+          "opening_transition_rate_k_s_inv": 2.25,
+          "gating_regime": "BALANCED_ENTROPIC_FRENETIC_RESPONSE",
+          "maes_netocny_criterion_satisfied": true
+        },
+        "f508del_uncorrected": {
+          "net_response_coefficient_r": 0.02,
+          "frenetic_activity_k": 0.05,
+          "excess_entropy_production_s": 0.08,
+          "frenetic_acceleration_ratio": 0.05,
+          "opening_transition_rate_k_s_inv": 0.0006,
+          "gating_regime": "FRENETIC_FREEZE_KINETIC_TRAP",
+          "maes_netocny_criterion_satisfied": false
+        },
+        "g551d_uncoupled_cftr": {
+          "net_response_coefficient_r": 0.01,
+          "frenetic_activity_k": 0.04,
+          "excess_entropy_production_s": 0.06,
+          "frenetic_acceleration_ratio": 0.04,
+          "opening_transition_rate_k_s_inv": 0.0004,
+          "gating_regime": "FRENETIC_FREEZE_KINETIC_TRAP",
+          "maes_netocny_criterion_satisfied": false
+        },
+        "rescued_cftr_ivacaftor": {
+          "net_response_coefficient_r": 1.38,
+          "frenetic_activity_k": 1.78,
+          "excess_entropy_production_s": 2.35,
+          "frenetic_acceleration_ratio": 2.65,
+          "opening_transition_rate_k_s_inv": 2.1,
+          "gating_regime": "BALANCED_ENTROPIC_FRENETIC_RESPONSE",
+          "maes_netocny_criterion_satisfied": true
+        },
+        "w1282x_nonsense_baseline": {
+          "net_response_coefficient_r": 0.0,
+          "frenetic_activity_k": 0.0,
+          "excess_entropy_production_s": 0.0,
+          "frenetic_acceleration_ratio": 0.0,
+          "opening_transition_rate_k_s_inv": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "maes_netocny_criterion_satisfied": false
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "net_response_dag_r": 1.85,
+          "frenetic_throughput_k": 2.65,
+          "inferential_traffic_acceleration_pct": 64.0,
+          "maes_netocny_proof_parity_satisfied": true,
+          "frenetic_bound_satisfied": true
+        },
+        "anthropics/formal-math/zeta23": {
+          "net_response_dag_r": 1.75,
+          "frenetic_throughput_k": 2.5,
+          "inferential_traffic_acceleration_pct": 61.5,
+          "maes_netocny_proof_parity_satisfied": true,
+          "frenetic_bound_satisfied": true
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "net_response_dag_r": 1.65,
+          "frenetic_throughput_k": 2.4,
+          "inferential_traffic_acceleration_pct": 58.0,
+          "maes_netocny_proof_parity_satisfied": true,
+          "frenetic_bound_satisfied": true
+        }
+      }
     }
   },
   "challenges_unbridged": {
