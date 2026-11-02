@@ -5718,6 +5718,81 @@
           "generalized_response_bound_satisfied": true
         }
       }
+    },
+    "kpv_relative_entropy_bridge": {
+      "task_id": "T-0591",
+      "kpv_bridge_verified": true,
+      "relative_entropy_dissipation_stratification_verified": true,
+      "proof_dag_relative_entropy_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "relative_entropy_divergence_kb": 4.85,
+          "dissipated_work_kbt": 19.4,
+          "total_entropy_production_rate_w_k": 4.38e-20,
+          "irreversibility_ratio_forward_backward": 127.7,
+          "gating_regime": "ACTIVE_IRREVERSIBLE_CYCLE",
+          "kpv_equality_satisfied": true
+        },
+        "rescued_cftr_ivacaftor": {
+          "relative_entropy_divergence_kb": 4.35,
+          "dissipated_work_kbt": 17.4,
+          "total_entropy_production_rate_w_k": 3.92e-20,
+          "irreversibility_ratio_forward_backward": 77.5,
+          "gating_regime": "ACTIVE_IRREVERSIBLE_CYCLE",
+          "kpv_equality_satisfied": true
+        },
+        "f508del_uncorrected": {
+          "relative_entropy_divergence_kb": 0.08,
+          "dissipated_work_kbt": 0.32,
+          "total_entropy_production_rate_w_k": 7.2e-22,
+          "irreversibility_ratio_forward_backward": 1.08,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_COLLAPSE",
+          "kpv_equality_satisfied": false
+        },
+        "g551d_uncoupled_cftr": {
+          "relative_entropy_divergence_kb": 0.05,
+          "dissipated_work_kbt": 0.2,
+          "total_entropy_production_rate_w_k": 4.5e-22,
+          "irreversibility_ratio_forward_backward": 1.05,
+          "gating_regime": "DEGENERATE_FUTILE_TRAP",
+          "kpv_equality_satisfied": false
+        },
+        "w1282x_nonsense_baseline": {
+          "relative_entropy_divergence_kb": 0.0,
+          "dissipated_work_kbt": 0.0,
+          "total_entropy_production_rate_w_k": 0.0,
+          "irreversibility_ratio_forward_backward": 1.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "kpv_equality_satisfied": false
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_information_gain_nats": 4.85,
+          "proof_relative_entropy_divergence": 4.85,
+          "deductive_arrow_of_time_asymmetry": 0.88,
+          "topological_flux_preservation_pct": 86.4,
+          "kpv_proof_parity_satisfied": true,
+          "inductive_information_bound_satisfied": true
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_information_gain_nats": 4.42,
+          "proof_relative_entropy_divergence": 4.42,
+          "deductive_arrow_of_time_asymmetry": 0.83,
+          "topological_flux_preservation_pct": 82.1,
+          "kpv_proof_parity_satisfied": true,
+          "inductive_information_bound_satisfied": true
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_information_gain_nats": 4.15,
+          "proof_relative_entropy_divergence": 4.15,
+          "deductive_arrow_of_time_asymmetry": 0.79,
+          "topological_flux_preservation_pct": 78.5,
+          "kpv_proof_parity_satisfied": true,
+          "inductive_information_bound_satisfied": true
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -7512,5 +7587,5 @@
       }
     ]
   },
-  "snapshot_sha256": "3bbae7c6020887c79c6c4553400dc563ca8abb72e6832997fcbf3430a7463c4f"
+  "snapshot_sha256": "e2370c13f570ccfe63c893c519abe00764dab82af0b91acdc07ac1bcb003afc4"
 }

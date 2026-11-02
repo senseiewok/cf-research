@@ -42,6 +42,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Seifert U (Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001)
   - Prost J, Joanny JF, Parrondo JMR (Phys Rev Lett 2009, DOI: 10.1103/PhysRevLett.103.090601)
   - Speck T, Seifert U (Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Phys Rev Lett 2009, DOI: 10.1103/PhysRevLett.103.090601)
+  - Kawai-Parrondo-Van den Broeck relative entropy & dissipated work (Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -596,6 +597,12 @@ def evaluate_speck_seifert_fdt(n_gating_regimes: int = 5) -> Dict[str, Any]:
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["speck_seifert_fdt_bridge"]
+
+
+def evaluate_kpv_relative_entropy(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["kpv_relative_entropy_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
