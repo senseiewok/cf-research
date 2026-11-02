@@ -43,6 +43,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_seifert_trajectory_entropy_production,
     evaluate_prost_joanny_parrondo_fdt,
     evaluate_speck_seifert_fdt,
+    evaluate_kpv_relative_entropy,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -100,6 +101,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_seifert_trajectory_entropy_production()["seifert_trajectory_bridge_verified"])
         self.assertTrue(evaluate_prost_joanny_parrondo_fdt()["prost_joanny_parrondo_bridge_verified"])
         self.assertTrue(evaluate_speck_seifert_fdt()["speck_seifert_bridge_verified"])
+        self.assertTrue(evaluate_kpv_relative_entropy()["kpv_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])
