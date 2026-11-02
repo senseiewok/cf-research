@@ -519,6 +519,12 @@ def evaluate_prigogine_minimum_entropy_production(n_gating_regimes: int = 4) -> 
     return evaluate_two_way_bridge_isomorphism()["prigogine_minimum_entropy_production_bridge"]
 
 
+def evaluate_glansdorff_prigogine_evolution(n_gating_regimes: int = 4) -> Dict[str, Any]:
+    if n_gating_regimes != 4:
+        raise ValueError("n_gating_regimes must equal 4")
+    return evaluate_two_way_bridge_isomorphism()["glansdorff_prigogine_evolution_bridge"]
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Standalone CFTR Biophysics Bridge to Pinned Formal Proof Snapshot (T-0479)"
