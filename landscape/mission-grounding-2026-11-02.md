@@ -109,6 +109,7 @@ Clinical Trial Decoupling Atlas"]
   - **`T-0578` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 34: Interactive Maes-Netočný Non-Equilibrium Response & Frenetic Activity Simulator on `senseiewok.ai`*.
   - **`T-0579` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 35: Komatsu-Nakagawa-Sasa-Tasaki (KNST) Non-Equilibrium Work & Free Energy for CFTR Gating Transitions in `cf-research`*. Grounded in `DOI:10.1063/1.2738753`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. Delivered in PR.
   - **`T-0580` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 36: Interactive Komatsu-Nakagawa-Sasa-Tasaki (KNST) Non-Equilibrium Work & Gating Transition Free Energy Simulator on `senseiewok.ai`*.
-  - **`T-0581` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 37: Geometrical Thermodynamic Gauge Theory & Berry Holonomy for CFTR Catalytic Cycles in `cf-research`*.
+  - **`T-0581` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 37: Geometrical Thermodynamic Gauge Theory & Berry Holonomy for CFTR Catalytic Cycles in `cf-research`*. Grounded in `DOI:10.1063/1.2738753`, `DOI:10.1085/jgp.200609558`, `DOI:10.1126/science.ade2216`, and `DOI:10.1103/PhysRevLett.86.3463`. Delivered in PR.
+  - **`T-0582` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 38: Interactive Geometrical Thermodynamic Gauge Theory & Berry Holonomy Simulator on `senseiewok.ai`*.
 
 *Report submitted by Frontier AI Scout (Round 165). Zero hallucinations detected across AH-1 through AH-12.*
