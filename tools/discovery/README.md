@@ -4,8 +4,8 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `99` (plus 4 infrastructure scripts and 106 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `81`
+- **Total Verified Modules:** `101` (plus 4 infrastructure scripts and 108 unit test suites)
+- **`keep` (Canonical Core Workbenches):** `83`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 
@@ -65,7 +65,7 @@ python tools/discovery/discovery_council.py --check-index
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 47 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 49 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -88,6 +88,7 @@ python tools/discovery/discovery_council.py --check-index
 | `enac_proteolysis_model.py` | `T-0245` | `T2` | `merge` | Merge into `enac_tmem16a_equilibrium.py` |
 | `enac_tmem16a_equilibrium.py` | `T-0252` | `T2` | `keep` | Canonical workbench |
 | `endocytosis_mucociliary_competition.py` | `T-0416` | `T2` | `keep` | Canonical workbench |
+| `endosomal_escape_kinetics.py` | `T-0557` | `T2` | `keep` | Canonical workbench |
 | `epithelial_plasticity.py` | `T-0178` | `T2` | `keep` | Canonical workbench |
 | `ev_basal_tropism.py` | `T-0234` | `T2` | `archive` | Candidate for archive |
 | `glycocalyx_charge_barrier_model.py` | `T-0351` | `T2` | `merge` | Merge into `glycocalyx_permeabilization_model.py` |
@@ -104,6 +105,7 @@ python tools/discovery/discovery_council.py --check-index
 | `mpp_obstruction_scaling.py` | `T-0244` | `T2` | `keep` | Canonical workbench |
 | `mrna_lnp_escape_model.py` | `T-0239` | `T2` | `merge` | Merge into `lnp_escape_dynamics.py` |
 | `mrna_lnp_nebulizer_shear_stability.py` | `T-0481` | `T2` | `keep` | Canonical workbench |
+| `mucociliary_clearance_viscoelasticity.py` | `T-0558` | `T2` | `keep` | Canonical workbench |
 | `mucus_cleavage_kinetics.py` | `T-0253` | `T2` | `merge` | Merge into `mucus_rheology.py` |
 | `mucus_penetrating_aso_kinetics.py` | `T-0497` | `T2` | `keep` | Canonical workbench |
 | `mucus_rheology.py` | `T-0185` | `T2` | `keep` | Canonical workbench |
