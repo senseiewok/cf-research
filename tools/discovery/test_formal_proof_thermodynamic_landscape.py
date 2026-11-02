@@ -39,6 +39,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_maes_netocny_response,
     evaluate_knst_nonequilibrium_work,
     evaluate_geometric_gauge_holonomy,
+    evaluate_sasa_tasaki_equality,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -92,6 +93,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_maes_netocny_response()["maes_netocny_bridge_verified"])
         self.assertTrue(evaluate_knst_nonequilibrium_work()["knst_work_bridge_verified"])
         self.assertTrue(evaluate_geometric_gauge_holonomy()["geometric_gauge_bridge_verified"])
+        self.assertTrue(evaluate_sasa_tasaki_equality()["sasa_tasaki_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])
