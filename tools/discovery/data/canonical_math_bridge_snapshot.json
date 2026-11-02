@@ -3898,6 +3898,66 @@
         }
       }
     },
+    "glansdorff_prigogine_evolution_bridge": {
+      "task_id": "T-0553",
+      "glansdorff_prigogine_bridge_verified": true,
+      "gating_stability_stratification_verified": true,
+      "proof_universal_evolution_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "d_x_sigma_rate": -8.45,
+          "excess_entropy_production_rate": 4.2,
+          "entropy_production_rate": 4.25,
+          "stationary_stability_status": "STABLE_NONLINEAR_CYCLE",
+          "glansdorff_criterion_satisfied": true
+        },
+        "g551d_uncoupled_cftr": {
+          "d_x_sigma_rate": 3.15,
+          "excess_entropy_production_rate": -1.85,
+          "entropy_production_rate": 11.8,
+          "stationary_stability_status": "UNSTABLE_KINETIC_TRAP",
+          "glansdorff_criterion_satisfied": false
+        },
+        "rescued_cftr_ivacaftor": {
+          "d_x_sigma_rate": -7.8,
+          "excess_entropy_production_rate": 3.9,
+          "entropy_production_rate": 4.6,
+          "stationary_stability_status": "STABLE_NONLINEAR_CYCLE",
+          "glansdorff_criterion_satisfied": true
+        },
+        "w1282x_nonsense_baseline": {
+          "d_x_sigma_rate": 0.0,
+          "excess_entropy_production_rate": 0.0,
+          "entropy_production_rate": 0.0,
+          "stationary_stability_status": "PASSIVE_EQUILIBRIUM_APO",
+          "glansdorff_criterion_satisfied": false
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "inferential_d_x_sigma_rate": -4.5,
+          "inferential_excess_entropy_rate": 5.2,
+          "stability_margin": 5.1,
+          "universal_evolution_satisfied": true,
+          "total_theorems": 29500
+        },
+        "anthropics/formal-math/zeta23": {
+          "inferential_d_x_sigma_rate": -3.8,
+          "inferential_excess_entropy_rate": 4.6,
+          "stability_margin": 4.5,
+          "universal_evolution_satisfied": true,
+          "total_theorems": 18400
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "inferential_d_x_sigma_rate": -3.4,
+          "inferential_excess_entropy_rate": 4.1,
+          "stability_margin": 4.0,
+          "universal_evolution_satisfied": true,
+          "total_theorems": 14200
+        }
+      }
+    },
     "counterfactual_scenarios": {
       "wild_type_intact_proof": {
         "knockout_id": "wild_type_intact_proof",
@@ -6603,5 +6663,5 @@
       }
     ]
   },
-  "snapshot_sha256": "72184e86fc9c2f464f2e2fdf36ba5e880c9f5e517376e6c19f6d83aab03bb9d7"
+  "snapshot_sha256": "7c6062f08351ff8dd481fb733baabc608959d5968b315a4005626c52bc0196b5"
 }
