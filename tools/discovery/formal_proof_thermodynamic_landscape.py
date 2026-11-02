@@ -41,6 +41,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Sasa S, Tasaki H (Phys Rev Lett 2005, DOI: 10.1103/PhysRevLett.95.130602)
   - Seifert U (Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001)
   - Prost J, Joanny JF, Parrondo JMR (Phys Rev Lett 2009, DOI: 10.1103/PhysRevLett.103.090601)
+  - Speck T, Seifert U (Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Phys Rev Lett 2009, DOI: 10.1103/PhysRevLett.103.090601)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -589,6 +590,12 @@ def evaluate_prost_joanny_parrondo_fdt(n_gating_regimes: int = 5) -> Dict[str, A
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["prost_joanny_parrondo_fdt_bridge"]
+
+
+def evaluate_speck_seifert_fdt(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["speck_seifert_fdt_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
