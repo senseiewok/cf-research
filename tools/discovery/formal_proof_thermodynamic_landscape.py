@@ -38,6 +38,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Schnakenberg J (Rev Mod Phys 1976, DOI: 10.1103/RevModPhys.48.571)
   - Machlup S, Onsager L (Phys Rev 1953, DOI: 10.1103/PhysRev.91.1505)
   - Freidlin MI, Wentzell AD (Springer 2012, DOI: 10.1007/978-3-642-25847-3)
+  - Sasa S, Tasaki H (Phys Rev Lett 2005, DOI: 10.1103/PhysRevLett.95.130602)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -568,6 +569,12 @@ def evaluate_geometric_gauge_holonomy(n_gating_regimes: int = 5) -> Dict[str, An
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["geometric_gauge_holonomy_bridge"]
+
+
+def evaluate_sasa_tasaki_equality(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["sasa_tasaki_equality_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
