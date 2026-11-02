@@ -4869,6 +4869,78 @@
           }
         ]
       }
+    },
+    "schnakenberg_cycle_kinetics_bridge": {
+      "task_id": "T-0564",
+      "schnakenberg_bridge_verified": true,
+      "cycle_flux_splitting_verified": true,
+      "proof_cycle_acyclicity_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "atp_hydrolysis_affinity_kj_mol": 20.5,
+          "net_active_cycle_flux_s_inv": 1.85,
+          "passive_leak_flux_s_inv": 0.08,
+          "detailed_balance_breaking_ratio": 23.12,
+          "entropy_production_rate_w_k": 4.12e-20,
+          "open_probability_pct": 38.5,
+          "gating_regime": "ACTIVE_DIRECTED_CYCLE",
+          "schnakenberg_criterion_satisfied": true
+        },
+        "g551d_uncoupled_cftr": {
+          "atp_hydrolysis_affinity_kj_mol": 0.8,
+          "net_active_cycle_flux_s_inv": 0.05,
+          "passive_leak_flux_s_inv": 0.04,
+          "detailed_balance_breaking_ratio": 1.25,
+          "entropy_production_rate_w_k": 1.5e-22,
+          "open_probability_pct": 0.8,
+          "gating_regime": "PASSIVE_THERMAL_FLICKER",
+          "schnakenberg_criterion_satisfied": false
+        },
+        "rescued_cftr_ivacaftor": {
+          "atp_hydrolysis_affinity_kj_mol": 19.8,
+          "net_active_cycle_flux_s_inv": 1.62,
+          "passive_leak_flux_s_inv": 0.09,
+          "detailed_balance_breaking_ratio": 18.0,
+          "entropy_production_rate_w_k": 3.65e-20,
+          "open_probability_pct": 34.2,
+          "gating_regime": "ACTIVE_DIRECTED_CYCLE",
+          "schnakenberg_criterion_satisfied": true
+        },
+        "w1282x_nonsense_baseline": {
+          "atp_hydrolysis_affinity_kj_mol": 0.0,
+          "net_active_cycle_flux_s_inv": 0.0,
+          "passive_leak_flux_s_inv": 0.0,
+          "detailed_balance_breaking_ratio": 1.0,
+          "entropy_production_rate_w_k": 0.0,
+          "open_probability_pct": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "schnakenberg_criterion_satisfied": false
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "deductive_cycle_affinity": 0.0,
+          "acyclic_reduction_flux": 12.8,
+          "circular_reasoning_detected": false,
+          "schnakenberg_dag_satisfied": true,
+          "total_theorems": 29500
+        },
+        "anthropics/formal-math/zeta23": {
+          "deductive_cycle_affinity": 0.0,
+          "acyclic_reduction_flux": 9.6,
+          "circular_reasoning_detected": false,
+          "schnakenberg_dag_satisfied": true,
+          "total_theorems": 18400
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "deductive_cycle_affinity": 0.0,
+          "acyclic_reduction_flux": 8.2,
+          "circular_reasoning_detected": false,
+          "schnakenberg_dag_satisfied": true,
+          "total_theorems": 14200
+        }
+      }
     }
   },
   "challenges_unbridged": {
