@@ -37,6 +37,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Hartich D et al. (J Stat Mech 2014, DOI: 10.1088/1742-5468/2014/10/P10016)
   - Schnakenberg J (Rev Mod Phys 1976, DOI: 10.1103/RevModPhys.48.571)
   - Machlup S, Onsager L (Phys Rev 1953, DOI: 10.1103/PhysRev.91.1505)
+  - Freidlin MI, Wentzell AD (Springer 2012, DOI: 10.1007/978-3-642-25847-3)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -537,6 +538,12 @@ def evaluate_onsager_machlup_action(n_gating_regimes: int = 5) -> Dict[str, Any]
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["onsager_machlup_action_bridge"]
+
+
+def evaluate_freidlin_wentzell_quasipotential(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["freidlin_wentzell_quasipotential_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
