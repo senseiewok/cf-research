@@ -32,6 +32,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_onsager_machlup_transition_paths,
     evaluate_prigogine_minimum_entropy_production,
     evaluate_glansdorff_prigogine_evolution,
+    evaluate_schnakenberg_cycle_kinetics,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -78,6 +79,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_onsager_electroosmotic_transport()["onsager_transport_bridge_verified"])
         self.assertTrue(evaluate_prigogine_minimum_entropy_production()["prigogine_entropy_bridge_verified"])
         self.assertTrue(evaluate_glansdorff_prigogine_evolution()["glansdorff_prigogine_bridge_verified"])
+        self.assertTrue(evaluate_schnakenberg_cycle_kinetics()["schnakenberg_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])
