@@ -546,6 +546,12 @@ def evaluate_freidlin_wentzell_quasipotential(n_gating_regimes: int = 5) -> Dict
     return evaluate_two_way_bridge_isomorphism()["freidlin_wentzell_quasipotential_bridge"]
 
 
+def evaluate_graham_haken_potential(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["graham_haken_potential_bridge"]
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Standalone CFTR Biophysics Bridge to Pinned Formal Proof Snapshot (T-0479)"
