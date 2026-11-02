@@ -558,6 +558,12 @@ def evaluate_maes_netocny_response(n_gating_regimes: int = 5) -> Dict[str, Any]:
     return evaluate_two_way_bridge_isomorphism()["maes_netocny_response_bridge"]
 
 
+def evaluate_knst_nonequilibrium_work(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["knst_nonequilibrium_work_bridge"]
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Standalone CFTR Biophysics Bridge to Pinned Formal Proof Snapshot (T-0479)"
