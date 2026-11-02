@@ -105,6 +105,8 @@ Clinical Trial Decoupling Atlas"]
 - **Immediate Strategic Horizon (Ready for Immediate Pick-Up)**:
   - **`T-0575` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 31: Graham-Haken Non-Equilibrium Generalized Potential $\Phi(x)$ for Multi-Stable CFTR Gating in `cf-research`*. Grounded in `DOI:10.1007/BF01394858`, `DOI:10.1085/jgp.200609558`, and Cryo-EM coordinates `PDB 6MSM` & `PDB 8EIQ`. Fully specified in `tasks/specs/T-0575.md`. Delivered in PR #267.
   - **`T-0576` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 32: Interactive Graham-Haken Non-Equilibrium Generalized Potential & Multi-Stable Gating Simulator on `senseiewok.ai`*.
-  - **`T-0577` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 33: Maes-Netočný Non-Equilibrium Response Formula & Excess Entropy Production for Rescued CFTR Kinetics in `cf-research`*. Grounded in `DOI:10.1063/1.2738753`.
+  - **`T-0577` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 33: Maes-Netočný Non-Equilibrium Response Formula & Excess Entropy Production for Rescued CFTR Kinetics in `cf-research`*. Grounded in `DOI:10.1063/1.2738753`. Delivered in PR.
+  - **`T-0578` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 34: Interactive Maes-Netočný Non-Equilibrium Response & Frenetic Activity Simulator on `senseiewok.ai`*.
+  - **`T-0579` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 35: Komatsu-Nakagawa-Sasa-Tasaki (KNST) Non-Equilibrium Work & Free Energy for CFTR Gating Transitions in `cf-research`*. KNST non-equilibrium steady-state transitions.
 
 *Report submitted by Frontier AI Scout (Round 165). Zero hallucinations detected across AH-1 through AH-12.*
