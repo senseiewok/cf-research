@@ -6280,6 +6280,89 @@
           "sagawa_ueda_parity_satisfied": true
         }
       }
+    },
+    "barato_hartich_seifert_dissipation_bridge": {
+      "task_id": "T-0605",
+      "barato_hartich_seifert_dissipation_bridge_verified": true,
+      "bipartite_dissipation_bounds_verified": true,
+      "information_flow_stratification_verified": true,
+      "proof_dag_dissipation_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "subsystem_x_dissipation_rate_sigma_x_kb_per_s": 3.3,
+          "subsystem_y_dissipation_rate_sigma_y_kb_per_s": 1.15,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 4.45,
+          "information_flow_rate_i_x_to_y_kb_per_s": 2.7,
+          "information_flow_rate_i_y_to_x_kb_per_s": 0.4,
+          "bhs_dissipation_bound_satisfied": true,
+          "gating_regime": "COHERENT_BIPARTITE_DISSIPATION",
+          "allosteric_coupling_fidelity": 0.95
+        },
+        "rescued_cftr_ivacaftor": {
+          "subsystem_x_dissipation_rate_sigma_x_kb_per_s": 3.15,
+          "subsystem_y_dissipation_rate_sigma_y_kb_per_s": 1.05,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 4.2,
+          "information_flow_rate_i_x_to_y_kb_per_s": 2.55,
+          "information_flow_rate_i_y_to_x_kb_per_s": 0.35,
+          "bhs_dissipation_bound_satisfied": true,
+          "gating_regime": "COHERENT_BIPARTITE_DISSIPATION",
+          "allosteric_coupling_fidelity": 0.92
+        },
+        "f508del_uncorrected": {
+          "subsystem_x_dissipation_rate_sigma_x_kb_per_s": 0.26,
+          "subsystem_y_dissipation_rate_sigma_y_kb_per_s": 0.02,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 0.28,
+          "information_flow_rate_i_x_to_y_kb_per_s": 0.04,
+          "information_flow_rate_i_y_to_x_kb_per_s": 0.01,
+          "bhs_dissipation_bound_satisfied": false,
+          "gating_regime": "DEGENERATE_INFORMATION_DECOUPLING",
+          "allosteric_coupling_fidelity": 0.04
+        },
+        "g551d_uncoupled_cftr": {
+          "subsystem_x_dissipation_rate_sigma_x_kb_per_s": 0.18,
+          "subsystem_y_dissipation_rate_sigma_y_kb_per_s": 0.01,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 0.19,
+          "information_flow_rate_i_x_to_y_kb_per_s": 0.02,
+          "information_flow_rate_i_y_to_x_kb_per_s": 0.01,
+          "bhs_dissipation_bound_satisfied": false,
+          "gating_regime": "DEGENERATE_INFORMATION_DECOUPLING",
+          "allosteric_coupling_fidelity": 0.02
+        },
+        "w1282x_nonsense_baseline": {
+          "subsystem_x_dissipation_rate_sigma_x_kb_per_s": 0.0,
+          "subsystem_y_dissipation_rate_sigma_y_kb_per_s": 0.0,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 0.0,
+          "information_flow_rate_i_x_to_y_kb_per_s": 0.0,
+          "information_flow_rate_i_y_to_x_kb_per_s": 0.0,
+          "bhs_dissipation_bound_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "allosteric_coupling_fidelity": 0.0
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "subsystem_x_modularity_dissipation_rate": 5.18,
+          "subsystem_y_ribet_lowering_rate": 3.82,
+          "mutual_information_flow_bits_per_step": 4.88,
+          "proof_bipartite_dissipation_satisfied": true,
+          "bhs_parity_satisfied": true
+        },
+        "anthropics/formal-math/zeta23": {
+          "subsystem_x_modularity_dissipation_rate": 4.68,
+          "subsystem_y_ribet_lowering_rate": 3.44,
+          "mutual_information_flow_bits_per_step": 4.54,
+          "proof_bipartite_dissipation_satisfied": true,
+          "bhs_parity_satisfied": true
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "subsystem_x_modularity_dissipation_rate": 4.38,
+          "subsystem_y_ribet_lowering_rate": 3.2,
+          "mutual_information_flow_bits_per_step": 4.26,
+          "proof_bipartite_dissipation_satisfied": true,
+          "bhs_parity_satisfied": true
+        }
+      }
     }
   },
   "challenges_unbridged": {

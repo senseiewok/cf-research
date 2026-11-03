@@ -50,6 +50,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_hartich_barato_seifert_bipartite,
     evaluate_parrondo_horowitz_sagawa_information,
     evaluate_sagawa_ueda_fluctuation_efficiency,
+    evaluate_barato_hartich_seifert_dissipation,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -114,6 +115,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_hartich_barato_seifert_bipartite()["hartich_barato_seifert_bipartite_bridge_verified"])
         self.assertTrue(evaluate_parrondo_horowitz_sagawa_information()["parrondo_horowitz_sagawa_information_bridge_verified"])
         self.assertTrue(evaluate_sagawa_ueda_fluctuation_efficiency()["sagawa_ueda_fluctuation_efficiency_bridge_verified"])
+        self.assertTrue(evaluate_barato_hartich_seifert_dissipation()["barato_hartich_seifert_dissipation_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])
