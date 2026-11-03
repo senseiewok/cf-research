@@ -5793,6 +5793,81 @@
           "inductive_information_bound_satisfied": true
         }
       }
+    },
+    "dechant_sasa_bounds_bridge": {
+      "task_id": "T-0593",
+      "dechant_sasa_bridge_verified": true,
+      "wasserstein_dissipation_stratification_verified": true,
+      "proof_dag_wasserstein_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "wasserstein_distance_w2_states": 2.15,
+          "dissipation_rate_sigma_kb_per_s": 4.65,
+          "optimal_transport_cost_kbt": 8.85,
+          "catalytic_turnover_frequency_hz": 2.45,
+          "gating_regime": "ACTIVE_BOUNDED_TRANSPORT",
+          "dechant_sasa_bound_satisfied": true
+        },
+        "rescued_cftr_ivacaftor": {
+          "wasserstein_distance_w2_states": 1.95,
+          "dissipation_rate_sigma_kb_per_s": 4.25,
+          "optimal_transport_cost_kbt": 8.1,
+          "catalytic_turnover_frequency_hz": 2.25,
+          "gating_regime": "ACTIVE_BOUNDED_TRANSPORT",
+          "dechant_sasa_bound_satisfied": true
+        },
+        "f508del_uncorrected": {
+          "wasserstein_distance_w2_states": 0.06,
+          "dissipation_rate_sigma_kb_per_s": 0.12,
+          "optimal_transport_cost_kbt": 0.08,
+          "catalytic_turnover_frequency_hz": 0.02,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_COLLAPSE",
+          "dechant_sasa_bound_satisfied": false
+        },
+        "g551d_uncoupled_cftr": {
+          "wasserstein_distance_w2_states": 0.04,
+          "dissipation_rate_sigma_kb_per_s": 0.09,
+          "optimal_transport_cost_kbt": 0.05,
+          "catalytic_turnover_frequency_hz": 0.01,
+          "gating_regime": "DEGENERATE_FUTILE_TRAP",
+          "dechant_sasa_bound_satisfied": false
+        },
+        "w1282x_nonsense_baseline": {
+          "wasserstein_distance_w2_states": 0.0,
+          "dissipation_rate_sigma_kb_per_s": 0.0,
+          "optimal_transport_cost_kbt": 0.0,
+          "catalytic_turnover_frequency_hz": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "dechant_sasa_bound_satisfied": false
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_wasserstein_graph_edit_distance": 2.85,
+          "deductive_optimal_transport_cost": 5.12,
+          "inferential_dissipation_rate": 4.95,
+          "topological_flux_preservation_pct": 87.1,
+          "wasserstein_proof_parity_satisfied": true,
+          "dechant_sasa_proof_bound_satisfied": true
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_wasserstein_graph_edit_distance": 2.54,
+          "deductive_optimal_transport_cost": 4.65,
+          "inferential_dissipation_rate": 4.5,
+          "topological_flux_preservation_pct": 82.8,
+          "wasserstein_proof_parity_satisfied": true,
+          "dechant_sasa_proof_bound_satisfied": true
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_wasserstein_graph_edit_distance": 2.28,
+          "deductive_optimal_transport_cost": 4.25,
+          "inferential_dissipation_rate": 4.18,
+          "topological_flux_preservation_pct": 79.2,
+          "wasserstein_proof_parity_satisfied": true,
+          "dechant_sasa_proof_bound_satisfied": true
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -7587,5 +7662,5 @@
       }
     ]
   },
-  "snapshot_sha256": "e2370c13f570ccfe63c893c519abe00764dab82af0b91acdc07ac1bcb003afc4"
+  "snapshot_sha256": "284965b0a502e24a1b712b120323057e45f75c8c8b3926d3dea55b235a763547"
 }

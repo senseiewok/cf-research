@@ -121,5 +121,7 @@ Clinical Trial Decoupling Atlas"]
   - **`T-0590` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 43: Interactive Speck-Seifert Non-Equilibrium Fluctuation-Dissipation Theorem & Velocity Field Coupling Simulator on `senseiewok.ai`*.
   - **`T-0591` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 43: Kawai-Parrondo-Van den Broeck (KPV) Dissipation-Information Relative Entropy Equality for CFTR Trajectories in `cf-research`*. Grounded in `DOI:10.1088/0034-4885/75/12/126001`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. Fully specified in `tasks/specs/T-0591.md`. Delivered in PR.
   - **`T-0592` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 44: Interactive Kawai-Parrondo-Van den Broeck (KPV) Dissipation-Information Relative Entropy Equality Simulator on `senseiewok.ai`*.
+  - **`T-0593` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 44: Dechant-Sasa Wasserstein Fluctuation Dissipation Bounds for CFTR Gating in `cf-research`*. Grounded in `DOI:10.1088/1742-5468/ac0b4e`, `DOI:10.1088/0034-4885/75/12/126001`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. Fully specified in `tasks/specs/T-0593.md`. Delivered in PR.
+  - **`T-0594` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 45: Interactive Dechant-Sasa Wasserstein Fluctuation Dissipation Bounds Simulator on `senseiewok.ai`*.
 
-*Report submitted by Frontier AI Scout (Round 165). Zero hallucinations detected across AH-1 through AH-12.*
+*Report submitted by Frontier AI Scout (Round 166). Zero hallucinations detected across AH-1 through AH-12.*
