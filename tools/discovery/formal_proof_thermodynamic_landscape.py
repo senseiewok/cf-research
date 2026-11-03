@@ -48,6 +48,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Pietzonka-Seifert finite-time dissipation bounds & molecular machine efficiency (Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Hartich-Barato-Seifert bipartite information thermodynamics & subsystem entropy bounds (Hartich D, Barato AC, Seifert U J Stat Mech 2014, DOI: 10.1088/1742-5468/2014/10/P10016; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Parrondo-Horowitz-Sagawa information thermodynamics & Maxwell demon feedback cooling (Parrondo JMR, Horowitz JM, Sagawa T Nat Phys 2015, DOI: 10.1038/nphys3230; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Sagawa-Ueda generalized fluctuation theorem & information efficacy in allosteric drug stabilization (Parrondo JMR, Horowitz JM, Sagawa T Nat Phys 2015, DOI: 10.1038/nphys3230; Prost J, Joanny JF, Parrondo JMR Phys Rev Lett 2009, DOI: 10.1103/PhysRevLett.103.090601; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -638,6 +639,12 @@ def evaluate_parrondo_horowitz_sagawa_information(n_gating_regimes: int = 5) -> 
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["parrondo_horowitz_sagawa_information_bridge"]
+
+
+def evaluate_sagawa_ueda_fluctuation_efficiency(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["sagawa_ueda_fluctuation_efficiency_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
