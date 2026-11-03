@@ -6123,6 +6123,163 @@
           "hartich_barato_seifert_parity_satisfied": true
         }
       }
+    },
+    "parrondo_horowitz_sagawa_information_bridge": {
+      "task_id": "T-0601",
+      "parrondo_horowitz_sagawa_information_bridge_verified": true,
+      "feedback_cooling_bounds_verified": true,
+      "demon_efficiency_stratification_verified": true,
+      "proof_dag_information_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "mutual_information_acquisition_kb": 2.25,
+          "feedback_cooling_rate_kb_per_s": 1.85,
+          "dissipation_rate_sigma_kb_per_s": 4.2,
+          "demon_efficiency_eta_info": 0.82,
+          "sagawa_ueda_second_law_satisfied": true,
+          "gating_regime": "COHERENT_FEEDBACK_COOLING",
+          "allosteric_controller_fidelity": 0.94
+        },
+        "rescued_cftr_ivacaftor": {
+          "mutual_information_acquisition_kb": 2.1,
+          "feedback_cooling_rate_kb_per_s": 1.7,
+          "dissipation_rate_sigma_kb_per_s": 3.95,
+          "demon_efficiency_eta_info": 0.78,
+          "sagawa_ueda_second_law_satisfied": true,
+          "gating_regime": "COHERENT_FEEDBACK_COOLING",
+          "allosteric_controller_fidelity": 0.91
+        },
+        "f508del_uncorrected": {
+          "mutual_information_acquisition_kb": 0.05,
+          "feedback_cooling_rate_kb_per_s": 0.01,
+          "dissipation_rate_sigma_kb_per_s": 0.28,
+          "demon_efficiency_eta_info": 0.04,
+          "sagawa_ueda_second_law_satisfied": false,
+          "gating_regime": "DEGENERATE_INFORMATION_LOSS",
+          "allosteric_controller_fidelity": 0.03
+        },
+        "g551d_uncoupled_cftr": {
+          "mutual_information_acquisition_kb": 0.02,
+          "feedback_cooling_rate_kb_per_s": 0.0,
+          "dissipation_rate_sigma_kb_per_s": 0.19,
+          "demon_efficiency_eta_info": 0.01,
+          "sagawa_ueda_second_law_satisfied": false,
+          "gating_regime": "DEGENERATE_INFORMATION_LOSS",
+          "allosteric_controller_fidelity": 0.01
+        },
+        "w1282x_nonsense_baseline": {
+          "mutual_information_acquisition_kb": 0.0,
+          "feedback_cooling_rate_kb_per_s": 0.0,
+          "dissipation_rate_sigma_kb_per_s": 0.0,
+          "demon_efficiency_eta_info": 0.0,
+          "sagawa_ueda_second_law_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "allosteric_controller_fidelity": 0.0
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "mutual_information_bits_per_step": 5.24,
+          "feedback_lemma_pruning_efficiency": 0.88,
+          "sagawa_ueda_parity_satisfied": true
+        },
+        "anthropics/formal-math/zeta23": {
+          "mutual_information_bits_per_step": 4.78,
+          "feedback_lemma_pruning_efficiency": 0.85,
+          "sagawa_ueda_parity_satisfied": true
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "mutual_information_bits_per_step": 4.45,
+          "feedback_lemma_pruning_efficiency": 0.81,
+          "sagawa_ueda_parity_satisfied": true
+        }
+      }
+    },
+    "sagawa_ueda_fluctuation_efficiency_bridge": {
+      "task_id": "T-0603",
+      "sagawa_ueda_fluctuation_efficiency_bridge_verified": true,
+      "generalized_fluctuation_relation_verified": true,
+      "feedback_efficacy_stratification_verified": true,
+      "proof_dag_information_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "fluctuation_integral_exp_neg_sigma_I": 1.01,
+          "feedback_efficacy_gamma_fb": 0.77,
+          "mutual_information_I_kb": 2.2,
+          "entropy_production_sigma_kb_per_s": 4.15,
+          "extracted_work_W_kb": 1.82,
+          "free_energy_delta_F_kb": 0.17,
+          "generalized_fluctuation_relation_satisfied": true,
+          "gating_regime": "COHERENT_FEEDBACK_COOLING",
+          "allosteric_controller_fidelity": 0.94
+        },
+        "rescued_cftr_ivacaftor": {
+          "fluctuation_integral_exp_neg_sigma_I": 0.99,
+          "feedback_efficacy_gamma_fb": 0.74,
+          "mutual_information_I_kb": 2.08,
+          "entropy_production_sigma_kb_per_s": 3.92,
+          "extracted_work_W_kb": 1.7,
+          "free_energy_delta_F_kb": 0.18,
+          "generalized_fluctuation_relation_satisfied": true,
+          "gating_regime": "COHERENT_FEEDBACK_COOLING",
+          "allosteric_controller_fidelity": 0.91
+        },
+        "f508del_uncorrected": {
+          "fluctuation_integral_exp_neg_sigma_I": 0.35,
+          "feedback_efficacy_gamma_fb": 0.04,
+          "mutual_information_I_kb": 0.05,
+          "entropy_production_sigma_kb_per_s": 0.3,
+          "extracted_work_W_kb": 0.01,
+          "free_energy_delta_F_kb": 0.0,
+          "generalized_fluctuation_relation_satisfied": false,
+          "gating_regime": "DEGENERATE_INFORMATION_LOSS",
+          "allosteric_controller_fidelity": 0.03
+        },
+        "g551d_uncoupled_cftr": {
+          "fluctuation_integral_exp_neg_sigma_I": 0.28,
+          "feedback_efficacy_gamma_fb": 0.02,
+          "mutual_information_I_kb": 0.03,
+          "entropy_production_sigma_kb_per_s": 0.2,
+          "extracted_work_W_kb": 0.0,
+          "free_energy_delta_F_kb": 0.0,
+          "generalized_fluctuation_relation_satisfied": false,
+          "gating_regime": "DEGENERATE_INFORMATION_LOSS",
+          "allosteric_controller_fidelity": 0.01
+        },
+        "w1282x_nonsense_baseline": {
+          "fluctuation_integral_exp_neg_sigma_I": 1.0,
+          "feedback_efficacy_gamma_fb": 0.0,
+          "mutual_information_I_kb": 0.0,
+          "entropy_production_sigma_kb_per_s": 0.0,
+          "extracted_work_W_kb": 0.0,
+          "free_energy_delta_F_kb": 0.0,
+          "generalized_fluctuation_relation_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "allosteric_controller_fidelity": 0.0
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "fluctuation_integral_parity": 1.0,
+          "feedback_pruning_efficacy": 0.89,
+          "mutual_information_bits_per_step": 5.3,
+          "sagawa_ueda_parity_satisfied": true
+        },
+        "anthropics/formal-math/zeta23": {
+          "fluctuation_integral_parity": 1.0,
+          "feedback_pruning_efficacy": 0.86,
+          "mutual_information_bits_per_step": 4.8,
+          "sagawa_ueda_parity_satisfied": true
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "fluctuation_integral_parity": 1.0,
+          "feedback_pruning_efficacy": 0.82,
+          "mutual_information_bits_per_step": 4.48,
+          "sagawa_ueda_parity_satisfied": true
+        }
+      }
     }
   },
   "challenges_unbridged": {
