@@ -5958,6 +5958,171 @@
           "seifert_gingrich_bound_satisfied": true
         }
       }
+    },
+    "pietzonka_seifert_bounds_bridge": {
+      "task_id": "T-0597",
+      "pietzonka_seifert_bounds_bridge_verified": true,
+      "efficiency_stratification_verified": true,
+      "proof_dag_efficiency_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "power_output_pw": 1.85,
+          "power_input_atp_pw": 3.85,
+          "thermodynamic_efficiency_eta": 0.48,
+          "maximum_finite_time_efficiency_eta_max": 0.52,
+          "dissipation_rate_sigma_kb_per_s": 4.55,
+          "finite_time_dissipation_bound_satisfied": true,
+          "gating_regime": "ACTIVE_EFFICIENT_TRANSDUCTION",
+          "atp_coupling_ratio": 0.96
+        },
+        "rescued_cftr_ivacaftor": {
+          "power_output_pw": 1.72,
+          "power_input_atp_pw": 3.75,
+          "thermodynamic_efficiency_eta": 0.46,
+          "maximum_finite_time_efficiency_eta_max": 0.5,
+          "dissipation_rate_sigma_kb_per_s": 4.25,
+          "finite_time_dissipation_bound_satisfied": true,
+          "gating_regime": "ACTIVE_EFFICIENT_TRANSDUCTION",
+          "atp_coupling_ratio": 0.93
+        },
+        "f508del_uncorrected": {
+          "power_output_pw": 0.02,
+          "power_input_atp_pw": 2.45,
+          "thermodynamic_efficiency_eta": 0.008,
+          "maximum_finite_time_efficiency_eta_max": 0.12,
+          "dissipation_rate_sigma_kb_per_s": 0.14,
+          "finite_time_dissipation_bound_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_COLLAPSE",
+          "atp_coupling_ratio": 0.05
+        },
+        "g551d_uncoupled_cftr": {
+          "power_output_pw": 0.01,
+          "power_input_atp_pw": 3.15,
+          "thermodynamic_efficiency_eta": 0.003,
+          "maximum_finite_time_efficiency_eta_max": 0.08,
+          "dissipation_rate_sigma_kb_per_s": 0.09,
+          "finite_time_dissipation_bound_satisfied": false,
+          "gating_regime": "DEGENERATE_FUTILE_TRAP",
+          "atp_coupling_ratio": 0.03
+        },
+        "w1282x_nonsense_baseline": {
+          "power_output_pw": 0.0,
+          "power_input_atp_pw": 0.0,
+          "thermodynamic_efficiency_eta": 0.0,
+          "maximum_finite_time_efficiency_eta_max": 0.0,
+          "dissipation_rate_sigma_kb_per_s": 0.0,
+          "finite_time_dissipation_bound_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "atp_coupling_ratio": 0.0
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "deductive_power_efficiency": 0.88,
+          "proof_step_compression_ratio": 2.45,
+          "inferential_dissipation_rate": 4.95,
+          "finite_time_proof_bound_satisfied": true,
+          "pietzonka_seifert_efficiency_parity_satisfied": true
+        },
+        "anthropics/formal-math/zeta23": {
+          "deductive_power_efficiency": 0.84,
+          "proof_step_compression_ratio": 2.28,
+          "inferential_dissipation_rate": 4.52,
+          "finite_time_proof_bound_satisfied": true,
+          "pietzonka_seifert_efficiency_parity_satisfied": true
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "deductive_power_efficiency": 0.81,
+          "proof_step_compression_ratio": 2.12,
+          "inferential_dissipation_rate": 4.2,
+          "finite_time_proof_bound_satisfied": true,
+          "pietzonka_seifert_efficiency_parity_satisfied": true
+        }
+      }
+    },
+    "hartich_barato_seifert_bipartite_bridge": {
+      "task_id": "T-0599",
+      "hartich_barato_seifert_bipartite_bridge_verified": true,
+      "subsystem_entropy_bounds_verified": true,
+      "information_flow_stratification_verified": true,
+      "proof_dag_bipartite_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "subsystem_x_entropy_rate_kb_per_s": 3.25,
+          "subsystem_y_entropy_rate_kb_per_s": 1.15,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 4.4,
+          "information_flow_x_to_y_kb_per_s": 2.75,
+          "information_flow_y_to_x_kb_per_s": 0.45,
+          "bipartite_second_law_satisfied": true,
+          "gating_regime": "COHERENT_BIPARTITE_TRANSDUCTION",
+          "nbd_tmd_coupling_fidelity": 0.95
+        },
+        "rescued_cftr_ivacaftor": {
+          "subsystem_x_entropy_rate_kb_per_s": 3.1,
+          "subsystem_y_entropy_rate_kb_per_s": 1.05,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 4.15,
+          "information_flow_x_to_y_kb_per_s": 2.55,
+          "information_flow_y_to_x_kb_per_s": 0.4,
+          "bipartite_second_law_satisfied": true,
+          "gating_regime": "COHERENT_BIPARTITE_TRANSDUCTION",
+          "nbd_tmd_coupling_fidelity": 0.92
+        },
+        "f508del_uncorrected": {
+          "subsystem_x_entropy_rate_kb_per_s": 0.25,
+          "subsystem_y_entropy_rate_kb_per_s": 0.02,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 0.27,
+          "information_flow_x_to_y_kb_per_s": 0.04,
+          "information_flow_y_to_x_kb_per_s": 0.01,
+          "bipartite_second_law_satisfied": false,
+          "gating_regime": "UNCOUPLED_FUTILE_DISSIPATION",
+          "nbd_tmd_coupling_fidelity": 0.04
+        },
+        "g551d_uncoupled_cftr": {
+          "subsystem_x_entropy_rate_kb_per_s": 0.18,
+          "subsystem_y_entropy_rate_kb_per_s": 0.01,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 0.19,
+          "information_flow_x_to_y_kb_per_s": 0.02,
+          "information_flow_y_to_x_kb_per_s": 0.01,
+          "bipartite_second_law_satisfied": false,
+          "gating_regime": "UNCOUPLED_FUTILE_DISSIPATION",
+          "nbd_tmd_coupling_fidelity": 0.02
+        },
+        "w1282x_nonsense_baseline": {
+          "subsystem_x_entropy_rate_kb_per_s": 0.0,
+          "subsystem_y_entropy_rate_kb_per_s": 0.0,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 0.0,
+          "information_flow_x_to_y_kb_per_s": 0.0,
+          "information_flow_y_to_x_kb_per_s": 0.0,
+          "bipartite_second_law_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "nbd_tmd_coupling_fidelity": 0.0
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "subsystem_x_modularity_lifting_rate": 5.12,
+          "subsystem_y_level_lowering_rate": 3.84,
+          "mutual_information_flow_bits_per_step": 4.85,
+          "proof_bipartite_decomposition_satisfied": true,
+          "hartich_barato_seifert_parity_satisfied": true
+        },
+        "anthropics/formal-math/zeta23": {
+          "subsystem_x_modularity_lifting_rate": 4.65,
+          "subsystem_y_level_lowering_rate": 3.42,
+          "mutual_information_flow_bits_per_step": 4.52,
+          "proof_bipartite_decomposition_satisfied": true,
+          "hartich_barato_seifert_parity_satisfied": true
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "subsystem_x_modularity_lifting_rate": 4.35,
+          "subsystem_y_level_lowering_rate": 3.18,
+          "mutual_information_flow_bits_per_step": 4.25,
+          "proof_bipartite_decomposition_satisfied": true,
+          "hartich_barato_seifert_parity_satisfied": true
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -7752,5 +7917,5 @@
       }
     ]
   },
-  "snapshot_sha256": "f74e4c86af191470ac7174cc7b80f8a8f080e2cbb594f01c871d56ff4d921c20"
+  "snapshot_sha256": "0f9fb7d5a5597c57e0d95ebe8a5654eef98d51884da37ca237a1a48f91568e44"
 }

@@ -126,5 +126,8 @@ Clinical Trial Decoupling Atlas"]
 
   - **`T-0595` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 45: Seifert-Gingrich Current Fluctuation Theorems & Generalized TUR for CFTR Channel Kinetics in `cf-research`*. Grounded in `DOI:10.1088/0034-4885/75/12/126001`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. Fully specified in `tasks/specs/T-0595.md`. Delivered in PR.
   - **`T-0596` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 46: Interactive Seifert-Gingrich Current Fluctuation Theorems & Generalized TUR Simulator on `senseiewok.ai`*.
+  - **`T-0597` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 46: Pietzonka-Seifert Finite-Time Dissipation Bounds & Molecular Machine Efficiency in `cf-research`*. Grounded in `DOI:10.1088/0034-4885/75/12/126001`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. Fully specified in `tasks/specs/T-0597.md`. Delivered in PR.
+  - **`T-0598` (Priority P3 / Lane: `showcase`)**: *Living Proof Observatory Round 47: Interactive Pietzonka-Seifert Finite-Time Dissipation Bounds & Molecular Machine Efficiency Simulator on `senseiewok.ai`*.
+  - **`T-0599` (Priority P3 / Lane: `research`)**: *Formal Proof & Physics Round 47: Hartich-Barato-Seifert Bipartite Information Thermodynamics & Subsystem Entropy Bounds in `cf-research`*. Grounded in `DOI:10.1088/1742-5468/2014/10/P10016`, `DOI:10.1088/0034-4885/75/12/126001`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. Fully specified in `tasks/specs/T-0599.md`. Delivered in PR.
 
-*Report submitted by Frontier AI Scout (Round 167). Zero hallucinations detected across AH-1 through AH-12.*
+*Report submitted by Frontier AI Scout (Round 168). Zero hallucinations detected across AH-1 through AH-12.*
