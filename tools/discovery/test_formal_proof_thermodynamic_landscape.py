@@ -47,6 +47,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_dechant_sasa_bounds,
     evaluate_current_fluctuation_tur,
     evaluate_pietzonka_seifert_bounds,
+    evaluate_hartich_barato_seifert_bipartite,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -108,6 +109,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_dechant_sasa_bounds()["dechant_sasa_bridge_verified"])
         self.assertTrue(evaluate_current_fluctuation_tur()["current_fluctuation_tur_bridge_verified"])
         self.assertTrue(evaluate_pietzonka_seifert_bounds()["pietzonka_seifert_bounds_bridge_verified"])
+        self.assertTrue(evaluate_hartich_barato_seifert_bipartite()["hartich_barato_seifert_bipartite_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])

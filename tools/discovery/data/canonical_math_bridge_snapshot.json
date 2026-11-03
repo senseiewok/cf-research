@@ -6040,6 +6040,89 @@
           "pietzonka_seifert_efficiency_parity_satisfied": true
         }
       }
+    },
+    "hartich_barato_seifert_bipartite_bridge": {
+      "task_id": "T-0599",
+      "hartich_barato_seifert_bipartite_bridge_verified": true,
+      "subsystem_entropy_bounds_verified": true,
+      "information_flow_stratification_verified": true,
+      "proof_dag_bipartite_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "subsystem_x_entropy_rate_kb_per_s": 3.25,
+          "subsystem_y_entropy_rate_kb_per_s": 1.15,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 4.4,
+          "information_flow_x_to_y_kb_per_s": 2.75,
+          "information_flow_y_to_x_kb_per_s": 0.45,
+          "bipartite_second_law_satisfied": true,
+          "gating_regime": "COHERENT_BIPARTITE_TRANSDUCTION",
+          "nbd_tmd_coupling_fidelity": 0.95
+        },
+        "rescued_cftr_ivacaftor": {
+          "subsystem_x_entropy_rate_kb_per_s": 3.1,
+          "subsystem_y_entropy_rate_kb_per_s": 1.05,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 4.15,
+          "information_flow_x_to_y_kb_per_s": 2.55,
+          "information_flow_y_to_x_kb_per_s": 0.4,
+          "bipartite_second_law_satisfied": true,
+          "gating_regime": "COHERENT_BIPARTITE_TRANSDUCTION",
+          "nbd_tmd_coupling_fidelity": 0.92
+        },
+        "f508del_uncorrected": {
+          "subsystem_x_entropy_rate_kb_per_s": 0.25,
+          "subsystem_y_entropy_rate_kb_per_s": 0.02,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 0.27,
+          "information_flow_x_to_y_kb_per_s": 0.04,
+          "information_flow_y_to_x_kb_per_s": 0.01,
+          "bipartite_second_law_satisfied": false,
+          "gating_regime": "UNCOUPLED_FUTILE_DISSIPATION",
+          "nbd_tmd_coupling_fidelity": 0.04
+        },
+        "g551d_uncoupled_cftr": {
+          "subsystem_x_entropy_rate_kb_per_s": 0.18,
+          "subsystem_y_entropy_rate_kb_per_s": 0.01,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 0.19,
+          "information_flow_x_to_y_kb_per_s": 0.02,
+          "information_flow_y_to_x_kb_per_s": 0.01,
+          "bipartite_second_law_satisfied": false,
+          "gating_regime": "UNCOUPLED_FUTILE_DISSIPATION",
+          "nbd_tmd_coupling_fidelity": 0.02
+        },
+        "w1282x_nonsense_baseline": {
+          "subsystem_x_entropy_rate_kb_per_s": 0.0,
+          "subsystem_y_entropy_rate_kb_per_s": 0.0,
+          "total_dissipation_rate_sigma_tot_kb_per_s": 0.0,
+          "information_flow_x_to_y_kb_per_s": 0.0,
+          "information_flow_y_to_x_kb_per_s": 0.0,
+          "bipartite_second_law_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "nbd_tmd_coupling_fidelity": 0.0
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "subsystem_x_modularity_lifting_rate": 5.12,
+          "subsystem_y_level_lowering_rate": 3.84,
+          "mutual_information_flow_bits_per_step": 4.85,
+          "proof_bipartite_decomposition_satisfied": true,
+          "hartich_barato_seifert_parity_satisfied": true
+        },
+        "anthropics/formal-math/zeta23": {
+          "subsystem_x_modularity_lifting_rate": 4.65,
+          "subsystem_y_level_lowering_rate": 3.42,
+          "mutual_information_flow_bits_per_step": 4.52,
+          "proof_bipartite_decomposition_satisfied": true,
+          "hartich_barato_seifert_parity_satisfied": true
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "subsystem_x_modularity_lifting_rate": 4.35,
+          "subsystem_y_level_lowering_rate": 3.18,
+          "mutual_information_flow_bits_per_step": 4.25,
+          "proof_bipartite_decomposition_satisfied": true,
+          "hartich_barato_seifert_parity_satisfied": true
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -7834,5 +7917,5 @@
       }
     ]
   },
-  "snapshot_sha256": "77717e26d6480a6ff3bbde16867f3639bc1663a418b2eb33a10ac18a70f5c07f"
+  "snapshot_sha256": "0f9fb7d5a5597c57e0d95ebe8a5654eef98d51884da37ca237a1a48f91568e44"
 }
