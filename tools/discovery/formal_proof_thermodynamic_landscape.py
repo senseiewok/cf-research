@@ -44,6 +44,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Speck T, Seifert U (Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Phys Rev Lett 2009, DOI: 10.1103/PhysRevLett.103.090601)
   - Kawai-Parrondo-Van den Broeck relative entropy & dissipated work (Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558)
   - Dechant-Sasa Wasserstein distance & dissipation bounds (Dechant A, Sasa S J Stat Mech 2021, DOI: 10.1088/1742-5468/ac0b4e; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558)
+  - Seifert-Gingrich current fluctuation theorems & generalized TUR (Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -610,6 +611,12 @@ def evaluate_dechant_sasa_bounds(n_gating_regimes: int = 5) -> Dict[str, Any]:
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["dechant_sasa_bounds_bridge"]
+
+
+def evaluate_current_fluctuation_tur(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["current_fluctuation_tur_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:

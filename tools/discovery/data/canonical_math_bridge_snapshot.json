@@ -5868,6 +5868,96 @@
           "dechant_sasa_proof_bound_satisfied": true
         }
       }
+    },
+    "current_fluctuation_tur_bridge": {
+      "task_id": "T-0595",
+      "current_fluctuation_tur_bridge_verified": true,
+      "tur_stratification_verified": true,
+      "proof_dag_tur_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "mean_chloride_current_pa": 2.45,
+          "current_variance_pa2": 0.42,
+          "dissipation_rate_sigma_kb_per_s": 4.65,
+          "observation_time_window_s": 1.0,
+          "tur_ratio_q": 1.25,
+          "large_deviation_rate_function_i": 0.85,
+          "gallavotti_cohen_slope": 1.0,
+          "gating_regime": "ACTIVE_TUR_BOUNDED_TRANSPORT",
+          "current_tur_bound_satisfied": true
+        },
+        "rescued_cftr_ivacaftor": {
+          "mean_chloride_current_pa": 2.25,
+          "current_variance_pa2": 0.38,
+          "dissipation_rate_sigma_kb_per_s": 4.25,
+          "observation_time_window_s": 1.0,
+          "tur_ratio_q": 1.21,
+          "large_deviation_rate_function_i": 0.78,
+          "gallavotti_cohen_slope": 0.98,
+          "gating_regime": "ACTIVE_TUR_BOUNDED_TRANSPORT",
+          "current_tur_bound_satisfied": true
+        },
+        "f508del_uncorrected": {
+          "mean_chloride_current_pa": 0.04,
+          "current_variance_pa2": 0.15,
+          "dissipation_rate_sigma_kb_per_s": 0.12,
+          "observation_time_window_s": 1.0,
+          "tur_ratio_q": 0.05,
+          "large_deviation_rate_function_i": 0.02,
+          "gallavotti_cohen_slope": 0.05,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_COLLAPSE",
+          "current_tur_bound_satisfied": false
+        },
+        "g551d_uncoupled_cftr": {
+          "mean_chloride_current_pa": 0.02,
+          "current_variance_pa2": 0.12,
+          "dissipation_rate_sigma_kb_per_s": 0.08,
+          "observation_time_window_s": 1.0,
+          "tur_ratio_q": 0.03,
+          "large_deviation_rate_function_i": 0.01,
+          "gallavotti_cohen_slope": 0.03,
+          "gating_regime": "DEGENERATE_FUTILE_TRAP",
+          "current_tur_bound_satisfied": false
+        },
+        "w1282x_nonsense_baseline": {
+          "mean_chloride_current_pa": 0.0,
+          "current_variance_pa2": 0.0,
+          "dissipation_rate_sigma_kb_per_s": 0.0,
+          "observation_time_window_s": 1.0,
+          "tur_ratio_q": 0.0,
+          "large_deviation_rate_function_i": 0.0,
+          "gallavotti_cohen_slope": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "current_tur_bound_satisfied": false
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "deductive_current_precision": 2.85,
+          "proof_tur_ratio_q": 1.34,
+          "inferential_dissipation_rate": 4.95,
+          "topological_flux_preservation_pct": 87.5,
+          "tur_proof_parity_satisfied": true,
+          "seifert_gingrich_bound_satisfied": true
+        },
+        "anthropics/formal-math/zeta23": {
+          "deductive_current_precision": 2.52,
+          "proof_tur_ratio_q": 1.28,
+          "inferential_dissipation_rate": 4.52,
+          "topological_flux_preservation_pct": 83.2,
+          "tur_proof_parity_satisfied": true,
+          "seifert_gingrich_bound_satisfied": true
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "deductive_current_precision": 2.25,
+          "proof_tur_ratio_q": 1.21,
+          "inferential_dissipation_rate": 4.2,
+          "topological_flux_preservation_pct": 79.8,
+          "tur_proof_parity_satisfied": true,
+          "seifert_gingrich_bound_satisfied": true
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -7662,5 +7752,5 @@
       }
     ]
   },
-  "snapshot_sha256": "284965b0a502e24a1b712b120323057e45f75c8c8b3926d3dea55b235a763547"
+  "snapshot_sha256": "f74e4c86af191470ac7174cc7b80f8a8f080e2cbb594f01c871d56ff4d921c20"
 }
