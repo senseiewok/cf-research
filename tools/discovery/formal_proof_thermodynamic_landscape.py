@@ -52,6 +52,8 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Barato-Hartich-Seifert information thermodynamics & dissipation bounds in CFTR gating (Hartich D, Barato AC, Seifert U J Stat Mech 2014, DOI: 10.1088/1742-5468/2014/10/P10016; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Horowitz-Parrondo information flow & feedback control in CFTR catalytic assemblies (Parrondo JMR, Horowitz JM, Sagawa T Nat Phys 2015, DOI: 10.1038/nphys3230; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Dechant-Sasa thermodynamic speed limits & geometric bounds in CFTR gating (Dechant A, Sasa S J Stat Mech 2021, DOI: 10.1088/1742-5468/ac0b4e; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Shiraishi-Funo-Saito universal thermodynamic speed limits & operational cost bounds in CFTR gating (Shiraishi N, Funo K, Saito K Phys Rev Lett 2018, DOI: 10.1103/PhysRevLett.121.070601; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Esposito-Van den Broeck three-way entropy production decomposition & housekeeping dissipation in CFTR gating (Esposito M, Van den Broeck C Phys Rev Lett 2010, DOI: 10.1103/PhysRevLett.104.090601; Phys Rev E 2010, DOI: 10.1103/PhysRevE.82.011143; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -666,6 +668,18 @@ def evaluate_dechant_sasa_speed_limits(n_gating_regimes: int = 5) -> Dict[str, A
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["dechant_sasa_speed_limits_bridge"]
+
+
+def evaluate_shiraishi_funo_saito_speed_limits(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["shiraishi_funo_saito_speed_limits_bridge"]
+
+
+def evaluate_esposito_van_den_broeck_entropy(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["esposito_van_den_broeck_entropy_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
