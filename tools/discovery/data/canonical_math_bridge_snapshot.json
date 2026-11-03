@@ -6363,6 +6363,150 @@
           "bhs_parity_satisfied": true
         }
       }
+    },
+    "horowitz_parrondo_feedback_control_bridge": {
+      "task_id": "T-0606",
+      "horowitz_parrondo_feedback_control_bridge_verified": true,
+      "information_flow_bounds_verified": true,
+      "feedback_fidelity_stratification_verified": true,
+      "proof_dag_feedback_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "extractable_work_rate_w_dot_ext_kbt_per_s": 3.65,
+          "free_energy_rate_delta_f_dot_kbt_per_s": -2.15,
+          "information_flow_rate_i_dot_f_kb_per_s": 2.25,
+          "horowitz_parrondo_bound_satisfied": true,
+          "gating_regime": "COHERENT_FEEDBACK_CONTROL",
+          "allosteric_controller_fidelity": 0.95
+        },
+        "rescued_cftr_ivacaftor": {
+          "extractable_work_rate_w_dot_ext_kbt_per_s": 3.45,
+          "free_energy_rate_delta_f_dot_kbt_per_s": -2.05,
+          "information_flow_rate_i_dot_f_kb_per_s": 2.1,
+          "horowitz_parrondo_bound_satisfied": true,
+          "gating_regime": "COHERENT_FEEDBACK_CONTROL",
+          "allosteric_controller_fidelity": 0.92
+        },
+        "f508del_uncorrected": {
+          "extractable_work_rate_w_dot_ext_kbt_per_s": 0.22,
+          "free_energy_rate_delta_f_dot_kbt_per_s": -0.18,
+          "information_flow_rate_i_dot_f_kb_per_s": 0.05,
+          "horowitz_parrondo_bound_satisfied": false,
+          "gating_regime": "DEGENERATE_FEEDBACK_COLLAPSE",
+          "allosteric_controller_fidelity": 0.05
+        },
+        "g551d_uncoupled_cftr": {
+          "extractable_work_rate_w_dot_ext_kbt_per_s": 0.2,
+          "free_energy_rate_delta_f_dot_kbt_per_s": -0.15,
+          "information_flow_rate_i_dot_f_kb_per_s": 0.04,
+          "horowitz_parrondo_bound_satisfied": false,
+          "gating_regime": "DEGENERATE_FEEDBACK_COLLAPSE",
+          "allosteric_controller_fidelity": 0.04
+        },
+        "w1282x_nonsense_baseline": {
+          "extractable_work_rate_w_dot_ext_kbt_per_s": 0.0,
+          "free_energy_rate_delta_f_dot_kbt_per_s": 0.0,
+          "information_flow_rate_i_dot_f_kb_per_s": 0.0,
+          "horowitz_parrondo_bound_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "allosteric_controller_fidelity": 0.0
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_feedback_parity_satisfied": true,
+          "proof_controller_rate": 4.95,
+          "proof_information_flow": 3.85
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_feedback_parity_satisfied": true,
+          "proof_controller_rate": 4.55,
+          "proof_information_flow": 3.5
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_feedback_parity_satisfied": true,
+          "proof_controller_rate": 4.25,
+          "proof_information_flow": 3.2
+        }
+      }
+    },
+    "dechant_sasa_speed_limits_bridge": {
+      "task_id": "T-0607",
+      "dechant_sasa_speed_limits_bridge_verified": true,
+      "speed_limit_bounds_verified": true,
+      "geometric_transport_stratification_verified": true,
+      "proof_dag_speed_limit_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "conformational_transition_time_tau_ms": 14.5,
+          "dechant_sasa_lower_bound_ms": 4.68,
+          "wasserstein_distance_w1_nm": 3.2,
+          "diffusion_coefficient_d_nm2_per_ms": 0.45,
+          "entropy_production_rate_sigma_kb_per_ms": 0.52,
+          "speed_limit_bound_satisfied": true,
+          "gating_regime": "GEOMETRIC_SPEED_LIMIT_OPTIMAL",
+          "allosteric_coupling_fidelity": 0.94
+        },
+        "rescued_cftr_ivacaftor": {
+          "conformational_transition_time_tau_ms": 13.8,
+          "dechant_sasa_lower_bound_ms": 4.92,
+          "wasserstein_distance_w1_nm": 3.3,
+          "diffusion_coefficient_d_nm2_per_ms": 0.44,
+          "entropy_production_rate_sigma_kb_per_ms": 0.51,
+          "speed_limit_bound_satisfied": true,
+          "gating_regime": "GEOMETRIC_SPEED_LIMIT_OPTIMAL",
+          "allosteric_coupling_fidelity": 0.91
+        },
+        "f508del_uncorrected": {
+          "conformational_transition_time_tau_ms": 850.0,
+          "dechant_sasa_lower_bound_ms": 2.0,
+          "wasserstein_distance_w1_nm": 0.08,
+          "diffusion_coefficient_d_nm2_per_ms": 0.02,
+          "entropy_production_rate_sigma_kb_per_ms": 0.04,
+          "speed_limit_bound_satisfied": false,
+          "gating_regime": "KINETIC_TRAPPING_DIVERGENCE",
+          "allosteric_coupling_fidelity": 0.05
+        },
+        "g551d_uncoupled_cftr": {
+          "conformational_transition_time_tau_ms": 920.0,
+          "dechant_sasa_lower_bound_ms": 2.02,
+          "wasserstein_distance_w1_nm": 0.07,
+          "diffusion_coefficient_d_nm2_per_ms": 0.02,
+          "entropy_production_rate_sigma_kb_per_ms": 0.03,
+          "speed_limit_bound_satisfied": false,
+          "gating_regime": "KINETIC_TRAPPING_DIVERGENCE",
+          "allosteric_coupling_fidelity": 0.04
+        },
+        "w1282x_nonsense_baseline": {
+          "conformational_transition_time_tau_ms": 0.0,
+          "dechant_sasa_lower_bound_ms": 0.0,
+          "wasserstein_distance_w1_nm": 0.0,
+          "diffusion_coefficient_d_nm2_per_ms": 0.0,
+          "entropy_production_rate_sigma_kb_per_ms": 0.0,
+          "speed_limit_bound_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "allosteric_coupling_fidelity": 0.0
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_speed_limit_parity_satisfied": true,
+          "proof_transition_time_step": 6.8,
+          "proof_wasserstein_distance_w1": 4.2
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_speed_limit_parity_satisfied": true,
+          "proof_transition_time_step": 6.1,
+          "proof_wasserstein_distance_w1": 4.5
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_speed_limit_parity_satisfied": true,
+          "proof_transition_time_step": 5.8,
+          "proof_wasserstein_distance_w1": 4.8
+        }
+      }
     }
   },
   "challenges_unbridged": {
