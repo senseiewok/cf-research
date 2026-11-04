@@ -58,6 +58,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Dechant-Sasa fluctuation-response inequality out of equilibrium (Dechant A, Sasa S Proc Natl Acad Sci USA 2020, DOI: 10.1073/pnas.1918386117; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Lebowitz-Spohn stochastic action functional & Gallavotti-Cohen large deviation symmetry in CFTR gating transitions (Lebowitz JL, Spohn H J Stat Phys 1999, DOI: 10.1023/A:1004589714161; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Speck-Seifert housekeeping heat integral fluctuation theorem & non-equilibrium dissipation in CFTR gating cycles (Speck T, Seifert U J Phys A Math Gen 2005, DOI: 10.1088/0305-4470/38/34/L03; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Rao-Esposito non-equilibrium conservation laws and moiety decomposition in chemical reaction networks (Rao R, Esposito M Phys Rev X 2016, DOI: 10.1103/PhysRevX.6.041064; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -726,6 +727,12 @@ def evaluate_polettini_esposito_cycle_decomposition(n_gating_regimes: int = 5) -
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["polettini_esposito_cycle_bridge"]
+
+
+def evaluate_rao_esposito_conservation_laws(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["rao_esposito_conservation_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
