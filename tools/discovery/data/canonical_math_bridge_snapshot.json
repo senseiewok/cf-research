@@ -6805,6 +6805,165 @@
           "proof_cyclic_bound": 4.5
         }
       }
+    },
+    "falasco_esposito_dissipation_time_bridge": {
+      "task_id": "T-0619",
+      "falasco_esposito_dissipation_time_bridge_verified": true,
+      "dissipation_time_bounds_verified": true,
+      "stratification_verified": true,
+      "proof_dag_falasco_esposito_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "transition_duration_tau_ms": 25.0,
+          "entropy_production_rate_sigma_kb_per_ms": 0.46,
+          "dissipation_time_product": 11.5,
+          "falasco_esposito_lower_bound": 4.25,
+          "bound_ratio": 2.7059,
+          "falasco_esposito_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.93,
+          "gating_regime": "DISSIPATION_TIME_OPTIMAL"
+        },
+        "rescued_cftr_ivacaftor": {
+          "transition_duration_tau_ms": 28.5,
+          "entropy_production_rate_sigma_kb_per_ms": 0.44,
+          "dissipation_time_product": 12.54,
+          "falasco_esposito_lower_bound": 4.1,
+          "bound_ratio": 3.0585,
+          "falasco_esposito_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.91,
+          "gating_regime": "DISSIPATION_TIME_OPTIMAL"
+        },
+        "f508del_uncorrected": {
+          "transition_duration_tau_ms": 780.0,
+          "entropy_production_rate_sigma_kb_per_ms": 0.016,
+          "dissipation_time_product": 12.48,
+          "falasco_esposito_lower_bound": 24.5,
+          "bound_ratio": 0.5094,
+          "falasco_esposito_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.08,
+          "gating_regime": "KINETIC_TRAPPING_BREAKDOWN"
+        },
+        "g551d_uncoupled_cftr": {
+          "transition_duration_tau_ms": 850.0,
+          "entropy_production_rate_sigma_kb_per_ms": 0.012,
+          "dissipation_time_product": 10.2,
+          "falasco_esposito_lower_bound": 28.0,
+          "bound_ratio": 0.3643,
+          "falasco_esposito_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.05,
+          "gating_regime": "KINETIC_TRAPPING_BREAKDOWN"
+        },
+        "w1282x_nonsense_baseline": {
+          "transition_duration_tau_ms": 0.0,
+          "entropy_production_rate_sigma_kb_per_ms": 0.0,
+          "dissipation_time_product": 0.0,
+          "falasco_esposito_lower_bound": 0.0,
+          "bound_ratio": 0.0,
+          "falasco_esposito_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_falasco_esposito_parity_satisfied": true,
+          "proof_transition_steps": 14.5,
+          "proof_dissipation_bound": 8.2
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_falasco_esposito_parity_satisfied": true,
+          "proof_transition_steps": 11.2,
+          "proof_dissipation_bound": 6.8
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_falasco_esposito_parity_satisfied": true,
+          "proof_transition_steps": 9.8,
+          "proof_dissipation_bound": 5.4
+        }
+      }
+    },
+    "dechant_sasa_fluctuation_response_bridge": {
+      "task_id": "T-0620",
+      "dechant_sasa_fluctuation_response_bridge_verified": true,
+      "fluctuation_response_inequality_verified": true,
+      "susceptibility_stratification_verified": true,
+      "proof_dag_dechant_sasa_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "allosteric_susceptibility_r": 0.82,
+          "observable_variance_var": 0.65,
+          "entropy_production_rate_sigma": 4.5,
+          "response_upper_bound": 1.4625,
+          "squared_response": 0.6724,
+          "fluctuation_response_ratio": 0.4598,
+          "dechant_sasa_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.94,
+          "gating_regime": "RESPONSE_DISSIPATION_OPTIMAL"
+        },
+        "rescued_cftr_ivacaftor": {
+          "allosteric_susceptibility_r": 0.79,
+          "observable_variance_var": 0.62,
+          "entropy_production_rate_sigma": 4.25,
+          "response_upper_bound": 1.3175,
+          "squared_response": 0.6241,
+          "fluctuation_response_ratio": 0.4737,
+          "dechant_sasa_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.91,
+          "gating_regime": "RESPONSE_DISSIPATION_OPTIMAL"
+        },
+        "f508del_uncorrected": {
+          "allosteric_susceptibility_r": 0.08,
+          "observable_variance_var": 0.12,
+          "entropy_production_rate_sigma": 0.05,
+          "response_upper_bound": 0.003,
+          "squared_response": 0.0064,
+          "fluctuation_response_ratio": 2.1333,
+          "dechant_sasa_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.07,
+          "gating_regime": "SUSCEPTIBILITY_COLLAPSE"
+        },
+        "g551d_uncoupled_cftr": {
+          "allosteric_susceptibility_r": 0.06,
+          "observable_variance_var": 0.1,
+          "entropy_production_rate_sigma": 0.03,
+          "response_upper_bound": 0.0015,
+          "squared_response": 0.0036,
+          "fluctuation_response_ratio": 2.4,
+          "dechant_sasa_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.05,
+          "gating_regime": "SUSCEPTIBILITY_COLLAPSE"
+        },
+        "w1282x_nonsense_baseline": {
+          "allosteric_susceptibility_r": 0.0,
+          "observable_variance_var": 0.0,
+          "entropy_production_rate_sigma": 0.0,
+          "response_upper_bound": 0.0,
+          "squared_response": 0.0,
+          "fluctuation_response_ratio": 0.0,
+          "dechant_sasa_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_dechant_sasa_parity_satisfied": true,
+          "proof_susceptibility": 0.88,
+          "proof_response_bound": 1.25
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_dechant_sasa_parity_satisfied": true,
+          "proof_susceptibility": 0.82,
+          "proof_response_bound": 1.15
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_dechant_sasa_parity_satisfied": true,
+          "proof_susceptibility": 0.76,
+          "proof_response_bound": 1.05
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -8599,5 +8758,5 @@
       }
     ]
   },
-  "snapshot_sha256": "0f9fb7d5a5597c57e0d95ebe8a5654eef98d51884da37ca237a1a48f91568e44"
+  "snapshot_sha256": "a153abe887ca63b71fffbed5a2e0c5c2f0e83714f944e494265e20549ff0792f"
 }
