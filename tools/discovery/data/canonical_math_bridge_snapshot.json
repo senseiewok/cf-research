@@ -6661,6 +6661,150 @@
           "proof_housekeeping_rate": 3.15
         }
       }
+    },
+    "hatano_sasa_steady_state_bridge": {
+      "task_id": "T-0615",
+      "hatano_sasa_steady_state_bridge_verified": true,
+      "hatano_sasa_equality_verified": true,
+      "excess_dissipated_work_stratification_verified": true,
+      "proof_dag_hatano_sasa_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "hatano_sasa_equality_satisfied": true,
+          "excess_dissipated_work_y_kb_t": 0.85,
+          "steady_state_quasipotential_phi_kb_t": 3.45,
+          "gating_regime": "NON_EQUILIBRIUM_STEADY_STATE_OPTIMAL",
+          "allosteric_coupling_fidelity": 0.95,
+          "hatano_sasa_bound_satisfied": true
+        },
+        "rescued_cftr_ivacaftor": {
+          "hatano_sasa_equality_satisfied": true,
+          "excess_dissipated_work_y_kb_t": 0.92,
+          "steady_state_quasipotential_phi_kb_t": 3.3,
+          "gating_regime": "NON_EQUILIBRIUM_STEADY_STATE_OPTIMAL",
+          "allosteric_coupling_fidelity": 0.92,
+          "hatano_sasa_bound_satisfied": true
+        },
+        "f508del_uncorrected": {
+          "hatano_sasa_equality_satisfied": false,
+          "excess_dissipated_work_y_kb_t": 6.45,
+          "steady_state_quasipotential_phi_kb_t": 0.45,
+          "gating_regime": "KINETIC_TRAPPING_BREAKDOWN",
+          "allosteric_coupling_fidelity": 0.08,
+          "hatano_sasa_bound_satisfied": false
+        },
+        "g551d_uncoupled_cftr": {
+          "hatano_sasa_equality_satisfied": false,
+          "excess_dissipated_work_y_kb_t": 5.85,
+          "steady_state_quasipotential_phi_kb_t": 0.52,
+          "gating_regime": "KINETIC_TRAPPING_BREAKDOWN",
+          "allosteric_coupling_fidelity": 0.06,
+          "hatano_sasa_bound_satisfied": false
+        },
+        "w1282x_nonsense_baseline": {
+          "hatano_sasa_equality_satisfied": false,
+          "excess_dissipated_work_y_kb_t": 0.0,
+          "steady_state_quasipotential_phi_kb_t": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "allosteric_coupling_fidelity": 0.0,
+          "hatano_sasa_bound_satisfied": false
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_hatano_sasa_parity_satisfied": true,
+          "proof_excess_functional": 1.45,
+          "proof_quasipotential": 4.85
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_hatano_sasa_parity_satisfied": true,
+          "proof_excess_functional": 1.3,
+          "proof_quasipotential": 4.5
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_hatano_sasa_parity_satisfied": true,
+          "proof_excess_functional": 1.2,
+          "proof_quasipotential": 4.25
+        }
+      }
+    },
+    "koyuk_seifert_cyclic_speed_bridge": {
+      "task_id": "T-0616",
+      "koyuk_seifert_cyclic_speed_bridge_verified": true,
+      "cyclic_speed_bounds_verified": true,
+      "precision_dissipation_stratification_verified": true,
+      "proof_dag_koyuk_seifert_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "cyclic_period_tau_ms": 32.5,
+          "koyuk_seifert_lower_bound_ms": 14.2,
+          "koyuk_seifert_bound_satisfied": true,
+          "cycle_precision_ratio": 2.28,
+          "entropy_production_rate_sigma_kb_per_ms": 0.48,
+          "effective_diffusion_deff": 0.18,
+          "gating_regime": "CYCLIC_DISSIPATION_OPTIMAL",
+          "allosteric_coupling_fidelity": 0.94
+        },
+        "rescued_cftr_ivacaftor": {
+          "cyclic_period_tau_ms": 30.8,
+          "koyuk_seifert_lower_bound_ms": 13.5,
+          "koyuk_seifert_bound_satisfied": true,
+          "cycle_precision_ratio": 2.28,
+          "entropy_production_rate_sigma_kb_per_ms": 0.45,
+          "effective_diffusion_deff": 0.17,
+          "gating_regime": "CYCLIC_DISSIPATION_OPTIMAL",
+          "allosteric_coupling_fidelity": 0.91
+        },
+        "f508del_uncorrected": {
+          "cyclic_period_tau_ms": 850.0,
+          "koyuk_seifert_lower_bound_ms": 1200.0,
+          "koyuk_seifert_bound_satisfied": false,
+          "cycle_precision_ratio": 0.708,
+          "entropy_production_rate_sigma_kb_per_ms": 0.015,
+          "effective_diffusion_deff": 0.02,
+          "gating_regime": "CYCLIC_COHERENCE_COLLAPSE",
+          "allosteric_coupling_fidelity": 0.07
+        },
+        "g551d_uncoupled_cftr": {
+          "cyclic_period_tau_ms": 920.0,
+          "koyuk_seifert_lower_bound_ms": 1350.0,
+          "koyuk_seifert_bound_satisfied": false,
+          "cycle_precision_ratio": 0.681,
+          "entropy_production_rate_sigma_kb_per_ms": 0.012,
+          "effective_diffusion_deff": 0.018,
+          "gating_regime": "CYCLIC_COHERENCE_COLLAPSE",
+          "allosteric_coupling_fidelity": 0.05
+        },
+        "w1282x_nonsense_baseline": {
+          "cyclic_period_tau_ms": 0.0,
+          "koyuk_seifert_lower_bound_ms": 0.0,
+          "koyuk_seifert_bound_satisfied": false,
+          "cycle_precision_ratio": 0.0,
+          "entropy_production_rate_sigma_kb_per_ms": 0.0,
+          "effective_diffusion_deff": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "allosteric_coupling_fidelity": 0.0
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_koyuk_seifert_parity_satisfied": true,
+          "proof_cycle_duration_step": 8.4,
+          "proof_cyclic_bound": 5.2
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_koyuk_seifert_parity_satisfied": true,
+          "proof_cycle_duration_step": 7.8,
+          "proof_cyclic_bound": 4.9
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_koyuk_seifert_parity_satisfied": true,
+          "proof_cycle_duration_step": 7.2,
+          "proof_cyclic_bound": 4.5
+        }
+      }
     }
   },
   "challenges_unbridged": {
