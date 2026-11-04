@@ -7180,6 +7180,79 @@
           "proof_cycle_dissipation_ratio": 0.88
         }
       }
+    },
+    "rao_esposito_conservation_bridge": {
+      "task_id": "T-0629",
+      "rao_esposito_conservation_bridge_verified": true,
+      "conservation_laws_verified": true,
+      "moiety_decomposition_verified": true,
+      "emergent_force_stratified": true,
+      "proof_dag_conservation_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "emergent_thermodynamic_force_kj_mol": 22.4,
+          "internal_dissipation_rate_kcal_mol_s": 3.85,
+          "broken_moiety_leak_rate_kcal_mol_s": 0.04,
+          "moiety_conservation_ratio": 0.982,
+          "stoichiometric_conservation_satisfied": true,
+          "allosteric_coupling_fidelity": 0.95,
+          "gating_regime": "STRICT_STOICHIOMETRIC_COUPLING"
+        },
+        "rescued_cftr_ivacaftor": {
+          "emergent_thermodynamic_force_kj_mol": 20.1,
+          "internal_dissipation_rate_kcal_mol_s": 3.42,
+          "broken_moiety_leak_rate_kcal_mol_s": 0.08,
+          "moiety_conservation_ratio": 0.945,
+          "stoichiometric_conservation_satisfied": true,
+          "allosteric_coupling_fidelity": 0.92,
+          "gating_regime": "STRICT_STOICHIOMETRIC_COUPLING"
+        },
+        "f508del_uncorrected": {
+          "emergent_thermodynamic_force_kj_mol": 2.3,
+          "internal_dissipation_rate_kcal_mol_s": 0.15,
+          "broken_moiety_leak_rate_kcal_mol_s": 0.82,
+          "moiety_conservation_ratio": 0.124,
+          "stoichiometric_conservation_satisfied": false,
+          "allosteric_coupling_fidelity": 0.07,
+          "gating_regime": "BROKEN_MOIETY_LEAK"
+        },
+        "g551d_uncoupled_cftr": {
+          "emergent_thermodynamic_force_kj_mol": 1.1,
+          "internal_dissipation_rate_kcal_mol_s": 0.05,
+          "broken_moiety_leak_rate_kcal_mol_s": 0.74,
+          "moiety_conservation_ratio": 0.065,
+          "stoichiometric_conservation_satisfied": false,
+          "allosteric_coupling_fidelity": 0.04,
+          "gating_regime": "BROKEN_MOIETY_LEAK"
+        },
+        "w1282x_nonsense_baseline": {
+          "emergent_thermodynamic_force_kj_mol": 0.0,
+          "internal_dissipation_rate_kcal_mol_s": 0.0,
+          "broken_moiety_leak_rate_kcal_mol_s": 0.0,
+          "moiety_conservation_ratio": 0.0,
+          "stoichiometric_conservation_satisfied": false,
+          "allosteric_coupling_fidelity": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_conservation_parity_satisfied": true,
+          "proof_emergent_conservation_force": 18.2,
+          "proof_moiety_conservation_ratio": 0.96
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_conservation_parity_satisfied": true,
+          "proof_emergent_conservation_force": 15.1,
+          "proof_moiety_conservation_ratio": 0.93
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_conservation_parity_satisfied": true,
+          "proof_emergent_conservation_force": 12.8,
+          "proof_moiety_conservation_ratio": 0.89
+        }
+      }
     }
   },
   "challenges_unbridged": {

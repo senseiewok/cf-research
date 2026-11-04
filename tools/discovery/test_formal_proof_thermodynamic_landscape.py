@@ -60,6 +60,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_lebowitz_spohn_action,
     evaluate_speck_seifert_housekeeping,
     evaluate_polettini_esposito_cycle_decomposition,
+    evaluate_rao_esposito_conservation_laws,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -134,6 +135,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_lebowitz_spohn_action()["lebowitz_spohn_action_bridge_verified"])
         self.assertTrue(evaluate_speck_seifert_housekeeping()["speck_seifert_housekeeping_bridge_verified"])
         self.assertTrue(evaluate_polettini_esposito_cycle_decomposition()["polettini_esposito_cycle_bridge_verified"])
+        self.assertTrue(evaluate_rao_esposito_conservation_laws()["rao_esposito_conservation_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])
