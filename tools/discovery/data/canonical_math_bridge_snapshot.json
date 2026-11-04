@@ -7340,6 +7340,98 @@
           "parity_verified": true
         }
       }
+    },
+    "wachtel_rao_esposito_coarse_graining_bridge": {
+      "task_id": "T-0633",
+      "wachtel_rao_esposito_coarse_graining_bridge_verified": true,
+      "cycle_affinity_invariance_verified": true,
+      "dissipation_rate_lower_bounded": true,
+      "internal_dissipation_nonnegative": true,
+      "proof_dag_abstraction_level_lowering_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "micro_dissipation_rate_kcal_mol_s": 4.12,
+          "macro_dissipation_rate_kcal_mol_s": 3.78,
+          "internal_dissipation_rate_kcal_mol_s": 0.34,
+          "micro_cycle_affinity_atp_kbt": 20.15,
+          "macro_cycle_affinity_atp_kbt": 20.15,
+          "cycle_affinity_preserved": true,
+          "macro_dissipation_efficiency": 0.917,
+          "allosteric_coupling_fidelity": 0.96,
+          "gating_regime": "TIGHT_COUPLING_CYCLE_AFFINITY_CONSERVED"
+        },
+        "rescued_cftr_ivacaftor": {
+          "micro_dissipation_rate_kcal_mol_s": 3.65,
+          "macro_dissipation_rate_kcal_mol_s": 3.22,
+          "internal_dissipation_rate_kcal_mol_s": 0.43,
+          "micro_cycle_affinity_atp_kbt": 19.85,
+          "macro_cycle_affinity_atp_kbt": 19.85,
+          "cycle_affinity_preserved": true,
+          "macro_dissipation_efficiency": 0.882,
+          "allosteric_coupling_fidelity": 0.92,
+          "gating_regime": "TIGHT_COUPLING_CYCLE_AFFINITY_CONSERVED"
+        },
+        "f508del_uncorrected": {
+          "micro_dissipation_rate_kcal_mol_s": 1.45,
+          "macro_dissipation_rate_kcal_mol_s": 0.24,
+          "internal_dissipation_rate_kcal_mol_s": 1.21,
+          "micro_cycle_affinity_atp_kbt": 19.5,
+          "macro_cycle_affinity_atp_kbt": 19.5,
+          "cycle_affinity_preserved": true,
+          "macro_dissipation_efficiency": 0.166,
+          "allosteric_coupling_fidelity": 0.08,
+          "gating_regime": "FUTILE_INTERNAL_DISSIPATION_DECOUPLED"
+        },
+        "g551d_uncoupled_cftr": {
+          "micro_dissipation_rate_kcal_mol_s": 1.3,
+          "macro_dissipation_rate_kcal_mol_s": 0.18,
+          "internal_dissipation_rate_kcal_mol_s": 1.12,
+          "micro_cycle_affinity_atp_kbt": 19.2,
+          "macro_cycle_affinity_atp_kbt": 19.2,
+          "cycle_affinity_preserved": true,
+          "macro_dissipation_efficiency": 0.138,
+          "allosteric_coupling_fidelity": 0.06,
+          "gating_regime": "FUTILE_INTERNAL_DISSIPATION_DECOUPLED"
+        },
+        "w1282x_nonsense_baseline": {
+          "micro_dissipation_rate_kcal_mol_s": 0.0,
+          "macro_dissipation_rate_kcal_mol_s": 0.0,
+          "internal_dissipation_rate_kcal_mol_s": 0.0,
+          "micro_cycle_affinity_atp_kbt": 0.0,
+          "macro_cycle_affinity_atp_kbt": 0.0,
+          "cycle_affinity_preserved": true,
+          "macro_dissipation_efficiency": 1.0,
+          "allosteric_coupling_fidelity": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "fermats_last_theorem": {
+          "micro_intermediate_lemmas": 29500,
+          "macro_canonical_stages": 5,
+          "logical_deductive_affinity_preserved": true,
+          "stage_level_coarse_graining_verified": true,
+          "ribet_level_lowering_isomorphism": "Gamma_0(N) -> Gamma_0(2) coarse graining preserves contradiction witness",
+          "parity_verified": true
+        },
+        "formal_math_zeta23": {
+          "micro_intermediate_lemmas": 4120,
+          "macro_canonical_stages": 3,
+          "logical_deductive_affinity_preserved": true,
+          "stage_level_coarse_graining_verified": true,
+          "mollifier_projection_isomorphism": "Selberg-Levinson mollification coarse graining preserves zero-density bound",
+          "parity_verified": true
+        },
+        "formal_math_3sum_apsp": {
+          "micro_intermediate_lemmas": 3480,
+          "macro_canonical_stages": 3,
+          "logical_deductive_affinity_preserved": true,
+          "stage_level_coarse_graining_verified": true,
+          "word_ram_compression_isomorphism": "Fredman decision-tree bit-packing preserves sub-cubic reduction complexity",
+          "parity_verified": true
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -9134,5 +9226,5 @@
       }
     ]
   },
-  "snapshot_sha256": "9481b45ece2c19705e58f7f562b5976d90f78bc5485eb756024e86b1cf5f29a6"
+  "snapshot_sha256": "1900d16fec7b889fabbaf3362eb2af6b326561e7ea6967ef9f742e0f943c79ed"
 }

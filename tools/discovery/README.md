@@ -4,7 +4,7 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `103` (plus 4 infrastructure scripts and 141 unit test suites)
+- **Total Verified Modules:** `103` (plus 4 infrastructure scripts and 142 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
