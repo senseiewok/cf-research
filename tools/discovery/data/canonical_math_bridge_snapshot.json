@@ -6964,6 +6964,150 @@
           "proof_response_bound": 1.05
         }
       }
+    },
+    "lebowitz_spohn_action_bridge": {
+      "task_id": "T-0623",
+      "lebowitz_spohn_action_bridge_verified": true,
+      "gallavotti_cohen_symmetry_verified": true,
+      "action_functional_stratification_verified": true,
+      "proof_dag_lebowitz_spohn_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "trajectory_action_rate_s_inv": 4.85,
+          "gallavotti_cohen_slope": 1.0,
+          "large_deviation_curvature": 1.42,
+          "symmetry_relative_error": 0.002,
+          "gallavotti_cohen_symmetry_satisfied": true,
+          "allosteric_coupling_fidelity": 0.94,
+          "gating_regime": "ACTIVE_GALLAVOTTI_COHEN_CYCLE"
+        },
+        "rescued_cftr_ivacaftor": {
+          "trajectory_action_rate_s_inv": 4.35,
+          "gallavotti_cohen_slope": 0.998,
+          "large_deviation_curvature": 1.38,
+          "symmetry_relative_error": 0.004,
+          "gallavotti_cohen_symmetry_satisfied": true,
+          "allosteric_coupling_fidelity": 0.91,
+          "gating_regime": "ACTIVE_GALLAVOTTI_COHEN_CYCLE"
+        },
+        "f508del_uncorrected": {
+          "trajectory_action_rate_s_inv": 0.08,
+          "gallavotti_cohen_slope": 0.12,
+          "large_deviation_curvature": 0.04,
+          "symmetry_relative_error": 0.88,
+          "gallavotti_cohen_symmetry_satisfied": false,
+          "allosteric_coupling_fidelity": 0.07,
+          "gating_regime": "EQUILIBRIUM_FLICKER_COLLAPSE"
+        },
+        "g551d_uncoupled_cftr": {
+          "trajectory_action_rate_s_inv": 0.05,
+          "gallavotti_cohen_slope": 0.08,
+          "large_deviation_curvature": 0.02,
+          "symmetry_relative_error": 0.92,
+          "gallavotti_cohen_symmetry_satisfied": false,
+          "allosteric_coupling_fidelity": 0.05,
+          "gating_regime": "EQUILIBRIUM_FLICKER_COLLAPSE"
+        },
+        "w1282x_nonsense_baseline": {
+          "trajectory_action_rate_s_inv": 0.0,
+          "gallavotti_cohen_slope": 0.0,
+          "large_deviation_curvature": 0.0,
+          "symmetry_relative_error": 1.0,
+          "gallavotti_cohen_symmetry_satisfied": false,
+          "allosteric_coupling_fidelity": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_lebowitz_spohn_parity_satisfied": true,
+          "proof_directional_action": 15.2,
+          "proof_symmetry_slope": 1.0
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_lebowitz_spohn_parity_satisfied": true,
+          "proof_directional_action": 12.4,
+          "proof_symmetry_slope": 1.0
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_lebowitz_spohn_parity_satisfied": true,
+          "proof_directional_action": 10.8,
+          "proof_symmetry_slope": 1.0
+        }
+      }
+    },
+    "speck_seifert_housekeeping_bridge": {
+      "task_id": "T-0624",
+      "speck_seifert_housekeeping_bridge_verified": true,
+      "housekeeping_ift_verified": true,
+      "housekeeping_efficiency_stratified": true,
+      "proof_dag_speck_seifert_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "housekeeping_heat_rate_kcal_mol_s": 3.85,
+          "exp_neg_q_hk_expectation": 1.0,
+          "housekeeping_coupling_efficiency": 0.88,
+          "excess_heat_ratio": 0.12,
+          "housekeeping_ift_satisfied": true,
+          "allosteric_coupling_fidelity": 0.94,
+          "gating_regime": "STEADY_STATE_HOUSEKEEPING_ACTIVE"
+        },
+        "rescued_cftr_ivacaftor": {
+          "housekeeping_heat_rate_kcal_mol_s": 3.42,
+          "exp_neg_q_hk_expectation": 0.998,
+          "housekeeping_coupling_efficiency": 0.84,
+          "excess_heat_ratio": 0.16,
+          "housekeeping_ift_satisfied": true,
+          "allosteric_coupling_fidelity": 0.91,
+          "gating_regime": "STEADY_STATE_HOUSEKEEPING_ACTIVE"
+        },
+        "f508del_uncorrected": {
+          "housekeeping_heat_rate_kcal_mol_s": 0.12,
+          "exp_neg_q_hk_expectation": 0.35,
+          "housekeeping_coupling_efficiency": 0.15,
+          "excess_heat_ratio": 0.85,
+          "housekeeping_ift_satisfied": false,
+          "allosteric_coupling_fidelity": 0.07,
+          "gating_regime": "HOUSEKEEPING_DISSIPATION_COLLAPSE"
+        },
+        "g551d_uncoupled_cftr": {
+          "housekeeping_heat_rate_kcal_mol_s": 0.08,
+          "exp_neg_q_hk_expectation": 0.28,
+          "housekeeping_coupling_efficiency": 0.1,
+          "excess_heat_ratio": 0.9,
+          "housekeeping_ift_satisfied": false,
+          "allosteric_coupling_fidelity": 0.05,
+          "gating_regime": "HOUSEKEEPING_DISSIPATION_COLLAPSE"
+        },
+        "w1282x_nonsense_baseline": {
+          "housekeeping_heat_rate_kcal_mol_s": 0.0,
+          "exp_neg_q_hk_expectation": 0.0,
+          "housekeeping_coupling_efficiency": 0.0,
+          "excess_heat_ratio": 0.0,
+          "housekeeping_ift_satisfied": false,
+          "allosteric_coupling_fidelity": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_speck_seifert_parity_satisfied": true,
+          "proof_housekeeping_cost": 16.4,
+          "proof_exp_neg_cost_expectation": 1.0
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_speck_seifert_parity_satisfied": true,
+          "proof_housekeeping_cost": 13.1,
+          "proof_exp_neg_cost_expectation": 1.0
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_speck_seifert_parity_satisfied": true,
+          "proof_housekeeping_cost": 11.5,
+          "proof_exp_neg_cost_expectation": 1.0
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -8758,5 +8902,5 @@
       }
     ]
   },
-  "snapshot_sha256": "a153abe887ca63b71fffbed5a2e0c5c2f0e83714f944e494265e20549ff0792f"
+  "snapshot_sha256": "dfbd615ce05229a272c2944479d45156f43a2c0e911e17cbaa90502d165d9010"
 }

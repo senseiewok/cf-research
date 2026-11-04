@@ -56,6 +56,8 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Esposito-Van den Broeck three-way entropy production decomposition & housekeeping dissipation in CFTR gating (Esposito M, Van den Broeck C Phys Rev Lett 2010, DOI: 10.1103/PhysRevLett.104.090601; Phys Rev E 2010, DOI: 10.1103/PhysRevE.82.011143; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Falasco-Esposito dissipation-time uncertainty relation in driven systems (Falasco G, Esposito M Phys Rev Lett 2020, DOI: 10.1103/PhysRevLett.125.120604; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Dechant-Sasa fluctuation-response inequality out of equilibrium (Dechant A, Sasa S Proc Natl Acad Sci USA 2020, DOI: 10.1073/pnas.1918386117; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Lebowitz-Spohn stochastic action functional & Gallavotti-Cohen large deviation symmetry in CFTR gating transitions (Lebowitz JL, Spohn H J Stat Phys 1999, DOI: 10.1023/A:1004589714161; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Speck-Seifert housekeeping heat integral fluctuation theorem & non-equilibrium dissipation in CFTR gating cycles (Speck T, Seifert U J Phys A Math Gen 2005, DOI: 10.1088/0305-4470/38/34/L03; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -706,6 +708,18 @@ def evaluate_dechant_sasa_fluctuation_response(n_gating_regimes: int = 5) -> Dic
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["dechant_sasa_fluctuation_response_bridge"]
+
+
+def evaluate_lebowitz_spohn_action(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["lebowitz_spohn_action_bridge"]
+
+
+def evaluate_speck_seifert_housekeeping(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["speck_seifert_housekeeping_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
