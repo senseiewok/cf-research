@@ -7253,6 +7253,93 @@
           "proof_moiety_conservation_ratio": 0.89
         }
       }
+    },
+    "manikandan_gupta_krishnamurthy_bridge": {
+      "task_id": "T-0631",
+      "manikandan_gupta_krishnamurthy_bridge_verified": true,
+      "operational_dissipation_bounds_verified": true,
+      "current_fluctuation_dispersion_stratified": true,
+      "variational_tightening_verified": true,
+      "proof_dag_operational_bounding_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "total_dissipation_rate_kcal_mol_s": 4.12,
+          "operational_lower_bound_kcal_mol_s": 3.75,
+          "relative_current_dispersion": 0.118,
+          "operational_bound_ratio": 0.91,
+          "variational_tightening_gain": 1.28,
+          "operational_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.96,
+          "gating_regime": "TIGHT_OPERATIONAL_BOUND_STRICT_COUPLING"
+        },
+        "rescued_cftr_ivacaftor": {
+          "total_dissipation_rate_kcal_mol_s": 3.65,
+          "operational_lower_bound_kcal_mol_s": 3.18,
+          "relative_current_dispersion": 0.142,
+          "operational_bound_ratio": 0.871,
+          "variational_tightening_gain": 1.22,
+          "operational_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.92,
+          "gating_regime": "TIGHT_OPERATIONAL_BOUND_STRICT_COUPLING"
+        },
+        "f508del_uncorrected": {
+          "total_dissipation_rate_kcal_mol_s": 1.45,
+          "operational_lower_bound_kcal_mol_s": 0.22,
+          "relative_current_dispersion": 1.58,
+          "operational_bound_ratio": 0.152,
+          "variational_tightening_gain": 1.05,
+          "operational_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.08,
+          "gating_regime": "LOOSE_OPERATIONAL_BOUND_FUTILE_DISSIPATION"
+        },
+        "g551d_uncoupled_cftr": {
+          "total_dissipation_rate_kcal_mol_s": 1.3,
+          "operational_lower_bound_kcal_mol_s": 0.16,
+          "relative_current_dispersion": 1.72,
+          "operational_bound_ratio": 0.123,
+          "variational_tightening_gain": 1.03,
+          "operational_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.06,
+          "gating_regime": "LOOSE_OPERATIONAL_BOUND_FUTILE_DISSIPATION"
+        },
+        "w1282x_nonsense_baseline": {
+          "total_dissipation_rate_kcal_mol_s": 0.0,
+          "operational_lower_bound_kcal_mol_s": 0.0,
+          "relative_current_dispersion": 0.0,
+          "operational_bound_ratio": 1.0,
+          "variational_tightening_gain": 1.0,
+          "operational_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "fermats_last_theorem": {
+          "proof_total_entropy_production": 28.5,
+          "operational_verification_bound": 25.8,
+          "operational_bounding_fidelity": 0.905,
+          "tactic_step_dispersion": 0.14,
+          "variational_optimal_milestone": "stage_4_taylor_wiles_lifting",
+          "parity_verified": true
+        },
+        "formal_math_zeta23": {
+          "proof_total_entropy_production": 24.2,
+          "operational_verification_bound": 21.6,
+          "operational_bounding_fidelity": 0.893,
+          "tactic_step_dispersion": 0.16,
+          "variational_optimal_milestone": "zeta_stage_3_dirichlet_large_values",
+          "parity_verified": true
+        },
+        "formal_math_3sum_apsp": {
+          "proof_total_entropy_production": 21.8,
+          "operational_verification_bound": 19.2,
+          "operational_bounding_fidelity": 0.881,
+          "tactic_step_dispersion": 0.17,
+          "variational_optimal_milestone": "apsp_stage_3_fredman_decision_tree_compression",
+          "parity_verified": true
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -9047,5 +9134,5 @@
       }
     ]
   },
-  "snapshot_sha256": "dfbd615ce05229a272c2944479d45156f43a2c0e911e17cbaa90502d165d9010"
+  "snapshot_sha256": "9481b45ece2c19705e58f7f562b5976d90f78bc5485eb756024e86b1cf5f29a6"
 }
