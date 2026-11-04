@@ -6507,6 +6507,160 @@
           "proof_wasserstein_distance_w1": 4.8
         }
       }
+    },
+    "shiraishi_funo_saito_speed_limits_bridge": {
+      "task_id": "T-0611",
+      "shiraishi_funo_saito_speed_limits_bridge_verified": true,
+      "speed_limit_bounds_verified": true,
+      "operational_cost_stratification_verified": true,
+      "proof_dag_speed_limit_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "transition_duration_tau_ms": 12.5,
+          "shiraishi_funo_saito_lower_bound_ms": 3.85,
+          "total_variation_distance_dtv": 0.88,
+          "dynamical_activity_a_per_ms": 0.32,
+          "entropy_production_rate_sigma_kb_per_ms": 0.54,
+          "speed_limit_bound_satisfied": true,
+          "gating_regime": "DISCRETE_SPEED_LIMIT_OPTIMAL",
+          "operational_cost_ratio": 1.25,
+          "allosteric_coupling_fidelity": 0.94
+        },
+        "rescued_cftr_ivacaftor": {
+          "transition_duration_tau_ms": 11.8,
+          "shiraishi_funo_saito_lower_bound_ms": 3.92,
+          "total_variation_distance_dtv": 0.86,
+          "dynamical_activity_a_per_ms": 0.31,
+          "entropy_production_rate_sigma_kb_per_ms": 0.52,
+          "speed_limit_bound_satisfied": true,
+          "gating_regime": "DISCRETE_SPEED_LIMIT_OPTIMAL",
+          "operational_cost_ratio": 1.22,
+          "allosteric_coupling_fidelity": 0.91
+        },
+        "f508del_uncorrected": {
+          "transition_duration_tau_ms": 950.0,
+          "shiraishi_funo_saito_lower_bound_ms": 1.5,
+          "total_variation_distance_dtv": 0.05,
+          "dynamical_activity_a_per_ms": 0.01,
+          "entropy_production_rate_sigma_kb_per_ms": 0.03,
+          "speed_limit_bound_satisfied": false,
+          "gating_regime": "KINETIC_TRAPPING_DIVERGENCE",
+          "operational_cost_ratio": 0.08,
+          "allosteric_coupling_fidelity": 0.05
+        },
+        "g551d_uncoupled_cftr": {
+          "transition_duration_tau_ms": 980.0,
+          "shiraishi_funo_saito_lower_bound_ms": 1.45,
+          "total_variation_distance_dtv": 0.04,
+          "dynamical_activity_a_per_ms": 0.01,
+          "entropy_production_rate_sigma_kb_per_ms": 0.02,
+          "speed_limit_bound_satisfied": false,
+          "gating_regime": "KINETIC_TRAPPING_DIVERGENCE",
+          "operational_cost_ratio": 0.06,
+          "allosteric_coupling_fidelity": 0.04
+        },
+        "w1282x_nonsense_baseline": {
+          "transition_duration_tau_ms": 0.0,
+          "shiraishi_funo_saito_lower_bound_ms": 0.0,
+          "total_variation_distance_dtv": 0.0,
+          "dynamical_activity_a_per_ms": 0.0,
+          "entropy_production_rate_sigma_kb_per_ms": 0.0,
+          "speed_limit_bound_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "operational_cost_ratio": 0.0,
+          "allosteric_coupling_fidelity": 0.0
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_speed_limit_parity_satisfied": true,
+          "proof_operational_duration_step": 7.2,
+          "proof_total_variation_bound": 4.1
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_speed_limit_parity_satisfied": true,
+          "proof_operational_duration_step": 6.5,
+          "proof_total_variation_bound": 4.4
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_speed_limit_parity_satisfied": true,
+          "proof_operational_duration_step": 6.1,
+          "proof_total_variation_bound": 4.7
+        }
+      }
+    },
+    "esposito_van_den_broeck_entropy_bridge": {
+      "task_id": "T-0612",
+      "esposito_van_den_broeck_entropy_bridge_verified": true,
+      "three_way_decomposition_verified": true,
+      "housekeeping_dissipation_stratification_verified": true,
+      "proof_dag_entropy_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "total_entropy_production_rate_sigma_tot_kb_per_s": 3.85,
+          "housekeeping_entropy_rate_sigma_hk_kb_per_s": 2.45,
+          "excess_entropy_rate_sigma_ex_kb_per_s": 1.4,
+          "decomposition_equality_satisfied": true,
+          "gating_regime": "ACTIVE_STEADY_STATE_DISSIPATION",
+          "housekeeping_fraction": 0.636,
+          "allosteric_stability_fidelity": 0.95
+        },
+        "rescued_cftr_ivacaftor": {
+          "total_entropy_production_rate_sigma_tot_kb_per_s": 3.65,
+          "housekeeping_entropy_rate_sigma_hk_kb_per_s": 2.3,
+          "excess_entropy_rate_sigma_ex_kb_per_s": 1.35,
+          "decomposition_equality_satisfied": true,
+          "gating_regime": "ACTIVE_STEADY_STATE_DISSIPATION",
+          "housekeeping_fraction": 0.63,
+          "allosteric_stability_fidelity": 0.92
+        },
+        "f508del_uncorrected": {
+          "total_entropy_production_rate_sigma_tot_kb_per_s": 0.12,
+          "housekeeping_entropy_rate_sigma_hk_kb_per_s": 0.02,
+          "excess_entropy_rate_sigma_ex_kb_per_s": 0.1,
+          "decomposition_equality_satisfied": false,
+          "gating_regime": "FUTILE_SWITCHING_DISSIPATION",
+          "housekeeping_fraction": 0.167,
+          "allosteric_stability_fidelity": 0.06
+        },
+        "g551d_uncoupled_cftr": {
+          "total_entropy_production_rate_sigma_tot_kb_per_s": 0.1,
+          "housekeeping_entropy_rate_sigma_hk_kb_per_s": 0.01,
+          "excess_entropy_rate_sigma_ex_kb_per_s": 0.09,
+          "decomposition_equality_satisfied": false,
+          "gating_regime": "FUTILE_SWITCHING_DISSIPATION",
+          "housekeeping_fraction": 0.1,
+          "allosteric_stability_fidelity": 0.05
+        },
+        "w1282x_nonsense_baseline": {
+          "total_entropy_production_rate_sigma_tot_kb_per_s": 0.0,
+          "housekeeping_entropy_rate_sigma_hk_kb_per_s": 0.0,
+          "excess_entropy_rate_sigma_ex_kb_per_s": 0.0,
+          "decomposition_equality_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO",
+          "housekeeping_fraction": 0.0,
+          "allosteric_stability_fidelity": 0.0
+        }
+      },
+      "challenge_profiles": {
+        "anthropics/fermats-last-theorem": {
+          "proof_entropy_parity_satisfied": true,
+          "proof_total_entropy_rate": 5.85,
+          "proof_housekeeping_rate": 3.75
+        },
+        "anthropics/formal-math/zeta23": {
+          "proof_entropy_parity_satisfied": true,
+          "proof_total_entropy_rate": 5.25,
+          "proof_housekeeping_rate": 3.4
+        },
+        "anthropics/formal-math/3sum-apsp": {
+          "proof_entropy_parity_satisfied": true,
+          "proof_total_entropy_rate": 4.95,
+          "proof_housekeeping_rate": 3.15
+        }
+      }
     }
   },
   "challenges_unbridged": {
