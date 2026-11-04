@@ -722,6 +722,12 @@ def evaluate_speck_seifert_housekeeping(n_gating_regimes: int = 5) -> Dict[str, 
     return evaluate_two_way_bridge_isomorphism()["speck_seifert_housekeeping_bridge"]
 
 
+def evaluate_polettini_esposito_cycle_decomposition(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["polettini_esposito_cycle_bridge"]
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Standalone CFTR Biophysics Bridge to Pinned Formal Proof Snapshot (T-0479)"

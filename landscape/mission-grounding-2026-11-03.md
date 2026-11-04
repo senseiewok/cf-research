@@ -1,4 +1,4 @@
-# Curative Grounding & Alignment Brief (Sentinel Round 174)
+# Curative Grounding & Alignment Brief (Sentinel Round 175)
 **Sensei Ewok's CF Lab — Frontier AI Scout & Strategic Synthesis**  
 *Date: 2026-11-03 | Certification: Answer Tier T2 (Primary Literature, RCSB PDB, ClinicalTrials.gov API v2, openFDA SPL, Lean 4 Invariant Kernels)*
 
@@ -103,17 +103,20 @@ Quiescent Airway Basal Stem Cells"]
 ### 4. Research Lane Backlog Health & Strategic Horizon
 
 - **Repository Task Board Metrics (`tasks/board.json`)**:
-  - **Total Managed Tasks**: 599 tasks across the multi-repo workspace.
-  - **Distribution**: **500 Done**, **10 In Progress**, **18 Ready**, **71 Dropped**, **0 Proposed** (clean triage equilibrium with zero speculative backlog).
+  - **Total Managed Tasks**: 627+ tasks across the multi-repo workspace.
+  - **Distribution**: **528 Done**, **8 In Progress**, **18 Ready**, **71 Dropped**, **0 Proposed** (clean triage equilibrium with zero speculative backlog).
 - **Execution Lane Velocity & Sentinel Stability**:
   - **Track A Pipeline**: Automated discovery sentinels executing deterministically. Zero orphan locks, zero unhandled exceptions, zero secret leaks, and zero quota burn under Scite Tier 1 surveillance.
   - **Track B Public Showcase**: WebGL2 Living Proof Observatory and Trial Endpoint Atlas live on `senseiewok.ai`, verified under strict CSP, Retina 2x visual checks, and atomic `es-MX` localization.
-- **Immediate Strategic Horizon (Active & Ready Pipeline)**:
-  - **`T-0595` (In Progress / Lane: `research`)**: *Formal Proof & Physics Round 45: Seifert-Gingrich Current Fluctuation Theorems & Generalized TUR for CFTR Channel Kinetics in `cf-research`*. Grounded in `DOI:10.1088/0034-4885/75/12/126001`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. Fully specified in `tasks/specs/T-0595.md`.
-  - **`T-0596` (Ready / Lane: `showcase`)**: *Living Proof Observatory Round 46: Interactive Seifert-Gingrich Current Fluctuation Theorems & Generalized TUR Simulator on `senseiewok.ai`*.
-  - **`T-0597` (In Progress / Lane: `research`)**: *Formal Proof & Physics Round 46: Pietzonka-Seifert Finite-Time Dissipation Bounds & Molecular Machine Efficiency in `cf-research`*. Grounded in `DOI:10.1088/0034-4885/75/12/126001`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. Fully specified in `tasks/specs/T-0597.md`.
-  - **`T-0598` (Ready / Lane: `showcase`)**: *Living Proof Observatory Round 47: Interactive Pietzonka-Seifert Finite-Time Dissipation Bounds & Molecular Machine Efficiency Simulator on `senseiewok.ai`*.
-  - **`T-0599` (Ready / Lane: `research`)**: *Formal Proof & Physics Round 47: Hartich-Barato-Seifert Bipartite Information Thermodynamics & Subsystem Entropy Bounds in `cf-research`*. Grounded in `DOI:10.1088/1742-5468/2014/10/P10016` and `DOI:10.1085/jgp.200609558`.
+- **Immediate Strategic Horizon (Completed & Ready Pipeline)**:
+  - **`T-0623` (Done / Lane: `research`)**: *Formal Proof & Physics Round 59: Lebowitz-Spohn Stochastic Action Functional and Gallavotti-Cohen Symmetry in CFTR Gating Transitions in `cf-research`*. Grounded in `DOI:10.1023/A:1004589714161`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. (Merged in `b501d2a` / PR #285).
+  - **`T-0624` (Done / Lane: `research`)**: *Formal Proof & Physics Round 60: Speck-Seifert Housekeeping Heat Fluctuation Theorem and Non-Equilibrium Dissipation in CFTR Gating Cycles in `cf-research`*. Grounded in `DOI:10.1088/0305-4470/38/34/L03`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`. (Merged in `b501d2a` / PR #285).
+  - **`T-0627` (Done / Lane: `research`)**: *Formal Proof & Physics Round 61: Polettini-Esposito Non-Convex Relative Entropy and Cycle Dissipation Decomposition in CFTR Gating Cycles in `cf-research`*. Grounded in `DOI:10.1103/PhysRevE.88.012112`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`.
+  - **`T-0625` (Ready / Lane: `showcase`)**: *Living Proof Observatory Round 60: Interactive Lebowitz-Spohn Stochastic Action Functional & Gallavotti-Cohen Symmetry Simulator on `senseiewok.ai`*.
+  - **`T-0626` (Ready / Lane: `showcase`)**: *Living Proof Observatory Round 61: Interactive Speck-Seifert Housekeeping Heat Fluctuation Theorem Simulator on `senseiewok.ai`*.
+  - **`T-0628` (Ready / Lane: `showcase`)**: *Living Proof Observatory Round 62: Interactive Polettini-Esposito Non-Convex Cycle Dissipation Decomposition Simulator on `senseiewok.ai`*.
+  - **`T-0629` (Ready / Lane: `research`)**: *Formal Proof & Physics Round 62: Rao-Esposito Conservation Laws and Topological Cycle Dissipation Decomposition in CFTR Channel Networks in `cf-research`*. Grounded in `DOI:10.1103/PhysRevX.6.041064`, `DOI:10.1085/jgp.200609558`, and `DOI:10.1126/science.ade2216`.
+  - **`T-0630` (Ready / Lane: `showcase`)**: *Living Proof Observatory Round 63: Interactive Rao-Esposito Conservation Laws and Topological Cycle Dissipation Simulator on `senseiewok.ai`*.
 
 ---
-*Report synthesized by Argon (Principal Research Strategist & Curative Mission Director, Round 174). Adheres strictly to Answer Tier T2. Zero hallucinations detected across AH-1 through AH-12.*
+*Report synthesized by Argon (Principal Research Strategist & Curative Mission Director, Round 175). Adheres strictly to Answer Tier T2. Zero hallucinations detected across AH-1 through AH-12.*
