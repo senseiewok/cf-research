@@ -63,6 +63,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_rao_esposito_conservation_laws,
     evaluate_manikandan_gupta_krishnamurthy_bounds,
     evaluate_wachtel_rao_esposito_coarse_graining,
+    evaluate_dechant_sasa_wasserstein_bounds,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -140,6 +141,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_rao_esposito_conservation_laws()["rao_esposito_conservation_bridge_verified"])
         self.assertTrue(evaluate_manikandan_gupta_krishnamurthy_bounds()["manikandan_gupta_krishnamurthy_bridge_verified"])
         self.assertTrue(evaluate_wachtel_rao_esposito_coarse_graining()["wachtel_rao_esposito_coarse_graining_bridge_verified"])
+        self.assertTrue(evaluate_dechant_sasa_wasserstein_bounds()["dechant_sasa_wasserstein_bounds_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])

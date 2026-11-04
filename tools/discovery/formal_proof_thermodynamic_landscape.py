@@ -61,6 +61,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Rao-Esposito non-equilibrium conservation laws and moiety decomposition in chemical reaction networks (Rao R, Esposito M Phys Rev X 2016, DOI: 10.1103/PhysRevX.6.041064; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Manikandan-Gupta-Krishnamurthy operational dissipation bounds & current fluctuations in non-equilibrium steady states (Manikandan SK, Gupta D, Krishnamurthy S Phys Rev Lett 2019, DOI: 10.1103/PhysRevLett.122.230601; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Wachtel-Rao-Esposito thermodynamically consistent coarse-graining & cycle affinity invariants in Markov jump networks (Wachtel A, Rao R, Esposito M Phys Rev Lett 2018, DOI: 10.1103/PhysRevLett.120.240602; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Dechant-Sasa Wasserstein distance bound on non-equilibrium transition dynamics & geometric fluctuation bounds in CFTR macromolecular transition manifolds (Dechant A, Sasa S J Stat Mech 2021, DOI: 10.1088/1742-5468/ac0b4e; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -747,6 +748,12 @@ def evaluate_wachtel_rao_esposito_coarse_graining(n_gating_regimes: int = 5) -> 
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["wachtel_rao_esposito_coarse_graining_bridge"]
+
+
+def evaluate_dechant_sasa_wasserstein_bounds(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["dechant_sasa_wasserstein_bounds_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
