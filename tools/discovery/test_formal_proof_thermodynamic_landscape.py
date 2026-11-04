@@ -53,6 +53,10 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_barato_hartich_seifert_dissipation,
     evaluate_horowitz_parrondo_feedback_control,
     evaluate_dechant_sasa_speed_limits,
+    evaluate_hatano_sasa_steady_state_thermodynamics,
+    evaluate_koyuk_seifert_cyclic_speed_dissipation,
+    evaluate_falasco_esposito_dissipation_time,
+    evaluate_dechant_sasa_fluctuation_response,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -120,6 +124,10 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_barato_hartich_seifert_dissipation()["barato_hartich_seifert_dissipation_bridge_verified"])
         self.assertTrue(evaluate_horowitz_parrondo_feedback_control()["horowitz_parrondo_feedback_control_bridge_verified"])
         self.assertTrue(evaluate_dechant_sasa_speed_limits()["dechant_sasa_speed_limits_bridge_verified"])
+        self.assertTrue(evaluate_hatano_sasa_steady_state_thermodynamics()["hatano_sasa_steady_state_bridge_verified"])
+        self.assertTrue(evaluate_koyuk_seifert_cyclic_speed_dissipation()["koyuk_seifert_cyclic_speed_bridge_verified"])
+        self.assertTrue(evaluate_falasco_esposito_dissipation_time()["falasco_esposito_dissipation_time_bridge_verified"])
+        self.assertTrue(evaluate_dechant_sasa_fluctuation_response()["dechant_sasa_fluctuation_response_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])

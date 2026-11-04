@@ -54,6 +54,8 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Dechant-Sasa thermodynamic speed limits & geometric bounds in CFTR gating (Dechant A, Sasa S J Stat Mech 2021, DOI: 10.1088/1742-5468/ac0b4e; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Shiraishi-Funo-Saito universal thermodynamic speed limits & operational cost bounds in CFTR gating (Shiraishi N, Funo K, Saito K Phys Rev Lett 2018, DOI: 10.1103/PhysRevLett.121.070601; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Esposito-Van den Broeck three-way entropy production decomposition & housekeeping dissipation in CFTR gating (Esposito M, Van den Broeck C Phys Rev Lett 2010, DOI: 10.1103/PhysRevLett.104.090601; Phys Rev E 2010, DOI: 10.1103/PhysRevE.82.011143; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Falasco-Esposito dissipation-time uncertainty relation in driven systems (Falasco G, Esposito M Phys Rev Lett 2020, DOI: 10.1103/PhysRevLett.125.120604; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Dechant-Sasa fluctuation-response inequality out of equilibrium (Dechant A, Sasa S Proc Natl Acad Sci USA 2020, DOI: 10.1073/pnas.1918386117; Seifert U Rep Prog Phys 2012, DOI: 10.1088/0034-4885/75/12/126001; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -692,6 +694,18 @@ def evaluate_koyuk_seifert_cyclic_speed_dissipation(n_gating_regimes: int = 5) -
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["koyuk_seifert_cyclic_speed_bridge"]
+
+
+def evaluate_falasco_esposito_dissipation_time(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["falasco_esposito_dissipation_time_bridge"]
+
+
+def evaluate_dechant_sasa_fluctuation_response(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["dechant_sasa_fluctuation_response_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
