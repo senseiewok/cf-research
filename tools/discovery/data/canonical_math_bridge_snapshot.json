@@ -7554,6 +7554,119 @@
           "metric_space_optimal_transport_isomorphism": "Lean 4 MetricSpace (Mathlib.Topology.MetricSpace) Wasserstein-1 Kantorovich-Rubinstein duality"
         }
       }
+    },
+    "polettini_geometric_gauge_decomposition_bridge": {
+      "task_id": "T-0636",
+      "polettini_geometric_gauge_decomposition_bridge_verified": true,
+      "gauge_decomposition_exact_verified": true,
+      "cycle_dissipation_nonnegative_verified": true,
+      "relative_entropy_nonconvexity_verified": true,
+      "proof_dag_simplicial_homology_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "sigma_tot_s": 20.15,
+          "sigma_cyc_s": 19.344,
+          "sigma_gauge_s": 0.806,
+          "cycle_dissipation_ratio": 0.96,
+          "cycle_flux_j_cyc": 0.84,
+          "cycle_affinity_a_cyc": 23.0286,
+          "gauge_relative_entropy_d_rel": 0.42,
+          "polettini_gauge_decomposition_satisfied": true,
+          "allosteric_coupling_fidelity": 0.96,
+          "gating_regime": "TIGHT_CYC_DOMINATED_METABOLIC_POWER_STROKE"
+        },
+        "rescued_cftr_ivacaftor": {
+          "sigma_tot_s": 19.85,
+          "sigma_cyc_s": 18.262,
+          "sigma_gauge_s": 1.588,
+          "cycle_dissipation_ratio": 0.92,
+          "cycle_flux_j_cyc": 0.8,
+          "cycle_affinity_a_cyc": 22.8275,
+          "gauge_relative_entropy_d_rel": 0.48,
+          "polettini_gauge_decomposition_satisfied": true,
+          "allosteric_coupling_fidelity": 0.92,
+          "gating_regime": "TIGHT_CYC_DOMINATED_METABOLIC_POWER_STROKE"
+        },
+        "f508del_uncorrected": {
+          "sigma_tot_s": 1.25,
+          "sigma_cyc_s": 0.1,
+          "sigma_gauge_s": 1.15,
+          "cycle_dissipation_ratio": 0.08,
+          "cycle_flux_j_cyc": 0.012,
+          "cycle_affinity_a_cyc": 8.3333,
+          "gauge_relative_entropy_d_rel": 1.85,
+          "polettini_gauge_decomposition_satisfied": true,
+          "allosteric_coupling_fidelity": 0.08,
+          "gating_regime": "FUTILE_DISSIPATION_GAUGE_COLLAPSE"
+        },
+        "g551d_uncoupled_cftr": {
+          "sigma_tot_s": 1.15,
+          "sigma_cyc_s": 0.069,
+          "sigma_gauge_s": 1.081,
+          "cycle_dissipation_ratio": 0.06,
+          "cycle_flux_j_cyc": 0.009,
+          "cycle_affinity_a_cyc": 7.6667,
+          "gauge_relative_entropy_d_rel": 1.92,
+          "polettini_gauge_decomposition_satisfied": true,
+          "allosteric_coupling_fidelity": 0.06,
+          "gating_regime": "FUTILE_DISSIPATION_GAUGE_COLLAPSE"
+        },
+        "w1282x_nonsense_baseline": {
+          "sigma_tot_s": 0.0,
+          "sigma_cyc_s": 0.0,
+          "sigma_gauge_s": 0.0,
+          "cycle_dissipation_ratio": 0.0,
+          "cycle_flux_j_cyc": 0.0,
+          "cycle_affinity_a_cyc": 0.0,
+          "gauge_relative_entropy_d_rel": 0.0,
+          "polettini_gauge_decomposition_satisfied": true,
+          "allosteric_coupling_fidelity": 0.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "fermats_last_theorem": {
+          "sigma_tot": 12.8,
+          "sigma_cyc": 11.52,
+          "sigma_gauge": 1.28,
+          "cycle_dissipation_ratio": 0.9,
+          "simplicial_homology_cycle_rank": 5,
+          "polettini_gauge_decomposition_satisfied": true,
+          "parity_verified": true,
+          "simplicial_complex_homology_isomorphism": "Lean 4 Mathlib.Algebra.Homology.Complex Simplicial Boundary Hodge-Helmholtz Ker(d) + Im(d*)"
+        },
+        "formal_math_zeta23": {
+          "sigma_tot": 10.4,
+          "sigma_cyc": 9.152,
+          "sigma_gauge": 1.248,
+          "cycle_dissipation_ratio": 0.88,
+          "simplicial_homology_cycle_rank": 3,
+          "polettini_gauge_decomposition_satisfied": true,
+          "parity_verified": true,
+          "simplicial_complex_homology_isomorphism": "Lean 4 Mathlib.Algebra.Homology.Complex Simplicial Boundary Hodge-Helmholtz Ker(d) + Im(d*)"
+        },
+        "formal_math_3sum_apsp": {
+          "sigma_tot": 9.6,
+          "sigma_cyc": 8.16,
+          "sigma_gauge": 1.44,
+          "cycle_dissipation_ratio": 0.85,
+          "simplicial_homology_cycle_rank": 4,
+          "polettini_gauge_decomposition_satisfied": true,
+          "parity_verified": true,
+          "simplicial_complex_homology_isomorphism": "Lean 4 Mathlib.Algebra.Homology.Complex Simplicial Boundary Hodge-Helmholtz Ker(d) + Im(d*)"
+        },
+        "formal_math_eth": {
+          "sigma_tot": 9.8,
+          "sigma_cyc": 8.33,
+          "sigma_gauge": 1.47,
+          "cycle_dissipation_ratio": 0.85,
+          "simplicial_homology_cycle_rank": 3,
+          "polettini_gauge_decomposition_satisfied": true,
+          "parity_verified": true,
+          "simplicial_complex_homology_isomorphism": "Lean 4 Mathlib.Algebra.Homology.Complex Simplicial Boundary Hodge-Helmholtz Ker(d) + Im(d*)"
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -9348,5 +9461,5 @@
       }
     ]
   },
-  "snapshot_sha256": "a861afca03af3b88c5c64d5070727e1336fe341ffedeacfd6b1828d88d0b02ce"
+  "snapshot_sha256": "ca82b447df1bcec92758f6f588580dddd8feca2a1cbab5e428fa12c547264439"
 }
