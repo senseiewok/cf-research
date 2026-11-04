@@ -682,6 +682,18 @@ def evaluate_esposito_van_den_broeck_entropy(n_gating_regimes: int = 5) -> Dict[
     return evaluate_two_way_bridge_isomorphism()["esposito_van_den_broeck_entropy_bridge"]
 
 
+def evaluate_hatano_sasa_steady_state_thermodynamics(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["hatano_sasa_steady_state_bridge"]
+
+
+def evaluate_koyuk_seifert_cyclic_speed_dissipation(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["koyuk_seifert_cyclic_speed_bridge"]
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Standalone CFTR Biophysics Bridge to Pinned Formal Proof Snapshot (T-0479)"
