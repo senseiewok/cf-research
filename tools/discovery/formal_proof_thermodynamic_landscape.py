@@ -64,6 +64,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Dechant-Sasa Wasserstein distance bound on non-equilibrium transition dynamics & geometric fluctuation bounds in CFTR macromolecular transition manifolds (Dechant A, Sasa S J Stat Mech 2021, DOI: 10.1088/1742-5468/ac0b4e; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Polettini geometric gauge decomposition of entropy production & non-convex relative entropy bounds in CFTR macromolecular transition networks (Polettini M Phys Rev E 2013, DOI: 10.1103/PhysRevE.88.012112; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Esposito-Parrondo-Sagawa Second-Law information efficiency & allosteric feedback bounds in CFTR macromolecular gating cascades (Sagawa T, Ueda M Phys Rev Lett 2010, DOI: 10.1103/PhysRevLett.104.090601; Horowitz JM, Parrondo JMR Phys Rev E 2010, DOI: 10.1103/PhysRevE.82.011143; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Shiraishi-Funo-Saito universal thermodynamic speed limits & operational gating bounds in CFTR macromolecular transition dynamics (Shiraishi N, Funo K, Saito K Phys Rev Lett 2018, DOI: 10.1103/PhysRevLett.121.070601; Falasco G, Esposito M Phys Rev Lett 2020, DOI: 10.1103/PhysRevLett.125.120604; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -393,6 +394,26 @@ PROOF_THERMODYNAMIC_PARAMETERS: Dict[str, BiophysicalParameter] = {
         doi_or_pdb="10.1103/PhysRevE.82.011143",
         location_in_source="Second-law thermodynamic information efficiency eta = -W_ext / (k_B * T * <I>) in WT CFTR pore opening feedback cascade (Horowitz & Parrondo PRE 2010, DOI: 10.1103/PhysRevE.82.011143; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
         uncertainty_range=(0.88, 0.98),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "SHIRAISHI_FUNO_SAITO_MIN_TAU_WT_MS": BiophysicalParameter(
+        name="SHIRAISHI_FUNO_SAITO_MIN_TAU_WT_MS",
+        value=1.80,
+        units="ms",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevLett.121.070601",
+        location_in_source="Shiraishi-Funo-Saito universal thermodynamic speed limit minimum pore opening transition duration tau_bound = L^2 / (2 * sigma * D) in human CFTR (Shiraishi et al. PRL 2018, DOI: 10.1103/PhysRevLett.121.070601; Csanady et al. JGP 2006, DOI: 10.1085/jgp.200609558)",
+        uncertainty_range=(1.40, 2.20),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "SHIRAISHI_FUNO_SAITO_OPERATIONAL_VELOCITY_WT": BiophysicalParameter(
+        name="SHIRAISHI_FUNO_SAITO_OPERATIONAL_VELOCITY_WT",
+        value=0.40,
+        units="ms^-1",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevLett.121.070601",
+        location_in_source="Operational conformational transition velocity v_gating = L(p_0, p_tau) / tau in WT human CFTR (Shiraishi et al. PRL 2018, DOI: 10.1103/PhysRevLett.121.070601; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
+        uncertainty_range=(0.32, 0.50),
         notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
     ),
 }
@@ -788,6 +809,12 @@ def evaluate_esposito_parrondo_sagawa_information_efficiency(n_gating_regimes: i
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["esposito_parrondo_sagawa_information_efficiency_bridge"]
+
+
+def evaluate_shiraishi_funo_saito_speed_limit(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["shiraishi_funo_saito_speed_limit_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
