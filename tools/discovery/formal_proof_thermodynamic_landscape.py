@@ -66,6 +66,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Esposito-Parrondo-Sagawa Second-Law information efficiency & allosteric feedback bounds in CFTR macromolecular gating cascades (Sagawa T, Ueda M Phys Rev Lett 2010, DOI: 10.1103/PhysRevLett.104.090601; Horowitz JM, Parrondo JMR Phys Rev E 2010, DOI: 10.1103/PhysRevE.82.011143; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Shiraishi-Funo-Saito universal thermodynamic speed limits & operational gating bounds in CFTR macromolecular transition dynamics (Shiraishi N, Funo K, Saito K Phys Rev Lett 2018, DOI: 10.1103/PhysRevLett.121.070601; Falasco G, Esposito M Phys Rev Lett 2020, DOI: 10.1103/PhysRevLett.125.120604; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Koyuk-Seifert thermodynamic speed bounds on biochemical clocks & cyclic CFTR macromolecular oscillations (Koyuk T, Seifert U Phys Rev Lett 2020, DOI: 10.1103/PhysRevLett.125.260604; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Falasco-Esposito dissipation-time uncertainty relations & gating precision trade-offs in driven CFTR catalytic assemblies (Falasco G, Esposito M Phys Rev Lett 2020, DOI: 10.1103/PhysRevLett.125.120604; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -435,6 +436,26 @@ PROOF_THERMODYNAMIC_PARAMETERS: Dict[str, BiophysicalParameter] = {
         doi_or_pdb="10.1103/PhysRevLett.125.260604",
         location_in_source="Koyuk-Seifert thermodynamic speed bound on maximum angular oscillation frequency omega_cycle <= sigma_diss / (4 * pi * N_eff) in WT human CFTR (Koyuk & Seifert PRL 2020, DOI: 10.1103/PhysRevLett.125.260604; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
         uncertainty_range=(0.60, 0.98),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "FALASCO_ESPOSITO_OBSERVATION_TIME_WT_MS": BiophysicalParameter(
+        name="FALASCO_ESPOSITO_OBSERVATION_TIME_WT_MS",
+        value=25.0,
+        units="ms",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevLett.125.120604",
+        location_in_source="Falasco-Esposito dissipation-time uncertainty relation minimal observation time tau_obs for driven WT CFTR catalytic gating transitions (Falasco & Esposito PRL 2020, DOI: 10.1103/PhysRevLett.125.120604; Csanady et al. JGP 2006, DOI: 10.1085/jgp.200609558)",
+        uncertainty_range=(20.0, 32.0),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "FALASCO_ESPOSITO_PRECISION_BOUND_WT": BiophysicalParameter(
+        name="FALASCO_ESPOSITO_PRECISION_BOUND_WT",
+        value=4.20,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevLett.125.120604",
+        location_in_source="Falasco-Esposito precision trade-off lower bound |Delta A|^2 / (2 * D_A) for WT CFTR gating observable resolution (Falasco & Esposito PRL 2020, DOI: 10.1103/PhysRevLett.125.120604; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
+        uncertainty_range=(3.20, 5.25),
         notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
     ),
 }
@@ -842,6 +863,12 @@ def evaluate_koyuk_seifert_biochemical_clock_speed(n_gating_regimes: int = 5) ->
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["koyuk_seifert_biochemical_clock_speed_bridge"]
+
+
+def evaluate_falasco_esposito_dissipation_time_uncertainty(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["falasco_esposito_dissipation_time_uncertainty_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:

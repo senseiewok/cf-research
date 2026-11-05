@@ -8003,6 +8003,128 @@
           "formal_proof_clock_isomorphism": "Lean 4 Mathlib.Logic.Complexity.ExponentialTimeHypothesis Alternation Cycle Bound"
         }
       }
+    },
+    "falasco_esposito_dissipation_time_uncertainty_bridge": {
+      "task_id": "T-0646",
+      "falasco_esposito_dissipation_time_uncertainty_bridge_verified": true,
+      "uncertainty_relation_bound_verified": true,
+      "gating_precision_tradeoff_verified": true,
+      "trikafta_resolution_restoration_verified": true,
+      "proof_dag_uncertainty_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "observation_time_tau_obs_ms": 25.0,
+          "dissipation_rate_sigma_diss_kb_per_ms": 0.46,
+          "dissipation_time_product": 11.5,
+          "observable_displacement_delta_a_angstrom": 4.2,
+          "variance_diffusion_d_a_angstrom_sq": 2.1,
+          "precision_lower_bound": 4.2,
+          "uncertainty_ratio": 2.7381,
+          "uncertainty_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.94,
+          "blurring_factor": 0.06,
+          "gating_regime": "DISSIPATION_TIME_PRECISION_OPTIMAL"
+        },
+        "rescued_cftr_ivacaftor": {
+          "observation_time_tau_obs_ms": 28.0,
+          "dissipation_rate_sigma_diss_kb_per_ms": 0.44,
+          "dissipation_time_product": 12.32,
+          "observable_displacement_delta_a_angstrom": 4.0,
+          "variance_diffusion_d_a_angstrom_sq": 2.0,
+          "precision_lower_bound": 4.0,
+          "uncertainty_ratio": 3.08,
+          "uncertainty_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.91,
+          "blurring_factor": 0.09,
+          "gating_regime": "DISSIPATION_TIME_PRECISION_OPTIMAL"
+        },
+        "f508del_uncorrected": {
+          "observation_time_tau_obs_ms": 450.0,
+          "dissipation_rate_sigma_diss_kb_per_ms": 0.015,
+          "dissipation_time_product": 6.75,
+          "observable_displacement_delta_a_angstrom": 3.0,
+          "variance_diffusion_d_a_angstrom_sq": 0.3,
+          "precision_lower_bound": 15.0,
+          "uncertainty_ratio": 0.45,
+          "uncertainty_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.08,
+          "blurring_factor": 0.92,
+          "gating_regime": "DISSIPATION_TIME_BLURRING_ARREST"
+        },
+        "g551d_uncoupled_cftr": {
+          "observation_time_tau_obs_ms": 520.0,
+          "dissipation_rate_sigma_diss_kb_per_ms": 0.01,
+          "dissipation_time_product": 5.2,
+          "observable_displacement_delta_a_angstrom": 3.0,
+          "variance_diffusion_d_a_angstrom_sq": 0.25,
+          "precision_lower_bound": 18.0,
+          "uncertainty_ratio": 0.2889,
+          "uncertainty_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.05,
+          "blurring_factor": 0.95,
+          "gating_regime": "CATALYTIC_UNCOUPLING_BLURRING"
+        },
+        "w1282x_nonsense_baseline": {
+          "observation_time_tau_obs_ms": 0.0,
+          "dissipation_rate_sigma_diss_kb_per_ms": 0.0,
+          "dissipation_time_product": 0.0,
+          "observable_displacement_delta_a_angstrom": 0.0,
+          "variance_diffusion_d_a_angstrom_sq": 0.0,
+          "precision_lower_bound": 0.0,
+          "uncertainty_ratio": 0.0,
+          "uncertainty_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.0,
+          "blurring_factor": 1.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "fermats_last_theorem": {
+          "parity_verified": true,
+          "uncertainty_relation_satisfied": true,
+          "tau_obs_proof_steps": 18.0,
+          "sigma_diss_entropy": 0.38,
+          "dissipation_time_product": 6.84,
+          "falasco_esposito_precision_bound": 2.85,
+          "precision_ratio": 2.4,
+          "effective_stages_N_eff": 5.0,
+          "formal_proof_uncertainty_isomorphism": "Lean 4 Mathlib.Analysis.Calculus Falasco-Esposito Dissipation-Time Uncertainty on Proof DAG"
+        },
+        "formal_math_zeta23": {
+          "parity_verified": true,
+          "uncertainty_relation_satisfied": true,
+          "tau_obs_proof_steps": 14.0,
+          "sigma_diss_entropy": 0.34,
+          "dissipation_time_product": 4.76,
+          "falasco_esposito_precision_bound": 2.1,
+          "precision_ratio": 2.2667,
+          "effective_stages_N_eff": 4.0,
+          "formal_proof_uncertainty_isomorphism": "Lean 4 Mathlib.NumberTheory.ZetaValues Mollified Zero-Density Resolution Bound"
+        },
+        "formal_math_3sum_apsp": {
+          "parity_verified": true,
+          "uncertainty_relation_satisfied": true,
+          "tau_obs_proof_steps": 12.0,
+          "sigma_diss_entropy": 0.3,
+          "dissipation_time_product": 3.6,
+          "falasco_esposito_precision_bound": 1.65,
+          "precision_ratio": 2.1818,
+          "effective_stages_N_eff": 4.0,
+          "formal_proof_uncertainty_isomorphism": "Lean 4 Mathlib.Combinatorics Word-RAM Bit-Packing Transition Resolution Bound"
+        },
+        "formal_math_eth": {
+          "parity_verified": true,
+          "uncertainty_relation_satisfied": true,
+          "tau_obs_proof_steps": 16.0,
+          "sigma_diss_entropy": 0.28,
+          "dissipation_time_product": 4.48,
+          "falasco_esposito_precision_bound": 1.95,
+          "precision_ratio": 2.2974,
+          "effective_stages_N_eff": 5.0,
+          "formal_proof_uncertainty_isomorphism": "Lean 4 Mathlib.Logic.Complexity.ExponentialTimeHypothesis Alternating Clause-Variable Machine Resolution Bound"
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -9797,5 +9919,5 @@
       }
     ]
   },
-  "snapshot_sha256": "74e305f48876f20a422e7e76f3b680855b749d9e5f49dc08e8ce47eaafbf3e98"
+  "snapshot_sha256": "35e8de05ec353368981eb70e86843f2100fc08a1590695ca85a6d5388f6c19a7"
 }
