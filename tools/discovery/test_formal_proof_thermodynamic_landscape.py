@@ -69,6 +69,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_shiraishi_funo_saito_speed_limit,
     evaluate_koyuk_seifert_biochemical_clock_speed,
     evaluate_falasco_esposito_dissipation_time_uncertainty,
+    evaluate_van_vu_hasegawa_thermodynamic_uncertainty,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -152,6 +153,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_shiraishi_funo_saito_speed_limit()["shiraishi_funo_saito_speed_limit_bridge_verified"])
         self.assertTrue(evaluate_koyuk_seifert_biochemical_clock_speed()["koyuk_seifert_clock_speed_bridge_verified"])
         self.assertTrue(evaluate_falasco_esposito_dissipation_time_uncertainty()["falasco_esposito_dissipation_time_uncertainty_bridge_verified"])
+        self.assertTrue(evaluate_van_vu_hasegawa_thermodynamic_uncertainty()["van_vu_hasegawa_thermodynamic_uncertainty_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])
