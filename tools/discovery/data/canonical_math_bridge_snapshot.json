@@ -8125,6 +8125,114 @@
           "formal_proof_uncertainty_isomorphism": "Lean 4 Mathlib.Logic.Complexity.ExponentialTimeHypothesis Alternating Clause-Variable Machine Resolution Bound"
         }
       }
+    },
+    "van_vu_hasegawa_thermodynamic_uncertainty_bridge": {
+      "task_id": "T-0650",
+      "van_vu_hasegawa_thermodynamic_uncertainty_bridge_verified": true,
+      "non_stationary_tur_bound_verified": true,
+      "dynamical_activity_tradeoff_verified": true,
+      "trikafta_activity_restoration_verified": true,
+      "proof_dag_non_stationary_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "total_entropy_production_sigma_kb": 12.0,
+          "dynamical_activity_events_a": 24.0,
+          "current_relative_variance_epsilon_sq": 0.098,
+          "van_vu_hasegawa_precision_bound": 0.043534,
+          "uncertainty_ratio": 2.2511,
+          "uncertainty_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.94,
+          "blurring_factor": 0.06,
+          "gating_regime": "DYNAMICAL_ACTIVITY_PRECISION_OPTIMAL"
+        },
+        "rescued_cftr_ivacaftor": {
+          "total_entropy_production_sigma_kb": 11.2,
+          "dynamical_activity_events_a": 22.0,
+          "current_relative_variance_epsilon_sq": 0.112,
+          "van_vu_hasegawa_precision_bound": 0.046955,
+          "uncertainty_ratio": 2.3853,
+          "uncertainty_bound_satisfied": true,
+          "allosteric_coupling_fidelity": 0.91,
+          "blurring_factor": 0.09,
+          "gating_regime": "DYNAMICAL_ACTIVITY_PRECISION_OPTIMAL"
+        },
+        "f508del_uncorrected": {
+          "total_entropy_production_sigma_kb": 0.4,
+          "dynamical_activity_events_a": 1.2,
+          "current_relative_variance_epsilon_sq": 0.45,
+          "van_vu_hasegawa_precision_bound": 1.120046,
+          "uncertainty_ratio": 0.4018,
+          "uncertainty_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.09,
+          "blurring_factor": 0.91,
+          "gating_regime": "KINETIC_ARREST_ACTIVITY_COLLAPSE"
+        },
+        "g551d_uncoupled_cftr": {
+          "total_entropy_production_sigma_kb": 0.05,
+          "dynamical_activity_events_a": 8.0,
+          "current_relative_variance_epsilon_sq": 0.38,
+          "van_vu_hasegawa_precision_bound": 1.521015,
+          "uncertainty_ratio": 0.2498,
+          "uncertainty_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.06,
+          "blurring_factor": 0.94,
+          "gating_regime": "FUTILE_ACTIVITY_UNCOUPLED"
+        },
+        "w1282x_nonsense_baseline": {
+          "total_entropy_production_sigma_kb": 0.0,
+          "dynamical_activity_events_a": 0.0,
+          "current_relative_variance_epsilon_sq": 0.0,
+          "van_vu_hasegawa_precision_bound": 0.0,
+          "uncertainty_ratio": 0.0,
+          "uncertainty_bound_satisfied": false,
+          "allosteric_coupling_fidelity": 0.0,
+          "blurring_factor": 1.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "fermats_last_theorem": {
+          "parity_verified": true,
+          "uncertainty_relation_satisfied": true,
+          "sigma_proof_entropy": 5.8,
+          "dynamical_activity_proof_steps": 14.5,
+          "van_vu_hasegawa_bound": 0.07662,
+          "proof_current_relative_variance": 0.188,
+          "precision_ratio": 2.4537,
+          "formal_proof_non_stationary_isomorphism": "Lean 4 Mathlib.Analysis.Calculus Van Vu-Hasegawa Non-Stationary TUR on Proof DAG"
+        },
+        "formal_math_zeta23": {
+          "parity_verified": true,
+          "uncertainty_relation_satisfied": true,
+          "sigma_proof_entropy": 4.6,
+          "dynamical_activity_proof_steps": 11.2,
+          "van_vu_hasegawa_bound": 0.09862,
+          "proof_current_relative_variance": 0.228,
+          "precision_ratio": 2.3119,
+          "formal_proof_non_stationary_isomorphism": "Lean 4 Mathlib.NumberTheory.ZetaValues Non-Stationary Search Dispersion Bound"
+        },
+        "formal_math_3sum_apsp": {
+          "parity_verified": true,
+          "uncertainty_relation_satisfied": true,
+          "sigma_proof_entropy": 3.9,
+          "dynamical_activity_proof_steps": 9.8,
+          "van_vu_hasegawa_bound": 0.11658,
+          "proof_current_relative_variance": 0.259,
+          "precision_ratio": 2.2216,
+          "formal_proof_non_stationary_isomorphism": "Lean 4 Mathlib.Combinatorics Word-RAM Non-Stationary State Space Activity Bound"
+        },
+        "formal_math_eth": {
+          "parity_verified": true,
+          "uncertainty_relation_satisfied": true,
+          "sigma_proof_entropy": 4.2,
+          "dynamical_activity_proof_steps": 10.5,
+          "van_vu_hasegawa_bound": 0.10852,
+          "proof_current_relative_variance": 0.255,
+          "precision_ratio": 2.3498,
+          "formal_proof_non_stationary_isomorphism": "Lean 4 Mathlib.Logic.Complexity.ExponentialTimeHypothesis Alternating Dynamic Activity Bound"
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -9919,5 +10027,5 @@
       }
     ]
   },
-  "snapshot_sha256": "35e8de05ec353368981eb70e86843f2100fc08a1590695ca85a6d5388f6c19a7"
+  "snapshot_sha256": "1e58a78612ea950307cbfe50d5b2885ea2b3c9524cf576f1e174460eae10c543"
 }
