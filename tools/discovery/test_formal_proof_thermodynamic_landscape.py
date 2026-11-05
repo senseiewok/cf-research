@@ -66,6 +66,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_dechant_sasa_wasserstein_bounds,
     evaluate_polettini_geometric_gauge_decomposition,
     evaluate_esposito_parrondo_sagawa_information_efficiency,
+    evaluate_shiraishi_funo_saito_speed_limit,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -146,6 +147,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_dechant_sasa_wasserstein_bounds()["dechant_sasa_wasserstein_bounds_bridge_verified"])
         self.assertTrue(evaluate_polettini_geometric_gauge_decomposition()["polettini_geometric_gauge_decomposition_bridge_verified"])
         self.assertTrue(evaluate_esposito_parrondo_sagawa_information_efficiency()["esposito_parrondo_sagawa_information_efficiency_bridge_verified"])
+        self.assertTrue(evaluate_shiraishi_funo_saito_speed_limit()["shiraishi_funo_saito_speed_limit_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])
