@@ -68,6 +68,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Koyuk-Seifert thermodynamic speed bounds on biochemical clocks & cyclic CFTR macromolecular oscillations (Koyuk T, Seifert U Phys Rev Lett 2020, DOI: 10.1103/PhysRevLett.125.260604; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Falasco-Esposito dissipation-time uncertainty relations & gating precision trade-offs in driven CFTR catalytic assemblies (Falasco G, Esposito M Phys Rev Lett 2020, DOI: 10.1103/PhysRevLett.125.120604; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Van Vu-Hasegawa thermodynamic uncertainty relations & dynamical activity bounds in arbitrarily driven CFTR catalytic assemblies (Van Vu T, Hasegawa Y Phys Rev Research 2020, DOI: 10.1103/PhysRevResearch.2.013060; Van Vu T, Hasegawa Y Phys Rev Lett 2021, DOI: 10.1103/PhysRevLett.126.010601; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Gingrich-Horowitz finite-time thermodynamic uncertainty relations & current precision bounds in CFTR catalytic assemblies (Gingrich TR et al. Phys Rev Lett 2016, DOI: 10.1103/PhysRevLett.116.120601; Horowitz JM, Gingrich TR Nat Phys 2020, DOI: 10.1038/s41567-019-0702-6; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -876,6 +877,12 @@ def evaluate_van_vu_hasegawa_thermodynamic_uncertainty(n_gating_regimes: int = 5
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["van_vu_hasegawa_thermodynamic_uncertainty_bridge"]
+
+
+def evaluate_gingrich_horowitz_thermodynamic_uncertainty(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["gingrich_horowitz_thermodynamic_uncertainty_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
