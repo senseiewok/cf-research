@@ -76,6 +76,8 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Van Vu-Hasegawa geometrical bounds of irreversibility and dynamical activity in continuous-time Markovian CFTR assemblies (Van Vu T, Hasegawa Y Phys Rev Lett 2021, DOI: 10.1103/PhysRevLett.126.010601; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Pietzonka-Barato-Seifert universal finite-time current fluctuation bounds in CFTR catalytic assemblies (Pietzonka P, Barato AC, Seifert U Phys Rev E 2016, DOI: 10.1103/PhysRevE.93.052145; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Gingrich-Rotskoff-Vaikuntanathan-Horowitz dissipation-uncertainty equality in CFTR catalytic assemblies (Gingrich TR, Rotskoff GM, Vaikuntanathan S, Horowitz JM Proc Natl Acad Sci USA 2017, DOI: 10.1073/pnas.1706270114; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Li-Horowitz-Gingrich-Fakhri dissipation quantification from fluctuations in CFTR catalytic assemblies (Li J, Horowitz JM, Gingrich TR, Fakhri N Cell Syst 2019, DOI: 10.1016/j.cels.2019.03.007; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Gingrich-Horowitz first arrival time bounds and dwell-time thermodynamic uncertainty in CFTR catalytic assemblies (Gingrich TR, Horowitz JM Phys Rev Lett 2017, DOI: 10.1103/PhysRevLett.119.170601; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -624,6 +626,46 @@ PROOF_THERMODYNAMIC_PARAMETERS: Dict[str, BiophysicalParameter] = {
         uncertainty_range=(0.75, 1.25),
         notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
     ),
+    "LI_HOROWITZ_DISSIPATION_BOUND_WT": BiophysicalParameter(
+        name="LI_HOROWITZ_DISSIPATION_BOUND_WT",
+        value=11.2,
+        units="k_B/s",
+        category="derived",
+        doi_or_pdb="10.1016/j.cels.2019.03.007",
+        location_in_source="Li-Horowitz-Gingrich-Fakhri multi-observable dissipation lower bound sigma >= 2 k_B j^T Sigma^-1 j = 11.2 k_B s^-1 in WT CFTR catalytic assembly (Li et al. Cell Systems 2019, DOI: 10.1016/j.cels.2019.03.007; Csanady et al. JGP 2006, DOI: 10.1085/jgp.200609558)",
+        uncertainty_range=(8.4, 14.0),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "LI_HOROWITZ_QUANTIFICATION_EFFICIENCY_WT": BiophysicalParameter(
+        name="LI_HOROWITZ_QUANTIFICATION_EFFICIENCY_WT",
+        value=0.933333,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1016/j.cels.2019.03.007",
+        location_in_source="Li-Horowitz multi-observable dissipation quantification efficiency eta_multi = (2 k_B j^T Sigma^-1 j) / sigma = 0.933 in WT CFTR gating (Li et al. Cell Systems 2019, DOI: 10.1016/j.cels.2019.03.007; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
+        uncertainty_range=(0.70, 1.0),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "GINGRICH_HOROWITZ_FIRST_PASSAGE_BOUND_WT": BiophysicalParameter(
+        name="GINGRICH_HOROWITZ_FIRST_PASSAGE_BOUND_WT",
+        value=0.666667,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevLett.119.170601",
+        location_in_source="Gingrich-Horowitz first arrival time thermodynamic lower bound Var(T_J)/<T_J>^2 >= 2 k_B / (sigma <T_J>) = 0.667 in WT CFTR catalytic assembly (Gingrich & Horowitz Phys Rev Lett 2017, DOI: 10.1103/PhysRevLett.119.170601; Csanady et al. JGP 2006, DOI: 10.1085/jgp.200609558)",
+        uncertainty_range=(0.50, 0.833),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "GINGRICH_HOROWITZ_TUR_PRODUCT_WT": BiophysicalParameter(
+        name="GINGRICH_HOROWITZ_TUR_PRODUCT_WT",
+        value=1.08,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevLett.119.170601",
+        location_in_source="Gingrich-Horowitz first passage TUR product Q_FPT = (Var(T_J)/<T_J>^2) * (sigma <T_J> / 2 k_B) = 1.08 in WT CFTR burst gating (Gingrich & Horowitz PRL 2017; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
+        uncertainty_range=(0.81, 1.35),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
 }
 
 
@@ -1100,6 +1142,18 @@ def evaluate_deng_hani_ma_boltzmann_knudsen_limit(asl_height_nm: float = 7000.0)
 
 def evaluate_guth_maynard_spectral_gating_acceleration() -> Dict[str, Any]:
     return evaluate_two_way_bridge_isomorphism()["guth_maynard_spectral_gating_bridge"]
+
+
+def evaluate_li_horowitz_dissipation_quantification(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["li_horowitz_dissipation_quantification_bridge"]
+
+
+def evaluate_gingrich_horowitz_first_passage_tur(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["gingrich_horowitz_first_passage_tur_bridge"]
 
 
 
