@@ -73,6 +73,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Barato-Seifert universal thermodynamic uncertainty relation for biomolecular processes & molecular motors in CFTR catalytic assemblies (Barato AC, Seifert U Phys Rev Lett 2015, DOI: 10.1103/PhysRevLett.114.158101; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Dechant-Sasa multidimensional thermodynamic uncertainty relations & fluctuation-response bounds in CFTR catalytic assemblies (Dechant A, Sasa SI Proc Natl Acad Sci USA 2020, DOI: 10.1073/pnas.1918386117; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Koyuk-Seifert operationally accessible bounds on fluctuations and dissipation in CFTR catalytic assemblies (Koyuk T, Seifert U Phys Rev Lett 2019, DOI: 10.1103/PhysRevLett.122.230601; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Van Vu-Hasegawa geometrical bounds of irreversibility and dynamical activity in continuous-time Markovian CFTR assemblies (Van Vu T, Hasegawa Y Phys Rev Lett 2021, DOI: 10.1103/PhysRevLett.126.010601; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -991,6 +992,13 @@ def evaluate_koyuk_seifert_operationally_accessible_bounds(n_gating_regimes: int
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["koyuk_seifert_operationally_accessible_bounds_bridge"]
+
+
+
+def evaluate_van_vu_hasegawa_geometrical_irreversibility(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["van_vu_hasegawa_geometrical_irreversibility_bounds_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
