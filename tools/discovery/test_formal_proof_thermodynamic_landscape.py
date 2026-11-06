@@ -78,6 +78,8 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_van_vu_hasegawa_geometrical_irreversibility,
     evaluate_pietzonka_barato_seifert_current_bounds,
     evaluate_gingrich_rotskoff_dissipation_equality,
+    evaluate_deng_hani_ma_boltzmann_knudsen_limit,
+    evaluate_guth_maynard_spectral_gating_acceleration,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -170,6 +172,12 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_van_vu_hasegawa_geometrical_irreversibility()["van_vu_hasegawa_geometrical_irreversibility_bounds_bridge_verified"])
         self.assertTrue(evaluate_pietzonka_barato_seifert_current_bounds()["pietzonka_barato_seifert_current_bounds_bridge_verified"])
         self.assertTrue(evaluate_gingrich_rotskoff_dissipation_equality()["gingrich_rotskoff_dissipation_equality_bridge_verified"])
+        self.assertTrue(evaluate_deng_hani_ma_boltzmann_knudsen_limit()["deng_hani_ma_knudsen_bridge_verified"])
+        self.assertTrue(evaluate_guth_maynard_spectral_gating_acceleration()["guth_maynard_qrh_bridge_verified"])
+        self.assertIn("BIOEMU_BOLTZMANN_ENSEMBLE_ACCURACY_KCAL", PROOF_THERMODYNAMIC_PARAMETERS)
+        self.assertIn("BOLTZ2_FEP_BINDING_AFFINITY_RMSE_KCAL", PROOF_THERMODYNAMIC_PARAMETERS)
+        self.assertIn("EVO2_GENOMIC_CONTEXT_WINDOW_NT", PROOF_THERMODYNAMIC_PARAMETERS)
+        self.assertIn("GUTH_MAYNARD_ZERO_DENSITY_EXPONENT", PROOF_THERMODYNAMIC_PARAMETERS)
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])

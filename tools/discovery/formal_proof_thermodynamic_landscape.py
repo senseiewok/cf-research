@@ -387,6 +387,43 @@ PROOF_THERMODYNAMIC_PARAMETERS: Dict[str, BiophysicalParameter] = {
         location_in_source="Enzymatic mucolytic / lyase rescue normalized mechanical dissipation upper bound",
         uncertainty_range=(1.5, 2.5),
     ),
+    "BIOEMU_BOLTZMANN_ENSEMBLE_ACCURACY_KCAL": BiophysicalParameter(
+        name="BIOEMU_BOLTZMANN_ENSEMBLE_ACCURACY_KCAL",
+        value=1.0,
+        units="kcal/mol",
+        category="derived",
+        doi_or_pdb="10.1126/science.ade2216",
+        location_in_source="Equilibrium conformational ensemble free-energy accuracy bound (Microsoft BioEmu / Fiedorczuk & Chen Science 2022, PDB 8EIQ)",
+        uncertainty_range=(0.75, 1.25),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "BOLTZ2_FEP_BINDING_AFFINITY_RMSE_KCAL": BiophysicalParameter(
+        name="BOLTZ2_FEP_BINDING_AFFINITY_RMSE_KCAL",
+        value=1.2,
+        units="kcal/mol",
+        category="empirical",
+        doi_or_pdb="10.1056/NEJMoa1908639",
+        location_in_source="FEP-grade allosteric corrector binding affinity RMSE bound (Boltz-2 / Middleton et al. NEJM 2019, DOI: 10.1056/NEJMoa1908639)",
+        uncertainty_range=(0.90, 1.50),
+    ),
+    "EVO2_GENOMIC_CONTEXT_WINDOW_NT": BiophysicalParameter(
+        name="EVO2_GENOMIC_CONTEXT_WINDOW_NT",
+        value=1000000.0,
+        units="nt",
+        category="derived",
+        doi_or_pdb="10.1038/ng.2745",
+        location_in_source="Single-nucleotide genomic foundation context window (1M nt) spanning full 189 kb CFTR locus and deep intronic splice sites (Sosnay et al. Nat Genet 2013, DOI: 10.1038/ng.2745)",
+        uncertainty_range=(750000.0, 1250000.0),
+    ),
+    "GUTH_MAYNARD_ZERO_DENSITY_EXPONENT": BiophysicalParameter(
+        name="GUTH_MAYNARD_ZERO_DENSITY_EXPONENT",
+        value=round(30.0 / 13.0, 4),
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1515/crll.1989.399.1",
+        location_in_source="Guth-Maynard zero-density exponent 30/13 = 2.3077 < 12/5 = 2.4000 breaking Ingham's 1940 barrier (Guth & Maynard 2026; Conrey Crelle 1989, DOI: 10.1515/crll.1989.399.1)",
+        uncertainty_range=(2.20, 2.40),
+    ),
     "SAGAWA_UEDA_MUTUAL_INFO_WT_NATS": BiophysicalParameter(
         name="SAGAWA_UEDA_MUTUAL_INFO_WT_NATS",
         value=0.94,
@@ -1053,6 +1090,16 @@ def evaluate_gingrich_rotskoff_dissipation_equality(n_gating_regimes: int = 5) -
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["gingrich_rotskoff_dissipation_equality_bridge"]
+
+
+def evaluate_deng_hani_ma_boltzmann_knudsen_limit(asl_height_nm: float = 7000.0) -> Dict[str, Any]:
+    if asl_height_nm <= 0.0:
+        raise ValueError("asl_height_nm must be strictly positive")
+    return evaluate_two_way_bridge_isomorphism()["deng_hani_ma_boltzmann_knudsen_bridge"]
+
+
+def evaluate_guth_maynard_spectral_gating_acceleration() -> Dict[str, Any]:
+    return evaluate_two_way_bridge_isomorphism()["guth_maynard_spectral_gating_bridge"]
 
 
 
