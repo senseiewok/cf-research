@@ -633,9 +633,39 @@ def audit_discovery_module_registry(discovery_dir: Path | None = None) -> Dict[s
     }
 
 
+def discover_formal_proof_bridge_suites(discovery_dir: Path | None = None) -> List[Dict[str, str]]:
+    """Return metadata for test_*.py suites in tools/discovery/ that test formal_proof_thermodynamic_landscape.py."""
+    import re as _re
+    target_dir = Path(discovery_dir or DISCOVERY_DIR)
+    suites: List[Dict[str, str]] = []
+    for tf in sorted(target_dir.glob("test_*.py")):
+        stem = tf.stem[5:]
+        if stem in DISCOVERY_MODULE_REGISTRY or stem in INFRASTRUCTURE_MODULES or stem in {
+            "epistemic_rigor_and_falsification",
+            "symbolic_invariants",
+        }:
+            continue
+        txt = tf.read_text(encoding="utf-8")
+        if "formal_proof_thermodynamic_landscape" not in txt:
+            continue
+        first_line = txt.splitlines()[0].strip().strip('"""').strip("'''").strip()
+        if first_line.startswith("#!"):
+            first_line = txt.splitlines()[1].strip().strip('"""').strip("'''").strip()
+        m_round = _re.search(r"Round\s+(\d+)", first_line)
+        m_task = _re.search(r"(T-\d{4})", txt)
+        suites.append({
+            "test_file": tf.name,
+            "round": f"Round {m_round.group(1)}" if m_round else "Bridge Suite",
+            "task": m_task.group(1) if m_task else "T-0479",
+            "summary": first_line.rstrip("."),
+        })
+    return suites
+
+
 def generate_discovery_catalog(discovery_dir: Path | None = None) -> Dict[str, Any]:
     """Build a structured JSON catalog of all discovery modules grouped by scientific discipline."""
     audit = audit_discovery_module_registry(discovery_dir)
+    bridge_suites = discover_formal_proof_bridge_suites(discovery_dir)
     by_discipline: Dict[str, List[Dict[str, Any]]] = {d: [] for d in VALID_DISCIPLINES}
     for mod in audit["modules"]:
         disc = mod.get("discipline")
@@ -650,6 +680,7 @@ def generate_discovery_catalog(discovery_dir: Path | None = None) -> Dict[str, A
         "total_modules": audit["total_discovered"],
         "infrastructure_modules_count": audit["infrastructure_modules_count"],
         "test_suites_count": audit["test_suites_count"],
+        "formal_proof_bridge_suites_count": len(bridge_suites),
         "persona_summary": audit["persona_breakdown"],
         "triage_summary": audit["triage_breakdown"],
         "discipline_summary": audit["discipline_breakdown"],
@@ -664,6 +695,7 @@ def generate_discovery_catalog(discovery_dir: Path | None = None) -> Dict[str, A
             }
             for disc, mods in by_discipline.items()
         },
+        "formal_proof_bridge_suites": bridge_suites,
     }
 
 
@@ -672,6 +704,7 @@ def render_discovery_readme(catalog: Dict[str, Any]) -> str:
     t_sum = catalog["triage_summary"]
     infra_count = catalog.get("infrastructure_modules_count", len(INFRASTRUCTURE_MODULES))
     tests_count = catalog.get("test_suites_count", 0)
+    bridge_suites = catalog.get("formal_proof_bridge_suites", [])
     lines = [
         "# CF Research Discovery Workbench (`tools/discovery/`)",
         "",
@@ -683,12 +716,15 @@ def render_discovery_readme(catalog: Dict[str, Any]) -> str:
         f"- **`keep` (Canonical Core Workbenches):** `{t_sum.get('keep', 0)}`",
         f"- **`merge` (Consolidate into Canonical Module):** `{t_sum.get('merge', 0)}`",
         f"- **`archive` (Exploratory / Superseded Parameter Sweeps):** `{t_sum.get('archive', 0)}`",
+        f"- **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `{len(bridge_suites)}`",
         "",
-        "Verify this index and all module registrations deterministically with:",
+        "Verify this index, all module registrations, and the pure-stdlib unit test suites deterministically with:",
         "",
         "```bash",
         "python tools/discovery/discovery_council.py --audit-registry",
         "python tools/discovery/discovery_council.py --check-index",
+        "python tools/discovery/discovery_council.py --falsify-all",
+        "python tools/discovery/discovery_council.py --run-stdlib-tests",
         "```",
         "",
     ]
@@ -708,6 +744,33 @@ def render_discovery_readme(catalog: Dict[str, Any]) -> str:
             )
             lines.append(
                 f"| `{m['module']}.py` | `{m['task']}` | `{m['tier']}` | `{m['triage']}` | {target_note} |"
+            )
+        lines.append("")
+
+    lines.extend([
+        "## Infrastructure, Cross-Domain Mining & Symbolic Verification (`4` scripts + `2` cross-cutting suites)",
+        "",
+        "| Script / Suite | Role | Companion Verification |",
+        "| --- | --- | --- |",
+        "| `discovery_council.py` | 3-phase Curative Discovery Council runner, dynamic module registry auditor, and AH-10 falsification harness | `test_discovery_council.py` |",
+        "| `cross_domain_miner.py` | Cross-domain delivery vector feasibility (BFI), transcytosis, and basal stem-cell trajectory miner | `test_cross_domain_miner.py` |",
+        "| `export_delivery_web_data.py` | Deterministic TSV/JSON snapshot exporter for `data/delivery_discovery_snapshot.json` | `test_export_delivery_web_data.py` |",
+        "| `epistemic_rigor.py` | Shared epistemic contract, sensitivity perturbation, and negative-control verification helpers | `test_epistemic_rigor_and_falsification.py` |",
+        "| `test_symbolic_invariants.py` | Pure-stdlib complex-step autodiff (`Im(f(x+ih))/h`), exact integrals, and Buckingham Pi dimensional homogeneity (`T-0505`) | Self-contained (`unittest`) |",
+        "| `data/canonical_math_bridge_snapshot.json` | Locked Lean 4 / formal proof structural snapshot (`fermats_last_theorem`, `formal_math_zeta23`, `formal_math_3sum_apsp`) | `test_formal_proof_thermodynamic_landscape.py` |",
+        "",
+    ])
+
+    if bridge_suites:
+        lines.append(
+            f"## Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py` — {len(bridge_suites)} suites)"
+        )
+        lines.append("")
+        lines.append("| Test Suite | Round | Task | Verified Theorem & CF Biophysical Bridge |")
+        lines.append("| --- | --- | --- | --- |")
+        for bs in bridge_suites:
+            lines.append(
+                f"| `{bs['test_file']}` | `{bs['round']}` | `{bs['task']}` | {bs['summary']} |"
             )
         lines.append("")
 
@@ -1419,6 +1482,47 @@ def synthesize_cross_scale_discoveries() -> Dict[str, Any]:
     }
 
 
+def run_stdlib_discovery_test_suites(discovery_dir: Path | None = None) -> Dict[str, Any]:
+    """Execute all pure-stdlib unittest.TestCase suites in tools/discovery/ without requiring pytest."""
+    import contextlib
+    import io
+    import re as _re
+    import unittest
+
+    target_dir = Path(discovery_dir or DISCOVERY_DIR)
+    repo_root = target_dir.parent.parent
+    for p in (str(target_dir), str(repo_root)):
+        if p not in sys.path:
+            sys.path.insert(0, p)
+
+    loader = unittest.defaultTestLoader
+    combined_suite = unittest.TestSuite()
+    suite_files: List[str] = []
+
+    for tf in sorted(target_dir.glob("test_*.py")):
+        txt = tf.read_text(encoding="utf-8")
+        if _re.search(r"(?m)^\s*(?:import|from)\s+pytest\b", txt):
+            continue
+        suite_files.append(tf.name)
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+            mod = importlib.import_module(tf.stem)
+            combined_suite.addTests(loader.loadTestsFromModule(mod))
+
+    stream = io.StringIO()
+    with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+        runner = unittest.TextTestRunner(stream=stream, verbosity=0)
+        result = runner.run(combined_suite)
+
+    passed = result.wasSuccessful() and result.testsRun > 0
+    return {
+        "status": "PASS" if passed else "FAIL",
+        "suite_files_count": len(suite_files),
+        "tests_run": result.testsRun,
+        "failures": len(result.failures),
+        "errors": len(result.errors),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="Curative Discovery Council Runner")
     parser.add_argument("--topic", choices=ALL_COUNCIL_TOPICS, default="aerosol_sort_lnp")
@@ -1428,9 +1532,22 @@ def main():
     parser.add_argument("--check-index", action="store_true", help="Verify on-disk catalog.json and README.md match registry")
     parser.add_argument("--export-index", action="store_true", help="Export tools/discovery/catalog.json and tools/discovery/README.md")
     parser.add_argument("--cross-scale-report", action="store_true", help="Run deterministic 3-engine cross-scale discovery synthesis")
-    parser.add_argument("--falsify-all", action="store_true", help="Run AH-10 dynamic falsification and negative-control suite across all 66 modules")
+    parser.add_argument("--falsify-all", action="store_true", help="Run AH-10 dynamic falsification and negative-control suite across all registered modules")
+    parser.add_argument("--run-stdlib-tests", action="store_true", help="Run all pure-stdlib unittest.TestCase suites in tools/discovery/")
     parser.add_argument("--json", action="store_true", help="Emit raw JSON to stdout")
     args = parser.parse_args()
+
+    if args.run_stdlib_tests:
+        t_report = run_stdlib_discovery_test_suites()
+        if args.json:
+            print(json.dumps(t_report, indent=2))
+        else:
+            print(
+                f"Discovery Stdlib Unit Test Suites: {t_report['status']} "
+                f"({t_report['tests_run']} tests across {t_report['suite_files_count']} suites; "
+                f"failures={t_report['failures']}, errors={t_report['errors']})"
+            )
+        sys.exit(0 if t_report["status"] == "PASS" else 1)
 
     if args.falsify_all:
         f_report = run_dynamic_falsification_suite()

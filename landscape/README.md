@@ -50,3 +50,16 @@ This directory holds two groups of Markdown notes:
 - [`mission-grounding-2026-10-25-wave24.md`](mission-grounding-2026-10-25-wave24.md)
 - [`mission-grounding-2026-10-28-wave25.md`](mission-grounding-2026-10-28-wave25.md)
 - [`mission-grounding-2026-10-29.md`](mission-grounding-2026-10-29.md)
+- [`mission-grounding-2026-11-02.md`](mission-grounding-2026-11-02.md)
+- [`mission-grounding-2026-11-03.md`](mission-grounding-2026-11-03.md)
+
+## Structured Claim & Evidence Verification Sidecars
+
+Several topical syntheses carry machine-checked claim packets (`*-claims.json`), evidence extracts (`*-evidence.txt`), evidence maps (`*-evidence-map.json`), and allowlists (`*-allow.txt`) verified by `tools/claims/check_claims.py` and `tools/claims/check_anti_hallucination.py`:
+
+| Dossier | Verification Sidecar Files |
+| --- | --- |
+| [`discovery-dual-aav-intein-packaging.md`](discovery-dual-aav-intein-packaging.md) | `discovery-dual-aav-intein-packaging-claims.json`, `discovery-dual-aav-intein-packaging-evidence.txt`, `discovery-dual-aav-intein-packaging-evidence-map.json`, `discovery-dual-aav-intein-packaging-allow.txt` |
+| [`modulator-eligibility-denominators-2026.md`](modulator-eligibility-denominators-2026.md) | `modulator-eligibility-denominators-2026.json`, `modulator-eligibility-denominators-2026-claims.json`, `modulator-eligibility-denominators-2026-evidence.txt`, `modulator-eligibility-denominators-2026-evidence-map.json`, `modulator-eligibility-denominators-2026-allow.txt` |
+| [`multi-registry-eligibility-2026.md`](multi-registry-eligibility-2026.md) | `multi-registry-eligibility-claims.json`, `multi-registry-eligibility-allow.txt` |
+| [`trial-endpoint-evolution-2026.md`](trial-endpoint-evolution-2026.md) | `trial-endpoint-evolution-2026-claims.json`, `trial-endpoint-evolution-2026-evidence.txt`, `trial-endpoint-evolution-2026-evidence-map.json`, `trial-endpoint-evolution-2026-allow.txt` |
