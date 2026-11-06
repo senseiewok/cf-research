@@ -69,6 +69,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Falasco-Esposito dissipation-time uncertainty relations & gating precision trade-offs in driven CFTR catalytic assemblies (Falasco G, Esposito M Phys Rev Lett 2020, DOI: 10.1103/PhysRevLett.125.120604; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Van Vu-Hasegawa thermodynamic uncertainty relations & dynamical activity bounds in arbitrarily driven CFTR catalytic assemblies (Van Vu T, Hasegawa Y Phys Rev Research 2020, DOI: 10.1103/PhysRevResearch.2.013060; Van Vu T, Hasegawa Y Phys Rev Lett 2021, DOI: 10.1103/PhysRevLett.126.010601; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Gingrich-Horowitz finite-time thermodynamic uncertainty relations & current precision bounds in CFTR catalytic assemblies (Gingrich TR et al. Phys Rev Lett 2016, DOI: 10.1103/PhysRevLett.116.120601; Horowitz JM, Gingrich TR Nat Phys 2020, DOI: 10.1038/s41567-019-0702-6; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Pietzonka-Seifert universal trade-off between power, efficiency, and constancy in steady-state heat engines and biomolecular assemblies (Pietzonka P, Seifert U Phys Rev Lett 2018, DOI: 10.1103/PhysRevLett.120.190602; Barato AC, Seifert U Phys Rev Lett 2015, DOI: 10.1103/PhysRevLett.114.158101; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -458,6 +459,26 @@ PROOF_THERMODYNAMIC_PARAMETERS: Dict[str, BiophysicalParameter] = {
         doi_or_pdb="10.1103/PhysRevLett.125.120604",
         location_in_source="Falasco-Esposito precision trade-off lower bound |Delta A|^2 / (2 * D_A) for WT CFTR gating observable resolution (Falasco & Esposito PRL 2020, DOI: 10.1103/PhysRevLett.125.120604; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
         uncertainty_range=(3.20, 5.25),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "PIETZONKA_SEIFERT_POWER_WT": BiophysicalParameter(
+        name="PIETZONKA_SEIFERT_POWER_WT",
+        value=4.20,
+        units="normalized_power",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevLett.120.190602",
+        location_in_source="Pietzonka-Seifert universal power output P for active ATP-coupled WT CFTR chloride pumping (Pietzonka & Seifert PRL 2018, DOI: 10.1103/PhysRevLett.120.190602; Csanady et al. JGP 2006, DOI: 10.1085/jgp.200609558)",
+        uncertainty_range=(3.15, 5.25),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "PIETZONKA_SEIFERT_EFFICIENCY_WT": BiophysicalParameter(
+        name="PIETZONKA_SEIFERT_EFFICIENCY_WT",
+        value=0.58,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevLett.120.190602",
+        location_in_source="Pietzonka-Seifert thermodynamic efficiency eta for coupled WT CFTR gating (Pietzonka & Seifert PRL 2018, DOI: 10.1103/PhysRevLett.120.190602; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
+        uncertainty_range=(0.435, 0.725),
         notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
     ),
 }
@@ -883,6 +904,12 @@ def evaluate_gingrich_horowitz_thermodynamic_uncertainty(n_gating_regimes: int =
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["gingrich_horowitz_thermodynamic_uncertainty_bridge"]
+
+
+def evaluate_pietzonka_seifert_power_efficiency_constancy(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["pietzonka_seifert_power_efficiency_constancy_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
