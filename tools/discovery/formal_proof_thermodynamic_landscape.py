@@ -78,6 +78,8 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Gingrich-Rotskoff-Vaikuntanathan-Horowitz dissipation-uncertainty equality in CFTR catalytic assemblies (Gingrich TR, Rotskoff GM, Vaikuntanathan S, Horowitz JM Proc Natl Acad Sci USA 2017, DOI: 10.1073/pnas.1706270114; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Li-Horowitz-Gingrich-Fakhri dissipation quantification from fluctuations in CFTR catalytic assemblies (Li J, Horowitz JM, Gingrich TR, Fakhri N Cell Syst 2019, DOI: 10.1016/j.cels.2019.03.007; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Gingrich-Horowitz first arrival time bounds and dwell-time thermodynamic uncertainty in CFTR catalytic assemblies (Gingrich TR, Horowitz JM Phys Rev Lett 2017, DOI: 10.1103/PhysRevLett.119.170601; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Barato-Seifert cost of precision and biomolecular clock efficiency in CFTR catalytic assemblies (Barato AC, Seifert U Phys Rev X 2016, DOI: 10.1103/PhysRevX.6.041053; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Garrahan dynamical activity first-passage bounds and frenetic gating regularity in CFTR catalytic assemblies (Garrahan JP Phys Rev E 2017, DOI: 10.1103/PhysRevE.95.032134; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -666,6 +668,46 @@ PROOF_THERMODYNAMIC_PARAMETERS: Dict[str, BiophysicalParameter] = {
         uncertainty_range=(0.81, 1.35),
         notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
     ),
+    "BARATO_SEIFERT_CLOCK_PRECISION_WT": BiophysicalParameter(
+        name="BARATO_SEIFERT_CLOCK_PRECISION_WT",
+        value=5.4,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevX.6.041053",
+        location_in_source="Barato-Seifert Brownian clock precision N = <T>^2/Var(T) = 5.4 <= Delta_S_cycle / (2 k_B) = 6.0 in WT CFTR catalytic assembly (Barato & Seifert Phys Rev X 2016, DOI: 10.1103/PhysRevX.6.041053; Csanady et al. JGP 2006, DOI: 10.1085/jgp.200609558)",
+        uncertainty_range=(4.05, 6.75),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "BARATO_SEIFERT_CLOCK_EFFICIENCY_WT": BiophysicalParameter(
+        name="BARATO_SEIFERT_CLOCK_EFFICIENCY_WT",
+        value=0.9,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevX.6.041053",
+        location_in_source="Barato-Seifert Brownian clock efficiency eta_clock = 2 k_B N / Delta_S_cycle = 0.90 in WT CFTR gating (Barato & Seifert PRX 2016; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
+        uncertainty_range=(0.675, 1.0),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "GARRAHAN_FRENETIC_ACTIVITY_BOUND_WT": BiophysicalParameter(
+        name="GARRAHAN_FRENETIC_ACTIVITY_BOUND_WT",
+        value=0.2,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevE.95.032134",
+        location_in_source="Garrahan dynamical activity first-passage lower bound Var(T_J)/<T_J>^2 >= 1/<K> = 0.20 for <K> = 5.0 jumps per burst in WT CFTR catalytic assembly (Garrahan Phys Rev E 2017, DOI: 10.1103/PhysRevE.95.032134; Csanady et al. JGP 2006, DOI: 10.1085/jgp.200609558)",
+        uncertainty_range=(0.15, 0.25),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "GARRAHAN_FRENETIC_PRODUCT_WT": BiophysicalParameter(
+        name="GARRAHAN_FRENETIC_PRODUCT_WT",
+        value=1.2,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevE.95.032134",
+        location_in_source="Garrahan frenetic first-passage product Q_Garrahan = <K> * Var(T_J)/<T_J>^2 = 1.20 >= 1.0 in WT CFTR burst gating (Garrahan PRE 2017; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
+        uncertainty_range=(0.90, 1.50),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
 }
 
 
@@ -1154,6 +1196,18 @@ def evaluate_gingrich_horowitz_first_passage_tur(n_gating_regimes: int = 5) -> D
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["gingrich_horowitz_first_passage_tur_bridge"]
+
+
+def evaluate_barato_seifert_brownian_clock_precision(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["barato_seifert_brownian_clock_precision_bridge"]
+
+
+def evaluate_garrahan_frenetic_first_passage_bound(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["garrahan_frenetic_first_passage_bound_bridge"]
 
 
 
