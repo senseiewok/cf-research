@@ -74,6 +74,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_pietzonka_seifert_power_efficiency_constancy,
     evaluate_barato_seifert_universal_tur,
     evaluate_dechant_sasa_multidimensional_tur,
+    evaluate_koyuk_seifert_operationally_accessible_bounds,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -162,6 +163,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_pietzonka_seifert_power_efficiency_constancy()["pietzonka_seifert_power_efficiency_constancy_bridge_verified"])
         self.assertTrue(evaluate_barato_seifert_universal_tur()["barato_seifert_universal_tur_bridge_verified"])
         self.assertTrue(evaluate_dechant_sasa_multidimensional_tur()["dechant_sasa_multidimensional_tur_bridge_verified"])
+        self.assertTrue(evaluate_koyuk_seifert_operationally_accessible_bounds()["koyuk_seifert_operationally_accessible_bounds_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])
