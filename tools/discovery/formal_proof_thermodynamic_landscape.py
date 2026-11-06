@@ -1101,6 +1101,14 @@ def evaluate_deng_hani_ma_boltzmann_knudsen_limit(asl_height_nm: float = 7000.0)
 def evaluate_guth_maynard_spectral_gating_acceleration() -> Dict[str, Any]:
     return evaluate_two_way_bridge_isomorphism()["guth_maynard_spectral_gating_bridge"]
 
+def evaluate_alphaproof_bioemu_log_concave_funnel_bridge() -> Dict[str, Any]:
+    return evaluate_two_way_bridge_isomorphism()["alphaproof_bioemu_log_concave_funnel_bridge"]
+
+
+def evaluate_qrh_quarantine_deep_intronic_affinity_bridge() -> Dict[str, Any]:
+    return evaluate_two_way_bridge_isomorphism()["qrh_evo2_intronic_quarantine_bridge"]
+
+
 
 
 

@@ -9413,6 +9413,37 @@
           "formal_proof_dissipation_uncertainty_isomorphism": "Lean 4 Mathlib.Complexity.Sparsification Gingrich-Rotskoff Variational Equality on ETH Refutation DAG"
         }
       }
+    },
+    "alphaproof_bioemu_log_concave_funnel_bridge": {
+      "task_id": "T-0582",
+      "round": 29,
+      "theorem_anchor": "Stanley Pure O-Sequence Log-Concavity (AlphaProof Nexus, Science 2026) & BioEmu/Boltz-2 Funnel",
+      "wt_log_concave": true,
+      "f508del_log_concave_broken_at_k3": true,
+      "f508del_log_concavity_ratio_k3": 0.5158,
+      "rescued_log_concave": true,
+      "rescued_log_concavity_ratio_k3": 1.2582,
+      "uncorrected_barrier_kcal": 5.45,
+      "rescued_effective_barrier_kcal": 2.4229,
+      "kramers_escape_acceleration_factor": 135.8412,
+      "passed_log_concave_funnel_bridge": true,
+      "alphaproof_bioemu_funnel_bridge_verified": true,
+      "negative_control_detects_violation": true
+    },
+    "qrh_evo2_intronic_quarantine_bridge": {
+      "task_id": "T-0583",
+      "round": 30,
+      "theorem_anchor": "OpenAI lean-qrh O(V+E) Quarantine (722->719) & Evo 2 / Boltz-2 / OMol25 Splice Rescue",
+      "qrh_total_theorems": 722,
+      "qrh_quarantined_theorems": 719,
+      "quarantine_retention_ratio": 0.995845,
+      "unblocked_canonical_splice_fraction": 0.188429,
+      "rescued_canonical_splice_fraction": 0.998182,
+      "omol25_open_pore_conductance_factor": 0.990283,
+      "effective_wt_conductance_pct": 43.4933,
+      "passed_qrh_intronic_quarantine_bridge": true,
+      "qrh_evo2_intronic_quarantine_bridge_verified": true,
+      "negative_control_detects_violation": true
     }
   },
   "challenges_unbridged": {
