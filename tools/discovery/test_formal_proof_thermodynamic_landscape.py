@@ -80,6 +80,8 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_gingrich_rotskoff_dissipation_equality,
     evaluate_deng_hani_ma_boltzmann_knudsen_limit,
     evaluate_guth_maynard_spectral_gating_acceleration,
+    evaluate_li_horowitz_dissipation_quantification,
+    evaluate_gingrich_horowitz_first_passage_tur,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -178,6 +180,8 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertIn("BOLTZ2_FEP_BINDING_AFFINITY_RMSE_KCAL", PROOF_THERMODYNAMIC_PARAMETERS)
         self.assertIn("EVO2_GENOMIC_CONTEXT_WINDOW_NT", PROOF_THERMODYNAMIC_PARAMETERS)
         self.assertIn("GUTH_MAYNARD_ZERO_DENSITY_EXPONENT", PROOF_THERMODYNAMIC_PARAMETERS)
+        self.assertTrue(evaluate_li_horowitz_dissipation_quantification()["li_horowitz_dissipation_quantification_bridge_verified"])
+        self.assertTrue(evaluate_gingrich_horowitz_first_passage_tur()["gingrich_horowitz_first_passage_tur_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])
