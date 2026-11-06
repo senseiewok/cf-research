@@ -189,7 +189,7 @@
             },
             "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
             "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
             "alluvial_hypothesis_flux_pct": 75.78,
             "stage_verification_status": "KERNEL_VERIFIED"
           },
@@ -216,7 +216,7 @@
             },
             "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
             "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
             "alluvial_hypothesis_flux_pct": 75.31,
             "stage_verification_status": "KERNEL_VERIFIED"
           }
@@ -535,7 +535,7 @@
             },
             "cf_biophysical_analog": "AlphaEvolve-CF Pareto frontier pruning of combinatorial multi-drug dosing space",
             "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.ade2216",
-            "plain_english_summary": "The rate-limiting transition state: rewrites a_i + b_k <= a_j + b_k as a_i - a_j <= b_j - b_i to sort differences once and shave logarithmic factors—just as Pareto dominance prunes exponential drug combinations.",
+            "plain_english_summary": "The rate-limiting transition state: rewrites a_i + b_k <= a_j + b_k as a_i - a_j <= b_j - b_i to sort differences once and shave logarithmic factors\u2014just as Pareto dominance prunes exponential drug combinations.",
             "alluvial_hypothesis_flux_pct": 78.83,
             "stage_verification_status": "KERNEL_VERIFIED"
           },
@@ -2081,16 +2081,16 @@
         "wild_type_intact_proof": {
           "button_label": "1. Intact Lean 4 Proof (0 sorry / dim S_2(Gamma_0(2)) = 0)",
           "mutated_axiom": "None (prime exponent p >= 3, semistable Frey curve, Taylor-Wiles p=3/p=5 switch intact)",
-          "counterexample": "None — dim S_2(Gamma_0(2)) = 0 holds across all 29,500 Lean 4 theorems",
-          "pure_math_state": "dim S_2(Gamma_0(2)) = 0 (29,500 thms · 0 sorryAx)",
-          "stem_council_state": "Scite 100% Support (10/0) · 3 Kernel Verifiers PASS"
+          "counterexample": "None \u2014 dim S_2(Gamma_0(2)) = 0 holds across all 29,500 Lean 4 theorems",
+          "pure_math_state": "dim S_2(Gamma_0(2)) = 0 (29,500 thms \u00b7 0 sorryAx)",
+          "stem_council_state": "Scite 100% Support (10/0) \u00b7 3 Kernel Verifiers PASS"
         },
         "pythagorean_exponent_p2_mutation": {
           "button_label": "2. Mutate p >= 3 -> p = 2 (Pythagorean / Stage 1)",
           "mutated_axiom": "Relax exponent constraint p >= 3 to p = 2 in Fermat's Last Theorem",
           "counterexample": "3^2 + 4^2 = 5^2 (9 + 16 = 25); Frey curve level-lowering no longer contradicts modular form space",
           "pure_math_state": "Counterexample 3^2 + 4^2 = 5^2 (Stage 1 Gate Bypassed)",
-          "stem_council_state": "Boundary Scope Alert · Non-Prime Exponent p = 2"
+          "stem_council_state": "Boundary Scope Alert \u00b7 Non-Prime Exponent p = 2"
         },
         "frey_semistability_knockout": {
           "button_label": "3. Knock Out Semistability (Level-Lowering / Stage 3)",
@@ -2118,9 +2118,9 @@
         "wild_type_intact_proof": {
           "button_label": "1. Intact Lean 4 Proof (0 sorry / >2/3 Zeta & >=86.864% XiPrime)",
           "mutated_axiom": "None (s <-> 1-s functional symmetry, Kloosterman/large sieve axioms, and theta = 16/29 mollifier intact)",
-          "counterexample": "None — N_0(T) > (2/3)N(T) (Zeta23.lean) and >= 86.864% simple zeros (XiPrime.lean, d_1 = 9) verified",
+          "counterexample": "None \u2014 N_0(T) > (2/3)N(T) (Zeta23.lean) and >= 86.864% simple zeros (XiPrime.lean, d_1 = 9) verified",
           "pure_math_state": ">=86.864% Simple Zeros on Re(s)=1/2 (0 sorryAx)",
-          "stem_council_state": "Scite 100% Support (Conrey 1989) · 33 Lean Files PASS"
+          "stem_council_state": "Scite 100% Support (Conrey 1989) \u00b7 33 Lean Files PASS"
         },
         "pythagorean_exponent_p2_mutation": {
           "button_label": "2. Break Functional Equation s <-> 1-s (Stage 1)",
@@ -2140,7 +2140,7 @@
           "button_label": "4. Remove theta=16/29 Selberg Mollifier (Stage 4)",
           "mutated_axiom": "Disable asymptotic large sieve mollifier length theta = 16/29 and degree d_1 = 9 in XiPrime.lean Stage 4",
           "counterexample": "Unmollified Cauchy-Schwarz bound collapses below 40% critical-line zeros (7.88 kcal/mol unbridged barrier)",
-          "pure_math_state": "Mollifier Collapsed (<40% Zeros · Stage 4 Unbridged)",
+          "pure_math_state": "Mollifier Collapsed (<40% Zeros \u00b7 Stage 4 Unbridged)",
           "stem_council_state": "Mollifier Bridge OFF (7.88 kcal/mol Barrier)"
         },
         "unverified_sorry_axiom_injection": {
@@ -2155,8 +2155,8 @@
         "wild_type_intact_proof": {
           "button_label": "1. Intact Lean 4 Proof (0 sorry / Sub-Cubic O(n^2.99942))",
           "mutated_axiom": "None (Word-RAM w-bit model, tripartite zero-weight triangle bijection, and Fredman 64x packing intact)",
-          "counterexample": "None — sub-cubic 3SUM -> APSP reduction (980 Lean 4 theorems, 0 sorryAx) verified at O(n^3 / 2^Omega(sqrt(log n)))",
-          "pure_math_state": "Sub-Cubic O(n^2.99942) Verified (980 thms · 0 sorryAx)",
+          "counterexample": "None \u2014 sub-cubic 3SUM -> APSP reduction (980 Lean 4 theorems, 0 sorryAx) verified at O(n^3 / 2^Omega(sqrt(log n)))",
+          "pure_math_state": "Sub-Cubic O(n^2.99942) Verified (980 thms \u00b7 0 sorryAx)",
           "stem_council_state": "Scite 100 Mentions / 0 Contrasting (Williams 2018)"
         },
         "pythagorean_exponent_p2_mutation": {
@@ -2192,9 +2192,9 @@
         "wild_type_intact_proof": {
           "button_label": "1. Intact Lean 4 Proof (0 sorry / 2^o(n) #3-SAT ETHIsFalse)",
           "mutated_axiom": "None (K_K grid boundary, SWAP = I - 2*singlet rank 12^lambda, and S2_tilde_rank_three intact across 493 PaperIndex theorems)",
-          "counterexample": "None — theorem ETHIsFalse and SharpThreeSAT_Subexponential verified in Lean 4.28.0 with 0 sorryAx",
-          "pure_math_state": "ETHIsFalse Verified (2^o(n) #3-SAT · 493 PaperIndex thms)",
-          "stem_council_state": "Scite 100% Support (Impagliazzo-Paturi 2001) · 0 sorryAx"
+          "counterexample": "None \u2014 theorem ETHIsFalse and SharpThreeSAT_Subexponential verified in Lean 4.28.0 with 0 sorryAx",
+          "pure_math_state": "ETHIsFalse Verified (2^o(n) #3-SAT \u00b7 493 PaperIndex thms)",
+          "stem_council_state": "Scite 100% Support (Impagliazzo-Paturi 2001) \u00b7 0 sorryAx"
         },
         "pythagorean_exponent_p2_mutation": {
           "button_label": "2. Break K_K Grid Boundary Indexing (Stage 1)",
@@ -4108,7 +4108,7 @@
             },
             "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
             "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
             "alluvial_hypothesis_flux_pct": 75.78,
             "stage_verification_status": "KERNEL_VERIFIED"
           },
@@ -4135,7 +4135,7 @@
             },
             "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
             "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
             "alluvial_hypothesis_flux_pct": 75.31,
             "stage_verification_status": "KERNEL_VERIFIED"
           }
@@ -4290,7 +4290,7 @@
             },
             "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
             "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
             "alluvial_hypothesis_flux_pct": 0.0,
             "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
           },
@@ -4317,7 +4317,7 @@
             },
             "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
             "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
             "alluvial_hypothesis_flux_pct": 0.0,
             "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
           }
@@ -4472,7 +4472,7 @@
             },
             "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
             "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
             "alluvial_hypothesis_flux_pct": 0.0,
             "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
           },
@@ -4499,7 +4499,7 @@
             },
             "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
             "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
             "alluvial_hypothesis_flux_pct": 0.0,
             "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
           }
@@ -4654,7 +4654,7 @@
             },
             "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
             "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
             "alluvial_hypothesis_flux_pct": 0.11,
             "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
           },
@@ -4681,7 +4681,7 @@
             },
             "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
             "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
             "alluvial_hypothesis_flux_pct": 0.0,
             "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
           }
@@ -4836,7 +4836,7 @@
             },
             "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
             "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+            "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
             "alluvial_hypothesis_flux_pct": 75.78,
             "stage_verification_status": "KERNEL_VERIFIED"
           },
@@ -4863,7 +4863,7 @@
             },
             "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
             "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+            "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
             "alluvial_hypothesis_flux_pct": 0.02,
             "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
           }
@@ -9262,6 +9262,138 @@
           "formal_proof_finite_time_current_isomorphism": "Lean 4 Mathlib.Computability.Complexity Impagliazzo-Paturi-Zane Sunflower Pietzonka-Barato-Seifert Finite-Time Current Bound"
         }
       }
+    },
+    "gingrich_rotskoff_dissipation_equality_bridge": {
+      "task_id": "T-0669",
+      "gingrich_rotskoff_dissipation_equality_bridge_verified": true,
+      "variational_equality_verified": true,
+      "quadratic_functional_bound_verified": true,
+      "trikafta_variational_restoration_verified": true,
+      "proof_dag_variational_dissipation_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "total_entropy_production_sigma_kb": 12.0,
+          "optimal_estimator_mean_j": 12.0,
+          "optimal_estimator_variance_var_j": 12.0,
+          "variational_functional_f_val": 12.0,
+          "variational_dissipation_equality_satisfied": true,
+          "variational_efficiency_eta": 1.0,
+          "suboptimal_current_mean_j": 5.0,
+          "suboptimal_current_var_j": 2.0,
+          "suboptimal_functional_f_val": 8.0,
+          "suboptimal_efficiency_eta": 0.666667,
+          "allosteric_coupling_fidelity": 0.94,
+          "dissipation_overhead": 0.06,
+          "gating_regime": "DISSIPATION_EQUALITY_OPTIMAL"
+        },
+        "rescued_cftr_ivacaftor": {
+          "total_entropy_production_sigma_kb": 10.5,
+          "optimal_estimator_mean_j": 10.5,
+          "optimal_estimator_variance_var_j": 10.5,
+          "variational_functional_f_val": 10.5,
+          "variational_dissipation_equality_satisfied": true,
+          "variational_efficiency_eta": 1.0,
+          "suboptimal_current_mean_j": 4.5,
+          "suboptimal_current_var_j": 1.8,
+          "suboptimal_functional_f_val": 7.2,
+          "suboptimal_efficiency_eta": 0.685714,
+          "allosteric_coupling_fidelity": 0.91,
+          "dissipation_overhead": 0.09,
+          "gating_regime": "DISSIPATION_EQUALITY_OPTIMAL"
+        },
+        "f508del_uncorrected": {
+          "total_entropy_production_sigma_kb": 1.2,
+          "optimal_estimator_mean_j": 0.3,
+          "optimal_estimator_variance_var_j": 0.5,
+          "variational_functional_f_val": 0.1,
+          "variational_dissipation_equality_satisfied": false,
+          "variational_efficiency_eta": 0.083333,
+          "suboptimal_current_mean_j": 0.1,
+          "suboptimal_current_var_j": 0.15,
+          "suboptimal_functional_f_val": 0.05,
+          "suboptimal_efficiency_eta": 0.041667,
+          "allosteric_coupling_fidelity": 0.1,
+          "dissipation_overhead": 0.9,
+          "gating_regime": "KINETIC_ARREST_VARIATIONAL_COLLAPSE"
+        },
+        "g551d_uncoupled_cftr": {
+          "total_entropy_production_sigma_kb": 0.8,
+          "optimal_estimator_mean_j": 0.1,
+          "optimal_estimator_variance_var_j": 0.15,
+          "variational_functional_f_val": 0.05,
+          "variational_dissipation_equality_satisfied": false,
+          "variational_efficiency_eta": 0.0625,
+          "suboptimal_current_mean_j": 0.05,
+          "suboptimal_current_var_j": 0.08,
+          "suboptimal_functional_f_val": 0.02,
+          "suboptimal_efficiency_eta": 0.025,
+          "allosteric_coupling_fidelity": 0.06,
+          "dissipation_overhead": 0.94,
+          "gating_regime": "FUTILE_UNCOUPLED_VARIATIONAL_COLLAPSE"
+        },
+        "w1282x_nonsense_baseline": {
+          "total_entropy_production_sigma_kb": 0.0,
+          "optimal_estimator_mean_j": 0.0,
+          "optimal_estimator_variance_var_j": 0.0,
+          "variational_functional_f_val": 0.0,
+          "variational_dissipation_equality_satisfied": false,
+          "variational_efficiency_eta": 0.0,
+          "suboptimal_current_mean_j": 0.0,
+          "suboptimal_current_var_j": 0.0,
+          "suboptimal_functional_f_val": 0.0,
+          "suboptimal_efficiency_eta": 0.0,
+          "allosteric_coupling_fidelity": 0.0,
+          "dissipation_overhead": 1.0,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "fermats_last_theorem": {
+          "parity_verified": true,
+          "variational_dissipation_equality_satisfied": true,
+          "sigma_proof_entropy": 5.8,
+          "optimal_estimator_mean_j": 5.8,
+          "optimal_estimator_variance_var_j": 5.8,
+          "variational_functional_f_val": 5.8,
+          "variational_efficiency_eta": 1.0,
+          "suboptimal_functional_f_val": 4.2,
+          "formal_proof_dissipation_uncertainty_isomorphism": "Lean 4 Mathlib.Analysis.Calculus Gingrich-Rotskoff Dissipation-Uncertainty Equality on Proof DAG"
+        },
+        "formal_math_zeta23": {
+          "parity_verified": true,
+          "variational_dissipation_equality_satisfied": true,
+          "sigma_proof_entropy": 5.1,
+          "optimal_estimator_mean_j": 5.1,
+          "optimal_estimator_variance_var_j": 5.1,
+          "variational_functional_f_val": 5.1,
+          "variational_efficiency_eta": 1.0,
+          "suboptimal_functional_f_val": 3.8,
+          "formal_proof_dissipation_uncertainty_isomorphism": "Lean 4 Mathlib.NumberTheory.ZetaValues Gingrich-Rotskoff Variational Equality on Selberg-Levinson Sieve"
+        },
+        "formal_math_3sum_apsp": {
+          "parity_verified": true,
+          "variational_dissipation_equality_satisfied": true,
+          "sigma_proof_entropy": 4.9,
+          "optimal_estimator_mean_j": 4.9,
+          "optimal_estimator_variance_var_j": 4.9,
+          "variational_functional_f_val": 4.9,
+          "variational_efficiency_eta": 1.0,
+          "suboptimal_functional_f_val": 3.5,
+          "formal_proof_dissipation_uncertainty_isomorphism": "Lean 4 Mathlib.Combinatorics.Additive Gingrich-Rotskoff Variational Equality on Sub-Cubic Reduction DAG"
+        },
+        "formal_math_eth": {
+          "parity_verified": true,
+          "variational_dissipation_equality_satisfied": true,
+          "sigma_proof_entropy": 5.5,
+          "optimal_estimator_mean_j": 5.5,
+          "optimal_estimator_variance_var_j": 5.5,
+          "variational_functional_f_val": 5.5,
+          "variational_efficiency_eta": 1.0,
+          "suboptimal_functional_f_val": 4.0,
+          "formal_proof_dissipation_uncertainty_isomorphism": "Lean 4 Mathlib.Complexity.Sparsification Gingrich-Rotskoff Variational Equality on ETH Refutation DAG"
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -9405,7 +9537,7 @@
           },
           "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
           "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
           "alluvial_hypothesis_flux_pct": 7.17,
           "stage_verification_status": "KERNEL_VERIFIED"
         },
@@ -9432,7 +9564,7 @@
           },
           "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
           "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
           "alluvial_hypothesis_flux_pct": 6.75,
           "stage_verification_status": "KERNEL_VERIFIED"
         }
@@ -9751,7 +9883,7 @@
           },
           "cf_biophysical_analog": "AlphaEvolve-CF Pareto frontier pruning of combinatorial multi-drug dosing space",
           "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.ade2216",
-          "plain_english_summary": "The rate-limiting transition state: rewrites a_i + b_k <= a_j + b_k as a_i - a_j <= b_j - b_i to sort differences once and shave logarithmic factors—just as Pareto dominance prunes exponential drug combinations.",
+          "plain_english_summary": "The rate-limiting transition state: rewrites a_i + b_k <= a_j + b_k as a_i - a_j <= b_j - b_i to sort differences once and shave logarithmic factors\u2014just as Pareto dominance prunes exponential drug combinations.",
           "alluvial_hypothesis_flux_pct": 14.44,
           "stage_verification_status": "KERNEL_VERIFIED"
         },
@@ -10108,7 +10240,7 @@
           },
           "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
           "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
           "alluvial_hypothesis_flux_pct": 75.78,
           "stage_verification_status": "KERNEL_VERIFIED"
         },
@@ -10135,7 +10267,7 @@
           },
           "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
           "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
           "alluvial_hypothesis_flux_pct": 75.31,
           "stage_verification_status": "KERNEL_VERIFIED"
         }
@@ -10290,7 +10422,7 @@
           },
           "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
           "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
           "alluvial_hypothesis_flux_pct": 0.0,
           "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
         },
@@ -10317,7 +10449,7 @@
           },
           "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
           "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
           "alluvial_hypothesis_flux_pct": 0.0,
           "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
         }
@@ -10472,7 +10604,7 @@
           },
           "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
           "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
           "alluvial_hypothesis_flux_pct": 0.0,
           "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
         },
@@ -10499,7 +10631,7 @@
           },
           "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
           "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
           "alluvial_hypothesis_flux_pct": 0.0,
           "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
         }
@@ -10654,7 +10786,7 @@
           },
           "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
           "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
           "alluvial_hypothesis_flux_pct": 0.11,
           "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
         },
@@ -10681,7 +10813,7 @@
           },
           "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
           "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
           "alluvial_hypothesis_flux_pct": 0.0,
           "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
         }
@@ -10836,7 +10968,7 @@
           },
           "cf_biophysical_analog": "Cooperative NBD1-NBD2 ATP-driven dimerization & TM8 hinge potentiation (PDB 6MSM / 8EIQ)",
           "cf_pdb_or_doi": "PDB 6MSM, 8EIQ | DOI: 10.1126/science.aaw7611",
-          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls—just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
+          "plain_english_summary": "The rate-limiting transition state of the proof (11,900 of 29,500 theorems): matches universal Galois deformation rings R to Hecke algebras T, using the p=3 <-> p=5 switch when mod-3 irreducibility stalls\u2014just as dual correctors and potentiators cooperatively cross the highest folding and gating barrier.",
           "alluvial_hypothesis_flux_pct": 75.78,
           "stage_verification_status": "KERNEL_VERIFIED"
         },
@@ -10863,7 +10995,7 @@
           },
           "cf_biophysical_analog": "Open chloride-conducting pore state (gamma_Cl = 8.4 pS, restored ASL >= 7.0 um)",
           "cf_pdb_or_doi": "PDB 6MSM | DOI: 10.1085/jgp.200609558",
-          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist—settling into the global thermodynamic minimum.",
+          "plain_english_summary": "Reaches the weight-2 level-2 cusp form space S_2(Gamma_0(2)), whose dimension is strictly 0. Because no such modular form exists, the hypothetical counterexample cannot exist\u2014settling into the global thermodynamic minimum.",
           "alluvial_hypothesis_flux_pct": 0.02,
           "stage_verification_status": "FRACTURED_BY_AXIOM_KNOCKOUT"
         }
@@ -11056,5 +11188,5 @@
       }
     ]
   },
-  "snapshot_sha256": "399d94df27360ef7598503ce724e3d3f6b055662e7f55d385fef03c4871bf550"
+  "snapshot_sha256": "a73abbafa179f294a584210b5c692f4200122904b04570d4eafc6429c5a2bb93"
 }
