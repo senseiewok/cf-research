@@ -75,6 +75,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Koyuk-Seifert operationally accessible bounds on fluctuations and dissipation in CFTR catalytic assemblies (Koyuk T, Seifert U Phys Rev Lett 2019, DOI: 10.1103/PhysRevLett.122.230601; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Van Vu-Hasegawa geometrical bounds of irreversibility and dynamical activity in continuous-time Markovian CFTR assemblies (Van Vu T, Hasegawa Y Phys Rev Lett 2021, DOI: 10.1103/PhysRevLett.126.010601; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Pietzonka-Barato-Seifert universal finite-time current fluctuation bounds in CFTR catalytic assemblies (Pietzonka P, Barato AC, Seifert U Phys Rev E 2016, DOI: 10.1103/PhysRevE.93.052145; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Gingrich-Rotskoff-Vaikuntanathan-Horowitz dissipation-uncertainty equality in CFTR catalytic assemblies (Gingrich TR, Rotskoff GM, Vaikuntanathan S, Horowitz JM Proc Natl Acad Sci USA 2017, DOI: 10.1073/pnas.1706270114; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -566,6 +567,26 @@ PROOF_THERMODYNAMIC_PARAMETERS: Dict[str, BiophysicalParameter] = {
         uncertainty_range=(0.750009, 1.250015),
         notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
     ),
+    "GINGRICH_ROTSKOFF_VARIATIONAL_DISSIPATION_WT": BiophysicalParameter(
+        name="GINGRICH_ROTSKOFF_VARIATIONAL_DISSIPATION_WT",
+        value=12.0,
+        units="k_B/s",
+        category="derived",
+        doi_or_pdb="10.1073/pnas.1706270114",
+        location_in_source="Gingrich-Rotskoff-Vaikuntanathan-Horowitz variational dissipation equality sigma = max_d [2<j_d> - Var(j_d)] = 12.0 k_B s^-1 in WT CFTR catalytic assembly (Gingrich et al. PNAS 2017, DOI: 10.1073/pnas.1706270114; Csanady et al. JGP 2006, DOI: 10.1085/jgp.200609558)",
+        uncertainty_range=(9.0, 15.0),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "GINGRICH_ROTSKOFF_VARIATIONAL_EFFICIENCY_WT": BiophysicalParameter(
+        name="GINGRICH_ROTSKOFF_VARIATIONAL_EFFICIENCY_WT",
+        value=1.0,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1073/pnas.1706270114",
+        location_in_source="Gingrich-Rotskoff optimal variational efficiency eta_var = (2<j_d*> - Var(j_d*)) / sigma = 1.0 saturating thermodynamic dissipation in WT CFTR gating (Gingrich et al. PNAS 2017, DOI: 10.1073/pnas.1706270114; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
+        uncertainty_range=(0.75, 1.25),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
 }
 
 
@@ -1026,6 +1047,14 @@ def evaluate_pietzonka_barato_seifert_current_bounds(n_gating_regimes: int = 5) 
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["pietzonka_barato_seifert_current_bounds_bridge"]
+
+
+def evaluate_gingrich_rotskoff_dissipation_equality(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["gingrich_rotskoff_dissipation_equality_bridge"]
+
+
 
 
 def main(argv: Sequence[str] | None = None) -> int:
