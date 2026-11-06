@@ -1,5 +1,7 @@
 # Task packet: publish `cf-evidence-loop` and the supporting research changes
 
+**Status:** applied (task packet for `T-0003`, `T-0004`, `T-0022`, `T-0037`, `T-0038`, `T-0048`; superseded `2026-10-04-finalize-packet.md` for `skills` and `research`).
+
 Paste everything below the line into the orchestrating agent in `hq`. It follows the `ai-loop-council` packet contract. It supersedes `2026-10-04-finalize-packet.md` for the `skills` and `research` repos; the `hq` skill-edit steps in that packet still apply and are referenced, not repeated.
 
 ---

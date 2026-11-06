@@ -9,6 +9,7 @@
   "total_modules": 103,
   "infrastructure_modules_count": 4,
   "test_suites_count": 165,
+  "formal_proof_bridge_suites_count": 59,
   "persona_summary": {
     "researchers": 102,
     "builders": 1
@@ -1214,5 +1215,361 @@
         }
       ]
     }
-  }
+  },
+  "formal_proof_bridge_suites": [
+    {
+      "test_file": "test_barato_hartich_seifert_dissipation.py",
+      "round": "Round 50",
+      "task": "T-0605",
+      "summary": "Unit tests for Round 50 (T-0605): Barato-Hartich-Seifert Information Thermodynamics & Dissipation Bounds in CFTR Gating in cf-research"
+    },
+    {
+      "test_file": "test_barato_seifert_brownian_clock_precision.py",
+      "round": "Round 82",
+      "task": "T-0675",
+      "summary": "Unit tests for Round 82 (T-0675): Barato-Seifert Cost of Precision & Biomolecular Clock Efficiency in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_barato_seifert_universal_tur.py",
+      "round": "Round 74",
+      "task": "T-0659",
+      "summary": "Unit tests for Round 74 (T-0659): Barato-Seifert Universal Thermodynamic Uncertainty Relation for Molecular Motors in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_brandner_hanazato_saito_ballistic_tur.py",
+      "round": "Round 85",
+      "task": "T-0682",
+      "summary": "Unit tests for Round 85 (T-0682): Brandner-Hanazato-Saito Universal Thermodynamic Bounds on Ballistic Transport & Channel Precision in cf-research"
+    },
+    {
+      "test_file": "test_current_fluctuation_tur.py",
+      "round": "Round 45",
+      "task": "T-0595",
+      "summary": "Unit tests for Round 45 (T-0595): Seifert-Gingrich Current Fluctuation Theorems & Generalized TUR for CFTR Channel Kinetics in cf-research"
+    },
+    {
+      "test_file": "test_dechant_sasa_bounds.py",
+      "round": "Round 44",
+      "task": "T-0593",
+      "summary": "Unit tests for Round 44 (T-0593): Dechant-Sasa Wasserstein Fluctuation Dissipation Bounds for CFTR Gating in cf-research"
+    },
+    {
+      "test_file": "test_dechant_sasa_fluctuation_response.py",
+      "round": "Round 58",
+      "task": "T-0620",
+      "summary": "Unit tests for Round 58 (T-0620): Dechant-Sasa Fluctuation-Response Inequality and Out-of-Equilibrium Susceptibility in CFTR Gating in cf-research"
+    },
+    {
+      "test_file": "test_dechant_sasa_multidimensional_tur.py",
+      "round": "Round 75",
+      "task": "T-0661",
+      "summary": "Unit tests for Round 75 (T-0661): Dechant-Sasa Multidimensional Thermodynamic Uncertainty Relations & Fluctuation-Response Bounds in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_dechant_sasa_speed_limits.py",
+      "round": "Round 52",
+      "task": "T-0607",
+      "summary": "Unit tests for Round 52 (T-0607): Dechant-Sasa Thermodynamic Speed Limits & Geometric Bounds in CFTR Gating in cf-research"
+    },
+    {
+      "test_file": "test_dechant_sasa_wasserstein_bounds.py",
+      "round": "Round 65",
+      "task": "T-0635",
+      "summary": "Unit tests for Round 65 (T-0635): Dechant-Sasa Wasserstein Distance & Geometric Fluctuation Bounds in CFTR Macromolecular Transition Manifolds in cf-research"
+    },
+    {
+      "test_file": "test_esposito_parrondo_sagawa_information_efficiency.py",
+      "round": "Round 67",
+      "task": "T-0639",
+      "summary": "Unit tests for Round 67 (T-0639): Esposito-Parrondo-Sagawa Second-Law Information Efficiency & Allosteric Feedback Bounds in CFTR Macromolecular Gating Cascades in cf-research"
+    },
+    {
+      "test_file": "test_esposito_van_den_broeck_entropy.py",
+      "round": "Round 54",
+      "task": "T-0612",
+      "summary": "Unit tests for Round 54 (T-0612): Esposito-Van den Broeck Three-Way Entropy Production Decomposition & Housekeeping Dissipation in CFTR Gating in cf-research"
+    },
+    {
+      "test_file": "test_falasco_esposito_dissipation_time.py",
+      "round": "Round 57",
+      "task": "T-0619",
+      "summary": "Unit tests for Round 57 (T-0619): Falasco-Esposito Dissipation-Time Uncertainty Relation in CFTR Non-Equilibrium Transitions in cf-research"
+    },
+    {
+      "test_file": "test_falasco_esposito_dissipation_time_uncertainty.py",
+      "round": "Round 70",
+      "task": "T-0646",
+      "summary": "Unit tests for Round 70 (T-0646): Falasco-Esposito Dissipation-Time Uncertainty Relations & Gating Precision Trade-offs in Driven CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_freidlin_wentzell_quasipotential.py",
+      "round": "Round 30",
+      "task": "T-0574",
+      "summary": "Unit tests for Round 30 (T-0574): Freidlin-Wentzell Large Deviation Theory & Quasipotential Action for Rare CFTR Opening Events"
+    },
+    {
+      "test_file": "test_garrahan_frenetic_first_passage_bound.py",
+      "round": "Round 83",
+      "task": "T-0677",
+      "summary": "Unit tests for Round 83 (T-0677): Garrahan Dynamical Activity First-Passage Bounds & Frenetic Gating Regularity in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_geometric_gauge_holonomy.py",
+      "round": "Round 37",
+      "task": "T-0581",
+      "summary": "Unit tests for Round 37 (T-0581): Geometrical Thermodynamic Gauge Theory & Berry Holonomy for CFTR Catalytic Cycles in cf-research"
+    },
+    {
+      "test_file": "test_gingrich_horowitz_first_passage_tur.py",
+      "round": "Round 81",
+      "task": "T-0673",
+      "summary": "Unit tests for Round 81 (T-0673): Gingrich-Horowitz First Arrival Time Bounds & Dwell-Time TUR in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_gingrich_horowitz_thermodynamic_uncertainty.py",
+      "round": "Round 72",
+      "task": "T-0655",
+      "summary": "Unit tests for Round 72 (T-0655): Gingrich-Horowitz Finite-Time Thermodynamic Uncertainty Relations & Current Precision Bounds in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_gingrich_rotskoff_dissipation_equality.py",
+      "round": "Round 79",
+      "task": "T-0669",
+      "summary": "Unit tests for Round 79 (T-0669): Gingrich-Rotskoff-Vaikuntanathan-Horowitz Dissipation-Uncertainty Equality in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_glansdorff_prigogine_evolution.py",
+      "round": "Round 26",
+      "task": "T-0553",
+      "summary": "Unit tests for Round 26 (T-0553): Glansdorff-Prigogine Universal Evolution Criterion & Non-Linear Gating Dynamics in CFTR"
+    },
+    {
+      "test_file": "test_graham_haken_potential.py",
+      "round": "Round 31",
+      "task": "T-0575",
+      "summary": "Unit tests for Round 31 (T-0575): Graham-Haken Non-Equilibrium Generalized Potential for Multi-Stable CFTR Gating"
+    },
+    {
+      "test_file": "test_hartich_barato_seifert_bipartite.py",
+      "round": "Round 47",
+      "task": "T-0599",
+      "summary": "Unit tests for Round 47 (T-0599): Hartich-Barato-Seifert Bipartite Information Thermodynamics & Subsystem Entropy Bounds in cf-research"
+    },
+    {
+      "test_file": "test_hatano_sasa_steady_state_thermodynamics.py",
+      "round": "Round 55",
+      "task": "T-0615",
+      "summary": "Unit tests for Round 55 (T-0615): Hatano-Sasa Steady-State Thermodynamics & Dissipated Work Bounds in CFTR Gating Transitions in cf-research"
+    },
+    {
+      "test_file": "test_horowitz_parrondo_feedback_control.py",
+      "round": "Round 51",
+      "task": "T-0606",
+      "summary": "Unit tests for Round 51 (T-0606): Horowitz-Parrondo Information Flow & Feedback Control in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_knst_nonequilibrium_work.py",
+      "round": "Round 35",
+      "task": "T-0579",
+      "summary": "Unit tests for Round 35 (T-0579): Komatsu-Nakagawa-Sasa-Tasaki (KNST) Non-Equilibrium Work & Free Energy for CFTR Gating Transitions"
+    },
+    {
+      "test_file": "test_koyuk_seifert_biochemical_clock_speed.py",
+      "round": "Round 69",
+      "task": "T-0643",
+      "summary": "Unit tests for Round 69 (T-0643): Koyuk-Seifert Thermodynamic Speed Bounds on Biochemical Clocks & Cyclic CFTR Macromolecular Oscillations in cf-research"
+    },
+    {
+      "test_file": "test_koyuk_seifert_cyclic_speed_dissipation.py",
+      "round": "Round 56",
+      "task": "T-0616",
+      "summary": "Unit tests for Round 56 (T-0616): Koyuk-Seifert General Bound on Speed, Precision, and Dissipation in CFTR Biochemical Gating Cycles in cf-research"
+    },
+    {
+      "test_file": "test_koyuk_seifert_operationally_accessible_bounds.py",
+      "round": "Round 76",
+      "task": "T-0663",
+      "summary": "Unit tests for Round 76 (T-0663): Koyuk-Seifert Operationally Accessible Bounds on Fluctuations and Dissipation in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_koyuk_seifert_periodic_tur.py",
+      "round": "Round 84",
+      "task": "T-0681",
+      "summary": "Unit tests for Round 84 (T-0681): Koyuk-Seifert Periodically Driven Thermodynamic Uncertainty Relations in Cyclic CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_kpv_relative_entropy.py",
+      "round": "Round 43",
+      "task": "T-0591",
+      "summary": "Unit tests for Round 43 (T-0591): Kawai-Parrondo-Van den Broeck (KPV) Dissipation-Information Relative Entropy Equality for CFTR Trajectories in cf-research"
+    },
+    {
+      "test_file": "test_lebowitz_spohn_action.py",
+      "round": "Round 59",
+      "task": "T-0623",
+      "summary": "Unit tests for Round 59 (T-0623): Lebowitz-Spohn Stochastic Action Functional and Gallavotti-Cohen Symmetry in CFTR Gating Transitions in cf-research"
+    },
+    {
+      "test_file": "test_li_horowitz_dissipation_quantification.py",
+      "round": "Round 80",
+      "task": "T-0671",
+      "summary": "Unit tests for Round 80 (T-0671): Li-Horowitz-Gingrich-Fakhri Dissipation Quantification from Fluctuations in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_maes_netocny_response.py",
+      "round": "Round 33",
+      "task": "T-0577",
+      "summary": "Unit tests for Round 33 (T-0577): Maes-Neto\u010dn\u00fd Non-Equilibrium Response Formula & Excess Entropy Production for Rescued CFTR Kinetics"
+    },
+    {
+      "test_file": "test_manikandan_gupta_krishnamurthy_bounds.py",
+      "round": "Round 63",
+      "task": "T-0631",
+      "summary": "Unit tests for Round 63 (T-0631): Manikandan-Gupta-Krishnamurthy Operationally Accessible Bounds on Dissipation & Current Fluctuations in CFTR Channel Networks in cf-research"
+    },
+    {
+      "test_file": "test_onsager_electroosmotic_transport.py",
+      "round": "Round 24",
+      "task": "T-0546",
+      "summary": "Unit tests for Round 24 (T-0546): Onsager Reciprocal Relations & Cross-Coupled Electro-Osmotic Transport Across Airway Surface Liquid"
+    },
+    {
+      "test_file": "test_onsager_machlup_action.py",
+      "round": "Round 29",
+      "task": "T-0567",
+      "summary": "Unit tests for Round 29 (T-0567): Stochastic Path Integral & Onsager-Machlup Action for Active CFTR Dimerization"
+    },
+    {
+      "test_file": "test_parrondo_horowitz_sagawa_information.py",
+      "round": "Round 48",
+      "task": "T-0601",
+      "summary": "Unit tests for Round 48 (T-0601): Parrondo-Horowitz-Sagawa Information Thermodynamics & Maxwell Demon Feedback Cooling in CFTR Channel Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_pietzonka_barato_seifert_current_bounds.py",
+      "round": "Round 78",
+      "task": "T-0667",
+      "summary": "Unit tests for Round 78 (T-0667): Pietzonka-Barato-Seifert Universal Finite-Time Current Bounds in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_pietzonka_seifert_bounds.py",
+      "round": "Round 46",
+      "task": "T-0597",
+      "summary": "Unit tests for Round 46 (T-0597): Pietzonka-Seifert Finite-Time Dissipation Bounds & Molecular Machine Efficiency in cf-research"
+    },
+    {
+      "test_file": "test_pietzonka_seifert_power_efficiency_constancy.py",
+      "round": "Round 73",
+      "task": "T-0657",
+      "summary": "Unit tests for Round 73 (T-0657): Pietzonka-Seifert Universal Power-Efficiency-Constancy Trade-Off & Molecular Engine Bounds in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_polettini_esposito_cycle_decomposition.py",
+      "round": "Round 61",
+      "task": "T-0627",
+      "summary": "Unit tests for Round 61 (T-0627): Polettini-Esposito Non-Convex Relative Entropy and Cycle Dissipation Decomposition in CFTR Gating Cycles in cf-research"
+    },
+    {
+      "test_file": "test_polettini_geometric_gauge_decomposition.py",
+      "round": "Round 66",
+      "task": "T-0636",
+      "summary": "Unit tests for Round 66 (T-0636): Polettini Geometric Gauge Decomposition & Non-Convex Relative Entropy in CFTR Macromolecular Transition Networks in cf-research"
+    },
+    {
+      "test_file": "test_prigogine_minimum_entropy_production.py",
+      "round": "Round 25",
+      "task": "T-0551",
+      "summary": "Unit tests for Round 25 (T-0551): Prigogine Minimum Entropy Production Principle & Stationary NESS Stability in CFTR Gating"
+    },
+    {
+      "test_file": "test_proesmans_discrete_time_tur.py",
+      "round": "Round 86",
+      "task": "T-0685",
+      "summary": "Unit tests for Round 86 (T-0685): Proesmans-Van den Broeck Discrete-Time TUR & Stroboscopic CFTR Gating Bounds in cf-research"
+    },
+    {
+      "test_file": "test_prost_joanny_parrondo_fdt.py",
+      "round": "Round 41",
+      "task": "T-0587",
+      "summary": "Unit tests for Round 41 (T-0587): Prost-Joanny-Parrondo Generalized Fluctuation-Dissipation Theorem for Molecular Motors & CFTR Active Gating in cf-research"
+    },
+    {
+      "test_file": "test_rao_esposito_conservation_laws.py",
+      "round": "Round 62",
+      "task": "T-0629",
+      "summary": "Unit tests for Round 62 (T-0629): Rao-Esposito Conservation Laws and Topological Decomposition of Dissipation in CFTR Channel Networks in cf-research"
+    },
+    {
+      "test_file": "test_sagawa_ueda_fluctuation_efficiency.py",
+      "round": "Round 49",
+      "task": "T-0603",
+      "summary": "Unit tests for Round 49 (T-0603): Sagawa-Ueda Generalized Fluctuation Theorem & Information Efficacy in Allosteric Drug Stabilization in cf-research"
+    },
+    {
+      "test_file": "test_sasa_tasaki_equality.py",
+      "round": "Round 39",
+      "task": "T-0583",
+      "summary": "Unit tests for Round 39 (T-0583): Non-Equilibrium Steady-State Transition Bounds & Sasa-Tasaki Equality in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_schnakenberg_cycle_kinetics.py",
+      "round": "Round 28",
+      "task": "T-0565",
+      "summary": "Unit tests for Round 28 (T-0565): Schnakenberg Cycle Kinetics, Non-Equilibrium Cycle Flux Splitting & Detailed Balance Breaking in CFTR Gating"
+    },
+    {
+      "test_file": "test_seifert_trajectory_entropy_production.py",
+      "round": "Round 40",
+      "task": "T-0585",
+      "summary": "Unit tests for Round 40 (T-0585): Seifert Trajectory Stochastic Entropy Production & Fluctuation Theorem in CFTR Catalytic Cycles in cf-research"
+    },
+    {
+      "test_file": "test_shiraishi_funo_saito_speed_limit.py",
+      "round": "Round 68",
+      "task": "T-0641",
+      "summary": "Unit tests for Round 68 (T-0641): Shiraishi-Funo-Saito Thermodynamic Speed Limits & Operational Gating Bounds in CFTR Macromolecular Transition Dynamics in cf-research"
+    },
+    {
+      "test_file": "test_shiraishi_funo_saito_speed_limits.py",
+      "round": "Round 53",
+      "task": "T-0611",
+      "summary": "Unit tests for Round 53 (T-0611): Shiraishi-Funo-Saito Universal Thermodynamic Speed Limits & Operational Cost Bounds in CFTR Channel Gating in cf-research"
+    },
+    {
+      "test_file": "test_shiraishi_saito_tasaki_power_efficiency.py",
+      "round": "Round 87",
+      "task": "T-0686",
+      "summary": "Unit tests for Round 87 (T-0686): Shiraishi-Saito-Tasaki Power-Efficiency Trade-Off & CFTR NBD1-NBD2 Engine Bounds in cf-research"
+    },
+    {
+      "test_file": "test_speck_seifert_fdt.py",
+      "round": "Round 42",
+      "task": "T-0589",
+      "summary": "Unit tests for Round 42 (T-0589): Speck-Seifert Non-Equilibrium Fluctuation-Dissipation Theorem & Velocity Field Coupling for CFTR Active Gating in cf-research"
+    },
+    {
+      "test_file": "test_speck_seifert_housekeeping.py",
+      "round": "Round 60",
+      "task": "T-0624",
+      "summary": "Unit tests for Round 60 (T-0624): Speck-Seifert Housekeeping Heat Fluctuation Theorem and Non-Equilibrium Dissipation in CFTR Gating Cycles in cf-research"
+    },
+    {
+      "test_file": "test_van_vu_hasegawa_geometrical_irreversibility.py",
+      "round": "Round 77",
+      "task": "T-0665",
+      "summary": "Unit tests for Round 77 (T-0665): Van Vu-Hasegawa Geometrical Bounds of Irreversibility and Dynamical Activity in CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_van_vu_hasegawa_thermodynamic_uncertainty.py",
+      "round": "Round 71",
+      "task": "T-0650",
+      "summary": "Unit tests for Round 71 (T-0650): Van Vu - Hasegawa Thermodynamic Uncertainty Relations & Dynamical Activity Bounds in Arbitrarily Driven CFTR Catalytic Assemblies in cf-research"
+    },
+    {
+      "test_file": "test_wachtel_rao_esposito_coarse_graining.py",
+      "round": "Round 64",
+      "task": "T-0633",
+      "summary": "Unit tests for Round 64 (T-0633): Wachtel-Rao-Esposito Thermodynamically Consistent Coarse Graining & Cycle Affinity Invariants in CFTR Conformational Transition Networks in cf-research"
+    }
+  ]
 }

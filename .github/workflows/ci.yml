@@ -59,6 +59,8 @@ jobs:
         run: python check_sync_skill_catalog.py
       - name: catalog fields documented
         run: python tools/sources/check_catalog_fields.py
+      - name: repository organization and index sync check
+        run: python tools/sources/check_repo_organization.py
       - name: manual-downloads list up to date
         run: python tools/sources/make_manual_downloads.py --check
       - name: resources check
@@ -78,8 +80,8 @@ jobs:
       - name: CFTR model tests (standard library; browser cases skip)
         working-directory: tools/cftr-model/tests
         run: python -m unittest discover -v
-      - name: discovery models and index check
-        run: python tools/discovery/discovery_council.py --check-index && python tools/discovery/discovery_council.py --falsify-all
+      - name: discovery models, index check, falsification, and stdlib unit tests
+        run: python tools/discovery/discovery_council.py --check-index && python tools/discovery/discovery_council.py --falsify-all && python tools/discovery/discovery_council.py --run-stdlib-tests
       - name: benchmark suite tests
         run: python -m unittest discover -s tools/benchmark -v
       - name: checks_benchmark suite tests
