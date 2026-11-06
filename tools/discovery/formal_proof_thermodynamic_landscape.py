@@ -71,6 +71,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Gingrich-Horowitz finite-time thermodynamic uncertainty relations & current precision bounds in CFTR catalytic assemblies (Gingrich TR et al. Phys Rev Lett 2016, DOI: 10.1103/PhysRevLett.116.120601; Horowitz JM, Gingrich TR Nat Phys 2020, DOI: 10.1038/s41567-019-0702-6; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Pietzonka-Seifert universal trade-off between power, efficiency, and constancy in steady-state heat engines and biomolecular assemblies (Pietzonka P, Seifert U Phys Rev Lett 2018, DOI: 10.1103/PhysRevLett.120.190602; Barato AC, Seifert U Phys Rev Lett 2015, DOI: 10.1103/PhysRevLett.114.158101; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Barato-Seifert universal thermodynamic uncertainty relation for biomolecular processes & molecular motors in CFTR catalytic assemblies (Barato AC, Seifert U Phys Rev Lett 2015, DOI: 10.1103/PhysRevLett.114.158101; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Dechant-Sasa multidimensional thermodynamic uncertainty relations & fluctuation-response bounds in CFTR catalytic assemblies (Dechant A, Sasa SI Proc Natl Acad Sci USA 2020, DOI: 10.1073/pnas.1918386117; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -500,6 +501,26 @@ PROOF_THERMODYNAMIC_PARAMETERS: Dict[str, BiophysicalParameter] = {
         doi_or_pdb="10.1103/PhysRevLett.114.158101",
         location_in_source="Barato-Seifert thermodynamic uncertainty product Q in WT CFTR catalytic ATP hydrolysis cycle (Barato & Seifert PRL 2015, DOI: 10.1103/PhysRevLett.114.158101; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
         uncertainty_range=(3.045, 5.075),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "DECHANT_SASA_QUADRATIC_FORM_WT": BiophysicalParameter(
+        name="DECHANT_SASA_QUADRATIC_FORM_WT",
+        value=4.1204,
+        units="s^-1",
+        category="derived",
+        doi_or_pdb="10.1073/pnas.1918386117",
+        location_in_source="Dechant-Sasa multidimensional quadratic form j^T chi^-1 j <= sigma / (2 kB) in WT CFTR catalytic assembly (Dechant & Sasa PNAS 2020, DOI: 10.1073/pnas.1918386117; Csanady et al. JGP 2006, DOI: 10.1085/jgp.200609558)",
+        uncertainty_range=(3.0903, 5.1505),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "DECHANT_SASA_BOUND_WT": BiophysicalParameter(
+        name="DECHANT_SASA_BOUND_WT",
+        value=7.25,
+        units="s^-1",
+        category="derived",
+        doi_or_pdb="10.1073/pnas.1918386117",
+        location_in_source="Dechant-Sasa upper bound sigma / (2 kB) = 14.5 / 2.0 = 7.25 for coupled active chloride transport and ATP hydrolysis (Dechant & Sasa PNAS 2020, DOI: 10.1073/pnas.1918386117; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
+        uncertainty_range=(5.4375, 9.0625),
         notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
     ),
 }
@@ -937,6 +958,12 @@ def evaluate_barato_seifert_universal_tur(n_gating_regimes: int = 5) -> Dict[str
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["barato_seifert_universal_tur_bridge"]
+
+
+def evaluate_dechant_sasa_multidimensional_tur(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["dechant_sasa_multidimensional_tur_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
