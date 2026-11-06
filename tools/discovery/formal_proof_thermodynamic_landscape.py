@@ -1210,6 +1210,18 @@ def evaluate_garrahan_frenetic_first_passage_bound(n_gating_regimes: int = 5) ->
     return evaluate_two_way_bridge_isomorphism()["garrahan_frenetic_first_passage_bound_bridge"]
 
 
+def evaluate_koyuk_seifert_periodic_tur(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["koyuk_seifert_periodic_tur_bridge"]
+
+
+def evaluate_brandner_hanazato_saito_ballistic_tur(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["brandner_hanazato_saito_ballistic_tur_bridge"]
+
+
 
 
 def main(argv: Sequence[str] | None = None) -> int:
