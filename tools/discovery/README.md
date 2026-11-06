@@ -4,11 +4,11 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `103` (plus 4 infrastructure scripts and 165 unit test suites)
+- **Total Verified Modules:** `103` (plus 4 infrastructure scripts and 167 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
 - **`merge` (Consolidate into Canonical Module):** `14`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
-- **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `59`
+- **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
 Verify this index, all module registrations, and the pure-stdlib unit test suites deterministically with:
 
@@ -163,7 +163,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `test_symbolic_invariants.py` | Pure-stdlib complex-step autodiff (`Im(f(x+ih))/h`), exact integrals, and Buckingham Pi dimensional homogeneity (`T-0505`) | Self-contained (`unittest`) |
 | `data/canonical_math_bridge_snapshot.json` | Locked Lean 4 / formal proof structural snapshot (`fermats_last_theorem`, `formal_math_zeta23`, `formal_math_3sum_apsp`) | `test_formal_proof_thermodynamic_landscape.py` |
 
-## Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py` — 59 suites)
+## Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py` — 61 suites)
 
 | Test Suite | Round | Task | Verified Theorem & CF Biophysical Bridge |
 | --- | --- | --- | --- |
@@ -205,6 +205,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `test_manikandan_gupta_krishnamurthy_bounds.py` | `Round 63` | `T-0631` | Unit tests for Round 63 (T-0631): Manikandan-Gupta-Krishnamurthy Operationally Accessible Bounds on Dissipation & Current Fluctuations in CFTR Channel Networks in cf-research |
 | `test_onsager_electroosmotic_transport.py` | `Round 24` | `T-0546` | Unit tests for Round 24 (T-0546): Onsager Reciprocal Relations & Cross-Coupled Electro-Osmotic Transport Across Airway Surface Liquid |
 | `test_onsager_machlup_action.py` | `Round 29` | `T-0567` | Unit tests for Round 29 (T-0567): Stochastic Path Integral & Onsager-Machlup Action for Active CFTR Dimerization |
+| `test_pal_rahav_reuveni_reset_tur.py` | `Round 89` | `T-0692` | Unit tests for Round 89 (T-0692): Pal-Rahav-Reuveni First-Passage Thermodynamic Uncertainty Relations under Stochastic Gating Resets in cf-research |
 | `test_parrondo_horowitz_sagawa_information.py` | `Round 48` | `T-0601` | Unit tests for Round 48 (T-0601): Parrondo-Horowitz-Sagawa Information Thermodynamics & Maxwell Demon Feedback Cooling in CFTR Channel Assemblies in cf-research |
 | `test_pietzonka_barato_seifert_current_bounds.py` | `Round 78` | `T-0667` | Unit tests for Round 78 (T-0667): Pietzonka-Barato-Seifert Universal Finite-Time Current Bounds in CFTR Catalytic Assemblies in cf-research |
 | `test_pietzonka_seifert_bounds.py` | `Round 46` | `T-0597` | Unit tests for Round 46 (T-0597): Pietzonka-Seifert Finite-Time Dissipation Bounds & Molecular Machine Efficiency in cf-research |
