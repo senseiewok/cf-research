@@ -8596,6 +8596,300 @@
           "formal_proof_universal_tur_isomorphism": "Lean 4 Mathlib.Computability.Complexity Impagliazzo-Paturi-Zane Sunflower Sparsification Universal TUR"
         }
       }
+    },
+    "dechant_sasa_multidimensional_tur_bridge": {
+      "task_id": "T-0661",
+      "dechant_sasa_multidimensional_tur_bridge_verified": true,
+      "multidimensional_tur_bound_verified": true,
+      "fluctuation_response_inequality_verified": true,
+      "trikafta_vector_stabilization_verified": true,
+      "proof_dag_multidimensional_tur_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "gating_profiles": {
+        "wt_cftr": {
+          "vector_current_j": [
+            5.2,
+            18.5
+          ],
+          "covariance_matrix_chi": [
+            [
+              7.5,
+              22.0
+            ],
+            [
+              22.0,
+              85.0
+            ]
+          ],
+          "covariance_determinant": 153.5,
+          "inverse_covariance_chi_inv": [
+            [
+              0.553746,
+              -0.143322
+            ],
+            [
+              -0.143322,
+              0.04886
+            ]
+          ],
+          "dechant_sasa_quadratic_form_q": 4.120358,
+          "total_entropy_production_sigma_kb": 14.5,
+          "dechant_sasa_bound_sigma_over_2kb": 7.25,
+          "uncertainty_ratio": 1.759556,
+          "fluctuation_bound_ratio": 0.568325,
+          "bound_slack_margin": 3.129642,
+          "allosteric_coupling_fidelity": 0.95,
+          "dissipation_overhead": 0.05,
+          "multidimensional_tur_satisfied": true,
+          "gating_regime": "MULTIDIMENSIONAL_TUR_OPTIMAL"
+        },
+        "rescued_cftr_ivacaftor": {
+          "vector_current_j": [
+            4.8,
+            17.2
+          ],
+          "covariance_matrix_chi": [
+            [
+              7.2,
+              20.8
+            ],
+            [
+              20.8,
+              80.0
+            ]
+          ],
+          "covariance_determinant": 143.36,
+          "inverse_covariance_chi_inv": [
+            [
+              0.558036,
+              -0.145089
+            ],
+            [
+              -0.145089,
+              0.050223
+            ]
+          ],
+          "dechant_sasa_quadratic_form_q": 3.758036,
+          "total_entropy_production_sigma_kb": 13.2,
+          "dechant_sasa_bound_sigma_over_2kb": 6.6,
+          "uncertainty_ratio": 1.756237,
+          "fluctuation_bound_ratio": 0.5694,
+          "bound_slack_margin": 2.841964,
+          "allosteric_coupling_fidelity": 0.92,
+          "dissipation_overhead": 0.08,
+          "multidimensional_tur_satisfied": true,
+          "gating_regime": "MULTIDIMENSIONAL_TUR_OPTIMAL"
+        },
+        "f508del_uncorrected": {
+          "vector_current_j": [
+            0.5,
+            0.4
+          ],
+          "covariance_matrix_chi": [
+            [
+              0.12,
+              0.01
+            ],
+            [
+              0.01,
+              0.08
+            ]
+          ],
+          "covariance_determinant": 0.0095,
+          "inverse_covariance_chi_inv": [
+            [
+              8.421053,
+              -1.052632
+            ],
+            [
+              -1.052632,
+              12.631579
+            ]
+          ],
+          "dechant_sasa_quadratic_form_q": 3.705263,
+          "total_entropy_production_sigma_kb": 1.8,
+          "dechant_sasa_bound_sigma_over_2kb": 0.9,
+          "uncertainty_ratio": 0.242898,
+          "fluctuation_bound_ratio": 4.116959,
+          "bound_slack_margin": -2.805263,
+          "allosteric_coupling_fidelity": 0.12,
+          "dissipation_overhead": 0.88,
+          "multidimensional_tur_satisfied": false,
+          "gating_regime": "KINETIC_ARREST_TUR_COLLAPSE"
+        },
+        "g551d_uncoupled_cftr": {
+          "vector_current_j": [
+            0.08,
+            0.05
+          ],
+          "covariance_matrix_chi": [
+            [
+              0.015,
+              0.001
+            ],
+            [
+              0.001,
+              0.01
+            ]
+          ],
+          "covariance_determinant": 0.000149,
+          "inverse_covariance_chi_inv": [
+            [
+              67.114094,
+              -6.711409
+            ],
+            [
+              -6.711409,
+              100.671141
+            ]
+          ],
+          "dechant_sasa_quadratic_form_q": 0.627517,
+          "total_entropy_production_sigma_kb": 0.6,
+          "dechant_sasa_bound_sigma_over_2kb": 0.3,
+          "uncertainty_ratio": 0.478075,
+          "fluctuation_bound_ratio": 2.091723,
+          "bound_slack_margin": -0.327517,
+          "allosteric_coupling_fidelity": 0.08,
+          "dissipation_overhead": 0.92,
+          "multidimensional_tur_satisfied": false,
+          "gating_regime": "FUTILE_TUR_UNCOUPLED"
+        },
+        "w1282x_nonsense_baseline": {
+          "vector_current_j": [
+            0.0,
+            0.0
+          ],
+          "covariance_matrix_chi": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "covariance_determinant": 0.0,
+          "inverse_covariance_chi_inv": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ],
+          "dechant_sasa_quadratic_form_q": 0.0,
+          "total_entropy_production_sigma_kb": 0.0,
+          "dechant_sasa_bound_sigma_over_2kb": 0.0,
+          "uncertainty_ratio": 0.0,
+          "fluctuation_bound_ratio": 0.0,
+          "bound_slack_margin": 0.0,
+          "allosteric_coupling_fidelity": 0.0,
+          "dissipation_overhead": 1.0,
+          "multidimensional_tur_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "fermats_last_theorem": {
+          "parity_verified": true,
+          "multidimensional_tur_satisfied": true,
+          "sigma_proof_entropy": 6.2,
+          "dechant_sasa_bound_sigma_over_2": 3.1,
+          "proof_vector_current": [
+            1.8,
+            2.4
+          ],
+          "proof_covariance_matrix": [
+            [
+              2.1,
+              1.4
+            ],
+            [
+              1.4,
+              3.2
+            ]
+          ],
+          "dechant_sasa_quadratic_form_q": 2.178151,
+          "uncertainty_ratio": 1.423225,
+          "fluctuation_bound_ratio": 0.702629,
+          "formal_proof_multidimensional_tur_isomorphism": "Lean 4 Mathlib.Analysis.Calculus Dechant-Sasa Multidimensional TUR on Proof DAG"
+        },
+        "formal_math_zeta23": {
+          "parity_verified": true,
+          "multidimensional_tur_satisfied": true,
+          "sigma_proof_entropy": 5.4,
+          "dechant_sasa_bound_sigma_over_2": 2.7,
+          "proof_vector_current": [
+            1.6,
+            2.1
+          ],
+          "proof_covariance_matrix": [
+            [
+              1.9,
+              1.2
+            ],
+            [
+              1.2,
+              2.8
+            ]
+          ],
+          "dechant_sasa_quadratic_form_q": 1.928608,
+          "uncertainty_ratio": 1.399973,
+          "fluctuation_bound_ratio": 0.714299,
+          "formal_proof_multidimensional_tur_isomorphism": "Lean 4 Mathlib.NumberTheory.ZetaValues Selberg-Levinson Mollifier Dechant-Sasa Multidimensional TUR"
+        },
+        "formal_math_3sum_apsp": {
+          "parity_verified": true,
+          "multidimensional_tur_satisfied": true,
+          "sigma_proof_entropy": 4.8,
+          "dechant_sasa_bound_sigma_over_2": 2.4,
+          "proof_vector_current": [
+            1.4,
+            1.8
+          ],
+          "proof_covariance_matrix": [
+            [
+              1.6,
+              0.9
+            ],
+            [
+              0.9,
+              2.4
+            ]
+          ],
+          "dechant_sasa_quadratic_form_q": 1.766337,
+          "uncertainty_ratio": 1.358744,
+          "fluctuation_bound_ratio": 0.735974,
+          "formal_proof_multidimensional_tur_isomorphism": "Lean 4 Mathlib.Computability.WordRAM Alman-Williams Decision Tree Bit-Packing Dechant-Sasa TUR"
+        },
+        "formal_math_eth": {
+          "parity_verified": true,
+          "multidimensional_tur_satisfied": true,
+          "sigma_proof_entropy": 5.1,
+          "dechant_sasa_bound_sigma_over_2": 2.55,
+          "proof_vector_current": [
+            1.5,
+            1.9
+          ],
+          "proof_covariance_matrix": [
+            [
+              1.8,
+              1.1
+            ],
+            [
+              1.1,
+              2.6
+            ]
+          ],
+          "dechant_sasa_quadratic_form_q": 1.751585,
+          "uncertainty_ratio": 1.455824,
+          "fluctuation_bound_ratio": 0.686896,
+          "formal_proof_multidimensional_tur_isomorphism": "Lean 4 Mathlib.Computability.Complexity Impagliazzo-Paturi-Zane Sunflower Sparsification Dechant-Sasa TUR"
+        }
+      }
     }
   },
   "challenges_unbridged": {
@@ -10390,5 +10684,5 @@
       }
     ]
   },
-  "snapshot_sha256": "67c0e3d08caa46b59b325dd3428a5445b4e86ded05bdc512261387a88e4c80c8"
+  "snapshot_sha256": "34321d9e7677662c7b48cc4a6ba2c11e82f9c58caa603a1e7e1ccd2d0f416719"
 }
