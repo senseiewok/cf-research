@@ -1234,6 +1234,18 @@ def evaluate_shiraishi_saito_tasaki_power_efficiency(n_gating_regimes: int = 5) 
     return evaluate_two_way_bridge_isomorphism()["shiraishi_saito_tasaki_power_efficiency_bridge"]
 
 
+def evaluate_macieszczak_brandner_garrahan_unified_tur(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["macieszczak_brandner_garrahan_unified_tur_bridge"]
+
+
+def evaluate_pal_rahav_reuveni_reset_tur(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["pal_rahav_reuveni_reset_tur_bridge"]
+
+
 
 
 def main(argv: Sequence[str] | None = None) -> int:
