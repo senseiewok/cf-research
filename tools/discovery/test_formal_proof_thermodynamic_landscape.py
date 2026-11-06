@@ -72,6 +72,7 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_van_vu_hasegawa_thermodynamic_uncertainty,
     evaluate_gingrich_horowitz_thermodynamic_uncertainty,
     evaluate_pietzonka_seifert_power_efficiency_constancy,
+    evaluate_barato_seifert_universal_tur,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -158,6 +159,7 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_van_vu_hasegawa_thermodynamic_uncertainty()["van_vu_hasegawa_thermodynamic_uncertainty_bridge_verified"])
         self.assertTrue(evaluate_gingrich_horowitz_thermodynamic_uncertainty()["gingrich_horowitz_thermodynamic_uncertainty_bridge_verified"])
         self.assertTrue(evaluate_pietzonka_seifert_power_efficiency_constancy()["pietzonka_seifert_power_efficiency_constancy_bridge_verified"])
+        self.assertTrue(evaluate_barato_seifert_universal_tur()["barato_seifert_universal_tur_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])

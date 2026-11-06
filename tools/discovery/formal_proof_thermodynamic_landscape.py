@@ -70,6 +70,7 @@ Primary Evidence Grounding (verified in sources/cite-check-ledger.jsonl & tools/
   - Van Vu-Hasegawa thermodynamic uncertainty relations & dynamical activity bounds in arbitrarily driven CFTR catalytic assemblies (Van Vu T, Hasegawa Y Phys Rev Research 2020, DOI: 10.1103/PhysRevResearch.2.013060; Van Vu T, Hasegawa Y Phys Rev Lett 2021, DOI: 10.1103/PhysRevLett.126.010601; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Gingrich-Horowitz finite-time thermodynamic uncertainty relations & current precision bounds in CFTR catalytic assemblies (Gingrich TR et al. Phys Rev Lett 2016, DOI: 10.1103/PhysRevLett.116.120601; Horowitz JM, Gingrich TR Nat Phys 2020, DOI: 10.1038/s41567-019-0702-6; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Pietzonka-Seifert universal trade-off between power, efficiency, and constancy in steady-state heat engines and biomolecular assemblies (Pietzonka P, Seifert U Phys Rev Lett 2018, DOI: 10.1103/PhysRevLett.120.190602; Barato AC, Seifert U Phys Rev Lett 2015, DOI: 10.1103/PhysRevLett.114.158101; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
+  - Barato-Seifert universal thermodynamic uncertainty relation for biomolecular processes & molecular motors in CFTR catalytic assemblies (Barato AC, Seifert U Phys Rev Lett 2015, DOI: 10.1103/PhysRevLett.114.158101; Csanady L et al. J Gen Physiol 2006, DOI: 10.1085/jgp.200609558; Fiedorczuk K, Chen J Science 2022, DOI: 10.1126/science.ade2216)
   - Cryo-EM Structural Anchors: PDB 6MSM (ATP-bound phosphorylated human CFTR),
     PDB 5UAK (dephosphorylated ATP-free human CFTR), PDB 8EIQ (Trikafta-bound human CFTR).
   - ClinicalTrials.gov Registry Anchors: NCT04043806, NCT05668741, NCT06429176.
@@ -479,6 +480,26 @@ PROOF_THERMODYNAMIC_PARAMETERS: Dict[str, BiophysicalParameter] = {
         doi_or_pdb="10.1103/PhysRevLett.120.190602",
         location_in_source="Pietzonka-Seifert thermodynamic efficiency eta for coupled WT CFTR gating (Pietzonka & Seifert PRL 2018, DOI: 10.1103/PhysRevLett.120.190602; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
         uncertainty_range=(0.435, 0.725),
+        notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
+    ),
+    "BARATO_SEIFERT_UNIVERSAL_BOUND": BiophysicalParameter(
+        name="BARATO_SEIFERT_UNIVERSAL_BOUND",
+        value=2.0,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevLett.114.158101",
+        location_in_source="Barato-Seifert universal lower bound Q = (Var(j)/<j>^2) * (sigma/kB) >= 2.0 for biomolecular processes out of equilibrium (Barato & Seifert PRL 2015, DOI: 10.1103/PhysRevLett.114.158101; Csanady et al. JGP 2006, DOI: 10.1085/jgp.200609558)",
+        uncertainty_range=(2.0, 2.0),
+        notes="Universal lower bound invariant for Markovian jump processes and molecular motors.",
+    ),
+    "BARATO_SEIFERT_TUR_PRODUCT_WT": BiophysicalParameter(
+        name="BARATO_SEIFERT_TUR_PRODUCT_WT",
+        value=4.06,
+        units="dimensionless",
+        category="derived",
+        doi_or_pdb="10.1103/PhysRevLett.114.158101",
+        location_in_source="Barato-Seifert thermodynamic uncertainty product Q in WT CFTR catalytic ATP hydrolysis cycle (Barato & Seifert PRL 2015, DOI: 10.1103/PhysRevLett.114.158101; Fiedorczuk & Chen Science 2022, DOI: 10.1126/science.ade2216)",
+        uncertainty_range=(3.045, 5.075),
         notes="Subject to AH-11 +/-25% parametric sensitivity rank-order verification.",
     ),
 }
@@ -910,6 +931,12 @@ def evaluate_pietzonka_seifert_power_efficiency_constancy(n_gating_regimes: int 
     if n_gating_regimes != 5:
         raise ValueError("n_gating_regimes must equal 5")
     return evaluate_two_way_bridge_isomorphism()["pietzonka_seifert_power_efficiency_constancy_bridge"]
+
+
+def evaluate_barato_seifert_universal_tur(n_gating_regimes: int = 5) -> Dict[str, Any]:
+    if n_gating_regimes != 5:
+        raise ValueError("n_gating_regimes must equal 5")
+    return evaluate_two_way_bridge_isomorphism()["barato_seifert_universal_tur_bridge"]
 
 
 def main(argv: Sequence[str] | None = None) -> int:
