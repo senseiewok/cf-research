@@ -358,9 +358,9 @@
     },
     "rna_gene_editing": {
       "label": "RNA, Nonsense Readthrough & Gene Editing",
-      "count": 26,
+      "count": 27,
       "keep_count": 18,
-      "merge_count": 6,
+      "merge_count": 7,
       "archive_count": 2,
       "modules": [
         {

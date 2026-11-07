@@ -4,9 +4,9 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `120` (plus 4 infrastructure scripts and 184 unit test suites)
+- **Total Verified Modules:** `121` (plus 4 infrastructure scripts and 185 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
-- **`merge` (Consolidate into Canonical Module):** `31`
+- **`merge` (Consolidate into Canonical Module):** `32`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -53,7 +53,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `slc26a9_tmem16a_bypass.py` | `T-0256` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_enac_synergy_model.py` | `T-0430` | `T2` | `keep` | Canonical workbench |
 
-## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 26 modules)
+## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 27 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -78,6 +78,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `prime_editing_ptc_nmd_kinetics.py` | `T-0440` | `T2` | `keep` | Canonical workbench |
 | `ptc_erf_depletion_readthrough.py` | `T-0401` | `T2` | `keep` | Canonical workbench |
 | `round106_base_editor_bystander_markov_selectivity.py` | `T-0733` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round107_hopfield_ninio_kinetic_proofreading_ptc.py` | `T-0736` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `split_intein_cftr_reconstitution.py` | `T-0393` | `T2` | `keep` | Canonical workbench |
 | `suppressor_trna_model.py` | `T-0216` | `T2` | `keep` | Canonical workbench |
 | `suppressor_trna_orthogonality.py` | `T-0394` | `T2` | `keep` | Canonical workbench |
