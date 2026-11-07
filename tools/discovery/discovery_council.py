@@ -1239,7 +1239,12 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "consolidation_target": "formal_proof_thermodynamic_landscape",
 
-    }
+    },
+    "round109_crooks_jarzynski_nonequilibrium_folding": {
+        "task": "T-0740", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
 
 }
 
