@@ -6,21 +6,21 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 113,
+  "total_modules": 114,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 177,
+  "test_suites_count": 178,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 112,
+    "researchers": 113,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 24,
+    "merge": 25,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 24,
+    "structural_biology": 25,
     "rna_gene_editing": 25,
     "airway_delivery": 51,
     "microbiology_host": 7,
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 24,
+      "count": 25,
       "keep_count": 11,
-      "merge_count": 12,
+      "merge_count": 13,
       "archive_count": 1,
       "modules": [
         {
@@ -269,6 +269,17 @@
         {
           "module": "round99_van_vu_geometrical_irreversibility",
           "task": "T-0718",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round100_centennial_nonequilibrium_invariant_synthesis",
+          "task": "T-0721",
           "track": "Track A",
           "tier": "T2",
           "discipline": "structural_biology",
@@ -1535,7 +1546,7 @@
       "test_file": "test_maes_netocny_response.py",
       "round": "Round 33",
       "task": "T-0577",
-      "summary": "Unit tests for Round 33 (T-0577): Maes-Neto\u010dn\u00fd Non-Equilibrium Response Formula & Excess Entropy Production for Rescued CFTR Kinetics"
+      "summary": "Unit tests for Round 33 (T-0577): Maes-Netočný Non-Equilibrium Response Formula & Excess Entropy Production for Rescued CFTR Kinetics"
     },
     {
       "test_file": "test_manikandan_gupta_krishnamurthy_bounds.py",
