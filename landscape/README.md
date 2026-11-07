@@ -53,6 +53,7 @@ This directory holds two groups of Markdown notes:
 - [`mission-grounding-2026-11-02.md`](mission-grounding-2026-11-02.md)
 - [`mission-grounding-2026-11-03.md`](mission-grounding-2026-11-03.md)
 - [`mission-grounding-2026-11-06.md`](mission-grounding-2026-11-06.md)
+- [`mission-grounding-2026-11-07.md`](mission-grounding-2026-11-07.md)
 
 ## Structured Claim & Evidence Verification Sidecars
 
