@@ -6,22 +6,22 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 120,
+  "total_modules": 121,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 184,
+  "test_suites_count": 185,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 119,
+    "researchers": 120,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 31,
+    "merge": 32,
     "archive": 4
   },
   "discipline_summary": {
     "structural_biology": 29,
-    "rna_gene_editing": 26,
+    "rna_gene_editing": 27,
     "airway_delivery": 52,
     "microbiology_host": 7,
     "clinical_trials": 3,
@@ -586,6 +586,17 @@
         {
           "module": "round106_base_editor_bystander_markov_selectivity",
           "task": "T-0733",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round107_hopfield_ninio_kinetic_proofreading_ptc",
+          "task": "T-0736",
           "track": "Track A",
           "tier": "T2",
           "discipline": "rna_gene_editing",
