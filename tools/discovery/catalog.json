@@ -6,21 +6,21 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 105,
+  "total_modules": 109,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 169,
+  "test_suites_count": 173,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 104,
+    "researchers": 108,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 16,
+    "merge": 20,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 16,
+    "structural_biology": 20,
     "rna_gene_editing": 25,
     "airway_delivery": 51,
     "microbiology_host": 7,
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 16,
+      "count": 20,
       "keep_count": 11,
-      "merge_count": 4,
+      "merge_count": 8,
       "archive_count": 1,
       "modules": [
         {
@@ -181,6 +181,50 @@
         {
           "module": "round91_dechant_sasa_fluctuation_response",
           "task": "T-0698",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round92_hasegawa_biochemical_tur",
+          "task": "T-0703",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round93_li_fluctuation_dissipation_quantification",
+          "task": "T-0704",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round94_dechant_thermal_fri",
+          "task": "T-0709",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round95_terlizzi_baiesi_kur",
+          "task": "T-0710",
           "track": "Track A",
           "tier": "T2",
           "discipline": "structural_biology",
