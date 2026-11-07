@@ -4,9 +4,9 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `111` (plus 4 infrastructure scripts and 175 unit test suites)
+- **Total Verified Modules:** `120` (plus 4 infrastructure scripts and 184 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
-- **`merge` (Consolidate into Canonical Module):** `22`
+- **`merge` (Consolidate into Canonical Module):** `31`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -19,7 +19,7 @@ python tools/discovery/discovery_council.py --falsify-all
 python tools/discovery/discovery_council.py --run-stdlib-tests
 ```
 
-## Structural Biology & CFTR Biophysics (`structural_biology` — 22 modules)
+## Structural Biology & CFTR Biophysics (`structural_biology` — 29 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -35,6 +35,11 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `nbd1_thermodynamics.py` | `T-0199` | `T2` | `keep` | Canonical workbench |
 | `pdi_redox_remodeling.py` | `T-0281` | `T2` | `archive` | Candidate for archive |
 | `ptc_cryoem_allostery.py` | `T-0217` | `T2` | `merge` | Merge into `cryoem_truncation_model.py` |
+| `round100_centennial_nonequilibrium_invariant_synthesis.py` | `T-0721` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round101_horowitz_gingrich_molecular_motor_tur.py` | `T-0723` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round102_wachtel_coarse_grained_network_dissipation.py` | `T-0724` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round103_barato_seifert_coherence_oscillation_cost.py` | `T-0729` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round104_ito_sagawa_causal_network_transfer_entropy.py` | `T-0730` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round90_pietzonka_power_constancy_tradeoff.py` | `T-0697` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round91_dechant_sasa_fluctuation_response.py` | `T-0698` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round92_hasegawa_biochemical_tur.py` | `T-0703` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
@@ -43,10 +48,12 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `round95_terlizzi_baiesi_kur.py` | `T-0710` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round96_falasco_dissipation_speed_limit.py` | `T-0715` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round97_koyuk_seifert_periodic_tur.py` | `T-0716` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round98_van_vu_arbitrary_drive_tur.py` | `T-0717` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round99_van_vu_geometrical_irreversibility.py` | `T-0718` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `slc26a9_tmem16a_bypass.py` | `T-0256` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_enac_synergy_model.py` | `T-0430` | `T2` | `keep` | Canonical workbench |
 
-## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 25 modules)
+## RNA, Nonsense Readthrough & Gene Editing (`rna_gene_editing` — 26 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -70,13 +77,14 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `prime_editing_cftr.py` | `T-0184` | `T2` | `merge` | Merge into `class1_prime_base_editing.py` |
 | `prime_editing_ptc_nmd_kinetics.py` | `T-0440` | `T2` | `keep` | Canonical workbench |
 | `ptc_erf_depletion_readthrough.py` | `T-0401` | `T2` | `keep` | Canonical workbench |
+| `round106_base_editor_bystander_markov_selectivity.py` | `T-0733` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `split_intein_cftr_reconstitution.py` | `T-0393` | `T2` | `keep` | Canonical workbench |
 | `suppressor_trna_model.py` | `T-0216` | `T2` | `keep` | Canonical workbench |
 | `suppressor_trna_orthogonality.py` | `T-0394` | `T2` | `keep` | Canonical workbench |
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 51 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 52 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -123,6 +131,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `mucus_rheology.py` | `T-0185` | `T2` | `keep` | Canonical workbench |
 | `nebulizer_shear_stress_integrity.py` | `T-0413` | `T2` | `keep` | Canonical workbench |
 | `periciliary_brush_compression.py` | `T-0562` | `T2` | `keep` | Canonical workbench |
+| `round105_apical_hydration_electroosmotic_coupling.py` | `T-0732` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `surfactant_shielded_rnp_mucus_transport.py` | `T-0482` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_calcium_conductance_model.py` | `T-0392` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_conductance_model.py` | `T-0240` | `T2` | `merge` | Merge into `tmem16a_calcium_conductance_model.py` |

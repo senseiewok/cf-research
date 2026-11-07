@@ -6,23 +6,23 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 111,
+  "total_modules": 120,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 175,
+  "test_suites_count": 184,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 110,
+    "researchers": 119,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 22,
+    "merge": 31,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 22,
-    "rna_gene_editing": 25,
-    "airway_delivery": 51,
+    "structural_biology": 29,
+    "rna_gene_editing": 26,
+    "airway_delivery": 52,
     "microbiology_host": 7,
     "clinical_trials": 3,
     "ai_verification": 3
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 22,
+      "count": 29,
       "keep_count": 11,
-      "merge_count": 10,
+      "merge_count": 17,
       "archive_count": 1,
       "modules": [
         {
@@ -168,6 +168,61 @@
           "test_verified": true
         },
         {
+          "module": "round100_centennial_nonequilibrium_invariant_synthesis",
+          "task": "T-0721",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round101_horowitz_gingrich_molecular_motor_tur",
+          "task": "T-0723",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round102_wachtel_coarse_grained_network_dissipation",
+          "task": "T-0724",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round103_barato_seifert_coherence_oscillation_cost",
+          "task": "T-0729",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round104_ito_sagawa_causal_network_transfer_entropy",
+          "task": "T-0730",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
           "module": "round90_pietzonka_power_constancy_tradeoff",
           "task": "T-0697",
           "track": "Track A",
@@ -256,6 +311,28 @@
           "test_verified": true
         },
         {
+          "module": "round98_van_vu_arbitrary_drive_tur",
+          "task": "T-0717",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round99_van_vu_geometrical_irreversibility",
+          "task": "T-0718",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
           "module": "slc26a9_tmem16a_bypass",
           "task": "T-0256",
           "track": "Track A",
@@ -281,9 +358,9 @@
     },
     "rna_gene_editing": {
       "label": "RNA, Nonsense Readthrough & Gene Editing",
-      "count": 25,
+      "count": 26,
       "keep_count": 18,
-      "merge_count": 5,
+      "merge_count": 6,
       "archive_count": 2,
       "modules": [
         {
@@ -507,6 +584,17 @@
           "test_verified": true
         },
         {
+          "module": "round106_base_editor_bystander_markov_selectivity",
+          "task": "T-0733",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
           "module": "split_intein_cftr_reconstitution",
           "task": "T-0393",
           "track": "Track A",
@@ -565,9 +653,9 @@
     },
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
-      "count": 51,
+      "count": 52,
       "keep_count": 44,
-      "merge_count": 6,
+      "merge_count": 7,
       "archive_count": 1,
       "modules": [
         {
@@ -1041,6 +1129,17 @@
           "persona": "researchers",
           "triage": "keep",
           "consolidation_target": null,
+          "test_verified": true
+        },
+        {
+          "module": "round105_apical_hydration_electroosmotic_coupling",
+          "task": "T-0732",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
           "test_verified": true
         },
         {
