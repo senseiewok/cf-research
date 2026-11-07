@@ -11,9 +11,9 @@ Combined Centennial Joint Invariant Index:
   Omega_100 = min(TUR_product / 2.0, KUR_product / 1.0, Geom_ratio / 1.0, I_T / FRI_lhs) >= 1.0
 
 Primary Evidence Grounding:
-- DOI: 10.1088/0034-4885/75/12/126001 (Seifert U, Rep. Prog. Phys. 75, 126001, 2012; PMID: 23168354)
-- DOI: 10.1126/science.ade2216 (Fiedorczuk K, Chen J, Science 2022; PMID: 36264792)
-- DOI: 10.1038/nrg3849 (Cutting GR, Nat. Rev. Genet. 2014; PMID: 25404111)
+- DOI: 10.1088/0034-4885/75/12/126001 (Seifert U, Rep. Prog. Phys. 75, 126001, 2012)
+- DOI: 10.1085/jgp.200609558 (Csanady L et al., J. Gen. Physiol. 2006 — CFTR gating kinetics)
+- DOI: 10.1126/science.ade2216 (Fiedorczuk K, Chen J, Science 2022)
 - PDB: 6MSM, 5UAK, 8EIQ
 
 Research boundary: Preclinical computational model; research, not medical advice.
@@ -32,7 +32,7 @@ RESEARCH_BOUNDARY = (
 
 PRIMARY_DOI_SEIFERT_RPP_2012 = "10.1088/0034-4885/75/12/126001"
 SECONDARY_DOI_TRIKAFTA_CRYOEM = "10.1126/science.ade2216"
-SECONDARY_DOI_CUTTING_NRG_2014 = "10.1038/nrg3849"
+SECONDARY_DOI_CSANADY_JGP_2006 = "10.1085/jgp.200609558"
 
 GENOTYPE_SPECS: Dict[str, Dict[str, Any]] = {
     "wt_cftr": {
