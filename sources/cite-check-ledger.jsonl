@@ -283,3 +283,5 @@
 {"editorial_notices": 0, "id": "32127480", "kind": "PMID", "publisher_date": "2020", "source_id": "europe-pmc", "title": "Fluctuation-response inequality out of equilibrium", "verdict": "PASS"}
 {"editorial_notices": 0, "id": "31298835", "kind": "PMID", "publisher_date": "2019", "source_id": "europe-pmc", "title": "Uncertainty Relation in Biochemical Processes", "verdict": "PASS"}
 {"editorial_notices": 0, "id": "30904378", "kind": "PMID", "publisher_date": "2019", "source_id": "europe-pmc", "title": "Quantifying Dissipation Using Fluctuations in Living Systems", "verdict": "PASS"}
+{"editorial_notices": 0, "id": "32220962", "kind": "PMID", "publisher_date": "2020", "source_id": "europe-pmc", "title": "Fluctuation-response inequality out of equilibrium", "verdict": "PASS"}
+{"editorial_notices": 0, "id": "10.1088/1751-8121/ab0762", "kind": "DOI", "publisher_date": "2019", "scite_tally": {"citingPublications": 154, "contrasting": 0, "mentioning": 150, "supporting": 4}, "scite_verified": true, "source_id": "scite-api", "title": "Kinetic uncertainty relation", "verdict": "PASS"}

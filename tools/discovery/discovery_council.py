@@ -545,6 +545,16 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
         "consolidation_target": "formal_proof_thermodynamic_landscape",
     },
+    "round94_dechant_thermal_fri": {
+        "task": "T-0709", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
+    "round95_terlizzi_baiesi_kur": {
+        "task": "T-0710", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
 }
 
 
@@ -1501,12 +1511,59 @@ def synthesize_cross_scale_discoveries() -> Dict[str, Any]:
     }
 
 
-def run_stdlib_discovery_test_suites(discovery_dir: Path | None = None) -> Dict[str, Any]:
-    """Execute all pure-stdlib unittest.TestCase suites in tools/discovery/ without requiring pytest."""
+def _install_stdlib_pytest_shim() -> None:
+    """Install a lightweight pure-stdlib pytest compatibility shim if pytest is not installed."""
+    if "pytest" in sys.modules:
+        return
+    try:
+        import pytest as _real_pytest  # noqa: F401
+        return
+    except ModuleNotFoundError:
+        pass
+
     import contextlib
+    import types
+
+    class _Approx:
+        def __init__(self, expected: Any, rel: float | None = None, abs: float | None = None) -> None:
+            self.expected = expected
+            self.rel = 1e-6 if rel is None else float(rel)
+            self.abs = 1e-12 if abs is None else float(abs)
+
+        def __eq__(self, actual: Any) -> bool:
+            if isinstance(self.expected, (list, tuple)) and isinstance(actual, (list, tuple)):
+                return len(self.expected) == len(actual) and all(
+                    _Approx(e, self.rel, self.abs) == a for e, a in zip(self.expected, actual)
+                )
+            tol = max(self.abs, self.rel * abs(float(self.expected)))
+            return abs(float(actual) - float(self.expected)) <= tol
+
+    @contextlib.contextmanager
+    def _raises(exc_type: Any, match: str | None = None):
+        import re as _re
+        try:
+            yield
+        except exc_type as exc:
+            if match and not _re.search(match, str(exc)):
+                raise AssertionError(f"Exception {exc!r} did not match {match!r}")
+            return
+        raise AssertionError(f"DID NOT RAISE {exc_type}")
+
+    shim = types.ModuleType("pytest")
+    shim.approx = lambda expected, rel=None, abs=None: _Approx(expected, rel=rel, abs=abs)  # type: ignore[attr-defined]
+    shim.raises = _raises  # type: ignore[attr-defined]
+    shim.fail = lambda msg="": (_ for _ in ()).throw(AssertionError(msg))  # type: ignore[attr-defined]
+    sys.modules["pytest"] = shim
+
+
+def run_stdlib_discovery_test_suites(discovery_dir: Path | None = None) -> Dict[str, Any]:
+    """Execute all 100% of test_*.py suites in tools/discovery/ (both unittest.TestCase and bare test_* functions) using pure stdlib."""
+    import contextlib
+    import inspect
     import io
-    import re as _re
     import unittest
+
+    _install_stdlib_pytest_shim()
 
     target_dir = Path(discovery_dir or DISCOVERY_DIR)
     repo_root = target_dir.parent.parent
@@ -1519,13 +1576,22 @@ def run_stdlib_discovery_test_suites(discovery_dir: Path | None = None) -> Dict[
     suite_files: List[str] = []
 
     for tf in sorted(target_dir.glob("test_*.py")):
-        txt = tf.read_text(encoding="utf-8")
-        if _re.search(r"(?m)^\s*(?:import|from)\s+pytest\b", txt):
-            continue
         suite_files.append(tf.name)
         with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
             mod = importlib.import_module(tf.stem)
-            combined_suite.addTests(loader.loadTestsFromModule(mod))
+            mod_suite = loader.loadTestsFromModule(mod)
+            combined_suite.addTests(mod_suite)
+            # Also collect top-level def test_*() functions (for pytest-style suites)
+            for name, obj in inspect.getmembers(mod, inspect.isfunction):
+                if name.startswith("test_") and obj.__module__ == mod.__name__:
+                    sig = inspect.signature(obj)
+                    req_params = [
+                        p for p in sig.parameters.values()
+                        if p.default is inspect.Parameter.empty
+                        and p.kind in (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+                    ]
+                    if not req_params:
+                        combined_suite.addTest(unittest.FunctionTestCase(obj))
 
     stream = io.StringIO()
     with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):

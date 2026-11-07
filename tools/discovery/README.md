@@ -4,9 +4,9 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `107` (plus 4 infrastructure scripts and 171 unit test suites)
+- **Total Verified Modules:** `109` (plus 4 infrastructure scripts and 173 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
-- **`merge` (Consolidate into Canonical Module):** `18`
+- **`merge` (Consolidate into Canonical Module):** `20`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -19,7 +19,7 @@ python tools/discovery/discovery_council.py --falsify-all
 python tools/discovery/discovery_council.py --run-stdlib-tests
 ```
 
-## Structural Biology & CFTR Biophysics (`structural_biology` — 18 modules)
+## Structural Biology & CFTR Biophysics (`structural_biology` — 20 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -39,6 +39,8 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `round91_dechant_sasa_fluctuation_response.py` | `T-0698` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round92_hasegawa_biochemical_tur.py` | `T-0703` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round93_li_fluctuation_dissipation_quantification.py` | `T-0704` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round94_dechant_thermal_fri.py` | `T-0709` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round95_terlizzi_baiesi_kur.py` | `T-0710` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `slc26a9_tmem16a_bypass.py` | `T-0256` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_enac_synergy_model.py` | `T-0430` | `T2` | `keep` | Canonical workbench |
 
