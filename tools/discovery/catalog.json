@@ -6,21 +6,21 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 116,
+  "total_modules": 118,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 180,
+  "test_suites_count": 182,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 115,
+    "researchers": 117,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 27,
+    "merge": 29,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 27,
+    "structural_biology": 29,
     "rna_gene_editing": 25,
     "airway_delivery": 51,
     "microbiology_host": 7,
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 27,
+      "count": 29,
       "keep_count": 11,
-      "merge_count": 15,
+      "merge_count": 17,
       "archive_count": 1,
       "modules": [
         {
@@ -192,6 +192,28 @@
         {
           "module": "round102_wachtel_coarse_grained_network_dissipation",
           "task": "T-0724",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round103_barato_seifert_coherence_oscillation_cost",
+          "task": "T-0729",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round104_ito_sagawa_causal_network_transfer_entropy",
+          "task": "T-0730",
           "track": "Track A",
           "tier": "T2",
           "discipline": "structural_biology",
