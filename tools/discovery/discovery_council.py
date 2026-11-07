@@ -1511,18 +1511,20 @@ def synthesize_cross_scale_discoveries() -> Dict[str, Any]:
     }
 
 
-def _install_stdlib_pytest_shim() -> None:
+def _install_stdlib_pytest_shim(force: bool = False) -> None:
     """Install a lightweight pure-stdlib pytest compatibility shim if pytest is not installed."""
-    if "pytest" in sys.modules:
-        return
-    try:
-        import pytest as _real_pytest  # noqa: F401
-        return
-    except ModuleNotFoundError:
-        pass
+    if not force:
+        if "pytest" in sys.modules:
+            return
+        try:
+            import pytest as _real_pytest  # noqa: F401
+            return
+        except ModuleNotFoundError:
+            pass
 
     import contextlib
     import types
+    import unittest
 
     class _Approx:
         def __init__(self, expected: Any, rel: float | None = None, abs: float | None = None) -> None:
@@ -1535,35 +1537,154 @@ def _install_stdlib_pytest_shim() -> None:
                 return len(self.expected) == len(actual) and all(
                     _Approx(e, self.rel, self.abs) == a for e, a in zip(self.expected, actual)
                 )
+            if isinstance(self.expected, dict) and isinstance(actual, dict):
+                return set(self.expected.keys()) == set(actual.keys()) and all(
+                    _Approx(self.expected[k], self.rel, self.abs) == actual[k] for k in self.expected
+                )
             tol = max(self.abs, self.rel * abs(float(self.expected)))
             return abs(float(actual) - float(self.expected)) <= tol
+
+    class _ExcInfo:
+        def __init__(self, value: BaseException | None = None) -> None:
+            self.value = value
 
     @contextlib.contextmanager
     def _raises(exc_type: Any, match: str | None = None):
         import re as _re
+        info = _ExcInfo()
         try:
-            yield
+            yield info
         except exc_type as exc:
+            info.value = exc
             if match and not _re.search(match, str(exc)):
                 raise AssertionError(f"Exception {exc!r} did not match {match!r}")
             return
         raise AssertionError(f"DID NOT RAISE {exc_type}")
 
+    def _fixture(fn: Any = None, **_kwargs: Any) -> Any:
+        if fn is None:
+            def _dec(f: Any) -> Any:
+                setattr(f, "_is_pytest_fixture", True)
+                return f
+            return _dec
+        setattr(fn, "_is_pytest_fixture", True)
+        return fn
+
+    def _skip(reason: str = "") -> None:
+        raise unittest.SkipTest(reason)
+
     shim = types.ModuleType("pytest")
     shim.approx = lambda expected, rel=None, abs=None: _Approx(expected, rel=rel, abs=abs)  # type: ignore[attr-defined]
     shim.raises = _raises  # type: ignore[attr-defined]
+    shim.fixture = _fixture  # type: ignore[attr-defined]
+    shim.CaptureFixture = Any  # type: ignore[attr-defined]
+    shim.skip = _skip  # type: ignore[attr-defined]
     shim.fail = lambda msg="": (_ for _ in ()).throw(AssertionError(msg))  # type: ignore[attr-defined]
     sys.modules["pytest"] = shim
 
 
+def _wrap_pytest_callable(fn: Any, mod: Any, instance: Any = None) -> Any:
+    """Wrap a pytest-style function or method so unittest.FunctionTestCase can execute it with stdlib fixtures."""
+    import collections
+    import contextlib
+    import inspect
+    import io
+    import tempfile
+
+    CaptureResult = collections.namedtuple("CaptureResult", ["out", "err"])
+
+    class _StdlibCapsys:
+        def __init__(self, out_buf: io.StringIO, err_buf: io.StringIO) -> None:
+            self._out = out_buf
+            self._err = err_buf
+
+        def readouterr(self) -> Any:
+            out_val = self._out.getvalue()
+            err_val = self._err.getvalue()
+            self._out.seek(0)
+            self._out.truncate(0)
+            self._err.seek(0)
+            self._err.truncate(0)
+            return CaptureResult(out_val, err_val)
+
+    class _StdlibMonkeypatch:
+        def __init__(self) -> None:
+            self._undo: List[Any] = []
+
+        def setattr(self, target: Any, name: Any = None, value: Any = None) -> None:
+            if isinstance(target, str) and value is None:
+                mod_path, attr_name = target.rsplit(".", 1)
+                obj = sys.modules.get(mod_path) or importlib.import_module(mod_path)
+                val = name
+            else:
+                obj = target
+                attr_name = str(name)
+                val = value
+            had = hasattr(obj, attr_name)
+            orig = getattr(obj, attr_name, None)
+            self._undo.append((obj, attr_name, had, orig))
+            setattr(obj, attr_name, val)
+
+        def undo(self) -> None:
+            for obj, attr_name, had, orig in reversed(self._undo):
+                if had:
+                    setattr(obj, attr_name, orig)
+                else:
+                    delattr(obj, attr_name)
+            self._undo.clear()
+
+    sig = inspect.signature(fn)
+    param_names = [
+        p.name for p in sig.parameters.values()
+        if p.name != "self"
+        and p.default is inspect.Parameter.empty
+        and p.kind in (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+    ]
+
+    def _runner() -> None:
+        if instance is not None and hasattr(instance, "setup_method"):
+            instance.setup_method()
+        mp = _StdlibMonkeypatch()
+        out_buf = io.StringIO()
+        err_buf = io.StringIO()
+        with tempfile.TemporaryDirectory() as td:
+            kwargs: Dict[str, Any] = {}
+            for pname in param_names:
+                if pname == "capsys":
+                    kwargs[pname] = _StdlibCapsys(out_buf, err_buf)
+                elif pname == "monkeypatch":
+                    kwargs[pname] = mp
+                elif pname == "tmp_path":
+                    kwargs[pname] = Path(td)
+                elif instance is not None and hasattr(instance, pname):
+                    fix_fn = getattr(instance, pname)
+                    raw_fn = getattr(fix_fn, "__wrapped__", getattr(fix_fn, "_fixture_function", fix_fn))
+                    kwargs[pname] = raw_fn(instance) if not inspect.ismethod(raw_fn) else raw_fn()
+                elif hasattr(mod, pname):
+                    fix_fn = getattr(mod, pname)
+                    raw_fn = getattr(fix_fn, "__wrapped__", getattr(fix_fn, "_fixture_function", fix_fn))
+                    kwargs[pname] = raw_fn()
+            try:
+                with contextlib.redirect_stdout(out_buf), contextlib.redirect_stderr(err_buf):
+                    fn(**kwargs)
+            finally:
+                mp.undo()
+                if instance is not None and hasattr(instance, "teardown_method"):
+                    instance.teardown_method()
+
+    _runner.__name__ = getattr(fn, "__name__", "test_wrapped")
+    return _runner
+
+
 def run_stdlib_discovery_test_suites(discovery_dir: Path | None = None) -> Dict[str, Any]:
-    """Execute all 100% of test_*.py suites in tools/discovery/ (both unittest.TestCase and bare test_* functions) using pure stdlib."""
+    """Execute all 100% of test_*.py suites in tools/discovery/ (unittest.TestCase, plain Test* classes, and bare test_* functions) using pure stdlib."""
     import contextlib
     import inspect
     import io
     import unittest
 
-    _install_stdlib_pytest_shim()
+    saved_pytest = sys.modules.get("pytest")
+    _install_stdlib_pytest_shim(force=True)
 
     target_dir = Path(discovery_dir or DISCOVERY_DIR)
     repo_root = target_dir.parent.parent
@@ -1581,22 +1702,31 @@ def run_stdlib_discovery_test_suites(discovery_dir: Path | None = None) -> Dict[
             mod = importlib.import_module(tf.stem)
             mod_suite = loader.loadTestsFromModule(mod)
             combined_suite.addTests(mod_suite)
-            # Also collect top-level def test_*() functions (for pytest-style suites)
+            # Collect top-level def test_*() functions (including those taking fixtures)
             for name, obj in inspect.getmembers(mod, inspect.isfunction):
                 if name.startswith("test_") and obj.__module__ == mod.__name__:
-                    sig = inspect.signature(obj)
-                    req_params = [
-                        p for p in sig.parameters.values()
-                        if p.default is inspect.Parameter.empty
-                        and p.kind in (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
-                    ]
-                    if not req_params:
-                        combined_suite.addTest(unittest.FunctionTestCase(obj))
+                    combined_suite.addTest(unittest.FunctionTestCase(_wrap_pytest_callable(obj, mod)))
+            # Collect plain class Test* classes that do not inherit from unittest.TestCase
+            for cname, cobj in inspect.getmembers(mod, inspect.isclass):
+                if (
+                    cname.startswith("Test")
+                    and cobj.__module__ == mod.__name__
+                    and not issubclass(cobj, unittest.TestCase)
+                ):
+                    inst = cobj()
+                    for mname, mobj in inspect.getmembers(inst, inspect.ismethod):
+                        if mname.startswith("test_"):
+                            combined_suite.addTest(
+                                unittest.FunctionTestCase(_wrap_pytest_callable(mobj, mod, instance=inst))
+                            )
 
     stream = io.StringIO()
     with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
         runner = unittest.TextTestRunner(stream=stream, verbosity=0)
         result = runner.run(combined_suite)
+
+    if saved_pytest is not None:
+        sys.modules["pytest"] = saved_pytest
 
     passed = result.wasSuccessful() and result.testsRun > 0
     return {
