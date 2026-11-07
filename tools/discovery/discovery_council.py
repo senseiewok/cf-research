@@ -555,6 +555,16 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
         "consolidation_target": "formal_proof_thermodynamic_landscape",
     },
+    "round96_falasco_dissipation_speed_limit": {
+        "task": "T-0715", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
+    "round97_koyuk_seifert_periodic_tur": {
+        "task": "T-0716", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
 }
 
 
