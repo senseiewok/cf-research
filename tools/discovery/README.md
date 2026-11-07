@@ -35,6 +35,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `nbd1_thermodynamics.py` | `T-0199` | `T2` | `keep` | Canonical workbench |
 | `pdi_redox_remodeling.py` | `T-0281` | `T2` | `archive` | Candidate for archive |
 | `ptc_cryoem_allostery.py` | `T-0217` | `T2` | `merge` | Merge into `cryoem_truncation_model.py` |
+| `round100_centennial_nonequilibrium_invariant_synthesis.py` | `T-0721` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round90_pietzonka_power_constancy_tradeoff.py` | `T-0697` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round91_dechant_sasa_fluctuation_response.py` | `T-0698` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round92_hasegawa_biochemical_tur.py` | `T-0703` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
@@ -45,7 +46,6 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `round97_koyuk_seifert_periodic_tur.py` | `T-0716` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round98_van_vu_arbitrary_drive_tur.py` | `T-0717` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round99_van_vu_geometrical_irreversibility.py` | `T-0718` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
-| `round100_centennial_nonequilibrium_invariant_synthesis.py` | `T-0721` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `slc26a9_tmem16a_bypass.py` | `T-0256` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_enac_synergy_model.py` | `T-0430` | `T2` | `keep` | Canonical workbench |
 
