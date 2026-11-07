@@ -1249,6 +1249,16 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0741", "track": "Track A", "tier": "T2",
         "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
         "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
+    "round111_hatano_sasa_excess_entropy_transition": {
+        "task": "T-0743", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
+    "round112_harada_sasa_fluctuation_dissipation_violation": {
+        "task": "T-0744", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
     }
 
 }
