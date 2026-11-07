@@ -1231,6 +1231,15 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "consolidation_target": "formal_proof_thermodynamic_landscape",
 
     },
+    "round108_kramers_stokes_brinkman_mucus_filtration": {
+
+        "task": "T-0737", "track": "Track A", "tier": "T2",
+
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+
+    }
 
 }
 

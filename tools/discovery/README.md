@@ -4,9 +4,9 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `121` (plus 4 infrastructure scripts and 185 unit test suites)
+- **Total Verified Modules:** `122` (plus 4 infrastructure scripts and 186 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
-- **`merge` (Consolidate into Canonical Module):** `32`
+- **`merge` (Consolidate into Canonical Module):** `33`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -85,7 +85,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 52 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 53 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -133,6 +133,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `nebulizer_shear_stress_integrity.py` | `T-0413` | `T2` | `keep` | Canonical workbench |
 | `periciliary_brush_compression.py` | `T-0562` | `T2` | `keep` | Canonical workbench |
 | `round105_apical_hydration_electroosmotic_coupling.py` | `T-0732` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round108_kramers_stokes_brinkman_mucus_filtration.py` | `T-0737` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `surfactant_shielded_rnp_mucus_transport.py` | `T-0482` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_calcium_conductance_model.py` | `T-0392` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_conductance_model.py` | `T-0240` | `T2` | `merge` | Merge into `tmem16a_calcium_conductance_model.py` |
