@@ -84,6 +84,12 @@ from formal_proof_thermodynamic_landscape import (  # noqa: E402
     evaluate_gingrich_horowitz_first_passage_tur,
     evaluate_barato_seifert_brownian_clock_precision,
     evaluate_garrahan_frenetic_first_passage_bound,
+    evaluate_koyuk_seifert_periodic_tur,
+    evaluate_brandner_hanazato_saito_ballistic_tur,
+    evaluate_proesmans_discrete_time_tur,
+    evaluate_shiraishi_saito_tasaki_power_efficiency,
+    evaluate_macieszczak_brandner_garrahan_unified_tur,
+    evaluate_pal_rahav_reuveni_reset_tur,
     evaluate_stochastic_thermodynamics_ness_ion_transport,
     evaluate_thermodynamic_uncertainty_relations_cftr_precision,
     evaluate_two_way_bridge_isomorphism,
@@ -186,6 +192,12 @@ class TestCFTRBiophysicsMathBridge(unittest.TestCase):
         self.assertTrue(evaluate_gingrich_horowitz_first_passage_tur()["gingrich_horowitz_first_passage_tur_bridge_verified"])
         self.assertTrue(evaluate_barato_seifert_brownian_clock_precision()["barato_seifert_brownian_clock_precision_bridge_verified"])
         self.assertTrue(evaluate_garrahan_frenetic_first_passage_bound()["garrahan_frenetic_first_passage_bound_bridge_verified"])
+        self.assertTrue(evaluate_koyuk_seifert_periodic_tur()["koyuk_seifert_periodic_tur_bridge_verified"])
+        self.assertTrue(evaluate_brandner_hanazato_saito_ballistic_tur()["brandner_hanazato_saito_ballistic_tur_bridge_verified"])
+        self.assertTrue(evaluate_proesmans_discrete_time_tur()["proesmans_discrete_time_tur_bridge_verified"])
+        self.assertTrue(evaluate_shiraishi_saito_tasaki_power_efficiency()["shiraishi_saito_tasaki_power_efficiency_bridge_verified"])
+        self.assertTrue(evaluate_macieszczak_brandner_garrahan_unified_tur()["macieszczak_brandner_garrahan_unified_tur_bridge_verified"])
+        self.assertTrue(evaluate_pal_rahav_reuveni_reset_tur()["pal_rahav_reuveni_reset_tur_bridge_verified"])
 
         neg = evaluate_falsification_negative_control()
         self.assertTrue(neg["passed"])

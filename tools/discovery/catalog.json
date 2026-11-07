@@ -6,21 +6,21 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 111,
+  "total_modules": 113,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 175,
+  "test_suites_count": 177,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 110,
+    "researchers": 112,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 22,
+    "merge": 24,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 22,
+    "structural_biology": 24,
     "rna_gene_editing": 25,
     "airway_delivery": 51,
     "microbiology_host": 7,
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 22,
+      "count": 24,
       "keep_count": 11,
-      "merge_count": 10,
+      "merge_count": 12,
       "archive_count": 1,
       "modules": [
         {
@@ -247,6 +247,28 @@
         {
           "module": "round97_koyuk_seifert_periodic_tur",
           "task": "T-0716",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round98_van_vu_arbitrary_drive_tur",
+          "task": "T-0717",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round99_van_vu_geometrical_irreversibility",
+          "task": "T-0718",
           "track": "Track A",
           "tier": "T2",
           "discipline": "structural_biology",
