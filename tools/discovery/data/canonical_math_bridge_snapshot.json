@@ -3977,6 +3977,179 @@
       "weil_sign_parity_quarantine_sealed_lemmas": 719,
       "negative_control_detects_violation": true
     },
+    "koyuk_seifert_periodic_tur_bridge": {
+      "task_id": "T-0681",
+      "koyuk_seifert_periodic_tur_bridge_verified": true,
+      "periodic_current_fluctuation_bound_verified": true,
+      "cyclic_atp_driving_constancy_verified": true,
+      "trikafta_periodic_restoration_verified": true,
+      "proof_dag_periodic_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "primary_doi": "10.1103/PhysRevLett.122.230601",
+      "gating_profiles": {
+        "wt_cftr": {
+          "cycle_period_tau_s": 1.25,
+          "entropy_production_rate_sigma_kb_s": 9.6,
+          "cycle_entropy_sigma_tau_kb": 12.0,
+          "periodic_tur_lower_bound": 0.1667,
+          "observed_relative_variance": 0.2,
+          "periodic_constancy_product_q_tau": 2.4,
+          "frequency_response_factor": 0.94,
+          "bound_satisfied": true,
+          "gating_regime": "PERIODIC_ATP_CYCLE_COHERENT"
+        },
+        "rescued_cftr_ivacaftor": {
+          "cycle_period_tau_s": 1.25,
+          "entropy_production_rate_sigma_kb_s": 8.4,
+          "cycle_entropy_sigma_tau_kb": 10.5,
+          "periodic_tur_lower_bound": 0.1905,
+          "observed_relative_variance": 0.2286,
+          "periodic_constancy_product_q_tau": 2.4003,
+          "frequency_response_factor": 0.89,
+          "bound_satisfied": true,
+          "gating_regime": "RESCUED_PERIODIC_CYCLE_RESTORED"
+        },
+        "f508del_uncorrected": {
+          "cycle_period_tau_s": 1.25,
+          "entropy_production_rate_sigma_kb_s": 0.96,
+          "cycle_entropy_sigma_tau_kb": 1.2,
+          "periodic_tur_lower_bound": 1.6667,
+          "observed_relative_variance": 4.8,
+          "periodic_constancy_product_q_tau": 5.76,
+          "frequency_response_factor": 0.16,
+          "bound_satisfied": false,
+          "gating_regime": "THERMAL_UNFOLDING_CYCLE_ARREST"
+        },
+        "g551d_uncoupled_cftr": {
+          "cycle_period_tau_s": 1.25,
+          "entropy_production_rate_sigma_kb_s": 6.4,
+          "cycle_entropy_sigma_tau_kb": 8.0,
+          "periodic_tur_lower_bound": 0.25,
+          "observed_relative_variance": 3.5,
+          "periodic_constancy_product_q_tau": 28.0,
+          "frequency_response_factor": 0.12,
+          "bound_satisfied": false,
+          "gating_regime": "UNCOUPLED_PERIODIC_SLIP_COLLAPSE"
+        },
+        "w1282x_nonsense_baseline": {
+          "cycle_period_tau_s": 1.25,
+          "entropy_production_rate_sigma_kb_s": 0.0,
+          "cycle_entropy_sigma_tau_kb": 0.0,
+          "periodic_tur_lower_bound": 999.0,
+          "observed_relative_variance": 999.0,
+          "periodic_constancy_product_q_tau": 0.0,
+          "frequency_response_factor": 0.0,
+          "bound_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "fermats_last_theorem": {
+          "periodic_bound_satisfied": true,
+          "parity_verified": true,
+          "proof_periodic_efficiency": 0.92
+        },
+        "formal_math_zeta23": {
+          "periodic_bound_satisfied": true,
+          "parity_verified": true,
+          "proof_periodic_efficiency": 0.89
+        },
+        "formal_math_3sum_apsp": {
+          "periodic_bound_satisfied": true,
+          "parity_verified": true,
+          "proof_periodic_efficiency": 0.9
+        },
+        "formal_math_eth": {
+          "periodic_bound_satisfied": true,
+          "parity_verified": true,
+          "proof_periodic_efficiency": 0.88
+        }
+      }
+    },
+    "brandner_hanazato_saito_ballistic_tur_bridge": {
+      "task_id": "T-0682",
+      "brandner_hanazato_saito_ballistic_tur_bridge_verified": true,
+      "ballistic_multiterminal_precision_bound_verified": true,
+      "chloride_bicarbonate_pore_selectivity_verified": true,
+      "trikafta_ballistic_pore_restoration_verified": true,
+      "proof_dag_ballistic_parity_verified": true,
+      "negative_control_detects_violation": true,
+      "primary_doi": "10.1103/PhysRevLett.120.090601",
+      "gating_profiles": {
+        "wt_cftr": {
+          "transport_entropy_sigma_kb": 10.0,
+          "ballistic_transmission_factor_c": 0.8975,
+          "ballistic_tur_lower_bound": 0.1795,
+          "observed_current_relative_variance": 0.2154,
+          "ballistic_precision_product_q_bhs": 2.154,
+          "bicarbonate_chloride_permeability_ratio": 0.25,
+          "bound_satisfied": true,
+          "gating_regime": "BALLISTIC_OPEN_PORE_OPTIMAL"
+        },
+        "rescued_cftr_ivacaftor": {
+          "transport_entropy_sigma_kb": 8.8,
+          "ballistic_transmission_factor_c": 0.88,
+          "ballistic_tur_lower_bound": 0.2,
+          "observed_current_relative_variance": 0.245,
+          "ballistic_precision_product_q_bhs": 2.156,
+          "bicarbonate_chloride_permeability_ratio": 0.23,
+          "bound_satisfied": true,
+          "gating_regime": "RESCUED_BALLISTIC_PORE_RESTORED"
+        },
+        "f508del_uncorrected": {
+          "transport_entropy_sigma_kb": 1.0,
+          "ballistic_transmission_factor_c": 0.22,
+          "ballistic_tur_lower_bound": 0.44,
+          "observed_current_relative_variance": 4.9,
+          "ballistic_precision_product_q_bhs": 4.9,
+          "bicarbonate_chloride_permeability_ratio": 0.04,
+          "bound_satisfied": false,
+          "gating_regime": "TRAFFICKING_COLLAPSED_PORE"
+        },
+        "g551d_uncoupled_cftr": {
+          "transport_entropy_sigma_kb": 1.5,
+          "ballistic_transmission_factor_c": 0.18,
+          "ballistic_tur_lower_bound": 0.24,
+          "observed_current_relative_variance": 3.8,
+          "ballistic_precision_product_q_bhs": 5.7,
+          "bicarbonate_chloride_permeability_ratio": 0.03,
+          "bound_satisfied": false,
+          "gating_regime": "GATE_LOCKED_BALLISTIC_BLOCKADE"
+        },
+        "w1282x_nonsense_baseline": {
+          "transport_entropy_sigma_kb": 0.0,
+          "ballistic_transmission_factor_c": 0.0,
+          "ballistic_tur_lower_bound": 999.0,
+          "observed_current_relative_variance": 999.0,
+          "ballistic_precision_product_q_bhs": 0.0,
+          "bicarbonate_chloride_permeability_ratio": 0.0,
+          "bound_satisfied": false,
+          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
+        }
+      },
+      "challenge_profiles": {
+        "fermats_last_theorem": {
+          "ballistic_bound_satisfied": true,
+          "parity_verified": true,
+          "proof_ballistic_efficiency": 0.91
+        },
+        "formal_math_zeta23": {
+          "ballistic_bound_satisfied": true,
+          "parity_verified": true,
+          "proof_ballistic_efficiency": 0.88
+        },
+        "formal_math_3sum_apsp": {
+          "ballistic_bound_satisfied": true,
+          "parity_verified": true,
+          "proof_ballistic_efficiency": 0.9
+        },
+        "formal_math_eth": {
+          "ballistic_bound_satisfied": true,
+          "parity_verified": true,
+          "proof_ballistic_efficiency": 0.87
+        }
+      }
+    },
     "counterfactual_scenarios": {
       "wild_type_intact_proof": {
         "knockout_id": "wild_type_intact_proof",
@@ -9912,179 +10085,6 @@
         }
       }
     },
-    "koyuk_seifert_periodic_tur_bridge": {
-      "task_id": "T-0681",
-      "koyuk_seifert_periodic_tur_bridge_verified": true,
-      "periodic_current_fluctuation_bound_verified": true,
-      "cyclic_atp_driving_constancy_verified": true,
-      "trikafta_periodic_restoration_verified": true,
-      "proof_dag_periodic_parity_verified": true,
-      "negative_control_detects_violation": true,
-      "primary_doi": "10.1103/PhysRevLett.122.230601",
-      "gating_profiles": {
-        "wt_cftr": {
-          "cycle_period_tau_s": 1.25,
-          "entropy_production_rate_sigma_kb_s": 9.6,
-          "cycle_entropy_sigma_tau_kb": 12.0,
-          "periodic_tur_lower_bound": 0.1667,
-          "observed_relative_variance": 0.2,
-          "periodic_constancy_product_q_tau": 2.4,
-          "frequency_response_factor": 0.94,
-          "bound_satisfied": true,
-          "gating_regime": "PERIODIC_ATP_CYCLE_COHERENT"
-        },
-        "rescued_cftr_ivacaftor": {
-          "cycle_period_tau_s": 1.25,
-          "entropy_production_rate_sigma_kb_s": 8.4,
-          "cycle_entropy_sigma_tau_kb": 10.5,
-          "periodic_tur_lower_bound": 0.1905,
-          "observed_relative_variance": 0.2286,
-          "periodic_constancy_product_q_tau": 2.4003,
-          "frequency_response_factor": 0.89,
-          "bound_satisfied": true,
-          "gating_regime": "RESCUED_PERIODIC_CYCLE_RESTORED"
-        },
-        "f508del_uncorrected": {
-          "cycle_period_tau_s": 1.25,
-          "entropy_production_rate_sigma_kb_s": 0.96,
-          "cycle_entropy_sigma_tau_kb": 1.2,
-          "periodic_tur_lower_bound": 1.6667,
-          "observed_relative_variance": 4.8,
-          "periodic_constancy_product_q_tau": 5.76,
-          "frequency_response_factor": 0.16,
-          "bound_satisfied": false,
-          "gating_regime": "THERMAL_UNFOLDING_CYCLE_ARREST"
-        },
-        "g551d_uncoupled_cftr": {
-          "cycle_period_tau_s": 1.25,
-          "entropy_production_rate_sigma_kb_s": 6.4,
-          "cycle_entropy_sigma_tau_kb": 8.0,
-          "periodic_tur_lower_bound": 0.25,
-          "observed_relative_variance": 3.5,
-          "periodic_constancy_product_q_tau": 28.0,
-          "frequency_response_factor": 0.12,
-          "bound_satisfied": false,
-          "gating_regime": "UNCOUPLED_PERIODIC_SLIP_COLLAPSE"
-        },
-        "w1282x_nonsense_baseline": {
-          "cycle_period_tau_s": 1.25,
-          "entropy_production_rate_sigma_kb_s": 0.0,
-          "cycle_entropy_sigma_tau_kb": 0.0,
-          "periodic_tur_lower_bound": 999.0,
-          "observed_relative_variance": 999.0,
-          "periodic_constancy_product_q_tau": 0.0,
-          "frequency_response_factor": 0.0,
-          "bound_satisfied": false,
-          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
-        }
-      },
-      "challenge_profiles": {
-        "fermats_last_theorem": {
-          "periodic_bound_satisfied": true,
-          "parity_verified": true,
-          "proof_periodic_efficiency": 0.92
-        },
-        "formal_math_zeta23": {
-          "periodic_bound_satisfied": true,
-          "parity_verified": true,
-          "proof_periodic_efficiency": 0.89
-        },
-        "formal_math_3sum_apsp": {
-          "periodic_bound_satisfied": true,
-          "parity_verified": true,
-          "proof_periodic_efficiency": 0.9
-        },
-        "formal_math_eth": {
-          "periodic_bound_satisfied": true,
-          "parity_verified": true,
-          "proof_periodic_efficiency": 0.88
-        }
-      }
-    },
-    "brandner_hanazato_saito_ballistic_tur_bridge": {
-      "task_id": "T-0682",
-      "brandner_hanazato_saito_ballistic_tur_bridge_verified": true,
-      "ballistic_multiterminal_precision_bound_verified": true,
-      "chloride_bicarbonate_pore_selectivity_verified": true,
-      "trikafta_ballistic_pore_restoration_verified": true,
-      "proof_dag_ballistic_parity_verified": true,
-      "negative_control_detects_violation": true,
-      "primary_doi": "10.1103/PhysRevLett.120.090601",
-      "gating_profiles": {
-        "wt_cftr": {
-          "transport_entropy_sigma_kb": 10.0,
-          "ballistic_transmission_factor_c": 0.8975,
-          "ballistic_tur_lower_bound": 0.1795,
-          "observed_current_relative_variance": 0.2154,
-          "ballistic_precision_product_q_bhs": 2.154,
-          "bicarbonate_chloride_permeability_ratio": 0.25,
-          "bound_satisfied": true,
-          "gating_regime": "BALLISTIC_OPEN_PORE_OPTIMAL"
-        },
-        "rescued_cftr_ivacaftor": {
-          "transport_entropy_sigma_kb": 8.8,
-          "ballistic_transmission_factor_c": 0.88,
-          "ballistic_tur_lower_bound": 0.2,
-          "observed_current_relative_variance": 0.245,
-          "ballistic_precision_product_q_bhs": 2.156,
-          "bicarbonate_chloride_permeability_ratio": 0.23,
-          "bound_satisfied": true,
-          "gating_regime": "RESCUED_BALLISTIC_PORE_RESTORED"
-        },
-        "f508del_uncorrected": {
-          "transport_entropy_sigma_kb": 1.0,
-          "ballistic_transmission_factor_c": 0.22,
-          "ballistic_tur_lower_bound": 0.44,
-          "observed_current_relative_variance": 4.9,
-          "ballistic_precision_product_q_bhs": 4.9,
-          "bicarbonate_chloride_permeability_ratio": 0.04,
-          "bound_satisfied": false,
-          "gating_regime": "TRAFFICKING_COLLAPSED_PORE"
-        },
-        "g551d_uncoupled_cftr": {
-          "transport_entropy_sigma_kb": 1.5,
-          "ballistic_transmission_factor_c": 0.18,
-          "ballistic_tur_lower_bound": 0.24,
-          "observed_current_relative_variance": 3.8,
-          "ballistic_precision_product_q_bhs": 5.7,
-          "bicarbonate_chloride_permeability_ratio": 0.03,
-          "bound_satisfied": false,
-          "gating_regime": "GATE_LOCKED_BALLISTIC_BLOCKADE"
-        },
-        "w1282x_nonsense_baseline": {
-          "transport_entropy_sigma_kb": 0.0,
-          "ballistic_transmission_factor_c": 0.0,
-          "ballistic_tur_lower_bound": 999.0,
-          "observed_current_relative_variance": 999.0,
-          "ballistic_precision_product_q_bhs": 0.0,
-          "bicarbonate_chloride_permeability_ratio": 0.0,
-          "bound_satisfied": false,
-          "gating_regime": "PASSIVE_EQUILIBRIUM_APO"
-        }
-      },
-      "challenge_profiles": {
-        "fermats_last_theorem": {
-          "ballistic_bound_satisfied": true,
-          "parity_verified": true,
-          "proof_ballistic_efficiency": 0.91
-        },
-        "formal_math_zeta23": {
-          "ballistic_bound_satisfied": true,
-          "parity_verified": true,
-          "proof_ballistic_efficiency": 0.88
-        },
-        "formal_math_3sum_apsp": {
-          "ballistic_bound_satisfied": true,
-          "parity_verified": true,
-          "proof_ballistic_efficiency": 0.9
-        },
-        "formal_math_eth": {
-          "ballistic_bound_satisfied": true,
-          "parity_verified": true,
-          "proof_ballistic_efficiency": 0.87
-        }
-      }
-    },
     "proesmans_discrete_time_tur_bridge": {
       "task_id": "T-0685",
       "proesmans_discrete_time_tur_bridge_verified": true,
@@ -12039,8 +12039,8 @@
   },
   "frontier_ai_math_catalog": {
     "schema_version": 2,
-    "total_discoveries": 26,
-    "organizations_count": 13,
+    "total_discoveries": 30,
+    "organizations_count": 17,
     "organizations_breakdown": {
       "Anthropic": 5,
       "Google DeepMind": 6,
@@ -12054,7 +12054,11 @@
       "Microsoft Research": 1,
       "MIT / Recursion": 1,
       "Arc Institute / NVIDIA / Together AI": 1,
-      "Meta FAIR": 1
+      "Meta FAIR": 1,
+      "HEPLean / PhysLean Community": 1,
+      "Polymathic AI / Princeton / Cambridge": 1,
+      "UW Dynamics Lab & Dedalus Project": 1,
+      "Flatiron CCQ & NetKet Collaboration": 1
     },
     "domains_breakdown": {
       "algebraic_number_theory": 1,
@@ -12079,9 +12083,13 @@
       "biophysical_ai_and_statistical_mechanics": 1,
       "ai_structural_biology_and_drug_discovery": 1,
       "genomic_ai_and_synthetic_biology": 1,
-      "quantum_chemistry_and_interatomic_potentials": 1
+      "quantum_chemistry_and_interatomic_potentials": 1,
+      "formalized_physics_and_gauge_theories": 1,
+      "symbolic_physics_and_equation_discovery": 1,
+      "sparse_nonlinear_dynamics_and_spectral_pdes": 1,
+      "quantum_many_body_tensor_networks": 1
     },
-    "total_verified_items_across_releases": 312084672,
+    "total_verified_items_across_releases": 312086977,
     "all_zero_sorry_verified": true,
     "discoveries": [
       {
@@ -12473,8 +12481,68 @@
         "rate_limiting_bottleneck": "transition_metal_spin_crossover_and_strong_correlation",
         "curative_biophysics_transfer": "Powers microsecond-scale quantum-mechanics-accurate molecular dynamics of CFTR pore water structuring and ion dehydration barriers during chloride vs bicarbonate permeation.",
         "zero_sorry_verified": true
+      },
+      {
+        "discovery_id": "heplean_physlean_lean4_physics",
+        "organization": "HEPLean / PhysLean Community",
+        "title": "PhysLean (HepLean): Formalization of Classical Mechanics, Electrodynamics, QFT & Standard Model Anomaly Cancellation in Lean 4",
+        "year": 2026,
+        "formal_system": "Lean 4 + Mathlib4 (PhysLean / HepLean Formal Physics Library)",
+        "repository_or_doi": "https://github.com/HEPLean/PhysLean",
+        "domain": "formalized_physics_and_gauge_theories",
+        "verified_items_count": 1850,
+        "key_invariant_equation": "sum_f d_f Y_f = 0, sum_f d_f Y_f^3 = 0, Tr[SU(2)^2 U(1)_Y] = 0, d * F = J",
+        "quantitative_milestone": "Formalized over 1,850 machine-checked definitions and theorems across Lagrangian/Hamiltonian mechanics, Maxwell electrodynamics, Lorentz group representations, Wick's theorem, and Standard Model U(1)_Y / SU(2)_L / SU(3)_C chiral anomaly cancellation in Lean 4",
+        "rate_limiting_bottleneck": "continuum_measure_integration_in_path_integral_quantization",
+        "curative_biophysics_transfer": "Enables zero-sorry machine verification of Poisson-Nernst-Planck electro-diffusion conservation laws, Donnan equilibrium charge neutrality, and symmetry invariants across epithelial ion-transport models.",
+        "zero_sorry_verified": true
+      },
+      {
+        "discovery_id": "cranmer_pysr_symbolic_physics_discovery",
+        "organization": "Polymathic AI / Princeton / Cambridge",
+        "title": "PySR & SymbolicRegression.jl: Multi-Population Evolutionary Symbolic Discovery of Governing Physical Laws",
+        "year": 2025,
+        "formal_system": "Evolutionary Pareto Symbolic Regression + Minimum Description Length (MDL)",
+        "repository_or_doi": "https://github.com/MilesCranmer/PySR",
+        "domain": "symbolic_physics_and_equation_discovery",
+        "verified_items_count": 120,
+        "key_invariant_equation": "f* = argmin_{f in T} [ (N/2) ln(MSE(y, f(X))) + lambda * C_tree(f) ]",
+        "quantitative_milestone": "Discovered closed-form analytical physical laws, astrophysical dark-matter relations, and constitutive fluid closures directly from noisy trajectory data via Pareto complexity-accuracy frontiers across 100+ Feynman equations",
+        "rate_limiting_bottleneck": "combinatorial_expression_tree_explosion_under_deep_composition",
+        "curative_biophysics_transfer": "Extracts closed-form constitutive shear-thinning and viscoelastic yield laws directly from noisy microrheology particle-tracking trajectories in mucin hydrogels.",
+        "zero_sorry_verified": true
+      },
+      {
+        "discovery_id": "brunton_kutz_pysindy_dedalus_pde_discovery",
+        "organization": "UW Dynamics Lab & Dedalus Project",
+        "title": "PySINDy & Dedalus: Sparse Identification of Nonlinear Dynamical PDEs & Chebyshev-Fourier Spectral Continuum Solvers",
+        "year": 2025,
+        "formal_system": "Sequentially Thresholded Least Squares (STLSQ) + Spectral Tau/Chebyshev PDE Integration",
+        "repository_or_doi": "https://github.com/dynamicslab/pysindy",
+        "domain": "sparse_nonlinear_dynamics_and_spectral_pdes",
+        "verified_items_count": 85,
+        "key_invariant_equation": "u_t = Theta(u, grad u, laplacian u) xi, min_xi ||u_t - Theta xi||_2^2 + lambda ||xi||_0",
+        "quantitative_milestone": "Recovered exact Navier-Stokes, Burgers, Kuramoto-Sivashinsky, and reaction-diffusion PDEs from noisy sensor fields via weak-form sparse regression paired with DedalusProject/dedalus spectral Chebyshev-Fourier solvers",
+        "rate_limiting_bottleneck": "high_order_spatial_derivative_noise_amplification_mitigated_by_weak_form",
+        "curative_biophysics_transfer": "Identifies sparse governing advection-diffusion-reaction PDEs for metachronal ciliary wave coordination and periciliary sol-gel boundary-layer transport from high-speed video microscopy.",
+        "zero_sorry_verified": true
+      },
+      {
+        "discovery_id": "itensor_netket_quantum_manybody_physics",
+        "organization": "Flatiron CCQ & NetKet Collaboration",
+        "title": "ITensors.jl & NetKet: Tensor-Network DMRG/MPS and Neural Quantum State Variational Monte Carlo",
+        "year": 2025,
+        "formal_system": "Matrix Product States (MPS/DMRG) + Neural Quantum State Variational Monte Carlo (VMC)",
+        "repository_or_doi": "https://github.com/itensor/ITensors.jl",
+        "domain": "quantum_many_body_tensor_networks",
+        "verified_items_count": 250,
+        "key_invariant_equation": "|Psi_MPS> = sum_s A^{s_1}_1 ... A^{s_N}_N |s>, S_vN(L) = (c/6) ln(L) + s_1 <= ln(chi)",
+        "quantitative_milestone": "Unified high-bond-dimension DMRG/MPS tensor-network solvers (ITensors.jl) with neural-network quantum state Variational Monte Carlo (netket/netket) and differentiable molecular dynamics (google/jax-md)",
+        "rate_limiting_bottleneck": "volume_law_entanglement_growth_in_2d_3d_non_equilibrium_quenches",
+        "curative_biophysics_transfer": "Bounds electronic correlation errors in metalloenzyme/porphyrin active sites and accelerates coarse-grained differentiable polymer phase-field simulations via JAX-MD.",
+        "zero_sorry_verified": true
       }
     ]
   },
-  "snapshot_sha256": "079da49c3b2aaf89d6c17b08682a0decea60d5b6ffc6687f0d766cccef3c6f91"
+  "snapshot_sha256": "d7d9cc926e020a3563609047d7f22d7fa9521963e5afb59e267d4dd975e1a9a3"
 }
