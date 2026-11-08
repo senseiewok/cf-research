@@ -4,9 +4,9 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `137` (plus 4 infrastructure scripts and 201 unit test suites)
+- **Total Verified Modules:** `138` (plus 4 infrastructure scripts and 202 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
-- **`merge` (Consolidate into Canonical Module):** `48`
+- **`merge` (Consolidate into Canonical Module):** `49`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -19,7 +19,7 @@ python tools/discovery/discovery_council.py --falsify-all
 python tools/discovery/discovery_council.py --run-stdlib-tests
 ```
 
-## Structural Biology & CFTR Biophysics (`structural_biology` — 39 modules)
+## Structural Biology & CFTR Biophysics (`structural_biology` — 40 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -50,6 +50,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `round115_quantum_vqe_lindblad_biomolecular_bridge.py` | `T-0750` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round118_maxwell_calladine_tensegrity_cftr_allostery_bridge.py` | `T-0754` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round121_landau_ginzburg_sionna_nbd1_calorimetric_stabilization_bridge.py` | `T-0758` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round123_physlean_pnp_electro_diffusion_donnan_bridge.py` | `T-0763` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round90_pietzonka_power_constancy_tradeoff.py` | `T-0697` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round91_dechant_sasa_fluctuation_response.py` | `T-0698` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round92_hasegawa_biochemical_tur.py` | `T-0703` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
