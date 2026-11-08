@@ -1374,6 +1374,16 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "task": "T-0778", "track": "Track A", "tier": "T2",
         "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
         "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
+    "round135_smoluchowski_mucin_aggregation_bridge": {
+        "task": "T-0779", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
+    "round136_kramers_turnover_cftr_gating_bridge": {
+        "task": "T-0780", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
     }
 }
 
