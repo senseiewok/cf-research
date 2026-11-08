@@ -6,21 +6,21 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 137,
+  "total_modules": 138,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 201,
+  "test_suites_count": 202,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 136,
+    "researchers": 137,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 48,
+    "merge": 49,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 39,
+    "structural_biology": 40,
     "rna_gene_editing": 28,
     "airway_delivery": 57,
     "microbiology_host": 7,
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 39,
+      "count": 40,
       "keep_count": 11,
-      "merge_count": 27,
+      "merge_count": 28,
       "archive_count": 1,
       "modules": [
         {
@@ -324,6 +324,17 @@
         {
           "module": "round121_landau_ginzburg_sionna_nbd1_calorimetric_stabilization_bridge",
           "task": "T-0758",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round123_physlean_pnp_electro_diffusion_donnan_bridge",
+          "task": "T-0763",
           "track": "Track A",
           "tier": "T2",
           "discipline": "structural_biology",
