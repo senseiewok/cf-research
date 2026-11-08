@@ -6,21 +6,21 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 147,
+  "total_modules": 149,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 211,
+  "test_suites_count": 213,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 146,
+    "researchers": 148,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 58,
+    "merge": 60,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 49,
+    "structural_biology": 51,
     "rna_gene_editing": 28,
     "airway_delivery": 57,
     "microbiology_host": 7,
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 49,
+      "count": 51,
       "keep_count": 11,
-      "merge_count": 37,
+      "merge_count": 39,
       "archive_count": 1,
       "modules": [
         {
@@ -434,6 +434,28 @@
         {
           "module": "round132_flory_huggins_mucin_phase_separation_bridge",
           "task": "T-0776",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round133_wkb_asymptotic_cftr_permeation_bridge",
+          "task": "T-0777",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round134_cahn_hilliard_mucin_spinodal_interface_bridge",
+          "task": "T-0778",
           "track": "Track A",
           "tier": "T2",
           "discipline": "structural_biology",
