@@ -6,22 +6,22 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 135,
+  "total_modules": 137,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 199,
+  "test_suites_count": 201,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 134,
+    "researchers": 136,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 46,
+    "merge": 48,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 38,
-    "rna_gene_editing": 27,
+    "structural_biology": 39,
+    "rna_gene_editing": 28,
     "airway_delivery": 57,
     "microbiology_host": 7,
     "clinical_trials": 3,
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 38,
+      "count": 39,
       "keep_count": 11,
-      "merge_count": 26,
+      "merge_count": 27,
       "archive_count": 1,
       "modules": [
         {
@@ -322,6 +322,17 @@
           "test_verified": true
         },
         {
+          "module": "round121_landau_ginzburg_sionna_nbd1_calorimetric_stabilization_bridge",
+          "task": "T-0758",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
           "module": "round90_pietzonka_power_constancy_tradeoff",
           "task": "T-0697",
           "track": "Track A",
@@ -457,9 +468,9 @@
     },
     "rna_gene_editing": {
       "label": "RNA, Nonsense Readthrough & Gene Editing",
-      "count": 27,
+      "count": 28,
       "keep_count": 18,
-      "merge_count": 7,
+      "merge_count": 8,
       "archive_count": 2,
       "modules": [
         {
@@ -696,6 +707,17 @@
         {
           "module": "round107_hopfield_ninio_kinetic_proofreading_ptc",
           "task": "T-0736",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round122_doob_h_transform_92_nonsense_alleles_mrna_survival_bridge",
+          "task": "T-0759",
           "track": "Track A",
           "tier": "T2",
           "discipline": "rna_gene_editing",

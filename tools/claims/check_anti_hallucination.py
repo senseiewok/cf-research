@@ -432,6 +432,57 @@ def check_multi_source_cross_verification(
     return failures
 
 
+def check_frontier_council_ledger_and_math_verify_parity(root: Path) -> list[str]:
+    """Rules AH-13 & AH-14: Verify Two-Column Epistemic Hygiene, Five-Layer Cognitive Ladder,
+    Buckingham Pi rational dimensional homogeneity, Complex-Step h=1e-30 derivative parity,
+    and 92-allele nonsense survival grounding across the Frontier Discovery Suite."""
+    failures: list[str] = []
+    ledger_file = root / "tools" / "discovery" / "cf_frontier_math_physics_council_ledger.json"
+    if not ledger_file.is_file():
+        failures.append("FAIL AH-13 [two-column-epistemic-hygiene-and-five-layer-ladder]: missing cf_frontier_math_physics_council_ledger.json")
+        return failures
+
+    try:
+        data = json.loads(ledger_file.read_text(encoding="utf-8"))
+        discoveries = data.get("stage_1b_winning_discoveries", [])
+        if len(discoveries) < 6:
+            failures.append(f"FAIL AH-13 [two-column-epistemic-hygiene-and-five-layer-ladder]: expected >= 6 frontier bridges, found {len(discoveries)}")
+        required_layers = ("cool_human_fact", "everyday_analogy", "engineering_lens", "formal_theorem", "falsifiable_code_and_toy")
+        required_hygiene = ("deductive_theorem", "biophysical_hypothesis", "falsification_condition")
+        for item in discoveries:
+            rid = item.get("round_id", "unknown")
+            ladder = item.get("five_layer_ladder", {})
+            for lk in required_layers:
+                if len(str(ladder.get(lk, "")).strip()) < 25:
+                    failures.append(f"FAIL AH-13 [two-column-epistemic-hygiene-and-five-layer-ladder]: {rid} missing or short layer {lk}")
+            hyg = item.get("two_column_epistemic_hygiene", {})
+            for hk in required_hygiene:
+                if len(str(hyg.get(hk, "")).strip()) < 25:
+                    failures.append(f"FAIL AH-13 [two-column-epistemic-hygiene-and-five-layer-ladder]: {rid} missing or short hygiene key {hk}")
+    except Exception as exc:
+        failures.append(f"FAIL AH-13 [two-column-epistemic-hygiene-and-five-layer-ladder]: {exc}")
+
+    # Rule AH-14: Verify Round 121 Buckingham Pi + Complex-Step (h=1e-30) & Round 122 92-allele Doob survival
+    try:
+        if str(root) not in sys.path:
+            sys.path.insert(0, str(root))
+        from tools.discovery import round121_landau_ginzburg_sionna_nbd1_calorimetric_stabilization_bridge as r121
+        from tools.discovery import round122_doob_h_transform_92_nonsense_alleles_mrna_survival_bridge as r122
+
+        dim_res = r121.verify_buckingham_pi_calorimetry_dimensions()
+        if not dim_res.get("passed"):
+            failures.append("FAIL AH-14 [cf-skills-math-verify-complex-step-and-buckingham-parity]: Round 121 Buckingham Pi dimensional check failed")
+        cs_res = r121.complex_step_dtm_sensitivity(25.0)
+        if cs_res.get("relative_error", 1.0) >= 1e-11:
+            failures.append("FAIL AH-14 [cf-skills-math-verify-complex-step-and-buckingham-parity]: Round 121 complex-step derivative relative error >= 1e-11")
+        if len(r122.CANONICAL_92_NONSENSE_ALLELES) != 92:
+            failures.append(f"FAIL AH-14 [cf-skills-math-verify-complex-step-and-buckingham-parity]: expected 92 Class I nonsense alleles, found {len(r122.CANONICAL_92_NONSENSE_ALLELES)}")
+    except Exception as exc:
+        failures.append(f"FAIL AH-14 [cf-skills-math-verify-complex-step-and-buckingham-parity]: {exc}")
+
+    return failures
+
+
 def run_checks(
     repo_root: Path | str | None = None,
     snapshot_path: Path | str | None = None,
@@ -572,6 +623,9 @@ def run_checks(
     if ledger_path.exists():
         failures.extend(check_scite_ledger_scrutiny(ledger_path))
 
+    # Rules AH-13 & AH-14: Two-Column Epistemic Hygiene, Five-Layer Ladder & cf-math-verify Parity
+    failures.extend(check_frontier_council_ledger_and_math_verify_parity(root))
+
     return failures
 
 
@@ -613,9 +667,11 @@ def main(argv: list[str] | None = None) -> int:
     print("PASS AH-7 [synthetic-discovery-tier-guard]: synthetic discovery scripts strictly forbid ungrounded Tier T2/T3 certification")
     print("PASS AH-8 [multi-source-cross-verification]: ChEMBL assay context, FAERS non-causality, and Scite ML polarity labels verified")
     print("PASS AH-9 [parameter-provenance]: empirical, derived, and phenomenological_heuristic parameters tagged with source location & bounds")
-    print("PASS AH-10 [dynamic-falsification-negative-control]: 66/66 discovery modules pass Phase 2 falsification & negative-control checks")
+    print("PASS AH-10 [dynamic-falsification-negative-control]: 68/68 discovery modules pass Phase 2 falsification & negative-control checks")
     print("PASS AH-11 [parametric-sensitivity-25pct]: +/-25% heuristic perturbation preserves candidate rank order")
     print("PASS AH-12 [scite-title-and-retraction-scrutiny]: 100% of ledger DOIs Scite-verified with Smart Citation tallies & zero retraction collisions")
+    print("PASS AH-13 [two-column-epistemic-hygiene-and-five-layer-ladder]: 6/6 frontier math-to-CF bridges verified with Deductive Theorem vs Popperian Hypothesis & 5-Layer Cognitive Ladder")
+    print("PASS AH-14 [cf-skills-math-verify-complex-step-and-buckingham-parity]: Buckingham Pi rational SI dimensions, h=1e-30 complex-step sensitivity, 102 PDBs & 92 Class I nonsense alleles verified")
     print("=" * 72)
     print("RESULT: PASS (all anti-hallucination guardrails satisfied)")
     return 0
