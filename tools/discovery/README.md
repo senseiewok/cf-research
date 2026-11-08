@@ -4,9 +4,9 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `141` (plus 4 infrastructure scripts and 205 unit test suites)
+- **Total Verified Modules:** `143` (plus 4 infrastructure scripts and 207 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
-- **`merge` (Consolidate into Canonical Module):** `52`
+- **`merge` (Consolidate into Canonical Module):** `54`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -19,7 +19,7 @@ python tools/discovery/discovery_council.py --falsify-all
 python tools/discovery/discovery_council.py --run-stdlib-tests
 ```
 
-## Structural Biology & CFTR Biophysics (`structural_biology` — 43 modules)
+## Structural Biology & CFTR Biophysics (`structural_biology` — 45 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -54,6 +54,8 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `round124_pysindy_dedalus_ciliary_coordination_bridge.py` | `T-0764` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round125_kramers_moyal_cftr_patch_clamp_transition_bridge.py` | `T-0768` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round126_zwanzig_mori_mucus_memory_kernel_bridge.py` | `T-0769` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round127_green_kubo_mucus_shear_relaxation_bridge.py` | `T-0771` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round128_dean_kawasaki_mucin_fluctuations_bridge.py` | `T-0772` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round90_pietzonka_power_constancy_tradeoff.py` | `T-0697` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round91_dechant_sasa_fluctuation_response.py` | `T-0698` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round92_hasegawa_biochemical_tur.py` | `T-0703` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
