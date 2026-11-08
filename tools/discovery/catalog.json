@@ -6,23 +6,23 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 151,
+  "total_modules": 153,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 215,
+  "test_suites_count": 217,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 150,
+    "researchers": 152,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 62,
+    "merge": 64,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 52,
+    "structural_biology": 53,
     "rna_gene_editing": 28,
-    "airway_delivery": 58,
+    "airway_delivery": 59,
     "microbiology_host": 7,
     "clinical_trials": 3,
     "ai_verification": 3
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 52,
+      "count": 53,
       "keep_count": 11,
-      "merge_count": 40,
+      "merge_count": 41,
       "archive_count": 1,
       "modules": [
         {
@@ -467,6 +467,17 @@
         {
           "module": "round136_kramers_turnover_cftr_gating_bridge",
           "task": "T-0780",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round138_pnp_cftr_electrodiffusion_bridge",
+          "task": "T-0782",
           "track": "Track A",
           "tier": "T2",
           "discipline": "structural_biology",
@@ -928,9 +939,9 @@
     },
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
-      "count": 58,
+      "count": 59,
       "keep_count": 44,
-      "merge_count": 13,
+      "merge_count": 14,
       "archive_count": 1,
       "modules": [
         {
@@ -1475,6 +1486,17 @@
         {
           "module": "round135_smoluchowski_mucin_aggregation_bridge",
           "task": "T-0779",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round137_rouse_zimm_mucin_relaxation_bridge",
+          "task": "T-0781",
           "track": "Track A",
           "tier": "T2",
           "discipline": "airway_delivery",
