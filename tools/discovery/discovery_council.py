@@ -1465,6 +1465,16 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
         "consolidation_target": "formal_proof_thermodynamic_landscape",
     },
+    "round153_mucus_nanoparticle_filtration_bridge": {
+        "task": "T-0810", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
+    "round154_kramers_gating_barrier_bridge": {
+        "task": "T-0811", "track": "Track A", "tier": "T2",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
 }
 
 
