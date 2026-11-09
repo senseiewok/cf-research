@@ -67,6 +67,16 @@ class Round146GouyChapmanMembranePotentialTest(unittest.TestCase):
         poisoned = evaluate_falsification_negative_control(poison_negative_bulk_salt=True)
         self.assertFalse(poisoned["passed"])
 
+    def test_custom_sigma_s_sweep_and_zero_charge(self) -> None:
+        hyper = evaluate_round146_gouy_chapman_membrane_potential("wild_type_apical_membrane_bilayer", custom_sigma_s=-0.080)
+        wt = evaluate_round146_gouy_chapman_membrane_potential("wild_type_apical_membrane_bilayer", custom_sigma_s=-0.028)
+        neutral = evaluate_round146_gouy_chapman_membrane_potential("wild_type_apical_membrane_bilayer", custom_sigma_s=0.0)
+        self.assertLess(hyper.surface_potential_mv, wt.surface_potential_mv)
+        self.assertLess(hyper.surface_chloride_concentration_mm, wt.surface_chloride_concentration_mm)
+        self.assertLess(hyper.effective_conductance_ps, wt.effective_conductance_ps)
+        self.assertEqual(neutral.surface_potential_mv, 0.0)
+        self.assertTrue(neutral.falsification_invariant_satisfied)
+
     def test_two_column_epistemic_hygiene_and_five_layer_ladder(self) -> None:
         self.assertIn("deductive_theorem", TWO_COLUMN_EPISTEMIC_HYGIENE)
         self.assertIn("biophysical_hypothesis", TWO_COLUMN_EPISTEMIC_HYGIENE)

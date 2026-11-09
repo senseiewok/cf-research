@@ -47,10 +47,9 @@ Research simulation only; not medical advice.
 """
 from __future__ import annotations
 
-import cmath
 import math
 from dataclasses import dataclass
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, Tuple
 
 PRIMARY_CITATIONS: Tuple[str, ...] = (
     "DOI: 10.1085/jgp.200609558",

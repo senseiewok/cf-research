@@ -63,7 +63,7 @@ from __future__ import annotations
 import cmath
 import math
 from dataclasses import dataclass
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, Tuple
 
 PRIMARY_CITATIONS: Tuple[str, ...] = (
     "DOI: 10.1126/science.ade2216",
@@ -301,7 +301,15 @@ def evaluate_round146_gouy_chapman_membrane_potential(
     ratio = gc["partition_ratio"]
 
     # Effective channel conductance and epithelial current
-    g_eff = g_base
+    if custom_sigma_s is not None:
+        preset_gc = compute_gouy_chapman_double_layer(
+            sigma_s_c_m2=float(preset["surface_charge_density_c_m2"]),
+            bulk_salt_mm=bulk_mm,
+            temperature_k=temp,
+        )
+        g_eff = g_base * math.sqrt(cl_surf / max(1e-9, preset_gc["cl_surface_mm"]))
+    else:
+        g_eff = g_base
     i_single_a = (g_eff * 1e-12) * (v_drive_mv * 1e-3)
     i_sc_ua_cm2 = density * po * i_single_a * 1e6
 
@@ -319,20 +327,27 @@ def evaluate_round146_gouy_chapman_membrane_potential(
     r_const = 8.314462618
     f_const = 96485.33212
     v_thermal = (r_const * temp) / f_const
-    # Analytic and complex-step derivative of (2*v_th)*asinh(sigma_s / A)
-    deriv_step = (2.0 * v_thermal) / math.sqrt((a_gc ** 2) + (sigma_s ** 2))
+    psi_0_c = 2.0 * v_thermal * cmath.asinh(complex(sigma_s, h_step) / a_gc)
+    deriv_step = psi_0_c.imag / h_step
+    analytic_deriv = (2.0 * v_thermal) / math.sqrt((a_gc ** 2) + (sigma_s ** 2))
+    deriv_matches_analytic = abs(deriv_step - analytic_deriv) <= 1e-9 * max(1.0, abs(analytic_deriv))
 
     # Physical Invariants:
     # 1. Bulk concentration > 0
     # 2. Debye length > 0
-    # 3. Monotonic derivative d(psi_0)/d(sigma_s) > 0
+    # 3. Monotonic derivative d(psi_0)/d(sigma_s) > 0 (complex-step matches analytic)
     # 4. Sign consistency: sgn(psi_0) == sgn(sigma_s)
     # 5. Local surface concentration > 0
+    sign_consistent = (
+        (sigma_s == 0.0 and psi_mv == 0.0)
+        or (math.copysign(1.0, psi_mv) == math.copysign(1.0, sigma_s))
+    )
     invariants_met = (
         (bulk_mm > 0.0)
         and (lambda_nm > 0.0)
         and (deriv_step > 0.0)
-        and (math.copysign(1.0, psi_mv) == math.copysign(1.0, sigma_s))
+        and deriv_matches_analytic
+        and sign_consistent
         and (cl_surf > 0.0)
         and (i_sc_ua_cm2 >= 0.0)
     )

@@ -65,6 +65,13 @@ class Round145HillLangmuirCftrNbdDimerizationTest(unittest.TestCase):
         poisoned = evaluate_falsification_negative_control(poison_negative_atp=True)
         self.assertFalse(poisoned["passed"])
 
+    def test_custom_atp_monotonic_sweep(self) -> None:
+        low = evaluate_round145_hill_langmuir_cftr_nbd_dimerization("wild_type_cftr_atp_gating", custom_atp_um=50.0)
+        high = evaluate_round145_hill_langmuir_cftr_nbd_dimerization("wild_type_cftr_atp_gating", custom_atp_um=2000.0)
+        self.assertLess(low.open_probability, high.open_probability)
+        self.assertLess(low.epithelial_short_circuit_current_ua_cm2, high.epithelial_short_circuit_current_ua_cm2)
+        self.assertTrue(low.falsification_invariant_satisfied)
+
     def test_two_column_epistemic_hygiene_and_five_layer_ladder(self) -> None:
         self.assertIn("deductive_theorem", TWO_COLUMN_EPISTEMIC_HYGIENE)
         self.assertIn("biophysical_hypothesis", TWO_COLUMN_EPISTEMIC_HYGIENE)
