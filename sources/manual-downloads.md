@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-280 to download by hand, 1 to ask for, 3 not to download.
+293 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -53,6 +53,21 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | conte-2022-acsami | Hybrid Lipid/Polymer Nanoparticles to Tackle the Cystic Fibrosis Mucus Barrier in siRNA Delivery to the Lungs: Does PEGylation Make the Difference? | [page](https://doi.org/10.1021/acsami.1c14975) | link only | Supporting words are in the Introduction (the barrier and the viscous mucus) and the section on siRNA-loaded nanoparticles in CF sputum samples (dehydration). |
+
+### American Physical Society
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| roldan-parrondo-2010-prl-dissipation-trajectories | Estimating Dissipation from Single Stationary Trajectories | [page](https://doi.org/10.1103/PhysRevLett.105.150607) | link only | Theory paper. |
+| skinner-dunkel-2021-prl-waiting-times | Estimating Entropy Production from Waiting Time Distributions | [page](https://doi.org/10.1103/PhysRevLett.127.198101) | link only | Theory paper. |
+| barato-seifert-2016-prx-brownian-clocks | Cost and Precision of Brownian Clocks | [page](https://doi.org/10.1103/PhysRevX.6.041053) | link only | Theory paper. |
+| gingrich-horowitz-2017-prl-first-passage-bounds | Fundamental Bounds on First Passage Time Fluctuations for Currents | [page](https://doi.org/10.1103/PhysRevLett.119.170601) | link only | Theory paper. |
+
+### American Physiological Society
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| csanady-2019-physrev-cftr-review | Structure, Gating, and Regulation of the CFTR Anion Channel | [page](https://doi.org/10.1152/physrev.00007.2018) | link only | Only the abstract (through the Europe PMC API catalogued above) and the Crossref record were read on 2026-11-08; the full text was not. |
 
 ### American Samoa Department of Health
 
@@ -456,6 +471,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | einstokborn-is-resource-pages | Einstök börn rare disease support website (einstokborn.is) | [page](https://einstokborn.is/) | link only | National rare disease patient and family association in Iceland (Einstök börn) providing support and education for cystic fibrosis (slímseigjusjúkdómur). |
+
+### Elsevier (Cell Press)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sorum-2015-cell-pore-opening-timing | Timing of CFTR Pore Opening and Structure of Its Transition State | [page](https://doi.org/10.1016/j.cell.2015.09.052) | link only | Identifiers resolved on Crossref and Europe PMC on 2026-11-09; not in PubMed Central; the text was not read. |
 
 ### European Medicines Agency
 
@@ -1183,6 +1204,14 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | muratsan-am-resource-pages | Muratsan University Hospital Complex website (muratsan.am) | [page](https://muratsan.am/) | link only | Robots.txt verified 2026-10-25; manual access (link and summary only). |
 
+### National Academy of Sciences
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| csanady-2010-pnas-burst-coupling | Strict coupling between CFTR's catalytic cycle and gating of its Cl- ion pore revealed by distributions of open channel burst durations | [page](https://doi.org/10.1073/pnas.0911061107) | link only | Read from the PMC HTML page on 2026-11-08 (about half the article; Methods equations, SI and figure-image numbers not read). |
+| jih-hwang-2013-pnas-vx770-decoupling | Vx-770 potentiates CFTR function by promoting decoupling between the gating cycle and ATP hydrolysis cycle | [page](https://doi.org/10.1073/pnas.1215982110) | link only | Identifiers resolved on Crossref and Europe PMC on 2026-11-09; the text was not read. |
+| skinner-dunkel-2021-pnas-entropy-bounds | Improved bounds on entropy production in living systems | [page](https://doi.org/10.1073/pnas.2024300118) | link only | Theory paper. |
+
 ### National Centre for Disease Control Libya
 
 | ID | What | Open | Save as | Notes |
@@ -1206,6 +1235,13 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | nul-ls-resource-pages | National University of Lesotho website (www.nul.ls) | [page](https://www.nul.ls/) | link only | Official national university and health sciences faculty portal in Lesotho; robots.txt allow (2026-10-26), manual access, link and summary only. |
+
+### Nature Portfolio
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| vergani-2005-nature-nbd-dimerization | CFTR channel opening by ATP-driven tight dimerization of its nucleotide-binding domains | [page](https://doi.org/10.1038/nature03313) | link only | Identifiers resolved on Crossref and Europe PMC on 2026-11-09 (author manuscript in PMC, not flagged open access); the text was not read. |
+| martinez-2019-natcommun-broken-detailed-balance | Inferring broken detailed balance in the absence of observable currents | [page](https://doi.org/10.1038/s41467-019-11051-w) | link only | Theory paper. |
 
 ### Nature Publishing Group
 
@@ -1329,6 +1365,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | rfcf-se-resource-pages | Riksförbundet Cystisk Fibros website (rfcf.se) | [page](https://www.rfcf.se/) | link only | Official national cystic fibrosis federation in Sweden. |
 
+### Rockefeller University Press
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| csanady-2006-jgp-irreversible-cycle | Thermodynamics of CFTR Channel Gating: A Spreading Conformational Change Initiates an Irreversible Gating Cycle | [page](https://doi.org/10.1085/jgp.200609558) | link only | Identifiers resolved on Crossref and Europe PMC on 2026-11-09 (open access in PMC); the full text was not read, so no statement from it is verified yet. |
+
 ### Savez za rijetke bolesti Republike Srpske
 
 | ID | What | Open | Save as | Notes |
@@ -1394,6 +1436,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | sacfa-resource-pages | South African Cystic Fibrosis Association website (sacfa.org.za) | [page](https://www.sacfa.org.za/) | link only | Official national cystic fibrosis association in South Africa. |
+
+### Springer
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| gaspard-2004-jstatphys-time-reversed-entropy | Time-Reversed Dynamical Entropy and Irreversibility in Markovian Random Processes | [page](https://doi.org/10.1007/s10955-004-3455-1) | link only | Theory paper, not CF literature. |
 
 ### St Helena Government
 
