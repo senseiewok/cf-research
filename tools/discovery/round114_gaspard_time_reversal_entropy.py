@@ -21,6 +21,12 @@ Markov CFTR single-channel gating networks (PDB 6MSM, 8EIQ, 5UAK):
      dynamical entropy rate,
    - h_KS^R - h_KS = (1/2) sum_{m,n} (p_m^ss W_{mn} - p_n^ss W_{nm}) ln(W_{mn} / W_{nm}) >= 0
      is the exact steady-state entropy production rate dot(S)_i / k_B.
+   Scope: the identity holds for the full state trajectory. A patch clamp records only
+   the open/closed projection, on which the same divergence is a lower bound that can
+   be far smaller than dot(S)_i (a lab model on the Csanady, Vergani & Gadsby 2010
+   four-state cycle, DOI 10.1073/pnas.0911061107, recovered under 0.1 percent of it);
+   the measurable signature of the driven cycle in recordings is the peaked,
+   narrower-than-exponential open-burst duration distribution reported there.
 
 2. Five CFTR Single-Channel Kinetics Profiles:
    Evaluates `wt_cftr_atp_driven`, `f508del_eti_rescued`, `g551d_ivacaftor_potentiated`,

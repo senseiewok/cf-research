@@ -270,10 +270,10 @@ Along single stochastic channel trajectories $\gamma = \{m(t)\}_{0 \le t \le \ta
 
 $$\langle \exp(-\Delta s_{\text{tot}}) \rangle = 1.0, \quad \langle \exp(-\Delta s_{\text{ex}}) \rangle = 1.0, \quad \langle \exp(-\Delta s_{\text{hk}}) \rangle = 1.0$$
 
-In wild-type CFTR, tight $NBD1$-$NBD2$ coupling ensures that $>80\%$ of dissipated power fuels productive housekeeping cycling ($\eta_{\text{hk}} > 0.80$). In uncorrected $F508del$, uncoupled dimer dynamics elevate futile excess conformational dissipation, collapsing housekeeping efficiency below $40\%$.
+The housekeeping-efficiency figures quoted for these profiles ($\eta_{\text{hk}} > 0.80$ for wild type, below $40\%$ for uncorrected $F508del$) are outputs of the lab's illustrative Round 113 model (`tools/discovery/round113_esposito_van_den_broeck_three_faces.py`), not measured values; no primary source reports a housekeeping efficiency for CFTR, so the measured value is not stated.
 
 ##### Round 114: Gaspard Time-Reversed Dynamical Entropy & Kullback-Leibler Relative Entropy Rate
-Pierre Gaspard (PRL 2004, 2005) established the profound identity connecting microscopic irreversibility to non-equilibrium entropy production in single-molecule patch-clamp dwell sequences:
+Pierre Gaspard (J. Stat. Phys. 2004, DOI 10.1007/s10955-004-3455-1) established the identity connecting microscopic irreversibility to non-equilibrium entropy production for the full state trajectory of a Markov jump process. A patch clamp records only the open/closed projection of that trajectory, and on the projected record the same divergence is a lower bound that can be far smaller than the entropy production (a lab model on the published four-state cycle recovered under 0.1 percent of it); the measurable signature of the driven cycle is the shape of the open-burst duration distribution (Csanady, Vergani & Gadsby, PNAS 2010, DOI 10.1073/pnas.0911061107). The identity for the full trajectory reads:
 
 $$\frac{\dot{S}_{\text{tot}}}{k_B} = \lim_{\tau \to \infty} \frac{1}{\tau} D_{\text{KL}}(P(\omega) \parallel P(\omega^R)) = h_{\text{KS}}^R - h_{\text{KS}} \ge 0$$
 
@@ -283,7 +283,7 @@ where:
 - $h_{\text{KS}}$ is the Kolmogorov-Sinai dynamical entropy per unit time.
 - $h_{\text{KS}}^R$ is the time-reversed dynamical entropy rate.
 
-In an equilibrium channel (or inactive $W1282X$ truncation without ATP hydrolysis), microscopic detailed balance holds: forward and time-reversed dwell-time sequence distributions are statistically indistinguishable ($P(\omega) = P(\omega^R)$), yielding $h_{\text{KS}}^R = h_{\text{KS}}$ and $\dot{S}_{\text{tot}} = 0$. In active wild-type CFTR, the non-zero Kullback-Leibler divergence rate $D_{\text{KL}} / \tau > 0$ directly quantifies the thermodynamic arrow of time fueled by continuous ATP consumption.
+In an equilibrium channel (the hydrolysis-deficient NBD2 Walker B mutant D1370N gates this way: its burst durations decay monotonically and are fitted no better by the irreversible cycle than by the equilibrium model, Csanady, Vergani & Gadsby 2010), microscopic detailed balance holds: forward and time-reversed state trajectories are statistically indistinguishable ($P(\omega) = P(\omega^R)$), yielding $h_{\text{KS}}^R = h_{\text{KS}}$ and $\dot{S}_{\text{tot}} = 0$. Whether the $W1282X$ truncated protein hydrolyses ATP is not stated in any source the lab has read. In active wild-type CFTR, the non-zero divergence rate of the full trajectory quantifies the thermodynamic arrow of time fueled by ATP consumption; in the recorded open/closed sequence it appears as a peaked, narrower-than-exponential open-burst distribution (log-likelihood ratio 18.01 for the irreversible cycle over the equilibrium model, P = 2e-9, in the 2010 study).
 
 ---
 

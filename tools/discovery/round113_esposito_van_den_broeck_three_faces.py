@@ -35,14 +35,13 @@ human CFTR ATP-driven gating transitions and steady-state chloride conduction
        <Delta s_tot> >= 0,   <Delta s_ex> >= 0,   <Delta s_hk> >= 0.
 
 3. CFTR Mechanochemical Housekeeping Partitioning:
-   In active wild-type CFTR, tight NBD1-NBD2 head-to-tail dimerization couples
-   ATP binding and catalytic turnover into a coherent gating cycle, ensuring that
-   the vast majority of dissipated chemical power is channeled into productive
-   housekeeping cycling (eta_hk = dot(S)_hk / dot(S)_tot > 80%) rather than futile
-   excess conformational relaxation. In uncorrected F508del, NBD1 misfolding and
-   uncoupled dimer dynamics elevate futile excess dissipation, dropping housekeeping
-   efficiency below 40%. Highly effective modulator therapy (ETI) restores NBD1
-   thermodynamic stability and recovers housekeeping efficiency to >85%.
+   In this illustrative model, the wild-type profile is parameterised so that most
+   dissipated chemical power is channeled into housekeeping cycling
+   (eta_hk = dot(S)_hk / dot(S)_tot > 80%), the uncorrected F508del profile so that
+   housekeeping efficiency falls below 40%, and the ETI-rescued profile so that it
+   recovers above 85%. These efficiencies are model parameters chosen to exercise
+   the Esposito-Van den Broeck decomposition; no primary source reports a measured
+   housekeeping efficiency for CFTR, so the measured value is not stated.
 
 4. Five CFTR Gating Profiles:
    Evaluates `wt_cftr_atp_driven`, `f508del_eti_rescued`, `g551d_ivacaftor_potentiated`,
@@ -78,8 +77,9 @@ HYPOTHESIS = (
     "dot(S)_tot = dot(S)_ex + dot(S)_hk to ATP-driven CFTR gating proves that all three "
     "independent integral fluctuation theorems <exp(-Delta s_tot)> = 1, <exp(-Delta s_ex)> = 1, "
     "and <exp(-Delta s_hk)> = 1 hold simultaneously within 1e-6 numerical quadrature precision, "
-    "while ETI rescue of F508del suppresses futile excess conformational dissipation over 2-fold "
-    "and restores productive NESS housekeeping efficiency above 85% (vs 37.3% in uncorrected F508del)."
+    "while, in the illustrative profiles, the ETI-rescued F508del parameterisation suppresses futile excess "
+    "dissipation over 2-fold and carries a housekeeping efficiency above 85% (vs 37.3% in the uncorrected "
+    "profile); these efficiencies are model inputs, not measurements."
 )
 
 CITATIONS = [
