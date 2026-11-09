@@ -4,9 +4,9 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `175` (plus 4 infrastructure scripts and 239 unit test suites)
+- **Total Verified Modules:** `177` (plus 4 infrastructure scripts and 241 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
-- **`merge` (Consolidate into Canonical Module):** `86`
+- **`merge` (Consolidate into Canonical Module):** `88`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -19,7 +19,7 @@ python tools/discovery/discovery_council.py --falsify-all
 python tools/discovery/discovery_council.py --run-stdlib-tests
 ```
 
-## Structural Biology & CFTR Biophysics (`structural_biology` — 68 modules)
+## Structural Biology & CFTR Biophysics (`structural_biology` — 69 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -79,6 +79,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `round154_kramers_gating_barrier_bridge.py` | `T-0811` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round156_jarzynski_cftr_unfolding_bridge.py` | `T-0815` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round157_goldman_electrodiffusion_bridge.py` | `T-0818` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round162_mwc_allosteric_cooperativity_bridge.py` | `T-0827` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round90_pietzonka_power_constancy_tradeoff.py` | `T-0697` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round91_dechant_sasa_fluctuation_response.py` | `T-0698` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round92_hasegawa_biochemical_tur.py` | `T-0703` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
@@ -125,7 +126,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 66 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 67 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -187,6 +188,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `round158_flory_huggins_mucus_swelling_bridge.py` | `T-0819` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round159_dlvo_colloid_stability_bridge.py` | `T-0824` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round160_herschel_bulkley_yield_stress_bridge.py` | `T-0825` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round161_ogston_brinkman_sieving_bridge.py` | `T-0826` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `surfactant_shielded_rnp_mucus_transport.py` | `T-0482` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_calcium_conductance_model.py` | `T-0392` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_conductance_model.py` | `T-0240` | `T2` | `merge` | Merge into `tmem16a_calcium_conductance_model.py` |
