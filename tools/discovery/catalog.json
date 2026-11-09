@@ -6,21 +6,21 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 161,
+  "total_modules": 163,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 225,
+  "test_suites_count": 227,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 160,
+    "researchers": 162,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 72,
+    "merge": 74,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 59,
+    "structural_biology": 61,
     "rna_gene_editing": 28,
     "airway_delivery": 61,
     "microbiology_host": 7,
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 59,
+      "count": 61,
       "keep_count": 11,
-      "merge_count": 47,
+      "merge_count": 49,
       "archive_count": 1,
       "modules": [
         {
@@ -544,6 +544,28 @@
         {
           "module": "round146_gouy_chapman_membrane_potential_bridge",
           "task": "T-0797",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round147_butler_volmer_anion_kinetics_bridge",
+          "task": "T-0798",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round148_poisson_boltzmann_glycocalyx_screening_bridge",
+          "task": "T-0799",
           "track": "Track A",
           "tier": "T2",
           "discipline": "structural_biology",
