@@ -4,9 +4,9 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `173` (plus 4 infrastructure scripts and 237 unit test suites)
+- **Total Verified Modules:** `175` (plus 4 infrastructure scripts and 239 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
-- **`merge` (Consolidate into Canonical Module):** `84`
+- **`merge` (Consolidate into Canonical Module):** `86`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -125,7 +125,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 64 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 66 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -185,6 +185,8 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `round153_mucus_nanoparticle_filtration_bridge.py` | `T-0810` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round155_rayleigh_plesset_cavitation_bridge.py` | `T-0814` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round158_flory_huggins_mucus_swelling_bridge.py` | `T-0819` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round159_dlvo_colloid_stability_bridge.py` | `T-0824` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round160_herschel_bulkley_yield_stress_bridge.py` | `T-0825` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `surfactant_shielded_rnp_mucus_transport.py` | `T-0482` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_calcium_conductance_model.py` | `T-0392` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_conductance_model.py` | `T-0240` | `T2` | `merge` | Merge into `tmem16a_calcium_conductance_model.py` |
