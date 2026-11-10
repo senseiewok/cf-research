@@ -117,7 +117,10 @@ class Round197DualAAVSplitInteinCFTRBridgeTest(unittest.TestCase):
         self.assertIn("deductive_column_a", TWO_COLUMN_EPISTEMIC_HYGIENE)
         self.assertIn("popperian_column_b", TWO_COLUMN_EPISTEMIC_HYGIENE)
         self.assertGreaterEqual(len(FIVE_LAYER_LADDER), 5)
-        self.assertGreaterEqual(len(PRIMARY_CITATIONS), 2)
+        self.assertGreaterEqual(len(PRIMARY_CITATIONS), 3)
+        self.assertIn("DOI: 10.1126/scitranslmed.aav4523", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.1089/hum.2008.173", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.3389/fgeed.2023.1271813", PRIMARY_CITATIONS)
 
 
 if __name__ == "__main__":

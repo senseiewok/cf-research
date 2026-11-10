@@ -4,11 +4,10 @@ Round 198: Inhaled Trehalose Osmoprotection & Pseudomonas Biofilm Desiccation To
 
 Mathematical & Physical Pillar (Column A - Deductive Theorem):
   1. Trehalose Hydration Shell & Periciliary Liquid Layer (ASL) Water Retention:
-     Trehalose (alpha-D-glucopyranosyl-(1->1)-alpha-D-glucopyranoside) is an osmoprotective non-reducing disaccharide with
-     an exceptional hydration number (~13-14 water molecules per disaccharide molecule in aqueous solution) and high glass
-     transition temperature (Tg ~ 117 deg C in dry state). In cystic fibrosis airways, loss of CFTR chloride and bicarbonate
-     conductance leads to periciliary liquid (ASL) volume depletion (healthy height h_ASL_WT ~ 7.0 um collapses to h_ASL_CF < 2.5 um)
-     and mucus dehydration (DOI: 10.1016/j.biomaterials.2021.121114).
+     Trehalose (alpha-D-glucopyranosyl-(1->1)-alpha-D-glucopyranoside) is an osmoprotective non-reducing disaccharide.
+     In cystic fibrosis airways, loss of CFTR chloride and bicarbonate conductance leads to periciliary liquid (ASL) volume
+     depletion (healthy height h_ASL_WT ~ 7.0 um collapses to h_ASL_CF < 2.5 um) and mucus dehydration
+     (Boucher, Annu Rev Med 2007, DOI: 10.1146/annurev.med.58.071905.105316).
      Given inhaled aerosolized trehalose concentration [Treh]_inh (mM) in the ASL compartment:
        theta_hyd = [Treh]_inh / ([Treh]_inh + K_05_treh)
      where K_05_treh = 45.0 mM.
@@ -18,19 +17,19 @@ Mathematical & Physical Pillar (Column A - Deductive Theorem):
 
   2. Sputum Complex Dynamic Viscosity (|eta*|) & Yield Stress (tau_y) Scaling:
      Dehydrated CF mucus forms an entangled, cross-linked gel network with an unyielding Bingham plastic yield stress.
-     Trehalose inserts into the glycoprotein hydration mantle, replacing lost bulk water and disrupting inter-mucin hydrophobic
-     cross-links:
+     Osmotic disaccharide hydration re-expands the glycoprotein mantle:
        |eta*| = eta_min + (eta_cf - eta_min) * exp( - (kappa_visc * [Treh]_inh) / (1.0 + [Treh]_inh / K_05_treh) )
-     where eta_cf = 100.0 Pa*s, eta_min = 0.10 Pa*s, and kappa_visc = 0.045 mM^-1.
+     where eta_cf = 100.0 Pa*s, eta_min = 0.10 Pa*s, and kappa_visc = 0.125 mM^-1.
      The corresponding mucus yield stress is:
        tau_y = tau_y_cf * (1.0 - 0.88 * theta_hyd)**2
      where tau_y_cf = 6.5 Pa.
 
-  3. Pseudomonas aeruginosa Biofilm Extracellular Polymeric Substance (EPS) Disruption:
-     Chronic mucoid P. aeruginosa forms dense, desiccation-tolerant biofilms embedded in an alginate/extracellular DNA matrix
-     that impedes antibiotic penetration and induces persister dormancy (DOI: 10.1128/aac.01825-20).
-     Trehalose osmoprotection fluidizes the biofilm EPS shell, restoring metabolic activity and sensitizing persisters to
-     aminoglycoside antibiotics (e.g. inhaled tobramycin):
+  3. Pseudomonas aeruginosa Abiotic Stress & Biofilm Extracellular Polymeric Substance (EPS) Disruption:
+     Pseudomonas aeruginosa relies on endogenous trehalose and alpha-glucan pathways to tolerate osmotic and desiccation stress
+     (Woodcock et al., PLOS Genet 2021, DOI: 10.1371/journal.pgen.1009524), while dehydrated airway mucus impedes antibiotic clearance
+     (Boucher, Annu Rev Med 2007, DOI: 10.1146/annurev.med.58.071905.105316).
+     Analytical parameterization of exogenous osmotic hydration fluidizing the biofilm EPS barrier and sensitizing cells to
+     aminoglycoside co-therapy (e.g. inhaled tobramycin; phenomenological_heuristic, exact rate constants not stated):
        f_disrupt = (k_disrupt * [Treh]_inh) / (K_m_bio + [Treh]_inh)
      where k_disrupt = 0.85 and K_m_bio = 55.0 mM.
      Given tobramycin co-treatment fraction f_tobra in [0, 1]:
@@ -93,8 +92,8 @@ from dataclasses import dataclass
 from typing import Any, Dict, Tuple
 
 PRIMARY_CITATIONS: Tuple[str, ...] = (
-    "DOI: 10.1128/aac.01825-20",
-    "DOI: 10.1016/j.biomaterials.2021.121114",
+    "DOI: 10.1371/journal.pgen.1009524",
+    "DOI: 10.1146/annurev.med.58.071905.105316",
 )
 
 # Physical & Biophysical Constants
@@ -116,32 +115,32 @@ DEFAULT_BETA_EXP: float = 0.65                  # Viscous dissipation drag scali
 PARAMETER_PROVENANCE: Dict[str, Dict[str, object]] = {
     "trehalose_asl_half_saturation": {
         "value": 45.0,
-        "tag": "empirical",
-        "source": "Trehalose water-replacement hydration shell formation and mucosal wetting in human airway models (DOI: 10.1016/j.biomaterials.2021.121114)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical osmotic hydration half-saturation concentration K_05_treh for airway surface liquid expansion (exact 45.0 mM constant not stated in Boucher, Annu Rev Med 2007, DOI: 10.1146/annurev.med.58.071905.105316)",
         "bounds": (20.0, 90.0),
     },
     "biofilm_disruption_rate_constant": {
         "value": 0.85,
-        "tag": "empirical",
-        "source": "Disruption of Pseudomonas aeruginosa biofilm EPS matrix and persister sensitization (DOI: 10.1128/aac.01825-20)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical upper-bound biofilm matrix disruption factor parameterized around P. aeruginosa trehalose/alpha-glucan osmotic stress biology (exact 0.85 factor not stated in Woodcock et al., PLOS Genet 2021, DOI: 10.1371/journal.pgen.1009524)",
         "bounds": (0.60, 0.95),
     },
     "cf_asl_height_baseline": {
         "value": 2.0,
         "tag": "derived",
-        "source": "Periciliary liquid collapse measurements in primary CF bronchial epithelial cultures (DOI: 10.1016/j.biomaterials.2021.121114)",
+        "source": "Depleted periciliary airway surface liquid depth regime in dehydrated CF airways (~7 um normal vs collapsed < 3 um in CF; Boucher, Annu Rev Med 2007, DOI: 10.1146/annurev.med.58.071905.105316)",
         "bounds": (1.0, 3.5),
     },
     "trehalose_viscosity_rate_constant": {
         "value": 0.125,
         "tag": "phenomenological_heuristic",
-        "source": "Exponential thinning of biopolymer gels under osmoprotective disaccharide hydration (DOI: 10.1016/j.biomaterials.2021.121114)",
+        "source": "Analytical exponential mucus thinning rate constant under osmotic disaccharide rehydration (exact 0.125 mM^-1 constant not stated in Boucher, Annu Rev Med 2007, DOI: 10.1146/annurev.med.58.071905.105316)",
         "bounds": (0.050, 0.250),
     },
     "biofilm_fluidization_km": {
         "value": 55.0,
         "tag": "phenomenological_heuristic",
-        "source": "Michaelis-Menten saturation of biofilm matrix fluidization under topical trehalose (DOI: 10.1128/aac.01825-20)",
+        "source": "Analytical Michaelis-Menten half-saturation constant for osmotic fluidization of mucoid P. aeruginosa matrix (exact 55.0 mM constant not stated in Woodcock et al., PLOS Genet 2021, DOI: 10.1371/journal.pgen.1009524)",
         "bounds": (25.0, 110.0),
     },
 }

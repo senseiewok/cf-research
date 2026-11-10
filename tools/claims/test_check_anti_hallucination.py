@@ -193,6 +193,104 @@ class TestCheckAntiHallucination(unittest.TestCase):
             self.assertEqual(len(fails_scite), 1)
             self.assertIn("Scite supporting/contrasting citation polarity", fails_scite[0])
 
+    def test_ah6_discovery_round_and_catalog_doi_provenance(self):
+        """Rule AH-6 must reject unverified DOIs in tools/discovery/round*.py and catalog.json while allowing catalog.yaml DOIs."""
+        ledger = cah.load_cite_check_ledger(REPO_ROOT / "sources" / "cite-check-ledger.jsonl")
+        catalog_dois = cah.load_catalog_yaml_dois(REPO_ROOT / "sources" / "catalog.yaml")
+        self.assertGreater(len(catalog_dois), 0)
+
+        # Unverified DOI in round*.py or catalog.json is caught
+        unverified_round = 'PRIMARY_CITATIONS = ("DOI: 10.9999/unverified.round.doi",)\n'
+        fails_round = cah.check_cite_check_ledger_provenance(
+            Path("tools/discovery/round999_example.py"),
+            unverified_round,
+            ledger,
+            catalog_dois=catalog_dois,
+        )
+        self.assertEqual(len(fails_round), 1)
+        self.assertIn("10.9999/unverified.round.doi", fails_round[0])
+
+        unverified_cat = '{"notes": "10.9999/unverified.catalog.doi"}\n'
+        fails_cat = cah.check_cite_check_ledger_provenance(
+            Path("tools/discovery/catalog.json"),
+            unverified_cat,
+            ledger,
+            catalog_dois=catalog_dois,
+        )
+        self.assertEqual(len(fails_cat), 1)
+        self.assertIn("10.9999/unverified.catalog.doi", fails_cat[0])
+
+        # DOI present only in sources/catalog.yaml is accepted for discovery provenance
+        only_yaml_doi = "10.9999/catalog-yaml-only.2026"
+        self.assertEqual(
+            cah.check_cite_check_ledger_provenance(
+                Path("tools/discovery/round999_example.py"),
+                f'PRIMARY_CITATIONS = ("DOI: {only_yaml_doi}",)\n',
+                set(),
+                catalog_dois={only_yaml_doi},
+            ),
+            [],
+        )
+
+        # End-to-end run_checks catches unverified DOI injected into tools/discovery/catalog.json or round*.py
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_root = Path(tmpdir)
+            (tmp_root / "sources").mkdir(parents=True)
+            (tmp_root / "tools" / "trial_atlas").mkdir(parents=True)
+            (tmp_root / "tools" / "discovery").mkdir(parents=True)
+            (tmp_root / "tools" / "trial_atlas" / "snapshot.json").write_text('{"studies": []}\n', encoding="utf-8")
+            (tmp_root / "sources" / "catalog.yaml").write_text("sources: []\n", encoding="utf-8")
+            (tmp_root / "sources" / "cite-check-ledger.jsonl").write_text(
+                '{"id": "10.1126/sciadv.1601556", "kind": "DOI", "title": "Valid Mucus NP Study", "verdict": "PASS", "scite_verified": true, "scite_tally": {"citingPublications": 10, "supporting": 2, "contrasting": 0, "mentioning": 8}}\n',
+                encoding="utf-8",
+            )
+            (tmp_root / "tools" / "discovery" / "round999_rogue.py").write_text(
+                'PRIMARY_CITATIONS = ("DOI: 10.9999/rogue.round.doi",)\n',
+                encoding="utf-8",
+            )
+            (tmp_root / "tools" / "discovery" / "catalog.json").write_text(
+                '{"bad_doi": "10.9999/rogue.catalog.doi"}\n',
+                encoding="utf-8",
+            )
+            all_fails = cah.run_checks(tmp_root)
+            self.assertTrue(any("10.9999/rogue.round.doi" in f and "AH-6" in f for f in all_fails))
+            self.assertTrue(any("10.9999/rogue.catalog.doi" in f and "AH-6" in f for f in all_fails))
+
+    def test_ah12_scite_tally_and_doi_scrutiny_rejects_malformed_rows(self):
+        """Rule AH-12 must reject negative/non-int scite_tally fields, citingPublications==0 contradictions, invalid DOI syntax, and empty titles."""
+        import json
+
+        valid_row = {
+            "id": "10.1126/sciadv.1601556",
+            "kind": "DOI",
+            "title": "Nanoparticles that do not adhere to mucus",
+            "verdict": "PASS",
+            "scite_verified": True,
+            "scite_tally": {"citingPublications": 0, "supporting": 0, "contrasting": 0, "mentioning": 0},
+        }
+        bad_rows = [
+            # 1. Negative integer in scite_tally
+            {**valid_row, "id": "10.1038/s41551-021-00786-x", "scite_tally": {"citingPublications": 10, "supporting": -1, "contrasting": 0, "mentioning": 5}},
+            # 2. Boolean masquerading as int in scite_tally
+            {**valid_row, "id": "10.2353/ajpath.2009.090166", "scite_tally": {"citingPublications": 10, "supporting": True, "contrasting": 0, "mentioning": 5}},
+            # 3. citingPublications == 0 while supporting + contrasting + mentioning > 0
+            {**valid_row, "id": "10.1073/pnas.1508355112", "scite_tally": {"citingPublications": 0, "supporting": 1, "contrasting": 0, "mentioning": 2}},
+            # 4. Invalid DOI syntax
+            {**valid_row, "id": "not-a-valid-doi"},
+            # 5. Empty title
+            {**valid_row, "id": "10.1136/thoraxjnl-2016-209265", "title": "   "},
+        ]
+        with tempfile.TemporaryDirectory() as tmpdir:
+            ledger_file = Path(tmpdir) / "ledger.jsonl"
+            ledger_file.write_text(json.dumps(valid_row) + "\n", encoding="utf-8")
+            self.assertEqual(cah.check_scite_ledger_scrutiny(ledger_file), [])
+
+            for idx, bad in enumerate(bad_rows):
+                ledger_file.write_text(json.dumps(bad) + "\n", encoding="utf-8")
+                fails = cah.check_scite_ledger_scrutiny(ledger_file)
+                self.assertGreaterEqual(len(fails), 1, f"Expected AH-12 failure for malformed case #{idx + 1}: {bad}")
+                self.assertTrue(all("FAIL AH-12" in f for f in fails))
+
     def test_main_cli_execution(self):
         """CLI main entry point must execute cleanly and return 0 for the valid repository."""
         ret = cah.main(["--root", str(REPO_ROOT)])

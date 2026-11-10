@@ -42,11 +42,13 @@ import argparse
 
 import datetime
 
-import importlib
+import importlib.util
 
 import json
 
 from pathlib import Path
+
+import re
 
 import sys
 
@@ -59,6 +61,34 @@ DISCOVERY_DIR = Path(__file__).resolve().parent
 RESEARCH_ROOT = DISCOVERY_DIR.parent.parent
 
 CLAIMS_TOOL_DIR = RESEARCH_ROOT / "tools" / "claims"
+
+_ALLOWLISTED_DISCOVERY_STEM_RE = re.compile(r"^[a-zA-Z_][a-zA-Z0-9_]*$")
+
+
+def _load_allowlisted_discovery_module(stem: str, discovery_dir: Path | None = None) -> Any:
+    """Safely load a discovery or companion test module strictly confined to DISCOVERY_DIR."""
+    if not isinstance(stem, str) or not _ALLOWLISTED_DISCOVERY_STEM_RE.fullmatch(stem):
+        raise ValueError(f"Disallowed module identifier: {stem!r}")
+    base_dir = Path(discovery_dir).resolve() if discovery_dir is not None else DISCOVERY_DIR.resolve()
+    mod_file = (base_dir / f"{stem}.py").resolve()
+    if mod_file.parent != base_dir or not mod_file.is_file():
+        raise ImportError(f"Module {stem!r} is not an existing file inside {base_dir}")
+    existing = sys.modules.get(stem)
+    if existing is not None:
+        existing_file = getattr(existing, "__file__", None)
+        if existing_file is None or Path(existing_file).resolve() == mod_file:
+            return existing
+    spec = importlib.util.spec_from_file_location(stem, mod_file)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Cannot build module spec for {mod_file}")
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[stem] = mod
+    try:
+        spec.loader.exec_module(mod)
+    except Exception:
+        sys.modules.pop(stem, None)
+        raise
+    return mod
 
 
 
@@ -228,7 +258,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0547", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "aerosol_droplet_deposition_mechanics",
 
     },
 
@@ -800,7 +832,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0446", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "lnp_escape_dynamics",
 
     },
 
@@ -808,7 +842,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0444", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "enac_tmem16a_equilibrium",
 
     },
 
@@ -856,7 +892,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0447", "track": "Track A", "tier": "T2",
 
-        "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "gating_potentiator_energy_coupling",
 
     },
 
@@ -864,7 +902,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0452", "track": "Track A", "tier": "T2",
 
-        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "mrna_translation_velocity",
 
     },
 
@@ -872,7 +912,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0455", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "lnp_escape_dynamics",
 
     },
 
@@ -880,7 +922,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0456", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "lnp_escape_dynamics",
 
     },
 
@@ -888,7 +932,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0459", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "ciliary_wave_clearance_model",
 
     },
 
@@ -896,7 +942,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0449", "track": "Track A", "tier": "T2",
 
-        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "mrna_translation_velocity",
 
     },
 
@@ -904,7 +952,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0453", "track": "Track A", "tier": "T2",
 
-        "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "nbd1_thermodynamics",
 
     },
 
@@ -912,7 +962,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0461", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "enac_tmem16a_equilibrium",
 
     },
 
@@ -920,7 +972,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0463", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "lnp_mucus_shear_shedding_kinetics",
 
     },
 
@@ -928,7 +982,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0465", "track": "Track A", "tier": "T2",
 
-        "discipline": "structural_biology", "persona": "researchers", "triage": "keep",
+        "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "cryoem_truncation_model",
 
     },
 
@@ -936,7 +992,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0469", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "enac_tmem16a_equilibrium",
 
     },
 
@@ -944,7 +1002,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0470", "track": "Track A", "tier": "T2",
 
-        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "keep",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "aso_splice_kinetics",
 
     },
 
@@ -952,7 +1012,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0473", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "aerosol_droplet_deposition_mechanics",
 
     },
 
@@ -960,7 +1022,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0476", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "tmem16a_calcium_conductance_model",
 
     },
 
@@ -968,7 +1032,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0478", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "basal_stem_persistence",
 
     },
 
@@ -984,7 +1050,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0482", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "mpp_obstruction_scaling",
 
     },
 
@@ -992,7 +1060,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0481", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "nebulizer_shear_stress_integrity",
 
     },
 
@@ -1000,7 +1070,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0472", "track": "Track A", "tier": "T2",
 
-        "discipline": "microbiology_host", "persona": "researchers", "triage": "keep",
+        "discipline": "microbiology_host", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "phage_depolymerase_biofilm_synergy",
 
     },
 
@@ -1008,7 +1080,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0497", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "mpp_obstruction_scaling",
 
     },
 
@@ -1016,7 +1090,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0498", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "basal_stem_quiescence_kinetics",
 
     },
 
@@ -1024,7 +1100,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0557", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "lnp_escape_dynamics",
 
     },
 
@@ -1032,7 +1110,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0558", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "mucus_rheology",
 
     },
 
@@ -1040,7 +1120,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0561", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "endocytosis_mucociliary_competition",
 
     },
 
@@ -1048,7 +1130,9 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
 
         "task": "T-0562", "track": "Track A", "tier": "T2",
 
-        "discipline": "airway_delivery", "persona": "researchers", "triage": "keep",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+
+        "consolidation_target": "mucus_rheology",
 
     },
 
@@ -2241,15 +2325,17 @@ def check_discovery_index_drift(discovery_dir: Path | None = None) -> Dict[str, 
 
 
 
-    # Cross-repo check: if sibling cf-lab biophysical-index.md exists, verify all 'keep' modules are documented
-
+    # Cross-repo check: if sibling cf-lab biophysical-index.md exists (including from .worktrees/<repo>/<branch>), verify all 'keep' modules are documented
     biophys_index_candidates = [
-
         target_dir.parent.parent.parent / "cf-lab" / "wave22-council-roundtable-seed" / ".claude" / "skills" / "cf-research-context" / "references" / "biophysical-index.md",
-
         target_dir.parent.parent.parent / "cf-lab" / ".claude" / "skills" / "cf-research-context" / "references" / "biophysical-index.md",
-
     ]
+    if ".worktrees" in target_dir.parts:
+        wt_idx = target_dir.parts.index(".worktrees")
+        if wt_idx > 0:
+            biophys_index_candidates.append(
+                Path(*target_dir.parts[:wt_idx]) / "cf-lab" / ".claude" / "skills" / "cf-research-context" / "references" / "biophysical-index.md"
+            )
 
     biophys_index_in_sync = True
 
@@ -3137,7 +3223,7 @@ def execute_negative_control_check(topic: str) -> Dict[str, Any]:
 
         try:
 
-            importlib.import_module(topic)
+            _load_allowlisted_discovery_module(topic)
 
         except Exception as exc:
 
@@ -3813,7 +3899,7 @@ def _wrap_pytest_callable(fn: Any, mod: Any, instance: Any = None) -> Any:
 
                 mod_path, attr_name = target.rsplit(".", 1)
 
-                obj = sys.modules.get(mod_path) or importlib.import_module(mod_path)
+                obj = sys.modules.get(mod_path) or _load_allowlisted_discovery_module(mod_path)
 
                 val = name
 
@@ -3983,7 +4069,7 @@ def run_stdlib_discovery_test_suites(discovery_dir: Path | None = None) -> Dict[
 
         with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
 
-            mod = importlib.import_module(tf.stem)
+            mod = _load_allowlisted_discovery_module(tf.stem, discovery_dir=target_dir)
 
             mod_suite = loader.loadTestsFromModule(mod)
 
@@ -4195,7 +4281,11 @@ def main():
 
         else:
 
-            print(f"Discovery Index Drift Check: {drift['status']} (catalog={drift['catalog_json_in_sync']}, readme={drift['readme_md_in_sync']})")
+            print(
+                f"Discovery Index Drift Check: {drift['status']} "
+                f"(catalog={drift['catalog_json_in_sync']}, readme={drift['readme_md_in_sync']}, "
+                f"biophysical_index={drift['biophysical_index_in_sync']})"
+            )
 
         sys.exit(0 if drift["status"] == "PASS" else 1)
 

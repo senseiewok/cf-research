@@ -7,11 +7,12 @@ Mathematical & Physical Pillar (Column A - Deductive Theorem):
      Adeno-associated viral (AAV) capsids exhibit a rigid packaging limit of ~4.7 kb (including flanking inverted terminal repeats,
      ITRs, which occupy ~290 bp). Full-length wild-type human CFTR cDNA comprises 4,443 bp (1,480 amino acids), which strictly
      precludes packaging full-length cDNA alongside robust airway promoters (e.g. CMV, CBh, or cytokeratin-18) and polyadenylation
-     signals in a single viral capsid (DOI: 10.1038/s41587-020-00803-5).
-     In the dual-vector split-intein platform, CFTR cDNA is split into two halves: Vector 1 encodes the N-terminal CFTR segment
-     (aa 1-574) fused to the N-terminal half of a fast split intein (IntN, e.g. Nostoc punctiforme DnaE intein or engineered gp41-1),
-     while Vector 2 encodes the C-terminal intein half (IntC) fused in-frame to the C-terminal CFTR segment (aa 575-1480)
-     (DOI: 10.1016/j.omtm.2021.03.007).
+     signals in a single viral capsid (Tornabene et al., Sci Transl Med 2019, DOI: 10.1126/scitranslmed.aav4523).
+     In the dual-vector split-intein / segmental trans-splicing platform, CFTR cDNA is split into two halves: Vector 1 encodes the
+     N-terminal CFTR segment fused to the N-terminal half of a fast split intein (IntN, e.g. Nostoc punctiforme DnaE intein or Cfa),
+     while Vector 2 encodes the C-terminal intein half (IntC) fused in-frame to the C-terminal CFTR segment
+     (Tornabene et al., Sci Transl Med 2019, DOI: 10.1126/scitranslmed.aav4523; Song et al., Hum Gene Ther 2009, DOI: 10.1089/hum.2008.173;
+     Cooney et al., Front Genome Ed 2023, DOI: 10.3389/fgeed.2023.1271813).
 
   2. Airway Epithelial Co-Transduction Probability & Stoichiometric Coupling:
      Reconstitution of full-length functional channel requires co-transduction of individual airway epithelial cells by at least one
@@ -88,8 +89,9 @@ from dataclasses import dataclass
 from typing import Any, Dict, Tuple
 
 PRIMARY_CITATIONS: Tuple[str, ...] = (
-    "DOI: 10.1038/s41587-020-00803-5",
-    "DOI: 10.1016/j.omtm.2021.03.007",
+    "DOI: 10.1126/scitranslmed.aav4523",
+    "DOI: 10.1089/hum.2008.173",
+    "DOI: 10.3389/fgeed.2023.1271813",
 )
 
 # Physical & Transduction Constants
@@ -103,32 +105,32 @@ DEFAULT_MOI_TOX_THRESH_VG_CELL: float = 150000.0 # Toxicity threshold for unpart
 PARAMETER_PROVENANCE: Dict[str, Dict[str, object]] = {
     "aav_airway_entry_efficiency": {
         "value": 0.00015,
-        "tag": "empirical",
-        "source": "Airway epithelial viral entry efficiency of lung-tropic engineered AAV capsids (DOI: 10.1016/j.omtm.2021.03.007)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical airway epithelial AAV entry efficiency parameterization for lung-tropic capsids (exact 0.00015 (vg/cell)^-1 scalar not stated in Cooney et al., Front Genome Ed 2023, DOI: 10.3389/fgeed.2023.1271813 or Song et al., Hum Gene Ther 2009, DOI: 10.1089/hum.2008.173)",
         "bounds": (0.00005, 0.00050),
     },
     "split_intein_max_splice_rate": {
         "value": 0.92,
-        "tag": "empirical",
-        "source": "In vitro and cellular protein trans-splicing catalytic efficiency of engineered split inteins (DOI: 10.1038/s41587-020-00803-5)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical upper-bound split-intein protein trans-splicing efficiency parameterization (exact 0.92 saturation scalar not stated in Tornabene et al., Sci Transl Med 2019, DOI: 10.1126/scitranslmed.aav4523)",
         "bounds": (0.60, 0.98),
     },
     "cftr_functional_reserve_constant": {
         "value": 0.14,
-        "tag": "derived",
-        "source": "Nonlinear relation between full-length CFTR channel surface density and short-circuit current in human airway epithelia (DOI: 10.1016/j.omtm.2021.03.007)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical half-saturation fraction K_05_cftr modeling nonlinear relation between reconstituted CFTR expression and apical chloride current in CF airway epithelia (exact 0.14 constant not stated in Song et al., Hum Gene Ther 2009, DOI: 10.1089/hum.2008.173)",
         "bounds": (0.08, 0.25),
     },
     "aav_uptake_saturation_moi": {
         "value": 80000.0,
         "tag": "phenomenological_heuristic",
-        "source": "Receptor-mediated endocytosis saturation for apical AAV transduction in polarized epithelium (DOI: 10.1016/j.omtm.2021.03.007)",
+        "source": "Analytical receptor-mediated uptake half-saturation MOI parameterization for polarized airway epithelia (exact 80,000 vg/cell scalar not stated in Song et al., Hum Gene Ther 2009, DOI: 10.1089/hum.2008.173 or Cooney et al., Front Genome Ed 2023, DOI: 10.3389/fgeed.2023.1271813)",
         "bounds": (40000.0, 150000.0),
     },
     "unpaired_precursor_toxicity_threshold": {
         "value": 150000.0,
         "tag": "phenomenological_heuristic",
-        "source": "Unfolded protein response and ER stress threshold from unpartnered split-intein fragment accumulation (DOI: 10.1038/s41587-020-00803-5)",
+        "source": "Analytical threshold parameterization for ER stress penalty from unpartnered split-intein precursor fragments (exact 150,000 vg/cell threshold not stated in Tornabene et al., Sci Transl Med 2019, DOI: 10.1126/scitranslmed.aav4523)",
         "bounds": (80000.0, 300000.0),
     },
 }

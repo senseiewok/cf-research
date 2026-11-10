@@ -5,8 +5,8 @@ Round 192: Pseudomonas aeruginosa Pyocyanin-Mediated CFTR Inactivation & Catalas
 Mathematical & Physical Pillar (Column A - Deductive Theorem):
   1. Pyocyanin (PCN) Cellular Penetration & Intracellular Redox Cycling:
      Pseudomonas aeruginosa produces the redox-active zwitterionic phenazine pigment pyocyanin (PCN; 1-hydroxy-5-methylphenazine),
-     reaching concentrations of 10-100 uM in the chronically infected CF lung airway (Meirelles et al., Cell Host Microbe 2018,
-     DOI: 10.1016/j.chom.2018.06.004; Schwarzer et al., Am J Respir Cell Mol Biol 2008, DOI: 10.1165/rcmb.2007-0098oc).
+     driving airway oxidative pathogenesis in chronic CF lung infection (Caldwell et al., Am J Pathol 2009,
+     DOI: 10.2353/ajpath.2009.090166; Schwarzer et al., Free Radic Biol Med 2008, DOI: 10.1016/j.freeradbiomed.2008.09.011).
      PCN diffuses rapidly across the apical epithelial membrane and undergoes cyclic reduction by intracellular reducing equivalents
      (NADPH) catalyzed by oxidoreductases:
        PCN + NADPH + H+ -> PCN_H2 + NADP+
@@ -59,7 +59,7 @@ Mathematical & Physical Pillar (Column A - Deductive Theorem):
      - Poisoned negative controls: negative pyocyanin concentration, negative catalase dose, or unphysical kinetic rates fail deterministically.
 
 CF Biophysical Domain Mapping (Column B - Popperian Falsifiable Hypothesis):
-  - In Trikafta Plus High-Dose Catalase Protection Regimen (DOI: 10.1016/j.chom.2018.06.004; DOI: 10.1165/rcmb.2007-0098oc):
+  - In Trikafta Plus High-Dose Catalase Protection Regimen (DOI: 10.2353/ajpath.2009.090166; DOI: 10.1016/j.freeradbiomed.2008.09.011):
     [PCN] = 25.0 uM, [Catalase]_exo = 500.0 U/mL, f_Band_C = 0.35 (Trikafta):
     J_ROS = 7.00 uM/s, k_scav = 13.20 s^-1, [ROS]_ss = 0.53 uM, f_active = 0.968 (96.8%),
     I_sc_equiv = 32.17% WT, h_ASL = 7.50 um >= 7.0 um, v_MCC = 2.42 mm/min >= 1.0 mm/min,
@@ -90,8 +90,8 @@ from dataclasses import dataclass
 from typing import Any, Dict, Tuple
 
 PRIMARY_CITATIONS: Tuple[str, ...] = (
-    "DOI: 10.1016/j.chom.2018.06.004",
-    "DOI: 10.1165/rcmb.2007-0098oc",
+    "DOI: 10.2353/ajpath.2009.090166",
+    "DOI: 10.1016/j.freeradbiomed.2008.09.011",
     "DOI: 10.1016/j.cell.2015.09.052",
     "PDB: 8EIQ",
 )
@@ -115,31 +115,31 @@ PARAMETER_PROVENANCE: Dict[str, Dict[str, object]] = {
     "pyocyanin_sputum_concentration": {
         "value": 25.0,
         "tag": "empirical",
-        "source": "Clinical sputum concentration of pyocyanin in chronic P. aeruginosa infection (DOI: 10.1016/j.chom.2018.06.004)",
+        "source": "Pathophysiological airway pyocyanin concentration regime modeled in CF airway pathogenesis and bronchial epithelia (Caldwell et al., Am J Pathol 2009, DOI: 10.2353/ajpath.2009.090166; Schwarzer et al., Free Radic Biol Med 2008, DOI: 10.1016/j.freeradbiomed.2008.09.011)",
         "bounds": (5.0, 100.0),
     },
     "cftr_cysteine_oxidation_half_maximal": {
         "value": 3.50,
-        "tag": "empirical",
-        "source": "Intracellular H2O2 concentration causing 50% inhibition of CFTR chloride current (DOI: 10.1165/rcmb.2007-0098oc)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical Hill parameterization for intracellular ROS-mediated CFTR Cl- transport impairment (exact intracellular H2O2 IC50 not stated in Schwarzer et al., Free Radic Biol Med 2008, DOI: 10.1016/j.freeradbiomed.2008.09.011)",
         "bounds": (1.5, 8.0),
     },
     "pyocyanin_redox_cycling_rate": {
         "value": 0.35,
-        "tag": "empirical",
-        "source": "Non-enzymatic and enzymatic NADPH-dependent superoxide generation by pyocyanin (DOI: 10.1016/j.chom.2018.06.004)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical first-order NADPH redox-cycling rate parameterization for pyocyanin superoxide/H2O2 flux (exact s^-1 constant not stated in Caldwell et al., Am J Pathol 2009, DOI: 10.2353/ajpath.2009.090166 or Schwarzer et al., Free Radic Biol Med 2008, DOI: 10.1016/j.freeradbiomed.2008.09.011)",
         "bounds": (0.10, 1.00),
     },
     "catalase_scavenging_clearance_potency": {
         "value": 0.024,
         "tag": "derived",
-        "source": "Concentration-dependent rescue of CFTR gating by exogenous catalase in airway epithelia (DOI: 10.1165/rcmb.2007-0098oc)",
+        "source": "Analytical scavenging rate parameterization calibrated to antioxidant rescue of pyocyanin-impaired CFTR Cl- transport (exact s^-1/(U/mL) rate constant not stated in Schwarzer et al., Free Radic Biol Med 2008, DOI: 10.1016/j.freeradbiomed.2008.09.011)",
         "bounds": (0.010, 0.060),
     },
     "nbd_cysteine_oxidation_cooperativity": {
         "value": 1.80,
-        "tag": "derived",
-        "source": "Multi-cysteine cross-linking cooperativity in NBD1/NBD2 dimer interface (PDB 8EIQ; DOI: 10.1165/rcmb.2007-0098oc)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical Hill cooperativity parameterization for oxidative CFTR gating inhibition (exact Hill exponent not stated in Schwarzer et al., Free Radic Biol Med 2008, DOI: 10.1016/j.freeradbiomed.2008.09.011; structural NBD1/NBD2 context PDB 8EIQ)",
         "bounds": (1.20, 2.50),
     },
 }

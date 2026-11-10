@@ -5,8 +5,8 @@
 ## Triage & Consolidation Summary
 
 - **Total Verified Modules:** `213` (plus 4 infrastructure scripts and 277 unit test suites)
-- **`keep` (Canonical Core Workbenches):** `85`
-- **`merge` (Consolidate into Canonical Module):** `124`
+- **`keep` (Canonical Core Workbenches):** `58`
+- **`merge` (Consolidate into Canonical Module):** `151`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -25,10 +25,10 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | --- | --- | --- | --- | --- |
 | `allosteric_potentiator_model.py` | `T-0221` | `T2` | `merge` | Merge into `gating_potentiator_energy_coupling.py` |
 | `alpha_evolve_compound_het_ptc.py` | `T-0432` | `T2` | `keep` | Canonical workbench |
-| `cftr_interdomain_allosteric_energetics.py` | `T-0447` | `T2` | `keep` | Canonical workbench |
-| `cftr_membrane_insertion_thermodynamics.py` | `T-0453` | `T2` | `keep` | Canonical workbench |
+| `cftr_interdomain_allosteric_energetics.py` | `T-0447` | `T2` | `merge` | Merge into `gating_potentiator_energy_coupling.py` |
+| `cftr_membrane_insertion_thermodynamics.py` | `T-0453` | `T2` | `merge` | Merge into `nbd1_thermodynamics.py` |
 | `cftr_sequence_scanner.py` | `T-0264` | `T2` | `keep` | Canonical workbench |
-| `cftr_truncation_corrector_rescuability.py` | `T-0465` | `T2` | `keep` | Canonical workbench |
+| `cftr_truncation_corrector_rescuability.py` | `T-0465` | `T2` | `merge` | Merge into `cryoem_truncation_model.py` |
 | `cftr_variant_catalog_concordance.py` | `T-0420` | `T2` | `keep` | Canonical workbench |
 | `cryoem_truncation_model.py` | `T-0151` | `T2` | `keep` | Canonical workbench |
 | `gating_potentiator_energy_coupling.py` | `T-0270` | `T2` | `keep` | Canonical workbench |
@@ -110,15 +110,15 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `aso_splice_model.py` | `T-0183` | `T2` | `merge` | Merge into `aso_splice_kinetics.py` |
 | `base_editing_cftr.py` | `T-0219` | `T2` | `merge` | Merge into `class1_prime_base_editing.py` |
 | `bridge_rna_minipromoter_coevolve.py` | `T-0427` | `T2` | `keep` | Canonical workbench |
-| `cftr_cryptic_splice_aso_kinetics.py` | `T-0470` | `T2` | `keep` | Canonical workbench |
+| `cftr_cryptic_splice_aso_kinetics.py` | `T-0470` | `T2` | `merge` | Merge into `aso_splice_kinetics.py` |
 | `cftr_gquadruplex_stability_model.py` | `T-0316` | `T2` | `archive` | Candidate for archive |
 | `cftr_minigene_model.py` | `T-0207` | `T2` | `keep` | Canonical workbench |
 | `class1_prime_base_editing.py` | `T-0255` | `T2` | `keep` | Canonical workbench |
 | `dual_aav_intein_model.py` | `T-0206` | `T2` | `keep` | Canonical workbench |
 | `intronic_splice_foundation.py` | `T-0269` | `T2` | `keep` | Canonical workbench |
 | `minidna_evasion_model.py` | `T-0233` | `T2` | `archive` | Candidate for archive |
-| `mrna_hypoxia_translation_dynamics.py` | `T-0452` | `T2` | `keep` | Canonical workbench |
-| `mrna_poly_a_deadenylation_kinetics.py` | `T-0449` | `T2` | `keep` | Canonical workbench |
+| `mrna_hypoxia_translation_dynamics.py` | `T-0452` | `T2` | `merge` | Merge into `mrna_translation_velocity.py` |
+| `mrna_poly_a_deadenylation_kinetics.py` | `T-0449` | `T2` | `merge` | Merge into `mrna_translation_velocity.py` |
 | `mrna_translation_velocity.py` | `T-0272` | `T2` | `keep` | Canonical workbench |
 | `nmd_ptc_kinetics.py` | `T-0241` | `T2` | `merge` | Merge into `ptc_erf_depletion_readthrough.py` |
 | `prime_editing_cftr.py` | `T-0184` | `T2` | `merge` | Merge into `class1_prime_base_editing.py` |
@@ -145,25 +145,25 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | --- | --- | --- | --- | --- |
 | `aav_tropism_model.py` | `T-0208` | `T2` | `keep` | Canonical workbench |
 | `aerosol_droplet_deposition_mechanics.py` | `T-0408` | `T2` | `keep` | Canonical workbench |
-| `aerosol_hygroscopic_deposition_kinetics.py` | `T-0473` | `T2` | `keep` | Canonical workbench |
-| `aerosol_mmad_mucus_penetration.py` | `T-0547` | `T2` | `keep` | Canonical workbench |
+| `aerosol_hygroscopic_deposition_kinetics.py` | `T-0473` | `T2` | `merge` | Merge into `aerosol_droplet_deposition_mechanics.py` |
+| `aerosol_mmad_mucus_penetration.py` | `T-0547` | `T2` | `merge` | Merge into `aerosol_droplet_deposition_mechanics.py` |
 | `airway_basal_tight_junction_kinetics.py` | `T-0429` | `T2` | `keep` | Canonical workbench |
-| `ali_airway_lnp_transfection_kinetics.py` | `T-0446` | `T2` | `keep` | Canonical workbench |
-| `antimicrobial_peptide_acidification.py` | `T-0461` | `T2` | `keep` | Canonical workbench |
-| `asl_osmotic_ciliary_transport.py` | `T-0459` | `T2` | `keep` | Canonical workbench |
-| `asl_ph_antimicrobial_potency.py` | `T-0469` | `T2` | `keep` | Canonical workbench |
+| `ali_airway_lnp_transfection_kinetics.py` | `T-0446` | `T2` | `merge` | Merge into `lnp_escape_dynamics.py` |
+| `antimicrobial_peptide_acidification.py` | `T-0461` | `T2` | `merge` | Merge into `enac_tmem16a_equilibrium.py` |
+| `asl_osmotic_ciliary_transport.py` | `T-0459` | `T2` | `merge` | Merge into `ciliary_wave_clearance_model.py` |
+| `asl_ph_antimicrobial_potency.py` | `T-0469` | `T2` | `merge` | Merge into `enac_tmem16a_equilibrium.py` |
 | `basal_stem_persistence.py` | `T-0220` | `T2` | `keep` | Canonical workbench |
 | `basal_stem_quiescence_kinetics.py` | `T-0414` | `T2` | `keep` | Canonical workbench |
-| `basal_stem_tropism_persistence.py` | `T-0498` | `T2` | `keep` | Canonical workbench |
+| `basal_stem_tropism_persistence.py` | `T-0498` | `T2` | `merge` | Merge into `basal_stem_quiescence_kinetics.py` |
 | `biophysical_models.py` | `T-0154` | `T2` | `keep` | Canonical workbench |
 | `ciliary_wave_clearance_model.py` | `T-0315` | `T2` | `keep` | Canonical workbench |
 | `enac_knockdown_model.py` | `T-0200` | `T2` | `merge` | Merge into `enac_tmem16a_equilibrium.py` |
 | `enac_proteolysis_asl_regulation.py` | `T-0417` | `T2` | `keep` | Canonical workbench |
 | `enac_proteolysis_model.py` | `T-0245` | `T2` | `merge` | Merge into `enac_tmem16a_equilibrium.py` |
 | `enac_tmem16a_equilibrium.py` | `T-0252` | `T2` | `keep` | Canonical workbench |
-| `endocytic_pathway_partitioning.py` | `T-0561` | `T2` | `keep` | Canonical workbench |
+| `endocytic_pathway_partitioning.py` | `T-0561` | `T2` | `merge` | Merge into `endocytosis_mucociliary_competition.py` |
 | `endocytosis_mucociliary_competition.py` | `T-0416` | `T2` | `keep` | Canonical workbench |
-| `endosomal_escape_kinetics.py` | `T-0557` | `T2` | `keep` | Canonical workbench |
+| `endosomal_escape_kinetics.py` | `T-0557` | `T2` | `merge` | Merge into `lnp_escape_dynamics.py` |
 | `epithelial_plasticity.py` | `T-0178` | `T2` | `keep` | Canonical workbench |
 | `ev_basal_tropism.py` | `T-0234` | `T2` | `archive` | Candidate for archive |
 | `glycocalyx_charge_barrier_model.py` | `T-0351` | `T2` | `merge` | Merge into `glycocalyx_permeabilization_model.py` |
@@ -171,21 +171,21 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `lentiviral_basal_integration_persistence.py` | `T-0407` | `T2` | `keep` | Canonical workbench |
 | `lnp_escape_dynamics.py` | `T-0285` | `T2` | `keep` | Canonical workbench |
 | `lnp_mucus_shear_shedding_kinetics.py` | `T-0439` | `T2` | `keep` | Canonical workbench |
-| `lnp_nuclear_entry_basal_persistence.py` | `T-0478` | `T2` | `keep` | Canonical workbench |
-| `lnp_peg_shedding_mucus_kinetics.py` | `T-0463` | `T2` | `keep` | Canonical workbench |
-| `lnp_stem_endosomal_escape_kinetics.py` | `T-0455` | `T2` | `keep` | Canonical workbench |
-| `lnp_surfactant_corona_remodeling.py` | `T-0456` | `T2` | `keep` | Canonical workbench |
+| `lnp_nuclear_entry_basal_persistence.py` | `T-0478` | `T2` | `merge` | Merge into `basal_stem_persistence.py` |
+| `lnp_peg_shedding_mucus_kinetics.py` | `T-0463` | `T2` | `merge` | Merge into `lnp_mucus_shear_shedding_kinetics.py` |
+| `lnp_stem_endosomal_escape_kinetics.py` | `T-0455` | `T2` | `merge` | Merge into `lnp_escape_dynamics.py` |
+| `lnp_surfactant_corona_remodeling.py` | `T-0456` | `T2` | `merge` | Merge into `lnp_escape_dynamics.py` |
 | `macrophage_evasion.py` | `T-0544` | `T2` | `keep` | Canonical workbench |
 | `mechano_acoustic_delivery.py` | `T-0228` | `T2` | `keep` | Canonical workbench |
 | `mpp_obstruction_scaling.py` | `T-0244` | `T2` | `keep` | Canonical workbench |
 | `mrna_lnp_escape_model.py` | `T-0239` | `T2` | `merge` | Merge into `lnp_escape_dynamics.py` |
-| `mrna_lnp_nebulizer_shear_stability.py` | `T-0481` | `T2` | `keep` | Canonical workbench |
-| `mucociliary_clearance_viscoelasticity.py` | `T-0558` | `T2` | `keep` | Canonical workbench |
+| `mrna_lnp_nebulizer_shear_stability.py` | `T-0481` | `T2` | `merge` | Merge into `nebulizer_shear_stress_integrity.py` |
+| `mucociliary_clearance_viscoelasticity.py` | `T-0558` | `T2` | `merge` | Merge into `mucus_rheology.py` |
 | `mucus_cleavage_kinetics.py` | `T-0253` | `T2` | `merge` | Merge into `mucus_rheology.py` |
-| `mucus_penetrating_aso_kinetics.py` | `T-0497` | `T2` | `keep` | Canonical workbench |
+| `mucus_penetrating_aso_kinetics.py` | `T-0497` | `T2` | `merge` | Merge into `mpp_obstruction_scaling.py` |
 | `mucus_rheology.py` | `T-0185` | `T2` | `keep` | Canonical workbench |
 | `nebulizer_shear_stress_integrity.py` | `T-0413` | `T2` | `keep` | Canonical workbench |
-| `periciliary_brush_compression.py` | `T-0562` | `T2` | `keep` | Canonical workbench |
+| `periciliary_brush_compression.py` | `T-0562` | `T2` | `merge` | Merge into `mucus_rheology.py` |
 | `round105_apical_hydration_electroosmotic_coupling.py` | `T-0732` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round108_kramers_stokes_brinkman_mucus_filtration.py` | `T-0737` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round116_wef_global_health_coldchain_pareto_bridge.py` | `T-0751` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
@@ -222,11 +222,11 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `round195_alginate_lyase_sputum_liquefaction_bridge.py` | `T-0880` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round197_dual_aav_split_intein_cftr_bridge.py` | `T-0884` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round198_trehalose_osmoprotection_bridge.py` | `T-0885` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
-| `surfactant_shielded_rnp_mucus_transport.py` | `T-0482` | `T2` | `keep` | Canonical workbench |
+| `surfactant_shielded_rnp_mucus_transport.py` | `T-0482` | `T2` | `merge` | Merge into `mpp_obstruction_scaling.py` |
 | `tmem16a_calcium_conductance_model.py` | `T-0392` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_conductance_model.py` | `T-0240` | `T2` | `merge` | Merge into `tmem16a_calcium_conductance_model.py` |
-| `tmem16a_enac_asl_cbf_dynamics.py` | `T-0444` | `T2` | `keep` | Canonical workbench |
-| `tmem16a_slc26a9_conductance_coupling.py` | `T-0476` | `T2` | `keep` | Canonical workbench |
+| `tmem16a_enac_asl_cbf_dynamics.py` | `T-0444` | `T2` | `merge` | Merge into `enac_tmem16a_equilibrium.py` |
+| `tmem16a_slc26a9_conductance_coupling.py` | `T-0476` | `T2` | `merge` | Merge into `tmem16a_calcium_conductance_model.py` |
 | `transcytosis_model.py` | `T-0177` | `T2` | `keep` | Canonical workbench |
 | `vector_redosing_kinetics.py` | `T-0198` | `T2` | `keep` | Canonical workbench |
 | `vx522_inhaled_lnp_mucus_diffusion.py` | `T-0400` | `T2` | `keep` | Canonical workbench |
@@ -235,7 +235,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
-| `alginate_lyase_phage_synergy.py` | `T-0472` | `T2` | `keep` | Canonical workbench |
+| `alginate_lyase_phage_synergy.py` | `T-0472` | `T2` | `merge` | Merge into `phage_depolymerase_biofilm_synergy.py` |
 | `macrophage_efferocytosis_model.py` | `T-0251` | `T2` | `merge` | Merge into `macrophage_evasion_kinetics.py` |
 | `macrophage_evasion_kinetics.py` | `T-0271` | `T2` | `keep` | Canonical workbench |
 | `phage_biofilm_kinetics.py` | `T-0197` | `T2` | `keep` | Canonical workbench |

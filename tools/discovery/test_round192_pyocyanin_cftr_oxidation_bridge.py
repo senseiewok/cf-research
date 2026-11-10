@@ -115,7 +115,13 @@ class Round192PyocyaninOxidationTest(unittest.TestCase):
 
     def test_provenance_and_two_column_epistemic_hygiene_metadata(self) -> None:
         self.assertGreaterEqual(len(PRIMARY_CITATIONS), 4)
+        self.assertIn("DOI: 10.2353/ajpath.2009.090166", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.1016/j.freeradbiomed.2008.09.011", PRIMARY_CITATIONS)
         self.assertGreaterEqual(len(PARAMETER_PROVENANCE), 5)
+        for p_meta in PARAMETER_PROVENANCE.values():
+            self.assertIn(p_meta["tag"], ("empirical", "derived", "phenomenological_heuristic"))
+            self.assertIn("source", p_meta)
+            self.assertIn("bounds", p_meta)
         self.assertIn("deductive_theorem", TWO_COLUMN_EPISTEMIC_HYGIENE)
         self.assertIn("biophysical_hypothesis", TWO_COLUMN_EPISTEMIC_HYGIENE)
         self.assertIn("statement", TWO_COLUMN_EPISTEMIC_HYGIENE["biophysical_hypothesis"])

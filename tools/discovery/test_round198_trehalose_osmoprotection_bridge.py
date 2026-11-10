@@ -123,6 +123,8 @@ class Round198TrehaloseOsmoprotectionBridgeTest(unittest.TestCase):
         self.assertIn("popperian_column_b", TWO_COLUMN_EPISTEMIC_HYGIENE)
         self.assertGreaterEqual(len(FIVE_LAYER_LADDER), 5)
         self.assertGreaterEqual(len(PRIMARY_CITATIONS), 2)
+        self.assertIn("DOI: 10.1371/journal.pgen.1009524", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.1146/annurev.med.58.071905.105316", PRIMARY_CITATIONS)
 
 
 if __name__ == "__main__":
