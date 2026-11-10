@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-295 to download by hand, 1 to ask for, 3 not to download.
+297 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -473,6 +473,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | einstokborn-is-resource-pages | Einstök börn rare disease support website (einstokborn.is) | [page](https://einstokborn.is/) | link only | National rare disease patient and family association in Iceland (Einstök börn) providing support and education for cystic fibrosis (slímseigjusjúkdómur). |
 
+### eLife Sciences Publications
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| sorum-2023-elife-cftr-nbd-dimer-stability | Estimating the true stability of the prehydrolytic outward-facing state in an ABC protein | [page](https://doi.org/10.7554/elife.90736) | link only | Directly measures the true thermodynamic stability and free-energy barrier (Delta G_dissoc >= 14 k_B T) of CFTR NBD heterodimer. |
+
 ### Elsevier
 
 | ID | What | Open | Save as | Notes |
@@ -490,6 +496,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | eu-ctr | EU Clinical Trials Register (EudraCT) | [page](https://www.clinicaltrialsregister.eu/) | link only | robots.txt: none (404). |
+
+### European Respiratory Society
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| alton-2024-erj-rsiv-fhn-lentivirus-preclinical | Pharmacological and pre-clinical safety profile of rSIV.F/HN, a hybrid lentiviral vector for cystic fibrosis gene therapy | [page](https://doi.org/10.1183/13993003.01683-2023) | link only | Establishes aerosolized rSIV.F/HN lentiviral vector pre-clinical safety, mucus penetration, and airway basal cell genomic integration. |
 
 ### Falkland Islands Government Health and Social Services Department
 
