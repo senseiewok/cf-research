@@ -15,8 +15,8 @@
     "builders": 1
   },
   "triage_summary": {
-    "keep": 85,
-    "merge": 122,
+    "keep": 58,
+    "merge": 149,
     "archive": 4
   },
   "discipline_summary": {
@@ -31,8 +31,8 @@
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
       "count": 76,
-      "keep_count": 11,
-      "merge_count": 64,
+      "keep_count": 8,
+      "merge_count": 67,
       "archive_count": 1,
       "modules": [
         {
@@ -64,8 +64,8 @@
           "tier": "T2",
           "discipline": "structural_biology",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "gating_potentiator_energy_coupling",
           "test_verified": true
         },
         {
@@ -75,8 +75,8 @@
           "tier": "T2",
           "discipline": "structural_biology",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "nbd1_thermodynamics",
           "test_verified": true
         },
         {
@@ -97,8 +97,8 @@
           "tier": "T2",
           "discipline": "structural_biology",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "cryoem_truncation_model",
           "test_verified": true
         },
         {
@@ -876,8 +876,8 @@
     "rna_gene_editing": {
       "label": "RNA, Nonsense Readthrough & Gene Editing",
       "count": 34,
-      "keep_count": 18,
-      "merge_count": 14,
+      "keep_count": 15,
+      "merge_count": 17,
       "archive_count": 2,
       "modules": [
         {
@@ -953,8 +953,8 @@
           "tier": "T2",
           "discipline": "rna_gene_editing",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "aso_splice_kinetics",
           "test_verified": true
         },
         {
@@ -1030,8 +1030,8 @@
           "tier": "T2",
           "discipline": "rna_gene_editing",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "mrna_translation_velocity",
           "test_verified": true
         },
         {
@@ -1041,8 +1041,8 @@
           "tier": "T2",
           "discipline": "rna_gene_editing",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "mrna_translation_velocity",
           "test_verified": true
         },
         {
@@ -1259,8 +1259,8 @@
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
       "count": 85,
-      "keep_count": 44,
-      "merge_count": 40,
+      "keep_count": 24,
+      "merge_count": 60,
       "archive_count": 1,
       "modules": [
         {
@@ -1292,8 +1292,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "aerosol_droplet_deposition_mechanics",
           "test_verified": true
         },
         {
@@ -1303,8 +1303,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "aerosol_droplet_deposition_mechanics",
           "test_verified": true
         },
         {
@@ -1325,8 +1325,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "lnp_escape_dynamics",
           "test_verified": true
         },
         {
@@ -1336,8 +1336,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "enac_tmem16a_equilibrium",
           "test_verified": true
         },
         {
@@ -1347,8 +1347,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "ciliary_wave_clearance_model",
           "test_verified": true
         },
         {
@@ -1358,8 +1358,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "enac_tmem16a_equilibrium",
           "test_verified": true
         },
         {
@@ -1391,8 +1391,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "basal_stem_quiescence_kinetics",
           "test_verified": true
         },
         {
@@ -1468,8 +1468,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "endocytosis_mucociliary_competition",
           "test_verified": true
         },
         {
@@ -1490,8 +1490,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "lnp_escape_dynamics",
           "test_verified": true
         },
         {
@@ -1578,8 +1578,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "basal_stem_persistence",
           "test_verified": true
         },
         {
@@ -1589,8 +1589,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "lnp_mucus_shear_shedding_kinetics",
           "test_verified": true
         },
         {
@@ -1600,8 +1600,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "lnp_escape_dynamics",
           "test_verified": true
         },
         {
@@ -1611,8 +1611,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "lnp_escape_dynamics",
           "test_verified": true
         },
         {
@@ -1666,8 +1666,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "nebulizer_shear_stress_integrity",
           "test_verified": true
         },
         {
@@ -1677,8 +1677,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "mucus_rheology",
           "test_verified": true
         },
         {
@@ -1699,8 +1699,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "mpp_obstruction_scaling",
           "test_verified": true
         },
         {
@@ -1732,8 +1732,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "mucus_rheology",
           "test_verified": true
         },
         {
@@ -2117,8 +2117,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "mpp_obstruction_scaling",
           "test_verified": true
         },
         {
@@ -2150,8 +2150,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "enac_tmem16a_equilibrium",
           "test_verified": true
         },
         {
@@ -2161,8 +2161,8 @@
           "tier": "T2",
           "discipline": "airway_delivery",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "tmem16a_calcium_conductance_model",
           "test_verified": true
         },
         {
@@ -2203,8 +2203,8 @@
     "microbiology_host": {
       "label": "Microbiology, Phage Therapy & Host Defense",
       "count": 10,
-      "keep_count": 6,
-      "merge_count": 4,
+      "keep_count": 5,
+      "merge_count": 5,
       "archive_count": 0,
       "modules": [
         {
@@ -2214,8 +2214,8 @@
           "tier": "T2",
           "discipline": "microbiology_host",
           "persona": "researchers",
-          "triage": "keep",
-          "consolidation_target": null,
+          "triage": "merge",
+          "consolidation_target": "phage_depolymerase_biofilm_synergy",
           "test_verified": true
         },
         {

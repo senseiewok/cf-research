@@ -116,7 +116,15 @@ class Round191LNPMucusPenetrationTest(unittest.TestCase):
 
     def test_provenance_and_two_column_epistemic_hygiene_metadata(self) -> None:
         self.assertGreaterEqual(len(PRIMARY_CITATIONS), 4)
+        self.assertIn("DOI: 10.1126/sciadv.1601556", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.1038/s41551-021-00786-x", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.1016/j.biomaterials.2008.12.076", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.1038/nbt.2612", PRIMARY_CITATIONS)
         self.assertGreaterEqual(len(PARAMETER_PROVENANCE), 5)
+        for p_meta in PARAMETER_PROVENANCE.values():
+            self.assertIn(p_meta["tag"], ("empirical", "derived", "phenomenological_heuristic"))
+            self.assertIn("source", p_meta)
+            self.assertIn("bounds", p_meta)
         self.assertIn("deductive_theorem", TWO_COLUMN_EPISTEMIC_HYGIENE)
         self.assertIn("biophysical_hypothesis", TWO_COLUMN_EPISTEMIC_HYGIENE)
         self.assertIn("statement", TWO_COLUMN_EPISTEMIC_HYGIENE["biophysical_hypothesis"])

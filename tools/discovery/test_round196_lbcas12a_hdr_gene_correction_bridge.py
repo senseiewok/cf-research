@@ -116,6 +116,8 @@ class Round196Cas12aHDRGeneCorrectionTest(unittest.TestCase):
             self.assertIn(layer, FIVE_LAYER_LADDER)
 
         self.assertGreaterEqual(len(PRIMARY_CITATIONS), 2)
+        self.assertIn("DOI: 10.1038/s41587-018-0011-0", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.1093/nar/gkz669", PRIMARY_CITATIONS)
 
 
 if __name__ == "__main__":

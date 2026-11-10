@@ -6,10 +6,12 @@ Mathematical & Physical Pillar (Column A - Deductive Theorem):
   1. Aerosolized Bacteriophage Sputum Translocation Dynamics:
      AP-PA02 is an investigational cocktail of virulent obligately lytic bacteriophages targeting Pseudomonas aeruginosa,
      evaluated in cystic fibrosis chronic respiratory infections (SWARM-P.a. trial, NCT04596319).
-     Aerosolized phage virions (capsid hydrodynamic diameter d_phage = 70.0 nm; DOI: 10.1016/j.chom.2021.03.003) diffuse through dense,
+     Aerosolized phage virions (representative capsid hydrodynamic diameter d_phage = 70.0 nm; mucosal phage subdiffusion grounded in
+     Barr et al., Proc Natl Acad Sci USA 2015, DOI: 10.1073/pnas.1508355112) diffuse through dense,
      negatively charged CF mucus whose steric mesh pore size xi_mesh scales inversely with mucin solids weight fraction w_solid:
        xi_mesh = xi_0 * ( w_solid / w_0 )^-0.75
-     where xi_0 = 140.0 nm and w_0 = 3.0% solids (DOI: 10.1038/s41564-022-01139-4).
+     where xi_0 = 140.0 nm and w_0 = 3.0% solids (Hill et al., Physiol Rev 2022, DOI: 10.1152/physrev.00004.2021;
+     chronic respiratory P. aeruginosa phage lysis grounded in Waters et al., Thorax 2017, DOI: 10.1136/thoraxjnl-2016-209265).
      Steric hydrogel obstruction follows the Ogston-Amsden macromolecular pore permeability scaling:
        ratio = ( d_phage + d_fiber ) / ( xi_mesh + d_fiber )
        D_eff / D_0 = exp( - ( pi / 4 ) * ratio^2 * c_mesh )
@@ -55,7 +57,7 @@ Mathematical & Physical Pillar (Column A - Deductive Theorem):
      - Poisoned negative controls: negative phage dose, negative bacterial density, or negative solids fraction fail deterministically.
 
 CF Biophysical Domain Mapping (Column B - Popperian Falsifiable Hypothesis):
-  - In AP-PA02 High-Dose Trikafta Hydrated Regimen (NCT04596319; DOI: 10.1016/j.chom.2021.03.003):
+  - In AP-PA02 High-Dose Trikafta Hydrated Regimen (NCT04596319; DOI: 10.1073/pnas.1508355112; DOI: 10.1136/thoraxjnl-2016-209265):
     [P]_dose = 1.0e9 PFU/mL, w_solid = 3.0%, f_Band_C = 0.35 (Trikafta):
     D_eff/D_0 = 0.458, [P]_eff = 4.58e8 PFU/mL, Delta_log10_B = 3.09 log10, [B]_post = 8.1e4 CFU/mL,
     f_active = 0.988, I_sc_equiv = 32.85% WT, h_ASL = 7.52 um >= 7.0 um, v_MCC = 2.44 mm/min >= 1.0 mm/min,
@@ -87,8 +89,9 @@ from dataclasses import dataclass
 from typing import Any, Dict, Tuple
 
 PRIMARY_CITATIONS: Tuple[str, ...] = (
-    "DOI: 10.1016/j.chom.2021.03.003",
-    "DOI: 10.1038/s41564-022-01139-4",
+    "DOI: 10.1073/pnas.1508355112",
+    "DOI: 10.1136/thoraxjnl-2016-209265",
+    "DOI: 10.1152/physrev.00004.2021",
     "NCT04596319",
     "PDB: 8EIQ",
 )
@@ -114,32 +117,32 @@ DEFAULT_H_CILIA_MIN_UM: float = 5.0             # Minimum ASL height required fo
 PARAMETER_PROVENANCE: Dict[str, Dict[str, object]] = {
     "ap_pa02_phage_diameter": {
         "value": 70.0,
-        "tag": "empirical",
-        "source": "AP-PA02 therapeutic myovirus/podovirus capsid hydrodynamic dimensions (NCT04596319; DOI: 10.1016/j.chom.2021.03.003)",
+        "tag": "derived",
+        "source": "Representative caudoviricete capsid hydrodynamic diameter parameterization for mucosal phage diffusion (exact AP-PA02 virion diameter not stated in NCT04596319 registry record; mucosal phage subdiffusion grounded in Barr et al., Proc Natl Acad Sci USA 2015, DOI: 10.1073/pnas.1508355112)",
         "bounds": (50.0, 100.0),
     },
     "mucus_pore_scaling": {
         "value": 140.0,
-        "tag": "empirical",
-        "source": "Steric pore mesh size of human cystic fibrosis sputum as a function of solids content (DOI: 10.1038/s41564-022-01139-4)",
+        "tag": "derived",
+        "source": "Reference CF sputum mesh spacing (~140 nm at 3% solids) with polymer gel correlation scaling xi ~ w^-0.75 (Hill et al., Physiol Rev 2022, DOI: 10.1152/physrev.00004.2021; Suk et al., Biomaterials 2009, DOI: 10.1016/j.biomaterials.2008.12.076)",
         "bounds": (80.0, 220.0),
     },
     "phage_lytic_potency": {
         "value": 1.85,
-        "tag": "derived",
-        "source": "Concentration-dependent log10 bacterial killing of P. aeruginosa by AP-PA02 cocktail (NCT04596319)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical multi-round lytic log10 reduction coefficient parameterized to chronic P. aeruginosa respiratory phage killing (Waters et al., Thorax 2017, DOI: 10.1136/thoraxjnl-2016-209265; clinical trial context NCT04596319, efficacy constant not stated in registry)",
         "bounds": (1.00, 2.50),
     },
     "bacterial_virulence_inactivation_threshold": {
         "value": 1.5e6,
-        "tag": "derived",
-        "source": "P. aeruginosa quorum-sensing and phenazine concentration causing 50% CFTR gating loss (DOI: 10.1016/j.chom.2021.03.003)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical critical P. aeruginosa CFU/mL burden parameterization for exotoxin-driven CFTR inhibition (exact CFU/mL half-maximal constant not stated in Waters et al., Thorax 2017, DOI: 10.1136/thoraxjnl-2016-209265 or Barr et al., Proc Natl Acad Sci USA 2015, DOI: 10.1073/pnas.1508355112)",
         "bounds": (5.0e5, 5.0e6),
     },
     "cftr_gating_hill_cooperativity": {
         "value": 1.50,
         "tag": "phenomenological_heuristic",
-        "source": "Cooperative allosteric channel inhibition by multi-toxin bacterial secretome (PDB: 8EIQ)",
+        "source": "Analytical Hill cooperativity parameterization for bacterial exotoxin-mediated CFTR gating attenuation (structural reference PDB: 8EIQ)",
         "bounds": (1.0, 2.5),
     },
 }
