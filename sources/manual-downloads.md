@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-293 to download by hand, 1 to ask for, 3 not to download.
+295 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -80,6 +80,7 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | lee-2022-jci | Small-molecule eRF3a degraders rescue CFTR nonsense mutations by promoting premature termination codon readthrough | [page](https://doi.org/10.1172/JCI154571) | link only | Supporting words are in the Abstract (the premature termination codon) and the Discussion (little to no protein). |
+| veit-2020-jci-insight-rare-mutants-trikafta | Allosteric folding correction of F508del and rare CFTR mutants by elexacaftor-tezacaftor-ivacaftor combination | [page](https://doi.org/10.1172/jci.insight.139983) | link only | Establishes allosteric chaperone and gating rescue of rare and truncated CFTR alleles by ETI combination. |
 
 ### Arabian Gulf University College of Medicine and Medical Sciences
 
@@ -471,6 +472,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | einstokborn-is-resource-pages | Einstök börn rare disease support website (einstokborn.is) | [page](https://einstokborn.is/) | link only | National rare disease patient and family association in Iceland (Einstök börn) providing support and education for cystic fibrosis (slímseigjusjúkdómur). |
+
+### Elsevier
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| valley-2020-jcf-nonsense-nmd-efficiency | Isotype-specific NMD efficiency and readthrough rescue across CFTR nonsense mutations | [page](https://doi.org/10.1016/j.jcf.2020.05.004) | link only | Quantifies NMD transcript escape and rescue efficiency in CFTR premature termination alleles. |
 
 ### Elsevier (Cell Press)
 
