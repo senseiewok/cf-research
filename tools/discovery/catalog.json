@@ -6,23 +6,23 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 185,
+  "total_modules": 187,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 249,
+  "test_suites_count": 251,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 184,
+    "researchers": 186,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 96,
+    "merge": 98,
     "archive": 4
   },
   "discipline_summary": {
     "structural_biology": 71,
     "rna_gene_editing": 28,
-    "airway_delivery": 73,
+    "airway_delivery": 75,
     "microbiology_host": 7,
     "clinical_trials": 3,
     "ai_verification": 3
@@ -1137,9 +1137,9 @@
     },
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
-      "count": 73,
+      "count": 75,
       "keep_count": 44,
-      "merge_count": 28,
+      "merge_count": 30,
       "archive_count": 1,
       "modules": [
         {
@@ -1849,6 +1849,28 @@
         {
           "module": "round170_darcy_brinkman_osmotic_pumping_bridge",
           "task": "T-0835",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round171_flory_huggins_osmotic_compression_bridge",
+          "task": "T-0836",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round172_gibbs_donnan_bicarbonate_hydration_bridge",
+          "task": "T-0837",
           "track": "Track A",
           "tier": "T2",
           "discipline": "airway_delivery",
