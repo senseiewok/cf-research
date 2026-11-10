@@ -6,23 +6,23 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 191,
+  "total_modules": 193,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 255,
+  "test_suites_count": 257,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 190,
+    "researchers": 192,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 102,
+    "merge": 104,
     "archive": 4
   },
   "discipline_summary": {
     "structural_biology": 72,
-    "rna_gene_editing": 28,
-    "airway_delivery": 78,
+    "rna_gene_editing": 29,
+    "airway_delivery": 79,
     "microbiology_host": 7,
     "clinical_trials": 3,
     "ai_verification": 3
@@ -831,9 +831,9 @@
     },
     "rna_gene_editing": {
       "label": "RNA, Nonsense Readthrough & Gene Editing",
-      "count": 28,
+      "count": 29,
       "keep_count": 18,
-      "merge_count": 8,
+      "merge_count": 9,
       "archive_count": 2,
       "modules": [
         {
@@ -1090,6 +1090,17 @@
           "test_verified": true
         },
         {
+          "module": "round177_ribosome_translactam_readthrough_bridge",
+          "task": "T-0851",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
           "module": "split_intein_cftr_reconstitution",
           "task": "T-0393",
           "track": "Track A",
@@ -1148,9 +1159,9 @@
     },
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
-      "count": 78,
+      "count": 79,
       "keep_count": 44,
-      "merge_count": 33,
+      "merge_count": 34,
       "archive_count": 1,
       "modules": [
         {
@@ -1915,6 +1926,17 @@
         {
           "module": "round176_prime_editing_r_loop_flap_kinetics_bridge",
           "task": "T-0847",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round178_lung_tropic_aav_transduction_bridge",
+          "task": "T-0852",
           "track": "Track A",
           "tier": "T2",
           "discipline": "airway_delivery",
