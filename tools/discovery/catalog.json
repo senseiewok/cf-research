@@ -6,22 +6,22 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 201,
+  "total_modules": 203,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 265,
+  "test_suites_count": 267,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 200,
+    "researchers": 202,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 112,
+    "merge": 114,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 74,
-    "rna_gene_editing": 31,
+    "structural_biology": 75,
+    "rna_gene_editing": 32,
     "airway_delivery": 83,
     "microbiology_host": 7,
     "clinical_trials": 3,
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 74,
+      "count": 75,
       "keep_count": 11,
-      "merge_count": 62,
+      "merge_count": 63,
       "archive_count": 1,
       "modules": [
         {
@@ -718,6 +718,17 @@
           "test_verified": true
         },
         {
+          "module": "round188_nbd1_suppressor_thermodynamics_bridge",
+          "task": "T-0869",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
           "module": "round90_pietzonka_power_constancy_tradeoff",
           "task": "T-0697",
           "track": "Track A",
@@ -853,9 +864,9 @@
     },
     "rna_gene_editing": {
       "label": "RNA, Nonsense Readthrough & Gene Editing",
-      "count": 31,
+      "count": 32,
       "keep_count": 18,
-      "merge_count": 11,
+      "merge_count": 12,
       "archive_count": 2,
       "modules": [
         {
@@ -1136,6 +1147,17 @@
         {
           "module": "round183_nmd_smg1_w1282x_modulator_synergy_bridge",
           "task": "T-0860",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "rna_gene_editing",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round187_suppressor_trna_readthrough_bridge",
+          "task": "T-0868",
           "track": "Track A",
           "tier": "T2",
           "discipline": "rna_gene_editing",
