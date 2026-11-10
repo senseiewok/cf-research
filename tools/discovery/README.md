@@ -4,9 +4,9 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `213` (plus 4 infrastructure scripts and 277 unit test suites)
+- **Total Verified Modules:** `215` (plus 4 infrastructure scripts and 279 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `58`
-- **`merge` (Consolidate into Canonical Module):** `151`
+- **`merge` (Consolidate into Canonical Module):** `153`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -139,7 +139,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 87 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 89 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -222,6 +222,8 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `round195_alginate_lyase_sputum_liquefaction_bridge.py` | `T-0880` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round197_dual_aav_split_intein_cftr_bridge.py` | `T-0884` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round198_trehalose_osmoprotection_bridge.py` | `T-0885` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round199_basal_stem_cell_differentiation_bridge.py` | `T-0888` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round200_tight_junction_claudin_flux_bridge.py` | `T-0889` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `surfactant_shielded_rnp_mucus_transport.py` | `T-0482` | `T2` | `merge` | Merge into `mpp_obstruction_scaling.py` |
 | `tmem16a_calcium_conductance_model.py` | `T-0392` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_conductance_model.py` | `T-0240` | `T2` | `merge` | Merge into `tmem16a_calcium_conductance_model.py` |
