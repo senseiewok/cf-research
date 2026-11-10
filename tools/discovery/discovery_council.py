@@ -1655,6 +1655,16 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "discipline": "structural_biology", "persona": "researchers", "triage": "merge",
         "consolidation_target": "formal_proof_thermodynamic_landscape",
     },
+    "round191_nebulized_lnp_mucus_penetration_bridge": {
+        "task": "T-0872", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
+    "round192_pyocyanin_cftr_oxidation_bridge": {
+        "task": "T-0873", "track": "Track A", "tier": "T2",
+        "discipline": "microbiology_host", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
 }
 
 
