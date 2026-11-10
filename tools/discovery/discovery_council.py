@@ -1595,6 +1595,16 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
         "consolidation_target": "formal_proof_thermodynamic_landscape",
     },
+    "round179_abe8e_splice_base_editing_bridge": {
+        "task": "T-0853", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
+    "round180_tmem16a_potentiator_conductance_bridge": {
+        "task": "T-0854", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
 }
 
 
