@@ -5,21 +5,21 @@ Round 196: CRISPR-Cas12a LbCas12a Airway Epithelial Gene Correction Fidelity & N
 Mathematical & Physical Pillar (Column A - Deductive Theorem):
   1. Engineered High-Fidelity LbCas12a Cleavage & 5' Overhang Staggered Architecture:
      Wild-type Lachnospiraceae bacterium Cas12a (LbCas12a) recognizes a 5'-TTTV PAM and cleaves target DNA distally,
-     generating 4- or 5-nucleotide 5' staggered cohesive overhangs (DOI: 10.1038/s41587-020-0565-5).
-     Engineered high-fidelity variants (e.g. enLbCas12a, LbCas12a-HF) introduce targeted mutations in the bridge helix
-     and REC lobe that destabilize non-canonical guide-target pairings, reducing off-target cleavage by >99% while preserving
-     rapid on-target catalytic rate k_on.
+     generating 4- or 5-nucleotide 5' staggered cohesive overhangs (Kleinstiver et al., Nat Biotechnol 2019, DOI: 10.1038/s41587-018-0011-0).
+     Engineered high-fidelity variants (e.g. enAsCas12a / HF1 variants) introduce targeted mutations
+     that destabilize non-canonical guide-target pairings, substantially reducing off-target cleavage while preserving
+     on-target catalytic activity (analytical ODE parameters k_on, K_05_rnp, S_fidelity are phenomenological_heuristic; explicit ODE rates not stated).
      Given ribonucleoprotein concentration [RNP] (nM):
        f_cleave = 1.0 - exp( - (k_on * [RNP]) / (1.0 + [RNP] / K_05_rnp) )
      where k_on = 0.055 nM^-1 and K_05_rnp = 40.0 nM.
      Fidelity specificity ratio S_fidelity in [0, 1] represents the ratio of on-target to total cleavages:
        f_off = f_cleave * (1.0 - S_fidelity).
-     For engineered high-fidelity LbCas12a, S_fidelity >= 0.995 (99.5%), whereas wild-type Cas9/Cas12a exhibits S_fidelity ~ 0.88.
+     For engineered high-fidelity Cas12a parameterization, S_fidelity >= 0.995 (99.5%), whereas baseline unengineered parameterization uses S_fidelity ~ 0.88.
 
   2. Double-Strand Break Repair Pathway Competition (HDR vs. NHEJ):
      Staggered 5' overhangs provide natural substrates for single-stranded DNA donor annealing in homology-directed repair (HDR).
-     However, in human airway basal epithelial cells (HBEs), non-homologous end joining (NHEJ via DNA-PKcs and Ku70/80)
-     competes aggressively, introducing disruptive indels rather than precise sequence repair (DOI: 10.1016/j.cell.2019.11.002).
+     However, in human cells, non-homologous end joining (NHEJ via DNA-PKcs and Ku70/80)
+     competes aggressively, introducing disruptive indels rather than precise sequence repair (Riesenberg et al., Nucleic Acids Res 2019, DOI: 10.1093/nar/gkz669).
      Co-administration of small-molecule NHEJ inhibitors (e.g. DNA-PKcs inhibitor Nedisertib / M3814) suppresses NHEJ flux:
        k_nhej = k_nhej_0 / (1.0 + ([Inhibitor]_nhej / K_i_nhej)^gamma)
      where k_nhej_0 = 1.0, K_i_nhej = 0.50 uM, and gamma = 1.20.
@@ -85,8 +85,8 @@ from dataclasses import dataclass
 from typing import Any, Dict, Tuple
 
 PRIMARY_CITATIONS: Tuple[str, ...] = (
-    "DOI: 10.1038/s41587-020-0565-5",
-    "DOI: 10.1016/j.cell.2019.11.002",
+    "DOI: 10.1038/s41587-018-0011-0",
+    "DOI: 10.1093/nar/gkz669",
 )
 
 # Physical & Kinetic Constants
@@ -106,32 +106,32 @@ DEFAULT_DELTA_TOX: float = 2.0                 # Cytotoxicity cooperativity expo
 PARAMETER_PROVENANCE: Dict[str, Dict[str, object]] = {
     "lbcas12a_on_target_rate": {
         "value": 0.055,
-        "tag": "empirical",
-        "source": "Enzymatic cleavage rate of engineered enLbCas12a at genomic target loci (DOI: 10.1038/s41587-020-0565-5)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical RNP cleavage saturation constant parameterized to engineered Cas12a editing activity (exact 0.055 nM^-1 rate constant not stated in Kleinstiver et al., Nat Biotechnol 2019, DOI: 10.1038/s41587-018-0011-0)",
         "bounds": (0.01, 0.15),
     },
     "lbcas12a_fidelity_specificity": {
         "value": 0.998,
-        "tag": "empirical",
-        "source": "High-fidelity genome-wide specificity ratio of engineered LbCas12a variants (DOI: 10.1038/s41587-020-0565-5)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical high-fidelity specificity ratio parameterized to GUIDE-seq off-target suppression in engineered HF1 Cas12a variants (exact 0.998 scalar not stated in Kleinstiver et al., Nat Biotechnol 2019, DOI: 10.1038/s41587-018-0011-0)",
         "bounds": (0.85, 1.00),
     },
     "dna_pk_inhibition_constant": {
         "value": 0.50,
-        "tag": "empirical",
-        "source": "In vitro inhibition of DNA-PKcs-mediated NHEJ repair by Nedisertib / M3814 (DOI: 10.1016/j.cell.2019.11.002)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical cellular Hill half-inhibition parameterization for M3814 suppression of DNA-PKcs-dependent NHEJ during CRISPR HDR (exact 0.50 uM Hill constant not stated in Riesenberg et al., Nucleic Acids Res 2019, DOI: 10.1093/nar/gkz669)",
         "bounds": (0.10, 2.00),
     },
     "hdr_donor_template_affinity": {
         "value": 150.0,
-        "tag": "empirical",
-        "source": "Single-stranded oligodeoxynucleotide (ssODN) donor saturation in basal cells (DOI: 10.1016/j.cell.2019.11.002)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical Michaelis-Menten ssODN donor saturation constant for Cas12a templated HDR (exact 150.0 nM affinity constant not stated in Riesenberg et al., Nucleic Acids Res 2019, DOI: 10.1093/nar/gkz669)",
         "bounds": (50.0, 500.0),
     },
     "cftr_conductance_functional_reserve": {
         "value": 0.12,
-        "tag": "derived",
-        "source": "Nonlinear relation between CFTR allele correction and transepithelial chloride current (DOI: 10.1038/s41587-020-0565-5)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical epithelial chloride conductance half-saturation fraction K_05_cftr modeling nonlinear channel reserve (exact 0.12 constant not stated in Kleinstiver et al., Nat Biotechnol 2019, DOI: 10.1038/s41587-018-0011-0 or Riesenberg et al., Nucleic Acids Res 2019, DOI: 10.1093/nar/gkz669)",
         "bounds": (0.05, 0.25),
     },
 }

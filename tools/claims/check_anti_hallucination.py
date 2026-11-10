@@ -102,9 +102,17 @@ UNFILTERED_COHORT_CONTAMINATION: tuple[tuple[re.Pattern, str], ...] = (
 
 NCT_RE = re.compile(r"\bNCT\d{8}\b")
 DOI_RE = re.compile(r"\b10\.\d{4,9}/[-._;()/:A-Za-z0-9]+")
+VALID_DOI_SYNTAX_RE = re.compile(r"^10\.\d{4,9}/[-._;()/:A-Za-z0-9<>]+$")
 PMID_RE = re.compile(r"\bPMID[:\s]+(\d{6,9})\b", re.IGNORECASE)
 PDB_RE = re.compile(r"\bPDB\s*(?:ID:?|entry:?|code:?)?\s*([0-9][A-Za-z0-9]{3})\b", re.IGNORECASE)
 DEFAULT_CITE_LEDGER = REPO_ROOT / "sources" / "cite-check-ledger.jsonl"
+DEFAULT_CATALOG_YAML = REPO_ROOT / "sources" / "catalog.yaml"
+SCITE_TALLY_FIELDS: tuple[str, ...] = (
+    "citingPublications",
+    "supporting",
+    "contrasting",
+    "mentioning",
+)
 
 
 def load_snapshot_ncts(snapshot_path: Path | str | None = None) -> set[str]:
@@ -279,13 +287,30 @@ def check_discovery_module_registration(
     return failures
 
 
+def load_catalog_yaml_dois(catalog_yaml_path: Path | str | None = None) -> set[str]:
+    """Load lowercased DOIs referenced in non-comment lines of sources/catalog.yaml (pure stdlib)."""
+    cp = Path(catalog_yaml_path or DEFAULT_CATALOG_YAML)
+    if not cp.exists():
+        return set()
+    dois: set[str] = set()
+    for line in cp.read_text(encoding="utf-8").splitlines():
+        if line.lstrip().startswith("#"):
+            continue
+        for m in DOI_RE.finditer(line):
+            doi = m.group(0).rstrip(").,:;\"'")
+            if VALID_DOI_SYNTAX_RE.match(doi):
+                dois.add(doi.lower())
+    return dois
+
+
 def load_cite_check_ledger(ledger_path: Path | str | None = None) -> set[tuple[str, str]]:
     """Load verified (kind, id_lower) pairs with verdict == 'PASS' from sources/cite-check-ledger.jsonl.
 
     Rejects any entry whose title starts with 'RETRACTED:' or 'WITHDRAWN:' or whose
     retracted flag is truthy, even if verdict was historically recorded as 'PASS',
     unless the entry is explicitly marked with positive_control == True (used solely for
-    Retraction Watch detector sensitivity verification).
+    Retraction Watch detector sensitivity verification). Also rejects DOI entries with
+    invalid DOI syntax or empty titles.
     """
     lp = Path(ledger_path or DEFAULT_CITE_LEDGER)
     if not lp.exists():
@@ -296,7 +321,8 @@ def load_cite_check_ledger(ledger_path: Path | str | None = None) -> set[tuple[s
         if not line:
             continue
         rec = json.loads(line)
-        title_upper = str(rec.get("title") or "").strip().upper()
+        title_raw = str(rec.get("title") or "").strip()
+        title_upper = title_raw.upper()
         is_retracted = (
             title_upper.startswith(("RETRACTED:", "WITHDRAWN:", "RETRACTION NOTICE"))
             or "RETRACTION NOTICE TO" in title_upper
@@ -305,12 +331,38 @@ def load_cite_check_ledger(ledger_path: Path | str | None = None) -> set[tuple[s
         if is_retracted and not bool(rec.get("positive_control")):
             continue
         if rec.get("verdict") == "PASS" and rec.get("kind") and rec.get("id"):
-            verified.add((str(rec["kind"]).upper(), str(rec["id"]).lower()))
+            kind = str(rec["kind"]).upper()
+            ident = str(rec["id"]).strip()
+            if kind == "DOI" and (not VALID_DOI_SYNTAX_RE.match(ident) or not title_raw):
+                continue
+            verified.add((kind, ident.lower()))
     return verified
 
 
+def _validate_scite_tally_dict(tally: object) -> list[str]:
+    """Return human-readable validation errors for a scite_tally object."""
+    if not isinstance(tally, dict) or not all(k in tally for k in SCITE_TALLY_FIELDS):
+        return ["lacks complete scite_tally metadata (citingPublications, supporting, contrasting, mentioning)"]
+    errs: list[str] = []
+    int_vals: dict[str, int] = {}
+    for k in SCITE_TALLY_FIELDS:
+        val = tally[k]
+        if not isinstance(val, int) or isinstance(val, bool) or val < 0:
+            errs.append(f"scite_tally.{k}={val!r} must be a non-negative integer")
+        else:
+            int_vals[k] = val
+    if len(int_vals) == len(SCITE_TALLY_FIELDS):
+        if int_vals["citingPublications"] == 0 and (
+            int_vals["supporting"] + int_vals["contrasting"] + int_vals["mentioning"] != 0
+        ):
+            errs.append(
+                "scite_tally has citingPublications == 0 but supporting + contrasting + mentioning != 0"
+            )
+    return errs
+
+
 def check_scite_ledger_scrutiny(ledger_path: Path | str | None = None) -> list[str]:
-    """Rule AH-12: Every active PASS DOI in sources/cite-check-ledger.jsonl must be Scite-verified with Smart Citation tallies and zero unflagged retraction notices."""
+    """Rule AH-12: Every active PASS DOI or DOI row with scite_tally in sources/cite-check-ledger.jsonl must have valid DOI syntax, non-empty title, valid non-negative integer Smart Citation tallies, and zero unflagged retraction notices."""
     lp = Path(ledger_path or DEFAULT_CITE_LEDGER)
     if not lp.exists():
         return []
@@ -320,32 +372,47 @@ def check_scite_ledger_scrutiny(ledger_path: Path | str | None = None) -> list[s
         if not line:
             continue
         rec = json.loads(line)
-        if str(rec.get("kind") or "").upper() != "DOI" or rec.get("verdict") != "PASS":
+        if str(rec.get("kind") or "").upper() != "DOI":
             continue
-        doi = str(rec.get("id") or "")
-        title_upper = str(rec.get("title") or "").strip().upper()
+        is_pass = rec.get("verdict") == "PASS"
+        has_tally = "scite_tally" in rec
+        if not is_pass and not has_tally:
+            continue
+        doi = str(rec.get("id") or "").strip()
+        title_raw = str(rec.get("title") or "").strip()
+        title_upper = title_raw.upper()
+        if not VALID_DOI_SYNTAX_RE.match(doi):
+            failures.append(
+                f"FAIL AH-12 [scite-title-and-retraction-scrutiny] {lp.as_posix()}:{line_no}: "
+                f"DOI {doi!r} has invalid DOI syntax"
+            )
+        if not title_raw:
+            failures.append(
+                f"FAIL AH-12 [scite-title-and-retraction-scrutiny] {lp.as_posix()}:{line_no}: "
+                f"DOI {doi} has empty title"
+            )
         is_retracted = (
             title_upper.startswith(("RETRACTED:", "WITHDRAWN:", "RETRACTION NOTICE"))
             or "RETRACTION NOTICE TO" in title_upper
             or bool(rec.get("retracted"))
         )
-        if is_retracted and not bool(rec.get("positive_control")):
+        if is_pass and is_retracted and not bool(rec.get("positive_control")):
             failures.append(
                 f"FAIL AH-12 [scite-title-and-retraction-scrutiny] {lp.as_posix()}:{line_no}: "
                 f"DOI {doi} is a retracted publication or retraction notice without positive_control=True"
             )
             continue
-        if not bool(rec.get("scite_verified")):
+        if is_pass and not bool(rec.get("scite_verified")):
             failures.append(
                 f"FAIL AH-12 [scite-title-and-retraction-scrutiny] {lp.as_posix()}:{line_no}: "
                 f"DOI {doi} lacks Scite verification (scite_verified=True)"
             )
-        tally = rec.get("scite_tally")
-        if not isinstance(tally, dict) or not all(k in tally for k in ("supporting", "contrasting", "mentioning", "citingPublications")):
-            failures.append(
-                f"FAIL AH-12 [scite-title-and-retraction-scrutiny] {lp.as_posix()}:{line_no}: "
-                f"DOI {doi} lacks complete scite_tally metadata"
-            )
+        if is_pass or has_tally:
+            for err in _validate_scite_tally_dict(rec.get("scite_tally")):
+                failures.append(
+                    f"FAIL AH-12 [scite-title-and-retraction-scrutiny] {lp.as_posix()}:{line_no}: "
+                    f"DOI {doi} {err}"
+                )
     return failures
 
 
@@ -353,13 +420,16 @@ def check_cite_check_ledger_provenance(
     file_path: Path,
     content: str,
     verified_ledger: set[tuple[str, str]],
+    catalog_dois: set[str] | None = None,
 ) -> list[str]:
-    """Rule AH-6: Every DOI, PMID, and NCT in landscape/*.md and tools/discovery/*.py must be in cite-check-ledger.jsonl."""
+    """Rule AH-6: Every DOI, PMID, and NCT in landscape/*.md, tools/discovery/*.py, and tools/discovery/catalog.json must be verified in cite-check-ledger.jsonl (or sources/catalog.yaml for discovery DOIs)."""
     failures: list[str] = []
+    allowed_catalog_dois = {d.lower() for d in (catalog_dois or set())}
     for line_no, line in enumerate(content.splitlines(), 1):
         for m in DOI_RE.finditer(line):
-            doi = m.group(0).rstrip(").,:;")
-            if ("DOI", doi.lower()) not in verified_ledger:
+            doi = m.group(0).rstrip(").,:;\"'")
+            doi_lower = doi.lower()
+            if ("DOI", doi_lower) not in verified_ledger and doi_lower not in allowed_catalog_dois:
                 failures.append(
                     f"FAIL AH-6 [cite-check-ledger-provenance] {file_path.as_posix()}:{line_no}: "
                     f"DOI {doi} not verified in sources/cite-check-ledger.jsonl"
@@ -493,6 +563,7 @@ def run_checks(
     snapshot_ncts = load_snapshot_ncts(snap_path)
     ledger_path = root / "sources" / "cite-check-ledger.jsonl"
     verified_ledger = load_cite_check_ledger(ledger_path)
+    catalog_dois = load_catalog_yaml_dois(root / "sources" / "catalog.yaml")
 
     failures: list[str] = []
     if not ledger_path.exists():
@@ -542,13 +613,31 @@ def run_checks(
     # Rule AH-5: Discovery Module Registration & Provenance
     failures.extend(check_discovery_module_registration(root, snapshot_ncts))
 
-    # Rule AH-6 on tools/discovery/*.py
-    if verified_ledger:
-        for py_file in sorted((root / "tools" / "discovery").glob("*.py")):
-            if py_file.name.startswith("test_"):
-                continue
-            py_content = py_file.read_text(encoding="utf-8")
-            failures.extend(check_cite_check_ledger_provenance(py_file, py_content, verified_ledger))
+    # Rule AH-6 on tools/discovery/*.py (including all round*.py) and tools/discovery/catalog.json
+    discovery_dir = root / "tools" / "discovery"
+    for py_file in sorted(discovery_dir.glob("*.py")):
+        if py_file.name.startswith("test_"):
+            continue
+        py_content = py_file.read_text(encoding="utf-8")
+        failures.extend(
+            check_cite_check_ledger_provenance(
+                py_file,
+                py_content,
+                verified_ledger,
+                catalog_dois=catalog_dois,
+            )
+        )
+    discovery_catalog_json = discovery_dir / "catalog.json"
+    if discovery_catalog_json.is_file():
+        cat_content = discovery_catalog_json.read_text(encoding="utf-8")
+        failures.extend(
+            check_cite_check_ledger_provenance(
+                discovery_catalog_json,
+                cat_content,
+                verified_ledger,
+                catalog_dois=catalog_dois,
+            )
+        )
 
     # Rule AH-7: Synthetic discovery scripts and exported snapshot must never claim Tier T2/T3 Certified
     synth_tier_re = re.compile(r"\bTier\s+T[23]\s+Certified\b", re.IGNORECASE)

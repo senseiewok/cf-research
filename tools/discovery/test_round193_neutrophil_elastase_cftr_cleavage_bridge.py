@@ -113,6 +113,8 @@ class Round193NeutrophilElastaseCleavageTest(unittest.TestCase):
             self.assertIn(layer, FIVE_LAYER_LADDER)
 
         self.assertGreaterEqual(len(PRIMARY_CITATIONS), 2)
+        self.assertIn("DOI: 10.1164/rccm.201205-0875oc", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.1183/09031936.00047306", PRIMARY_CITATIONS)
 
 
 if __name__ == "__main__":

@@ -5,8 +5,9 @@ Round 191: Nebulized Mucus-Penetrating Lipid Nanoparticle (LNP) Surface Charge &
 Mathematical & Physical Pillar (Column A - Deductive Theorem):
   1. Steric Mesh Obstruction & Adhesive Mucin Electrostatic Entrapment:
      Cystic fibrosis airway sputum is a dense, heterogeneous hydrogel formed by hyperconcentrated MUC5AC and MUC5B mucin
-     polymers (Schneider et al., Nat Nanotechnol 2021, DOI: 10.1038/s41565-021-00870-0;
-     Kim et al., J Control Release 2021, DOI: 10.1016/j.jconrel.2021.08.031).
+     polymers (Schneider et al., Sci Adv 2017, DOI: 10.1126/sciadv.1601556;
+     Suk et al., Biomaterials 2009, DOI: 10.1016/j.biomaterials.2008.12.076;
+     Lokugamage et al., Nat Biomed Eng 2021, DOI: 10.1038/s41551-021-00786-x).
      The physical sputum pore mesh spacing exhibits a distribution with mean xi_pore = 140.0 nm (effective range 60-300 nm).
      Steric obstruction scaling follows Ogston obstruction geometry:
        f_steric = exp( - (pi / 4.0) * ( (d_NP + d_fiber) / (xi_pore + d_fiber) )^2 )
@@ -60,7 +61,7 @@ Mathematical & Physical Pillar (Column A - Deductive Theorem):
      - Poisoned negative controls: negative PEG density, negative droplet diameter, or unphysical particle size fail deterministically.
 
 CF Biophysical Domain Mapping (Column B - Popperian Falsifiable Hypothesis):
-  - In Nebulized Dense-PEG Neutral LNP Regimen (DOI: 10.1038/s41565-021-00870-0; DOI: 10.1016/j.jconrel.2021.08.031):
+  - In Nebulized Dense-PEG Neutral LNP Regimen (DOI: 10.1126/sciadv.1601556; DOI: 10.1038/s41551-021-00786-x):
     Gamma_PEG = 0.45 chains/nm^2, zeta = +0.80 mV, d_aero = 2.2 um, d_NP = 75 nm:
     D_eff/D0 = 0.582, f_mucus_penetration = 0.725 (72.5%), f_transfection = 0.306,
     I_sc_equiv = 30.56% WT, h_ASL = 7.46 um >= 7.0 um, v_MCC = 2.37 mm/min >= 1.0 mm/min,
@@ -91,8 +92,11 @@ from dataclasses import dataclass
 from typing import Any, Dict, Tuple
 
 PRIMARY_CITATIONS: Tuple[str, ...] = (
-    "DOI: 10.1038/s41565-021-00870-0",
-    "DOI: 10.1016/j.jconrel.2021.08.031",
+    "DOI: 10.1126/sciadv.1601556",
+    "DOI: 10.1038/s41551-021-00786-x",
+    "DOI: 10.1016/j.biomaterials.2008.12.076",
+    "DOI: 10.1038/nbt.2612",
+    "DOI: 10.1513/pats.200409-046ta",
     "DOI: 10.1016/j.cell.2015.09.052",
     "PDB: 8EIQ",
 )
@@ -123,32 +127,32 @@ DEFAULT_H_CILIA_MIN_UM: float = 5.0            # Minimum ASL height required for
 PARAMETER_PROVENANCE: Dict[str, Dict[str, object]] = {
     "dense_peg_mucus_penetration": {
         "value": 0.25,
-        "tag": "empirical",
-        "source": "Critical PEG brush density transition in human CF sputum (DOI: 10.1038/s41565-021-00870-0)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical PEG brush transition parameterization (exact chains/nm^2 threshold not stated in Schneider et al., Sci Adv 2017, DOI: 10.1126/sciadv.1601556, which establishes dense low-MW PEG muco-inert airway delivery)",
         "bounds": (0.15, 0.40),
     },
     "neutral_zeta_shielding_window": {
         "value": 5.0,
         "tag": "empirical",
-        "source": "Neutral zeta potential range minimizing mucin electrostatic binding (DOI: 10.1038/s41565-021-00870-0)",
+        "source": "Near-neutral surface zeta potential regime (|zeta| <= 5 mV) for dense PEG-coated muco-inert nanoparticles (Schneider et al., Sci Adv 2017, DOI: 10.1126/sciadv.1601556; Suk et al., Biomaterials 2009, DOI: 10.1016/j.biomaterials.2008.12.076)",
         "bounds": (3.0, 7.0),
     },
     "cf_sputum_mesh_pore_spacing": {
         "value": 140.0,
         "tag": "empirical",
-        "source": "Multiple particle tracking and cryo-SEM pore distribution in CF mucus (DOI: 10.1016/j.jconrel.2021.08.031)",
+        "source": "Mean 3D mesh pore spacing (~140 +/- 50 nm, range 60-300 nm) in fresh undiluted human CF sputum (Suk et al., Biomaterials 2009, DOI: 10.1016/j.biomaterials.2008.12.076)",
         "bounds": (80.0, 200.0),
     },
     "aerosol_optimal_aerodynamic_diameter": {
         "value": 2.0,
         "tag": "derived",
-        "source": "Mass median aerodynamic diameter (MMAD) for human bronchial airway deposition (DOI: 10.1016/j.jconrel.2021.08.031)",
+        "source": "Analytical bronchial aerosol MMAD parameterization alongside nebulized PEG-lipid LNP optimization (exact 2.0 um optimum not stated in Lokugamage et al., Nat Biomed Eng 2021, DOI: 10.1038/s41551-021-00786-x; respiratory tract particle deposition window grounded in DOI: 10.1513/pats.200409-046ta)",
         "bounds": (1.0, 3.5),
     },
     "endosomal_escape_efficiency": {
         "value": 0.18,
-        "tag": "empirical",
-        "source": "Intracellular trafficking and cytosolic mRNA release fraction for ionizable LNPs (DOI: 10.1016/j.cell.2015.09.052)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical upper-bound parameterization for optimized inhaled ionizable LNP cytosolic delivery (baseline LNP siRNA endosomal release ~1-2% in Gilleron et al., Nat Biotechnol 2013, DOI: 10.1038/nbt.2612; nebulized LNP optimization in Lokugamage et al., Nat Biomed Eng 2021, DOI: 10.1038/s41551-021-00786-x; CFTR gating reference DOI: 10.1016/j.cell.2015.09.052)",
         "bounds": (0.08, 0.30),
     },
 }

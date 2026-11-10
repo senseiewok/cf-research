@@ -112,6 +112,8 @@ class Round195AlginateLyaseSputumLiquefactionTest(unittest.TestCase):
             self.assertIn(layer, FIVE_LAYER_LADDER)
 
         self.assertGreaterEqual(len(PRIMARY_CITATIONS), 2)
+        self.assertIn("DOI: 10.1006/pulp.1994.1042", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.1016/j.jcf.2024.02.012", PRIMARY_CITATIONS)
 
 
 if __name__ == "__main__":

@@ -128,6 +128,9 @@ class Round194PhageTranslocationTest(unittest.TestCase):
             self.assertIn(layer, FIVE_LAYER_LADDER)
 
         self.assertGreaterEqual(len(PRIMARY_CITATIONS), 3)
+        self.assertIn("DOI: 10.1073/pnas.1508355112", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.1136/thoraxjnl-2016-209265", PRIMARY_CITATIONS)
+        self.assertIn("DOI: 10.1152/physrev.00004.2021", PRIMARY_CITATIONS)
 
 
 if __name__ == "__main__":

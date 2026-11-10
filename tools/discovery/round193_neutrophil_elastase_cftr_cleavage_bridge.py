@@ -6,12 +6,13 @@ Mathematical & Physical Pillar (Column A - Deductive Theorem):
   1. Chronic Neutrophil Degranulation & Free Human Neutrophil Elastase (HNE) Flux:
      In the cystic fibrosis airway, massive recruitment and constitutive degranulation of polymorphonuclear neutrophils (PMNs)
      release high concentrations of active serine proteases, predominantly human neutrophil elastase (HNE, EC 3.4.21.37),
-     reaching concentrations of 10-60 ug/mL (300-1800 nM) in purulent airway surface liquid (DOI: 10.1165/rcmb.2014-0138oc).
-     HNE cleaves extracellular and apical loops of mature, membrane-anchored CFTR channels (PDB 8EIQ), accelerating irreversible
-     endocytic internalization and proteolytic degradation.
+     reaching elevated micromolar/ug-per-mL levels in purulent airway surface liquid (Le Gars et al., Am J Respir Crit Care Med 2013,
+     DOI: 10.1164/rccm.201205-0875oc; Griese et al., Eur Respir J 2007, DOI: 10.1183/09031936.00047306).
+     HNE triggers calpain-mediated proteolytic degradation and loss of mature membrane CFTR channel activity (PDB 8EIQ), accelerating
+     irreversible channel inactivation.
 
   2. Alpha-1 Antitrypsin (A1AT) Stoichiometric Suicide-Inhibitor Shielding:
-     Endogenous and recombinant human alpha-1 antitrypsin (A1AT, SerpinA1; DOI: 10.1038/s41598-020-68523-2) acts as a suicide
+     Endogenous and inhaled human alpha-1 antitrypsin (A1AT, SerpinA1; Griese et al., Eur Respir J 2007, DOI: 10.1183/09031936.00047306) acts as a suicide
      substrate inhibitor that forms a covalent 1:1 acyl-enzyme complex with HNE, neutralizing its catalytic serine triad.
      Given total elastase [HNE]_tot and administered antiprotease [A1AT]_tot:
        [HNE]_free = max(0.0, [HNE]_tot - eta_inh * [A1AT]_tot)
@@ -77,8 +78,8 @@ from dataclasses import dataclass
 from typing import Any, Dict, Tuple
 
 PRIMARY_CITATIONS: Tuple[str, ...] = (
-    "DOI: 10.1165/rcmb.2014-0138oc",
-    "DOI: 10.1038/s41598-020-68523-2",
+    "DOI: 10.1164/rccm.201205-0875oc",
+    "DOI: 10.1183/09031936.00047306",
     "PDB: 8EIQ",
 )
 
@@ -97,31 +98,31 @@ PARAMETER_PROVENANCE: Dict[str, Dict[str, object]] = {
     "hne_airway_concentration": {
         "value": 25.0,
         "tag": "empirical",
-        "source": "Sputum active human neutrophil elastase in CF airway disease (DOI: 10.1165/rcmb.2014-0138oc)",
+        "source": "Pathophysiological CF airway active human neutrophil elastase concentration regime (Le Gars et al., Am J Respir Crit Care Med 2013, DOI: 10.1164/rccm.201205-0875oc; Griese et al., Eur Respir J 2007, DOI: 10.1183/09031936.00047306)",
         "bounds": (5.0, 60.0),
     },
     "hne_cftr_cleavage_rate": {
         "value": 0.045,
-        "tag": "empirical",
-        "source": "Concentration-dependent proteolytic inactivation rate of apical CFTR (DOI: 10.1165/rcmb.2014-0138oc)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical effective second-order CFTR degradation rate parameterization for elastase/calpain-mediated channel loss (exact (ug/mL)^-1 h^-1 constant not stated in Le Gars et al., Am J Respir Crit Care Med 2013, DOI: 10.1164/rccm.201205-0875oc)",
         "bounds": (0.010, 0.150),
     },
     "a1at_stoichiometric_inhibition_efficiency": {
         "value": 0.95,
         "tag": "derived",
-        "source": "SerpinA1 stoichiometric suicide inhibition adjusted for ROS oxidation (DOI: 10.1038/s41598-020-68523-2)",
+        "source": "Analytical stoichiometric SerpinA1 elastase neutralization factor accounting for partial oxidative inactivation in inflamed CF sputum (exact 0.95 factor not stated in Griese et al., Eur Respir J 2007, DOI: 10.1183/09031936.00047306)",
         "bounds": (0.80, 1.00),
     },
     "cftr_basal_turnover_rate": {
         "value": 0.05,
-        "tag": "empirical",
-        "source": "Mature Band C membrane half-life of 14 hours in polarized airway epithelia (PDB: 8EIQ)",
+        "tag": "derived",
+        "source": "Analytical mature Band C apical turnover parameterization (~14 h half-life; structural reference PDB: 8EIQ, kinetic rate not stated in structure record)",
         "bounds": (0.02, 0.10),
     },
     "asl_hydration_k05": {
         "value": 8.0,
-        "tag": "derived",
-        "source": "Half-maximal chloride current required for airway surface liquid hydration (DOI: 10.1038/s41598-020-68523-2)",
+        "tag": "phenomenological_heuristic",
+        "source": "Analytical half-maximal chloride current parameterization (% WT) for airway surface liquid hydration coupling (not stated in Griese et al., Eur Respir J 2007, DOI: 10.1183/09031936.00047306)",
         "bounds": (4.0, 15.0),
     },
 }
