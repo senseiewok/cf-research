@@ -1665,6 +1665,16 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "discipline": "microbiology_host", "persona": "researchers", "triage": "merge",
         "consolidation_target": "formal_proof_thermodynamic_landscape",
     },
+    "round193_neutrophil_elastase_cftr_cleavage_bridge": {
+        "task": "T-0876", "track": "Track A", "tier": "T2",
+        "discipline": "microbiology_host", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
+    "round194_phage_ap_pa02_mucus_translocation_bridge": {
+        "task": "T-0877", "track": "Track A", "tier": "T2",
+        "discipline": "microbiology_host", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
 }
 
 
