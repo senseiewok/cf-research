@@ -3,237 +3,253 @@
 Round 200: Bicellular Tight Junction Claudin-2/Claudin-4 Paracellular Ion Permselectivity Invariant Bridge (T-0889).
 
 Mathematical & Physical Pillar (Column A - Deductive Theorem):
-  1. Airway Epithelial Barrier Architecture & Claudin Permselectivity:
-     The polarized respiratory epithelium separates the airway lumen (mucosal compartment) from the vascularized interstitium
-     (serosal compartment). Transepithelial solute and water flux proceeds via parallel transcellular and paracellular routes.
-     Paracellular ion permeability is governed by tight junction (TJ) multiprotein complexes, in which the claudin superfamily
-     dictates size- and charge-selectivity (Günzel & Yu, Physiol Rev 2013, DOI: 10.1152/physrev.00019.2012;
-     Vazquez Cegla et al., Sci Rep 2024, DOI: 10.1038/s41598-024-76526-3;
-     Guan et al., J Control Release 2021, DOI: 10.1016/j.jconrel.2021.05.012).
-     Two opposing claudin archetypes establish barrier equilibrium:
-       - Claudin-4 (CLDN4): classic sealing claudin that tightens bicellular junctions against paracellular ion leak and increases
-         transepithelial electrical resistance (TEER).
-       - Claudin-2 (CLDN2): pore-forming cation channel that creates narrow paracellular water- and cation-permeable pores,
-         exhibiting selective permeability for Na+ over Cl- (P_Na / P_Cl ~ 2.5 - 4.0).
+  1. Claudin-2 / Claudin-4 Paracellular Permselectivity & Nernst-Planck Shunt Resistance:
+     Human conducting airway tight junctions regulate paracellular ion and water movement via opposing claudin
+     strands: Claudin-2 forms cation-selective, low-resistance paracellular pores (increasing Na+ permeability
+     P_Na and P_Na/P_HCO3 selectivity), whereas Claudin-4 tightens the bicellular barrier and restricts paracellular
+     Na+ leak, raising tight-junction resistance R_TJ (Schlingmann et al., Semin Cell Dev Biol 2015,
+     DOI: 10.1016/j.semcdb.2015.04.009). Proinflammatory cytokines (TNF-alpha / IFN-gamma) disrupt tight-junction
+     strands and open non-selective paracellular leak pathways I_cyt >= 0 (Coyne et al., Mol Biol Cell 2002,
+     DOI: 10.1091/mbc.e02-03-0134).
+     Given normalized Claudin-2 expression x_cldn2 >= 0, Claudin-4 expression x_cldn4 >= 0, and cytokine strand
+     disruption I_cyt >= 0, paracellular permeabilities (in 10^-6 cm/s) are:
+       P_Na   = (P_Na0 + alpha_cldn2 * x_cldn2) / (1.0 + beta_cldn4 * x_cldn4) + gamma_na * I_cyt
+       P_HCO3 = P_HCO3_0 / (1.0 + 0.28 * x_cldn4 + 0.30 * x_cldn2) + gamma_hco3 * I_cyt
+       P_Cl   = P_Cl0 / (1.0 + 0.32 * x_cldn4) + gamma_cl * I_cyt
+     By the Nernst-Planck conductance relation G_i = (F^2 / RT) * P_i * C_bar at T = 310.15 K
+     (where F^2 / RT = 0.0036102 mS*cm / (10^-6 cm/s * mM)):
+       G_TJ = 0.0036102 * (P_Na * 122.5 + P_HCO3 * 18.0 + P_Cl * 115.0)   [mS/cm^2]
+       R_TJ = 1000.0 / G_TJ                                               [Ohm*cm^2].
 
-  2. Paracellular Conductance & Transepithelial Electrical Resistance (TEER):
-     Total tissue electrical resistance TEER (Ohm*cm^2) is the reciprocal of total tissue conductance:
-       G_para = ( G_0 + g_2 * E_cldn2 ) / ( 1.0 + alpha_4 * E_cldn4 )
-       TEER = 1.0 / ( G_para + G_trans )
-     where:
-       E_cldn2 in [0, inf) is the relative expression of pore-forming Claudin-2 (normalized to baseline 1.0),
-       E_cldn4 in [0, inf) is the relative expression of barrier-sealing Claudin-4 (normalized to baseline 1.0),
-       G_0 = 0.0010 Ohm^-1*cm^-2 (baseline unspecialized junction conductance, R_0 = 1000 Ohm*cm^2),
-       g_2 = 0.0025 Ohm^-1*cm^-2 per unit Claudin-2 pore conductance,
-       alpha_4 = 1.20 sealing efficiency scalar per unit Claudin-4,
-       G_trans = 0.0004 Ohm^-1*cm^-2 transcellular channel conductance.
+  2. Goldman-Hodgkin-Katz (GHK) Paracellular Electrodiffusion & Steady-State ASL pH Tempering:
+     Across transepithelial potential V_te (mV, lumen relative to basolateral bath) with thermal voltage
+     V_T = RT / F = 26.726 mV at 310.15 K, let u_i = z_i * V_te / V_T (z_Na = +1, z_HCO3 = -1) and define the
+     complex-analytic Bernoulli factor B(u) = u / (exp(u) - 1) (with Taylor expansion 1 - u/2 + u^2/12 - u^4/720
+     for |u| < 1e-5). Basolateral-to-apical paracellular flux (nmol * cm^-2 * h^-1) satisfies:
+       J_i_para = 3.6 * P_i * B(u_i) * (C_i_baso - C_i_asl * exp(u_i)).
+     Balancing active apical CFTR bicarbonate transport J_hco3_trans against unopposed ATP12A proton load
+     J_proton_atp12a = 24.0 nmol * cm^-2 * h^-1 and paracellular GHK exchange yields the steady-state luminal
+     bicarbonate concentration C_HCO3_asl (mM) and Henderson-Hasselbalch pH_ASL (Thornell et al., J Physiol 2020,
+     DOI: 10.1113/jp280120):
+       raw_num    = C_HCO3_baso + (J_hco3_trans - J_proton_atp12a) / (3.6 * P_HCO3 * B(u_HCO3))
+       C_HCO3_asl = 0.5 * (raw_num + sqrt(raw_num^2 + 1.0)) / exp(u_HCO3)
+       pH_ASL     = 6.10 + log10(C_HCO3_asl / 1.20)
+     where C_HCO3_baso = 24.0 mM and dissolved CO2 buffer is 1.20 mM (40 mmHg * 0.03 mM/mmHg).
+     In untreated hyperpolarized CF airway (J_hco3_trans = 2.0 < J_proton_atp12a = 24.0, V_te = -24.0 mV),
+     paracellular HCO3- influx (J_HCO3_para = +21.95 nmol * cm^-2 * h^-1 > 0) flows from submucosa into ASL to
+     temper acidification around pH_ASL = 6.874 rather than unbuffered collapse (Thornell et al., J Physiol 2020).
+     Steady-state ASL hydration depth h_ASL (um) reflects active anion transport retained by intact R_TJ:
+       h_ASL = 2.4 + 6.5 * (R_TJ / (R_TJ + 220.0)) * (J_hco3_trans / (J_hco3_trans + 18.0)) / (1.0 + (J_Na_para / 650.0)^2).
 
-  3. Permselectivity & Paracellular Ionic Flux:
-     Paracellular sodium and chloride permeabilities (P_Na and P_Cl, 10^-6 cm/s):
-       P_Na = ( P_Na_0 + p_2 * E_cldn2 ) / ( 1.0 + beta_4 * E_cldn4 )
-       P_Cl = ( P_Cl_0 + (p_2 / S_ratio) * E_cldn2 ) / ( 1.0 + beta_4 * E_cldn4 )
-     where P_Na_0 = 2.0e-6 cm/s, P_Cl_0 = 1.0e-6 cm/s, p_2 = 8.0e-6 cm/s, S_ratio = 3.5 (Na+/Cl- selectivity of Claudin-2 pore),
-     and beta_4 = 0.80.
-     The permselectivity ratio is:
-       P_ratio = P_Na / P_Cl.
-     Transepithelial paracellular sodium counter-ion flux J_Na_para (nmol/(cm^2*min)) driven by lumen-negative potential
-     difference Delta_psi (mV) and serosa-to-mucosa chemical gradient follows the Goldman-Hodgkin-Katz (GHK) electrodiffusion formulation:
-       xi = (z * F * Delta_psi) / (R * T)   (dimensionless voltage drive, z = +1)
-       J_Na_para = P_Na * xi * ( (C_serosa - C_mucosa * exp(-xi)) / (1.0 - exp(-xi)) ) * unit_factor
-     where C_serosa = 145.0 mM, C_mucosa = 100.0 mM, Delta_psi = -15.0 mV, and unit_factor converts to nmol/(cm^2*min).
+  3. Kahn-Kalai Curative Threshold for Bicellular Tight-Junction Barrier & ASL Alkalinization:
+     - Paracellular tight-junction resistance R_TJ >= 500.0 Ohm*cm^2.
+     - Steady-state luminal pH_ASL >= 7.25 (C_HCO3_asl >= 16.0 mM).
+     - Paracellular sodium leak magnitude |J_Na_para| <= 450.0 nmol * cm^-2 * h^-1.
+     - Steady-state airway surface liquid height h_ASL >= 5.20 um.
 
-  4. Airway Surface Liquid (ASL) Hydration Preservation Factor:
-     Adequate ASL volume requires both a tight barrier (preventing hyperosmotic fluid back-leak, TEER >= 500 Ohm*cm^2) and
-     sufficient paracellular Na+ counter-ion flux to balance apical CFTR Cl- and HCO3- secretion:
-       Phi_asl = ( TEER / (TEER + K_teer) ) * ( J_Na_para / (J_Na_para + K_flux) )
-     where K_teer = 250.0 Ohm*cm^2 and K_flux = 15.0 nmol/(cm^2*min).
-
-  5. Kahn-Kalai Curative Threshold for Tight Junction Invariant Bridge:
-     - Transepithelial electrical resistance TEER >= 500.0 Ohm*cm^2 (barrier integrity).
-     - Paracellular permselectivity ratio P_ratio in [1.8, 3.8] (cation-selective counter-ion conductance).
-     - Paracellular sodium flux J_Na_para >= 20.0 nmol/(cm^2*min).
-     - ASL preservation factor Phi_asl >= 0.40 (>= 40.0% hydration power).
-
-  6. Invariants & Deterministic Bounds:
-     - TEER > 0.0; G_para >= 0.0; P_Na > 0.0; P_Cl > 0.0; P_ratio > 0.0.
-     - 0.0 <= Phi_asl <= 1.0.
-     - Monotonicity: d(TEER)/d(E_cldn4) >= 0; d(TEER)/d(E_cldn2) <= 0; d(P_Na)/d(E_cldn2) >= 0.
-     - Complex-step differentiation: d(TEER)/d(E_cldn4) verified at step h = 1e-30 against central finite differences
-       with relative error <= 1e-3.
-     - Poisoned negative controls: negative Claudin expression, negative concentrations, or positive Delta_psi fail deterministically with ValueError.
+  4. Invariants & Deterministic Bounds:
+     - Selectivity & barrier derivatives: d(P_Na)/d(x_cldn2) > 0; d(P_Na / P_HCO3)/d(x_cldn2) > 0;
+       d(R_TJ)/d(x_cldn4) > 0; d(R_TJ)/d(I_cyt) < 0.
+     - Removable GHK singularity at V_te -> 0 mV smoothly recovers Fick's first law without NaN/ZeroDivisionError.
+     - Complex-step differentiation: d(pH_ASL)/d(J_hco3_trans) verified at step h = 1e-30 against central finite
+       differences with relative error <= 1e-6.
+     - Poisoned negative controls: negative claudin expression, negative cytokine index, or negative transcellular
+       flux fail deterministically with ValueError.
 
 CF Biophysical Domain Mapping (Column B - Popperian Falsifiable Hypothesis):
-  - In Balanced Physiological Curative Tight Junction Regimen:
-    E_cldn4 = 1.8, E_cldn2 = 1.2:
-    G_para = 0.00126 Ohm^-1*cm^-2, TEER = 600.2 Ohm*cm^2 >= 500 Ohm*cm^2,
-    P_Na = 4.75e-6 cm/s, P_Cl = 1.53e-6 cm/s, P_ratio = 3.10 in [1.8, 3.8],
-    J_Na_para = 32.8 nmol/(cm^2*min) >= 20.0, Phi_asl = 0.485 >= 0.40,
-    robustly crossing the Kahn-Kalai curative threshold for airway barrier restoration.
-  - In Reinforced Barrier Super-Curative Regimen:
-    E_cldn4 = 2.5, E_cldn2 = 1.5:
-    TEER = 735.4 Ohm*cm^2, P_ratio = 3.05, J_Na_para = 31.2 nmol/(cm^2*min), Phi_asl = 0.504,
-    achieving robust mechanical seal and counter-ion flux.
-  - In CF Inflammatory Leaky Barrier Breakdown Regimen:
-    E_cldn4 = 0.2, E_cldn2 = 4.0:
-    TEER = 108.0 Ohm*cm^2 < 500 Ohm*cm^2, uncontrolled paracellular leak,
-    Phi_asl = 0.264 < 0.40, failing curative barrier integrity threshold.
-  - In Sub-Curative Attenuated Sealing Regimen:
-    E_cldn4 = 0.7, E_cldn2 = 2.2:
-    TEER = 281.3 Ohm*cm^2 < 500 Ohm*cm^2, failing threshold due to insufficient Claudin-4 barrier resistance.
-  - In Pore-Deficient Impermeable Arrest Regimen:
-    E_cldn4 = 2.0, E_cldn2 = 0.05:
-    TEER = 931.2 Ohm*cm^2 (very tight), but P_Na = 0.92e-6 cm/s, J_Na_para = 6.4 nmol/(cm^2*min) < 20.0,
-    Phi_asl = 0.236 < 0.40, failing due to paracellular Na+ counter-ion starvation.
+  - In Claudin-4 Intact Barrier + CFTR Rescued Curative Regimen (x_cldn2=0.25, x_cldn4=1.35, I_cyt=0.0, J_trans=56.0, V_te=-8.5 mV):
+    P_Na = 1.293, P_HCO3 = 0.998, R_TJ = 863.2 Ohm*cm^2 >= 500, C_HCO3_asl = 25.10 mM, pH_ASL = 7.420 >= 7.25,
+    J_Na_para = 345.60 nmol/(cm^2*h) <= 450, h_ASL = 5.45 um >= 5.20 um (Pass).
+  - In Claudin-4 Enhanced Barrier Stabilized Curative Regimen (x_cldn2=0.15, x_cldn4=1.80, I_cyt=0.0, J_trans=62.0, V_te=-7.5 mV):
+    P_Na = 0.919, P_HCO3 = 0.936, R_TJ = 1062.4 Ohm*cm^2, C_HCO3_asl = 27.96 mM, pH_ASL = 7.467,
+    J_Na_para = 230.18 nmol/(cm^2*h), h_ASL = 6.11 um (Pass).
+  - In Untreated Hyperpolarized CF Airway Paracellular Tempering Regimen (x_cldn2=0.45, x_cldn4=0.90, I_cyt=0.15, J_trans=2.0, V_te=-24.0 mV):
+    R_TJ = 474.4 Ohm*cm^2 < 500, J_HCO3_para = +21.95 nmol/(cm^2*h) (basolateral-to-apical tempering influx),
+    C_HCO3_asl = 7.14 mM, pH_ASL = 6.874 < 7.25, h_ASL = 2.48 um < 5.20 um (Fail).
+  - In Cytokine-Disrupted Leaky Tight Junction Regimen (x_cldn2=0.80, x_cldn4=0.20, I_cyt=2.20, J_trans=50.0, V_te=-14.0 mV):
+    R_TJ = 93.1 Ohm*cm^2 < 500, C_HCO3_asl = 14.91 mM, pH_ASL = 7.194 < 7.25, J_Na_para = 5063.24 nmol/(cm^2*h),
+    h_ASL = 2.42 um < 5.20 um, failing barrier and hydration thresholds despite active CFTR transport.
+  - In Claudin-2 Overexpression Cation-Selective Shunt Leak Regimen (x_cldn2=2.60, x_cldn4=0.15, I_cyt=0.25, J_trans=42.0, V_te=-10.0 mV):
+    P_Na / P_HCO3 = 8.45, R_TJ = 139.8 Ohm*cm^2 < 500, J_Na_para = 3944.01 nmol/(cm^2*h) > 450,
+    h_ASL = 2.44 um < 5.20 um, failing barrier resistance and hydration retention.
 
 Research simulation only; not medical advice.
 """
 from __future__ import annotations
 
+import cmath
 import math
 from dataclasses import dataclass
 from typing import Any, Dict, Tuple
 
 PRIMARY_CITATIONS: Tuple[str, ...] = (
-    "DOI: 10.1152/physrev.00019.2012",
-    "DOI: 10.1038/s41598-024-76526-3",
-    "DOI: 10.1016/j.jconrel.2021.05.012",
+    "DOI: 10.1113/jp280120",
+    "DOI: 10.1016/j.semcdb.2015.04.009",
+    "DOI: 10.1091/mbc.e02-03-0134",
 )
 
-# Biophysical Tight Junction & Electrodiffusion Constants
-DEFAULT_G_0: float = 0.0010              # Baseline paracellular junction conductance (Ohm^-1*cm^-2)
-DEFAULT_G_2: float = 0.0025              # Claudin-2 pore conductance scalar (Ohm^-1*cm^-2 per unit expression)
-DEFAULT_ALPHA_4: float = 1.20            # Claudin-4 junction sealing scalar per unit expression
-DEFAULT_G_TRANS: float = 0.0004          # Transcellular path conductance (Ohm^-1*cm^-2)
-DEFAULT_P_NA_0: float = 2.0e-6           # Baseline Na+ permeability (cm/s)
-DEFAULT_P_CL_0: float = 1.0e-6           # Baseline Cl- permeability (cm/s)
-DEFAULT_P_2: float = 8.0e-6              # Claudin-2 Na+ permeability scalar (cm/s per unit expression)
-DEFAULT_S_RATIO: float = 3.50            # Claudin-2 pore Na+/Cl- permselectivity ratio
-DEFAULT_BETA_4: float = 0.80             # Claudin-4 permeability attenuation coefficient
-DEFAULT_DELTA_PSI_MV: float = -15.0      # Transepithelial potential difference (mV, lumen negative)
-DEFAULT_C_SEROSA_MM: float = 145.0       # Serosal (basolateral) interstitial Na+ concentration (mM)
-DEFAULT_C_MUCOSA_MM: float = 100.0       # Mucosal (apical ASL) Na+ concentration (mM)
-DEFAULT_K_TEER: float = 250.0            # Half-saturation TEER for ASL preservation (Ohm*cm^2)
-DEFAULT_K_FLUX: float = 15.0             # Half-saturation Na+ flux for ASL preservation (nmol/(cm^2*min))
+# Physical & Paracellular Transport Constants
+THERMAL_VOLTAGE_MV_310K: float = 26.726       # RT / F at 310.15 K (mV)
+NERNST_PLANCK_G_SCALE_MS: float = 0.0036102   # F^2 / RT conversion to mS/cm^2 per (10^-6 cm/s * mM)
+C_NA_BASO_MM: float = 140.0
+C_NA_APICAL_MM: float = 105.0
+C_HCO3_BASO_MM: float = 24.0
+C_CO2_DISSOLVED_MM: float = 1.20              # 40 mmHg * 0.03 mM/mmHg Henry's law at 37 C
+PKA_CARBONIC_37C: float = 6.10
+DEFAULT_J_PROTON_ATP12A: float = 24.0         # Apical non-gastric H+/K+-ATPase acid load (nmol * cm^-2 * h^-1)
 
-# Physical Constants at 37 C (310.15 K)
-FARADAY_CONSTANT: float = 96485.3        # C/mol
-GAS_CONSTANT: float = 8.31446            # J/(mol*K)
-TEMPERATURE_KELVIN: float = 310.15       # Body temperature in K
-RT_OVER_F_MV: float = (GAS_CONSTANT * TEMPERATURE_KELVIN / FARADAY_CONSTANT) * 1000.0 # ~26.726 mV
+DEFAULT_P_NA_BASE: float = 2.10
+DEFAULT_ALPHA_CLDN2: float = 4.80
+DEFAULT_BETA_CLDN4: float = 1.15
+DEFAULT_GAMMA_NA_CYT: float = 4.20
+DEFAULT_P_HCO3_BASE: float = 1.45
+DEFAULT_GAMMA_HCO3_CYT: float = 3.20
+DEFAULT_P_CL_BASE: float = 1.80
+DEFAULT_GAMMA_CL_CYT: float = 3.60
 
 PARAMETER_PROVENANCE: Dict[str, Dict[str, object]] = {
-    "claudin2_pore_conductance": {
-        "value": 0.0025,
-        "tag": "phenomenological_heuristic",
-        "source": "Analytical paracellular cation pore conductance parameterization per unit CLDN2 expression (exact 0.0025 scalar not stated in Günzel & Yu, Physiol Rev 2013, DOI: 10.1152/physrev.00019.2012)",
-        "bounds": (0.0010, 0.0050),
+    "thermal_voltage_rt_over_f_310k": {
+        "value": THERMAL_VOLTAGE_MV_310K,
+        "tag": "derived",
+        "source": (
+            "Thermodynamic thermal voltage RT/F at physiological airway temperature T = 310.15 K "
+            "(CODATA R = 8.31446 J/(mol*K), F = 96485.3 C/mol; exact 26.726 mV rounding not stated in "
+            "Thornell et al., J Physiol 2020, DOI: 10.1113/jp280120)"
+        ),
+        "bounds": (26.5, 27.0),
     },
-    "claudin4_sealing_efficiency": {
-        "value": 1.20,
+    "claudin2_cation_pore_gain": {
+        "value": DEFAULT_ALPHA_CLDN2,
         "tag": "phenomenological_heuristic",
-        "source": "Analytical bicellular junction sealing coefficient alpha_4 for CLDN4 barrier fortification (exact 1.20 constant not stated in Vazquez Cegla et al., Sci Rep 2024, DOI: 10.1038/s41598-024-76526-3)",
+        "source": (
+            "Analytical cation-selective paracellular Na+ permeability gain per unit Claudin-2 expression "
+            "(exact 4.80 x 10^-6 cm/s scalar not stated in Schlingmann et al., Semin Cell Dev Biol 2015, "
+            "DOI: 10.1016/j.semcdb.2015.04.009)"
+        ),
+        "bounds": (2.0, 8.0),
+    },
+    "claudin4_barrier_sealing_coefficient": {
+        "value": DEFAULT_BETA_CLDN4,
+        "tag": "phenomenological_heuristic",
+        "source": (
+            "Analytical bicellular cation-sealing attenuation factor per unit Claudin-4 expression "
+            "(exact 1.15 dimensionless scalar not stated in Schlingmann et al., Semin Cell Dev Biol 2015, "
+            "DOI: 10.1016/j.semcdb.2015.04.009)"
+        ),
         "bounds": (0.50, 2.50),
     },
-    "claudin2_na_cl_selectivity": {
-        "value": 3.50,
-        "tag": "empirical",
-        "source": "Experimentally determined paracellular Na+/Cl- permselectivity ratio of Claudin-2 pores (2.5-4.0 in epithelial cell lines; Günzel & Yu, Physiol Rev 2013, DOI: 10.1152/physrev.00019.2012)",
-        "bounds": (2.0, 5.0),
-    },
-    "baseline_junction_conductance": {
-        "value": 0.0010,
+    "cytokine_strand_leak_conductance_gain": {
+        "value": DEFAULT_GAMMA_HCO3_CYT,
         "tag": "phenomenological_heuristic",
-        "source": "Analytical baseline unspecialized airway junction conductance G_0 corresponding to 1,000 Ohm*cm^2 baseline resistance (exact 0.0010 constant not stated in Guan et al., J Control Release 2021, DOI: 10.1016/j.jconrel.2021.05.012)",
-        "bounds": (0.0005, 0.0025),
+        "source": (
+            "Analytical non-selective paracellular permeability increment under TNF-alpha/IFN-gamma tight-junction "
+            "remodeling (exact 3.20 x 10^-6 cm/s scalar not stated in Coyne et al., Mol Biol Cell 2002, "
+            "DOI: 10.1091/mbc.e02-03-0134)"
+        ),
+        "bounds": (1.0, 6.0),
     },
-    "asl_teer_saturation_constant": {
-        "value": 250.0,
+    "baseline_paracellular_bicarbonate_permeability": {
+        "value": DEFAULT_P_HCO3_BASE,
         "tag": "phenomenological_heuristic",
-        "source": "Analytical half-saturation TEER parameter K_teer for preventing osmotic airway liquid back-leak (exact 250.0 Ohm*cm^2 constant not stated in Vazquez Cegla et al., Sci Rep 2024, DOI: 10.1038/s41598-024-76526-3)",
-        "bounds": (100.0, 500.0),
+        "source": (
+            "Analytical baseline airway epithelial paracellular bicarbonate permeability constant P_HCO3_0 "
+            "(exact 1.45 x 10^-6 cm/s scalar not stated in Thornell et al., J Physiol 2020, DOI: 10.1113/jp280120)"
+        ),
+        "bounds": (0.50, 3.00),
     },
 }
 
 TWO_COLUMN_EPISTEMIC_HYGIENE: Dict[str, Dict[str, str]] = {
     "deductive_column_a": {
         "formal_theorem": (
-            "Given bicellular tight junction expression of pore-forming Claudin-2 and barrier-sealing Claudin-4, "
-            "paracellular conductance G_para is inversely proportional to (1 + alpha_4 * E_cldn4) and linearly "
-            "proportional to E_cldn2. Transepithelial resistance TEER = 1 / (G_para + G_trans). Paracellular cation "
-            "flux J_Na_para follows Goldman-Hodgkin-Katz electrodiffusion, coupling with transcellular anion secretion "
-            "to maximize the airway surface liquid hydration factor Phi_asl on the bounded interval [0, 1]."
+            "Under Goldman-Hodgkin-Katz electrodiffusion across a bicellular tight junction with ion permeabilities "
+            "P_Na(x_cldn2, x_cldn4, I_cyt) and P_HCO3(x_cldn2, x_cldn4, I_cyt), the Bernoulli-regularized flux "
+            "J_i = 3.6 * P_i * B(z_i V_te / V_T) * (C_i,baso - C_i,asl * exp(z_i V_te / V_T)) is entire in V_te "
+            "(including V_te = 0), strictly recovers Nernst-Donnan equilibrium when active transport vanishes, and "
+            "satisfies d(P_Na / P_HCO3)/d(x_cldn2) > 0 and d(R_TJ)/d(x_cldn4) > 0."
         ),
         "invariants": (
-            "TEER > 0; G_para >= 0; P_Na > 0; P_Cl > 0; P_ratio > 0; 0 <= Phi_asl <= 1.0; "
-            "d(TEER)/d(E_cldn4) >= 0; d(TEER)/d(E_cldn2) <= 0; d(P_Na)/d(E_cldn2) >= 0."
+            "P_Na > 0; P_HCO3 > 0; R_TJ > 0; C_HCO3_asl > 0; d(P_Na)/d(x_cldn2) > 0; "
+            "d(P_Na / P_HCO3)/d(x_cldn2) > 0; d(R_TJ)/d(x_cldn4) > 0; smooth limit as V_te -> 0."
         ),
     },
     "popperian_column_b": {
         "falsifiable_hypothesis": (
-            "Restoring balanced tight junction expression (Claudin-4 >= 1.5, Claudin-2 between 0.8 and 1.8) in "
-            "cystic fibrosis airway epithelia establishes TEER >= 500 Ohm*cm^2, preserves Na+/Cl- permselectivity "
-            "between 1.8 and 3.8, and delivers paracellular Na+ counter-ion flux >= 20.0 nmol/(cm^2*min)."
+            "In hyperpolarized CF airway epithelia lacking apical CFTR bicarbonate transport, paracellular HCO3- "
+            "influx from the 24 mM basolateral bath tempers unopposed ATP12A acidification near pH 6.8–6.9, whereas "
+            "durable restoration of pH_ASL >= 7.25 and ASL hydration >= 5.2 um requires both restored transcellular "
+            "anion transport and an intact Claudin-4-sealed tight junction (R_TJ >= 500 Ohm*cm^2)."
         ),
         "empirical_falsification_threshold": (
-            "The hypothesis is falsified if balanced expression (E_cldn4 = 1.8, E_cldn2 = 1.2) yields TEER < 500 Ohm*cm^2, "
-            "produces P_ratio outside [1.8, 3.8], or fails to achieve Phi_asl >= 0.40."
+            "Falsified if cytokine-disrupted airway epithelia with R_TJ < 120 Ohm*cm^2 sustain physiological "
+            "ASL hydration height >= 5.2 um against hypertonic paracellular Na+ shunt leak, or if removing "
+            "basolateral bicarbonate fails to further acidify untreated CF airway surface liquid."
         ),
     },
 }
 
 FIVE_LAYER_LADDER: Dict[str, str] = {
     "cool_human_fact": (
-        "Between every adjacent airway cell lies a nanoscale molecular zipper called a tight junction. Inside this zipper, "
-        "Claudin-4 acts like waterproof glue that seals the gaps, while Claudin-2 acts like tiny selective tunnels that let "
-        "sodium ions and water slip through to hydrate the mucus blanket."
+        "Airway cells are zipped together at their top edges by molecular Velcro proteins called claudins: "
+        "Claudin-4 acts like a waterproof gasket, while Claudin-2 opens tiny cation-selective pores—and in CF, "
+        "small amounts of bicarbonate sneaking between cells actually keep airway liquid from turning dangerously acidic."
     ),
     "everyday_analogy": (
-        "Think of a weather-proof jacket with selective micro-ventilation pores. If the jacket has too many holes (excess "
-        "Claudin-2), wind and rain leak right through and ruin the seal. If it is 100% rubber with zero breathability, "
-        "moisture gets trapped inside. A balanced blend of waterproof seams and breathable pores keeps the airway perfectly hydrated."
+        "Imagine trying to refill and balance the pH of a rooftop swimming pool: turning on the clean water pump "
+        "(CFTR) only works if the tile grout between panels (Claudin-4) is sealed; if inflammation cracks the grout, "
+        "water and buffers leak right back through the seams."
     ),
     "engineering_lens": (
-        "From an equivalent circuit perspective, the epithelial barrier acts as an electrical resistor network with parallel "
-        "transcellular and paracellular branches. Claudin-4 tunes paracellular shunt resistance R_para upward, while Claudin-2 "
-        "modulates selective ionic conductance channels, balancing electromotive driving forces across the membrane."
+        "Epithelial ion homeostasis is a parallel circuit of active transcellular pumps (CFTR, ATP12A) shunted by "
+        "a permselective paracellular resistor R_TJ: Claudin-2 increases cation-over-anion selectivity P_Na/P_HCO3, "
+        "while Claudin-4 maximizes shunt impedance to preserve transepithelial osmotic gradients."
     ),
     "formal_theorem": (
-        "Let paracellular conductance G_para(E_2, E_4) = (G_0 + g_2 * E_2) / (1 + alpha_4 * E_4). Then TEER(E_2, E_4) = "
-        "1 / (G_para + G_trans) is strictly concave-increasing in E_4 (dTEER/dE_4 > 0, d^2TEER/dE_4^2 < 0) and strictly "
-        "decreasing in E_2 (dTEER/dE_2 < 0). GHK paracellular flux J_Na is continuous in Delta_psi and converges to pure "
-        "diffusion as Delta_psi -> 0."
+        "Let B(u) = u / (e^u - 1) be the exponential Bernoulli generating kernel for dimensionless potential "
+        "u_i = z_i F V_te / (RT). Stationary apical bicarbonate balance admits an exact closed-form root "
+        "C_HCO3,asl(J_trans, P_HCO3, V_te) analytic across u = 0 with exact complex-step sensitivity at h = 1e-30."
     ),
     "falsifiable_code_and_toy": (
-        "evaluate_round200_tight_junction_claudin_flux(regime_key) computes exact TEER, ionic permeabilities, paracellular "
-        "sodium fluxes, and ASL preservation scores across 5 clinical regimens with complex-step verification."
+        "evaluate_round200_tight_junction_claudin_flux(regime_key) computes ion-specific paracellular permeabilities, "
+        "R_TJ, GHK Na+ and HCO3- fluxes, steady-state pH_ASL, and hydration depth across 5 tight-junction states."
     ),
 }
 
 REGIME_PRESETS: Dict[str, Dict[str, float]] = {
-    "balanced_physiological_curative_junction": {
-        "e_cldn4": 1.8,
-        "e_cldn2": 1.2,
-        "delta_psi_mv": -15.0,
+    "claudin4_intact_barrier_cftr_rescued_curative": {
+        "x_cldn2": 0.25,
+        "x_cldn4": 1.35,
+        "i_cytokine": 0.00,
+        "j_hco3_transcellular": 56.0,
+        "v_te_mv": -8.5,
     },
-    "reinforced_barrier_super_curative": {
-        "e_cldn4": 2.5,
-        "e_cldn2": 1.5,
-        "delta_psi_mv": -18.0,
+    "claudin4_enhanced_barrier_stabilized_curative": {
+        "x_cldn2": 0.15,
+        "x_cldn4": 1.80,
+        "i_cytokine": 0.00,
+        "j_hco3_transcellular": 62.0,
+        "v_te_mv": -7.5,
     },
-    "cf_inflammatory_leaky_barrier_breakdown": {
-        "e_cldn4": 0.2,
-        "e_cldn2": 4.0,
-        "delta_psi_mv": -8.0,
+    "untreated_cf_hyperpolarized_paracellular_tempering": {
+        "x_cldn2": 0.45,
+        "x_cldn4": 0.90,
+        "i_cytokine": 0.15,
+        "j_hco3_transcellular": 2.0,
+        "v_te_mv": -24.0,
     },
-    "sub_curative_attenuated_sealing": {
-        "e_cldn4": 0.7,
-        "e_cldn2": 2.2,
-        "delta_psi_mv": -12.0,
+    "cytokine_disrupted_leaky_tight_junction": {
+        "x_cldn2": 0.80,
+        "x_cldn4": 0.20,
+        "i_cytokine": 2.20,
+        "j_hco3_transcellular": 50.0,
+        "v_te_mv": -14.0,
     },
-    "pore_deficient_impermeable_arrest": {
-        "e_cldn4": 2.0,
-        "e_cldn2": 0.05,
-        "delta_psi_mv": -15.0,
+    "claudin2_overexpression_cation_shunt_leak": {
+        "x_cldn2": 2.60,
+        "x_cldn4": 0.15,
+        "i_cytokine": 0.25,
+        "j_hco3_transcellular": 42.0,
+        "v_te_mv": -10.0,
     },
 }
 
@@ -241,200 +257,189 @@ REGIME_PRESETS: Dict[str, Dict[str, float]] = {
 @dataclass(frozen=True)
 class Round200TightJunctionResult:
     regime_key: str
-    e_cldn4: float
-    e_cldn2: float
-    teer_ohm_cm2: float
-    g_para: float
-    p_na_cm_s: float
-    p_cl_cm_s: float
-    permselectivity_ratio: float
-    j_na_para_nmol_cm2_min: float
-    phi_asl_preservation: float
+    x_cldn2: float
+    x_cldn4: float
+    i_cytokine: float
+    j_hco3_transcellular: float
+    v_te_mv: float
+    p_na_1e6_cm_s: float
+    p_hco3_1e6_cm_s: float
+    cation_anion_selectivity: float
+    r_tj_ohm_cm2: float
+    c_hco3_asl_mm: float
+    j_hco3_para_nmol_cm2_h: float
+    j_na_para_nmol_cm2_h: float
+    ph_asl: float
+    h_asl_um: float
     crosses_kahn_kalai_threshold: bool
     falsification_invariant_satisfied: bool
     complex_step_relative_error: float
+    research_boundary: str = "Research simulation only; not medical advice."
 
 
-def compute_paracellular_conductance(
-    e_cldn2: float | complex,
-    e_cldn4: float | complex,
-    g_0: float = DEFAULT_G_0,
-    g_2: float = DEFAULT_G_2,
-    alpha_4: float = DEFAULT_ALPHA_4,
-) -> float | complex:
-    """Computes paracellular shunt conductance (Ohm^-1*cm^-2)."""
-    if isinstance(e_cldn2, (int, float)) and e_cldn2 < 0.0:
-        raise ValueError(f"Claudin-2 expression must be non-negative, got {e_cldn2}")
-    if isinstance(e_cldn4, (int, float)) and e_cldn4 < 0.0:
-        raise ValueError(f"Claudin-4 expression must be non-negative, got {e_cldn4}")
-
-    num = g_0 + (g_2 * e_cldn2)
-    den = 1.0 + (alpha_4 * e_cldn4)
-    return num / den
+def bernoulli_ghk_kernel(u: float | complex) -> float | complex:
+    """Evaluates B(u) = u / (exp(u) - 1) smoothly across u = 0 for both real and complex arguments."""
+    if abs(u) < 1e-5:
+        return 1.0 - 0.5 * u + (u ** 2) / 12.0 - (u ** 4) / 720.0
+    exp_fn = cmath.exp if isinstance(u, complex) else math.exp
+    return u / (exp_fn(u) - 1.0)
 
 
-def compute_teer(
-    g_para: float | complex,
-    g_trans: float = DEFAULT_G_TRANS,
-) -> float | complex:
-    """Computes transepithelial electrical resistance TEER (Ohm*cm^2)."""
-    return 1.0 / (g_para + g_trans)
-
-
-def compute_paracellular_permeabilities(
-    e_cldn2: float | complex,
-    e_cldn4: float | complex,
-    p_na_0: float = DEFAULT_P_NA_0,
-    p_cl_0: float = DEFAULT_P_CL_0,
-    p_2: float = DEFAULT_P_2,
-    s_ratio: float = DEFAULT_S_RATIO,
-    beta_4: float = DEFAULT_BETA_4,
+def compute_claudin_permeabilities_and_resistance(
+    x_cldn2: float | complex,
+    x_cldn4: float | complex,
+    i_cytokine: float | complex = 0.0,
 ) -> Tuple[float | complex, float | complex, float | complex]:
-    """Computes paracellular Na+ and Cl- permeabilities (cm/s) and permselectivity ratio."""
-    if isinstance(e_cldn2, (int, float)) and e_cldn2 < 0.0:
-        raise ValueError(f"Claudin-2 expression must be non-negative, got {e_cldn2}")
-    if isinstance(e_cldn4, (int, float)) and e_cldn4 < 0.0:
-        raise ValueError(f"Claudin-4 expression must be non-negative, got {e_cldn4}")
-    if s_ratio <= 0.0:
-        raise ValueError(f"Selectivity ratio must be positive, got {s_ratio}")
+    """Computes (P_Na, P_HCO3, R_TJ) in (10^-6 cm/s, 10^-6 cm/s, Ohm*cm^2)."""
+    for name, val in (("x_cldn2", x_cldn2), ("x_cldn4", x_cldn4), ("i_cytokine", i_cytokine)):
+        if isinstance(val, (int, float)) and val < 0.0:
+            raise ValueError(f"{name} must be non-negative, got {val}")
 
-    den = 1.0 + (beta_4 * e_cldn4)
-    p_na = (p_na_0 + (p_2 * e_cldn2)) / den
-    p_cl = (p_cl_0 + ((p_2 / s_ratio) * e_cldn2)) / den
-    p_ratio = p_na / p_cl
-    return p_na, p_cl, p_ratio
+    p_na = (DEFAULT_P_NA_BASE + DEFAULT_ALPHA_CLDN2 * x_cldn2) / (
+        1.0 + DEFAULT_BETA_CLDN4 * x_cldn4
+    ) + DEFAULT_GAMMA_NA_CYT * i_cytokine
+    p_hco3 = DEFAULT_P_HCO3_BASE / (
+        1.0 + 0.28 * x_cldn4 + 0.30 * x_cldn2
+    ) + DEFAULT_GAMMA_HCO3_CYT * i_cytokine
+    p_cl = DEFAULT_P_CL_BASE / (1.0 + 0.32 * x_cldn4) + DEFAULT_GAMMA_CL_CYT * i_cytokine
 
-
-def compute_paracellular_sodium_flux(
-    p_na_cm_s: float | complex,
-    delta_psi_mv: float | complex = DEFAULT_DELTA_PSI_MV,
-    c_serosa_mm: float = DEFAULT_C_SEROSA_MM,
-    c_mucosa_mm: float = DEFAULT_C_MUCOSA_MM,
-) -> float | complex:
-    """Computes paracellular Na+ counter-ion flux J_Na_para (nmol/(cm^2*min)) via GHK formulation."""
-    if isinstance(p_na_cm_s, (int, float)) and p_na_cm_s < 0.0:
-        raise ValueError(f"P_Na must be non-negative, got {p_na_cm_s}")
-    if c_serosa_mm < 0.0 or c_mucosa_mm < 0.0:
-        raise ValueError(f"Concentrations must be non-negative (serosa={c_serosa_mm}, mucosa={c_mucosa_mm})")
-
-    # Dimensionless voltage xi = (z * F * Delta_psi) / (R * T)
-    # At 37 C, RT/F ~ 26.726 mV
-    xi = delta_psi_mv / RT_OVER_F_MV
-
-    # GHK flux from serosa (interstitium) to mucosa (airway surface liquid):
-    # J_Na = P_Na * xi * (C_serosa - C_mucosa * exp(xi)) / (exp(xi) - 1.0)
-    # Conversion: P (cm/s) * C (mM = umol/cm^3) -> umol/(cm^2*s)
-    # * 1000 nmol/umol * 60 s/min -> 60,000 nmol/(cm^2*min)
-    flux_unit_conv = 60000.0
-
-    if isinstance(xi, complex):
-        import cmath
-        exp_xi = cmath.exp(xi)
-        ghk_factor = xi * (c_serosa_mm - c_mucosa_mm * exp_xi) / (exp_xi - 1.0 + 1e-12)
-        return p_na_cm_s * ghk_factor * flux_unit_conv
-    else:
-        if abs(xi) < 1e-6:
-            # Taylor expansion near xi = 0 (pure diffusion): P * (C_s - C_m)
-            return p_na_cm_s * (c_serosa_mm - c_mucosa_mm) * flux_unit_conv
-        exp_xi = math.exp(xi)
-        ghk_factor = xi * (c_serosa_mm - c_mucosa_mm * exp_xi) / (exp_xi - 1.0)
-        return p_na_cm_s * ghk_factor * flux_unit_conv
+    g_tj_ms = NERNST_PLANCK_G_SCALE_MS * (p_na * 122.5 + p_hco3 * 18.0 + p_cl * 115.0)
+    r_tj_ohm_cm2 = 1000.0 / g_tj_ms
+    return p_na, p_hco3, r_tj_ohm_cm2
 
 
-def compute_asl_preservation_factor(
-    teer_ohm_cm2: float | complex,
-    j_na_para: float | complex,
-    k_teer: float = DEFAULT_K_TEER,
-    k_flux: float = DEFAULT_K_FLUX,
-) -> float | complex:
-    """Computes the ASL hydration volume preservation factor Phi_asl on [0, 1]."""
-    teer_term = teer_ohm_cm2 / (teer_ohm_cm2 + k_teer)
-    flux_term = j_na_para / (j_na_para + k_flux)
-    return teer_term * flux_term
+def compute_ghk_paracellular_fluxes_and_asl_state(
+    p_na: float | complex,
+    p_hco3: float | complex,
+    r_tj_ohm_cm2: float | complex,
+    j_hco3_transcellular: float | complex,
+    v_te_mv: float | complex,
+) -> Tuple[float | complex, float | complex, float | complex, float | complex, float | complex]:
+    """Computes steady-state (C_HCO3_asl, J_HCO3_para, J_Na_para, pH_ASL, h_ASL)."""
+    for name, val in (
+        ("p_na", p_na),
+        ("p_hco3", p_hco3),
+        ("r_tj_ohm_cm2", r_tj_ohm_cm2),
+        ("j_hco3_transcellular", j_hco3_transcellular),
+    ):
+        if isinstance(val, (int, float)) and val < 0.0:
+            raise ValueError(f"{name} must be non-negative, got {val}")
+
+    is_complex = any(isinstance(v, complex) for v in (p_na, p_hco3, r_tj_ohm_cm2, j_hco3_transcellular, v_te_mv))
+    exp_fn = cmath.exp if is_complex else math.exp
+    log10_fn = cmath.log10 if is_complex else math.log10
+
+    u_hco3 = (-1.0) * v_te_mv / THERMAL_VOLTAGE_MV_310K
+    u_na = (+1.0) * v_te_mv / THERMAL_VOLTAGE_MV_310K
+    b_hco3 = bernoulli_ghk_kernel(u_hco3)
+    b_na = bernoulli_ghk_kernel(u_na)
+
+    raw_num = C_HCO3_BASO_MM + (j_hco3_transcellular - DEFAULT_J_PROTON_ATP12A) / (3.6 * p_hco3 * b_hco3)
+    c_hco3_asl = 0.5 * (raw_num + (raw_num ** 2 + 1.0) ** 0.5) / exp_fn(u_hco3)
+
+    j_hco3_para = 3.6 * p_hco3 * b_hco3 * (C_HCO3_BASO_MM - c_hco3_asl * exp_fn(u_hco3))
+    j_na_para = 3.6 * p_na * b_na * (C_NA_BASO_MM - C_NA_APICAL_MM * exp_fn(u_na))
+
+    ph_asl = PKA_CARBONIC_37C + log10_fn(c_hco3_asl / C_CO2_DISSOLVED_MM)
+    shunt_retention = r_tj_ohm_cm2 / (r_tj_ohm_cm2 + 220.0)
+    h_asl_um = (
+        2.4
+        + 6.5
+        * shunt_retention
+        * (j_hco3_transcellular / (j_hco3_transcellular + 18.0))
+        / (1.0 + (j_na_para / 650.0) ** 2)
+    )
+    return c_hco3_asl, j_hco3_para, j_na_para, ph_asl, h_asl_um
 
 
-def complex_step_teer_derivative(
-    e_cldn4: float,
-    e_cldn2: float,
+def complex_step_ph_transcellular_derivative(
+    x_cldn2: float,
+    x_cldn4: float,
+    i_cytokine: float,
+    j_hco3_transcellular: float,
+    v_te_mv: float,
     step_h: float = 1e-30,
 ) -> Tuple[float, float, float]:
-    """Computes d(TEER)/d(E_cldn4) via complex-step differentiation vs central finite difference."""
-    # Complex step evaluation
-    z_e4 = complex(e_cldn4, step_h)
-    g_para_c = compute_paracellular_conductance(e_cldn2, z_e4)
-    teer_c = compute_teer(g_para_c)
-    cs_deriv = teer_c.imag / step_h
+    """Verifies d(pH_ASL)/d(J_hco3_transcellular) at h = 1e-30 against central finite differences."""
+    p_na, p_hco3, r_tj = compute_claudin_permeabilities_and_resistance(x_cldn2, x_cldn4, i_cytokine)
 
-    # Finite difference evaluation
-    fd_step = 1e-4
-    def _eval_teer(e4: float) -> float:
-        gp = float(compute_paracellular_conductance(e_cldn2, e4))
-        return float(compute_teer(gp))
+    def _eval_ph(j_val: float | complex) -> float | complex:
+        _, _, _, ph_val, _ = compute_ghk_paracellular_fluxes_and_asl_state(p_na, p_hco3, r_tj, j_val, v_te_mv)
+        return ph_val
 
-    fd_deriv = (_eval_teer(e_cldn4 + fd_step) - _eval_teer(e_cldn4 - fd_step)) / (2.0 * fd_step)
-    rel_err = abs(cs_deriv - fd_deriv) / max(abs(cs_deriv), 1e-9)
+    cs_val = _eval_ph(complex(j_hco3_transcellular, step_h))
+    cs_deriv = cs_val.imag / step_h
+
+    fd_h = 1e-5
+    fd_deriv = float(_eval_ph(j_hco3_transcellular + fd_h) - _eval_ph(j_hco3_transcellular - fd_h)) / (2.0 * fd_h)
+    rel_err = abs(cs_deriv - fd_deriv) / max(abs(cs_deriv), 1e-12)
     return cs_deriv, fd_deriv, rel_err
 
 
 def evaluate_round200_tight_junction_claudin_flux(regime_key: str) -> Round200TightJunctionResult:
-    """Evaluates the Round 200 tight junction claudin permselectivity model for a preset regime."""
+    """Evaluates the Round 200 Claudin-2/Claudin-4 paracellular electrodiffusion and ASL pH bridge."""
     if regime_key not in REGIME_PRESETS:
         raise KeyError(f"Unknown regime '{regime_key}'. Valid regimes: {list(REGIME_PRESETS.keys())}")
 
     cfg = REGIME_PRESETS[regime_key]
-    e4 = cfg["e_cldn4"]
-    e2 = cfg["e_cldn2"]
-    d_psi = cfg.get("delta_psi_mv", DEFAULT_DELTA_PSI_MV)
+    x_cldn2 = cfg["x_cldn2"]
+    x_cldn4 = cfg["x_cldn4"]
+    i_cyt = cfg["i_cytokine"]
+    j_trans = cfg["j_hco3_transcellular"]
+    v_te = cfg["v_te_mv"]
 
-    g_para = float(compute_paracellular_conductance(e2, e4))
-    teer = float(compute_teer(g_para))
-    p_na, p_cl, p_ratio = compute_paracellular_permeabilities(e2, e4)
-    p_na = float(p_na)
-    p_cl = float(p_cl)
-    p_ratio = float(p_ratio)
+    p_na_r, p_hco3_r, r_tj_r = compute_claudin_permeabilities_and_resistance(x_cldn2, x_cldn4, i_cyt)
+    p_na = float(p_na_r)
+    p_hco3 = float(p_hco3_r)
+    r_tj = float(r_tj_r)
+    selectivity = p_na / p_hco3
 
-    j_na = float(compute_paracellular_sodium_flux(p_na, d_psi))
-    phi_asl = float(compute_asl_preservation_factor(teer, j_na))
+    chco3_r, jhpara_r, jnapara_r, ph_r, hasl_r = compute_ghk_paracellular_fluxes_and_asl_state(
+        p_na, p_hco3, r_tj, j_trans, v_te
+    )
+    c_hco3 = float(chco3_r)
+    j_hco3_para = float(jhpara_r)
+    j_na_para = float(jnapara_r)
+    ph_asl = float(ph_r)
+    h_asl = float(hasl_r)
 
-    # Complex step derivative check (dTEER/dE_cldn4)
-    eval_e4 = max(0.2, e4)
-    _, _, rel_err = complex_step_teer_derivative(eval_e4, e2)
+    _, _, rel_err = complex_step_ph_transcellular_derivative(x_cldn2, x_cldn4, i_cyt, max(j_trans, 5.0), v_te)
 
-    # Invariants verification
     inv_satisfied = (
-        teer > 0.0
-        and g_para >= 0.0
-        and p_na > 0.0
-        and p_cl > 0.0
-        and p_ratio > 0.0
-        and j_na >= 0.0
-        and 0.0 <= phi_asl <= 1.0
-        and rel_err <= 1e-3
+        p_na > 0.0
+        and p_hco3 > 0.0
+        and selectivity > 0.0
+        and r_tj > 0.0
+        and c_hco3 > 0.0
+        and 5.5 <= ph_asl <= 8.5
+        and 2.0 <= h_asl <= 10.0
+        and rel_err <= 1e-6
     )
 
-    # Kahn-Kalai curative threshold:
-    # 1. TEER >= 500.0 Ohm*cm^2
-    # 2. P_ratio in [1.8, 3.8]
-    # 3. J_Na_para >= 20.0 nmol/(cm^2*min)
-    # 4. Phi_asl >= 0.40
     crosses_threshold = (
-        teer >= 500.0
-        and 1.8 <= p_ratio <= 3.8
-        and j_na >= 20.0
-        and phi_asl >= 0.40
+        r_tj >= 500.0
+        and ph_asl >= 7.25
+        and c_hco3 >= 16.0
+        and abs(j_na_para) <= 450.0
+        and h_asl >= 5.20
     )
 
     return Round200TightJunctionResult(
         regime_key=regime_key,
-        e_cldn4=e4,
-        e_cldn2=e2,
-        teer_ohm_cm2=teer,
-        g_para=g_para,
-        p_na_cm_s=p_na,
-        p_cl_cm_s=p_cl,
-        permselectivity_ratio=p_ratio,
-        j_na_para_nmol_cm2_min=j_na,
-        phi_asl_preservation=phi_asl,
+        x_cldn2=x_cldn2,
+        x_cldn4=x_cldn4,
+        i_cytokine=i_cyt,
+        j_hco3_transcellular=j_trans,
+        v_te_mv=v_te,
+        p_na_1e6_cm_s=p_na,
+        p_hco3_1e6_cm_s=p_hco3,
+        cation_anion_selectivity=selectivity,
+        r_tj_ohm_cm2=r_tj,
+        c_hco3_asl_mm=c_hco3,
+        j_hco3_para_nmol_cm2_h=j_hco3_para,
+        j_na_para_nmol_cm2_h=j_na_para,
+        ph_asl=ph_asl,
+        h_asl_um=h_asl,
         crosses_kahn_kalai_threshold=crosses_threshold,
         falsification_invariant_satisfied=inv_satisfied,
         complex_step_relative_error=rel_err,
@@ -442,30 +447,31 @@ def evaluate_round200_tight_junction_claudin_flux(regime_key: str) -> Round200Ti
 
 
 def evaluate_falsification_negative_control(
-    poison_negative_cldn4: bool = False,
-    poison_negative_cldn2: bool = False,
-    poison_negative_concentration: bool = False,
+    poison_negative_claudin: bool = False,
+    poison_negative_cytokine: bool = False,
+    poison_negative_transcellular_flux: bool = False,
 ) -> Dict[str, Any]:
     """Tests poisoned negative controls that must deterministically raise ValueError."""
-    if poison_negative_cldn4:
+    reasons: list[str] = []
+    if poison_negative_claudin:
         try:
-            compute_paracellular_conductance(1.0, -1.0)
-            return {"passed": False, "reason": "Negative Claudin-4 expression accepted unexpectedly"}
-        except ValueError:
-            return {"passed": True, "reason": "Deterministically rejected negative Claudin-4 expression"}
-
-    if poison_negative_cldn2:
-        try:
-            compute_paracellular_conductance(-1.0, 1.0)
+            compute_claudin_permeabilities_and_resistance(-0.5, 1.0, 0.0)
             return {"passed": False, "reason": "Negative Claudin-2 expression accepted unexpectedly"}
         except ValueError:
-            return {"passed": True, "reason": "Deterministically rejected negative Claudin-2 expression"}
+            reasons.append("Deterministically rejected negative Claudin-2 expression")
 
-    if poison_negative_concentration:
+    if poison_negative_cytokine:
         try:
-            compute_paracellular_sodium_flux(1e-6, c_serosa_mm=-50.0)
-            return {"passed": False, "reason": "Negative serosal concentration accepted unexpectedly"}
+            compute_claudin_permeabilities_and_resistance(0.2, 1.0, -1.0)
+            return {"passed": False, "reason": "Negative cytokine index accepted unexpectedly"}
         except ValueError:
-            return {"passed": True, "reason": "Deterministically rejected negative serosal concentration"}
+            reasons.append("Deterministically rejected negative cytokine index")
 
-    return {"passed": True, "reason": "Baseline control pass"}
+    if poison_negative_transcellular_flux:
+        try:
+            compute_ghk_paracellular_fluxes_and_asl_state(1.0, 1.0, 600.0, -10.0, -8.0)
+            return {"passed": False, "reason": "Negative transcellular HCO3 flux accepted unexpectedly"}
+        except ValueError:
+            reasons.append("Deterministically rejected negative transcellular flux")
+
+    return {"passed": True, "reason": "; ".join(reasons) if reasons else "Nominal baseline"}
