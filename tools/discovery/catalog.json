@@ -6,23 +6,23 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 199,
+  "total_modules": 201,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 263,
+  "test_suites_count": 265,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 198,
+    "researchers": 200,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 110,
+    "merge": 112,
     "archive": 4
   },
   "discipline_summary": {
-    "structural_biology": 73,
+    "structural_biology": 74,
     "rna_gene_editing": 31,
-    "airway_delivery": 82,
+    "airway_delivery": 83,
     "microbiology_host": 7,
     "clinical_trials": 3,
     "ai_verification": 3
@@ -30,9 +30,9 @@
   "disciplines": {
     "structural_biology": {
       "label": "Structural Biology & CFTR Biophysics",
-      "count": 73,
+      "count": 74,
       "keep_count": 11,
-      "merge_count": 61,
+      "merge_count": 62,
       "archive_count": 1,
       "modules": [
         {
@@ -707,6 +707,17 @@
           "test_verified": true
         },
         {
+          "module": "round186_nbd_dimer_dissociation_free_energy_bridge",
+          "task": "T-0863",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "structural_biology",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
           "module": "round90_pietzonka_power_constancy_tradeoff",
           "task": "T-0697",
           "track": "Track A",
@@ -1192,9 +1203,9 @@
     },
     "airway_delivery": {
       "label": "Airway Delivery, Mucus Rheology & Alternative Ion Transport",
-      "count": 82,
+      "count": 83,
       "keep_count": 44,
-      "merge_count": 37,
+      "merge_count": 38,
       "archive_count": 1,
       "modules": [
         {
@@ -2003,6 +2014,17 @@
         {
           "module": "round182_basal_stem_cell_clonal_persistence_bridge",
           "task": "T-0859",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "airway_delivery",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round185_lentivirus_mucus_penetration_integration_bridge",
+          "task": "T-0862",
           "track": "Track A",
           "tier": "T2",
           "discipline": "airway_delivery",
