@@ -4,9 +4,9 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `189` (plus 4 infrastructure scripts and 253 unit test suites)
+- **Total Verified Modules:** `191` (plus 4 infrastructure scripts and 255 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
-- **`merge` (Consolidate into Canonical Module):** `100`
+- **`merge` (Consolidate into Canonical Module):** `102`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -129,7 +129,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `u1_snrnp_decoy_kinetics.py` | `T-0292` | `T2` | `merge` | Merge into `u1_snrnp_decoy_thermodynamics.py` |
 | `u1_snrnp_decoy_thermodynamics.py` | `T-0352` | `T2` | `keep` | Canonical workbench |
 
-## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 76 modules)
+## Airway Delivery, Mucus Rheology & Alternative Ion Transport (`airway_delivery` — 78 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -201,6 +201,8 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `round171_flory_huggins_osmotic_compression_bridge.py` | `T-0836` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round172_gibbs_donnan_bicarbonate_hydration_bridge.py` | `T-0837` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `round173_ogston_brinkman_nanoparticle_sieving_bridge.py` | `T-0841` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round175_proton_sponge_endosomal_escape_bridge.py` | `T-0846` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round176_prime_editing_r_loop_flap_kinetics_bridge.py` | `T-0847` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 | `surfactant_shielded_rnp_mucus_transport.py` | `T-0482` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_calcium_conductance_model.py` | `T-0392` | `T2` | `keep` | Canonical workbench |
 | `tmem16a_conductance_model.py` | `T-0240` | `T2` | `merge` | Merge into `tmem16a_calcium_conductance_model.py` |
