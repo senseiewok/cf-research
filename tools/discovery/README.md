@@ -4,9 +4,9 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `207` (plus 4 infrastructure scripts and 271 unit test suites)
+- **Total Verified Modules:** `209` (plus 4 infrastructure scripts and 273 unit test suites)
 - **`keep` (Canonical Core Workbenches):** `85`
-- **`merge` (Consolidate into Canonical Module):** `118`
+- **`merge` (Consolidate into Canonical Module):** `120`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`
 - **Formal Proof & Stochastic Thermodynamics Bridge Suites (`formal_proof_thermodynamic_landscape.py`):** `61`
 
@@ -227,7 +227,7 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `vector_redosing_kinetics.py` | `T-0198` | `T2` | `keep` | Canonical workbench |
 | `vx522_inhaled_lnp_mucus_diffusion.py` | `T-0400` | `T2` | `keep` | Canonical workbench |
 
-## Microbiology, Phage Therapy & Host Defense (`microbiology_host` — 8 modules)
+## Microbiology, Phage Therapy & Host Defense (`microbiology_host` — 10 modules)
 
 | Module | Task | Tier | Triage | Consolidation Target / Notes |
 | --- | --- | --- | --- | --- |
@@ -239,6 +239,8 @@ python tools/discovery/discovery_council.py --run-stdlib-tests
 | `phage_depolymerase_biofilm_synergy.py` | `T-0402` | `T2` | `keep` | Canonical workbench |
 | `phage_omko1_tradeoff.py` | `T-0246` | `T2` | `keep` | Canonical workbench |
 | `round192_pyocyanin_cftr_oxidation_bridge.py` | `T-0873` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round193_neutrophil_elastase_cftr_cleavage_bridge.py` | `T-0876` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
+| `round194_phage_ap_pa02_mucus_translocation_bridge.py` | `T-0877` | `T2` | `merge` | Merge into `formal_proof_thermodynamic_landscape.py` |
 
 ## Clinical Trials, Registries & Theratyping (`clinical_trials` — 3 modules)
 

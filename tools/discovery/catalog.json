@@ -6,24 +6,24 @@
     "researchers",
     "builders"
   ],
-  "total_modules": 207,
+  "total_modules": 209,
   "infrastructure_modules_count": 4,
-  "test_suites_count": 271,
+  "test_suites_count": 273,
   "formal_proof_bridge_suites_count": 61,
   "persona_summary": {
-    "researchers": 206,
+    "researchers": 208,
     "builders": 1
   },
   "triage_summary": {
     "keep": 85,
-    "merge": 118,
+    "merge": 120,
     "archive": 4
   },
   "discipline_summary": {
     "structural_biology": 76,
     "rna_gene_editing": 33,
     "airway_delivery": 84,
-    "microbiology_host": 8,
+    "microbiology_host": 10,
     "clinical_trials": 3,
     "ai_verification": 3
   },
@@ -2180,9 +2180,9 @@
     },
     "microbiology_host": {
       "label": "Microbiology, Phage Therapy & Host Defense",
-      "count": 8,
+      "count": 10,
       "keep_count": 6,
-      "merge_count": 2,
+      "merge_count": 4,
       "archive_count": 0,
       "modules": [
         {
@@ -2265,6 +2265,28 @@
         {
           "module": "round192_pyocyanin_cftr_oxidation_bridge",
           "task": "T-0873",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "microbiology_host",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round193_neutrophil_elastase_cftr_cleavage_bridge",
+          "task": "T-0876",
+          "track": "Track A",
+          "tier": "T2",
+          "discipline": "microbiology_host",
+          "persona": "researchers",
+          "triage": "merge",
+          "consolidation_target": "formal_proof_thermodynamic_landscape",
+          "test_verified": true
+        },
+        {
+          "module": "round194_phage_ap_pa02_mucus_translocation_bridge",
+          "task": "T-0877",
           "track": "Track A",
           "tier": "T2",
           "discipline": "microbiology_host",
