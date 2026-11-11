@@ -1799,6 +1799,16 @@ DISCOVERY_MODULE_REGISTRY: Dict[str, Dict[str, Any]] = {
         "discipline": "rna_gene_editing", "persona": "researchers", "triage": "merge",
         "consolidation_target": "formal_proof_thermodynamic_landscape",
     },
+    "round203_chem_mod_suptrna_lnp_bridge": {
+        "task": "T-0896", "track": "Track A", "tier": "T2",
+        "discipline": "rna_gene_editing", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
+    "round204_ehd_taylor_cbf_redosing_bridge": {
+        "task": "T-0897", "track": "Track A", "tier": "T2",
+        "discipline": "airway_delivery", "persona": "researchers", "triage": "merge",
+        "consolidation_target": "formal_proof_thermodynamic_landscape",
+    },
 }
 
 
