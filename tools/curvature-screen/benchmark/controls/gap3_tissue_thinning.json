@@ -1,0 +1,480 @@
+{
+ "script": "benchmark/controls/gap3_tissue_thinning.py",
+ "reference_script_sha256": "89fd3319c518eb19e5ab2bd6151c39e12e70f7415ae1e28aefa2696c39c79137",
+ "cache_npz": "benchmark/out/zenodo7656540_leica_stellaris8_tissue_flim.npz",
+ "cache_sha256": "4e28d6a6bd03d4a19a0d393bb06a54ce7cc31d518c6b231443b4608a448ef578",
+ "seed": 20261113,
+ "repeats_per_tile_and_level": 1000,
+ "grid": "8x8 (64 tiles, 64x64 px each)",
+ "split": "checkerboard (cached grid8_chk_hA / grid8_chk_hB)",
+ "anchor_peak_bin": 12,
+ "B_eff": 6,
+ "n_dark_lt_1500": 8,
+ "dark_tile_N": [
+  1280,
+  1100,
+  862,
+  1487,
+  1192,
+  1457,
+  1082,
+  1392
+ ],
+ "n_lt_2500": 13,
+ "n_stained_ge_20000": 41,
+ "stained_tile_N_min_median_max": [
+  23193,
+  225028,
+  780531
+ ],
+ "full_count_reproduction": {
+  "off10_M10_D12": {
+   "dark_fp_z_split_gt2": 0,
+   "dark_fp_z_diff_gt2": 0,
+   "dark_max_z_split": 0.82,
+   "dark_max_z_diff": 0.76,
+   "lt2500_fp_z_diff_gt2": 1,
+   "stained_n_z_split_gt3": 41,
+   "stained_n_z_split_gt2": 41,
+   "stained_n_z_diff_gt2": 34,
+   "stained_n_z_diff_gt3": 28,
+   "dark_z_split": [
+    0.61,
+    0.65,
+    -0.18,
+    0.82,
+    -0.97,
+    -0.1,
+    0.39,
+    -0.06
+   ],
+   "dark_z_diff": [
+    -0.24,
+    -0.12,
+    -1.18,
+    0.76,
+    -0.63,
+    -0.25,
+    -0.23,
+    0.19
+   ],
+   "matches_ledger": true,
+   "ledger": {
+    "dark_fp_z_split_gt2": 0,
+    "dark_fp_z_diff_gt2": 0,
+    "lt2500_fp_z_diff_gt2": 1,
+    "stained_n_z_split_gt3": 41,
+    "stained_n_z_diff_gt2": 34
+   }
+  },
+  "off10_M12_D15": {
+   "dark_fp_z_split_gt2": 0,
+   "dark_fp_z_diff_gt2": 0,
+   "dark_max_z_split": 1.41,
+   "dark_max_z_diff": 1.02,
+   "lt2500_fp_z_diff_gt2": 0,
+   "stained_n_z_split_gt3": 41,
+   "stained_n_z_split_gt2": 41,
+   "stained_n_z_diff_gt2": 35,
+   "stained_n_z_diff_gt3": 30,
+   "dark_z_split": [
+    0.43,
+    1.02,
+    0.15,
+    0.33,
+    -0.43,
+    1.03,
+    1.41,
+    -1.62
+   ],
+   "dark_z_diff": [
+    0.19,
+    0.6,
+    -0.35,
+    -0.53,
+    -1.08,
+    -0.32,
+    1.02,
+    -1.69
+   ],
+   "matches_ledger": true,
+   "ledger": {
+    "dark_fp_z_split_gt2": 0,
+    "dark_fp_z_diff_gt2": 0,
+    "lt2500_fp_z_diff_gt2": 0,
+    "stained_n_z_split_gt3": 41,
+    "stained_n_z_diff_gt2": 35
+   }
+  },
+  "off16_M12_D16": {
+   "dark_fp_z_split_gt2": 1,
+   "dark_fp_z_diff_gt2": 2,
+   "dark_max_z_split": 3.47,
+   "dark_max_z_diff": 2.22,
+   "lt2500_fp_z_diff_gt2": 3,
+   "stained_n_z_split_gt3": 35,
+   "stained_n_z_split_gt2": 39,
+   "stained_n_z_diff_gt2": 24,
+   "stained_n_z_diff_gt3": 20,
+   "dark_z_split": [
+    1.51,
+    0.53,
+    3.47,
+    0.48,
+    1.21,
+    0.26,
+    1.22,
+    -1.5
+   ],
+   "dark_z_diff": [
+    2.0,
+    0.32,
+    2.22,
+    -0.36,
+    1.3,
+    -0.49,
+    0.33,
+    -1.54
+   ],
+   "matches_ledger": true,
+   "ledger": {
+    "dark_fp_z_split_gt2": 1,
+    "dark_fp_z_diff_gt2": 2,
+    "lt2500_fp_z_diff_gt2": 3,
+    "stained_n_z_split_gt3": 35,
+    "stained_n_z_diff_gt2": 24
+   }
+  }
+ },
+ "thinning_levels": {
+  "requested": [
+   1500,
+   5000
+  ],
+  "extra_median_dark_tile_N": 1236
+ },
+ "stained_tiles_thinned": {
+  "N_1500": {
+   "off10_M10_D12": {
+    "n_evaluations": 41000,
+    "rate_z_split_gt2": 0.1269,
+    "rate_z_split_gt3": 0.0159,
+    "rate_z_diff_gt2": 0.0561,
+    "rate_z_diff_gt3": 0.0053,
+    "rate_z_split_lt_m2": 0.0016,
+    "rate_z_diff_lt_m2": 0.0065,
+    "mc_se_max": 0.0025,
+    "median_z_split": 0.826,
+    "median_z_diff": 0.335,
+    "per_tile_rate_z_split_gt2_min_median_max": [
+     0.071,
+     0.127,
+     0.195
+    ],
+    "per_tile_rate_z_diff_gt2_min_median_max": [
+     0.026,
+     0.057,
+     0.091
+    ],
+    "fraction_truncated_diff_set_to_zero": 0.055,
+    "prob_0_of_n_dark_exceed_z_split_gt2_if_dark_were_like_thinned_stained": 0.3377,
+    "prob_0_of_n_dark_exceed_z_diff_gt2_if_dark_were_like_thinned_stained": 0.63
+   },
+   "off10_M12_D15": {
+    "n_evaluations": 41000,
+    "rate_z_split_gt2": 0.1425,
+    "rate_z_split_gt3": 0.0176,
+    "rate_z_diff_gt2": 0.0363,
+    "rate_z_diff_gt3": 0.0029,
+    "rate_z_split_lt_m2": 0.0014,
+    "rate_z_diff_lt_m2": 0.0061,
+    "mc_se_max": 0.0025,
+    "median_z_split": 0.927,
+    "median_z_diff": 0.0,
+    "per_tile_rate_z_split_gt2_min_median_max": [
+     0.088,
+     0.144,
+     0.229
+    ],
+    "per_tile_rate_z_diff_gt2_min_median_max": [
+     0.01,
+     0.036,
+     0.075
+    ],
+    "fraction_truncated_diff_set_to_zero": 0.2516,
+    "prob_0_of_n_dark_exceed_z_split_gt2_if_dark_were_like_thinned_stained": 0.2923,
+    "prob_0_of_n_dark_exceed_z_diff_gt2_if_dark_were_like_thinned_stained": 0.7438
+   },
+   "off16_M12_D16": {
+    "n_evaluations": 41000,
+    "rate_z_split_gt2": 0.074,
+    "rate_z_split_gt3": 0.0056,
+    "rate_z_diff_gt2": 0.0052,
+    "rate_z_diff_gt3": 0.0003,
+    "rate_z_split_lt_m2": 0.0042,
+    "rate_z_diff_lt_m2": 0.005,
+    "mc_se_max": 0.0025,
+    "median_z_split": 0.543,
+    "median_z_diff": 0.0,
+    "per_tile_rate_z_split_gt2_min_median_max": [
+     0.04,
+     0.072,
+     0.154
+    ],
+    "per_tile_rate_z_diff_gt2_min_median_max": [
+     0.0,
+     0.004,
+     0.02
+    ],
+    "fraction_truncated_diff_set_to_zero": 0.6663,
+    "prob_0_of_n_dark_exceed_z_split_gt2_if_dark_were_like_thinned_stained": 0.5404,
+    "prob_0_of_n_dark_exceed_z_diff_gt2_if_dark_were_like_thinned_stained": 0.9588
+   }
+  },
+  "N_5000": {
+   "off10_M10_D12": {
+    "n_evaluations": 41000,
+    "rate_z_split_gt2": 0.2995,
+    "rate_z_split_gt3": 0.0688,
+    "rate_z_diff_gt2": 0.1132,
+    "rate_z_diff_gt3": 0.0136,
+    "rate_z_split_lt_m2": 0.0002,
+    "rate_z_diff_lt_m2": 0.0033,
+    "mc_se_max": 0.0025,
+    "median_z_split": 1.467,
+    "median_z_diff": 0.754,
+    "per_tile_rate_z_split_gt2_min_median_max": [
+     0.125,
+     0.3,
+     0.551
+    ],
+    "per_tile_rate_z_diff_gt2_min_median_max": [
+     0.023,
+     0.106,
+     0.212
+    ],
+    "fraction_truncated_diff_set_to_zero": 0.0,
+    "prob_0_of_n_dark_exceed_z_split_gt2_if_dark_were_like_thinned_stained": 0.058,
+    "prob_0_of_n_dark_exceed_z_diff_gt2_if_dark_were_like_thinned_stained": 0.3825
+   },
+   "off10_M12_D15": {
+    "n_evaluations": 41000,
+    "rate_z_split_gt2": 0.3663,
+    "rate_z_split_gt3": 0.0904,
+    "rate_z_diff_gt2": 0.1213,
+    "rate_z_diff_gt3": 0.0156,
+    "rate_z_split_lt_m2": 0.0001,
+    "rate_z_diff_lt_m2": 0.0027,
+    "mc_se_max": 0.0025,
+    "median_z_split": 1.661,
+    "median_z_diff": 0.827,
+    "per_tile_rate_z_split_gt2_min_median_max": [
+     0.21,
+     0.373,
+     0.604
+    ],
+    "per_tile_rate_z_diff_gt2_min_median_max": [
+     0.029,
+     0.12,
+     0.272
+    ],
+    "fraction_truncated_diff_set_to_zero": 0.0,
+    "prob_0_of_n_dark_exceed_z_split_gt2_if_dark_were_like_thinned_stained": 0.026,
+    "prob_0_of_n_dark_exceed_z_diff_gt2_if_dark_were_like_thinned_stained": 0.3553
+   },
+   "off16_M12_D16": {
+    "n_evaluations": 41000,
+    "rate_z_split_gt2": 0.1565,
+    "rate_z_split_gt3": 0.0222,
+    "rate_z_diff_gt2": 0.0536,
+    "rate_z_diff_gt3": 0.0047,
+    "rate_z_split_lt_m2": 0.0013,
+    "rate_z_diff_lt_m2": 0.0077,
+    "mc_se_max": 0.0025,
+    "median_z_split": 0.966,
+    "median_z_diff": 0.391,
+    "per_tile_rate_z_split_gt2_min_median_max": [
+     0.049,
+     0.138,
+     0.395
+    ],
+    "per_tile_rate_z_diff_gt2_min_median_max": [
+     0.012,
+     0.05,
+     0.152
+    ],
+    "fraction_truncated_diff_set_to_zero": 0.0025,
+    "prob_0_of_n_dark_exceed_z_split_gt2_if_dark_were_like_thinned_stained": 0.2563,
+    "prob_0_of_n_dark_exceed_z_diff_gt2_if_dark_were_like_thinned_stained": 0.6435
+   }
+  },
+  "N_1236": {
+   "off10_M10_D12": {
+    "n_evaluations": 41000,
+    "rate_z_split_gt2": 0.1098,
+    "rate_z_split_gt3": 0.013,
+    "rate_z_diff_gt2": 0.0422,
+    "rate_z_diff_gt3": 0.0039,
+    "rate_z_split_lt_m2": 0.002,
+    "rate_z_diff_lt_m2": 0.0067,
+    "mc_se_max": 0.0025,
+    "median_z_split": 0.748,
+    "median_z_diff": 0.102,
+    "per_tile_rate_z_split_gt2_min_median_max": [
+     0.052,
+     0.106,
+     0.173
+    ],
+    "per_tile_rate_z_diff_gt2_min_median_max": [
+     0.013,
+     0.042,
+     0.086
+    ],
+    "fraction_truncated_diff_set_to_zero": 0.1502,
+    "prob_0_of_n_dark_exceed_z_split_gt2_if_dark_were_like_thinned_stained": 0.3945,
+    "prob_0_of_n_dark_exceed_z_diff_gt2_if_dark_were_like_thinned_stained": 0.708
+   },
+   "off10_M12_D15": {
+    "n_evaluations": 41000,
+    "rate_z_split_gt2": 0.1249,
+    "rate_z_split_gt3": 0.0129,
+    "rate_z_diff_gt2": 0.02,
+    "rate_z_diff_gt3": 0.001,
+    "rate_z_split_lt_m2": 0.0017,
+    "rate_z_diff_lt_m2": 0.005,
+    "mc_se_max": 0.0025,
+    "median_z_split": 0.837,
+    "median_z_diff": 0.0,
+    "per_tile_rate_z_split_gt2_min_median_max": [
+     0.077,
+     0.122,
+     0.175
+    ],
+    "per_tile_rate_z_diff_gt2_min_median_max": [
+     0.001,
+     0.019,
+     0.047
+    ],
+    "fraction_truncated_diff_set_to_zero": 0.4406,
+    "prob_0_of_n_dark_exceed_z_split_gt2_if_dark_were_like_thinned_stained": 0.3441,
+    "prob_0_of_n_dark_exceed_z_diff_gt2_if_dark_were_like_thinned_stained": 0.8506
+   },
+   "off16_M12_D16": {
+    "n_evaluations": 41000,
+    "rate_z_split_gt2": 0.0675,
+    "rate_z_split_gt3": 0.0045,
+    "rate_z_diff_gt2": 0.0019,
+    "rate_z_diff_gt3": 0.0,
+    "rate_z_split_lt_m2": 0.004,
+    "rate_z_diff_lt_m2": 0.0022,
+    "mc_se_max": 0.0025,
+    "median_z_split": 0.496,
+    "median_z_diff": 0.0,
+    "per_tile_rate_z_split_gt2_min_median_max": [
+     0.043,
+     0.061,
+     0.134
+    ],
+    "per_tile_rate_z_diff_gt2_min_median_max": [
+     0.0,
+     0.001,
+     0.012
+    ],
+    "fraction_truncated_diff_set_to_zero": 0.827,
+    "prob_0_of_n_dark_exceed_z_split_gt2_if_dark_were_like_thinned_stained": 0.5719,
+    "prob_0_of_n_dark_exceed_z_diff_gt2_if_dark_were_like_thinned_stained": 0.9847
+   }
+  }
+ },
+ "pooled_low_count_tiles": {
+  "dark_lt_1500_pooled": {
+   "n_tiles": 8,
+   "N_photons": 9852,
+   "windows": {
+    "off10_M10_D12": {
+     "z_split_exact": 0.35,
+     "z_diff_split_exact": -0.87,
+     "W_rel": 0.0303,
+     "W_diff_rel": -0.3115,
+     "diff_truncated": false
+    },
+    "off10_M12_D15": {
+     "z_split_exact": 0.7,
+     "z_diff_split_exact": -0.88,
+     "W_rel": 0.0604,
+     "W_diff_rel": -0.2902,
+     "diff_truncated": false
+    },
+    "off16_M12_D16": {
+     "z_split_exact": 2.31,
+     "z_diff_split_exact": 1.08,
+     "W_rel": 0.2438,
+     "W_diff_rel": 0.613,
+     "diff_truncated": false
+    }
+   }
+  },
+  "lt_2500_pooled": {
+   "n_tiles": 13,
+   "N_photons": 18864,
+   "windows": {
+    "off10_M10_D12": {
+     "z_split_exact": 2.13,
+     "z_diff_split_exact": 0.78,
+     "W_rel": 0.1439,
+     "W_diff_rel": 0.2583,
+     "diff_truncated": false
+    },
+    "off10_M12_D15": {
+     "z_split_exact": 1.39,
+     "z_diff_split_exact": -0.79,
+     "W_rel": 0.0912,
+     "W_diff_rel": -0.1964,
+     "diff_truncated": false
+    },
+    "off16_M12_D16": {
+     "z_split_exact": 2.05,
+     "z_diff_split_exact": 0.77,
+     "W_rel": 0.1593,
+     "W_diff_rel": 0.2667,
+     "diff_truncated": false
+    }
+   }
+  }
+ },
+ "stained_tiles_thinned_to_pooled_dark_N": {
+  "N_target": 9852,
+  "windows": {
+   "off10_M10_D12": {
+    "rate_z_split_gt2": 0.5224,
+    "rate_z_split_gt3": 0.1797,
+    "rate_z_diff_gt2": 0.1805,
+    "rate_z_diff_gt3": 0.0291,
+    "median_z_split": 2.059,
+    "median_z_diff": 1.06,
+    "fraction_thinned_z_split_le_pooled_dark": 0.0492,
+    "fraction_thinned_z_diff_le_pooled_dark": 0.0293
+   },
+   "off10_M12_D15": {
+    "rate_z_split_gt2": 0.6271,
+    "rate_z_split_gt3": 0.2471,
+    "rate_z_diff_gt2": 0.2017,
+    "rate_z_diff_gt3": 0.0319,
+    "median_z_split": 2.325,
+    "median_z_diff": 1.155,
+    "fraction_thinned_z_split_le_pooled_dark": 0.0545,
+    "fraction_thinned_z_diff_le_pooled_dark": 0.0218
+   },
+   "off16_M12_D16": {
+    "rate_z_split_gt2": 0.2569,
+    "rate_z_split_gt3": 0.052,
+    "rate_z_diff_gt2": 0.0716,
+    "rate_z_diff_gt3": 0.0072,
+    "median_z_split": 1.337,
+    "median_z_diff": 0.536,
+    "fraction_thinned_z_split_le_pooled_dark": 0.8308,
+    "fraction_thinned_z_diff_le_pooled_dark": 0.708
+   }
+  }
+ }
+}

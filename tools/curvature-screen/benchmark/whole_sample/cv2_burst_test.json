@@ -1,0 +1,267 @@
+{
+ "seed": 20261113,
+ "reps": 20000,
+ "label": "Part A: DERIVED, NOT MEASURED (simulation). Part B: public F1-ATPase dwell times.",
+ "population_cv2": {
+  "A_12_8_per_s": 0.52,
+  "B_5.988_4_per_s": 0.5198
+ },
+ "partA_power": {
+  "N_30": {
+   "critical_cv2_alpha_0.05": 0.5443,
+   "power_A_12_8_per_s_alpha_0.05": 0.6452,
+   "power_B_5.988_4_per_s_alpha_0.05": 0.6499,
+   "false_alarm_two_rate_mixture_alpha_0.05": 0.0014,
+   "false_alarm_single_exponential_alpha_0.05": 0.047,
+   "critical_cv2_alpha_0.01": 0.4483,
+   "power_A_12_8_per_s_alpha_0.01": 0.3934,
+   "power_B_5.988_4_per_s_alpha_0.01": 0.3973,
+   "false_alarm_two_rate_mixture_alpha_0.01": 0.0001,
+   "false_alarm_single_exponential_alpha_0.01": 0.0111
+  },
+  "N_50": {
+   "critical_cv2_alpha_0.05": 0.6329,
+   "power_A_12_8_per_s_alpha_0.05": 0.8435,
+   "power_B_5.988_4_per_s_alpha_0.05": 0.8405,
+   "false_alarm_two_rate_mixture_alpha_0.05": 0.0004,
+   "false_alarm_single_exponential_alpha_0.05": 0.0538,
+   "critical_cv2_alpha_0.01": 0.5282,
+   "power_A_12_8_per_s_alpha_0.01": 0.6052,
+   "power_B_5.988_4_per_s_alpha_0.01": 0.6013,
+   "false_alarm_two_rate_mixture_alpha_0.01": 0.0001,
+   "false_alarm_single_exponential_alpha_0.01": 0.0097
+  },
+  "N_75": {
+   "critical_cv2_alpha_0.05": 0.6863,
+   "power_A_12_8_per_s_alpha_0.05": 0.9368,
+   "power_B_5.988_4_per_s_alpha_0.05": 0.9346,
+   "false_alarm_two_rate_mixture_alpha_0.05": 0.0001,
+   "false_alarm_single_exponential_alpha_0.05": 0.0531,
+   "critical_cv2_alpha_0.01": 0.5945,
+   "power_A_12_8_per_s_alpha_0.01": 0.794,
+   "power_B_5.988_4_per_s_alpha_0.01": 0.7913,
+   "false_alarm_two_rate_mixture_alpha_0.01": 0.0,
+   "false_alarm_single_exponential_alpha_0.01": 0.0077
+  },
+  "N_100": {
+   "critical_cv2_alpha_0.05": 0.7207,
+   "power_A_12_8_per_s_alpha_0.05": 0.9729,
+   "power_B_5.988_4_per_s_alpha_0.05": 0.9732,
+   "false_alarm_two_rate_mixture_alpha_0.05": 0.0001,
+   "false_alarm_single_exponential_alpha_0.05": 0.0461,
+   "critical_cv2_alpha_0.01": 0.6428,
+   "power_A_12_8_per_s_alpha_0.01": 0.9118,
+   "power_B_5.988_4_per_s_alpha_0.01": 0.9075,
+   "false_alarm_two_rate_mixture_alpha_0.01": 0.0,
+   "false_alarm_single_exponential_alpha_0.01": 0.0109
+  },
+  "N_200": {
+   "critical_cv2_alpha_0.05": 0.7933,
+   "power_A_12_8_per_s_alpha_0.05": 0.9992,
+   "power_B_5.988_4_per_s_alpha_0.05": 0.9994,
+   "false_alarm_two_rate_mixture_alpha_0.05": 0.0,
+   "false_alarm_single_exponential_alpha_0.05": 0.0505,
+   "critical_cv2_alpha_0.01": 0.7317,
+   "power_A_12_8_per_s_alpha_0.01": 0.9969,
+   "power_B_5.988_4_per_s_alpha_0.01": 0.9967,
+   "false_alarm_two_rate_mixture_alpha_0.01": 0.0,
+   "false_alarm_single_exponential_alpha_0.01": 0.0117
+  },
+  "N_300": {
+   "critical_cv2_alpha_0.05": 0.8286,
+   "power_A_12_8_per_s_alpha_0.05": 1.0,
+   "power_B_5.988_4_per_s_alpha_0.05": 1.0,
+   "false_alarm_two_rate_mixture_alpha_0.05": 0.0,
+   "false_alarm_single_exponential_alpha_0.05": 0.0529,
+   "critical_cv2_alpha_0.01": 0.7729,
+   "power_A_12_8_per_s_alpha_0.01": 1.0,
+   "power_B_5.988_4_per_s_alpha_0.01": 0.9997,
+   "false_alarm_two_rate_mixture_alpha_0.01": 0.0,
+   "false_alarm_single_exponential_alpha_0.01": 0.0089
+  },
+  "N_1000": {
+   "critical_cv2_alpha_0.05": 0.9014,
+   "power_A_12_8_per_s_alpha_0.05": 1.0,
+   "power_B_5.988_4_per_s_alpha_0.05": 1.0,
+   "false_alarm_two_rate_mixture_alpha_0.05": 0.0,
+   "false_alarm_single_exponential_alpha_0.05": 0.0486,
+   "critical_cv2_alpha_0.01": 0.8674,
+   "power_A_12_8_per_s_alpha_0.01": 1.0,
+   "power_B_5.988_4_per_s_alpha_0.01": 1.0,
+   "false_alarm_two_rate_mixture_alpha_0.01": 0.0,
+   "false_alarm_single_exponential_alpha_0.01": 0.0107
+  }
+ },
+ "partA_power_vs_rate_ratio": {
+  "note": "two sequential steps; ratio = faster rate / slower rate; one-sided alpha 0.01",
+  "rate_ratio_1": {
+   "rates_per_s": [
+    4.0,
+    4.0
+   ],
+   "population_cv2": 0.5,
+   "power_N_100_alpha_0.01": 0.9449,
+   "power_N_300_alpha_0.01": 1.0,
+   "power_N_1000_alpha_0.01": 1.0
+  },
+  "rate_ratio_1.5": {
+   "rates_per_s": [
+    6.0,
+    4.0
+   ],
+   "population_cv2": 0.52,
+   "power_N_100_alpha_0.01": 0.9143,
+   "power_N_300_alpha_0.01": 0.9998,
+   "power_N_1000_alpha_0.01": 1.0
+  },
+  "rate_ratio_3": {
+   "rates_per_s": [
+    12.0,
+    4.0
+   ],
+   "population_cv2": 0.625,
+   "power_N_100_alpha_0.01": 0.6139,
+   "power_N_300_alpha_0.01": 0.9724,
+   "power_N_1000_alpha_0.01": 1.0
+  },
+  "rate_ratio_5": {
+   "rates_per_s": [
+    20.0,
+    4.0
+   ],
+   "population_cv2": 0.7222,
+   "power_N_100_alpha_0.01": 0.3202,
+   "power_N_300_alpha_0.01": 0.7598,
+   "power_N_1000_alpha_0.01": 0.9968
+  },
+  "rate_ratio_10": {
+   "rates_per_s": [
+    40.0,
+    4.0
+   ],
+   "population_cv2": 0.8347,
+   "power_N_100_alpha_0.01": 0.0954,
+   "power_N_300_alpha_0.01": 0.2676,
+   "power_N_1000_alpha_0.01": 0.7253
+  }
+ },
+ "partA_false_alarm_near_boundary_mixtures": {
+  "note": "the single exponential appears least favourable; this is shown by simulation, not proven for finite N",
+  "mixture_w0.5_ratio1.2": {
+   "weight_of_fast_component": 0.5,
+   "rate_ratio": 1.2,
+   "false_alarm_N_100_alpha_0.01": 0.009,
+   "false_alarm_N_300_alpha_0.01": 0.0065
+  },
+  "mixture_w0.5_ratio2": {
+   "weight_of_fast_component": 0.5,
+   "rate_ratio": 2.0,
+   "false_alarm_N_100_alpha_0.01": 0.0011,
+   "false_alarm_N_300_alpha_0.01": 0.0001
+  },
+  "mixture_w0.1_ratio3": {
+   "weight_of_fast_component": 0.1,
+   "rate_ratio": 3.0,
+   "false_alarm_N_100_alpha_0.01": 0.0024,
+   "false_alarm_N_300_alpha_0.01": 0.0006
+  },
+  "mixture_w0.9_ratio3": {
+   "weight_of_fast_component": 0.9,
+   "rate_ratio": 3.0,
+   "false_alarm_N_100_alpha_0.01": 0.0011,
+   "false_alarm_N_300_alpha_0.01": 0.0001
+  },
+  "mixture_w0.02_ratio10": {
+   "weight_of_fast_component": 0.02,
+   "rate_ratio": 10.0,
+   "false_alarm_N_100_alpha_0.01": 0.0053,
+   "false_alarm_N_300_alpha_0.01": 0.003
+  }
+ },
+ "partA_dead_time_N300": {
+  "rule": "discard events shorter than the dead time and subtract it; an exponential stays exponential",
+  "dead_time_5_ms": {
+   "power_variant_A_alpha_0.01": 0.9992,
+   "false_alarm_single_exponential_alpha_0.01": 0.0107,
+   "runs": 4000
+  },
+  "dead_time_20_ms": {
+   "power_variant_A_alpha_0.01": 0.9918,
+   "false_alarm_single_exponential_alpha_0.01": 0.0125,
+   "runs": 4000
+  },
+  "dead_time_50_ms": {
+   "power_variant_A_alpha_0.01": 0.8383,
+   "false_alarm_single_exponential_alpha_0.01": 0.009,
+   "runs": 4000
+  }
+ },
+ "partA_heterogeneous_patches": {
+  "design": "10 patches x 100 bursts, variant A, each patch's time scale drawn log-normally (sigma 0.5)",
+  "power_pooling_raw_durations_alpha_0.01": 0.5733,
+  "power_per_patch_scores_combined_alpha_0.01": 1.0,
+  "runs": 4000,
+  "why": "pooling patches of different speed is itself a mixture and pushes CV^2 up toward 1"
+ },
+ "partA_reference_3bin_test": {
+  "source": "benchmark/out/single_channel_sample_size.json calibration.variant_A_binned_vs_hypoexponential_LRT",
+  "power_3bin_D2_alpha_0.01": {
+   "N_300": 0.295,
+   "N_1000": 0.7833333333333333
+  },
+  "power_likelihood_ratio_test_alpha_0.01": {
+   "N_300": 1.0,
+   "N_1000": 1.0
+  }
+ },
+ "partB_f1_atpase": {
+  "cache": "benchmark/out/zenodo5567245_f1_atpase.npz",
+  "cache_sha256": "9459a7abe8dfad87a8b262b469d50cecee6d57d7a38402162a5d1c7b805190ac",
+  "note": "rotary F1-ATPase 120-degree step dwells, not CFTR; a step-finding algorithm that misses short dwells lowers CV^2, which the adjusted statistic only partly addresses",
+  "conditions": {
+   "dwell_2d": {
+    "condition": "Fig2D wild type, 3 mM ATP (saturating; hydrolysis-limited dwell)",
+    "n_dwells": 1599,
+    "frame_quantum": 0.022222,
+    "shortest_dwell": 0.044444,
+    "cv2_raw": 0.367,
+    "p_one_sided_raw_vs_exponential": 0.0,
+    "cv2_dead_time_adjusted": 0.4166,
+    "p_one_sided_adjusted_vs_quantized_exponential": 0.0,
+    "p_upper_tail_adjusted": 1.0,
+    "critical_cv2_alpha_0.01_adjusted": 0.8928,
+    "reject_mixture_at_0.01": true
+   },
+   "dwell_3a": {
+    "condition": "Fig3A wild type, 1 mM ATP-gamma-S (slowly hydrolysed analog)",
+    "n_dwells": 192,
+    "frame_quantum": 0.1,
+    "shortest_dwell": 0.1,
+    "cv2_raw": 0.8079,
+    "p_one_sided_raw_vs_exponential": 0.07085,
+    "cv2_dead_time_adjusted": 0.8131,
+    "p_one_sided_adjusted_vs_quantized_exponential": 0.07905,
+    "p_upper_tail_adjusted": 0.92095,
+    "critical_cv2_alpha_0.01_adjusted": 0.7243,
+    "reject_mixture_at_0.01": false
+   },
+   "dwell_2c": {
+    "condition": "Fig2C wild type, 300 nM ATP (binding-limited dwell)",
+    "n_dwells": 443,
+    "frame_quantum": 2.0,
+    "shortest_dwell": 2.0,
+    "cv2_raw": 1.3826,
+    "p_one_sided_raw_vs_exponential": 0.9994,
+    "cv2_dead_time_adjusted": 1.4058,
+    "p_one_sided_adjusted_vs_quantized_exponential": 0.9996,
+    "p_upper_tail_adjusted": 0.0004,
+    "critical_cv2_alpha_0.01_adjusted": 0.8022,
+    "reject_mixture_at_0.01": false
+   }
+  }
+ },
+ "not_run": {
+  "BK_channel_dwells": "the package cache holds only binned dwell histograms truncated at 400 bins; truncation lowers CV^2 even for a mixture, so the test is not valid on that cache and was not run",
+  "CFTR": "no public event-level CFTR recording was found; nothing is analysed"
+ }
+}

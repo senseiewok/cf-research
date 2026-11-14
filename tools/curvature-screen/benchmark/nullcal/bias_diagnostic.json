@@ -1,0 +1,22 @@
+{
+ "T300": {
+  "reps": 3000,
+  "package_mean_z": -0.45734518101661775,
+  "package_sd_z": 1.0510724817269996,
+  "package_frac_lt_m2": 0.066,
+  "no_mean_subtraction_mean_z": -0.0006913705897955253,
+  "no_mean_subtraction_sd_z": 1.059079591282423,
+  "no_mean_subtraction_frac_lt_m2": 0.025666666666666667,
+  "predicted_W_offset": -2.8997756253056997
+ },
+ "T1800": {
+  "reps": 600,
+  "package_mean_z": -0.123806649927876,
+  "package_sd_z": 1.1586290948620221,
+  "package_frac_lt_m2": 0.05,
+  "no_mean_subtraction_mean_z": 0.06331591122753333,
+  "no_mean_subtraction_sd_z": 1.1596419119284114,
+  "no_mean_subtraction_frac_lt_m2": 0.035,
+  "predicted_W_offset": -0.4832443859842779
+ }
+}

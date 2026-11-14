@@ -1,0 +1,257 @@
+{
+ "assumptions": [
+  "Stationary, ergodic, finite-state Markov channel; n independent identical channels; additive white measurement noise; current = sum of conductances.",
+  "W_C(t1,d) = C(t1) C(t1+2d) - C(t1+d)^2 on equally spaced lags; reversible => C completely monotone => W_C >= 0.",
+  "Filter (anti-aliasing) effects are not modelled here; lags must lie well beyond the filter time constant.",
+  "No experimental recording is analysed here. This is a simulation benchmark of the statistic."
+ ],
+ "reversible_null": {
+  "n_chains": 2000,
+  "states": [
+   3,
+   4
+  ],
+  "triples_per_chain": 81,
+  "evaluations": 162000,
+  "violations_W_C_lt_minus1e9_rel": 0,
+  "min_W_over_C2sq": -6.868016216173705e-12,
+  "note": "min W/C(t2)^2 ~ 0 up to float error; sign constraint holds."
+ },
+ "driven_cycle_listed_rates": {
+  "name": "listed rates (k12=2.5,k23=4.0,k31=3.5; reverse 0.05 /s)",
+  "rates_per_s": {
+   "0->1": 2.5,
+   "1->0": 0.05,
+   "1->2": 4.0,
+   "2->1": 0.05,
+   "2->0": 3.5,
+   "0->2": 0.05
+  },
+  "eigenvalues_nonzero": [
+   [
+    -5.074999999999999,
+    2.738955092731533
+   ],
+   [
+    -5.074999999999999,
+    -2.738955092731533
+   ]
+  ],
+  "eigenvalues_strictly_real": false,
+  "spectral_weights": [
+   [
+    0.12228377327344009,
+    -0.02813636965165084
+   ],
+   [
+    0.12228377327344009,
+    0.02813636965165084
+   ]
+  ],
+  "cycle_affinity_kBT": 12.542544882151386,
+  "fraction_lag_triples_W_C_lt_0": 1.0,
+  "W_C_at_50_200_350ms_per_unit_current_sq": -0.0013193572414836457,
+  "stationary": [
+   0.4262948207171315,
+   0.26693227091633465,
+   0.3067729083665338
+  ]
+ },
+ "driven_cycle_real_spectrum": {
+  "name": "seeded search: strictly real spectrum, A>=6, slow rate 0.5-10/s, fast <=40/s",
+  "rates_per_s": {
+   "0->1": 0.19593728618614192,
+   "1->0": 0.04278514817414629,
+   "1->2": 15.506440425102108,
+   "2->1": 0.04313619619225887,
+   "2->0": 1.6757181135840646,
+   "0->2": 0.03370247760253501
+  },
+  "eigenvalues_nonzero": [
+   [
+    -1.9236122126331896,
+    0.0
+   ],
+   [
+    -15.57410743420806,
+    0.0
+   ]
+  ],
+  "eigenvalues_strictly_real": true,
+  "spectral_weights": [
+   [
+    0.11457357019051795,
+    -0.0
+   ],
+   [
+    -0.0013261929434789676,
+    0.0
+   ]
+  ],
+  "cycle_affinity_kBT": 11.312677589791269,
+  "fraction_lag_triples_W_C_lt_0": 1.0,
+  "W_C_at_50_200_350ms_per_unit_current_sq": -2.6983460001117447e-05,
+  "stationary": [
+   0.8698007879290699,
+   0.011290316840266577,
+   0.11890889523066347
+  ]
+ },
+ "real_spectrum_search_seed": 20261113,
+ "affinity_sweep_listed_topology": [
+  {
+   "forward_scale": 1.0,
+   "affinity_kBT": 12.542544882151386,
+   "strictly_real": false,
+   "fraction_W_C_lt_0": 1.0
+  },
+  {
+   "forward_scale": 2.0,
+   "affinity_kBT": 14.621986423831222,
+   "strictly_real": false,
+   "fraction_W_C_lt_0": 1.0
+  },
+  {
+   "forward_scale": 5.0,
+   "affinity_kBT": 17.37085861945369,
+   "strictly_real": false,
+   "fraction_W_C_lt_0": 1.0
+  },
+  {
+   "forward_scale": 10.0,
+   "affinity_kBT": 19.450300161133523,
+   "strictly_real": false,
+   "fraction_W_C_lt_0": 0.8266666666666667
+  },
+  {
+   "forward_scale": 30.0,
+   "affinity_kBT": 22.746137027137852,
+   "strictly_real": false,
+   "fraction_W_C_lt_0": 0.6755555555555556
+  },
+  {
+   "forward_scale": 100.0,
+   "affinity_kBT": 26.35805544011566,
+   "strictly_real": false,
+   "fraction_W_C_lt_0": 0.7288888888888889
+  }
+ ],
+ "detection_time_gaussian_limit": {
+  "method": "Circulant-embedding Gaussian process with exact C(tau) from the rate matrix + white noise sigma_w; K=16 block U-statistic; jackknife SE",
+  "caveat": "Gaussian (many-channel) limit; finite-n non-Gaussianity, filtering, baseline drift and rundown are not modelled. z is signed: W_C < 0 gives negative z.",
+  "results": {
+   "listed_complex_spectrum": {
+    "per_n": [
+     {
+      "n_channels": 1,
+      "sigma_w_over_i": 1.0,
+      "T_s": 300.0,
+      "mean_z": -1.5063560223442187,
+      "sd_z": 1.0574992656465692,
+      "frac_z_lt_minus2": 0.225,
+      "frac_z_gt_2": 0.0
+     },
+     {
+      "n_channels": 10,
+      "sigma_w_over_i": 1.0,
+      "T_s": 300.0,
+      "mean_z": -2.3084178745100283,
+      "sd_z": 1.1192609073481607,
+      "frac_z_lt_minus2": 0.575,
+      "frac_z_gt_2": 0.0
+     },
+     {
+      "n_channels": 100,
+      "sigma_w_over_i": 1.0,
+      "T_s": 300.0,
+      "mean_z": -2.5248415936510624,
+      "sd_z": 1.0647637321687418,
+      "frac_z_lt_minus2": 0.675,
+      "frac_z_gt_2": 0.0
+     },
+     {
+      "n_channels": 1000,
+      "sigma_w_over_i": 1.0,
+      "T_s": 300.0,
+      "mean_z": -2.2317240653004013,
+      "sd_z": 1.1898774965517698,
+      "frac_z_lt_minus2": 0.55,
+      "frac_z_gt_2": 0.0
+     }
+    ],
+    "T5sigma_s_by_sqrtT_scaling_n100": 1176.5028709148066,
+    "T5sigma_minutes": 19.608381181913444,
+    "refinement_runs": [
+     {
+      "T_s": 1176.5028709148066,
+      "mean_z": -3.904999016721408,
+      "sd_z": 1.2614307273800858
+     },
+     {
+      "T_s": 1928.8175201392066,
+      "mean_z": -5.150731724089982,
+      "sd_z": 1.3964566780948755
+     },
+     {
+      "T_s": 1817.5789754810887,
+      "mean_z": -5.385483855540248,
+      "sd_z": 1.7123805383671935
+     }
+    ],
+    "T_mean_z_5_after_refinement_s": 1566.6927817002518,
+    "T_mean_z_5_after_refinement_minutes": 26.111546361670865
+   },
+   "real_spectrum": {
+    "per_n": [
+     {
+      "n_channels": 1,
+      "sigma_w_over_i": 1.0,
+      "T_s": 300.0,
+      "mean_z": -0.33674167257630694,
+      "sd_z": 1.012692589568466,
+      "frac_z_lt_minus2": 0.0,
+      "frac_z_gt_2": 0.025
+     },
+     {
+      "n_channels": 10,
+      "sigma_w_over_i": 1.0,
+      "T_s": 300.0,
+      "mean_z": -0.8009994322703775,
+      "sd_z": 0.8905786188568902,
+      "frac_z_lt_minus2": 0.075,
+      "frac_z_gt_2": 0.0
+     },
+     {
+      "n_channels": 100,
+      "sigma_w_over_i": 1.0,
+      "T_s": 300.0,
+      "mean_z": -1.0109411624565898,
+      "sd_z": 0.9916101100824294,
+      "frac_z_lt_minus2": 0.125,
+      "frac_z_gt_2": 0.0
+     },
+     {
+      "n_channels": 1000,
+      "sigma_w_over_i": 1.0,
+      "T_s": 300.0,
+      "mean_z": -1.036031049384724,
+      "sd_z": 0.9470769790405121,
+      "frac_z_lt_minus2": 0.125,
+      "frac_z_gt_2": 0.0
+     }
+    ],
+    "T5sigma_s_by_sqrtT_scaling_n100": 7338.537254196569,
+    "T5sigma_minutes": 122.30895423660948,
+    "refinement_runs": [
+     {
+      "T_s": 7338.537254196569,
+      "mean_z": -1.4183552418884537,
+      "sd_z": 0.951411586779586
+     }
+    ],
+    "T_mean_z_5_after_refinement_s": 91196.7739965596,
+    "T_mean_z_5_after_refinement_minutes": 1519.9462332759933
+   }
+  }
+ }
+}
