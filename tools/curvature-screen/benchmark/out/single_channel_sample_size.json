@@ -1,0 +1,267 @@
+{
+ "reconciliation": {
+  "A_disjoint50ms": {
+   "rates_per_s": [
+    12.0,
+    8.0
+   ],
+   "observable": "disjoint",
+   "bin_or_grid": 0.05,
+   "cell_probs": [
+    0.08666313408113502,
+    0.16773839739160434,
+    0.17261360923382751
+   ],
+   "D2": -0.6317270099223129,
+   "N_var_D2": 41.17887466988944,
+   "snr_per_sqrtN": -0.0984446702935202,
+   "N_for_SNR5": 2580,
+   "N_for_SNR3": 929
+  },
+  "A_nested40_80_120": {
+   "rates_per_s": [
+    12.0,
+    8.0
+   ],
+   "observable": "nested",
+   "bin_or_grid": [
+    0.04,
+    0.08,
+    0.12
+   ],
+   "cell_probs": [
+    0.9408803276087909,
+    0.8160915001789215,
+    0.6748231405610927
+   ],
+   "D2": -0.047786364205811005,
+   "N_var_D2": 0.4190353291911593,
+   "snr_per_sqrtN": -0.07382078662317837,
+   "N_for_SNR5": 4588,
+   "N_for_SNR3": 1652
+  },
+  "B_disjoint50ms": {
+   "rates_per_s": [
+    5.988,
+    4.0
+   ],
+   "observable": "disjoint",
+   "bin_or_grid": 0.05,
+   "cell_probs": [
+    0.025398296277514443,
+    0.06112411092973358,
+    0.07993909485811868
+   ],
+   "D2": -0.6098656786049506,
+   "N_var_D2": 117.32286801453407,
+   "snr_per_sqrtN": -0.056304467797277,
+   "N_for_SNR5": 7886,
+   "N_for_SNR3": 2839
+  },
+  "B_nested40_80_120": {
+   "rates_per_s": [
+    5.988,
+    4.0
+   ],
+   "observable": "nested",
+   "bin_or_grid": [
+    0.04,
+    0.08,
+    0.12
+   ],
+   "cell_probs": [
+    0.9832066161329784,
+    0.9409804825451684,
+    0.8830279118272156
+   ],
+   "D2": -0.01966869863093912,
+   "N_var_D2": 0.11538681518782351,
+   "snr_per_sqrtN": -0.057902529001339555,
+   "N_for_SNR5": 7457,
+   "N_for_SNR3": 2685
+  }
+ },
+ "recording_time_vs_burst_rate": [
+  {
+   "variant": "A_disjoint50ms",
+   "bursts_per_s": 0.5,
+   "N": 2580,
+   "minutes": 86.0
+  },
+  {
+   "variant": "A_disjoint50ms",
+   "bursts_per_s": 1.0,
+   "N": 2580,
+   "minutes": 43.0
+  },
+  {
+   "variant": "A_disjoint50ms",
+   "bursts_per_s": 2.0,
+   "N": 2580,
+   "minutes": 21.5
+  },
+  {
+   "variant": "A_disjoint50ms",
+   "bursts_per_s": 5.0,
+   "N": 2580,
+   "minutes": 8.6
+  },
+  {
+   "variant": "B_disjoint50ms",
+   "bursts_per_s": 0.5,
+   "N": 7886,
+   "minutes": 262.9
+  },
+  {
+   "variant": "B_disjoint50ms",
+   "bursts_per_s": 1.0,
+   "N": 7886,
+   "minutes": 131.4
+  },
+  {
+   "variant": "B_disjoint50ms",
+   "bursts_per_s": 2.0,
+   "N": 7886,
+   "minutes": 65.7
+  },
+  {
+   "variant": "B_disjoint50ms",
+   "bursts_per_s": 5.0,
+   "N": 7886,
+   "minutes": 26.3
+  }
+ ],
+ "recording_time_note": "Time = N / (bursts per second). The old 13-21 min figure corresponds to a burst rate of 3.3-2.0 bursts/s, i.e. a very active channel; patches with 0.5-2 bursts/s need 20-90 min under variant A.",
+ "calibration": {
+  "note": "Null = exponential burst durations with matched mean. alpha is calibrated by Monte Carlo (LRT) or the plug-in normal approximation (D2), whose empirical type-I error is reported. SNR=5 means E[z]=5; it is not a detection probability.",
+  "variant_A_binned_vs_hypoexponential_LRT": [
+   {
+    "N": 300,
+    "mc_reps": 600,
+    "d2_null_mean_z": 0.027593802369207113,
+    "d2_null_sd_z": 0.9793409773998555,
+    "d2_alt_mean_z": 1.7165984870311077,
+    "d2_typeI_z_gt_1p645": 0.045,
+    "d2_power_z_gt_1p645": 0.515,
+    "d2_typeI_z_gt_2p326": 0.013333333333333334,
+    "d2_power_z_gt_2p326": 0.295,
+    "lrt_crit_95": 3.9815692588723173,
+    "lrt_crit_99": 6.8831964841659055,
+    "lrt_typeI_at_own_95": 0.05,
+    "lrt_power_at_null95": 1.0,
+    "lrt_power_at_null99": 1.0
+   },
+   {
+    "N": 1000,
+    "mc_reps": 600,
+    "d2_null_mean_z": 0.024917161108964785,
+    "d2_null_sd_z": 0.967414561491596,
+    "d2_alt_mean_z": 3.182019504995324,
+    "d2_typeI_z_gt_1p645": 0.04666666666666667,
+    "d2_power_z_gt_1p645": 0.925,
+    "d2_typeI_z_gt_2p326": 0.006666666666666667,
+    "d2_power_z_gt_2p326": 0.7833333333333333,
+    "lrt_crit_95": 3.47865962310179,
+    "lrt_crit_99": 6.049369472681484,
+    "lrt_typeI_at_own_95": 0.05,
+    "lrt_power_at_null95": 1.0,
+    "lrt_power_at_null99": 1.0
+   },
+   {
+    "N": 2580,
+    "mc_reps": 600,
+    "d2_null_mean_z": 0.013610455184132777,
+    "d2_null_sd_z": 0.9865065553627871,
+    "d2_alt_mean_z": 4.959235095019767,
+    "d2_typeI_z_gt_1p645": 0.03833333333333333,
+    "d2_power_z_gt_1p645": 1.0,
+    "d2_typeI_z_gt_2p326": 0.006666666666666667,
+    "d2_power_z_gt_2p326": 1.0,
+    "lrt_crit_95": 3.4851119411439866,
+    "lrt_crit_99": 5.998769826419321,
+    "lrt_typeI_at_own_95": 0.05,
+    "lrt_power_at_null95": 1.0,
+    "lrt_power_at_null99": 1.0
+   },
+   {
+    "N": 7873,
+    "mc_reps": 600,
+    "d2_null_mean_z": 0.08705165350131225,
+    "d2_null_sd_z": 1.045389710857979,
+    "d2_alt_mean_z": 8.640587826168222,
+    "d2_typeI_z_gt_1p645": 0.065,
+    "d2_power_z_gt_1p645": 1.0,
+    "d2_typeI_z_gt_2p326": 0.015,
+    "d2_power_z_gt_2p326": 1.0,
+    "lrt_crit_95": 3.478504875913494,
+    "lrt_crit_99": 5.17303841447845,
+    "lrt_typeI_at_own_95": 0.05,
+    "lrt_power_at_null95": 1.0,
+    "lrt_power_at_null99": 1.0
+   }
+  ],
+  "variant_B_binned_vs_hypoexponential_LRT": [
+   {
+    "N": 1000,
+    "mc_reps": 600,
+    "d2_null_mean_z": 0.0662838012969303,
+    "d2_null_sd_z": 0.9666509133617759,
+    "d2_alt_mean_z": 1.8056083619555239,
+    "d2_typeI_z_gt_1p645": 0.051666666666666666,
+    "d2_power_z_gt_1p645": 0.5583333333333333,
+    "d2_typeI_z_gt_2p326": 0.01,
+    "d2_power_z_gt_2p326": 0.3233333333333333,
+    "lrt_crit_95": 3.7154052611084856,
+    "lrt_crit_99": 5.769180926656823,
+    "lrt_typeI_at_own_95": 0.05,
+    "lrt_power_at_null95": 1.0,
+    "lrt_power_at_null99": 1.0
+   },
+   {
+    "N": 7873,
+    "mc_reps": 600,
+    "d2_null_mean_z": -0.022355853828175638,
+    "d2_null_sd_z": 1.0057987306342286,
+    "d2_alt_mean_z": 4.9988150172783,
+    "d2_typeI_z_gt_1p645": 0.055,
+    "d2_power_z_gt_1p645": 1.0,
+    "d2_typeI_z_gt_2p326": 0.013333333333333334,
+    "d2_power_z_gt_2p326": 0.995,
+    "lrt_crit_95": 3.6867277268428533,
+    "lrt_crit_99": 5.824289349667068,
+    "lrt_typeI_at_own_95": 0.05,
+    "lrt_power_at_null95": 1.0,
+    "lrt_power_at_null99": 1.0
+   }
+  ]
+ },
+ "detection_probability_conversion": {
+  "z_required_for_power0p8_alpha0p01": 3.167969107613755,
+  "N_variant_A": 1036,
+  "N_variant_B": 3166,
+  "note": "Asymptotic; confirm with the Monte-Carlo power columns above."
+ },
+ "dead_time_sensitivity_N2580_variantA": [
+  {
+   "dead_ms": 0.0,
+   "A_power_z_gt_2p326_N2580": 1.0
+  },
+  {
+   "dead_ms": 1.0,
+   "A_power_z_gt_2p326_N2580": 1.0
+  },
+  {
+   "dead_ms": 3.0,
+   "A_power_z_gt_2p326_N2580": 1.0
+  },
+  {
+   "dead_ms": 5.0,
+   "A_power_z_gt_2p326_N2580": 1.0
+  }
+ ],
+ "limitations": [
+  "Burst durations are assumed independent with known sequential two-step kinetics; real records contain flickery closures, subconductance states, multiple channels and missed events (see dead_time_sensitivity).",
+  "A likelihood-based hypoexponential LRT is the established comparator; it is expected to be at least as powerful when the model is correct. The binned statistic is a model-light screen, not a replacement.",
+  "No experimental single-channel recording is analysed in this script."
+ ]
+}

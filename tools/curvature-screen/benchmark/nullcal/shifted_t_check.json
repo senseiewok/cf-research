@@ -1,0 +1,106 @@
+{
+ "z_rev_lumpable_boundary_WC0_n100_T300.npy": {
+  "N": 40000,
+  "mean": -0.45106977730113273,
+  "thr_-3": {
+   "observed": 0.01175,
+   "shifted_normal": 0.0054026958750611875,
+   "shifted_t15": 0.011122547566683584
+  },
+  "thr_-2": {
+   "observed": 0.070475,
+   "shifted_normal": 0.060699247380639844,
+   "shifted_t15": 0.07111796651950526
+  },
+  "thr_2": {
+   "observed": 0.012175,
+   "shifted_normal": 0.007121616973946874,
+   "shifted_t15": 0.013492299906220704
+  },
+  "thr_3": {
+   "observed": 0.00105,
+   "shifted_normal": 0.00027918459444861596,
+   "shifted_t15": 0.0017820045998785462
+  },
+  "ks_vs_shifted_t15_p": 0.19297677981576355,
+  "ks_vs_shifted_normal_p": 0.000117756839960691
+ },
+ "z_rev_lumpable_boundary_WC0_n100_T1800.npy": {
+  "N": 10000,
+  "mean": -0.20266883743497874,
+  "thr_-3": {
+   "observed": 0.0059,
+   "shifted_normal": 0.0025763344867539882,
+   "shifted_t15": 0.006766195909727318
+  },
+  "thr_-2": {
+   "observed": 0.0489,
+   "shifted_normal": 0.036141530915246474,
+   "shifted_t15": 0.04622056477971614
+  },
+  "thr_2": {
+   "observed": 0.0223,
+   "shifted_normal": 0.013809049102948662,
+   "shifted_t15": 0.02183626364994491
+  },
+  "thr_3": {
+   "observed": 0.0044,
+   "shifted_normal": 0.0006808022942058382,
+   "shifted_t15": 0.002965674764466202
+  },
+  "ks_vs_shifted_t15_p": 0.5910787732487035,
+  "ks_vs_shifted_normal_p": 0.05425832340599357
+ },
+ "z_rev_lumpable_boundary_WC0_n10_T300.npy": {
+  "N": 10000,
+  "mean": -0.46871757917183277,
+  "thr_-3": {
+   "observed": 0.0124,
+   "shifted_normal": 0.005682315072419557,
+   "shifted_t15": 0.011518234220119836
+  },
+  "thr_-2": {
+   "observed": 0.0729,
+   "shifted_normal": 0.06284980413521332,
+   "shifted_t15": 0.07325751116761517
+  },
+  "thr_2": {
+   "observed": 0.0108,
+   "shifted_normal": 0.0067799094860368685,
+   "shifted_t15": 0.013032126850818993
+  },
+  "thr_3": {
+   "observed": 0.001,
+   "shifted_normal": 0.0002614744393353553,
+   "shifted_t15": 0.0017186231295748906
+  },
+  "ks_vs_shifted_t15_p": 0.5359157611412442,
+  "ks_vs_shifted_normal_p": 0.10708934028481087
+ },
+ "z_rev_lumpable_boundary_WC0_n10_T1800.npy": {
+  "N": 4000,
+  "mean": -0.18301558684010125,
+  "thr_-3": {
+   "observed": 0.00675,
+   "shifted_normal": 0.0024238439111823403,
+   "shifted_t15": 0.006503048925549632
+  },
+  "thr_-2": {
+   "observed": 0.045,
+   "shifted_normal": 0.03460975001525865,
+   "shifted_t15": 0.04462563358191668
+  },
+  "thr_2": {
+   "observed": 0.02325,
+   "shifted_normal": 0.01451733109151659,
+   "shifted_t15": 0.02267001765731993
+  },
+  "thr_3": {
+   "observed": 0.003,
+   "shifted_normal": 0.0007287488400354752,
+   "shifted_t15": 0.0030874220319384513
+  },
+  "ks_vs_shifted_t15_p": 0.7761805268115505,
+  "ks_vs_shifted_normal_p": 0.2370778061949842
+ }
+}
