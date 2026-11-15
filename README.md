@@ -33,7 +33,7 @@ Beside the notes are the things the notes rest on. The **source catalog**, [`sou
 
 The **CFTR model**, [`tools/cftr-model/`](tools/cftr-model/README.md), is an interactive 3D drawing of the human CFTR protein built from four published structures (6MSM, 5UAK, 8EIQ and 8EJ1, from the Protein Data Bank), numbered as in UniProt P13569. It draws one point per amino acid each structure places and says plainly what it leaves out: no pore, no gate, no medicine, no motion, and nothing about what any person with CF can expect. Residue 508 is marked where a structure has it and shown as a gap where the file says it is absent, as it is in two of the four. The website's [CFTR model](https://senseiewok.ai/cf/cftr/) page is the same model with the same tables. The picture at the top of this page is an emblem, a door in a wall standing a little open: it is not a diagram of CFTR or of how it works, it is not the model, and it shows no treatment.
 
-The **ledger**, [`ledger/`](ledger/), logs the real mistakes caught in our working sessions, what caught each one and a cheap guard against the next: 138 entries in two session logs on 2026-10-08, by `ledger/tally.py`. A single entry is an observation, not a lesson. [`proposals/`](proposals/) holds changes to sibling repositories that an agent could not or should not apply directly, each with its evidence and a verification step.
+The **ledger**, [`ledger/`](ledger/), logs the real mistakes caught in our working sessions and holds the stated prediction ledger ([`ledger/predictions.jsonl`](ledger/predictions.jsonl)) with its validator, recording one prediction at a time under the discovery protocol. [`proposals/`](proposals/) holds changes to sibling repositories that an agent could not or should not apply directly, each with its evidence and a verification step.
 
 What this is not: a medical device, clinical guidance, or a place for patient data. We do not interpret anyone's genotype, recommend or dose any medicine, or predict any person's outcome. Clinical decisions belong with licensed care teams.
 
@@ -143,7 +143,7 @@ verified yet, in that order. Read them the way you'd read a map, not a promise.
 | [`.claude/settings.json`](.claude/settings.json) | Claude Code deny rules for a session started here: no reading `.env` files, keys or credentials. The same list as `cf-lab` | v1, 2026-10-06 |
 | [`leads/`](leads/README.md) | The public register of research leads: ideas, questions and sources worth following that are not yet tasks, each with its evidence tier, the data it needs and what the catalog permits, its guard and what it must not claim. `LEADS.md` is rendered; `tools/leads/` holds the renderer, the checker and their tests | seeded 2026-10-10 |
 | [`proposals/`](proposals/README.md) | Proposed changes to sibling repos, council decisions, and governance records (indexed by status in [`proposals/README.md`](proposals/README.md)), with evidence and a verification step for each | indexed 2026-11-06 |
-| [`ledger/`](ledger/) | Logs of real errors from working sessions: what happened, what caught it, and a cheap guard. A single entry is an observation, not a lesson | two session logs, 2026-10-04 and 2026-10-07 |
+| [`ledger/`](ledger/) | Session error logs and the stated prediction ledger ([`predictions.jsonl`](ledger/predictions.jsonl)) with its validator, recording each prediction, its refutation test, prior art, standard method, and outcome | error logs and PRED-0001 seeded, 2026-11-14 |
 
 ## How to read claims
 
