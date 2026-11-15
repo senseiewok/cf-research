@@ -25,6 +25,8 @@ class TestRetractionCitationRadar(unittest.TestCase):
         self.assertEqual(rep["retracted_or_withdrawn_hits"], [])
         self.assertEqual(rep["uncataloged_citation_hits"], [])
         self.assertGreaterEqual(rep["notes_scanned"], 5)
+        self.assertGreaterEqual(rep["claim_files_scanned"], 4)
+        self.assertGreaterEqual(rep["structured_claims_verified"], 40)
 
     def test_2_quarantine_untrusted_notice_blocks_trojan_and_homoglyphs(self) -> None:
         q = rcr.quarantine_untrusted_notice(

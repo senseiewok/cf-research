@@ -57,6 +57,19 @@ class TestRareGenotypeTrialScreener(unittest.TestCase):
         for ctrl in rep["negative_controls"]:
             self.assertTrue(ctrl["passed"], msg=str(ctrl))
 
+    def test_4_genotype_criteria_25_trial_benchmark_and_word_boundary_guard(self) -> None:
+        b_rep = rgts.evaluate_genotype_criteria_benchmark(self.studies)
+        self.assertEqual(b_rep["total_trials"], 25)
+        self.assertEqual(b_rep["exact_matches"], 25, msg=str(b_rep["mismatches"]))
+        self.assertEqual(b_rep["exact_match_accuracy"], 1.0)
+        self.assertTrue(b_rep["passed"])
+        for cls_name, metrics in b_rep["class_metrics"].items():
+            self.assertEqual(metrics["precision"], 1.0, msg=f"{cls_name}: {metrics}")
+            self.assertEqual(metrics["recall"], 1.0, msg=f"{cls_name}: {metrics}")
+        # Verify 'aso' does not match inside 'tetrasodium' or 'reasons'
+        self.assertFalse(rgts._keyword_matches("denufosol tetrasodium inhalation for safety reasons", "aso"))
+        self.assertTrue(rgts._keyword_matches("inhaled aso therapy for 3849+10kbc->t", "aso"))
+
 
 if __name__ == "__main__":
     unittest.main()

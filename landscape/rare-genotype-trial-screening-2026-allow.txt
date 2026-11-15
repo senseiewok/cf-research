@@ -1,0 +1,26 @@
+# Allow file for landscape/rare-genotype-trial-screening-2026.md
+# Format: number # explanation
+
+1  # Class I variant classification / Phase 1 / Rule X1
+2  # Phase 2 / API v2
+3  # three-letter substring / PRED-0003
+4  # 4 variant/therapeutic classes in benchmark
+5  # 5 negative controls in benchmark
+6  # Rule X6
+7  # Table 7
+9  # Chapter 9 / 9 matched studies
+10  # 3849+10kb splice mutation offset
+32  # ARCT-032 mRNA therapy identifier
+84  # SPL84 antisense oligonucleotide identifier
+100  # 100% precision/recall/accuracy percentage equivalent of 1.0
+542  # G542X codon number
+551  # G551D codon number
+710  # 4D-710 vector identifier
+940  # Task ID T-0940 and 940 eligible studies
+3849  # 3849+10kb splice mutation coordinate
+846781  # NCT00846781 numeric tail
+909532  # NCT00909532 numeric tail
+5248230  # NCT05248230 numeric tail
+5712538  # NCT05712538 numeric tail
+6429176  # NCT06429176 numeric tail
+4135495  # NCT04135495 numeric tail

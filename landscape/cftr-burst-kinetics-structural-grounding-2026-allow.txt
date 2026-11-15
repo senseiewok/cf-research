@@ -1,0 +1,18 @@
+# Allow file for landscape/cftr-burst-kinetics-structural-grounding-2026.md
+# Format: number # explanation
+
+1  # Section 1 / NBD1 / 1:1 stoichiometric coupling
+2  # Section 2 / NBD2 / composite site 2 / 2 mM MgATP
+3  # Section 3
+4  # Track 4
+5  # 5UAK PDB prefix digit
+6  # 6MSM PDB prefix digit
+100  # 35000 / 350 = 100-fold prolongation
+465  # PDB REMARK 465 header for unmodeled residues
+1371  # E1371Q catalytic glutamate residue number
+10.1085  # JGP DOI prefix for Csanady et al. 2006
+200609558  # JGP DOI suffix for Csanady et al. 2006
+10.1073  # PNAS DOI prefix for Csanady et al. 2010
+0911061107  # PNAS DOI suffix for Csanady et al. 2010
+10.1152  # PhysRev DOI prefix for Csanady et al. 2019
+00007.2018  # PhysRev DOI suffix for Csanady et al. 2019

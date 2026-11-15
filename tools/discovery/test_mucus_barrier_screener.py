@@ -55,6 +55,12 @@ class TestMucusBarrierScreener(unittest.TestCase):
         self.assertTrue(rep["falsify_passed"], msg=str(rep))
         self.assertEqual(len(rep["negative_controls"]), 3)
 
+    def test_4_empirical_mpt_benchmark_matches_published_regimes(self) -> None:
+        b_rep = mbs.evaluate_empirical_mpt_benchmark()
+        self.assertEqual(b_rep["total_cases"], 5)
+        self.assertEqual(b_rep["passed_cases"], 5, msg=str(b_rep["cases"]))
+        self.assertTrue(b_rep["passed"])
+
 
 if __name__ == "__main__":
     unittest.main()

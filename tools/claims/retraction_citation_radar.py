@@ -192,9 +192,14 @@ def audit_catalog_and_notes(
         if cdoi and cdoi not in by_doi:
             uncataloged_hits.append({"doi": cdoi, "location": str(cit.get("location") or "explicit_citation")})
 
-    # Scan markdown notes in landscape/ and proposals/ for catalog source ID mentions
+    # Scan markdown notes and structured *-claims.json sidecars in landscape/ and proposals/
     notes_scanned = 0
+    claim_files_scanned = 0
+    structured_claims_verified = 0
     matched_source_ids: set[str] = set()
+    retracted_ids = {str(h.get("source_id") or "") for h in retracted_hits if h.get("source_id")}
+    retracted_dois = {str(h.get("doi") or "") for h in retracted_hits if h.get("doi")}
+
     for sdir in scan_dirs:
         if not sdir.is_dir():
             continue
@@ -205,6 +210,54 @@ def audit_catalog_and_notes(
                 if sid in content:
                     matched_source_ids.add(sid)
 
+        for claims_path in sorted(sdir.glob("*-claims.json")):
+            claim_files_scanned += 1
+            stem = claims_path.name[: -len("-claims.json")]
+            ev_map_path = sdir / f"{stem}-evidence-map.json"
+            ev_map: dict[str, str] = {}
+            if ev_map_path.is_file():
+                try:
+                    ev_map = json.loads(ev_map_path.read_text(encoding="utf-8"))
+                except Exception:
+                    uncataloged_hits.append({"source_id": "invalid_evidence_map_json", "location": str(ev_map_path.name)})
+            try:
+                claims_list = json.loads(claims_path.read_text(encoding="utf-8"))
+            except Exception:
+                uncataloged_hits.append({"source_id": "invalid_claims_json", "location": str(claims_path.name)})
+                continue
+            if not isinstance(claims_list, list) or not claims_list:
+                uncataloged_hits.append({"source_id": "empty_claims_json", "location": str(claims_path.name)})
+                continue
+            for item in claims_list:
+                if not isinstance(item, dict):
+                    continue
+                structured_claims_verified += 1
+                c_src = str(item.get("source") or "").strip()
+                if ev_map:
+                    rel_ev = ev_map.get(c_src)
+                    if not rel_ev or not (sdir / rel_ev).is_file():
+                        uncataloged_hits.append({"source_id": c_src or "missing_source", "location": f"{claims_path.name}:{item.get('id', '?')}"})
+                if c_src in by_id:
+                    matched_source_ids.add(c_src)
+                if c_src in retracted_ids:
+                    retracted_hits.append(
+                        {
+                            "source_id": c_src,
+                            "reason": "structured_claim_cites_retracted_source",
+                            "location": f"{claims_path.name}:{item.get('id', '?')}",
+                        }
+                    )
+                for m in DOI_RE.finditer(f"{item.get('claim', '')} {item.get('quote', '')}"):
+                    d_norm = normalize_doi(m.group(1))
+                    if d_norm in retracted_dois:
+                        retracted_hits.append(
+                            {
+                                "doi": d_norm,
+                                "reason": "structured_claim_cites_retracted_doi",
+                                "location": f"{claims_path.name}:{item.get('id', '?')}",
+                            }
+                        )
+
     passed = len(retracted_hits) == 0 and len(uncataloged_hits) == 0
     return {
         "schema_version": 1,
@@ -213,6 +266,8 @@ def audit_catalog_and_notes(
         "catalog_source_count": len(by_id),
         "catalog_doi_count": len(by_doi),
         "notes_scanned": notes_scanned,
+        "claim_files_scanned": claim_files_scanned,
+        "structured_claims_verified": structured_claims_verified,
         "catalog_ids_cited_in_notes": len(matched_source_ids),
         "retracted_or_withdrawn_hits": retracted_hits,
         "uncataloged_citation_hits": uncataloged_hits,
@@ -323,7 +378,8 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         print(
             f"PASS retraction_citation_radar: catalog_sources={report['catalog_source_count']} "
-            f"notes_scanned={report['notes_scanned']} cited_ids={report['catalog_ids_cited_in_notes']} "
+            f"notes_scanned={report['notes_scanned']} claim_files={report['claim_files_scanned']} "
+            f"structured_claims={report['structured_claims_verified']} cited_ids={report['catalog_ids_cited_in_notes']} "
             f"retracted={len(report['retracted_or_withdrawn_hits'])} falsify_controls={len(f_rep['negative_controls'])}/3"
         )
         return 0

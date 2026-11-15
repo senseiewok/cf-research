@@ -1,0 +1,29 @@
+# Evidence Corpus for Rare-Genotype Trial Screening & Class-I Registry Denominators (2026)
+
+Section 1: Multi-Registry Modulator Ineligibility Denominators
+Overall, 92.3 percent of the total CF population in the Registry was eligible by CFTR genotype for at least one CFTR modulator as of 2024.
+In the 2024 CFF Patient Registry, 8.0 percent of individuals with known CFTR genotypes were ineligible by genotype for all FDA-approved CFTR modulators.
+In 2024, 26,277 of the 29,314 (89.6 percent) people eligible for a CFTR modulator based on age and genotype had at least one prescription reported in the Registry.
+The number of eligible individuals who were not prescribed a CFTR modulator fell from 3,065 (10.8 percent) in 2023 to 3,037 (10.4 percent) in 2024.
+Not shown in Table 7 are the 7.6 percent of individuals who were not considered currently eligible by age and genotype for any CFTR modulator therapies in the 2024 Canadian CF Registry.
+Table 7 describes the CFTR modulator usage in 2024: Elexacaftor/tezacaftor/ivacaftor 1,004 children and 2,083 adults for a total of 3,087 individuals in Canada.
+Of the 2,326 adults in the Australian registry in 2025 who had known eligibility for a modulator, 5.8 percent were not eligible for a modulator and 85.6 percent were eligible and prescribed a modulator.
+Of 1,473 children and adolescents with known eligibility in the Australian registry in 2025, 170 children and adolescents (11.5 percent) were not eligible for a modulator.
+We adopted the 2024 eligibility criteria of the European Medicines Agency for all countries in the ECFSPR except Israel, the Russian Federation and Switzerland.
+
+Section 2: ClinicalTrials.gov API v2 PRISMA Screening and Word-Boundary Disambiguation
+In the ClinicalTrials.gov API v2 CF snapshot, 1,053 studies were identified through the condition query and 940 interventional studies were eligible after rules X1 through X6.
+Across the 940 eligible interventional studies, 28 studies matched naive substring search for short genetic therapy acronyms before word-boundary disambiguation, including 19 false-positive matches.
+Specifically, study NCT00846781 evaluated inhalation of denufosol tetrasodium and matched naive substring search only because the chemical name tetrasodium contains the three-letter substring aso.
+Similarly, study NCT00909532 evaluated ivacaftor in subjects aged 12 years and older with the G551D mutation and serves as a negative control for Class I genetic therapy screening.
+Enforcing strict regular expression word boundaries on short acronyms reduced false positives from 19 to 0 and identified 9 true rare-genotype genetic therapy trials across the 940 studies.
+Against the 25-study labeled ClinicalTrials.gov genotype-criteria benchmark containing 20 positive rare-genotype or anti-infective studies and 5 negative controls, the screener achieved 1.0 precision, 1.0 recall, and 1.0 accuracy across all 25 studies.
+
+Section 3: Matched Class-I, Splice-Modulation, and Genotype-Agnostic Clinical Trials
+Study NCT05248230 AEROW evaluates aerosolized 4D-710 AAV gene therapy encoding human CFTR Delta-R in adults with cystic fibrosis who are ineligible for or intolerant of CFTR modulators.
+Phase 1/2 clinical efficacy results for study NCT05248230 are not stated in the ClinicalTrials.gov registry record as of the 2026 snapshot.
+Study NCT05712538 evaluates inhaled ARCT-032 mRNA therapy formulated in lipid nanoparticles in healthy adult subjects and adults with cystic fibrosis.
+Study NCT06429176 evaluates SPL84 antisense oligonucleotide splice-modulation therapy in patients with cystic fibrosis carrying the 3849+10kb C-to-T splicing mutation.
+Posted clinical efficacy results for study NCT06429176 are not stated in the ClinicalTrials.gov registry record as of the 2026 snapshot.
+Study NCT04135495 evaluated ELX-02 translational readthrough therapy in cystic fibrosis subjects carrying at least one G542X nonsense allele or genetically similar Class I nonsense mutation.
+ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote United States Federal Government endorsement.

@@ -1,0 +1,13 @@
+# Evidence Corpus for CFTR Single-Channel Burst Kinetics & Cryo-EM Structural Grounding (2026)
+
+Section 1: Human CFTR Cryo-EM Structural Coordinates (PDB 6MSM and 5UAK)
+In the phosphorylated, ATP-bound human CFTR E1371Q cryo-EM structure PDB 6MSM determined at 3.2 Angstrom resolution, the model places 1,181 of the 1,480 residues in chain A, while 299 residues are not placed due to conformational disorder.
+In the dephosphorylated, ATP-free human CFTR cryo-EM structure PDB 5UAK determined at 3.87 Angstrom resolution, the model places 1,139 of the 1,480 residues, leaving 341 residues unplaced in the disordered regions including the regulatory domain.
+Subtracting 1,139 placed residues in PDB 5UAK from 1,181 placed residues in PDB 6MSM (or subtracting 299 unplaced residues from 341 unplaced residues) equals 42 additional ordered residues resolved upon R-domain phosphorylation and ATP-driven NBD1-NBD2 dimerization.
+Atomic coordinates for the intrinsically disordered central portion of the regulatory (R) domain are not stated in the deposited PDB 6MSM or PDB 5UAK coordinate records because the flexible segments lack continuous cryo-EM map density.
+
+Section 2: Non-Equilibrium Irreversible Gating Cycle and Burst-Duration Coupling (Csanady 2006, 2010, 2019)
+Csanady L et al. 2006 demonstrated in the Journal of General Physiology (DOI: 10.1085/jgp.200609558) that wild-type CFTR channel gating follows a non-equilibrium irreversible cycle driven by ATP binding at NBD1 and NBD2 and ATP hydrolysis at canonical composite site 2.
+In the hydrolysis-deficient E1371Q catalytic-glutamate mutant, blocking ATP hydrolysis at composite site 2 slows channel closure from open bursts by more than two orders of magnitude, prolonging mean open burst duration from approximately 350 milliseconds in wild-type CFTR to over 35,000 milliseconds.
+Csanady L et al. 2010 demonstrated in PNAS (DOI: 10.1073/pnas.0911061107) strict stoichiometric 1:1 coupling between the CFTR open-burst state and the hydrolysis of a single ATP molecule at canonical composite site 2, showing that open burst duration distributions exhibit a peaked non-monotonic probability density with a deficit of very short openings.
+Csanady L, Vergani P, and Gadsby DC 2019 synthesized in Physiological Reviews (DOI: 10.1152/physrev.00007.2018) that wild-type human CFTR exhibits a single-channel chloride conductance of 8 to 10 pS and a maximal open probability of approximately 0.40 in excised inside-out membrane patches at saturating 2 mM MgATP after PKA phosphorylation.

@@ -70,7 +70,7 @@ jobs:
         run: python -m unittest -v
       - name: claims checker tests
         working-directory: tools/claims
-        run: python -m unittest -v
+        run: python -m unittest -v && python retraction_citation_radar.py --check && python retraction_citation_radar.py --falsify
       - name: research leads tests, check and render check
         run: python -m unittest discover -s tools/leads -v && python tools/leads/check_leads.py && python tools/leads/render_leads.py --check
       - name: variant_profile tests
