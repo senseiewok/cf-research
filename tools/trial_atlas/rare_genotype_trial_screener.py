@@ -141,12 +141,26 @@ def _study_corpus(study: dict[str, Any]) -> str:
     return " ".join(parts).lower()
 
 
+WORD_BOUNDARY_KEYWORDS: frozenset[str] = frozenset(
+    {"aso", "mrna", "trna", "aav", "lnp", "tea", "teae", "pk", "cfu", "lci"}
+)
+
+
+def _keyword_matches(corpus: str, kw: str) -> bool:
+    """Match keywords with strict word boundaries on short acronyms (e.g. 'aso' not inside 'tetrasodium')."""
+    if kw == "ptc":
+        return bool(re.search(r"\bptc(?:\d+)?\b", corpus))
+    if kw in WORD_BOUNDARY_KEYWORDS:
+        return bool(re.search(rf"\b{re.escape(kw)}\b", corpus))
+    return kw in corpus
+
+
 def classify_variant_classes(study: dict[str, Any]) -> list[str]:
     """Infer stated trial relevance categories from registry title, modalities, and interventions."""
     corpus = _study_corpus(study)
     matched: list[str] = []
     for cls_name, keywords in VARIANT_CLASS_RULES.items():
-        if any(kw in corpus for kw in keywords):
+        if any(_keyword_matches(corpus, kw) for kw in keywords):
             matched.append(cls_name)
     for mod in study.get("modalities") or []:
         mod_l = str(mod).lower()
@@ -165,9 +179,106 @@ def classify_endpoint_categories(study: dict[str, Any]) -> list[str]:
     ).lower()
     matched: list[str] = []
     for ep_name, keywords in ENDPOINT_CATEGORY_RULES.items():
-        if any(kw in outcome_text for kw in keywords):
+        if any(_keyword_matches(outcome_text, kw) for kw in keywords):
             matched.append(ep_name)
     return sorted(matched)
+
+
+GENOTYPE_CRITERIA_BENCHMARK_25: tuple[tuple[str, tuple[str, ...], str], ...] = (
+    # 6 Class I stop/nonsense trials
+    ("NCT01140451", ("class_i_stop_nonsense",), "Extension Study of Ataluren (PTC124) in Cystic Fibrosis"),
+    ("NCT04126473", ("class_i_stop_nonsense", "genotype_agnostic_mrna_gene"), "A Phase 2 Study to Evaluate the Safety, Tolerability, PK and PD in Cystic Fibrosis Patients With at Least 1 G542X Allele"),
+    ("NCT00376428", ("class_i_stop_nonsense",), "Interest of Gentamicin-induced Readthrough in Cystic Fibrosis Patients"),
+    ("NCT02139306", ("class_i_stop_nonsense",), "Study of Ataluren in Nonsense Mutation Cystic Fibrosis (ACT CF)"),
+    ("NCT04135495", ("class_i_stop_nonsense", "genotype_agnostic_mrna_gene"), "A Phase 2 Study to Evaluate the Safety, Tolerability, PK and PD of ELX-02 in Cystic Fibrosis Patients With G542X Allele"),
+    ("NCT03624101", ("class_i_stop_nonsense",), "Novel Therapeutic Approaches for Treatment of CF Patients With W1282X Premature Termination Codon Mutations"),
+    # 5 Splice modulation / antisense oligonucleotide trials
+    ("NCT02934698", ("splice_modulation",), "An Efficacy and Safety Study of Ivacaftor in Patients With Cystic Fibrosis and Two Splicing Mutations"),
+    ("NCT06217952", ("splice_modulation",), "Safety, Tolerability, and Pharmacokinetics of SPL84 in Healthy Volunteers"),
+    ("NCT06429176", ("splice_modulation",), "Safety, Tolerability, Pharmacokinetics, and Preliminary Efficacy of SPL84 in Patients With Cystic Fibrosis"),
+    ("NCT02564354", ("splice_modulation",), "Exploratory Study to Evaluate QR-010 in Subjects With Cystic Fibrosis ΔF508 CFTR Mutation"),
+    ("NCT05100823", ("genotype_agnostic_mrna_gene", "splice_modulation"), "Validation of Therapeutic Efficacy Targeting the Splicing Variants in Cystic Fibrosis and CFTR Pathologies"),
+    # 5 Genotype-agnostic mRNA / gene therapy trials
+    ("NCT05248230", ("genotype_agnostic_mrna_gene",), "4D-710 in Adult Patients With Cystic Fibrosis"),
+    ("NCT06526923", ("genotype_agnostic_mrna_gene",), "A Phase 1/2 Trial of SP-101 for the Treatment of Cystic Fibrosis (CF)"),
+    ("NCT05712538", ("genotype_agnostic_mrna_gene",), "Safety, Tolerability, and Pharmacokinetics of ARCT-032 in Healthy Adult Subjects and Adults With Cystic Fibrosis."),
+    ("NCT00004533", ("genotype_agnostic_mrna_gene",), "Phase I Randomized Study of Adeno-Associated Virus-CFTR Vector in Patients With Cystic Fibrosis"),
+    ("NCT07485543", ("genotype_agnostic_mrna_gene",), "Safety and Efficacy of Inhaled BMD003 (CFTR mRNA) in Chinese Cystic Fibrosis Patients Aged ≥12 Years"),
+    # 4 Phage / anti-infective trials
+    ("NCT02918409", ("phage_anti_infective",), "IV Colistin for Pulmonary Exacerbations: Improving Safety and Efficacy"),
+    ("NCT00411736", ("phage_anti_infective",), "Scandinavian Cystic Fibrosis Azithromycin Study"),
+    ("NCT01404234", ("phage_anti_infective",), "Safety of AZLI in Children With Cystic Fibrosis (CF) and Chronic Pseudomonas Aeruginosa in the Lower Airways"),
+    ("NCT02054156", ("phage_anti_infective",), "OPTIMIZing Treatment for Early Pseudomonas Aeruginosa Infection in Cystic Fibrosis"),
+    # 5 Negative-control trials (modulator-only or non-rare-genotype, including hard negative NCT00846781 'tetrasodium')
+    ("NCT00846781", (), "Study 08-114 Open-label Extension of Study 08-110 - A Multi-Center Study of Denufosol Tetrasodium Inhalation Solution in Patients With Cystic Fibrosis Lung Disease (P08642)"),
+    ("NCT00909532", (), "Study of Ivacaftor in Cystic Fibrosis Subjects Aged 12 Years and Older With the G551D Mutation"),
+    ("NCT02858843", (), "The Effect of Combination Lumacaftor and Ivacaftor on Markers of Hyperglycemia"),
+    ("NCT03029455", (), "A Study to Evaluate Safety and Pharmacokinetics of VX-659 in Healthy Subjects and in Adults With Cystic Fibrosis"),
+    ("NCT04043806", (), "A Study Evaluating the Long-term Safety of VX-445 Combination Therapy"),
+)
+
+
+def evaluate_genotype_criteria_benchmark(studies: list[dict[str, Any]]) -> dict[str, Any]:
+    """Score classify_variant_classes against the 25-trial labeled benchmark (T-0940, PRED-0003)."""
+    by_nct = {str(s.get("nct_id")): s for s in studies if s.get("nct_id")}
+    exact_matches = 0
+    mismatches: list[dict[str, Any]] = []
+    class_metrics: dict[str, dict[str, Any]] = {
+        cls_name: {"tp": 0, "fp": 0, "fn": 0, "tn": 0}
+        for cls_name in VARIANT_CLASS_RULES
+    }
+
+    for nct_id, expected_tuple, title in GENOTYPE_CRITERIA_BENCHMARK_25:
+        study = by_nct.get(nct_id)
+        if study is None:
+            mismatches.append({"nct_id": nct_id, "error": "missing_from_snapshot"})
+            continue
+        predicted = tuple(classify_variant_classes(study))
+        expected = tuple(sorted(expected_tuple))
+        if predicted == expected:
+            exact_matches += 1
+        else:
+            mismatches.append(
+                {
+                    "nct_id": nct_id,
+                    "title": title,
+                    "expected": list(expected),
+                    "predicted": list(predicted),
+                }
+            )
+        for cls_name, counts in class_metrics.items():
+            in_exp = cls_name in expected
+            in_pred = cls_name in predicted
+            if in_exp and in_pred:
+                counts["tp"] += 1
+            elif in_pred and not in_exp:
+                counts["fp"] += 1
+            elif in_exp and not in_pred:
+                counts["fn"] += 1
+            else:
+                counts["tn"] += 1
+
+    for cls_name, counts in class_metrics.items():
+        tp, fp, fn = counts["tp"], counts["fp"], counts["fn"]
+        prec = tp / (tp + fp) if (tp + fp) > 0 else 1.0
+        rec = tp / (tp + fn) if (tp + fn) > 0 else 1.0
+        f1 = (2 * prec * rec / (prec + rec)) if (prec + rec) > 0 else 0.0
+        counts["precision"] = round(prec, 4)
+        counts["recall"] = round(rec, 4)
+        counts["f1"] = round(f1, 4)
+
+    total = len(GENOTYPE_CRITERIA_BENCHMARK_25)
+    accuracy = round(exact_matches / total, 4) if total else 0.0
+    return {
+        "benchmark_id": "T-0940-25-trial-rare-genotype-benchmark",
+        "prediction_id": "PRED-0003",
+        "total_trials": total,
+        "exact_matches": exact_matches,
+        "exact_match_accuracy": accuracy,
+        "passed": exact_matches == total,
+        "class_metrics": class_metrics,
+        "mismatches": mismatches,
+    }
 
 
 def screen_rare_genotype_trials(
@@ -387,6 +498,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--lang", type=str, default="en", choices=("en", "es-MX"), help="Output language (en or es-MX)")
     parser.add_argument("--limit", type=int, default=15, help="Max trials to return")
     parser.add_argument("--json", action="store_true", help="Emit JSON packet")
+    parser.add_argument("--benchmark", action="store_true", help="Run 25-trial rare-genotype criteria benchmark (T-0940)")
     parser.add_argument("--check", action="store_true", help="Run fast deterministic self-check")
     parser.add_argument("--falsify", action="store_true", help="Run negative-control falsification suite")
     args = parser.parse_args(argv)
@@ -400,6 +512,19 @@ def main(argv: list[str] | None = None) -> int:
         return 0 if rep["falsify_passed"] else 1
 
     _, studies = load_prisma_included_studies(args.snapshot)
+    if args.benchmark:
+        b_rep = evaluate_genotype_criteria_benchmark(studies)
+        if args.json:
+            print(json.dumps(b_rep, indent=2))
+        else:
+            print(
+                f"PASS benchmark rare_genotype_trial_screener: {b_rep['exact_matches']}/{b_rep['total_trials']} "
+                f"(accuracy={b_rep['exact_match_accuracy']})"
+                if b_rep["passed"]
+                else f"FAIL benchmark rare_genotype_trial_screener: {b_rep['mismatches']}"
+            )
+        return 0 if b_rep["passed"] else 1
+
     known_ncts = {str(s.get("nct_id")) for s in studies if s.get("nct_id")}
     rows = screen_rare_genotype_trials(
         studies,
@@ -423,12 +548,14 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.check:
         f_rep = run_falsification_suite(args.snapshot)
-        if not f_rep["falsify_passed"] or packet["match_count"] < 1:
+        b_rep = evaluate_genotype_criteria_benchmark(studies)
+        if not f_rep["falsify_passed"] or not b_rep["passed"] or packet["match_count"] < 1:
             print("FAIL rare_genotype_trial_screener self-check", file=sys.stderr)
             return 1
         print(
             f"PASS rare_genotype_trial_screener: prisma_studies={len(studies)} "
-            f"matched={packet['match_count']} falsify_controls={len(f_rep['negative_controls'])}/3"
+            f"matched={packet['match_count']} benchmark={b_rep['exact_matches']}/{b_rep['total_trials']} "
+            f"falsify_controls={len(f_rep['negative_controls'])}/3"
         )
         return 0
 

@@ -241,6 +241,126 @@ def run_falsification_suite() -> dict[str, Any]:
     }
 
 
+EMPIRICAL_MPT_BENCHMARK_CASES: tuple[dict[str, Any], ...] = (
+    {
+        "case_id": "mpp_dense_peg_80nm",
+        "citation": "Suk JS et al. Adv Drug Deliv Rev 2016 (doi:10.1016/j.addr.2015.09.012); Lai SK et al. PNAS 2007 (doi:10.1073/pnas.0608611104)",
+        "input": VectorBiophysicalInput(
+            diameter_nm=80.0,
+            zeta_mv=-2.5,
+            peg_density_chains_nm2=0.28,
+            peg_mw_kda=2.0,
+            pore_diameter_nm=140.0,
+            mucus_thickness_um=25.0,
+            mcc_window_s=900.0,
+        ),
+        "expected_verdict": "FEASIBLE_MUCUS_PENETRATING_CANDIDATE",
+        "d_eff_over_d_water_min": 0.02,
+        "d_eff_over_d_water_max": 0.15,
+    },
+    {
+        "case_id": "mpp_hybrid_lipid_polymer_100nm",
+        "citation": "Conte G et al. ACS Appl Mater Interfaces 2022 (doi:10.1021/acsami.1c14975); Suk JS et al. 2016 (doi:10.1016/j.addr.2015.09.012)",
+        "input": VectorBiophysicalInput(
+            diameter_nm=100.0,
+            zeta_mv=-3.0,
+            peg_density_chains_nm2=0.25,
+            peg_mw_kda=2.0,
+            pore_diameter_nm=140.0,
+            mucus_thickness_um=15.0,
+            mcc_window_s=900.0,
+        ),
+        "expected_verdict": "FEASIBLE_MUCUS_PENETRATING_CANDIDATE",
+        "d_eff_over_d_water_min": 0.01,
+        "d_eff_over_d_water_max": 0.08,
+    },
+    {
+        "case_id": "aav_capsid_25nm_neutral",
+        "citation": "Suk JS et al. Adv Drug Deliv Rev 2016 (doi:10.1016/j.addr.2015.09.012); Button B et al. Science 2012 (doi:10.1126/science.1223012)",
+        "input": VectorBiophysicalInput(
+            diameter_nm=25.0,
+            zeta_mv=-4.0,
+            peg_density_chains_nm2=0.0,
+            peg_mw_kda=2.0,
+            pore_diameter_nm=140.0,
+            mucus_thickness_um=25.0,
+            mcc_window_s=900.0,
+        ),
+        "expected_verdict": "FEASIBLE_MUCUS_PENETRATING_CANDIDATE",
+        "d_eff_over_d_water_min": 0.15,
+        "d_eff_over_d_water_max": 0.30,
+    },
+    {
+        "case_id": "uncoated_cationic_lipoplex_110nm",
+        "citation": "Lai SK et al. PNAS 2007 (doi:10.1073/pnas.0608611104)",
+        "input": VectorBiophysicalInput(
+            diameter_nm=110.0,
+            zeta_mv=30.0,
+            peg_density_chains_nm2=0.0,
+            peg_mw_kda=2.0,
+            pore_diameter_nm=140.0,
+            mucus_thickness_um=25.0,
+            mcc_window_s=900.0,
+        ),
+        "expected_verdict": "ELECTROSTATICALLY_TRAPPED_ON_MUCIN_FIBERS",
+        "d_eff_over_d_water_min": 0.0,
+        "d_eff_over_d_water_max": 0.005,
+    },
+    {
+        "case_id": "oversized_conventional_particle_300nm",
+        "citation": "Dawson M et al. J Biol Chem 2003 (doi:10.1074/jbc.M309026200); Suk JS et al. 2016 (doi:10.1016/j.addr.2015.09.012)",
+        "input": VectorBiophysicalInput(
+            diameter_nm=300.0,
+            zeta_mv=-3.0,
+            peg_density_chains_nm2=0.28,
+            peg_mw_kda=2.0,
+            pore_diameter_nm=140.0,
+            mucus_thickness_um=25.0,
+            mcc_window_s=900.0,
+        ),
+        "expected_verdict": "STERICALLY_TRAPPED_BY_SPUTUM_MESH",
+        "d_eff_over_d_water_min": 0.0,
+        "d_eff_over_d_water_max": 0.0,
+    },
+)
+
+
+def evaluate_empirical_mpt_benchmark() -> dict[str, Any]:
+    """Benchmark Renkin-Flory-Stokes-Einstein screener against 5 published CF sputum MPT regimes (T-0941, PRED-0004)."""
+    case_results: list[dict[str, Any]] = []
+    passed_count = 0
+    for case in EMPIRICAL_MPT_BENCHMARK_CASES:
+        pkt = evaluate_mucus_barrier(case["input"])
+        cm = pkt["computed_metrics"]
+        d_ratio = float(cm["d_eff_over_d_water"]["value"])
+        verdict = str(cm["crosses_before_mcc_window"]["verdict"])
+        in_bounds = case["d_eff_over_d_water_min"] <= d_ratio <= case["d_eff_over_d_water_max"]
+        verdict_ok = verdict == case["expected_verdict"]
+        ok = in_bounds and verdict_ok
+        if ok:
+            passed_count += 1
+        case_results.append(
+            {
+                "case_id": case["case_id"],
+                "citation": case["citation"],
+                "d_eff_over_d_water": d_ratio,
+                "expected_bounds": [case["d_eff_over_d_water_min"], case["d_eff_over_d_water_max"]],
+                "verdict": verdict,
+                "expected_verdict": case["expected_verdict"],
+                "passed": ok,
+            }
+        )
+    total = len(EMPIRICAL_MPT_BENCHMARK_CASES)
+    return {
+        "benchmark_id": "T-0941-cf-sputum-mpt-benchmark",
+        "prediction_id": "PRED-0004",
+        "total_cases": total,
+        "passed_cases": passed_count,
+        "passed": passed_count == total,
+        "cases": case_results,
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--diameter-nm", type=float, default=80.0, help="Hydrodynamic diameter d_p in nm (default: 80.0)")
@@ -250,6 +370,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--pore-nm", type=float, default=140.0, help="CF sputum mesh pore diameter in nm (default: 140.0)")
     parser.add_argument("--mucus-thickness-um", type=float, default=25.0, help="Airway mucus blanket thickness in um (default: 25.0)")
     parser.add_argument("--json", action="store_true", help="Print JSON output")
+    parser.add_argument("--benchmark", action="store_true", help="Run 5-regime CF sputum MPT benchmark (T-0941)")
     parser.add_argument("--check", action="store_true", help="Run fast deterministic self-check")
     parser.add_argument("--falsify", action="store_true", help="Run poisoned negative-control suite")
     args = parser.parse_args(argv)
@@ -261,6 +382,18 @@ def main(argv: list[str] | None = None) -> int:
         else:
             print(f"PASS falsify mucus_barrier_screener ({len(rep['negative_controls'])}/3 negative controls)" if rep["falsify_passed"] else "FAIL falsify mucus_barrier_screener")
         return 0 if rep["falsify_passed"] else 1
+
+    if args.benchmark:
+        b_rep = evaluate_empirical_mpt_benchmark()
+        if args.json:
+            print(json.dumps(b_rep, indent=2))
+        else:
+            print(
+                f"PASS benchmark mucus_barrier_screener: {b_rep['passed_cases']}/{b_rep['total_cases']} MPT regimes"
+                if b_rep["passed"]
+                else f"FAIL benchmark mucus_barrier_screener: {b_rep['cases']}"
+            )
+        return 0 if b_rep["passed"] else 1
 
     inp = VectorBiophysicalInput(
         diameter_nm=args.diameter_nm,
@@ -274,15 +407,17 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.check:
         f_rep = run_falsification_suite()
+        b_rep = evaluate_empirical_mpt_benchmark()
         verdict = packet["computed_metrics"]["crosses_before_mcc_window"]["verdict"]
-        if not f_rep["falsify_passed"] or verdict != "FEASIBLE_MUCUS_PENETRATING_CANDIDATE":
+        if not f_rep["falsify_passed"] or not b_rep["passed"] or verdict != "FEASIBLE_MUCUS_PENETRATING_CANDIDATE":
             print("FAIL mucus_barrier_screener self-check", file=sys.stderr)
             return 1
         print(
             f"PASS mucus_barrier_screener: d_p={inp.diameter_nm}nm "
             f"D_eff/D_w={packet['computed_metrics']['d_eff_over_d_water']['value']} "
             f"transit_s={packet['computed_metrics']['mean_transit_time_s']['value']} "
-            f"verdict={verdict} falsify_controls={len(f_rep['negative_controls'])}/3"
+            f"verdict={verdict} mpt_benchmark={b_rep['passed_cases']}/{b_rep['total_cases']} "
+            f"falsify_controls={len(f_rep['negative_controls'])}/3"
         )
         return 0
 
