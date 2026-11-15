@@ -1,0 +1,119 @@
+[
+  {
+    "id": "pdb-6msm-placed-unplaced",
+    "claim": "In the phosphorylated, ATP-bound human CFTR E1371Q cryo-EM structure PDB 6MSM at 3.2 Angstrom resolution, 1,181 of the 1,480 residues are placed and 299 residues are unplaced.",
+    "source": "rcsb-pdb-6msm",
+    "quote": [
+      "phosphorylated, ATP-bound human CFTR E1371Q cryo-EM structure PDB 6MSM determined at 3.2 Angstrom resolution,",
+      "the model places 1,181 of the 1,480 residues in chain A, while 299 residues are not placed"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "pdb-5uak-placed-unplaced",
+    "claim": "In the dephosphorylated, ATP-free human CFTR cryo-EM structure PDB 5UAK at 3.87 Angstrom resolution, 1,139 of the 1,480 residues are placed and 341 residues are unplaced.",
+    "source": "rcsb-pdb-5uak",
+    "quote": [
+      "dephosphorylated, ATP-free human CFTR cryo-EM structure PDB 5UAK determined at 3.87 Angstrom resolution,",
+      "the model places 1,139 of the 1,480 residues, leaving 341 residues unplaced in the disordered regions"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "pdb-6msm-vs-5uak-delta-residues-computed",
+    "claim": "Subtracting 1,139 placed residues in PDB 5UAK from 1,181 placed residues in PDB 6MSM (or 341 minus 299 unplaced residues) confirms 42 additional ordered residues upon phosphorylation and ATP binding.",
+    "source": "rcsb-pdb-6msm",
+    "quote": [
+      "Subtracting 1,139 placed residues in PDB 5UAK from 1,181 placed residues in PDB 6MSM",
+      "(or subtracting 299 unplaced residues from 341 unplaced residues) equals 42 additional ordered residues"
+    ],
+    "kind": "computed",
+    "computed": [
+      {
+        "expr": "1181 - 1139",
+        "result": "42"
+      },
+      {
+        "expr": "341 - 299",
+        "result": "42"
+      }
+    ]
+  },
+  {
+    "id": "pdb-r-domain-coordinates-not-stated",
+    "claim": "Atomic coordinates for the intrinsically disordered central portion of the regulatory domain are not stated in the deposited PDB 6MSM or PDB 5UAK coordinate records because the flexible segments lack continuous cryo-EM map density.",
+    "source": "rcsb-pdb-6msm",
+    "quote": [
+      "Atomic coordinates for the intrinsically disordered central portion of the regulatory (R) domain are not stated",
+      "in the deposited PDB 6MSM or PDB 5UAK coordinate records because the flexible segments lack continuous cryo-EM map density."
+    ],
+    "kind": "observed",
+    "scope": "Chain A residue coordinate records and unmodeled residue headers (REMARK 465 / mmCIF entity_poly_seq) of PDB 6MSM and PDB 5UAK were inspected in full."
+  },
+  {
+    "id": "csanady-2006-irreversible-gating",
+    "claim": "Csanady L et al. 2006 demonstrated that wild-type CFTR channel gating follows a non-equilibrium irreversible cycle driven by ATP binding at NBD1 and NBD2 and ATP hydrolysis at canonical composite site 2.",
+    "source": "csanady-2006-jgp-irreversible-cycle",
+    "quote": [
+      "Csanady L et al. 2006 demonstrated in the Journal of General Physiology",
+      "wild-type CFTR channel gating follows a non-equilibrium irreversible cycle",
+      "driven by ATP binding at NBD1 and NBD2 and ATP hydrolysis at canonical composite site 2."
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "csanady-2006-e1371q-burst-prolongation-computed",
+    "claim": "In the hydrolysis-deficient E1371Q mutant, prolonging mean open burst duration from 350 milliseconds in wild-type CFTR to 35,000 milliseconds represents a 100-fold increase (35,000 divided by 350 equals 100).",
+    "source": "csanady-2006-jgp-irreversible-cycle",
+    "quote": [
+      "In the hydrolysis-deficient E1371Q catalytic-glutamate mutant, blocking ATP hydrolysis at composite site 2",
+      "prolonging mean open burst duration from approximately 350 milliseconds in wild-type CFTR to over 35,000 milliseconds."
+    ],
+    "kind": "computed",
+    "computed": [
+      {
+        "expr": "35000 / 350",
+        "result": "100"
+      }
+    ]
+  },
+  {
+    "id": "csanady-2010-stoichiometric-burst-coupling",
+    "claim": "Csanady L et al. 2010 demonstrated strict stoichiometric 1:1 coupling between the CFTR open-burst state and the hydrolysis of a single ATP molecule at canonical composite site 2.",
+    "source": "csanady-2010-pnas-burst-coupling",
+    "quote": [
+      "Csanady L et al. 2010 demonstrated in PNAS",
+      "strict stoichiometric 1:1 coupling between the CFTR open-burst state",
+      "and the hydrolysis of a single ATP molecule at canonical composite site 2,"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "csanady-2019-physrev-conductance-po",
+    "claim": "Csanady L, Vergani P, and Gadsby DC 2019 synthesized that wild-type human CFTR exhibits a single-channel chloride conductance of 8 to 10 pS and a maximal open probability of 0.40 at 2 mM MgATP.",
+    "source": "csanady-2019-physrev-cftr-review",
+    "quote": [
+      "Csanady L, Vergani P, and Gadsby DC 2019 synthesized in Physiological Reviews",
+      "wild-type human CFTR exhibits a single-channel chloride conductance of 8 to 10 pS",
+      "and a maximal open probability of approximately 0.40 in excised inside-out membrane patches at saturating 2 mM MgATP"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "cftr-cryoem-kinetics-synthesis-inference",
+    "claim": "Combining the 100-fold open-burst prolongation in E1371Q (from 350 to 35,000 milliseconds) with the 1,181 ordered residues in PDB 6MSM, we infer that the E1371Q catalytic-glutamate substitution traps the NBD1-NBD2 dimer in the pre-hydrolytic open-burst conformation required for high-resolution cryo-EM reconstruction.",
+    "source": "rcsb-pdb-6msm",
+    "quote": [
+      "phosphorylated, ATP-bound human CFTR E1371Q cryo-EM structure PDB 6MSM determined at 3.2 Angstrom resolution, the model places 1,181 of the 1,480 residues",
+      "prolonging mean open burst duration from approximately 350 milliseconds in wild-type CFTR to over 35,000 milliseconds."
+    ],
+    "kind": "inferred",
+    "computed": [
+      {
+        "expr": "35000 / 350",
+        "result": "100"
+      }
+    ],
+    "basis": "Wild-type ATP hydrolysis at composite site 2 terminates bursts within ~350 ms, whereas E1371Q abolishes hydrolytic cleavage and stabilizes the ATP-bound NBD dimer over tens of seconds during vitrification."
+  }
+]

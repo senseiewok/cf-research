@@ -1,0 +1,19 @@
+# Evidence Corpus for Airway Mucus Barrier Biophysics & Nanoparticle Transit Benchmark (2026)
+
+Section 1: Hybrid Lipid-Polymer Nanoparticles and Gene Editing across the CF Airway Mucus Barrier
+Conte G et al. 2022 reported hybrid lipid-polymer nanoparticles for pulmonary nucleic acid delivery with hydrodynamic diameters of 80 to 120 nm and dense polyethylene glycol surface shells (DOI: 10.1021/acsami.1c14975).
+Dense polyethylene glycol shells with near-neutral zeta potential between -5 mV and +2 mV shield nanoparticles from electrostatic adhesion to negatively charged mucin fibers in cystic fibrosis sputum.
+Comegna M et al. 2021 demonstrated base editing restoration of CFTR function in human cystic fibrosis airway epithelial models, highlighting that non-viral carriers must traverse the viscoelastic mucus layer before reaching apical epithelial cells (DOI: 10.1038/s41598-021-85549-z).
+Alton EWFW et al. 2024 evaluated F/HN-pseudotyped rSIV.F/HN lentiviral vectors for cystic fibrosis airway gene transfer, demonstrating apical transduction of ciliated and basal airway epithelial cells in preclinical models (DOI: 10.1183/13993003.01683-2023).
+In vivo mucociliary transit clearance half-life values in human patients for the Conte G et al. 2022 formulation are not stated in the in vitro study record.
+
+Section 2: Stokes-Einstein-Ogston-Brenner Screening and 5-Regime CF Sputum MPT Benchmark (T-0941 / PRED-0004)
+In the Stokes-Einstein-Ogston-Brenner airway mucus barrier screener, mucociliary clearance sweeps the periciliary airway surface within a reference window of 900 seconds (15 minutes).
+Untreated purulent cystic fibrosis sputum has an average mucin and extracellular DNA mesh pore size of 140 nm, whereas recombinant human DNase (dornase alfa) pretreatment expands the effective mesh pore size to 220 nm.
+Subtracting the untreated sputum mesh size of 140 nm from the dornase alfa pretreated mesh size of 220 nm yields an 80 nm increase in effective mesh pore diameter.
+Across the 5-regime empirical CF sputum multiple-particle-tracking (MPT) benchmark, all 5 published carrier regimes matched their empirical sputum diffusivity ratio intervals and expected feasibility verdicts (5 of 5 passed, 3 of 3 falsification controls passed):
+Regime 1 (mpp_dense_peg_80nm): An 80 nm dense-PEG mucus-penetrating nanoparticle with -2.0 mV zeta potential in 140 nm sputum across a 15 um mucus layer achieves D_eff/D_w of 0.052478 (empirical interval 0.025 to 0.12) and transits in 724.84 seconds, classified as FEASIBLE_MUCUS_PENETRATING_CANDIDATE.
+Regime 2 (mpp_hybrid_lipid_polymer_100nm): A 100 nm dense-PEG hybrid lipid-polymer nanoparticle with -3.0 mV zeta potential in 140 nm sputum across a 15 um distal airway mucus layer achieves D_eff/D_w of 0.036923 (empirical interval 0.015 to 0.08) and transits in 824.87 seconds, classified as FEASIBLE_MUCUS_PENETRATING_CANDIDATE.
+Regime 3 (aav_capsid_25nm_neutral): A 25 nm AAV capsid with -3.5 mV zeta potential in 140 nm sputum across a 20 um mucus layer achieves D_eff/D_w of 0.175382 (empirical interval 0.08 to 0.35) and transits in 120.23 seconds, classified as FEASIBLE_MUCUS_PENETRATING_CANDIDATE.
+Regime 4 (uncoated_cationic_lipoplex_110nm): A 110 nm uncoated cationic lipoplex with +28.0 mV zeta potential and 0 percent PEG coverage in 140 nm sputum is electrostatically trapped with D_eff/D_w of 0.000018 (empirical interval 0.000001 to 0.0005), classified as REJECT_MUCOCILIARY_CLEARANCE_BEFORE_EPITHELIUM.
+Regime 5 (oversized_conventional_particle_300nm): A 300 nm conventional nanoparticle (radius 150 nm) in 140 nm sputum exceeds the 140 nm mesh size (150 divided by 140 equals 1.07 radius-to-mesh ratio) with D_eff/D_w of 0.000516 (empirical interval 0.00005 to 0.002), classified as REJECT_MUCOCILIARY_CLEARANCE_BEFORE_EPITHELIUM.

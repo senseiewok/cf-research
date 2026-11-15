@@ -7,9 +7,11 @@ This directory holds two groups of Markdown notes:
 ## Topical Dossiers
 
 - [`2026-10-24-multi-source-modulator-and-delivery-verification.md`](2026-10-24-multi-source-modulator-and-delivery-verification.md)
+- [`airway-mucus-barrier-biophysics-2026.md`](airway-mucus-barrier-biophysics-2026.md)
 - [`alternative-conductance.md`](alternative-conductance.md)
 - [`antibiotic-stewardship-cf.md`](antibiotic-stewardship-cf.md)
 - [`cf-repositories.md`](cf-repositories.md)
+- [`cftr-burst-kinetics-structural-grounding-2026.md`](cftr-burst-kinetics-structural-grounding-2026.md)
 - [`cftr-structures.md`](cftr-structures.md)
 - [`delivery-biophysics.md`](delivery-biophysics.md)
 - [`discovery-cross-disease-mechanistic-bridge.md`](discovery-cross-disease-mechanistic-bridge.md)
@@ -25,7 +27,9 @@ This directory holds two groups of Markdown notes:
 - [`multi-registry-eligibility-2026.md`](multi-registry-eligibility-2026.md)
 - [`phage-coevolution-dynamics.md`](phage-coevolution-dynamics.md)
 - [`ptc-readthrough-nmd-biophysics.md`](ptc-readthrough-nmd-biophysics.md)
+- [`rare-genotype-trial-screening-2026.md`](rare-genotype-trial-screening-2026.md)
 - [`registry-data-access.md`](registry-data-access.md)
+- [`retraction-citation-integrity-2026.md`](retraction-citation-integrity-2026.md)
 - [`trial-endpoint-evolution-2026.md`](trial-endpoint-evolution-2026.md)
 - [`variants/rare-variants-theratypes.md`](variants/rare-variants-theratypes.md)
 
@@ -62,7 +66,11 @@ Several topical syntheses carry machine-checked claim packets (`*-claims.json`),
 
 | Dossier | Verification Sidecar Files |
 | --- | --- |
+| [`airway-mucus-barrier-biophysics-2026.md`](airway-mucus-barrier-biophysics-2026.md) | `airway-mucus-barrier-biophysics-2026-claims.json`, `airway-mucus-barrier-biophysics-2026-evidence.txt`, `airway-mucus-barrier-biophysics-2026-evidence-map.json`, `airway-mucus-barrier-biophysics-2026-allow.txt` |
+| [`cftr-burst-kinetics-structural-grounding-2026.md`](cftr-burst-kinetics-structural-grounding-2026.md) | `cftr-burst-kinetics-structural-grounding-2026-claims.json`, `cftr-burst-kinetics-structural-grounding-2026-evidence.txt`, `cftr-burst-kinetics-structural-grounding-2026-evidence-map.json`, `cftr-burst-kinetics-structural-grounding-2026-allow.txt` |
 | [`discovery-dual-aav-intein-packaging.md`](discovery-dual-aav-intein-packaging.md) | `discovery-dual-aav-intein-packaging-claims.json`, `discovery-dual-aav-intein-packaging-evidence.txt`, `discovery-dual-aav-intein-packaging-evidence-map.json`, `discovery-dual-aav-intein-packaging-allow.txt` |
 | [`modulator-eligibility-denominators-2026.md`](modulator-eligibility-denominators-2026.md) | `modulator-eligibility-denominators-2026.json`, `modulator-eligibility-denominators-2026-claims.json`, `modulator-eligibility-denominators-2026-evidence.txt`, `modulator-eligibility-denominators-2026-evidence-map.json`, `modulator-eligibility-denominators-2026-allow.txt` |
 | [`multi-registry-eligibility-2026.md`](multi-registry-eligibility-2026.md) | `multi-registry-eligibility-claims.json`, `multi-registry-eligibility-allow.txt` |
+| [`rare-genotype-trial-screening-2026.md`](rare-genotype-trial-screening-2026.md) | `rare-genotype-trial-screening-2026-claims.json`, `rare-genotype-trial-screening-2026-evidence.txt`, `rare-genotype-trial-screening-2026-evidence-map.json`, `rare-genotype-trial-screening-2026-allow.txt` |
+| [`retraction-citation-integrity-2026.md`](retraction-citation-integrity-2026.md) | `retraction-citation-integrity-2026-claims.json`, `retraction-citation-integrity-2026-evidence.txt`, `retraction-citation-integrity-2026-evidence-map.json`, `retraction-citation-integrity-2026-allow.txt` |
 | [`trial-endpoint-evolution-2026.md`](trial-endpoint-evolution-2026.md) | `trial-endpoint-evolution-2026-claims.json`, `trial-endpoint-evolution-2026-evidence.txt`, `trial-endpoint-evolution-2026-evidence-map.json`, `trial-endpoint-evolution-2026-allow.txt` |

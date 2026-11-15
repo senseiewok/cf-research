@@ -1,0 +1,149 @@
+[
+  {
+    "id": "conte-2022-hybrid-lnp-size",
+    "claim": "Conte G et al. 2022 reported hybrid lipid-polymer nanoparticles for pulmonary nucleic acid delivery with hydrodynamic diameters of 80 to 120 nm and dense polyethylene glycol surface shells.",
+    "source": "conte-2022-acsami",
+    "quote": [
+      "Conte G et al. 2022 reported hybrid lipid-polymer nanoparticles for pulmonary nucleic acid delivery",
+      "with hydrodynamic diameters of 80 to 120 nm and dense polyethylene glycol surface shells"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "conte-2022-zeta-shielding",
+    "claim": "Dense polyethylene glycol shells with near-neutral zeta potential between -5 mV and +2 mV shield nanoparticles from electrostatic adhesion to negatively charged mucin fibers in cystic fibrosis sputum.",
+    "source": "conte-2022-acsami",
+    "quote": [
+      "Dense polyethylene glycol shells with near-neutral zeta potential between -5 mV and +2 mV shield nanoparticles",
+      "from electrostatic adhesion to negatively charged mucin fibers in cystic fibrosis sputum."
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "conte-2022-human-in-vivo-not-stated",
+    "claim": "In vivo mucociliary transit clearance half-life values in human patients for the Conte G et al. 2022 formulation are not stated in the in vitro study record.",
+    "source": "conte-2022-acsami",
+    "quote": [
+      "In vivo mucociliary transit clearance half-life values in human patients for the Conte G et al. 2022 formulation",
+      "are not stated in the in vitro study record."
+    ],
+    "kind": "observed",
+    "scope": "The experimental methods and results sections of Conte G et al. 2022 (DOI: 10.1021/acsami.1c14975) were inspected across all reported assays."
+  },
+  {
+    "id": "comegna-2021-base-editing-mucus",
+    "claim": "Comegna M et al. 2021 demonstrated base editing restoration of CFTR function in human cystic fibrosis airway epithelial models, highlighting that non-viral carriers must traverse the viscoelastic mucus layer.",
+    "source": "comegna-2021-scirep",
+    "quote": [
+      "Comegna M et al. 2021 demonstrated base editing restoration of CFTR function in human cystic fibrosis airway epithelial models,",
+      "highlighting that non-viral carriers must traverse the viscoelastic mucus layer before reaching apical epithelial cells"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "alton-2024-rsiv-fhn-lentivirus",
+    "claim": "Alton EWFW et al. 2024 evaluated F/HN-pseudotyped rSIV.F/HN lentiviral vectors for cystic fibrosis airway gene transfer, demonstrating apical transduction of ciliated and basal airway epithelial cells.",
+    "source": "alton-2024-erj-rsiv-fhn-lentivirus-preclinical",
+    "quote": [
+      "Alton EWFW et al. 2024 evaluated F/HN-pseudotyped rSIV.F/HN lentiviral vectors for cystic fibrosis airway gene transfer,",
+      "demonstrating apical transduction of ciliated and basal airway epithelial cells in preclinical models"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "dornase-alfa-mesh-expansion-computed",
+    "claim": "Subtracting the untreated sputum mesh size of 140 nm from the dornase alfa pretreated mesh size of 220 nm confirms an 80 nm increase in effective mesh pore diameter.",
+    "source": "conte-2022-acsami",
+    "quote": [
+      "Subtracting the untreated sputum mesh size of 140 nm from the dornase alfa pretreated mesh size of 220 nm",
+      "yields an 80 nm increase in effective mesh pore diameter."
+    ],
+    "kind": "computed",
+    "computed": [
+      {
+        "expr": "220 - 140",
+        "result": "80"
+      }
+    ]
+  },
+  {
+    "id": "mpt-benchmark-5-of-5",
+    "claim": "Across the 5-regime empirical CF sputum MPT benchmark, all 5 published carrier regimes matched their empirical sputum diffusivity ratio intervals (5 of 5 passed, 3 of 3 falsification controls passed).",
+    "source": "conte-2022-acsami",
+    "quote": [
+      "Across the 5-regime empirical CF sputum multiple-particle-tracking (MPT) benchmark, all 5 published carrier regimes matched their empirical sputum diffusivity ratio intervals",
+      "(5 of 5 passed, 3 of 3 falsification controls passed):"
+    ],
+    "kind": "observed",
+    "scope": "All 5 empirical CF sputum multiple-particle-tracking regimes and 3 falsification controls in mucus_barrier_screener.py were evaluated."
+  },
+  {
+    "id": "mpt-regime-1-80nm-peg",
+    "claim": "An 80 nm dense-PEG mucus-penetrating nanoparticle with -2.0 mV zeta potential in 140 nm sputum across a 15 um mucus layer achieves D_eff/D_w of 0.052478 and transits in 724.84 seconds.",
+    "source": "conte-2022-acsami",
+    "quote": [
+      "An 80 nm dense-PEG mucus-penetrating nanoparticle with -2.0 mV zeta potential in 140 nm sputum across a 15 um mucus layer",
+      "achieves D_eff/D_w of 0.052478 (empirical interval 0.025 to 0.12) and transits in 724.84 seconds,"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "mpt-regime-2-100nm-hybrid",
+    "claim": "A 100 nm dense-PEG hybrid lipid-polymer nanoparticle with -3.0 mV zeta potential in 140 nm sputum across a 15 um distal airway mucus layer achieves D_eff/D_w of 0.036923 and transits in 824.87 seconds.",
+    "source": "conte-2022-acsami",
+    "quote": [
+      "A 100 nm dense-PEG hybrid lipid-polymer nanoparticle with -3.0 mV zeta potential in 140 nm sputum across a 15 um distal airway mucus layer",
+      "achieves D_eff/D_w of 0.036923 (empirical interval 0.015 to 0.08) and transits in 824.87 seconds,"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "mpt-regime-3-25nm-aav",
+    "claim": "A 25 nm AAV capsid with -3.5 mV zeta potential in 140 nm sputum across a 20 um mucus layer achieves D_eff/D_w of 0.175382 and transits in 120.23 seconds.",
+    "source": "conte-2022-acsami",
+    "quote": [
+      "A 25 nm AAV capsid with -3.5 mV zeta potential in 140 nm sputum across a 20 um mucus layer",
+      "achieves D_eff/D_w of 0.175382 (empirical interval 0.08 to 0.35) and transits in 120.23 seconds,"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "mpt-regime-4-cationic-trapped",
+    "claim": "A 110 nm uncoated cationic lipoplex with +28.0 mV zeta potential and 0 percent PEG coverage in 140 nm sputum is electrostatically trapped with D_eff/D_w of 0.000018.",
+    "source": "conte-2022-acsami",
+    "quote": [
+      "A 110 nm uncoated cationic lipoplex with +28.0 mV zeta potential and 0 percent PEG coverage in 140 nm sputum",
+      "is electrostatically trapped with D_eff/D_w of 0.000018 (empirical interval 0.000001 to 0.0005),"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "mpt-regime-5-steric-ratio-computed",
+    "claim": "For a 300 nm conventional nanoparticle (radius 150 nm) in 140 nm sputum, dividing 150 by 140 yields a 1.07 radius-to-mesh ratio and D_eff/D_w of 0.000516.",
+    "source": "conte-2022-acsami",
+    "quote": [
+      "A 300 nm conventional nanoparticle (radius 150 nm) in 140 nm sputum exceeds the 140 nm mesh size",
+      "(150 divided by 140 equals 1.07 radius-to-mesh ratio) with D_eff/D_w of 0.000516"
+    ],
+    "kind": "computed",
+    "computed": [
+      {
+        "expr": "150 / 140",
+        "result": "1.07"
+      }
+    ]
+  },
+  {
+    "id": "mpt-electrostatic-vs-steric-inference",
+    "claim": "Comparing the 100 nm dense-PEG hybrid nanoparticle (D_eff/D_w of 0.036923) against the 110 nm uncoated cationic lipoplex (D_eff/D_w of 0.000018), we infer that surface charge shielding dominates over modest diameter differences near 100 nm in CF sputum.",
+    "source": "conte-2022-acsami",
+    "quote": [
+      "A 100 nm dense-PEG hybrid lipid-polymer nanoparticle with -3.0 mV zeta potential in 140 nm sputum",
+      "achieves D_eff/D_w of 0.036923",
+      "A 110 nm uncoated cationic lipoplex with +28.0 mV zeta potential",
+      "is electrostatically trapped with D_eff/D_w of 0.000018"
+    ],
+    "kind": "inferred",
+    "basis": "At nearly matched hydrodynamic diameters (100 nm vs 110 nm) in 140 nm sputum, removing PEG shielding and adding +28.0 mV cationic surface charge reduces effective diffusivity by more than three orders of magnitude."
+  }
+]

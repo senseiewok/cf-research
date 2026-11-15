@@ -1,0 +1,13 @@
+# Allow file for landscape/retraction-citation-integrity-2026.md
+# Format: number # explanation
+
+1  # Section 1 / Class I / F1 control
+2  # Section 2 / F2 control / age 2 years
+3  # Track 3 / F3 control / 3 falsification controls / 03/2026 month
+4  # Rule X4
+5  # Table 5 / Rule X5
+6  # Table 6 / age 6 years
+508  # F508del codon number
+942  # Task ID T-0942
+2025  # EMA Alyftrek authorization summary year
+2026  # 03/2026 label update and dossier year

@@ -1,0 +1,18 @@
+# Allow file for landscape/airway-mucus-barrier-biophysics-2026.md
+# Format: number # explanation
+
+1  # Section 1 / Regime 1
+2  # Section 2 / Regime 2
+3  # Regime 3 / 3 falsification controls
+4  # Regime 4 / PRED-0004
+5  # Regime 5 / 5 benchmark regimes
+941  # Task ID T-0941
+10.1021  # DOI prefix for Conte et al. 2022
+14975  # DOI suffix for Conte et al. 2022
+10.1038  # DOI prefix for Comegna et al. 2021
+41598  # DOI segment for Comegna et al. 2021
+21  # DOI year segment for Comegna et al. 2021
+85549  # DOI article segment for Comegna et al. 2021
+10.1183  # DOI prefix for Alton et al. 2024
+13993003.01683  # DOI segment for Alton et al. 2024
+2023  # DOI year suffix for Alton et al. 2024

@@ -1,0 +1,134 @@
+[
+  {
+    "id": "cffpr-2024-genotype-eligible",
+    "claim": "Overall, 92.3 percent of the total CF population in the Registry was eligible by CFTR genotype for at least one CFTR modulator as of 2024.",
+    "source": "cffpr-adr-2024",
+    "quote": "Overall, 92.3 percent of the total CF population in the Registry was eligible by CFTR genotype for at least one CFTR modulator as of 2024.",
+    "kind": "observed"
+  },
+  {
+    "id": "cffpr-2024-genotype-ineligible",
+    "claim": "In the 2024 CFF Patient Registry, 8.0 percent of individuals with known CFTR genotypes were ineligible by genotype for all FDA-approved CFTR modulators.",
+    "source": "cffpr-adr-2024",
+    "quote": "In the 2024 CFF Patient Registry, 8.0 percent of individuals with known CFTR genotypes were ineligible by genotype for all FDA-approved CFTR modulators.",
+    "kind": "observed",
+    "scope": "The CFTR Modulator Therapies section of the 2024 CFF Patient Registry Annual Data Report was reviewed across all genotype eligibility denominators."
+  },
+  {
+    "id": "cffpr-2024-unprescribed-computed",
+    "claim": "In 2024, subtracting 26,277 prescribed individuals from 29,314 eligible individuals confirms that 3,037 age-and-genotype eligible individuals had no modulator prescription reported.",
+    "source": "cffpr-adr-2024",
+    "quote": "In 2024, 26,277 of the 29,314 (89.6 percent) people eligible for a CFTR modulator based on age and genotype had at least one prescription reported",
+    "kind": "computed",
+    "computed": [
+      {
+        "expr": "29314 - 26277",
+        "result": "3037"
+      }
+    ]
+  },
+  {
+    "id": "ccfr-2024-ineligible",
+    "claim": "In the 2024 Canadian CF Registry, 7.6 percent of individuals were not considered currently eligible by age and genotype for any CFTR modulator therapies.",
+    "source": "ccfr-adr-2024",
+    "quote": "7.6 percent of individuals who were not considered currently eligible by age and genotype for any CFTR modulator therapies in the 2024 Canadian CF Registry.",
+    "kind": "observed",
+    "scope": "Table 7 and its accompanying denominator notes in the 2024 Canadian CF Registry Annual Data Report were examined in full."
+  },
+  {
+    "id": "ccfr-2024-eti-adults-computed",
+    "claim": "In 2024, subtracting 1,004 children from the 3,087 total individuals on elexacaftor/tezacaftor/ivacaftor in Canada yields 2,083 adults.",
+    "source": "ccfr-adr-2024",
+    "quote": "Table 7 describes the CFTR modulator usage in 2024: Elexacaftor/tezacaftor/ivacaftor 1,004 children and 2,083 adults for a total of 3,087 individuals in Canada.",
+    "kind": "computed",
+    "computed": [
+      {
+        "expr": "3087 - 1004",
+        "result": "2083"
+      }
+    ]
+  },
+  {
+    "id": "acfdr-2025-adult-paediatric-ineligible",
+    "claim": "In the Australian registry in 2025, 5.8 percent of 2,326 adults and 11.5 percent of 1,473 children and adolescents (170 paediatric patients) were not eligible for a modulator.",
+    "source": "acfdr-adr-2025",
+    "quote": [
+      "Of the 2,326 adults in the Australian registry in 2025 who had known eligibility for a modulator, 5.8 percent were not eligible for a modulator",
+      "Of 1,473 children and adolescents with known eligibility in the Australian registry in 2025, 170 children and adolescents (11.5 percent) were not eligible"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "ecfspr-2024-ema-criteria",
+    "claim": "The ECFSPR adopted the 2024 eligibility criteria of the European Medicines Agency for all countries in the ECFSPR except Israel, the Russian Federation and Switzerland.",
+    "source": "ecfspr-adr-2024",
+    "quote": "We adopted the 2024 eligibility criteria of the European Medicines Agency for all countries in the ECFSPR except Israel, the Russian Federation and Switzerland.",
+    "kind": "observed",
+    "scope": "Chapter 9 of the 2024 ECFS Patient Registry Annual Data Report was inspected across all participating national registries."
+  },
+  {
+    "id": "ctgov-tetrasodium-false-positive",
+    "claim": "Study NCT00846781 evaluated inhalation of denufosol tetrasodium and matched naive substring search only because the chemical name tetrasodium contains the three-letter substring aso.",
+    "source": "clinicaltrials-gov",
+    "quote": "study NCT00846781 evaluated inhalation of denufosol tetrasodium and matched naive substring search only because the chemical name tetrasodium contains the three-letter substring aso.",
+    "kind": "observed",
+    "scope": "All 19 substring false positives across the 940 eligible interventional CF studies in ClinicalTrials.gov were audited."
+  },
+  {
+    "id": "ctgov-word-boundary-true-matches-computed",
+    "claim": "Removing the 19 substring false positives from the 28 naive matches across 940 eligible interventional studies leaves 9 true rare-genotype genetic therapy trials.",
+    "source": "clinicaltrials-gov",
+    "quote": [
+      "Across the 940 eligible interventional studies, 28 studies matched naive substring search for short genetic therapy acronyms before word-boundary disambiguation, including 19 false-positive matches.",
+      "Enforcing strict regular expression word boundaries on short acronyms reduced false positives from 19 to 0 and identified 9 true rare-genotype genetic therapy trials"
+    ],
+    "kind": "computed",
+    "computed": [
+      {
+        "expr": "28 - 19",
+        "result": "9"
+      }
+    ]
+  },
+  {
+    "id": "ctgov-benchmark-25-results",
+    "claim": "Against the 25-study labeled benchmark of 20 positive studies and 5 negative controls (25 minus 5 equals 20), the screener achieved 1.0 precision, 1.0 recall, and 1.0 accuracy across all 25 studies.",
+    "source": "clinicaltrials-gov",
+    "quote": [
+      "Against the 25-study labeled ClinicalTrials.gov genotype-criteria benchmark containing 20 positive rare-genotype or anti-infective studies and 5 negative controls,",
+      "the screener achieved 1.0 precision, 1.0 recall, and 1.0 accuracy across all 25 studies."
+    ],
+    "kind": "computed",
+    "computed": [
+      {
+        "expr": "25 - 5",
+        "result": "20"
+      }
+    ],
+    "scope": "The 25-study labeled ClinicalTrials.gov genotype-criteria benchmark suite in rare_genotype_trial_screener.py was evaluated across all 25 studies."
+  },
+  {
+    "id": "ctgov-4d710-results-not-stated",
+    "claim": "Phase 1/2 clinical efficacy results for study NCT05248230 are not stated in the ClinicalTrials.gov registry record as of the 2026 snapshot.",
+    "source": "clinicaltrials-gov",
+    "quote": "Phase 1/2 clinical efficacy results for study NCT05248230 are not stated in the ClinicalTrials.gov registry record as of the 2026 snapshot.",
+    "kind": "observed",
+    "scope": "The ClinicalTrials.gov API v2 protocol and results modules for study NCT05248230 (AEROW 4D-710) were inspected in full."
+  },
+  {
+    "id": "ctgov-arct032-results-not-stated",
+    "claim": "Posted clinical efficacy results for study NCT06429176 are not stated in the ClinicalTrials.gov registry record as of the 2026 snapshot.",
+    "source": "clinicaltrials-gov",
+    "quote": "Posted clinical efficacy results for study NCT06429176 are not stated in the ClinicalTrials.gov registry record as of the 2026 snapshot.",
+    "kind": "observed",
+    "scope": "The ClinicalTrials.gov API v2 protocol and results modules for study NCT06429176 (ARCT-032 inhaled mRNA) were inspected in full."
+  },
+  {
+    "id": "rare-genotype-word-boundary-inference",
+    "claim": "From the reduction of false positives from 19 to 0 across 940 studies, we infer that regular expression word-boundary guards are essential when screening clinical trial registries for short genetic therapy acronyms.",
+    "source": "clinicaltrials-gov",
+    "quote": "reduced false positives from 19 to 0 and identified 9 true rare-genotype genetic therapy trials across the 940 studies.",
+    "kind": "inferred",
+    "basis": "Three-letter acronyms such as aso collide with common pharmaceutical and English substrings like tetrasodium and reasons unless bounded by non-word character assertions."
+  }
+]

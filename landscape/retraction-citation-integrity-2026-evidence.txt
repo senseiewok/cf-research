@@ -1,0 +1,16 @@
+# Evidence Corpus for Retraction & Citation Integrity Surveillance (2026)
+
+Section 1: Regulatory Label Provenance Across openFDA and EMA Medicines Catalogs
+Following the 03/2026 label update, TRIKAFTA is indicated in patients aged 2 years and older who have a clinical diagnosis of CF and at least one variant that is responsive based on clinical and/or in vitro data (see Table 6) or results in production of CFTR protein.
+Following the 03/2026 label update, ALYFTREK is indicated in patients 6 years of age and older who have a clinical diagnosis of CF and at least one variant that is responsive based on clinical and/or in vitro data (see Table 5) or results in production of CFTR protein.
+EMA Kaftrio indications cover patients aged 6 years and older and paediatric patients aged 2 to less than 6 years who have at least one non-Class I mutation in the cystic fibrosis transmembrane conductance regulator (CFTR) gene.
+EMA Alyftrek indications cover people aged 6 years and older who have at least one non-Class I mutation in the cystic fibrosis transmembrane conductance regulator (CFTR) gene.
+On December 20, 2024, the U.S. Food and Drug Administration approved VTD for patients aged 6 years and older with at least one F508del mutation or another responsive CFTR mutation, including 31 additional rare mutations, and 135 individuals in the Registry became eligible for a CFTR modulator for the first time.
+Clinical efficacy data for homozygous Class I nonsense genotypes without CFTR protein production are not stated in the 03/2026 openFDA TRIKAFTA or ALYFTREK prescribing information labels.
+
+Section 2: Deterministic Retraction & Citation Radar Audit (T-0942)
+In the deterministic retraction and citation radar audit across sources/catalog.yaml, 347 cataloged primary sources were audited with 0 retracted or withdrawn entries detected.
+In the ClinicalTrials.gov API v2 CF snapshot, 1,053 studies were identified and 940 interventional studies were eligible after excluding 113 studies under rules X4 (72 studies) and X5 (41 studies).
+Adding 72 studies excluded under rule X4 and 41 studies excluded under rule X5 equals 113 total excluded studies across the 1,053 identified records.
+The retraction citation radar evaluates 3 deterministic poisoned negative controls (--falsify): F1 injects a retracted catalog source, F2 injects an external Crossref retraction notice containing an adversarial prompt-injection string, and F3 injects an uncataloged phantom citation ID.
+All 3 poisoned negative controls failed deterministically as required (3 of 3 falsification controls passed), and external notice titles were quarantined inside nonce-tagged untrusted_data boundaries.
