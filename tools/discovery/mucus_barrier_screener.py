@@ -5,7 +5,7 @@
 nanoparticle / LNP / viral vector parameters against primary-literature Cystic
 Fibrosis airway mucus bounds:
   - CF sputum mesh pore-size range: 100–300 nm (mean ~140 nm; Suk JS et al. 2016,
-    doi:10.1016/j.addr.2015.09.012; Dawson M et al. 2003, doi:10.1074/jbc.M302423200).
+    doi:10.1016/j.addr.2015.09.012; Dawson M et al. 2003, doi:10.1074/jbc.M309026200).
   - Mucus-penetrating particle (MPP) neutral surface potential window: |zeta| <= 5.0 mV
     via dense low-MW PEG brush (Lai SK et al. 2007, doi:10.1073/pnas.0608611104).
   - Periciliary layer (PCL) thickness ~7.0 um and airway mucus blanket ~50.0 um vs.
@@ -41,7 +41,7 @@ MEASURED_BOUNDS: dict[str, dict[str, Any]] = {
         "value": [100.0, 300.0],
         "mean_nm": 140.0,
         "epistemic_label": "MEASURED_SOURCE_BOUND",
-        "source_citation": "Suk JS et al. Adv Drug Deliv Rev 2016 (doi:10.1016/j.addr.2015.09.012); Dawson M et al. J Biol Chem 2003 (doi:10.1074/jbc.M302423200)",
+        "source_citation": "Suk JS et al. Adv Drug Deliv Rev 2016 (doi:10.1016/j.addr.2015.09.012); Dawson M et al. J Biol Chem 2003 (doi:10.1074/jbc.M309026200)",
     },
     "mpp_neutral_zeta_mv_window": {
         "value": [-5.0, 5.0],
