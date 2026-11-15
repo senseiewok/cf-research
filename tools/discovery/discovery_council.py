@@ -160,6 +160,8 @@ INFRASTRUCTURE_MODULES = frozenset({
 
     "epistemic_rigor",
 
+    "mucus_barrier_screener",
+
 })
 
 

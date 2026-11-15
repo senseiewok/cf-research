@@ -90,5 +90,5 @@ jobs:
         run: python -m unittest discover -s tools/registry-extract -v
       - name: evidence loop cross-check tests
         run: python -m unittest tools/test_evidence_loop_cross_check.py -v
-      - name: ledger tally self-check
-        run: python ledger/tally.py --self-check
+      - name: ledger tally self-check and prediction ledger tests
+        run: python ledger/tally.py --self-check && python -m unittest discover -s ledger -v && python ledger/check_predictions.py
