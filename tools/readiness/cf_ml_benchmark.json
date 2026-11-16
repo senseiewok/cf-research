@@ -1,0 +1,92 @@
+[
+  {
+    "id": "jiang-2026-amr",
+    "pmid": "42592015",
+    "doi": "10.1002/mco2.70894",
+    "title": "Prediction of Antimicrobial Resistance in People Living With Cystic Fibrosis Using Machine Learning",
+    "journal": "MedComm 2026",
+    "text": "Antimicrobial resistance (AMR) is a growing challenge in people living with cystic fibrosis (pwCF), who often experience chronic lung infection and repeated antibiotic exposure. Because routine antibiotic susceptibility testing often takes several days, treatment is frequently started before current resistance profiles are available. We assessed whether routinely collected electronic healthcare records (EHR) could predict antibiotic resistance in sputum cultures from adults with CF. In this retrospective single-center study, 12,618 sputum cultures from 209 pwCF between 2012 and 2022 were linked with 63,823 days of intravenous antibiotic exposure, spirometry, demographic characteristics, microbiology results, and historical resistance data. Different models were trained and evaluated with patient-level splitting and cross-validation to predict resistance to ciprofloxacin, ceftazidime, meropenem, piperacillin/tazobactam, and tobramycin. Extreme gradient boosting showed the most consistent performance with AUCs of 0.75-0.80. Model discrimination was broadly similar in cultures with and without Pseudomonas aeruginosa, except for ceftazidime and meropenem. Shapley Additive Explanations (SHAP) suggested that longer term resistance history was more informative than recent results. These findings support the feasibility of using EHR-derived data to estimate AMR before culture results are available, but external validation, broader antibiotic exposure data, and assessment of temporal dataset shift are needed before clinical use.",
+    "expected": {
+      "cohort_size": 209,
+      "split_type": "patient_level",
+      "external_validation": "absent_single_center_or_internal_only",
+      "headline_metric": "AUCs of 0.75-0.80",
+      "readiness_tier": "T1_RETROSPECTIVE_OR_UNVALIDATED"
+    }
+  },
+  {
+    "id": "campredon-2022-ct",
+    "pmid": "34795038",
+    "doi": "10.1183/13993003.01344-2021",
+    "title": "Using chest computed tomography and unsupervised machine learning for predicting and evaluating response to lumacaftor-ivacaftor in people with cystic fibrosis",
+    "journal": "Eur Respir J 2022",
+    "text": "Lumacaftor-ivacaftor is a cystic fibrosis transmembrane conductance regulator (CFTR) modulator known to improve clinical status in people with cystic fibrosis (CF). The aim of this study was to assess lung structural changes after 1 year of lumacaftor-ivacaftor treatment and to use unsupervised machine learning to identify morphological phenotypes of lung disease that are associated with response to lumacaftor-ivacaftor. Adolescents and adults with CF from a French multicentre real-world prospective observational study evaluating the first year of treatment with lumacaftor-ivacaftor were included if they had pre-therapeutic and follow-up chest computed tomography (CT) scans available. CT scans were visually scored using a modified Bhalla score. A k-means clustering method was performed based on 120 radiomics features extracted from unenhanced pre-therapeutic chest CT scans. In total, 283 patients were included. The Bhalla score significantly decreased after 1 year of lumacaftor-ivacaftor (-1.40±1.53 points compared with pre-therapeutic CT, p<0.001). This finding was related to a significant decrease in mucus plugging (-0.58±0.88 points, p<0.001), bronchial wall thickening (-0.35±0.62 points, p<0.001) and parenchymal consolidations (-0.24±0.52 points, p<0.001). Cluster analysis identified three morphological clusters. Patients from cluster C were more likely to experience an increase in per cent predicted forced expiratory volume in 1 s (FEV1). Radiomics features on pre-therapeutic CT scans may help to predict lung function response under lumacaftor-ivacaftor.",
+    "expected": {
+      "cohort_size": 283,
+      "split_type": "unsupervised_or_zero_shot",
+      "external_validation": "not_stated",
+      "headline_metric": "-1.40±1.53 points",
+      "readiness_tier": "T1_RETROSPECTIVE_OR_UNVALIDATED"
+    }
+  },
+  {
+    "id": "mcdonald-2024-alphamissense",
+    "pmid": "38271453",
+    "doi": "10.1371/journal.pone.0297560",
+    "title": "Benchmarking AlphaMissense pathogenicity predictions against cystic fibrosis variants",
+    "journal": "PLoS ONE 2024",
+    "text": "Variants in the cystic fibrosis transmembrane conductance regulator gene (CFTR) result in cystic fibrosis-a lethal autosomal recessive disorder. Missense variants that alter a single amino acid in the CFTR protein are among the most common cystic fibrosis variants, yet tools for accurately predicting molecular consequences of missense variants have been limited to date. AlphaMissense (AM) is a new technology that predicts the pathogenicity of missense variants based on dual learned protein structure and evolutionary features. Here, we evaluated the ability of AM to predict the pathogenicity of CFTR missense variants. AM predicted a high pathogenicity for CFTR residues overall, resulting in a high false positive rate and fair classification performance on CF variants from the CFTR2.org database. AM pathogenicity score correlated modestly with pathogenicity metrics from persons with CF including sweat chloride level, pancreatic insufficiency rate, and Pseudomonas aeruginosa infection rate. Correlation was also modest with CFTR trafficking and folding competency in vitro. By contrast, the AM score correlated well with CFTR channel function in vitro-demonstrating the dual structure and evolutionary training approach learns important functional information despite lacking such data during training. Different performance across metrics indicated AM may determine if polymorphisms in CFTR are recessive CF variants yet cannot differentiate mechanistic effects or the nature of pathophysiology. Finally, AM predictions offered limited utility to inform on the pharmacological response of CF variants i.e., theratype. Development of new approaches to differentiate the biochemical and pharmacological properties of CFTR variants is therefore still needed to refine the targeting of emerging precision CF therapeutics.",
+    "expected": {
+      "cohort_size": "not stated",
+      "split_type": "not_stated",
+      "external_validation": "not_stated",
+      "headline_metric": "fair classification",
+      "readiness_tier": "T0_PRECLINICAL_BENCHMARK"
+    }
+  },
+  {
+    "id": "mangkalaphiban-2024-readthrough",
+    "pmid": "38509072",
+    "doi": "10.1038/s41467-024-46703-z",
+    "title": "Extended stop codon context predicts nonsense codon readthrough efficiency in human cells",
+    "journal": "Nat Commun 2024",
+    "text": "Protein synthesis terminates when a stop codon enters the ribosome's A-site. Although termination is efficient, stop codon readthrough can occur when a near-cognate tRNA outcompetes release factors during decoding. Seeking to understand readthrough regulation we used a machine learning approach to analyze readthrough efficiency data from published HEK293T ribosome profiling experiments and compared it to comparable yeast experiments. We obtained evidence for the conservation of identities of the stop codon, its context, and 3'-UTR length (when termination is compromised), but not the P-site codon, suggesting a P-site tRNA role in readthrough regulation. Models trained on data from cells treated with the readthrough-promoting drug, G418, accurately predicted readthrough of premature termination codons arising from CFTR nonsense alleles that cause cystic fibrosis. This predictive ability has the potential to aid development of nonsense suppression therapies by predicting a patient's likelihood of improvement in response to drugs given their nonsense mutation sequence context.",
+    "expected": {
+      "cohort_size": "not stated",
+      "split_type": "sample_or_record_level",
+      "external_validation": "not_stated",
+      "headline_metric": "accurately predicted readthrough",
+      "readiness_tier": "T0_PRECLINICAL_BENCHMARK"
+    }
+  },
+  {
+    "id": "bulcaen-2024-organoids",
+    "pmid": "38697102",
+    "doi": "10.1016/j.xcrm.2024.101560",
+    "title": "Prime editing functionally corrects cystic fibrosis-causing CFTR mutations in human organoids and airway epithelial cells",
+    "journal": "Cell Reports Med 2024",
+    "text": "Prime editing is a recent, CRISPR-derived genome editing technology capable of introducing precise nucleotide substitutions, insertions, and deletions. Here, we present prime editing approaches to correct L227R- and N1303K-CFTR, two mutations that cause cystic fibrosis and are not eligible for current market-approved modulator therapies. We show that, upon DNA correction of the CFTR gene, the complex glycosylation, localization, and, most importantly, function of the CFTR protein are restored in HEK293T and 16HBE cell lines. These findings were subsequently validated in patient-derived rectal organoids and human nasal epithelial cells. Through analysis of predicted and experimentally identified candidate off-target sites in primary stem cells, we confirm previous reports on the high prime editor (PE) specificity and its potential for a curative CF gene editing therapy. To facilitate future screening of genetic strategies in a translational CF model, a machine learning algorithm was developed for dynamic quantification of CFTR function in organoids (DETECTOR: 'detection of targeted editing of CFTR in organoids').",
+    "expected": {
+      "cohort_size": "not stated",
+      "split_type": "not_stated",
+      "external_validation": "not_stated",
+      "headline_metric": "dynamic quantification of CFTR function",
+      "readiness_tier": "T0_PRECLINICAL_BENCHMARK"
+    }
+  },
+  {
+    "id": "alaa-2018-autoprognosis",
+    "pmid": "30050169",
+    "doi": "10.1038/s41598-018-29229-5",
+    "title": "Prognostication and Risk Factors for Cystic Fibrosis via Automated Machine Learning",
+    "journal": "Sci Rep 2018",
+    "text": "Accurate prediction of survival for cystic fibrosis (CF) patients is instrumental in establishing the optimal timing for referring patients with terminal respiratory failure for lung transplantation (LT). In this study, we developed an automated machine learning framework, AutoPrognosis, to predict 3-year mortality in 10,261 patients from the UK Cystic Fibrosis Registry. The framework implemented patient-level splitting with temporal validation and was externally validated using independent data from the Canadian Cystic Fibrosis Registry. AutoPrognosis achieved an AUC-ROC of 0.89 for predicting 3-year mortality, outperforming conventional clinical scoring systems. Feature importance analyses revealed novel complex interaction effects among clinical variables determining disease progression.",
+    "expected": {
+      "cohort_size": 10261,
+      "split_type": "patient_level",
+      "external_validation": "external_multicenter_or_independent",
+      "headline_metric": "AUC-ROC of 0.89",
+      "readiness_tier": "T3_EXTERNALLY_VALIDATED"
+    }
+  }
+]
