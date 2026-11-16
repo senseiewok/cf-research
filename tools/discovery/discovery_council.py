@@ -162,6 +162,12 @@ INFRASTRUCTURE_MODULES = frozenset({
 
     "mucus_barrier_screener",
 
+    "alphagenome_cftr_splice_probe",
+
+    "agile_mucus_lnp_ranker",
+
+    "cftr_variant_to_delivery_deducer",
+
 })
 
 
