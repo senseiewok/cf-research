@@ -102,7 +102,13 @@ def mutate_claim(item: dict[str, Any], idx: int) -> dict[str, Any]:
         "SAFE_USE_ELIGIBILITY_DIRECTIVE",
         "AH6_FABRICATED_CITATION",
     )
-    mode = modes[idx % len(modes)]
+    kind_str = str(item.get("kind") or "observed").strip()
+    if kind_str != "observed":
+        # R3 numeric grounding applies strictly to observed claims; select from the remaining 5 violation modes
+        applicable_modes = modes[1:]
+        mode = applicable_modes[idx % len(applicable_modes)]
+    else:
+        mode = modes[idx % len(modes)]
 
     if mode == "R3_NUMERIC_DISTORTION":
         m = NUMBER_TOKEN_RE.search(claim_text)
