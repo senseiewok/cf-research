@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-297 to download by hand, 1 to ask for, 3 not to download.
+300 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -219,6 +219,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | hsa-ky-resource-pages | Cayman Islands Health Services Authority website (www.hsa.ky) | [page](https://www.hsa.ky/) | link only | Principal public healthcare system and hospital provider in the Cayman Islands; robots.txt allow (2026-10-27), manual access, link and summary only. |
+
+### Cell Chemical Biology (Elsevier BV)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cftr-dms-mckee-2023 | CFTR Deep Mutational Scanning Corrector Response (McKee et al. 2023) | [page](https://doi.org/10.1016/j.chembiol.2023.05.001) | link only | Deep mutational scanning plasma membrane expression data for 129 clinical CFTR variants under vehicle, VX-661, VX-445, and dual corrector treatment. |
 
 ### Centre d'Infectiologie Charles Mérieux du Mali
 
@@ -1001,11 +1007,23 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | --- | --- | --- | --- | --- |
 | maltabreathewell-resource-pages | Malta Breathe Well Association website (www.maltabreathewell.org) | [page](https://www.maltabreathewell.org/) | link only | Maltese respiratory association providing patient support, public health education, and advocacy for people living with cystic fibrosis and chronic lung condit… |
 
+### MaveDB authors and contributors (hosted on Zenodo)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| mavedb-dump-zenodo | MaveDB Bulk Download (Zenodo archive) | [page](https://zenodo.org/records/18511521) | link only | Bulk download archive of published variant effect data from Multiplexed Assays of Variant Effect (MAVEs). |
+
 ### MDPI
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | anwar-2024-advrespirmed | Cystic Fibrosis: Understanding Cystic Fibrosis Transmembrane Regulator Mutation Classification and Modulator Therapies | [page](https://doi.org/10.3390/arm92040026) | link only | Supporting words are in section 5, Classification of CFTR Mutations. |
+
+### Mendeley Data
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| cftr-dms-tedman-2025 | CFTR Deep Mutational Scanning Calnexin Dependency (Tedman et al. 2025) | [page](https://doi.org/10.17632/ksfmxv8zts.1) | link only | Deep mutational scanning dataset of 232 clinical CFTR variants measuring calnexin chaperone dependence and pharmacological rescue. |
 
 ### Middle East Cystic Fibrosis Association
 
