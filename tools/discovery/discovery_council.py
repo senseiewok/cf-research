@@ -166,6 +166,8 @@ INFRASTRUCTURE_MODULES = frozenset({
 
     "agile_mucus_lnp_ranker",
 
+    "cftr_variant_to_delivery_deducer",
+
 })
 
 
