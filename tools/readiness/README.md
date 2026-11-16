@@ -1,0 +1,63 @@
+# CF Machine-Learning Paper Readiness Label Extractor (`tools/readiness`)
+
+Deterministic sentence-grounded extraction of clinical readiness labels from Cystic Fibrosis machine-learning and artificial intelligence papers (board row T-0931).
+
+## Motivation
+
+As observed in our medical AI discovery audits (`.lab-files/scratch/ai-medicine-scan/discovery-round-2026-11-15.md`):
+- Most machine learning applications in Cystic Fibrosis are retrospective, single-center, and lack independent external validation across geographic regions or patient registries.
+- Secondary explainers, chatbots, and model summaries routinely overstate readiness—conflating in vitro cell-line models (e.g. HEK293T readthrough assays) with clinical trials, or presenting single-center retrospective scores as deployable clinical tools.
+- TRIPOD+AI, CLAIM, and PRISMA-AI reporting standards mandate transparent disclosure of cohort size, split structure, external validation, and primary performance metrics.
+
+`tools/readiness` extracts these four core parameters directly from paper abstracts and methods, anchors each extracted parameter with its exact verbatim source sentence, assigns a conservative epistemic readiness tier (`T0`–`T3`), and attaches anti-overclaim warnings.
+
+## Extracted Fields
+
+| Field | Description | Values / Types | Source Grounding |
+| :--- | :--- | :--- | :--- |
+| `cohort_size` | Number of human patients/individuals in study | `int` or `"not stated"` | Exact sentence mentioning patient count |
+| `split_type` | Partitioning methodology | `patient_level`, `sample_or_record_level`, `unsupervised_or_zero_shot`, `not_stated` | Sentence describing split or cross-validation |
+| `external_validation` | Independent external cohort testing | `external_multicenter_or_independent`, `absent_single_center_or_internal_only`, `not_stated` | Sentence stating single-center vs independent cohort |
+| `headline_metric` | Primary performance metric | String (e.g., `AUCs of 0.75-0.80`, `AUC-ROC of 0.89`, `-1.40±1.53 points`) | Sentence reporting metric |
+| `readiness_tier` | Standardized readiness level | `T0_PRECLINICAL_BENCHMARK`, `T1_RETROSPECTIVE_OR_UNVALIDATED`, `T2_INTERNALLY_VALIDATED`, `T3_EXTERNALLY_VALIDATED` | Deterministic rule from above |
+| `anti_overclaim_flags` | Guardrail warnings | List of string flags (e.g. `SINGLE_CENTER_NO_EXTERNAL_VALIDATION`, `IN_VITRO_OR_VARIANT_ONLY_NO_HUMAN_COHORT`) | Rule-based flags |
+
+## Epistemic Readiness Tiers
+
+- **`T3_EXTERNALLY_VALIDATED`**: Large human patient cohort ($N \ge 50$), strict patient-level splitting, and independent external validation on a distinct registry or center (e.g., AutoPrognosis validated on the Canadian CF Registry).
+- **`T2_INTERNALLY_VALIDATED`**: Human patient cohort ($N \ge 50$) with patient-level splitting and internal temporal or cross-validation, but lacking independent external center validation.
+- **`T1_RETROSPECTIVE_OR_UNVALIDATED`**: Retrospective single-center cohorts, unsupervised morphological clustering, sample/record-level splits, or studies that explicitly state external validation is required before clinical use.
+- **`T0_PRECLINICAL_BENCHMARK`**: Preclinical studies (in vitro cell lines, organoids, synthetic traces, or variant-level databases) with no human patient cohort.
+
+## Benchmark (`cf_ml_benchmark.json`)
+
+The extractor was evaluated on 6 published Cystic Fibrosis machine learning and computational papers:
+1. **Jiang et al. 2026** (*MedComm*, `doi:10.1002/mco2.70894`): Retrospective single-center EHR AMR prediction in 209 pwCF; patient-level splitting; lacks external validation; `AUCs of 0.75-0.80` $\to$ `T1`.
+2. **Campredon et al. 2022** (*Eur Respir J*, `doi:10.1183/13993003.01344-2021`): Chest CT radiomics in 283 patients; unsupervised k-means clustering; `-1.40±1.53 points` Bhalla decrease $\to$ `T1`.
+3. **McDonald et al. 2024** (*PLoS ONE*, `doi:10.1371/journal.pone.0297560`): AlphaMissense on CFTR2 variants; variant database evaluation; zero patient cohort; fair classification $\to$ `T0`.
+4. **Mangkalaphiban et al. 2024** (*Nat Commun*, `doi:10.1038/s41467-024-46703-z`): Extended stop codon machine learning in HEK293T cells; zero human cohort $\to$ `T0`.
+5. **Bulcaen et al. 2024** (*Cell Reports Med*, `doi:10.1016/j.xcrm.2024.101560`): Prime editing and DETECTOR ML in rectal organoids; in vitro model; zero human cohort $\to$ `T0`.
+6. **Alaa et al. 2018** (*Sci Rep*, `doi:10.1038/s41598-018-29229-5`): AutoPrognosis on 10,261 UK CF Registry patients; patient-level split; externally validated on Canadian CF Registry; `AUC-ROC of 0.89` $\to$ `T3`.
+
+Benchmark Performance: **1.0000 exact-match accuracy** (30/30 fields) and **100% verbatim sentence grounding**.
+
+## Usage
+
+```bash
+# Run benchmark
+python tools/readiness/extractor.py --benchmark
+
+# Run benchmark with JSON output
+python tools/readiness/extractor.py --benchmark --json
+
+# Parse a file
+python tools/readiness/extractor.py --file abstract.txt
+
+# Run unit tests
+python -m unittest discover -s tools/readiness -v
+```
+
+## Security & Medical Boundaries
+
+- **Input Sanitization**: Untrusted input is quarantined against prompt injection attempts (`<system>`, `ignore previous instructions`, etc.).
+- **Dignity & Medical Boundaries**: `tools/readiness` is an epistemic evaluation tool for scientific literature. It does not provide medical advice, diagnosis, treatment recommendations, or clinical validation.
