@@ -2,7 +2,7 @@
 
 Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. Do not edit by hand.
 
-300 to download by hand, 1 to ask for, 3 not to download.
+305 to download by hand, 1 to ask for, 3 not to download.
 
 ## How this works
 
@@ -177,6 +177,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | bermudahospitals-bm-resource-pages | Bermuda Hospitals Board website (bermudahospitals.bm) | [page](https://bermudahospitals.bm/) | link only | Principal public hospital authority operating King Edward VII Memorial Hospital and specialized pediatric services in Bermuda; robots.txt allow (2026-10-28), m… |
+
+### BioMed Central (Springer Nature)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| kraft-2026-bmcmedresmethodol | Supporting high-quality enrollment decision-making in clinical research: development of a novel informed consent communication framework and curriculum | [page](https://doi.org/10.1186/s12874-026-02885-2) | link only | Verified 2026-11-16 via Europe PMC XML (PMC13721633; published 2026-07-25; Scite retracted: false, contrasting: 0). |
 
 ### BioMed Central Limited on behalf of ISRCTN
 
@@ -387,6 +393,7 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | cffpr-highlights-2024 | CFF Patient Registry Highlights 2024 | [page](https://www.cff.org/medical-professionals/patient-registry) | `CFFPR_Highlights_2024.pdf` | Opened 2026-10-05 from the maintainer's browser download. |
 | cffpr-highlights-2025 | CFF Patient Registry Highlights 2025 | [page](https://www.cff.org/medical-professionals/2025-patient-registry-highlights) | `CFFPR_Highlights_2025.pdf` | Opened 2026-10-05 from the maintainer's browser download. |
 | cff-resource-pages | Cystic Fibrosis Foundation public help pages (www.cff.org) | [page](https://www.cff.org/support) | link only | Same host and same evidence as the twelve Foundation registry entries above: robots.txt was unreadable on 2026-10-05 and the notes there say the site refuses a… |
+| cff-research-priorities | Cystic Fibrosis Foundation Research Approach and Path to a Cure Pages (www.cff.org) | [page](https://www.cff.org/research-clinical-trials/our-research-approach) | link only | Same host (www.cff.org) and robots evidence as cff-resource-pages and cffpr-adr-2024: robots.txt was unreadable on 2026-10-05 and www.cff.org refuses automated… |
 | cff-apps-resource-pages | Cystic Fibrosis Foundation tools host (apps.cff.org) | [page](https://apps.cff.org/ccd) | link only | A second host of the Foundation, for the care center locator and the clinical trial finder. |
 
 ### Cystic Fibrosis Foundation of Israel
@@ -496,6 +503,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | sorum-2015-cell-pore-opening-timing | Timing of CFTR Pore Opening and Structure of Its Transition State | [page](https://doi.org/10.1016/j.cell.2015.09.052) | link only | Identifiers resolved on Crossref and Europe PMC on 2026-11-09; not in PubMed Central; the text was not read. |
+
+### Elsevier BV (ASGCT Molecular Therapy Nucleic Acids)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| barilla-2026-omtn | Targeted insertion of partial CFTR cDNA replicates native CFTR expression with restored channel function in CF airway epithelium | [page](https://doi.org/10.1016/j.omtn.2026.103123) | link only | Verified 2026-11-16 via Europe PMC XML (PMC13717110; published 2026-10-01; Scite retracted: false, contrasting: 0). |
 
 ### European Medicines Agency
 
@@ -1018,6 +1031,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | anwar-2024-advrespirmed | Cystic Fibrosis: Understanding Cystic Fibrosis Transmembrane Regulator Mutation Classification and Modulator Therapies | [page](https://doi.org/10.3390/arm92040026) | link only | Supporting words are in section 5, Classification of CFTR Mutations. |
+
+### MDPI (International Journal of Neonatal Screening)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| mcgarry-2025-ijns | Cystic Fibrosis Newborn Screening: A Systematic Review-Driven Consensus Guideline from the United States Cystic Fibrosis Foundation | [page](https://doi.org/10.3390/ijns11020024) | link only | Verified 2026-11-16 via Europe PMC XML (PMC12015897; published 2025-04-02; Scite retracted: false, contrasting: 0). |
 
 ### Mendeley Data
 
@@ -1653,6 +1672,12 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
 | doh-vi-resource-pages | Virgin Islands Department of Health website (doh.vi.gov) | [page](https://doh.vi.gov/) | link only | Official territorial health department administering public healthcare programs, maternal and child clinical services, and specialized medical referrals across… |
+
+### Wolters Kluwer (AASLD Hepatology Communications)
+
+| ID | What | Open | Save as | Notes |
+| --- | --- | --- | --- | --- |
+| debray-2026-hepatolcommun | Research priorities and knowledge gaps in understanding hepatobiliary disease in cystic fibrosis | [page](https://doi.org/10.1097/HC9.0000000000001061) | link only | Verified 2026-11-16 via Europe PMC XML (PMC13668289; Scite retracted: false, contrasting: 0). |
 
 ### World Health Organization
 

@@ -53,7 +53,7 @@ class TestRareGenotypeTrialScreener(unittest.TestCase):
     def test_3_falsification_suite_passes_all_negative_controls(self) -> None:
         rep = rgts.run_falsification_suite()
         self.assertTrue(rep["falsify_passed"], msg=str(rep))
-        self.assertEqual(len(rep["negative_controls"]), 3)
+        self.assertEqual(len(rep["negative_controls"]), 4)
         for ctrl in rep["negative_controls"]:
             self.assertTrue(ctrl["passed"], msg=str(ctrl))
 
@@ -69,6 +69,45 @@ class TestRareGenotypeTrialScreener(unittest.TestCase):
         # Verify 'aso' does not match inside 'tetrasodium' or 'reasons'
         self.assertFalse(rgts._keyword_matches("denufosol tetrasodium inhalation for safety reasons", "aso"))
         self.assertTrue(rgts._keyword_matches("inhaled aso therapy for 3849+10kbc->t", "aso"))
+
+    def test_5_observational_readiness_and_genetic_consent_bilingual_isolation(self) -> None:
+        rows = rgts.screen_rare_genotype_trials(
+            self.studies,
+            variant_class="genotype_agnostic_mrna_gene",
+            status="ALL",
+            limit=5,
+        )
+        pkt_en = rgts.build_care_team_packet(
+            rows,
+            self.known_ncts,
+            lang="en",
+            include_observational_readiness=True,
+            include_genetic_consent_questions=True,
+        )
+        pkt_es = rgts.build_care_team_packet(
+            rows,
+            self.known_ncts,
+            lang="es-MX",
+            include_observational_readiness=True,
+            include_genetic_consent_questions=True,
+        )
+        self.assertEqual(len(self.known_ncts), 940)
+        interventional_ncts = {r["nct_id"] for r in pkt_en["trials"]}
+        obs_ncts = {r["nct_id"] for r in pkt_en["observational_trial_readiness"]}
+        self.assertNotIn("NCT06504589", interventional_ncts)
+        self.assertEqual(obs_ncts, {"NCT06504589"})
+        self.assertIn("does not evaluate safety or efficacy", pkt_en["nlm_disclaimer"])
+        self.assertEqual(len(pkt_en["genetic_trial_consent_questions"]), 4)
+        self.assertEqual(len(pkt_es["genetic_trial_consent_questions"]), 4)
+        self.assertIn("anticuerpos", pkt_es["genetic_trial_consent_questions"][0].lower())
+        with self.assertRaises(rgts.ScreenerVerificationError):
+            rgts.verify_packet_safety_and_provenance(
+                {
+                    "clinical_boundary": "Informational only, not medical advice.",
+                    "trials": [{"nct_id": "NCT06504589", "study_type": "OBSERVATIONAL", "provenance_tier": "T1"}],
+                },
+                self.known_ncts,
+            )
 
 
 if __name__ == "__main__":

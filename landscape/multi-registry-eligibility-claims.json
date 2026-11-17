@@ -100,5 +100,51 @@
               "Israel, the Russian Federation and Switzerland"],
     "kind": "observed",
     "scope": "Chapter 9 page 81 of the ECFSPR 2024 Annual Data Report was read."
+  },
+  {
+    "id": "cffpr-2025-highlights-totals",
+    "claim": "In the 2025 CFF Patient Registry Highlights, 34,526 people were in the Registry and 2,253 people were ineligible for a modulator.",
+    "source": "cffpr-highlights-2025",
+    "quote": [
+      "2025 CYSTIC FIBROSIS FOUNDATION Patient Registry Highlights",
+      "People in the Registry 34,526",
+      "People Ineligible for a Modulator 2,253"
+    ],
+    "kind": "observed"
+  },
+  {
+    "id": "cffpr-2025-highlights-alyftrek-uptake",
+    "claim": "Between the approval of Alyftrek on December 20, 2024, and the end of 2025, 186 of 559 newly eligible individuals with CF were prescribed a modulator for the first time.",
+    "source": "cffpr-highlights-2025",
+    "quote": [
+      "Of the 559 individuals with CF who were newly eligible for modulators, 186 were prescribed a modulator for the first time",
+      "between Alyftrek's approval on December 20, 2024, and the end of 2025."
+    ],
+    "kind": "observed",
+    "scope": "All four pages of the 2025 CFF Patient Registry Highlights were read in full."
+  },
+  {
+    "id": "cffpr-2025-highlights-modulator-breakdown",
+    "claim": "Among 33,047 individuals without lung transplants in 2025, 67% were prescribed Trikafta, 10% Alyftrek, 3% Kalydeco, 1% Orkambi, and 1% Symdeko, while 11% were eligible with none prescribed, 5% were ineligible by genotype, and 2% were ineligible by age.",
+    "source": "cffpr-highlights-2025",
+    "quote": [
+      "Use of CFTR Modulators Among People With CF 2020 2021 2022 2023 2024 2025",
+      "29,781 30,551 31,165 31,853 32,584 33,047 Percentage of CF Population Without Lung Transplants",
+      "67% 3% 11% 5% 2% 1% 1% Vanz/Teza/Deut (Alyftrek) 10%",
+      "Luma/Iva (Orkambi) Teza/Iva (Symdeko) Iva (Kalydeco) Ineligible by Genotype Eligible, None Prescribed Elexa/Teza/Iva (Trikafta) Ineligible by Age"
+    ],
+    "kind": "observed",
+    "scope": "Page 3 modulator distribution chart and legend of the 2025 CFF Patient Registry Highlights were read."
+  },
+  {
+    "id": "cffpr-2025-highlights-infections-survival",
+    "claim": "In the 2025 CFF Patient Registry Highlights, Pseudomonas aeruginosa prevalence was 22%, MRSA was 12%, and nontuberculous mycobacteria was 12%, with median predicted survival of age 66 for people born between 2021 and 2025.",
+    "source": "cffpr-highlights-2025",
+    "quote": [
+      "22% 4% 12% 2% 1% 12% 5 9 10 15 20 26 Common CF Infections",
+      "Pseudomonas aeruginosa Stenotrophomonas maltophilia Methicillin-resistant Staphylococcus aureus Achromobacter xylosoxidans Burkholderia cepacia complex Nontuberculous mycobacteria",
+      "Among people with CF born between 2021 and 2025, half are predicted to live to age 66 or beyond."
+    ],
+    "kind": "observed"
   }
 ]

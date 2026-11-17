@@ -1,0 +1,96 @@
+# Allow file for landscape/cff-research-priorities-2026.md
+# Format: number # explanation
+
+1 # Rule R1 / Intron 1 / TI-1 / NDA section 1
+2 # Rule R2 / Class II / TI-1 exon 2 start / Phase 2 / 2-27
+3 # Class III / Page 3 / 3 negative controls
+4 # Class IV / Rule X4 / 4-Seat Council / 4-component RIVER
+5 # 5 priority care domains / 5% ineligible by genotype
+7 # PRED-0007 / 7 NBS recommendations / Phase 1/2
+8 # 8 DOIs verified in cite-check-ledger.jsonl
+10 # 10% Alyftrek / 10% remaining modulator gap context
+11 # 11% eligible none prescribed
+12 # 12% MRSA / 12% NTM / Exon 12
+13.0 # 13.0% Hispanic among newly diagnosed (CFFPR Highlights 2025 p. 2)
+16 # 16 snapshot interventional trials in 18-study watchlist
+17 # 17/92 distal exons 23-27 benchmark
+18 # 18-study priority watchlist / Exon 18 split codon
+18.48 # 18.48% (17/92) distal exons 23-27 percentage
+20 # Dec 20 2024 Alyftrek approval / CFTR2 variant screening context
+21 # Exon 21 vs Exon 22 comparison
+22 # 22% P. aeruginosa / Exon 22 R1162X
+23 # Exons 23-27 distal window / ACMG-23
+24 # 24% CFRD / Exon 24 N1303K
+26 # 26% depression / median NTM age 26 / 2026 year suffix
+27 # 27 CFTR exons (exons 2-27 / exons 1-27)
+29 # 29% anxiety / 29% adult overweight
+30 # Age 30 post-transplant screening
+40 # Age 40 baseline colonoscopy screening
+48 # 48% colonoscopy screening (2021-2025)
+50 # Age 50+ cohort (3,337)
+52 # Nucleotide c.52..53 Exon 1 split codon 18
+53 # Nucleotide c.53 Exon 1 end
+54 # Nucleotide c.54 Exon 2 start
+66 # Median predicted survival 66 years
+89 # 89/92 (96.74%) Exons 2-27 coverage
+92 # 92 canonical Class I nonsense alleles
+95 # >=95% NBS sensitivity threshold
+96.74 # 96.74% (89/92) Exons 2-27 coverage
+186 # 186 of 559 newly eligible prescribed modulator
+417 # 417 CFTR variants tested by Bihler et al. 2026
+559 # 559 newly eligible individuals (CFFPR Highlights 2025 p. 3)
+680 # 680 pregnancies (CFFPR Highlights 2025 p. 4)
+940 # 940 PRISMA-included interventional trials
+1053 # 1,053 raw interventional records in snapshot.json
+1240 # Codon 1240 start of Exon 23 (RefSeq NM_000492.4)
+1480 # 1,480 CFTR amino acid codons (NM_000492.4)
+2.1 # 2.1% Asian newly diagnosed
+3.6 # 3.6% multiracial newly diagnosed
+3.7 # 3.7% Black newly diagnosed
+2021 # 2021-2025 birth cohort
+2024 # Year 2024
+2025 # Year 2025 / CFFPR Highlights 2025
+2026 # Year 2026 / dossier publication year
+212273 # FDA NDA 212273 TRIKAFTA
+218730 # FDA NDA 218730 ALYFTREK
+203188 # FDA NDA 203188 KALYDECO
+206038 # FDA NDA 206038 ORKAMBI
+210491 # FDA NDA 210491 SYMDEKO
+34526 # 34,526 Registry individuals (CFFPR Highlights 2025 p. 1)
+33047 # 33,047 individuals without lung transplants (p. 3)
+2253 # 2,253 modulator-ineligible individuals (p. 1)
+11261 # 11,261 telehealth visits (p. 4)
+000492.4 # RefSeq NM_000492.4
+000007137 # ClinVar VCV000007137 (R1162X)
+06237335 # NCT06237335
+06515002 # NCT06515002
+06962852 # NCT06962852
+06526923 # NCT06526923
+07485543 # NCT07485543
+05248230 # NCT05248230
+05504837 # NCT05504837
+06429176 # NCT06429176
+06998043 # NCT06998043
+07275905 # NCT07275905
+04294043 # NCT04294043
+06654752 # NCT06654752
+10.1016 # Elsevier DOI prefix
+10.1097 # Wolters Kluwer DOI prefix
+10.3390 # MDPI DOI prefix
+10.1186 # BMC DOI prefix
+10.1001 # JAMA DOI prefix
+10.1002 # Wiley DOI prefix
+10.1099 # Microbiology Society DOI prefix
+2885 # 02885-2 DOI suffix
+103123 # 103123 DOI suffix
+4593 # 4593 DOI suffix
+71472 # 71472 DOI suffix
+1061 # 1061 DOI suffix
+08 # 08.010 DOI component
+010 # 08.010 DOI component
+03 # 03.021 DOI component
+021 # 03.021 DOI component
+13717110 # PMC13717110
+13721633 # PMC13721633
+12015897 # PMC12015897
+13668289 # PMC13668289

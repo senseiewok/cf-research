@@ -1,0 +1,39 @@
+# Evidence Extract: CFF 2025-2026 Research Priorities & Open-Access Consensus Literature
+# Sources: CC BY 4.0 Europe PMC abstracts (PMC12015897, PMC13721633, PMC13717110), public ClinicalTrials.gov snapshot.json,
+# and bibliographic metadata index lines (DOIs/titles/NCTs) for Crossref/Scite/AH-3 verification.
+# Note: Zero text is copied from www.cff.org (access: manual) or CC BY-NC-ND 4.0 Debray et al. 2026 (PMC13668289).
+
+[mcgarry-2025-ijns | DOI 10.3390/ijns11020024 | PMC12015897 | Licence: CC BY 4.0 | 2025]
+Systematic reviews were used to develop seven recommendations for newborn screening program practices to improve timeliness, sensitivity, and equity in diagnosing infants with CF: (1) The CF Foundation recommends the use of a floating immunoreactive trypsinogen (IRT) cutoff over a fixed IRT cutoff; (2) The CF Foundation recommends using a very high IRT referral strategy in CF newborn screening programs whose variant panel does not include all CF-causing variants in CFTR2 or does not have a variant panel that achieves at least 95% sensitivity in all ancestral groups within the state; (3) The CF Foundation recommends that CF newborn screening algorithms should not limit CFTR variant detection to the F508del variant or variants included in the American College of Medical Genetics-23 panel; (4) The CF Foundation recommends that CF newborn screening programs screen for all CF-causing CFTR variants in CFTR2; (5) The CF Foundation recommends conducting CFTR variant screening twice weekly or more frequently as resources allow; (6) The CF Foundation recommends the inclusion of a CFTR sequencing tier following IRT and CFTR variant panel testing to improve the specificity and positive predictive value of CF newborn screening; (7) The CF Foundation recommends that both the primary care provider and the CF specialist be notified of abnormal newborn screening results.
+
+[kraft-2026-bmcmedresmethodol | DOI 10.1186/s12874-026-02885-2 | PMC13721633 | Licence: CC BY 4.0 | 2026]
+The ENgaging with Values to Inform research enrollment deciSIONs (ENVISION) study was launched to improve the process of research enrollment decision-making within the context of a multisite cystic fibrosis clinical trial.
+The development process resulted in a four-component, values-oriented communication framework, the RIVER framework: Relationship (forming a connection with the prospective participant), Information (sharing about the study), Values Exploration (eliciting and examining relevant values), and Resolution (confirming a values-aligned decision).
+The training curriculum consists of two 2-hour sessions that include didactic teaching, group discussion, and role-play scenarios, which provide an opportunity to practice real-world clinical research enrollment conversations.
+
+[barilla-2026-omtn | DOI 10.1016/j.omtn.2026.103123 | PMC13717110 | Licence: CC BY 4.0 | 2026]
+Barilla et al. (2026, DOI 10.1016/j.omtn.2026.103123, PMC13717110) targeted integration of CFTR 2-27 sequence into CFTR intron 1 (TI-1):
+we sought to develop a correction methodology utilizing targeted integration of CFTR 2-27 sequence into CFTR intron 1 (TI-1).
+Following electroporation of CF primary airway basal stem cells with intron 1-targeted Cas9/gRNA, we delivered CFTR 2-27 donor, flanked by a splice acceptor and polyadenylation signal, via an integrase defective lentiviral vector.
+Molecular characterization revealed highly efficient integration of the CFTR 2-27 sequence into the native CFTR intron 1 with most insertion events reflecting the desired homology-directed repair. Fully differentiated airway epithelium, derived from TI-1 treated basal cells without enrichment for corrected cells, exhibited functional restoration of CFTR channel activity with significant improvement of mucus hydration and transport.
+
+[Bibliographic Metadata Index (Crossref / Scite / PubMed Metadata Only — No Full Text Copied)]
+- DOI 10.1097/HC9.0000000000001061 (Debray et al. 2026, Hepatol Commun, PMC13668289, CC BY-NC-ND 4.0)
+- DOI 10.1016/j.jcf.2026.08.010 (Bihler et al. 2026, J Cyst Fibros, 417 CFTR variants, subscription abstract/metadata only)
+- DOI 10.1002/ppul.71472 (Georgiopoulos et al. 2026, Pediatr Pulmonol, CF mental health research priorities, metadata only)
+- DOI 10.1016/j.jcf.2026.03.021 (Putman et al. 2026, J Cyst Fibros, CFRD research updates, metadata only)
+- DOI 10.1001/jamapediatrics.2026.4593 (Ren, Sontag & Faro 2026, JAMA Pediatr, CF newborn screening sweat test indications, metadata only)
+
+[clinicaltrials-gov | tools/trial_atlas/snapshot.json | PRISMA included 940 / raw interventional 1,053]
+NCT06237335 ACTIVE_NOT_RECRUITING INTERVENTIONAL 'A Phase 2 Study Evaluating Safety and Tolerability of RCT2100 (CFTR mRNA) in Healthy Participants and in Participants With CF'
+NCT06515002 TERMINATED INTERVENTIONAL 'A Study to Test How Well BI 3720931 is Tolerated and Whether it Improves Lung Function in People With Cystic Fibrosis (Lenticlair™ 1)'
+NCT06962852 ACTIVE_NOT_RECRUITING INTERVENTIONAL 'A Long-term Study to Monitor the Health Status of People With Cystic Fibrosis Who Took Part in a Previous Study With BI 3720931 (Lenticlair™-ON)'
+NCT06526923 RECRUITING INTERVENTIONAL 'A Phase 1/2 Trial of SP-101 for the Treatment of Cystic Fibrosis (CF)'
+NCT07485543 RECRUITING INTERVENTIONAL 'Safety and Efficacy of Inhaled BMD003 (CFTR mRNA) in Chinese Cystic Fibrosis Patients Aged ≥12 Years'
+NCT05248230 RECRUITING INTERVENTIONAL '4D-710 in Adult Patients With Cystic Fibrosis'
+NCT05504837 RECRUITING INTERVENTIONAL 'A Study Assessing KB407 for the Treatment of Cystic Fibrosis'
+NCT06429176 RECRUITING INTERVENTIONAL 'Safety, Tolerability, Pharmacokinetics, and Preliminary Efficacy of SPL84 in Patients With Cystic Fibrosis'
+NCT06998043 RECRUITING INTERVENTIONAL 'Study With Phage for CF Subjects With Pseudomonas Lung Infection'
+NCT07275905 RECRUITING INTERVENTIONAL 'Bacteriophages for Adults With Cystic Fibrosis and Chronic Achromobacter Lung Infection'
+NCT04294043 RECRUITING INTERVENTIONAL 'IV Gallium Study for Patients With Cystic Fibrosis Who Have NTM (ABATE Study)'
+NCT06654752 RECRUITING INTERVENTIONAL 'Streamlined Treatment of Pulmonary Exacerbations in Pediatrics'

@@ -1,0 +1,65 @@
+[
+  {
+    "id": "cff-nbs-seven-recommendations",
+    "claim": "The United States CF Foundation newborn screening consensus guideline states seven program practice recommendations, including floating IRT cutoffs, 95% sensitivity across ancestral groups, expanding beyond F508del and ACMG-23 panels, screening CFTR2 CF-causing variants twice weekly, adding a CFTR sequencing tier, and notifying primary care providers and CF specialists.",
+    "source": "mcgarry-2025-ijns",
+    "quote": [
+      "Systematic reviews were used to develop seven recommendations for newborn screening program practices to improve timeliness, sensitivity, and equity in diagnosing infants with CF:",
+      "The CF Foundation recommends the use of a floating immunoreactive trypsinogen (IRT) cutoff over a fixed IRT cutoff",
+      "variant panel that achieves at least 95% sensitivity in all ancestral groups",
+      "should not limit CFTR variant detection to the F508del variant or variants included in the American College of Medical Genetics-23 panel",
+      "screen for all CF-causing CFTR variants in CFTR2",
+      "conducting CFTR variant screening twice weekly or more frequently",
+      "The CF Foundation recommends the inclusion of a CFTR sequencing tier following IRT and CFTR variant panel testing",
+      "the primary care provider and the CF specialist be notified of abnormal newborn screening results."
+    ],
+    "kind": "observed",
+    "scope": "Checked in the CC BY 4.0 abstract of McGarry et al. 2025 (PMC12015897)."
+  },
+  {
+    "id": "cff-envision-river-consent",
+    "claim": "The ENVISION cystic fibrosis clinical trial consent project produced the four-component RIVER framework (Relationship, Information, Values Exploration, Resolution) backed by two 2-hour training sessions for research coordinators.",
+    "source": "kraft-2026-bmcmedresmethodol",
+    "quote": [
+      "The ENgaging with Values to Inform research enrollment deciSIONs (ENVISION) study was launched to improve",
+      "making within the context of a multisite cystic fibrosis clinical trial.",
+      "The development process resulted in a four-component, values-oriented communication framework, the RIVER framework:",
+      "Relationship (forming a connection with the prospective participant), Information (sharing about the study), Values Exploration (eliciting and examining relevant values),",
+      "Resolution (confirming a values-aligned decision).",
+      "The training curriculum consists of two 2-hour sessions that include didactic teaching, group discussion, and role-play scenarios,"
+    ],
+    "kind": "observed",
+    "scope": "Checked in the CC BY 4.0 abstract of Kraft et al. 2026 (PMC13721633)."
+  },
+  {
+    "id": "cff-barilla-intron1-ti1-exon2-27",
+    "claim": "Barilla et al. (2026) evaluated targeted CRISPR/Cas9 integration of a partial CFTR exons 2-27 cDNA donor into CFTR intron 1 (TI-1) via integrase-defective lentivirus in CF primary airway basal stem cells and differentiated airway epithelium.",
+    "source": "barilla-2026-omtn",
+    "quote": [
+      "Barilla et al. (2026, DOI 10.1016/j.omtn.2026.103123, PMC13717110) targeted integration of CFTR 2-27 sequence into CFTR intron 1 (TI-1):",
+      "we sought to develop a correction methodology utilizing targeted integration of CFTR 2-27 sequence into CFTR intron 1 (TI-1).",
+      "Following electroporation of CF primary airway basal stem cells with intron 1-targeted Cas9/gRNA, we delivered CFTR 2-27 donor,",
+      "via an integrase defective lentiviral vector.",
+      "Fully differentiated airway epithelium, derived from TI-1 treated basal cells without enrichment for corrected cells, exhibited functional restoration of CFTR channel activity"
+    ],
+    "kind": "observed",
+    "scope": "Preclinical airway basal stem cell model read in the CC BY 4.0 abstract of PMC13717110; not a clinical efficacy claim."
+  },
+  {
+    "id": "cff-snapshot-priority-trials-status",
+    "claim": "Within tools/trial_atlas/snapshot.json (1,053 raw interventional records; 940 PRISMA-included), NCT06237335 (RCT2100 CFTR mRNA) is ACTIVE_NOT_RECRUITING, NCT06515002 (BI 3720931) is TERMINATED, and NCT06526923 (SP-101), NCT07485543 (BMD003 CFTR mRNA), NCT06998043 (Pseudomonas phage), NCT07275905 (Achromobacter phage), and NCT04294043 (ABATE IV gallium) are RECRUITING.",
+    "source": "clinicaltrials-gov",
+    "quote": [
+      "PRISMA included 940 / raw interventional 1,053",
+      "NCT06237335 ACTIVE_NOT_RECRUITING INTERVENTIONAL 'A Phase 2 Study Evaluating Safety and Tolerability of RCT2100 (CFTR mRNA)",
+      "NCT06515002 TERMINATED INTERVENTIONAL 'A Study to Test How Well BI 3720931 is Tolerated",
+      "NCT06526923 RECRUITING INTERVENTIONAL 'A Phase 1/2 Trial of SP-101 for the Treatment",
+      "NCT07485543 RECRUITING INTERVENTIONAL 'Safety and Efficacy of Inhaled BMD003 (CFTR mRNA) in Chinese",
+      "NCT06998043 RECRUITING INTERVENTIONAL 'Study With Phage for CF Subjects With Pseudomonas Lung Infection'",
+      "NCT07275905 RECRUITING INTERVENTIONAL 'Bacteriophages for Adults With Cystic Fibrosis and Chronic Achromobacter Lung Infection'",
+      "NCT04294043 RECRUITING INTERVENTIONAL 'IV Gallium Study for Patients With Cystic Fibrosis Who Have NTM (ABATE Study)'"
+    ],
+    "kind": "observed",
+    "scope": "Snapshot status counts recorded in tools/trial_atlas/snapshot.json (2026-10-14)."
+  }
+]

@@ -9,7 +9,7 @@
     "total_uniprot_natural_variants_mapped": 209,
     "uniprot_placed_in_6msm_cryoem": 191,
     "uniprot_unplaced_disordered_region": 18,
-    "uniprot_near_splice_junction_le_3aa": 17,
+    "uniprot_near_splice_junction_le_3aa": 20,
     "domains_represented": 5,
     "total_cftr_domains_defined": 6,
     "consequence_class_counts": {
@@ -40,7 +40,7 @@
     {
       "finding_id": "VF-4",
       "label": "[computed]",
-      "summary": "Across the 209 UniProt P13569 natural variants superposed onto Cryo-EM structures 6MSM/5UAK/8EIQ/8EJ1, 191 are resolved in 3D C-alpha coordinates in 6MSM while 18 fall in unplaced intrinsically disordered regions (primarily the R-domain, residues 631-845, Exon 14/27), and 17 lie within <=3 codons of an exon-intron boundary."
+      "summary": "Across the 209 UniProt P13569 natural variants superposed onto Cryo-EM structures 6MSM/5UAK/8EIQ/8EJ1, 191 are resolved in 3D C-alpha coordinates in 6MSM while 18 fall in unplaced intrinsically disordered regions (primarily the R-domain, residues 631-845, Exon 14/27), and 20 lie within <=3 codons of an exon-intron boundary."
     }
   ],
   "multi_nucleotide_degeneracy_audit": {
@@ -557,7 +557,7 @@
       "refseq_exon": {
         "exon_number": 23,
         "exon_label": "23/27",
-        "exon_codon_span": "1210-1292",
+        "exon_codon_span": "1240-1291",
         "near_splice_junction_le_3aa": false,
         "source": "[computed from RefSeq NM_000492.4 exon codon spans]"
       },
@@ -687,7 +687,7 @@
       "refseq_exon": {
         "exon_number": 24,
         "exon_label": "24/27",
-        "exon_codon_span": "1293-1326",
+        "exon_codon_span": "1292-1321",
         "near_splice_junction_le_3aa": false,
         "source": "[computed from RefSeq NM_000492.4 exon codon spans]"
       },
@@ -817,7 +817,7 @@
       "refseq_exon": {
         "exon_number": 20,
         "exon_label": "20/27",
-        "exon_codon_span": "1041-1123",
+        "exon_codon_span": "1047-1122",
         "near_splice_junction_le_3aa": false,
         "source": "[computed from RefSeq NM_000492.4 exon codon spans]"
       },
@@ -947,7 +947,7 @@
       "refseq_exon": {
         "exon_number": 21,
         "exon_label": "21/27",
-        "exon_codon_span": "1124-1175",
+        "exon_codon_span": "1123-1156",
         "near_splice_junction_le_3aa": false,
         "source": "[computed from RefSeq NM_000492.4 exon codon spans]"
       },
@@ -1207,7 +1207,7 @@
       "refseq_exon": {
         "exon_number": 20,
         "exon_label": "20/27",
-        "exon_codon_span": "1041-1123",
+        "exon_codon_span": "1047-1122",
         "near_splice_junction_le_3aa": false,
         "source": "[computed from RefSeq NM_000492.4 exon codon spans]"
       },
@@ -1728,7 +1728,7 @@
       "refseq_exon": {
         "exon_number": 20,
         "exon_label": "20/27",
-        "exon_codon_span": "1041-1123",
+        "exon_codon_span": "1047-1122",
         "near_splice_junction_le_3aa": false,
         "source": "[computed from RefSeq NM_000492.4 exon codon spans]"
       },
@@ -1978,7 +1978,7 @@
       "refseq_exon": {
         "exon_number": 23,
         "exon_label": "23/27",
-        "exon_codon_span": "1210-1292",
+        "exon_codon_span": "1240-1291",
         "near_splice_junction_le_3aa": false,
         "source": "[computed from RefSeq NM_000492.4 exon codon spans]"
       },
@@ -2108,7 +2108,7 @@
       "refseq_exon": {
         "exon_number": 23,
         "exon_label": "23/27",
-        "exon_codon_span": "1210-1292",
+        "exon_codon_span": "1240-1291",
         "near_splice_junction_le_3aa": false,
         "source": "[computed from RefSeq NM_000492.4 exon codon spans]"
       },
@@ -2366,7 +2366,7 @@
       "refseq_exon": {
         "exon_number": 24,
         "exon_label": "24/27",
-        "exon_codon_span": "1293-1326",
+        "exon_codon_span": "1292-1321",
         "near_splice_junction_le_3aa": false,
         "source": "[computed from RefSeq NM_000492.4 exon codon spans]"
       },
@@ -2474,7 +2474,7 @@
     "multi_residue_variants": 13,
     "placed_in_6msm_cryoem_count": 191,
     "unplaced_disordered_region_count": 18,
-    "near_exon_splice_junction_count": 17,
+    "near_exon_splice_junction_count": 20,
     "counts_by_domain": {
       "Lasso_N_terminal": 11,
       "TMD1": 54,
@@ -2494,17 +2494,17 @@
       "8/27": 21,
       "10/27": 4,
       "11/27": 13,
-      "12/27": 10,
-      "13/27": 17,
+      "12/27": 15,
+      "13/27": 12,
       "14/27": 26,
       "15/27": 2,
-      "16/27": 6,
-      "18/27": 10,
-      "19/27": 4,
+      "17/27": 11,
+      "18/27": 1,
+      "19/27": 8,
       "20/27": 22,
-      "21/27": 6,
-      "22/27": 2,
-      "23/27": 14,
+      "21/27": 4,
+      "22/27": 7,
+      "23/27": 11,
       "24/27": 2,
       "25/27": 3,
       "26/27": 1,
@@ -4773,7 +4773,7 @@
         "span_type": "single_residue",
         "domain_id": "NBD1",
         "exon_label": "12/27",
-        "near_splice_junction_le_3aa": true,
+        "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
           "5UAK",
@@ -4797,7 +4797,7 @@
         "end_aa": 558,
         "span_type": "single_residue",
         "domain_id": "NBD1",
-        "exon_label": "13/27",
+        "exon_label": "12/27",
         "near_splice_junction_le_3aa": true,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -4822,7 +4822,7 @@
         "end_aa": 559,
         "span_type": "single_residue",
         "domain_id": "NBD1",
-        "exon_label": "13/27",
+        "exon_label": "12/27",
         "near_splice_junction_le_3aa": true,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -4847,7 +4847,7 @@
         "end_aa": 560,
         "span_type": "single_residue",
         "domain_id": "NBD1",
-        "exon_label": "13/27",
+        "exon_label": "12/27",
         "near_splice_junction_le_3aa": true,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -4872,7 +4872,7 @@
         "end_aa": 560,
         "span_type": "single_residue",
         "domain_id": "NBD1",
-        "exon_label": "13/27",
+        "exon_label": "12/27",
         "near_splice_junction_le_3aa": true,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -4897,7 +4897,7 @@
         "end_aa": 560,
         "span_type": "single_residue",
         "domain_id": "NBD1",
-        "exon_label": "13/27",
+        "exon_label": "12/27",
         "near_splice_junction_le_3aa": true,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -4923,7 +4923,7 @@
         "span_type": "single_residue",
         "domain_id": "NBD1",
         "exon_label": "13/27",
-        "near_splice_junction_le_3aa": false,
+        "near_splice_junction_le_3aa": true,
         "placed_in_pdb_entries": [
           "6MSM",
           "5UAK",
@@ -4948,7 +4948,7 @@
         "span_type": "single_residue",
         "domain_id": "NBD1",
         "exon_label": "13/27",
-        "near_splice_junction_le_3aa": false,
+        "near_splice_junction_le_3aa": true,
         "placed_in_pdb_entries": [
           "6MSM",
           "5UAK",
@@ -4973,7 +4973,7 @@
         "span_type": "single_residue",
         "domain_id": "NBD1",
         "exon_label": "13/27",
-        "near_splice_junction_le_3aa": false,
+        "near_splice_junction_le_3aa": true,
         "placed_in_pdb_entries": [
           "6MSM",
           "5UAK",
@@ -4998,7 +4998,7 @@
         "span_type": "single_residue",
         "domain_id": "NBD1",
         "exon_label": "13/27",
-        "near_splice_junction_le_3aa": false,
+        "near_splice_junction_le_3aa": true,
         "placed_in_pdb_entries": [
           "6MSM",
           "5UAK",
@@ -5848,7 +5848,7 @@
         "end_aa": 1480,
         "span_type": "multi_residue",
         "domain_id": "TMD2",
-        "exon_label": "16/27",
+        "exon_label": "17/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [],
         "delta_ca_6msm_vs_5uak_angstrom": "not stated",
@@ -5866,7 +5866,7 @@
         "end_aa": 903,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "16/27",
+        "exon_label": "17/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -5889,7 +5889,7 @@
         "end_aa": 909,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "16/27",
+        "exon_label": "17/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -5913,7 +5913,7 @@
         "end_aa": 912,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "16/27",
+        "exon_label": "17/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -5938,7 +5938,7 @@
         "end_aa": 913,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "16/27",
+        "exon_label": "17/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -5963,8 +5963,8 @@
         "end_aa": 917,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "16/27",
-        "near_splice_junction_le_3aa": true,
+        "exon_label": "17/27",
+        "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
           "5UAK",
@@ -5988,7 +5988,7 @@
         "end_aa": 938,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "18/27",
+        "exon_label": "17/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -6013,7 +6013,7 @@
         "end_aa": 949,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "18/27",
+        "exon_label": "17/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -6038,7 +6038,7 @@
         "end_aa": 952,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "18/27",
+        "exon_label": "17/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -6063,7 +6063,7 @@
         "end_aa": 959,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "18/27",
+        "exon_label": "17/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -6088,8 +6088,8 @@
         "end_aa": 967,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "18/27",
-        "near_splice_junction_le_3aa": false,
+        "exon_label": "17/27",
+        "near_splice_junction_le_3aa": true,
         "placed_in_pdb_entries": [
           "6MSM",
           "5UAK",
@@ -6138,8 +6138,8 @@
         "end_aa": 997,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "18/27",
-        "near_splice_junction_le_3aa": false,
+        "exon_label": "19/27",
+        "near_splice_junction_le_3aa": true,
         "placed_in_pdb_entries": [
           "6MSM",
           "5UAK",
@@ -6163,7 +6163,7 @@
         "end_aa": 1005,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "18/27",
+        "exon_label": "19/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -6188,7 +6188,7 @@
         "end_aa": 1006,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "18/27",
+        "exon_label": "19/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -6213,8 +6213,8 @@
         "end_aa": 1013,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "18/27",
-        "near_splice_junction_le_3aa": true,
+        "exon_label": "19/27",
+        "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
           "5UAK",
@@ -6980,7 +6980,7 @@
         "end_aa": 1480,
         "span_type": "multi_residue",
         "domain_id": "TMD2",
-        "exon_label": "21/27",
+        "exon_label": "22/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -7003,7 +7003,7 @@
         "end_aa": 1162,
         "span_type": "single_residue",
         "domain_id": "TMD2",
-        "exon_label": "21/27",
+        "exon_label": "22/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -7067,7 +7067,7 @@
         "end_aa": 1220,
         "span_type": "single_residue",
         "domain_id": "NBD2_C_terminal",
-        "exon_label": "23/27",
+        "exon_label": "22/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -7092,7 +7092,7 @@
         "end_aa": 1234,
         "span_type": "single_residue",
         "domain_id": "NBD2_C_terminal",
-        "exon_label": "23/27",
+        "exon_label": "22/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",
@@ -7117,7 +7117,7 @@
         "end_aa": 1235,
         "span_type": "single_residue",
         "domain_id": "NBD2_C_terminal",
-        "exon_label": "23/27",
+        "exon_label": "22/27",
         "near_splice_junction_le_3aa": false,
         "placed_in_pdb_entries": [
           "6MSM",

@@ -54,3 +54,5 @@ python -m unittest discover -s tools/variant_profile -v   # from the repo root; 
 ```
 
 Tested against the CFTR R31L fixture recorded 2026-10-07, and fixtures for F508del, R117H, N1303K, W1282X, Y1092X, D1152H and R104fs recorded 2026-10-08 (see [`fixtures/README.md`](fixtures/README.md)).
+
+Also includes [`super_exon_benchmark.py`](super_exon_benchmark.py), a RefSeq `NM_000492.4` exon-span coverage benchmark (`PRED-0007`) comparing intron-1 partial cDNA exons 2-27 insertion (Barillà et al. 2026, DOI `10.1016/j.omtn.2026.103123`, `PMC13717110`), distal exons 23-27 comparison cassettes (`c.3718..4440`, codons `1240..1480`), and full exons 1-27 coding replacement across all 92 indexed Class I nonsense alleles with upstream negative controls (`Q2X` in exon 1, `R1162X` in exon 22).
