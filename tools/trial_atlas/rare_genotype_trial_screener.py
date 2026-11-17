@@ -360,11 +360,52 @@ def screen_rare_genotype_trials(
     return rows
 
 
+DEFAULT_OBSERVATIONAL_NCTS: frozenset[str] = frozenset({"NCT06504589"})
+NLM_DISCLAIMER = (
+    "ClinicalTrials.gov does not evaluate safety or efficacy; "
+    "listing on the registry does not denote government endorsement."
+)
+
+OBSERVATIONAL_READINESS_WATCHLIST: tuple[dict[str, Any], ...] = (
+    {
+        "nct_id": "NCT06504589",
+        "study_name": "REACH (REACH-OB-23)",
+        "brief_title": "A Research Study to Advance the CF Therapeutics Pipeline for People Without Modulators",
+        "study_type": "OBSERVATIONAL",
+        "overall_status": "RECRUITING",
+        "in_interventional_snapshot": False,
+        "provenance_tier": "T1",
+        "provenance_source": "ClinicalTrials.gov API v2 external observational watchlist (not in PRISMA interventional 940/1,053 counts)",
+        "cohort_focus": "People with CF who are genetically ineligible for or not taking CFTR modulators.",
+        "stated_primary_outcome": "Change in ppFEV1 at 12 months",
+    },
+)
+
+# Grounded in Kraft et al. 2026 (DOI 10.1186/s12874-026-02885-2) genetic-trial decision support themes
+GENETIC_TRIAL_CONSENT_QUESTIONS: dict[str, tuple[str, ...]] = {
+    "en": (
+        "Could participating in a viral-vector or nucleic-acid trial create antibodies or affect whether redosing or enrolling in another genetic trial stays possible later (Kraft et al. 2026, DOI 10.1186/s12874-026-02885-2)?",
+        "What current medicines, nebulized treatments, or washout periods are required before screening, and what happens to routine CF care during follow-up?",
+        "How many clinic visits, bronchoscopy or airway-sampling procedures, and how many years of long-term safety follow-up are written into the protocol?",
+        "What travel, lodging, or caregiver schedule support does the study site or Cystic Fibrosis Foundation offer for multi-visit follow-up?",
+    ),
+    "es-MX": (
+        "¿Participar en un estudio con vector viral o ácido nucleico podría generar anticuerpos o limitar la posibilidad de recibir dosis repetidas o entrar a otro ensayo genético más adelante (Kraft et al. 2026, DOI 10.1186/s12874-026-02885-2)?",
+        "¿Qué tratamientos actuales, terapias inhaladas o periodos de suspensión previa exige el protocolo antes del tamizaje y cómo continúa el cuidado habitual de FQ?",
+        "¿Cuántas visitas clínicas, broncoscopias o tomas de muestra y cuántos años de seguimiento de seguridad a largo plazo contempla el consentimiento informado?",
+        "¿Qué apoyo de traslado, hospedaje o acompañante ofrecen el centro del estudio o la fundación de FQ durante el seguimiento?",
+    ),
+}
+
+
 def build_care_team_packet(
     rows: list[dict[str, Any]],
     known_ncts: set[str],
     lang: str = "en",
     filters: dict[str, Any] | None = None,
+    include_observational_readiness: bool = False,
+    include_genetic_consent_questions: bool = False,
+    known_observational_ncts: set[str] | frozenset[str] | None = None,
 ) -> dict[str, Any]:
     """Build a verified bilingual care-team discussion packet with mandatory safety disclaimers."""
     is_es = lang.strip().lower().startswith("es")
@@ -380,12 +421,13 @@ def build_care_team_packet(
         ]
         urgent_line = (
             "Si presenta dificultad respiratoria aguda, hemoptisis o fiebre alta, comuniquese "
-            "de inmediato con su equipo de atencion de fibrosis quistica o servicios de urgencias."
+            "de inmediato con su equipo de atencion de fibrosis quistica o servicios de urgencias (911 in the US)."
         )
     else:
         boundary = (
             "Informational clinic-visit preparation only (Tier T1: ClinicalTrials.gov). "
-            "This tool does NOT determine personal trial eligibility or provide medical advice."
+            "This tool does NOT determine personal trial eligibility or provide medical advice. "
+            "Please check this with your CF care team before changing anything."
         )
         questions = [
             "Does this registered study enroll people with Class I / nonsense / splice variants or evaluate a genotype-agnostic therapy?",
@@ -394,26 +436,51 @@ def build_care_team_packet(
         ]
         urgent_line = (
             "If you have urgent symptoms such as sudden shortness of breath, coughing up blood, "
-            "or high fever, contact your CF care team or emergency services right away."
+            "or high fever, contact your CF care team or emergency services (911 in the US) right away."
         )
 
-    packet = {
+    source_catalog_ids = ["clinicaltrials-gov"]
+    if include_observational_readiness:
+        source_catalog_ids.append("cff-research-priorities")
+    if include_genetic_consent_questions:
+        source_catalog_ids.append("kraft-2026-bmcmedresmethodol")
+
+    packet: dict[str, Any] = {
         "schema_version": 1,
         "tool": "rare_genotype_trial_screener",
         "lang": "es-MX" if is_es else "en",
         "epistemic_tier": "T1",
+        "source_catalog_ids": source_catalog_ids,
         "clinical_boundary": boundary,
         "urgent_symptom_notice": urgent_line,
+        "nlm_disclaimer": NLM_DISCLAIMER,
         "filters": filters or {},
         "match_count": len(rows),
         "trials": rows,
         "care_team_questions": questions,
     }
-    verify_packet_safety_and_provenance(packet, known_ncts)
+    if include_observational_readiness:
+        packet["observational_trial_readiness"] = [dict(r) for r in OBSERVATIONAL_READINESS_WATCHLIST]
+    if include_genetic_consent_questions:
+        lang_key = "es-MX" if is_es else "en"
+        packet["genetic_trial_consent_questions"] = list(GENETIC_TRIAL_CONSENT_QUESTIONS[lang_key])
+
+    verify_packet_safety_and_provenance(
+        packet,
+        known_ncts,
+        known_observational_ncts=known_observational_ncts,
+    )
     return packet
 
 
-def verify_packet_safety_and_provenance(packet: dict[str, Any], known_ncts: set[str]) -> None:
+generate_visit_prep_packet = build_care_team_packet
+
+
+def verify_packet_safety_and_provenance(
+    packet: dict[str, Any],
+    known_ncts: set[str],
+    known_observational_ncts: set[str] | frozenset[str] | None = None,
+) -> None:
     """Deterministic verifier enforcing zero personal eligibility promises and strict NCT provenance."""
     serialized = json.dumps(packet, ensure_ascii=False)
     for rule_name, pat in FORBIDDEN_ELIGIBILITY_PATTERNS:
@@ -424,10 +491,20 @@ def verify_packet_safety_and_provenance(packet: dict[str, Any], known_ncts: set[
     if not packet.get("clinical_boundary") or "not" not in str(packet.get("clinical_boundary", "")).lower() and "no " not in str(packet.get("clinical_boundary", "")).lower():
         raise ScreenerVerificationError("Safety violation: missing explicit non-medical-advice clinical_boundary.")
 
+    obs_allowed = (
+        set(known_observational_ncts)
+        if known_observational_ncts is not None
+        else set(DEFAULT_OBSERVATIONAL_NCTS)
+    )
+    interventional_ncts: set[str] = set()
     for row in packet.get("trials", []):
         nct = str(row.get("nct_id") or "")
         if not re.fullmatch(r"NCT\d{8}", nct):
             raise ScreenerVerificationError(f"Provenance violation: invalid NCT ID '{nct}'.")
+        if row.get("study_type") == "OBSERVATIONAL":
+            raise ScreenerVerificationError(
+                f"Cohort separation violation: OBSERVATIONAL study '{nct}' must not appear in interventional packet['trials']."
+            )
         if known_ncts and nct not in known_ncts:
             raise ScreenerVerificationError(
                 f"Provenance violation: NCT ID '{nct}' is absent from the verified PRISMA snapshot."
@@ -435,6 +512,28 @@ def verify_packet_safety_and_provenance(packet: dict[str, Any], known_ncts: set[
         if row.get("provenance_tier") != "T1":
             raise ScreenerVerificationError(
                 f"Provenance violation: trial '{nct}' missing provenance_tier='T1'."
+            )
+        interventional_ncts.add(nct)
+
+    for obs in packet.get("observational_trial_readiness", []):
+        obs_nct = str(obs.get("nct_id") or "")
+        if not re.fullmatch(r"NCT\d{8}", obs_nct):
+            raise ScreenerVerificationError(f"Provenance violation: invalid observational NCT ID '{obs_nct}'.")
+        if obs_nct not in obs_allowed:
+            raise ScreenerVerificationError(
+                f"Provenance violation: observational NCT ID '{obs_nct}' is not in verified observational watchlist."
+            )
+        if obs.get("study_type") != "OBSERVATIONAL":
+            raise ScreenerVerificationError(
+                f"Cohort separation violation: observational_trial_readiness entry '{obs_nct}' missing study_type='OBSERVATIONAL'."
+            )
+        if obs.get("provenance_tier") != "T1":
+            raise ScreenerVerificationError(
+                f"Provenance violation: observational entry '{obs_nct}' missing provenance_tier='T1'."
+            )
+        if obs_nct in interventional_ncts:
+            raise ScreenerVerificationError(
+                f"Cohort separation violation: '{obs_nct}' appears in both interventional trials and observational_trial_readiness."
             )
 
 
@@ -480,6 +579,24 @@ def run_falsification_suite(snapshot_path: Path = DEFAULT_SNAPSHOT_JSON) -> dict
     except ScreenerVerificationError as exc:
         controls.append({"control": "hallucinated_nct_provenance_guard", "passed": True, "detail": str(exc)})
 
+    # Negative Control 4: Observational study leaking into interventional trials or duplicated across lists must fail closed
+    poisoned_obs_leak = {
+        "clinical_boundary": "Informational only, not medical advice.",
+        "trials": [
+            {
+                "nct_id": "NCT06504589",
+                "study_type": "OBSERVATIONAL",
+                "provenance_tier": "T1",
+                "brief_title": "REACH Observational Leak Attempt",
+            }
+        ],
+    }
+    try:
+        verify_packet_safety_and_provenance(poisoned_obs_leak, known_ncts)
+        controls.append({"control": "observational_cohort_leak_blocked", "passed": False, "detail": "Observational NCT06504589 was allowed inside packet['trials']"})
+    except ScreenerVerificationError as exc:
+        controls.append({"control": "observational_cohort_leak_blocked", "passed": True, "detail": str(exc)})
+
     all_passed = all(c["passed"] for c in controls)
     return {
         "tool": "rare_genotype_trial_screener",
@@ -497,6 +614,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--endpoint", type=str, default="all", help="Endpoint category filter (sweat_chloride, ppfev1, lci, safety_tolerability, pk_pd, microbiology_cfu, all)")
     parser.add_argument("--lang", type=str, default="en", choices=("en", "es-MX"), help="Output language (en or es-MX)")
     parser.add_argument("--limit", type=int, default=15, help="Max trials to return")
+    parser.add_argument("--include-observational", action="store_true", help="Include isolated observational readiness studies (e.g. NCT06504589 REACH)")
+    parser.add_argument("--include-consent-questions", action="store_true", help="Include genetic-trial informed-consent discussion questions (Kraft et al. 2026)")
     parser.add_argument("--json", action="store_true", help="Emit JSON packet")
     parser.add_argument("--benchmark", action="store_true", help="Run 25-trial rare-genotype criteria benchmark (T-0940)")
     parser.add_argument("--check", action="store_true", help="Run fast deterministic self-check")
@@ -508,7 +627,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.json:
             print(json.dumps(rep, indent=2))
         else:
-            print(f"PASS falsify rare_genotype_trial_screener ({len(rep['negative_controls'])}/3 negative controls)" if rep["falsify_passed"] else "FAIL falsify rare_genotype_trial_screener")
+            print(f"PASS falsify rare_genotype_trial_screener ({len(rep['negative_controls'])}/4 negative controls)" if rep["falsify_passed"] else "FAIL falsify rare_genotype_trial_screener")
         return 0 if rep["falsify_passed"] else 1
 
     _, studies = load_prisma_included_studies(args.snapshot)
@@ -544,6 +663,8 @@ def main(argv: list[str] | None = None) -> int:
             "status": args.status,
             "endpoint": args.endpoint,
         },
+        include_observational_readiness=args.include_observational,
+        include_genetic_consent_questions=args.include_consent_questions,
     )
 
     if args.check:
@@ -555,7 +676,7 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"PASS rare_genotype_trial_screener: prisma_studies={len(studies)} "
             f"matched={packet['match_count']} benchmark={b_rep['exact_matches']}/{b_rep['total_trials']} "
-            f"falsify_controls={len(f_rep['negative_controls'])}/3"
+            f"falsify_controls={len(f_rep['negative_controls'])}/4"
         )
         return 0
 
@@ -570,6 +691,11 @@ def main(argv: list[str] | None = None) -> int:
                 f"  - [{r['nct_id']}] ({r['overall_status']}, {','.join(r['phases'])}) "
                 f"{r['brief_title']} | classes={','.join(r['matched_variant_classes'])} "
                 f"| primary_endpoint={r['stated_primary_outcome_measure']}"
+            )
+        for obs in packet.get("observational_trial_readiness", []):
+            print(
+                f"  - [OBSERVATIONAL {obs['nct_id']}] ({obs['overall_status']}) "
+                f"{obs['study_name']}: {obs['brief_title']}"
             )
     return 0
 

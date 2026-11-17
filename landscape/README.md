@@ -11,6 +11,7 @@ This directory holds two groups of Markdown notes:
 - [`alternative-conductance.md`](alternative-conductance.md)
 - [`antibiotic-stewardship-cf.md`](antibiotic-stewardship-cf.md)
 - [`cf-repositories.md`](cf-repositories.md)
+- [`cff-research-priorities-2026.md`](cff-research-priorities-2026.md)
 - [`cftr-burst-kinetics-structural-grounding-2026.md`](cftr-burst-kinetics-structural-grounding-2026.md)
 - [`cftr-structures.md`](cftr-structures.md)
 - [`delivery-biophysics.md`](delivery-biophysics.md)
@@ -67,6 +68,7 @@ Several topical syntheses carry machine-checked claim packets (`*-claims.json`),
 | Dossier | Verification Sidecar Files |
 | --- | --- |
 | [`airway-mucus-barrier-biophysics-2026.md`](airway-mucus-barrier-biophysics-2026.md) | `airway-mucus-barrier-biophysics-2026-claims.json`, `airway-mucus-barrier-biophysics-2026-evidence.txt`, `airway-mucus-barrier-biophysics-2026-evidence-map.json`, `airway-mucus-barrier-biophysics-2026-allow.txt` |
+| [`cff-research-priorities-2026.md`](cff-research-priorities-2026.md) | `cff-research-priorities-2026-claims.json`, `cff-research-priorities-2026-evidence.txt`, `cff-research-priorities-2026-evidence-map.json`, `cff-research-priorities-2026-allow.txt` |
 | [`cftr-burst-kinetics-structural-grounding-2026.md`](cftr-burst-kinetics-structural-grounding-2026.md) | `cftr-burst-kinetics-structural-grounding-2026-claims.json`, `cftr-burst-kinetics-structural-grounding-2026-evidence.txt`, `cftr-burst-kinetics-structural-grounding-2026-evidence-map.json`, `cftr-burst-kinetics-structural-grounding-2026-allow.txt` |
 | [`discovery-dual-aav-intein-packaging.md`](discovery-dual-aav-intein-packaging.md) | `discovery-dual-aav-intein-packaging-claims.json`, `discovery-dual-aav-intein-packaging-evidence.txt`, `discovery-dual-aav-intein-packaging-evidence-map.json`, `discovery-dual-aav-intein-packaging-allow.txt` |
 | [`modulator-eligibility-denominators-2026.md`](modulator-eligibility-denominators-2026.md) | `modulator-eligibility-denominators-2026.json`, `modulator-eligibility-denominators-2026-claims.json`, `modulator-eligibility-denominators-2026-evidence.txt`, `modulator-eligibility-denominators-2026-evidence-map.json`, `modulator-eligibility-denominators-2026-allow.txt` |

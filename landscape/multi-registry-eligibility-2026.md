@@ -76,6 +76,11 @@ Each national patient registry operates under distinct legal mandates, clinical 
   - The approval of 31 additional rare mutations enabled 135 individuals in the Registry to become eligible for a CFTR modulator for the first time (page 58).
   - VTD (vanzacaftor/tezacaftor/deutivacaftor, ALYFTREK): Page 8 explicitly notes that individuals solely eligible for VTD (and not other modulators) are categorized as modulator ineligible in 2024 for all charts and tables.
 
+#### 2025 Orientation Update: CFF Patient Registry Highlights (`cffpr-highlights-2025`)
+- **Orientation Scope vs. Annual Data Report**: Distinct from the full 120-page 2024 Annual Data Report (`cffpr-adr-2024`), the 4-page *2025 CFF Patient Registry Highlights* handout (`cffpr-highlights-2025`, copyright 2026) provides early orientation figures rather than an annual report replacement and is kept strictly separate from cross-registry calculations.
+- **2025 Totals & Modulator Distribution (Excluding Lung Transplants)**: The Highlights record 34,526 people in the Registry and 2,253 people ineligible for a modulator (page 1). Across 33,047 individuals without lung transplants in 2025, recorded categories were 67% Trikafta, 10% Alyftrek, 3% Kalydeco, 1% Orkambi, 1% Symdeko, 11% eligible with none prescribed, 5% ineligible by genotype, and 2% ineligible by age (page 3). Between Alyftrek's approval on December 20, 2024, and the end of 2025, 186 of 559 newly eligible people with CF received a modulator prescription for the first time (page 3).
+- **Selected 2025 Burden & Survival Context**: Reported median predicted survival age for the 2021-2025 birth cohort was 66 years (approx. two decades lower for people ineligible for modulators, page 1); reported infections included 22% *Pseudomonas aeruginosa*, 12% MRSA, and 12% nontuberculous mycobacteria (NTM, page 2).
+
 ### Canada: Canadian Cystic Fibrosis Registry (2024 Annual Data Report)
 - **Primary Source**: Cystic Fibrosis Canada. (2025). The Canadian Cystic Fibrosis Registry 2024 Annual Data Report. Toronto, Canada: Cystic Fibrosis Canada (`ccfr-adr-2024`, 52 pages).
 - **Modulator Ineligible Proportion**: In the 2024 Canadian CF Registry, 7.6% of individuals were not considered currently eligible by age and genotype for any CFTR modulator therapies (page 38).
@@ -165,7 +170,7 @@ The figures, quotes, and parameters in this dossier were audited against primary
 
 ```text
 Deterministic Verification:
-- python tools/claims/check_claims.py: PASS (12 claims, 0 failures, rules R1 to R5)
+- python tools/claims/check_claims.py: PASS (16 claims, 0 failures, rules R1 to R5)
 - python tools/sources/check_numbers.py: PASS (All cited registry figures matched to source evidence text)
 - python tools/sources/check_source_overlap.py: PASS (Zero runs over copying limits, zero over-length quotations)
 ```

@@ -33,6 +33,9 @@ class TestBenchmarkPredictors(unittest.TestCase):
 
         self.assertEqual(map_residue_to_exon(31)["exon_label"], "2/27")
         self.assertEqual(map_residue_to_exon(508)["exon_label"], "11/27")
+        self.assertEqual(map_residue_to_exon(1162)["exon_label"], "22/27")
+        self.assertEqual(map_residue_to_exon(1239)["exon_label"], "22/27")
+        self.assertEqual(map_residue_to_exon(1240)["exon_label"], "23/27")
         self.assertEqual(map_residue_to_exon(1282)["exon_label"], "23/27")
         self.assertEqual(map_residue_to_exon(1303)["exon_label"], "24/27")
         self.assertTrue(map_residue_to_exon(55)["near_splice_junction_le_3aa"])

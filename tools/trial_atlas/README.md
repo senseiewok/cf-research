@@ -23,6 +23,10 @@ Words used here: a **retrieval route** is one of the searches a snapshot is fetc
 | `ground_definitions.py` | Source grounding for the glosses: searches Europe PMC for open-access, openly licensed articles, asks a local model for one sentence that defines each target term, and keeps only quotes a script verifies. See "Grounding the glosses" below |
 | `grounding_targets.json` | The grounding targets: search words, required terms and what each quote must define. No article text |
 | `synthetic_fixtures.py` | Synthetic studies, pages and a fake client for the tests and the default negative controls. Not registry data |
+| `care_team_trials.py` | Deterministic bilingual (`en` and `es-MX`) PRISMA-included interventional trial filter and clinic-visit question sheet aligned with `cf-ai-safe-use` and `cf-visit-prep` |
+| `rare_genotype_trial_screener.py` | Deterministic screener and 25-trial benchmark (`T-0920`, `T-0940`, `PRED-0003`) for rare/Class I CF genotypes, plus isolated `NCT06504589` REACH observational readiness and Kraft et al. 2026 genetic-trial consent prompts |
+| `cff_priority_radar.py` | Deterministic 18-study CFF 2025-2026 priority radar cross-verifying snapshot interventional studies separately from `OBSERVATIONAL` watchlist records (`NCT06504589` REACH, `NCT07312734` SEND-CF) |
+| `whole_person_visit_prep.py` | Bilingual (`en` and `es-MX`) whole-person clinic-visit prep guide across five CFF 2025-2026 priorities (hepatobiliary/DILI, NBS equity, NTM & non-sputum diagnostics, GI/CFRD/nutrition, mental health/pain/reproductive/telehealth) |
 | `test_*.py` | Unit tests, one file per tool |
 
 ## Run the tests

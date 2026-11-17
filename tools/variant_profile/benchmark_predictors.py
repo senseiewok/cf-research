@@ -39,7 +39,9 @@ DEFAULT_OUT = REPO_ROOT / "data" / "cftr_variant_domain_benchmark.json"
 
 NOT_STATED = "not stated"
 
-# RefSeq NM_000492.4 27-exon coding amino acid spans (codons 1..1480)
+# RefSeq NM_000492.4 27-exon coding amino acid spans (codons 1..1480), derived
+# directly from NCBI RefSeq NM_000492.4 CDS nucleotide intervals (CDS 71..4510)
+# by each codon's central nucleotide position (3*codon - 1).
 CFTR_EXON_SPANS: tuple[tuple[int, int, int], ...] = (
     (1, 1, 18),
     (2, 19, 55),
@@ -52,22 +54,22 @@ CFTR_EXON_SPANS: tuple[tuple[int, int, int], ...] = (
     (9, 373, 403),
     (10, 404, 464),
     (11, 465, 528),
-    (12, 529, 557),
-    (13, 558, 590),
-    (14, 591, 831),
-    (15, 832, 874),
-    (16, 875, 917),
-    (17, 918, 930),
-    (18, 931, 1013),
-    (19, 1014, 1040),
-    (20, 1041, 1123),
-    (21, 1124, 1175),
-    (22, 1176, 1209),
-    (23, 1210, 1292),
-    (24, 1293, 1326),
-    (25, 1327, 1384),
-    (26, 1385, 1419),
-    (27, 1420, 1480),
+    (12, 529, 560),
+    (13, 561, 589),
+    (14, 590, 830),
+    (15, 831, 873),
+    (16, 874, 886),
+    (17, 887, 969),
+    (18, 970, 996),
+    (19, 997, 1046),
+    (20, 1047, 1122),
+    (21, 1123, 1156),
+    (22, 1157, 1239),
+    (23, 1240, 1291),
+    (24, 1292, 1321),
+    (25, 1322, 1379),
+    (26, 1380, 1414),
+    (27, 1415, 1480),
 )
 
 # UniProt P13569 & Cryo-EM (PDB 5UAK, 6MSM, 8EIQ, 8EJ1) canonical domain boundaries on human CFTR (1480 aa)
