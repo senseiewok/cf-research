@@ -15,21 +15,22 @@ if str(HERE) not in sys.path:
 
 import care_team_trials as ctt  # noqa: E402
 
-SAFE_OUTPUT_SCRIPT = (
-    REPO_ROOT.parent / "cf-skills" / ".claude" / "skills" / "cf-ai-safe-use" / "scripts" / "check_safe_output.py"
+SAFE_OUTPUT_CANDIDATES = (
+    REPO_ROOT.parent / "cf-skills" / ".claude" / "skills" / "cf-ai-safe-use" / "scripts" / "check_safe_output.py",
+    REPO_ROOT.parents[2] / "cf-skills" / ".claude" / "skills" / "cf-ai-safe-use" / "scripts" / "check_safe_output.py",
 )
 
 
 def _load_safe_output_checker():
-    if not SAFE_OUTPUT_SCRIPT.exists():
-        return None
-    spec = importlib.util.spec_from_file_location("check_safe_output", SAFE_OUTPUT_SCRIPT)
-    if spec is None or spec.loader is None:
-        return None
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["check_safe_output"] = mod
-    spec.loader.exec_module(mod)
-    return mod
+    for script in SAFE_OUTPUT_CANDIDATES:
+        if script.is_file():
+            spec = importlib.util.spec_from_file_location("check_safe_output", script)
+            if spec is not None and spec.loader is not None:
+                mod = importlib.util.module_from_spec(spec)
+                sys.modules["check_safe_output"] = mod
+                spec.loader.exec_module(mod)
+                return mod
+    return None
 
 
 class TestCareTeamTrials(unittest.TestCase):
@@ -73,7 +74,7 @@ class TestCareTeamTrials(unittest.TestCase):
         self.assertNotIn("could qualify", sheet_en.lower())
 
         if self.safe_mod is not None:
-            flags = self.safe_mod.check_text(sheet_en)
+            flags = self.safe_mod.check(sheet_en)
             self.assertEqual(flags, [], f"check_safe_output.py flagged English sheet: {flags}")
 
     def test_spanish_es_mx_sheet_contains_mandatory_safety_elements(self) -> None:

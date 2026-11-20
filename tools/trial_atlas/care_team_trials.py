@@ -43,6 +43,15 @@ from consensus_audit import _to_raw_study  # noqa: E402
 DEFAULT_SNAPSHOT_JSON = HERE / "snapshot.json"
 DEFAULT_WEB_EXPORT = REPO_ROOT / "data" / "care_team_trials_directory.json"
 NOT_STATED = "not stated"
+DOSE_STRIP_RE = re.compile(
+    r"\b\d+(?:[.,]\d+)?\s*(?:mg|mcg|ug|ml|mL|micrograms?|milligrams?|grams?|units?|puffs?|tablets?|capsules?)\b",
+    re.I,
+)
+
+
+def _strip_dose_tokens(text: str) -> str:
+    """Redact numeric dose-unit patterns from verbatim registry text so sheets never emit doses."""
+    return DOSE_STRIP_RE.sub("[amount in registry]", text)
 
 # Personal identifier guard patterns (matching check_safe_output.py)
 PHI_REFUSAL_PATTERNS = [
@@ -216,10 +225,12 @@ def render_care_team_sheet(
                 phases_str = ", ".join(t["phases"])
                 mods_str = ", ".join(t["modalities"])
                 int_names = ", ".join(i["name"] for i in t["interventions"]) or NOT_STATED
+                clean_measure_es = _strip_dose_tokens(t["primary_outcome_measure"])
+                clean_ints_es = _strip_dose_tokens(int_names)
                 lines.append(
                     f"- **[T1] {t['nct_id']}** — *{t['brief_title']}* | Estado en registro: `{t['overall_status']}` | "
                     f"Fase: `{phases_str}` | Modalidad: `{mods_str}` | Patrocinador principal: {t['lead_sponsor']} | "
-                    f"Intervenciones nombradas: {int_names} | Desenlace primario registrado: {t['primary_outcome_measure']} "
+                    f"Intervenciones nombradas: {clean_ints_es} | Desenlace primario registrado: {clean_measure_es} "
                     f"(marco temporal: {t['primary_outcome_time_frame']})."
                 )
             lines.append("")
@@ -262,7 +273,7 @@ def render_care_team_sheet(
         f"status={status_label}, modality={modality_label}, phase={phase_label}, term={query_label}). "
         "Listing on the registry does not evaluate safety or efficacy and does not denote government endorsement. "
         "I cannot tell you if anyone is eligible for a trial; only your CF care team and the study investigators can "
-        "review official criteria. Please check each NCT record on the official website with your CF care team.",
+        "review official criteria. Please check them on the official website with your CF care team.",
         "",
     ]
     if not trials:
@@ -276,12 +287,13 @@ def render_care_team_sheet(
             phases_str = ", ".join(t["phases"])
             mods_str = ", ".join(t["modalities"])
             int_names = ", ".join(i["name"] for i in t["interventions"]) or NOT_STATED
-            # Strip any accidental numeric dose units from free-text measure strings so no dose pattern is emitted
-            clean_measure = re.sub(r"\b\d+\s*(?:mg|mcg|ug|ml|mL|grams?|puffs?|tablets?|capsules?)\b", "[amount in registry]", t["primary_outcome_measure"], flags=re.I)
+            # Strip accidental numeric dose units from free-text registry strings so no dose pattern is emitted
+            clean_measure = _strip_dose_tokens(t["primary_outcome_measure"])
+            clean_ints = _strip_dose_tokens(int_names)
             lines.append(
                 f"- **[T1] {t['nct_id']}** — *{t['brief_title']}* | Registry status: `{t['overall_status']}` | "
                 f"Phase: `{phases_str}` | Modality: `{mods_str}` | Lead sponsor: {t['lead_sponsor']} | "
-                f"Named interventions: {int_names} | Registered primary outcome: {clean_measure} "
+                f"Named interventions: {clean_ints} | Registered primary outcome: {clean_measure} "
                 f"(time frame: {t['primary_outcome_time_frame']})."
             )
         lines.append("")
