@@ -4,7 +4,7 @@
 
 ## Triage & Consolidation Summary
 
-- **Total Verified Modules:** `219` (plus 8 infrastructure scripts and 287 unit test suites)
+- **Total registered modules:** `219` (plus 8 infrastructure scripts and 287 unit test suites). Each passes its own unit tests and rejects an unphysical negative-control input. That makes it a self-consistent model, not a result: no module here has been compared with measured data or read by a CF scientist unless its own section says so.
 - **`keep` (Canonical Core Workbenches):** `58`
 - **`merge` (Consolidate into Canonical Module):** `157`
 - **`archive` (Exploratory / Superseded Parameter Sweeps):** `4`

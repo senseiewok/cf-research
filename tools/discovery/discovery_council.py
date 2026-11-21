@@ -2189,7 +2189,7 @@ def render_discovery_readme(catalog: Dict[str, Any]) -> str:
 
         "",
 
-        f"- **Total Verified Modules:** `{catalog['total_modules']}` (plus {infra_count} infrastructure scripts and {tests_count} unit test suites)",
+        f"- **Total registered modules:** `{catalog['total_modules']}` (plus {infra_count} infrastructure scripts and {tests_count} unit test suites). Each passes its own unit tests and rejects an unphysical negative-control input. That makes it a self-consistent model, not a result: no module here has been compared with measured data or read by a CF scientist unless its own section says so.",
 
         f"- **`keep` (Canonical Core Workbenches):** `{t_sum.get('keep', 0)}`",
 
