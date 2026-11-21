@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "work": "T-0944 / PRED-0009: 20-study benchmark of CFF Infection Research Initiative NTM, bacteriophage, and non-sputum diagnostic trial outcomes against tools/trial_atlas/snapshot.json, dated ClinicalTrials.gov API v2 protocol metadata, and CC BY 4.0 Dayman et al. 2026 (10.1099/jmm.0.002150).",
+  "done_file": "done.md",
+  "done_sha256": "a57c3f128175f8f93f6f08361fe9ee33acca3128d26ccf89a1fb46fe20d58f9c",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-prisma-940-interventional-count",
+      "statement": "tools/trial_atlas/snapshot.json holds 1,053 INTERVENTIONAL study records and 940 PRISMA-included Cystic Fibrosis interventional studies after excluding 72 X4 condition-omission records and 41 X5 negated-CF records.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/trial_atlas/snapshot.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "../../tools/trial_atlas/infection_outcomes_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "scope.py regex classifier + care_team_trials PRISMA loader",
+          "script": "../../tools/trial_atlas/infection_outcomes_benchmark.py",
+          "difference": "applies tools/trial_atlas/scope.py regular expressions over conditions",
+          "value": 940
+        },
+        {
+          "name": "regex-free word-window parser + care_team_trials_directory cross-check",
+          "script": "independent_audit.py",
+          "difference": "separate file with zero re or trial_atlas imports; scans alphanumeric word-tuple windows and cross-checks data/care_team_trials_directory.json",
+          "value": 940
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c2-prisma-primary-microbiology-in-benchmark",
+      "statement": "Among the 17 PRISMA-940 interventional studies in the 20-study CF infection and diagnostic benchmark, 9 register a primary bacterial or mycobacterial culture/CFU/density outcome, whereas the remaining 8 register primary safety/PK (5) or spirometric FEV1 / ppFEV1 (3).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/trial_atlas/snapshot.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "../../tools/trial_atlas/infection_outcomes_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "lexicon.py rule tagger over primary_outcomes",
+          "script": "../../tools/trial_atlas/infection_outcomes_benchmark.py",
+          "difference": "applies tools/trial_atlas/lexicon.json rules MICRO-01..MICRO-04 with description fallback",
+          "value": 9
+        },
+        {
+          "name": "regex-free measure-first general biomedical stem scanner",
+          "script": "independent_audit.py",
+          "difference": "separate file with zero re or trial_atlas imports; checks general microbiology word stems on measure first and description only when measure names no non-microbiology clinical class",
+          "value": 9
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c3-multi-field-classifier-vs-baseline",
+      "statement": "On the fixed 20-study held-out CF infection and diagnostic benchmark pre-registered in done.md (disjoint from the 4 positive controls), the cohort-partitioned multi-field classifier achieves 20/20 (1.0000) joint exact-match accuracy compared with 5/20 (0.2500) for the primary-outcome-only PRISMA-940 baseline.",
+      "kind": "predicted",
+      "origin": "lab",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "../../tools/trial_atlas/infection_outcomes_benchmark.py"}
+      ],
+      "held_out_error": {
+        "value": 0.0,
+        "unit": "error_fraction_on_fixed_20_study_benchmark",
+        "set_fixed_in_done_file": true
+      },
+      "headline": false,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c4-abate-x4-ntm-secondary-clearance",
+      "statement": "NCT04294043 (ABATE Phase 1b IV gallium nitrate study in CF with NTM) is excluded from PRISMA-940 by rule X4 because snapshot.json conditions lists only 'Nontuberculous Mycobacterium Infection', and registers primary 'Adverse Events of Special Interest' (Baseline to Day 57) in snapshot.json alongside secondary 'NTM clearance (efficacy)' (>=2 sequential negative NTM cultures at least 2 weeks apart, Day 6 to Day 111) in ClinicalTrials.gov protocolSection.outcomesModule.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "ClinicalTrials.gov record NCT04294043 (Chris Goss, ABATE Study, updated 2025-10-01) and tools/trial_atlas/snapshot.json",
+      "source": "https://clinicaltrials.gov/study/NCT04294043",
+      "standing": "open",
+      "checks": [
+        {"type": "source_quote", "ref": "https://clinicaltrials.gov/study/NCT04294043"},
+        {"type": "own_script", "ref": "../../tools/trial_atlas/infection_outcomes_benchmark.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c5-achromophage-safety-primary-qpcr-secondary",
+      "statement": "NCT07275905 (AchromoPhage Phase 1 trial) registers primary 'Incidence of treatment-related Grade >=4 adverse events or treatment-limiting toxicities' (42 Days) in snapshot.json and secondary 'AchromoPhage Concentration by qPCR (Pharmacokinetic Outcome Measure)' across blood, sputum, nasal swabs, and oral swabs in ClinicalTrials.gov protocolSection.outcomesModule, where bacterial CFU/mL sputum density is not stated.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "ClinicalTrials.gov record NCT07275905 (Ghady Haidar, The AchromoPhage Trial, updated 2026-10-08) and tools/trial_atlas/snapshot.json",
+      "source": "https://clinicaltrials.gov/study/NCT07275905",
+      "standing": "open",
+      "checks": [
+        {"type": "source_quote", "ref": "https://clinicaltrials.gov/study/NCT07275905"},
+        {"type": "own_script", "ref": "../../tools/trial_atlas/infection_outcomes_benchmark.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c6-send-cf-observational-concordance",
+      "statement": "NCT07312734 (SEND-CF) is an external OBSERVATIONAL study (enrollment=300, updated 2026-07-02, isolated from interventional denominators) whose primary outcome compares alternative pathogen detection methods across sputum, saliva, blood, urine, and breath against sputum cultures.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "ClinicalTrials.gov record NCT07312734 (Chris Goss, SEND-CF, updated 2026-07-02)",
+      "source": "https://clinicaltrials.gov/study/NCT07312734",
+      "standing": "open",
+      "checks": [
+        {"type": "source_quote", "ref": "https://clinicaltrials.gov/study/NCT07312734"},
+        {"type": "own_script", "ref": "../../tools/trial_atlas/infection_outcomes_benchmark.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c7-dayman-2026-face-mask-sampling",
+      "statement": "In Dayman et al. (2026, CC BY 4.0), 15-minute polyvinyl alcohol face mask sampling across 11 children from the Leicester CF cohort (median age 12 years, range 1-16 years) isolated respiratory pathogens in 9 face mask samples from 11 participants including Mycobacterium abscessus (n=3), whereas Pseudomonas aeruginosa was not detected on face mask samples and the post-clearance 16S yield increase trend (n=5) was not statistically significant.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "Dayman, Patel, Wisniewska et al. (2026), Journal of Medical Microbiology (PMC13061336, CC BY 4.0)",
+      "source": "10.1099/jmm.0.002150",
+      "standing": "open",
+      "checks": [
+        {"type": "peer_review", "ref": "10.1099/jmm.0.002150"},
+        {"type": "source_quote", "ref": "10.1099/jmm.0.002150"},
+        {"type": "own_script", "ref": "../../tools/trial_atlas/infection_outcomes_benchmark.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-21"
+    }
+  ]
+}
