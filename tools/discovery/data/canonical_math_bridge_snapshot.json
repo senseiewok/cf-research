@@ -751,7 +751,7 @@
     "sensitivity_25pct": {
       "rule": "AH-11",
       "perturbation_pct": 25.0,
-      "parameters_tested": 7,
+      "parameters_tested": 8,
       "baseline_ranking": [
         "taylor_wiles_modularity_lift",
         "ribet_level_lowering",
@@ -825,6 +825,14 @@
           "low_value": 0.9375,
           "high_value": 1.5625,
           "max_relative_score_drift_pct": 0.0
+        },
+        {
+          "parameter": "MUCUS_LYASE_RESCUED_MAX_DISSIPATION_KPA_S",
+          "category": "phenomenological_heuristic",
+          "baseline_value": 2.0,
+          "low_value": 1.5,
+          "high_value": 2.5,
+          "max_relative_score_drift_pct": 0.0
         }
       ],
       "rank_flips": [],
@@ -835,7 +843,7 @@
       "fermats_last_theorem": {
         "rule": "AH-11",
         "perturbation_pct": 25.0,
-        "parameters_tested": 7,
+        "parameters_tested": 8,
         "baseline_ranking": [
           "taylor_wiles_modularity_lift",
           "ribet_level_lowering",
@@ -909,6 +917,14 @@
             "low_value": 0.9375,
             "high_value": 1.5625,
             "max_relative_score_drift_pct": 0.0
+          },
+          {
+            "parameter": "MUCUS_LYASE_RESCUED_MAX_DISSIPATION_KPA_S",
+            "category": "phenomenological_heuristic",
+            "baseline_value": 2.0,
+            "low_value": 1.5,
+            "high_value": 2.5,
+            "max_relative_score_drift_pct": 0.0
           }
         ],
         "rank_flips": [],
@@ -918,7 +934,7 @@
       "formal_math_zeta23": {
         "rule": "AH-11",
         "perturbation_pct": 25.0,
-        "parameters_tested": 7,
+        "parameters_tested": 8,
         "baseline_ranking": [
           "mollifier_second_moment_bound",
           "short_character_sum_smoothing",
@@ -992,6 +1008,14 @@
             "low_value": 0.9375,
             "high_value": 1.5625,
             "max_relative_score_drift_pct": 0.0
+          },
+          {
+            "parameter": "MUCUS_LYASE_RESCUED_MAX_DISSIPATION_KPA_S",
+            "category": "phenomenological_heuristic",
+            "baseline_value": 2.0,
+            "low_value": 1.5,
+            "high_value": 2.5,
+            "max_relative_score_drift_pct": 0.0
           }
         ],
         "rank_flips": [],
@@ -1001,7 +1025,7 @@
       "formal_math_3sum_apsp": {
         "rule": "AH-11",
         "perturbation_pct": 25.0,
-        "parameters_tested": 7,
+        "parameters_tested": 8,
         "baseline_ranking": [
           "Fredman_trick_bit_packing_reduction",
           "exact_triangle_min_plus_witness",
@@ -1075,6 +1099,14 @@
             "low_value": 0.9375,
             "high_value": 1.5625,
             "max_relative_score_drift_pct": 0.0
+          },
+          {
+            "parameter": "MUCUS_LYASE_RESCUED_MAX_DISSIPATION_KPA_S",
+            "category": "phenomenological_heuristic",
+            "baseline_value": 2.0,
+            "low_value": 1.5,
+            "high_value": 2.5,
+            "max_relative_score_drift_pct": 0.0
           }
         ],
         "rank_flips": [],
@@ -1084,7 +1116,7 @@
       "formal_math_eth": {
         "rule": "AH-11",
         "perturbation_pct": 25.0,
-        "parameters_tested": 7,
+        "parameters_tested": 8,
         "baseline_ranking": [
           "clause_vs_variable_alternation_bridge",
           "tensor_network_degree_compression",
@@ -1157,6 +1189,14 @@
             "baseline_value": 1.25,
             "low_value": 0.9375,
             "high_value": 1.5625,
+            "max_relative_score_drift_pct": 0.0
+          },
+          {
+            "parameter": "MUCUS_LYASE_RESCUED_MAX_DISSIPATION_KPA_S",
+            "category": "phenomenological_heuristic",
+            "baseline_value": 2.0,
+            "low_value": 1.5,
+            "high_value": 2.5,
             "max_relative_score_drift_pct": 0.0
           }
         ],
@@ -3974,7 +4014,6 @@
       "guth_maynard_2026_exponent": 2.307692,
       "spectral_recurrence_acceleration_ratio": 1.04,
       "qrh_zero_free_strip_sigma_min": 0.875,
-      "weil_sign_parity_quarantine_sealed_lemmas": 719,
       "negative_control_detects_violation": true
     },
     "koyuk_seifert_periodic_tur_bridge": {
@@ -12040,6 +12079,7 @@
   "frontier_ai_math_catalog": {
     "schema_version": 2,
     "total_discoveries": 30,
+    "verified_source_count": 27,
     "organizations_count": 17,
     "organizations_breakdown": {
       "Anthropic": 5,
@@ -12089,8 +12129,13 @@
       "sparse_nonlinear_dynamics_and_spectral_pdes": 1,
       "quantum_many_body_tensor_networks": 1
     },
-    "total_verified_items_across_releases": 312086977,
+    "total_verified_items_across_releases": 132046681,
     "all_zero_sorry_verified": true,
+    "unverified_source_ids": [
+      "anthropic_theorem_riscv_rocq_180m",
+      "deepmind_alphaproof_nexus_science2026",
+      "openai_erdos_unit_distance_disproof"
+    ],
     "discoveries": [
       {
         "discovery_id": "anthropic_flt_lean4",
@@ -12100,27 +12145,29 @@
         "formal_system": "Lean 4 (v4.29.0-rc8 / Mathlib4)",
         "repository_or_doi": "https://github.com/anthropics/fermats-last-theorem",
         "domain": "algebraic_number_theory",
-        "verified_items_count": 29500,
+        "verified_items_count": 1,
         "key_invariant_equation": "a^p + b^p = c^p (p >= 3) => rho_{E,p} ~ rho_{f,p} in S_2(Gamma_0(2)) = {0}",
-        "quantitative_milestone": "29,500 machine-checked theorems across 5 stages with 0 sorry axioms and p=3 <-> p=5 modularity switch",
+        "quantitative_milestone": "The repository README states: a complete machine-checked proof on Lean 4.33.1 with Mathlib; all 60,475 modules built; the theorem depends only on propext, Classical.choice and Quot.sound; an independent kernel (nanoda) checked 1,052,234 declarations. The theorem and line counts printed here before were not from the source",
         "rate_limiting_bottleneck": "stage_4_taylor_wiles_lifting",
-        "curative_biophysics_transfer": "Taylor-Wiles auxiliary prime patching (R = T) is isomorphic to dual-corrector allosteric pocket stabilization (Elexacaftor TM8/TM11 + Tezacaftor TMD1) across the CFTR NBD1-TMD2 interface.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Taylor-Wiles auxiliary prime patching (R = T) is compared to dual-corrector allosteric pocket stabilization (Elexacaftor TM8/TM11 + Tezacaftor TMD1) across the CFTR NBD1-TMD2 interface.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "anthropic_formal_math_zeta23",
         "organization": "Anthropic",
-        "title": "Riemann Zeta & XiPrime Critical-Line Zero-Density Spectral Barrier (anthropics/formal-math/zeta23)",
+        "title": "More Than Two Thirds of Zeta Zeros Simple and on the Critical Line (anthropics/formal-math/zeta23)",
         "year": 2026,
         "formal_system": "Lean 4 (Mathlib4)",
         "repository_or_doi": "https://github.com/anthropics/formal-math",
         "domain": "analytic_number_theory",
-        "verified_items_count": 4120,
+        "verified_items_count": 1,
         "key_invariant_equation": "N(sigma, T) <= C * T^{A(1 - sigma)} (log T)^B,  xi'(1/2 + i*t) spectral mollifier",
-        "quantitative_milestone": "4,120 Lean 4 lemmas bounding Dirichlet polynomial large values and Challenge/XiPrime.lean",
+        "quantitative_milestone": "The repository README gives the project statement: more than two thirds of the zeros of the Riemann zeta function are simple and on the critical line (Alpoge-Furman, arXiv:2608.13637). Lemma counts printed here before were not from the source",
         "rate_limiting_bottleneck": "zeta_stage_3_dirichlet_large_values",
-        "curative_biophysics_transfer": "Dirichlet L^2 mean-value mollification transfers to spectral Laplacian Cheeger bottleneck bounds and muco-inert PEGylated nanoparticle screening across entangled airway mucin meshes.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Dirichlet L^2 mean-value mollification is compared to spectral Laplacian Cheeger bottleneck bounds and muco-inert PEGylated nanoparticle screening across entangled airway mucin meshes.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "anthropic_formal_math_3sum_apsp",
@@ -12130,42 +12177,45 @@
         "formal_system": "Lean 4 (Mathlib4)",
         "repository_or_doi": "https://github.com/anthropics/formal-math",
         "domain": "fine_grained_complexity",
-        "verified_items_count": 3480,
+        "verified_items_count": 1,
         "key_invariant_equation": "(A (x)_{min,+} B)_{ij} = min_k (A_{ik} + B_{kj}) in O(n^3 / 2^{Omega(sqrt(log n))})",
-        "quantitative_milestone": "3,480 Lean 4 lemmas verifying Fredman decision-tree compression and Williams tropical polynomial batching",
+        "quantitative_milestone": "The repository README gives the project statement: word-RAM programs solve 3SUM in O(n^1.9992) steps and the (min,+)-product and APSP in O(n^2.99942) steps on integers of polynomial size (Alman-Vassilevska Williams, arXiv:2610.06783). Lemma counts printed here before were not from the source",
         "rate_limiting_bottleneck": "apsp_stage_3_fredman_decision_tree_compression",
-        "curative_biophysics_transfer": "Min-plus tropical semiring path minimization directly models minimum-action Onsager-Machlup allosteric pathways and multi-barrier serial delivery waterfalls in bronchial epithelia.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Min-plus tropical semiring path minimization is used as a picture of minimum-action Onsager-Machlup allosteric pathways and multi-barrier serial delivery waterfalls in bronchial epithelia.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "anthropic_formal_math_eth_3sat",
         "organization": "Anthropic",
-        "title": "Exponential Time Hypothesis Refutation (ETHIsFalse) & 2^{o(n)} #3-SAT in Lean 4",
+        "title": "Repository statement: #k-SAT counting in 2^{o(n)} steps, said to refute ETH (anthropics/formal-math/eth)",
         "year": 2026,
         "formal_system": "Lean 4 (v4.33.1 / Mathlib4)",
         "repository_or_doi": "https://github.com/anthropics/formal-math",
         "domain": "computational_complexity",
-        "verified_items_count": 493,
+        "verified_items_count": 1,
         "key_invariant_equation": "s_3 = inf { delta : 3-SAT in O(2^{delta * n}) } = 0 (ETHIsFalse),  (row rank)(col rank) <= 12^lambda,  SWAP = I - 2*|psi^-><psi^-|",
-        "quantitative_milestone": "493 machine-checked Lean 4.33.1 theorem aliases in MainResults.lean proving CountsWithin M k phi (timeMin C k m n) in 2^{o(n)} steps via Eight-Square rank compression and alternating clause/variable machines, refuting ETH (s_3 = 0) with zero sorryAx",
+        "quantitative_milestone": "The repository README states that one deterministic Turing machine counts the satisfying assignments of every k-CNF in 2^O(min{k^2 n log log n/sqrt(log n), km/sqrt(log m)}) steps, 'which refutes the Exponential Time Hypothesis'. This catalog reports that statement and has not checked it; theorem counts printed here before were not from the source",
         "rate_limiting_bottleneck": "clause_vs_variable_alternation_bridge",
-        "curative_biophysics_transfer": "Bipartite SWAP = I - 2*singlet decomposition and Eight-Square Identity rank compression transfer directly to salt-bridge cross-domain factorization (R347-D924) and sub-exponential combinatorial multi-drug regimen pruning in AlphaEvolve-CF.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Bipartite SWAP = I - 2*singlet decomposition and Eight-Square Identity rank compression are compared to salt-bridge cross-domain factorization (R347-D924) and sub-exponential combinatorial multi-drug regimen pruning in AlphaEvolve-CF.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "anthropic_theorem_riscv_rocq_180m",
         "organization": "Anthropic",
-        "title": "180M-Line Machine-Checked RISC-V Processor & Bytecode Equivalence Verification in Rocq",
+        "title": "UNVERIFIED CLAIM (withdrawn): machine-checked RISC-V processor proof attributed to Anthropic",
         "year": 2026,
-        "formal_system": "Rocq (Coq) 8.20 / Kami Formal Hardware Compiler",
-        "repository_or_doi": "https://github.com/anthropics/theorem-riscv",
+        "formal_system": "unverified; not stated",
+        "repository_or_doi": "unverified: no public Anthropic repository named theorem-riscv or similar (checked 2026-11-13)",
         "domain": "formal_hardware_and_compiler_verification",
-        "verified_items_count": 180000000,
-        "key_invariant_equation": "Semantics_{Rocq}(RV64GC_Pipeline(state)) == Trace_{ISA}(BinaryBytecode(state))",
-        "quantitative_milestone": "Machine-verified complete formal equivalence between out-of-order pipelined RV64GC microarchitecture and ISA specifications across 180M lines of Rocq proof scripts with zero admit axioms",
-        "rate_limiting_bottleneck": "speculative_branch_out_of_order_memory_reordering_coherence",
-        "curative_biophysics_transfer": "Guaranteed silicon-level instruction equivalence provides the verified hardware substrate for zero-hallucination deterministic medical dosage execution and real-time ventilator/nebulizer microcontrollers.",
-        "zero_sorry_verified": true
+        "verified_items_count": 0,
+        "key_invariant_equation": "unverified; not stated",
+        "quantitative_milestone": "Earlier versions of this catalog described a very large Rocq proof of a RISC-V processor. No public source was found on 2026-11-13, so the claim is unverified and must not be cited",
+        "rate_limiting_bottleneck": "unverified; not stated",
+        "curative_biophysics_transfer": "unverified; not stated",
+        "zero_sorry_verified": false,
+        "source_status": "unverified"
       },
       {
         "discovery_id": "deepmind_alphaproof_imo_lean4",
@@ -12179,8 +12229,9 @@
         "key_invariant_equation": "V*(s) = max_{a in Tactics(s)} P(QED | step(s, a)),  IMO 2024 P1, P2, P6 solved in Lean 4",
         "quantitative_milestone": "Solved 3 non-geometry IMO 2024 problems (including hardest P6, solved by only 5/609 humans) via 1M+ autoformalized Lean 4 variants",
         "rate_limiting_bottleneck": "autoformalization_and_auxiliary_lemma_invention",
-        "curative_biophysics_transfer": "Tree-search over machine-verified tactic states inspires zero-hallucination hypothesis pruning in multi-agent scientific discovery councils.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Tree-search over machine-verified tactic states inspires zero-hallucination hypothesis pruning in multi-agent scientific discovery councils.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "deepmind_alphageometry2",
@@ -12194,8 +12245,9 @@
         "key_invariant_equation": "Closure(DDAR(Premises union AuxConstructions)) |- Goal (84% across 50 IMO geometry problems 2000-2024)",
         "quantitative_milestone": "Solved 42 of 50 IMO geometry problems (84%, up from 54% in AlphaGeometry 1), including IMO 2024 P4 in 19 seconds",
         "rate_limiting_bottleneck": "auxiliary_point_and_circle_locus_synthesis",
-        "curative_biophysics_transfer": "Exact geometric incidence closure informs 3D steric distance constraints in Cryo-EM pocket triangulation (PDB 8EIQ / 6O2P) and Maxwell-Cremona reciprocal force polygons.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Exact geometric incidence closure informs 3D steric distance constraints in Cryo-EM pocket triangulation (PDB 8EIQ / 6O2P) and Maxwell-Cremona reciprocal force polygons.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "deepmind_funsearch_capset",
@@ -12209,8 +12261,9 @@
         "key_invariant_equation": "S subset F_3^n, x + y + z != 0 (mod 3) => |S_{n=8}| >= 512,  c >= 2.2202 asymptotic capacity",
         "quantitative_milestone": "Discovered the largest known cap set in F_3^8 (512 points) and new admissible set constructions improving 20-year bounds",
         "rate_limiting_bottleneck": "priority_function_symmetry_breaking",
-        "curative_biophysics_transfer": "Evolutionary search over fast deterministic evaluators powers sequence-space exploration for suppressor tRNA anticodon stems and non-immunogenic capsid/LNP barcodes.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Evolutionary search over fast deterministic evaluators is compared to sequence-space exploration for suppressor tRNA anticodon stems and non-immunogenic capsid/LNP barcodes.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "deepmind_alphaevolve_algorithms",
@@ -12224,23 +12277,25 @@
         "key_invariant_equation": "Rank( <4, 4, 4>_C ) <= 48 (surpassing Strassen 49),  KissingNumber(R^11) >= 593",
         "quantitative_milestone": "Improved bounds on 20% of >50 open mathematical optimization problems, including 4x4 complex matrix multiplication in 48 multiplications and N=11 kissing number 593",
         "rate_limiting_bottleneck": "continuous_to_discrete_certificate_rounding",
-        "curative_biophysics_transfer": "Directly grounds CF Lab's AlphaEvolve Pareto Regimen Optimizer (alpha_evolve_pareto_regimen.py) for multi-barrier inhaled mRNA/ASO dosing vs toxicity trade-offs.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Motivates CF Lab's AlphaEvolve Pareto Regimen Optimizer (alpha_evolve_pareto_regimen.py) for multi-barrier inhaled mRNA/ASO dosing vs toxicity trade-offs.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "deepmind_alphaproof_nexus_science2026",
         "organization": "Google DeepMind",
-        "title": "AlphaProof Nexus: Systematic Resolution of Open Erd\u0151s Problems & OEIS Conjectures (Science 2026)",
+        "title": "UNVERIFIED CLAIM (withdrawn): 'AlphaProof Nexus' results attributed to Google DeepMind",
         "year": 2026,
-        "formal_system": "Lean 4 + Anchored GDA Minimax Tree Search",
-        "repository_or_doi": "10.1126/science.adx2026",
+        "formal_system": "unverified; not stated",
+        "repository_or_doi": "unverified: the DOI 10.1126/science.adx2026 printed here before does not resolve (checked 2026-11-13)",
         "domain": "automated_theorem_proving_and_combinatorics",
-        "verified_items_count": 353,
-        "key_invariant_equation": "h_k^2 >= h_{k-1} * h_{k+1} (Hilbert pure O-sequence log-concavity), min_x max_y L(x, y) anchored GDA convergence",
-        "quantitative_milestone": "Resolved 9 long-standing open problems from the Erd\u0151s problem database, proved log-concavity of pure O-sequences, and machine-verified 44 OEIS conjectures via self-play dual policy-value networks in Lean 4",
-        "rate_limiting_bottleneck": "non_convex_gda_saddle_point_cycling_avoidance",
-        "curative_biophysics_transfer": "Log-concave sequence bounds enforce unimodal size distributions in synthetic lipid nanoparticle (LNP) formulations, preventing multi-modal aggregation and microvascular embolization.",
-        "zero_sorry_verified": true
+        "verified_items_count": 0,
+        "key_invariant_equation": "unverified; not stated",
+        "quantitative_milestone": "Earlier versions of this catalog credited a Science 2026 paper with resolving 9 Erd\u0151s problems and 44 OEIS conjectures. The DOI does not resolve and no other source was found, so these numbers are unverified and must not be cited",
+        "rate_limiting_bottleneck": "unverified; not stated",
+        "curative_biophysics_transfer": "unverified; not stated",
+        "zero_sorry_verified": false,
+        "source_status": "unverified"
       },
       {
         "discovery_id": "deepmind_alphaproteo_binders",
@@ -12254,8 +12309,9 @@
         "key_invariant_equation": "K_D = k_{off} / k_{on} < 1.0e-9 M (sub-nanomolar affinity), pLDDT >= 88.5, RMSD <= 1.2 A",
         "quantitative_milestone": "Generated novel de novo protein binders with 3-300x higher binding affinity than best previous methods across 7 diverse viral and cancer targets, verified with sub-nanomolar dissociation constants",
         "rate_limiting_bottleneck": "backbone_flexible_loop_hotspot_interface_hydration",
-        "curative_biophysics_transfer": "Directly informs de novo engineered nanobodies and chaperone mimetics designed to bind the uncoupled CFTR NBD1-ICL4 interface in F508del CFTR to prevent thermal denaturation.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Could inform de novo engineered nanobodies and chaperone mimetics designed to bind the uncoupled CFTR NBD1-ICL4 interface in F508del CFTR to prevent thermal denaturation.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "openai_minif2f_process_supervision",
@@ -12269,53 +12325,57 @@
         "key_invariant_equation": "P_PRM(Trajectory) = prod_{t=1}^T sigma(r_theta(s_1..t)),  488 Olympiad problems across 4 systems",
         "quantitative_milestone": "Established cross-system formal Olympiad benchmark (244 test + 244 valid problems) and proved step-level verification outperforms outcome supervision",
         "rate_limiting_bottleneck": "intermediate_step_credit_assignment",
-        "curative_biophysics_transfer": "Step-level verification rather than end-of-text plausibility underpins our line-by-line claim verifier (check_claims.py) and AH-1..AH-12 anti-hallucination gates.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Step-level verification rather than end-of-text plausibility underpins our line-by-line claim verifier (check_claims.py) and AH-1..AH-12 anti-hallucination gates.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "openai_math_qrh_seven_eighths",
         "organization": "OpenAI",
-        "title": "Result 003 Quasi-Riemann Hypothesis (QRH) 7/8 Vertical Zero-Free Strip in Lean 4",
+        "title": "Result 003: The Quasi-Riemann Hypothesis, Zero-Free Half-Plane Re(s) > 7/8 (openai/math)",
         "year": 2026,
         "formal_system": "Lean 4 (Mathlib4)",
-        "repository_or_doi": "https://github.com/openai/formal-math-qrh",
+        "repository_or_doi": "https://github.com/openai/math",
         "domain": "analytic_number_theory",
-        "verified_items_count": 719,
-        "key_invariant_equation": "zeta(sigma + i*t) != 0 for all sigma in [7/8, 1], t in R (uniform infinite vertical strip)",
-        "quantitative_milestone": "Proved sorry-free infinite vertical zero-free strip 7/8 <= Re(s) <= 1 for zeta(s) and Dirichlet L-functions via semigroup cascade of sextic character twists and cubic Gauss sums; quarantined 722->719 lemmas after catching sign error in Weil-class DAG",
-        "rate_limiting_bottleneck": "sextic_cubic_gauss_sum_positivity_semigroup_cascade",
-        "curative_biophysics_transfer": "Infinite vertical uniform zero-free strips establish uniform exponential decay in non-equilibrium relaxation, eliminating long-tail kinetic trapping in CFTR NBD1 unfolding.",
-        "zero_sorry_verified": true
+        "verified_items_count": 1,
+        "key_invariant_equation": "L(s, chi) != 0 for Re(s) > 7/8, for every Dirichlet character chi (including zeta(s))",
+        "quantitative_milestone": "The repository's contents page states that result 003 proves every Dirichlet L-function, including zeta(s), is zero-free in Re(s) > 7/8, with a Lean document. Lemma counts and the 'sign error' account printed here before were not taken from the source and are removed",
+        "rate_limiting_bottleneck": "not stated in the source",
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Infinite vertical uniform zero-free strips are compared to uniform decay in non-equilibrium relaxation, which the lab compares to relaxation in CFTR NBD1 unfolding.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "openai_navier_stokes_lean4_blowup",
         "organization": "OpenAI",
-        "title": "3D Forced Incompressible Navier-Stokes Self-Similar Finite-Time Blow-Up Profile in Lean 4",
+        "title": "Finite-Time Blowup for Forced Navier-Stokes and for Euler, Formalized in Lean 4 (openai/NavierStokesAndEuler)",
         "year": 2026,
         "formal_system": "Lean 4 (Mathlib4)",
-        "repository_or_doi": "https://github.com/openai/navier-stokes-formal",
+        "repository_or_doi": "https://github.com/openai/NavierStokesAndEuler",
         "domain": "nonlinear_pde_and_fluid_mechanics",
-        "verified_items_count": 1420,
-        "key_invariant_equation": "||omega(t)||_{L^infinity} ~ c * (T^* - t)^{-gamma} (gamma = 1.0003), nu Delta u - (u.grad)u - grad p + F_ext = partial_t u",
-        "quantitative_milestone": "Formalized self-similar asymptotically unstable vortex-filament collapse profile proving finite-time vorticity blow-up under smooth C^infinity forcing F_ext in Lean 4, demarcating the discrete viscosity barrier",
-        "rate_limiting_bottleneck": "spectral_stability_linearized_euler_profile_contraction",
-        "curative_biophysics_transfer": "Vortex filament concentration and non-linear strain amplification govern turbulent aerosol droplet impaction and jet nebulizer shear degradation across bronchial bifurcations.",
-        "zero_sorry_verified": true
+        "verified_items_count": 1,
+        "key_invariant_equation": "partial_t u + (u.grad)u = nu Delta u - grad p + F, div u = 0. R^3: no global smooth solution with uniformly bounded kinetic energy; T^3: no global smooth solution (for some smooth data and smooth forcing F)",
+        "quantitative_milestone": "The repository README states, for every positive viscosity: on R^3 there exist smooth initial data and forcing with no global smooth solution of uniformly bounded kinetic energy, and on the periodic torus smooth periodic data and forcing with no global smooth solution. Blow-up exponents and lemma counts printed here before were not taken from the source and are removed",
+        "rate_limiting_bottleneck": "not stated in the source",
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Vortex filament concentration and non-linear strain amplification are compared to turbulent aerosol droplet impaction and jet nebulizer shear degradation across bronchial bifurcations.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "openai_erdos_unit_distance_disproof",
         "organization": "OpenAI",
-        "title": "Disproof of Erd\u0151s 80-Year Planar Unit Distance Conjecture via Hilbert Class Field Towers",
+        "title": "UNVERIFIED CLAIM (withdrawn): disproof of the Erd\u0151s planar unit distance conjecture attributed to OpenAI",
         "year": 2026,
-        "formal_system": "Lean 4 / Python Formal Certificate Verifier",
-        "repository_or_doi": "https://github.com/openai/erdos-unit-distance",
+        "formal_system": "unverified; not stated",
+        "repository_or_doi": "unverified: github.com/openai/erdos-unit-distance does not exist (checked 2026-11-14). The contents page of openai/math lists a different statement as result 167: 'A complementary theorem bounds the number of unit-distance pairs by O(n^{4/3-delta}) for an absolute delta > 0'",
         "domain": "discrete_geometry_and_algebraic_number_theory",
-        "verified_items_count": 186,
-        "key_invariant_equation": "u(n) >= n^{1 + c / log log n} (c > 1.0), violating Erdos 1946 conjecture u(n) <= n^{1 + o(1)}",
-        "quantitative_milestone": "Disproved the 1946 Erd\u0151s unit distance conjecture by constructing planar configurations with n^{1 + Omega(1/log log n)} unit distances using ring of integers embeddings in unramified Hilbert class field towers",
-        "rate_limiting_bottleneck": "infinite_unramified_ray_class_field_ring_embedding_density",
-        "curative_biophysics_transfer": "Extremal planar distance clusterings optimize multivalent nanoparticle ligand-receptor patterning (spatial spacing of PEG/Fab heads to match CFTR extracellular vestibule epitopes).",
-        "zero_sorry_verified": true
+        "verified_items_count": 0,
+        "key_invariant_equation": "unverified; not stated",
+        "quantitative_milestone": "Earlier versions of this catalog described a disproof via Hilbert class field towers. No public source was found, and the inequality printed with it did not contradict the conjecture as stated. Unverified; must not be cited",
+        "rate_limiting_bottleneck": "unverified; not stated",
+        "curative_biophysics_transfer": "unverified; not stated",
+        "zero_sorry_verified": false,
+        "source_status": "unverified"
       },
       {
         "discovery_id": "lean_fro_tao_pfr_equational",
@@ -12329,8 +12389,9 @@
         "key_invariant_equation": "d[X; Y] <= 11 => |A + A| <= K * |A| implies A covered by <= K^11 cosets of H <= F_2^n",
         "quantitative_milestone": "Formalized Marton's PFR conjecture in 21 days via Shannon entropic Ruzsa distance and resolved 100% of 22,028,942 magma law implications in Lean 4",
         "rate_limiting_bottleneck": "entropic_ruzsa_triangle_inequality_bootstrap",
-        "curative_biophysics_transfer": "Blueprint DAG decomposition and entropic Ruzsa distance directly inspire our Shannon-MDL cargo packing bounds and multi-agent task-board dependency graphs.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Blueprint DAG decomposition and entropic Ruzsa distance inspire our Shannon-MDL cargo packing bounds and multi-agent task-board dependency graphs.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "harmonic_aristotle_yuclid_imo",
@@ -12344,23 +12405,25 @@
         "key_invariant_equation": "det(CM(p_1, ..., p_5)) = 0 (Cayley-Menger 4D volume vanishing), P(Proof | G) via MCGS branch-and-bound",
         "quantitative_milestone": "Achieved IMO Gold level (35/42 points, 5/6 problems formally verified in Lean 4) by uniting Yuclid algebraic Cayley-Menger metric geometry with Aristotle Monte Carlo Graph Search",
         "rate_limiting_bottleneck": "metric_dimension_collapse_in_non_euclidean_projective_degeneracies",
-        "curative_biophysics_transfer": "Cayley-Menger metric determinant geometry solves 3D distance-geometry constraint satisfaction in Cryo-EM coordinate refinement (PDB 8EIQ / 6MSM) without unphysical bond-length violations.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Cayley-Menger metric determinant geometry is compared to 3D distance-geometry constraint satisfaction in Cryo-EM coordinate refinement (PDB 8EIQ / 6MSM) without unphysical bond-length violations.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "bytedance_seed_prover_1_5",
         "organization": "ByteDance Seed",
-        "title": "Seed-Prover 1.5 & BFS-Prover-V2 Breadth-First Formal Reasoning Engine",
+        "title": "Seed-Prover 1.5 (arXiv:2512.17260)",
         "year": 2025,
-        "formal_system": "Lean 4 (Mathlib4) + BFS-Prover MCTS Guided Expansion",
-        "repository_or_doi": "https://arxiv.org/abs/2501.16499",
+        "formal_system": "Lean 4",
+        "repository_or_doi": "https://arxiv.org/abs/2512.17260",
         "domain": "automated_formal_reasoning",
         "verified_items_count": 11,
-        "key_invariant_equation": "Score(node) = alpha * P_{PRM}(step) + beta * sqrt(ln(N_parent) / N_node) + gamma * LengthPenalty",
-        "quantitative_milestone": "Solved 11 of 12 Putnam 2025 formal challenge problems in Lean 4 via breadth-first tree exploration paired with step-level state-evaluation process reward models",
-        "rate_limiting_bottleneck": "long_horizon_backtracking_memory_exhaustion",
-        "curative_biophysics_transfer": "Breadth-first search with process reward scoring powers optimal search across combinatorial delivery cascades (mucus penetration -> cell entry -> endosomal escape).",
-        "zero_sorry_verified": true
+        "key_invariant_equation": "not summarised here; see the paper",
+        "quantitative_milestone": "Seed-Prover 1.5 abstract (arXiv:2512.17260): 88% of PutnamBench, 80% of Fate-H, 33% of Fate-X, and 11 of 12 Putnam 2025 problems within 9 hours. BFS-Prover-V2 is a separate step-prover paper (arXiv:2509.06493)",
+        "rate_limiting_bottleneck": "not stated in the source",
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Breadth-first search with process reward scoring is compared to search across combinatorial delivery cascades (mucus penetration -> cell entry -> endosomal escape).",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "deepseek_prover_v2_lean4",
@@ -12374,8 +12437,9 @@
         "key_invariant_equation": "Goal(G) = And_{i=1}^k Subgoal(g_i), TreeSearch_{Lean4}(g_i) in parallel with mutual premise sharing",
         "quantitative_milestone": "Solved 88.5% of miniF2F-test and 1,200+ Mathlib lemmas by decomposing target theorems into independent typed subgoals with shared tactic caching",
         "rate_limiting_bottleneck": "subgoal_dependency_deadlock_and_type_coercion_mismatch",
-        "curative_biophysics_transfer": "Recursive subgoal decomposition maps directly to multi-stage pharmacokinetic modeling: decouples nebulizer droplet sizing, mucociliary clearance, and apical membrane permeability into independent tractable proofs.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Recursive subgoal decomposition is compared to multi-stage pharmacokinetic modeling: decouples nebulizer droplet sizing, mucociliary clearance, and apical membrane permeability into independent tractable proofs.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "deng_hani_ma_hilbert_sixth_boltzmann",
@@ -12389,23 +12453,25 @@
         "key_invariant_equation": "lim_{Kn -> 0} lim_{N -> inf, r -> 0} f_N(t, x, v) = f_{Maxwellian}(x, v; rho, u, theta)",
         "quantitative_milestone": "Resolved a central core of Hilbert's 6th Problem by rigorously deriving the incompressible Navier-Stokes-Fourier equations from a deterministic system of Newtonian hard spheres in the low Knudsen number limit Kn -> 0",
         "rate_limiting_bottleneck": "recollision_control_in_grad_boltzmann_scaling_hierarchy",
-        "curative_biophysics_transfer": "Provides the exact mathematical link between atomistic molecular dynamics of airway surface liquid (ions, water, mucin monomers) and macroscopic continuum Stokes-Brinkman mucus clearance.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Is cited as a model for the link between atomistic molecular dynamics of airway surface liquid (ions, water, mucin monomers) and macroscopic continuum Stokes-Brinkman mucus clearance.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "guth_maynard_zero_density_30_13",
         "organization": "Guth & Maynard (IAS / Oxford)",
-        "title": "Breaking Ingham's 1940 Barrier: Zero-Density Estimate N(sigma, T) <= T^{(30/13)(1-sigma) + o(1)}",
+        "title": "Zero-Density Estimate N(sigma, T) <= T^{(30/13)(1-sigma) + o(1)} (Guth & Maynard)",
         "year": 2026,
         "formal_system": "Analytic Number Theory / Annals of Mathematics",
-        "repository_or_doi": "arXiv:2405.10935 / 10.4007/annals.2026",
+        "repository_or_doi": "arXiv:2405.20552 / 10.4007/annals.2026.203.2.6",
         "domain": "analytic_number_theory",
-        "verified_items_count": 32,
+        "verified_items_count": 1,
         "key_invariant_equation": "N(sigma, T) <= C(eps) * T^{(30/13)(1 - sigma) + eps}, 30/13 = 2.30769 < 2.4000 (Ingham 12/5 = 2.4)",
-        "quantitative_milestone": "Broke Ingham's 84-year-old exponent barrier (12/5 = 2.40) by establishing N(sigma, T) <= T^{(30/13)(1-sigma)+o(1)} using Guth's polynomial method and multi-linear decoupling, proving primes exist in short intervals [x, x + x^{17/30 + eps}]",
-        "rate_limiting_bottleneck": "multilinear_kakeya_decoupling_with_pseudo_characters",
-        "curative_biophysics_transfer": "Zero-density spectral bounds govern the probability of rare extreme fluctuations in stochastic ion channel gating, bounding the recurrence time of prolonged closed-channel states.",
-        "zero_sorry_verified": true
+        "quantitative_milestone": "Abstract of 'New large value estimates for Dirichlet polynomials': a zero density estimate N(sigma, T) <= T^{30(1-sigma)/13+o(1)} and asymptotics for primes in short intervals of length x^{17/30+o(1)}. The exponent 30/13 improves on the earlier 12/5 (Ingham 1940; Huxley 1972)",
+        "rate_limiting_bottleneck": "not stated in the source",
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Zero-density spectral bounds are compared to bounds on rare extreme fluctuations in stochastic ion channel gating.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "wang_zahl_3d_kakeya",
@@ -12419,8 +12485,9 @@
         "key_invariant_equation": "dim_H(K) = dim_M(K) = 3, forall Besicovitch/Kakeya sets K subset R^3 containing unit segments in all directions",
         "quantitative_milestone": "Proved the 3-dimensional Kakeya conjecture: every compact Besicovitch set in R^3 containing a unit segment in every direction must have Hausdorff dimension 3 and Minkowski dimension 3",
         "rate_limiting_bottleneck": "sticky_hairbrush_tube_overlap_multiscale_decomposition",
-        "curative_biophysics_transfer": "3D directional tube overlap bounds govern the spatial packing and percolation threshold of entangled polymer chains in airway mucus hydrogels.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): 3D directional tube overlap bounds are compared to the packing of entangled polymer chains in airway mucus hydrogels.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "microsoft_bioemu_equilibrium_ensembles",
@@ -12434,8 +12501,9 @@
         "key_invariant_equation": "p_theta(x) propto exp(-U(x) / k_B T), |Delta G_{pred} - Delta G_{exp}| <= 1.0 kcal/mol",
         "quantitative_milestone": "Generated full Boltzmann conformational equilibrium ensembles for proteins up to 500 residues with ~1 kcal/mol free-energy accuracy, producing thermodynamic distributions in minutes that previously required millisecond all-atom MD",
         "rate_limiting_bottleneck": "slow_barrier_crossing_in_rugged_funnels",
-        "curative_biophysics_transfer": "Directly predicts the free-energy landscape Delta G(x) of CFTR NBD1 thermal unfolding and allosteric stabilization under dual correctors without multi-month supercomputer MD runs.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Could be used to estimate the free-energy landscape Delta G(x) of CFTR NBD1 thermal unfolding and allosteric stabilization under dual correctors more cheaply than long molecular-dynamics runs.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "mit_recursion_boltz2_fep_affinity",
@@ -12449,8 +12517,9 @@
         "key_invariant_equation": "Delta Delta G_{bind} = -k_B T ln(K_{D,mut} / K_{D,WT}), Pearson r >= 0.82 on FEP benchmarks",
         "quantitative_milestone": "Unified 3D co-folding of proteins, RNAs, ligands, and covalent modifications with free-energy perturbation (FEP) grade binding affinity predictions (RMSE < 1.2 kcal/mol) across diverse chemical series",
         "rate_limiting_bottleneck": "covalent_ligand_induced_fit_stereocenter_inversion",
-        "curative_biophysics_transfer": "Enables in-silico screening of next-generation CFTR modulators (e.g. vanzacaftor vs ivacaftor/elexacaftor) against rare Class II/III/IV mutants to predict rescue efficacy before synthesis.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Could support in-silico screening of next-generation CFTR modulators (e.g. vanzacaftor vs ivacaftor/elexacaftor) against rare Class II/III/IV mutants as a way to rank candidates before synthesis; it would not predict clinical efficacy.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "arc_nvidia_evo2_genomic_1m",
@@ -12464,8 +12533,9 @@
         "key_invariant_equation": "P(x_1, ..., x_L) = prod_{i=1}^L P(x_i | x_{<i}), L = 1,000,000 nt at single-nucleotide resolution",
         "quantitative_milestone": "Trained a 40-billion-parameter foundation model across 9 trillion tokens with a 1-million-token context window at single-nucleotide resolution, predicting deep non-coding variant consequences and designing functional synthetic bacteriophages",
         "rate_limiting_bottleneck": "long_range_chromatin_looping_and_enhancer_promoter_contact_induction",
-        "curative_biophysics_transfer": "Predicts splicing disruption for deep intronic CFTR variants (e.g., 3849+10kb C->T) and generates targeted bacteriophage endolysins to clear multidrug-resistant Pseudomonas aeruginosa biofilms.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Could be explored for predicting the effect of deep intronic CFTR variants (e.g., 3849+10kb C->T). No such prediction has been made or checked here.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "meta_fair_omol25_uma_potentials",
@@ -12479,8 +12549,9 @@
         "key_invariant_equation": "F_i = -grad_{r_i} E_{UMA}(r_1, ..., r_N), MAE(E) <= 0.02 eV, MAE(F) <= 0.03 eV/A",
         "quantitative_milestone": "Released 100M quantum DFT calculations across organic, bioinorganic, and medicinal chemistries; trained UMA universal force field achieving ab-initio quantum accuracy at 100,000x lower computational cost",
         "rate_limiting_bottleneck": "transition_metal_spin_crossover_and_strong_correlation",
-        "curative_biophysics_transfer": "Powers microsecond-scale quantum-mechanics-accurate molecular dynamics of CFTR pore water structuring and ion dehydration barriers during chloride vs bicarbonate permeation.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Could support microsecond-scale quantum-mechanics-accurate molecular dynamics of CFTR pore water structuring and ion dehydration barriers during chloride vs bicarbonate permeation.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "heplean_physlean_lean4_physics",
@@ -12494,8 +12565,9 @@
         "key_invariant_equation": "sum_f d_f Y_f = 0, sum_f d_f Y_f^3 = 0, Tr[SU(2)^2 U(1)_Y] = 0, d * F = J",
         "quantitative_milestone": "Formalized over 1,850 machine-checked definitions and theorems across Lagrangian/Hamiltonian mechanics, Maxwell electrodynamics, Lorentz group representations, Wick's theorem, and Standard Model U(1)_Y / SU(2)_L / SU(3)_C chiral anomaly cancellation in Lean 4",
         "rate_limiting_bottleneck": "continuum_measure_integration_in_path_integral_quantization",
-        "curative_biophysics_transfer": "Enables zero-sorry machine verification of Poisson-Nernst-Planck electro-diffusion conservation laws, Donnan equilibrium charge neutrality, and symmetry invariants across epithelial ion-transport models.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Could support machine verification of Poisson-Nernst-Planck electro-diffusion conservation laws, Donnan equilibrium charge neutrality, and symmetry invariants across epithelial ion-transport models.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "cranmer_pysr_symbolic_physics_discovery",
@@ -12509,8 +12581,9 @@
         "key_invariant_equation": "f* = argmin_{f in T} [ (N/2) ln(MSE(y, f(X))) + lambda * C_tree(f) ]",
         "quantitative_milestone": "Discovered closed-form analytical physical laws, astrophysical dark-matter relations, and constitutive fluid closures directly from noisy trajectory data via Pareto complexity-accuracy frontiers across 100+ Feynman equations",
         "rate_limiting_bottleneck": "combinatorial_expression_tree_explosion_under_deep_composition",
-        "curative_biophysics_transfer": "Extracts closed-form constitutive shear-thinning and viscoelastic yield laws directly from noisy microrheology particle-tracking trajectories in mucin hydrogels.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Could be used to fit closed-form constitutive shear-thinning and viscoelastic yield laws directly from noisy microrheology particle-tracking trajectories in mucin hydrogels.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "brunton_kutz_pysindy_dedalus_pde_discovery",
@@ -12524,8 +12597,9 @@
         "key_invariant_equation": "u_t = Theta(u, grad u, laplacian u) xi, min_xi ||u_t - Theta xi||_2^2 + lambda ||xi||_0",
         "quantitative_milestone": "Recovered exact Navier-Stokes, Burgers, Kuramoto-Sivashinsky, and reaction-diffusion PDEs from noisy sensor fields via weak-form sparse regression paired with DedalusProject/dedalus spectral Chebyshev-Fourier solvers",
         "rate_limiting_bottleneck": "high_order_spatial_derivative_noise_amplification_mitigated_by_weak_form",
-        "curative_biophysics_transfer": "Identifies sparse governing advection-diffusion-reaction PDEs for metachronal ciliary wave coordination and periciliary sol-gel boundary-layer transport from high-speed video microscopy.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Could be used to look for sparse governing advection-diffusion-reaction PDEs for metachronal ciliary wave coordination and periciliary sol-gel boundary-layer transport from high-speed video microscopy.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       },
       {
         "discovery_id": "itensor_netket_quantum_manybody_physics",
@@ -12539,10 +12613,11 @@
         "key_invariant_equation": "|Psi_MPS> = sum_s A^{s_1}_1 ... A^{s_N}_N |s>, S_vN(L) = (c/6) ln(L) + s_1 <= ln(chi)",
         "quantitative_milestone": "Unified high-bond-dimension DMRG/MPS tensor-network solvers (ITensors.jl) with neural-network quantum state Variational Monte Carlo (netket/netket) and differentiable molecular dynamics (google/jax-md)",
         "rate_limiting_bottleneck": "volume_law_entanglement_growth_in_2d_3d_non_equilibrium_quenches",
-        "curative_biophysics_transfer": "Bounds electronic correlation errors in metalloenzyme/porphyrin active sites and accelerates coarse-grained differentiable polymer phase-field simulations via JAX-MD.",
-        "zero_sorry_verified": true
+        "curative_biophysics_transfer": "Lab analogy (a hypothesis, not an established result): Could bound electronic correlation errors in metalloenzyme/porphyrin active sites and accelerates coarse-grained differentiable polymer phase-field simulations via JAX-MD.",
+        "zero_sorry_verified": true,
+        "source_status": "verified"
       }
     ]
   },
-  "snapshot_sha256": "d7d9cc926e020a3563609047d7f22d7fa9521963e5afb59e267d4dd975e1a9a3"
+  "snapshot_sha256": "bbeba14334ede80c822d393992a160aaf6b626d0267f35d812d7a5c68b0959b9"
 }
