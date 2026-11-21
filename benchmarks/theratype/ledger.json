@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "work": "T-0925 / PRED-0010: Open CFTR theratype benchmark testing whether AlphaMissense predicts CFTR modulator responsiveness across missense, in-frame indel, splicing, and Class I nonsense/frameshift variants on a domain- and position-disjoint split against US FDA SPL labels (TRIKAFTA v23 Table 6, ALYFTREK v9 Table 5) and MyVariant/dbNSFP open annotations.",
+  "done_file": "done.md",
+  "done_sha256": "3530e7b7db0345167da1830fe587e88770559d378c8794642fad813b97ada40c",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-mcdonald-table1-vus-reproduction",
+      "statement": "Canonical ENST00000003084 / P13569 AlphaMissense scores retrieved from MyVariant dbnsfp.alphamissense reproduce 7 of 7 CFTR2 Variants of Unknown Significance (R31L=0.17, V201M=0.36, A349V=0.26, S912L=0.12, D924N=0.83, M952T=0.85, Y1014C=0.37) reported in Table 1 of McDonald et al. (2024, PMC10810519) with 0 codon overlap against the 30 train/test benchmark variants.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/theratype/theratype_open_annotations_2026-11-21.json (myvariant dbnsfp.alphamissense + europe-pmc PMC10810519)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_theratype_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "typed VUS control verifier with Cheng 2023 threshold classifier",
+          "script": "cftr_theratype_benchmark.py",
+          "difference": "verifies float rounding, Cheng 2023 cutoffs (0.34, 0.56), and dbNSFP B/A/P letters via typed dataclasses",
+          "value": 7
+        },
+        {
+          "name": "independent Decimal score check and codon-disjointness audit",
+          "script": "independent_audit.py",
+          "difference": "separate code with zero imports from cftr_theratype_benchmark.py; parses raw JSON via decimal.Decimal and checks control codon disjointness",
+          "value": 7
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c2-alphamissense-trikafta-abstention-auroc",
+      "statement": "On the fixed 20-variant domain-disjoint test split (NBD1, TMD2, NBD2_C_terminal; minimum cross-split codon gap 71 codons), pre-registered AlphaMissense responsiveness scoring s_AM(x) = 1 - AM(x) covers 11/20 variants (0.5500) and yields conditional missense ROC-AUC 0.5333 (8/15) and abstention-aware ROC-AUC 0.5101 (101/198) against US FDA TRIKAFTA v23 Table 6 responsiveness.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/theratype/theratype_open_annotations_2026-11-21.json (myvariant dbnsfp.alphamissense + openfda-label TRIKAFTA v23 Table 6)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_theratype_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "IEEE-754 pairwise Mann-Whitney concordant/tie enumeration",
+          "script": "cftr_theratype_benchmark.py",
+          "difference": "enumerates all N_1 * N_0 positive-negative pairs directly with 0.5 credit for unscored pairs",
+          "value": 0.5101
+        },
+        {
+          "name": "exact fractions.Fraction Wilcoxon rank-sum + closed-form abstention identity",
+          "script": "independent_audit.py",
+          "difference": "sorts scored missense items in exact rational arithmetic, computes U = R_pos - |S_1|(|S_1|+1)/2 = 8/15, and evaluates 1/2 + (|S_1||S_0|/(N_1 N_0))*(AUC_cond - 1/2) = 101/198",
+          "value": 0.5101
+        }
+      ],
+      "tolerance": 0.0001,
+      "headline": true,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c3-sequence-consequence-baseline-trikafta-auroc",
+      "statement": "On the same fixed 20-variant domain-disjoint test split, the deterministic sequence-consequence class baseline covers 20/20 variants (1.0000) and achieves abstention-aware ROC-AUC 0.6818 (15/22) against US FDA TRIKAFTA v23 Table 6 and 0.8750 (7/8) against ALYFTREK v9 Table 5, exceeding standalone AlphaMissense (0.5101 and 0.5700).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/theratype/theratype_open_annotations_2026-11-21.json (openfda-label TRIKAFTA v23 Table 6 and ALYFTREK v9 Table 5)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_theratype_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "regex canonical-splice class rule + pairwise Mann-Whitney loop",
+          "script": "cftr_theratype_benchmark.py",
+          "difference": "uses regular expression CANONICAL_SPLICE_DINUCLEOTIDE_RE and pairwise float comparisons",
+          "value": 0.6818
+        },
+        {
+          "name": "regex-free charwise HGVS splice parser + exact rational Wilcoxon rank-sum",
+          "script": "independent_audit.py",
+          "difference": "parses c.<digits>[+-][12] character-by-character without re and computes exact Fraction rank-sum 15/22",
+          "value": 0.6818
+        }
+      ],
+      "tolerance": 0.0001,
+      "headline": true,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c4-pred-0010-alphamissense-theratype-refuted",
+      "statement": "Pre-registered prediction PRED-0010 that standalone AlphaMissense responsiveness scoring s_AM(x) = 1 - AM(x) achieves test_coverage >= 0.80, conditional_auroc >= 0.75, and abstention_aware_auroc >= 0.75 on the held-out 20-variant TRIKAFTA v23 test split while matching or beating the sequence-consequence class baseline is refuted (observed coverage 0.5500, conditional ROC-AUC 0.5333, abstention-aware ROC-AUC 0.5101 vs baseline 0.6818).",
+      "kind": "predicted",
+      "origin": "lab",
+      "standing": "refuted",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_theratype_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "held_out_error": {
+        "value": 0.4899,
+        "unit": "1_minus_abstention_aware_auroc_on_fixed_20_variant_test_split",
+        "set_fixed_in_done_file": true
+      },
+      "headline": false,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c5-mcdonald-2024-published-cftr-theratype-finding",
+      "statement": "McDonald et al. (2024, CC BY 4.0) reported that AlphaMissense achieved ROC-AUC 0.80 when distinguishing CF-causing from non-CF-causing CFTR2 missense variants (n=162) alongside Pearson r = -0.44 against CFTR plasma membrane expression (p = 4.6e-7), but exhibited limited predictive value for variant pharmacological theratype rescue by elexacaftor/tezacaftor.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "McDonald, Oliver, Schlebach et al. (2024), PLOS ONE 19(1):e0297560 (PMC10810519, CC BY 4.0)",
+      "source": "10.1371/journal.pone.0297560",
+      "standing": "open",
+      "checks": [
+        {"type": "peer_review", "ref": "10.1371/journal.pone.0297560"},
+        {"type": "source_quote", "ref": "10.1371/journal.pone.0297560"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c6-openfda-spl-trikafta-vs-alyftrek-discordance",
+      "statement": "Across the 30 benchmarked CFTR variants, US FDA Structured Product Labels list 15 responsive variants in TRIKAFTA v23 Table 6 (effective 2026-06-22) and 16 in ALYFTREK v9 Table 5 (effective 2026-08-26), with 5 discordant variants: V520F, R560T, and R1066C appear in ALYFTREK Table 5 but not TRIKAFTA Table 6, whereas intronic splice variants 2789+5G->A and 3849+10kbC->T appear in TRIKAFTA Table 6 (clinical trial evidence) but not ALYFTREK Table 5, and N1303K is listed in both via human bronchial epithelial (HBE) assay data.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "US FDA Structured Product Labels via openFDA API: TRIKAFTA (NDA 212273/217660, v23, 2026-06-22, Table 6) and ALYFTREK (NDA 218730, v9, 2026-08-26, Table 5)",
+      "source": "https://api.fda.gov/drug/label.json",
+      "standing": "open",
+      "checks": [
+        {"type": "source_quote", "ref": "https://api.fda.gov/drug/label.json"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-21"
+    }
+  ]
+}

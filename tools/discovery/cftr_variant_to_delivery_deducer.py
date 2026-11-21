@@ -41,7 +41,10 @@ RESEARCH_BOUNDARY = "Research simulation only; not medical advice."
 
 def route_variant_modality(case: ctb.CftrVariantCase) -> str:
     """Deduce candidate modality family from variant class and model coverage."""
-    if case.modulator_responsive == 1 and case.variant_family in ("inframe_folding", "gating_missense", "gating_missense_heldout"):
+    if case.modulator_responsive == 1 and case.variant_family in (
+        "missense",
+        "inframe_indel",
+    ):
         return "SMALL_MOLECULE_MODULATOR_ELIGIBLE"
     if case.variant_family == "splice_regulatory":
         return "ASO_SPLICE_MODULATION_OR_MODULATOR" if case.modulator_responsive == 1 else "ASO_SPLICE_MODULATION_OR_MRNA"
