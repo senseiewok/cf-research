@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "work": "PRED-0013: Modulator-free apo Cryo-EM tertiary packing compliance benchmark testing whether SE(3)-invariant zero-parameter non-covalent 3D C-alpha inverse Weighted Contact Number s_flex(i) = 1 / (1 + (361/25)*WCN_nc(i)) in dephosphorylated ATP-free WT human CFTR (PDB 5UAK) rescues PRED-0010 on US FDA TRIKAFTA v23 Table 6 responsiveness across the fixed 20-variant domain-disjoint held-out test split (NBD1, TMD2, NBD2_C_terminal).",
+  "done_file": "done.md",
+  "done_sha256": "7e69f65fd1e988f4b149e38b77de90d8682e9cbcef08b656ed4d511dcb127ecf",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-5uak-chain-a-integrity-and-packing-controls",
+      "statement": "Modulator-free dephosphorylated ATP-free WT human CFTR (PDB 5UAK, CC0 1.0) places 1,139 canonical Chain A C-alpha residues (1..1480, including WT I507 and F508) with exact SE(3) rigid-motion invariance (float64 drift 3.33e-16; SO(3, Q) rational drift 0/1 across all 646,957 non-covalent pairs), reproduces exact 4-point collinear 3.8 A non-covalent compliance [36/49, 4/5, 4/5, 36/49], and separates exposed peripheral/cleft controls {38, 1347, 1348, 1371} (s_flex >= 0.050936) from buried core scaffolding controls {195, 311, 361, 1030, 1102, 1293} (s_flex <= 0.047689).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/5UAK.cif.gz (RCSB PDB 5UAK, CC0 1.0) + tools/cftr-model/data/p13569.json (UniProtKB P13569, CC BY 4.0)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_packing_compliance_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "shlex mmCIF parser with float64 Euclidean squared-distance WCN",
+          "script": "cryoem_packing_compliance_benchmark.py",
+          "difference": "tokenizes _atom_site via shlex, rejects UNK chains, and evaluates float64 non-covalent WCN and SE(3) rigid-motion drift",
+          "value": 1139
+        },
+        {
+          "name": "character-level mmCIF state-machine lexer with exact rational Q arithmetic",
+          "script": "independent_audit.py",
+          "difference": "zero shared imports; parses mmCIF character-by-character without shlex/re/math and evaluates exact Fraction r_ij^2 and SO(3, Q) zero-drift invariance",
+          "value": 1139
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-22"
+    },
+    {
+      "id": "c2-test-missense-conditional-auroc-sflex",
+      "statement": "On the 11 placed missense variants of the fixed 20-variant held-out test split (NBD1, TMD2, NBD2_C_terminal; 6 TRIKAFTA-responsive and 5 non-responsive), apo 5UAK non-covalent packing compliance s_flex(i) achieves conditional ROC-AUC 0.700000 (7/10 = 21/30 pairs, separating {S549N, S1251N, G551D, N1303K, A455E} above {L467P, R1066C, Y569D, R560T} on 20/20 pairs while inverting TM12 pore-helix D1152H = 0.042597 across 5 pairs and aromatic steric-clash V520F = 0.053492 across 4 additional pairs [5 total, sharing D1152H vs V520F]), exceeding standalone AlphaMissense s_AM at 0.533333 (8/15 = 16/30 pairs).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/5UAK.cif.gz + benchmarks/theratype/theratype_open_annotations_2026-11-21.json (openfda-label TRIKAFTA v23 Table 6 + myvariant dbnsfp.alphamissense)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_packing_compliance_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "float64 non-covalent WCN + pairwise O(N1*N0) Mann-Whitney enumeration",
+          "script": "cryoem_packing_compliance_benchmark.py",
+          "difference": "computes float64 s_flex(i) = 1 / (1 + 14.44 * WCN_nc(i)) and enumerates all 30 positive-negative missense pairs directly",
+          "value": 0.700000
+        },
+        {
+          "name": "exact rational Fraction WCN (zero square roots) + exact Wilcoxon rank-sum",
+          "script": "independent_audit.py",
+          "difference": "evaluates exact Q s_flex(i) from Fraction(Cartn_x/y/z) without square roots and computes exact rational rank-sum 7/10",
+          "value": 0.700000
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-22"
+    },
+    {
+      "id": "c3-test-all20-gated-gflex-abstention-auroc",
+      "statement": "Across all 20 held-out test variants (9 TRIKAFTA-responsive and 11 non-responsive across NBD1, TMD2, NBD2_C_terminal, with WT codons 507/508 strictly gated to s_flex=None and g_flex=0.50 on I507del and F508del), class-gated apo packing compliance g_flex achieves abstention-aware ROC-AUC 0.742424 (49/66 = 73.5/99 pairs), exceeding both the deterministic sequence-consequence class baseline at 0.681818 (15/22 pairs) and identically gated g_AM at 0.691919 (137/198 pairs).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/5UAK.cif.gz + benchmarks/theratype/theratype_open_annotations_2026-11-21.json (openfda-label TRIKAFTA v23 Table 6 + myvariant dbnsfp.alphamissense)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_packing_compliance_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "regex canonical-splice class gate + float64 pairwise Mann-Whitney ROC-AUC",
+          "script": "cryoem_packing_compliance_benchmark.py",
+          "difference": "applies CANONICAL_SPLICE_RE + 0.50 + 0.50*s_flex and enumerates all 99 positive-negative pairs in float64",
+          "value": 0.742424
+        },
+        {
+          "name": "charwise HGVS splice parser + exact Fraction Wilcoxon mid-rank ROC-AUC",
+          "script": "independent_audit.py",
+          "difference": "parses canonical +/-1,2 splice sites character-by-character without regex and evaluates exact rational rank-sum 49/66",
+          "value": 0.742424
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-22"
+    },
+    {
+      "id": "c4-pred-0013-apo-packing-compliance-refuted",
+      "statement": "Pre-registered prediction PRED-0013 that apo 5UAK non-covalent tertiary packing compliance achieves conditional missense ROC-AUC >= 0.75 and class-gated abstention-aware ROC-AUC >= 0.75 against US FDA TRIKAFTA v23 Table 6 on the fixed 20-variant test split is refuted (observed conditional ROC-AUC 0.700000 = 7/10 < 0.75 and gated ROC-AUC 0.742424 = 49/66 < 0.75, held-out error 17/66 = 0.257576), because single-state WT C-alpha burial mistakes transmembrane pore-bundle packing (D1152H on test, R347P on train) for unrescuable misfolding, cannot see aromatic side-chain steric clashes (V520F, rescued on ALYFTREK v9 but not TRIKAFTA v23), and scores outer-vestibule charge-loss mutant R334W (train AUC_cond = 0.333333) as compliant.",
+      "kind": "predicted",
+      "origin": "lab",
+      "standing": "refuted",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_packing_compliance_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "held_out_error": {
+        "value": 0.257576,
+        "unit": "1_minus_abstention_aware_auroc_on_fixed_20_variant_test_split",
+        "set_fixed_in_done_file": true
+      },
+      "headline": false,
+      "checked_on": "2026-11-22"
+    },
+    {
+      "id": "c5-halle-2002-lin-2008-weighted-contact-number",
+      "statement": "Halle (2002) established that crystallographic B-factors scale inversely with local non-hydrogen contact density within a spherical cutoff (R_C approx 7.35 A), and Lin et al. (2008) introduced the cutoff-free inverse-square C-alpha Weighted Contact Number (WCN_i = sum_{j != i} r_{ij}^{-2}) governing local thermal fluctuation profiles in proteins.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "Halle (2002), Proc. Natl. Acad. Sci. U.S.A. 99(3):1274-1279; Lin, Huang, Lai et al. (2008), Proteins 72(3):929-935",
+      "source": "10.1002/prot.21983",
+      "standing": "open",
+      "checks": [
+        {"type": "peer_review", "ref": "10.1073/pnas.032522499"},
+        {"type": "peer_review", "ref": "10.1002/prot.21983"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-22"
+    },
+    {
+      "id": "c6-fiedorczuk-2022-rodriguez-mier-2026-allosteric-corrector-specificity",
+      "statement": "Fiedorczuk & Chen (2022) demonstrated that elexacaftor and tezacaftor rescue DeltaF508 CFTR by stabilizing TMD1 and TMD2/Lasso interfaces without binding NBD1 directly (PDB 8EIQ, 8EJ1), and Rodriguez Mier et al. (2026) documented differential variant responsiveness between elexacaftor- and vanzacaftor-based triple modulator regimens.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "Fiedorczuk & Chen (2022), Science 378:284-290; Rodriguez Mier, Callebaut, Proesmans et al. (2026), J. Cyst. Fibros.",
+      "source": "10.1126/science.ade2216",
+      "standing": "open",
+      "checks": [
+        {"type": "peer_review", "ref": "10.1126/science.ade2216"},
+        {"type": "peer_review", "ref": "10.1016/j.jcf.2025.12.018"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-22"
+    }
+  ]
+}
