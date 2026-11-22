@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "work": "PRED-0011: Cryo-EM 3D potentiation-vs-folding pocket proximity benchmark testing whether E(3)-invariant intra-8EIQ pocket geometry predicts US FDA KALYDECO v36 Table 3 ivacaftor monotherapy responsiveness on the fixed 20-variant domain-disjoint held-out test split (NBD1, TMD2, NBD2_C_terminal).",
+  "done_file": "done.md",
+  "done_sha256": "243b8a53db649ac846c26586b628761a165d95e3298f2cf27b4cfb632245c6cd",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-8eiq-heavy-atom-and-pocket-controls",
+      "statement": "In PDB 8EIQ Model 1 Chain A (tools/cftr-model/data/8EIQ.cif.gz, CC0 1.0, 1,162 placed C-alpha residues with codon 508 absent), the disjoint heavy-atom anchor sets contain 93 potentiation atoms (ATP=62, MG=2, VX7=29) and 103 folding/corrector atoms (CV6=37, WJX=41, W1063=14, R1070=11), reproducing 8 of 8 published non-benchmark Cryo-EM pocket contacts (Y304, S307, F311, F931 < 8.0 A from VX7; K464, K1250 < 4.0 A from ATP; W361 < 5.0 A from CV6; R1102 < 6.0 A from WJX) with exact SE(3) rigid-motion invariance (< 1e-12).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/8EIQ.cif.gz (RCSB PDB 8EIQ, CC0 1.0) + tools/cftr-model/data/p13569.json (UniProtKB P13569, CC BY 4.0)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_potentiation_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "shlex mmCIF loop parser with 8.0 A 3D spatial voxel grid",
+          "script": "cryoem_potentiation_benchmark.py",
+          "difference": "tokenizes _atom_site via shlex, verifies P13569 residue alignment, and indexes heavy atoms in an 8.0 A cubic voxel grid",
+          "value": 93
+        },
+        {
+          "name": "state-machine mmCIF tokenizer with 50-digit Decimal norms",
+          "script": "independent_audit.py",
+          "difference": "zero shared imports; parses mmCIF character-by-character without shlex/re and counts heavy atoms in exact Decimal coordinates",
+          "value": 93
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c2-test-missense-conditional-auroc-s3d",
+      "statement": "On the 11 placed missense variants of the fixed 20-variant held-out test split (NBD1, TMD2, NBD2_C_terminal; 5 KALYDECO-responsive and 6 non-responsive), E(3)-invariant intra-8EIQ pocket proximity s_3D(i) = d_fold(i) / (d_pot(i) + d_fold(i)) achieves conditional ROC-AUC 0.933333 (14/15 = 28/30 pairs), exceeding standalone AlphaMissense responsiveness s_AM(i) = 1 - AM(i) at 0.666667 (2/3 = 20/30 pairs) and the constant-missense sequence-consequence baseline at 0.500000.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/8EIQ.cif.gz + benchmarks/theratype/theratype_open_annotations_2026-11-21.json (openfda-label KALYDECO v36 Table 3 + myvariant dbnsfp.alphamissense)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_potentiation_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "voxel-grid float64 Euclidean distance + pairwise Mann-Whitney loop",
+          "script": "cryoem_potentiation_benchmark.py",
+          "difference": "evaluates min distances via VoxelGrid3D + math.dist and enumerates all 30 positive-negative missense pairs in float64",
+          "value": 0.933333
+        },
+        {
+          "name": "50-digit Decimal brute-force distance + exact Fraction Wilcoxon rank-sum",
+          "script": "independent_audit.py",
+          "difference": "computes (dx^2+dy^2+dz^2).sqrt() in 50-digit Decimal and exact Wilcoxon rank-sum U/(|S_1||S_0|) = 14/15 in fractions.Fraction",
+          "value": 0.933333
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c3-pred-0011-gated-auroc-supported",
+      "statement": "Across all 20 held-out test variants (7 KALYDECO-responsive and 13 non-responsive across NBD1, TMD2, NBD2_C_terminal), class-gated 3D pocket proximity g_3D achieves abstention-aware ROC-AUC 0.824176 (75/91 pairs, held-out error 1 - AUC = 0.175824), exceeding both the deterministic sequence-consequence class baseline at 0.681319 (62/91 pairs) and identically gated g_AM at 0.736264 (67/91 pairs), supporting pre-registered PRED-0011.",
+      "kind": "predicted",
+      "origin": "lab",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_potentiation_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "regex canonical-splice gate + float64 pairwise Mann-Whitney ROC-AUC",
+          "script": "cryoem_potentiation_benchmark.py",
+          "difference": "applies CANONICAL_SPLICE_RE + 0.50 + 0.50*s_3D and enumerates all 91 positive-negative pairs directly",
+          "value": 0.824176
+        },
+        {
+          "name": "charwise HGVS splice gate + exact Fraction Wilcoxon mid-rank sum",
+          "script": "independent_audit.py",
+          "difference": "parses canonical +/-1,2 splice sites character-by-character without regex and evaluates exact rational rank-sum 75/91",
+          "value": 0.824176
+        }
+      ],
+      "tolerance": 0.000001,
+      "held_out_error": {
+        "value": 0.175824,
+        "unit": "1_minus_abstention_aware_auroc_on_fixed_20_variant_test_split",
+        "set_fixed_in_done_file": true
+      },
+      "headline": true,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c4-lasso-tmd1-train-domain-limitation",
+      "statement": "On the 10-variant Lasso_N_terminal / TMD1 / R_domain train split (7 missense: 4 KALYDECO-responsive P67L, R117H, G178R, L206W and 3 non-responsive G85E, R334W, R347P), static s_3D yields conditional missense ROC-AUC 0.250000 (3/12 pairs) because mild residual-trafficking/conductance alleles P67L, R117H, and L206W sit closer to transmembrane corrector pockets than to ATP/VX7 while non-responsive TM6 salt-bridge proline mutant R347P sits 12.0840 A from VX7.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/8EIQ.cif.gz + benchmarks/theratype/theratype_open_annotations_2026-11-21.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_potentiation_benchmark.py"},
+        {"type": "own_script", "ref": "test_cryoem_potentiation_benchmark.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c5-fiedorczuk-chen-2022-8eiq-structure",
+      "statement": "Fiedorczuk and Chen (2022) determined the 3.0 A Cryo-EM structure of phosphorylated human deltaF508-CFTR bound simultaneously to elexacaftor (VX-445), tezacaftor (VX-661), ivacaftor (VX-770), and ATP/Mg2+ (PDB 8EIQ), resolving distinct transmembrane corrector binding cavities in TMD1 and TMD2/Lasso alongside the TM8 ivacaftor potentiator cleft and NBD1:NBD2 ATP dimer.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "Fiedorczuk & Chen (2022), Science 378(6617):284-290",
+      "source": "10.1126/science.ade2216",
+      "standing": "open",
+      "checks": [
+        {"type": "peer_review", "ref": "10.1126/science.ade2216"},
+        {"type": "source_quote", "ref": "10.1126/science.ade2216"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-21"
+    },
+    {
+      "id": "c6-liu-2019-ivacaftor-tm8-hotspot",
+      "statement": "Liu et al. (2019) identified the ivacaftor (VX-770) potentiator binding site at the unwound transmembrane helix TM8 hinge of phosphorylated ATP-bound human CFTR within the lipid bilayer interface, contacting residues including Y304, S307, F311, and F931.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "Liu, Zhang, Levit, Chen et al. (2019), Science 364(6446):1184-1188",
+      "source": "10.1126/science.aaw7611",
+      "standing": "open",
+      "checks": [
+        {"type": "peer_review", "ref": "10.1126/science.aaw7611"},
+        {"type": "source_quote", "ref": "10.1126/science.aaw7611"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-21"
+    }
+  ]
+}
