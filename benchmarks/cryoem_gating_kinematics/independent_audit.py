@@ -358,6 +358,8 @@ def run_independent_audit() -> dict[str, object]:
         b_val = class_baseline_fraction(v)
         base_scores.append(b_val)
         if fam != "missense":
+            if v.get("alphamissense_score") is not None or v.get("revel_score") is not None:
+                raise ValueError(f"Non-missense {v['variant_id']} carries non-None missense score")
             g_kin.append(b_val)
             g_am.append(b_val)
         else:

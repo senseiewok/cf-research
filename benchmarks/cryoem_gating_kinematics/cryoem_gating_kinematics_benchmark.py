@@ -65,9 +65,9 @@ ALLOWED_FAMILIES: frozenset[str] = frozenset(
     {"missense", "inframe_indel", "splice_regulatory", "class_i_ptc_frameshift"}
 )
 CANONICAL_SPLICE_RE = re.compile(r"^c\.\d+[+-][12](?:[^\d]|$)")
-CATALOG_ID_RE = re.compile(r"^\s*-\s*id:\s*([^\s#]+)")
-CATALOG_ACCESS_RE = re.compile(r"^\s*(?:access|mode):\s*([^\s#]+)")
-CATALOG_LABEL_RE = re.compile(r"^\s*claim_label:\s*([^\s#]+)")
+CATALOG_ID_RE = re.compile(r"^  -\s+id:\s*([^\s#]+)")
+CATALOG_ACCESS_RE = re.compile(r"^    (?:access|mode):\s*([^\s#]+)")
+CATALOG_LABEL_RE = re.compile(r"^    claim_label:\s*([^\s#]+)")
 
 DIMER_CLOSURE_PAIRS: tuple[tuple[int, int], ...] = ((464, 1348), (582, 1246))
 GATING_HINGE_CONTROLS: tuple[int, ...] = (267, 1347, 1348, 1371)
@@ -109,13 +109,16 @@ class SpatialGrid15A:
 
     def neighbors_within(self, query_seq: int, radius: float = LDDT_INCLUSION_RADIUS_A) -> set[int]:
         pt_q = self.coords_by_seq[query_seq]
-        qx, qy, qz = self._cell(pt_q)
-        span = max(1, math.ceil(radius / self.cell_size))
+        cs = self.cell_size
+        reach = radius + BOUNDARY_EPSILON_A
+        x_lo, x_hi = math.floor((pt_q[0] - reach) / cs), math.floor((pt_q[0] + reach) / cs)
+        y_lo, y_hi = math.floor((pt_q[1] - reach) / cs), math.floor((pt_q[1] + reach) / cs)
+        z_lo, z_hi = math.floor((pt_q[2] - reach) / cs), math.floor((pt_q[2] + reach) / cs)
         hits: set[int] = set()
-        for dx in range(-span, span + 1):
-            for dy in range(-span, span + 1):
-                for dz in range(-span, span + 1):
-                    for seq_j, pt_j in self.buckets.get((qx + dx, qy + dy, qz + dz), ()):
+        for cx in range(x_lo, x_hi + 1):
+            for cy in range(y_lo, y_hi + 1):
+                for cz in range(z_lo, z_hi + 1):
+                    for seq_j, pt_j in self.buckets.get((cx, cy, cz), ()):
                         if abs(seq_j - query_seq) <= 1:
                             continue
                         d = math.dist(pt_q, pt_j)
@@ -157,7 +160,7 @@ def load_admitted_automated_catalog_ids(catalog_path: Path = DEFAULT_CATALOG_YAM
     cur_label: str | None = None
 
     def flush() -> None:
-        if cur_id and cur_access in {"fetch", "api"} and cur_label != "unverified":
+        if cur_id and cur_access in {"fetch", "api"} and cur_label == "verified":
             admitted.add(cur_id)
 
     for ln in catalog_path.read_text(encoding="utf-8").splitlines():
@@ -174,7 +177,7 @@ def load_admitted_automated_catalog_ids(catalog_path: Path = DEFAULT_CATALOG_YAM
             if val in {"fetch", "api", "manual", "forbidden", "request"}:
                 cur_access = val
         m_lbl = CATALOG_LABEL_RE.match(ln)
-        if m_lbl:
+        if m_lbl and cur_label is None:
             cur_label = m_lbl.group(1).strip("'\"")
     flush()
     return frozenset(admitted)
@@ -363,6 +366,9 @@ def parse_chain_a_ca(
         if rigid_transform is not None:
             xyz = rigid_transform(xyz)
         ca_by_seq[seq_id] = (comp_id, xyz)
+
+    if not ca_by_seq:
+        raise CryoEMGatingKinematicsError(f"{pdb_id}: zero Chain A C-alpha atoms placed in 1..1480")
 
     if uniprot_seq is not None:
         verify_ca_against_uniprot(
@@ -680,20 +686,28 @@ def verify_positive_controls(
         rigid_transform=_make_proper_rigid_motion(-1.12, 0.89, (-33.0, 14.75, -61.5)),
     )
     s_rot, _ = compute_symmetric_lddt_kinematics(rot_5uak, rot_6msm)
+    if set(s_kin_by_seq.keys()) != set(s_rot.keys()) or any(
+        (s_kin_by_seq[k] is None) != (s_rot[k] is None) for k in s_kin_by_seq
+    ):
+        raise CryoEMGatingKinematicsError("SE(3)xSE(3) transform altered placed/None residue mask")
     max_se3_drift = max(
         abs(float(s_kin_by_seq[k]) - float(s_rot[k]))
         for k in s_kin_by_seq
-        if s_kin_by_seq[k] is not None and s_rot[k] is not None
+        if s_kin_by_seq[k] is not None
     )
     if max_se3_drift >= 1e-12:
         raise CryoEMGatingKinematicsError(f"SE(3)xSE(3) drift {max_se3_drift:.3e} >= 1e-12")
 
     # Exact swap symmetry s_kin(5UAK, 6MSM) == s_kin(6MSM, 5UAK)
     s_swapped, _ = compute_symmetric_lddt_kinematics(struct_6msm, struct_5uak)
+    if set(s_kin_by_seq.keys()) != set(s_swapped.keys()) or any(
+        (s_kin_by_seq[k] is None) != (s_swapped[k] is None) for k in s_kin_by_seq
+    ):
+        raise CryoEMGatingKinematicsError("State swap altered placed/None residue mask")
     max_swap_diff = max(
         abs(float(s_kin_by_seq[k]) - float(s_swapped[k]))
         for k in s_kin_by_seq
-        if s_kin_by_seq[k] is not None and s_swapped[k] is not None
+        if s_kin_by_seq[k] is not None
     )
     if max_swap_diff != 0.0:
         raise CryoEMGatingKinematicsError(f"State swap asymmetry detected: {max_swap_diff}")
@@ -739,7 +753,8 @@ def run_falsification_suite(
 ) -> dict[str, bool]:
     results: dict[str, bool] = {}
 
-    # 1. Stripping _struct_ref_seq_dif (E1371Q) in 6MSM fails P13569 verification
+    # 1. Stripping _struct_ref_seq_dif (E1371Q) or shifting sequence numbering fails P13569 verification
+    seq_dif_caught = False
     try:
         parse_chain_a_ca(
             DEFAULT_CIF_6MSM,
@@ -749,9 +764,35 @@ def run_falsification_suite(
             verify_hash=False,
             honor_seq_dif=False,
         )
-        raise AssertionError("Expected CryoEMGatingKinematicsError when E1371Q _struct_ref_seq_dif is ignored")
     except CryoEMGatingKinematicsError:
-        results["missing_e1371q_seq_dif_rejected"] = True
+        seq_dif_caught = True
+    shift_caught = False
+    try:
+        parse_chain_a_ca(
+            DEFAULT_CIF_6MSM,
+            "6MSM",
+            EXPECTED_6MSM_SHA256,
+            uniprot_seq,
+            verify_hash=False,
+            seq_offset=1,
+        )
+    except CryoEMGatingKinematicsError:
+        shift_caught = True
+    empty_offset_caught = False
+    try:
+        parse_chain_a_ca(
+            DEFAULT_CIF_6MSM,
+            "6MSM",
+            EXPECTED_6MSM_SHA256,
+            uniprot_seq,
+            verify_hash=False,
+            seq_offset=1480,
+        )
+    except CryoEMGatingKinematicsError:
+        empty_offset_caught = True
+    if not (seq_dif_caught and shift_caught and empty_offset_caught):
+        raise AssertionError("Expected stripped E1371Q, seq_offset=1, and seq_offset=1480 to fail closed")
+    results["missing_e1371q_seq_dif_rejected"] = True
 
     # 2. Omitting Chain A filter admits unassigned R-domain UNK chains (1..19) and fails duplicate/sequence check
     try:
@@ -888,14 +929,8 @@ def run_benchmark(run_falsify: bool = False) -> dict[str, Any]:
             (1.0 - float(v["alphamissense_score"])) if v["alphamissense_score"] is not None else None
             for v in rows
         ]
-        g_kin_scores = [
-            class_gated_score(v, sk if v["variant_family"] == "missense" else None)
-            for v, sk in zip(rows, s_kin_scores)
-        ]
-        g_am_scores = [
-            class_gated_score(v, sa if v["variant_family"] == "missense" else None)
-            for v, sa in zip(rows, s_am_scores)
-        ]
+        g_kin_scores = [class_gated_score(v, sk) for v, sk in zip(rows, s_kin_scores)]
+        g_am_scores = [class_gated_score(v, sa) for v, sa in zip(rows, s_am_scores)]
         base_scores = [sequence_consequence_baseline_score(v) for v in rows]
 
         missense_idx = [idx for idx, v in enumerate(rows) if v["variant_family"] == "missense"]

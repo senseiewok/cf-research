@@ -115,6 +115,40 @@ class TestCryoEMGatingKinematicsBenchmark(unittest.TestCase):
         with self.assertRaises(ValueError):
             audit.wilcoxon_rank_sum_auroc([True, 0], [audit.Fraction(1, 2), audit.Fraction(1, 4)])
 
+    def test_spatial_grid_exact_cell_boundary_15a(self) -> None:
+        # (-1e-17, 0, 0) in cell -1 and (14.999999, 0, 0) in cell 0 / (15.0 + 2e-10, 0, 0) in cell +1
+        g = bench.SpatialGrid15A({1: (-1e-17, 0.0, 0.0), 10: (14.999998, 0.0, 0.0)})
+        self.assertEqual(g.neighbors_within(1, radius=15.0), {10})
+        g_knife = bench.SpatialGrid15A({1: (-1e-17, 0.0, 0.0), 10: (15.0, 0.0, 0.0)})
+        with self.assertRaises(bench.CryoEMGatingKinematicsError):
+            g_knife.neighbors_within(1, radius=15.0)
+
+    def test_catalog_allowlist_requires_verified_top_level_claim_label(self) -> None:
+        import tempfile
+
+        yaml_text = (
+            "sources:\n"
+            "  - id: missing-label-source\n"
+            "    access: fetch\n"
+            "  - id: notes-spoof-source\n"
+            "    access: api\n"
+            "    notes: >-\n"
+            "      claim_label: verified\n"
+            "  - id: genuine-verified-source\n"
+            "    access: api\n"
+            "    claim_label: verified\n"
+        )
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "catalog.yaml"
+            p.write_text(yaml_text, encoding="utf-8")
+            admitted = bench.load_admitted_automated_catalog_ids(p)
+            self.assertEqual(admitted, frozenset({"genuine-verified-source"}))
+
+    def test_class_gated_score_rejects_non_missense_score_leakage(self) -> None:
+        f508 = {"variant_id": "CFTR-F508del", "variant_family": "inframe_indel", "hgvs_p_or_c": "p.Phe508del"}
+        with self.assertRaises(bench.CryoEMGatingKinematicsError):
+            bench.class_gated_score(f508, 0.42)
+
 
 if __name__ == "__main__":
     unittest.main()
