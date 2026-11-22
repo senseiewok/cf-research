@@ -1,44 +1,200 @@
 #!/usr/bin/env python3
-"""Unit tests for Open CFTR Theratype Benchmark (T-0925)."""
+"""Unit tests for the Open CFTR Theratype Benchmark (`T-0925` / `PRED-0010`)."""
 from __future__ import annotations
 
 from pathlib import Path
 import sys
+import tempfile
 import unittest
 
-BENCH_DIR = Path(__file__).resolve().parent
-if str(BENCH_DIR) not in sys.path:
-    sys.path.insert(0, str(BENCH_DIR))
+HERE = Path(__file__).resolve().parent
+if str(HERE) not in sys.path:
+    sys.path.insert(0, str(HERE))
 
-import cftr_theratype_benchmark as ctb  # noqa: E402
+from cftr_theratype_benchmark import (  # noqa: E402
+    ALLOWED_FAMILIES,
+    CftrVariantCase,
+    DEFAULT_CATALOG_PATH,
+    DEFAULT_FIXTURE_PATH,
+    MCDONALD_2024_TABLE1_POSITIVE_CONTROLS,
+    McDonaldVusControl,
+    OPEN_CFTR_THERATYPE_BENCHMARK,
+    SPLIT_VERSION,
+    TheratypeBenchmarkError,
+    audit_split_leakage,
+    evaluate_falsification_controls,
+    evaluate_lofo_splits,
+    evaluate_model_coverage_and_auroc,
+    evaluate_pred_0010,
+    load_mavedb_cc0_csv,
+    main,
+    map_codon_to_p13569_domain,
+    verify_positive_controls,
+)
+from independent_audit import audit_independently, main as independent_audit_main  # noqa: E402
 
 
 class TestCftrTheratypeBenchmark(unittest.TestCase):
-    def test_fixed_split_passes_leakage_audit(self) -> None:
-        audit = ctb.audit_split_leakage(ctb.OPEN_CFTR_THERATYPE_BENCHMARK)
+    def test_mcdonald_2024_table1_positive_controls(self) -> None:
+        res = verify_positive_controls()
+        self.assertEqual(res["status"], "PASS")
+        self.assertEqual(res["controls_verified"], 7)
+
+        bad_ctrl = list(MCDONALD_2024_TABLE1_POSITIVE_CONTROLS)
+        bad_ctrl[0] = McDonaldVusControl("R31L", "p.Arg31Leu", 31, 0.91, "P", 0.17, "benign")
+        with self.assertRaises(TheratypeBenchmarkError):
+            verify_positive_controls(bad_ctrl)
+
+    def test_split_leakage_domain_buffer_and_provenance(self) -> None:
+        self.assertEqual(SPLIT_VERSION, "2026-11-21.v2")
+        audit = audit_split_leakage(OPEN_CFTR_THERATYPE_BENCHMARK)
         self.assertTrue(audit["leakage_audit_passed"])
+        self.assertEqual(audit["train_count"], 10)
+        self.assertEqual(audit["test_count"], 20)
         self.assertEqual(audit["codon_position_overlap"], [])
-        self.assertEqual(audit["variant_family_overlap"], [])
-        self.assertEqual(audit["train_count"], 6)
-        self.assertEqual(audit["test_count"], 10)
+        self.assertEqual(audit["positive_control_codon_overlap"], [])
+        self.assertGreater(audit["min_cross_split_codon_gap"], 5)
+        self.assertEqual(audit["structural_domain_overlap"], [])
+        self.assertEqual(audit["invalid_families"], [])
+        self.assertEqual(audit["provenance_violations"], [])
+        self.assertEqual(audit["heldout_novel_families_in_test"], ["inframe_indel"])
 
-    def test_evo2_and_alphagenome_cover_class_i_and_splice_beyond_alphamissense(self) -> None:
-        am = ctb.evaluate_model_coverage_and_auroc(ctb.OPEN_CFTR_THERATYPE_BENCHMARK, "alphamissense")
-        evo2 = ctb.evaluate_model_coverage_and_auroc(ctb.OPEN_CFTR_THERATYPE_BENCHMARK, "evo2")
-        ag = ctb.evaluate_model_coverage_and_auroc(ctb.OPEN_CFTR_THERATYPE_BENCHMARK, "alphagenome_avi")
-        self.assertEqual(am["test_coverage"], 0.1)
-        self.assertEqual(evo2["test_coverage"], 1.0)
-        self.assertEqual(ag["test_coverage"], 1.0)
-        self.assertGreaterEqual(evo2["disruption_auroc"], 0.90)
-        self.assertGreaterEqual(ag["disruption_auroc"], 0.90)
+        # Out-of-range / NaN missense score and frameshift token must fail provenance check
+        nan_case = list(OPEN_CFTR_THERATYPE_BENCHMARK) + [
+            CftrVariantCase("POISON-NAN", "p.Gly1349Asp", 1349, "missense", "test", 1, float("nan"), structural_domain="NBD2_C_terminal")
+        ]
+        self.assertFalse(audit_split_leakage(nan_case)["leakage_audit_passed"])
 
-    def test_falsification_controls_pass(self) -> None:
-        falsify = ctb.evaluate_falsification_controls()
+        fs_case = list(OPEN_CFTR_THERATYPE_BENCHMARK) + [
+            CftrVariantCase("POISON-FS", "p.Lys684fs", 1349, "missense", "test", 0, 0.95, structural_domain="NBD2_C_terminal")
+        ]
+        self.assertFalse(audit_split_leakage(fs_case)["leakage_audit_passed"])
+
+    def test_p13569_domain_bounds(self) -> None:
+        self.assertEqual(map_codon_to_p13569_domain(1), "Lasso_N_terminal")
+        self.assertEqual(map_codon_to_p13569_domain(508), "NBD1")
+        self.assertEqual(map_codon_to_p13569_domain(1303), "NBD2_C_terminal")
+        with self.assertRaises(TheratypeBenchmarkError):
+            map_codon_to_p13569_domain(0)
+        with self.assertRaises(TheratypeBenchmarkError):
+            map_codon_to_p13569_domain(1481)
+
+    def test_fda_spl_ground_truth_invariants(self) -> None:
+        by_id = {c.variant_id: c for c in OPEN_CFTR_THERATYPE_BENCHMARK}
+        self.assertEqual(by_id["CFTR-N1303K"].modulator_responsive, 1)
+        self.assertEqual(by_id["CFTR-N1303K"].alyftrek_v9_responsive, 1)
+        self.assertEqual(by_id["CFTR-N1303K"].kalydeco_v36_responsive, 0)
+        for vid in ("CFTR-V520F", "CFTR-R560T", "CFTR-R1066C"):
+            self.assertEqual(by_id[vid].modulator_responsive, 0)
+            self.assertEqual(by_id[vid].alyftrek_v9_responsive, 1)
+        for vid in ("CFTR-2789+5G>A", "CFTR-3849+10kbC>T"):
+            self.assertEqual(by_id[vid].modulator_responsive, 1)
+            self.assertEqual(by_id[vid].alyftrek_v9_responsive, 0)
+        for vid in ("CFTR-F508del", "CFTR-I507del", "CFTR-G542X", "CFTR-W1282X", "CFTR-3849+10kbC>T"):
+            self.assertIsNone(by_id[vid].alphamissense_score)
+            self.assertIsNone(by_id[vid].revel_score)
+
+    def test_pred_0010_refutation_and_baseline_comparison(self) -> None:
+        pred = evaluate_pred_0010(OPEN_CFTR_THERATYPE_BENCHMARK)
+        self.assertEqual(pred["prediction_id"], "PRED-0010")
+        self.assertEqual(pred["outcome"], "refuted")
+
+        am = pred["alphamissense_trikafta_v23"]
+        base = pred["sequence_consequence_baseline_trikafta_v23"]
+        self.assertEqual(am["test_total"], 20)
+        self.assertEqual(am["test_scored"], 11)
+        self.assertAlmostEqual(am["test_coverage"], 0.55, places=4)
+        self.assertEqual(base["test_coverage"], 1.0)
+        self.assertGreater(base["abstention_aware_auroc"], am["abstention_aware_auroc"])
+
+        lofo = evaluate_lofo_splits(OPEN_CFTR_THERATYPE_BENCHMARK, "alphamissense")
+        self.assertEqual(set(lofo.keys()), set(ALLOWED_FAMILIES))
+        for fam, fold in lofo.items():
+            self.assertEqual(fold["family_overlap_with_train"], [])
+            if fam != "missense":
+                self.assertEqual(fold["coverage"], 0.0)
+
+    def test_manual_catalog_gate_strict_allowlist_and_yaml_hygiene(self) -> None:
+        for manual_id in ("mavedb-dump-zenodo", "cftr-dms-mckee-2023", "cftr-dms-tedman-2025"):
+            with self.assertRaises(PermissionError):
+                load_mavedb_cc0_csv(DEFAULT_FIXTURE_PATH, DEFAULT_CATALOG_PATH, source_id=manual_id)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            csv_file = Path(tmp) / "mavedb_mock.csv"
+            csv_file.write_text("hgvs_pro,score\np.Gly551Asp,-1.20\n", encoding="utf-8")
+
+            # Hostile YAML 1: inline comment after `access: manual # pending` + wrapped notes containing `access: fetch`
+            cat_hostile_1 = Path(tmp) / "cat_hostile_1.yaml"
+            cat_hostile_1.write_text(
+                "sources:\n"
+                "  - id: mavedb-dump-zenodo\n"
+                "    access: manual # pending maintainer review\n"
+                "    claim_label: verified\n"
+                "    notes: >-\n"
+                "      access: fetch\n"
+                "      claim_label: verified\n",
+                encoding="utf-8",
+            )
+            with self.assertRaises(PermissionError):
+                load_mavedb_cc0_csv(csv_file, cat_hostile_1, source_id="mavedb-dump-zenodo")
+
+            # Hostile YAML 2: `access: fetch` without `claim_label: verified` must fail closed
+            cat_hostile_2 = Path(tmp) / "cat_hostile_2.yaml"
+            cat_hostile_2.write_text(
+                "sources:\n  - id: mavedb-dump-zenodo\n    access: fetch\n",
+                encoding="utf-8",
+            )
+            with self.assertRaises(PermissionError):
+                load_mavedb_cc0_csv(csv_file, cat_hostile_2, source_id="mavedb-dump-zenodo")
+
+            # Valid admitted catalog entry (`access: fetch` + `claim_label: verified`) succeeds
+            cat_admitted = Path(tmp) / "cat_admitted.yaml"
+            cat_admitted.write_text(
+                "sources:\n  - id: mavedb-dump-zenodo\n    access: fetch # admitted\n    claim_label: verified\n",
+                encoding="utf-8",
+            )
+            rows = load_mavedb_cc0_csv(csv_file, cat_admitted, source_id="mavedb-dump-zenodo")
+            self.assertEqual(len(rows), 1)
+            self.assertEqual(rows[0]["hgvs_pro"], "p.Gly551Asp")
+
+    def test_six_falsification_controls_and_cli(self) -> None:
+        falsify = evaluate_falsification_controls()
         self.assertEqual(falsify["status"], "PASS")
-        self.assertEqual(falsify["controls_passed"], 3)
+        self.assertEqual(falsify["controls_passed"], 6)
+        self.assertEqual(falsify["total_controls"], 6)
+        self.assertEqual(main(["--check", "--falsify"]), 0)
+        self.assertEqual(independent_audit_main(["--check"]), 0)
 
-    def test_cli_main_passes(self) -> None:
-        self.assertEqual(ctb.main(["--check", "--falsify"]), 0)
+    def test_independent_audit_exact_parity(self) -> None:
+        ind = audit_independently(DEFAULT_FIXTURE_PATH)
+        leak = audit_split_leakage(OPEN_CFTR_THERATYPE_BENCHMARK)
+        am_eti = evaluate_model_coverage_and_auroc(OPEN_CFTR_THERATYPE_BENCHMARK, "alphamissense", "trikafta_v23")
+        am_vtd = evaluate_model_coverage_and_auroc(OPEN_CFTR_THERATYPE_BENCHMARK, "alphamissense", "alyftrek_v9")
+        base_eti = evaluate_model_coverage_and_auroc(
+            OPEN_CFTR_THERATYPE_BENCHMARK, "sequence_consequence_baseline", "trikafta_v23"
+        )
+        base_vtd = evaluate_model_coverage_and_auroc(
+            OPEN_CFTR_THERATYPE_BENCHMARK, "sequence_consequence_baseline", "alyftrek_v9"
+        )
+
+        self.assertEqual(ind["train_count"], leak["train_count"])
+        self.assertEqual(ind["test_count"], leak["test_count"])
+        self.assertEqual(ind["min_cross_split_codon_gap"], leak["min_cross_split_codon_gap"])
+        self.assertEqual(ind["train_domains"], leak["train_domains"])
+        self.assertEqual(ind["test_domains"], leak["test_domains"])
+
+        for left, right in ((ind["alphamissense_trikafta_v23"], am_eti), (ind["alphamissense_alyftrek_v9"], am_vtd)):
+            self.assertAlmostEqual(left["coverage_raw"], right["test_coverage_raw"], places=9)
+            self.assertAlmostEqual(left["conditional_auroc_raw"], right["conditional_auroc_raw"], places=9)
+            self.assertAlmostEqual(left["abstention_aware_auroc_raw"], right["abstention_aware_auroc_raw"], places=9)
+
+        for left, right in (
+            (ind["sequence_consequence_baseline_trikafta_v23"], base_eti),
+            (ind["sequence_consequence_baseline_alyftrek_v9"], base_vtd),
+        ):
+            self.assertAlmostEqual(left["coverage_raw"], right["test_coverage_raw"], places=9)
+            self.assertAlmostEqual(left["conditional_auroc_raw"], right["conditional_auroc_raw"], places=9)
+            self.assertAlmostEqual(left["abstention_aware_auroc_raw"], right["abstention_aware_auroc_raw"], places=9)
 
 
 if __name__ == "__main__":
