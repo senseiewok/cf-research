@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "work": "PRED-0012: Modulator-free multi-state Cryo-EM gating kinematics benchmark testing whether SE(3) x SE(3)-invariant apo-to-ATP conformational reorganization s_kin(i) = 1 - lDDT_sym(i; 5UAK, 6MSM) (Mariani et al. 2013 published defaults R_0 = 15.0 A and {0.5, 1.0, 2.0, 4.0} A over shared Chain A C-alpha residues) predicts US FDA KALYDECO v36 Table 3 ivacaftor monotherapy responsiveness on the fixed 20-variant domain-disjoint held-out test split (NBD1, TMD2, NBD2_C_terminal).",
+  "done_file": "done.md",
+  "done_sha256": "e0e95139b0c2e30e4b6d09102c419dbbaea254358d83e7fa543cc307e7e60741",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-5uak-6msm-shared-ca-and-dimer-controls",
+      "statement": "Across modulator-free human CFTR Cryo-EM structures 5UAK (1,139 Chain A C-alpha residues, ATP-free dephosphorylated WT) and 6MSM (1,181 Chain A C-alpha residues, phosphorylated ATP/Mg-bound E1371Q), S_common contains 1,130 shared residues with exact SE(3) x SE(3) rigid-motion invariance and state-swap symmetry, reproducing cross-NBD ATP Site 1 (K464-H1348: 32.5927 -> 10.9161 A) and Site 2 (T582-G1246: 23.5583 -> 7.8865 A) dimer closure (> 15.0 A contraction) and separating cytosolic gating/catalytic controls {E267, S1347, H1348, E1371} (s_kin > 0.45) from corrector/beta-core scaffolding controls {W361, R450, R1102} (s_kin < 0.25).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/5UAK.cif.gz (RCSB PDB 5UAK, CC0 1.0) + tools/cftr-model/data/6MSM.cif.gz (RCSB PDB 6MSM, CC0 1.0) + tools/cftr-model/data/p13569.json (UniProtKB P13569, CC BY 4.0)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_gating_kinematics_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "shlex mmCIF parser with 15.0 A 3D cubic spatial voxel grid",
+          "script": "cryoem_gating_kinematics_benchmark.py",
+          "difference": "tokenizes _atom_site and _struct_ref_seq_dif via shlex, rejects UNK chains R/B, and indexes shared C-alpha atoms in SpatialGrid15A",
+          "value": 1130
+        },
+        {
+          "name": "character-level mmCIF state-machine lexer with 50-digit Decimal matrices",
+          "script": "independent_audit.py",
+          "difference": "zero shared imports; parses mmCIF character-by-character without shlex/re and verifies all 1,130 shared C-alpha residues in 50-digit Decimal",
+          "value": 1130
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-22"
+    },
+    {
+      "id": "c2-test-missense-conditional-auroc-skin",
+      "statement": "On the 11 placed missense variants of the fixed 20-variant held-out test split (NBD1, TMD2, NBD2_C_terminal; 5 KALYDECO-responsive and 6 non-responsive), modulator-free apo-to-ATP conformational reorganization s_kin(i) = 1 - lDDT_sym(i; 5UAK, 6MSM) achieves conditional ROC-AUC 0.966667 (29/30 pairs, resolving TM12 pore hinge D1152H at s_kin = 9/32 = 0.281250 above all 6 non-responsive variants and missing only A455E vs V520F), exceeding standalone AlphaMissense responsiveness s_AM(i) = 1 - AM(i) at 0.666667 (2/3 = 20/30 pairs).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/5UAK.cif.gz + tools/cftr-model/data/6MSM.cif.gz + benchmarks/theratype/theratype_open_annotations_2026-11-21.json (openfda-label KALYDECO v36 Table 3 + myvariant dbnsfp.alphamissense)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_gating_kinematics_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "15.0 A voxel-grid float64 lDDT_sym + pairwise Mann-Whitney loop",
+          "script": "cryoem_gating_kinematics_benchmark.py",
+          "difference": "assembles N_sym(i) via SpatialGrid15A + math.dist and enumerates all 30 positive-negative missense pairs in float64",
+          "value": 0.966667
+        },
+        {
+          "name": "50-digit Decimal all-pairs distances + exact Fraction s_kin and Wilcoxon rank-sum",
+          "script": "independent_audit.py",
+          "difference": "evaluates (dx^2+dy^2+dz^2).sqrt() in 50-digit Decimal, exact rational s_kin = Fraction(4|N_sym|-c, 4|N_sym|), and exact Wilcoxon rank-sum 29/30",
+          "value": 0.966667
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-22"
+    },
+    {
+      "id": "c3-pred-0012-gated-gkin-auroc-supported",
+      "statement": "Across all 20 held-out test variants (7 KALYDECO-responsive and 13 non-responsive across NBD1, TMD2, NBD2_C_terminal), class-gated modulator-free gating reorganization g_kin achieves abstention-aware ROC-AUC 0.835165 (76/91 pairs, held-out error 15/91 = 0.164835), exceeding both the deterministic sequence-consequence class baseline at 0.681319 (62/91 pairs) and identically gated g_AM at 0.736264 (67/91 pairs), supporting pre-registered PRED-0012.",
+      "kind": "predicted",
+      "origin": "lab",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_gating_kinematics_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "regex canonical-splice gate + float64 pairwise Mann-Whitney ROC-AUC",
+          "script": "cryoem_gating_kinematics_benchmark.py",
+          "difference": "applies CANONICAL_SPLICE_RE + 0.50 + 0.50*s_kin and enumerates all 91 positive-negative pairs directly",
+          "value": 0.835165
+        },
+        {
+          "name": "charwise HGVS splice gate + exact Fraction Wilcoxon mid-rank sum",
+          "script": "independent_audit.py",
+          "difference": "parses canonical +/-1,2 splice sites character-by-character without regex and evaluates exact rational rank-sum 76/91",
+          "value": 0.835165
+        }
+      ],
+      "tolerance": 0.000001,
+      "held_out_error": {
+        "value": 0.164835,
+        "unit": "1_minus_abstention_aware_auroc_on_fixed_20_variant_test_split",
+        "set_fixed_in_done_file": true
+      },
+      "headline": true,
+      "checked_on": "2026-11-22"
+    },
+    {
+      "id": "c4-lasso-tmd1-train-pore-charge-and-trafficking-boundary",
+      "statement": "On the 10-variant Lasso_N_terminal / TMD1 / R_domain train split (7 missense: 4 KALYDECO-responsive P67L, R117H, G178R, L206W and 3 non-responsive G85E, R334W, R347P), s_kin yields conditional missense ROC-AUC 0.500000 (6/12 pairs, gated g_kin abstention-aware ROC-AUC 0.750000 = 18/24): although s_kin elevates ECL1 outer-pore R117H (0.613095) and ICL1 G178R (0.636029) above G85E (0.145833) and R347P (0.250000), residual-trafficking Lasso/TM3 alleles P67L (0.140625) and L206W (0.075581) sit in locally rigid transmembrane scaffolding while non-responsive TM6 outer-vestibule charge-loss mutant R334W undergoes large gating reorganization (0.511364) yet disrupts anion permeation rather than gating.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/5UAK.cif.gz + tools/cftr-model/data/6MSM.cif.gz + benchmarks/theratype/theratype_open_annotations_2026-11-21.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_gating_kinematics_benchmark.py"},
+        {"type": "own_script", "ref": "test_cryoem_gating_kinematics_benchmark.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-22"
+    },
+    {
+      "id": "c5-mariani-2013-lddt-superposition-free-score",
+      "statement": "Mariani et al. (2013) defined the Local Distance Difference Test (lDDT) as a superposition-free local structural comparison score evaluating the fraction of inter-atomic distances within a 15.0 A inclusion radius preserved across four tolerance thresholds {0.5, 1.0, 2.0, 4.0} A.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "Mariani, Biasini, Barbato & Schwede (2013), Bioinformatics 29(21):2722-2728",
+      "source": "10.1093/bioinformatics/btt473",
+      "standing": "open",
+      "checks": [
+        {"type": "peer_review", "ref": "10.1093/bioinformatics/btt473"},
+        {"type": "source_quote", "ref": "10.1093/bioinformatics/btt473"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-22"
+    },
+    {
+      "id": "c6-liu-2017-zhang-2018-human-cftr-apo-and-atp-structures",
+      "statement": "Liu et al. (2017) and Zhang, Liu & Chen (2018) determined the Cryo-EM structures of dephosphorylated ATP-free human CFTR (PDB 5UAK, 3.87 A) and phosphorylated ATP-bound E1371Q human CFTR (PDB 6MSM, 3.2 A), resolving NBD1:NBD2 head-to-tail dimerization and transmembrane helical gating transitions in the absence of small-molecule CFTR modulators.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "Liu, Zhang, Csanady, Gadsby & Chen (2017), Cell 169:85-95.e8; Zhang, Liu & Chen (2018), Proc. Natl. Acad. Sci. U.S.A. 115:12757-12762",
+      "source": "10.1073/pnas.1815287115",
+      "standing": "open",
+      "checks": [
+        {"type": "peer_review", "ref": "10.1016/j.cell.2017.02.024"},
+        {"type": "peer_review", "ref": "10.1073/pnas.1815287115"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-22"
+    }
+  ]
+}
