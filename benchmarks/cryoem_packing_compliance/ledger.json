@@ -7,7 +7,7 @@
   "claims": [
     {
       "id": "c1-5uak-chain-a-integrity-and-packing-controls",
-      "statement": "Modulator-free dephosphorylated ATP-free WT human CFTR (PDB 5UAK, CC0 1.0) places 1,139 canonical Chain A C-alpha residues (1..1480, including WT I507 and F508) with exact SE(3) rigid-motion invariance (float64 drift 3.89e-16; SO(3, Q) rational drift 0/1), reproduces exact 4-point collinear 3.8 A non-covalent compliance [36/49, 4/5, 4/5, 36/49], and separates exposed peripheral/cleft controls {38, 1347, 1348, 1371} (s_flex >= 0.050936) from buried core scaffolding controls {195, 311, 361, 1030, 1102, 1293} (s_flex <= 0.047689).",
+      "statement": "Modulator-free dephosphorylated ATP-free WT human CFTR (PDB 5UAK, CC0 1.0) places 1,139 canonical Chain A C-alpha residues (1..1480, including WT I507 and F508) with exact SE(3) rigid-motion invariance (float64 drift 3.33e-16; SO(3, Q) rational drift 0/1 across all 646,957 non-covalent pairs), reproduces exact 4-point collinear 3.8 A non-covalent compliance [36/49, 4/5, 4/5, 36/49], and separates exposed peripheral/cleft controls {38, 1347, 1348, 1371} (s_flex >= 0.050936) from buried core scaffolding controls {195, 311, 361, 1030, 1102, 1293} (s_flex <= 0.047689).",
       "kind": "measured",
       "origin": "lab",
       "dataset": "tools/cftr-model/data/5UAK.cif.gz (RCSB PDB 5UAK, CC0 1.0) + tools/cftr-model/data/p13569.json (UniProtKB P13569, CC BY 4.0)",
@@ -36,7 +36,7 @@
     },
     {
       "id": "c2-test-missense-conditional-auroc-sflex",
-      "statement": "On the 11 placed missense variants of the fixed 20-variant held-out test split (NBD1, TMD2, NBD2_C_terminal; 6 TRIKAFTA-responsive and 5 non-responsive), apo 5UAK non-covalent packing compliance s_flex(i) achieves conditional ROC-AUC 0.700000 (7/10 = 21/30 pairs, separating {S549N, S1251N, G551D, N1303K, A455E} above {L467P, R1066C, Y569D, R560T} on 20/20 pairs while inverting TM12 pore-helix D1152H = 0.042597 across 5 pairs and aromatic steric-clash V520F = 0.053492 across 4 pairs), exceeding standalone AlphaMissense s_AM at 0.533333 (8/15 = 16/30 pairs).",
+      "statement": "On the 11 placed missense variants of the fixed 20-variant held-out test split (NBD1, TMD2, NBD2_C_terminal; 6 TRIKAFTA-responsive and 5 non-responsive), apo 5UAK non-covalent packing compliance s_flex(i) achieves conditional ROC-AUC 0.700000 (7/10 = 21/30 pairs, separating {S549N, S1251N, G551D, N1303K, A455E} above {L467P, R1066C, Y569D, R560T} on 20/20 pairs while inverting TM12 pore-helix D1152H = 0.042597 across 5 pairs and aromatic steric-clash V520F = 0.053492 across 4 additional pairs [5 total, sharing D1152H vs V520F]), exceeding standalone AlphaMissense s_AM at 0.533333 (8/15 = 16/30 pairs).",
       "kind": "measured",
       "origin": "lab",
       "dataset": "tools/cftr-model/data/5UAK.cif.gz + benchmarks/theratype/theratype_open_annotations_2026-11-21.json (openfda-label TRIKAFTA v23 Table 6 + myvariant dbnsfp.alphamissense)",
@@ -112,7 +112,7 @@
     },
     {
       "id": "c5-halle-2002-lin-2008-weighted-contact-number",
-      "statement": "Halle (2002) and Lin et al. (2008) showed that local inverse-square C-alpha packing density (Weighted Contact Number, WCN_i = sum_{j != i} r_{ij}^{-2}) governs local thermal atomic fluctuation profiles in globular proteins without an arbitrary distance cutoff.",
+      "statement": "Halle (2002) established that crystallographic B-factors scale inversely with local non-hydrogen contact density within a spherical cutoff (R_C approx 7.35 A), and Lin et al. (2008) introduced the cutoff-free inverse-square C-alpha Weighted Contact Number (WCN_i = sum_{j != i} r_{ij}^{-2}) governing local thermal fluctuation profiles in proteins.",
       "kind": "measured",
       "origin": "external",
       "attributed_to": "Halle (2002), Proc. Natl. Acad. Sci. U.S.A. 99(3):1274-1279; Lin, Huang, Lai et al. (2008), Proteins 72(3):929-935",

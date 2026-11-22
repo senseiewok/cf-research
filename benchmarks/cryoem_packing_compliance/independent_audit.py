@@ -231,6 +231,8 @@ def run_independent_audit() -> dict[str, object]:
     coords = load_rational_5uak_ca()
     if len(coords) != 1139:
         raise AssertionError(f"Expected 1139 placed CA, got {len(coords)}")
+    if 507 not in coords or 508 not in coords:
+        raise AssertionError("WT 5UAK must place codons 507 and 508")
 
     # Verify exact 4-point collinear 3.8 A chain in Q
     c4_coords = {
@@ -241,19 +243,69 @@ def run_independent_audit() -> dict[str, object]:
     if c4_exact != [Fraction(36, 49), Fraction(4, 5), Fraction(4, 5), Fraction(36, 49)]:
         raise AssertionError(f"4-point exact Q control failed: {c4_exact}")
 
-    # Verify exact SO(3, Q) |x Q^3 zero-drift invariance across 5UAK using Pythagorean matrix
+    # Proper Pythagorean rotation matrix R_+ in SO(3, Q) (det = +1, R_+^T R_+ = I)
+    r_mat = (
+        (Fraction(2, 3), Fraction(-2, 3), Fraction(1, 3)),
+        (Fraction(2, 3), Fraction(1, 3), Fraction(-2, 3)),
+        (Fraction(1, 3), Fraction(2, 3), Fraction(2, 3)),
+    )
+    det_r = (
+        r_mat[0][0] * (r_mat[1][1] * r_mat[2][2] - r_mat[1][2] * r_mat[2][1])
+        - r_mat[0][1] * (r_mat[1][0] * r_mat[2][2] - r_mat[1][2] * r_mat[2][0])
+        + r_mat[0][2] * (r_mat[1][0] * r_mat[2][1] - r_mat[1][1] * r_mat[2][0])
+    )
+    if det_r != Fraction(1, 1):
+        raise AssertionError(f"Expected det(R_+) == 1, got {det_r}")
+    for ri in range(3):
+        for ci in range(3):
+            dot_rc = sum(r_mat[k][ri] * r_mat[k][ci] for k in range(3))
+            if dot_rc != (Fraction(1, 1) if ri == ci else Fraction(0, 1)):
+                raise AssertionError(f"Non-orthogonal R_+ at ({ri}, {ci}): {dot_rc}")
+
     rot_coords: dict[int, tuple[Fraction, Fraction, Fraction]] = {}
     t_x, t_y, t_z = Fraction(69, 4), Fraction(-83, 2), Fraction(73, 8)
     for k, (x, y, z) in coords.items():
-        rx = (2 * x - 2 * y + z) * Fraction(1, 3) + t_x
-        ry = (x + 2 * y + 2 * z) * Fraction(1, 3) + t_y
-        rz = (2 * x + y - 2 * z) * Fraction(1, 3) + t_z
+        rx = r_mat[0][0] * x + r_mat[0][1] * y + r_mat[0][2] * z + t_x
+        ry = r_mat[1][0] * x + r_mat[1][1] * y + r_mat[1][2] * z + t_y
+        rz = r_mat[2][0] * x + r_mat[2][1] * y + r_mat[2][2] * z + t_z
         rot_coords[k] = (rx, ry, rz)
 
-    # Evaluate exact Q s_flex on all needed codons (controls + 30 benchmark codons) and check SO(3, Q) zero drift
+    # Exact SO(3, Q) |x Q^3 zero-drift certificate across ALL 1,139 residues (all 646,952 non-covalent pairs):
+    # scaling by 24,000 clears denominators of 3-decimal mmCIF strings (1,000), 1/3 rotation, and 1/8 translation.
+    scale_int = 24000
+    sorted_keys = sorted(coords.keys())
+    scaled_orig: list[tuple[int, int, int, int]] = []
+    scaled_rot: list[tuple[int, int, int, int]] = []
+    for k in sorted_keys:
+        ox, oy, oz = (coords[k][0] * scale_int, coords[k][1] * scale_int, coords[k][2] * scale_int)
+        rx, ry, rz = (rot_coords[k][0] * scale_int, rot_coords[k][1] * scale_int, rot_coords[k][2] * scale_int)
+        if any(q.denominator != 1 for q in (ox, oy, oz, rx, ry, rz)):
+            raise AssertionError(f"Unexpected rational denominator at codon {k}")
+        scaled_orig.append((k, ox.numerator, oy.numerator, oz.numerator))
+        scaled_rot.append((k, rx.numerator, ry.numerator, rz.numerator))
+
+    noncovalent_pairs = 0
+    n_all = len(scaled_orig)
+    for idx_a in range(n_all):
+        ka, ax, ay, az = scaled_orig[idx_a]
+        _, rax, ray, raz = scaled_rot[idx_a]
+        for idx_b in range(idx_a + 1, n_all):
+            kb, bx, by, bz = scaled_orig[idx_b]
+            if kb - ka <= 1:
+                continue
+            _, rbx, rby, rbz = scaled_rot[idx_b]
+            d2_o = (ax - bx) * (ax - bx) + (ay - by) * (ay - by) + (az - bz) * (az - bz)
+            d2_r = (rax - rbx) * (rax - rbx) + (ray - rby) * (ray - rby) + (raz - rbz) * (raz - rbz)
+            if d2_o <= 0 or d2_o != d2_r:
+                raise AssertionError(f"Non-zero SO(3, Q) pair drift at ({ka}, {kb}): {d2_o} vs {d2_r}")
+            noncovalent_pairs += 1
+
+    # Evaluate exact Q s_flex on all needed codons (controls + 30 benchmark codons) and verify c1 control bounds
     annotations = json.loads(ANNOTATIONS_JSON.read_text(encoding="utf-8"))
     variants = annotations["variants"]
-    needed_codons = {38, 1347, 1348, 1371, 195, 311, 361, 1030, 1102, 1293, 178, 85}
+    exposed_ctrls = (38, 1347, 1348, 1371)
+    buried_ctrls = (195, 311, 361, 1030, 1102, 1293)
+    needed_codons = set(exposed_ctrls) | set(buried_ctrls) | {178, 85}
     for v in variants:
         if v["variant_family"] == "missense":
             needed_codons.add(int(v["codon_position"]))
@@ -267,11 +319,14 @@ def run_independent_audit() -> dict[str, object]:
                 raise AssertionError(f"Non-zero SO(3, Q) drift at {seq}: {v_orig} != {v_rot}")
             s_flex_q[seq] = v_orig
 
-    # Also spot-check first, middle, and last placed residues of all 1,139 for exact 0 Q drift
-    sorted_all = sorted(coords.keys())
-    for seq in (sorted_all[0], sorted_all[len(sorted_all) // 2], sorted_all[-1]):
-        if exact_s_flex_single(seq, coords) != exact_s_flex_single(seq, rot_coords):
-            raise AssertionError(f"Non-zero SO(3, Q) drift at boundary {seq}")
+    for ec in exposed_ctrls:
+        if s_flex_q[ec] < Fraction(50936, 1000000):
+            raise AssertionError(f"Exposed control {ec} below 0.050936: {float(s_flex_q[ec])}")
+    for bc in buried_ctrls:
+        if s_flex_q[bc] > Fraction(47689, 1000000):
+            raise AssertionError(f"Buried control {bc} above 0.047689: {float(s_flex_q[bc])}")
+    if not (s_flex_q[178] > s_flex_q[85]):
+        raise AssertionError("Train control G178 > G85 failed in exact Q audit")
 
     test_vars = [v for v in variants if v["split"] == "test"]
     train_vars = [v for v in variants if v["split"] == "train"]
@@ -346,6 +401,7 @@ def run_independent_audit() -> dict[str, object]:
     train_q = eval_q(train_vars)
     return {
         "placed_ca_5uak": len(coords),
+        "noncovalent_pairs_verified": noncovalent_pairs,
         "so3_q_drift": "0/1",
         "train": train_q,
         "test": test_q,

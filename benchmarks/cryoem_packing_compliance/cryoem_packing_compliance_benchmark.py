@@ -258,6 +258,24 @@ def compute_noncovalent_compliance_map(
     return out
 
 
+def verify_proper_rotation_matrix(mat: tuple[tuple[float, float, float], ...], tol: float = 1e-12) -> None:
+    if len(mat) != 3 or any(len(row) != 3 for row in mat):
+        raise CryoEMPackingComplianceError("Expected 3x3 rotation matrix")
+    for r in range(3):
+        for c in range(3):
+            dot = sum(mat[k][r] * mat[k][c] for k in range(3))
+            expected = 1.0 if r == c else 0.0
+            if abs(dot - expected) > tol:
+                raise CryoEMPackingComplianceError(f"Matrix not orthogonal at ({r}, {c}): {dot}")
+    det = (
+        mat[0][0] * (mat[1][1] * mat[2][2] - mat[1][2] * mat[2][1])
+        - mat[0][1] * (mat[1][0] * mat[2][2] - mat[1][2] * mat[2][0])
+        + mat[0][2] * (mat[1][0] * mat[2][1] - mat[1][1] * mat[2][0])
+    )
+    if abs(det - 1.0) > tol:
+        raise CryoEMPackingComplianceError(f"Improper rotation matrix: det={det:.6f} != +1")
+
+
 def verify_rigid_isometry_preserve_distances(
     before: dict[int, tuple[float, float, float]],
     after: dict[int, tuple[float, float, float]],
@@ -266,14 +284,17 @@ def verify_rigid_isometry_preserve_distances(
     keys = sorted(before.keys())
     if keys != sorted(after.keys()) or len(keys) < 2:
         raise CryoEMPackingComplianceError("Coordinate key mismatch in isometry check")
-    probe_pairs = [(keys[0], keys[1]), (keys[0], keys[-1]), (keys[len(keys) // 2], keys[-1])]
-    for a, b in probe_pairs:
-        d0 = math.dist(before[a], before[b])
-        d1 = math.dist(after[a], after[b])
-        if abs(d0 - d1) > tol:
-            raise CryoEMPackingComplianceError(
-                f"Non-isometric coordinate transform detected on pair ({a}, {b}): d0={d0:.6f}, d1={d1:.6f}"
-            )
+    n = len(keys)
+    for idx, a in enumerate(keys):
+        for b in (keys[(idx + 1) % n], keys[(idx + n // 2) % n]):
+            if a == b:
+                continue
+            d0 = math.dist(before[a], before[b])
+            d1 = math.dist(after[a], after[b])
+            if abs(d0 - d1) > tol:
+                raise CryoEMPackingComplianceError(
+                    f"Non-isometric coordinate transform detected on pair ({a}, {b}): d0={d0:.6f}, d1={d1:.6f}"
+                )
 
 
 def score_variant_s_flex(
@@ -338,6 +359,12 @@ def directional_auroc_abstention(
 ) -> float:
     if len(labels) != len(scores) or not labels:
         raise CryoEMPackingComplianceError("Mismatched or empty labels/scores")
+    for y in labels:
+        if isinstance(y, bool) or y not in (0, 1):
+            raise CryoEMPackingComplianceError(f"Invalid binary label {y!r}")
+    for s in scores:
+        if s is not None and (isinstance(s, bool) or not math.isfinite(s)):
+            raise CryoEMPackingComplianceError(f"Non-finite or boolean score {s!r}")
     pos_idx = [i for i, y in enumerate(labels) if y == 1]
     neg_idx = [i for i, y in enumerate(labels) if y == 0]
     if not pos_idx or not neg_idx:
@@ -437,12 +464,18 @@ def run_positive_controls(
 
     # Control 4: SE(3) rigid-motion invariance + train G178 > G85
     raw_coords = {k: pt for k, (_, pt) in struct_5uak.ca_by_seq.items()}
-    # Proper Pythagorean rotation matrix R in SO(3) (det = +1) + translation
+    # Proper Pythagorean rotation matrix R_+ in SO(3) (det = +1) + translation
+    rot_mat = (
+        (2.0 / 3.0, -2.0 / 3.0, 1.0 / 3.0),
+        (2.0 / 3.0, 1.0 / 3.0, -2.0 / 3.0),
+        (1.0 / 3.0, 2.0 / 3.0, 2.0 / 3.0),
+    )
+    verify_proper_rotation_matrix(rot_mat)
     rot_coords: dict[int, tuple[float, float, float]] = {}
     for k, (x, y, z) in raw_coords.items():
-        rx = (2.0 * x - 2.0 * y + 1.0 * z) / 3.0 + 17.25
-        ry = (1.0 * x + 2.0 * y + 2.0 * z) / 3.0 - 41.50
-        rz = (2.0 * x + 1.0 * y - 2.0 * z) / 3.0 + 9.125
+        rx = rot_mat[0][0] * x + rot_mat[0][1] * y + rot_mat[0][2] * z + 17.25
+        ry = rot_mat[1][0] * x + rot_mat[1][1] * y + rot_mat[1][2] * z - 41.50
+        rz = rot_mat[2][0] * x + rot_mat[2][1] * y + rot_mat[2][2] * z + 9.125
         rot_coords[k] = (rx, ry, rz)
     verify_rigid_isometry_preserve_distances(raw_coords, rot_coords)
     rot_map = compute_noncovalent_compliance_map(rot_coords)
@@ -494,19 +527,32 @@ def run_falsification_controls(
             return
         raise AssertionError(f"Planted negative control {name!r} failed to raise {exc_types}")
 
-    # 1. WT 507/508 indel missense leak rejected
-    def _leak_508_indel() -> None:
-        f508_var = next(v for v in variants if v["legacy_spl_name"] == "F508del")
-        leaked = score_variant_s_flex(f508_var, compliance_map, allow_non_missense_bug=True)
-        if leaked is not None:
-            raise CryoEMPackingComplianceError("In-frame indel F508del illegally received WT CA score")
+    # 1. WT 507/508 indel missense leak rejected (both I507del and F508del)
+    def _leak_507_508_indels() -> None:
+        for indel_name in ("I507del", "F508del"):
+            indel_var = next(v for v in variants if v["legacy_spl_name"] == indel_name)
+            leaked = score_variant_s_flex(indel_var, compliance_map, allow_non_missense_bug=True)
+            if leaked is None:
+                return
+        raise CryoEMPackingComplianceError("In-frame indels I507del and F508del illegally received WT CA scores")
 
-    must_fail("wt_507_508_indel_missense_leak_rejected", _leak_508_indel, (CryoEMPackingComplianceError,))
+    must_fail("wt_507_508_indel_missense_leak_rejected", _leak_507_508_indels, (CryoEMPackingComplianceError,))
 
-    # 2. UNK chain or sequence mismatch rejected
+    # 2. UNK chain AND P13569 sequence mismatch rejected
+    def _unk_and_seq_mismatch() -> None:
+        unk_failed = False
+        try:
+            parse_5uak_chain_a(enforce_chain_a=False)
+        except CryoEMPackingComplianceError:
+            unk_failed = True
+        if not unk_failed:
+            return
+        corrupted_seq = "A" * 1480
+        parse_5uak_chain_a(uniprot_seq=corrupted_seq)
+
     must_fail(
         "unk_chain_or_sequence_mismatch_rejected",
-        lambda: parse_5uak_chain_a(enforce_chain_a=False),
+        _unk_and_seq_mismatch,
         (CryoEMPackingComplianceError,),
     )
 
@@ -545,9 +591,34 @@ def run_falsification_controls(
 
     must_fail("post_hoc_sign_flip_rejected", _reject_sign_flip, (CryoEMPackingComplianceError,))
 
-    # 7. Codon leakage / _heldout hack / manual source rejected
+    # 7. Codon leakage (<= 5), _heldout hack, and all 3 manual sources rejected
     def _manual_and_leakage() -> None:
-        assert_catalog_source_admitted("mavedb-dump-zenodo", perms)
+        bad_gap_list = [dict(v) for v in variants]
+        bad_gap_list[0] = dict(bad_gap_list[0], codon_position=452)
+        gap_caught = False
+        try:
+            validate_benchmark_annotations({"variants": bad_gap_list})
+        except CryoEMPackingComplianceError:
+            gap_caught = True
+        if not gap_caught:
+            return
+        bad_fam_list = [dict(v) for v in variants]
+        bad_fam_list[0] = dict(bad_fam_list[0], variant_family="missense_heldout")
+        fam_caught = False
+        try:
+            validate_benchmark_annotations({"variants": bad_fam_list})
+        except CryoEMPackingComplianceError:
+            fam_caught = True
+        if not fam_caught:
+            return
+        blocked_count = 0
+        for manual_id in ("mavedb-dump-zenodo", "cftr-dms-mckee-2023", "cftr-dms-tedman-2025"):
+            try:
+                assert_catalog_source_admitted(manual_id, perms)
+            except PermissionError:
+                blocked_count += 1
+        if blocked_count == 3:
+            raise PermissionError("All 3 manual sources plus codon-gap and _heldout bypasses rejected")
 
     must_fail("codon_leakage_or_manual_source_rejected", _manual_and_leakage, (PermissionError,))
     return results

@@ -44,6 +44,14 @@ class TestCryoEMPackingComplianceBenchmark(unittest.TestCase):
     def test_04_se3_invariance_and_so3_rational_zero_drift(self) -> None:
         self.assertLess(self.report_m1["positive_controls"]["max_se3_drift"], 1e-12)
         self.assertEqual(self.report_m2["so3_q_drift"], "0/1")
+        self.assertEqual(self.report_m2["noncovalent_pairs_verified"], 646957)
+        improper_reflection = (
+            (2.0 / 3.0, -2.0 / 3.0, 1.0 / 3.0),
+            (1.0 / 3.0, 2.0 / 3.0, 2.0 / 3.0),
+            (2.0 / 3.0, 1.0 / 3.0, -2.0 / 3.0),
+        )
+        with self.assertRaises(m1.CryoEMPackingComplianceError):
+            m1.verify_proper_rotation_matrix(improper_reflection)
 
     def test_05_positive_scale_invariance_of_auroc(self) -> None:
         struct = m1.parse_5uak_chain_a()
@@ -91,13 +99,25 @@ class TestCryoEMPackingComplianceBenchmark(unittest.TestCase):
         m2.verify_ast_independence(HERE / "independent_audit.py")
         te1 = self.report_m1["test_split"]
         te2 = self.report_m2["test"]
+        tr1 = self.report_m1["train_split"]
+        tr2 = self.report_m2["train"]
         self.assertEqual(te2["auc_cond_s_flex_fraction"], "7/10")
         self.assertEqual(te2["auc_abst_g_flex_fraction"], "49/66")
+        self.assertEqual(te2["auc_abst_g_am_fraction"], "137/198")
+        self.assertEqual(tr2["auc_cond_s_flex_fraction"], "1/3")
+        self.assertEqual(tr2["auc_abst_g_flex_fraction"], "5/6")
         self.assertAlmostEqual(te1["conditional_missense_auroc_s_flex"], float(Fraction(7, 10)), places=6)
         self.assertAlmostEqual(te1["gated_abstention_auroc_g_flex"], float(Fraction(49, 66)), places=6)
         self.assertAlmostEqual(te1["conditional_missense_auroc_s_am"], float(Fraction(8, 15)), places=6)
+        self.assertAlmostEqual(te1["gated_abstention_auroc_g_am"], float(Fraction(137, 198)), places=6)
         self.assertAlmostEqual(te1["sequence_consequence_auroc"], float(Fraction(15, 22)), places=6)
+        self.assertAlmostEqual(tr1["conditional_missense_auroc_s_flex"], float(Fraction(1, 3)), places=6)
+        self.assertAlmostEqual(tr1["gated_abstention_auroc_g_flex"], float(Fraction(5, 6)), places=6)
         self.assertEqual(self.report_m1["outcome"], "refuted")
+        with self.assertRaises(m1.CryoEMPackingComplianceError):
+            m1.directional_auroc_abstention([True, False], [0.9, 0.1])  # type: ignore[list-item]
+        with self.assertRaises(m1.CryoEMPackingComplianceError):
+            m1.directional_auroc_abstention([1, 0], [float("nan"), 0.1])
 
 
 if __name__ == "__main__":
