@@ -1,0 +1,43 @@
+# Done file: Cryo-EM 3D potentiation-vs-folding pocket proximity benchmark — does intra-8EIQ 3D pocket geometry predict CFTR ivacaftor monotherapy responsiveness? (`PRED-0011`)
+
+Written and committed before running `cryoem_potentiation_benchmark.py` on the held-out `test` split or recording `ledger.json`.
+
+## Success test
+
+The benchmark work is done when every condition below holds, each decided by an automated script:
+
+1. `python -m unittest discover -s benchmarks/cryoem_potentiation -v` exits `0` from the `cf-research` repository root using only the Python 3.10+ standard library and git-tracked repository files (`tools/cftr-model/data/8EIQ.cif.gz`, `tools/cftr-model/data/p13569.json`, `benchmarks/theratype/theratype_open_annotations_2026-11-21.json`), with zero network calls, zero third-party packages, and zero patient or PHI data.
+2. `python benchmarks/cryoem_potentiation/cryoem_potentiation_benchmark.py --check --falsify` exits `0`, enforcing:
+   - Cryptographic provenance of git-tracked public-domain Cryo-EM coordinates (`tools/cftr-model/data/8EIQ.cif.gz`, CC0 1.0, SHA-256 `d13cbfc8ba6575ab6228f351578c6f9cc5b9dafe13e5913d9b27b3cacebc18d6`; Fiedorczuk & Chen, *Science* 2022, DOI `10.1126/science.ade2216`) and UniProtKB `P13569` sequence annotations (`tools/cftr-model/data/p13569.json`, CC BY 4.0, SHA-256 `c8feabfabe8690ef4a06af7de5b5f8dc3c8da554246c5ab3d403edf265d4a893`), cross-joined against US FDA `KALYDECO` v36 Table 3 (`openfda-label`, NDA 203188, effective `2026-03-23`) recorded in `benchmarks/theratype/theratype_open_annotations_2026-11-21.json`.
+   - Exact $E(3)$-invariant intra-`8EIQ` heavy-atom coordinate selection (`pdbx_PDB_model_num == "1"`, `auth_asym_id == "A"`, `label_alt_id in {".", "A"}`, `type_symbol != "H"`, full floating-point `Cartn_x/y/z`, indexed strictly by `auth_seq_id` verified against `P13569` with `_struct_ref_seq_dif` construct declarations so `label_seq_id` $\Delta$F508 shifts never misalign C-terminal codons):
+     - Potentiation heavy-atom anchor set $A_{\text{pot}}$: all Chain A `HETATM` heavy atoms with `label_comp_id in {"ATP", "MG", "VX7"}` (`62 + 2 + 29 = 93` heavy atoms).
+     - Folding/corrector heavy-atom anchor set $A_{\text{fold}}$: all Chain A `HETATM` heavy atoms with `label_comp_id in {"CV6", "WJX"}` (`37 + 41 = 78` heavy atoms) plus all Chain A `ATOM` heavy atoms at ICL4 F508-socket anchor residues `auth_seq_id in {1063, 1070}` (`W1063` `14` + `R1070` `11` = `25` heavy atoms; total `103` heavy atoms), with $A_{\text{pot}} \cap A_{\text{fold}} = \emptyset$.
+     - For placed `missense` variants at codon $i$: $d_{\text{pot}}(i) = \min_{\mathbf{q} \in A_{\text{pot}}} \|\mathbf{r}_{C\alpha}(i) - \mathbf{q}\|_2$, $d_{\text{fold}}(i) = \min_{\mathbf{q} \in A_{\text{fold}}} \|\mathbf{r}_{C\alpha}(i) - \mathbf{q}\|_2$, and $s_{\text{3D}}(i) = d_{\text{fold}}(i) / (d_{\text{pot}}(i) + d_{\text{fold}}(i)) \in (0, 1)$; for all non-missense alleles (`inframe_indel`, `splice_regulatory`, `class_i_ptc_frameshift`) or unplaced missense residues, $s_{\text{3D}}(x) = \text{None}$.
+     - Matched class-gated hierarchical score $g_{\text{3D}}(x)$: `0.0` on `class_i_ptc_frameshift` and canonical `+/-1,2` splice; `0.50` on `inframe_indel` and non-canonical intronic splice; `0.50 + 0.50 * s_3D(x)` on placed missense (`None` if unplaced in `8EIQ`), compared apples-to-apples against identically gated $g_{\text{AM}}(x) = 0.50 + 0.50 * (1.0 - \text{AM}(x))$ on missense and the deterministic sequence-consequence class baseline (`0.0`, `0.50`, `0.75`).
+   - Pre-registered test of `PRED-0011` on the fixed 20-variant domain-disjoint held-out `test` split (`NBD1`, `TMD2`, `NBD2_C_terminal`, split `2026-11-21.v2`, target `Y = kalydeco_v36_responsive`, forbidding `max(AUC, 1 - AUC)` or post-hoc sign/anchor tuning): `PRED-0011` is `"supported"` if and only if (a) conditional missense ROC-AUC of $s_{\text{3D}}$ is `>= 0.75` and strictly exceeds standalone $s_{\text{AM}}(x) = 1 - \text{AM}(x)$ on the held-out `test` missense variants, AND (b) abstention-aware ROC-AUC of $g_{\text{3D}}$ across all 20 held-out `test` variants is `>= 0.75` and strictly exceeds both the deterministic sequence-consequence class baseline and identically gated $g_{\text{AM}}$; otherwise `PRED-0011` is recorded honestly as `"refuted"`.
+   - Rejection of all six planted negative controls (`--falsify`):
+     1. `label_seq_id_shift_rejected`: indexing Chain A residues by `label_seq_id` instead of `auth_seq_id` across `8EIQ`'s $\Delta$F508 deletion fails `P13569` sequence verification.
+     2. `overlapping_anchor_sets_rejected`: non-disjoint $A_{\text{pot}} \cap A_{\text{fold}} \neq \emptyset$ or zero denominator is rejected.
+     3. `non_missense_3d_score_rejected`: non-`None` $s_{\text{3D}}$ on any indel (`F508del`, `I507del`), splicing, or Class I PTC/frameshift variant is rejected.
+     4. `post_hoc_sign_flip_rejected`: inverted scoring on a strict separator yields ROC-AUC `0.0`, rejecting `max(AUC, 1 - AUC)`.
+     5. `codon_or_domain_leakage_rejected`: duplicate codon or cross-split codon gap `<= 5` across `train` and `test` is rejected.
+     6. `unadmitted_manual_source_rejected`: attempting to auto-ingest `access: manual` sources (`mavedb-dump-zenodo`, `cftr-dms-mckee-2023`, `cftr-dms-tedman-2025`, or closed-access publisher tables) raises `PermissionError`.
+3. `python benchmarks/cryoem_potentiation/independent_audit.py --check` (AST-verified zero imports from `cryoem_potentiation_benchmark.py` or `tools/`, using a character-level mmCIF state-machine parser, brute-force `Decimal`/Euclidean distance evaluation, and exact `fractions.Fraction` Wilcoxon rank-sum ROC-AUC) agrees with tolerance `0` on integer counts and `1e-6` on floating-point metrics.
+4. `python tools/claims/check_anti_hallucination.py`, `python tools/discovery/discovery_council.py --falsify-all`, `python ledger/check_predictions.py`, `python tools/sources/check_repo_organization.py`, and `python ../cf-lab/.claude/skills/discovery-practice/scripts/check_claim_ledger.py --git benchmarks/cryoem_potentiation/ledger.json` all exit `0`.
+
+## Positive control
+
+Before computing any held-out `test` score, the evaluator must verify all five positive-control suites (using zero `test` variants):
+
+1. **Cryptographic & Construct Integrity**: `8EIQ.cif.gz` and `p13569.json` match their SHA-256 digests; `8EIQ` Model 1 Chain A contains exact heavy-atom counts `ATP=62`, `MG=2`, `VX7=29` (`|A_pot|=93`), `CV6=37`, `WJX=41`, `W1063=14`, `R1070=11` (`|A_fold|=103`), and `auth_seq_id == 508` is absent ($\Delta$F508 construct).
+2. **Published Cryo-EM Pocket Contacts (`0` codon overlap with the 30 `train`+`test` variants)**:
+   - Liu et al. 2019 (`10.1126/science.aaw7611`) `VX7` TM8/TM5 hinge contacts `Y304`, `S307`, `F311`, `F931` each satisfy $d(C_\alpha, \text{VX7}) < 8.0\text{ \AA}$ and $s_{\text{3D}} > 0.70$.
+   - Zhang, Liu & Chen 2018 (`10.1073/pnas.1815287115`) Walker A `ATP` contacts `K464`, `K1250` each satisfy $d(C_\alpha, \text{ATP}) < 4.0\text{ \AA}$ and $s_{\text{3D}} > 0.75$.
+   - Fiedorczuk & Chen 2022 (`10.1126/science.ade2216`) `CV6` and `WJX` corrector contacts `W361` ($d(C_\alpha, \text{CV6}) < 5.0\text{ \AA}$) and `R1102` ($d(C_\alpha, \text{WJX}) < 6.0\text{ \AA}$) each satisfy $s_{\text{3D}} < 0.20$.
+3. **Exact $SE(3)$ Rigid-Motion Invariance**: applying a non-trivial proper 3D rotation $R \in SO(3)$ ($\det R = +1$) and translation $\mathbf{t} \in \mathbb{R}^3$ to all `8EIQ` coordinates preserves $s_{\text{3D}}$ across all placed Chain A residues within `< 1e-12`.
+4. **`train`-Split Mechanistic Control**: `ICL1` gating residue `G178` (`KALYDECO=1` in `train`) outscores `TM1` Class II folding residue `G85` (`KALYDECO=0` in `train`): $s_{\text{3D}}(178) > s_{\text{3D}}(85)$.
+5. **ROC-AUC Unit Controls**: abstention-aware ROC-AUC equals `0.5` on an all-`None` predictor, `1.0` on a strict positive separator, and `0.0` on an inverted separator. If any positive control fails, `CryoEMPotentiationError` is raised and no benchmark score is reported.
+
+## Stopping rule
+
+Fixed 30-variant benchmark (`10` `train` in `Lasso_N_terminal`/`TMD1`/`R_domain`, `20` `test` in `NBD1`/`TMD2`/`NBD2_C_terminal`, split `2026-11-21.v2`) and 8 disjoint published Cryo-EM pocket positive-control residues fixed in advance in this file; single evaluation pass on `test` with zero split, anchor, threshold, or sign tuning after seeing held-out `test` scores, and zero synthetic variant or coordinate data. Any miss, confounder, or review correction is recorded permanently in `benchmarks/cryoem_potentiation/failures.jsonl`.
