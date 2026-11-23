@@ -138,20 +138,76 @@ def extract_external_validation(sentences: List[str]) -> Tuple[str, str]:
     Categories:
     - 'external_multicenter_or_independent': Validated on independent external registry or center.
     - 'absent_single_center_or_internal_only': Single center, internal validation only, or explicitly needs external validation.
-    - 'not_stated': External validation status silent.
+    - 'not_stated': No completed validation statement, or conflicting explicit evidence.
     """
+    validation = r"(?:external|independent)\s+validation"
+    population = r"(?:external|independent)(?:\s+external)?\s+(?:data(?:set)?s?|cohorts?|registr(?:y|ies))"
+    action = r"(?:validated|tested|evaluated)"
+    negative = re.compile(
+        rf"\b(?:not(?!\s+only\b)|never|without)\s+(?:(?:yet|been|being)\s+)*"
+        rf"(?:externally\s+validated|{validation})\b"
+        rf"|\b(?:no|without|lacks?|lacked)\s+(?:an?\s+)?{validation}\b"
+        rf"|\b{validation}\s+(?:(?:was|were|has|have|had)\s+(?:not|never)|(?:wasn't|weren't|hasn't|haven't|hadn't))\b"
+        rf"|\b(?:wasn't|weren't|hasn't|haven't|hadn't)\s+(?:been\s+)?externally\s+validated\b"
+        rf"|\b(?:did\s+not|didn't|do\s+not|don't)\s+(?:externally\s+validate|(?:perform|conduct|complete)\s+(?:an?\s+)?{validation})\b"
+        rf"|\b(?:not|never)\s+(?:(?:yet|been|being)\s+)*{action}\s+(?:on|using|against|in|with)\s+(?:an?\s+)?{population}\b"
+        r"|\b(?:internal validation only|only internal validation|only internally validated)\b"
+    )
+    completed = re.compile(
+        r"\b(?:was|were|has been|have been|had been|we)\s+"
+        r"(?:(?:also|successfully|not only)\s+)?externally\s+validated\b"
+        rf"|\b(?:was|were|has been|have been|had been)\s+(?:successfully\s+)?{action}"
+        rf"\s+(?:on|using|against|in|with)\s+(?:an?\s+)?{population}\b"
+        rf"|\bwe\s+{action}\s+(?:the\s+)?(?:model|algorithm|framework)"
+        rf"\s+(?:on|using|against|in|with)\s+(?:an?\s+)?{population}\b"
+        rf"|\b{validation}\s+(?:was|has been|had been)\s+(?:successfully\s+)?"
+        r"(?:performed|conducted|completed)\b"
+    )
+    prospective = re.compile(
+        r"\b(?:will|would|could|should|may|might|if|whether|planned|proposed|"
+        r"intend(?:ed)?|aim(?:ed)?)\b"
+    )
+    uncertain = re.compile(
+        r"\b(?:no (?:evidence|indication)|(?:not|never) (?:shown|established|confirmed)|"
+        r"unclear|unknown|uncertain)\b"
+    )
+    affirmative_sentence = ""
+    negative_sentence = ""
+    uncertain_sentence = ""
+    fallback_sentence = ""
+
     for sent in sentences:
         low = sent.lower()
-        # Explicit independent validation
-        if ("externally validated" in low or "independent data" in low or "independent validation" in low or "external validation cohort" in low) and "needed" not in low and "requires" not in low:
-            return "external_multicenter_or_independent", sent
+        for clause in re.split(r";|\b(?:but|however)\b", low):
+            for match in negative.finditer(clause):
+                prefix = clause[:match.start()]
+                if not prospective.search(prefix) and not uncertain.search(prefix):
+                    negative_sentence = negative_sentence or sent
+            # Remove negated spans so their completed-action wording cannot be reused.
+            positive_clause = negative.sub(lambda match: " " * len(match.group()), clause)
+            for match in completed.finditer(positive_clause):
+                prefix = positive_clause[:match.start()]
+                if uncertain.search(prefix):
+                    uncertain_sentence = uncertain_sentence or sent
+                elif not prospective.search(prefix):
+                    affirmative_sentence = affirmative_sentence or sent
 
-        # Single center or lacking external validation
+        # Development setting and calls for further validation are weaker evidence.
         if "single-center" in low or "single center" in low:
-            return "absent_single_center_or_internal_only", sent
-        if "external validation" in low and ("needed" in low or "lacks" in low or "required" in low or "future" in low or "before clinical use" in low):
-            return "absent_single_center_or_internal_only", sent
+            fallback_sentence = fallback_sentence or sent
+        if "external validation" in low and any(
+            term in low for term in ("needed", "requires", "required", "before clinical use")
+        ):
+            fallback_sentence = fallback_sentence or sent
 
+    if affirmative_sentence and negative_sentence:
+        return "not_stated", negative_sentence
+    if uncertain_sentence:
+        return "not_stated", uncertain_sentence
+    if affirmative_sentence:
+        return "external_multicenter_or_independent", affirmative_sentence
+    if negative_sentence or fallback_sentence:
+        return "absent_single_center_or_internal_only", negative_sentence or fallback_sentence
     return "not_stated", ""
 
 
