@@ -68,20 +68,51 @@ evaluation. Synthetic regression tests additionally exercise negation, prospecti
 language, cohort mentions, sentence order, and conflicting evidence; they do not
 measure extraction accuracy on unseen papers.
 
+## Evaluation Harness (`evaluate_readiness.py`)
+
+`evaluate_readiness.py` separates factual extraction accuracy from heuristic `readiness_tier`
+scoring and tracks statistical power explicitly:
+
+- **Factual extraction metrics (per field)**: positive-assertion precision with
+  95% Wilson score confidence intervals, recall on stated ground truth, answer coverage,
+  abstention rate (`not stated` / `not_stated`), verbatim sentence grounding rate, and an
+  error taxonomy (`false_positive_assertion`, `false_negative_miss`, `value_mismatch`,
+  `ungrounded_quote`, `grounding_span_mismatch`). Achieving a 95% Wilson lower bound at zero
+  errors requires $N \ge 73$ positive assertions; smaller samples are reported explicitly as
+  `underpowered_n_lt_73`.
+- **Heuristic tier isolation**: `readiness_tier` (`T0`–`T3`) is summarized in a separate
+  `heuristic_readiness_tier` section tracking tier match rate, overclaims, and `T3` overclaims.
+- **Version-pinned pre-PR #388 comparator**: `--compare-baseline` runs the frozen pre-PR #388
+  `extract_external_validation` logic (`d8acab74d94c6d5bfdf1b4c2cbbf6769da4bb830`) on the same
+  tokenized sentences to quantify negation/contradiction precision and `T3` overclaim reduction.
+- **Synthetic stress fixtures (`stress_eval_synthetic.json`)**: Contains 18 explicitly labeled
+  synthetic regression fixtures (`is_unseen_published_papers: false`) covering negation,
+  prospective wording, uncertainty denial, section contradictions, multi-count text, in vitro
+  models, silent abstracts, prompt injection, and novel metric phrasing. It does **not**
+  measure accuracy on unseen published papers or clinical validity.
+- **Dual-annotator protocol (`--compare-annotators A.json B.json`)**: Validates `readiness-eval-v1`
+  annotation files, checks for `paper_id` / DOI / PMID / `study_group_id` leakage against the
+  frozen 6-paper dev fixture, reports raw agreement over both all rows and jointly asserted rows,
+  lists disagreements for adjudication, and computes nominal Cohen's kappa on closed categorical
+  fields only (flagging `underpowered_n_lt_30` when $N < 30$).
+
 ## Usage
 
 ```bash
-# Run benchmark
-python tools/readiness/extractor.py --benchmark
-
-# Run benchmark with JSON output
+# Run frozen 6-paper fixture benchmark
 python tools/readiness/extractor.py --benchmark --json
+
+# Run labeled synthetic stress suite with pre-PR #388 baseline comparator
+python tools/readiness/evaluate_readiness.py --stress --compare-baseline --json
+
+# Compare two independent readiness-eval-v1 annotation files for unseen papers
+python tools/readiness/evaluate_readiness.py --compare-annotators annotator_a.json annotator_b.json --json
 
 # Parse a file
 python tools/readiness/extractor.py --file abstract.txt
 
 # Run unit tests
-python -m unittest discover -s tools/readiness -v
+python -m unittest discover -s tools/readiness -t . -p 'test_*.py' -v
 ```
 
 ## Security & Medical Boundaries
