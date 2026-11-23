@@ -45,6 +45,26 @@ ALLOWED_FAMILIES: frozenset[str] = frozenset(
         "class_i_ptc_frameshift",
     }
 )
+ALLOWED_SPL_LISTING_STATES: frozenset[str] = frozenset(
+    {
+        "listed_on_fda_spl",
+        "not_listed_on_fda_spl",
+        "unknown",
+    }
+)
+ALLOWED_EXPERIMENTAL_RESCUE_STATES: frozenset[str] = frozenset(
+    {
+        "measured_experimental_response",
+        "measured_experimental_nonresponse",
+        "unknown",
+    }
+)
+ALLOWED_PANEL_EXPOSURE_STATES: frozenset[str] = frozenset(
+    {
+        "exposed_development_reference",
+        "untouched_holdout",
+    }
+)
 
 P13569_DOMAIN_SPANS: Tuple[Tuple[str, int, int], ...] = (
     ("Lasso_N_terminal", 1, 80),
@@ -70,7 +90,7 @@ class CftrVariantCase:
     codon_position: int
     variant_family: str
     split: str
-    modulator_responsive: int  # 1 = responsive on US FDA TRIKAFTA v23 Table 6, 0 = non-responsive
+    modulator_responsive: int  # 1 = listed_on_fda_spl (US FDA TRIKAFTA v23 Table 6), 0 = not_listed_on_fda_spl (not experimentally measured nonresponse)
     alphamissense_score: float | None
     evo2_zero_shot_score: float | None = None
     alphagenome_avi_score: float | None = None
@@ -395,6 +415,144 @@ def audit_split_leakage(
     }
 
 
+def audit_label_provenance(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Audit separation of FDA SPL regulatory listing, experimental rescue status, and panel exposure."""
+    violations: List[str] = []
+    provenance = payload.get("provenance")
+    if not isinstance(provenance, dict):
+        return {
+            "audit_passed": False,
+            "violations": ["missing_provenance_object"],
+            "panel_exposure_status": "unknown",
+            "jurisdiction": "",
+            "canonical_transcript": "",
+            "total_variants": 0,
+            "spl_listing_coverage": 0.0,
+            "experimental_measured_count": 0,
+            "experimental_unknown_count": 0,
+            "experimental_measured_coverage": 0.0,
+            "unsupported_assertion_count": 0,
+            "cross_spl_discordant_variants": [],
+        }
+
+    panel_exposure_status = str(provenance.get("panel_exposure_status", "")).strip()
+    if panel_exposure_status not in ALLOWED_PANEL_EXPOSURE_STATES:
+        violations.append(f"invalid_panel_exposure_status:{panel_exposure_status!r}")
+    elif payload.get("schema_version") == SPLIT_VERSION and panel_exposure_status != "exposed_development_reference":
+        violations.append(f"exposed_panel_must_not_be_marked_untouched:{panel_exposure_status!r}")
+
+    jurisdiction = str(provenance.get("jurisdiction", "")).strip()
+    if jurisdiction != "US FDA":
+        violations.append(f"invalid_provenance_jurisdiction:{jurisdiction!r}")
+    canonical_transcript = str(provenance.get("canonical_transcript", "")).strip()
+    if canonical_transcript != "ENST00000003084":
+        violations.append(f"invalid_provenance_transcript:{canonical_transcript!r}")
+
+    spl_labels = provenance.get("openfda_spl_labels")
+    if not isinstance(spl_labels, dict):
+        violations.append("missing_openfda_spl_labels")
+    else:
+        for drug_key in ("TRIKAFTA", "ALYFTREK", "KALYDECO", "SYMDEKO"):
+            entry = spl_labels.get(drug_key)
+            if not isinstance(entry, dict):
+                violations.append(f"missing_spl_metadata:{drug_key}")
+                continue
+            for req_field in ("set_id", "effective_time", "version", "table"):
+                if not str(entry.get(req_field, "")).strip():
+                    violations.append(f"empty_spl_metadata:{drug_key}:{req_field}")
+
+    variants = payload.get("variants")
+    if not isinstance(variants, list) or not variants:
+        violations.append("missing_variants_list")
+        variants = []
+
+    spl_field_pairs = (
+        ("trikafta_v23_responsive", "trikafta_v23_spl"),
+        ("alyftrek_v9_responsive", "alyftrek_v9_spl"),
+        ("kalydeco_v36_responsive", "kalydeco_v36_spl"),
+        ("symdeko_v22_responsive", "symdeko_v22_spl"),
+    )
+    spl_complete_count = 0
+    measured_count = 0
+    unknown_count = 0
+    unsupported_assertion_count = 0
+    discordant: List[str] = []
+
+    for row in variants:
+        if not isinstance(row, dict):
+            violations.append("non_dict_variant_row")
+            continue
+        vid = str(row.get("variant_id", "<unknown>"))
+        legacy_name = str(row.get("legacy_spl_name", vid))
+        if row.get("trikafta_v23_responsive") != row.get("alyftrek_v9_responsive"):
+            discordant.append(legacy_name)
+
+        label_status = row.get("label_status")
+        if not isinstance(label_status, dict):
+            violations.append(f"{vid}:missing_label_status")
+            continue
+
+        row_spl_ok = True
+        for bin_key, spl_key in spl_field_pairs:
+            bin_val = row.get(bin_key)
+            spl_val = label_status.get(spl_key)
+            if spl_val not in ALLOWED_SPL_LISTING_STATES:
+                violations.append(f"{vid}:invalid_{spl_key}:{spl_val!r}")
+                row_spl_ok = False
+                continue
+            expected_spl = "listed_on_fda_spl" if bin_val == 1 else "not_listed_on_fda_spl" if bin_val == 0 else None
+            if expected_spl is None or spl_val != expected_spl:
+                violations.append(f"{vid}:spl_parity_mismatch:{spl_key}={spl_val!r}!={expected_spl!r}")
+                row_spl_ok = False
+
+        if label_status.get("spl_jurisdiction") != "US FDA":
+            violations.append(f"{vid}:invalid_row_spl_jurisdiction:{label_status.get('spl_jurisdiction')!r}")
+            row_spl_ok = False
+        if label_status.get("canonical_transcript") != "ENST00000003084":
+            violations.append(f"{vid}:invalid_row_transcript:{label_status.get('canonical_transcript')!r}")
+            row_spl_ok = False
+
+        if row_spl_ok:
+            spl_complete_count += 1
+
+        exp_state = label_status.get("experimental_rescue_status")
+        if exp_state not in ALLOWED_EXPERIMENTAL_RESCUE_STATES:
+            violations.append(f"{vid}:invalid_experimental_rescue_status:{exp_state!r}")
+        elif exp_state in ("measured_experimental_response", "measured_experimental_nonresponse"):
+            ev_src = str(label_status.get("experimental_evidence_source", "")).strip()
+            if not ev_src:
+                unsupported_assertion_count += 1
+                violations.append(f"{vid}:measured_experimental_status_missing_source")
+            else:
+                measured_count += 1
+        else:
+            unknown_count += 1
+
+    total_variants = len(variants)
+    spl_coverage = round(spl_complete_count / total_variants, 4) if total_variants else 0.0
+    exp_coverage = round(measured_count / total_variants, 4) if total_variants else 0.0
+    passed = (
+        len(violations) == 0
+        and total_variants > 0
+        and spl_complete_count == total_variants
+        and unsupported_assertion_count == 0
+    )
+    return {
+        "audit_passed": passed,
+        "violations": violations,
+        "panel_exposure_status": panel_exposure_status,
+        "jurisdiction": jurisdiction,
+        "canonical_transcript": canonical_transcript,
+        "total_variants": total_variants,
+        "spl_listing_coverage": spl_coverage,
+        "experimental_measured_count": measured_count,
+        "experimental_unknown_count": unknown_count,
+        "experimental_measured_coverage": exp_coverage,
+        "unsupported_assertion_count": unsupported_assertion_count,
+        "cross_spl_discordant_variants": sorted(discordant),
+    }
+
+
 def _score_case_for_responsiveness(case: CftrVariantCase, model_name: str) -> float | None:
     """Pre-registered directional responsiveness score s(x) in [0, 1] (higher = predicted responsive)."""
     if model_name == "alphamissense":
@@ -681,6 +839,7 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     pos_ctrl = verify_positive_controls()
     leakage = audit_split_leakage(OPEN_CFTR_THERATYPE_BENCHMARK)
+    label_provenance = audit_label_provenance(_FIXTURE_META)
     pred = evaluate_pred_0010(OPEN_CFTR_THERATYPE_BENCHMARK)
     falsify = (
         evaluate_falsification_controls()
@@ -693,6 +852,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     ok = (
         pos_ctrl["status"] == "PASS"
         and leakage["leakage_audit_passed"]
+        and label_provenance["audit_passed"]
         and base_eti["test_coverage"] == 1.0
         and am_eti["test_coverage"] < base_eti["test_coverage"]
         and (not args.falsify or falsify["status"] == "PASS")
@@ -703,6 +863,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "boundary": RESEARCH_BOUNDARY,
         "positive_controls": pos_ctrl,
         "leakage_audit": leakage,
+        "label_provenance": label_provenance,
         "pred_0010": pred,
         "falsification": falsify,
     }
