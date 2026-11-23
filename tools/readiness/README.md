@@ -22,6 +22,28 @@ As observed in our medical AI discovery audits (`.lab-files/scratch/ai-medicine-
 | `readiness_tier` | Standardized readiness level | `T0_PRECLINICAL_BENCHMARK`, `T1_RETROSPECTIVE_OR_UNVALIDATED`, `T2_INTERNALLY_VALIDATED`, `T3_EXTERNALLY_VALIDATED` | Deterministic rule from above |
 | `anti_overclaim_flags` | Guardrail warnings | List of string flags (e.g. `SINGLE_CENTER_NO_EXTERNAL_VALIDATION`, `IN_VITRO_OR_VARIANT_ONLY_NO_HUMAN_COHORT`) | Rule-based flags |
 
+### External-validation evidence rules
+
+The extractor scans the supplied sentences before choosing a label. It recognizes
+explicit completed validation/testing statements, not the mere availability of
+independent data or a named external cohort. Negated validation does not qualify.
+Future or hypothetical testing alone returns `not_stated`; it does not establish
+whether some other external validation already occurred.
+Statements denying evidence of completed validation also return `not_stated`.
+
+A single-center development statement does not override an explicit completed
+external-validation statement elsewhere. Calls for additional validation likewise
+do not negate completed testing. Explicit positive and negative validation statements
+produce `not_stated`, retaining a verbatim negative evidence sentence for review.
+The existing single-sentence field cannot represent both sides of a contradiction.
+
+These are bounded language rules, not a general natural-language inference system:
+unrecognized phrasing may be missed, and model/cohort identity across statements is
+not resolved. `not_stated` therefore includes unresolved evidence, not just silence.
+Review the original text when that label appears. Under the unchanged tier rules,
+an unresolved case can still receive T2; that is not confirmation of internal
+validation, clinical readiness, or suitability for deployment.
+
 ## Epistemic Readiness Tiers
 
 - **`T3_EXTERNALLY_VALIDATED`**: Large human patient cohort ($N \ge 50$), strict patient-level splitting, and independent external validation on a distinct registry or center (e.g., AutoPrognosis validated on the Canadian CF Registry).
@@ -40,6 +62,11 @@ The extractor was evaluated on 6 published Cystic Fibrosis machine learning and 
 6. **Alaa et al. 2018** (*Sci Rep*, `doi:10.1038/s41598-018-29229-5`): AutoPrognosis on 10,261 UK CF Registry patients; patient-level split; externally validated on Canadian CF Registry; `AUC-ROC of 0.89` $\to$ `T3`.
 
 Benchmark Performance: **1.0000 exact-match accuracy** (30/30 fields) and **100% verbatim sentence grounding**.
+
+This is agreement with the six curated fixtures, not an independent clinical
+evaluation. Synthetic regression tests additionally exercise negation, prospective
+language, cohort mentions, sentence order, and conflicting evidence; they do not
+measure extraction accuracy on unseen papers.
 
 ## Usage
 

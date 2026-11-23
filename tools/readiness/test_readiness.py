@@ -142,6 +142,124 @@ class TestAntiOverclaimGuardrails(unittest.TestCase):
         self.assertEqual(rec.readiness_tier, "T3_EXTERNALLY_VALIDATED")
         self.assertEqual(rec.anti_overclaim_flags, [])
 
+    def test_negated_external_validation_does_not_upgrade(self) -> None:
+        statements = (
+            "The model was not externally validated.",
+            "The model has never been externally validated.",
+            "The model has not yet been externally validated.",
+            "The model wasn't externally validated.",
+            "No external validation was performed.",
+            "External validation was not performed.",
+            "External validation wasn't performed.",
+            "The model was evaluated without independent validation.",
+            "The model was not tested on an independent cohort.",
+            "The model was not tested with an independent cohort.",
+            "The model has not yet been tested on an independent cohort.",
+            "We did not perform external validation.",
+            "We did not externally validate the model.",
+        )
+        for statement in statements:
+            with self.subTest(statement=statement):
+                rec = self.extractor.extract(
+                    "We evaluated 200 patients with CF. "
+                    "Patient-level splitting was applied. " + statement
+                )
+                self.assertEqual(
+                    rec.external_validation, "absent_single_center_or_internal_only"
+                )
+                self.assertEqual(rec.external_validation_sentence, statement)
+                self.assertNotEqual(rec.readiness_tier, "T3_EXTERNALLY_VALIDATED")
+
+    def test_proposed_or_mentioned_validation_does_not_upgrade(self) -> None:
+        statements = (
+            "The model will be externally validated using independent data.",
+            "The model could be externally validated in another registry.",
+            "External validation will be performed in the future.",
+            "An external validation cohort was identified.",
+            "Independent data were available for future research.",
+            "We trained the model using an independent cohort.",
+            "We proposed an independent validation study.",
+            "There is no evidence that external validation was performed.",
+        )
+        for statement in statements:
+            with self.subTest(statement=statement):
+                rec = self.extractor.extract(
+                    "We evaluated 200 patients with CF. "
+                    "Patient-level splitting was applied. " + statement
+                )
+                self.assertEqual(rec.external_validation, "not_stated")
+                self.assertNotEqual(rec.readiness_tier, "T3_EXTERNALLY_VALIDATED")
+                self.assertIn(
+                    "UNSTATED_EXTERNAL_VALIDATION_STATUS", rec.anti_overclaim_flags
+                )
+
+    def test_completed_validation_is_not_negated_by_other_claims(self) -> None:
+        statements = (
+            "The model was tested on an independent external cohort.",
+            "External validation was performed.",
+            "We validated the model on an independent cohort.",
+            "The model was not only externally validated but also calibrated.",
+            "The model was externally validated but was not deployed clinically.",
+            "The model was externally validated. Additional external validation is needed.",
+        )
+        for statement in statements:
+            with self.subTest(statement=statement):
+                rec = self.extractor.extract(
+                    "We evaluated 200 patients with CF. "
+                    "Patient-level splitting was applied. " + statement
+                )
+                self.assertEqual(
+                    rec.external_validation, "external_multicenter_or_independent"
+                )
+                self.assertIn(rec.external_validation_sentence, statement)
+
+    def test_external_validation_overrides_single_center_development(self) -> None:
+        development = "This was a single-center development study."
+        validation = "The model was externally validated on an independent cohort."
+        for statements in ((development, validation), (validation, development)):
+            with self.subTest(statements=statements):
+                rec = self.extractor.extract(
+                    "We evaluated 200 patients with CF. "
+                    "Patient-level splitting was applied. " + " ".join(statements)
+                )
+                self.assertEqual(
+                    rec.external_validation, "external_multicenter_or_independent"
+                )
+                self.assertEqual(rec.external_validation_sentence, validation)
+                self.assertEqual(rec.readiness_tier, "T3_EXTERNALLY_VALIDATED")
+
+    def test_conflicting_external_validation_statements_abstain(self) -> None:
+        positive = "The model was externally validated."
+        negative = "The model was not externally validated."
+        for statements in ((positive, negative), (negative, positive)):
+            with self.subTest(statements=statements):
+                rec = self.extractor.extract(
+                    "We evaluated 200 patients with CF. "
+                    "Patient-level splitting was applied. " + " ".join(statements)
+                )
+                self.assertEqual(rec.external_validation, "not_stated")
+                self.assertEqual(rec.external_validation_sentence, negative)
+                self.assertNotEqual(rec.readiness_tier, "T3_EXTERNALLY_VALIDATED")
+                self.assertIn(
+                    "UNSTATED_EXTERNAL_VALIDATION_STATUS", rec.anti_overclaim_flags
+                )
+
+    def test_conflicts_survive_same_sentence_and_future_work(self) -> None:
+        statements = (
+            "The model was externally validated, although no external validation was performed.",
+            "The model was externally validated. "
+            "No external validation was performed, and we will address this in future work.",
+        )
+        for statement in statements:
+            with self.subTest(statement=statement):
+                rec = self.extractor.extract(
+                    "We evaluated 200 patients with CF. "
+                    "Patient-level splitting was applied. " + statement
+                )
+                self.assertEqual(rec.external_validation, "not_stated")
+                self.assertNotEqual(rec.readiness_tier, "T3_EXTERNALLY_VALIDATED")
+                self.assertIn(rec.external_validation_sentence, statement)
+
 
 class TestSecurityAndInjectionDefense(unittest.TestCase):
     """Verify robust defense against adversarial prompt injection attempts."""
