@@ -1,23 +1,24 @@
 {
-  "timestamp": "2026-10-14T14:12:11.425555+00:00",
-  "date": "2026-10-14",
+  "timestamp": "2026-11-23T02:01:59.090764+00:00",
+  "date": "2026-11-23",
   "disclaimer": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.",
   "sentinel_id": "scheduled-trial-surveillance",
   "review_tier": "elevated",
   "verdict": "UPDATES_DETECTED",
   "summary": {
     "total_studies_retrieved": 1053,
-    "previous_baseline_count": 1052,
-    "new_trials_count": 1,
-    "status_transitions_count": 1,
-    "terminated_trials_count": 115,
+    "previous_baseline_count": 1053,
+    "new_trials_count": 0,
+    "status_transitions_count": 5,
+    "terminated_trials_count": 116,
     "suspended_trials_count": 4
   },
   "status_distribution": {
-    "COMPLETED": 836,
-    "TERMINATED": 115,
-    "RECRUITING": 73,
-    "ACTIVE_NOT_RECRUITING": 25,
+    "COMPLETED": 837,
+    "TERMINATED": 116,
+    "RECRUITING": 68,
+    "ACTIVE_NOT_RECRUITING": 27,
+    "UNKNOWN": 1,
     "SUSPENDED": 4
   },
   "modalities_distribution": {
@@ -151,6 +152,16 @@
       "why_stopped": "terminated due to an inability to recruit study subjects",
       "phases": [
         "PHASE2"
+      ],
+      "modalities": []
+    },
+    {
+      "nct_id": "NCT06603246",
+      "title": "A Study to Test the Safety and Effects of Inhaled GDC-6988 in Participants With Muco-obstructive Disease",
+      "lead_sponsor": "Genentech, Inc.",
+      "why_stopped": "Sponsor's Decision",
+      "phases": [
+        "PHASE1"
       ],
       "modalities": []
     },
@@ -1283,14 +1294,58 @@
   ],
   "status_transitions": [
     {
-      "nct_id": "NCT07709494",
-      "title": "A Phase 1a/1b Study to Investigate the Safety, Tolerability, Microbiological Response, and Pharmacokinetics of Inhaled Rev-56 in Adult Healthy Volunteers and Adult Non-cystic Fibrosis Bronchiectasis (NCFB) Patients With Chronic P. Aeruginosa",
+      "nct_id": "NCT02965326",
+      "title": "Surrogate Markers of Response to New Therapies in Cystic Fibrosis Patients",
+      "old_status": "RECRUITING",
+      "new_status": "UNKNOWN",
+      "transition": "RECRUITING -> UNKNOWN",
+      "lead_sponsor": "Hôpital Necker-Enfants Malades",
+      "phases": [
+        "NA"
+      ]
+    },
+    {
+      "nct_id": "NCT06603246",
+      "title": "A Study to Test the Safety and Effects of Inhaled GDC-6988 in Participants With Muco-obstructive Disease",
+      "old_status": "RECRUITING",
+      "new_status": "TERMINATED",
+      "transition": "RECRUITING -> TERMINATED",
+      "lead_sponsor": "Genentech, Inc.",
+      "phases": [
+        "PHASE1"
+      ]
+    },
+    {
+      "nct_id": "NCT07031323",
+      "title": "OnTrackCF: Engagement, Feasibility, and Acceptability Study",
+      "old_status": "RECRUITING",
+      "new_status": "COMPLETED",
+      "transition": "RECRUITING -> COMPLETED",
+      "lead_sponsor": "Boston Children's Hospital",
+      "phases": [
+        "NA"
+      ]
+    },
+    {
+      "nct_id": "NCT06616857",
+      "title": "Personalized Mobile Health Platform to Promote Physical Activity in Adolescents and Young Adults With Cystic Fibrosis",
       "old_status": "RECRUITING",
       "new_status": "ACTIVE_NOT_RECRUITING",
       "transition": "RECRUITING -> ACTIVE_NOT_RECRUITING",
-      "lead_sponsor": "ReviR Therapeutics Inc.",
+      "lead_sponsor": "Nemours Children's Clinic",
       "phases": [
-        "PHASE1"
+        "NA"
+      ]
+    },
+    {
+      "nct_id": "NCT06032273",
+      "title": "Lung Transplant READY CF 2: CARING CF Ancillary RCT",
+      "old_status": "RECRUITING",
+      "new_status": "ACTIVE_NOT_RECRUITING",
+      "transition": "RECRUITING -> ACTIVE_NOT_RECRUITING",
+      "lead_sponsor": "University of Washington",
+      "phases": [
+        "NA"
       ]
     }
   ],
@@ -1462,18 +1517,5 @@
       ]
     }
   ],
-  "new_trials": [
-    {
-      "nct_id": "NCT07809867",
-      "title": "Pharmacokinetics of Elexacaftor/Tezacaftor/Ivacaftor in Cystic Fibrosis",
-      "status": "RECRUITING",
-      "lead_sponsor": "Istituto Giannina Gaslini",
-      "phases": [
-        "PHASE4"
-      ],
-      "modalities": [
-        "CFTR Modulator"
-      ]
-    }
-  ]
+  "new_trials": []
 }
