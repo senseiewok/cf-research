@@ -1,6 +1,6 @@
 # `proposals/` — Design Proposals, Council Decisions, and Governance Records
 
-This directory holds **44** design proposals, council decision records, task packets, and provenance reviews.
+This directory holds **45** design proposals, council decision records, task packets, and provenance reviews.
 Per `cf-lab/AGENTS.md`, agents inspect `Status: proposed` files here at the start of a session; changes to sibling
 repositories (`cf-lab`, `cf-skills`, `.ai`) wait for a maintainer decision before they are applied.
 
@@ -8,7 +8,7 @@ repositories (`cf-lab`, `cf-skills`, `.ai`) wait for a maintainer decision befor
 
 - **Open / Proposed (Awaiting Maintainer or Clinician Decision):** `26`
 - **Admitted / Ratified / Applied / Implemented in Code:** `10`
-- **Review Records, Provenance Notes & Evaluations:** `6`
+- **Review Records, Provenance Notes & Evaluations:** `7`
 - **Superseded:** `2`
 
 ## 1. Open / Proposed (`26` files)
@@ -57,7 +57,7 @@ repositories (`cf-lab`, `cf-skills`, `.ai`) wait for a maintainer decision befor
 | [`2026-10-11-withholding-design.md`](2026-10-11-withholding-design.md) | Trial atlas: withholding classes that fail the accuracy check | proposed, written 2026-10-11 |
 | [`2026-10-15-decision-governance-cloud-permissions-licensing.md`](2026-10-15-decision-governance-cloud-permissions-licensing.md) | Decision Record: Governance, Cloud-Model Routing, Permission Letters & Skill Licensing (T-0072) | ratified (approved by maintainer 2026-10-15) |
 
-## 3. Review Records, Provenance Notes & Evaluations (`6` files)
+## 3. Review Records, Provenance Notes & Evaluations (`7` files)
 
 | File | Title | Declared Status Summary |
 | --- | --- | --- |
@@ -67,6 +67,7 @@ repositories (`cf-lab`, `cf-skills`, `.ai`) wait for a maintainer decision befor
 | [`2026-10-05-local-worker-evaluation.md`](2026-10-05-local-worker-evaluation.md) | Evaluation: the local worker on this week's delegations, and what changed in the loop | evaluation, not a policy change |
 | [`2026-10-05-registry-reading-provenance.md`](2026-10-05-registry-reading-provenance.md) | Provenance of the registry reading skills (2026-10-05) | record, written 2026-10-05, for `cffpr-report-reading` and `cf-genetics-reading` in this repo |
 | [`2026-10-05-security-review.md`](2026-10-05-security-review.md) | Security review of the 2026-10-05 work: misses found, fixes made, and what is left | review, written 2026-10-05 from the week's commits and the way the sources were read |
+| [`2026-11-22-mucus-mpt-data-feasibility.md`](2026-11-22-mucus-mpt-data-feasibility.md) | Feasibility & Data-Gate Record: Public Airway-Mucus MPT Data and CFTR DMS Admission Gates | review record (written 2026-11-22; BLOCKED — could not test) |
 
 ## 4. Superseded (`2` files)
 
