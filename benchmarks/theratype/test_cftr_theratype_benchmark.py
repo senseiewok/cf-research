@@ -21,11 +21,13 @@ from cftr_theratype_benchmark import (  # noqa: E402
     OPEN_CFTR_THERATYPE_BENCHMARK,
     SPLIT_VERSION,
     TheratypeBenchmarkError,
+    audit_label_provenance,
     audit_split_leakage,
     evaluate_falsification_controls,
     evaluate_lofo_splits,
     evaluate_model_coverage_and_auroc,
     evaluate_pred_0010,
+    load_benchmark_fixture,
     load_mavedb_cc0_csv,
     main,
     map_codon_to_p13569_domain,
@@ -195,6 +197,54 @@ class TestCftrTheratypeBenchmark(unittest.TestCase):
             self.assertAlmostEqual(left["coverage_raw"], right["test_coverage_raw"], places=9)
             self.assertAlmostEqual(left["conditional_auroc_raw"], right["conditional_auroc_raw"], places=9)
             self.assertAlmostEqual(left["abstention_aware_auroc_raw"], right["abstention_aware_auroc_raw"], places=9)
+
+    def test_label_provenance_separates_spl_listing_from_experimental_response(self) -> None:
+        import copy
+
+        _, _, payload = load_benchmark_fixture(DEFAULT_FIXTURE_PATH)
+        clean = audit_label_provenance(payload)
+        self.assertTrue(clean["audit_passed"], msg=str(clean))
+        self.assertEqual(clean["panel_exposure_status"], "exposed_development_reference")
+        self.assertEqual(clean["jurisdiction"], "US FDA")
+        self.assertEqual(clean["canonical_transcript"], "ENST00000003084")
+        self.assertEqual(clean["total_variants"], 30)
+        self.assertEqual(clean["spl_listing_coverage"], 1.0)
+        self.assertEqual(clean["experimental_measured_count"], 0)
+        self.assertEqual(clean["experimental_unknown_count"], 30)
+        self.assertEqual(clean["experimental_measured_coverage"], 0.0)
+        self.assertEqual(clean["unsupported_assertion_count"], 0)
+        self.assertEqual(
+            clean["cross_spl_discordant_variants"],
+            ["2789+5G->A", "3849+10kbC->T", "R1066C", "R560T", "V520F"],
+        )
+
+        # Planted defect 1: claiming measured experimental nonresponse without evidence source must fail
+        poison_unsourced = copy.deepcopy(payload)
+        poison_unsourced["variants"][0]["label_status"]["experimental_rescue_status"] = (
+            "measured_experimental_nonresponse"
+        )
+        res_unsourced = audit_label_provenance(poison_unsourced)
+        self.assertFalse(res_unsourced["audit_passed"])
+        self.assertEqual(res_unsourced["unsupported_assertion_count"], 1)
+
+        # Planted defect 2: binary 0 paired with listed_on_fda_spl must fail parity
+        poison_parity = copy.deepcopy(payload)
+        for v in poison_parity["variants"]:
+            if v["trikafta_v23_responsive"] == 0:
+                v["label_status"]["trikafta_v23_spl"] = "listed_on_fda_spl"
+                break
+        res_parity = audit_label_provenance(poison_parity)
+        self.assertFalse(res_parity["audit_passed"])
+        self.assertTrue(any("spl_parity_mismatch" in err for err in res_parity["violations"]))
+
+        # Planted defect 3: marking exposed 2026-11-21.v2 panel as untouched_holdout must fail
+        poison_exposure = copy.deepcopy(payload)
+        poison_exposure["provenance"]["panel_exposure_status"] = "untouched_holdout"
+        res_exposure = audit_label_provenance(poison_exposure)
+        self.assertFalse(res_exposure["audit_passed"])
+        self.assertTrue(
+            any("exposed_panel_must_not_be_marked_untouched" in err for err in res_exposure["violations"])
+        )
 
 
 if __name__ == "__main__":

@@ -42,7 +42,13 @@
         "version": "22",
         "table": "Table 6 (154 responsive CFTR variants + homozygous F508del)"
       }
-    }
+    },
+    "panel_exposure_status": "exposed_development_reference",
+    "panel_exposure_note": "Evaluated in PRED-0010 on 2026-11-21; treat all 30 variants as exposed development/reference data, not as an untouched confirmatory holdout for future models.",
+    "label_semantics": "US FDA Structured Product Label (SPL) regulatory listing concordance only; 0 denotes not_listed_on_fda_spl as of the cited effective_time, not experimentally measured nonresponse.",
+    "jurisdiction": "US FDA",
+    "canonical_transcript": "ENST00000003084",
+    "uniprot_acc": "P13569"
   },
   "mcdonald_2024_table1_positive_controls": [
     {
@@ -142,7 +148,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-G85E",
@@ -162,7 +177,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-R117H",
@@ -182,7 +206,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-Y122X",
@@ -202,7 +235,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-621+1G>T",
@@ -222,7 +264,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-G178R",
@@ -242,7 +293,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-L206W",
@@ -262,7 +322,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-R334W",
@@ -282,7 +351,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-R347P",
@@ -302,7 +380,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-2051delAA",
@@ -322,7 +409,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-A455E",
@@ -342,7 +438,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-L467P",
@@ -362,7 +467,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-I507del",
@@ -382,7 +496,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-F508del",
@@ -402,7 +525,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-V520F",
@@ -422,7 +554,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-1585-1G>A",
@@ -442,7 +583,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-G542X",
@@ -462,7 +612,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-S549N",
@@ -482,7 +641,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-G551D",
@@ -502,7 +670,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-R553X",
@@ -522,7 +699,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-R560T",
@@ -542,7 +728,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-Y569D",
@@ -562,7 +757,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-2789+5G>A",
@@ -582,7 +786,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-R1066C",
@@ -602,7 +815,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-D1152H",
@@ -622,7 +844,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-R1162X",
@@ -642,7 +873,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-3849+10kbC>T",
@@ -662,7 +902,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-S1251N",
@@ -682,7 +931,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1
+      "symdeko_v22_responsive": 1,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "listed_on_fda_spl",
+        "symdeko_v22_spl": "listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-W1282X",
@@ -702,7 +960,16 @@
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "not_listed_on_fda_spl",
+        "alyftrek_v9_spl": "not_listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     },
     {
       "variant_id": "CFTR-N1303K",
@@ -722,7 +989,16 @@
       "trikafta_v23_responsive": 1,
       "alyftrek_v9_responsive": 1,
       "kalydeco_v36_responsive": 0,
-      "symdeko_v22_responsive": 0
+      "symdeko_v22_responsive": 0,
+      "label_status": {
+        "trikafta_v23_spl": "listed_on_fda_spl",
+        "alyftrek_v9_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
+        "experimental_rescue_status": "unknown",
+        "spl_jurisdiction": "US FDA",
+        "canonical_transcript": "ENST00000003084"
+      }
     }
   ]
 }
