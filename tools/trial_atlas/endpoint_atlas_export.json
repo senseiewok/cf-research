@@ -1,7 +1,7 @@
 {
   "metadata": {
     "source": "ClinicalTrials.gov API v2",
-    "snapshot_data_timestamp": "2026-10-14T14:12:11.425555+00:00",
+    "snapshot_data_timestamp": "2026-11-23T02:01:59.090764+00:00",
     "generated_tool": "tools/trial_atlas/export_web_atlas.py",
     "disclaimer": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote United States Federal Government endorsement."
   },
@@ -436,5 +436,5 @@
     ],
     "clinician_review_gate": "Plain-language class notes stay unpublished until a clinician has read them (a person, not a model)."
   },
-  "export_sha256": "2b1dc95ab7b97525d9dca9bdd77a8221b591eb12440db9a622424d0d69eb4a87"
+  "export_sha256": "4dc573f79b0a63cdcb184458c26b63a68ea22e48ef64ee4c90cf95d9cbf82e13"
 }

@@ -3,16 +3,17 @@
     "source": "ClinicalTrials.gov API v2",
     "condition": "Cystic Fibrosis",
     "study_type": "INTERVENTIONAL",
-    "data_timestamp": "2026-10-14T14:12:11.425555+00:00",
+    "data_timestamp": "2026-11-23T02:01:59.090764+00:00",
     "total_count": 1053,
     "requests_made": 11,
     "disclaimer": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement."
   },
   "status_counts": {
-    "COMPLETED": 836,
-    "TERMINATED": 115,
-    "RECRUITING": 73,
-    "ACTIVE_NOT_RECRUITING": 25,
+    "COMPLETED": 837,
+    "TERMINATED": 116,
+    "RECRUITING": 68,
+    "ACTIVE_NOT_RECRUITING": 27,
+    "UNKNOWN": 1,
     "SUSPENDED": 4
   },
   "modality_counts": {
@@ -2084,7 +2085,7 @@
       "nct_id": "NCT02965326",
       "brief_title": "Surrogate Markers of Response to New Therapies in Cystic Fibrosis Patients",
       "official_title": "Personalized Therapy of Cystic Fibrosis: Set-up of Response Markers",
-      "overall_status": "RECRUITING",
+      "overall_status": "UNKNOWN",
       "why_stopped": null,
       "study_type": "INTERVENTIONAL",
       "phases": [
@@ -5418,8 +5419,8 @@
       "nct_id": "NCT06603246",
       "brief_title": "A Study to Test the Safety and Effects of Inhaled GDC-6988 in Participants With Muco-obstructive Disease",
       "official_title": "A Phase Ic, Open-label, Multicenter Study to Evaluate the Safety, Tolerability, and Activity of Inhaled GDC-6988 in Patients With Muco-obstructive Disease",
-      "overall_status": "RECRUITING",
-      "why_stopped": null,
+      "overall_status": "TERMINATED",
+      "why_stopped": "Sponsor's Decision",
       "study_type": "INTERVENTIONAL",
       "phases": [
         "PHASE1"
@@ -7767,7 +7768,7 @@
       "nct_id": "NCT07031323",
       "brief_title": "OnTrackCF: Engagement, Feasibility, and Acceptability Study",
       "official_title": "OnTrackCF: Engagement, Feasibility, and Acceptability Study",
-      "overall_status": "RECRUITING",
+      "overall_status": "COMPLETED",
       "why_stopped": null,
       "study_type": "INTERVENTIONAL",
       "phases": [
@@ -8470,7 +8471,7 @@
       "nct_id": "NCT06616857",
       "brief_title": "Personalized Mobile Health Platform to Promote Physical Activity in Adolescents and Young Adults With Cystic Fibrosis",
       "official_title": "Personalized Mobile Health Platform to Promote Physical Activity in Adolescents and Young Adults With Cystic Fibrosis",
-      "overall_status": "RECRUITING",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
       "why_stopped": null,
       "study_type": "INTERVENTIONAL",
       "phases": [
@@ -50786,7 +50787,7 @@
       "nct_id": "NCT06032273",
       "brief_title": "Lung Transplant READY CF 2: CARING CF Ancillary RCT",
       "official_title": "Exploring Caregiver Needs While Supporting People with CF Learning About Lung Transplant",
-      "overall_status": "RECRUITING",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
       "why_stopped": null,
       "study_type": "INTERVENTIONAL",
       "phases": [
