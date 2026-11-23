@@ -52,7 +52,7 @@
   },
   {
     "id": "dornase-alfa-mesh-expansion-computed",
-    "claim": "Subtracting the untreated sputum mesh size of 140 nm from the dornase alfa pretreated mesh size of 220 nm confirms an 80 nm increase in effective mesh pore diameter.",
+    "claim": "Subtracting the untreated sputum mesh size of 140 nm from the dornase alfa pretreated mesh size of 220 nm yields an 80 nm increase in effective mesh pore diameter.",
     "source": "conte-2022-acsami",
     "quote": [
       "Subtracting the untreated sputum mesh size of 140 nm from the dornase alfa pretreated mesh size of 220 nm",
@@ -68,82 +68,84 @@
   },
   {
     "id": "mpt-benchmark-5-of-5",
-    "claim": "Across the 5-regime empirical CF sputum MPT benchmark, all 5 published carrier regimes matched their empirical sputum diffusivity ratio intervals (5 of 5 passed, 3 of 3 falsification controls passed).",
+    "claim": "Across the 5-regime CF sputum MPT benchmark in mucus_barrier_screener.py, all 5 simulated carrier regimes matched their target diffusivity ratio bounds (5 of 5 passed, 3 of 3 falsification controls passed).",
     "source": "conte-2022-acsami",
     "quote": [
-      "Across the 5-regime empirical CF sputum multiple-particle-tracking (MPT) benchmark, all 5 published carrier regimes matched their empirical sputum diffusivity ratio intervals",
+      "Across the 5-regime CF sputum multiple-particle-tracking (MPT) benchmark in mucus_barrier_screener.py, all 5 simulated carrier regimes matched their target diffusivity ratio bounds",
       "(5 of 5 passed, 3 of 3 falsification controls passed):"
     ],
     "kind": "observed",
-    "scope": "All 5 empirical CF sputum multiple-particle-tracking regimes and 3 falsification controls in mucus_barrier_screener.py were evaluated."
+    "scope": "All 5 simulated CF sputum multiple-particle-tracking regimes and 3 falsification controls in mucus_barrier_screener.py were evaluated."
   },
   {
     "id": "mpt-regime-1-80nm-peg",
-    "claim": "An 80 nm dense-PEG mucus-penetrating nanoparticle with -2.0 mV zeta potential in 140 nm sputum across a 15 um mucus layer achieves D_eff/D_w of 0.052478 and transits in 724.84 seconds.",
+    "claim": "In mucus_barrier_screener.py, a simulated 80 nm dense-PEG mucus-penetrating nanoparticle with -2.5 mV zeta potential in 140 nm sputum across a 25 um mucus layer yields simulated D_eff/D_w of 0.052478 and simulated transit time of 724.84 seconds.",
     "source": "conte-2022-acsami",
     "quote": [
-      "An 80 nm dense-PEG mucus-penetrating nanoparticle with -2.0 mV zeta potential in 140 nm sputum across a 15 um mucus layer",
-      "achieves D_eff/D_w of 0.052478 (empirical interval 0.025 to 0.12) and transits in 724.84 seconds,"
+      "In mucus_barrier_screener.py, a simulated 80 nm dense-PEG mucus-penetrating nanoparticle with -2.5 mV zeta potential in 140 nm sputum across a 25 um mucus layer",
+      "yields simulated D_eff/D_w of 0.052478 (target bounds 0.02 to 0.15) and simulated transit time of 724.84 seconds,"
     ],
     "kind": "observed"
   },
   {
     "id": "mpt-regime-2-100nm-hybrid",
-    "claim": "A 100 nm dense-PEG hybrid lipid-polymer nanoparticle with -3.0 mV zeta potential in 140 nm sputum across a 15 um distal airway mucus layer achieves D_eff/D_w of 0.036923 and transits in 824.87 seconds.",
+    "claim": "In mucus_barrier_screener.py, a simulated 100 nm dense-PEG hybrid lipid-polymer nanoparticle with -3.0 mV zeta potential in 140 nm sputum across a 15 um distal airway mucus layer yields simulated D_eff/D_w of 0.023324 and simulated transit time of 733.90 seconds.",
     "source": "conte-2022-acsami",
     "quote": [
-      "A 100 nm dense-PEG hybrid lipid-polymer nanoparticle with -3.0 mV zeta potential in 140 nm sputum across a 15 um distal airway mucus layer",
-      "achieves D_eff/D_w of 0.036923 (empirical interval 0.015 to 0.08) and transits in 824.87 seconds,"
+      "In mucus_barrier_screener.py, a simulated 100 nm dense-PEG hybrid lipid-polymer nanoparticle with -3.0 mV zeta potential",
+      "in 140 nm sputum across a 15 um distal airway mucus layer",
+      "yields simulated D_eff/D_w of 0.023324 (target bounds 0.01 to 0.08) and simulated transit time of 733.90 seconds,"
     ],
     "kind": "observed"
   },
   {
     "id": "mpt-regime-3-25nm-aav",
-    "claim": "A 25 nm AAV capsid with -3.5 mV zeta potential in 140 nm sputum across a 20 um mucus layer achieves D_eff/D_w of 0.175382 and transits in 120.23 seconds.",
+    "claim": "In mucus_barrier_screener.py, a simulated 25 nm AAV capsid with -4.0 mV zeta potential in 140 nm sputum across a 25 um mucus layer yields simulated D_eff/D_w of 0.192784 and simulated transit time of 61.66 seconds.",
     "source": "conte-2022-acsami",
     "quote": [
-      "A 25 nm AAV capsid with -3.5 mV zeta potential in 140 nm sputum across a 20 um mucus layer",
-      "achieves D_eff/D_w of 0.175382 (empirical interval 0.08 to 0.35) and transits in 120.23 seconds,"
+      "In mucus_barrier_screener.py, a simulated 25 nm AAV capsid with -4.0 mV zeta potential in 140 nm sputum across a 25 um mucus layer",
+      "yields simulated D_eff/D_w of 0.192784 (target bounds 0.15 to 0.30) and simulated transit time of 61.66 seconds,"
     ],
     "kind": "observed"
   },
   {
     "id": "mpt-regime-4-cationic-trapped",
-    "claim": "A 110 nm uncoated cationic lipoplex with +28.0 mV zeta potential and 0 percent PEG coverage in 140 nm sputum is electrostatically trapped with D_eff/D_w of 0.000018.",
+    "claim": "In mucus_barrier_screener.py, a simulated 110 nm uncoated cationic lipoplex with +30.0 mV zeta potential and 0 percent PEG coverage in 140 nm sputum across a 25 um mucus layer yields simulated D_eff/D_w of 0.000054 and simulated transit time of 975498.44 seconds.",
     "source": "conte-2022-acsami",
     "quote": [
-      "A 110 nm uncoated cationic lipoplex with +28.0 mV zeta potential and 0 percent PEG coverage in 140 nm sputum",
-      "is electrostatically trapped with D_eff/D_w of 0.000018 (empirical interval 0.000001 to 0.0005),"
+      "In mucus_barrier_screener.py, a simulated 110 nm uncoated cationic lipoplex with +30.0 mV zeta potential and 0 percent PEG coverage",
+      "in 140 nm sputum across a 25 um mucus layer",
+      "yields simulated D_eff/D_w of 0.000054 (target bounds 0.0 to 0.005) and simulated transit time of 975498.44 seconds,"
     ],
     "kind": "observed"
   },
   {
     "id": "mpt-regime-5-steric-ratio-computed",
-    "claim": "For a 300 nm conventional nanoparticle (radius 150 nm) in 140 nm sputum, dividing 150 by 140 yields a 1.07 radius-to-mesh ratio and D_eff/D_w of 0.000516.",
+    "claim": "For a simulated 300 nm conventional particle in 140 nm sputum in mucus_barrier_screener.py, dividing 300 by 140 yields a 2.14 diameter-to-pore ratio and simulated D_eff/D_w of 0.0.",
     "source": "conte-2022-acsami",
     "quote": [
-      "A 300 nm conventional nanoparticle (radius 150 nm) in 140 nm sputum exceeds the 140 nm mesh size",
-      "(150 divided by 140 equals 1.07 radius-to-mesh ratio) with D_eff/D_w of 0.000516"
+      "In mucus_barrier_screener.py, a simulated 300 nm conventional particle with -3.0 mV zeta potential in 140 nm sputum across a 25 um mucus layer",
+      "(300 divided by 140 equals 2.14 diameter-to-pore ratio) yields simulated D_eff/D_w of 0.0"
     ],
     "kind": "computed",
     "computed": [
       {
-        "expr": "150 / 140",
-        "result": "1.07"
+        "expr": "300 / 140",
+        "result": "2.14"
       }
     ]
   },
   {
     "id": "mpt-electrostatic-vs-steric-inference",
-    "claim": "Comparing the 100 nm dense-PEG hybrid nanoparticle (D_eff/D_w of 0.036923) against the 110 nm uncoated cationic lipoplex (D_eff/D_w of 0.000018), we infer that surface charge shielding dominates over modest diameter differences near 100 nm in CF sputum.",
+    "claim": "Comparing the simulated 100 nm dense-PEG hybrid nanoparticle (D_eff/D_w of 0.023324) against the simulated 110 nm uncoated cationic lipoplex (D_eff/D_w of 0.000054), we infer under this screening model that surface charge shielding produces a larger simulated diffusivity difference than the diameter difference between 100 nm and 110 nm in 140 nm sputum.",
     "source": "conte-2022-acsami",
     "quote": [
-      "A 100 nm dense-PEG hybrid lipid-polymer nanoparticle with -3.0 mV zeta potential in 140 nm sputum",
-      "achieves D_eff/D_w of 0.036923",
-      "A 110 nm uncoated cationic lipoplex with +28.0 mV zeta potential",
-      "is electrostatically trapped with D_eff/D_w of 0.000018"
+      "a simulated 100 nm dense-PEG hybrid lipid-polymer nanoparticle with -3.0 mV zeta potential in 140 nm sputum",
+      "yields simulated D_eff/D_w of 0.023324",
+      "a simulated 110 nm uncoated cationic lipoplex with +30.0 mV zeta potential and 0 percent PEG coverage in 140 nm sputum",
+      "yields simulated D_eff/D_w of 0.000054"
     ],
     "kind": "inferred",
-    "basis": "At nearly matched hydrodynamic diameters (100 nm vs 110 nm) in 140 nm sputum, removing PEG shielding and adding +28.0 mV cationic surface charge reduces effective diffusivity by more than three orders of magnitude."
+    "basis": "At simulated hydrodynamic diameters of 100 nm versus 110 nm in 140 nm sputum in mucus_barrier_screener.py, removing PEG shielding and setting +30.0 mV cationic surface charge lowers simulated D_eff/D_w from 0.023324 to 0.000054."
   }
 ]
