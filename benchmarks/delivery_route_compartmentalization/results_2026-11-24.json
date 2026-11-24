@@ -1,0 +1,201 @@
+{
+  "benchmark_version": "2026-11-24.v1",
+  "prediction_id": "PRED-0015",
+  "evaluated_on_local": "2026-11-24",
+  "done_sha256": "91244ae1b0be777825b41c60e6f450c4069c47659a80b71830e45e284258d853",
+  "nlm_attribution": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.",
+  "research_boundary": "Independent open-source research benchmark only (Tier T1/T2 registry metadata); not clinical guidance and not an assessment of personal trial eligibility or treatment efficacy.",
+  "dataset": {
+    "catalog_source_id": "clinicaltrials-gov",
+    "snapshot_path": "tools/trial_atlas/snapshot.json",
+    "data_timestamp": "2026-11-23T02:01:59.090764+00:00",
+    "raw_interventional_count": 1053,
+    "prisma_included_count": 940,
+    "excluded_by_rule": {
+      "X1": 0,
+      "X2": 0,
+      "X3": 0,
+      "X4": 72,
+      "X5": 41
+    },
+    "early_phase_healthy_volunteer_excluded_count": 47
+  },
+  "positive_controls": {
+    "calibration_fixture_12_9_10_0": {
+      "p_fisher_1s_exact": "1/2261",
+      "newcombe_wilson_ci95_low": 0.35412,
+      "chan_zhang_ci95_low": 0.383224
+    },
+    "known_trial_controls": {
+      "NCT05668741": {
+        "arm": "inhaled_cftr",
+        "dual_route_modulator_co_admin": true,
+        "rule_detail": "named_inhaled_cftr"
+      },
+      "NCT05248230": {
+        "arm": "inhaled_cftr",
+        "dual_route_modulator_co_admin": false,
+        "rule_detail": "named_inhaled_cftr"
+      },
+      "NCT06429176": {
+        "arm": "inhaled_cftr",
+        "dual_route_modulator_co_admin": false,
+        "rule_detail": "named_inhaled_cftr"
+      },
+      "NCT00846781": {
+        "arm": "non_cftr_or_other",
+        "dual_route_modulator_co_admin": false,
+        "rule_detail": "excluded_non_cftr_topical"
+      }
+    },
+    "inhaled_airway_or_safety_specificity": {
+      "matched": 16,
+      "total": 17,
+      "proportion": 0.941176
+    }
+  },
+  "primary_estimand_early_phase": {
+    "n_sys": 54,
+    "k_sys": 7,
+    "p_sys": 0.12963,
+    "p_sys_exact": "7/54",
+    "n_inh": 17,
+    "k_inh": 0,
+    "p_inh": 0.0,
+    "p_inh_exact": "0/17",
+    "risk_difference": 0.12963,
+    "p_fisher_one_sided_exact": "160272/1203521",
+    "p_fisher_one_sided": 0.13316926,
+    "p_fisher_two_sided_exact": "20212/109411",
+    "p_fisher_two_sided": 0.18473462,
+    "chan_zhang_unconditional_ci95": [
+      -0.07838,
+      0.252184
+    ],
+    "newcombe_wilson_ci95": [
+      -0.065945,
+      0.244217
+    ],
+    "criteria": {
+      "margins_ge_8": true,
+      "directional_p_sys_gt_p_inh": true,
+      "fisher_p_lt_0_01": false,
+      "unconditional_and_nw_ci95_gt_0": false,
+      "dual_route_sensitivity_preserved": false
+    },
+    "outcome": "refuted",
+    "ledger_standing": "refuted",
+    "systemic_ncts": [
+      "NCT00016744",
+      "NCT00234663",
+      "NCT00237380",
+      "NCT00351078",
+      "NCT00457821",
+      "NCT00458341",
+      "NCT00590538",
+      "NCT00865904",
+      "NCT00953706",
+      "NCT01161537",
+      "NCT01225211",
+      "NCT01262352",
+      "NCT01531673",
+      "NCT01685801",
+      "NCT02070744",
+      "NCT02190604",
+      "NCT02508207",
+      "NCT02589236",
+      "NCT02690519",
+      "NCT02707562",
+      "NCT02718495",
+      "NCT02730208",
+      "NCT02767297",
+      "NCT02951182",
+      "NCT02951195",
+      "NCT02971839",
+      "NCT03029455",
+      "NCT03045523",
+      "NCT03061331",
+      "NCT03093714",
+      "NCT03119649",
+      "NCT03140527",
+      "NCT03224351",
+      "NCT03227471",
+      "NCT03251092",
+      "NCT03258424",
+      "NCT03450720",
+      "NCT03474042",
+      "NCT03500263",
+      "NCT03506061",
+      "NCT03540524",
+      "NCT03587961",
+      "NCT03589313",
+      "NCT03591094",
+      "NCT03625466",
+      "NCT03768089",
+      "NCT03911713",
+      "NCT03912233",
+      "NCT03969888",
+      "NCT04006873",
+      "NCT04126473",
+      "NCT04135495",
+      "NCT04853368",
+      "NCT06154447"
+    ],
+    "systemic_sweat_cl_ncts": [
+      "NCT01225211",
+      "NCT01531673",
+      "NCT02971839",
+      "NCT03474042",
+      "NCT03506061",
+      "NCT03540524",
+      "NCT04853368"
+    ],
+    "inhaled_ncts": [
+      "NCT00789867",
+      "NCT01621867",
+      "NCT02532764",
+      "NCT02564354",
+      "NCT03375047",
+      "NCT05248230",
+      "NCT05504837",
+      "NCT05668741",
+      "NCT05712538",
+      "NCT06237335",
+      "NCT06429176",
+      "NCT06515002",
+      "NCT06526923",
+      "NCT06747858",
+      "NCT06962852",
+      "NCT06963008",
+      "NCT07485543"
+    ],
+    "inhaled_sweat_cl_ncts": [],
+    "dual_route_inhaled_ncts": [
+      "NCT05668741",
+      "NCT06237335"
+    ]
+  },
+  "sensitivity_pure_inhaled_excluding_dual_route": {
+    "n_sys": 54,
+    "k_sys": 7,
+    "n_inh_pure": 15,
+    "k_inh_pure": 0,
+    "p_inh_pure": 0.0,
+    "p_fisher_one_sided_exact": "5565/33902",
+    "p_fisher_one_sided": 0.16414961,
+    "newcombe_wilson_ci95": [
+      -0.084484,
+      0.244217
+    ]
+  },
+  "descriptive_context_all_phases_non_gated": {
+    "n_sys_all": 134,
+    "k_sys_all": 8,
+    "p_sys_all": 0.059701,
+    "n_inh_all": 19,
+    "k_inh_all": 0,
+    "p_inh_all": 0.0,
+    "p_fisher_one_sided_exact": "109666578736/325422273645",
+    "p_fisher_one_sided": 0.33699776
+  }
+}
