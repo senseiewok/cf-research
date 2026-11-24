@@ -41,8 +41,8 @@
         "table": "Table 6 (154 responsive CFTR variants)"
       }
     },
-    "panel_exposure_status": "untouched_holdout",
-    "panel_exposure_note": "Constructed blind to 3D Cryo-EM coordinates for pre-registration of PRED-0014; transitions to exposed_development_reference immediately upon running the single pre-registered evaluation pass.",
+    "panel_exposure_status": "exposed_development_reference",
+    "panel_exposure_note": "Constructed blind to 3D Cryo-EM coordinates for pre-registration of PRED-0014 (commit 9a23e16) and evaluated in a single pre-registered pass on 2026-11-23; treat all 24 variants as exposed development/reference data for future models.",
     "label_semantics": "US FDA Structured Product Label (SPL) regulatory listing concordance only; 0 denotes not_listed_on_fda_spl as of the cited effective_time, not experimentally measured nonresponse.",
     "jurisdiction": "US FDA",
     "canonical_transcript": "ENST00000003084",

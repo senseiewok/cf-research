@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "work": "PRED-0014: Two-state deltaF508 Cryo-EM rescue benchmark testing whether SE(3)xSE(3)-invariant, swap-symmetric, zero-free-parameter local backbone substructure conservation s_stab(i) = lDDT_sym(i; 8EJ1, 8EIQ) between modulator-free dephosphorylated deltaF508 human CFTR (PDB 8EJ1, 6.9 A) and Trikafta+ATP/Mg-bound phosphorylated deltaF508 human CFTR (PDB 8EIQ, 3.0 A) predicts US FDA TRIKAFTA v23 Table 6 SPL listing concordance across an AST-blinded 24-variant untouched holdout panel.",
+  "done_file": "done.md",
+  "done_sha256": "b6730dc3cf7d89362f9048521bc1f948e02133058b54ec5d7db2de8d7542d460",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-8ej1-8eiq-scommon-and-so3q-invariance",
+      "statement": "Dephosphorylated modulator-free deltaF508 human CFTR (PDB 8EJ1, CC0 1.0) places 1,127 canonical Chain A C-alpha residues and phosphorylated Trikafta+ATP/Mg-bound deltaF508 human CFTR (PDB 8EIQ, CC0 1.0) places 1,162 canonical Chain A C-alpha residues (both lacking deleted Phe508 and carrying engineered E1371Q), intersecting on 1,121 shared residues (41 only in 8EIQ including ECL1 loop 109..117; 6 only in 8EJ1) with 626,646 non-covalent residue pairs (excluding |i - j| <= 1 and the deltaF508 507-509 trans-peptide bond), exact SE(3)xSE(3) invariance (float64 drift 0.0; SO(3, Q) rational drift 0/1 across all 626,646 pairs), swap symmetry 0.0, minimum cutoff margin 1.998509e-05 A, >20 A NBD1:NBD2 closure across ATP Sites 1 and 2, and strict ordering between helical corrector-pocket scaffolding {38, 311, 361, 450, 1030, 1102} (s_stab >= 0.728972) and reorganizing ATP-site residues {464, 582, 1246, 1347, 1348} (s_stab <= 0.551724).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/8EJ1.cif.gz (RCSB PDB 8EJ1, CC0 1.0) + tools/cftr-model/data/8EIQ.cif.gz (RCSB PDB 8EIQ, CC0 1.0) + tools/cftr-model/data/p13569.json (UniProtKB P13569, CC BY 4.0)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_f508del_rescue_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "shlex mmCIF parser with float64 Euclidean symmetric lDDT",
+          "script": "cryoem_f508del_rescue_benchmark.py",
+          "difference": "tokenizes _struct_ref_seq_dif and _atom_site via shlex and evaluates float64 Euclidean distances, SE(3)xSE(3) drift, and NBD dimer closure controls",
+          "value": 1121
+        },
+        {
+          "name": "character-level mmCIF state-machine lexer with square-root-free Fraction polynomial lDDT",
+          "script": "independent_audit.py",
+          "difference": "zero shared imports; parses mmCIF character-by-character without shlex/re/math and evaluates exact Fraction polynomial lDDT and SO(3, Q) zero-drift across all 626,646 non-covalent pairs",
+          "value": 1121
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c2-holdout-missense-auroc-sstab",
+      "statement": "Across the 14 missense variants of the fixed 24-variant untouched holdout panel (7 listed on US FDA TRIKAFTA v23 Table 6 and 7 not listed), 11 variants lie in S_common while 3 abstain to None (ECL1 D110H absent in 6.9 A 8EJ1; R-domain D648V and E822K absent in both structures), yielding conditional placed-missense ROC-AUC 0.700000 (7/10 = 21/30 pairs, with 9 inversions from Lasso W57G, Lasso D44G, and ALYFTREK-listed NBD1 A613T against {H1085R, H139R, S13F}) and all-14 missense abstention-aware ROC-AUC 0.622449 (61/98), exceeding standalone AlphaMissense s_AM at 0.448980 (22/49).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/8EJ1.cif.gz + tools/cftr-model/data/8EIQ.cif.gz + benchmarks/cryoem_f508del_rescue/holdout_open_annotations_2026-11-23.json (openfda-label TRIKAFTA v23 Table 6 + myvariant dbnsfp.alphamissense)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_f508del_rescue_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "float64 symmetric lDDT + pairwise O(N1*N0) Mann-Whitney enumeration",
+          "script": "cryoem_f508del_rescue_benchmark.py",
+          "difference": "computes float64 s_stab(i) = lDDT_sym(i; 8EJ1, 8EIQ) and enumerates all positive-negative pairs directly",
+          "value": 0.622449
+        },
+        {
+          "name": "square-root-free Fraction polynomial lDDT + exact rational Wilcoxon rank-sum",
+          "script": "independent_audit.py",
+          "difference": "evaluates (A + B - t^2)^2 < 4AB in exact Fraction arithmetic without square roots and computes exact rational rank-sum 61/98 (placed conditional 7/10)",
+          "value": 0.622449
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c3-holdout-all24-gated-gstab-auroc",
+      "statement": "Across all 24 variants of the fixed holdout panel (8 listed on US FDA TRIKAFTA v23 Table 6 and 16 not listed across missense, in-frame indels, canonical/non-canonical splice, and Class I PTC alleles), class-gated g_stab achieves abstention-aware ROC-AUC 0.722656 (185/256), tying identically gated g_AM at 0.722656 (185/256) and trailing the deterministic sequence-consequence class baseline at 0.742188 (95/128) because unmodeled TRIKAFTA-listed missense variants D110H and E822K abstain to g_stab=None (0.5 tie against Class I and canonical-splice negatives scored at 0.0).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/8EJ1.cif.gz + tools/cftr-model/data/8EIQ.cif.gz + benchmarks/cryoem_f508del_rescue/holdout_open_annotations_2026-11-23.json (openfda-label TRIKAFTA v23 Table 6 + myvariant dbnsfp.alphamissense)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_f508del_rescue_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "regex canonical-splice class gate + float64 pairwise Mann-Whitney ROC-AUC",
+          "script": "cryoem_f508del_rescue_benchmark.py",
+          "difference": "applies CANONICAL_SPLICE_RE + 0.50 + 0.50*s_stab (preserving None on unmodeled missense) and enumerates all 128 positive-negative pairs in float64",
+          "value": 0.722656
+        },
+        {
+          "name": "charwise HGVS splice parser + exact Fraction abstention-aware ROC-AUC",
+          "script": "independent_audit.py",
+          "difference": "parses canonical +/-1,2 splice dinucleotides character-by-character without regex and evaluates exact rational 185/256",
+          "value": 0.722656
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c4-pred-0014-f508del-rescue-conservation-refuted",
+      "statement": "Pre-registered prediction PRED-0014 that two-state deltaF508 Cryo-EM backbone substructure conservation s_stab(i) = lDDT_sym(i; 8EJ1, 8EIQ) achieves placed-missense conditional ROC-AUC >= 0.75, all-14 missense abstention-aware ROC-AUC >= 0.75, and all-24 class-gated abstention-aware ROC-AUC >= 0.75 (exceeding both the deterministic sequence-consequence class baseline and g_AM) against US FDA TRIKAFTA v23 Table 6 SPL listing on the untouched 24-variant holdout panel is refuted (observed conditional placed-missense ROC-AUC 0.700000 = 7/10 < 0.75, all-14 missense ROC-AUC 0.622449 = 61/98 < 0.75, and all-24 gated ROC-AUC 0.722656 = 185/256 < 0.75, held-out error 71/256 = 0.277344).",
+      "kind": "predicted",
+      "origin": "lab",
+      "standing": "refuted",
+      "checks": [
+        {"type": "own_script", "ref": "cryoem_f508del_rescue_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "held_out_error": {
+        "value": 0.277344,
+        "unit": "1_minus_abstention_aware_auroc_on_fixed_24_variant_holdout_panel",
+        "set_fixed_in_done_file": true
+      },
+      "headline": false,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c5-fiedorczuk-chen-2022-deltaf508-cryoem-structures",
+      "statement": "Fiedorczuk & Chen (2022) resolved Cryo-EM structures of human deltaF508/E1371Q CFTR in the dephosphorylated modulator-free apo state (PDB 8EJ1, 6.9 A) and in the phosphorylated elexacaftor/tezacaftor/ivacaftor + ATP/Mg-bound state (PDB 8EIQ, 3.0 A), showing that Type I/III correctors stabilize TMD1 and the TMD2/Lasso interface to promote NBD dimerization without binding NBD1 directly.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "Fiedorczuk & Chen (2022), Science 378(6617):284-290",
+      "source": "10.1126/science.ade2216",
+      "standing": "open",
+      "checks": [
+        {"type": "peer_review", "ref": "10.1126/science.ade2216"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c6-mariani-2013-superposition-free-lddt",
+      "statement": "Mariani et al. (2013) introduced the superposition-free Local Distance Difference Test (lDDT) over inter-atomic distances within inclusion radius R_0 = 15.0 A across tolerance thresholds {0.5, 1.0, 2.0, 4.0} A to quantify local stereochemical and conformational preservation across domain movements.",
+      "kind": "measured",
+      "origin": "external",
+      "attributed_to": "Mariani, Biasini, Barbato & Schwede (2013), Bioinformatics 29(21):2722-2728",
+      "source": "10.1093/bioinformatics/btt473",
+      "standing": "open",
+      "checks": [
+        {"type": "peer_review", "ref": "10.1093/bioinformatics/btt473"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-23"
+    }
+  ]
+}
