@@ -106,6 +106,42 @@ class TestCryoEMF508delRescueBenchmark(unittest.TestCase):
         with self.assertRaises(m1.CryoEMF508delRescueError):
             m1.validate_holdout_annotations(bad_spl, dev, expected_variants_sha256=None)
 
+        # G970R is not listed on KALYDECO v36 Table 3 or SYMDEKO v22 Table 6
+        g970r = next(r for r in hold["variants"] if r["variant_id"] == "CFTR-G970R")
+        self.assertEqual(g970r["kalydeco_v36_responsive"], 0)
+        self.assertEqual(g970r["symdeko_v22_responsive"], 0)
+
+        # Manual catalog source inside provenance.catalog_sources fails closed
+        bad_prov = copy.deepcopy(hold)
+        bad_prov["provenance"]["catalog_sources"] = ["myvariant", "mavedb-dump-zenodo"]
+        with self.assertRaises(PermissionError):
+            m1.validate_holdout_annotations(bad_prov, dev)
+
+        # Multi-codon indel endpoint within <=5 aa of reserved control codon 1030 fails closed
+        bad_span = copy.deepcopy(hold)
+        idx_indel = next(i for i, r in enumerate(bad_span["variants"]) if r["variant_id"] == "CFTR-Ile1023_Val1024del")
+        bad_span["variants"][idx_indel]["codon_position"] = 1024
+        bad_span["variants"][idx_indel]["hgvs_p_or_c"] = "p.Ile1024_Val1025del"
+        with self.assertRaises(m1.CryoEMF508delRescueError):
+            m1.validate_holdout_annotations(bad_span, dev, expected_variants_sha256=None)
+
+        # Numeric imputation on ETI-only ECL1 codon 110 fails closed in evaluate_holdout_panel
+        s_8ej1, s_8eiq, _ = m1.load_verified_structures()
+        c_8ej1 = {k: pt for k, (_, pt) in s_8ej1.ca_by_seq.items()}
+        c_8eiq = {k: pt for k, (_, pt) in s_8eiq.ca_by_seq.items()}
+        common_set = frozenset(set(c_8ej1) & set(c_8eiq))
+        s_map, _, _ = m1.compute_lddt_sym_conservation_map(c_8ej1, c_8eiq)
+        with self.assertRaises(m1.CryoEMF508delRescueError):
+            m1.evaluate_holdout_panel(hold["variants"], {**s_map, 110: 0.0}, valid_s_common=common_set)
+
+        # Unknown variant_family and bool codon_position fail closed
+        with self.assertRaises(m1.CryoEMF508delRescueError):
+            m1.score_variant_baselines({"variant_family": "unknown_family", "hgvs_p_or_c": "p.Ser13Phe"})
+        bad_bool = copy.deepcopy(hold)
+        bad_bool["variants"][0]["codon_position"] = True
+        with self.assertRaises(m1.CryoEMF508delRescueError):
+            m1.validate_holdout_annotations(bad_bool, dev, expected_variants_sha256=None)
+
         with self.assertRaises(m1.CryoEMF508delRescueError):
             m1.compute_mann_whitney_auroc([(0.9, True), (0.1, False)], abstention_aware=True)  # type: ignore[list-item]
         with self.assertRaises(m1.CryoEMF508delRescueError):

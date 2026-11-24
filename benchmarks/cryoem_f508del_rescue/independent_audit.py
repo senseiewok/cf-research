@@ -38,7 +38,8 @@ EXPECTED_HASHES = {
     "8EJ1": "9582203b74c0add00a7917bed765cbc8a943fcc3a88ffbac8ae8dde7de2bc159",
     "8EIQ": "d13cbfc8ba6575ab6228f351578c6f9cc5b9dafe13e5913d9b27b3cacebc18d6",
     "P13569": "c8feabfabe8690ef4a06af7de5b5f8dc3c8da554246c5ab3d403edf265d4a893",
-    "HOLDOUT_VARIANTS": "9b815b5bc581363fc8cc7c7c4b5c31fc346d60ee2047256bc264d544062eb703",
+    "HOLDOUT_VARIANTS": "8d410145e5219bfa405dbf7a24f68cedb7a5f88c5035b0da6936b5d402024bb3",
+    "PRE_REGISTERED_HOLDOUT_VARIANTS": "9b815b5bc581363fc8cc7c7c4b5c31fc346d60ee2047256bc264d544062eb703",
 }
 
 AA_3_TO_1 = {
@@ -128,7 +129,8 @@ def load_rational_ca(
     if digest != EXPECTED_HASHES[tag]:
         raise AssertionError(f"{tag} SHA-256 mismatch: {digest}")
 
-    lines = gzip.open(cif_path, "rt", encoding="utf-8").read().splitlines()
+    with gzip.open(cif_path, "rt", encoding="utf-8") as fh:
+        lines = fh.read().splitlines()
     mutations: dict[int, str] = {}
     deletions: set[int] = set()
 
@@ -397,7 +399,12 @@ def wilcoxon_auroc_fraction(
     return total_u / Fraction(len(pos) * len(neg), 1)
 
 
-def run_independent_audit() -> dict[str, Any]:
+def dec_dist(a: tuple[Fraction, Fraction, Fraction], b: tuple[Fraction, Fraction, Fraction]) -> Decimal:
+    sq = sq_dist_q(a, b)
+    return (Decimal(sq.numerator) / Decimal(sq.denominator)).sqrt()
+
+
+def run_independent_audit(*, verify_parity: bool = True) -> dict[str, Any]:
     assert_ast_isolation()
     if hashlib.sha256(UNIPROT_JSON.read_bytes()).hexdigest() != EXPECTED_HASHES["P13569"]:
         raise AssertionError("P13569 SHA-256 mismatch")
@@ -407,16 +414,64 @@ def run_independent_audit() -> dict[str, Any]:
     ca_8eiq = load_rational_ca(CIF_8EIQ, "8EIQ", uniprot_seq)
     common = sorted(set(ca_8ej1.keys()) & set(ca_8eiq.keys()))
 
+    d_junc_8ej1 = dec_dist(ca_8ej1[507], ca_8ej1[509])
+    d_junc_8eiq = dec_dist(ca_8eiq[507], ca_8eiq[509])
+    if not (Decimal("3.70") <= d_junc_8ej1 <= Decimal("3.90")) or not (Decimal("3.70") <= d_junc_8eiq <= Decimal("3.90")):
+        raise AssertionError(f"deltaF508 (507, 509) peptide bond out of [3.70, 3.90] A: {d_junc_8ej1}, {d_junc_8eiq}")
+
     s_stab_q, noncovalent_pairs, min_dec_margin = compute_exact_fraction_s_stab(ca_8ej1, ca_8eiq)
+    if min_dec_margin < Decimal("1e-9"):
+        raise AssertionError(f"Minimum cutoff margin {min_dec_margin} < 1e-9 A")
+
     so3_drift, pairs_verified = verify_all_pairs_so3_q_zero_drift(ca_8ej1, ca_8eiq, common)
     if so3_drift != Fraction(0) or pairs_verified != noncovalent_pairs:
         raise AssertionError(f"SO(3, Q) drift check failed: drift={so3_drift}, pairs={pairs_verified}/{noncovalent_pairs}")
 
+    # Positive controls in 50-digit Decimal & exact Fraction arithmetic
+    d_site1_apo = dec_dist(ca_8ej1[464], ca_8ej1[1348])
+    d_site1_eti = dec_dist(ca_8eiq[464], ca_8eiq[1348])
+    d_site2_apo = dec_dist(ca_8ej1[582], ca_8ej1[1246])
+    d_site2_eti = dec_dist(ca_8eiq[582], ca_8eiq[1246])
+    if (d_site1_apo - d_site1_eti) <= Decimal("15.0") or d_site1_eti >= Decimal("12.0"):
+        raise AssertionError("ATP Site 1 closure positive control failed in independent_audit")
+    if (d_site2_apo - d_site2_eti) <= Decimal("15.0") or d_site2_eti >= Decimal("12.0"):
+        raise AssertionError("ATP Site 2 closure positive control failed in independent_audit")
+
+    for sc_codon in (38, 311, 361, 450, 1030, 1102):
+        val = s_stab_q.get(sc_codon)
+        if val is None or val <= Fraction(7, 10):
+            raise AssertionError(f"Scaffold control {sc_codon} failed s_stab > 7/10: {val}")
+    for atp_codon in (464, 582, 1246, 1347, 1348):
+        val = s_stab_q.get(atp_codon)
+        if val is None or val >= Fraction(14, 25):
+            raise AssertionError(f"ATP-site control {atp_codon} failed s_stab < 14/25: {val}")
+
     holdout = json.loads(HOLDOUT_JSON.read_text(encoding="utf-8"))
+    prov = holdout["provenance"]
     variants = holdout["variants"]
     v_sha = hashlib.sha256(json.dumps(variants, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
     if v_sha != EXPECTED_HASHES["HOLDOUT_VARIANTS"]:
         raise AssertionError(f"Holdout variants_sha256 mismatch: {v_sha}")
+
+    # Verify reversibility of CFTR-G970R auxiliary KALYDECO/SYMDEKO SPL erratum back to Commit 9a23e16 digest
+    rev_variants = json.loads(json.dumps(variants))
+    by_vid = {str(r["variant_id"]): r for r in rev_variants}
+    for err in prov.get("post_audit_spl_errata", []):
+        row_t = by_vid[str(err["variant_id"])]
+        for fk, pair in err["fields_corrected"].items():
+            old_v, new_v = pair
+            if fk.startswith("label_status."):
+                sk = fk.split(".", 1)[1]
+                if row_t["label_status"][sk] != new_v:
+                    raise AssertionError(f"Errata state mismatch on {fk}")
+                row_t["label_status"][sk] = old_v
+            else:
+                if row_t[fk] != new_v:
+                    raise AssertionError(f"Errata state mismatch on {fk}")
+                row_t[fk] = old_v
+    rev_sha = hashlib.sha256(json.dumps(rev_variants, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+    if rev_sha != EXPECTED_HASHES["PRE_REGISTERED_HOLDOUT_VARIANTS"]:
+        raise AssertionError(f"Pre-registered 9a23e16 digest reversal mismatch: {rev_sha}")
 
     miss_placed: list[tuple[Fraction | None, int]] = []
     miss_all14: list[tuple[Fraction | None, int]] = []
@@ -433,8 +488,9 @@ def run_independent_audit() -> dict[str, Any]:
         if fam == "missense":
             sv = None if codon in (508, 1371) else s_stab_q.get(codon)
             gv = (Fraction(1, 2) + Fraction(1, 2) * sv) if sv is not None else None
-            s_am_q = Fraction(1, 1) - Fraction(str(r["alphamissense_score"]))
-            g_am_q = Fraction(1, 2) + Fraction(1, 2) * s_am_q
+            raw_am = r.get("alphamissense_score")
+            s_am_q = (Fraction(1, 1) - Fraction(str(raw_am))) if raw_am is not None else None
+            g_am_q = (Fraction(1, 2) + Fraction(1, 2) * s_am_q) if s_am_q is not None else None
             miss_all14.append((sv, y))
             miss_am.append((s_am_q, y))
             if sv is not None:
@@ -446,17 +502,36 @@ def run_independent_audit() -> dict[str, Any]:
             all24_g_stab.append((Fraction(0), y))
             all24_g_am.append((Fraction(0), y))
             all24_cls.append((Fraction(0), y))
-        else:
+        elif fam in ("inframe_indel", "splice_regulatory"):
             all24_g_stab.append((Fraction(1, 2), y))
             all24_g_am.append((Fraction(1, 2), y))
             all24_cls.append((Fraction(1, 2), y))
+        else:
+            raise AssertionError(f"Unsupported variant_family in independent_audit: {fam!r}")
 
     auc_placed = wilcoxon_auroc_fraction(miss_placed, abstention_aware=False)
     auc_all14 = wilcoxon_auroc_fraction(miss_all14, abstention_aware=True)
-    auc_am = wilcoxon_auroc_fraction(miss_am, abstention_aware=False)
+    auc_am = wilcoxon_auroc_fraction(miss_am, abstention_aware=True)
     auc_g_stab = wilcoxon_auroc_fraction(all24_g_stab, abstention_aware=True)
     auc_g_am = wilcoxon_auroc_fraction(all24_g_am, abstention_aware=True)
     auc_cls = wilcoxon_auroc_fraction(all24_cls, abstention_aware=True)
+
+    if verify_parity:
+        expected_counts = (1127, 1162, 1121, 626646)
+        actual_counts = (len(ca_8ej1), len(ca_8eiq), len(common), pairs_verified)
+        if actual_counts != expected_counts:
+            raise AssertionError(f"Residue/pair count parity mismatch: {actual_counts} != {expected_counts}")
+        expected_aucs = (
+            Fraction(7, 10),
+            Fraction(61, 98),
+            Fraction(22, 49),
+            Fraction(185, 256),
+            Fraction(185, 256),
+            Fraction(95, 128),
+        )
+        actual_aucs = (auc_placed, auc_all14, auc_am, auc_g_stab, auc_g_am, auc_cls)
+        if actual_aucs != expected_aucs:
+            raise AssertionError(f"Exact rational ROC-AUC parity mismatch: {actual_aucs} != {expected_aucs}")
 
     return {
         "placed_ca_8ej1": len(ca_8ej1),
@@ -486,7 +561,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--json", action="store_true", help="Print JSON audit report")
     args = parser.parse_args(argv)
 
-    rep = run_independent_audit()
+    rep = run_independent_audit(verify_parity=True if args.check else True)
     if args.json:
         print(json.dumps(rep, indent=2))
         return 0

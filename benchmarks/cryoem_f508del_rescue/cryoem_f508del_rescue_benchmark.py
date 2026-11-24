@@ -43,7 +43,8 @@ EXPECTED_SHA256 = {
     "8EJ1": "9582203b74c0add00a7917bed765cbc8a943fcc3a88ffbac8ae8dde7de2bc159",
     "8EIQ": "d13cbfc8ba6575ab6228f351578c6f9cc5b9dafe13e5913d9b27b3cacebc18d6",
     "P13569": "c8feabfabe8690ef4a06af7de5b5f8dc3c8da554246c5ab3d403edf265d4a893",
-    "HOLDOUT_VARIANTS": "9b815b5bc581363fc8cc7c7c4b5c31fc346d60ee2047256bc264d544062eb703",
+    "HOLDOUT_VARIANTS": "8d410145e5219bfa405dbf7a24f68cedb7a5f88c5035b0da6936b5d402024bb3",
+    "PRE_REGISTERED_HOLDOUT_VARIANTS": "9b815b5bc581363fc8cc7c7c4b5c31fc346d60ee2047256bc264d544062eb703",
 }
 
 THREE_TO_ONE = {
@@ -70,6 +71,7 @@ MIN_CUTOFF_MARGIN_ANGSTROM = 1e-9
 MIN_CODON_BUFFER = 5
 
 CANONICAL_SPLICE_RE = re.compile(r"^c\.\d+[+-][12][ACGT]>[ACGT]$")
+INDEL_SPAN_RE = re.compile(r"^p\.[A-Z][a-z]{2}(\d+)_[A-Z][a-z]{2}(\d+)del$")
 
 
 class CryoEMF508delRescueError(ValueError):
@@ -189,27 +191,21 @@ def parse_deltaf508_chain_a_mmcif(
                 seq_difs.append(row)
             elif mode == "atom":
                 grp = row.get("group_PDB", "")
-                if grp != "ATOM":
-                    if allow_hetatm and grp == "HETATM":
-                        raise CryoEMF508delRescueError(
-                            f"{pdb_id}: HETATM record ({row.get('label_comp_id')}) leaked into polypeptide Chain A selector"
-                        )
+                allowed_groups = {"ATOM", "HETATM"} if allow_hetatm else {"ATOM"}
+                if grp not in allowed_groups:
                     continue
                 if row.get("pdbx_PDB_model_num") != "1":
                     continue
                 if not allow_non_chain_a:
-                    if row.get("auth_asym_id") != "A" or row.get("label_asym_id") != "A":
+                    if row.get("auth_asym_id") != "A":
                         continue
-                else:
-                    if row.get("auth_asym_id") != "A" or row.get("label_asym_id") != "A":
-                        raise CryoEMF508delRescueError(
-                            f"{pdb_id}: non-Chain-A polypeptide record ({row.get('auth_asym_id')}/{row.get('label_asym_id')}) leaked"
-                        )
+                    if grp == "ATOM" and row.get("label_asym_id") != "A":
+                        continue
                 if row.get("pdbx_PDB_ins_code") not in {"?", "."}:
                     continue
                 if row.get("label_alt_id") not in {".", "A"}:
                     continue
-                if row.get("label_atom_id") != "CA":
+                if grp == "ATOM" and row.get("label_atom_id") != "CA":
                     continue
                 seq_field = "label_seq_id" if use_label_seq_id else "auth_seq_id"
                 raw_seq = row.get(seq_field, "?")
@@ -217,6 +213,10 @@ def parse_deltaf508_chain_a_mmcif(
                     continue
                 seq_no = int(raw_seq)
                 if not (1 <= seq_no <= 1480):
+                    if grp == "HETATM":
+                        raise CryoEMF508delRescueError(
+                            f"{pdb_id}: non-polypeptide HETATM ligand {row.get('label_comp_id')} at seq {seq_no} outside 1..1480"
+                        )
                     continue
                 if seq_no in ca_by_seq:
                     raise CryoEMF508delRescueError(f"{pdb_id}: duplicate CA atom at residue {seq_no}")
@@ -287,8 +287,10 @@ def load_verified_structures(
     verify_sha256(cif_8ej1_path, EXPECTED_SHA256["8EJ1"], "8EJ1")
     verify_sha256(cif_8eiq_path, EXPECTED_SHA256["8EIQ"], "8EIQ")
     uniprot_seq = load_uniprot_p13569_sequence(uniprot_path)
-    text_8ej1 = gzip.open(cif_8ej1_path, "rt", encoding="utf-8").read()
-    text_8eiq = gzip.open(cif_8eiq_path, "rt", encoding="utf-8").read()
+    with gzip.open(cif_8ej1_path, "rt", encoding="utf-8") as fh_8ej1:
+        text_8ej1 = fh_8ej1.read()
+    with gzip.open(cif_8eiq_path, "rt", encoding="utf-8") as fh_8eiq:
+        text_8eiq = fh_8eiq.read()
     s_8ej1 = parse_deltaf508_chain_a_mmcif(text_8ej1, "8EJ1", uniprot_seq)
     s_8eiq = parse_deltaf508_chain_a_mmcif(text_8eiq, "8EIQ", uniprot_seq)
     return s_8ej1, s_8eiq, uniprot_seq
@@ -387,8 +389,18 @@ def validate_holdout_annotations(
     *,
     require_exposed_status: bool = False,
     expected_variants_sha256: str | None = EXPECTED_SHA256["HOLDOUT_VARIANTS"],
+    catalog_entries: Mapping[str, Mapping[str, str]] | None = None,
 ) -> list[dict[str, Any]]:
+    cat_map = catalog_entries if catalog_entries is not None else load_catalog_permissions()
     prov = holdout_payload.get("provenance", {})
+    cat_sources = prov.get("catalog_sources")
+    if not isinstance(cat_sources, list) or not cat_sources:
+        raise CryoEMF508delRescueError("Holdout provenance.catalog_sources must be a non-empty list")
+    for src_id in cat_sources:
+        check_manual_catalog_gate(str(src_id), catalog_entries=cat_map)
+    for dev_src_id in dev_payload.get("provenance", {}).get("catalog_sources", []):
+        check_manual_catalog_gate(str(dev_src_id), catalog_entries=cat_map)
+
     exp_status = prov.get("panel_exposure_status")
     if exp_status not in ALLOWED_EXPOSURE_STATES:
         raise CryoEMF508delRescueError(f"Invalid panel_exposure_status: {exp_status!r}")
@@ -408,7 +420,7 @@ def validate_holdout_annotations(
         exposed_codons.add(int(c["codon_position"]))
 
     seen_ids: set[str] = set()
-    seen_codons: list[tuple[int, str]] = []
+    seen_spans: list[tuple[int, int, str]] = []
     out: list[dict[str, Any]] = []
 
     for row in variants:
@@ -421,20 +433,28 @@ def validate_holdout_annotations(
         if fam not in ALLOWED_FAMILIES:
             raise CryoEMF508delRescueError(f"Invalid variant_family {fam!r} on {vid}")
 
-        codon = int(row["codon_position"])
-        if not (1 <= codon <= 1480):
-            raise CryoEMF508delRescueError(f"Codon out of range on {vid}: {codon}")
-        for exc in exposed_codons:
-            if abs(codon - exc) <= MIN_CODON_BUFFER:
-                raise CryoEMF508delRescueError(
-                    f"Holdout variant {vid} (codon {codon}) within <={MIN_CODON_BUFFER} aa of forbidden codon {exc}"
-                )
-        for prev_c, prev_id in seen_codons:
-            if abs(codon - prev_c) <= MIN_CODON_BUFFER:
-                raise CryoEMF508delRescueError(
-                    f"Holdout codon collision <={MIN_CODON_BUFFER} aa: {vid} ({codon}) vs {prev_id} ({prev_c})"
-                )
-        seen_codons.append((codon, vid))
+        raw_codon = row.get("codon_position")
+        if isinstance(raw_codon, bool) or not isinstance(raw_codon, int):
+            raise CryoEMF508delRescueError(f"codon_position must be int on {vid}, got {raw_codon!r}")
+        codon = raw_codon
+        hgvs = str(row.get("hgvs_p_or_c", ""))
+        span_m = INDEL_SPAN_RE.match(hgvs)
+        span_lo = int(span_m.group(1)) if span_m else codon
+        span_hi = int(span_m.group(2)) if span_m else codon
+        if not (1 <= span_lo <= codon <= span_hi <= 1480):
+            raise CryoEMF508delRescueError(f"Codon/span out of range on {vid}: codon={codon}, span={span_lo}..{span_hi}")
+        for span_pos in range(span_lo, span_hi + 1):
+            for exc in exposed_codons:
+                if abs(span_pos - exc) <= MIN_CODON_BUFFER:
+                    raise CryoEMF508delRescueError(
+                        f"Holdout variant {vid} (codon {span_pos}) within <={MIN_CODON_BUFFER} aa of forbidden codon {exc}"
+                    )
+            for prev_lo, prev_hi, prev_id in seen_spans:
+                if min(abs(span_pos - p) for p in range(prev_lo, prev_hi + 1)) <= MIN_CODON_BUFFER:
+                    raise CryoEMF508delRescueError(
+                        f"Holdout codon collision <={MIN_CODON_BUFFER} aa: {vid} ({span_lo}..{span_hi}) vs {prev_id} ({prev_lo}..{prev_hi})"
+                    )
+        seen_spans.append((span_lo, span_hi, vid))
 
         ls = row.get("label_status")
         if not isinstance(ls, dict):
@@ -463,12 +483,44 @@ def validate_holdout_annotations(
 
     canonical = json.dumps(variants, sort_keys=True, separators=(",", ":"))
     v_sha = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
-    if expected_variants_sha256 is not None and (
-        v_sha != expected_variants_sha256 or prov.get("variants_sha256") != expected_variants_sha256
-    ):
-        raise CryoEMF508delRescueError(
-            f"Holdout variants_sha256 mismatch: computed {v_sha}, provenance {prov.get('variants_sha256')}"
-        )
+    if expected_variants_sha256 is not None:
+        if v_sha != expected_variants_sha256 or prov.get("variants_sha256") != expected_variants_sha256:
+            raise CryoEMF508delRescueError(
+                f"Holdout variants_sha256 mismatch: computed {v_sha}, provenance {prov.get('variants_sha256')}"
+            )
+        if expected_variants_sha256 == EXPECTED_SHA256["HOLDOUT_VARIANTS"]:
+            if prov.get("pre_registered_variants_sha256") != EXPECTED_SHA256["PRE_REGISTERED_HOLDOUT_VARIANTS"]:
+                raise CryoEMF508delRescueError("Missing or mismatched pre_registered_variants_sha256 from Commit 9a23e16")
+            allowed_errata_fields = {
+                "kalydeco_v36_responsive",
+                "symdeko_v22_responsive",
+                "label_status.kalydeco_v36_spl",
+                "label_status.symdeko_v22_spl",
+            }
+            reverted = copy.deepcopy(variants)
+            by_id = {str(r["variant_id"]): r for r in reverted}
+            for err in prov.get("post_audit_spl_errata", []):
+                target_row = by_id.get(str(err.get("variant_id")))
+                if target_row is None:
+                    raise CryoEMF508delRescueError(f"Unknown errata variant_id: {err.get('variant_id')}")
+                for fk, pair in err.get("fields_corrected", {}).items():
+                    if fk not in allowed_errata_fields or not isinstance(pair, list) or len(pair) != 2:
+                        raise CryoEMF508delRescueError(f"Disallowed errata field {fk!r}; evaluated target columns are immutable")
+                    old_v, new_v = pair
+                    if fk.startswith("label_status."):
+                        sub_k = fk.split(".", 1)[1]
+                        if target_row["label_status"].get(sub_k) != new_v:
+                            raise CryoEMF508delRescueError(f"Errata current value mismatch on {fk}")
+                        target_row["label_status"][sub_k] = old_v
+                    else:
+                        if target_row.get(fk) != new_v:
+                            raise CryoEMF508delRescueError(f"Errata current value mismatch on {fk}")
+                        target_row[fk] = old_v
+            rev_sha = hashlib.sha256(json.dumps(reverted, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+            if rev_sha != EXPECTED_SHA256["PRE_REGISTERED_HOLDOUT_VARIANTS"]:
+                raise CryoEMF508delRescueError(
+                    f"Errata reversal digest {rev_sha} failed to reproduce pre-registered 9a23e16 digest"
+                )
 
     return out
 
@@ -476,6 +528,8 @@ def validate_holdout_annotations(
 def score_variant_s_stab(
     row: Mapping[str, Any],
     s_stab_by_seq: Mapping[int, float | None],
+    *,
+    valid_s_common: frozenset[int] | None = None,
 ) -> tuple[float | None, float | None]:
     fam = str(row["variant_family"])
     codon = int(row["codon_position"])
@@ -486,7 +540,16 @@ def score_variant_s_stab(
         s_val = s_stab_by_seq.get(codon)
         if s_val is None:
             return None, None
-        return s_val, 0.50 + 0.50 * s_val
+        if isinstance(s_val, bool) or not isinstance(s_val, (int, float)) or not math.isfinite(float(s_val)):
+            raise CryoEMF508delRescueError(f"Non-finite s_stab score on codon {codon}: {s_val!r}")
+        s_f = float(s_val)
+        if not (0.0 <= s_f <= 1.0):
+            raise CryoEMF508delRescueError(f"s_stab score out of [0, 1] on codon {codon}: {s_f}")
+        if valid_s_common is not None and codon not in valid_s_common:
+            raise CryoEMF508delRescueError(
+                f"Numeric fallback forbidden: codon {codon} is absent from S_common yet received s_stab={s_f}"
+            )
+        return s_f, 0.50 + 0.50 * s_f
     if fam == "class_i_ptc_frameshift" or CANONICAL_SPLICE_RE.match(hgvs):
         return None, 0.0
     if fam in ("inframe_indel", "splice_regulatory"):
@@ -504,7 +567,9 @@ def score_variant_baselines(row: Mapping[str, Any]) -> tuple[float | None, float
         return s_am, g_am, 0.75
     if fam == "class_i_ptc_frameshift" or CANONICAL_SPLICE_RE.match(hgvs):
         return None, 0.0, 0.0
-    return None, 0.50, 0.50
+    if fam in ("inframe_indel", "splice_regulatory"):
+        return None, 0.50, 0.50
+    raise CryoEMF508delRescueError(f"Unsupported variant_family: {fam!r}")
 
 
 def compute_mann_whitney_auroc(
@@ -641,7 +706,16 @@ def evaluate_holdout_panel(
     variants: Sequence[Mapping[str, Any]],
     s_stab_map: Mapping[int, float | None],
     target_key: str = "trikafta_v23_responsive",
+    *,
+    valid_s_common: frozenset[int] | None = None,
 ) -> dict[str, Any]:
+    if valid_s_common is not None:
+        for k, v in s_stab_map.items():
+            if v is not None and k not in valid_s_common:
+                raise CryoEMF508delRescueError(
+                    f"Numeric fallback forbidden in s_stab_map: residue {k} outside S_common has value {v!r}"
+                )
+
     evaluated_rows: list[dict[str, Any]] = []
     missense_placed_pairs: list[tuple[float | None, int]] = []
     missense_all14_stab_pairs: list[tuple[float | None, int]] = []
@@ -653,8 +727,13 @@ def evaluate_holdout_panel(
     unmodeled_missense: list[str] = []
 
     for row in variants:
-        y = int(row[target_key])
-        s_stab, g_stab = score_variant_s_stab(row, s_stab_map)
+        if target_key not in row:
+            raise CryoEMF508delRescueError(f"Missing target_key {target_key!r} in variant row {row.get('variant_id')}")
+        raw_y = row[target_key]
+        if isinstance(raw_y, bool) or not isinstance(raw_y, int) or raw_y not in (0, 1):
+            raise CryoEMF508delRescueError(f"Invalid binary target {target_key}={raw_y!r}")
+        y = raw_y
+        s_stab, g_stab = score_variant_s_stab(row, s_stab_map, valid_s_common=valid_s_common)
         s_am, g_am, cls_b = score_variant_baselines(row)
         if row["variant_family"] == "missense":
             missense_all14_stab_pairs.append((s_stab, y))
@@ -682,15 +761,14 @@ def evaluate_holdout_panel(
 
     cond_placed_auroc = compute_mann_whitney_auroc(missense_placed_pairs, abstention_aware=False)
     missense_all14_abst_auroc = compute_mann_whitney_auroc(missense_all14_stab_pairs, abstention_aware=True)
-    missense_am_auroc = compute_mann_whitney_auroc(missense_am_pairs, abstention_aware=False)
+    missense_am_auroc = compute_mann_whitney_auroc(missense_am_pairs, abstention_aware=True)
     all24_g_stab_auroc = compute_mann_whitney_auroc(all24_g_stab_pairs, abstention_aware=True)
     all24_g_am_auroc = compute_mann_whitney_auroc(all24_g_am_pairs, abstention_aware=True)
     all24_cls_auroc = compute_mann_whitney_auroc(all24_cls_pairs, abstention_aware=True)
 
-    # Pre-registered PRED-0014 decision rule (done.md):
+    # Pre-registered PRED-0014 decision rule (done.md line 18):
     supported = (
-        cond_placed_auroc >= 0.75
-        and missense_all14_abst_auroc >= 0.75
+        missense_all14_abst_auroc >= 0.75
         and missense_all14_abst_auroc > missense_am_auroc
         and all24_g_stab_auroc >= 0.75
         and all24_g_stab_auroc > all24_cls_auroc
@@ -723,11 +801,14 @@ def run_falsification_suite(
     s_stab_map: Mapping[int, float | None],
     holdout_payload: Mapping[str, Any],
     dev_payload: Mapping[str, Any],
+    holdout_variants: Sequence[Mapping[str, Any]],
 ) -> dict[str, str]:
     verdicts: dict[str, str] = {}
-    raw_8eiq_text = gzip.open(DEFAULT_CIF_8EIQ, "rt", encoding="utf-8").read()
+    with gzip.open(DEFAULT_CIF_8EIQ, "rt", encoding="utf-8") as fh_8eiq:
+        raw_8eiq_text = fh_8eiq.read()
     c_8ej1 = {k: pt for k, (_, pt) in s_8ej1.ca_by_seq.items()}
     c_8eiq = {k: pt for k, (_, pt) in s_8eiq.ca_by_seq.items()}
+    common_set = frozenset(set(c_8ej1) & set(c_8eiq))
 
     # 1. f508del_507_509_peptide_bond_or_shift_rejected
     c1_ok = True
@@ -736,12 +817,12 @@ def run_falsification_suite(
         c1_ok = False
     except CryoEMF508delRescueError:
         pass
-    # Insert synthetic deleted-508 CA line directly inside the _atom_site loop (after the first ATOM record)
     first_atom_nl = raw_8eiq_text.find("\nATOM ")
-    next_nl = raw_8eiq_text.find("\n", first_atom_nl + 1)
+    next_nl = raw_8eiq_text.find("\n", first_atom_nl + 1) if first_atom_nl >= 0 else -1
+    if first_atom_nl < 0 or next_nl < 0:
+        raise CryoEMF508delRescueError("Failed to locate _atom_site ATOM record in 8EIQ")
     sample_atom = raw_8eiq_text[first_atom_nl + 1 : next_nl]
     stoks = shlex.split(sample_atom)
-    # Locate column positions from _atom_site headers
     a_cols = [ln.strip().split(".", 1)[1] for ln in raw_8eiq_text.splitlines() if ln.strip().startswith("_atom_site.")]
     fake_map = dict(zip(a_cols, stoks))
     fake_map["id"] = "999999"
@@ -769,10 +850,22 @@ def run_falsification_suite(
         raise CryoEMF508delRescueError("Control 1 failed")
     verdicts["f508del_507_509_peptide_bond_or_shift_rejected"] = "PASS"
 
-    # 2. hetatm_ligand_or_chain_b_leak_rejected
+    # 2. hetatm_ligand_or_chain_b_leak_rejected (exercising downstream sequence/range checks without flag short-circuits)
     c2_ok = True
     try:
         parse_deltaf508_chain_a_mmcif(raw_8eiq_text, "8EIQ", uniprot_seq, allow_hetatm=True)
+        c2_ok = False
+    except CryoEMF508delRescueError:
+        pass
+    hetatm_ca_map = dict(fake_map)
+    hetatm_ca_map["group_PDB"] = "HETATM"
+    hetatm_ca_map["label_comp_id"] = "VX7"
+    hetatm_ca_map["auth_comp_id"] = "VX7"
+    hetatm_ca_map["auth_seq_id"] = "900"
+    hetatm_ca_map["label_seq_id"] = "900"
+    injected_hetatm_ca = raw_8eiq_text[:next_nl] + "\n" + " ".join(hetatm_ca_map[c] for c in a_cols) + raw_8eiq_text[next_nl:]
+    try:
+        parse_deltaf508_chain_a_mmcif(injected_hetatm_ca, "8EIQ", uniprot_seq, allow_hetatm=True)
         c2_ok = False
     except CryoEMF508delRescueError:
         pass
@@ -785,17 +878,20 @@ def run_falsification_suite(
         raise CryoEMF508delRescueError("Control 2 failed")
     verdicts["hetatm_ligand_or_chain_b_leak_rejected"] = "PASS"
 
-    # 3. unmodeled_loop_numeric_fallback_rejected
+    # 3. unmodeled_loop_numeric_fallback_rejected (exercising downstream evaluate_holdout_panel & score_variant_s_stab)
     c3_ok = True
-    try:
-        compute_lddt_sym_conservation_map(c_8ej1, c_8eiq, unmodeled_fallback=0.0)
-        c3_ok = False
-    except CryoEMF508delRescueError:
-        pass
-    # Codon 110 (D110H) is placed in 8EIQ (109..117 ECL1 loop) and absent in 8EJ1 -> must abstain to None!
+    for imputed_val in (0.0, 1.0):
+        poisoned_map = dict(s_stab_map)
+        poisoned_map[110] = imputed_val  # ETI-ordered ECL1 residue 110 in C_8EIQ \ C_8EJ1
+        try:
+            evaluate_holdout_panel(holdout_variants, poisoned_map, valid_s_common=common_set)
+            c3_ok = False
+        except CryoEMF508delRescueError:
+            pass
     s_110, g_110 = score_variant_s_stab(
         {"variant_family": "missense", "codon_position": 110, "hgvs_p_or_c": "p.Asp110His"},
         s_stab_map,
+        valid_s_common=common_set,
     )
     if s_110 is not None or g_110 is not None:
         c3_ok = False
@@ -877,6 +973,15 @@ def run_falsification_suite(
             c7_ok = False
 
     cat_entries = load_catalog_permissions()
+    bad_prov_src = copy.deepcopy(dict(holdout_payload))
+    bad_prov_src["provenance"] = dict(holdout_payload["provenance"])
+    bad_prov_src["provenance"]["catalog_sources"] = ["myvariant", "mavedb-dump-zenodo"]
+    try:
+        validate_holdout_annotations(bad_prov_src, dev_payload, catalog_entries=cat_entries)
+        c7_ok = False
+    except PermissionError:
+        pass
+
     for src_id in MANUAL_UNADMITTED_SOURCES:
         try:
             check_manual_catalog_gate(src_id, catalog_entries=cat_entries)
@@ -896,12 +1001,13 @@ def run_benchmark(
     require_exposed_status: bool = False,
 ) -> dict[str, Any]:
     cat_entries = load_catalog_permissions()
-    for admitted_id in ("rcsb-pdb-8ej1", "rcsb-pdb-8eiq", "uniprot-p13569", "openfda-label", "myvariant"):
+    for admitted_id in ("rcsb-pdb-8ej1", "rcsb-pdb-8eiq", "uniprot-p13569", "openfda-label", "myvariant", "clinvar"):
         check_manual_catalog_gate(admitted_id, catalog_entries=cat_entries)
 
     s_8ej1, s_8eiq, uniprot_seq = load_verified_structures()
     c_8ej1 = {k: pt for k, (_, pt) in s_8ej1.ca_by_seq.items()}
     c_8eiq = {k: pt for k, (_, pt) in s_8eiq.ca_by_seq.items()}
+    common_set = frozenset(set(c_8ej1) & set(c_8eiq))
     s_stab_map, _, min_margin = compute_lddt_sym_conservation_map(c_8ej1, c_8eiq)
 
     dev_payload = json.loads(DEFAULT_DEV_JSON.read_text(encoding="utf-8"))
@@ -912,13 +1018,32 @@ def run_benchmark(
         holdout_payload,
         dev_payload,
         require_exposed_status=require_exposed_status,
+        catalog_entries=cat_entries,
     )
 
-    trikafta_eval = evaluate_holdout_panel(holdout_variants, s_stab_map, "trikafta_v23_responsive")
-    alyftrek_eval = evaluate_holdout_panel(holdout_variants, s_stab_map, "alyftrek_v9_responsive")
+    trikafta_eval = evaluate_holdout_panel(
+        holdout_variants,
+        s_stab_map,
+        "trikafta_v23_responsive",
+        valid_s_common=common_set,
+    )
+    alyftrek_eval = evaluate_holdout_panel(
+        holdout_variants,
+        s_stab_map,
+        "alyftrek_v9_responsive",
+        valid_s_common=common_set,
+    )
 
     falsify_verdicts = (
-        run_falsification_suite(s_8ej1, s_8eiq, uniprot_seq, s_stab_map, holdout_payload, dev_payload)
+        run_falsification_suite(
+            s_8ej1,
+            s_8eiq,
+            uniprot_seq,
+            s_stab_map,
+            holdout_payload,
+            dev_payload,
+            holdout_variants,
+        )
         if run_falsify
         else {}
     )

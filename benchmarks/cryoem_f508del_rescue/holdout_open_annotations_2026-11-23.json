@@ -47,7 +47,32 @@
     "jurisdiction": "US FDA",
     "canonical_transcript": "ENST00000003084",
     "uniprot_acc": "P13569",
-    "variants_sha256": "9b815b5bc581363fc8cc7c7c4b5c31fc346d60ee2047256bc264d544062eb703"
+    "variants_sha256": "8d410145e5219bfa405dbf7a24f68cedb7a5f88c5035b0da6936b5d402024bb3",
+    "pre_registered_variants_sha256": "9b815b5bc581363fc8cc7c7c4b5c31fc346d60ee2047256bc264d544062eb703",
+    "post_audit_spl_errata": [
+      {
+        "variant_id": "CFTR-G970R",
+        "fields_corrected": {
+          "kalydeco_v36_responsive": [
+            1,
+            0
+          ],
+          "symdeko_v22_responsive": [
+            1,
+            0
+          ],
+          "label_status.kalydeco_v36_spl": [
+            "listed_on_fda_spl",
+            "not_listed_on_fda_spl"
+          ],
+          "label_status.symdeko_v22_spl": [
+            "listed_on_fda_spl",
+            "not_listed_on_fda_spl"
+          ]
+        },
+        "reason": "G970R appears in KALYDECO Section 12.1/14 prose and SYMDEKO Section 14 clinical-study text as a non-indicated splicing-defect allele and is absent from KALYDECO v36 Table 3 and SYMDEKO v22 Table 6; primary trikafta_v23_responsive (0) and secondary alyftrek_v9_responsive (0) are unchanged."
+      }
+    ]
   },
   "variants": [
     {
@@ -560,13 +585,13 @@
       "alphagenome_avi_score": null,
       "trikafta_v23_responsive": 0,
       "alyftrek_v9_responsive": 0,
-      "kalydeco_v36_responsive": 1,
-      "symdeko_v22_responsive": 1,
+      "kalydeco_v36_responsive": 0,
+      "symdeko_v22_responsive": 0,
       "label_status": {
         "trikafta_v23_spl": "not_listed_on_fda_spl",
         "alyftrek_v9_spl": "not_listed_on_fda_spl",
-        "kalydeco_v36_spl": "listed_on_fda_spl",
-        "symdeko_v22_spl": "listed_on_fda_spl",
+        "kalydeco_v36_spl": "not_listed_on_fda_spl",
+        "symdeko_v22_spl": "not_listed_on_fda_spl",
         "experimental_rescue_status": "unknown",
         "spl_jurisdiction": "US FDA",
         "canonical_transcript": "ENST00000003084"
