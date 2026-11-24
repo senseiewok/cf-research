@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "work": "Quantitative CFTR calnexin (CANX KO) chaperone coupling & single-corrector (VX-661 vs. VX-445) selectivity benchmark reusing the locked residue-clustered split of Tedman et al. 2025 (CC BY 4.0).",
+  "done_file": "done.md",
+  "done_sha256": "9d701976cea245957e18b3feb532d6ad7b01338928f40397bb5472116aa81187",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-dev-canx-ko-stability-positive-control",
+      "statement": "Across 167 development variants in Tedman et al. 2025 (234/234 rows aligned between All_variants and All_variants CANX KO, zero excluded), log2(Parental DMSO) and log2(CANX KO DMSO) exhibit Pearson r = 0.992301 (> 0.70 pre-registered positive control).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/ALT 9-6-24 CFTR DMS Expanded Library Master Tables.xlsx (CC BY 4.0, DOI 10.17632/ksfmxv8zts.1) summarized in benchmarks/cftr_dms_canx_selectivity/results_2026-11-23.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_canx_selectivity.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "IEEE-754 float64 dual-sheet XML correlation",
+          "script": "cftr_dms_canx_selectivity.py",
+          "difference": "parses both workbook sheets with float64 log2 conversion and computes Pearson r in float64 arithmetic",
+          "value": 0.992301
+        },
+        {
+          "name": "Decimal precision independent sheet correlation",
+          "script": "independent_audit.py",
+          "difference": "separate XML reader computing log2 Pearson correlation via decimal.Decimal without sharing code",
+          "value": 0.992301
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c2-arm-a-canx-ko-holdout-mae",
+      "statement": "On 67 held-out CFTR variants across 59 unexposed codons (zero overlap with dev or PRED-0010), 2-feature OLS predicting log2(Parental VX-661+VX-445) from log2(Parental DMSO) + log2(CANX KO DMSO) yields held-out MAE = 0.430771 log2(Mut/WT) vs. baseline dmso_ols MAE = 0.451487.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/ALT 9-6-24 CFTR DMS Expanded Library Master Tables.xlsx (All_variants & All_variants CANX KO, CC BY 4.0) summarized in benchmarks/cftr_dms_canx_selectivity/results_2026-11-23.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_canx_selectivity.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "Gaussian elimination OLS fit on dual-sheet dev set",
+          "script": "cftr_dms_canx_selectivity.py",
+          "difference": "solves 3x3 normal equations via partial-pivoting Gaussian elimination",
+          "value": 0.430771
+        },
+        {
+          "name": "Cholesky L L^T 3x3 independent re-derivation",
+          "script": "independent_audit.py",
+          "difference": "separate XML parser solving 3x3 normal equations via Cholesky factorization",
+          "value": 0.430771
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c3-arm-b-canx-ko-selectivity-holdout-mae",
+      "statement": "On the same 67 held-out variants in All_variants CANX KO, partial-penalized Ridge (alpha=100.0) predicting dampened single-corrector selectivity S_eps_canx_ko = log2((VX445+0.05)/(VX661+0.05)) yields held-out MAE = 0.189235 vs. dev-CV-locked constant_dev_median MAE = 0.186365 (-1.54%).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/ALT 9-6-24 CFTR DMS Expanded Library Master Tables.xlsx (All_variants CANX KO Cols F/J/N, CC BY 4.0) summarized in benchmarks/cftr_dms_canx_selectivity/results_2026-11-23.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_canx_selectivity.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "Gaussian elimination 10x10 partial Ridge",
+          "script": "cftr_dms_canx_selectivity.py",
+          "difference": "fits partial-penalized Ridge on All_variants CANX KO via Gaussian elimination",
+          "value": 0.189235
+        },
+        {
+          "name": "Cholesky L L^T 10x10 independent solver",
+          "script": "independent_audit.py",
+          "difference": "separate XML parser solving 10x10 Ridge normal equations via Cholesky factorization",
+          "value": 0.189235
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c4-arm-a-10pct-coupling-refuted",
+      "statement": "Pre-registered Arm A hypothesis (>=10% held-out log2 MAE reduction and Bonferroni 97.5% cluster-bootstrap CI > 0 from adding CANX KO DMSO to Parental DMSO) is refuted: point reduction is +4.5884% and 59-cluster 97.5% CI is [-0.001739, 0.044782].",
+      "kind": "predicted",
+      "origin": "lab",
+      "dataset": "benchmarks/cftr_dms_canx_selectivity/results_2026-11-23.json",
+      "standing": "refuted",
+      "held_out_error": {
+        "value": 0.430771,
+        "unit": "log2(Mut/WT) MAE",
+        "set_fixed_in_done_file": true
+      },
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_canx_selectivity.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c5-arm-b-10pct-selectivity-refuted",
+      "statement": "Pre-registered Arm B hypothesis (>=10% held-out MAE reduction and Bonferroni 97.5% cluster-bootstrap CI > 0 for CANX KO single-corrector selectivity S_eps_canx_ko) is refuted: Ridge yields 0.189235 vs. constant_dev_median 0.186365 (-1.5397%, 97.5% CI [-0.038826, 0.036407]).",
+      "kind": "predicted",
+      "origin": "lab",
+      "dataset": "benchmarks/cftr_dms_canx_selectivity/results_2026-11-23.json",
+      "standing": "refuted",
+      "held_out_error": {
+        "value": 0.189235,
+        "unit": "S_eps_canx_ko MAE (log2 ratio)",
+        "set_fixed_in_done_file": true
+      },
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_canx_selectivity.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-23"
+    }
+  ]
+}
