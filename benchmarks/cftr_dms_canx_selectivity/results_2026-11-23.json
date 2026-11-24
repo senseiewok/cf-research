@@ -1,0 +1,212 @@
+{
+  "schema_version": "tedman2025-canx-selectivity-results-v1",
+  "benchmark_id": "tedman2025-canx-dependency-and-corrector-selectivity",
+  "evaluated_on_local": "2026-11-23",
+  "evaluated_on_utc": "2026-11-24T05:42:47Z",
+  "done_sha256": "9d701976cea245957e18b3feb532d6ad7b01338928f40397bb5472116aa81187",
+  "split_manifest_path": "benchmarks/cftr_dms_expression/split_manifest.json",
+  "split_manifest_sha256": "e6d60aa56d2ac87a9b82aaca8b3df5b560131943eb0ffb809f0834e8a9db3543",
+  "multiplicity_policy": "bonferroni_2_arms_975pct_two_sided_ci_no_or_gate",
+  "source_workbook_note": "Parental All_variants Col J (VX-661 Mut/WT) is blank (0/234) in the Tedman et al. 2025 workbook; All_variants CANX KO Cols F/J/N/R are 234/234 populated.",
+  "dataset": {
+    "source_id": "cftr-dms-tedman-2025",
+    "source_master_xlsx": "ALT 9-6-24 CFTR DMS Expanded Library Master Tables.xlsx",
+    "source_master_sha256": "2a702ee3744b8039a9c7c4c74aec9bb30a91301b138d4948e0e2c81a1931e51b",
+    "scale_boundary": "HEK293T plasma-membrane expression is not CFTR chloride conductance or clinical response.",
+    "aligned_variants_total": 234,
+    "excluded_count": 0,
+    "excluded_rows": [],
+    "dev_variants": 167,
+    "holdout_variants": 67,
+    "dev_unique_codons": 123,
+    "holdout_unique_codons": 59,
+    "dev_pred0010_forced_variants": 45,
+    "holdout_pred0010_overlap_codons": 0
+  },
+  "pre_holdout_controls": {
+    "dual_sheet_alignment": {
+      "aligned_variants": 234,
+      "excluded_count": 0,
+      "passed": true
+    },
+    "dev_canx_ko_dmso_stability": {
+      "pearson_r_log2": 0.992301,
+      "threshold": 0.7,
+      "passed": true
+    },
+    "dev_pharmacological_directionality": {
+      "parental_medians_rel": {
+        "dmso": 0.408232,
+        "vx445": 1.462794,
+        "combo": 3.120957
+      },
+      "canx_ko_medians_rel": {
+        "dmso": 0.269038,
+        "vx661": 1.111691,
+        "vx445": 1.041286,
+        "combo": 2.978676
+      },
+      "passed": true
+    },
+    "dev_shuffled_negative_controls": {
+      "seed": 20261124,
+      "arm_a_shuffled_canx_dev_cv_rel_reduction": -0.003609,
+      "arm_b_shuffled_features_dev_cv_rel_reduction": -0.12641,
+      "passed": true
+    }
+  },
+  "arm_a_canx_chaperone_coupling": {
+    "target": "y_combo_log2 = log2(Parental VX-661+VX-445)",
+    "dev_models": {
+      "baseline_dmso_ols": {
+        "b0_intercept": 2.21154,
+        "b1_parental_dmso_slope": 0.865568,
+        "se": [
+          0.06527,
+          0.03895
+        ]
+      },
+      "candidate_dmso_plus_canx_ko_ols": {
+        "b0_intercept": 1.513433,
+        "b1_parental_dmso_slope": 1.688711,
+        "b2_canx_ko_dmso_slope": -1.001083,
+        "se": [
+          0.267608,
+          0.308738,
+          0.372587
+        ]
+      }
+    },
+    "holdout_evaluation": {
+      "baseline_dmso_ols_mae_log2": 0.451487,
+      "baseline_dmso_ols_mae_linear_context_only": 0.541184,
+      "candidate_mae_log2": 0.430771,
+      "candidate_mae_linear_context_only": 0.510338,
+      "relative_mae_reduction": 0.045884,
+      "pre_registered_gate_threshold": 0.1,
+      "residue_clustered_bootstrap": {
+        "n_holdout_clusters": 59,
+        "resamples": 2000,
+        "seed": 20261123,
+        "delta_mae_ci95": [
+          0.000723,
+          0.041823
+        ],
+        "ci95_low_gt_zero": true,
+        "delta_mae_ci975_bonferroni": [
+          -0.001739,
+          0.044782
+        ],
+        "ci975_low_gt_zero": false
+      },
+      "gate_verdict": "REFUTED_BELOW_10PCT_MAE_REDUCTION_THRESHOLD",
+      "ledger_standing": "refuted"
+    }
+  },
+  "arm_b_canx_ko_single_corrector_selectivity": {
+    "target": "S_eps_canx_ko = log2((CANX_KO_VX445_rel + 0.05) / (CANX_KO_VX661_rel + 0.05))",
+    "eps_dampening": 0.05,
+    "dev_models": {
+      "constant_dev_median_s_eps": -0.108261,
+      "canx_ko_dmso_ols": {
+        "b0_intercept": -0.22904,
+        "b1_canx_ko_dmso_slope": -0.113622,
+        "se": [
+          0.050506,
+          0.025989
+        ]
+      },
+      "dev_cv_5fold_baselines": {
+        "constant_dev_median_mae_s_eps": 0.186444,
+        "canx_ko_dmso_ols_mae_s_eps": 0.191943,
+        "locked_baseline_before_holdout": "constant_dev_median"
+      },
+      "candidate_partial_ridge": {
+        "selected_alpha": 100.0,
+        "cv_path": [
+          {
+            "alpha": 0.01,
+            "dev_cv_mae_s_eps": 0.1924
+          },
+          {
+            "alpha": 0.1,
+            "dev_cv_mae_s_eps": 0.192383
+          },
+          {
+            "alpha": 1.0,
+            "dev_cv_mae_s_eps": 0.192224
+          },
+          {
+            "alpha": 10.0,
+            "dev_cv_mae_s_eps": 0.190976
+          },
+          {
+            "alpha": 100.0,
+            "dev_cv_mae_s_eps": 0.186276
+          },
+          {
+            "alpha": 1000.0,
+            "dev_cv_mae_s_eps": 0.189142
+          }
+        ],
+        "b0_intercept": -0.255416,
+        "b1_canx_ko_dmso_slope": -0.129276,
+        "extra_feature_names": [
+          "TMD1",
+          "NBD1",
+          "R Domain",
+          "TMD2",
+          "NBD2",
+          "nonsense",
+          "inframe_indel",
+          "other"
+        ],
+        "extra_weights": [
+          -0.002178,
+          -0.030776,
+          0.000672,
+          0.028821,
+          -0.009579,
+          -0.03156,
+          -0.00661,
+          0.004592
+        ]
+      },
+      "dev_subdomain_s_eps_medians_context_only": {
+        "Lasso": -0.033332,
+        "TMD1": -0.133473,
+        "NBD1": -0.091653,
+        "R Domain": -0.130069,
+        "TMD2": -0.050884,
+        "NBD2": -0.131424
+      }
+    },
+    "holdout_evaluation": {
+      "locked_baseline_name": "constant_dev_median",
+      "locked_baseline_mae_s_eps": 0.186365,
+      "constant_dev_median_mae_s_eps": 0.186365,
+      "canx_ko_dmso_ols_mae_s_eps": 0.191408,
+      "candidate_partial_ridge_mae_s_eps": 0.189235,
+      "s_raw_constant_median_mae_context_only": 0.200678,
+      "relative_mae_reduction": -0.015397,
+      "pre_registered_gate_threshold": 0.1,
+      "residue_clustered_bootstrap": {
+        "n_holdout_clusters": 59,
+        "resamples": 2000,
+        "seed": 20261123,
+        "delta_mae_ci95": [
+          -0.03571,
+          0.032947
+        ],
+        "ci95_low_gt_zero": false,
+        "delta_mae_ci975_bonferroni": [
+          -0.038826,
+          0.036407
+        ],
+        "ci975_low_gt_zero": false
+      },
+      "gate_verdict": "REFUTED_BELOW_10PCT_MAE_REDUCTION_THRESHOLD",
+      "ledger_standing": "refuted"
+    }
+  }
+}
