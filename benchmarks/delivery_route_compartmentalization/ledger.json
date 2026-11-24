@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "work": "PRED-0015: Delivery-route biomarker compartmentalization benchmark across early-phase PRISMA-included Cystic Fibrosis interventional trials in tools/trial_atlas/snapshot.json.",
+  "done_file": "done.md",
+  "done_sha256": "91244ae1b0be777825b41c60e6f450c4069c47659a80b71830e45e284258d853",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-prisma-940-cohort-count",
+      "statement": "tools/trial_atlas/snapshot.json contains 1,053 INTERVENTIONAL records and 940 PRISMA-included Cystic Fibrosis interventional studies after excluding 72 X4 condition-omission records and 41 X5 negated-CF records.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/trial_atlas/snapshot.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "delivery_route_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "scope.py regex PRISMA classifier",
+          "script": "delivery_route_compartmentalization.py",
+          "difference": "applies tools/trial_atlas/scope.py regular expressions to snapshot study records",
+          "value": 940
+        },
+        {
+          "name": "regex-free character token-window + directory cross-check",
+          "script": "independent_audit.py",
+          "difference": "separate file with zero re or trial_atlas imports; scans alphanumeric token windows and checks data/care_team_trials_directory.json",
+          "value": 940
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c2-early-phase-systemic-primary-sweat-chloride",
+      "statement": "Among 54 early-phase non-healthy-volunteer PRISMA-included systemic CFTR modulator and systemic PTC readthrough trials in tools/trial_atlas/snapshot.json, 7 (0.129630) register sweat chloride as a primary outcome in primary_outcomes[].measure.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/trial_atlas/snapshot.json (clinicaltrials-gov) summarized in benchmarks/delivery_route_compartmentalization/results_2026-11-24.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "delivery_route_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "word-boundary regex regimen and measure classifier",
+          "script": "delivery_route_compartmentalization.py",
+          "difference": "classifies interventions and primary_outcomes[].measure with compiled regular expressions",
+          "value": 7
+        },
+        {
+          "name": "regex-free structured intervention token scanner",
+          "script": "independent_audit.py",
+          "difference": "separate file with zero re imports; inspects typed DRUG/BIOLOGICAL/GENETIC intervention dicts via lowercase alphanumeric token tuples",
+          "value": 7
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c3-early-phase-inhaled-primary-sweat-chloride",
+      "statement": "Among 17 early-phase non-healthy-volunteer PRISMA-included airway-restricted CFTR-restoring genetic, mRNA, viral-vector, liposomal, and splice-ASO trials in tools/trial_atlas/snapshot.json (15 excluding dual-route modulator co-administration), 0 (0.000000) register primary sweat chloride while 16 of 17 (0.941176) register primary airway or safety outcomes.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/trial_atlas/snapshot.json (clinicaltrials-gov) summarized in benchmarks/delivery_route_compartmentalization/results_2026-11-24.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "delivery_route_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "word-boundary regex investigational-route classifier",
+          "script": "delivery_route_compartmentalization.py",
+          "difference": "applies investigational-route precedence regular expressions to study titles, keywords, and interventions",
+          "value": 0
+        },
+        {
+          "name": "regex-free proximity token-window scanner",
+          "script": "independent_audit.py",
+          "difference": "separate file with zero re imports; checks 12-token proximity windows and named candidate tuples",
+          "value": 0
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c4a-fisher-hypergeometric-one-sided-p",
+      "statement": "Comparing 7/54 systemic vs 0/17 airway-restricted early-phase CFTR-restoring trials yields one-sided Fisher hypergeometric p = 160272/1203521 (0.13316926) and two-sided Fisher p = 20212/109411 (0.18473462).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/trial_atlas/snapshot.json (clinicaltrials-gov) summarized in benchmarks/delivery_route_compartmentalization/results_2026-11-24.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "delivery_route_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "math.comb hypergeometric support summation",
+          "script": "delivery_route_compartmentalization.py",
+          "difference": "computes combinatorial hypergeometric mass terms via math.comb",
+          "value": 0.13316926
+        },
+        {
+          "name": "multiplicative Fraction product summation",
+          "script": "independent_audit.py",
+          "difference": "computes binomial coefficients via multiplicative Fraction products without importing math",
+          "value": 0.13316926
+        }
+      ],
+      "tolerance": 0.00000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c4b-chan-zhang-unconditional-ci95-low",
+      "statement": "The Chan-Zhang (1999) unconditional two-sided 95% risk-difference confidence interval for 7/54 systemic minus 0/17 airway-restricted early-phase CFTR-restoring trials is [-0.078380, 0.252184], with lower bound -0.078380.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/trial_atlas/snapshot.json (clinicaltrials-gov) summarized in benchmarks/delivery_route_compartmentalization/results_2026-11-24.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "delivery_route_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "trigonometric Cardano cubic restricted-MLE + golden-section supremum",
+          "script": "delivery_route_compartmentalization.py",
+          "difference": "solves Miettinen-Nurminen cubic via math.acos/math.cos and refines nuisance p2 via golden-section search",
+          "value": -0.07838
+        },
+        {
+          "name": "polynomial score-derivative bisection + ternary nuisance supremum",
+          "script": "independent_audit.py",
+          "difference": "solves cleared-denominator log-likelihood derivative by monotone bisection without trigonometry and refines nuisance p2 via ternary search",
+          "value": -0.07838
+        }
+      ],
+      "tolerance": 0.00001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c4c-newcombe-wilson-ci95-low",
+      "statement": "The Newcombe-Wilson Method-10 two-sided 95% risk-difference confidence interval for 7/54 systemic minus 0/17 airway-restricted early-phase CFTR-restoring trials is [-0.065945, 0.244217], with lower bound -0.065945.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/trial_atlas/snapshot.json (clinicaltrials-gov) summarized in benchmarks/delivery_route_compartmentalization/results_2026-11-24.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "delivery_route_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "IEEE-754 float64 Newcombe-Wilson Method 10",
+          "script": "delivery_route_compartmentalization.py",
+          "difference": "computes single-arm Wilson limits and Euclidean difference intervals in float64",
+          "value": -0.065945
+        },
+        {
+          "name": "50-digit Decimal.sqrt Newcombe-Wilson Method 10",
+          "script": "independent_audit.py",
+          "difference": "computes Wilson limits and root-sum-of-squares bounds in 50-digit decimal.Decimal arithmetic",
+          "value": -0.065945
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c5-pred0015-primary-sweat-chloride-hypothesis-refuted",
+      "statement": "Pre-registered PRED-0015 hypothesis (one-sided Fisher hypergeometric p < 0.01 and unconditional / Newcombe-Wilson 95% risk-difference CI lower bound > 0 on flattened primary_outcomes[].measure) is refuted: observed proportions are 7/54 (0.129630) vs 0/17 (0.000000), p_fisher_1s = 160272/1203521 = 0.13316926 >= 0.01, Chan-Zhang 95% CI [-0.078380, 0.252184], and Newcombe-Wilson 95% CI [-0.065945, 0.244217] because early-phase systemic CFTR trials predominantly register safety/PK as primary outcomes and place sweat chloride in secondary outcomes omitted from snapshot.json.",
+      "kind": "predicted",
+      "origin": "lab",
+      "dataset": "benchmarks/delivery_route_compartmentalization/results_2026-11-24.json",
+      "standing": "refuted",
+      "held_out_error": {
+        "value": 0.13316926,
+        "unit": "one_sided_fisher_hypergeometric_p_value_vs_0.01_alpha_threshold",
+        "set_fixed_in_done_file": true
+      },
+      "checks": [
+        {"type": "own_script", "ref": "delivery_route_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-24"
+    }
+  ]
+}
