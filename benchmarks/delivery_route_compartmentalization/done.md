@@ -1,7 +1,7 @@
 # Done file: Delivery-route biomarker compartmentalization benchmark across early-phase CFTR interventional trials (`PRED-0015`)
 
 Pre-registered and committed on `feat/sentinel-research-sync` prior to reading `tools/trial_atlas/snapshot.json` outcome counts or authoring `ledger.json`.
-Independent open-source research benchmark only (Tier T1/T2 ClinicalTrials.gov registry metadata); not clinical guidance and never an assessment of personal trial eligibility or treatment efficacy. ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.
+Independent open-source research benchmark only (Tier T1/T2 ClinicalTrials.gov registry metadata); not clinical guidance and not an assessment of personal trial eligibility or treatment efficacy. ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.
 
 ## Success test
 
@@ -9,7 +9,7 @@ The benchmark work is complete when every deterministic check below exits `0` on
 
 1. **Dataset provenance, flattened schema check, & PRISMA-940 cohort boundary (`AH-1`, `AH-2`):**
    - Source dataset: `tools/trial_atlas/snapshot.json` (`catalog.yaml` source `clinicaltrials-gov`, `dataTimestamp` `2026-10-09`, `1,053` raw `INTERVENTIONAL` studies and `940` PRISMA-included Cystic Fibrosis interventional studies after `scope.py` rules `X1`–`X5`: `72` `X4` condition-omission exclusions and `41` `X5` negated-CF exclusions).
-   - Explicitly assert that every PRISMA-included study record carries flattened `primary_outcomes` (`list` of dicts with `measure`, `description`, `time_frame`), `phases`, `interventions`, `brief_title`, and `official_title`; never assume uncollected `secondary_outcomes` or `outcomesModule` keys.
+   - Explicitly assert that every PRISMA-included study record carries flattened `primary_outcomes` (`list` of dicts with `measure`, `description`, `time_frame`), `phases`, `interventions`, `brief_title`, and `official_title`; do not read uncollected `secondary_outcomes` or `outcomesModule` keys.
 
 2. **Single pre-registered primary estimand (early-phase non-healthy-volunteer CFTR-restoring trials, zero OR-gates):**
    - **Early-phase filter:** `phases` (uppercase list) is non-empty and `set(phases) <= {"EARLY_PHASE1", "PHASE1", "PHASE2"}` (admitting `EARLY_PHASE1`, `PHASE1`, `["PHASE1", "PHASE2"]`, and `PHASE2`; excluding `["PHASE2", "PHASE3"]`, `PHASE3`, `PHASE4`, `NA`, and empty `[]`). All-phase counts across `940` PRISMA studies are reported strictly as non-gated descriptive context.
@@ -28,9 +28,9 @@ The benchmark work is complete when every deterministic check below exits `0` on
    - **Pre-registered support criteria (all five required simultaneously for `standing = "open"` / `outcome = "supported"`; otherwise recorded as `refuted`):**
      1. Minimum early-phase arm margins: `N_sys >= 8` and `N_inh >= 8`.
      2. Directional compartmentalization: `p_sys = k_sys / N_sys > p_inh = k_inh / N_inh`.
-     3. Exact one-sided Fisher hypergeometric `p_fisher_1s < 0.01` (`Fraction(1, 100)`).
-     4. Both the exact unconditional Chan-Zhang / Miettinen-Nurminen profile-score 95% two-sided risk-difference CI lower bound (`alpha/2 = 0.025`) `> 0.0` AND the Newcombe-Wilson Method-10 95% two-sided risk-difference CI lower bound `> 0.0`.
-     5. Dual-route sensitivity preservation: after excluding `dual_route_modulator_co_admin == True` studies from `inhaled_cftr`, `p_sys > p_inh_pure` and exact one-sided Fisher `p_fisher_pure_1s < 0.01`.
+     3. One-sided Fisher hypergeometric `p_fisher_1s < 0.01` (`Fraction(1, 100)`).
+     4. Both the unconditional Chan-Zhang / Miettinen-Nurminen profile-score 95% two-sided risk-difference CI lower bound (`alpha/2 = 0.025`) `> 0.0` AND the Newcombe-Wilson Method-10 95% two-sided risk-difference CI lower bound `> 0.0`.
+     5. Dual-route sensitivity preservation: after excluding `dual_route_modulator_co_admin == True` studies from `inhaled_cftr`, `p_sys > p_inh_pure` and one-sided Fisher `p_fisher_pure_1s < 0.01`.
 
 4. **Independent second-method audit & repository gates (`discovery-practice` Rule 2):**
    - `benchmarks/delivery_route_compartmentalization/independent_audit.py` (importing zero `re`, zero `tools/`, and zero benchmark helper modules) independently verifies `done_sha256`, PRISMA `940` count parity against `data/care_team_trials_directory.json`, token-tuple arm & outcome counts, multiplicative `Fraction` hypergeometric `p_fisher_1s` (`tolerance = 0`), and 50-digit `Decimal` Newcombe-Wilson risk-difference bounds (`tolerance <= 1e-6`).
@@ -40,10 +40,10 @@ The benchmark work is complete when every deterministic check below exits `0` on
 
 Before computing or inspecting observed early-phase sweat-chloride proportions on `snapshot.json`, `delivery_route_compartmentalization.py` must verify:
 
-1. **Exact hypergeometric & CI calibration:** On synthetic fixture `(N_sys=12, k_sys=9, N_inh=10, k_inh=0)`, exact `p_fisher_1s == Fraction(11, 24871)`, full hypergeometric support sums to `Fraction(1, 1)`, and both Chan-Zhang unconditional 95% CI lower bound and Newcombe-Wilson 95% CI lower bound exceed `0.35`.
+1. **Hypergeometric & CI calibration:** On synthetic fixture `(N_sys=12, k_sys=9, N_inh=10, k_inh=0)`, rational `p_fisher_1s == Fraction(11, 24871)`, full hypergeometric support sums to `Fraction(1, 1)`, and both Chan-Zhang unconditional 95% CI lower bound and Newcombe-Wilson 95% CI lower bound exceed `0.35`.
 2. **Known trial regimen-route controls:** `NCT05668741` (`VX-522` + `ivacaftor`) classifies as `inhaled_cftr` with `dual_route_modulator_co_admin=True`; `NCT05248230` (`4D-710` AAV) and `NCT06429176` (`SPL84` ASO) classify as `inhaled_cftr` with `dual_route_modulator_co_admin=False`; `NCT00846781` (`denufosol` P2Y2) classifies as `non_cftr_or_other`.
 3. **Inhaled airway/safety primary-endpoint specificity:** At least `80%` of early-phase `inhaled_cftr` trials register an airway (`FEV1`, `LCI`, `NPD`, mucociliary) or safety/tolerability primary endpoint in `primary_outcomes[].measure`.
 
 ## Stopping rule
 
-Single confirmatory evaluation pass on frozen `tools/trial_atlas/snapshot.json` (`dataTimestamp` `2026-10-09`). Zero post-hoc tuning of phase list, healthy-volunteer filter, drug/vector allowlists, outcome keywords, or `alpha = 0.01` / `95%` CI thresholds after reading `snapshot.json`. Any positive-control failure raises `CompartmentalizationBenchmarkError` before reporting outcomes; if any of the five pre-registered support criteria fails, the prediction is recorded honestly as `refuted` in `results_2026-11-24.json`, `ledger.json`, `failures.jsonl`, and `ledger/predictions.jsonl`.
+Single pre-registered evaluation pass on frozen `tools/trial_atlas/snapshot.json` (`dataTimestamp` `2026-10-09`). Zero post-hoc tuning of phase list, healthy-volunteer filter, drug/vector allowlists, outcome keywords, or `alpha = 0.01` / `95%` CI thresholds after reading `snapshot.json`. Any positive-control failure raises `CompartmentalizationBenchmarkError` before reporting outcomes; if any of the five pre-registered support criteria fails, the prediction is recorded honestly as `refuted` in `results_2026-11-24.json`, `ledger.json`, `failures.jsonl`, and `ledger/predictions.jsonl`.
