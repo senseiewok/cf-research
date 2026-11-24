@@ -152,6 +152,6 @@ All primary DOIs and dataset identifiers were verified live via `evidence_cli.py
 
 ## 6. Next Steps
 
-1. Human maintainer reviews the licensing terms and files.
-2. Maintainer updates status to `Status: admitted` or modifies access mode.
-3. Once admitted, benchmark tools can ingest the variant tables into the theratype benchmark suite.
+1. **2026-11-23 Maintainer Update (`cftr-dms-tedman-2025`):** Maintainer manually downloaded `cftr-dms-tedman-2025` (`DOI: 10.17632/ksfmxv8zts.1`, CC BY 4.0) locally into git-ignored `sources/downloads/tedman-2025/` (`ALT 9-6-24 CFTR DMS Expanded Library Master Tables.xlsx`, `AGM ALT Library Comparison.xlsx`, `cftr_dict3.tsv`) for offline empirical evaluation in `benchmarks/cftr_dms_expression/` (`access` remains `manual`).
+2. **2026-11-23 Maintainer Update (`mavedb-dump-zenodo`):** Maintainer manually downloaded `mavedb-dump.2026062418131.tar.gz` (concept DOI `10.5281/zenodo.11201736`, CC0 1.0, `1,907,736,956` bytes, SHA-256 `7101852e929c1458b8e437949c2ec6ac01a4af6ff1e5740f3a656b557be2bb22`, `asOf: 2026-06-24`) and staged `main.json` (`21,120,012` bytes, SHA-256 `a3350ab7538172fd26cea79b5f10fe1e7f48912cdb971b62c152d8296da18fa8`) in git-ignored `sources/downloads/mavedb-2026-06-24/`: `1,254` experiment sets, `1,992` experiments, and `2,777` score sets with `0` CFTR/`P13569`/`ABCC7` or checked CF modifier score sets (the 41 `"fibrosis"` string hits target `MPL`/`P40238`). `access` remains `manual`.
+3. `cftr-dms-mckee-2023` (Elsevier supplementary tables; 103 overlapping variants already cross-checked via Tedman et al. 2025's CC BY 4.0 `AGM ALT Library Comparison.xlsx`) remains `access: manual` pending separate maintainer review and staging.

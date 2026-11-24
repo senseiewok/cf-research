@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "work": "Council Item #1: Quantitative CFTR plasma-membrane expression benchmark evaluating whether untreated baseline expression (log2 DMSO Mut/WT), CFTR sub-domain, and variant class predict VX-661+VX-445 rescue (log2 Mut/WT) on a residue-clustered, PRED-0010-disjoint held-out slice of Tedman et al. 2025 (CC BY 4.0).",
+  "done_file": "done.md",
+  "done_sha256": "d4b8e94679660bf21f7aa55c023802049c16b2397edb1bb31a191a51fe57d39d",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-agm-alt-cross-study-positive-control",
+      "statement": "Cross-study positive control on AGM ALT Library Comparison.xlsx (N = 103 shared CFTR variants between McKee et al. 2023 and Tedman et al. 2025) reproduces Pearson r = 0.998856 (linear) and Spearman rho = 0.965767.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/AGM ALT Library Comparison.xlsx (CC BY 4.0, DOI 10.17632/ksfmxv8zts.1) summarized in benchmarks/cftr_dms_expression/results_2026-11-23.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "IEEE-754 float Pearson r in benchmark parser",
+          "script": "cftr_dms_benchmark.py",
+          "difference": "parses XLSX XML Sheet1 with float64 and computes Pearson r in float arithmetic",
+          "value": 0.998856
+        },
+        {
+          "name": "Decimal exact-parse cross-study audit",
+          "script": "independent_audit.py",
+          "difference": "separate XLSX XML reader computing covariances via decimal.Decimal without importing cftr_dms_benchmark.py",
+          "value": 0.998856
+        }
+      ],
+      "tolerance": 0.00001,
+      "headline": true,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c2-dmso-ols-holdout-mae",
+      "statement": "On 67 held-out CFTR variants across 59 unexposed codons (zero overlap with dev or PRED-0010), untreated-expression OLS (log2 VX-661+VX-445 ~ log2 DMSO fitted on 167 dev variants) achieves held-out MAE = 0.451487 log2(Mut/WT) vs constant dev-median MAE = 1.077948.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/ALT 9-6-24 CFTR DMS Expanded Library Master Tables.xlsx (sheet All_variants, CC BY 4.0) summarized in benchmarks/cftr_dms_expression/results_2026-11-23.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "Simple 1D OLS normal equations estimator",
+          "script": "cftr_dms_benchmark.py",
+          "difference": "direct centered covariance 1D OLS fit on 167 dev rows evaluated on 67 holdout rows",
+          "value": 0.451487
+        },
+        {
+          "name": "Cholesky 2x2 independent re-derivation",
+          "script": "independent_audit.py",
+          "difference": "separate XML reader fitting 2x2 normal equations via Cholesky L L^T factorization",
+          "value": 0.451487
+        }
+      ],
+      "tolerance": 0.00001,
+      "headline": true,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c3-candidate-partial-ridge-holdout-mae",
+      "statement": "On the same 67 held-out variants (59 unexposed codons), partial-penalized Ridge (unpenalized intercept + log2 DMSO slope plus dev-standardized CFTR sub-domain and variant-class indicators with alpha=100.0 chosen by 5-fold residue-clustered dev CV) achieves held-out MAE = 0.434782 log2(Mut/WT).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/ALT 9-6-24 CFTR DMS Expanded Library Master Tables.xlsx (sheet All_variants, CC BY 4.0) summarized in benchmarks/cftr_dms_expression/results_2026-11-23.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "Partial-pivoting Gaussian elimination solver",
+          "script": "cftr_dms_benchmark.py",
+          "difference": "solves 10x10 partial-penalized normal equations by Gaussian elimination with partial pivoting",
+          "value": 0.434782
+        },
+        {
+          "name": "Independent Cholesky L L^T solver",
+          "script": "independent_audit.py",
+          "difference": "separate XLSX XML reader and Cholesky L L^T solver with zero shared imports",
+          "value": 0.434782
+        }
+      ],
+      "tolerance": 0.00001,
+      "headline": true,
+      "checked_on": "2026-11-23"
+    },
+    {
+      "id": "c4-preregistered-10pct-reduction-refuted",
+      "statement": "Pre-registered hypothesis predicting >= 10% held-out log2 MAE reduction over stronger baseline (dmso_ols) with residue-clustered 95% bootstrap CI > 0 is refuted: observed point reduction is +3.7001% (0.016705 log2) and 59-cluster 95% bootstrap CI is [-0.028005, 0.058719].",
+      "kind": "predicted",
+      "origin": "lab",
+      "dataset": "benchmarks/cftr_dms_expression/results_2026-11-23.json",
+      "standing": "refuted",
+      "held_out_error": {
+        "value": 0.434782,
+        "unit": "log2(Mut/WT) MAE",
+        "set_fixed_in_done_file": true
+      },
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_benchmark.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-23"
+    }
+  ]
+}

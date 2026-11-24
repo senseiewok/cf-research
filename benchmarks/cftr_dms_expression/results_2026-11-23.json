@@ -1,0 +1,133 @@
+{
+  "schema_version": "tedman2025-item1-results-v1",
+  "benchmark_id": "council-item-1-cftr-dms-expression",
+  "evaluated_on": "2026-11-24",
+  "done_sha256": "d4b8e94679660bf21f7aa55c023802049c16b2397edb1bb31a191a51fe57d39d",
+  "split_manifest_sha256": "e6d60aa56d2ac87a9b82aaca8b3df5b560131943eb0ffb809f0834e8a9db3543",
+  "dataset": {
+    "source_id": "cftr-dms-tedman-2025",
+    "doi": "10.17632/ksfmxv8zts.1",
+    "paper_doi": "10.7554/eLife.107180",
+    "license": "CC BY 4.0",
+    "assay": "HEK293T parental CFTR DMS plasma-membrane intensity (VX-661+VX-445 vs DMSO, Mut/WT)",
+    "scale_boundary": "Plasma-membrane expression in HEK293T cells is not CFTR channel conductance or clinical lung benefit.",
+    "total_valid_variants": 234,
+    "excluded_count": 0,
+    "dev_variants": 167,
+    "holdout_variants": 67,
+    "dev_unique_codons": 123,
+    "holdout_unique_codons": 59,
+    "dev_pred0010_forced_variants": 45,
+    "holdout_pred0010_overlap_codons": 0
+  },
+  "positive_controls": {
+    "agm_alt_cross_study": {
+      "file": "AGM ALT Library Comparison.xlsx",
+      "sha256": "6673ab2a480200e7d36133b98dfbeb4864d1a41aa22cf4fdddea59eda8dbe178",
+      "pairs_evaluated": 103,
+      "pearson_r_linear": 0.998856,
+      "pearson_r_log2": 0.998275,
+      "spearman_rho": 0.965767,
+      "passed": true
+    },
+    "dev_directionality": {
+      "dev_dmso_median_rel": 0.408232,
+      "dev_combo_median_rel": 3.120957,
+      "passed": true
+    }
+  },
+  "models_fitted_on_dev": {
+    "constant_dev_median_log2": 1.641988,
+    "dmso_ols": {
+      "b0_intercept": 2.21154,
+      "b1_dmso_slope": 0.865568
+    },
+    "dev_cv_5fold_baselines": {
+      "constant_dev_median_mae_log2": 0.992185,
+      "dmso_ols_mae_log2": 0.443911,
+      "stronger_baseline_in_dev_cv": "dmso_ols"
+    },
+    "candidate_partial_ridge": {
+      "selected_alpha": 100.0,
+      "cv_path": [
+        {
+          "alpha": 0.01,
+          "dev_cv_mae_log2": 0.40396
+        },
+        {
+          "alpha": 0.1,
+          "dev_cv_mae_log2": 0.403926
+        },
+        {
+          "alpha": 1.0,
+          "dev_cv_mae_log2": 0.403687
+        },
+        {
+          "alpha": 10.0,
+          "dev_cv_mae_log2": 0.403599
+        },
+        {
+          "alpha": 100.0,
+          "dev_cv_mae_log2": 0.403393
+        },
+        {
+          "alpha": 1000.0,
+          "dev_cv_mae_log2": 0.425434
+        }
+      ],
+      "b0_intercept": 2.161115,
+      "b1_dmso_slope": 0.823584,
+      "extra_feature_names": [
+        "TMD1",
+        "NBD1",
+        "R Domain",
+        "TMD2",
+        "NBD2",
+        "nonsense",
+        "inframe_indel",
+        "other"
+      ],
+      "extra_weights": [
+        0.024333,
+        -0.149569,
+        0.001122,
+        0.040726,
+        -0.054231,
+        -0.113037,
+        0.011801,
+        0.000249
+      ]
+    }
+  },
+  "holdout_evaluation": {
+    "primary_unit": "log2(VX-661+VX-445 Mut/WT)",
+    "constant_dev_median": {
+      "mae_log2": 1.077948,
+      "mae_linear_context_only": 1.593272
+    },
+    "dmso_ols": {
+      "mae_log2": 0.451487,
+      "mae_linear_context_only": 0.541184
+    },
+    "candidate_partial_ridge": {
+      "mae_log2": 0.434782,
+      "mae_linear_context_only": 0.573246
+    },
+    "stronger_baseline_on_holdout": "dmso_ols",
+    "stronger_baseline_mae_log2": 0.451487,
+    "relative_mae_reduction_vs_stronger": 0.037001,
+    "residue_clustered_bootstrap": {
+      "n_holdout_clusters": 59,
+      "resamples": 2000,
+      "seed": 20261123,
+      "delta_mae_ci95_log2": [
+        -0.028005,
+        0.058719
+      ],
+      "ci95_low_gt_zero": false
+    },
+    "pre_registered_gate_threshold": 0.1,
+    "gate_verdict": "REFUTED_BELOW_10PCT_MAE_REDUCTION_THRESHOLD",
+    "ledger_standing": "refuted"
+  }
+}

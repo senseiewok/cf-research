@@ -95,12 +95,17 @@ class TestMucusMptAndDmsCatalogGate(unittest.TestCase):
                 msg=f"Unexpected admitted MPT/mucus dataset {entry.get('id')!r}; update feasibility record.",
             )
 
-    def test_dms_proposals_remain_manual_unverified(self) -> None:
+    def test_dms_catalog_entries_stay_manual_and_match_verification_state(self) -> None:
         by_id = {e["id"]: e for e in _parse_catalog_entries_stdlib(CATALOG_PATH)}
-        for source_id in ("mavedb-dump-zenodo", "cftr-dms-mckee-2023", "cftr-dms-tedman-2025"):
+        expected_labels = {
+            "mavedb-dump-zenodo": "verified",
+            "cftr-dms-tedman-2025": "verified",
+            "cftr-dms-mckee-2023": "unverified",
+        }
+        for source_id, expected_label in expected_labels.items():
             self.assertIn(source_id, by_id)
             self.assertEqual(by_id[source_id].get("access"), "manual")
-            self.assertEqual(by_id[source_id].get("claim_label"), "unverified")
+            self.assertEqual(by_id[source_id].get("claim_label"), expected_label)
 
     def test_feasibility_record_states_blocked_and_excludes_pig_gastric_gel(self) -> None:
         self.assertTrue(FEASIBILITY_RECORD.is_file())

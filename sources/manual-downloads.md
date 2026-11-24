@@ -1024,7 +1024,7 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
-| mavedb-dump-zenodo | MaveDB Bulk Download (Zenodo archive) | [page](https://zenodo.org/records/18511521) | link only | Bulk download archive of published variant effect data from Multiplexed Assays of Variant Effect (MAVEs). |
+| mavedb-dump-zenodo | MaveDB Bulk Download (Zenodo archive) | [page](https://zenodo.org/records/18511521) | link only | Bulk download archive of published variant effect data from Multiplexed Assays of Variant Effect (MAVEs) licensed under Creative Commons Zero (CC0 1.0 Universa… |
 
 ### MDPI
 
@@ -1042,7 +1042,7 @@ Generated from sources/catalog.yaml by tools/sources/make_manual_downloads.py. D
 
 | ID | What | Open | Save as | Notes |
 | --- | --- | --- | --- | --- |
-| cftr-dms-tedman-2025 | CFTR Deep Mutational Scanning Calnexin Dependency (Tedman et al. 2025) | [page](https://doi.org/10.17632/ksfmxv8zts.1) | link only | Deep mutational scanning dataset of 232 clinical CFTR variants measuring calnexin chaperone dependence and pharmacological rescue. |
+| cftr-dms-tedman-2025 | CFTR Deep Mutational Scanning Calnexin Dependency (Tedman et al. 2025) | [page](https://doi.org/10.17632/ksfmxv8zts.1) | link only | Deep mutational scanning dataset of clinical CFTR variants measuring calnexin chaperone dependence and pharmacological rescue (234 parental variants across 182… |
 
 ### Middle East Cystic Fibrosis Association
 
