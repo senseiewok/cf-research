@@ -1,0 +1,288 @@
+{
+  "schema_version": "tedman2025-3d-structure-results-v1",
+  "benchmark_id": "cftr-dms-3d-structure",
+  "evaluated_on": "2026-11-24",
+  "evaluated_on_local": "2026-11-24",
+  "evaluated_on_utc": "2026-11-24",
+  "done_sha256": "a997290fda86f3f5ee69c839df7bf1d2c78074c50497283e564f69b71f60fb62",
+  "split_manifest_sha256": "e6d60aa56d2ac87a9b82aaca8b3df5b560131943eb0ffb809f0834e8a9db3543",
+  "cryoem_mmcif_sha256": {
+    "6MSM.cif.gz": "82933988abc3ed24a343819d410b39dc0d86913eaba4426dd945e3273e34fa59",
+    "5UAK.cif.gz": "8bf00f2612dd961d3b1ccd2f2193781a534ad44f32666a6de8da948afb8d84cf",
+    "8EIQ.cif.gz": "d13cbfc8ba6575ab6228f351578c6f9cc5b9dafe13e5913d9b27b3cacebc18d6"
+  },
+  "dataset": {
+    "source_id": "cftr-dms-tedman-2025",
+    "doi": "10.17632/ksfmxv8zts.1",
+    "paper_doi": "10.7554/eLife.107180",
+    "license": "CC BY 4.0",
+    "assay": "HEK293T parental CFTR DMS plasma-membrane intensity (VX-661+VX-445 vs DMSO, Mut/WT)",
+    "scale_boundary": "Plasma-membrane expression in HEK293T cells is not CFTR channel conductance or clinical lung benefit.",
+    "bfactor_boundary": "6MSM B_iso_or_equiv is a local Cryo-EM map-resolution/flexibility proxy, not a physical atomic displacement parameter.",
+    "total_valid_variants": 234,
+    "excluded_count": 0,
+    "dev_variants": 167,
+    "holdout_variants": 67,
+    "dev_unique_codons": 123,
+    "holdout_unique_codons": 59,
+    "holdout_pred0010_overlap_codons": 0,
+    "dev_struct_unresolved_rows": 9,
+    "holdout_struct_unresolved_rows": 6,
+    "excluded_predictors_for_3d_isolation": [
+      "sub_domain",
+      "variant_class"
+    ]
+  },
+  "pre_holdout_controls": {
+    "wt_amino_acid_sequence_parity": {
+      "passed": true,
+      "unexpected_mismatches": 0,
+      "holdout_mismatches": 0,
+      "documented_dev_exceptions": [
+        {
+          "pdb_id": "6MSM",
+          "row_num": 89,
+          "codon_position": 470,
+          "protein_distinction": "M470V",
+          "split": "dev",
+          "expected_wt_aa": "M",
+          "observed_mmcif_aa": "V",
+          "ruling": "Common CFTR rs213950 polymorphism: Tedman background M470 vs canonical P13569/6MSM/5UAK/8EIQ VAL470; mapped to auth_seq_id=470."
+        },
+        {
+          "pdb_id": "8EIQ",
+          "row_num": 89,
+          "codon_position": 470,
+          "protein_distinction": "M470V",
+          "split": "dev",
+          "expected_wt_aa": "M",
+          "observed_mmcif_aa": "V",
+          "ruling": "Common CFTR rs213950 polymorphism: Tedman background M470 vs canonical P13569/6MSM/5UAK/8EIQ VAL470; mapped to auth_seq_id=470."
+        },
+        {
+          "pdb_id": "6MSM",
+          "row_num": 217,
+          "codon_position": 966,
+          "protein_distinction": "Q966=",
+          "split": "dev",
+          "expected_wt_aa": "Q",
+          "observed_mmcif_aa": "T",
+          "ruling": "Source-table discrepancy: Q966= vs THR966 in 6MSM/5UAK/8EIQ/P13569 (2988G>A corresponds to Q996=); kept in dev without exclusion and treated as unmapped (struct_unresolved=1.0, 5 continuous 3D features missing)."
+        },
+        {
+          "pdb_id": "8EIQ",
+          "row_num": 217,
+          "codon_position": 966,
+          "protein_distinction": "Q966=",
+          "split": "dev",
+          "expected_wt_aa": "Q",
+          "observed_mmcif_aa": "T",
+          "ruling": "Source-table discrepancy: Q966= vs THR966 in 6MSM/5UAK/8EIQ/P13569 (2988G>A corresponds to Q996=); kept in dev without exclusion and treated as unmapped (struct_unresolved=1.0, 5 continuous 3D features missing)."
+        }
+      ]
+    },
+    "cryoem_tmd_superposition_and_pockets": {
+      "tmd_common_ca_8eiq_6msm": 565,
+      "tmd_common_ca_5uak_6msm": 556,
+      "rmsd_tmd_8eiq_to_6msm_A": 0.843794,
+      "rmsd_tmd_5uak_to_6msm_A": 5.009998,
+      "wjx_heavy_atoms": 41,
+      "cv6_heavy_atoms": 37,
+      "wjx_cv6_min_heavy_atom_dist_A": 30.013875,
+      "wjx_cv6_centroid_dist_A": 36.894394
+    },
+    "baseline_396_dev_parity_passed": true,
+    "dev_codon_permuted_3d_null_control": {
+      "seed": 20261124,
+      "selected_alpha_permuted": 1000.0,
+      "permuted_dev_cv_mae_log2": 0.445431,
+      "relative_cv_mae_reduction": -0.003426,
+      "threshold": 0.1,
+      "passed": true
+    }
+  },
+  "models_fitted_on_dev": {
+    "constant_dev_median_log2": 1.641988,
+    "dmso_ols": {
+      "b0_intercept": 2.21154,
+      "b1_dmso_slope": 0.865568
+    },
+    "dev_cv_5fold_baselines": {
+      "constant_dev_median_mae_log2": 0.992185,
+      "dmso_ols_mae_log2": 0.443911,
+      "locked_stronger_baseline": "dmso_ols"
+    },
+    "candidate_dmso_3d_cryoem_ridge": {
+      "selected_alpha": 100.0,
+      "dev_cv_mae_log2": 0.399628,
+      "cv_path": [
+        {
+          "alpha": 0.01,
+          "dev_cv_mae_log2": 0.412096
+        },
+        {
+          "alpha": 0.1,
+          "dev_cv_mae_log2": 0.412063
+        },
+        {
+          "alpha": 1.0,
+          "dev_cv_mae_log2": 0.411738
+        },
+        {
+          "alpha": 10.0,
+          "dev_cv_mae_log2": 0.408733
+        },
+        {
+          "alpha": 100.0,
+          "dev_cv_mae_log2": 0.399628
+        },
+        {
+          "alpha": 1000.0,
+          "dev_cv_mae_log2": 0.429142
+        }
+      ],
+      "b0_intercept": 2.230772,
+      "b1_dmso_slope": 0.88158,
+      "feature_names": [
+        "rbf_wjx",
+        "rbf_cv6",
+        "cn_10A_6msm",
+        "bfactor_6msm",
+        "disp_5uak_6msm",
+        "struct_unresolved"
+      ],
+      "dev_impute_means": [
+        0.037545,
+        0.06724,
+        18.876543,
+        142.069198,
+        6.07817,
+        0.053892
+      ],
+      "dev_feat_means": [
+        0.037545,
+        0.06724,
+        18.876543,
+        142.069198,
+        6.07817,
+        0.053892
+      ],
+      "dev_feat_stds": [
+        0.120281,
+        0.173594,
+        3.619252,
+        22.334466,
+        3.395033,
+        0.225805
+      ],
+      "weights": [
+        0.104693,
+        0.057219,
+        -0.030064,
+        0.009605,
+        -0.101675,
+        -0.029606
+      ],
+      "dev_vif_context": {
+        "vif_3d_features_only": {
+          "rbf_wjx": 1.206663,
+          "rbf_cv6": 1.128067,
+          "cn_10A_6msm": 1.250744,
+          "bfactor_6msm": 1.180456,
+          "disp_5uak_6msm": 1.266245,
+          "struct_unresolved": 1.071173
+        },
+        "vif_with_x_dmso_log2": {
+          "x_dmso_log2": 1.221958,
+          "rbf_wjx": 1.350645,
+          "rbf_cv6": 1.16849,
+          "cn_10A_6msm": 1.26552,
+          "bfactor_6msm": 1.185279,
+          "disp_5uak_6msm": 1.375195,
+          "struct_unresolved": 1.10044
+        }
+      }
+    }
+  },
+  "holdout_evaluation": {
+    "primary_unit": "log2(VX-661+VX-445 Mut/WT)",
+    "constant_dev_median": {
+      "mae_log2": 1.077948,
+      "mae_linear_context_only": 1.593272
+    },
+    "dmso_ols": {
+      "mae_log2": 0.451487,
+      "mae_linear_context_only": 0.541184
+    },
+    "candidate_dmso_3d_cryoem_ridge": {
+      "mae_log2": 0.450918,
+      "mae_linear_context_only": 0.537163
+    },
+    "stronger_baseline_on_holdout": "dmso_ols",
+    "stronger_baseline_mae_log2": 0.451487,
+    "relative_mae_reduction_vs_stronger": 0.001261,
+    "residue_clustered_bootstrap": {
+      "n_holdout_clusters": 59,
+      "resamples": 10000,
+      "seed": 20261124,
+      "delta_mae_ci95_log2": [
+        -0.065011,
+        0.066022
+      ],
+      "ci95_low_gt_zero": false
+    },
+    "pre_registered_gate_threshold": 0.1,
+    "gate_verdict": "REFUTED_BELOW_10PCT_MAE_REDUCTION_THRESHOLD",
+    "ledger_standing": "refuted",
+    "non_gated_subdomain_breakdown": [
+      {
+        "sub_domain": "Lasso",
+        "holdout_variants": 2,
+        "holdout_codons": 2,
+        "stronger_baseline_mae_log2": 0.64071,
+        "candidate_mae_log2": 0.243623,
+        "delta_mae_log2": 0.397088
+      },
+      {
+        "sub_domain": "TMD1",
+        "holdout_variants": 19,
+        "holdout_codons": 16,
+        "stronger_baseline_mae_log2": 0.491062,
+        "candidate_mae_log2": 0.520344,
+        "delta_mae_log2": -0.029282
+      },
+      {
+        "sub_domain": "NBD1",
+        "holdout_variants": 13,
+        "holdout_codons": 12,
+        "stronger_baseline_mae_log2": 0.464193,
+        "candidate_mae_log2": 0.432521,
+        "delta_mae_log2": 0.031672
+      },
+      {
+        "sub_domain": "R Domain",
+        "holdout_variants": 5,
+        "holdout_codons": 5,
+        "stronger_baseline_mae_log2": 0.167374,
+        "candidate_mae_log2": 0.133388,
+        "delta_mae_log2": 0.033986
+      },
+      {
+        "sub_domain": "TMD2",
+        "holdout_variants": 22,
+        "holdout_codons": 18,
+        "stronger_baseline_mae_log2": 0.519267,
+        "candidate_mae_log2": 0.584672,
+        "delta_mae_log2": -0.065405
+      },
+      {
+        "sub_domain": "NBD2",
+        "holdout_variants": 6,
+        "holdout_codons": 6,
+        "stronger_baseline_mae_log2": 0.223794,
+        "candidate_mae_log2": 0.1142,
+        "delta_mae_log2": 0.109595
+      }
+    ]
+  }
+}
