@@ -454,11 +454,21 @@ def run_independent_audit(*, verify_parity: bool = True) -> dict[str, Any]:
         raise AssertionError(f"Holdout variants_sha256 mismatch: {v_sha}")
 
     # Verify reversibility of CFTR-G970R auxiliary KALYDECO/SYMDEKO SPL erratum back to Commit 9a23e16 digest
+    if prov.get("pre_registered_variants_sha256") != EXPECTED_HASHES["PRE_REGISTERED_HOLDOUT_VARIANTS"]:
+        raise AssertionError("pre_registered_variants_sha256 mismatch in independent_audit")
+    allowed_errata_fields = {
+        "kalydeco_v36_responsive",
+        "symdeko_v22_responsive",
+        "label_status.kalydeco_v36_spl",
+        "label_status.symdeko_v22_spl",
+    }
     rev_variants = json.loads(json.dumps(variants))
     by_vid = {str(r["variant_id"]): r for r in rev_variants}
     for err in prov.get("post_audit_spl_errata", []):
         row_t = by_vid[str(err["variant_id"])]
         for fk, pair in err["fields_corrected"].items():
+            if fk not in allowed_errata_fields or not isinstance(pair, list) or len(pair) != 2:
+                raise AssertionError(f"Disallowed errata field {fk!r} in independent_audit")
             old_v, new_v = pair
             if fk.startswith("label_status."):
                 sk = fk.split(".", 1)[1]
@@ -561,7 +571,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--json", action="store_true", help="Print JSON audit report")
     args = parser.parse_args(argv)
 
-    rep = run_independent_audit(verify_parity=True if args.check else True)
+    rep = run_independent_audit(verify_parity=True)
     if args.json:
         print(json.dumps(rep, indent=2))
         return 0

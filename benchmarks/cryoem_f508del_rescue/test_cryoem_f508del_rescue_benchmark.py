@@ -134,6 +134,20 @@ class TestCryoEMF508delRescueBenchmark(unittest.TestCase):
         with self.assertRaises(m1.CryoEMF508delRescueError):
             m1.evaluate_holdout_panel(hold["variants"], {**s_map, 110: 0.0}, valid_s_common=common_set)
 
+        # Forged erratum touching evaluated trikafta_v23_responsive fails closed even under expected_variants_sha256=None
+        forged_err = copy.deepcopy(hold)
+        forged_err["variants"][0]["trikafta_v23_responsive"] = 0
+        forged_err["variants"][0]["label_status"]["trikafta_v23_spl"] = "not_listed_on_fda_spl"
+        forged_err["provenance"]["post_audit_spl_errata"].append({
+            "variant_id": "CFTR-S13F",
+            "fields_corrected": {
+                "trikafta_v23_responsive": [1, 0],
+                "label_status.trikafta_v23_spl": ["listed_on_fda_spl", "not_listed_on_fda_spl"],
+            },
+        })
+        with self.assertRaises(m1.CryoEMF508delRescueError):
+            m1.validate_holdout_annotations(forged_err, dev, expected_variants_sha256=None)
+
         # Unknown variant_family and bool codon_position fail closed
         with self.assertRaises(m1.CryoEMF508delRescueError):
             m1.score_variant_baselines({"variant_family": "unknown_family", "hgvs_p_or_c": "p.Ser13Phe"})

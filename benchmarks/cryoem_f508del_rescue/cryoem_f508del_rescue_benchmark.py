@@ -483,44 +483,50 @@ def validate_holdout_annotations(
 
     canonical = json.dumps(variants, sort_keys=True, separators=(",", ":"))
     v_sha = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
-    if expected_variants_sha256 is not None:
-        if v_sha != expected_variants_sha256 or prov.get("variants_sha256") != expected_variants_sha256:
-            raise CryoEMF508delRescueError(
-                f"Holdout variants_sha256 mismatch: computed {v_sha}, provenance {prov.get('variants_sha256')}"
-            )
-        if expected_variants_sha256 == EXPECTED_SHA256["HOLDOUT_VARIANTS"]:
+    allowed_errata_fields = {
+        "kalydeco_v36_responsive",
+        "symdeko_v22_responsive",
+        "label_status.kalydeco_v36_spl",
+        "label_status.symdeko_v22_spl",
+    }
+    errata_list = prov.get("post_audit_spl_errata")
+    if errata_list is not None:
+        if not isinstance(errata_list, list):
+            raise CryoEMF508delRescueError("post_audit_spl_errata must be a list")
+        reverted = copy.deepcopy(variants)
+        by_id = {str(r["variant_id"]): r for r in reverted}
+        for err in errata_list:
+            target_row = by_id.get(str(err.get("variant_id")))
+            if target_row is None:
+                raise CryoEMF508delRescueError(f"Unknown errata variant_id: {err.get('variant_id')}")
+            for fk, pair in err.get("fields_corrected", {}).items():
+                if fk not in allowed_errata_fields or not isinstance(pair, list) or len(pair) != 2:
+                    raise CryoEMF508delRescueError(f"Disallowed errata field {fk!r}; evaluated target columns are immutable")
+                old_v, new_v = pair
+                if fk.startswith("label_status."):
+                    sub_k = fk.split(".", 1)[1]
+                    if target_row["label_status"].get(sub_k) != new_v:
+                        raise CryoEMF508delRescueError(f"Errata current value mismatch on {fk}")
+                    target_row["label_status"][sub_k] = old_v
+                else:
+                    if target_row.get(fk) != new_v:
+                        raise CryoEMF508delRescueError(f"Errata current value mismatch on {fk}")
+                    target_row[fk] = old_v
+        if expected_variants_sha256 is not None:
             if prov.get("pre_registered_variants_sha256") != EXPECTED_SHA256["PRE_REGISTERED_HOLDOUT_VARIANTS"]:
                 raise CryoEMF508delRescueError("Missing or mismatched pre_registered_variants_sha256 from Commit 9a23e16")
-            allowed_errata_fields = {
-                "kalydeco_v36_responsive",
-                "symdeko_v22_responsive",
-                "label_status.kalydeco_v36_spl",
-                "label_status.symdeko_v22_spl",
-            }
-            reverted = copy.deepcopy(variants)
-            by_id = {str(r["variant_id"]): r for r in reverted}
-            for err in prov.get("post_audit_spl_errata", []):
-                target_row = by_id.get(str(err.get("variant_id")))
-                if target_row is None:
-                    raise CryoEMF508delRescueError(f"Unknown errata variant_id: {err.get('variant_id')}")
-                for fk, pair in err.get("fields_corrected", {}).items():
-                    if fk not in allowed_errata_fields or not isinstance(pair, list) or len(pair) != 2:
-                        raise CryoEMF508delRescueError(f"Disallowed errata field {fk!r}; evaluated target columns are immutable")
-                    old_v, new_v = pair
-                    if fk.startswith("label_status."):
-                        sub_k = fk.split(".", 1)[1]
-                        if target_row["label_status"].get(sub_k) != new_v:
-                            raise CryoEMF508delRescueError(f"Errata current value mismatch on {fk}")
-                        target_row["label_status"][sub_k] = old_v
-                    else:
-                        if target_row.get(fk) != new_v:
-                            raise CryoEMF508delRescueError(f"Errata current value mismatch on {fk}")
-                        target_row[fk] = old_v
             rev_sha = hashlib.sha256(json.dumps(reverted, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
             if rev_sha != EXPECTED_SHA256["PRE_REGISTERED_HOLDOUT_VARIANTS"]:
                 raise CryoEMF508delRescueError(
                     f"Errata reversal digest {rev_sha} failed to reproduce pre-registered 9a23e16 digest"
                 )
+    if expected_variants_sha256 is not None:
+        if v_sha != expected_variants_sha256 or prov.get("variants_sha256") != expected_variants_sha256:
+            raise CryoEMF508delRescueError(
+                f"Holdout variants_sha256 mismatch: computed {v_sha}, provenance {prov.get('variants_sha256')}"
+            )
+        if expected_variants_sha256 == EXPECTED_SHA256["HOLDOUT_VARIANTS"] and errata_list is None:
+            raise CryoEMF508delRescueError("Missing post_audit_spl_errata for reversibility check to 9a23e16")
 
     return out
 
