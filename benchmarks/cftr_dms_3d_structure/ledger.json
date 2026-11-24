@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "work": "Pure 3D Cryo-EM structure-to-DMS modulator-rescue benchmark evaluating whether 6 Cryo-EM structural features from 6MSM, 5UAK, and 8EIQ (excluding sub-domain and variant-class indicators) improve log2(VX-661+VX-445 Mut/WT) prediction over baseline log2(DMSO) OLS on the locked Tedman et al. 2025 holdout.",
+  "done_file": "done.md",
+  "done_sha256": "a997290fda86f3f5ee69c839df7bf1d2c78074c50497283e564f69b71f60fb62",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-cryoem-tmd-superposition-control",
+      "statement": "Over 565 common Chain A auth_seq_id C-alpha atoms in TMD1 (77..360) union TMD2 (859..1155), Kabsch/Horn rigid superposition of deltaF508+Trikafta CFTR (8EIQ) onto WT ATP-bound CFTR (6MSM) yields TMD RMSD = 0.843794 A (< 1.5 A pre-registered control), with 5UAK->6MSM TMD RMSD = 5.009998 A (556 CA) and WJX-CV6 minimum heavy-atom separation = 30.013875 A.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/6MSM.cif.gz, 5UAK.cif.gz, and 8EIQ.cif.gz (RCSB PDB CC0 1.0) summarized in benchmarks/cftr_dms_3d_structure/results_2026-11-24.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_3d_structure.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "3x3 cross-covariance SVD Kabsch superposition",
+          "script": "cftr_dms_3d_structure.py",
+          "difference": "computes SO(3) rigid transform via 3x3 H^T H Jacobi eigendecomposition and modified Gram-Schmidt SVD",
+          "value": 0.843794
+        },
+        {
+          "name": "Horn 1987 4x4 quaternion eigensystem superposition",
+          "script": "independent_audit.py",
+          "difference": "separate mmCIF parser solving rigid alignment via 4x4 Davenport/Horn quaternion Jacobi eigensolver without sharing code",
+          "value": 0.843794
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c2-dmso-ols-baseline-parity",
+      "statement": "On the locked 67 held-out CFTR variants across 59 unexposed codons (zero overlap with dev or PRED-0010), untreated-expression OLS (log2 VX-661+VX-445 ~ log2 DMSO fitted on 167 dev variants) reproduces held-out MAE = 0.451487 log2(Mut/WT), matching #396 within 1e-6.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/ALT 9-6-24 CFTR DMS Expanded Library Master Tables.xlsx (sheet All_variants, CC BY 4.0) summarized in benchmarks/cftr_dms_3d_structure/results_2026-11-24.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_3d_structure.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "Centered covariance 1D OLS fit on dev",
+          "script": "cftr_dms_3d_structure.py",
+          "difference": "computes 1D OLS normal equations directly from dev means and cross-products",
+          "value": 0.451487
+        },
+        {
+          "name": "Cholesky L L^T 2x2 independent OLS solver",
+          "script": "independent_audit.py",
+          "difference": "separate XLSX XML reader solving 2x2 normal equations via Cholesky factorization",
+          "value": 0.451487
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c3-candidate-3d-cryoem-ridge-holdout-mae",
+      "statement": "On the same 67 held-out variants (59 unexposed codons), partial-penalized Ridge adding the 6 fold-imputed, dev-standardized Cryo-EM 3D structural features (rbf_wjx, rbf_cv6, cn_10A_6msm, bfactor_6msm, disp_5uak_6msm, struct_unresolved; alpha=100.0 chosen by 5-fold dev CV, zero sub-domain or variant-class indicators) yields held-out MAE = 0.450918 log2(Mut/WT) vs dev-CV MAE = 0.399628.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/ALT 9-6-24 CFTR DMS Expanded Library Master Tables.xlsx (CC BY 4.0) paired with 6MSM/5UAK/8EIQ mmCIFs (CC0 1.0) in benchmarks/cftr_dms_3d_structure/results_2026-11-24.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_3d_structure.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "3x3 SVD Kabsch + Gaussian elimination 8x8 partial Ridge",
+          "script": "cftr_dms_3d_structure.py",
+          "difference": "computes 3D features via 3x3 SVD Kabsch alignment and solves 8x8 partial-penalized normal equations by partial-pivoting Gaussian elimination",
+          "value": 0.450918
+        },
+        {
+          "name": "Horn quaternion + Cholesky L L^T 8x8 independent solver",
+          "script": "independent_audit.py",
+          "difference": "separate mmCIF and XLSX XML parsers using Horn 4x4 quaternion superposition and Cholesky L L^T linear solver",
+          "value": 0.450918
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c4-preregistered-10pct-3d-reduction-refuted",
+      "statement": "Pre-registered hypothesis predicting >= 10% held-out log2 MAE reduction over stronger baseline (dmso_ols) from pure 3D Cryo-EM features with 10,000-resample 59-cluster 95% bootstrap CI > 0 is refuted: observed relative reduction is +0.1261% (0.450918 vs 0.451487 log2, delta=0.000569) and 95% CI is [-0.065011, 0.066022].",
+      "kind": "predicted",
+      "origin": "lab",
+      "dataset": "benchmarks/cftr_dms_3d_structure/results_2026-11-24.json",
+      "standing": "refuted",
+      "held_out_error": {
+        "value": 0.450918,
+        "unit": "log2(Mut/WT) MAE",
+        "set_fixed_in_done_file": true
+      },
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_3d_structure.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-24"
+    }
+  ]
+}
