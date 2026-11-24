@@ -498,6 +498,8 @@ def run_independent_audit(repo_root: Path = REPO_ROOT, data_dir: Optional[Path] 
             "cholesky_ridge_holdout_mae_log2": round(cand_hold_mae, 6),
         }
 
+    if not isinstance(he.get("gate_verdict"), str) or not he["gate_verdict"]:
+        raise AssertionError("Missing holdout_evaluation.gate_verdict.")
     return {
         "status": "PASS",
         "raw_local_data_audited": raw_checked,
@@ -512,11 +514,11 @@ def run_independent_audit(repo_root: Path = REPO_ROOT, data_dir: Optional[Path] 
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--data-dir", type=Path, default=None)
-    parser.add_argument("--check", action="store_true", default=True)
+    parser.add_argument("--check", action="store_true", help="Run the independent verification audit.")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args(argv)
 
-    rep = run_independent_audit(repo_root=REPO_ROOT, data_dir=args.data_dir) if args.check else {}
+    rep = run_independent_audit(repo_root=REPO_ROOT, data_dir=args.data_dir)
     if args.json:
         print(json.dumps(rep, indent=2, allow_nan=False))
     else:
