@@ -1,17 +1,17 @@
 # `proposals/` — Design Proposals, Council Decisions, and Governance Records
 
-This directory holds **45** design proposals, council decision records, task packets, and provenance reviews.
+This directory holds **46** design proposals, council decision records, task packets, and provenance reviews.
 Per `cf-lab/AGENTS.md`, agents inspect `Status: proposed` files here at the start of a session; changes to sibling
 repositories (`cf-lab`, `cf-skills`, `.ai`) wait for a maintainer decision before they are applied.
 
 ## Summary by Status Category
 
-- **Open / Proposed (Awaiting Maintainer or Clinician Decision):** `26`
+- **Open / Proposed (Awaiting Maintainer or Clinician Decision):** `27`
 - **Admitted / Ratified / Applied / Implemented in Code:** `10`
 - **Review Records, Provenance Notes & Evaluations:** `7`
 - **Superseded:** `2`
 
-## 1. Open / Proposed (`26` files)
+## 1. Open / Proposed (`27` files)
 
 | File | Title | Declared Status Summary |
 | --- | --- | --- |
@@ -41,6 +41,7 @@ repositories (`cf-lab`, `cf-skills`, `.ai`) wait for a maintainer decision befor
 | [`2026-10-nonsense-readthrough-nmd.md`](2026-10-nonsense-readthrough-nmd.md) | The Remaining 10% Nonsense Mutation Engine: Tri-Modal Synergies for W1282X and G542X | Proposal & Molecular Genetic Specification |
 | [`2026-11-15-mavedb-and-cftr-dms-admission.md`](2026-11-15-mavedb-and-cftr-dms-admission.md) | Proposal: Source Catalog Admission for MaveDB (CC0 Zenodo Dump) and CFTR Deep Mutational Scanning Deposits | proposed, written 2026-11-15 |
 | [`2026-11-16-alyftrek-417-theratyping-and-super-exon-benchmark.md`](2026-11-16-alyftrek-417-theratyping-and-super-exon-benchmark.md) | Proposal: Alyftrek (`NDA 218730`) 417-Variant Theratyping Alignment & Intron-1 Partial *CFTR* cDNA (`Exons 2–27`) Benchmark (`PRED-0007`) | proposed, written 2026-11-16 |
+| [`2026-11-23-external-replication-collaboration-brief.md`](2026-11-23-external-replication-collaboration-brief.md) | Proposal: Single-Track External Replication & Collaboration Brief (`Council Item #7`) | proposed (written 2026-11-23; zero outreach sent) |
 
 ## 2. Admitted, Ratified, Applied, or Implemented (`10` files)
 
