@@ -1,0 +1,410 @@
+{
+  "schema_version": "gt-bottleneck-map-v1",
+  "benchmark_id": "council-item-5-genetic-therapy-bottlenecks",
+  "non_comparable_across_scales": true,
+  "no_ranking_or_leaderboard": true,
+  "snapshot_file": "tools/trial_atlas/snapshot.json",
+  "ledger_file": "sources/cite-check-ledger.jsonl",
+  "research_boundary": "Bounded evidence map separating five translational stages across verified public records and trials. Does not rank therapies, compare effect sizes across incompatible scales, propose wet-lab protocols, or infer clinical benefit from registry entries.",
+  "stages_catalog": {
+    "S1_cell_correction_or_expression": "Cellular DNA/RNA editing, transduction, or CFTR transcript/protein expression in the studied system.",
+    "S2_restored_channel_function": "Measured CFTR ion-channel function or swelling assay response in cells or organoids.",
+    "S3_in_vivo_airway_delivery": "Administered in vivo airway delivery (nebulization or respiratory vector administration).",
+    "S4_durability_or_redosing_persistence": "Multi-dose regimen or persistence beyond acute transient delivery.",
+    "S5_clinical_benefit_or_lung_function": "Measured clinical spirometry or patient-level pulmonary endpoint in a clinical study."
+  },
+  "studies": [
+    {
+      "study_id": "prime-editing-organoids-2024",
+      "source_id": "10.1016/j.xcrm.2024.101544",
+      "citation_label": "Cell Reports Medicine 2024 (Prime editing CFTR organoids)",
+      "modality": "prime_editing",
+      "study_design": "preclinical_in_vitro_or_organoid",
+      "measurement_scale": "molecular_and_cellular",
+      "experimental_system": "Human intestinal organoids and airway epithelial models",
+      "controls": "Unedited / mutant baseline organoid controls",
+      "follow_up": "In vitro organoid functional assay window (duration not stated in ledger note)",
+      "untested_downstream_steps": [
+        "S3_in_vivo_airway_delivery",
+        "S4_durability_or_redosing_persistence",
+        "S5_clinical_benefit_or_lung_function"
+      ],
+      "stages": {
+        "S1_cell_correction_or_expression": {
+          "status": "measured_in_system",
+          "measurement_scale": "molecular_and_cellular",
+          "evidence_type": "verbatim_passage",
+          "source_file": "landscape/mission-grounding-2026-10-25-wave24.md",
+          "source_file_sha256": "9ae383d9dfc6b2090222d843a3ffb474753e6bed8b83399e7213852b08b2bfb1",
+          "locator": "landscape/mission-grounding-2026-10-25-wave24.md:L303",
+          "passage_text": "`10.1016/j.xcrm.2024.101544`: Prime editing functionally corrects cystic fibrosis-causing mutations in human intestinal organoids."
+        },
+        "S2_restored_channel_function": {
+          "status": "measured_in_system",
+          "measurement_scale": "molecular_and_cellular",
+          "evidence_type": "verbatim_passage",
+          "source_file": "landscape/mission-grounding-2026-10-25-wave24.md",
+          "source_file_sha256": "9ae383d9dfc6b2090222d843a3ffb474753e6bed8b83399e7213852b08b2bfb1",
+          "locator": "landscape/mission-grounding-2026-10-25-wave24.md:L303",
+          "passage_text": "`10.1016/j.xcrm.2024.101544`: Prime editing functionally corrects cystic fibrosis-causing mutations in human intestinal organoids."
+        },
+        "S3_in_vivo_airway_delivery": {
+          "status": "untested_in_study",
+          "measurement_scale": "molecular_and_cellular",
+          "note": "In vitro organoid study only; in vivo airway aerosol or viral/LNP mucus transit not tested."
+        },
+        "S4_durability_or_redosing_persistence": {
+          "status": "untested_in_study",
+          "measurement_scale": "molecular_and_cellular",
+          "note": "In vivo repeated-dosing or long-term epithelial persistence not tested."
+        },
+        "S5_clinical_benefit_or_lung_function": {
+          "status": "untested_in_study",
+          "measurement_scale": "molecular_and_cellular",
+          "note": "No human clinical cohort or spirometry outcome measured."
+        }
+      }
+    },
+    {
+      "study_id": "alton-2024-rsiv-fhn-preclinical",
+      "source_id": "10.1183/13993003.01683-2023",
+      "citation_label": "Alton et al., Eur Respir J 2024 (rSIV.F/HN lentivirus)",
+      "modality": "lentiviral_gene_transfer",
+      "study_design": "preclinical_in_vitro_or_organoid",
+      "measurement_scale": "molecular_and_cellular",
+      "experimental_system": "Preclinical airway epithelial ciliated and basal cell models",
+      "controls": "Preclinical vector controls as recorded in evidence corpus",
+      "follow_up": "Preclinical evaluation window (duration not stated in evidence corpus)",
+      "untested_downstream_steps": [
+        "S2_restored_channel_function",
+        "S3_in_vivo_airway_delivery",
+        "S4_durability_or_redosing_persistence",
+        "S5_clinical_benefit_or_lung_function"
+      ],
+      "stages": {
+        "S1_cell_correction_or_expression": {
+          "status": "measured_in_system",
+          "measurement_scale": "molecular_and_cellular",
+          "evidence_type": "verbatim_passage",
+          "source_file": "landscape/airway-mucus-barrier-biophysics-2026-evidence.txt",
+          "source_file_sha256": "da0a88bb9e22254df0c5a6a3afbe6d1aa24ac958ed69da9eabe904dd5a021c7e",
+          "locator": "landscape/airway-mucus-barrier-biophysics-2026-evidence.txt:L7",
+          "passage_text": "Alton EWFW et al. 2024 evaluated F/HN-pseudotyped rSIV.F/HN lentiviral vectors for cystic fibrosis airway gene transfer, demonstrating apical transduction of ciliated and basal airway epithelial cells in preclinical models (DOI: 10.1183/13993003.01683-2023)."
+        },
+        "S2_restored_channel_function": {
+          "status": "not_stated",
+          "measurement_scale": "molecular_and_cellular",
+          "note": "Quantitative Cl- channel current not stated in cited evidence corpus excerpt."
+        },
+        "S3_in_vivo_airway_delivery": {
+          "status": "untested_in_study",
+          "measurement_scale": "molecular_and_cellular",
+          "note": "Preclinical model record only; human inhaled clinical administration tracked separately."
+        },
+        "S4_durability_or_redosing_persistence": {
+          "status": "untested_in_study",
+          "measurement_scale": "molecular_and_cellular",
+          "note": "Clinical human redosing durability not established in this preclinical record."
+        },
+        "S5_clinical_benefit_or_lung_function": {
+          "status": "untested_in_study",
+          "measurement_scale": "molecular_and_cellular",
+          "note": "No human clinical pulmonary outcome measured in this preclinical study."
+        }
+      }
+    },
+    {
+      "study_id": "alton-2015-pgm169-gl67a-rct",
+      "source_id": "10.1016/S2213-2600(15)00245-3",
+      "citation_label": "Alton et al., Lancet Respir Med 2015 (pGM169/GL67A Phase 2b RCT)",
+      "modality": "non_viral_plasmid_lipoplex",
+      "study_design": "clinical_randomized_phase2b",
+      "measurement_scale": "clinical_spirometry_rct",
+      "experimental_system": "People with CF enrolled in randomized double-blind placebo-controlled Phase 2b trial",
+      "controls": "Placebo randomized control arm",
+      "follow_up": "12-month repeated nebulisation Phase 2b follow-up",
+      "untested_downstream_steps": [
+        "S1_cell_correction_or_expression",
+        "S2_restored_channel_function",
+        "S4_durability_or_redosing_persistence"
+      ],
+      "stages": {
+        "S1_cell_correction_or_expression": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_spirometry_rct",
+          "note": "Cellular transduction assay percentage not reported in cited landscape table entry."
+        },
+        "S2_restored_channel_function": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_spirometry_rct",
+          "note": "Single-cell patch-clamp channel restoration not reported in cited summary row."
+        },
+        "S3_in_vivo_airway_delivery": {
+          "status": "measured_in_system",
+          "measurement_scale": "clinical_spirometry_rct",
+          "evidence_type": "verbatim_passage",
+          "source_file": "landscape/2026-10-24-multi-source-modulator-and-delivery-verification.md",
+          "source_file_sha256": "380d38b785f7597ee8b51141abe460d77ff51f9d6e9e0ef0e3bd91df284d2664",
+          "locator": "landscape/2026-10-24-multi-source-modulator-and-delivery-verification.md:L104",
+          "passage_text": "Repeated nebulisation of non-viral CFTR gene therapy in patients with cystic fibrosis: a randomised, double-blind, placebo-controlled, phase 2b trial"
+        },
+        "S4_durability_or_redosing_persistence": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_spirometry_rct",
+          "note": "Repeated nebulisation was tested clinically, while independent long-term expression persistence beyond trial window is not stated in this excerpt."
+        },
+        "S5_clinical_benefit_or_lung_function": {
+          "status": "measured_in_system",
+          "measurement_scale": "clinical_spirometry_rct",
+          "evidence_type": "verbatim_passage",
+          "source_file": "landscape/2026-10-24-multi-source-modulator-and-delivery-verification.md",
+          "source_file_sha256": "380d38b785f7597ee8b51141abe460d77ff51f9d6e9e0ef0e3bd91df284d2664",
+          "locator": "landscape/2026-10-24-multi-source-modulator-and-delivery-verification.md:L104",
+          "passage_text": "UK CF Gene Therapy Consortium benchmark demonstrating modest `ppFEV1` stabilization (`3.7%`, $p = 0.046$) with `pGM169/GL67A` lipoplexes"
+        }
+      }
+    },
+    {
+      "study_id": "nct05248230-4d710-aav",
+      "source_id": "NCT05248230",
+      "citation_label": "NCT05248230 (4D-710 AAV Phase 2, RECRUITING)",
+      "modality": "aav_gene_therapy",
+      "study_design": "clinical_trial_registry_snapshot",
+      "measurement_scale": "clinical_safety_registry",
+      "experimental_system": "Adult participants with CF in registered Phase 2 AAV trial",
+      "controls": "Registry record fields allocation/masking null in snapshot",
+      "follow_up": "Trial ongoing (overall_status: RECRUITING; results not posted in snapshot)",
+      "untested_downstream_steps": [
+        "S1_cell_correction_or_expression",
+        "S2_restored_channel_function",
+        "S4_durability_or_redosing_persistence",
+        "S5_clinical_benefit_or_lung_function"
+      ],
+      "stages": {
+        "S1_cell_correction_or_expression": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "ClinicalTrials.gov snapshot lists adverse events as primary outcome; biopsy expression not reported here."
+        },
+        "S2_restored_channel_function": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Channel function measurements not reported in registry snapshot."
+        },
+        "S3_in_vivo_airway_delivery": {
+          "status": "registered_endpoint_not_reported",
+          "measurement_scale": "clinical_safety_registry",
+          "evidence_type": "snapshot_field_pointer",
+          "snapshot_nct_id": "NCT05248230",
+          "snapshot_field": "interventions",
+          "expected_substring": "4D-710 is an adeno-associated virus (AAV) gene therapy"
+        },
+        "S4_durability_or_redosing_persistence": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Redosing persistence not reported in recruiting trial snapshot."
+        },
+        "S5_clinical_benefit_or_lung_function": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Primary registered outcome in snapshot is adverse events; pulmonary efficacy outcomes are not posted."
+        }
+      }
+    },
+    {
+      "study_id": "nct05668741-vx522-mrna",
+      "source_id": "NCT05668741",
+      "citation_label": "NCT05668741 (VX-522 mRNA Phase 1/2, COMPLETED)",
+      "modality": "inhaled_mrna_lnp",
+      "study_design": "clinical_trial_registry_snapshot",
+      "measurement_scale": "clinical_safety_registry",
+      "experimental_system": "Participants with CF receiving oral inhalation of VX-522 mRNA therapy",
+      "controls": "Registry record fields allocation/masking null in snapshot",
+      "follow_up": "overall_status: COMPLETED; snapshot primary outcome records safety AEs/SAEs without posted result tables",
+      "untested_downstream_steps": [
+        "S1_cell_correction_or_expression",
+        "S2_restored_channel_function",
+        "S4_durability_or_redosing_persistence",
+        "S5_clinical_benefit_or_lung_function"
+      ],
+      "stages": {
+        "S1_cell_correction_or_expression": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Intracellular CFTR translation data not posted in trial snapshot."
+        },
+        "S2_restored_channel_function": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Channel function results not posted in trial snapshot."
+        },
+        "S3_in_vivo_airway_delivery": {
+          "status": "registered_endpoint_not_reported",
+          "measurement_scale": "clinical_safety_registry",
+          "evidence_type": "snapshot_field_pointer",
+          "snapshot_nct_id": "NCT05668741",
+          "snapshot_field": "interventions",
+          "expected_substring": "Oral inhalation using nebulizer."
+        },
+        "S4_durability_or_redosing_persistence": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Repeat-dose durability not reported in trial snapshot."
+        },
+        "S5_clinical_benefit_or_lung_function": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Snapshot primary outcome is Safety and Tolerability (AEs/SAEs); efficacy outcomes are not posted."
+        }
+      }
+    },
+    {
+      "study_id": "nct06237335-rct2100-mrna",
+      "source_id": "NCT06237335",
+      "citation_label": "NCT06237335 (RCT2100 CFTR mRNA Phase 2, ACTIVE_NOT_RECRUITING)",
+      "modality": "inhaled_mrna_lnp",
+      "study_design": "clinical_trial_registry_snapshot",
+      "measurement_scale": "clinical_safety_registry",
+      "experimental_system": "Healthy participants and participants with CF inhaling RCT2100 mRNA",
+      "controls": "Matched placebo nebulizer volume and ivacaftor run-in arms in registry",
+      "follow_up": "4-week and 12-week nebulization intervention entries recorded; results not posted",
+      "untested_downstream_steps": [
+        "S1_cell_correction_or_expression",
+        "S2_restored_channel_function",
+        "S5_clinical_benefit_or_lung_function"
+      ],
+      "stages": {
+        "S1_cell_correction_or_expression": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Molecular expression measurements not posted in registry snapshot."
+        },
+        "S2_restored_channel_function": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Channel function readouts not posted in registry snapshot."
+        },
+        "S3_in_vivo_airway_delivery": {
+          "status": "registered_endpoint_not_reported",
+          "measurement_scale": "clinical_safety_registry",
+          "evidence_type": "snapshot_field_pointer",
+          "snapshot_nct_id": "NCT06237335",
+          "snapshot_field": "interventions",
+          "expected_substring": "oral inhalation using nebulizer"
+        },
+        "S4_durability_or_redosing_persistence": {
+          "status": "registered_endpoint_not_reported",
+          "measurement_scale": "clinical_safety_registry",
+          "evidence_type": "snapshot_field_pointer",
+          "snapshot_nct_id": "NCT06237335",
+          "snapshot_field": "interventions",
+          "expected_substring": "for 12 weeks"
+        },
+        "S5_clinical_benefit_or_lung_function": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Registered primary outcomes in snapshot list participant AEs and SAEs; lung efficacy results not posted."
+        }
+      }
+    },
+    {
+      "study_id": "nct06429176-spl84-aso",
+      "source_id": "NCT06429176",
+      "citation_label": "NCT06429176 (SPL84 ASO Phase 2, RECRUITING)",
+      "modality": "inhaled_antisense_oligonucleotide",
+      "study_design": "clinical_trial_registry_snapshot",
+      "measurement_scale": "clinical_safety_registry",
+      "experimental_system": "Participants with CF receiving nebulized SPL84 ASO",
+      "controls": "Placebo solution for nebulization listed in registry",
+      "follow_up": "Trial ongoing (overall_status: RECRUITING; primary outcomes evaluate AEs and cardiorespiratory rates)",
+      "untested_downstream_steps": [
+        "S1_cell_correction_or_expression",
+        "S2_restored_channel_function",
+        "S4_durability_or_redosing_persistence",
+        "S5_clinical_benefit_or_lung_function"
+      ],
+      "stages": {
+        "S1_cell_correction_or_expression": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Splice-correction molecular readouts not posted in snapshot."
+        },
+        "S2_restored_channel_function": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Channel current measurements not posted in snapshot."
+        },
+        "S3_in_vivo_airway_delivery": {
+          "status": "registered_endpoint_not_reported",
+          "measurement_scale": "clinical_safety_registry",
+          "evidence_type": "snapshot_field_pointer",
+          "snapshot_nct_id": "NCT06429176",
+          "snapshot_field": "interventions",
+          "expected_substring": "SPL84 solution for nebulization"
+        },
+        "S4_durability_or_redosing_persistence": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Durability not reported in recruiting snapshot."
+        },
+        "S5_clinical_benefit_or_lung_function": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Snapshot primary outcomes list AEs/SAEs and heart/respiratory safety checks; efficacy results not posted."
+        }
+      }
+    },
+    {
+      "study_id": "nct06515002-bi3720931-lentivirus",
+      "source_id": "NCT06515002",
+      "citation_label": "NCT06515002 (BI 3720931 Lenticlair 1 Phase 1/2, TERMINATED)",
+      "modality": "lentiviral_gene_transfer",
+      "study_design": "clinical_trial_registry_snapshot",
+      "measurement_scale": "clinical_safety_registry",
+      "experimental_system": "People with CF in inhaled BI 3720931 Phase 1/2 trial",
+      "controls": "Placebo arm listed in registry interventions",
+      "follow_up": "Snapshot status: TERMINATED (termination reason not specified in local snapshot JSON)",
+      "untested_downstream_steps": [
+        "S1_cell_correction_or_expression",
+        "S2_restored_channel_function",
+        "S4_durability_or_redosing_persistence",
+        "S5_clinical_benefit_or_lung_function"
+      ],
+      "stages": {
+        "S1_cell_correction_or_expression": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Cellular gene-transfer outcomes not posted in snapshot."
+        },
+        "S2_restored_channel_function": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Channel function readouts not posted in snapshot."
+        },
+        "S3_in_vivo_airway_delivery": {
+          "status": "study_terminated_unreported",
+          "termination_reason_class": "unspecified_in_snapshot",
+          "measurement_scale": "clinical_safety_registry",
+          "evidence_type": "snapshot_field_pointer",
+          "snapshot_nct_id": "NCT06515002",
+          "snapshot_field": "overall_status",
+          "expected_substring": "TERMINATED"
+        },
+        "S4_durability_or_redosing_persistence": {
+          "status": "not_stated",
+          "measurement_scale": "clinical_safety_registry",
+          "note": "Durability outcomes not reported in terminated registry record."
+        },
+        "S5_clinical_benefit_or_lung_function": {
+          "status": "study_terminated_unreported",
+          "termination_reason_class": "unspecified_in_snapshot",
+          "measurement_scale": "clinical_safety_registry",
+          "evidence_type": "snapshot_field_pointer",
+          "snapshot_nct_id": "NCT06515002",
+          "snapshot_field": "primary_outcomes",
+          "expected_substring": "FEV1pp"
+        }
+      }
+    }
+  ]
+}
