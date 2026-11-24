@@ -1,0 +1,178 @@
+{
+  "benchmark_version": "2026-11-24.v1",
+  "prediction_id": "PRED-0016",
+  "evaluated_on_local": "2026-11-24",
+  "done_sha256": "7fa36e5bed1a33269ff6abcf229602d8cfa9875082c8020ba1014cec6f30161d",
+  "pred0015_results_sha256": "c4288a7c40783c746e1e4c103e9b1b8867818cb97cc371d19348715d9251dcb1",
+  "snapshot_sha256": "de0f330c4441d77b84dc5f547e4dfcf99195c1b9f223e4dbeebd628054925b2d",
+  "outcomes_sha256": "f765a172c79b0592bbe1df62439d1cf6ad1e8836d45fba25324e6f3aaa381099",
+  "nlm_attribution": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.",
+  "research_boundary": "Independent open-source research benchmark only (Tier T1/T2 registry metadata); not clinical guidance and not an assessment of personal trial eligibility or treatment efficacy.",
+  "dataset": {
+    "catalog_source_id": "clinicaltrials-gov",
+    "snapshot_path": "tools/trial_atlas/snapshot.json",
+    "snapshot_data_timestamp": "2026-11-23T02:01:59.090764+00:00",
+    "outcomes_fixture_path": "benchmarks/secondary_sweat_chloride_compartmentalization/early_phase_outcomes_2026-11-24.json",
+    "outcomes_retrieved_at_utc": "2026-11-24T17:33:24Z",
+    "raw_interventional_count": 1053,
+    "prisma_included_count": 940,
+    "locked_early_phase_total": 71,
+    "primary_outcomes_drift_vs_snapshot_count": 0,
+    "primary_outcomes_drift_ncts": [],
+    "empty_secondary_outcomes": {
+      "systemic_empty_count": 2,
+      "systemic_empty_rate": 0.037037,
+      "inhaled_pure_empty_count": 3,
+      "inhaled_pure_empty_rate": 0.2,
+      "inhaled_all_empty_count": 4,
+      "inhaled_all_empty_rate": 0.235294
+    }
+  },
+  "positive_controls": {
+    "calibration_12_9_10_0": {
+      "p_fisher_1s_exact": "1/2261",
+      "chan_zhang_ci95_low": 0.383224,
+      "newcombe_wilson_ci95_low": 0.35412
+    },
+    "boundary_54_15_alpha_0_01": {
+      "p_fisher_1s_k17_exact": "37701755/4769128474",
+      "p_fisher_1s_k16_exact": "1998193015/181226882012"
+    },
+    "locked_71_nct_parity_verified": true,
+    "lexical_and_quarantine_controls_verified": true
+  },
+  "primary_estimand_pure_route_full_protocol": {
+    "n_sys": 54,
+    "k_sys": 35,
+    "p_sys": 0.648148,
+    "p_sys_exact": "35/54",
+    "n_inh_pure": 15,
+    "k_inh_pure": 0,
+    "p_inh_pure": 0.0,
+    "p_inh_pure_exact": "0/15",
+    "risk_difference": 0.648148,
+    "p_fisher_one_sided_exact": "15/4581527",
+    "p_fisher_one_sided": 3.27e-06,
+    "p_fisher_two_sided_exact": "15/4581527",
+    "p_fisher_two_sided": 3.27e-06,
+    "chan_zhang_unconditional_ci95": [
+      0.383804,
+      0.776095
+    ],
+    "newcombe_wilson_ci95": [
+      0.404556,
+      0.76177
+    ],
+    "criteria": {
+      "exact_cohort_sizes_54_15_17": true,
+      "directional_p_sys_gt_p_inh_pure": true,
+      "fisher_pure_p_lt_0_01": true,
+      "unconditional_and_nw_ci95_gt_0": true,
+      "all_17_inhaled_fisher_p_lt_0_01": true
+    },
+    "outcome": "supported",
+    "ledger_standing": "open",
+    "systemic_sweat_cl_any_ncts": [
+      "NCT00237380",
+      "NCT00457821",
+      "NCT00865904",
+      "NCT00953706",
+      "NCT01161537",
+      "NCT01225211",
+      "NCT01262352",
+      "NCT01531673",
+      "NCT01685801",
+      "NCT02070744",
+      "NCT02508207",
+      "NCT02589236",
+      "NCT02690519",
+      "NCT02707562",
+      "NCT02718495",
+      "NCT02951182",
+      "NCT02951195",
+      "NCT02971839",
+      "NCT03045523",
+      "NCT03119649",
+      "NCT03224351",
+      "NCT03227471",
+      "NCT03251092",
+      "NCT03474042",
+      "NCT03506061",
+      "NCT03540524",
+      "NCT03591094",
+      "NCT03768089",
+      "NCT03911713",
+      "NCT03912233",
+      "NCT03969888",
+      "NCT04126473",
+      "NCT04135495",
+      "NCT04853368",
+      "NCT06154447"
+    ],
+    "systemic_sweat_cl_secondary_added_ncts": [
+      "NCT00237380",
+      "NCT00457821",
+      "NCT00865904",
+      "NCT00953706",
+      "NCT01161537",
+      "NCT01262352",
+      "NCT01685801",
+      "NCT02070744",
+      "NCT02508207",
+      "NCT02589236",
+      "NCT02690519",
+      "NCT02707562",
+      "NCT02718495",
+      "NCT02951182",
+      "NCT02951195",
+      "NCT03045523",
+      "NCT03119649",
+      "NCT03224351",
+      "NCT03227471",
+      "NCT03251092",
+      "NCT03591094",
+      "NCT03768089",
+      "NCT03911713",
+      "NCT03912233",
+      "NCT03969888",
+      "NCT04126473",
+      "NCT04135495",
+      "NCT06154447"
+    ],
+    "inhaled_pure_sweat_cl_any_ncts": []
+  },
+  "sensitivity_all_17_inhaled_including_dual_route": {
+    "n_sys": 54,
+    "k_sys": 35,
+    "n_inh_all": 17,
+    "k_inh_all": 0,
+    "p_inh_all": 0.0,
+    "p_inh_all_exact": "0/17",
+    "risk_difference": 0.648148,
+    "p_fisher_one_sided_exact": "270/325288417",
+    "p_fisher_one_sided": 8.3e-07,
+    "p_fisher_two_sided_exact": "825/650576834",
+    "chan_zhang_unconditional_ci95": [
+      0.432919,
+      0.773188
+    ],
+    "newcombe_wilson_ci95": [
+      0.420679,
+      0.76177
+    ],
+    "inhaled_all_sweat_cl_any_ncts": [],
+    "dual_route_inhaled_ncts": [
+      "NCT05668741",
+      "NCT06237335"
+    ]
+  },
+  "descriptive_context_non_gated": {
+    "systemic_primary_only_count": 7,
+    "systemic_secondary_only_added_count": 28,
+    "inhaled_all_secondary_only_added_count": 0,
+    "inhaled_all_secondary_only_added_ncts": [],
+    "measure_plus_description_systemic_count": 35,
+    "measure_plus_description_inhaled_all_count": 0,
+    "measure_plus_description_inhaled_all_ncts": []
+  }
+}

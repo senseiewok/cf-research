@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "work": "PRED-0016: Full-protocol (primaryOutcomes U secondaryOutcomes) sweat-chloride compartmentalization benchmark across locked early-phase PRISMA-included Cystic Fibrosis interventional trials from PRED-0015.",
+  "done_file": "done.md",
+  "done_sha256": "7fa36e5bed1a33269ff6abcf229602d8cfa9875082c8020ba1014cec6f30161d",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-early-phase-systemic-full-protocol-sweat-chloride",
+      "statement": "Among 54 locked early-phase non-healthy-volunteer PRISMA-included systemic CFTR modulator and systemic PTC readthrough trials, 35 (0.648148: 7 in primaryOutcomes and 28 added via secondaryOutcomes) register sweat chloride in outcomesModule measure strings.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/secondary_sweat_chloride_compartmentalization/early_phase_outcomes_2026-11-24.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "secondary_sweat_chloride_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "compiled regular-expression outcomesModule measure classifier",
+          "script": "secondary_sweat_chloride_compartmentalization.py",
+          "difference": "classifies primary_outcomes and secondary_outcomes measure strings with compiled regular expressions",
+          "value": 35
+        },
+        {
+          "name": "regex-free character token-window measure scanner",
+          "script": "independent_audit.py",
+          "difference": "separate file with zero re or math imports; scans lowercase alphanumeric token sequences",
+          "value": 35
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c2-early-phase-inhaled-full-protocol-sweat-chloride",
+      "statement": "Among 15 pure airway-restricted early-phase CFTR-restoring genetic, mRNA, viral-vector, liposomal, and splice-ASO trials (and all 17 including dual-route NCT05668741 and NCT06237335), 0 (0.000000) register sweat chloride across primaryOutcomes or secondaryOutcomes measure strings.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/secondary_sweat_chloride_compartmentalization/early_phase_outcomes_2026-11-24.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "secondary_sweat_chloride_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "compiled regular-expression pure-inhaled measure classifier",
+          "script": "secondary_sweat_chloride_compartmentalization.py",
+          "difference": "evaluates compiled sweat-chloride regexes across 15 pure-inhaled and 17 total inhaled trials",
+          "value": 0
+        },
+        {
+          "name": "regex-free character token-window pure-inhaled scanner",
+          "script": "independent_audit.py",
+          "difference": "separate file with zero re imports; checks alphanumeric token tuples across primary and secondary outcomes",
+          "value": 0
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c3-fisher-hypergeometric-pure-and-all17-pvalues",
+      "statement": "Comparing 35/54 systemic vs 0/15 pure airway-restricted early-phase CFTR trials yields exact one-sided Fisher hypergeometric p = 15/4581527 (0.00000327), and comparing 35/54 vs 0/17 all-inhaled trials yields p = 270/325288417 (0.00000083).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/secondary_sweat_chloride_compartmentalization/results_2026-11-24.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "secondary_sweat_chloride_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "math.comb hypergeometric support summation",
+          "script": "secondary_sweat_chloride_compartmentalization.py",
+          "difference": "computes hypergeometric PMF numerator and denominator via math.comb",
+          "value": 0.00000327
+        },
+        {
+          "name": "multiplicative Fraction product summation",
+          "script": "independent_audit.py",
+          "difference": "computes binomial coefficients via multiplicative Fraction products without importing math",
+          "value": 0.00000327
+        }
+      ],
+      "tolerance": 0.00000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c4-chan-zhang-and-newcombe-wilson-ci95-bounds",
+      "statement": "On 35/54 systemic vs 0/15 pure airway-restricted early-phase CFTR trials (risk difference +0.648148), the Chan-Zhang unconditional 95% CI is [0.383804, 0.776095] and the Newcombe-Wilson Method-10 95% CI is [0.404556, 0.761770].",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/secondary_sweat_chloride_compartmentalization/results_2026-11-24.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "secondary_sweat_chloride_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "Cardano trigonometric restricted-MLE + golden-section Chan-Zhang CI95 lower bound",
+          "script": "secondary_sweat_chloride_compartmentalization.py",
+          "difference": "solves Miettinen-Nurminen cubic score via Cardano acos/cos and golden-section nuisance refinement in float64",
+          "value": 0.383804
+        },
+        {
+          "name": "50-digit Decimal polynomial-bisection + ternary Chan-Zhang CI95 lower bound",
+          "script": "independent_audit.py",
+          "difference": "solves Miettinen-Nurminen score polynomial by monotone bisection and 50-digit Decimal ternary refinement without math",
+          "value": 0.383804
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c5-pred0016-full-protocol-compartmentalization-supported",
+      "statement": "Pre-registered PRED-0016 hypothesis is supported on measured ClinicalTrials.gov API v2 outcomesModule records across the locked 71 early-phase CFTR trials: adding secondaryOutcomes resolves PRED-0015's primary-only censoring (7/54 -> 35/54 systemic vs 0/15 pure-inhaled and 0/17 all-inhaled; p_fisher_pure_1s = 15/4581527 = 0.00000327 < 0.01; Chan-Zhang 95% CI [0.383804, 0.776095]; Newcombe-Wilson 95% CI [0.404556, 0.761770]).",
+      "kind": "predicted",
+      "origin": "lab",
+      "dataset": "benchmarks/secondary_sweat_chloride_compartmentalization/results_2026-11-24.json",
+      "standing": "open",
+      "held_out_error": {
+        "value": 0.00000327,
+        "unit": "one_sided_fisher_hypergeometric_p_value_vs_0.01_alpha_threshold",
+        "set_fixed_in_done_file": true
+      },
+      "checks": [
+        {"type": "own_script", "ref": "secondary_sweat_chloride_compartmentalization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "regex full-protocol risk-difference evaluator",
+          "script": "secondary_sweat_chloride_compartmentalization.py",
+          "difference": "computes p_sys - p_inh_pure from regex-classified primary and secondary outcomes",
+          "value": 0.648148
+        },
+        {
+          "name": "token-window full-protocol risk-difference auditor",
+          "script": "independent_audit.py",
+          "difference": "computes p_sys - p_inh_pure from regex-free character token-window outcome classification",
+          "value": 0.648148
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    }
+  ]
+}
