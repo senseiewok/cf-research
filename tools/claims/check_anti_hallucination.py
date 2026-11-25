@@ -278,7 +278,11 @@ def check_discovery_module_registration(
         for oc_fail in check_clinical_overclaim_guard(py_file, content):
             failures.append(oc_fail.replace("AH-4 [clinical-overclaim-guard]", "AH-5 [discovery-module-registration]"))
 
-        if py_file.stem not in infra_modules and py_file.stem not in registry:
+        if (
+            not py_file.stem.startswith("audit_")
+            and py_file.stem not in infra_modules
+            and py_file.stem not in registry
+        ):
             failures.append(
                 f"FAIL AH-5 [discovery-module-registration] {py_file.as_posix()}: "
                 f"biophysical module '{py_file.stem}' is not registered in discovery_council.DISCOVERY_MODULE_REGISTRY"

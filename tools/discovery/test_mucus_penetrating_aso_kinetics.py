@@ -109,6 +109,27 @@ class TestMucusPenetratingAsoKinetics(unittest.TestCase):
         self.assertTrue(results[-1].clinical_responder_met)
         self.assertGreater(results[-1].restored_isc_pct_wt, 15.0)
 
+    def test_splice_rescue_2789_and_1811_dose_response(self):
+        """Verify dose-dependent rescue and canonical parity vector for 2789+5G->A and 1811+1.6kbA->G."""
+        doses = [0.0, 10.0, 38.0, 100.0, 300.0]
+        for variant in ("2789+5G->A", "1811+1.6kbA->G"):
+            results = [mak.compute_splice_nmd_kinetics(variant, d) for d in doses]
+            for i in range(len(results) - 1):
+                self.assertLess(results[i].target_occupancy, results[i + 1].target_occupancy)
+                self.assertLess(results[i].restored_isc_pct_wt, results[i + 1].restored_isc_pct_wt)
+            self.assertGreater(results[-1].restored_isc_pct_wt, 15.0)
+
+        bare_2789 = mak.simulate_mucus_penetrating_aso(
+            variant="2789+5G->A",
+            apical_dose_nm=80.0,
+            peg_mol_pct=0.0,
+            surface_zeta_mv=-12.0,
+            conjugate_type="bare_aso",
+            potentiator_boost=1.5,
+            corrector_boost=1.0,
+        )
+        self.assertAlmostEqual(bare_2789.rescue.restored_isc_pct_wt, 2.57, places=2)
+
     def test_nonsense_rescue_w1282x_and_g542x(self):
         """Verify nonsense mutation rescue with Manfredi et al. (2025) ERAD chaperone and NMD grounding."""
         w1282x_low = mak.compute_splice_nmd_kinetics("W1282X", nuclear_aso_nm=5.0)

@@ -453,21 +453,41 @@ def compute_splice_nmd_kinetics(
     if "3849" in var_clean:
         # Deep-intronic cryptic splice rescue: displacements of U1 snRNP from aberrant pseudoexon donor
         baseline_canonical = 0.08  # Baseline canonical splice fraction (~8%)
-        canonical_mrna = baseline_canonical + (1.0 - baseline_canonical) * occupancy
+        canonical_or_rescued_mrna = baseline_canonical + (1.0 - baseline_canonical) * occupancy
         stabilization_fold = 1.0 + 3.5 * occupancy
-        synthesis_rate = canonical_mrna * 100.0
+        synthesis_rate = canonical_or_rescued_mrna * 100.0
         maturation_eff = 0.85
         band_c = synthesis_rate * maturation_eff
         restored_isc = band_c * potentiator_boost * 0.42
+
+    elif "2789" in var_clean:
+        # Splice-donor variant (2789+5G->A): partial basal splicing with ASO U1 restoration
+        baseline_canonical = 0.06
+        canonical_or_rescued_mrna = baseline_canonical + (1.0 - baseline_canonical) * occupancy * 0.82
+        stabilization_fold = 1.0 + 2.8 * occupancy
+        synthesis_rate = canonical_or_rescued_mrna * 100.0
+        maturation_eff = 0.75
+        band_c = synthesis_rate * maturation_eff
+        restored_isc = band_c * potentiator_boost * 0.38
+
+    elif "1811" in var_clean:
+        # Deep-intronic splice variant (1811+1.6kbA->G): pseudoexon steric blocking
+        baseline_canonical = 0.035
+        canonical_or_rescued_mrna = baseline_canonical + (1.0 - baseline_canonical) * occupancy * 0.85
+        stabilization_fold = 1.0 + 3.2 * occupancy
+        synthesis_rate = canonical_or_rescued_mrna * 100.0
+        maturation_eff = 0.80
+        band_c = synthesis_rate * maturation_eff
+        restored_isc = band_c * potentiator_boost * 0.40
 
     elif "W1282X" in var_clean:
         # Exon 23 nonsense variant: partial baseline NMD escape (~38% WT)
         # Manfredi et al. (Biochemistry 2025): truncated 1281-CFTR causes ERAD chaperone competition.
         # ASO-mediated NMD suppression / readthrough stabilization:
         baseline_mrna = 0.38
-        rescued_mrna = baseline_mrna + (1.0 - baseline_mrna) * occupancy * 0.65
-        stabilization_fold = rescued_mrna / baseline_mrna
-        synthesis_rate = rescued_mrna * 100.0
+        canonical_or_rescued_mrna = baseline_mrna + (1.0 - baseline_mrna) * occupancy * 0.65
+        stabilization_fold = canonical_or_rescued_mrna / baseline_mrna
+        synthesis_rate = canonical_or_rescued_mrna * 100.0
         # Correctors (ETI / Trikafta) alleviate ERAD chaperone load
         maturation_eff = min(0.90, 0.45 * corrector_boost)
         band_c = synthesis_rate * maturation_eff * (0.15 + 0.35 * occupancy)
@@ -476,9 +496,9 @@ def compute_splice_nmd_kinetics(
     elif "G542X" in var_clean:
         # Exon 12 nonsense variant: severe NMD degradation (baseline ~18% WT)
         baseline_mrna = 0.18
-        rescued_mrna = baseline_mrna + (1.0 - baseline_mrna) * occupancy * 0.58
-        stabilization_fold = rescued_mrna / baseline_mrna
-        synthesis_rate = rescued_mrna * 100.0
+        canonical_or_rescued_mrna = baseline_mrna + (1.0 - baseline_mrna) * occupancy * 0.58
+        stabilization_fold = canonical_or_rescued_mrna / baseline_mrna
+        synthesis_rate = canonical_or_rescued_mrna * 100.0
         maturation_eff = min(0.85, 0.40 * corrector_boost)
         band_c = synthesis_rate * maturation_eff * (0.10 + 0.30 * occupancy)
         restored_isc = band_c * potentiator_boost * 0.50
@@ -486,9 +506,9 @@ def compute_splice_nmd_kinetics(
     else:
         # Generic Class I nonsense/splice baseline
         baseline_mrna = 0.20
-        rescued_mrna = baseline_mrna + (1.0 - baseline_mrna) * occupancy * 0.50
-        stabilization_fold = rescued_mrna / baseline_mrna
-        synthesis_rate = rescued_mrna * 100.0
+        canonical_or_rescued_mrna = baseline_mrna + (1.0 - baseline_mrna) * occupancy * 0.50
+        stabilization_fold = canonical_or_rescued_mrna / baseline_mrna
+        synthesis_rate = canonical_or_rescued_mrna * 100.0
         maturation_eff = 0.50
         band_c = synthesis_rate * maturation_eff * (0.10 + 0.25 * occupancy)
         restored_isc = band_c * potentiator_boost * 0.45
@@ -499,7 +519,7 @@ def compute_splice_nmd_kinetics(
         variant=variant,
         target_occupancy=round(occupancy, 4),
         pre_mrna_stabilization_fold=round(stabilization_fold, 2),
-        canonical_or_rescued_mrna_pct_wt=round(rescued_mrna * 100.0 if "3849" not in var_clean else canonical_mrna * 100.0, 2),
+        canonical_or_rescued_mrna_pct_wt=round(canonical_or_rescued_mrna * 100.0, 2),
         rescued_protein_synthesis_rate=round(synthesis_rate, 2),
         cftr_maturation_efficiency=round(maturation_eff, 4),
         mature_band_c_pct_wt=round(band_c, 2),

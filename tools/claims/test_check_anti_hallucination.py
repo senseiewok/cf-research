@@ -117,6 +117,32 @@ class TestCheckAntiHallucination(unittest.TestCase):
                 f"Expected AH-5 NCT failure for NCT99999999, got: {fails}",
             )
 
+    def test_ah5_audit_module_exempt_from_registry_but_enforces_nct(self):
+        """Rule AH-5 exempts audit_*.py oracles from DISCOVERY_MODULE_REGISTRY while still enforcing NCT provenance."""
+        snapshot_ncts = cah.load_snapshot_ncts(REPO_ROOT / "tools" / "trial_atlas" / "snapshot.json")
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_root = Path(tmpdir)
+            disc_dst = tmp_root / "tools" / "discovery"
+            shutil.copytree(REPO_ROOT / "tools" / "discovery", disc_dst)
+            clean_audit = disc_dst / "audit_clean_oracle.py"
+            clean_audit.write_text('"""Offline audit oracle."""\ndef run(): return 0\n', encoding="utf-8")
+            self.assertEqual(cah.check_discovery_module_registration(tmp_root, snapshot_ncts), [])
+
+            bad_audit = disc_dst / "audit_bad_oracle.py"
+            bad_audit.write_text(
+                '"""Audit oracle citing invented NCT99999999."""\ndef run(): return 1\n',
+                encoding="utf-8",
+            )
+            fails = cah.check_discovery_module_registration(tmp_root, snapshot_ncts)
+            self.assertTrue(
+                any("NCT99999999" in f and "AH-5" in f for f in fails),
+                f"Expected AH-5 NCT failure for audit_bad_oracle, got: {fails}",
+            )
+            self.assertFalse(
+                any("is not registered in discovery_council.DISCOVERY_MODULE_REGISTRY" in f for f in fails),
+                f"audit_*.py must not fail DISCOVERY_MODULE_REGISTRY registration: {fails}",
+            )
+
     def test_ah6_cite_check_ledger_provenance_rejects_unverified_identifiers(self):
         """Rule AH-6 must verify DOIs, PMIDs, and NCTs against sources/cite-check-ledger.jsonl."""
         ledger = cah.load_cite_check_ledger(REPO_ROOT / "sources" / "cite-check-ledger.jsonl")

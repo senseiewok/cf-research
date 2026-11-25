@@ -1835,7 +1835,7 @@ def discover_biophysical_modules(discovery_dir: Path | None = None) -> List[str]
 
         stem = py_file.stem
 
-        if stem.startswith("test_") or stem in INFRASTRUCTURE_MODULES:
+        if stem.startswith(("test_", "audit_")) or stem in INFRASTRUCTURE_MODULES:
 
             continue
 
