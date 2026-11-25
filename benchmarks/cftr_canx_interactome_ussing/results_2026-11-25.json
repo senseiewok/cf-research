@@ -1,0 +1,1170 @@
+{
+  "schema_version": "tedman2025-canx-interactome-ussing-results-v1",
+  "benchmark_id": "tedman2025-cftr-canx-interactome-ussing",
+  "evaluated_on_local": "2026-11-25",
+  "evaluated_on_utc": "2026-11-25T13:51:05Z",
+  "done_sha256": "d6eeee7cf61baf2cee4576f6094c278a623b214d3667effe42ff05c14360ca82",
+  "dataset": {
+    "source_id": "cftr-dms-tedman-2025",
+    "paper_doi": "10.7554/eLife.107180",
+    "mendeley_doi": "10.17632/ksfmxv8zts.1",
+    "license": "CC BY 4.0",
+    "research_boundary": "Macroscopic FRT Ussing Delta Isc and HEK293T TMT-18plex co-IP fold changes are not single-channel patch-clamp burst durations, clinical endpoints, or medical advice.",
+    "workbook_sha256": {
+      "Copy of TMT_Labels.xlsx": "5b16d08dfefce36878149259d823604d2153df8b027a48bd8cf69c3f1af5b41e",
+      "Copy of CFTR_Variants_LogFoldChanges.xlsx": "492df3ef266f27a5e18e1d9ce61b13356a8101b3e85d89c38ec87f5ca7208f7a",
+      "Copy of CFTR_F508del_Drug_LogFoldChanges.xlsx": "d42ae782fe85163909396ea5ab4ee0915eec346e8ae420e419e80b5dd5e270c0",
+      "Copy of FRT-F508del_siCANX_Ussing-summary-for-paper.xlsx": "a1ad7e325bab60ba6fe15e001fdddfd4fd14918d571e53ca45844c2f58f1ac1a",
+      "Copy of FRT-WT_siCANX_Ussing-summary-for-paper.xlsx": "bddaffb3b68449184b518a923c3c0d18ce51ed409662915d7b16fe7f8fedc628"
+    },
+    "variants_non_empty_rows_incl_cftr": 373,
+    "variants_interactors_excl_cftr": 372,
+    "drug_non_empty_rows_incl_cftr": 236,
+    "drug_interactors_excl_cftr": 235
+  },
+  "data_integrity_audit": {
+    "duplicate_replicate_columns_count": 7,
+    "duplicate_replicate_columns": [
+      {
+        "workbook": "FRT-F508del",
+        "group": "siNS, DMSO",
+        "kept_col": "C",
+        "dropped_col": "D",
+        "tuple_fsk_vx770_inh172": [
+          2.19,
+          0.405,
+          -3.4
+        ]
+      },
+      {
+        "workbook": "FRT-F508del",
+        "group": "siNS, VX-661",
+        "kept_col": "C",
+        "dropped_col": "D",
+        "tuple_fsk_vx770_inh172": [
+          6.28,
+          3.87,
+          -10.7
+        ]
+      },
+      {
+        "workbook": "FRT-F508del",
+        "group": "siNS, VX-445",
+        "kept_col": "C",
+        "dropped_col": "D",
+        "tuple_fsk_vx770_inh172": [
+          8.73,
+          1.01,
+          -12.1
+        ]
+      },
+      {
+        "workbook": "FRT-F508del",
+        "group": "siCANX, VX-661",
+        "kept_col": "C",
+        "dropped_col": "D",
+        "tuple_fsk_vx770_inh172": [
+          2.19,
+          1.53,
+          -5.53
+        ]
+      },
+      {
+        "workbook": "FRT-F508del",
+        "group": "siCANX, VX-445",
+        "kept_col": "C",
+        "dropped_col": "D",
+        "tuple_fsk_vx770_inh172": [
+          5.94,
+          3.85,
+          -10.9
+        ]
+      },
+      {
+        "workbook": "FRT-F508del",
+        "group": "siCANX, 661+445",
+        "kept_col": "C",
+        "dropped_col": "D",
+        "tuple_fsk_vx770_inh172": [
+          22.5,
+          8.4,
+          -32.1
+        ]
+      },
+      {
+        "workbook": "FRT-F508del",
+        "group": "siCANX, ETI",
+        "kept_col": "C",
+        "dropped_col": "D",
+        "tuple_fsk_vx770_inh172": [
+          17.3,
+          1.32,
+          -18.6
+        ]
+      }
+    ],
+    "proteomics_non_numeric_cells": [
+      {
+        "workbook": "CFTR_Variants",
+        "row_num": 336,
+        "gene_symbol": "RAB5A",
+        "column": "I1366N (-CX)",
+        "cell": "G336",
+        "raw_value": "#DIV/0!"
+      },
+      {
+        "workbook": "CFTR_F508del_Drug",
+        "row_num": 197,
+        "gene_symbol": "LUZP1",
+        "column": "\u0394F (-CX)",
+        "cell": "C197",
+        "raw_value": "#DIV/0!"
+      },
+      {
+        "workbook": "CFTR_F508del_Drug",
+        "row_num": 198,
+        "gene_symbol": "POLE3",
+        "column": "\u0394F (-CX)",
+        "cell": "C198",
+        "raw_value": "#DIV/0!"
+      }
+    ]
+  },
+  "arm_1_frt_ussing_sicanx_asymmetry": {
+    "positive_controls": {
+      "inh172_reversal_parity": {
+        "FRT-F508del": {
+          "all_11_groups_pos_act_neg_inh": true,
+          "pearson_r_all_11_groups": 0.99826,
+          "pearson_r_9_non_eti_groups": 0.999519,
+          "max_abs_group_mean_balance_residual": 1.527667,
+          "passed": true
+        },
+        "FRT-WT": {
+          "all_11_groups_pos_act_neg_inh": true,
+          "pearson_r_all_11_groups": 0.884189,
+          "pearson_r_9_non_eti_groups": 0.993663,
+          "max_abs_group_mean_balance_residual": 14.14775,
+          "passed": true
+        },
+        "pooled_22_groups_pearson_r": 0.991056
+      },
+      "wt_vs_f508del_nt_dynamic_range": {
+        "frt_wt_nt_mean_c_to_r_n15": 79.227207,
+        "frt_wt_nt_mean_c_to_l_n10": 85.02287,
+        "frt_f508del_nt_mean_n8": 1.733125,
+        "ratio_c_to_r": 45.713498,
+        "ratio_c_to_l": 49.057552,
+        "threshold": 5.0,
+        "passed": true
+      },
+      "f508del_sins_combo_gt_dmso": {
+        "sins_661_445_mean": 35.39325,
+        "sins_dmso_mean": 1.737333,
+        "fold_rescue": 20.37217,
+        "passed": true
+      }
+    },
+    "primary_strict_dedup": {
+      "arm_1a_f508del_combo_sicanx_drop": {
+        "n_sicanx": 3,
+        "n_sins": 4,
+        "mean_sicanx_total_act": 24.226667,
+        "mean_sins_total_act": 35.39325,
+        "diff_mean": -11.166583,
+        "pct_change_vs_sins": -31.550037,
+        "exact_perm_p_two_sided": 0.085714,
+        "exact_perm_ge_count": 3,
+        "exact_perm_total_splits": 35,
+        "welch_t_context": {
+          "t_stat": -2.746379,
+          "df": 3.583194,
+          "p_two_sided": 0.058231
+        },
+        "bootstrap_log_ratio": {
+          "point_estimate": -0.379067,
+          "ci95": [
+            -0.621386,
+            -0.138234
+          ],
+          "ci975": [
+            -0.632096,
+            -0.100299
+          ],
+          "ci975_high_lt_zero": true
+        },
+        "alpha_bonferroni": 0.025,
+        "passed_gate": false
+      },
+      "arm_1b_sicanx_proportion_f508del_vs_wt": {
+        "n_f508del_sicanx": 3,
+        "n_f508del_sins": 4,
+        "n_wt_sicanx_dmso": 8,
+        "n_wt_sins_dmso": 8,
+        "f508del_combo_log_ratio": -0.379067,
+        "wt_dmso_log_ratio": -0.324926,
+        "wt_dmso_pct_change": -27.741893,
+        "did_log_ratio": -0.054142,
+        "exact_stratified_perm_p_one_sided": 0.408714,
+        "exact_stratified_perm_p_two_sided_context": 0.813573,
+        "exact_stratified_perm_total_splits": 450450,
+        "bootstrap_did_log_ratio": {
+          "point_estimate": -0.054142,
+          "one_sided_975_upper": 0.224171,
+          "one_sided_975_high_lt_zero": false,
+          "two_sided_ci975": [
+            -0.37346,
+            0.265609
+          ],
+          "two_sided_ci95": [
+            -0.341708,
+            0.224171
+          ]
+        },
+        "alpha_bonferroni": 0.025,
+        "passed_gate": false
+      },
+      "overall_verdict": "refuted",
+      "ledger_standing": "refuted"
+    },
+    "group_summaries_dedup": {
+      "frt_f508del": {
+        "NT": {
+          "n": 8,
+          "mean_fsk": 1.16925,
+          "mean_vx770": 0.563875,
+          "mean_total_act": 1.733125,
+          "sem_total_act": 0.235871,
+          "mean_inh172": -2.72625,
+          "mean_mass_balance_residual": -0.993125
+        },
+        "siNS, DMSO": {
+          "n": 3,
+          "mean_fsk": 1.444,
+          "mean_vx770": 0.293333,
+          "mean_total_act": 1.737333,
+          "sem_total_act": 0.451832,
+          "mean_inh172": -2.58,
+          "mean_mass_balance_residual": -0.842667
+        },
+        "siNS, VX-661": {
+          "n": 3,
+          "mean_fsk": 5.543333,
+          "mean_vx770": 2.121667,
+          "mean_total_act": 7.665,
+          "sem_total_act": 1.242742,
+          "mean_inh172": -8.106667,
+          "mean_mass_balance_residual": -0.441667
+        },
+        "siNS, VX-445": {
+          "n": 3,
+          "mean_fsk": 10.11,
+          "mean_vx770": 1.53,
+          "mean_total_act": 11.64,
+          "sem_total_act": 1.01318,
+          "mean_inh172": -12.966667,
+          "mean_mass_balance_residual": -1.326667
+        },
+        "siNS, 661+445": {
+          "n": 4,
+          "mean_fsk": 33.35,
+          "mean_vx770": 2.04325,
+          "mean_total_act": 35.39325,
+          "sem_total_act": 2.196907,
+          "mean_inh172": -35.35,
+          "mean_mass_balance_residual": 0.04325
+        },
+        "siNS, ETI": {
+          "n": 4,
+          "mean_fsk": 22.475,
+          "mean_vx770": 0.18175,
+          "mean_total_act": 22.65675,
+          "sem_total_act": 1.008651,
+          "mean_inh172": -23.725,
+          "mean_mass_balance_residual": -1.06825
+        },
+        "siCANX, DMSO": {
+          "n": 4,
+          "mean_fsk": 0.73825,
+          "mean_vx770": 0.397125,
+          "mean_total_act": 1.135375,
+          "sem_total_act": 0.246443,
+          "mean_inh172": -1.9175,
+          "mean_mass_balance_residual": -0.782125
+        },
+        "siCANX, VX-661": {
+          "n": 3,
+          "mean_fsk": 2.38,
+          "mean_vx770": 1.135667,
+          "mean_total_act": 3.515667,
+          "sem_total_act": 0.442936,
+          "mean_inh172": -5.043333,
+          "mean_mass_balance_residual": -1.527667
+        },
+        "siCANX, VX-445": {
+          "n": 3,
+          "mean_fsk": 6.563333,
+          "mean_vx770": 2.706667,
+          "mean_total_act": 9.27,
+          "sem_total_act": 0.39281,
+          "mean_inh172": -10.376667,
+          "mean_mass_balance_residual": -1.106667
+        },
+        "siCANX, 661+445": {
+          "n": 3,
+          "mean_fsk": 18.7,
+          "mean_vx770": 5.526667,
+          "mean_total_act": 24.226667,
+          "sem_total_act": 3.421312,
+          "mean_inh172": -24.8,
+          "mean_mass_balance_residual": -0.573333
+        },
+        "siCANX, ETI": {
+          "n": 3,
+          "mean_fsk": 16.633333,
+          "mean_vx770": 0.870667,
+          "mean_total_act": 17.504,
+          "sem_total_act": 0.558306,
+          "mean_inh172": -16.433333,
+          "mean_mass_balance_residual": 1.070667
+        }
+      },
+      "frt_wt": {
+        "NT": {
+          "n": 15,
+          "mean_fsk": 79.733333,
+          "mean_vx770": -0.506127,
+          "mean_total_act": 79.227207,
+          "sem_total_act": 5.505901,
+          "mean_inh172": -72.726667,
+          "mean_mass_balance_residual": 6.50054
+        },
+        "siNS, DMSO": {
+          "n": 8,
+          "mean_fsk": 88.825,
+          "mean_vx770": -0.675375,
+          "mean_total_act": 88.149625,
+          "sem_total_act": 5.56113,
+          "mean_inh172": -79.775,
+          "mean_mass_balance_residual": 8.374625
+        },
+        "siNS, VX-661": {
+          "n": 7,
+          "mean_fsk": 105.885714,
+          "mean_vx770": -0.833429,
+          "mean_total_act": 105.052286,
+          "sem_total_act": 6.412479,
+          "mean_inh172": -96.914286,
+          "mean_mass_balance_residual": 8.138
+        },
+        "siNS, VX-445": {
+          "n": 7,
+          "mean_fsk": 84.8,
+          "mean_vx770": -0.919714,
+          "mean_total_act": 83.880286,
+          "sem_total_act": 5.421404,
+          "mean_inh172": -75.671429,
+          "mean_mass_balance_residual": 8.208857
+        },
+        "siNS, 661+445": {
+          "n": 6,
+          "mean_fsk": 101.783333,
+          "mean_vx770": -1.2435,
+          "mean_total_act": 100.539833,
+          "sem_total_act": 9.582253,
+          "mean_inh172": -93.566667,
+          "mean_mass_balance_residual": 6.973167
+        },
+        "siNS, ETI": {
+          "n": 8,
+          "mean_fsk": 84.975,
+          "mean_vx770": -1.38525,
+          "mean_total_act": 83.58975,
+          "sem_total_act": 6.478595,
+          "mean_inh172": -97.7375,
+          "mean_mass_balance_residual": -14.14775
+        },
+        "siCANX, DMSO": {
+          "n": 8,
+          "mean_fsk": 64.4625,
+          "mean_vx770": -0.76725,
+          "mean_total_act": 63.69525,
+          "sem_total_act": 3.46265,
+          "mean_inh172": -61.0875,
+          "mean_mass_balance_residual": 2.60775
+        },
+        "siCANX, VX-661": {
+          "n": 8,
+          "mean_fsk": 81.7875,
+          "mean_vx770": -0.6715,
+          "mean_total_act": 81.116,
+          "sem_total_act": 4.393707,
+          "mean_inh172": -77.375,
+          "mean_mass_balance_residual": 3.741
+        },
+        "siCANX, VX-445": {
+          "n": 7,
+          "mean_fsk": 59.857143,
+          "mean_vx770": -0.663286,
+          "mean_total_act": 59.193857,
+          "sem_total_act": 4.850486,
+          "mean_inh172": -55.828571,
+          "mean_mass_balance_residual": 3.365286
+        },
+        "siCANX, 661+445": {
+          "n": 8,
+          "mean_fsk": 70.6625,
+          "mean_vx770": -0.8065,
+          "mean_total_act": 69.856,
+          "sem_total_act": 6.212947,
+          "mean_inh172": -67.3875,
+          "mean_mass_balance_residual": 2.4685
+        },
+        "siCANX, ETI": {
+          "n": 7,
+          "mean_fsk": 65.571429,
+          "mean_vx770": -0.922686,
+          "mean_total_act": 64.648743,
+          "sem_total_act": 3.942958,
+          "mean_inh172": -70.614286,
+          "mean_mass_balance_residual": -5.965543
+        }
+      }
+    },
+    "sensitivity_as_deposited_n4": {
+      "arm_1a_f508del_combo_sicanx_drop": {
+        "n_sicanx": 4,
+        "n_sins": 4,
+        "mean_sicanx_total_act": 25.895,
+        "mean_sins_total_act": 35.39325,
+        "diff_mean": -9.49825,
+        "pct_change_vs_sins": -26.836332,
+        "exact_perm_p_two_sided": 0.085714,
+        "exact_perm_ge_count": 6,
+        "exact_perm_total_splits": 70,
+        "welch_t_context": {
+          "t_stat": -2.588701,
+          "df": 5.555151,
+          "p_two_sided": 0.044307
+        },
+        "bootstrap_log_ratio": {
+          "point_estimate": -0.312471,
+          "ci95": [
+            -0.540631,
+            -0.102857
+          ],
+          "ci975": [
+            -0.569706,
+            -0.084731
+          ],
+          "ci975_high_lt_zero": true
+        },
+        "alpha_bonferroni": 0.025,
+        "passed_gate": false
+      },
+      "arm_1b_sicanx_proportion_f508del_vs_wt": {
+        "n_f508del_sicanx": 4,
+        "n_f508del_sins": 4,
+        "n_wt_sicanx_dmso": 8,
+        "n_wt_sins_dmso": 8,
+        "f508del_combo_log_ratio": -0.312471,
+        "wt_dmso_log_ratio": -0.324926,
+        "wt_dmso_pct_change": -27.741893,
+        "did_log_ratio": 0.012454,
+        "exact_stratified_perm_p_one_sided": 0.524227,
+        "exact_stratified_perm_p_two_sided_context": 0.951548,
+        "exact_stratified_perm_total_splits": 900900,
+        "bootstrap_did_log_ratio": {
+          "point_estimate": 0.012454,
+          "one_sided_975_upper": 0.267621,
+          "one_sided_975_high_lt_zero": false,
+          "two_sided_ci975": [
+            -0.306713,
+            0.300515
+          ],
+          "two_sided_ci95": [
+            -0.262722,
+            0.267621
+          ]
+        },
+        "alpha_bonferroni": 0.025,
+        "passed_gate": false
+      },
+      "overall_verdict": "refuted",
+      "ledger_standing": "refuted"
+    },
+    "dms_f508del_concordance_context": {
+      "available": true,
+      "master_xlsx_sha256": "2a702ee3744b8039a9c7c4c74aec9bb30a91301b138d4948e0e2c81a1931e51b",
+      "parental_col_j_vx661_status": "blank_0_of_234_in_published_workbook",
+      "parental_dms_3_treatments": {
+        "DMSO": 0.165962,
+        "VX-445": 0.345314,
+        "661+445": 0.771953
+      },
+      "canx_ko_dms_4_treatments": {
+        "DMSO": 0.144903,
+        "VX-661": 0.227935,
+        "VX-445": 0.229712,
+        "661+445": 0.575882
+      },
+      "frt_f508del_sins_ussing_means": {
+        "DMSO": 1.737333,
+        "VX-661": 7.665,
+        "VX-445": 11.64,
+        "661+445": 35.39325
+      },
+      "frt_f508del_sicanx_ussing_means": {
+        "DMSO": 1.135375,
+        "VX-661": 3.515667,
+        "VX-445": 9.27,
+        "661+445": 24.226667
+      },
+      "spearman_parental_dms_vs_sins_3tr": 1.0,
+      "spearman_canx_ko_dms_vs_sicanx_4tr": 1.0,
+      "spearman_canx_ko_dms_vs_sins_4tr": 1.0
+    }
+  },
+  "arm_2_canx_ko_proteostasis_remodeling": {
+    "controls": {
+      "cftr_anchor_all_zero": {
+        "WT(-CX)": 0.0,
+        "V232D (-CX)": 0.0,
+        "P5L (-CX)": 0.0,
+        "T1036N (-CX)": 0.0,
+        "I1366N (-CX)": 0.0,
+        "\u0394F (-CX)": 0.0,
+        "DelF (-CX) +445": 0.0,
+        "DelF (-CX) +661": 0.0,
+        "DelF (-CX) + combo": 0.0
+      },
+      "non_cftr_dispersion_std": {
+        "WT(-CX)": 0.368766,
+        "V232D (-CX)": 0.322243,
+        "P5L (-CX)": 0.47151,
+        "T1036N (-CX)": 0.703448,
+        "I1366N (-CX)": 0.495147,
+        "\u0394F (-CX)": 0.468334,
+        "DelF (-CX) +445": 0.420011,
+        "DelF (-CX) +661": 0.371751,
+        "DelF (-CX) + combo": 0.410274
+      },
+      "tmt_18plex_design_parity": {
+        "runs": 6,
+        "channels_per_run": 18,
+        "total_channel_entries": 108,
+        "channels": [
+          "126",
+          "127N",
+          "127C",
+          "128N",
+          "128C",
+          "129N",
+          "129C",
+          "130N",
+          "130C",
+          "131N",
+          "131C",
+          "132N",
+          "132C",
+          "133N",
+          "133C",
+          "134N",
+          "134C",
+          "135N"
+        ]
+      },
+      "pathway_permutation_null": {
+        "draws": 10000,
+        "seed": 20261125,
+        "drug_family_empirical_fwer_q05": 0.0578,
+        "variants_family_empirical_fwer_q05": 0.0432,
+        "max_allowed_fwer": 0.08,
+        "passed": true
+      }
+    },
+    "primary_evaluation": {
+      "family_2a_drug_attenuation": {
+        "num_tests": 4,
+        "fdr_threshold": 0.05,
+        "significant_count": 0,
+        "tests": [
+          {
+            "module": "folding",
+            "n_paired": 10,
+            "median_dmso_lfc": 0.23675,
+            "median_combo_lfc": 0.222354,
+            "median_abs_diff_combo_minus_dmso": -0.163479,
+            "mean_abs_diff_combo_minus_dmso": -0.292725,
+            "wilcoxon_abs_method": "exact_dp",
+            "wilcoxon_abs_w_plus": 13.0,
+            "raw_p_two_sided": 0.160156,
+            "signed_shift_context": {
+              "median_signed_diff": -0.065611,
+              "p_two_sided": 1.0
+            },
+            "bh_fdr_q": 0.640625,
+            "significant_q05": false
+          },
+          {
+            "module": "ups",
+            "n_paired": 20,
+            "median_dmso_lfc": 0.339081,
+            "median_combo_lfc": 0.236665,
+            "median_abs_diff_combo_minus_dmso": 0.148773,
+            "mean_abs_diff_combo_minus_dmso": 0.024615,
+            "wilcoxon_abs_method": "exact_dp",
+            "wilcoxon_abs_w_plus": 116.0,
+            "raw_p_two_sided": 0.701181,
+            "signed_shift_context": {
+              "median_signed_diff": 0.148773,
+              "p_two_sided": 0.756166
+            },
+            "bh_fdr_q": 0.701181,
+            "significant_q05": false
+          },
+          {
+            "module": "autophagy_lysosome",
+            "n_paired": 8,
+            "median_dmso_lfc": 0.470089,
+            "median_combo_lfc": 0.397963,
+            "median_abs_diff_combo_minus_dmso": 0.048821,
+            "mean_abs_diff_combo_minus_dmso": 0.152277,
+            "wilcoxon_abs_method": "exact_dp",
+            "wilcoxon_abs_w_plus": 24.0,
+            "raw_p_two_sided": 0.460938,
+            "signed_shift_context": {
+              "median_signed_diff": 0.055072,
+              "p_two_sided": 0.640625
+            },
+            "bh_fdr_q": 0.701181,
+            "significant_q05": false
+          },
+          {
+            "module": "trafficking",
+            "n_paired": 8,
+            "median_dmso_lfc": 0.563818,
+            "median_combo_lfc": 0.648075,
+            "median_abs_diff_combo_minus_dmso": 0.133354,
+            "mean_abs_diff_combo_minus_dmso": 0.075058,
+            "wilcoxon_abs_method": "exact_dp",
+            "wilcoxon_abs_w_plus": 23.0,
+            "raw_p_two_sided": 0.546875,
+            "signed_shift_context": {
+              "median_signed_diff": 0.156572,
+              "p_two_sided": 0.460938
+            },
+            "bh_fdr_q": 0.701181,
+            "significant_q05": false
+          }
+        ]
+      },
+      "family_2b_variant_enrichment": {
+        "num_tests": 20,
+        "fdr_threshold": 0.05,
+        "significant_count": 0,
+        "tests": [
+          {
+            "variant": "WT(-CX)",
+            "module": "folding",
+            "n_module": 16,
+            "n_background": 356,
+            "median_module_lfc": 0.239986,
+            "median_background_lfc": 0.064948,
+            "mean_module_lfc": 0.113152,
+            "mean_background_lfc": 0.058208,
+            "u1": 3680.0,
+            "z_signed": 1.977309,
+            "raw_p_two_sided": 0.048141,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.303826,
+              "median_bg_abs_lfc": 0.172379,
+              "z_signed": 1.772924,
+              "p_two_sided": 0.076438
+            },
+            "bh_fdr_q": 0.694575,
+            "significant_q05": false
+          },
+          {
+            "variant": "WT(-CX)",
+            "module": "ups",
+            "n_module": 22,
+            "n_background": 350,
+            "median_module_lfc": 0.089539,
+            "median_background_lfc": 0.07071,
+            "mean_module_lfc": 0.151192,
+            "mean_background_lfc": 0.054875,
+            "u1": 4336.0,
+            "z_signed": 0.993407,
+            "raw_p_two_sided": 0.32101,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.188339,
+              "median_bg_abs_lfc": 0.176784,
+              "z_signed": -0.435382,
+              "p_two_sided": 0.664027
+            },
+            "bh_fdr_q": 0.79183,
+            "significant_q05": false
+          },
+          {
+            "variant": "WT(-CX)",
+            "module": "autophagy_lysosome",
+            "n_module": 28,
+            "n_background": 344,
+            "median_module_lfc": 0.044021,
+            "median_background_lfc": 0.074653,
+            "mean_module_lfc": 0.071849,
+            "mean_background_lfc": 0.059653,
+            "u1": 4379.0,
+            "z_signed": -0.798655,
+            "raw_p_two_sided": 0.42502,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.150793,
+              "median_bg_abs_lfc": 0.178931,
+              "z_signed": -1.198897,
+              "p_two_sided": 0.230924
+            },
+            "bh_fdr_q": 0.79183,
+            "significant_q05": false
+          },
+          {
+            "variant": "WT(-CX)",
+            "module": "trafficking",
+            "n_module": 22,
+            "n_background": 350,
+            "median_module_lfc": -0.051367,
+            "median_background_lfc": 0.076852,
+            "mean_module_lfc": 0.025826,
+            "mean_background_lfc": 0.062755,
+            "u1": 3282.0,
+            "z_signed": -1.161019,
+            "raw_p_two_sided": 0.24605,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.194279,
+              "median_bg_abs_lfc": 0.176273,
+              "z_signed": -0.094026,
+              "p_two_sided": 0.9259
+            },
+            "bh_fdr_q": 0.79183,
+            "significant_q05": false
+          },
+          {
+            "variant": "V232D (-CX)",
+            "module": "folding",
+            "n_module": 16,
+            "n_background": 356,
+            "median_module_lfc": 0.445506,
+            "median_background_lfc": 0.372676,
+            "mean_module_lfc": 0.347328,
+            "mean_background_lfc": 0.349869,
+            "u1": 3103.0,
+            "z_signed": 0.606026,
+            "raw_p_two_sided": 0.545287,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.45495,
+              "median_bg_abs_lfc": 0.386065,
+              "z_signed": 1.052822,
+              "p_two_sided": 0.292968
+            },
+            "bh_fdr_q": 0.826347,
+            "significant_q05": false
+          },
+          {
+            "variant": "V232D (-CX)",
+            "module": "ups",
+            "n_module": 22,
+            "n_background": 350,
+            "median_module_lfc": 0.347176,
+            "median_background_lfc": 0.378038,
+            "mean_module_lfc": 0.322751,
+            "mean_background_lfc": 0.351458,
+            "u1": 3468.0,
+            "z_signed": -0.780826,
+            "raw_p_two_sided": 0.435506,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.353216,
+              "median_bg_abs_lfc": 0.398634,
+              "z_signed": -1.028156,
+              "p_two_sided": 0.304358
+            },
+            "bh_fdr_q": 0.79183,
+            "significant_q05": false
+          },
+          {
+            "variant": "V232D (-CX)",
+            "module": "autophagy_lysosome",
+            "n_module": 28,
+            "n_background": 344,
+            "median_module_lfc": 0.343454,
+            "median_background_lfc": 0.378038,
+            "mean_module_lfc": 0.355062,
+            "mean_background_lfc": 0.349328,
+            "u1": 4544.0,
+            "z_signed": -0.497104,
+            "raw_p_two_sided": 0.619761,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.343454,
+              "median_bg_abs_lfc": 0.401716,
+              "z_signed": -1.054517,
+              "p_two_sided": 0.292064
+            },
+            "bh_fdr_q": 0.826347,
+            "significant_q05": false
+          },
+          {
+            "variant": "V232D (-CX)",
+            "module": "trafficking",
+            "n_module": 22,
+            "n_background": 350,
+            "median_module_lfc": 0.377897,
+            "median_background_lfc": 0.37291,
+            "mean_module_lfc": 0.410307,
+            "mean_background_lfc": 0.345954,
+            "u1": 4116.0,
+            "z_signed": 0.543716,
+            "raw_p_two_sided": 0.58734,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.377897,
+              "median_bg_abs_lfc": 0.39534,
+              "z_signed": -0.006132,
+              "p_two_sided": 0.995923
+            },
+            "bh_fdr_q": 0.826347,
+            "significant_q05": false
+          },
+          {
+            "variant": "P5L (-CX)",
+            "module": "folding",
+            "n_module": 16,
+            "n_background": 356,
+            "median_module_lfc": 0.331006,
+            "median_background_lfc": 0.279365,
+            "mean_module_lfc": 0.340817,
+            "mean_background_lfc": 0.282136,
+            "u1": 3178.0,
+            "z_signed": 0.784269,
+            "raw_p_two_sided": 0.43358,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.375969,
+              "median_bg_abs_lfc": 0.3414,
+              "z_signed": 0.917357,
+              "p_two_sided": 0.359578
+            },
+            "bh_fdr_q": 0.79183,
+            "significant_q05": false
+          },
+          {
+            "variant": "P5L (-CX)",
+            "module": "ups",
+            "n_module": 22,
+            "n_background": 350,
+            "median_module_lfc": 0.258934,
+            "median_background_lfc": 0.301908,
+            "mean_module_lfc": 0.248349,
+            "mean_background_lfc": 0.286942,
+            "u1": 3751.0,
+            "z_signed": -0.202361,
+            "raw_p_two_sided": 0.840434,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.424721,
+              "median_bg_abs_lfc": 0.33958,
+              "z_signed": 0.190096,
+              "p_two_sided": 0.850035
+            },
+            "bh_fdr_q": 0.973028,
+            "significant_q05": false
+          },
+          {
+            "variant": "P5L (-CX)",
+            "module": "autophagy_lysosome",
+            "n_module": 28,
+            "n_background": 344,
+            "median_module_lfc": 0.320564,
+            "median_background_lfc": 0.293624,
+            "mean_module_lfc": 0.282546,
+            "mean_background_lfc": 0.284832,
+            "u1": 4759.0,
+            "z_signed": -0.104172,
+            "raw_p_two_sided": 0.917758,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.363972,
+              "median_bg_abs_lfc": 0.33958,
+              "z_signed": -0.175448,
+              "p_two_sided": 0.861445
+            },
+            "bh_fdr_q": 0.973028,
+            "significant_q05": false
+          },
+          {
+            "variant": "P5L (-CX)",
+            "module": "trafficking",
+            "n_module": 22,
+            "n_background": 350,
+            "median_module_lfc": 0.333957,
+            "median_background_lfc": 0.293624,
+            "mean_module_lfc": 0.357564,
+            "mean_background_lfc": 0.280077,
+            "u1": 4182.0,
+            "z_signed": 0.678624,
+            "raw_p_two_sided": 0.498024,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.35672,
+              "median_bg_abs_lfc": 0.33958,
+              "z_signed": 0.081762,
+              "p_two_sided": 0.935649
+            },
+            "bh_fdr_q": 0.826347,
+            "significant_q05": false
+          },
+          {
+            "variant": "T1036N (-CX)",
+            "module": "folding",
+            "n_module": 16,
+            "n_background": 356,
+            "median_module_lfc": 0.127439,
+            "median_background_lfc": 0.197445,
+            "mean_module_lfc": -0.016427,
+            "mean_background_lfc": 0.290288,
+            "u1": 2275.0,
+            "z_signed": -1.361777,
+            "raw_p_two_sided": 0.173644,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.288762,
+              "median_bg_abs_lfc": 0.238171,
+              "z_signed": 0.111699,
+              "p_two_sided": 0.912004
+            },
+            "bh_fdr_q": 0.694575,
+            "significant_q05": false
+          },
+          {
+            "variant": "T1036N (-CX)",
+            "module": "ups",
+            "n_module": 22,
+            "n_background": 350,
+            "median_module_lfc": 0.221406,
+            "median_background_lfc": 0.192501,
+            "mean_module_lfc": 0.201284,
+            "mean_background_lfc": 0.281862,
+            "u1": 3815.0,
+            "z_signed": -0.071542,
+            "raw_p_two_sided": 0.94378,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.232958,
+              "median_bg_abs_lfc": 0.241392,
+              "z_signed": -0.451734,
+              "p_two_sided": 0.652197
+            },
+            "bh_fdr_q": 0.973028,
+            "significant_q05": false
+          },
+          {
+            "variant": "T1036N (-CX)",
+            "module": "autophagy_lysosome",
+            "n_module": 28,
+            "n_background": 344,
+            "median_module_lfc": 0.223186,
+            "median_background_lfc": 0.192967,
+            "mean_module_lfc": 0.205828,
+            "mean_background_lfc": 0.282897,
+            "u1": 4797.0,
+            "z_signed": -0.034724,
+            "raw_p_two_sided": 0.973028,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.251579,
+              "median_bg_abs_lfc": 0.235541,
+              "z_signed": 0.274138,
+              "p_two_sided": 0.784681
+            },
+            "bh_fdr_q": 0.973028,
+            "significant_q05": false
+          },
+          {
+            "variant": "T1036N (-CX)",
+            "module": "trafficking",
+            "n_module": 22,
+            "n_background": 350,
+            "median_module_lfc": 0.302375,
+            "median_background_lfc": 0.192097,
+            "mean_module_lfc": 0.279478,
+            "mean_background_lfc": 0.276946,
+            "u1": 4557.0,
+            "z_signed": 1.445141,
+            "raw_p_two_sided": 0.148705,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.302375,
+              "median_bg_abs_lfc": 0.235361,
+              "z_signed": 1.154886,
+              "p_two_sided": 0.248556
+            },
+            "bh_fdr_q": 0.694575,
+            "significant_q05": false
+          },
+          {
+            "variant": "I1366N (-CX)",
+            "module": "folding",
+            "n_module": 16,
+            "n_background": 355,
+            "median_module_lfc": 0.236815,
+            "median_background_lfc": 0.165018,
+            "mean_module_lfc": 0.169356,
+            "mean_background_lfc": 0.218858,
+            "u1": 2986.0,
+            "z_signed": 0.347935,
+            "raw_p_two_sided": 0.728784,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.276467,
+              "median_bg_abs_lfc": 0.213938,
+              "z_signed": 0.412279,
+              "p_two_sided": 0.681009
+            },
+            "bh_fdr_q": 0.91098,
+            "significant_q05": false
+          },
+          {
+            "variant": "I1366N (-CX)",
+            "module": "ups",
+            "n_module": 22,
+            "n_background": 349,
+            "median_module_lfc": 0.235753,
+            "median_background_lfc": 0.156312,
+            "mean_module_lfc": 0.289461,
+            "mean_background_lfc": 0.212138,
+            "u1": 4528.0,
+            "z_signed": 1.412259,
+            "raw_p_two_sided": 0.158176,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.235753,
+              "median_bg_abs_lfc": 0.214858,
+              "z_signed": 0.14553,
+              "p_two_sided": 0.885101
+            },
+            "bh_fdr_q": 0.694575,
+            "significant_q05": false
+          },
+          {
+            "variant": "I1366N (-CX)",
+            "module": "autophagy_lysosome",
+            "n_module": 28,
+            "n_background": 343,
+            "median_module_lfc": 0.17479,
+            "median_background_lfc": 0.158621,
+            "mean_module_lfc": 0.230839,
+            "mean_background_lfc": 0.215571,
+            "u1": 5364.0,
+            "z_signed": 1.029981,
+            "raw_p_two_sided": 0.303449,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.17479,
+              "median_bg_abs_lfc": 0.216922,
+              "z_signed": 0.023825,
+              "p_two_sided": 0.981723
+            },
+            "bh_fdr_q": 0.79183,
+            "significant_q05": false
+          },
+          {
+            "variant": "I1366N (-CX)",
+            "module": "trafficking",
+            "n_module": 22,
+            "n_background": 349,
+            "median_module_lfc": 0.051495,
+            "median_background_lfc": 0.170799,
+            "mean_module_lfc": 0.139043,
+            "mean_background_lfc": 0.22162,
+            "u1": 2957.0,
+            "z_signed": -1.807855,
+            "raw_p_two_sided": 0.070789,
+            "abs_lfc_context": {
+              "median_module_abs_lfc": 0.122109,
+              "median_bg_abs_lfc": 0.22133,
+              "z_signed": -1.568038,
+              "p_two_sided": 0.117112
+            },
+            "bh_fdr_q": 0.694575,
+            "significant_q05": false
+          }
+        ]
+      },
+      "overall_verdict": "refuted",
+      "ledger_standing": "refuted",
+      "broad_proteostasis_sensitivity_context": {
+        "included_normalized_pathways": [
+          "autophagy-lysosome pathway",
+          "cytonuclear proteostasis",
+          "er",
+          "er proteostasis",
+          "er, trafficking",
+          "extracellular proteostasis",
+          "folding",
+          "mitochondrial proteostasis",
+          "nuclear proteostasis",
+          "protein folding",
+          "quality control of membrane proteins",
+          "trafficking",
+          "ubiquitin proteasome system",
+          "vesicle trafficking"
+        ],
+        "drug_paired_abs_attenuation": {
+          "n_paired": 59,
+          "median_abs_diff": -0.009414,
+          "w_plus": 832.0,
+          "p_two_sided": 0.691907,
+          "method": "normal_tie_corrected"
+        },
+        "variant_enrichment_5_tests": [
+          {
+            "variant": "WT(-CX)",
+            "n_broad": 107,
+            "n_background": 265,
+            "median_broad_lfc": 0.090272,
+            "median_bg_lfc": 0.067507,
+            "z_signed": 1.029493,
+            "raw_p_two_sided": 0.303498,
+            "bh_fdr_q": 0.505831
+          },
+          {
+            "variant": "V232D (-CX)",
+            "n_broad": 107,
+            "n_background": 265,
+            "median_broad_lfc": 0.369308,
+            "median_bg_lfc": 0.37723,
+            "z_signed": 0.511817,
+            "raw_p_two_sided": 0.609152,
+            "bh_fdr_q": 0.76144
+          },
+          {
+            "variant": "P5L (-CX)",
+            "n_broad": 107,
+            "n_background": 265,
+            "median_broad_lfc": 0.336716,
+            "median_bg_lfc": 0.267713,
+            "z_signed": 1.283005,
+            "raw_p_two_sided": 0.199677,
+            "bh_fdr_q": 0.499193
+          },
+          {
+            "variant": "T1036N (-CX)",
+            "n_broad": 107,
+            "n_background": 265,
+            "median_broad_lfc": 0.222473,
+            "median_bg_lfc": 0.191517,
+            "z_signed": -0.159244,
+            "raw_p_two_sided": 0.873896,
+            "bh_fdr_q": 0.873896
+          },
+          {
+            "variant": "I1366N (-CX)",
+            "n_broad": 107,
+            "n_background": 264,
+            "median_broad_lfc": 0.201851,
+            "median_bg_lfc": 0.144283,
+            "z_signed": 1.544163,
+            "raw_p_two_sided": 0.122678,
+            "bh_fdr_q": 0.499193
+          }
+        ]
+      }
+    }
+  }
+}
