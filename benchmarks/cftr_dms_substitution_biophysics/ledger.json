@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "work": "Substitution biophysics and UniProt P13569 topology DMS modulator-rescue benchmark evaluating whether 7 sequence-substitution and topology features computed from each variant's experimental WT amino acid improve log2(VX-661+VX-445 Mut/WT) prediction over baseline log2(DMSO) OLS on the locked Tedman et al. 2025 holdout.",
+  "done_file": "done.md",
+  "done_sha256": "f956d9440f9a46e5de7569ab91a491ebd0e9793ebc94469a7b1885b2efea68c1",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-p13569-wt-sequence-parity",
+      "statement": "Across all 234 Tedman et al. 2025 variants (235 parsed components including compound row 77 Q359K/T360K), experimental WT residues match UniProt P13569 (1,480 aa, CC BY 4.0) with 0 holdout mismatches, 0 unexpected mismatches, and exactly two documented dev exceptions: row 89 M470V (M vs canonical V470) and row 217 Q966= (Q vs canonical T966).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "tools/cftr-model/data/p13569.json (UniProtKB CC BY 4.0) cross-checked against benchmarks/cftr_dms_expression/split_manifest.json in benchmarks/cftr_dms_substitution_biophysics/results_2026-11-24.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_substitution_biophysics.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "Structured component parser + P13569 sequence parity check",
+          "script": "cftr_dms_substitution_biophysics.py",
+          "difference": "parses variant components via dataclass VariantComponent pipeline and checks P13569 JSON sequence/feature invariants",
+          "value": 235
+        },
+        {
+          "name": "Independent tuple-based regex decomposer + P13569 sequence check",
+          "script": "independent_audit.py",
+          "difference": "independently decomposes all 234 manifest rows and verifies BLOSUM62 lower-triangular symmetry and P13569 parity without importing main module",
+          "value": 235
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c2-dmso-ols-baseline-parity",
+      "statement": "On the locked 67 held-out CFTR variants across 59 unexposed codons (zero overlap with dev or PRED-0010), untreated-expression OLS (log2 VX-661+VX-445 ~ log2 DMSO fitted on 167 dev variants) reproduces held-out MAE = 0.451487 log2(Mut/WT), matching #396 within 1e-6.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/ALT 9-6-24 CFTR DMS Expanded Library Master Tables.xlsx (sheet All_variants, CC BY 4.0) summarized in benchmarks/cftr_dms_substitution_biophysics/results_2026-11-24.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_substitution_biophysics.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "Centered covariance 1D OLS fit on dev",
+          "script": "cftr_dms_substitution_biophysics.py",
+          "difference": "computes 1D OLS normal equations directly from dev means and cross-products",
+          "value": 0.451487
+        },
+        {
+          "name": "Cholesky L L^T 2x2 independent OLS solver",
+          "script": "independent_audit.py",
+          "difference": "separate XLSX XML reader solving 2x2 normal equations via Cholesky factorization",
+          "value": 0.451487
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c3-candidate-subst-biophysics-ridge-holdout-mae",
+      "statement": "On the same 67 held-out variants (59 unexposed codons), partial-penalized Ridge adding the 7 experimental-WT substitution biophysics and P13569 topology features (delta_blosum62, delta_kd_hydropathy, abs_delta_charge, helix_breaker_in_helix, tm_polarity_shock, is_nonsense, is_inframe_indel; alpha=100.0 chosen by 5-fold dev CV, dev-mean imputation on missing continuous scales, is_inframe_indel weight=-0.000721, max dev VIF=1.445349) yields held-out MAE = 0.414943 log2(Mut/WT) vs dev-CV MAE = 0.423982.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/ALT 9-6-24 CFTR DMS Expanded Library Master Tables.xlsx (CC BY 4.0) paired with tools/cftr-model/data/p13569.json (CC BY 4.0) in benchmarks/cftr_dms_substitution_biophysics/results_2026-11-24.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_substitution_biophysics.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "20x20 BLOSUM62 dict + Gaussian elimination 9x9 partial Ridge",
+          "script": "cftr_dms_substitution_biophysics.py",
+          "difference": "computes experimental-WT substitution deltas via full 20x20 BLOSUM62 dict and solves 9x9 partial-penalized normal equations by partial-pivoting Gaussian elimination",
+          "value": 0.414943
+        },
+        {
+          "name": "Lower-triangular BLOSUM62 + Cholesky L L^T 9x9 independent solver",
+          "script": "independent_audit.py",
+          "difference": "separate XLSX XML and P13569 parsers reconstructing BLOSUM62 from lower-triangular rows and solving 9x9 partial Ridge and VIFs via Cholesky L L^T",
+          "value": 0.414943
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c4-preregistered-10pct-subst-biophysics-refuted",
+      "statement": "Pre-registered hypothesis predicting >= 10% held-out log2 MAE reduction over stronger baseline (dmso_ols) from 7 substitution biophysics and UniProt P13569 topology features with 10,000-resample 59-cluster 95% bootstrap CI > 0 is refuted: observed relative reduction is +8.0942% (0.414943 vs 0.451487 log2, delta=0.036544) and 95% CI is [-0.001247, 0.080596].",
+      "kind": "predicted",
+      "origin": "lab",
+      "dataset": "benchmarks/cftr_dms_substitution_biophysics/results_2026-11-24.json",
+      "standing": "refuted",
+      "held_out_error": {
+        "value": 0.414943,
+        "unit": "log2(Mut/WT) MAE",
+        "set_fixed_in_done_file": true
+      },
+      "checks": [
+        {"type": "own_script", "ref": "cftr_dms_substitution_biophysics.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-24"
+    }
+  ]
+}
