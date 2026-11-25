@@ -35,7 +35,9 @@ The folder holds:
 
 The open question is whether the whole-sample check rejects a passive mixture on real wild-type CFTR burst durations. A table of burst durations per patch is enough, with each patch's resolution (dead time), filter cut-off, burst criterion and number of active channels; raw traces are not needed. The plan in `specs/CFTR_DATA_REQUEST_AND_ANALYSIS_PLAN.md` states the request and the analysis. To get in touch, use the Contact page of [senseiewok.ai](https://senseiewok.ai/contact/).
 
-`benchmark/whole_sample/run_on_patches.py` applies the dead-time rule and steps 3 to 5 of the fixed analysis to such a table, so a laboratory can run it without sending data anywhere.
+`benchmark/whole_sample/run_on_patches.py` applies all steps of `specs/CFTR_DATA_REQUEST_AND_ANALYSIS_PLAN.md` to a patch burst table without sending data anywhere: step 1 one-active-channel verification (`n_channels`/`active_channels` and `--metadata`) and unstable-patch exclusion, step 2 dead-time and frame-grid adjustment (`0.36/f_c` default), steps 3 to 5 calibrated `CV²` tests and cross-patch combination, step 6 composite-null GLRT comparator (2-exponential mixture vs. 2-step hypoexponential with `2,000`-draw parametric bootstrap and secondary single-exponential LRT), and step 7 control power simulation plus Section 5 failure checks.
+
+`benchmark/whole_sample/run_f1_atpase_validation.py` runs the full pipeline on the cached rotary F₁-ATPase 120-degree step dwells ([Zenodo 5567245](https://doi.org/10.5281/zenodo.5567245), CC0 1.0; NOT CFTR) and writes `benchmark/whole_sample/f1_atpase_full_pipeline.json` (`--check` verifies reproducibility): at `3 mM` ATP (`1,599` dwells), both `CV²` (`0.4166`, `p = 5e-5`) and the GLRT comparator (`lambda_comp = 627.1985`, `p = 0.0005`) reject a 2-exponential mixture; at `1 mM` ATPγS (`192` dwells), `CV²` does not reject (`0.8131`, `p = 0.0767`) while the GLRT comparator rejects (`lambda_comp = 13.9974`, `p = 0.001`) and simulated `CV²` power at the fitted rates is `0.6235` (`< 0.80`, so Section 5 failure is not triggered); and at binding-limited `300 nM` ATP (`443` dwells, treated as reference control), neither rejects (`CV² = 1.4058`, `lambda_comp = 0.0`, `p = 1.0`) with `1.0` (`100%` rounded) simulated control power at scale-matched Variant A rate ratio `1.5` and `0.933` at `1 mM` ATPγS rate ratio `4.52`. No CFTR recording has been analyzed; every CFTR result is a simulation.
 
 ## Run it
 
@@ -46,6 +48,9 @@ pip install -r requirements.txt
 python benchmark/single_channel_sample_size.py
 python benchmark/macroscopic_patch_clamp_benchmark.py
 python benchmark/whole_sample/cv2_burst_test.py
+python benchmark/whole_sample/run_on_patches.py --self-test
+python benchmark/whole_sample/run_f1_atpase_validation.py --check
+python -B -m unittest discover -s benchmark -p "test_*.py" -v
 ```
 
 The scripts are copied byte for byte from the sealed package, because the briefing quotes the checksums of two of them and of the draft protocol. Two scripts therefore still name files that are not part of this release: a docstring in `benchmark/validate_fluorescence_benchmark.py` and comments in `benchmark/controls/gap1_sigma_lambda.py`.

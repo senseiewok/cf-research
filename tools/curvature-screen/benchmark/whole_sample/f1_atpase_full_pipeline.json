@@ -1,0 +1,1129 @@
+{
+ "schema_version": "1.0",
+ "dataset": {
+  "source": "Zenodo 5567245 (Kobayashi, Ueno, Li et al., CC0 1.0)",
+  "cache_path": "benchmark/out/zenodo5567245_f1_atpase.npz",
+  "cache_sha256": "9459a7abe8dfad87a8b262b469d50cecee6d57d7a38402162a5d1c7b805190ac",
+  "system_note": "rotary F1-ATPase 120-degree step dwells, NOT CFTR",
+  "cftr_boundary": "No CFTR recording is analyzed; every CFTR result in this package is a simulation."
+ },
+ "dead_time_alignment_note": "cv2_burst_test.py sets adj = x - xmin + q/2. In run_on_patches.adjust(x, dead_time, q), dead_time = max(0, xmin - q) reproduces the exact same adjusted dwells and burst counts (1599 for dwell_2d where xmin=2*q, 192 for dwell_3a where xmin=q, 443 for dwell_2c where xmin=q).",
+ "bootstrap_reps": 2000,
+ "conditions_metadata": {
+  "dwell_2d": {
+   "condition": "Fig2D wild type, 3 mM ATP (saturating; hydrolysis-limited dwell)",
+   "role": "test",
+   "n_raw": 1599,
+   "n_after_adjust": 1599,
+   "frame_quantum_s": 0.022222222,
+   "shortest_dwell_s": 0.044444444,
+   "effective_dead_time_arg_s": 0.022222222,
+   "mean_adjusted_s": 0.508644
+  },
+  "dwell_3a": {
+   "condition": "Fig3A wild type, 1 mM ATP-gamma-S (slowly hydrolysed analog)",
+   "role": "test",
+   "n_raw": 192,
+   "n_after_adjust": 192,
+   "frame_quantum_s": 0.1,
+   "shortest_dwell_s": 0.1,
+   "effective_dead_time_arg_s": 0.0,
+   "mean_adjusted_s": 15.583333
+  },
+  "dwell_2c": {
+   "condition": "Fig2C wild type, 300 nM ATP (binding-limited dwell, reference control)",
+   "role": "control",
+   "n_raw": 443,
+   "n_after_adjust": 443,
+   "frame_quantum_s": 2.0,
+   "shortest_dwell_s": 2.0,
+   "effective_dead_time_arg_s": 0.0,
+   "mean_adjusted_s": 120.079007
+  }
+ },
+ "per_condition_runs": {
+  "dwell_2d": {
+   "plan": "specs/CFTR_DATA_REQUEST_AND_ANALYSIS_PLAN.md",
+   "alpha_one_sided": 0.01,
+   "monte_carlo_draws": 20000,
+   "comparator_bootstrap_draws": 2000,
+   "power_simulation_draws": 2000,
+   "seed": 20261113,
+   "filter_cutoff_hz": null,
+   "burst_criterion_s": null,
+   "implemented": [
+    "step 1: one-active-channel verification, unstable-patch exclusion, and burst minimums (50 WT, 5 control)",
+    "step 2: dead-time adjustment, 0.36/f_c default filter resolution, and frame-grid handling",
+    "steps 3-5: CV^2 statistic, per-patch critical threshold, and sqrt(N) combination",
+    "step 4 calibration: instrument-calibrated false-alarm threshold for dead time, filtering (f_c), and burst criterion (t_crit)",
+    "step 6: composite-null GLRT comparator (2-exp mixture vs. 2-step hypoexponential) with parametric bootstrap and secondary single-exp LRT",
+    "step 7: control power simulation at observed burst counts and Section 5 failure criteria",
+    "section 5: 1x / 2x resolution sensitivity decision rule"
+   ],
+   "not_implemented": [],
+   "constructs": {
+    "dwell_2d": {
+     "resolution_s": 0.022222222,
+     "filter_cutoff_hz": null,
+     "burst_criterion_s": null,
+     "frame_quantum_s": 0.022222222222222143,
+     "min_bursts": 50,
+     "one_active_channel_verified": false,
+     "patches": [
+      {
+       "patch_id": "dwell_2d",
+       "n_channels": null,
+       "n_bursts_used": 1599,
+       "included": true,
+       "resolution_s": 0.022222222,
+       "frame_quantum_s": 0.022222222,
+       "cv2": 0.4166,
+       "critical_cv2_alpha_0.01": 0.8916,
+       "p_one_sided": 5e-05,
+       "rejects_mixture": true,
+       "shortest_burst_minus_resolution_s": 0.022222,
+       "p_gap_this_large_if_resolution_correct": null,
+       "resolution_may_be_too_small": false,
+       "comparator": {
+        "ll_exp": -6604.791988,
+        "ll_mix": -6604.791988,
+        "ll_hypo": -6291.192731,
+        "lambda_comp": 627.198515,
+        "lambda_exp": 627.198515,
+        "fitted_h0_mixture": {
+         "w": 1.0,
+         "rate1_per_s": 1.966323,
+         "rate2_per_s": 1.966323
+        },
+        "fitted_h1_hypoexponential": {
+         "rate1_per_s": 3.93232,
+         "rate2_per_s": 3.932321
+        },
+        "bootstrap_reps": 2000,
+        "critical_alpha_0.01": 5.081894,
+        "p_one_sided": 0.0005,
+        "rejects_mixture": true,
+        "secondary_single_exp_lrt": {
+         "lambda_exp": 627.198515,
+         "note": "descriptive only; rejects positive exponential mixtures as well as sequential steps"
+        }
+       }
+      }
+     ],
+     "n_patches_included": 1,
+     "one_active_channel_note": "active-channel count not supplied in input; assumed 1 per caller",
+     "combined": {
+      "statistic": -11.5932,
+      "critical_alpha_0.01": -2.1353,
+      "p_one_sided": 5e-05,
+      "rejects_mixture": true
+     },
+     "comparator": {
+      "bootstrap_reps": 2000,
+      "alpha_one_sided": 0.01,
+      "n_patches_included": 1,
+      "combined": {
+       "bootstrap_reps": 2000,
+       "alpha_one_sided": 0.01,
+       "n_patches_included": 1,
+       "lambda_comp_sum": 627.198515,
+       "lambda_exp_sum": 627.198515,
+       "critical_alpha_0.01": 5.081894,
+       "p_one_sided": 0.0005,
+       "rejects_mixture": true
+      },
+      "median_fitted_hypoexponential_rates_per_s": [
+       3.93232,
+       3.932321
+      ]
+     },
+     "role": "test",
+     "resolution_sensitivity": {
+      "patches_included_at_both_resolutions": 1,
+      "combined_at_1x": {
+       "statistic": -11.5932,
+       "critical_alpha_0.01": -2.1353,
+       "p_one_sided": 5e-05,
+       "rejects_mixture": true
+      },
+      "combined_at_2x": {
+       "statistic": -10.9499,
+       "critical_alpha_0.01": -2.1234,
+       "p_one_sided": 5e-05,
+       "rejects_mixture": true
+      },
+      "rejects_at_1x_not_2x": false,
+      "rejects_at_2x_not_1x": false,
+      "comparator_at_1x": {
+       "patches_included_at_both_resolutions": 1,
+       "bootstrap_reps": 2000,
+       "combined": {
+        "bootstrap_reps": 2000,
+        "alpha_one_sided": 0.01,
+        "n_patches_included": 1,
+        "lambda_comp_sum": 627.198515,
+        "lambda_exp_sum": 627.198515,
+        "critical_alpha_0.01": 5.081894,
+        "p_one_sided": 0.0005,
+        "rejects_mixture": true
+       },
+       "median_fitted_hypoexponential_rates_per_s": [
+        3.93232,
+        3.932321
+       ]
+      }
+     },
+     "decision": "rejects_mixture",
+     "section_5_failure_triggered": false,
+     "section_5_failure_reasons": [],
+     "outcome_reading": "check agrees with likelihood analysis (both reject)"
+    }
+   },
+   "controlled": false,
+   "section_5_failure_triggered": false,
+   "section_5_failure_reasons": []
+  },
+  "dwell_3a": {
+   "plan": "specs/CFTR_DATA_REQUEST_AND_ANALYSIS_PLAN.md",
+   "alpha_one_sided": 0.01,
+   "monte_carlo_draws": 20000,
+   "comparator_bootstrap_draws": 2000,
+   "power_simulation_draws": 2000,
+   "seed": 20261113,
+   "filter_cutoff_hz": null,
+   "burst_criterion_s": null,
+   "implemented": [
+    "step 1: one-active-channel verification, unstable-patch exclusion, and burst minimums (50 WT, 5 control)",
+    "step 2: dead-time adjustment, 0.36/f_c default filter resolution, and frame-grid handling",
+    "steps 3-5: CV^2 statistic, per-patch critical threshold, and sqrt(N) combination",
+    "step 4 calibration: instrument-calibrated false-alarm threshold for dead time, filtering (f_c), and burst criterion (t_crit)",
+    "step 6: composite-null GLRT comparator (2-exp mixture vs. 2-step hypoexponential) with parametric bootstrap and secondary single-exp LRT",
+    "step 7: control power simulation at observed burst counts and Section 5 failure criteria",
+    "section 5: 1x / 2x resolution sensitivity decision rule"
+   ],
+   "not_implemented": [],
+   "constructs": {
+    "dwell_3a": {
+     "resolution_s": 0.0,
+     "filter_cutoff_hz": null,
+     "burst_criterion_s": null,
+     "frame_quantum_s": 0.09999999999999787,
+     "min_bursts": 50,
+     "one_active_channel_verified": false,
+     "patches": [
+      {
+       "patch_id": "dwell_3a",
+       "n_channels": null,
+       "n_bursts_used": 192,
+       "included": true,
+       "resolution_s": 0.0,
+       "frame_quantum_s": 0.1,
+       "cv2": 0.8131,
+       "critical_cv2_alpha_0.01": 0.7218,
+       "p_one_sided": 0.0767,
+       "rejects_mixture": false,
+       "shortest_burst_minus_resolution_s": 0.1,
+       "p_gap_this_large_if_resolution_correct": null,
+       "resolution_may_be_too_small": false,
+       "comparator": {
+        "ll_exp": -1161.366786,
+        "ll_mix": -1161.366786,
+        "ll_hypo": -1154.368089,
+        "lambda_comp": 13.997394,
+        "lambda_exp": 13.997394,
+        "fitted_h0_mixture": {
+         "w": 0.816525,
+         "rate1_per_s": 0.064171,
+         "rate2_per_s": 0.064171
+        },
+        "fitted_h1_hypoexponential": {
+         "rate1_per_s": 0.078359,
+         "rate2_per_s": 0.354403
+        },
+        "bootstrap_reps": 2000,
+        "critical_alpha_0.01": 5.99485,
+        "p_one_sided": 0.001,
+        "rejects_mixture": true,
+        "secondary_single_exp_lrt": {
+         "lambda_exp": 13.997394,
+         "note": "descriptive only; rejects positive exponential mixtures as well as sequential steps"
+        }
+       }
+      }
+     ],
+     "n_patches_included": 1,
+     "one_active_channel_note": "active-channel count not supplied in input; assumed 1 per caller",
+     "combined": {
+      "statistic": -1.2806,
+      "critical_alpha_0.01": -1.9228,
+      "p_one_sided": 0.0767,
+      "rejects_mixture": false
+     },
+     "comparator": {
+      "bootstrap_reps": 2000,
+      "alpha_one_sided": 0.01,
+      "n_patches_included": 1,
+      "combined": {
+       "bootstrap_reps": 2000,
+       "alpha_one_sided": 0.01,
+       "n_patches_included": 1,
+       "lambda_comp_sum": 13.997394,
+       "lambda_exp_sum": 13.997394,
+       "critical_alpha_0.01": 5.99485,
+       "p_one_sided": 0.001,
+       "rejects_mixture": true
+      },
+      "median_fitted_hypoexponential_rates_per_s": [
+       0.078359,
+       0.354403
+      ]
+     },
+     "role": "test",
+     "resolution_sensitivity": {
+      "patches_included_at_both_resolutions": 1,
+      "combined_at_1x": {
+       "statistic": -1.2806,
+       "critical_alpha_0.01": -1.9228,
+       "p_one_sided": 0.0767,
+       "rejects_mixture": false
+      },
+      "combined_at_2x": {
+       "statistic": -1.2806,
+       "critical_alpha_0.01": -1.9228,
+       "p_one_sided": 0.0767,
+       "rejects_mixture": false
+      },
+      "rejects_at_1x_not_2x": false,
+      "rejects_at_2x_not_1x": false,
+      "comparator_at_1x": {
+       "patches_included_at_both_resolutions": 1,
+       "bootstrap_reps": 2000,
+       "combined": {
+        "bootstrap_reps": 2000,
+        "alpha_one_sided": 0.01,
+        "n_patches_included": 1,
+        "lambda_comp_sum": 13.997394,
+        "lambda_exp_sum": 13.997394,
+        "critical_alpha_0.01": 5.99485,
+        "p_one_sided": 0.001,
+        "rejects_mixture": true
+       },
+       "median_fitted_hypoexponential_rates_per_s": [
+        0.078359,
+        0.354403
+       ]
+      }
+     },
+     "decision": "does_not_reject",
+     "test_power_at_comparator_rates": {
+      "power_alpha_0.01": 0.6235,
+      "simulation_reps": 2000,
+      "scale_matched_to_patch_mean": false,
+      "rate_ratio": 4.5228,
+      "simulated_rates_per_s": [
+       [
+        0.078359,
+        0.354403
+       ]
+      ]
+     },
+     "section_5_failure_triggered": false,
+     "section_5_failure_reasons": [],
+     "outcome_reading": "check needs more data or shows resolution sensitivity"
+    }
+   },
+   "controlled": false,
+   "section_5_failure_triggered": false,
+   "section_5_failure_reasons": []
+  },
+  "dwell_2c": {
+   "plan": "specs/CFTR_DATA_REQUEST_AND_ANALYSIS_PLAN.md",
+   "alpha_one_sided": 0.01,
+   "monte_carlo_draws": 20000,
+   "comparator_bootstrap_draws": 2000,
+   "power_simulation_draws": 2000,
+   "seed": 20261113,
+   "filter_cutoff_hz": null,
+   "burst_criterion_s": null,
+   "implemented": [
+    "step 1: one-active-channel verification, unstable-patch exclusion, and burst minimums (50 WT, 5 control)",
+    "step 2: dead-time adjustment, 0.36/f_c default filter resolution, and frame-grid handling",
+    "steps 3-5: CV^2 statistic, per-patch critical threshold, and sqrt(N) combination",
+    "step 4 calibration: instrument-calibrated false-alarm threshold for dead time, filtering (f_c), and burst criterion (t_crit)",
+    "step 6: composite-null GLRT comparator (2-exp mixture vs. 2-step hypoexponential) with parametric bootstrap and secondary single-exp LRT",
+    "step 7: control power simulation at observed burst counts and Section 5 failure criteria",
+    "section 5: 1x / 2x resolution sensitivity decision rule"
+   ],
+   "not_implemented": [],
+   "constructs": {
+    "dwell_2c": {
+     "resolution_s": 0.0,
+     "filter_cutoff_hz": null,
+     "burst_criterion_s": null,
+     "frame_quantum_s": 2.0,
+     "min_bursts": 5,
+     "one_active_channel_verified": false,
+     "patches": [
+      {
+       "patch_id": "dwell_2c",
+       "n_channels": null,
+       "n_bursts_used": 443,
+       "included": true,
+       "resolution_s": 0.0,
+       "frame_quantum_s": 2.0,
+       "cv2": 1.4058,
+       "critical_cv2_alpha_0.01": 0.8046,
+       "p_one_sided": 0.99955,
+       "rejects_mixture": false,
+       "shortest_burst_minus_resolution_s": 2.0,
+       "p_gap_this_large_if_resolution_correct": null,
+       "resolution_may_be_too_small": false,
+       "comparator": {
+        "ll_exp": -2257.081091,
+        "ll_mix": -2224.449075,
+        "ll_hypo": -2257.081091,
+        "lambda_comp": 0.0,
+        "lambda_exp": 0.0,
+        "fitted_h0_mixture": {
+         "w": 0.905879,
+         "rate1_per_s": 0.007556,
+         "rate2_per_s": 0.557414
+        },
+        "fitted_h1_hypoexponential": {
+         "rate1_per_s": 0.008328,
+         "rate2_per_s": 8328.042891
+        },
+        "bootstrap_reps": 2000,
+        "critical_alpha_0.01": 0.0,
+        "p_one_sided": 1.0,
+        "rejects_mixture": false,
+        "secondary_single_exp_lrt": {
+         "lambda_exp": 0.0,
+         "note": "descriptive only; rejects positive exponential mixtures as well as sequential steps"
+        }
+       }
+      }
+     ],
+     "n_patches_included": 1,
+     "one_active_channel_note": "active-channel count not supplied in input; assumed 1 per caller",
+     "combined": {
+      "statistic": 4.319,
+      "critical_alpha_0.01": -2.0434,
+      "p_one_sided": 0.99955,
+      "rejects_mixture": false
+     },
+     "comparator": {
+      "bootstrap_reps": 2000,
+      "alpha_one_sided": 0.01,
+      "n_patches_included": 1,
+      "combined": {
+       "bootstrap_reps": 2000,
+       "alpha_one_sided": 0.01,
+       "n_patches_included": 1,
+       "lambda_comp_sum": 0.0,
+       "lambda_exp_sum": 0.0,
+       "critical_alpha_0.01": 0.0,
+       "p_one_sided": 1.0,
+       "rejects_mixture": false
+      },
+      "median_fitted_hypoexponential_rates_per_s": [
+       0.008328,
+       8328.042891
+      ]
+     },
+     "role": "control",
+     "resolution_sensitivity": {
+      "patches_included_at_both_resolutions": 1,
+      "combined_at_1x": {
+       "statistic": 4.319,
+       "critical_alpha_0.01": -2.0434,
+       "p_one_sided": 0.99955,
+       "rejects_mixture": false
+      },
+      "combined_at_2x": {
+       "statistic": 4.319,
+       "critical_alpha_0.01": -2.0434,
+       "p_one_sided": 0.99955,
+       "rejects_mixture": false
+      },
+      "rejects_at_1x_not_2x": false,
+      "rejects_at_2x_not_1x": false,
+      "comparator_at_1x": {
+       "patches_included_at_both_resolutions": 1,
+       "bootstrap_reps": 2000,
+       "combined": {
+        "bootstrap_reps": 2000,
+        "alpha_one_sided": 0.01,
+        "n_patches_included": 1,
+        "lambda_comp_sum": 0.0,
+        "lambda_exp_sum": 0.0,
+        "critical_alpha_0.01": 0.0,
+        "p_one_sided": 1.0,
+        "rejects_mixture": false
+       },
+       "median_fitted_hypoexponential_rates_per_s": [
+        0.008328,
+        8328.042891
+       ]
+      }
+     },
+     "decision": "does_not_reject",
+     "control_power_simulation": {
+      "observed_patch_burst_counts": [
+       443
+      ],
+      "total_bursts": 443,
+      "variant_A_reference_rates_per_s": [
+       12.0,
+       8.0
+      ],
+      "power_at_variant_A_scale_matched": {
+       "power_alpha_0.01": 1.0,
+       "simulation_reps": 2000,
+       "scale_matched_to_patch_mean": true,
+       "rate_ratio": 1.5,
+       "simulated_rates_per_s": [
+        [
+         0.01388,
+         0.02082
+        ]
+       ]
+      },
+      "power_at_variant_A_nominal_rates": null
+     },
+     "section_5_failure_triggered": false,
+     "section_5_failure_reasons": [],
+     "outcome_reading": "control does not reject mixture"
+    }
+   },
+   "controlled": true,
+   "section_5_failure_triggered": false,
+   "section_5_failure_reasons": []
+  }
+ },
+ "paired_control_runs": {
+  "dwell_2d_vs_dwell_2c_control": {
+   "plan": "specs/CFTR_DATA_REQUEST_AND_ANALYSIS_PLAN.md",
+   "alpha_one_sided": 0.01,
+   "monte_carlo_draws": 20000,
+   "comparator_bootstrap_draws": 2000,
+   "power_simulation_draws": 2000,
+   "seed": 20261113,
+   "filter_cutoff_hz": null,
+   "burst_criterion_s": null,
+   "implemented": [
+    "step 1: one-active-channel verification, unstable-patch exclusion, and burst minimums (50 WT, 5 control)",
+    "step 2: dead-time adjustment, 0.36/f_c default filter resolution, and frame-grid handling",
+    "steps 3-5: CV^2 statistic, per-patch critical threshold, and sqrt(N) combination",
+    "step 4 calibration: instrument-calibrated false-alarm threshold for dead time, filtering (f_c), and burst criterion (t_crit)",
+    "step 6: composite-null GLRT comparator (2-exp mixture vs. 2-step hypoexponential) with parametric bootstrap and secondary single-exp LRT",
+    "step 7: control power simulation at observed burst counts and Section 5 failure criteria",
+    "section 5: 1x / 2x resolution sensitivity decision rule"
+   ],
+   "not_implemented": [],
+   "constructs": {
+    "dwell_2c": {
+     "resolution_s": null,
+     "filter_cutoff_hz": null,
+     "burst_criterion_s": null,
+     "frame_quantum_s": 0.0,
+     "min_bursts": 5,
+     "one_active_channel_verified": false,
+     "patches": [
+      {
+       "patch_id": "dwell_2c",
+       "n_channels": null,
+       "n_bursts_used": 443,
+       "included": true,
+       "resolution_s": 0.0,
+       "frame_quantum_s": 2.0,
+       "cv2": 1.4058,
+       "critical_cv2_alpha_0.01": 0.8046,
+       "p_one_sided": 0.99955,
+       "rejects_mixture": false,
+       "shortest_burst_minus_resolution_s": 2.0,
+       "p_gap_this_large_if_resolution_correct": null,
+       "resolution_may_be_too_small": false,
+       "comparator": {
+        "ll_exp": -2257.081091,
+        "ll_mix": -2224.449075,
+        "ll_hypo": -2257.081091,
+        "lambda_comp": 0.0,
+        "lambda_exp": 0.0,
+        "fitted_h0_mixture": {
+         "w": 0.905879,
+         "rate1_per_s": 0.007556,
+         "rate2_per_s": 0.557414
+        },
+        "fitted_h1_hypoexponential": {
+         "rate1_per_s": 0.008328,
+         "rate2_per_s": 8328.042891
+        },
+        "bootstrap_reps": 2000,
+        "critical_alpha_0.01": 0.0,
+        "p_one_sided": 1.0,
+        "rejects_mixture": false,
+        "secondary_single_exp_lrt": {
+         "lambda_exp": 0.0,
+         "note": "descriptive only; rejects positive exponential mixtures as well as sequential steps"
+        }
+       }
+      }
+     ],
+     "n_patches_included": 1,
+     "one_active_channel_note": "active-channel count not supplied in input; assumed 1 per caller",
+     "combined": {
+      "statistic": 4.319,
+      "critical_alpha_0.01": -2.0434,
+      "p_one_sided": 0.99955,
+      "rejects_mixture": false
+     },
+     "comparator": {
+      "bootstrap_reps": 2000,
+      "alpha_one_sided": 0.01,
+      "n_patches_included": 1,
+      "combined": {
+       "bootstrap_reps": 2000,
+       "alpha_one_sided": 0.01,
+       "n_patches_included": 1,
+       "lambda_comp_sum": 0.0,
+       "lambda_exp_sum": 0.0,
+       "critical_alpha_0.01": 0.0,
+       "p_one_sided": 1.0,
+       "rejects_mixture": false
+      },
+      "median_fitted_hypoexponential_rates_per_s": [
+       0.008328,
+       8328.042891
+      ]
+     },
+     "role": "control",
+     "resolution_sensitivity": {
+      "patches_included_at_both_resolutions": 1,
+      "combined_at_1x": {
+       "statistic": 4.319,
+       "critical_alpha_0.01": -2.0434,
+       "p_one_sided": 0.99955,
+       "rejects_mixture": false
+      },
+      "combined_at_2x": {
+       "statistic": 4.319,
+       "critical_alpha_0.01": -2.0434,
+       "p_one_sided": 0.99955,
+       "rejects_mixture": false
+      },
+      "rejects_at_1x_not_2x": false,
+      "rejects_at_2x_not_1x": false,
+      "comparator_at_1x": {
+       "patches_included_at_both_resolutions": 1,
+       "bootstrap_reps": 2000,
+       "combined": {
+        "bootstrap_reps": 2000,
+        "alpha_one_sided": 0.01,
+        "n_patches_included": 1,
+        "lambda_comp_sum": 0.0,
+        "lambda_exp_sum": 0.0,
+        "critical_alpha_0.01": 0.0,
+        "p_one_sided": 1.0,
+        "rejects_mixture": false
+       },
+       "median_fitted_hypoexponential_rates_per_s": [
+        0.008328,
+        8328.042891
+       ]
+      }
+     },
+     "decision": "does_not_reject",
+     "control_power_simulation": {
+      "observed_patch_burst_counts": [
+       443
+      ],
+      "total_bursts": 443,
+      "variant_A_reference_rates_per_s": [
+       12.0,
+       8.0
+      ],
+      "power_at_variant_A_scale_matched": {
+       "power_alpha_0.01": 1.0,
+       "simulation_reps": 2000,
+       "scale_matched_to_patch_mean": true,
+       "rate_ratio": 1.5,
+       "simulated_rates_per_s": [
+        [
+         0.01388,
+         0.02082
+        ]
+       ]
+      },
+      "power_at_variant_A_nominal_rates": null,
+      "test_construct_source": [
+       "dwell_2d"
+      ],
+      "test_construct_median_rates_per_s": [
+       3.93232,
+       3.932321
+      ],
+      "power_at_test_rates_scale_matched": {
+       "power_alpha_0.01": 1.0,
+       "simulation_reps": 2000,
+       "scale_matched_to_patch_mean": true,
+       "rate_ratio": 1.0,
+       "simulated_rates_per_s": [
+        [
+         0.016656,
+         0.016656
+        ]
+       ]
+      },
+      "power_at_test_rates_nominal": null
+     },
+     "section_5_failure_triggered": false,
+     "section_5_failure_reasons": [],
+     "outcome_reading": "control does not reject mixture"
+    },
+    "dwell_2d": {
+     "resolution_s": null,
+     "filter_cutoff_hz": null,
+     "burst_criterion_s": null,
+     "frame_quantum_s": 0.0,
+     "min_bursts": 50,
+     "one_active_channel_verified": false,
+     "patches": [
+      {
+       "patch_id": "dwell_2d",
+       "n_channels": null,
+       "n_bursts_used": 1599,
+       "included": true,
+       "resolution_s": 0.022222222,
+       "frame_quantum_s": 0.022222222,
+       "cv2": 0.4166,
+       "critical_cv2_alpha_0.01": 0.8916,
+       "p_one_sided": 5e-05,
+       "rejects_mixture": true,
+       "shortest_burst_minus_resolution_s": 0.022222,
+       "p_gap_this_large_if_resolution_correct": null,
+       "resolution_may_be_too_small": false,
+       "comparator": {
+        "ll_exp": -6604.791988,
+        "ll_mix": -6604.791988,
+        "ll_hypo": -6291.192731,
+        "lambda_comp": 627.198515,
+        "lambda_exp": 627.198515,
+        "fitted_h0_mixture": {
+         "w": 1.0,
+         "rate1_per_s": 1.966323,
+         "rate2_per_s": 1.966323
+        },
+        "fitted_h1_hypoexponential": {
+         "rate1_per_s": 3.93232,
+         "rate2_per_s": 3.932321
+        },
+        "bootstrap_reps": 2000,
+        "critical_alpha_0.01": 5.081894,
+        "p_one_sided": 0.0005,
+        "rejects_mixture": true,
+        "secondary_single_exp_lrt": {
+         "lambda_exp": 627.198515,
+         "note": "descriptive only; rejects positive exponential mixtures as well as sequential steps"
+        }
+       }
+      }
+     ],
+     "n_patches_included": 1,
+     "one_active_channel_note": "active-channel count not supplied in input; assumed 1 per caller",
+     "combined": {
+      "statistic": -11.5932,
+      "critical_alpha_0.01": -2.1353,
+      "p_one_sided": 5e-05,
+      "rejects_mixture": true
+     },
+     "comparator": {
+      "bootstrap_reps": 2000,
+      "alpha_one_sided": 0.01,
+      "n_patches_included": 1,
+      "combined": {
+       "bootstrap_reps": 2000,
+       "alpha_one_sided": 0.01,
+       "n_patches_included": 1,
+       "lambda_comp_sum": 627.198515,
+       "lambda_exp_sum": 627.198515,
+       "critical_alpha_0.01": 5.081894,
+       "p_one_sided": 0.0005,
+       "rejects_mixture": true
+      },
+      "median_fitted_hypoexponential_rates_per_s": [
+       3.93232,
+       3.932321
+      ]
+     },
+     "role": "test",
+     "resolution_sensitivity": {
+      "patches_included_at_both_resolutions": 1,
+      "combined_at_1x": {
+       "statistic": -11.5932,
+       "critical_alpha_0.01": -2.1353,
+       "p_one_sided": 5e-05,
+       "rejects_mixture": true
+      },
+      "combined_at_2x": {
+       "statistic": -10.9499,
+       "critical_alpha_0.01": -2.1234,
+       "p_one_sided": 5e-05,
+       "rejects_mixture": true
+      },
+      "rejects_at_1x_not_2x": false,
+      "rejects_at_2x_not_1x": false,
+      "comparator_at_1x": {
+       "patches_included_at_both_resolutions": 1,
+       "bootstrap_reps": 2000,
+       "combined": {
+        "bootstrap_reps": 2000,
+        "alpha_one_sided": 0.01,
+        "n_patches_included": 1,
+        "lambda_comp_sum": 627.198515,
+        "lambda_exp_sum": 627.198515,
+        "critical_alpha_0.01": 5.081894,
+        "p_one_sided": 0.0005,
+        "rejects_mixture": true
+       },
+       "median_fitted_hypoexponential_rates_per_s": [
+        3.93232,
+        3.932321
+       ]
+      }
+     },
+     "decision": "rejects_mixture",
+     "section_5_failure_triggered": false,
+     "section_5_failure_reasons": [],
+     "outcome_reading": "check agrees with likelihood analysis (both reject)"
+    }
+   },
+   "controlled": true,
+   "section_5_failure_triggered": false,
+   "section_5_failure_reasons": []
+  },
+  "dwell_3a_vs_dwell_2c_control": {
+   "plan": "specs/CFTR_DATA_REQUEST_AND_ANALYSIS_PLAN.md",
+   "alpha_one_sided": 0.01,
+   "monte_carlo_draws": 20000,
+   "comparator_bootstrap_draws": 2000,
+   "power_simulation_draws": 2000,
+   "seed": 20261113,
+   "filter_cutoff_hz": null,
+   "burst_criterion_s": null,
+   "implemented": [
+    "step 1: one-active-channel verification, unstable-patch exclusion, and burst minimums (50 WT, 5 control)",
+    "step 2: dead-time adjustment, 0.36/f_c default filter resolution, and frame-grid handling",
+    "steps 3-5: CV^2 statistic, per-patch critical threshold, and sqrt(N) combination",
+    "step 4 calibration: instrument-calibrated false-alarm threshold for dead time, filtering (f_c), and burst criterion (t_crit)",
+    "step 6: composite-null GLRT comparator (2-exp mixture vs. 2-step hypoexponential) with parametric bootstrap and secondary single-exp LRT",
+    "step 7: control power simulation at observed burst counts and Section 5 failure criteria",
+    "section 5: 1x / 2x resolution sensitivity decision rule"
+   ],
+   "not_implemented": [],
+   "constructs": {
+    "dwell_2c": {
+     "resolution_s": null,
+     "filter_cutoff_hz": null,
+     "burst_criterion_s": null,
+     "frame_quantum_s": 0.0,
+     "min_bursts": 5,
+     "one_active_channel_verified": false,
+     "patches": [
+      {
+       "patch_id": "dwell_2c",
+       "n_channels": null,
+       "n_bursts_used": 443,
+       "included": true,
+       "resolution_s": 0.0,
+       "frame_quantum_s": 2.0,
+       "cv2": 1.4058,
+       "critical_cv2_alpha_0.01": 0.8046,
+       "p_one_sided": 0.99955,
+       "rejects_mixture": false,
+       "shortest_burst_minus_resolution_s": 2.0,
+       "p_gap_this_large_if_resolution_correct": null,
+       "resolution_may_be_too_small": false,
+       "comparator": {
+        "ll_exp": -2257.081091,
+        "ll_mix": -2224.449075,
+        "ll_hypo": -2257.081091,
+        "lambda_comp": 0.0,
+        "lambda_exp": 0.0,
+        "fitted_h0_mixture": {
+         "w": 0.905879,
+         "rate1_per_s": 0.007556,
+         "rate2_per_s": 0.557414
+        },
+        "fitted_h1_hypoexponential": {
+         "rate1_per_s": 0.008328,
+         "rate2_per_s": 8328.042891
+        },
+        "bootstrap_reps": 2000,
+        "critical_alpha_0.01": 0.0,
+        "p_one_sided": 1.0,
+        "rejects_mixture": false,
+        "secondary_single_exp_lrt": {
+         "lambda_exp": 0.0,
+         "note": "descriptive only; rejects positive exponential mixtures as well as sequential steps"
+        }
+       }
+      }
+     ],
+     "n_patches_included": 1,
+     "one_active_channel_note": "active-channel count not supplied in input; assumed 1 per caller",
+     "combined": {
+      "statistic": 4.319,
+      "critical_alpha_0.01": -2.0434,
+      "p_one_sided": 0.99955,
+      "rejects_mixture": false
+     },
+     "comparator": {
+      "bootstrap_reps": 2000,
+      "alpha_one_sided": 0.01,
+      "n_patches_included": 1,
+      "combined": {
+       "bootstrap_reps": 2000,
+       "alpha_one_sided": 0.01,
+       "n_patches_included": 1,
+       "lambda_comp_sum": 0.0,
+       "lambda_exp_sum": 0.0,
+       "critical_alpha_0.01": 0.0,
+       "p_one_sided": 1.0,
+       "rejects_mixture": false
+      },
+      "median_fitted_hypoexponential_rates_per_s": [
+       0.008328,
+       8328.042891
+      ]
+     },
+     "role": "control",
+     "resolution_sensitivity": {
+      "patches_included_at_both_resolutions": 1,
+      "combined_at_1x": {
+       "statistic": 4.319,
+       "critical_alpha_0.01": -2.0434,
+       "p_one_sided": 0.99955,
+       "rejects_mixture": false
+      },
+      "combined_at_2x": {
+       "statistic": 4.319,
+       "critical_alpha_0.01": -2.0434,
+       "p_one_sided": 0.99955,
+       "rejects_mixture": false
+      },
+      "rejects_at_1x_not_2x": false,
+      "rejects_at_2x_not_1x": false,
+      "comparator_at_1x": {
+       "patches_included_at_both_resolutions": 1,
+       "bootstrap_reps": 2000,
+       "combined": {
+        "bootstrap_reps": 2000,
+        "alpha_one_sided": 0.01,
+        "n_patches_included": 1,
+        "lambda_comp_sum": 0.0,
+        "lambda_exp_sum": 0.0,
+        "critical_alpha_0.01": 0.0,
+        "p_one_sided": 1.0,
+        "rejects_mixture": false
+       },
+       "median_fitted_hypoexponential_rates_per_s": [
+        0.008328,
+        8328.042891
+       ]
+      }
+     },
+     "decision": "does_not_reject",
+     "control_power_simulation": {
+      "observed_patch_burst_counts": [
+       443
+      ],
+      "total_bursts": 443,
+      "variant_A_reference_rates_per_s": [
+       12.0,
+       8.0
+      ],
+      "power_at_variant_A_scale_matched": {
+       "power_alpha_0.01": 1.0,
+       "simulation_reps": 2000,
+       "scale_matched_to_patch_mean": true,
+       "rate_ratio": 1.5,
+       "simulated_rates_per_s": [
+        [
+         0.01388,
+         0.02082
+        ]
+       ]
+      },
+      "power_at_variant_A_nominal_rates": null,
+      "test_construct_source": [
+       "dwell_3a"
+      ],
+      "test_construct_median_rates_per_s": [
+       0.078359,
+       0.354403
+      ],
+      "power_at_test_rates_scale_matched": {
+       "power_alpha_0.01": 0.933,
+       "simulation_reps": 2000,
+       "scale_matched_to_patch_mean": true,
+       "rate_ratio": 4.5228,
+       "simulated_rates_per_s": [
+        [
+         0.010169,
+         0.045993
+        ]
+       ]
+      },
+      "power_at_test_rates_nominal": {
+       "power_alpha_0.01": 0.9265,
+       "simulation_reps": 2000,
+       "scale_matched_to_patch_mean": false,
+       "rate_ratio": 4.5228,
+       "simulated_rates_per_s": [
+        [
+         0.078359,
+         0.354403
+        ]
+       ]
+      }
+     },
+     "section_5_failure_triggered": false,
+     "section_5_failure_reasons": [],
+     "outcome_reading": "control does not reject mixture"
+    },
+    "dwell_3a": {
+     "resolution_s": null,
+     "filter_cutoff_hz": null,
+     "burst_criterion_s": null,
+     "frame_quantum_s": 0.0,
+     "min_bursts": 50,
+     "one_active_channel_verified": false,
+     "patches": [
+      {
+       "patch_id": "dwell_3a",
+       "n_channels": null,
+       "n_bursts_used": 192,
+       "included": true,
+       "resolution_s": 0.0,
+       "frame_quantum_s": 0.1,
+       "cv2": 0.8131,
+       "critical_cv2_alpha_0.01": 0.7218,
+       "p_one_sided": 0.0767,
+       "rejects_mixture": false,
+       "shortest_burst_minus_resolution_s": 0.1,
+       "p_gap_this_large_if_resolution_correct": null,
+       "resolution_may_be_too_small": false,
+       "comparator": {
+        "ll_exp": -1161.366786,
+        "ll_mix": -1161.366786,
+        "ll_hypo": -1154.368089,
+        "lambda_comp": 13.997394,
+        "lambda_exp": 13.997394,
+        "fitted_h0_mixture": {
+         "w": 0.816525,
+         "rate1_per_s": 0.064171,
+         "rate2_per_s": 0.064171
+        },
+        "fitted_h1_hypoexponential": {
+         "rate1_per_s": 0.078359,
+         "rate2_per_s": 0.354403
+        },
+        "bootstrap_reps": 2000,
+        "critical_alpha_0.01": 5.99485,
+        "p_one_sided": 0.001,
+        "rejects_mixture": true,
+        "secondary_single_exp_lrt": {
+         "lambda_exp": 13.997394,
+         "note": "descriptive only; rejects positive exponential mixtures as well as sequential steps"
+        }
+       }
+      }
+     ],
+     "n_patches_included": 1,
+     "one_active_channel_note": "active-channel count not supplied in input; assumed 1 per caller",
+     "combined": {
+      "statistic": -1.2806,
+      "critical_alpha_0.01": -1.9228,
+      "p_one_sided": 0.0767,
+      "rejects_mixture": false
+     },
+     "comparator": {
+      "bootstrap_reps": 2000,
+      "alpha_one_sided": 0.01,
+      "n_patches_included": 1,
+      "combined": {
+       "bootstrap_reps": 2000,
+       "alpha_one_sided": 0.01,
+       "n_patches_included": 1,
+       "lambda_comp_sum": 13.997394,
+       "lambda_exp_sum": 13.997394,
+       "critical_alpha_0.01": 5.99485,
+       "p_one_sided": 0.001,
+       "rejects_mixture": true
+      },
+      "median_fitted_hypoexponential_rates_per_s": [
+       0.078359,
+       0.354403
+      ]
+     },
+     "role": "test",
+     "resolution_sensitivity": {
+      "patches_included_at_both_resolutions": 1,
+      "combined_at_1x": {
+       "statistic": -1.2806,
+       "critical_alpha_0.01": -1.9228,
+       "p_one_sided": 0.0767,
+       "rejects_mixture": false
+      },
+      "combined_at_2x": {
+       "statistic": -1.2806,
+       "critical_alpha_0.01": -1.9228,
+       "p_one_sided": 0.0767,
+       "rejects_mixture": false
+      },
+      "rejects_at_1x_not_2x": false,
+      "rejects_at_2x_not_1x": false,
+      "comparator_at_1x": {
+       "patches_included_at_both_resolutions": 1,
+       "bootstrap_reps": 2000,
+       "combined": {
+        "bootstrap_reps": 2000,
+        "alpha_one_sided": 0.01,
+        "n_patches_included": 1,
+        "lambda_comp_sum": 13.997394,
+        "lambda_exp_sum": 13.997394,
+        "critical_alpha_0.01": 5.99485,
+        "p_one_sided": 0.001,
+        "rejects_mixture": true
+       },
+       "median_fitted_hypoexponential_rates_per_s": [
+        0.078359,
+        0.354403
+       ]
+      }
+     },
+     "decision": "does_not_reject",
+     "test_power_at_comparator_rates": {
+      "power_alpha_0.01": 0.6235,
+      "simulation_reps": 2000,
+      "scale_matched_to_patch_mean": false,
+      "rate_ratio": 4.5228,
+      "simulated_rates_per_s": [
+       [
+        0.078359,
+        0.354403
+       ]
+      ]
+     },
+     "section_5_failure_triggered": false,
+     "section_5_failure_reasons": [],
+     "outcome_reading": "check needs more data or shows resolution sensitivity"
+    }
+   },
+   "controlled": true,
+   "section_5_failure_triggered": false,
+   "section_5_failure_reasons": []
+  }
+ }
+}
