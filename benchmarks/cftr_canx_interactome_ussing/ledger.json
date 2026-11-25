@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "work": "CFTR calnexin interactome remodeling & FRT siCANX Ussing asymmetry benchmark on Tedman et al. 2025 (CC BY 4.0).",
+  "done_file": "done.md",
+  "done_sha256": "d6eeee7cf61baf2cee4576f6094c278a623b214d3667effe42ff05c14360ca82",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-arm1-data-integrity-and-positive-controls",
+      "statement": "Across 22 sample groups in FRT-F508del and FRT-WT Ussing workbooks (7 exact Col C == Col D duplicate replicate columns removed in FRT-F508del; 0 duplicates in FRT-WT), mean(Fsk+VX-770) > 0 and mean(Inh172) < 0 hold in 22/22 groups with pooled Pearson r = 0.991056 (FRT-F508del r = 0.998260; FRT-WT 9 non-ETI groups r = 0.993663; FRT-WT NT 45.71x FRT-F508del NT).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/Copy of FRT-F508del_siCANX_Ussing-summary-for-paper.xlsx & Copy of FRT-WT_siCANX_Ussing-summary-for-paper.xlsx (CC BY 4.0, DOI 10.17632/ksfmxv8zts.1) summarized in benchmarks/cftr_canx_interactome_ussing/results_2026-11-25.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_canx_interactome_ussing.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "ElementTree float64 Ussing pooled reversal correlation",
+          "script": "cftr_canx_interactome_ussing.py",
+          "difference": "parses Raw-data-analyzed via ElementTree and computes 22-group Pearson r in float64",
+          "value": 0.991056
+        },
+        {
+          "name": "minidom Decimal Ussing pooled reversal correlation",
+          "script": "independent_audit.py",
+          "difference": "separate xml.dom.minidom OOXML reader computing 22-group Pearson r via decimal.Decimal",
+          "value": 0.991056
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-25"
+    },
+    {
+      "id": "c2-arm1-did-log-ratio-measurement",
+      "statement": "Under strict deduplication, siCANX shifts FRT-F508del 661+445 total activation by -31.55% (24.226667 [N=3] vs 35.393250 [N=4], ln ratio = -0.379067) and shifts FRT-WT DMSO by -27.74% (63.695250 [N=8] vs 88.149625 [N=8], ln ratio = -0.324926), yielding difference-in-differences log ratio = -0.054142 (as-deposited N=4 sensitivity reverses sign to +0.012454).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/Copy of FRT-F508del_siCANX_Ussing-summary-for-paper.xlsx & Copy of FRT-WT_siCANX_Ussing-summary-for-paper.xlsx (CC BY 4.0) summarized in benchmarks/cftr_canx_interactome_ussing/results_2026-11-25.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_canx_interactome_ussing.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "ElementTree float64 DiD log-ratio evaluator",
+          "script": "cftr_canx_interactome_ussing.py",
+          "difference": "computes deduplicated group means and DiD log-ratio in IEEE-754 float64",
+          "value": -0.054142
+        },
+        {
+          "name": "minidom Decimal DiD log-ratio auditor",
+          "script": "independent_audit.py",
+          "difference": "independent minidom parser computing DiD log-ratio with 34-digit decimal.Decimal logarithms",
+          "value": -0.054142
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-25"
+    },
+    {
+      "id": "c3-arm2-bh-fdr-min-q-measurement",
+      "statement": "Across 235 F508del-drug interactors and 372 CFTR-variant interactors (excluding CFTR=0.0 anchor and 3 #DIV/0! cells), minimum BH-FDR q-value across the 4 Drug canonical module attenuation tests is 0.640625 (folding, raw p = 0.160156) and across the 20 Variants module enrichment tests is 0.694575 (WT(-CX):folding raw p = 0.048141).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "sources/downloads/tedman-2025/Copy of CFTR_Variants_LogFoldChanges.xlsx & Copy of CFTR_F508del_Drug_LogFoldChanges.xlsx (CC BY 4.0) summarized in benchmarks/cftr_canx_interactome_ussing/results_2026-11-25.json",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "cftr_canx_interactome_ussing.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "Array-DP Wilcoxon + pooled-rank BH-FDR",
+          "script": "cftr_canx_interactome_ussing.py",
+          "difference": "computes paired signed-rank p-values via integer array DP and float64 BH step-up",
+          "value": 0.640625
+        },
+        {
+          "name": "Counter-DP Wilcoxon + Decimal BH-FDR",
+          "script": "independent_audit.py",
+          "difference": "independent minidom reader using Counter subset-sum and Decimal BH step-up",
+          "value": 0.640625
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-25"
+    },
+    {
+      "id": "c4-arm-1-ussing-sicanx-asymmetry",
+      "statement": "Pre-registered Arm 1 hypothesis (FRT-F508del 661+445 siCANX reduction and disproportionate drop vs FRT-WT DMSO at Bonferroni alpha = 0.025) is refuted: Arm 1a two-sided permutation p = 0.085714 (3/35 splits > 0.025; Welch t = -2.746379, p = 0.058231; bootstrap 97.5% CI [-0.632096, -0.100299]) and Arm 1b one-sided stratified DiD permutation p = 0.408714 (450,450 splits; one-sided 97.5% upper CI = +0.224171 > 0).",
+      "kind": "predicted",
+      "origin": "lab",
+      "dataset": "benchmarks/cftr_canx_interactome_ussing/results_2026-11-25.json",
+      "standing": "refuted",
+      "held_out_error": {
+        "value": 0.408714,
+        "unit": "exact_stratified_did_permutation_one_sided_p",
+        "set_fixed_in_done_file": true
+      },
+      "checks": [
+        {"type": "own_script", "ref": "cftr_canx_interactome_ussing.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-25"
+    },
+    {
+      "id": "c5-arm-2-proteostasis-remodeling",
+      "statement": "Pre-registered Arm 2 hypothesis (>=1 canonical proteostasis module surviving BH-FDR q < 0.05 in BOTH Drug 4-test attenuation and Variants 20-test enrichment families) is refuted: 0/4 canonical modules pass Drug BH-FDR q < 0.05 (min q = 0.640625) and 0/20 module-variant pairs pass Variants BH-FDR q < 0.05 (min q = 0.694575); 10,000-draw label permutation null confirms calibrated FWER (0.0578 Drug, 0.0432 Variants).",
+      "kind": "predicted",
+      "origin": "lab",
+      "dataset": "benchmarks/cftr_canx_interactome_ussing/results_2026-11-25.json",
+      "standing": "refuted",
+      "held_out_error": {
+        "value": 0.640625,
+        "unit": "min_bh_fdr_q_across_drug_4_and_variants_20_families",
+        "set_fixed_in_done_file": true
+      },
+      "checks": [
+        {"type": "own_script", "ref": "cftr_canx_interactome_ussing.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "headline": false,
+      "checked_on": "2026-11-25"
+    }
+  ]
+}
