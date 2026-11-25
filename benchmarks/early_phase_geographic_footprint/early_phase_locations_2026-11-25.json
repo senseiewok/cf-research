@@ -1,0 +1,5119 @@
+{
+  "schema_version": "pred0018-early-phase-locations-fixture-v1",
+  "catalog_source_id": "clinicaltrials-gov",
+  "api_endpoint_pattern": "https://clinicaltrials.gov/api/v2/studies/{nct_id}",
+  "fetched_at_utc": "2026-11-25T15:11:17.109273+00:00",
+  "evaluated_on_local": "2026-11-25",
+  "nlm_attribution": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.",
+  "research_boundary": "Independent open-source research benchmark only (Tier T1/T2 registry metadata); not clinical guidance and not an assessment of personal trial eligibility, site availability, or treatment efficacy.",
+  "quarantine_notice": "External registry country and recruitment-status strings sanitized for bidi/default-ignorable controls and closing-tag lookalikes; centralContacts, overallOfficials, locations[].contacts, facility, city, state, zip, and geoPoint stripped in memory prior to disk write.",
+  "study_count": 71,
+  "studies": {
+    "NCT00016744": {
+      "nct_id": "NCT00016744",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": false,
+      "locations": null
+    },
+    "NCT00234663": {
+      "nct_id": "NCT00234663",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT00237380": {
+      "nct_id": "NCT00237380",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Israel",
+          "status": null
+        }
+      ]
+    },
+    "NCT00351078": {
+      "nct_id": "NCT00351078",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Israel",
+          "status": null
+        }
+      ]
+    },
+    "NCT00457821": {
+      "nct_id": "NCT00457821",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        }
+      ]
+    },
+    "NCT00458341": {
+      "nct_id": "NCT00458341",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        }
+      ]
+    },
+    "NCT00590538": {
+      "nct_id": "NCT00590538",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT00789867": {
+      "nct_id": "NCT00789867",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT00865904": {
+      "nct_id": "NCT00865904",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        }
+      ]
+    },
+    "NCT00953706": {
+      "nct_id": "NCT00953706",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT01161537": {
+      "nct_id": "NCT01161537",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT01225211": {
+      "nct_id": "NCT01225211",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "New Zealand",
+          "status": null
+        },
+        {
+          "country": "New Zealand",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT01262352": {
+      "nct_id": "NCT01262352",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT01531673": {
+      "nct_id": "NCT01531673",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT01621867": {
+      "nct_id": "NCT01621867",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT01685801": {
+      "nct_id": "NCT01685801",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT02070744": {
+      "nct_id": "NCT02070744",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT02190604": {
+      "nct_id": "NCT02190604",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Romania",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT02508207": {
+      "nct_id": "NCT02508207",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT02532764": {
+      "nct_id": "NCT02532764",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Czechia",
+          "status": null
+        },
+        {
+          "country": "Denmark",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Italy",
+          "status": null
+        },
+        {
+          "country": "Spain",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT02564354": {
+      "nct_id": "NCT02564354",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        }
+      ]
+    },
+    "NCT02589236": {
+      "nct_id": "NCT02589236",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT02690519": {
+      "nct_id": "NCT02690519",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        }
+      ]
+    },
+    "NCT02707562": {
+      "nct_id": "NCT02707562",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Czechia",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT02718495": {
+      "nct_id": "NCT02718495",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Denmark",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        }
+      ]
+    },
+    "NCT02730208": {
+      "nct_id": "NCT02730208",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        }
+      ]
+    },
+    "NCT02767297": {
+      "nct_id": "NCT02767297",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT02951182": {
+      "nct_id": "NCT02951182",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Austria",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Denmark",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Italy",
+          "status": null
+        },
+        {
+          "country": "Spain",
+          "status": null
+        },
+        {
+          "country": "Spain",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT02951195": {
+      "nct_id": "NCT02951195",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT02971839": {
+      "nct_id": "NCT02971839",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT03029455": {
+      "nct_id": "NCT03029455",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03045523": {
+      "nct_id": "NCT03045523",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Czechia",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03061331": {
+      "nct_id": "NCT03061331",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        }
+      ]
+    },
+    "NCT03093714": {
+      "nct_id": "NCT03093714",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Czechia",
+          "status": null
+        },
+        {
+          "country": "Czechia",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03119649": {
+      "nct_id": "NCT03119649",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Serbia",
+          "status": null
+        },
+        {
+          "country": "Spain",
+          "status": null
+        },
+        {
+          "country": "Spain",
+          "status": null
+        },
+        {
+          "country": "Spain",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03140527": {
+      "nct_id": "NCT03140527",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Denmark",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Sweden",
+          "status": null
+        }
+      ]
+    },
+    "NCT03224351": {
+      "nct_id": "NCT03224351",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Israel",
+          "status": null
+        },
+        {
+          "country": "Israel",
+          "status": null
+        },
+        {
+          "country": "Israel",
+          "status": null
+        },
+        {
+          "country": "Israel",
+          "status": null
+        },
+        {
+          "country": "Israel",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03227471": {
+      "nct_id": "NCT03227471",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        }
+      ]
+    },
+    "NCT03251092": {
+      "nct_id": "NCT03251092",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Denmark",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "New Zealand",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03258424": {
+      "nct_id": "NCT03258424",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03375047": {
+      "nct_id": "NCT03375047",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT03450720": {
+      "nct_id": "NCT03450720",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Belgium",
+          "status": null
+        }
+      ]
+    },
+    "NCT03474042": {
+      "nct_id": "NCT03474042",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        }
+      ]
+    },
+    "NCT03500263": {
+      "nct_id": "NCT03500263",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03506061": {
+      "nct_id": "NCT03506061",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT03540524": {
+      "nct_id": "NCT03540524",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Bulgaria",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Greece",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Serbia",
+          "status": null
+        },
+        {
+          "country": "Sweden",
+          "status": null
+        },
+        {
+          "country": "Sweden",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03587961": {
+      "nct_id": "NCT03587961",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        }
+      ]
+    },
+    "NCT03589313": {
+      "nct_id": "NCT03589313",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Belgium",
+          "status": null
+        }
+      ]
+    },
+    "NCT03591094": {
+      "nct_id": "NCT03591094",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT03625466": {
+      "nct_id": "NCT03625466",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        }
+      ]
+    },
+    "NCT03768089": {
+      "nct_id": "NCT03768089",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03911713": {
+      "nct_id": "NCT03911713",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Ireland",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03912233": {
+      "nct_id": "NCT03912233",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Portugal",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT03969888": {
+      "nct_id": "NCT03969888",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Czechia",
+          "status": null
+        },
+        {
+          "country": "Czechia",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "Hungary",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "New Zealand",
+          "status": null
+        },
+        {
+          "country": "New Zealand",
+          "status": null
+        },
+        {
+          "country": "New Zealand",
+          "status": null
+        },
+        {
+          "country": "New Zealand",
+          "status": null
+        },
+        {
+          "country": "Poland",
+          "status": null
+        },
+        {
+          "country": "Serbia",
+          "status": null
+        },
+        {
+          "country": "Slovakia",
+          "status": null
+        },
+        {
+          "country": "Slovakia",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT04006873": {
+      "nct_id": "NCT04006873",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT04126473": {
+      "nct_id": "NCT04126473",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Israel",
+          "status": null
+        },
+        {
+          "country": "Israel",
+          "status": null
+        },
+        {
+          "country": "Israel",
+          "status": null
+        },
+        {
+          "country": "Israel",
+          "status": null
+        }
+      ]
+    },
+    "NCT04135495": {
+      "nct_id": "NCT04135495",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        }
+      ]
+    },
+    "NCT04853368": {
+      "nct_id": "NCT04853368",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Hungary",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "New Zealand",
+          "status": null
+        },
+        {
+          "country": "New Zealand",
+          "status": null
+        },
+        {
+          "country": "Slovakia",
+          "status": null
+        },
+        {
+          "country": "Slovakia",
+          "status": null
+        }
+      ]
+    },
+    "NCT05248230": {
+      "nct_id": "NCT05248230",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "COMPLETED"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "WITHDRAWN"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        }
+      ]
+    },
+    "NCT05504837": {
+      "nct_id": "NCT05504837",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        }
+      ]
+    },
+    "NCT05668741": {
+      "nct_id": "NCT05668741",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": true,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "Australia",
+          "status": null
+        },
+        {
+          "country": "Belgium",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Canada",
+          "status": null
+        },
+        {
+          "country": "Germany",
+          "status": null
+        },
+        {
+          "country": "Sweden",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT05712538": {
+      "nct_id": "NCT05712538",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "New Zealand",
+          "status": null
+        }
+      ]
+    },
+    "NCT06154447": {
+      "nct_id": "NCT06154447",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        }
+      ]
+    },
+    "NCT06237335": {
+      "nct_id": "NCT06237335",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": true,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "United States",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "New Zealand",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT06429176": {
+      "nct_id": "NCT06429176",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "Czechia",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "France",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "Germany",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "Germany",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "Israel",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "Israel",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "Italy",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "Lithuania",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "Poland",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "Poland",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "Spain",
+          "status": "RECRUITING"
+        }
+      ]
+    },
+    "NCT06515002": {
+      "nct_id": "NCT06515002",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "Italy",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Spain",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT06526923": {
+      "nct_id": "NCT06526923",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        }
+      ]
+    },
+    "NCT06747858": {
+      "nct_id": "NCT06747858",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "NOT_YET_RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "ACTIVE_NOT_RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        },
+        {
+          "country": "United States",
+          "status": "RECRUITING"
+        }
+      ]
+    },
+    "NCT06962852": {
+      "nct_id": "NCT06962852",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "France",
+          "status": null
+        },
+        {
+          "country": "Italy",
+          "status": null
+        },
+        {
+          "country": "Netherlands",
+          "status": null
+        },
+        {
+          "country": "Spain",
+          "status": null
+        },
+        {
+          "country": "United Kingdom",
+          "status": null
+        }
+      ]
+    },
+    "NCT06963008": {
+      "nct_id": "NCT06963008",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "China",
+          "status": null
+        }
+      ]
+    },
+    "NCT07485543": {
+      "nct_id": "NCT07485543",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "contacts_locations_module_present": true,
+      "locations_key_present": true,
+      "locations": [
+        {
+          "country": "China",
+          "status": "RECRUITING"
+        }
+      ]
+    }
+  }
+}
