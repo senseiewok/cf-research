@@ -2,7 +2,7 @@
 """Early-Phase Randomization & Masking Asymmetry Benchmark (`PRED-0017`).
 
 Tests the pre-registered design-asymmetry hypothesis (`benchmarks/early_phase_masking_randomization/done.md`)
-across the locked 71 early-phase non-healthy-volunteer PRISMA-940 Cystic Fibrosis interventional trials
+across the locked 71 early-phase non-healthy-volunteer-only PRISMA-940 Cystic Fibrosis interventional trials
 from `PRED-0015` and `PRED-0016` (`benchmarks/delivery_route_compartmentalization/results_2026-11-24.json`):
 
 - Primary comparison: `systemic_cftr` (`N_sys == 54`) vs pure airway-restricted `inhaled_cftr_pure`
@@ -33,7 +33,6 @@ import hashlib
 import json
 import math
 from pathlib import Path
-import re
 import statistics
 import sys
 import tempfile
@@ -75,11 +74,49 @@ ALLOWED_MASKINGS: frozenset[str | None] = frozenset({"NONE", "SINGLE", "DOUBLE",
 MASKED_VALUES: frozenset[str] = frozenset({"SINGLE", "DOUBLE", "TRIPLE", "QUADRUPLE"})
 ALLOWED_STD_AGES: frozenset[str] = frozenset({"CHILD", "ADULT", "OLDER_ADULT"})
 ALLOWED_ENROLLMENT_TYPES: frozenset[str | None] = frozenset({"ACTUAL", "ESTIMATED", None})
+ALLOWED_PHASES: frozenset[str] = frozenset({"EARLY_PHASE1", "PHASE1", "PHASE2", "PHASE3", "PHASE4", "NA"})
 
 Z_95 = 1.959963984540054
 ALPHA_ONE_SIDED_THRESHOLD = Fraction(1, 100)
 
-_CLOSING_TAG_LOOKALIKE_RX = re.compile(r"<\s*/\s*[^\s>]*data[^\s>]*>", re.IGNORECASE)
+_CONFUSABLE_SKELETON_MAP = str.maketrans(
+    {
+        "\u0430": "a", "\u0435": "e", "\u043e": "o", "\u0440": "p",
+        "\u0441": "c", "\u0443": "y", "\u0445": "x", "\u0501": "d",
+        "\u0456": "i", "\u0455": "s", "\u0442": "t", "\u043d": "n",
+        "\u0410": "A", "\u0412": "B", "\u0421": "C", "\u0500": "D",
+        "\u0415": "E", "\u041d": "H", "\u0406": "I", "\u041a": "K",
+        "\u041c": "M", "\u041e": "O", "\u0420": "P", "\u0405": "S",
+        "\u0422": "T", "\u0425": "X", "\u0423": "Y",
+        "\u2215": "/", "\u2044": "/", "\uff0f": "/",
+        "\uff1c": "<", "\u27e8": "<", "\u3008": "<", "\u2039": "<", "\ufe64": "<", "\u226e": "<",
+        "\uff1e": ">", "\u27e9": ">", "\u3009": ">", "\u203a": ">", "\ufe65": ">", "\u226f": ">",
+    }
+)
+
+
+def _is_default_ignorable_or_control(ch: str) -> bool:
+    cp = ord(ch)
+    cat = unicodedata.category(ch)
+    if cat in ("Cf", "Cc") and ch not in ("\n", "\t"):
+        return True
+    return (
+        cp in (0x00AD, 0x034F, 0x061C, 0x115F, 0x1160, 0x17B4, 0x17B5, 0x3164, 0xFFA0)
+        or (0x180B <= cp <= 0x180F)
+        or (0xFE00 <= cp <= 0xFE0F)
+        or (0xFFF0 <= cp <= 0xFFF8)
+        or (0x1BCA0 <= cp <= 0x1BCA3)
+        or (0x1D173 <= cp <= 0x1D17A)
+        or (0xE0000 <= cp <= 0xE0FFF)
+    )
+
+
+def _validate_2x2_counts(n1: int, k1: int, n2: int, k2: int) -> None:
+    for name, val in (("n1", n1), ("k1", k1), ("n2", n2), ("k2", k2)):
+        if isinstance(val, bool) or not isinstance(val, int):
+            raise ValueError(f"Invalid integer type for {name}: {val!r}")
+    if n1 <= 0 or n2 <= 0 or not (0 <= k1 <= n1) or not (0 <= k2 <= n2):
+        raise ValueError(f"Invalid 2x2 counts: n1={n1}, k1={k1}, n2={n2}, k2={k2}")
 
 
 class EarlyPhaseMaskingBenchmarkError(RuntimeError):
@@ -91,23 +128,57 @@ def sha256_lf_file(path: Path) -> str:
     return hashlib.sha256(txt.encode("utf-8")).hexdigest()
 
 
+def _is_closing_data_tag_span(span: str) -> bool:
+    skeleton_chars: list[str] = []
+    for ch in span:
+        if _is_default_ignorable_or_control(ch):
+            continue
+        norm = unicodedata.normalize("NFKD", ch.translate(_CONFUSABLE_SKELETON_MAP))
+        for sub in norm:
+            if unicodedata.category(sub) == "Mn" or _is_default_ignorable_or_control(sub) or sub.isspace():
+                continue
+            skeleton_chars.append(sub.lower())
+    folded = "".join(skeleton_chars)
+    return folded.startswith("</") and folded.endswith(">") and ("data" in folded or "untrusted" in folded)
+
+
 def sanitize_registry_text(value: Any) -> str:
-    """Escape format/bidi/control characters and closing-tag lookalikes on sponsor-entered text."""
+    """Linear O(N) escape of format/bidi/default-ignorable characters and closing-tag lookalikes."""
     if value is None:
         return ""
     raw = str(value)
+    n = len(raw)
+    tag_safe_parts: list[str] = []
+    idx = 0
+    while idx < n:
+        ch = raw[idx]
+        mapped = ch.translate(_CONFUSABLE_SKELETON_MAP)
+        if mapped == "<":
+            end_idx = -1
+            scan = idx + 1
+            while scan < n:
+                s_mapped = raw[scan].translate(_CONFUSABLE_SKELETON_MAP)
+                if s_mapped == "<":
+                    break
+                if s_mapped == ">":
+                    end_idx = scan
+                    break
+                scan += 1
+            if end_idx != -1 and _is_closing_data_tag_span(raw[idx : end_idx + 1]):
+                tag_safe_parts.append("[ESCAPED_CLOSING_TAG]")
+                idx = end_idx + 1
+                continue
+        tag_safe_parts.append(ch)
+        idx += 1
+
+    inter = "".join(tag_safe_parts)
     out_chars: list[str] = []
-    for ch in raw:
-        cat = unicodedata.category(ch)
-        if cat in ("Cf", "Cc") and ch not in ("\n", "\t"):
+    for ch in inter:
+        if _is_default_ignorable_or_control(ch):
             out_chars.append(f"<U+{ord(ch):04X}>")
         else:
             out_chars.append(ch)
-    cleaned = "".join(out_chars)
-    folded = unicodedata.normalize("NFKD", cleaned)
-    if _CLOSING_TAG_LOOKALIKE_RX.search(folded):
-        cleaned = _CLOSING_TAG_LOOKALIKE_RX.sub("[ESCAPED_CLOSING_TAG]", folded)
-    return cleaned
+    return "".join(out_chars)
 
 
 def classify_design_enums(allocation: Any, masking: Any, nct_id: str = "synthetic") -> dict[str, bool]:
@@ -145,18 +216,20 @@ def parse_study_design_eligibility(record: dict[str, Any], nct_id: str = "synthe
     if not isinstance(design_mod, dict):
         raise EarlyPhaseMaskingBenchmarkError(f"{nct_id}: design_module must be dict or None")
 
-    design_info_present = "designInfo" in design_mod and design_mod.get("designInfo") is not None
-    design_info = design_mod.get("designInfo") or {}
-    if not isinstance(design_info, dict):
+    raw_design_info = design_mod.get("designInfo")
+    if raw_design_info is not None and not isinstance(raw_design_info, dict):
         raise EarlyPhaseMaskingBenchmarkError(f"{nct_id}: designInfo must be dict or None")
+    design_info_present = raw_design_info is not None
+    design_info = {} if raw_design_info is None else raw_design_info
 
     allocation_key_present = "allocation" in design_info and design_info.get("allocation") is not None
     allocation = design_info.get("allocation")
 
-    masking_info_present = "maskingInfo" in design_info and design_info.get("maskingInfo") is not None
-    masking_info = design_info.get("maskingInfo") or {}
-    if not isinstance(masking_info, dict):
+    raw_masking_info = design_info.get("maskingInfo")
+    if raw_masking_info is not None and not isinstance(raw_masking_info, dict):
         raise EarlyPhaseMaskingBenchmarkError(f"{nct_id}: maskingInfo must be dict or None")
+    masking_info_present = raw_masking_info is not None
+    masking_info = {} if raw_masking_info is None else raw_masking_info
     masking_key_present = "masking" in masking_info and masking_info.get("masking") is not None
     masking = masking_info.get("masking")
 
@@ -166,9 +239,10 @@ def parse_study_design_eligibility(record: dict[str, Any], nct_id: str = "synthe
     if intervention_model is not None:
         intervention_model = sanitize_registry_text(intervention_model)
 
-    enroll_info = design_mod.get("enrollmentInfo") or {}
-    if not isinstance(enroll_info, dict):
+    raw_enroll_info = design_mod.get("enrollmentInfo")
+    if raw_enroll_info is not None and not isinstance(raw_enroll_info, dict):
         raise EarlyPhaseMaskingBenchmarkError(f"{nct_id}: enrollmentInfo must be dict or None")
+    enroll_info = {} if raw_enroll_info is None else raw_enroll_info
     enroll_count = enroll_info.get("count")
     if enroll_count is not None and (isinstance(enroll_count, bool) or not isinstance(enroll_count, int) or enroll_count < 0):
         raise EarlyPhaseMaskingBenchmarkError(f"{nct_id}: invalid enrollmentInfo.count {enroll_count!r}")
@@ -190,12 +264,21 @@ def parse_study_design_eligibility(record: dict[str, Any], nct_id: str = "synthe
     else:
         raise EarlyPhaseMaskingBenchmarkError(f"{nct_id}: invalid eligibilityModule.stdAges {std_ages_raw!r}")
 
+    hv_raw = elig_mod.get("healthyVolunteers")
+    if hv_raw is not None and not isinstance(hv_raw, bool):
+        raise EarlyPhaseMaskingBenchmarkError(f"{nct_id}: invalid eligibilityModule.healthyVolunteers {hv_raw!r}")
+
     min_age = sanitize_registry_text(elig_mod.get("minimumAge")) if elig_mod.get("minimumAge") is not None else None
     max_age = sanitize_registry_text(elig_mod.get("maximumAge")) if elig_mod.get("maximumAge") is not None else None
     sex = sanitize_registry_text(elig_mod.get("sex")) if elig_mod.get("sex") is not None else None
 
     phases_raw = design_mod.get("phases")
-    phases = list(phases_raw) if isinstance(phases_raw, list) else []
+    if phases_raw is None:
+        phases: list[str] = []
+    elif isinstance(phases_raw, list) and all(isinstance(x, str) and x in ALLOWED_PHASES for x in phases_raw):
+        phases = list(phases_raw)
+    else:
+        raise EarlyPhaseMaskingBenchmarkError(f"{nct_id}: invalid designModule.phases {phases_raw!r}")
 
     return {
         "nct_id": nct_id,
@@ -211,6 +294,7 @@ def parse_study_design_eligibility(record: dict[str, Any], nct_id: str = "synthe
         "enrollment_type": enroll_type,
         "std_ages": std_ages,
         "includes_child_std_age": "CHILD" in std_ages,
+        "healthy_volunteers": hv_raw,
         "minimum_age": min_age,
         "maximum_age": max_age,
         "sex": sex,
@@ -219,8 +303,7 @@ def parse_study_design_eligibility(record: dict[str, Any], nct_id: str = "synthe
 
 
 def fisher_hypergeometric_exact(n1: int, k1: int, n2: int, k2: int) -> dict[str, Any]:
-    if n1 <= 0 or n2 <= 0 or not (0 <= k1 <= n1) or not (0 <= k2 <= n2):
-        raise ValueError(f"Invalid 2x2 counts: n1={n1}, k1={k1}, n2={n2}, k2={k2}")
+    _validate_2x2_counts(n1, k1, n2, k2)
     total_n = n1 + n2
     total_k = k1 + k2
     denom = math.comb(total_n, total_k)
@@ -254,6 +337,9 @@ def _wilson_single_ci(k: int, n: int, z: float = Z_95) -> tuple[float, float]:
 
 
 def newcombe_wilson_rd_ci95(n1: int, k1: int, n2: int, k2: int, z: float = Z_95) -> tuple[float, float]:
+    _validate_2x2_counts(n1, k1, n2, k2)
+    if isinstance(z, bool) or not isinstance(z, (int, float)) or not math.isfinite(z) or z <= 0.0:
+        raise ValueError(f"Invalid z-score parameter: {z!r}")
     p1 = k1 / n1
     p2 = k2 / n2
     rd = p1 - p2
@@ -316,6 +402,14 @@ def chan_zhang_unconditional_rd_ci95(
     and upward/downward `delta` bracket scanning (`inf{delta: P_U* > alpha/2}`,
     `sup{delta: P_L* > alpha/2}`) safe under non-zero `k2 > 0` sawtooth discontinuities.
     """
+    _validate_2x2_counts(n1, k1, n2, k2)
+    if (
+        isinstance(alpha_two_sided, bool)
+        or not isinstance(alpha_two_sided, (int, float))
+        or not math.isfinite(alpha_two_sided)
+        or not (0.0 < alpha_two_sided < 1.0)
+    ):
+        raise ValueError(f"Invalid alpha_two_sided parameter: {alpha_two_sided!r}")
     alpha_tail = 0.5 * alpha_two_sided
     comb1 = [math.comb(n1, i) for i in range(n1 + 1)]
     comb2 = [math.comb(n2, j) for j in range(n2 + 1)]
@@ -579,11 +673,12 @@ def _arm_descriptive_summary(items: list[dict[str, Any]]) -> dict[str, Any]:
     cc_items = [x for x in items if x["is_complete_case_alloc_and_mask"]]
     cc_joint = sum(1 for x in cc_items if x["is_randomized_and_masked"])
 
-    phase1_only = [x for x in items if set(x["phases"]) <= {"EARLY_PHASE1", "PHASE1"}]
+    phase1_only = [x for x in items if x["phases"] and set(x["phases"]) <= {"EARLY_PHASE1", "PHASE1"}]
     phase2_any = [x for x in items if "PHASE2" in set(x["phases"])]
 
     enroll_vals = [int(x["enrollment_count"]) for x in items if x["enrollment_count"] is not None]
     child_count = sum(1 for x in items if x["includes_child_std_age"])
+    hv_true_count = sum(1 for x in items if x["healthy_volunteers"] is True)
 
     return {
         "n": n,
@@ -624,6 +719,8 @@ def _arm_descriptive_summary(items: list[dict[str, Any]]) -> dict[str, Any]:
         },
         "pediatric_std_age_child_count": child_count,
         "pediatric_std_age_child_proportion": round(child_count / n, 6) if n else 0.0,
+        "healthy_volunteers_true_count": hv_true_count,
+        "healthy_volunteers_true_proportion": round(hv_true_count / n, 6) if n else 0.0,
     }
 
 
@@ -951,6 +1048,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--pred0015-results", type=Path, default=DEFAULT_PRED0015_RESULTS_JSON)
     ap.add_argument("--snapshot", type=Path, default=DEFAULT_SNAPSHOT_JSON)
     ap.add_argument("--fixture", type=Path, default=DEFAULT_FIXTURE_JSON)
+    ap.add_argument("--results", type=Path, default=DEFAULT_RESULTS_JSON)
     ap.add_argument("--write-results", type=Path, default=None)
     ap.add_argument("--controls-only", action="store_true")
     ap.add_argument("--check", action="store_true")
@@ -968,10 +1066,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.write_results is not None:
         args.write_results.write_text(json.dumps(res, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    if args.check and DEFAULT_RESULTS_JSON.is_file():
-        saved = json.loads(DEFAULT_RESULTS_JSON.read_text(encoding="utf-8"))
+    if args.check:
+        if not args.results.is_file():
+            raise EarlyPhaseMaskingBenchmarkError(f"Missing saved results file for --check: {args.results}")
+        saved = json.loads(args.results.read_text(encoding="utf-8"))
         if saved != res:
-            raise EarlyPhaseMaskingBenchmarkError("Saved results_2026-11-24.json differs from live evaluation")
+            raise EarlyPhaseMaskingBenchmarkError(f"Saved {args.results.name} differs from live evaluation")
 
     falsify_rep = None
     if args.falsify:

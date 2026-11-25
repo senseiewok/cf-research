@@ -7,7 +7,7 @@
   "claims": [
     {
       "id": "c1-early-phase-systemic-randomized-and-masked",
-      "statement": "Among 54 locked early-phase non-healthy-volunteer PRISMA-included systemic CFTR modulator and systemic PTC readthrough trials, 39 (0.722222: 40/54 randomized and 40/54 masked, 0 omitted fields) implement jointly RANDOMIZED allocation and masked blinding in ClinicalTrials.gov API v2 designInfo.",
+      "statement": "Among 54 locked early-phase non-healthy-volunteer-only PRISMA-included systemic CFTR modulator and systemic PTC readthrough trials (including 8 mixed healthy-volunteer + CF trials), 39 (0.722222: 40/54 randomized and 40/54 masked, 0 omitted allocation/masking keys) implement jointly RANDOMIZED allocation and masked blinding in ClinicalTrials.gov API v2 designInfo.",
       "kind": "measured",
       "origin": "lab",
       "dataset": "benchmarks/early_phase_masking_randomization/early_phase_design_eligibility_2026-11-24.json (clinicaltrials-gov)",
@@ -36,7 +36,7 @@
     },
     {
       "id": "c2-early-phase-inhaled-randomized-and-masked",
-      "statement": "Among 15 pure airway-restricted early-phase CFTR-restoring genetic, mRNA, viral-vector, liposomal, and splice-ASO trials, 6 (0.400000: NCT01621867, NCT02532764, NCT03375047, NCT05712538, NCT06429176, NCT06515002; and 7/17 = 0.411765 across all-inhaled adding NCT06237335) implement jointly RANDOMIZED allocation and masked blinding.",
+      "statement": "Among 15 pure airway-restricted early-phase CFTR-restoring genetic, mRNA, viral-vector, liposomal, and oligonucleotide / splice-ASO trials, 6 (0.400000: NCT01621867, NCT02532764, NCT03375047, NCT05712538 [Phase 1 healthy-volunteer DOUBLE masking; Phase 1b CF open-label per maskingDescription], NCT06429176, NCT06515002; and 7/17 = 0.411765 across all-inhaled adding NCT06237335 [Part 1 masked, Parts 2-3 open-label]) carry jointly RANDOMIZED allocation and masked blinding in ClinicalTrials.gov API v2 designInfo.",
       "kind": "measured",
       "origin": "lab",
       "dataset": "benchmarks/early_phase_masking_randomization/early_phase_design_eligibility_2026-11-24.json (clinicaltrials-gov)",
@@ -113,7 +113,7 @@
         {
           "name": "pure-Decimal log-likelihood Newton-bisection + ternary multi-peak Chan-Zhang CI95 lower bound",
           "script": "independent_audit.py",
-          "difference": "solves unexpanded log-likelihood derivative in Decimal with zero float pre-screening and ternary multi-peak polish",
+          "difference": "solves unexpanded log-likelihood derivative in Decimal (28-digit scan refined at 50-digit precision) with zero float pre-screening and ternary multi-peak polish",
           "value": 0.005320
         }
       ],
@@ -123,7 +123,7 @@
     },
     {
       "id": "c5-pred0017-alpha-0-01-randomization-masking-refuted",
-      "statement": "Pre-registered PRED-0017 hypothesis is refuted at the locked alpha = 0.01 Fisher threshold without post-hoc tuning: although systemic early-phase CFTR trials exceeded pure airway-restricted inhaled CFTR trials by +0.322222 (39/54 = 0.722222 vs 6/15 = 0.400000; Chan-Zhang 95% CI [0.005320, 0.578285]; Newcombe-Wilson 95% CI [0.046513, 0.548120]), one-sided Fisher hypergeometric p = 20586899/867114268 = 0.02374185 (and all-17 p = 0.02169903) exceeded 0.01 because 6/15 pure-inhaled trials (pGM169, eluforsen, MRT5005, ARCT-032, SPL84, BI 3720931) implemented randomized masked designs.",
+      "statement": "Pre-registered PRED-0017 hypothesis is refuted at the locked alpha = 0.01 Fisher threshold without post-hoc tuning: although systemic early-phase CFTR trials exceeded pure airway-restricted inhaled CFTR trials by +0.322222 (39/54 = 0.722222 vs 6/15 = 0.400000; Chan-Zhang 95% CI [0.005320, 0.578285]; Newcombe-Wilson 95% CI [0.046513, 0.548120]), one-sided Fisher hypergeometric p = 20586899/867114268 = 0.02374185 (and all-17 p = 0.02169903) exceeded 0.01 because 6/15 pure-inhaled trials (pGM169, QR-010 [eluforsen], MRT5005, ARCT-032 [Phase 1 healthy-volunteer DOUBLE masking with open-label CF Phase 1b, retained as True under study-level designInfo rule], SPL84, BI 3720931) carried RANDOMIZED + masked study-level designInfo.",
       "kind": "predicted",
       "origin": "lab",
       "dataset": "benchmarks/early_phase_masking_randomization/results_2026-11-24.json",

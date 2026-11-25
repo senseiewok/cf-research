@@ -3,8 +3,8 @@
 
 Enforces Rule 2 of `discovery-practice` and `done.md` Section 4:
 - Imports ZERO `re`, ZERO `math`, ZERO `tools/`, and ZERO benchmark helper modules.
-- Uses ZERO IEEE `float` pre-screening inside its 50-digit `decimal.Decimal` Chan-Zhang verifier.
-- Re-checks `done_sha256`, `pred0015_results_sha256`, `fixture_sha256`, and `54/17/15` NCT set equality.
+- Uses ZERO IEEE `float` pre-screening inside its `decimal.Decimal` Chan-Zhang verifier (`28`-digit bracket scan refined at `50`-digit `Decimal` precision on final bisection steps).
+- Re-checks `done_sha256`, `pred0015_results_sha256`, `snapshot_sha256`, `fixture_sha256`, and `54/17/15` NCT set equality.
 - Evaluates raw `designInfo.allocation` and `designInfo.maskingInfo.masking` enums directly from JSON.
 - Computes hypergeometric Fisher p-values via multiplicative `fractions.Fraction` products (`tolerance = 0`).
 - Recomputes BOTH Newcombe-Wilson Method-10 AND conservative sawtooth-safe multi-peak Chan-Zhang 95% CIs
@@ -28,12 +28,24 @@ HERE = Path(__file__).resolve().parent
 REPO_ROOT = HERE.parents[1]
 DEFAULT_DONE = HERE / "done.md"
 DEFAULT_PRED0015_RESULTS = REPO_ROOT / "benchmarks" / "delivery_route_compartmentalization" / "results_2026-11-24.json"
+DEFAULT_SNAPSHOT = REPO_ROOT / "tools" / "trial_atlas" / "snapshot.json"
 DEFAULT_FIXTURE = HERE / "early_phase_design_eligibility_2026-11-24.json"
 DEFAULT_RESULTS = HERE / "results_2026-11-24.json"
+
+EXPECTED_PRED0015_RESULTS_SHA256 = "c4288a7c40783c746e1e4c103e9b1b8867818cb97cc371d19348715d9251dcb1"
+EXPECTED_SNAPSHOT_SHA256 = "de0f330c4441d77b84dc5f547e4dfcf99195c1b9f223e4dbeebd628054925b2d"
 
 VALID_ALLOC = frozenset({"RANDOMIZED", "NON_RANDOMIZED", "NA", None})
 VALID_MASK = frozenset({"NONE", "SINGLE", "DOUBLE", "TRIPLE", "QUADRUPLE", None})
 MASKED_SET = frozenset({"SINGLE", "DOUBLE", "TRIPLE", "QUADRUPLE"})
+
+
+def _validate_2x2_counts(n1: int, k1: int, n2: int, k2: int) -> None:
+    for name, val in (("n1", n1), ("k1", k1), ("n2", n2), ("k2", k2)):
+        if isinstance(val, bool) or not isinstance(val, int):
+            raise ValueError(f"Invalid integer type for {name}: {val!r}")
+    if n1 <= 0 or n2 <= 0 or not (0 <= k1 <= n1) or not (0 <= k2 <= n2):
+        raise ValueError(f"Invalid 2x2 counts: n1={n1}, k1={k1}, n2={n2}, k2={k2}")
 
 
 def _sha256_lf(path: Path) -> str:
@@ -41,20 +53,43 @@ def _sha256_lf(path: Path) -> str:
     return hashlib.sha256(txt.encode("utf-8")).hexdigest()
 
 
-def verify_ast_independence(self_path: Path = Path(__file__)) -> None:
-    """AST guard proving zero imports of `re`, `math`, `tools`, or sibling benchmark modules."""
-    tree = ast.parse(self_path.read_text(encoding="utf-8"), filename=str(self_path))
-    banned = {"re", "math", "early_phase_masking_randomization", "delivery_route_compartmentalization", "scope", "snapshot"}
+def verify_ast_independence(
+    self_path: Path = Path(__file__),
+    source_override: str | None = None,
+) -> None:
+    """AST guard proving zero imports of `re`, `math`, `importlib`, `tools`, `benchmarks`, relative imports, or dynamic import calls."""
+    src = source_override if source_override is not None else self_path.read_text(encoding="utf-8")
+    tree = ast.parse(src, filename=str(self_path))
+    banned = {
+        "re",
+        "math",
+        "importlib",
+        "tools",
+        "benchmarks",
+        "early_phase_masking_randomization",
+        "delivery_route_compartmentalization",
+        "scope",
+        "snapshot",
+    }
+    dyn_builtin = "_" + "_import_" + "_"
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             for alias in node.names:
-                root_mod = alias.name.split(".")[0]
-                if root_mod in banned or root_mod == "tools":
+                parts = set(alias.name.split("."))
+                if parts & banned:
                     raise RuntimeError(f"Forbidden import in independent_audit.py: {alias.name}")
-        elif isinstance(node, ast.ImportFrom) and node.module:
-            root_mod = node.module.split(".")[0]
-            if root_mod in banned or root_mod == "tools":
+        elif isinstance(node, ast.ImportFrom):
+            if (node.level or 0) > 0:
+                raise RuntimeError("Forbidden relative import in independent_audit.py")
+            mod_parts = set(node.module.split(".")) if node.module else set()
+            alias_parts = {alias.name.split(".")[0] for alias in node.names}
+            if (mod_parts | alias_parts) & banned:
                 raise RuntimeError(f"Forbidden from-import in independent_audit.py: {node.module}")
+        elif isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name) and node.func.id == dyn_builtin:
+                raise RuntimeError("Forbidden dynamic import call in independent_audit.py")
+            if isinstance(node.func, ast.Attribute) and node.func.attr == "import_module":
+                raise RuntimeError("Forbidden import_module call in independent_audit.py")
 
 
 def _binom_fraction(n: int, k: int) -> Fraction:
@@ -68,6 +103,7 @@ def _binom_fraction(n: int, k: int) -> Fraction:
 
 
 def _fisher_tails_multiplicative(n1: int, k1: int, n2: int, k2: int) -> tuple[Fraction, Fraction]:
+    _validate_2x2_counts(n1, k1, n2, k2)
     total_n = n1 + n2
     total_k = k1 + k2
     denom = _binom_fraction(total_n, total_k)
@@ -83,6 +119,7 @@ def _fisher_tails_multiplicative(n1: int, k1: int, n2: int, k2: int) -> tuple[Fr
 
 
 def _newcombe_wilson_decimal(n1: int, k1: int, n2: int, k2: int) -> tuple[Decimal, Decimal]:
+    _validate_2x2_counts(n1, k1, n2, k2)
     z = Decimal("1.959963984540054")
     z2 = z * z
 
@@ -204,6 +241,7 @@ def _mn_z_decimal(x1: int, n1: int, x2: int, n2: int, delta: Decimal) -> Decimal
 
 def _chan_zhang_ci95_decimal(n1: int, k1: int, n2: int, k2: int) -> tuple[Decimal, Decimal]:
     """100% pure `Decimal` (zero `float` pre-screen) sawtooth-safe multi-peak Chan-Zhang 95% CI."""
+    _validate_2x2_counts(n1, k1, n2, k2)
     zero = Decimal(0)
     one = Decimal(1)
     half = Decimal("0.5")
@@ -323,7 +361,7 @@ def _chan_zhang_ci95_decimal(n1: int, k1: int, n2: int, k2: int) -> tuple[Decima
                     break
             for it in range(42):
                 mid = half * (lo_b + hi_b)
-                prec_use = 45 if it >= 28 else 28
+                prec_use = 50 if it >= 28 else 28
                 if tail_sup(mid, True, prec_digits=prec_use) > alpha_tail:
                     hi_b = mid
                 else:
@@ -350,7 +388,7 @@ def _chan_zhang_ci95_decimal(n1: int, k1: int, n2: int, k2: int) -> tuple[Decima
                     break
             for it in range(42):
                 mid = half * (lo_b + hi_b)
-                prec_use = 45 if it >= 28 else 28
+                prec_use = 50 if it >= 28 else 28
                 if tail_sup(mid, False, prec_digits=prec_use) > alpha_tail:
                     lo_b = mid
                 else:
@@ -365,10 +403,12 @@ def run_independent_audit(
     pred0015_results_path: Path = DEFAULT_PRED0015_RESULTS,
     fixture_path: Path = DEFAULT_FIXTURE,
     results_path: Path = DEFAULT_RESULTS,
+    snapshot_path: Path = DEFAULT_SNAPSHOT,
 ) -> dict[str, Any]:
     verify_ast_independence()
     done_sha = _sha256_lf(done_path)
     p15_sha = _sha256_lf(pred0015_results_path)
+    snap_sha = _sha256_lf(snapshot_path)
     fixture_sha = _sha256_lf(fixture_path)
 
     p15_doc = json.loads(pred0015_results_path.read_text(encoding="utf-8"))
@@ -379,42 +419,106 @@ def run_independent_audit(
     inh_pure_set = inh_set - dual_set
 
     fix_doc = json.loads(fixture_path.read_text(encoding="utf-8"))
-    studies = fix_doc.get("studies") or {}
+    studies = fix_doc.get("studies")
+    if not isinstance(studies, dict):
+        return {"passed": False, "mismatches": ["Fixture studies is not a dict"]}
 
     mismatches: list[str] = []
+    if p15_sha != EXPECTED_PRED0015_RESULTS_SHA256:
+        mismatches.append(f"Canonical PRED-0015 SHA-256 mismatch: {p15_sha}")
+    if snap_sha != EXPECTED_SNAPSHOT_SHA256:
+        mismatches.append(f"Canonical snapshot.json SHA-256 mismatch: {snap_sha}")
     if set(studies.keys()) != (sys_set | inh_set):
         mismatches.append("Fixture NCT set != locked 71 NCTs")
 
     k_sys = 0
     k_inh_pure = 0
     k_inh_all = 0
+    rand_counts = {"sys": 0, "inh_pure": 0, "inh_all": 0}
+    mask_counts = {"sys": 0, "inh_pure": 0, "inh_all": 0}
+    child_counts = {"sys": 0, "inh_pure": 0, "inh_all": 0}
+    hv_counts = {"sys": 0, "inh_pure": 0, "inh_all": 0}
     sys_matched: list[str] = []
     inh_pure_matched: list[str] = []
     inh_all_matched: list[str] = []
 
     for nid in sorted(studies):
         st = studies[nid]
-        dmod = st.get("design_module") or {}
-        dinfo = dmod.get("designInfo") or {}
+        if not isinstance(st, dict):
+            mismatches.append(f"{nid}: study record is not a dict")
+            continue
+        raw_dmod = st.get("design_module")
+        if raw_dmod is not None and not isinstance(raw_dmod, dict):
+            mismatches.append(f"{nid}: design_module must be dict or None")
+            continue
+        dmod = {} if raw_dmod is None else raw_dmod
+
+        raw_dinfo = dmod.get("designInfo")
+        if raw_dinfo is not None and not isinstance(raw_dinfo, dict):
+            mismatches.append(f"{nid}: designInfo must be dict or None")
+            continue
+        dinfo = {} if raw_dinfo is None else raw_dinfo
         alloc = dinfo.get("allocation")
-        minfo = dinfo.get("maskingInfo") or {}
+
+        raw_minfo = dinfo.get("maskingInfo")
+        if raw_minfo is not None and not isinstance(raw_minfo, dict):
+            mismatches.append(f"{nid}: maskingInfo must be dict or None")
+            continue
+        minfo = {} if raw_minfo is None else raw_minfo
         mask = minfo.get("masking")
+
+        raw_emod = st.get("eligibility_module")
+        if raw_emod is not None and not isinstance(raw_emod, dict):
+            mismatches.append(f"{nid}: eligibility_module must be dict or None")
+            continue
+        emod = {} if raw_emod is None else raw_emod
+        std_ages = emod.get("stdAges") or []
+        has_child = isinstance(std_ages, list) and ("CHILD" in std_ages)
+        has_hv = emod.get("healthyVolunteers") is True
+
         if alloc not in VALID_ALLOC:
             mismatches.append(f"{nid}: invalid allocation {alloc!r}")
             continue
         if mask not in VALID_MASK:
             mismatches.append(f"{nid}: invalid masking {mask!r}")
             continue
-        hit = (alloc == "RANDOMIZED") and (mask in MASKED_SET)
+        is_rand = alloc == "RANDOMIZED"
+        is_mask = mask in MASKED_SET
+        hit = is_rand and is_mask
         if nid in sys_set:
+            if is_rand:
+                rand_counts["sys"] += 1
+            if is_mask:
+                mask_counts["sys"] += 1
+            if has_child:
+                child_counts["sys"] += 1
+            if has_hv:
+                hv_counts["sys"] += 1
             if hit:
                 k_sys += 1
                 sys_matched.append(nid)
         else:
+            if is_rand:
+                rand_counts["inh_all"] += 1
+            if is_mask:
+                mask_counts["inh_all"] += 1
+            if has_child:
+                child_counts["inh_all"] += 1
+            if has_hv:
+                hv_counts["inh_all"] += 1
             if hit:
                 k_inh_all += 1
                 inh_all_matched.append(nid)
-                if nid in inh_pure_set:
+            if nid in inh_pure_set:
+                if is_rand:
+                    rand_counts["inh_pure"] += 1
+                if is_mask:
+                    mask_counts["inh_pure"] += 1
+                if has_child:
+                    child_counts["inh_pure"] += 1
+                if has_hv:
+                    hv_counts["inh_pure"] += 1
+                if hit:
                     k_inh_pure += 1
                     inh_pure_matched.append(nid)
 
@@ -429,36 +533,42 @@ def run_independent_audit(
     nw_all_lo, nw_all_hi = _newcombe_wilson_decimal(n_sys, k_sys, n_inh_all, k_inh_all)
     cz_all_lo, cz_all_hi = _chan_zhang_ci95_decimal(n_sys, k_sys, n_inh_all, k_inh_all)
 
-    expected_supported = (
-        (n_sys, n_inh_pure, n_inh_all) == (54, 15, 17)
-        and Fraction(k_sys, n_sys) > Fraction(k_inh_pure, n_inh_pure)
-        and p_pure_1s < Fraction(1, 100)
-        and cz_pure_lo > Decimal(0)
-        and nw_pure_lo > Decimal(0)
-        and Fraction(k_sys, n_sys) > Fraction(k_inh_all, n_inh_all)
-        and p_all_1s < Fraction(1, 100)
-    )
+    crit_1 = (n_sys, n_inh_pure, n_inh_all) == (54, 15, 17)
+    crit_2 = Fraction(k_sys, n_sys) > Fraction(k_inh_pure, n_inh_pure)
+    crit_3 = p_pure_1s < Fraction(1, 100)
+    crit_4 = (cz_pure_lo > Decimal(0)) and (nw_pure_lo > Decimal(0))
+    crit_5 = (Fraction(k_sys, n_sys) > Fraction(k_inh_all, n_inh_all)) and (p_all_1s < Fraction(1, 100))
+    expected_supported = crit_1 and crit_2 and crit_3 and crit_4 and crit_5
     expected_outcome = "supported" if expected_supported else "refuted"
 
     res_doc = json.loads(results_path.read_text(encoding="utf-8"))
     prim_res = res_doc.get("primary_estimand_pure_route_randomization_and_masking") or {}
     sec_res = res_doc.get("secondary_gate_all_17_inhaled_including_dual_route") or {}
     sc_res = res_doc.get("support_criteria_evaluation") or {}
+    desc_res = res_doc.get("descriptive_cross_scale_non_gated") or {}
 
     if res_doc.get("done_sha256") != done_sha:
         mismatches.append(f"done_sha256 mismatch: {res_doc.get('done_sha256')} != {done_sha}")
     if res_doc.get("pred0015_results_sha256") != p15_sha:
         mismatches.append("pred0015_results_sha256 mismatch")
+    if res_doc.get("snapshot_sha256") != snap_sha:
+        mismatches.append("snapshot_sha256 mismatch")
     if res_doc.get("fixture_sha256") != fixture_sha:
         mismatches.append("fixture_sha256 mismatch")
+    if prim_res.get("n_sys") != n_sys or prim_res.get("n_inh_pure") != n_inh_pure:
+        mismatches.append(f"Primary denominators mismatch: {prim_res.get('n_sys')}/{prim_res.get('n_inh_pure')} != {n_sys}/{n_inh_pure}")
     if prim_res.get("k_sys") != k_sys or prim_res.get("k_inh_pure") != k_inh_pure:
         mismatches.append(f"Primary counts mismatch: {prim_res.get('k_sys')}/{prim_res.get('k_inh_pure')} != {k_sys}/{k_inh_pure}")
+    if sec_res.get("n_sys") != n_sys or sec_res.get("k_sys") != k_sys or sec_res.get("n_inh_all") != n_inh_all:
+        mismatches.append("Secondary denominators/k_sys mismatch")
     if sec_res.get("k_inh_all") != k_inh_all:
         mismatches.append(f"All-17 inhaled count mismatch: {sec_res.get('k_inh_all')} != {k_inh_all}")
     if prim_res.get("systemic_matched_ncts") != sys_matched:
         mismatches.append("systemic_matched_ncts mismatch")
     if prim_res.get("inhaled_pure_matched_ncts") != inh_pure_matched:
         mismatches.append("inhaled_pure_matched_ncts mismatch")
+    if sec_res.get("inhaled_all_matched_ncts") != inh_all_matched:
+        mismatches.append("inhaled_all_matched_ncts mismatch")
     if prim_res.get("p_fisher_one_sided_exact") != f"{p_pure_1s.numerator}/{p_pure_1s.denominator}":
         mismatches.append("p_fisher_one_sided_exact pure mismatch")
     if prim_res.get("p_fisher_two_sided_exact") != f"{p_pure_2s.numerator}/{p_pure_2s.denominator}":
@@ -467,6 +577,32 @@ def run_independent_audit(
         mismatches.append("p_fisher_one_sided_exact all-17 mismatch")
 
     tol = Decimal("0.000001")
+    tol_p = Decimal("0.00000001")
+    p_sys_dec = Decimal(k_sys) / Decimal(n_sys)
+    p_inh_pure_dec = Decimal(k_inh_pure) / Decimal(n_inh_pure)
+    p_inh_all_dec = Decimal(k_inh_all) / Decimal(n_inh_all)
+    rd_pure_dec = p_sys_dec - p_inh_pure_dec
+    rd_all_dec = p_sys_dec - p_inh_all_dec
+    p_pure_1s_dec = Decimal(p_pure_1s.numerator) / Decimal(p_pure_1s.denominator)
+    p_pure_2s_dec = Decimal(p_pure_2s.numerator) / Decimal(p_pure_2s.denominator)
+    p_all_1s_dec = Decimal(p_all_1s.numerator) / Decimal(p_all_1s.denominator)
+
+    for field_label, got_val, exp_dec, bound_tol in (
+        ("prim.p_sys", prim_res.get("p_sys"), p_sys_dec, tol),
+        ("prim.p_inh_pure", prim_res.get("p_inh_pure"), p_inh_pure_dec, tol),
+        ("prim.risk_difference", prim_res.get("risk_difference"), rd_pure_dec, tol),
+        ("prim.p_fisher_one_sided", prim_res.get("p_fisher_one_sided"), p_pure_1s_dec, tol_p),
+        ("prim.p_fisher_two_sided", prim_res.get("p_fisher_two_sided"), p_pure_2s_dec, tol_p),
+        ("sec.p_sys", sec_res.get("p_sys"), p_sys_dec, tol),
+        ("sec.p_inh_all", sec_res.get("p_inh_all"), p_inh_all_dec, tol),
+        ("sec.risk_difference", sec_res.get("risk_difference"), rd_all_dec, tol),
+        ("sec.p_fisher_one_sided", sec_res.get("p_fisher_one_sided"), p_all_1s_dec, tol_p),
+    ):
+        if isinstance(got_val, bool) or not isinstance(got_val, (int, float)):
+            mismatches.append(f"{field_label}: missing or non-numeric ({got_val!r})")
+        elif abs(Decimal(str(got_val)) - exp_dec) > bound_tol:
+            mismatches.append(f"{field_label}: {got_val} != {exp_dec}")
+
     for label, got_pair, exp_pair in (
         ("chan_zhang_pure", prim_res.get("chan_zhang_unconditional_ci95"), (cz_pure_lo, cz_pure_hi)),
         ("newcombe_pure", prim_res.get("newcombe_wilson_ci95"), (nw_pure_lo, nw_pure_hi)),
@@ -477,12 +613,42 @@ def run_independent_audit(
             mismatches.append(f"{label}: missing CI pair")
             continue
         for idx, bound_name in enumerate(("low", "high")):
+            if isinstance(got_pair[idx], bool) or not isinstance(got_pair[idx], (int, float)):
+                mismatches.append(f"{label}.{bound_name}: non-numeric CI bound")
+                continue
             diff = abs(Decimal(str(got_pair[idx])) - exp_pair[idx])
             if diff > tol:
                 mismatches.append(f"{label}.{bound_name} drift {diff} > {tol}: got={got_pair[idx]} exp={exp_pair[idx]}")
 
+    for crit_key, exp_bool in (
+        ("crit_1_exact_54_15_17_margins", crit_1),
+        ("crit_2_directional_pure", crit_2),
+        ("crit_3_fisher_pure_lt_0_01", crit_3),
+        ("crit_4_chan_zhang_and_newcombe_ci95_low_gt_0", crit_4),
+        ("crit_5_all_17_inhaled_preserved_lt_0_01", crit_5),
+    ):
+        if sc_res.get(crit_key) is not exp_bool:
+            mismatches.append(f"{crit_key} mismatch: {sc_res.get(crit_key)!r} != {exp_bool!r}")
+
     if sc_res.get("outcome") != expected_outcome:
         mismatches.append(f"outcome mismatch: {sc_res.get('outcome')} != {expected_outcome}")
+
+    for arm_key, short_key, exp_n, exp_k in (
+        ("systemic_cftr", "sys", n_sys, k_sys),
+        ("inhaled_cftr_pure", "inh_pure", n_inh_pure, k_inh_pure),
+        ("inhaled_cftr_all", "inh_all", n_inh_all, k_inh_all),
+    ):
+        arm_blk = desc_res.get(arm_key) or {}
+        if arm_blk.get("n") != exp_n or arm_blk.get("joint_randomized_and_masked_count") != exp_k:
+            mismatches.append(f"descriptive.{arm_key} n/joint mismatch")
+        if arm_blk.get("is_randomized_count") != rand_counts[short_key]:
+            mismatches.append(f"descriptive.{arm_key}.is_randomized_count mismatch")
+        if arm_blk.get("is_masked_count") != mask_counts[short_key]:
+            mismatches.append(f"descriptive.{arm_key}.is_masked_count mismatch")
+        if arm_blk.get("pediatric_std_age_child_count") != child_counts[short_key]:
+            mismatches.append(f"descriptive.{arm_key}.pediatric_std_age_child_count mismatch")
+        if arm_blk.get("healthy_volunteers_true_count") != hv_counts[short_key]:
+            mismatches.append(f"descriptive.{arm_key}.healthy_volunteers_true_count mismatch")
 
     return {
         "passed": len(mismatches) == 0,

@@ -185,7 +185,9 @@
         "max_enrollment": 312
       },
       "pediatric_std_age_child_count": 14,
-      "pediatric_std_age_child_proportion": 0.259259
+      "pediatric_std_age_child_proportion": 0.259259,
+      "healthy_volunteers_true_count": 8,
+      "healthy_volunteers_true_proportion": 0.148148
     },
     "inhaled_cftr_pure": {
       "n": 15,
@@ -229,7 +231,9 @@
         "max_enrollment": 130
       },
       "pediatric_std_age_child_count": 3,
-      "pediatric_std_age_child_proportion": 0.2
+      "pediatric_std_age_child_proportion": 0.2,
+      "healthy_volunteers_true_count": 1,
+      "healthy_volunteers_true_proportion": 0.066667
     },
     "inhaled_cftr_all": {
       "n": 17,
@@ -273,7 +277,9 @@
         "max_enrollment": 130
       },
       "pediatric_std_age_child_count": 3,
-      "pediatric_std_age_child_proportion": 0.176471
+      "pediatric_std_age_child_proportion": 0.176471,
+      "healthy_volunteers_true_count": 2,
+      "healthy_volunteers_true_proportion": 0.117647
     },
     "engine_a_registry_context_non_pooled": {
       "acfdr_2025_pediatric_ineligible": "11.5% (170 of 1,473 pediatric participants without lung transplant, PBS basis; ACFDR 2025)",
