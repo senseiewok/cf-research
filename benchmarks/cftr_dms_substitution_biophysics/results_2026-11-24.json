@@ -1,0 +1,290 @@
+{
+  "schema_version": "tedman2025-substitution-biophysics-results-v1",
+  "benchmark_id": "cftr-dms-substitution-biophysics",
+  "evaluated_on": "2026-11-24",
+  "evaluated_on_local": "2026-11-24",
+  "evaluated_on_utc": "2026-11-25",
+  "done_sha256": "f956d9440f9a46e5de7569ab91a491ebd0e9793ebc94469a7b1885b2efea68c1",
+  "split_manifest_sha256": "e6d60aa56d2ac87a9b82aaca8b3df5b560131943eb0ffb809f0834e8a9db3543",
+  "p13569_sha256": "c8feabfabe8690ef4a06af7de5b5f8dc3c8da554246c5ab3d403edf265d4a893",
+  "dataset": {
+    "source_id": "cftr-dms-tedman-2025",
+    "doi": "10.17632/ksfmxv8zts.1",
+    "paper_doi": "10.7554/eLife.107180",
+    "license": "CC BY 4.0",
+    "uniprot_accession": "P13569",
+    "uniprot_license": "CC BY 4.0",
+    "uniprot_sequence_length": 1480,
+    "uniprot_feature_counts": {
+      "Transmembrane": 12,
+      "Helix": 76,
+      "Beta strand": 31,
+      "Binding site": 6
+    },
+    "assay": "HEK293T parental CFTR DMS plasma-membrane intensity (VX-661+VX-445 vs DMSO, Mut/WT)",
+    "scale_boundary": "Plasma-membrane expression in HEK293T cells is not CFTR channel conductance or clinical lung benefit.",
+    "total_valid_variants": 234,
+    "excluded_count": 0,
+    "dev_variants": 167,
+    "holdout_variants": 67,
+    "dev_unique_codons": 123,
+    "holdout_unique_codons": 59,
+    "holdout_pred0010_overlap_codons": 0,
+    "dev_missing_continuous_scale_rows": 14,
+    "holdout_missing_continuous_scale_rows": 6
+  },
+  "pre_holdout_controls": {
+    "p13569_wt_sequence_parity": {
+      "passed": true,
+      "variants_checked": 234,
+      "components_checked": 235,
+      "unexpected_mismatches": 0,
+      "holdout_mismatches": 0,
+      "documented_dev_exceptions": [
+        {
+          "row_num": 89,
+          "codon_position": 470,
+          "protein_distinction": "M470V",
+          "split": "dev",
+          "expected_experimental_wt_aa": "M",
+          "observed_p13569_aa": "V",
+          "ruling": "Common CFTR rs213950 polymorphism: Tedman background M470 vs canonical P13569 V470; substitution deltas computed from experimental WT M -> V."
+        },
+        {
+          "row_num": 217,
+          "codon_position": 966,
+          "protein_distinction": "Q966=",
+          "split": "dev",
+          "expected_experimental_wt_aa": "Q",
+          "observed_p13569_aa": "T",
+          "ruling": "Source-table discrepancy: Q966= vs THR966 in P13569 (2988G>A corresponds to Q996=); kept in dev as synonymous (all 7 features = 0.0)."
+        }
+      ]
+    },
+    "baseline_396_dev_parity_passed": true,
+    "dev_variant_permuted_null_control": {
+      "seed": 20261124,
+      "permutation_unit": "dev_variants",
+      "selected_alpha_permuted": 1000.0,
+      "permuted_dev_cv_mae_log2": 0.446154,
+      "relative_cv_mae_reduction": -0.005055,
+      "threshold": 0.1,
+      "passed": true
+    }
+  },
+  "models_fitted_on_dev": {
+    "constant_dev_median_log2": 1.641988,
+    "dmso_ols": {
+      "b0_intercept": 2.21154,
+      "b1_dmso_slope": 0.865568
+    },
+    "dev_cv_5fold_baselines": {
+      "constant_dev_median_mae_log2": 0.992185,
+      "dmso_ols_mae_log2": 0.443911,
+      "locked_stronger_baseline": "dmso_ols"
+    },
+    "candidate_dmso_subst_biophysics_ridge": {
+      "selected_alpha": 100.0,
+      "dev_cv_mae_log2": 0.423982,
+      "cv_path": [
+        {
+          "alpha": 0.01,
+          "dev_cv_mae_log2": 0.429428
+        },
+        {
+          "alpha": 0.1,
+          "dev_cv_mae_log2": 0.42939
+        },
+        {
+          "alpha": 1.0,
+          "dev_cv_mae_log2": 0.429054
+        },
+        {
+          "alpha": 10.0,
+          "dev_cv_mae_log2": 0.426607
+        },
+        {
+          "alpha": 100.0,
+          "dev_cv_mae_log2": 0.423982
+        },
+        {
+          "alpha": 1000.0,
+          "dev_cv_mae_log2": 0.437569
+        }
+      ],
+      "b0_intercept": 2.197789,
+      "b1_dmso_slope": 0.854118,
+      "feature_names": [
+        "delta_blosum62",
+        "delta_kd_hydropathy",
+        "abs_delta_charge",
+        "helix_breaker_in_helix",
+        "tm_polarity_shock",
+        "is_nonsense",
+        "is_inframe_indel"
+      ],
+      "dev_impute_means": [
+        -6.150327,
+        -0.201961,
+        0.542484,
+        0.173653,
+        0.107784,
+        0.05988,
+        0.023952
+      ],
+      "dev_feat_means": [
+        -6.150327,
+        -0.201961,
+        0.542484,
+        0.173653,
+        0.107784,
+        0.05988,
+        0.023952
+      ],
+      "dev_feat_stds": [
+        2.563613,
+        3.671683,
+        0.535974,
+        0.378811,
+        0.310108,
+        0.237265,
+        0.1529
+      ],
+      "weights": [
+        -0.028556,
+        0.061095,
+        -0.007885,
+        0.009452,
+        0.038402,
+        -0.119115,
+        -0.000721
+      ],
+      "weights_by_feature": {
+        "delta_blosum62": -0.028556,
+        "delta_kd_hydropathy": 0.061095,
+        "abs_delta_charge": -0.007885,
+        "helix_breaker_in_helix": 0.009452,
+        "tm_polarity_shock": 0.038402,
+        "is_nonsense": -0.119115,
+        "is_inframe_indel": -0.000721
+      },
+      "is_inframe_indel_dev_weight": -0.000721,
+      "dev_vif_context": {
+        "vif_threshold": 10.0,
+        "vif_features_only": {
+          "delta_blosum62": 1.193513,
+          "delta_kd_hydropathy": 1.049306,
+          "abs_delta_charge": 1.062684,
+          "helix_breaker_in_helix": 1.147826,
+          "tm_polarity_shock": 1.100337,
+          "is_nonsense": 1.023849,
+          "is_inframe_indel": 1.01082
+        },
+        "vif_with_x_dmso_log2": {
+          "x_dmso_log2": 1.313225,
+          "delta_blosum62": 1.445349,
+          "delta_kd_hydropathy": 1.086964,
+          "abs_delta_charge": 1.062757,
+          "helix_breaker_in_helix": 1.165558,
+          "tm_polarity_shock": 1.100692,
+          "is_nonsense": 1.058119,
+          "is_inframe_indel": 1.03082
+        },
+        "max_vif_features_only": 1.193513,
+        "max_vif_with_x_dmso_log2": 1.445349,
+        "flagged_gt_10_features_only": [],
+        "flagged_gt_10_with_x_dmso": [],
+        "any_vif_gt_10": false
+      }
+    }
+  },
+  "holdout_evaluation": {
+    "primary_unit": "log2(VX-661+VX-445 Mut/WT)",
+    "constant_dev_median": {
+      "mae_log2": 1.077948,
+      "mae_linear_context_only": 1.593272
+    },
+    "dmso_ols": {
+      "mae_log2": 0.451487,
+      "mae_linear_context_only": 0.541184
+    },
+    "candidate_dmso_subst_biophysics_ridge": {
+      "mae_log2": 0.414943,
+      "mae_linear_context_only": 0.541441
+    },
+    "stronger_baseline_on_holdout": "dmso_ols",
+    "stronger_baseline_mae_log2": 0.451487,
+    "relative_mae_reduction_vs_stronger": 0.080942,
+    "residue_clustered_bootstrap": {
+      "n_holdout_clusters": 59,
+      "resamples": 10000,
+      "seed": 20261124,
+      "delta_mae_ci95_log2": [
+        -0.001247,
+        0.080596
+      ],
+      "ci95_low_gt_zero": false
+    },
+    "pre_registered_gate_threshold": 0.1,
+    "gate_verdict": "REFUTED_BELOW_10PCT_MAE_REDUCTION_THRESHOLD",
+    "ledger_standing": "refuted",
+    "non_gated_context_comparison": {
+      "pr_396_domain_class_ridge_rel_reduction": 0.037001,
+      "pr_396_domain_class_ridge_pct": 3.7001,
+      "pr_401_3d_cryoem_ridge_rel_reduction": 0.001261,
+      "pr_401_3d_cryoem_ridge_pct": 0.1261,
+      "this_subst_biophysics_rel_reduction": 0.080942,
+      "this_subst_biophysics_pct": 8.0942
+    },
+    "non_gated_subdomain_breakdown": [
+      {
+        "sub_domain": "Lasso",
+        "holdout_variants": 2,
+        "holdout_codons": 2,
+        "stronger_baseline_mae_log2": 0.64071,
+        "candidate_mae_log2": 0.642557,
+        "delta_mae_log2": -0.001846
+      },
+      {
+        "sub_domain": "TMD1",
+        "holdout_variants": 19,
+        "holdout_codons": 16,
+        "stronger_baseline_mae_log2": 0.491062,
+        "candidate_mae_log2": 0.472152,
+        "delta_mae_log2": 0.018911
+      },
+      {
+        "sub_domain": "NBD1",
+        "holdout_variants": 13,
+        "holdout_codons": 12,
+        "stronger_baseline_mae_log2": 0.464193,
+        "candidate_mae_log2": 0.498687,
+        "delta_mae_log2": -0.034494
+      },
+      {
+        "sub_domain": "R Domain",
+        "holdout_variants": 5,
+        "holdout_codons": 5,
+        "stronger_baseline_mae_log2": 0.167374,
+        "candidate_mae_log2": 0.187483,
+        "delta_mae_log2": -0.020109
+      },
+      {
+        "sub_domain": "TMD2",
+        "holdout_variants": 22,
+        "holdout_codons": 18,
+        "stronger_baseline_mae_log2": 0.519267,
+        "candidate_mae_log2": 0.401503,
+        "delta_mae_log2": 0.117764
+      },
+      {
+        "sub_domain": "NBD2",
+        "holdout_variants": 6,
+        "holdout_codons": 6,
+        "stronger_baseline_mae_log2": 0.223794,
+        "candidate_mae_log2": 0.215293,
+        "delta_mae_log2": 0.008501
+      }
+    ]
+  }
+}
