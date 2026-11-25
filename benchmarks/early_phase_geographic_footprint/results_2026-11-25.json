@@ -1,0 +1,411 @@
+{
+  "schema_version": "pred0018-early-phase-geographic-footprint-v1",
+  "benchmark_version": "2026-11-25.v1",
+  "prediction_id": "PRED-0018",
+  "evaluated_on_local": "2026-11-25",
+  "done_sha256": "b8db87733513b2a3f44dee07b6011a023612b9f084b01fddf4ebc89b83e75ca4",
+  "pred0015_results_sha256": "c4288a7c40783c746e1e4c103e9b1b8867818cb97cc371d19348715d9251dcb1",
+  "snapshot_sha256": "de0f330c4441d77b84dc5f547e4dfcf99195c1b9f223e4dbeebd628054925b2d",
+  "fixture_sha256": "95e2b1ef3e96770a588271a8330bacd8c74c020b5084be8e5e7d350078539d70",
+  "nlm_attribution": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.",
+  "research_boundary": "Independent open-source research benchmark only (Tier T1/T2 registry metadata); not clinical guidance and not an assessment of personal trial eligibility, site availability, or treatment efficacy.",
+  "positive_controls": {
+    "control_1_zero_inhaled_fisher_exact": "1/2261",
+    "control_1_nonzero_inhaled_54_35_15_3_fisher_exact": "1712895/721469936",
+    "control_1_nonzero_inhaled_chan_zhang_ci95": [
+      0.077872,
+      0.649644
+    ],
+    "control_1_nonzero_inhaled_newcombe_wilson_ci95": [
+      0.163193,
+      0.620446
+    ],
+    "control_2_locked_partition_parity": "PASS (54 systemic, 17 inhaled, 15 pure-inhaled)",
+    "control_3_sovereign_and_withdrawn_rules": "PASS (territories/renames/WITHDRAWN deduplicated; unmapped/blank fail-closed)",
+    "control_4_omitted_pii_and_quarantine": "PASS"
+  },
+  "dataset": {
+    "catalog_source_id": "clinicaltrials-gov",
+    "prisma_included_interventional_studies": 940,
+    "locked_early_phase_total": 71,
+    "systemic_cftr_count": 54,
+    "inhaled_cftr_pure_count": 15,
+    "inhaled_cftr_all_count": 17,
+    "dual_route_inhaled_ncts": [
+      "NCT05668741",
+      "NCT06237335"
+    ]
+  },
+  "primary_estimand_pure_route_multi_country": {
+    "n_sys": 54,
+    "k_sys": 26,
+    "p_sys": 0.481481,
+    "n_inh_pure": 15,
+    "k_inh_pure": 5,
+    "p_inh_pure": 0.333333,
+    "risk_difference": 0.148148,
+    "p_fisher_one_sided_exact": "10424417/44368472",
+    "p_fisher_one_sided": 0.234951,
+    "p_fisher_two_sided_exact": "17117417/44368472",
+    "p_fisher_two_sided": 0.38580136,
+    "chan_zhang_unconditional_ci95": [
+      -0.149733,
+      0.39611
+    ],
+    "newcombe_wilson_ci95": [
+      -0.132089,
+      0.37146
+    ],
+    "systemic_matched_ncts": [
+      "NCT00457821",
+      "NCT00458341",
+      "NCT00865904",
+      "NCT01225211",
+      "NCT01262352",
+      "NCT01531673",
+      "NCT02190604",
+      "NCT02690519",
+      "NCT02707562",
+      "NCT02718495",
+      "NCT02951182",
+      "NCT03045523",
+      "NCT03093714",
+      "NCT03119649",
+      "NCT03140527",
+      "NCT03224351",
+      "NCT03227471",
+      "NCT03251092",
+      "NCT03540524",
+      "NCT03768089",
+      "NCT03911713",
+      "NCT03912233",
+      "NCT03969888",
+      "NCT04126473",
+      "NCT04135495",
+      "NCT04853368"
+    ],
+    "inhaled_pure_matched_ncts": [
+      "NCT02532764",
+      "NCT02564354",
+      "NCT06429176",
+      "NCT06515002",
+      "NCT06962852"
+    ]
+  },
+  "secondary_gate_all_17_inhaled_including_dual_route": {
+    "n_sys": 54,
+    "k_sys": 26,
+    "p_sys": 0.481481,
+    "n_inh_all": 17,
+    "k_inh_all": 7,
+    "p_inh_all": 0.411765,
+    "risk_difference": 0.069717,
+    "p_fisher_one_sided_exact": "98997089/239686202",
+    "p_fisher_one_sided": 0.4130279,
+    "chan_zhang_unconditional_ci95": [
+      -0.210126,
+      0.327149
+    ],
+    "newcombe_wilson_ci95": [
+      -0.19169,
+      0.304623
+    ],
+    "inhaled_all_matched_ncts": [
+      "NCT02532764",
+      "NCT02564354",
+      "NCT05668741",
+      "NCT06237335",
+      "NCT06429176",
+      "NCT06515002",
+      "NCT06962852"
+    ]
+  },
+  "support_criteria_evaluation": {
+    "crit_1_exact_54_15_17_margins": true,
+    "crit_2_directional_pure": true,
+    "crit_3_fisher_pure_lt_0_01": false,
+    "crit_4_chan_zhang_and_newcombe_ci95_low_gt_0": false,
+    "crit_5_all_17_inhaled_preserved_lt_0_01": false,
+    "outcome": "refuted"
+  },
+  "descriptive_cross_scale_non_gated": {
+    "systemic_cftr": {
+      "n": 54,
+      "multi_country_count": 26,
+      "multi_country_proportion": 0.481481,
+      "unfiltered_including_withdrawn_multi_country_count": 26,
+      "unfiltered_including_withdrawn_multi_country_proportion": 0.481481,
+      "country_count_breakdown": {
+        "zero_countries_total": 1,
+        "zero_countries_omitted_or_empty_locations": 1,
+        "zero_countries_all_withdrawn": 0,
+        "single_country_count": 27,
+        "multi_country_ge_2_count": 26,
+        "max_sovereign_countries_in_single_study": 12
+      },
+      "complete_case_ge_1_country": {
+        "n_complete": 53,
+        "multi_country_count": 26,
+        "multi_country_proportion": 0.490566
+      },
+      "non_withdrawn_facility_summary": {
+        "median_facilities_all_studies": 11.0,
+        "median_facilities_complete_case": 12.0,
+        "min_facilities": 0,
+        "max_facilities": 55,
+        "total_non_withdrawn_facilities_sum": 933
+      },
+      "jurisdiction_site_presence_non_withdrawn": {
+        "United States": {
+          "study_count": 32,
+          "study_proportion": 0.592593
+        },
+        "Canada": {
+          "study_count": 10,
+          "study_proportion": 0.185185
+        },
+        "United Kingdom": {
+          "study_count": 21,
+          "study_proportion": 0.388889
+        },
+        "Australia": {
+          "study_count": 11,
+          "study_proportion": 0.203704
+        },
+        "EU-27": {
+          "study_count": 29,
+          "study_proportion": 0.537037
+        },
+        "non_eu_ecfspr_states_separate": {
+          "United Kingdom": 21,
+          "Switzerland": 0,
+          "Israel": 4,
+          "Russia": 0
+        }
+      },
+      "distinct_sovereign_countries_across_arm": [
+        "Australia",
+        "Austria",
+        "Belgium",
+        "Bulgaria",
+        "Canada",
+        "Czechia",
+        "Denmark",
+        "France",
+        "Germany",
+        "Greece",
+        "Hungary",
+        "Ireland",
+        "Israel",
+        "Italy",
+        "Netherlands",
+        "New Zealand",
+        "Poland",
+        "Portugal",
+        "Romania",
+        "Serbia",
+        "Slovakia",
+        "Spain",
+        "Sweden",
+        "United Kingdom",
+        "United States"
+      ]
+    },
+    "inhaled_cftr_pure": {
+      "n": 15,
+      "multi_country_count": 5,
+      "multi_country_proportion": 0.333333,
+      "unfiltered_including_withdrawn_multi_country_count": 5,
+      "unfiltered_including_withdrawn_multi_country_proportion": 0.333333,
+      "country_count_breakdown": {
+        "zero_countries_total": 0,
+        "zero_countries_omitted_or_empty_locations": 0,
+        "zero_countries_all_withdrawn": 0,
+        "single_country_count": 10,
+        "multi_country_ge_2_count": 5,
+        "max_sovereign_countries_in_single_study": 10
+      },
+      "complete_case_ge_1_country": {
+        "n_complete": 15,
+        "multi_country_count": 5,
+        "multi_country_proportion": 0.333333
+      },
+      "non_withdrawn_facility_summary": {
+        "median_facilities_all_studies": 5.0,
+        "median_facilities_complete_case": 5.0,
+        "min_facilities": 1,
+        "max_facilities": 27,
+        "total_non_withdrawn_facilities_sum": 134
+      },
+      "jurisdiction_site_presence_non_withdrawn": {
+        "United States": {
+          "study_count": 8,
+          "study_proportion": 0.533333
+        },
+        "Canada": {
+          "study_count": 1,
+          "study_proportion": 0.066667
+        },
+        "United Kingdom": {
+          "study_count": 5,
+          "study_proportion": 0.333333
+        },
+        "Australia": {
+          "study_count": 0,
+          "study_proportion": 0.0
+        },
+        "EU-27": {
+          "study_count": 5,
+          "study_proportion": 0.333333
+        },
+        "non_eu_ecfspr_states_separate": {
+          "United Kingdom": 5,
+          "Switzerland": 0,
+          "Israel": 1,
+          "Russia": 0
+        }
+      },
+      "distinct_sovereign_countries_across_arm": [
+        "Belgium",
+        "Canada",
+        "China",
+        "Czechia",
+        "Denmark",
+        "France",
+        "Germany",
+        "Israel",
+        "Italy",
+        "Lithuania",
+        "Netherlands",
+        "New Zealand",
+        "Poland",
+        "Spain",
+        "United Kingdom",
+        "United States"
+      ]
+    },
+    "inhaled_cftr_all": {
+      "n": 17,
+      "multi_country_count": 7,
+      "multi_country_proportion": 0.411765,
+      "unfiltered_including_withdrawn_multi_country_count": 7,
+      "unfiltered_including_withdrawn_multi_country_proportion": 0.411765,
+      "country_count_breakdown": {
+        "zero_countries_total": 0,
+        "zero_countries_omitted_or_empty_locations": 0,
+        "zero_countries_all_withdrawn": 0,
+        "single_country_count": 10,
+        "multi_country_ge_2_count": 7,
+        "max_sovereign_countries_in_single_study": 10
+      },
+      "complete_case_ge_1_country": {
+        "n_complete": 17,
+        "multi_country_count": 7,
+        "multi_country_proportion": 0.411765
+      },
+      "non_withdrawn_facility_summary": {
+        "median_facilities_all_studies": 5.0,
+        "median_facilities_complete_case": 5.0,
+        "min_facilities": 1,
+        "max_facilities": 27,
+        "total_non_withdrawn_facilities_sum": 183
+      },
+      "jurisdiction_site_presence_non_withdrawn": {
+        "United States": {
+          "study_count": 10,
+          "study_proportion": 0.588235
+        },
+        "Canada": {
+          "study_count": 2,
+          "study_proportion": 0.117647
+        },
+        "United Kingdom": {
+          "study_count": 7,
+          "study_proportion": 0.411765
+        },
+        "Australia": {
+          "study_count": 1,
+          "study_proportion": 0.058824
+        },
+        "EU-27": {
+          "study_count": 7,
+          "study_proportion": 0.411765
+        },
+        "non_eu_ecfspr_states_separate": {
+          "United Kingdom": 7,
+          "Switzerland": 0,
+          "Israel": 1,
+          "Russia": 0
+        }
+      },
+      "distinct_sovereign_countries_across_arm": [
+        "Australia",
+        "Belgium",
+        "Canada",
+        "China",
+        "Czechia",
+        "Denmark",
+        "France",
+        "Germany",
+        "Israel",
+        "Italy",
+        "Lithuania",
+        "Netherlands",
+        "New Zealand",
+        "Poland",
+        "Spain",
+        "Sweden",
+        "United Kingdom",
+        "United States"
+      ]
+    },
+    "complete_case_sensitivity_pure": {
+      "evaluatable": true,
+      "n_sys_cc": 53,
+      "k_sys": 26,
+      "p_sys_cc": 0.490566,
+      "n_inh_cc": 15,
+      "k_inh": 5,
+      "p_inh_cc": 0.333333,
+      "risk_difference_cc": 0.157233,
+      "p_fisher_one_sided_exact": "3976723/18326108",
+      "p_fisher_one_sided": 0.21699768,
+      "chan_zhang_unconditional_ci95": [
+        -0.151469,
+        0.405566
+      ],
+      "newcombe_wilson_ci95": [
+        -0.12382,
+        0.380893
+      ]
+    },
+    "complete_case_sensitivity_all_17": {
+      "evaluatable": true,
+      "n_sys_cc": 53,
+      "k_sys": 26,
+      "p_sys_cc": 0.490566,
+      "n_inh_cc": 17,
+      "k_inh": 7,
+      "p_inh_cc": 0.411765,
+      "risk_difference_cc": 0.078801,
+      "p_fisher_one_sided_exact": "81839301/210750242",
+      "p_fisher_one_sided": 0.38832364,
+      "chan_zhang_unconditional_ci95": [
+        -0.205833,
+        0.336142
+      ],
+      "newcombe_wilson_ci95": [
+        -0.183479,
+        0.314039
+      ]
+    },
+    "engine_a_registry_context_non_pooled": {
+      "cffpr_2024_and_2025_us": "CFFPR 2024: 8.0% ineligible by genotype (29,314 age-and-genotype eligible prescribing denominator); 2025 Highlights: 2,253 modulator-ineligible of 34,526 in the Registry",
+      "ccfr_2024_canada": "CCFR 2024: 7.6% ineligible by age and genotype",
+      "ukcfr_2024_uk": "UKCFR 2024: 12.4% never used modulator among 11,381 registered",
+      "acfdr_2025_australia": "ACFDR 2025: 5.8% adult (of 2,326 non-transplant adults) and 11.5% pediatric (170 of 1,473 non-transplant pediatric participants) PBS-ineligible",
+      "ecfspr_2024_eu27_separation": "EU-27 sovereign site presence is reported separately from non-EU ECFSPR states (United Kingdom, Switzerland, Israel, Russia)",
+      "non_pooling_note": "National registry percentages use distinct regulator lists, transplant filters, and reporting years and are juxtaposed strictly as non-pooled epidemiological context without cross-dividing into trial counts."
+    }
+  }
+}

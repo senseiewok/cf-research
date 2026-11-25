@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "work": "PRED-0018: Early-phase multi-country clinical trial site-network asymmetry benchmark across locked PRISMA-included Cystic Fibrosis interventional trials from PRED-0015 through PRED-0017.",
+  "done_file": "done.md",
+  "done_sha256": "b8db87733513b2a3f44dee07b6011a023612b9f084b01fddf4ebc89b83e75ca4",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-early-phase-systemic-multi-country-count",
+      "statement": "Among 54 locked early-phase non-healthy-volunteer-only PRISMA-included systemic CFTR modulator and systemic PTC readthrough trials, 26 (0.481481: 1 omitted/empty locations, 27 single-country, 26 multi-country >= 2 sovereign countries; 26/53 = 0.490566 complete-case) register multi-country non-WITHDRAWN clinical trial site networks in ClinicalTrials.gov API v2 contactsLocationsModule.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/early_phase_geographic_footprint/early_phase_locations_2026-11-25.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "early_phase_geographic_footprint.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "schema-validated sovereign canonicalizer and non-WITHDRAWN facility evaluator",
+          "script": "early_phase_geographic_footprint.py",
+          "difference": "parses PII-stripped locations through fail-closed ISO-3166-1 sovereign canonicalizer and counts systemic multi-country studies",
+          "value": 26
+        },
+        {
+          "name": "independent raw-JSON sovereign lookup auditor",
+          "script": "independent_audit.py",
+          "difference": "separate file with zero re, math, or shared imports; canonicalizes raw JSON locations[].country and filters WITHDRAWN directly",
+          "value": 26
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-25"
+    },
+    {
+      "id": "c2-early-phase-inhaled-multi-country-count",
+      "statement": "Among 15 pure airway-restricted early-phase CFTR-restoring genetic, mRNA, viral-vector, liposomal, and oligonucleotide / splice-ASO trials, 5 (0.333333: NCT02532764, NCT02564354, NCT06429176, NCT06515002, NCT06962852; and 7/17 = 0.411765 across all-inhaled adding dual-route NCT05668741 and NCT06237335) register multi-country non-WITHDRAWN clinical trial site networks in ClinicalTrials.gov API v2 contactsLocationsModule.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/early_phase_geographic_footprint/early_phase_locations_2026-11-25.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "early_phase_geographic_footprint.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "schema-validated pure-inhaled sovereign country evaluator",
+          "script": "early_phase_geographic_footprint.py",
+          "difference": "evaluates pure-route inhaled CFTR trials excluding dual-route co-administered systemic modulators",
+          "value": 5
+        },
+        {
+          "name": "independent raw-JSON pure-inhaled sovereign auditor",
+          "script": "independent_audit.py",
+          "difference": "separate file with zero shared imports; counts pure-inhaled studies with >= 2 non-WITHDRAWN sovereign countries directly",
+          "value": 5
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-25"
+    },
+    {
+      "id": "c3-fisher-hypergeometric-pure-and-all17-pvalues",
+      "statement": "Comparing 26/54 systemic vs 5/15 pure airway-restricted early-phase CFTR trials yields one-sided Fisher hypergeometric p = 10424417/44368472 (0.23495100 >= 0.01), and comparing 26/54 vs 7/17 all-inhaled trials yields p = 98997089/239686202 (0.41302790 >= 0.01).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/early_phase_geographic_footprint/early_phase_locations_2026-11-25.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "early_phase_geographic_footprint.py"},
+        {
+          "type": "exact_certificate",
+          "ref": "independent_audit.py",
+          "checker": "independent_audit.py (_fisher_tails_multiplicative Fraction equality on 10424417/44368472 and 98997089/239686202)"
+        }
+      ],
+      "methods": [
+        {
+          "name": "math.comb hypergeometric reduced Fraction numerator on pure-route (denominator 44368472; all-17 98997089/239686202)",
+          "script": "early_phase_geographic_footprint.py",
+          "difference": "computes reduced Fraction hypergeometric tail numerator via math.comb",
+          "value": 10424417
+        },
+        {
+          "name": "multiplicative Fraction product reduced numerator on pure-route (denominator 44368472; all-17 98997089/239686202)",
+          "script": "independent_audit.py",
+          "difference": "computes reduced Fraction hypergeometric tail numerator via multiplicative Fraction products without importing math",
+          "value": 10424417
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-25"
+    },
+    {
+      "id": "c4-chan-zhang-and-newcombe-wilson-ci95-bounds",
+      "statement": "On 26/54 systemic vs 5/15 pure airway-restricted early-phase CFTR trials (risk difference +0.148148), the sawtooth-safe unconditional Chan-Zhang 95% CI is [-0.149733, 0.396110] and the Newcombe-Wilson Method-10 95% CI is [-0.132089, 0.371460], both straddling zero.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/early_phase_geographic_footprint/early_phase_locations_2026-11-25.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "early_phase_geographic_footprint.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "Cardano trigonometric restricted-MLE + golden-section multi-peak Chan-Zhang CI95 lower bound",
+          "script": "early_phase_geographic_footprint.py",
+          "difference": "solves Miettinen-Nurminen cubic score via Cardano acos/cos and golden-section multi-peak polish in float64",
+          "value": -0.149733
+        },
+        {
+          "name": "pure-Decimal log-likelihood Newton-bisection + ternary multi-peak Chan-Zhang CI95 lower bound",
+          "script": "independent_audit.py",
+          "difference": "solves unexpanded log-likelihood derivative in Decimal (28-digit scan refined at 50-digit precision) with zero float pre-screening and ternary multi-peak polish",
+          "value": -0.149733
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-25"
+    },
+    {
+      "id": "c5-pred0018-multi-country-site-asymmetry-refuted",
+      "statement": "Pre-registered PRED-0018 hypothesis is refuted on measured ClinicalTrials.gov data without post-hoc tuning: systemic early-phase CFTR trials registered multi-country site networks in 26/54 (0.481481) vs 5/15 (0.333333) pure airway-restricted inhaled CFTR trials (risk difference +0.148148; one-sided Fisher p = 10424417/44368472 = 0.23495100 >= 0.01; Chan-Zhang 95% CI [-0.149733, 0.396110] with lower bound <= 0; Newcombe-Wilson 95% CI [-0.132089, 0.371460] with lower bound <= 0, both straddling zero; all-17 inhaled 7/17 = 0.411765, p = 0.41302790 >= 0.01).",
+      "kind": "predicted",
+      "origin": "lab",
+      "dataset": "benchmarks/early_phase_geographic_footprint/early_phase_locations_2026-11-25.json (clinicaltrials-gov)",
+      "standing": "refuted",
+      "held_out_error": {
+        "value": 0.234951,
+        "unit": "one_sided_fisher_hypergeometric_p_value_exceeding_locked_0.01_alpha_threshold",
+        "set_fixed_in_done_file": true
+      },
+      "checks": [
+        {"type": "own_script", "ref": "early_phase_geographic_footprint.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "float64 multi-country risk-difference evaluator",
+          "script": "early_phase_geographic_footprint.py",
+          "difference": "computes p_sys - p_inh_pure from schema-validated non-WITHDRAWN sovereign country sets",
+          "value": 0.148148
+        },
+        {
+          "name": "independent raw-JSON multi-country risk-difference auditor",
+          "script": "independent_audit.py",
+          "difference": "computes p_sys - p_inh_pure from independent raw JSON sovereign lookup evaluation",
+          "value": 0.148148
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": false,
+      "checked_on": "2026-11-25"
+    }
+  ]
+}
