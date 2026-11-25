@@ -1,0 +1,2804 @@
+{
+  "schema_version": "pred0017-early-phase-design-eligibility-v1",
+  "catalog_source_id": "clinicaltrials-gov",
+  "retrieved_at_utc": "2026-11-25T01:41:03Z",
+  "nlm_attribution": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.",
+  "research_boundary": "Independent open-source research benchmark only (Tier T1/T2 registry metadata); not clinical guidance and not an assessment of personal trial eligibility or treatment efficacy.",
+  "quarantine_notice": "All sponsor-entered registry strings sanitized for Trojan-Source/Cf controls and closing-tag lookalikes; treated strictly as passive data.",
+  "pred0015_results_sha256": "c4288a7c40783c746e1e4c103e9b1b8867818cb97cc371d19348715d9251dcb1",
+  "total_studies": 71,
+  "systemic_count": 54,
+  "inhaled_all_count": 17,
+  "inhaled_pure_count": 15,
+  "studies": {
+    "NCT00016744": {
+      "nct_id": "NCT00016744",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Phenylbutyrate/Genistein Duotherapy in Delta F508-Homozygous(for Cystic Fibrosis)",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2009-01-09",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "BASIC_SCIENCE",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 12,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT00234663": {
+      "nct_id": "NCT00234663",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "PTC124 for Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2009-01-13",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NON_RANDOMIZED",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 24
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT00237380": {
+      "nct_id": "NCT00237380",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Safety and Efficacy of Ataluren (PTC124) for Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2020-06-11",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 24,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT00351078": {
+      "nct_id": "NCT00351078",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "PTC124 for the Treatment of Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2017-12-13",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 19,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT00457821": {
+      "nct_id": "NCT00457821",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Safety Study of Ivacaftor in Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2012-10-05",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "CROSSOVER",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 39,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT00458341": {
+      "nct_id": "NCT00458341",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study of Ataluren in Pediatric Participants With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2020-03-06",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "CROSSOVER",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 30,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "6 Years",
+        "maximumAge": "18 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT00590538": {
+      "nct_id": "NCT00590538",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Phenylbutyrate/Genistein Duotherapy in Delta F508-Heterozygotes (for Cystic Fibrosis)",
+      "overall_status": "TERMINATED",
+      "last_update_post_date": "2011-06-30",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "BASIC_SCIENCE",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 9,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT00789867": {
+      "nct_id": "NCT00789867",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Single Dose of pGM169/GL67A in CF Patients",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2020-01-18",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 35,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "16 Years",
+        "maximumAge": "70 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT00865904": {
+      "nct_id": "NCT00865904",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study of VX-809 in Cystic Fibrosis Subjects With the ∆F508-CFTR Gene Mutation",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2015-08-28",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 93,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT00953706": {
+      "nct_id": "NCT00953706",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study of Ivacaftor in Cystic Fibrosis Subjects Aged 12 Years and Older Homozygous for the F508del-CFTR Mutation",
+      "overall_status": "TERMINATED",
+      "last_update_post_date": "2015-09-11",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 140,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "12 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT01161537": {
+      "nct_id": "NCT01161537",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study of the Effect of VX-770 on Hyperpolarized Helium-3 Magnetic Resonance Imaging in Subjects With Cystic Fibrosis and the G551D Mutation",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2014-07-31",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NON_RANDOMIZED",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "SINGLE",
+            "whoMasked": [
+              "PARTICIPANT"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 13,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "12 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT01225211": {
+      "nct_id": "NCT01225211",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study of VX-809 Alone and in Combination With VX-770 in Cystic Fibrosis (CF) Patients Homozygous or Heterozygous for the F508del-CFTR Mutation",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2015-10-05",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "FACTORIAL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 312,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT01262352": {
+      "nct_id": "NCT01262352",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study of the Effect of Ivacaftor on Lung Clearance Index in Subjects With Cystic Fibrosis and the G551D Mutation",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2013-02-11",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "CROSSOVER",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 21,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "6 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT01531673": {
+      "nct_id": "NCT01531673",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study of VX-661 Alone and in Combination With Ivacaftor in Subjects Homozygous or Heterozygous to the F508del-Cystic Fibrosis Transmembrane Conductance Regulator(CFTR) Mutation",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2018-04-13",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 194,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "12 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT01621867": {
+      "nct_id": "NCT01621867",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Repeated Application of Gene Therapy in CF Patients",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2015-10-22",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "DOUBLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 130,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "12 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT01685801": {
+      "nct_id": "NCT01685801",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Pilot Study Testing the Effect of Ivacaftor on Lung Function in Subjects With Cystic Fibrosis and Residual CFTR Function",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2015-05-19",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "CROSSOVER",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "DOUBLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 24,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "12 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02070744": {
+      "nct_id": "NCT02070744",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study to Evaluate Safety and Efficacy of VX-661 in Combination With Ivacaftor in Subjects With Cystic Fibrosis, Homozygous for the F508del-CFTR Mutation With an Open-Label Expansion",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2025-09-24",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 40,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02190604": {
+      "nct_id": "NCT02190604",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Safety, Tolerability, Pharmacokinetics, and Preliminary Pharmacodynamics of QBW251 in Healthy Subjects and Cystic Fibrosis Patients",
+      "overall_status": "TERMINATED",
+      "last_update_post_date": "2020-12-30",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 153,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "maximumAge": "65 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": true
+      }
+    },
+    "NCT02508207": {
+      "nct_id": "NCT02508207",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Phase 2 Study to Evaluate Effects of VX-661/Ivacaftor on Lung and Extrapulmonary Systems in Subjects With Cystic Fibrosis, Homozygous for the F508del-CFTR Mutation",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2021-07-19",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 34,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02532764": {
+      "nct_id": "NCT02532764",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Dose Escalation Study of QR-010 in Homozygous ΔF508 Cystic Fibrosis Patients",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2019-02-06",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 70,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "maximumAge": "60 Years",
+        "stdAges": [
+          "ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02564354": {
+      "nct_id": "NCT02564354",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Exploratory Study to Evaluate QR-010 in Subjects With Cystic Fibrosis ΔF508 CFTR Mutation",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2020-09-24",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "NON_RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "SINGLE",
+            "whoMasked": [
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 18,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02589236": {
+      "nct_id": "NCT02589236",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study of Cavosonstat (N91115) in Patients With CF Homozygous for the F508del-CFTR Mutation",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2017-01-10",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 138,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02690519": {
+      "nct_id": "NCT02690519",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study of GLPG1837 in Subjects With Cystic Fibrosis (S1251N Mutation)",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2016-10-11",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 7,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02707562": {
+      "nct_id": "NCT02707562",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study of GLPG1837 in Subjects With Cystic Fibrosis (G551D Mutation)",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2016-12-07",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 26,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02718495": {
+      "nct_id": "NCT02718495",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study Assessing PTI-428 Safety, Tolerability, and Pharmacokinetics in Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2019-03-21",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 56,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02730208": {
+      "nct_id": "NCT02730208",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study to Evaluate the Effect of VX-661 in Combination With Ivacaftor on Chest Imaging Endpoints in Subjects With Cystic Fibrosis, Homozygous for the F508del CFTR Mutation",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2019-10-23",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 41,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "12 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02767297": {
+      "nct_id": "NCT02767297",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Bioavailability and Pharmacokinetics Study of FDL169 in Healthy Subjects and Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2016-10-24",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NON_RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 46,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": true
+      }
+    },
+    "NCT02951182": {
+      "nct_id": "NCT02951182",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study Evaluating the Safety and Efficacy of VX-440 Combination Therapy in Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2020-08-28",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 74,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "12 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02951195": {
+      "nct_id": "NCT02951195",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study Evaluating the Safety of VX-152 Combination Therapy in Adults With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2021-01-28",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 80,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT02971839": {
+      "nct_id": "NCT02971839",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study to Evaluate the Safety and Efficacy of CTP-656 in Patients With Cystic Fibrosis With CFTR Gating Mutations",
+      "overall_status": "TERMINATED",
+      "last_update_post_date": "2020-08-26",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 11,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03029455": {
+      "nct_id": "NCT03029455",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study to Evaluate Safety and Pharmacokinetics of VX-659 in Healthy Subjects and in Adults With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2017-09-05",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 163,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": true
+      }
+    },
+    "NCT03045523": {
+      "nct_id": "NCT03045523",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study to Evaluate GLPG2222 in Ivacaftor-treated Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2017-11-21",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 37,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "maximumAge": "99 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03061331": {
+      "nct_id": "NCT03061331",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Lumacaftor/Ivacaftor Combination Therapy in Subjects With CF Who Have an A455E CFTR Mutation",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2018-10-02",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "CROSSOVER",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 20,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "12 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03093714": {
+      "nct_id": "NCT03093714",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study to Evaluate Safety, PK and PD of FDL169 in Cystic Fibrosis Subjects",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2018-04-12",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "DOUBLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 27,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "maximumAge": "85 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03119649": {
+      "nct_id": "NCT03119649",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study to Evaluate Multiple Doses of GLPG2222 in Adult Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2018-11-16",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 59,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "maximumAge": "99 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03140527": {
+      "nct_id": "NCT03140527",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study Assessing the Safety, Tolerability, Pharmacokinetics, Food Effect, and Drug-Drug Interactions of PTI-801 in Healthy Volunteers, and Safety, Tolerability, and Pharmacokinetics of PTI-801 in Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2020-04-30",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 171,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": true
+      }
+    },
+    "NCT03224351": {
+      "nct_id": "NCT03224351",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study Evaluating the Safety and Efficacy of VX-659 Combination Therapy in Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2021-04-22",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 124,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03227471": {
+      "nct_id": "NCT03227471",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study of VX-445 in Healthy Subjects and Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2022-01-18",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 225,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": true
+      }
+    },
+    "NCT03251092": {
+      "nct_id": "NCT03251092",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study Designed to Assess the Safety, Tolerability and PK of PTI-808 in Healthy Volunteers and in Adults With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2020-04-22",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 179,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "maximumAge": "99 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": true
+      }
+    },
+    "NCT03258424": {
+      "nct_id": "NCT03258424",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study Assessing PTI-428 Safety, Tolerability, and Pharmacokinetics in Subjects With Cystic Fibrosis on KALYDECO® as Background Therapy",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2020-03-26",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 15,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03375047": {
+      "nct_id": "NCT03375047",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study to Evaluate the Safety & Tolerability of MRT5005 Administered by Nebulization in Adults With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2026-02-09",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 42,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03450720": {
+      "nct_id": "NCT03450720",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Pharmacokinetics of GLPG2737 in Male Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2018-03-19",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 6,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "MALE",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03474042": {
+      "nct_id": "NCT03474042",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "GLPG2737 on Top of Orkambi in Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2018-06-11",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 22,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03500263": {
+      "nct_id": "NCT03500263",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Safety, Tolerability, and Pharmacokinetics of PTI-808, PTI-801, and PTI-428 Combination Therapy in Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2020-04-06",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 12,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03506061": {
+      "nct_id": "NCT03506061",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Trikafta in Cystic Fibrosis Patients",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2026-08-11",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NON_RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 42,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "12 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03540524": {
+      "nct_id": "NCT03540524",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study Looking at the Safety, Tolerability and Efficacy of the Combination of the Study Drugs GLPG2451 and GLPG2222 With or Without GLPG2737 in Patients With Cystic Fibrosis.",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2019-04-08",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "NON_RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 10,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03587961": {
+      "nct_id": "NCT03587961",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Personalized Theratyping Trial",
+      "overall_status": "RECRUITING",
+      "last_update_post_date": "2026-02-02",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "EARLY_PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "NON_RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 20,
+          "type": "ESTIMATED"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "6 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03589313": {
+      "nct_id": "NCT03589313",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Pharmacokinetics of GLPG3067 in Male Subjects With Cystic Fibrosis.",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2018-07-17",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 6,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "MALE",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03591094": {
+      "nct_id": "NCT03591094",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study Assessing PTI-428 Safety, Tolerability, Pharmacokinetics and Effect in Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2020-02-27",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 40,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03625466": {
+      "nct_id": "NCT03625466",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study to Explore the Impact of Lumacaftor/Ivacaftor on Disease Progression in Subjects Aged 2 Through 5 Years With Cystic Fibrosis, Homozygous for F508del",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2022-11-02",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "maskingDescription": "Double blinded in Part 1, and Open label in Part 2",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 51,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "2 Years",
+        "maximumAge": "5 Years",
+        "stdAges": [
+          "CHILD"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03768089": {
+      "nct_id": "NCT03768089",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study of VX-121 in Healthy Subjects and in Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2022-07-14",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 115,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": true
+      }
+    },
+    "NCT03911713": {
+      "nct_id": "NCT03911713",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Phase 2 Study to Evaluate Efficacy and Safety of VX-561 in Subjects Aged 18 Years and Older With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2022-01-25",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 77,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03912233": {
+      "nct_id": "NCT03912233",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study to Evaluate the Safety and Efficacy of VX-121 Combination Therapy in Subjects With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2023-04-20",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 87,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT03969888": {
+      "nct_id": "NCT03969888",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Phase 2 Study of ABBV-3067 Alone and in Combination With ABBV-2222",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2023-06-28",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 78,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT04006873": {
+      "nct_id": "NCT04006873",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Gut Imaging for Function & Transit in Cystic Fibrosis Study 2",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2023-05-24",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "CROSSOVER",
+          "primaryPurpose": "OTHER",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 12,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "12 Years",
+        "maximumAge": "40 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT04126473": {
+      "nct_id": "NCT04126473",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Phase 2 Study to Evaluate the Safety, Tolerability, PK and PD in Cystic Fibrosis Patients With at Least 1 G542X Allele",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2023-08-21",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 17,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "16 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT04135495": {
+      "nct_id": "NCT04135495",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Phase 2 Study to Evaluate the Safety, Tolerability, PK and PD of ELX-02 in Cystic Fibrosis Patients With G542X Allele",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2022-11-22",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 17,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT04853368": {
+      "nct_id": "NCT04853368",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Study to Evaluate Adverse Events and Change in Disease Activity With Oral Capsules of Galicaftor/Navocaftor/ABBV-119 or Galicaftor/Navocaftor/ABBV-576 Combination Therapies in Adult Participants With Cystic Fibrosis",
+      "overall_status": "TERMINATED",
+      "last_update_post_date": "2024-07-16",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "TRIPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 48,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT05248230": {
+      "nct_id": "NCT05248230",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "4D-710 in Adult Patients With Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "last_update_post_date": "2026-07-06",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NON_RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 30,
+          "type": "ESTIMATED"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT05504837": {
+      "nct_id": "NCT05504837",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study Assessing KB407 for the Treatment of Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "last_update_post_date": "2026-05-07",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "NON_RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 20,
+          "type": "ESTIMATED"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT05668741": {
+      "nct_id": "NCT05668741",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": true,
+      "brief_title": "A Phase 1/2 Study of VX-522 in Participants With Cystic Fibrosis (CF)",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2026-10-09",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SEQUENTIAL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 26,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "maximumAge": "65 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT05712538": {
+      "nct_id": "NCT05712538",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Safety, Tolerability, and Pharmacokinetics of ARCT-032 in Healthy Adult Subjects and Adults With Cystic Fibrosis.",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2024-11-13",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "interventionModelDescription": "Double-blind, placebo controlled (Phase 1 only)",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "DOUBLE",
+            "maskingDescription": "Participant and investigator masking only applies to Phase 1 healthy volunteers only. For Phase 1b, there is no masking, None (Open Label) should be applied.",
+            "whoMasked": [
+              "PARTICIPANT",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 39,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "maximumAge": "65 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": true
+      }
+    },
+    "NCT06154447": {
+      "nct_id": "NCT06154447",
+      "arm": "systemic_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Evaluation of VX-828 in Healthy Participants and in Participants With Cystic Fibrosis",
+      "overall_status": "COMPLETED",
+      "last_update_post_date": "2026-08-10",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 165,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": true
+      }
+    },
+    "NCT06237335": {
+      "nct_id": "NCT06237335",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": true,
+      "brief_title": "A Phase 2 Study Evaluating Safety and Tolerability of RCT2100 (CFTR mRNA) in Healthy Participants and in Participants With CF",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "last_update_post_date": "2026-08-19",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "PARALLEL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "DOUBLE",
+            "maskingDescription": "Participant and investigator masking only applies to Part 1 which is randomized. For Part 2 and Part 3, there is no masking, and this part is Open Label.",
+            "whoMasked": [
+              "PARTICIPANT",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 128,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "maximumAge": "60 Years",
+        "stdAges": [
+          "ADULT"
+        ],
+        "healthyVolunteers": true
+      }
+    },
+    "NCT06429176": {
+      "nct_id": "NCT06429176",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Safety, Tolerability, Pharmacokinetics, and Preliminary Efficacy of SPL84 in Patients With Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "last_update_post_date": "2026-11-10",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "DOUBLE",
+            "whoMasked": [
+              "PARTICIPANT",
+              "INVESTIGATOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 64,
+          "type": "ESTIMATED"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT06515002": {
+      "nct_id": "NCT06515002",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Study to Test How Well BI 3720931 is Tolerated and Whether it Improves Lung Function in People With Cystic Fibrosis (Lenticlair™ 1)",
+      "overall_status": "TERMINATED",
+      "last_update_post_date": "2026-04-15",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "interventionModelDescription": "The open-label dose escalation part, Phase I, will study the safety and efficacy of single doses of three different dose levels of BI 3720931 in trial participants with cystic fibrosis (CF).\n\nPhase II will be a double-blind, placebo-controlled, dose expansion part with 3 arms: first arm investigating Phase II dose 1, second arm investigating Phase II dose 2, and third arm for placebo.\n\nAn interim analysis of the safety and efficacy data from Phase I will be used for the decision making to move to Phase II and the selection of doses in Phase II.",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "QUADRUPLE",
+            "maskingDescription": "Phase I: open-label Phase II: double-blind",
+            "whoMasked": [
+              "PARTICIPANT",
+              "CARE_PROVIDER",
+              "INVESTIGATOR",
+              "OUTCOMES_ASSESSOR"
+            ]
+          }
+        },
+        "enrollmentInfo": {
+          "count": 5,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT06526923": {
+      "nct_id": "NCT06526923",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Phase 1/2 Trial of SP-101 for the Treatment of Cystic Fibrosis (CF)",
+      "overall_status": "RECRUITING",
+      "last_update_post_date": "2024-11-25",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NON_RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "interventionModelDescription": "Single ascending dose",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 15,
+          "type": "ESTIMATED"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "maximumAge": "65 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT06747858": {
+      "nct_id": "NCT06747858",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Safety, Tolerability and Efficacy Study of ARCT-032 in People With Cystic Fibrosis",
+      "overall_status": "RECRUITING",
+      "last_update_post_date": "2026-05-08",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NON_RANDOMIZED",
+          "interventionModel": "SEQUENTIAL",
+          "interventionModelDescription": "Multiple ascending dose",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 33,
+          "type": "ESTIMATED"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT06962852": {
+      "nct_id": "NCT06962852",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Long-term Study to Monitor the Health Status of People With Cystic Fibrosis Who Took Part in a Previous Study With BI 3720931 (Lenticlair™-ON)",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "last_update_post_date": "2026-04-14",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "PHASE1",
+          "PHASE2"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SINGLE_GROUP",
+          "interventionModelDescription": "The trial is intended to assess 2 different objectives: long-term safety over 15 years and durability of efficacy over at least 2 years of BI 3720931 after single dose administration in a previous clinical trial in trial participants with cystic fibrosis (CF).",
+          "primaryPurpose": "OTHER",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 5,
+          "type": "ACTUAL"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT06963008": {
+      "nct_id": "NCT06963008",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "A Prospective, Single-center, Open-label Study of Inhaled BMD003 (CFTR mRNA) in Chinese Adults With Cystic Fibrosis",
+      "overall_status": "ACTIVE_NOT_RECRUITING",
+      "last_update_post_date": "2026-10-01",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "EARLY_PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 12,
+          "type": "ESTIMATED"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "18 Years",
+        "stdAges": [
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    },
+    "NCT07485543": {
+      "nct_id": "NCT07485543",
+      "arm": "inhaled_cftr",
+      "dual_route_modulator_co_admin": false,
+      "brief_title": "Safety and Efficacy of Inhaled BMD003 (CFTR mRNA) in Chinese Cystic Fibrosis Patients Aged ≥12 Years",
+      "overall_status": "RECRUITING",
+      "last_update_post_date": "2026-10-01",
+      "design_module": {
+        "studyType": "INTERVENTIONAL",
+        "phases": [
+          "EARLY_PHASE1"
+        ],
+        "designInfo": {
+          "allocation": "NA",
+          "interventionModel": "SINGLE_GROUP",
+          "primaryPurpose": "TREATMENT",
+          "maskingInfo": {
+            "masking": "NONE"
+          }
+        },
+        "enrollmentInfo": {
+          "count": 24,
+          "type": "ESTIMATED"
+        }
+      },
+      "eligibility_module": {
+        "sex": "ALL",
+        "minimumAge": "12 Years",
+        "stdAges": [
+          "CHILD",
+          "ADULT",
+          "OLDER_ADULT"
+        ],
+        "healthyVolunteers": false
+      }
+    }
+  }
+}
