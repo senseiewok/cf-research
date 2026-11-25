@@ -52,7 +52,7 @@ The benchmark is complete when all deterministic checks exit `0` under the fixed
 
 Before interpreting Arm 1 or Arm 2 hypothesis outcomes, all technical and directional positive/negative controls must pass (aborting before outcome reporting if any fails):
 
-1. **Arm 1 `Inh172` reversal parity:** Every group (`11` in `FRT-F508del` and `11` in `FRT-WT`) has `mean(Inh172) < 0` and `mean(Fsk + VX-770) > 0`, and across the `11` group means in each workbook `Pearson r(mean(Fsk + VX-770), -mean(Inh172)) > 0.95`.
+1. **Arm 1 `Inh172` reversal parity:** Every group (`11` in `FRT-F508del` and `11` in `FRT-WT`) has `mean(Inh172) < 0` and `mean(Fsk + VX-770) > 0`; across all `22` groups in both workbooks `Pearson r(mean(Fsk + VX-770), -mean(Inh172)) > 0.95`; within `FRT-F508del` (`11` groups) `r > 0.95`; and within `FRT-WT` non-chronic-potentiator groups (`9` non-`ETI` groups; noting chronic `ETI` pre-treatment elevates basal WT current before acute `Fsk` so `-mean(Inh172)` exceeds `mean(Fsk + VX-770)`) `r > 0.95` (while reporting all-`11` `FRT-WT` `r` as context).
 2. **Arm 1 WT vs. F508del dynamic range:** `FRT-WT NT mean(Fsk + VX-770) > 5 * FRT-F508del NT mean(Fsk + VX-770)` (verified on both `Cols C..R` `N=15` and `Cols C..L` `N=10` for `FRT-WT NT`).
 3. **Arm 1 F508del modulator rescue:** `FRT-F508del siNS, 661+445 mean(Fsk + VX-770) > FRT-F508del siNS, DMSO mean(Fsk + VX-770)`.
 4. **Arm 2 `CFTR` normalization anchor, dispersion, & TMT design parity:** Row `CFTR` equals `0.0` (`|val| <= 1e-12`) across all `9` proteomics columns (`5` Variants + `4` Drug), every non-`CFTR` column has sample `std > 0.05`, and `Copy of TMT_Labels.xlsx` verifies `6` TMT-18plex runs (`18` labels `126..135N`).
