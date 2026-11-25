@@ -1,0 +1,286 @@
+{
+  "schema_version": "pred0017-early-phase-masking-randomization-v1",
+  "benchmark_version": "2026-11-24.v1",
+  "prediction_id": "PRED-0017",
+  "evaluated_on_local": "2026-11-24",
+  "done_sha256": "ffaca416a469fda2029b6679614d3fdd762366c1f8f4df1e8c3ea96bf29fc76c",
+  "pred0015_results_sha256": "c4288a7c40783c746e1e4c103e9b1b8867818cb97cc371d19348715d9251dcb1",
+  "snapshot_sha256": "de0f330c4441d77b84dc5f547e4dfcf99195c1b9f223e4dbeebd628054925b2d",
+  "fixture_sha256": "9ae9c2745e050901a81d666cc96d065b9b0ee0ef48be802fb0a51069677ba184",
+  "nlm_attribution": "ClinicalTrials.gov does not evaluate safety or efficacy; listing on the registry does not denote government endorsement.",
+  "research_boundary": "Independent open-source research benchmark only (Tier T1/T2 registry metadata); not clinical guidance and not an assessment of personal trial eligibility or treatment efficacy.",
+  "positive_controls": {
+    "control_1_zero_inhaled_fisher_exact": "1/2261",
+    "control_1_nonzero_inhaled_54_35_15_3_fisher_exact": "1712895/721469936",
+    "control_1_nonzero_inhaled_chan_zhang_ci95": [
+      0.077872,
+      0.649644
+    ],
+    "control_1_nonzero_inhaled_newcombe_wilson_ci95": [
+      0.163193,
+      0.620446
+    ],
+    "control_2_locked_partition_parity": "PASS (54 systemic, 17 inhaled, 15 pure-inhaled)",
+    "control_3_enum_allowlist": "PASS (3 positive, 5 negative, 2 invalid fail-closed)",
+    "control_4_nullable_and_quarantine": "PASS"
+  },
+  "dataset": {
+    "catalog_source_id": "clinicaltrials-gov",
+    "prisma_included_interventional_studies": 940,
+    "locked_early_phase_total": 71,
+    "systemic_cftr_count": 54,
+    "inhaled_cftr_pure_count": 15,
+    "inhaled_cftr_all_count": 17,
+    "dual_route_inhaled_ncts": [
+      "NCT05668741",
+      "NCT06237335"
+    ]
+  },
+  "primary_estimand_pure_route_randomization_and_masking": {
+    "n_sys": 54,
+    "k_sys": 39,
+    "p_sys": 0.722222,
+    "n_inh_pure": 15,
+    "k_inh_pure": 6,
+    "p_inh_pure": 0.4,
+    "risk_difference": 0.322222,
+    "p_fisher_one_sided_exact": "20586899/867114268",
+    "p_fisher_one_sided": 0.02374185,
+    "p_fisher_two_sided_exact": "27240461/867114268",
+    "p_fisher_two_sided": 0.03141508,
+    "chan_zhang_unconditional_ci95": [
+      0.00532,
+      0.578285
+    ],
+    "newcombe_wilson_ci95": [
+      0.046513,
+      0.54812
+    ],
+    "systemic_matched_ncts": [
+      "NCT00016744",
+      "NCT00457821",
+      "NCT00590538",
+      "NCT00865904",
+      "NCT00953706",
+      "NCT01225211",
+      "NCT01262352",
+      "NCT01531673",
+      "NCT01685801",
+      "NCT02070744",
+      "NCT02190604",
+      "NCT02508207",
+      "NCT02589236",
+      "NCT02718495",
+      "NCT02730208",
+      "NCT02951182",
+      "NCT02951195",
+      "NCT02971839",
+      "NCT03029455",
+      "NCT03045523",
+      "NCT03061331",
+      "NCT03093714",
+      "NCT03119649",
+      "NCT03140527",
+      "NCT03224351",
+      "NCT03227471",
+      "NCT03251092",
+      "NCT03258424",
+      "NCT03474042",
+      "NCT03500263",
+      "NCT03591094",
+      "NCT03625466",
+      "NCT03768089",
+      "NCT03911713",
+      "NCT03912233",
+      "NCT03969888",
+      "NCT04006873",
+      "NCT04853368",
+      "NCT06154447"
+    ],
+    "inhaled_pure_matched_ncts": [
+      "NCT01621867",
+      "NCT02532764",
+      "NCT03375047",
+      "NCT05712538",
+      "NCT06429176",
+      "NCT06515002"
+    ]
+  },
+  "secondary_gate_all_17_inhaled_including_dual_route": {
+    "n_sys": 54,
+    "k_sys": 39,
+    "p_sys": 0.722222,
+    "n_inh_all": 17,
+    "k_inh_all": 7,
+    "p_inh_all": 0.411765,
+    "risk_difference": 0.310458,
+    "p_fisher_one_sided_exact": "9351324175/430955791196",
+    "p_fisher_one_sided": 0.02169903,
+    "chan_zhang_unconditional_ci95": [
+      0.000232,
+      0.559583
+    ],
+    "newcombe_wilson_ci95": [
+      0.047283,
+      0.530923
+    ],
+    "inhaled_all_matched_ncts": [
+      "NCT01621867",
+      "NCT02532764",
+      "NCT03375047",
+      "NCT05712538",
+      "NCT06237335",
+      "NCT06429176",
+      "NCT06515002"
+    ]
+  },
+  "support_criteria_evaluation": {
+    "crit_1_exact_54_15_17_margins": true,
+    "crit_2_directional_pure": true,
+    "crit_3_fisher_pure_lt_0_01": false,
+    "crit_4_chan_zhang_and_newcombe_ci95_low_gt_0": true,
+    "crit_5_all_17_inhaled_preserved_lt_0_01": false,
+    "outcome": "refuted"
+  },
+  "descriptive_cross_scale_non_gated": {
+    "systemic_cftr": {
+      "n": 54,
+      "joint_randomized_and_masked_count": 39,
+      "joint_randomized_and_masked_proportion": 0.722222,
+      "is_randomized_count": 40,
+      "is_randomized_proportion": 0.740741,
+      "is_masked_count": 40,
+      "is_masked_proportion": 0.740741,
+      "allocation_breakdown": {
+        "RANDOMIZED": 40,
+        "NON_RANDOMIZED": 6,
+        "NA": 8,
+        "omitted": 0
+      },
+      "masking_breakdown": {
+        "NONE": 14,
+        "SINGLE": 1,
+        "DOUBLE": 2,
+        "TRIPLE": 13,
+        "QUADRUPLE": 24,
+        "omitted": 0
+      },
+      "complete_case_sensitivity": {
+        "n_complete": 46,
+        "joint_count": 39,
+        "joint_proportion": 0.847826
+      },
+      "phase_stratified": {
+        "phase1_only_n": 9,
+        "phase1_only_joint_count": 5,
+        "phase1_only_joint_proportion": 0.555556,
+        "phase2_containing_n": 45,
+        "phase2_containing_joint_count": 34,
+        "phase2_containing_joint_proportion": 0.755556
+      },
+      "enrollment_summary": {
+        "non_null_count": 54,
+        "median_enrollment": 39.5,
+        "min_enrollment": 6,
+        "max_enrollment": 312
+      },
+      "pediatric_std_age_child_count": 14,
+      "pediatric_std_age_child_proportion": 0.259259
+    },
+    "inhaled_cftr_pure": {
+      "n": 15,
+      "joint_randomized_and_masked_count": 6,
+      "joint_randomized_and_masked_proportion": 0.4,
+      "is_randomized_count": 7,
+      "is_randomized_proportion": 0.466667,
+      "is_masked_count": 7,
+      "is_masked_proportion": 0.466667,
+      "allocation_breakdown": {
+        "RANDOMIZED": 7,
+        "NON_RANDOMIZED": 5,
+        "NA": 3,
+        "omitted": 0
+      },
+      "masking_breakdown": {
+        "NONE": 8,
+        "SINGLE": 1,
+        "DOUBLE": 3,
+        "TRIPLE": 1,
+        "QUADRUPLE": 2,
+        "omitted": 0
+      },
+      "complete_case_sensitivity": {
+        "n_complete": 12,
+        "joint_count": 6,
+        "joint_proportion": 0.5
+      },
+      "phase_stratified": {
+        "phase1_only_n": 5,
+        "phase1_only_joint_count": 1,
+        "phase1_only_joint_proportion": 0.2,
+        "phase2_containing_n": 10,
+        "phase2_containing_joint_count": 5,
+        "phase2_containing_joint_proportion": 0.5
+      },
+      "enrollment_summary": {
+        "non_null_count": 15,
+        "median_enrollment": 30.0,
+        "min_enrollment": 5,
+        "max_enrollment": 130
+      },
+      "pediatric_std_age_child_count": 3,
+      "pediatric_std_age_child_proportion": 0.2
+    },
+    "inhaled_cftr_all": {
+      "n": 17,
+      "joint_randomized_and_masked_count": 7,
+      "joint_randomized_and_masked_proportion": 0.411765,
+      "is_randomized_count": 8,
+      "is_randomized_proportion": 0.470588,
+      "is_masked_count": 8,
+      "is_masked_proportion": 0.470588,
+      "allocation_breakdown": {
+        "RANDOMIZED": 8,
+        "NON_RANDOMIZED": 5,
+        "NA": 4,
+        "omitted": 0
+      },
+      "masking_breakdown": {
+        "NONE": 9,
+        "SINGLE": 1,
+        "DOUBLE": 4,
+        "TRIPLE": 1,
+        "QUADRUPLE": 2,
+        "omitted": 0
+      },
+      "complete_case_sensitivity": {
+        "n_complete": 13,
+        "joint_count": 7,
+        "joint_proportion": 0.538462
+      },
+      "phase_stratified": {
+        "phase1_only_n": 5,
+        "phase1_only_joint_count": 1,
+        "phase1_only_joint_proportion": 0.2,
+        "phase2_containing_n": 12,
+        "phase2_containing_joint_count": 6,
+        "phase2_containing_joint_proportion": 0.5
+      },
+      "enrollment_summary": {
+        "non_null_count": 17,
+        "median_enrollment": 30.0,
+        "min_enrollment": 5,
+        "max_enrollment": 130
+      },
+      "pediatric_std_age_child_count": 3,
+      "pediatric_std_age_child_proportion": 0.176471
+    },
+    "engine_a_registry_context_non_pooled": {
+      "acfdr_2025_pediatric_ineligible": "11.5% (170 of 1,473 pediatric participants without lung transplant, PBS basis; ACFDR 2025)",
+      "acfdr_2025_adult_ineligible": "5.8% (of 2,326 adult participants without lung transplant, PBS basis; ACFDR 2025)",
+      "cffpr_2024_genotype_ineligible": "8.0% ineligible by genotype (CFFPR 2024)",
+      "ccfr_2024_age_and_genotype_ineligible": "7.6% ineligible by age and genotype (CCFR 2024)",
+      "non_pooling_note": "National registry percentages use distinct regulator lists, transplant filters, and reporting years and are juxtaposed strictly as non-pooled epidemiological context without cross-dividing into trial counts."
+    }
+  }
+}

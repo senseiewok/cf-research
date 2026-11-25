@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "work": "PRED-0017: Early-phase randomization and masking asymmetry benchmark across locked PRISMA-included Cystic Fibrosis interventional trials from PRED-0015 and PRED-0016.",
+  "done_file": "done.md",
+  "done_sha256": "ffaca416a469fda2029b6679614d3fdd762366c1f8f4df1e8c3ea96bf29fc76c",
+  "failure_log": "failures.jsonl",
+  "claims": [
+    {
+      "id": "c1-early-phase-systemic-randomized-and-masked",
+      "statement": "Among 54 locked early-phase non-healthy-volunteer PRISMA-included systemic CFTR modulator and systemic PTC readthrough trials, 39 (0.722222: 40/54 randomized and 40/54 masked, 0 omitted fields) implement jointly RANDOMIZED allocation and masked blinding in ClinicalTrials.gov API v2 designInfo.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/early_phase_masking_randomization/early_phase_design_eligibility_2026-11-24.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "early_phase_masking_randomization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "schema-validated designInfo enum evaluator",
+          "script": "early_phase_masking_randomization.py",
+          "difference": "parses design_module.designInfo through fail-closed NLM enum validator and counts systemic matches",
+          "value": 39
+        },
+        {
+          "name": "independent raw-JSON enum auditor",
+          "script": "independent_audit.py",
+          "difference": "separate file with zero re, math, or shared imports; inspects raw JSON designInfo keys directly",
+          "value": 39
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c2-early-phase-inhaled-randomized-and-masked",
+      "statement": "Among 15 pure airway-restricted early-phase CFTR-restoring genetic, mRNA, viral-vector, liposomal, and splice-ASO trials, 6 (0.400000: NCT01621867, NCT02532764, NCT03375047, NCT05712538, NCT06429176, NCT06515002; and 7/17 = 0.411765 across all-inhaled adding NCT06237335) implement jointly RANDOMIZED allocation and masked blinding.",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/early_phase_masking_randomization/early_phase_design_eligibility_2026-11-24.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "early_phase_masking_randomization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "schema-validated pure-inhaled designInfo evaluator",
+          "script": "early_phase_masking_randomization.py",
+          "difference": "evaluates pure-route inhaled CFTR trials excluding dual-route co-administered systemic modulators",
+          "value": 6
+        },
+        {
+          "name": "independent raw-JSON pure-inhaled enum auditor",
+          "script": "independent_audit.py",
+          "difference": "separate file with zero shared imports; counts pure-inhaled RANDOMIZED + masked records directly",
+          "value": 6
+        }
+      ],
+      "tolerance": 0,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c3-fisher-hypergeometric-pure-and-all17-pvalues",
+      "statement": "Comparing 39/54 systemic vs 6/15 pure airway-restricted early-phase CFTR trials yields one-sided Fisher hypergeometric p = 20586899/867114268 (0.02374185 >= 0.01), and comparing 39/54 vs 7/17 all-inhaled trials yields p = 9351324175/430955791196 (0.02169903 >= 0.01).",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/early_phase_masking_randomization/results_2026-11-24.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "early_phase_masking_randomization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "math.comb hypergeometric support summation",
+          "script": "early_phase_masking_randomization.py",
+          "difference": "computes hypergeometric PMF numerator and denominator via math.comb",
+          "value": 0.02374185
+        },
+        {
+          "name": "multiplicative Fraction product summation",
+          "script": "independent_audit.py",
+          "difference": "computes binomial coefficients via multiplicative Fraction products without importing math",
+          "value": 0.02374185
+        }
+      ],
+      "tolerance": 0.00000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c4-chan-zhang-and-newcombe-wilson-ci95-bounds",
+      "statement": "On 39/54 systemic vs 6/15 pure airway-restricted early-phase CFTR trials (risk difference +0.322222), the sawtooth-safe unconditional Chan-Zhang 95% CI is [0.005320, 0.578285] and the Newcombe-Wilson Method-10 95% CI is [0.046513, 0.548120].",
+      "kind": "measured",
+      "origin": "lab",
+      "dataset": "benchmarks/early_phase_masking_randomization/results_2026-11-24.json (clinicaltrials-gov)",
+      "standing": "open",
+      "checks": [
+        {"type": "own_script", "ref": "early_phase_masking_randomization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "Cardano trigonometric restricted-MLE + golden-section multi-peak Chan-Zhang CI95 lower bound",
+          "script": "early_phase_masking_randomization.py",
+          "difference": "solves Miettinen-Nurminen cubic score via Cardano acos/cos and golden-section multi-peak polish in float64",
+          "value": 0.005320
+        },
+        {
+          "name": "pure-Decimal log-likelihood Newton-bisection + ternary multi-peak Chan-Zhang CI95 lower bound",
+          "script": "independent_audit.py",
+          "difference": "solves unexpanded log-likelihood derivative in Decimal with zero float pre-screening and ternary multi-peak polish",
+          "value": 0.005320
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": true,
+      "checked_on": "2026-11-24"
+    },
+    {
+      "id": "c5-pred0017-alpha-0-01-randomization-masking-refuted",
+      "statement": "Pre-registered PRED-0017 hypothesis is refuted at the locked alpha = 0.01 Fisher threshold without post-hoc tuning: although systemic early-phase CFTR trials exceeded pure airway-restricted inhaled CFTR trials by +0.322222 (39/54 = 0.722222 vs 6/15 = 0.400000; Chan-Zhang 95% CI [0.005320, 0.578285]; Newcombe-Wilson 95% CI [0.046513, 0.548120]), one-sided Fisher hypergeometric p = 20586899/867114268 = 0.02374185 (and all-17 p = 0.02169903) exceeded 0.01 because 6/15 pure-inhaled trials (pGM169, eluforsen, MRT5005, ARCT-032, SPL84, BI 3720931) implemented randomized masked designs.",
+      "kind": "predicted",
+      "origin": "lab",
+      "dataset": "benchmarks/early_phase_masking_randomization/results_2026-11-24.json",
+      "standing": "refuted",
+      "held_out_error": {
+        "value": 0.02374185,
+        "unit": "one_sided_fisher_hypergeometric_p_value_exceeding_locked_0.01_alpha_threshold",
+        "set_fixed_in_done_file": true
+      },
+      "checks": [
+        {"type": "own_script", "ref": "early_phase_masking_randomization.py"},
+        {"type": "own_script", "ref": "independent_audit.py"}
+      ],
+      "methods": [
+        {
+          "name": "float64 designInfo risk-difference evaluator",
+          "script": "early_phase_masking_randomization.py",
+          "difference": "computes p_sys - p_inh_pure from schema-validated designInfo enums",
+          "value": 0.322222
+        },
+        {
+          "name": "independent raw-JSON risk-difference auditor",
+          "script": "independent_audit.py",
+          "difference": "computes p_sys - p_inh_pure from independent raw JSON enum evaluation",
+          "value": 0.322222
+        }
+      ],
+      "tolerance": 0.000001,
+      "headline": false,
+      "checked_on": "2026-11-24"
+    }
+  ]
+}
