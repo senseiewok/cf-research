@@ -219,6 +219,12 @@ class TestCanxInteractomeUssingUnits(unittest.TestCase):
             self.assertAlmostEqual(q1, exp, places=9)
             self.assertAlmostEqual(q2, exp, places=9)
 
+        # Zero-variance MWU (e.g. constant |LFC| = 1.0) returns z_signed=0.0 and p=1.0 cleanly
+        mwu_zv = bench.mann_whitney_u_two_sided([1.0, 1.0, 1.0], [1.0, 1.0, 1.0, 1.0])
+        self.assertEqual(mwu_zv["z_signed"], 0.0)
+        self.assertEqual(mwu_zv["p_two_sided"], 1.0)
+        self.assertEqual(independent_audit._pairwise_mwu_p([1.0, 1.0, 1.0], [1.0, 1.0, 1.0, 1.0]), 1.0)
+
     def test_div0_nbsp_and_fail_closed_proteomics_guards(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             ok_p = Path(tmp) / "drug_ok.xlsx"
@@ -228,6 +234,44 @@ class TestCanxInteractomeUssingUnits(unittest.TestCase):
             self.assertEqual(anchor.gene_symbol, "CFTR")
             self.assertEqual(len(non_num), 2)
             self.assertIsNone(rows[0].values["ΔF (-CX)"])
+
+            # NBSP inside Pathway cell normalizes cleanly
+            nbsp_p = Path(tmp) / "nbsp_pw.xlsx"
+            _write_minimal_xlsx(
+                nbsp_p,
+                {
+                    "Sheet1": [
+                        (2, {"A": ("s", "Gene Symbol"), "B": ("s", "Pathway"), "C": ("s", "ΔF\xa0(-CX)"), "D": ("s", "DelF (-CX) +445"), "E": ("s", "DelF (-CX) +661"), "F": ("s", "DelF (-CX) + combo")}),
+                        (3, {"A": ("s", "CFTR"), "B": ("s", "Ion Transport"), "C": ("n", "0"), "D": ("n", "0"), "E": ("n", "0"), "F": ("n", "0")}),
+                        (4, {"A": ("s", "DNAJA1"), "B": ("s", "Protein\xa0folding"), "C": ("n", "0.5"), "D": ("n", "0.2"), "E": ("n", "0.3"), "F": ("n", "0.1")}),
+                    ]
+                },
+            )
+            nbsp_rows, _, _ = bench.parse_proteomics_workbook(nbsp_p, "DRUG", bench.DRUG_COLS)
+            self.assertEqual(nbsp_rows[0].pathway_norm, "protein folding")
+
+            # Permutation null handles a module with 0 finite observations in one variant column without ZeroDivisionError
+            v_anchor = bench.ProteomicsRow(3, "CFTR", "Ion", "ion", {c: 0.0 for c in bench.VARIANT_COLS})
+            v_rows = []
+            for idx in range(12):
+                vals = {c: 0.2 * (idx - 5) for c in bench.VARIANT_COLS}
+                if idx == 0:
+                    vals["I1366N (-CX)"] = None
+                pw = "folding" if idx == 0 else "metabolism"
+                v_rows.append(bench.ProteomicsRow(4 + idx, f"G{idx}", pw, pw, vals))
+            d_anchor = bench.ProteomicsRow(3, "CFTR", "Ion", "ion", {c: 0.0 for c in bench.DRUG_COLS})
+            d_rows = [
+                bench.ProteomicsRow(4 + idx, f"D{idx}", "folding" if idx < 2 else "metabolism", "folding" if idx < 2 else "metabolism", {c: 0.2 * (idx + 1) for c in bench.DRUG_COLS})
+                for idx in range(6)
+            ]
+            tmt_ok = {"runs": 6, "channels_per_run": 18, "total_channel_entries": 108, "channels": ["126"] * 18}
+            orig_draws = bench.PERM_NULL_DRAWS
+            try:
+                bench.PERM_NULL_DRAWS = 50
+                null_res = bench.run_arm2_controls(v_rows, v_anchor, d_rows, d_anchor, tmt_ok)
+                self.assertTrue(null_res["pathway_permutation_null"]["passed"])
+            finally:
+                bench.PERM_NULL_DRAWS = orig_draws
 
             # > 5 non-numeric cells fails closed
             too_many = Path(tmp) / "drug_bad_cnt.xlsx"
@@ -249,20 +293,49 @@ class TestCanxInteractomeUssingUnits(unittest.TestCase):
             troot = Path(tmp) / "repo"
             shutil.copytree(HERE, troot / "benchmarks" / "cftr_canx_interactome_ussing")
             rfile = troot / "benchmarks" / "cftr_canx_interactome_ussing" / bench.RESULTS_FILE_NAME
-            payload = json.loads(rfile.read_text(encoding="utf-8"))
+            lfile = troot / "benchmarks" / "cftr_canx_interactome_ussing" / "ledger.json"
+            orig_payload = json.loads(rfile.read_text(encoding="utf-8"))
+            orig_ledger = json.loads(lfile.read_text(encoding="utf-8"))
 
-            # Offline CI verification (missing raw data dir) passes first
-            ci_rep = bench.verify_checked_in_artifacts(repo_root=troot, data_dir=Path(tmp) / "missing")
+            # Offline CI verification (no data_dir and no local tedman-2025 under temp repo) passes first
+            ci_rep = bench.verify_checked_in_artifacts(repo_root=troot, data_dir=None)
             self.assertEqual(ci_rep["status"], "PASS")
             self.assertFalse(ci_rep["raw_local_data_parity_checked"])
+            audit_ci = independent_audit.run_independent_audit(repo_root=troot, data_dir=None)
+            self.assertEqual(audit_ci["status"], "PASS")
+            self.assertFalse(audit_ci["raw_local_data_audited"])
 
-            # Tamper done_sha256 -> both scripts must fail closed
-            payload["done_sha256"] = "0" * 64
-            rfile.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-            with self.assertRaises(AssertionError):
+            # Explicit nonexistent --data-dir fails closed
+            with self.assertRaises(FileNotFoundError):
                 bench.verify_checked_in_artifacts(repo_root=troot, data_dir=Path(tmp) / "missing")
-            with self.assertRaises(AssertionError):
+            with self.assertRaises(FileNotFoundError):
                 independent_audit.run_independent_audit(repo_root=troot, data_dir=Path(tmp) / "missing")
+
+            # Tamper done_sha256 -> both scripts fail closed
+            p_hash = json.loads(json.dumps(orig_payload))
+            p_hash["done_sha256"] = "0" * 64
+            rfile.write_text(json.dumps(p_hash, indent=2), encoding="utf-8")
+            with self.assertRaises(AssertionError):
+                bench.verify_checked_in_artifacts(repo_root=troot, data_dir=None)
+            with self.assertRaises(AssertionError):
+                independent_audit.run_independent_audit(repo_root=troot, data_dir=None)
+
+            # Tamper Arm 1/2 verdict + fake bh_fdr_q while keeping raw p intact -> both fail closed
+            p_fake = json.loads(json.dumps(orig_payload))
+            p_fake["arm_1_frt_ussing_sicanx_asymmetry"]["primary_strict_dedup"]["overall_verdict"] = "supported"
+            p_fake["arm_1_frt_ussing_sicanx_asymmetry"]["primary_strict_dedup"]["ledger_standing"] = "open"
+            p_fake["arm_2_canx_ko_proteostasis_remodeling"]["primary_evaluation"]["family_2a_drug_attenuation"]["tests"][0]["bh_fdr_q"] = 0.01
+            p_fake["arm_2_canx_ko_proteostasis_remodeling"]["primary_evaluation"]["overall_verdict"] = "supported"
+            rfile.write_text(json.dumps(p_fake, indent=2), encoding="utf-8")
+            l_fake = json.loads(json.dumps(orig_ledger))
+            for cl in l_fake["claims"]:
+                if cl["id"] in ("c4-arm-1-ussing-sicanx-asymmetry", "c5-arm-2-proteostasis-remodeling"):
+                    cl["standing"] = "open"
+            lfile.write_text(json.dumps(l_fake, indent=2), encoding="utf-8")
+            with self.assertRaises(AssertionError):
+                bench.verify_checked_in_artifacts(repo_root=troot, data_dir=None)
+            with self.assertRaises(AssertionError):
+                independent_audit.run_independent_audit(repo_root=troot, data_dir=None)
 
     def test_checked_in_and_audit_cli(self) -> None:
         if not (HERE / bench.RESULTS_FILE_NAME).is_file():

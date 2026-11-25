@@ -923,8 +923,8 @@ def parse_proteomics_workbook(
     seen_genes: set[str] = set()
 
     for rnum in range(3, max_row + 1):
-        gene = cells.get((rnum, "A"), "").strip()
-        pw_raw = cells.get((rnum, "B"), "").strip()
+        gene = cells.get((rnum, "A"), "").replace("\xa0", " ").strip()
+        pw_raw = cells.get((rnum, "B"), "").replace("\xa0", " ").strip()
         raw_vals = [cells.get((rnum, c_let)) for c_let in col_letters]
         if not gene and not pw_raw and all(v is None or str(v).strip() == "" for v in raw_vals):
             continue
@@ -990,8 +990,8 @@ def parse_tmt_labels_metadata(xlsx_path: Path) -> Dict[str, Any]:
     if runs != [f"Run {i}" for i in range(1, 7)]:
         raise ValueError(f"Unexpected TMT run headers: {runs}")
     channels = [cells.get((r, "A"), "").strip() for r in range(2, 20)]
-    if len(channels) != 18 or max_row != 19:
-        raise ValueError(f"Expected 18 TMT channels (rows 2..19), got {len(channels)}, max_row={max_row}")
+    if any(ch == "" for ch in channels) or max_row != 19:
+        raise ValueError(f"Expected 18 non-empty TMT channels (rows 2..19), got {channels}, max_row={max_row}")
     populated_cells = sum(
         1 for r in range(2, 20) for c in range(2, 8) if cells.get((r, _index_to_col(c)), "").strip() != ""
     )
@@ -1080,7 +1080,7 @@ def _mann_whitney_from_ranks(
     tie_sum = sum(t * (t * t - 1) for t in tie_sizes)
     var = (n1 * n2 / 12.0) * ((n_tot + 1.0) - (tie_sum / (n_tot * (n_tot - 1.0))))
     if var <= 0.0:
-        return {"n_group": n1, "n_bg": n2, "u1": u1, "z": 0.0, "p_two_sided": 1.0}
+        return {"n_group": n1, "n_bg": n2, "u1": u1, "z_signed": 0.0, "p_two_sided": 1.0}
     z_signed = (u1 - mu) / math.sqrt(var)
     z_cc = max(0.0, abs(u1 - mu) - 0.5) / math.sqrt(var)
     p_val = min(1.0, max(0.0, math.erfc(z_cc / math.sqrt(2.0))))
@@ -1126,7 +1126,7 @@ def _fast_wilcoxon_p_for_null(diffs: Sequence[float]) -> float:
     n = len(nz)
     if n == 0:
         return 1.0
-    if n <= 20:
+    if n <= 25:
         return wilcoxon_signed_rank_two_sided(nz)["p_two_sided"]
     abs_vals = [abs(d) for d in nz]
     ranks, tie_sizes = _rank_average_ties(abs_vals)
@@ -1230,10 +1230,16 @@ def run_arm2_controls(
             for mod in CANONICAL_MODULE_ORDER:
                 n1 = mod_cnts[mod]
                 n2 = n_tot - n1
+                if n1 <= 0 or n2 <= 0 or n_tot <= 1:
+                    pvals_v.append(1.0)
+                    continue
                 r1 = mod_sums[mod]
                 u1 = r1 - (n1 * (n1 + 1)) / 2.0
                 mu = (n1 * n2) / 2.0
                 var = (n1 * n2 / 12.0) * ((n_tot + 1.0) - (tie_sum / (n_tot * (n_tot - 1.0))))
+                if var <= 0.0:
+                    pvals_v.append(1.0)
+                    continue
                 z_cc = max(0.0, abs(u1 - mu) - 0.5) / math.sqrt(var)
                 pvals_v.append(min(1.0, max(0.0, math.erfc(z_cc / math.sqrt(2.0)))))
         if any(q < ALPHA_PROTEOMICS_FDR for q in benjamini_hochberg(pvals_v)):
@@ -1509,7 +1515,7 @@ def verify_checked_in_artifacts(repo_root: Path = REPO_ROOT, data_dir: Optional[
     if results["done_sha256"] != done_sha:
         raise AssertionError(f"results done_sha256 mismatch: {results['done_sha256']} != {done_sha}")
 
-    # Verify internal BH-FDR & verdict logic even in offline CI without .xlsx
+    # Verify internal BH-FDR, ledger, & verdict logic even in offline CI without .xlsx
     a1p = results["arm_1_frt_ussing_sicanx_asymmetry"]["primary_strict_dedup"]
     exp_a1a = (
         a1p["arm_1a_f508del_combo_sicanx_drop"]["exact_perm_p_two_sided"] <= ALPHA_USSING
@@ -1523,40 +1529,90 @@ def verify_checked_in_artifacts(repo_root: Path = REPO_ROOT, data_dir: Optional[
         raise AssertionError("Arm 1a gate state mismatch")
     if a1p["arm_1b_sicanx_proportion_f508del_vs_wt"]["passed_gate"] != exp_a1b:
         raise AssertionError("Arm 1b gate state mismatch")
-    if a1p["overall_verdict"] != ("supported" if (exp_a1a and exp_a1b) else "refuted"):
-        raise AssertionError("Arm 1 overall verdict mismatch")
+    exp_a1_verdict = "supported" if (exp_a1a and exp_a1b) else "refuted"
+    exp_a1_standing = "open" if (exp_a1a and exp_a1b) else "refuted"
+    if a1p["overall_verdict"] != exp_a1_verdict or a1p["ledger_standing"] != exp_a1_standing:
+        raise AssertionError("Arm 1 overall verdict or standing mismatch")
 
     a2p = results["arm_2_canx_ko_proteostasis_remodeling"]["primary_evaluation"]
-    d_tests = a2p["family_2a_drug_attenuation"]["tests"]
-    v_tests = a2p["family_2b_variant_enrichment"]["tests"]
+    d_fam = a2p["family_2a_drug_attenuation"]
+    v_fam = a2p["family_2b_variant_enrichment"]
+    d_tests = d_fam["tests"]
+    v_tests = v_fam["tests"]
     if len(d_tests) != 4 or len(v_tests) != 20:
         raise AssertionError("Unexpected test counts in Arm 2 results")
-    d_sig = sum(1 for t in d_tests if t["bh_fdr_q"] < ALPHA_PROTEOMICS_FDR)
-    v_sig = sum(1 for t in v_tests if t["bh_fdr_q"] < ALPHA_PROTEOMICS_FDR)
-    if a2p["overall_verdict"] != ("supported" if (d_sig >= 1 and v_sig >= 1) else "refuted"):
-        raise AssertionError("Arm 2 overall verdict mismatch")
+
+    d_q_chk = benjamini_hochberg([float(t["raw_p_two_sided"]) for t in d_tests])
+    for t, qc in zip(d_tests, d_q_chk):
+        if abs(float(t["bh_fdr_q"]) - qc) > len(d_tests) * 0.5e-6 + 1e-6:
+            raise AssertionError(f"Offline Drug BH-FDR mismatch for {t['module']}: {t['bh_fdr_q']} vs {qc}")
+        if t["significant_q05"] != (float(t["bh_fdr_q"]) < ALPHA_PROTEOMICS_FDR):
+            raise AssertionError(f"Drug significant_q05 flag mismatch for {t['module']}")
+
+    v_q_chk = benjamini_hochberg([float(t["raw_p_two_sided"]) for t in v_tests])
+    for t, qc in zip(v_tests, v_q_chk):
+        if abs(float(t["bh_fdr_q"]) - qc) > len(v_tests) * 0.5e-6 + 1e-6:
+            raise AssertionError(f"Offline Variants BH-FDR mismatch for {t['variant']}:{t['module']}")
+        if t["significant_q05"] != (float(t["bh_fdr_q"]) < ALPHA_PROTEOMICS_FDR):
+            raise AssertionError(f"Variants significant_q05 flag mismatch for {t['variant']}:{t['module']}")
+
+    d_sig = sum(1 for t in d_tests if t["significant_q05"])
+    v_sig = sum(1 for t in v_tests if t["significant_q05"])
+    if d_fam["significant_count"] != d_sig or v_fam["significant_count"] != v_sig:
+        raise AssertionError("Arm 2 significant_count mismatch")
+    exp_a2_verdict = "supported" if (d_sig >= 1 and v_sig >= 1) else "refuted"
+    exp_a2_standing = "open" if (d_sig >= 1 and v_sig >= 1) else "refuted"
+    if a2p["overall_verdict"] != exp_a2_verdict or a2p["ledger_standing"] != exp_a2_standing:
+        raise AssertionError("Arm 2 overall verdict or standing mismatch")
+
+    ledger = json.loads((bench_dir / "ledger.json").read_text(encoding="utf-8"))
+    if ledger.get("done_sha256") != done_sha:
+        raise AssertionError("ledger.json done_sha256 mismatch")
+    by_id = {c["id"]: c for c in ledger.get("claims", [])}
+    if by_id["c4-arm-1-ussing-sicanx-asymmetry"]["standing"] != exp_a1_standing:
+        raise AssertionError("ledger Arm 1 standing mismatch")
+    if by_id["c5-arm-2-proteostasis-remodeling"]["standing"] != exp_a2_standing:
+        raise AssertionError("ledger Arm 2 standing mismatch")
 
     resolved_data = resolve_tedman_data_dir(data_dir, repo_root=repo_root)
+    if data_dir is not None and resolved_data is None:
+        raise FileNotFoundError(f"Explicit --data-dir invalid or missing Tedman workbooks: {data_dir}")
     raw_parity_checked = False
     if resolved_data is not None:
         fresh = evaluate_benchmark(resolved_data, repo_root=repo_root)
-        f_a1a = fresh["arm_1_frt_ussing_sicanx_asymmetry"]["primary_strict_dedup"]["arm_1a_f508del_combo_sicanx_drop"]
+        if fresh["data_integrity_audit"]["duplicate_replicate_columns_count"] != results["data_integrity_audit"]["duplicate_replicate_columns_count"]:
+            raise AssertionError("Duplicate replicate column count parity drift")
+        f_p = fresh["arm_1_frt_ussing_sicanx_asymmetry"]["primary_strict_dedup"]
+        if f_p["overall_verdict"] != a1p["overall_verdict"] or f_p["ledger_standing"] != a1p["ledger_standing"]:
+            raise AssertionError("Arm 1 verdict parity drift")
+        f_a1a = f_p["arm_1a_f508del_combo_sicanx_drop"]
         r_a1a = a1p["arm_1a_f508del_combo_sicanx_drop"]
-        if abs(f_a1a["exact_perm_p_two_sided"] - r_a1a["exact_perm_p_two_sided"]) > 1e-6:
+        if (
+            abs(f_a1a["exact_perm_p_two_sided"] - r_a1a["exact_perm_p_two_sided"]) > 1e-6
+            or abs(f_a1a["mean_sicanx_total_act"] - r_a1a["mean_sicanx_total_act"]) > 1e-6
+            or f_a1a["passed_gate"] != r_a1a["passed_gate"]
+            or f_a1a["bootstrap_log_ratio"]["ci975"] != r_a1a["bootstrap_log_ratio"]["ci975"]
+        ):
             raise AssertionError("Arm 1a raw parity drift")
-        if abs(f_a1a["mean_sicanx_total_act"] - r_a1a["mean_sicanx_total_act"]) > 1e-6:
-            raise AssertionError("Arm 1a mean raw parity drift")
-        f_a1b = fresh["arm_1_frt_ussing_sicanx_asymmetry"]["primary_strict_dedup"]["arm_1b_sicanx_proportion_f508del_vs_wt"]
+        f_a1b = f_p["arm_1b_sicanx_proportion_f508del_vs_wt"]
         r_a1b = a1p["arm_1b_sicanx_proportion_f508del_vs_wt"]
-        if abs(f_a1b["did_log_ratio"] - r_a1b["did_log_ratio"]) > 1e-6:
-            raise AssertionError("Arm 1b DiD raw parity drift")
-        f_d = fresh["arm_2_canx_ko_proteostasis_remodeling"]["primary_evaluation"]["family_2a_drug_attenuation"]["tests"]
+        if (
+            abs(f_a1b["did_log_ratio"] - r_a1b["did_log_ratio"]) > 1e-6
+            or abs(f_a1b["exact_stratified_perm_p_one_sided"] - r_a1b["exact_stratified_perm_p_one_sided"]) > 1e-6
+            or f_a1b["passed_gate"] != r_a1b["passed_gate"]
+            or f_a1b["bootstrap_did_log_ratio"]["one_sided_975_upper"] != r_a1b["bootstrap_did_log_ratio"]["one_sided_975_upper"]
+        ):
+            raise AssertionError("Arm 1b raw parity drift")
+        f_a2 = fresh["arm_2_canx_ko_proteostasis_remodeling"]["primary_evaluation"]
+        if f_a2["overall_verdict"] != a2p["overall_verdict"] or f_a2["ledger_standing"] != a2p["ledger_standing"]:
+            raise AssertionError("Arm 2 verdict parity drift")
+        f_d = f_a2["family_2a_drug_attenuation"]["tests"]
         for ft, rt in zip(f_d, d_tests):
-            if abs(ft["bh_fdr_q"] - rt["bh_fdr_q"]) > 1e-6:
+            if abs(ft["bh_fdr_q"] - rt["bh_fdr_q"]) > 1e-6 or abs(ft["raw_p_two_sided"] - rt["raw_p_two_sided"]) > 1e-6:
                 raise AssertionError(f"Arm 2a BH-FDR parity drift for {rt['module']}")
-        f_v = fresh["arm_2_canx_ko_proteostasis_remodeling"]["primary_evaluation"]["family_2b_variant_enrichment"]["tests"]
+        f_v = f_a2["family_2b_variant_enrichment"]["tests"]
         for ft, rt in zip(f_v, v_tests):
-            if abs(ft["bh_fdr_q"] - rt["bh_fdr_q"]) > 1e-6:
+            if abs(ft["bh_fdr_q"] - rt["bh_fdr_q"]) > 1e-6 or abs(ft["raw_p_two_sided"] - rt["raw_p_two_sided"]) > 1e-6:
                 raise AssertionError(f"Arm 2b BH-FDR parity drift for {rt['variant']}:{rt['module']}")
         raw_parity_checked = True
 

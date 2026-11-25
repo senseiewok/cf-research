@@ -30,6 +30,7 @@ getcontext().prec = 34
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 BENCH_DIR = REPO_ROOT / "benchmarks" / "cftr_canx_interactome_ussing"
+DONE_SHA256_EXPECTED = "d6eeee7cf61baf2cee4576f6094c278a623b214d3667effe42ff05c14360ca82"
 
 EXPECTED_WORKBOOKS: Dict[str, str] = {
     "Copy of TMT_Labels.xlsx": "5b16d08dfefce36878149259d823604d2153df8b027a48bd8cf69c3f1af5b41e",
@@ -321,6 +322,8 @@ def _pairwise_mwu_p(grp: Sequence[float], bg: Sequence[float]) -> float:
     tie_sum = sum(c * (c * c - 1) for c in collections.Counter(list(grp) + list(bg)).values() if c > 1)
     mu = (n1 * n2) / 2.0
     var = (n1 * n2 / 12.0) * ((n_tot + 1.0) - (tie_sum / (n_tot * (n_tot - 1.0))))
+    if var <= 0.0:
+        return 1.0
     z = max(0.0, abs(u1 - mu) - 0.5) / math.sqrt(var)
     return min(1.0, max(0.0, math.erfc(z / math.sqrt(2.0))))
 
@@ -335,6 +338,10 @@ def _mod_of(pw: str) -> Optional[str]:
 
 def _parse_ussing_raw(xlsx_path: Path, avg_col: str) -> Tuple[Dict[str, List[Tuple[float, float, float]]], List[Tuple[str, str, str]]]:
     grid = _read_sheet_minidom(xlsx_path, "Raw-data-analyzed")
+    if grid.get((1, "A"), "").strip() != "Sample ID" or grid.get((1, "B"), "").strip() != "Acute drugs":
+        raise AssertionError(f"Unexpected A1/B1 header in {xlsx_path.name}")
+    if grid.get((1, avg_col), "").strip() != "AVG":
+        raise AssertionError(f"Missing AVG header at {avg_col}1 in {xlsx_path.name}")
     end_idx = _col_num(avg_col)
     cols = [_num_col(i) for i in range(_col_num("C"), end_idx)]
     dedup_map: Dict[str, List[Tuple[float, float, float]]] = {}
@@ -343,18 +350,28 @@ def _parse_ussing_raw(xlsx_path: Path, avg_col: str) -> Tuple[Dict[str, List[Tup
         r0 = 3 + 3 * idx
         if grid.get((r0, "A"), "").strip() != gname:
             raise AssertionError(f"Group mismatch at {r0}: {grid.get((r0, 'A'))}")
+        drugs = tuple(grid.get((r0 + k, "B"), "").strip() for k in range(3))
+        if drugs != ("Fsk", "VX-770", "Inh172"):
+            raise AssertionError(f"Drug label mismatch at rows {r0}..{r0+2}: {drugs}")
         seen: Dict[Tuple[float, float, float], str] = {}
         kept: List[Tuple[float, float, float]] = []
         for col in cols:
             vals = [grid.get((r0 + k, col)) for k in range(3)]
-            if all(v is None for v in vals):
+            non_empty = [v is not None and str(v).strip() != "" for v in vals]
+            if not any(non_empty):
                 continue
+            if not all(non_empty):
+                raise AssertionError(f"Partial replicate column {col} in {gname}")
             tup = (float(vals[0]), float(vals[1]), float(vals[2]))
+            if not all(math.isfinite(x) for x in tup):
+                raise AssertionError(f"Non-finite replicate value at {col} in {gname}: {tup}")
             if tup in seen:
                 dups.append((gname, seen[tup], col))
             else:
                 seen[tup] = col
                 kept.append(tup)
+        if not kept:
+            raise AssertionError(f"Empty replicates for {gname}")
         dedup_map[gname] = kept
     return dedup_map, dups
 
@@ -363,45 +380,80 @@ def run_independent_audit(repo_root: Path = REPO_ROOT, data_dir: Optional[Path] 
     bench_dir = repo_root / "benchmarks" / "cftr_canx_interactome_ussing"
     done_txt = (bench_dir / "done.md").read_text(encoding="utf-8", errors="replace").replace("\r\n", "\n")
     done_sha = hashlib.sha256(done_txt.encode("utf-8")).hexdigest()
+    if done_sha != DONE_SHA256_EXPECTED:
+        raise AssertionError(f"done_sha256 mismatch against pinned protocol: {done_sha}")
     results = json.loads((bench_dir / "results_2026-11-25.json").read_text(encoding="utf-8"))
     if results["done_sha256"] != done_sha:
         raise AssertionError("done_sha256 mismatch in results JSON")
 
-    ledger_path = bench_dir / "ledger.json"
-    if ledger_path.is_file():
-        ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
-        if ledger.get("done_sha256") != done_sha:
-            raise AssertionError("done_sha256 mismatch in ledger.json")
-        # Check standing consistency for predicted claims
-        a1_stand = results["arm_1_frt_ussing_sicanx_asymmetry"]["primary_strict_dedup"]["ledger_standing"]
-        a2_stand = results["arm_2_canx_ko_proteostasis_remodeling"]["primary_evaluation"]["ledger_standing"]
-        by_id = {c["id"]: c for c in ledger.get("claims", [])}
-        if "c4-arm-1-ussing-sicanx-asymmetry" in by_id:
-            if by_id["c4-arm-1-ussing-sicanx-asymmetry"]["standing"] != a1_stand:
-                raise AssertionError("Arm 1 ledger standing mismatch")
-            if a1_stand == "refuted" and by_id["c4-arm-1-ussing-sicanx-asymmetry"].get("headline") is True:
-                raise AssertionError("Refuted Arm 1 claim cannot be headline")
-        if "c5-arm-2-proteostasis-remodeling" in by_id:
-            if by_id["c5-arm-2-proteostasis-remodeling"]["standing"] != a2_stand:
-                raise AssertionError("Arm 2 ledger standing mismatch")
-            if a2_stand == "refuted" and by_id["c5-arm-2-proteostasis-remodeling"].get("headline") is True:
-                raise AssertionError("Refuted Arm 2 claim cannot be headline")
-
-    # Offline BH-FDR and gate arithmetic checks
+    # Offline BH-FDR, decision-gate, and ledger consistency checks
     a1p = results["arm_1_frt_ussing_sicanx_asymmetry"]["primary_strict_dedup"]
+    a1a = a1p["arm_1a_f508del_combo_sicanx_drop"]
+    a1b = a1p["arm_1b_sicanx_proportion_f508del_vs_wt"]
+    exp_1a = (a1a["exact_perm_p_two_sided"] <= 0.025) and (a1a["bootstrap_log_ratio"]["ci975_high_lt_zero"] is True)
+    exp_1b = (
+        a1b["exact_stratified_perm_p_one_sided"] <= 0.025
+        and a1b["bootstrap_did_log_ratio"]["one_sided_975_high_lt_zero"] is True
+    )
+    if a1a["passed_gate"] != exp_1a or a1b["passed_gate"] != exp_1b:
+        raise AssertionError("Arm 1 sub-gate flag mismatch")
+    exp_a1_verdict = "supported" if (exp_1a and exp_1b) else "refuted"
+    exp_a1_stand = "open" if (exp_1a and exp_1b) else "refuted"
+    if a1p["overall_verdict"] != exp_a1_verdict or a1p["ledger_standing"] != exp_a1_stand:
+        raise AssertionError("Arm 1 overall verdict or ledger_standing mismatch")
+
     a2p = results["arm_2_canx_ko_proteostasis_remodeling"]["primary_evaluation"]
-    d_tests = a2p["family_2a_drug_attenuation"]["tests"]
-    v_tests = a2p["family_2b_variant_enrichment"]["tests"]
+    d_fam = a2p["family_2a_drug_attenuation"]
+    v_fam = a2p["family_2b_variant_enrichment"]
+    d_tests = d_fam["tests"]
+    v_tests = v_fam["tests"]
+    if len(d_tests) != 4 or len(v_tests) != 20:
+        raise AssertionError(f"Expected 4 Drug and 20 Variants tests, got {len(d_tests)}, {len(v_tests)}")
+
     d_q_chk = _bh_q_decimal([t["raw_p_two_sided"] for t in d_tests])
     v_q_chk = _bh_q_decimal([t["raw_p_two_sided"] for t in v_tests])
     for t, qc in zip(d_tests, d_q_chk):
-        if abs(t["bh_fdr_q"] - qc) > 2e-6:
+        if abs(t["bh_fdr_q"] - qc) > len(d_tests) * 0.5e-6 + 1e-6:
             raise AssertionError(f"Offline Drug BH-FDR mismatch: {t['bh_fdr_q']} vs {qc}")
+        if t["significant_q05"] != (t["bh_fdr_q"] < 0.05):
+            raise AssertionError(f"Drug significant_q05 mismatch for {t['module']}")
     for t, qc in zip(v_tests, v_q_chk):
-        if abs(t["bh_fdr_q"] - qc) > 2e-6:
+        if abs(t["bh_fdr_q"] - qc) > len(v_tests) * 0.5e-6 + 1e-6:
             raise AssertionError(f"Offline Variants BH-FDR mismatch: {t['bh_fdr_q']} vs {qc}")
+        if t["significant_q05"] != (t["bh_fdr_q"] < 0.05):
+            raise AssertionError(f"Variants significant_q05 mismatch for {t['variant']}:{t['module']}")
+
+    d_sig = sum(1 for t in d_tests if t["significant_q05"])
+    v_sig = sum(1 for t in v_tests if t["significant_q05"])
+    if d_fam["significant_count"] != d_sig or v_fam["significant_count"] != v_sig:
+        raise AssertionError("Arm 2 significant_count mismatch")
+    exp_a2_verdict = "supported" if (d_sig >= 1 and v_sig >= 1) else "refuted"
+    exp_a2_stand = "open" if (d_sig >= 1 and v_sig >= 1) else "refuted"
+    if a2p["overall_verdict"] != exp_a2_verdict or a2p["ledger_standing"] != exp_a2_stand:
+        raise AssertionError("Arm 2 overall verdict or ledger_standing mismatch")
+
+    ledger_path = bench_dir / "ledger.json"
+    if not ledger_path.is_file():
+        raise AssertionError("Missing ledger.json")
+    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+    if ledger.get("done_sha256") != done_sha:
+        raise AssertionError("done_sha256 mismatch in ledger.json")
+    by_id = {c["id"]: c for c in ledger.get("claims", [])}
+    for req_id in ("c4-arm-1-ussing-sicanx-asymmetry", "c5-arm-2-proteostasis-remodeling"):
+        if req_id not in by_id:
+            raise AssertionError(f"Missing required claim {req_id} in ledger.json")
+    if by_id["c4-arm-1-ussing-sicanx-asymmetry"]["standing"] != exp_a1_stand:
+        raise AssertionError("Arm 1 ledger standing mismatch")
+    if exp_a1_stand == "refuted" and by_id["c4-arm-1-ussing-sicanx-asymmetry"].get("headline") is True:
+        raise AssertionError("Refuted Arm 1 claim cannot be headline")
+    if by_id["c5-arm-2-proteostasis-remodeling"]["standing"] != exp_a2_stand:
+        raise AssertionError("Arm 2 ledger standing mismatch")
+    if exp_a2_stand == "refuted" and by_id["c5-arm-2-proteostasis-remodeling"].get("headline") is True:
+        raise AssertionError("Refuted Arm 2 claim cannot be headline")
 
     ddir = _find_data_dir(data_dir, repo_root)
+    if data_dir is not None and ddir is None:
+        raise FileNotFoundError(f"Explicit --data-dir invalid or missing workbooks: {data_dir}")
     raw_checked = False
     recomputed: Dict[str, Any] = {}
     if ddir is not None:
@@ -463,40 +515,80 @@ def run_independent_audit(repo_root: Path = REPO_ROOT, data_dir: Optional[Path] 
         # Independent Arm 2 parsing and statistical audit
         v_grid = _read_sheet_minidom(ddir / "Copy of CFTR_Variants_LogFoldChanges.xlsx", "Sheet1")
         d_grid = _read_sheet_minidom(ddir / "Copy of CFTR_F508del_Drug_LogFoldChanges.xlsx", "Sheet1")
+        for clet, exp_h in zip(("A", "B", "C", "D", "E", "F", "G"), ("Gene Symbol", "Pathway") + VAR_COLS):
+            if v_grid.get((2, clet), "").replace("\xa0", " ").strip() != exp_h:
+                raise AssertionError(f"Variants header mismatch at {clet}2")
+        for clet, exp_h in zip(("A", "B", "C", "D", "E", "F"), ("Gene Symbol", "Pathway") + DRUG_COLS):
+            if d_grid.get((2, clet), "").replace("\xa0", " ").strip() != exp_h:
+                raise AssertionError(f"Drug header mismatch at {clet}2")
         max_vr = max(r for r, _ in v_grid)
         max_dr = max(r for r, _ in d_grid)
 
         v_rows: List[Tuple[str, Dict[str, Optional[float]]]] = []
+        v_cftr_seen = False
+        v_div0 = 0
         for r in range(3, max_vr + 1):
-            g = v_grid.get((r, "A"), "").strip()
-            pw = v_grid.get((r, "B"), "").strip()
-            if not g:
+            g = v_grid.get((r, "A"), "").replace("\xa0", " ").strip()
+            pw = v_grid.get((r, "B"), "").replace("\xa0", " ").strip()
+            raw_list = [v_grid.get((r, clet)) for clet in ("C", "D", "E", "F", "G")]
+            if not g and not pw and all(x is None or str(x).strip() == "" for x in raw_list):
                 continue
-            vals = {}
-            for cname, clet in zip(VAR_COLS, ("C", "D", "E", "F", "G")):
-                raw = v_grid.get((r, clet), "")
-                vals[cname] = None if raw == "#DIV/0!" else float(raw)
+            if not g:
+                raise AssertionError(f"Variants row {r} missing Gene Symbol")
+            vals: Dict[str, Optional[float]] = {}
+            for cname, raw in zip(VAR_COLS, raw_list):
+                s = "" if raw is None else str(raw).strip()
+                if s == "#DIV/0!":
+                    v_div0 += 1
+                    vals[cname] = None
+                else:
+                    num = float(s)
+                    if not math.isfinite(num):
+                        raise AssertionError(f"Variants non-finite at row {r} {cname}")
+                    vals[cname] = num
+            if v_div0 > 5:
+                raise AssertionError(f"Variants non-numeric count > 5: {v_div0}")
             if g == "CFTR":
+                v_cftr_seen = True
                 if any(vals[c] != 0.0 for c in VAR_COLS):
                     raise AssertionError("Variants CFTR anchor != 0")
             else:
                 v_rows.append((pw, vals))
+        if not v_cftr_seen:
+            raise AssertionError("Variants CFTR anchor missing")
 
         d_rows: List[Tuple[str, Dict[str, Optional[float]]]] = []
+        d_cftr_seen = False
+        d_div0 = 0
         for r in range(3, max_dr + 1):
-            g = d_grid.get((r, "A"), "").strip()
-            pw = d_grid.get((r, "B"), "").strip()
-            if not g:
+            g = d_grid.get((r, "A"), "").replace("\xa0", " ").strip()
+            pw = d_grid.get((r, "B"), "").replace("\xa0", " ").strip()
+            raw_list = [d_grid.get((r, clet)) for clet in ("C", "D", "E", "F")]
+            if not g and not pw and all(x is None or str(x).strip() == "" for x in raw_list):
                 continue
+            if not g:
+                raise AssertionError(f"Drug row {r} missing Gene Symbol")
             vals = {}
-            for cname, clet in zip(DRUG_COLS, ("C", "D", "E", "F")):
-                raw = d_grid.get((r, clet), "")
-                vals[cname] = None if raw == "#DIV/0!" else float(raw)
+            for cname, raw in zip(DRUG_COLS, raw_list):
+                s = "" if raw is None else str(raw).strip()
+                if s == "#DIV/0!":
+                    d_div0 += 1
+                    vals[cname] = None
+                else:
+                    num = float(s)
+                    if not math.isfinite(num):
+                        raise AssertionError(f"Drug non-finite at row {r} {cname}")
+                    vals[cname] = num
+            if d_div0 > 5:
+                raise AssertionError(f"Drug non-numeric count > 5: {d_div0}")
             if g == "CFTR":
+                d_cftr_seen = True
                 if any(vals[c] != 0.0 for c in DRUG_COLS):
                     raise AssertionError("Drug CFTR anchor != 0")
             else:
                 d_rows.append((pw, vals))
+        if not d_cftr_seen:
+            raise AssertionError("Drug CFTR anchor missing")
 
         d_raw_ps: List[float] = []
         for mod in ("folding", "ups", "autophagy_lysosome", "trafficking"):
@@ -548,11 +640,15 @@ def run_independent_audit(repo_root: Path = REPO_ROOT, data_dir: Optional[Path] 
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--data-dir", type=Path, default=None)
-    parser.add_argument("--check", action="store_true", default=True)
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Run verification checks (default behavior; accepted for CLI parity).",
+    )
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args(argv)
 
-    rep = run_independent_audit(repo_root=REPO_ROOT, data_dir=args.data_dir) if args.check else {"status": "SKIP"}
+    rep = run_independent_audit(repo_root=REPO_ROOT, data_dir=args.data_dir)
     if args.json:
         print(json.dumps(rep, indent=2, allow_nan=False))
     else:
