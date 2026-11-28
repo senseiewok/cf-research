@@ -66,7 +66,8 @@ PRIMARY_DOI_INHALED_LNP = "10.1126/scitranslmed.adw8886"
 
 # Default applied mRNA dose, copies per cm^2. This is a MODEL SETTING, not a measured dose: it is
 # not an inhaled deposited dose in people and not an in-vitro applied dose, and no cited study
-# supplies it. It is the same value the website simulator uses, so the two agree. Reported
+# supplies it. It is the same value the JavaScript simulator module in the site repo uses, so the
+# two agree (that module is not mounted on the delivery page today). Reported
 # in-vitro ALI experiments apply hundreds of ng of mRNA per insert, which is far above this
 # setting; that is a different quantity from the deposited dose this model takes as input.
 DEFAULT_DOSE_MRNA_COPIES_PER_CM2 = 1.0e8
@@ -440,7 +441,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "--dose",
         type=float,
         default=DEFAULT_DOSE_MRNA_COPIES_PER_CM2,
-        help="mRNA dose in copies/cm^2 (a model setting, default 1e8; this default was 1e9 before it was aligned with the website simulator)",
+        help="mRNA dose in copies/cm^2 (a model setting, default 1e8; this default was 1e9 before it was aligned with the JavaScript simulator module)",
     )
     parser.add_argument("--json", action="store_true", help="Print results as JSON")
     args = parser.parse_args(argv)
