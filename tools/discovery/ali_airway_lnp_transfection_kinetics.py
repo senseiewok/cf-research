@@ -64,6 +64,18 @@ PRIMARY_DOI_AIRWAY_PHYSIOLOGY = "10.1152/physrev.00004.2021"
 PRIMARY_DOI_MUCUS_BARRIER = "10.1016/j.addr.2015.09.012"
 PRIMARY_DOI_INHALED_LNP = "10.1126/scitranslmed.adw8886"
 
+# Default applied mRNA dose, copies per cm^2. This is a MODEL SETTING, not a measured dose: it is
+# not an inhaled deposited dose in people and not an in-vitro applied dose, and no cited study
+# supplies it. It is the same value the website simulator uses, so the two agree. Reported
+# in-vitro ALI experiments apply hundreds of ng of mRNA per insert, which is far above this
+# setting; that is a different quantity from the deposited dose this model takes as input.
+DEFAULT_DOSE_MRNA_COPIES_PER_CM2 = 1.0e8
+DOSE_LABEL = (
+    "Dose is a model setting, not a measured dose: not an inhaled deposited dose in people "
+    "and not an in-vitro applied dose. The rescue verdict is a threshold inside the model, "
+    "not a clinical outcome."
+)
+
 # Physical constants
 BOLTZMANN_CONSTANT = 1.380649e-23  # J/K
 BODY_TEMPERATURE_K = 310.15       # 37 C
@@ -248,7 +260,7 @@ def evaluate_tight_junction_permeation(
 
 def simulate_polarized_cellular_internalization(
     retention_fraction: float,
-    dose_mrna_copies_per_cm2: float = 1.0e8,
+    dose_mrna_copies_per_cm2: float = DEFAULT_DOSE_MRNA_COPIES_PER_CM2,
     ciliated_fraction: float = 0.60,
     club_fraction: float = 0.40,
     endosomal_escape_efficiency: float = 0.08,
@@ -355,7 +367,7 @@ def simulate_cftr_expression_and_isc_rescue(
 
 def simulate_full_ali_airway_transfection(
     params: Optional[ALIAirwayParameters] = None,
-    dose_mrna_copies_per_cm2: float = 1.0e9,
+    dose_mrna_copies_per_cm2: float = DEFAULT_DOSE_MRNA_COPIES_PER_CM2,
 ) -> Dict[str, Any]:
     """Execute end-to-end biophysical simulation of aerosolized LNP delivery in human airway ALI culture."""
     p = params or ALIAirwayParameters()
@@ -409,6 +421,8 @@ def simulate_full_ali_airway_transfection(
             PRIMARY_DOI_MUCUS_BARRIER,
             PRIMARY_DOI_INHALED_LNP,
         ],
+        "dose_mrna_copies_per_cm2": dose_mrna_copies_per_cm2,
+        "dose_label": DOSE_LABEL,
         "nlm_attribution": NLM_ATTRIBUTION,
         "research_boundary": RESEARCH_BOUNDARY,
     }
@@ -422,7 +436,12 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--zeta", type=float, default=-1.5, help="Surface zeta potential in mV")
     parser.add_argument("--mcc-velocity", type=float, default=10.0, help="MCC velocity (5-20 mm/min)")
     parser.add_argument("--escape-efficiency", type=float, default=0.08, help="Endosomal escape fraction (> 0.05)")
-    parser.add_argument("--dose", type=float, default=1.0e9, help="mRNA dose in copies/cm^2")
+    parser.add_argument(
+        "--dose",
+        type=float,
+        default=DEFAULT_DOSE_MRNA_COPIES_PER_CM2,
+        help="mRNA dose in copies/cm^2 (a model setting, default 1e8; this default was 1e9 before it was aligned with the website simulator)",
+    )
     parser.add_argument("--json", action="store_true", help="Print results as JSON")
     args = parser.parse_args(argv)
 
@@ -449,12 +468,14 @@ def main(argv: Optional[List[str]] = None) -> int:
         print(f"Tight Junction Barrier TEER:    {tj['effective_teer_ohm_cm2']:.1f} Ohm*cm^2 (Preserved: {tj['barrier_integrity_preserved']})")
         print(f"  Paracellular Basal Access:    {tj['paracellular_basal_permeability_ratio'] * 100:.2f}%")
         upt = result["polarized_internalization"]
+        print(f"Applied dose (model setting):   {result['dose_mrna_copies_per_cm2']:.2e} copies/cm^2")
         print(f"Cytosolic mRNA Released:        {upt['cytosolic_functional_mrna_copies']:.2e} copies/cm^2 (Escape: {upt['endosomal_escape_efficiency']*100:.1f}%)")
         res = result["functional_cftr_rescue"]
         print(f"CFTR Functional Rescue:         {res['percent_wildtype_rescue']:.1f}% of Wild-Type (I_sc: {res['total_rescued_isc_ua_cm2']:.2f} uA/cm^2)")
         print(f"  Therapeutic Threshold (>=10%):{res['cftr_rescue_adequate_ge_10pct']}")
         print("-" * 70)
         print(f"Grounding: NCTs: {', '.join(result['clinical_trial_grounding'])}; PDBs: {', '.join(result['pdb_structures'])}")
+        print(f"Dose note: {result['dose_label']}")
         print(f"NLM Disclaimer: {result['nlm_attribution']}")
 
     return 0

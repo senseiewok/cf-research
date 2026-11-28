@@ -169,5 +169,41 @@ class TestALIAirwayLNPTransfectionKinetics(unittest.TestCase):
         )
 
 
+class TestDoseDefaultAndLabel(unittest.TestCase):
+    """The dose is a model setting; its default must match the website simulator (1e8 copies/cm^2)."""
+
+    def test_end_to_end_default_dose_is_1e8_and_reported(self) -> None:
+        import ali_airway_lnp_transfection_kinetics as m
+
+        self.assertEqual(m.DEFAULT_DOSE_MRNA_COPIES_PER_CM2, 1.0e8)
+        sim = m.simulate_full_ali_airway_transfection()
+        self.assertEqual(sim["dose_mrna_copies_per_cm2"], 1.0e8)
+        self.assertIn("model setting", sim["dose_label"])
+        self.assertIn("not a measured dose", sim["dose_label"])
+
+    def test_dose_scales_cytosolic_mrna_linearly(self) -> None:
+        import ali_airway_lnp_transfection_kinetics as m
+
+        low = m.simulate_full_ali_airway_transfection(dose_mrna_copies_per_cm2=1.0e8)
+        high = m.simulate_full_ali_airway_transfection(dose_mrna_copies_per_cm2=1.0e9)
+        ratio = (
+            high["polarized_internalization"]["cytosolic_functional_mrna_copies"]
+            / low["polarized_internalization"]["cytosolic_functional_mrna_copies"]
+        )
+        self.assertAlmostEqual(ratio, 10.0, places=6)
+
+    def test_cli_default_dose_matches_function_default(self) -> None:
+        import contextlib
+        import io
+        import json
+
+        import ali_airway_lnp_transfection_kinetics as m
+
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            self.assertEqual(m.main(["--json"]), 0)
+        self.assertEqual(json.loads(buf.getvalue())["dose_mrna_copies_per_cm2"], 1.0e8)
+
+
 if __name__ == "__main__":
     unittest.main()
